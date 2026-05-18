@@ -26,6 +26,11 @@ progress/
 tools/*
 !tools/bulanci_unpack/
 !tools/.gitkeep
+# Track only the per-toolchain README so vendoring instructions are visible
+# without pulling the actual MSVC bits into the repo.
+!tools/msvc8/
+tools/msvc8/*
+!tools/msvc8/README.md
 
 # Editor scratch
 .tmp_*

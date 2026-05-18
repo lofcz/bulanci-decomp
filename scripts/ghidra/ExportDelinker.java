@@ -23,12 +23,15 @@ import ghidra.program.model.listing.GhidraClass;
 import ghidra.program.model.address.AddressRange;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolTable;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +54,20 @@ public class ExportDelinker extends GhidraScript
                 return currentProgram;
             }
         });
+
+        // bulanci.exe is RTTI-rich C++: Ghidra's auto-analysis assigns the same
+        // bare name (::vftable, ::vbtable, ::CreateObject, ...) to multiple
+        // distinct symbols inside the same class namespace (one per inheritance
+        // path / overload). CoffRelocatableObjectExporter aborts the export
+        // when its EXTERNAL-undefined symbol table contains two entries with
+        // identical names. The "static-visibility regex" option does NOT help
+        // here - external/undefined symbols are always EXTERNAL class regardless
+        // of visibility predicates (see computeExternalSymbols).
+        //
+        // Workaround: walk the in-memory symbol table once and suffix every
+        // duplicate's name with its address. The project is opened -readOnly,
+        // so these renames stay in memory and never touch the .gpr on disk.
+        deduplicateSymbolNames();
 
         exporter.setOptions(exporterOptions);
 
@@ -108,6 +125,49 @@ public class ExportDelinker extends GhidraScript
                 printf("Failed exporting %s.obj to %s file.\n", objClass, outFile);
                 printf("Export log: %s.\n", exporter.getMessageLog().toString());
             }
+        }
+    }
+
+    /**
+     * Suffix every symbol whose qualified name collides with at least one
+     * other symbol so each surviving name is unique. Address suffix is in
+     * lower-case hex (e.g. "vftable_0042a000"), matching MSVC mangling
+     * conventions reasonably well. Idempotent: already-suffixed names are
+     * untouched unless they still collide.
+     *
+     * Operates in-memory; requires either -readOnly or a writeable project.
+     */
+    private void deduplicateSymbolNames() throws Exception {
+        SymbolTable st = currentProgram.getSymbolTable();
+        Map<String, List<Symbol>> byQualifiedName = new HashMap<>();
+        for (Symbol sym : st.getAllSymbols(true)) {
+            String qn = sym.getName(true);
+            byQualifiedName.computeIfAbsent(qn, k -> new ArrayList<>()).add(sym);
+        }
+
+        int renamed = 0;
+        for (Map.Entry<String, List<Symbol>> entry : byQualifiedName.entrySet()) {
+            List<Symbol> dups = entry.getValue();
+            if (dups.size() <= 1) {
+                continue;
+            }
+            // Keep one as-is, suffix all others.
+            dups.sort((a, b) -> a.getAddress().compareTo(b.getAddress()));
+            for (int i = 1; i < dups.size(); i++) {
+                Symbol s = dups.get(i);
+                String suffix = "_" + s.getAddress().toString().toLowerCase();
+                try {
+                    s.setName(s.getName() + suffix, SourceType.USER_DEFINED);
+                    renamed++;
+                } catch (Exception e) {
+                    // Some symbols (e.g. function entry points) may reject
+                    // renames; skip them silently rather than aborting the
+                    // entire export run.
+                }
+            }
+        }
+        if (renamed > 0) {
+            printf("Deduplicated %d colliding symbol name(s) by suffixing with address.\n", renamed);
         }
     }
 }

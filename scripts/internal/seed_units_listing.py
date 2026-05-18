@@ -35,6 +35,19 @@ def _top_namespace(qualified_name: str) -> str:
     return parts[0]
 
 
+def _all_namespaces(qualified_name: str) -> str:
+    """Return the qualified parent namespace, e.g.
+
+        std::exception::exception  -> std::exception
+        ATL::_AtlGetThreadACPFake  -> ATL
+        _Globals::FUN_00401000     -> _Globals
+    """
+    parts = qualified_name.split("::")
+    if len(parts) <= 1:
+        return ""
+    return "::".join(parts[:-1])
+
+
 def seed(mapping_path: Path, units_path: Path, completed_path: Path) -> dict:
     if not mapping_path.exists():
         raise SystemExit(f"mapping.csv not found at {mapping_path} - run export_mapping_via_mcp.py first")
@@ -43,7 +56,10 @@ def seed(mapping_path: Path, units_path: Path, completed_path: Path) -> dict:
         lines = [ln.rstrip("\n") for ln in f if ln.strip()]
 
     rewritten: list[str] = []
-    namespaces: dict[str, int] = {}
+    # top-level -> count of functions
+    namespace_counts: dict[str, int] = {}
+    # top-level -> set of full namespace paths (e.g. {"std", "std::exception", "std::bad_alloc"})
+    namespaces_by_unit: dict[str, set[str]] = {}
     globals_promoted = 0
 
     for line in lines:
@@ -56,10 +72,13 @@ def seed(mapping_path: Path, units_path: Path, completed_path: Path) -> dict:
             new_qualified = f"{GLOBALS_UNIT}::{qualified}" if qualified else f"{GLOBALS_UNIT}::"
             parts[1] = new_qualified
             globals_promoted += 1
-            namespaces[GLOBALS_UNIT] = namespaces.get(GLOBALS_UNIT, 0) + 1
+            namespace_counts[GLOBALS_UNIT] = namespace_counts.get(GLOBALS_UNIT, 0) + 1
+            namespaces_by_unit.setdefault(GLOBALS_UNIT, set()).add(GLOBALS_UNIT)
         else:
             top = _top_namespace(qualified)
-            namespaces[top] = namespaces.get(top, 0) + 1
+            namespace_counts[top] = namespace_counts.get(top, 0) + 1
+            parent_ns = _all_namespaces(qualified)
+            namespaces_by_unit.setdefault(top, set()).add(parent_ns)
         rewritten.append(";".join(parts))
 
     with mapping_path.open("w", encoding="utf-8", newline="\n") as f:
@@ -68,8 +87,12 @@ def seed(mapping_path: Path, units_path: Path, completed_path: Path) -> dict:
 
     units_path.parent.mkdir(parents=True, exist_ok=True)
     with units_path.open("w", encoding="utf-8", newline="\n") as f:
-        for unit in sorted(namespaces):
-            f.write(f"{unit},{unit}\n")
+        for unit in sorted(namespaces_by_unit):
+            # Sort nested namespaces shortest first (so the top-level appears
+            # before its descendants) and keep all of them in the row -
+            # helpers.has_functions() does exact-string membership checks.
+            nested = sorted(namespaces_by_unit[unit], key=lambda s: (s.count("::"), s))
+            f.write(unit + "," + ",".join(nested) + "\n")
 
     if not completed_path.exists():
         completed_path.parent.mkdir(parents=True, exist_ok=True)
@@ -77,7 +100,7 @@ def seed(mapping_path: Path, units_path: Path, completed_path: Path) -> dict:
 
     return {
         "globals_promoted": globals_promoted,
-        "namespaces": namespaces,
+        "namespaces": namespace_counts,
     }
 
 

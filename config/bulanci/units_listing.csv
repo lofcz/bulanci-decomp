@@ -1,1 +1,6 @@
+ATL,ATL
 _Globals,_Globals
+_LocaleUpdate,_LocaleUpdate
+exception,exception
+std,std::bad_alloc,std::exception
+type_info,type_info

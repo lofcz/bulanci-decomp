@@ -6,9 +6,15 @@ from project import DecompUnit
 
 WORKSPACE_PATH = Path(__file__).parent.parent
 
-# Configurable via env var; defaults to a placeholder that does not exist
-# until the maintainer decides which MSVC version to vendor.
-DEFAULT_CL = os.environ.get("BULANCI_CL", r"tools\msvc\Bin\cl.exe")
+# bulanci.exe was linked with VC8 (Visual Studio 2005 RTM, link.exe 8.00.50727).
+# We vendor that toolchain under tools/msvc8/. Override with BULANCI_CL if you
+# keep it elsewhere - the rest of the install must still be siblings of cl.exe.
+DEFAULT_CL = os.environ.get("BULANCI_CL", r"tools\msvc8\Bin\cl.exe")
+
+# Mirrors the original game's optimisation flags as far as Rich Header analysis
+# allows us to infer them. /O2 + /GR + /GX (now /EHsc on modern MSVC) is a
+# reasonable baseline for matching VC8 commercial code. Refine per-unit later.
+DEFAULT_CL_FLAGS = "/Zi /O2 /GR /GX"
 
 
 def generateNinja(decompUnits: list[DecompUnit], output_path: Path):
@@ -23,7 +29,7 @@ def generateNinja(decompUnits: list[DecompUnit], output_path: Path):
         unitsImports = " ".join([f"/I {str(decUnit.includePath)}" for decUnit in decompUnits])
         writer.variable(
             "cl_flags",
-            f"/Zi /O2 /GR /GX /I include/ {unitsImports} /I tools/",
+            f"{DEFAULT_CL_FLAGS} /I include/ {unitsImports} /I tools/",
         )
         writer.rule("cc", "$cl /nologo $cl_flags /c $in /Fd$out.pdb /Fo$out", deps="msvc")
 

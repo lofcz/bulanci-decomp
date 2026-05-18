@@ -13,17 +13,23 @@ def generateObjdiffConfig(
     master_base_dir: Path,
     output_dir: Path,
 ):
+    # Auto-detect whether the maintainer has dropped a real cl.exe in
+    # tools/msvc8/. When present, let objdiff invoke ninja to rebuild base
+    # objects; otherwise stay in first-run mode (base_path null + build_base
+    # false), which keeps the report at an honest 0 % and avoids broken
+    # objdiff sessions complaining about missing compilers.
+    cl_path = Path(os.environ.get("BULANCI_CL", "tools/msvc8/Bin/cl.exe"))
+    base_build_available = cl_path.exists()
+
     config = {
         "$schema": "https://raw.githubusercontent.com/encounter/objdiff/main/config.schema.json",
         "custom_make": "ninja",
         "target_dir": str(master_target_dir),
         "base_dir": str(master_base_dir),
-        # First-run defaults: no MSVC is wired up yet, so we cannot rebuild
-        # base objects in-tree, and the target .obj files are exported once
-        # via Ghidra and then committed-out-of-band. Set both to false until
-        # the build is fully reproducible.
-        "build_base": False,
+        # build_target stays false: target objs come from Ghidra ExportDelinker,
+        # not from a ninja edge - objdiff has no way to invoke that itself.
         "build_target": False,
+        "build_base": base_build_available,
         "watch_patterns": ["*.c", "*.cpp", "*.h", "*.hpp"],
     }
 
