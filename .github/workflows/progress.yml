@@ -1,0 +1,30 @@
+name: Upload Objdiff Progress Report Artifact
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Verify report.json is committed
+        run: |
+          if [ ! -f report.json ]; then
+            echo "report.json is missing from the repo - run progress_update.bat locally and commit it." >&2
+            exit 1
+          fi
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bulanci_report
+          path: ./report.json

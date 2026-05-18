@@ -1,0 +1,10 @@
+[project]
+name = "bulanci-decomp"
+adapter = "generic"
+default_unit = "_Globals"
+goal = "Match bulanci.exe (Windows MSVC x86 PE) translation unit by translation unit."
+
+[commands]
+build = "python scripts/oracle.py --build"
+score = "python scripts/oracle.py --score --unit {unit}"
+diff  = "python scripts/oracle.py --diff  --unit {unit}"

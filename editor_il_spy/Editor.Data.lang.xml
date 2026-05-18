@@ -1,0 +1,667 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 1.3
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">1.3</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1">this is my long string</data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        [base64 mime encoded serialized .NET Framework object]
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        [base64 mime encoded string representing a byte array form of the .NET Framework object]
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used forserialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="130">
+    <value>&amp;Middle mode</value>
+  </data>
+  <data name="131">
+    <value>&amp;Background mode</value>
+  </data>
+  <data name="132">
+    <value>Change level name...</value>
+  </data>
+  <data name="85">
+    <value>layer background</value>
+  </data>
+  <data name="137">
+    <value>open existing level...</value>
+  </data>
+  <data name="30">
+    <value>Ground</value>
+  </data>
+  <data name="143">
+    <value>insert obstacle</value>
+  </data>
+  <data name="93">
+    <value>Loading bitmap must be 800x600 pixels.</value>
+  </data>
+  <data name="92">
+    <value>You must enter file name for loading bitmap.</value>
+  </data>
+  <data name="91">
+    <value>You must enter file name for level background.</value>
+  </data>
+  <data name="90">
+    <value>fire through enabled</value>
+  </data>
+  <data name="97">
+    <value>Resource name already in collection.</value>
+  </data>
+  <data name="96">
+    <value>Resource cannot be removed from resource list, because it is used.</value>
+  </data>
+  <data name="95">
+    <value>Cannot read mp3 file.</value>
+  </data>
+  <data name="94">
+    <value>You must enter file name for level sound.</value>
+  </data>
+  <data name="98">
+    <value>Minimum resource name length is 3 characters.</value>
+  </data>
+  <data name="119">
+    <value>Save &amp;as...</value>
+  </data>
+  <data name="138">
+    <value>save current level</value>
+  </data>
+  <data name="139">
+    <value>save current level as...</value>
+  </data>
+  <data name="82">
+    <value>bottom</value>
+  </data>
+  <data name="83">
+    <value>layer foreground</value>
+  </data>
+  <data name="80">
+    <value>up</value>
+  </data>
+  <data name="81">
+    <value>down</value>
+  </data>
+  <data name="86">
+    <value>move to</value>
+  </data>
+  <data name="87">
+    <value>remove</value>
+  </data>
+  <data name="84">
+    <value>layer pillows</value>
+  </data>
+  <data name="133">
+    <value>Change loading bitmap...</value>
+  </data>
+  <data name="134">
+    <value>Change background...</value>
+  </data>
+  <data name="135">
+    <value>Change sound...</value>
+  </data>
+  <data name="136">
+    <value>create new level...</value>
+  </data>
+  <data name="89">
+    <value>Resources</value>
+  </data>
+  <data name="2">
+    <value>&amp;X:</value>
+  </data>
+  <data name="3">
+    <value>&amp;Y:</value>
+  </data>
+  <data name="1">
+    <value>Item bounds define where the item is located, width and height.</value>
+  </data>
+  <data name="6">
+    <value>Bounds</value>
+  </data>
+  <data name="7">
+    <value>Z-Order</value>
+  </data>
+  <data name="4">
+    <value>&amp;Width:</value>
+  </data>
+  <data name="5">
+    <value>&amp;Height:</value>
+  </data>
+  <data name="121">
+    <value>&amp;Properties...</value>
+  </data>
+  <data name="120">
+    <value>Compile</value>
+  </data>
+  <data name="31">
+    <value>Every bitmap can have transaprent color. Transparent color defines where in the bitmap is visible background located under bitmap.</value>
+  </data>
+  <data name="162">
+    <value>Opponents</value>
+  </data>
+  <data name="33">
+    <value>by &amp;location:</value>
+  </data>
+  <data name="141">
+    <value>compile current level</value>
+  </data>
+  <data name="74">
+    <value>active</value>
+  </data>
+  <data name="118">
+    <value>&amp;Save</value>
+  </data>
+  <data name="176">
+    <value>Black</value>
+  </data>
+  <data name="20">
+    <value>Name</value>
+  </data>
+  <data name="21">
+    <value>Loading bitmap</value>
+  </data>
+  <data name="22">
+    <value>Background</value>
+  </data>
+  <data name="112">
+    <value>&amp;Help</value>
+  </data>
+  <data name="113">
+    <value>&amp;Level</value>
+  </data>
+  <data name="110">
+    <value>&amp;Finish</value>
+  </data>
+  <data name="111">
+    <value>&amp;About...</value>
+  </data>
+  <data name="116">
+    <value>&amp;New</value>
+  </data>
+  <data name="117">
+    <value>&amp;Open...</value>
+  </data>
+  <data name="114">
+    <value>&amp;Layer</value>
+  </data>
+  <data name="115">
+    <value>&amp;Insert</value>
+  </data>
+  <data name="129">
+    <value>&amp;Foreground mode</value>
+  </data>
+  <data name="128">
+    <value>Insert &amp;bitmap</value>
+  </data>
+  <data name="147">
+    <value>insert object to background layer</value>
+  </data>
+  <data name="100">
+    <value>Minimum level name length is 5 characters.</value>
+  </data>
+  <data name="13">
+    <value>&amp;Next &gt;&gt;</value>
+  </data>
+  <data name="12">
+    <value>&lt;&lt; &amp;Prev</value>
+  </data>
+  <data name="11">
+    <value>&amp;Cancel</value>
+  </data>
+  <data name="104">
+    <value>Error</value>
+  </data>
+  <data name="123">
+    <value>Show &amp;foreground objects</value>
+  </data>
+  <data name="122">
+    <value>E&amp;xit</value>
+  </data>
+  <data name="125">
+    <value>Show &amp;background objects</value>
+  </data>
+  <data name="124">
+    <value>Show &amp;middle objects</value>
+  </data>
+  <data name="127">
+    <value>Insert &amp;obstacle</value>
+  </data>
+  <data name="126">
+    <value>&amp;Select object(s)</value>
+  </data>
+  <data name="178">
+    <value>Gun</value>
+  </data>
+  <data name="179">
+    <value>Shot-gun</value>
+  </data>
+  <data name="174">
+    <value>Purple</value>
+  </data>
+  <data name="175">
+    <value>Blue</value>
+  </data>
+  <data name="151">
+    <value>Item &amp;name:</value>
+  </data>
+  <data name="177">
+    <value>Random</value>
+  </data>
+  <data name="170">
+    <value>Pink</value>
+  </data>
+  <data name="171">
+    <value>Brown</value>
+  </data>
+  <data name="172">
+    <value>Red</value>
+  </data>
+  <data name="173">
+    <value>Yellow</value>
+  </data>
+  <data name="109">
+    <value>Question</value>
+  </data>
+  <data name="108">
+    <value>The current level is not saved. Save it ?</value>
+  </data>
+  <data name="39">
+    <value>Loading bitmap is a bitmap that appears while CombatPillows (c) prepares the level and while the counting is in progress, before the level starts. The bitmap must have 800x600 pixels.</value>
+  </data>
+  <data name="38">
+    <value>Resource &amp;name:</value>
+  </data>
+  <data name="78">
+    <value>Save level resource file as...</value>
+  </data>
+  <data name="103">
+    <value>remove unused resources</value>
+  </data>
+  <data name="102">
+    <value>insert new bitmap...</value>
+  </data>
+  <data name="101">
+    <value>Maximum level name length is 32 characters.</value>
+  </data>
+  <data name="140">
+    <value>show level properties...</value>
+  </data>
+  <data name="107">
+    <value>Background image size must be {0}x{1} pixels.</value>
+  </data>
+  <data name="106">
+    <value>New level has been generated to "{0}".</value>
+  </data>
+  <data name="105">
+    <value>Information</value>
+  </data>
+  <data name="32">
+    <value>Bitmap has &amp;transparent color</value>
+  </data>
+  <data name="35">
+    <value>x:</value>
+  </data>
+  <data name="34">
+    <value>by &amp;color:</value>
+  </data>
+  <data name="37">
+    <value>y:</value>
+  </data>
+  <data name="36">
+    <value>Each resource has its own unique name. For example, you can use later this name to insert the resource into the level.</value>
+  </data>
+  <data name="8">
+    <value>FireThrough</value>
+  </data>
+  <data name="9">
+    <value>Obstacle properties...</value>
+  </data>
+  <data name="28">
+    <value>Bitmap properties...</value>
+  </data>
+  <data name="29">
+    <value>Layer &amp; Z-Order</value>
+  </data>
+  <data name="158">
+    <value>&amp;Target teleport:</value>
+  </data>
+  <data name="159">
+    <value>Every level can have vampires and/or opponents... Vampires are special built-in opponents. You can define also your own opponents. Every opponent has its color, speed, weapon and hits he can survive.</value>
+  </data>
+  <data name="156">
+    <value>&amp;Remove</value>
+  </data>
+  <data name="157">
+    <value>Insert target teleport...</value>
+  </data>
+  <data name="154">
+    <value>If the teleport is source, it can lead to one or more targets. If the teleport leads to two or more targets the player will be teleported to one of them randomly.</value>
+  </data>
+  <data name="155">
+    <value>&amp;Insert</value>
+  </data>
+  <data name="152">
+    <value>Teleport properties...</value>
+  </data>
+  <data name="153">
+    <value>Targets</value>
+  </data>
+  <data name="150">
+    <value>Each item has its own unique name. It is used for better orientation through the items of the level.</value>
+  </data>
+  <data name="23">
+    <value>Sound</value>
+  </data>
+  <data name="24">
+    <value>&amp;Bitmap resource name:</value>
+  </data>
+  <data name="25">
+    <value>New...</value>
+  </data>
+  <data name="26">
+    <value>Insert bitmap</value>
+  </data>
+  <data name="27">
+    <value>Level properties...</value>
+  </data>
+  <data name="169">
+    <value>Green</value>
+  </data>
+  <data name="168">
+    <value>Random</value>
+  </data>
+  <data name="19">
+    <value>CombatPillows level editor</value>
+  </data>
+  <data name="18">
+    <value>New bitmap wizard...</value>
+  </data>
+  <data name="165">
+    <value>&amp;Weapon:</value>
+  </data>
+  <data name="164">
+    <value>&amp;Color:</value>
+  </data>
+  <data name="167">
+    <value>Survive &amp;hits:</value>
+  </data>
+  <data name="166">
+    <value>&amp;Speed:</value>
+  </data>
+  <data name="161">
+    <value>There are opponents in the level</value>
+  </data>
+  <data name="160">
+    <value>There are vampires in the level</value>
+  </data>
+  <data name="163">
+    <value>Change opponents...</value>
+  </data>
+  <data name="10">
+    <value>&amp;OK</value>
+  </data>
+  <data name="17">
+    <value>New Level Wizard...</value>
+  </data>
+  <data name="16">
+    <value>&amp;jpeg</value>
+  </data>
+  <data name="15">
+    <value>&amp;bmp</value>
+  </data>
+  <data name="14">
+    <value>save as:</value>
+  </data>
+  <data name="149">
+    <value>Insert &amp;teleport</value>
+  </data>
+  <data name="148">
+    <value>insert teleport</value>
+  </data>
+  <data name="79">
+    <value>top</value>
+  </data>
+  <data name="146">
+    <value>insert object to pillows layer</value>
+  </data>
+  <data name="145">
+    <value>insert object to foreground layer</value>
+  </data>
+  <data name="144">
+    <value>insert bitmap</value>
+  </data>
+  <data name="75">
+    <value>visible</value>
+  </data>
+  <data name="142">
+    <value>select objects</value>
+  </data>
+  <data name="77">
+    <value>Open level resource file...</value>
+  </data>
+  <data name="76">
+    <value>level resource files (*.eapres)|*.eapres</value>
+  </data>
+  <data name="71">
+    <value>Pillows</value>
+  </data>
+  <data name="70">
+    <value>Foreground</value>
+  </data>
+  <data name="73">
+    <value>show properties...</value>
+  </data>
+  <data name="72">
+    <value>Background</value>
+  </data>
+  <data name="68">
+    <value>Combat Pillows Level Editor</value>
+  </data>
+  <data name="69">
+    <value>&amp;Close</value>
+  </data>
+  <data name="64">
+    <value>Bitmap</value>
+  </data>
+  <data name="65">
+    <value>Transparency</value>
+  </data>
+  <data name="66">
+    <value>Name</value>
+  </data>
+  <data name="67">
+    <value>About...</value>
+  </data>
+  <data name="60">
+    <value>Enter level background bitmap. The bitmap size for level background must be 800x515 pixels.</value>
+  </data>
+  <data name="61">
+    <value>Background &amp;bitmap:</value>
+  </data>
+  <data name="62">
+    <value>Select background bitmap...</value>
+  </data>
+  <data name="63">
+    <value>Bitmap resource properties...</value>
+  </data>
+  <data name="59">
+    <value>Select bitmap...</value>
+  </data>
+  <data name="58">
+    <value>&amp;Bitmap:</value>
+  </data>
+  <data name="57">
+    <value>Enter bitmap file name.</value>
+  </data>
+  <data name="56">
+    <value>enable &amp;fire through the obstacle</value>
+  </data>
+  <data name="55">
+    <value>FireThrough defines whether the obstacle is invisible to shots or not.</value>
+  </data>
+  <data name="54">
+    <value>&amp;Ground:</value>
+  </data>
+  <data name="53">
+    <value>Each visible item in 'pillows' layer has 'Ground' property. It defines how the item is combined with other items to calculate final z-order.</value>
+  </data>
+  <data name="52">
+    <value>&amp;Z-Order:</value>
+  </data>
+  <data name="51">
+    <value>&amp;Layer:</value>
+  </data>
+  <data name="50">
+    <value>Each visual item has its layer. 'Background' contains all items that are under pillows, 'foreground' contains all items that are before pillows and 'pillows' contains all items that combine its z-order with pillows.</value>
+  </data>
+  <data name="88">
+    <value>Layers</value>
+  </data>
+  <data name="48">
+    <value>&amp;Level name:</value>
+  </data>
+  <data name="49">
+    <value>C&amp;reated by:</value>
+  </data>
+  <data name="46">
+    <value>Select level sound...</value>
+  </data>
+  <data name="47">
+    <value>Level name indicates the name of level that appears in the list of all available levels in CombatPillows (c). It must be 5-32 characters long. You can also provide your name or nick in the field 'Created by'.</value>
+  </data>
+  <data name="44">
+    <value>Level &amp;sound:</value>
+  </data>
+  <data name="45">
+    <value>MP3 files (*.mp3)|*.mp3</value>
+  </data>
+  <data name="42">
+    <value>All available images (*.bmp; *.jpg; *.jpeg; *.gif; *.png)|*.bmp; *.jpg; *.jpeg; *.gif; *.png</value>
+  </data>
+  <data name="43">
+    <value>Enter level sound. As a level sound you can provide any MP3 file. The MP3 file will be looping during the game.</value>
+  </data>
+  <data name="40">
+    <value>&amp;Loading bitmap:</value>
+  </data>
+  <data name="41">
+    <value>Select loading bitmap...</value>
+  </data>
+  <data name="183">
+    <value>Opponent 1</value>
+  </data>
+  <data name="182">
+    <value>Opponents properties...</value>
+  </data>
+  <data name="181">
+    <value>Bomb thrower</value>
+  </data>
+  <data name="180">
+    <value>Machine-gun</value>
+  </data>
+  <data name="187">
+    <value>Insert &amp;mine</value>
+  </data>
+  <data name="186">
+    <value>Opponent 4</value>
+  </data>
+  <data name="185">
+    <value>Opponent 3</value>
+  </data>
+  <data name="184">
+    <value>Opponent 2</value>
+  </data>
+  <data name="189">
+    <value>Mine properties...</value>
+  </data>
+  <data name="188">
+    <value>insert mine</value>
+  </data>
+  <data name="190">
+    <value>setup opponents</value>
+  </data>
+</root>

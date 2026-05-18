@@ -1,0 +1,32 @@
+/bulanci.rep
+bulanci.gpr
+bulanci.lock
+bulanci.lock~
+
+# Extracted assets produced by tools/bulanci_unpack - derived from bulanci.exe
+# and the .eap/.eapres sources; do not commit.
+/unpacked/
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Decomp pipeline - generated artifacts
+/build/
+build.ninja
+.ninja_deps
+.ninja_log
+objdiff.json
+baseline.json
+changes.json
+progress.png
+progress/
+
+# Third-party tools (downloaded locally, not committed)
+tools/*
+!tools/bulanci_unpack/
+!tools/.gitkeep
+
+# Editor scratch
+.tmp_*
+*.swp
