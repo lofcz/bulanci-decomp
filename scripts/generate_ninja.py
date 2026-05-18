@@ -12,9 +12,10 @@ WORKSPACE_PATH = Path(__file__).parent.parent
 DEFAULT_CL = os.environ.get("BULANCI_CL", r"tools\msvc8\Bin\cl.exe")
 
 # Mirrors the original game's optimisation flags as far as Rich Header analysis
-# allows us to infer them. /O2 + /GR + /GX (now /EHsc on modern MSVC) is a
-# reasonable baseline for matching VC8 commercial code. Refine per-unit later.
-DEFAULT_CL_FLAGS = "/Zi /O2 /GR /GX"
+# allows us to infer them. /EHsc is the post-VS2005 spelling of /GX; we use it
+# to avoid the D9035 deprecation warning. /GR keeps RTTI on (the binary uses
+# it heavily). Refine per-unit later when we start hitting real matches.
+DEFAULT_CL_FLAGS = "/Zi /O2 /GR /EHsc"
 
 
 def generateNinja(decompUnits: list[DecompUnit], output_path: Path):
@@ -26,10 +27,21 @@ def generateNinja(decompUnits: list[DecompUnit], output_path: Path):
             writer.variable(f"builddir_{decompUnit.directory_name}", str(decompUnit.buildSrc))
 
         writer.variable("cl", DEFAULT_CL)
+        # The vendored compiler's CRT/C++ headers live in tools/msvc8/Include
+        # and the Windows user-mode SDK lives next to it under
+        # tools/msvc8/PlatformSDK/Include (windows.h, winuser.h, ...).
+        # If the user pointed BULANCI_CL elsewhere we derive both from cl's
+        # parent so things stay consistent.
+        cl_dir = Path(DEFAULT_CL).resolve().parent if Path(DEFAULT_CL).exists() else Path("tools/msvc8/Bin")
+        msvc_include = cl_dir.parent / "Include"
+        psdk_include = cl_dir.parent / "PlatformSDK" / "Include"
         unitsImports = " ".join([f"/I {str(decUnit.includePath)}" for decUnit in decompUnits])
+        include_flags = f"/I include/ {unitsImports} /I {msvc_include}"
+        if psdk_include.exists():
+            include_flags += f" /I {psdk_include}"
         writer.variable(
             "cl_flags",
-            f"{DEFAULT_CL_FLAGS} /I include/ {unitsImports} /I tools/",
+            f"{DEFAULT_CL_FLAGS} {include_flags} /I tools/",
         )
         writer.rule("cc", "$cl /nologo $cl_flags /c $in /Fd$out.pdb /Fo$out", deps="msvc")
 

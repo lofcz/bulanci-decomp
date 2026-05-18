@@ -36,7 +36,14 @@ def runAnalyze(
     username=None,
     pre_scripts=None,
     post_scripts=None,
+    read_only=True,
 ):
+    """Invoke Ghidra's `analyzeHeadless` against a project.
+
+    `read_only` defaults to True because the export-side scripts
+    (ExportDelinker, GenerateMapping) only need to read symbols. Set to
+    False for one-shot rename / namespace-mutation passes that need to
+    persist back to the .gpr (e.g. `PromoteVftableMembers.java`)."""
     if pre_scripts is None:
         pre_scripts = []
     if post_scripts is None:
@@ -53,8 +60,9 @@ def runAnalyze(
     elif import_file:
         commonAnalyzeHeadlessArgs += ["-import", import_file]
 
+    if read_only:
+        commonAnalyzeHeadlessArgs += ["-readOnly"]
     commonAnalyzeHeadlessArgs += [
-        "-readOnly",
         "-scriptPath",
         str(SCRIPT_PATH / "ghidra"),
     ]

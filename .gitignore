@@ -27,10 +27,13 @@ tools/*
 !tools/bulanci_unpack/
 !tools/.gitkeep
 # Track only the per-toolchain README so vendoring instructions are visible
-# without pulling the actual MSVC bits into the repo.
+# without pulling the actual binaries into the repo.
 !tools/msvc8/
 tools/msvc8/*
 !tools/msvc8/README.md
+!tools/dxsdk_feb2007/
+tools/dxsdk_feb2007/*
+!tools/dxsdk_feb2007/README.md
 
 # Editor scratch
 .tmp_*

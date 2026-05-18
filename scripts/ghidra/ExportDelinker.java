@@ -67,6 +67,15 @@ public class ExportDelinker extends GhidraScript
         // Workaround: walk the in-memory symbol table once and suffix every
         // duplicate's name with its address. The project is opened -readOnly,
         // so these renames stay in memory and never touch the .gpr on disk.
+        //
+        // We also sanitise Ghidra's synthetic symbol names that are not
+        // valid C++ identifiers (e.g. `Catch@<addr>`, backtick-quoted
+        // `` `scalar_deleting_destructor' ``) so the COFF symbols here
+        // match what `scripts/generate_sources.py` writes into the stub
+        // sources via `_sanitize_symbol_name()`. Without this, objdiff
+        // would see the target and stub functions under different names
+        // and never pair them.
+        sanitizeSymbolNames();
         deduplicateSymbolNames();
 
         exporter.setOptions(exporterOptions);
@@ -137,6 +146,73 @@ public class ExportDelinker extends GhidraScript
      *
      * Operates in-memory; requires either -readOnly or a writeable project.
      */
+    /**
+     * Rewrite any symbol whose simple name contains characters that are
+     * illegal in a C++ identifier (commonly `@`, backtick, single-quote)
+     * into a sanitised form built only from `[A-Za-z0-9_]` plus a leading
+     * `~` for destructors. Mirrors `_sanitize_symbol_name()` in
+     * `scripts/generate_sources.py` so the stub COFF symbols and the
+     * target COFF symbols agree.
+     *
+     * Operator overloads (`operator==`, `operator new[]`, ...) are left
+     * alone - those are legal C++ method names and MSVC will mangle them
+     * the same way on both sides of the diff.
+     *
+     * Operates in-memory; requires either -readOnly or a writeable project.
+     */
+    private void sanitizeSymbolNames() throws Exception {
+        SymbolTable st = currentProgram.getSymbolTable();
+        int renamed = 0;
+        for (Symbol sym : st.getAllSymbols(true)) {
+            String original = sym.getName();
+            String sanitised = sanitiseName(original);
+            if (sanitised.equals(original)) {
+                continue;
+            }
+            try {
+                sym.setName(sanitised, SourceType.USER_DEFINED);
+                renamed++;
+            } catch (Exception e) {
+                // Some symbols reject renames (function entry points
+                // bound to type info, etc.); skip them rather than abort.
+            }
+        }
+        if (renamed > 0) {
+            printf("Sanitised %d symbol name(s) for COFF export.\n", renamed);
+        }
+    }
+
+    /** Pure-function version of `_sanitize_symbol_name()`. */
+    private static String sanitiseName(String name) {
+        if (name == null || name.isEmpty()) {
+            return name;
+        }
+        if (name.startsWith("operator") && name.length() > "operator".length()) {
+            return name;
+        }
+        StringBuilder out = new StringBuilder(name.length());
+        for (int i = 0; i < name.length(); i++) {
+            char c = name.charAt(i);
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')
+                    || (c >= '0' && c <= '9') || c == '_') {
+                out.append(c);
+            } else if (c == '~' && i == 0) {
+                out.append(c);
+            } else {
+                out.append('_');
+            }
+        }
+        // Collapse runs of underscores introduced by the substitution.
+        String collapsed = out.toString().replaceAll("_+", "_");
+        // Strip outer underscores, but reinstate a leading `_` if the
+        // original started with one (legal C++ identifier start).
+        String stripped = collapsed.replaceAll("^_+|_+$", "");
+        if (name.charAt(0) == '_' && !stripped.startsWith("_")) {
+            stripped = "_" + stripped;
+        }
+        return stripped.isEmpty() ? "_anon" : stripped;
+    }
+
     private void deduplicateSymbolNames() throws Exception {
         SymbolTable st = currentProgram.getSymbolTable();
         Map<String, List<Symbol>> byQualifiedName = new HashMap<>();
