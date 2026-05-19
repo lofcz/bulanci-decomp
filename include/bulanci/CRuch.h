@@ -6,6 +6,7 @@
 class CRuch {
 public:
 	/* 423D00 */ uchar* FUN_00423d00();
+	/* 423D10 */ uchar FUN_00423d10(uint* param_1);
 	/* 423D70 */ uchar FUN_00423d70(uchar param_1);
 	/* 423D80 */ uchar FUN_00423d80(uchar param_1);
 	/* 423D90 */ uchar FUN_00423d90(uchar param_1);

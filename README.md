@@ -26,7 +26,8 @@ python scripts\configure.py --skip-ghidra
 progress_update.bat
 ```
 
-See [`docs/DECOMP.md`](docs/DECOMP.md) for the full pipeline.
+See [`docs/DECOMP.md`](docs/DECOMP.md) for the full pipeline and
+[`docs/MODULES.md`](docs/MODULES.md) for the per-subsystem module map.
 
 ## Asset unpacker
 

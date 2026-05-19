@@ -55,6 +55,16 @@ uchar CMina::FUN_0041b210(void* param_1) {
 	return 0;
 }
 
+/* 41B4A0-41B500 00060	*/
+uchar CMina::FUN_0041b4a0(void* param_1) {
+	return 0;
+}
+
+/* 41C010-41C0CB 000BB	*/
+uchar CMina::FUN_0041c010(uint* param_1) {
+	return 0;
+}
+
 /* 41C0D0-41C132 00062	*/
 uchar CMina::FUN_0041c0d0(int param_1) {
 	return 0;

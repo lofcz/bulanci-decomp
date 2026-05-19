@@ -21,11 +21,11 @@ public:
 	/* 409490 */ uchar FUN_00409490(int param_1);
 	/* 409970 */ uchar FUN_00409970(int param_1);
 	/* 429300 */ uchar FUN_00429300(int param_1);
-	/* 433400 */ uchar FUN_00433400(void* param_1, ulong param_2);
-	/* 433470 */ uchar FUN_00433470(void* param_1, ulong param_2);
-	/* 4334C0 */ uchar FUN_004334c0(ulong param_1, ulong param_2, ulong param_3, ulong param_4);
-	/* 433510 */ uchar FUN_00433510(ulong param_1, ulong param_2, ulong param_3, ulong param_4);
-	/* 433560 */ uchar FUN_00433560(long param_1, long param_2, ulong param_3);
+	/* 433400 */ uchar FUN_00433400(void* param_1, DWORD param_2);
+	/* 433470 */ uchar FUN_00433470(void* param_1, DWORD param_2);
+	/* 4334C0 */ uchar FUN_004334c0(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4);
+	/* 433510 */ uchar FUN_00433510(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4);
+	/* 433560 */ uchar FUN_00433560(int param_1, int param_2, DWORD param_3);
 	/* 4335E0 */ uchar FUN_004335e0(uint param_1, uint param_2);
 	/* 433660 */ longlong FUN_00433660(uint param_1);
 	/* 4336C0 */ longlong FUN_004336c0(uint param_1);

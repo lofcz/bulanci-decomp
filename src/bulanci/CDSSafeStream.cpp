@@ -25,6 +25,11 @@ uchar CDSSafeStream::FUN_00433bb0(uchar param_1) {
 	return 0;
 }
 
+/* 433BC0-433C52 00092	*/
+uchar CDSSafeStream::FUN_00433bc0(uint* param_1) {
+	return 0;
+}
+
 /* 433C90-433CAE 0001E	*/
 uint* CDSSafeStream::FUN_00433c90(uchar param_1) {
 	return 0;
@@ -42,6 +47,11 @@ uchar CDSSafeStream::FUN_00446c00(void* param_1) {
 
 /* 446CA0-446CA8 00008	*/
 int CDSSafeStream::FUN_00446ca0(int param_1) {
+	return 0;
+}
+
+/* 446D90-446E9E 0010E	*/
+int CDSSafeStream::FUN_00446d90(int param_1) {
 	return 0;
 }
 

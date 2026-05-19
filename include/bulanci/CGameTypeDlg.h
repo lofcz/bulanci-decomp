@@ -5,6 +5,7 @@
 
 class CGameTypeDlg {
 public:
+	/* 40AAD0 */ uchar FUN_0040aad0(int* param_1);
 	/* 40AB00 */ uchar FUN_0040ab00(short param_1, int param_2, uint param_3);
 	/* 40BC00 */ uchar* FUN_0040bc00();
 };

@@ -9,6 +9,7 @@ public:
 	/* 429340 */ uchar* FUN_00429340();
 	/* 429350 */ uchar FUN_00429350(uchar param_1);
 	/* 429360 */ uchar FUN_00429360(uchar param_1);
+	/* 429370 */ uchar FUN_00429370(uint* param_1);
 	/* 429510 */ uint* FUN_00429510(uchar param_1);
 };
 

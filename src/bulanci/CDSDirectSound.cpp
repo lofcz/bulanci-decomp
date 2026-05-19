@@ -1,5 +1,10 @@
 #include "CDSDirectSound.h"
 
+/* 43A350-43A483 00133	*/
+uchar CDSDirectSound::FUN_0043a350(int param_1) {
+	return 0;
+}
+
 /* 43C8A0-43C8A6 00006	*/
 uchar* CDSDirectSound::FUN_0043c8a0() {
 	return 0;

@@ -40,6 +40,11 @@ uchar CIcon::FUN_00404a90(uchar param_1) {
 	return 0;
 }
 
+/* 404AA0-404B02 00062	*/
+uchar CIcon::FUN_00404aa0(uint* param_1) {
+	return 0;
+}
+
 /* 4065E0-4065FE 0001E	*/
 uint* CIcon::FUN_004065e0(uchar param_1) {
 	return 0;

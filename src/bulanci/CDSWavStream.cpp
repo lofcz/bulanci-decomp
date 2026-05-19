@@ -40,6 +40,11 @@ uchar CDSWavStream::FUN_0041a630(uchar param_1) {
 	return 0;
 }
 
+/* 41A640-41A69A 0005A	*/
+uchar CDSWavStream::FUN_0041a640(uint* param_1) {
+	return 0;
+}
+
 /* 41BC00-41BC1E 0001E	*/
 uint* CDSWavStream::FUN_0041bc00(uchar param_1) {
 	return 0;

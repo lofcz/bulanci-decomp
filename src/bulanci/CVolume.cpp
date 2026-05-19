@@ -25,8 +25,18 @@ uchar CVolume::FUN_0040be70(uchar param_1) {
 	return 0;
 }
 
+/* 40E230-40E261 00031	*/
+uchar CVolume::FUN_0040e230(int param_1) {
+	return 0;
+}
+
 /* 40E270-40E28D 0001D	*/
 uchar CVolume::FUN_0040e270(uint param_1, uchar param_2) {
+	return 0;
+}
+
+/* 40FA70-40FAFD 0008D	*/
+uchar CVolume::FUN_0040fa70(uint* param_1) {
 	return 0;
 }
 

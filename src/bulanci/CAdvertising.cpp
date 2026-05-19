@@ -1,5 +1,10 @@
 #include "CAdvertising.h"
 
+/* 40ACC0-40ACD9 00019	*/
+uint CAdvertising::FUN_0040acc0(int param_1) {
+	return 0;
+}
+
 /* 40B4B0-40B4C8 00018	*/
 uchar CAdvertising::FUN_0040b4b0(void* param_1) {
 	return 0;

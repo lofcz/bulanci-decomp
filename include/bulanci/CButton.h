@@ -5,6 +5,7 @@
 
 class CButton {
 public:
+	/* 4030B0 */ uchar FUN_004030b0(int param_1);
 	/* 4030E0 */ uchar FUN_004030e0(uint param_1, short param_2);
 	/* 403F20 */ uchar FUN_00403f20(uint param_1, uchar param_2);
 	/* 403F90 */ uint FUN_00403f90(uchar param_1, char param_2);
@@ -13,6 +14,7 @@ public:
 	/* 404BB0 */ uchar FUN_00404bb0(uchar param_1);
 	/* 404BC0 */ uchar FUN_00404bc0(uchar param_1);
 	/* 404BD0 */ uchar FUN_00404bd0(uchar param_1);
+	/* 405600 */ uchar FUN_00405600(uint* param_1);
 	/* 4056B0 */ uchar FUN_004056b0(int param_1);
 	/* 406670 */ uint* FUN_00406670(uchar param_1);
 };

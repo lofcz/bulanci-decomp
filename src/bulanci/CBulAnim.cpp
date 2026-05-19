@@ -1,5 +1,15 @@
 #include "CBulAnim.h"
 
+/* 40AD20-40AD7D 0005D	*/
+uchar CBulAnim::FUN_0040ad20(uint* param_1) {
+	return 0;
+}
+
+/* 40AFD0-40B015 00045	*/
+uchar CBulAnim::FUN_0040afd0(uchar param_1) {
+	return 0;
+}
+
 /* 40B020-40B04B 0002B	*/
 uchar CBulAnim::FUN_0040b020(short param_1, uint param_2) {
 	return 0;

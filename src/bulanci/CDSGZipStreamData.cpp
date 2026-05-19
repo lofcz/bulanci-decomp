@@ -10,6 +10,11 @@ uchar CDSGZipStreamData::FUN_00434fb0(uchar param_1) {
 	return 0;
 }
 
+/* 434FC0-435026 00066	*/
+uchar CDSGZipStreamData::FUN_00434fc0(uint* param_1) {
+	return 0;
+}
+
 /* 435030-43504E 0001E	*/
 uint* CDSGZipStreamData::FUN_00435030(uchar param_1) {
 	return 0;

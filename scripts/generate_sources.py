@@ -10,11 +10,21 @@ WORKSPACE_PATH = Path(__file__).parent.parent
 # type gets forward-declared as `struct Name;` at the top of the header so
 # pointer-to-Name compiles. Empty stub bodies never dereference the pointer
 # so a forward declaration is sufficient.
+#
+# Keep in sync with `include/globals.h` - any typedef declared there
+# should be listed here so the stub generator emits the bare typedef
+# name instead of a (broken) `struct Name;` forward declaration.
 KNOWN_TYPES = {
     "void", "bool", "char", "uchar", "short", "ushort", "int", "uint",
     "long", "ulong", "longlong", "ulonglong", "float", "double",
-    "wchar_t", "size_t", "ptrdiff_t", "BOOL", "DWORD", "DWORD_PTR",
-    "LPCRITICAL_SECTION", "HINSTANCE", "HWND", "HRESULT",
+    "wchar_t", "size_t", "ptrdiff_t",
+    # Curated Win32 / DirectX scalar + handle typedefs from globals.h.
+    "BOOL", "BYTE", "WORD", "DWORD", "DWORD_PTR", "HRESULT",
+    "CHAR", "WCHAR", "errno_t",
+    "PVOID", "LPVOID",
+    # Pre-existing Win32 handle types kept for backwards compatibility
+    # with already-generated stubs that reference them.
+    "LPCRITICAL_SECTION", "HINSTANCE", "HWND",
 }
 
 # Regex of characters that may appear inside a C++ identifier (plus `:` so

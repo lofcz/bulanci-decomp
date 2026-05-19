@@ -50,6 +50,11 @@ uchar CRadio::FUN_004073d0(uchar param_1) {
 	return 0;
 }
 
+/* 407500-4075EA 000EA	*/
+uchar CRadio::FUN_00407500(uint* param_1) {
+	return 0;
+}
+
 /* 407F30-407F4E 0001E	*/
 uint* CRadio::FUN_00407f30(uchar param_1) {
 	return 0;

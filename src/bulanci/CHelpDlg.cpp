@@ -25,6 +25,11 @@ uchar CHelpDlg::FUN_004220d0(uchar param_1) {
 	return 0;
 }
 
+/* 4220E0-422192 000B2	*/
+uchar CHelpDlg::FUN_004220e0(uint* param_1) {
+	return 0;
+}
+
 /* 4222F0-42230E 0001E	*/
 uint* CHelpDlg::FUN_004222f0(uchar param_1) {
 	return 0;

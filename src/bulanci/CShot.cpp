@@ -5,6 +5,11 @@ uchar* CShot::FUN_004170e0() {
 	return 0;
 }
 
+/* 4170F0-41714D 0005D	*/
+uchar CShot::FUN_004170f0(uint* param_1) {
+	return 0;
+}
+
 /* 417150-417158 00008	*/
 uchar CShot::FUN_00417150(uchar param_1) {
 	return 0;
@@ -30,6 +35,11 @@ uint* CShot::FUN_00417190(uchar param_1) {
 	return 0;
 }
 
+/* 417B30-417BC6 00096	*/
+uchar CShot::FUN_00417b30(int* param_1, int* param_2, int param_3) {
+	return 0;
+}
+
 /* 417BD0-417C71 000A1	*/
 uchar CShot::FUN_00417bd0(void* param_1) {
 	return 0;
@@ -52,6 +62,11 @@ uchar CShot::FUN_0041a980(int param_1) {
 
 /* 41B1D0-41B203 00033	*/
 uchar CShot::FUN_0041b1d0(void* param_1) {
+	return 0;
+}
+
+/* 41DE60-41DF60 00100	*/
+uint CShot::FUN_0041de60(int* param_1, int* param_2, uchar* param_3) {
 	return 0;
 }
 

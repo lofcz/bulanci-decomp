@@ -13,6 +13,7 @@ public:
 	/* 41A610 */ uchar FUN_0041a610(int param_1);
 	/* 41A620 */ uchar FUN_0041a620(uchar param_1);
 	/* 41A630 */ uchar FUN_0041a630(uchar param_1);
+	/* 41A640 */ uchar FUN_0041a640(uint* param_1);
 	/* 41BC00 */ uint* FUN_0041bc00(uchar param_1);
 	/* 428DD0 */ uchar FUN_00428dd0(int param_1);
 	/* 43BAB0 */ uchar FUN_0043bab0(int* param_1);

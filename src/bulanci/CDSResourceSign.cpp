@@ -1,5 +1,15 @@
 #include "CDSResourceSign.h"
 
+/* 42E680-42E693 00013	*/
+uchar CDSResourceSign::FUN_0042e680(int* param_1) {
+	return 0;
+}
+
+/* 42E6A0-42E6B3 00013	*/
+uchar CDSResourceSign::FUN_0042e6a0(int* param_1) {
+	return 0;
+}
+
 /* 434310-434347 00037	*/
 uchar CDSResourceSign::FUN_00434310(int* param_1) {
 	return 0;
@@ -47,6 +57,11 @@ uchar CDSResourceSign::FUN_00434650(int param_1) {
 
 /* 434660-434668 00008	*/
 uchar CDSResourceSign::FUN_00434660(int param_1) {
+	return 0;
+}
+
+/* 434670-4346EC 0007C	*/
+uchar CDSResourceSign::FUN_00434670(uint* param_1) {
 	return 0;
 }
 

@@ -13,11 +13,14 @@ public:
 	/* 4034C0 */ uchar FUN_004034c0(uchar param_1);
 	/* 4034D0 */ uchar* FUN_004034d0();
 	/* 4034E0 */ uint* FUN_004034e0(uchar param_1);
+	/* 4040C0 */ uchar FUN_004040c0(int param_1);
 	/* 404110 */ uchar FUN_00404110(short param_1, int param_2);
 	/* 404DE0 */ uchar FUN_00404de0(int param_1);
+	/* 405110 */ uint FUN_00405110(char param_1);
 	/* 4057C0 */ uchar FUN_004057c0(int* param_1);
 	/* 405930 */ bool FUN_00405930(char param_1);
 	/* 405AF0 */ uchar FUN_00405af0(int* param_1);
+	/* 4069B0 */ uchar FUN_004069b0(char param_1);
 	/* 406CC0 */ bool FUN_00406cc0(char param_1);
 	/* 4229A0 */ uchar FUN_004229a0(int param_1);
 };

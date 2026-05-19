@@ -81,27 +81,27 @@ uchar CDSFileStream::FUN_00429300(int param_1) {
 }
 
 /* 433400-433461 00061	*/
-uchar CDSFileStream::FUN_00433400(void* param_1, ulong param_2) {
+uchar CDSFileStream::FUN_00433400(void* param_1, DWORD param_2) {
 	return 0;
 }
 
 /* 433470-4334BE 0004E	*/
-uchar CDSFileStream::FUN_00433470(void* param_1, ulong param_2) {
+uchar CDSFileStream::FUN_00433470(void* param_1, DWORD param_2) {
 	return 0;
 }
 
 /* 4334C0-433507 00047	*/
-uchar CDSFileStream::FUN_004334c0(ulong param_1, ulong param_2, ulong param_3, ulong param_4) {
+uchar CDSFileStream::FUN_004334c0(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4) {
 	return 0;
 }
 
 /* 433510-433557 00047	*/
-uchar CDSFileStream::FUN_00433510(ulong param_1, ulong param_2, ulong param_3, ulong param_4) {
+uchar CDSFileStream::FUN_00433510(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4) {
 	return 0;
 }
 
 /* 433560-4335D3 00073	*/
-uchar CDSFileStream::FUN_00433560(long param_1, long param_2, ulong param_3) {
+uchar CDSFileStream::FUN_00433560(int param_1, int param_2, DWORD param_3) {
 	return 0;
 }
 

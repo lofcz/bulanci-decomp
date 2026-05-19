@@ -15,6 +15,16 @@ uchar CGameView::FUN_00417210(int* param_1) {
 	return 0;
 }
 
+/* 418290-4182C9 00039	*/
+uchar CGameView::FUN_00418290(uchar param_1, uchar param_2, uchar param_3) {
+	return 0;
+}
+
+/* 4182D0-4182FD 0002D	*/
+uchar CGameView::FUN_004182d0(uchar param_1, uchar param_2) {
+	return 0;
+}
+
 /* 419010-419066 00056	*/
 uchar CGameView::FUN_00419010(int* param_1) {
 	return 0;

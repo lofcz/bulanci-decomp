@@ -5,6 +5,11 @@ uint CPauseDlg::FUN_0040ac20(char param_1, char param_2) {
 	return 0;
 }
 
+/* 40AC50-40AC9A 0004A	*/
+uchar CPauseDlg::FUN_0040ac50(int param_1) {
+	return 0;
+}
+
 /* 40B2F0-40B401 00111	*/
 uchar CPauseDlg::FUN_0040b2f0(short param_1, char param_2, int param_3) {
 	return 0;

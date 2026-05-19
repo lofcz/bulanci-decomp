@@ -70,6 +70,21 @@ uchar CDSApp::FUN_0042ccf0(int param_1) {
 	return 0;
 }
 
+/* 42E770-42E786 00016	*/
+uchar CDSApp::FUN_0042e770() {
+	return 0;
+}
+
+/* 42F530-42F590 00060	*/
+uchar CDSApp::FUN_0042f530() {
+	return 0;
+}
+
+/* 43CBC0-43CCB0 000F0	*/
+uchar CDSApp::FUN_0043cbc0(uint param_1, ushort param_2, int param_3, ushort param_4) {
+	return 0;
+}
+
 /* 467430-467431 00001	*/
 uchar CDSApp::FUN_00467430() {
 	return 0;

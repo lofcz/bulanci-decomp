@@ -1,5 +1,15 @@
 #include "CScrollBar.h"
 
+/* 402E80-402ED5 00055	*/
+uchar CScrollBar::FUN_00402e80(void* param_1, int param_2, int param_3, int param_4, int param_5) {
+	return 0;
+}
+
+/* 402EE0-402F35 00055	*/
+uchar CScrollBar::FUN_00402ee0(void* param_1, int param_2, int param_3, int param_4, int param_5) {
+	return 0;
+}
+
 /* 403530-403860 00330	*/
 uchar CScrollBar::FUN_00403530(int param_1) {
 	return 0;

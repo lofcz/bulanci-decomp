@@ -1,5 +1,10 @@
 #include "CSwitch.h"
 
+/* 423950-4239DF 0008F	*/
+uchar CSwitch::FUN_00423950(uint* param_1) {
+	return 0;
+}
+
 /* 4239E0-4239E6 00006	*/
 uchar* CSwitch::FUN_004239e0() {
 	return 0;
@@ -32,6 +37,11 @@ uchar CSwitch::FUN_00423b00(uchar param_1) {
 
 /* 423B30-423B4E 0001E	*/
 uint* CSwitch::FUN_00423b30(uchar param_1) {
+	return 0;
+}
+
+/* 423EF0-423F1F 0002F	*/
+uchar CSwitch::FUN_00423ef0(int param_1) {
 	return 0;
 }
 

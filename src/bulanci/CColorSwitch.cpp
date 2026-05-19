@@ -5,6 +5,11 @@ uchar CColorSwitch::FUN_0040aa10(short param_1) {
 	return 0;
 }
 
+/* 40AA40-40AA5A 0001A	*/
+uchar CColorSwitch::FUN_0040aa40(char param_1) {
+	return 0;
+}
+
 /* 40AA60-40AA70 00010	*/
 uchar CColorSwitch::FUN_0040aa60(char* param_1) {
 	return 0;
@@ -27,6 +32,11 @@ uchar CColorSwitch::FUN_0040b970(uchar param_1) {
 
 /* 40B980-40B988 00008	*/
 uchar CColorSwitch::FUN_0040b980(uchar param_1) {
+	return 0;
+}
+
+/* 40B990-40B9EE 0005E	*/
+uchar CColorSwitch::FUN_0040b990(uint* param_1) {
 	return 0;
 }
 

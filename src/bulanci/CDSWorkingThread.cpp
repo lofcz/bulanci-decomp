@@ -15,6 +15,11 @@ uchar CDSWorkingThread::FUN_00447230(uchar param_1) {
 	return 0;
 }
 
+/* 447240-447291 00051	*/
+uchar CDSWorkingThread::FUN_00447240(uint* param_1) {
+	return 0;
+}
+
 /* 4472E0-4472FE 0001E	*/
 uint* CDSWorkingThread::FUN_004472e0(uchar param_1) {
 	return 0;

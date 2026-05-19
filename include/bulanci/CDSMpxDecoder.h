@@ -5,6 +5,7 @@
 
 class CDSMpxDecoder {
 public:
+	/* 4468B0 */ uchar FUN_004468b0(uint* param_1);
 	/* 446930 */ uchar* FUN_00446930();
 	/* 446AE0 */ uint* FUN_00446ae0(uchar param_1);
 };

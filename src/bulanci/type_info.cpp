@@ -18,3 +18,8 @@ bool type_info::operator==(void* param_1) {
 void type_info::_Type_info_dtor(void* param_1) {
 }
 
+/* 449937-449940 00009	*/
+uchar type_info::FUN_00449937() {
+	return 0;
+}
+

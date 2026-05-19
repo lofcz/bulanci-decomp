@@ -10,6 +10,7 @@ public:
 	/* 40B790 */ uchar FUN_0040b790(uchar param_1);
 	/* 40B7A0 */ uchar FUN_0040b7a0(uchar param_1);
 	/* 40B7B0 */ uchar FUN_0040b7b0(uchar param_1);
+	/* 40B7C0 */ uchar FUN_0040b7c0(uint* param_1);
 	/* 40CCC0 */ uchar FUN_0040ccc0(uchar* param_1);
 	/* 40EA80 */ uint* FUN_0040ea80(uchar param_1);
 	/* 40F580 */ uchar FUN_0040f580(int* param_1);

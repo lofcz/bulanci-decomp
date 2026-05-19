@@ -18,6 +18,8 @@ public:
 	/* 435360 */ int FUN_00435360(uint param_1);
 	/* 435390 */ int FUN_00435390(uint param_1);
 	/* 4353C0 */ uchar FUN_004353c0(uint param_1, uint param_2, int param_3);
+	/* 435A20 */ uchar FUN_00435a20(int param_1);
+	/* 435AE0 */ uint* FUN_00435ae0(int param_1);
 	/* 435BA0 */ uint* FUN_00435ba0(int param_1);
 	/* 43BFF0 */ uchar FUN_0043bff0(void* param_1);
 	/* 446C10 */ uchar FUN_00446c10(void* param_1);

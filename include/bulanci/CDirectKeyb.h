@@ -6,6 +6,7 @@
 class CDirectKeyb {
 public:
 	/* 412340 */ uchar* FUN_00412340();
+	/* 412350 */ uchar FUN_00412350(uint* param_1);
 	/* 412440 */ uint* FUN_00412440(uchar param_1);
 };
 

@@ -1,5 +1,10 @@
 #include "CBitmap.h"
 
+/* 418260-418290 00030	*/
+uchar CBitmap::FUN_00418260(int param_1, ushort param_2) {
+	return 0;
+}
+
 /* 419120-419126 00006	*/
 uchar* CBitmap::FUN_00419120() {
 	return 0;

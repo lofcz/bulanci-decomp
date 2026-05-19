@@ -1,5 +1,10 @@
 #include "CButton.h"
 
+/* 4030B0-4030DA 0002A	*/
+uchar CButton::FUN_004030b0(int param_1) {
+	return 0;
+}
+
 /* 4030E0-40311A 0003A	*/
 uchar CButton::FUN_004030e0(uint param_1, short param_2) {
 	return 0;
@@ -37,6 +42,11 @@ uchar CButton::FUN_00404bc0(uchar param_1) {
 
 /* 404BD0-404BD8 00008	*/
 uchar CButton::FUN_00404bd0(uchar param_1) {
+	return 0;
+}
+
+/* 405600-4056A7 000A7	*/
+uchar CButton::FUN_00405600(uint* param_1) {
 	return 0;
 }
 

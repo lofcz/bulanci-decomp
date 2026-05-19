@@ -35,13 +35,18 @@ uint* CDSEasyMemStream::FUN_004092f0(uchar param_1) {
 	return 0;
 }
 
+/* 4306E0-4307ED 0010D	*/
+uchar CDSEasyMemStream::FUN_004306e0(int param_1) {
+	return 0;
+}
+
 /* 4307F0-4308BD 000CD	*/
-uchar CDSEasyMemStream::FUN_004307f0(void* param_1, uint param_2) {
+uchar CDSEasyMemStream::FUN_004307f0(void* param_1, size_t param_2) {
 	return 0;
 }
 
 /* 4308C0-43097F 000BF	*/
-uchar CDSEasyMemStream::FUN_004308c0(void* param_1, uint param_2) {
+uchar CDSEasyMemStream::FUN_004308c0(void* param_1, size_t param_2) {
 	return 0;
 }
 

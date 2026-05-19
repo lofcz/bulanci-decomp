@@ -31,7 +31,7 @@ int CDSChain::FUN_0042ac90(int param_1) {
 }
 
 /* 42FB70-42FC19 000A9	*/
-uchar CDSChain::FUN_0042fb70(wchar_t* param_1) {
+uchar CDSChain::FUN_0042fb70(WCHAR* param_1) {
 	return 0;
 }
 

@@ -5,6 +5,8 @@
 
 class CBulAnim {
 public:
+	/* 40AD20 */ uchar FUN_0040ad20(uint* param_1);
+	/* 40AFD0 */ uchar FUN_0040afd0(uchar param_1);
 	/* 40B020 */ uchar FUN_0040b020(short param_1, uint param_2);
 	/* 40B820 */ uchar* FUN_0040b820();
 	/* 40B830 */ uchar* FUN_0040b830();

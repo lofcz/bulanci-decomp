@@ -25,6 +25,11 @@ uchar CHistoryDlg::FUN_00423460(uchar param_1) {
 	return 0;
 }
 
+/* 423470-423522 000B2	*/
+uchar CHistoryDlg::FUN_00423470(uint* param_1) {
+	return 0;
+}
+
 /* 423680-42369E 0001E	*/
 uint* CHistoryDlg::FUN_00423680(uchar param_1) {
 	return 0;

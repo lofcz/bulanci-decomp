@@ -20,6 +20,11 @@ uchar CHelpScript::FUN_004216b0(uchar param_1) {
 	return 0;
 }
 
+/* 4216F0-42174D 0005D	*/
+uchar CHelpScript::FUN_004216f0(uint* param_1) {
+	return 0;
+}
+
 /* 421920-42193E 0001E	*/
 uint* CHelpScript::FUN_00421920(uchar param_1) {
 	return 0;

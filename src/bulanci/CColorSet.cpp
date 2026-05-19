@@ -25,6 +25,11 @@ uchar CColorSet::FUN_0040b7b0(uchar param_1) {
 	return 0;
 }
 
+/* 40B7C0-40B81E 0005E	*/
+uchar CColorSet::FUN_0040b7c0(uint* param_1) {
+	return 0;
+}
+
 /* 40CCC0-40CCD0 00010	*/
 uchar CColorSet::FUN_0040ccc0(uchar* param_1) {
 	return 0;

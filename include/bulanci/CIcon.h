@@ -13,6 +13,7 @@ public:
 	/* 404A70 */ uchar FUN_00404a70(uchar param_1);
 	/* 404A80 */ uchar FUN_00404a80(uchar param_1);
 	/* 404A90 */ uchar FUN_00404a90(uchar param_1);
+	/* 404AA0 */ uchar FUN_00404aa0(uint* param_1);
 	/* 4065E0 */ uint* FUN_004065e0(uchar param_1);
 };
 

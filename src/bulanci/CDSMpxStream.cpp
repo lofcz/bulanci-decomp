@@ -40,6 +40,11 @@ uchar CDSMpxStream::FUN_00433090(int param_1) {
 	return 0;
 }
 
+/* 4330B0-43310A 0005A	*/
+uchar CDSMpxStream::FUN_004330b0(uint* param_1) {
+	return 0;
+}
+
 /* 433160-43317E 0001E	*/
 uint* CDSMpxStream::FUN_00433160(uchar param_1) {
 	return 0;

@@ -35,6 +35,11 @@ uchar CPoem::FUN_00409480() {
 	return 0;
 }
 
+/* 4094A0-40950D 0006D	*/
+uchar CPoem::FUN_004094a0(uint* param_1) {
+	return 0;
+}
+
 /* 409870-409896 00026	*/
 uchar CPoem::FUN_00409870(void* param_1) {
 	return 0;

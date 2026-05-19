@@ -5,7 +5,12 @@
 
 class CListViewer {
 public:
+	/* 404240 */ uchar FUN_00404240(int* param_1);
+	/* 4044F0 */ uchar FUN_004044f0(int* param_1, int* param_2);
+	/* 405B30 */ uint FUN_00405b30(int param_1, int param_2);
 	/* 405DD0 */ uchar FUN_00405dd0(int* param_1);
+	/* 405DF0 */ uchar FUN_00405df0(void* param_1);
+	/* 405E10 */ uint FUN_00405e10(int param_1);
 	/* 406D00 */ uchar FUN_00406d00(int* param_1);
 	/* 407FD0 */ uchar* FUN_00407fd0();
 	/* 407FE0 */ uchar FUN_00407fe0(uchar param_1);

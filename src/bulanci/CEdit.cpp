@@ -30,6 +30,11 @@ uchar CEdit::FUN_00404df0(uchar param_1) {
 	return 0;
 }
 
+/* 406050-4060FC 000AC	*/
+uchar CEdit::FUN_00406050(uint* param_1) {
+	return 0;
+}
+
 /* 406100-406225 00125	*/
 uchar CEdit::FUN_00406100(int param_1) {
 	return 0;
@@ -42,6 +47,11 @@ uint* CEdit::FUN_00406230(uint* param_1, uchar param_2) {
 
 /* 406270-406285 00015	*/
 uint CEdit::FUN_00406270(int param_1) {
+	return 0;
+}
+
+/* 406390-4063BE 0002E	*/
+uchar CEdit::FUN_00406390(int* param_1, size_t param_2, int* param_3) {
 	return 0;
 }
 

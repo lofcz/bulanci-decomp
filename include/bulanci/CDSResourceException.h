@@ -7,6 +7,7 @@ class CDSResourceException {
 public:
 	/* 434350 */ uchar* FUN_00434350(wchar_t* param_1);
 	/* 434430 */ uchar* FUN_00434430();
+	/* 434440 */ uchar FUN_00434440(uint* param_1);
 	/* 4348E0 */ uint* FUN_004348e0(uchar param_1);
 };
 

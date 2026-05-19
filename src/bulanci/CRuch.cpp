@@ -5,6 +5,11 @@ uchar* CRuch::FUN_00423d00() {
 	return 0;
 }
 
+/* 423D10-423D6A 0005A	*/
+uchar CRuch::FUN_00423d10(uint* param_1) {
+	return 0;
+}
+
 /* 423D70-423D78 00008	*/
 uchar CRuch::FUN_00423d70(uchar param_1) {
 	return 0;

@@ -30,6 +30,11 @@ uchar CBulPicture::FUN_0040b8e0(uchar param_1) {
 	return 0;
 }
 
+/* 40B8F0-40B94E 0005E	*/
+uchar CBulPicture::FUN_0040b8f0(uint* param_1) {
+	return 0;
+}
+
 /* 40EBD0-40EBEE 0001E	*/
 uint* CBulPicture::FUN_0040ebd0(uchar param_1) {
 	return 0;

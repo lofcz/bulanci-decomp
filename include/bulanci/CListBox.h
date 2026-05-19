@@ -6,6 +6,7 @@
 class CListBox {
 public:
 	/* 405FC0 */ uchar FUN_00405fc0(int* param_1, int param_2);
+	/* 408200 */ uchar FUN_00408200(uint* param_1);
 	/* 408290 */ uchar* FUN_00408290();
 	/* 4082A0 */ uchar FUN_004082a0(uchar param_1);
 	/* 4082B0 */ uchar FUN_004082b0(uchar param_1);

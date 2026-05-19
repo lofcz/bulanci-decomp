@@ -5,6 +5,8 @@
 
 class CScrollBar {
 public:
+	/* 402E80 */ static uchar FUN_00402e80(void* param_1, int param_2, int param_3, int param_4, int param_5);
+	/* 402EE0 */ static uchar FUN_00402ee0(void* param_1, int param_2, int param_3, int param_4, int param_5);
 	/* 403530 */ uchar FUN_00403530(int param_1);
 	/* 403A80 */ uchar FUN_00403a80(int param_1);
 	/* 404840 */ uchar* FUN_00404840();

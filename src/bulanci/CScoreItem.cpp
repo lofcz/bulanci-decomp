@@ -20,6 +20,11 @@ uchar CScoreItem::FUN_004093b0(uchar param_1) {
 	return 0;
 }
 
+/* 4093C0-40941F 0005F	*/
+uchar CScoreItem::FUN_004093c0(uint* param_1) {
+	return 0;
+}
+
 /* 409A90-409AAE 0001E	*/
 uint* CScoreItem::FUN_00409a90(uchar param_1) {
 	return 0;

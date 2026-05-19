@@ -52,6 +52,7 @@ instructions.
 | ghidra-delinker-extension     | drop the matching zip from [boricj/ghidra-delinker-extension](https://github.com/boricj/ghidra-delinker-extension/releases) into `%APPDATA%\ghidra\<ver>\Extensions\` |
 | ghidra-mcp plugin             | needed only by the MCP-based mapping exporter; HTTP plugin on `:8089`                            |
 | `tools/objdiff-cli.exe`       | from <https://github.com/encounter/objdiff/releases>                                             |
+| `tools/ninja/ninja.exe`       | from <https://github.com/ninja-build/ninja/releases>; drives the stub recompile                  |
 | `tools/msvc8/` (optional)     | Visual Studio 2005 RTM toolchain - required only when you want progress > 0%                     |
 | `uv`                          | for `decomp-goal-harness` (<https://github.com/astral-sh/uv>)                                    |
 
@@ -97,12 +98,120 @@ match them exactly. Functions at file scope are promoted to
 `_Globals::FUN_xxx` so the C++ stub generator has a real namespace to
 bind to.
 
-### Namespace promotion loop
+### One-time SDK type setup (DirectX + Win32)
 
-As you name and group functions inside Ghidra (e.g. `CGame::Init`,
-`CBulanci::Update`), re-running the headless path will fragment the
-single `_Globals` super-unit into per-class translation units
-automatically:
+Without matching struct / COM-interface types in Ghidra's data-type
+manager, every Win32 / DirectX call decompiles to inscrutable
+`(**(code **)(*pDD + 0x24))(...)` arithmetic and anonymous offset
+math like `*(int*)(arg + 0x18)`.
+
+Two vendored `.gdt` archives, both committed to the tree, fix this:
+
+| Archive | Source                                             | Coverage |
+|---------|----------------------------------------------------|----------|
+| `tools/dxsdk_feb2007/gdt/directx_feb2007.gdt` | DX SDK Feb 2007 (`ddraw`, `dsound`, `dinput`) | DirectX COM vtables |
+| `tools/msvc8/gdt/win32_msvc8.gdt`             | MSVC8 Platform SDK (`windows.h`, `objbase.h`, `mmsystem.h`) | Win32 API surface |
+
+Apply both at once:
+
+```pwsh
+:: Ghidra must be closed for --mode existing
+python scripts\apply_gdt.py --mode existing
+```
+
+After applying you should see the decompiler render DirectX calls as
+`pDS->lpVtbl->CreateSoundBuffer(pDS, &desc, &pBuf, NULL)` and Win32
+calls with their proper struct args (`STARTUPINFOA`, `OVERLAPPED`,
+`WIN32_FIND_DATAA`, `WNDCLASSEXA`, ...), which makes everything under
+`Engine.DS.*` and the kernel32 / user32 call sites legible.
+
+To rebuild the archives (e.g. after an SDK version bump):
+
+```pwsh
+python scripts\build_gdt.py                     :: --target all, default
+python scripts\build_gdt.py --target win32       :: build only one
+python scripts\build_gdt.py --phase verify       :: just spot-check existing .gdt
+```
+
+`build_gdt.py` runs `cl /E /TC /FI dx_prelude.h` on each wrapper TU
+(`tools/dxsdk_feb2007/build/dx_main.c`,
+`tools/msvc8/build/win32_main.c`), post-processes the flattened `.i`
+through `scripts/internal_clean_i.py`-style regexes, and feeds the
+result to Ghidra's CParser via
+`scripts/ghidra/ParseHeadersToGdt.java`. Phases (`preprocess`,
+`clean`, `parse`, `verify`) are independent and re-runnable.
+
+### One-time FidDb setup
+
+The first promotion pass (`ApplyFidDb.java`) uses Ghidra's FunctionID
+database to recognise MSVC CRT / STL / ATL / MFC entry points. Stock
+Ghidra ships the FID infrastructure but not the data files - clone the
+NSA-published [`ghidra-data`](https://github.com/NationalSecurityAgency/ghidra-data)
+repository alongside this project and register the relevant DB once:
+
+```bash
+git clone https://github.com/NationalSecurityAgency/ghidra-data \
+    ../ghidra-data
+$env:GHIDRA_DATA = "$(Resolve-Path ..\ghidra-data)"
+python scripts\setup_fiddb.py
+```
+
+`vsOlder_x86.fidb` covers VS6 - VS2010 (including bulanci's VS2005
+RTM toolchain). The script runs against a throwaway Ghidra project so
+it works while the real `bulanci.gpr` is open in the GUI.
+
+### Automated namespace promotion
+
+Before doing any manual renaming, run the six chained Ghidra passes
+that mechanically attribute functions to classes. Close the Ghidra
+GUI first (these passes write to the project):
+
+```bash
+python scripts/promote_namespaces.py
+```
+
+The chain (see `scripts/promote_namespaces.py` for flags):
+
+1. **`ApplyFidDb.java`** - if FidDb files are attached, applies
+   single-match results to default-named functions. No-op until
+   `setup_fiddb.py` has been run once. Names CRT helpers Ghidra's
+   RTTI pass cannot reach.
+2. **`AssignEntryPoints.java`** - tags the PE entry as
+   `_mainCRTStartup`, then walks `RegisterClass*` / `DialogBox*`
+   argument slots to anchor `WinMain` / `WndProc` / `DialogProc`.
+3. **`PromoteVftableMembers.java`** - reparents every RTTI vftable
+   member into its class namespace (~920 functions on `bulanci.exe`).
+4. **`AssignByStringRefs.java`** - matches defined strings (including
+   the MSVC RTTI mangled form `.?AVClass@@` and Hungarian-stripped
+   aliases like `Bulanci` for `CBulanci`) against the class name
+   table; if a function references exactly one class's name, it gets
+   reparented.
+5. **`AssignByThisPointerType.java`** - reparents any file-scope
+   function whose first parameter has a pointer-to-known-class type.
+   Catches non-virtual methods Ghidra typed but never assigned.
+6. **`PropagateCallerNamespaces.java`** - iterates: any function whose
+   entire caller set lives in one class becomes a member of that
+   class. Runs to a fixed point.
+
+After the chain finishes, `GenerateMapping.java` re-exports
+`mapping.csv` so the new ownership flows downstream.
+
+Tuning knobs:
+
+```bash
+# Skip a phase
+python scripts/promote_namespaces.py --skip-strings
+python scripts/promote_namespaces.py --skip-callgraph
+
+# Relax callgraph propagation (default 0 = every caller must be in the
+# same class; higher values tolerate that many strangers per fn).
+python scripts/promote_namespaces.py --callgraph-ambiguity 1
+```
+
+### Manual / iterative namespace work
+
+After the automated chain, additional renames in Ghidra are picked up
+by re-running the headless path:
 
 1. In Ghidra, rename a function and/or move it into a class namespace.
 2. Save the project (`Ctrl+S`).
@@ -113,6 +222,7 @@ automatically:
        --program bulanci.exe --output config\bulanci\mapping.csv
    python scripts/internal/seed_units_listing.py
    python scripts/configure.py
+   .\tools\ninja\ninja.exe
    .\progress_update.bat
    ```
 5. The new namespaces appear as separate units in `objdiff.json` and
@@ -120,7 +230,56 @@ automatically:
 
 `seed_units_listing.py` only promotes to `_Globals` when no `::` is
 present in the qualified name. Anything you've already namespaced in
-Ghidra is kept exactly as-is.
+Ghidra (manually or via the automated chain) is kept exactly as-is.
+
+### Per-class annotation agents
+
+Once the automated promotion chain has split the program into 130+
+class units, agents can pick up classes individually and annotate them
+inside Ghidra (rename functions, recover field names, tighten
+signatures). See [`docs/ROADMAP.md`](ROADMAP.md) for the scaling plan.
+
+The minimal loop for one agent:
+
+1. Make sure the Ghidra GUI is open and the `ghidra-mcp` plugin is
+   bound to `http://localhost:8089`.
+2. Atomically claim a class:
+
+   ```cmd
+   python scripts\agent_coord.py pick --agent agent-073 ^
+       --prefer "CBulanci,CGame,CGaming"
+   ```
+
+3. Dump the per-class context bundle the agent will read:
+
+   ```cmd
+   python scripts\run_annotation_agent.py --agent agent-073 ^
+       --class CBulanci --prompt > bundle.txt
+   ```
+
+   `--prompt` prepends `docs/agent_prompts/annotate_class.md`, so
+   `bundle.txt` is the complete agent input.
+
+4. Hand `bundle.txt` to your agent runner (Cursor, Claude SDK,
+   OpenAI API, ...). The agent must operate strictly via the MCP
+   HTTP API on `:8089`.
+
+5. When the agent finishes, release the claim:
+
+   ```cmd
+   python scripts\agent_coord.py release CBulanci --agent agent-073 ^
+       --attempted FUN_004032c0 FUN_00405110
+   ```
+
+6. Close Ghidra, re-run `python scripts\promote_namespaces.py`
+   (refreshes `mapping.csv`), `python scripts\internal\seed_units_listing.py`,
+   `python scripts\configure.py --ghidra-mode existing`, and
+   `tools\ninja\ninja.exe`. Any new namespaces / signatures the
+   agent introduced flow into the next `report.json`.
+
+Coordinator state lives under `state/claims.json` (gitignored). The
+file is safe for concurrent access from multiple agent processes on
+the same host - operations serialise through `state/claims.json.lock`.
 
 ## Regenerate sources / objdiff / ninja
 
@@ -149,10 +308,12 @@ After Ghidra finishes, the pipeline writes:
 * `src/bulanci/<unit>.cpp` + `include/bulanci/<unit>.h` per unit
 * `build/orig/bulanci/<unit>.obj` — relocatable COFF target object,
   produced by `ExportDelinker.java` via the delinker extension. One
-  `.obj` per top-level namespace (currently `_Globals`, `ATL`,
+  `.obj` per top-level namespace; currently 136 units after running
+  `promote_namespaces.py` (each RTTI class plus `_Globals`, `ATL`,
   `_LocaleUpdate`, `exception`, `std`, `type_info`).
 * `build.ninja` — defaults `cl` to `tools\msvc8\Bin\cl.exe`; override
-  with `BULANCI_CL=path/to/cl.exe`
+  with `BULANCI_CL=path/to/cl.exe`. Build the stubs with
+  `.\tools\ninja\ninja.exe`.
 * `objdiff.json` — `build_base` auto-flips to `true` when `cl.exe`
   exists; `base_path` becomes non-null per unit once `ninja` has built
   the stub

@@ -6,6 +6,7 @@
 class CDSDirectPlay {
 public:
 	/* 43B2D0 */ uchar* FUN_0043b2d0();
+	/* 43B2E0 */ uchar FUN_0043b2e0(uint* param_1);
 	/* 43B600 */ uint* FUN_0043b600(uchar param_1);
 };
 

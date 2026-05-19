@@ -11,7 +11,7 @@ public:
 	/* 401260 */ uchar FUN_00401260(uchar param_1);
 	/* 41AA40 */ uchar FUN_0041aa40(int param_1);
 	/* 42AC90 */ int FUN_0042ac90(int param_1);
-	/* 42FB70 */ uchar FUN_0042fb70(wchar_t* param_1);
+	/* 42FB70 */ uchar FUN_0042fb70(WCHAR* param_1);
 	/* 42FC30 */ uchar FUN_0042fc30(int* param_1);
 };
 

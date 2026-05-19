@@ -10,3 +10,8 @@ char CChatEdit::FUN_0040cee0(uchar* param_1, uchar* param_2) {
 	return 0;
 }
 
+/* 413B90-413C41 000B1	*/
+uchar CChatEdit::FUN_00413b90(uchar param_1, int* param_2, void* param_3) {
+	return 0;
+}
+

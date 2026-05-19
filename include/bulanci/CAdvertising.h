@@ -5,6 +5,7 @@
 
 class CAdvertising {
 public:
+	/* 40ACC0 */ uint FUN_0040acc0(int param_1);
 	/* 40B4B0 */ uchar FUN_0040b4b0(void* param_1);
 	/* 40B4D0 */ uchar FUN_0040b4d0(int* param_1);
 	/* 40B500 */ uint FUN_0040b500(char param_1, char param_2);

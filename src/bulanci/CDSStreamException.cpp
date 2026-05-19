@@ -5,6 +5,11 @@ uchar* CDSStreamException::FUN_0042ffe0() {
 	return 0;
 }
 
+/* 430000-43007E 0007E	*/
+uchar CDSStreamException::FUN_00430000(uint* param_1) {
+	return 0;
+}
+
 /* 430360-4303FF 0009F	*/
 uchar* CDSStreamException::FUN_00430360(wchar_t* param_1) {
 	return 0;

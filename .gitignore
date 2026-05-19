@@ -22,6 +22,12 @@ changes.json
 progress.png
 progress/
 
+# Ghidra MCP snapshots - reproducible from the live database, see
+# `scripts/internal/build_module_map.py`. The derived
+# `config/bulanci/modules.csv` is the committed artifact.
+/config/bulanci/ghidra_functions_dump.csv
+/config/bulanci/vftable_methods.csv
+
 # Third-party tools (downloaded locally, not committed)
 tools/*
 !tools/bulanci_unpack/
@@ -31,9 +37,32 @@ tools/*
 !tools/msvc8/
 tools/msvc8/*
 !tools/msvc8/README.md
+# Win32 .gdt (built from tools/msvc8/PlatformSDK/Include via
+# scripts/build_gdt.py --target win32) and its small build helpers.
+!tools/msvc8/gdt/
+!tools/msvc8/gdt/*
+tools/msvc8/gdt/*_CParser.out
+!tools/msvc8/build/
+!tools/msvc8/build/*
 !tools/dxsdk_feb2007/
 tools/dxsdk_feb2007/*
 !tools/dxsdk_feb2007/README.md
+# The DX .gdt archive is a one-shot derivative of the vendored SDK
+# that takes ~15s to rebuild via scripts/build_dx_gdt.py.  Commit it
+# so a fresh clone doesn't have to do that work; commit the
+# build-helper sources too.
+!tools/dxsdk_feb2007/gdt/
+!tools/dxsdk_feb2007/gdt/*
+# Ghidra's CParser leaves a chatty parse log next to the .gdt.
+tools/dxsdk_feb2007/gdt/*_CParser.out
+!tools/dxsdk_feb2007/build/
+!tools/dxsdk_feb2007/build/*
+!tools/ninja/
+tools/ninja/*
+!tools/ninja/README.md
+
+# Agent coordinator state (claims, locks, transient bundles)
+/state/
 
 # Editor scratch
 .tmp_*

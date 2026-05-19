@@ -5,6 +5,7 @@
 
 class CBitmap {
 public:
+	/* 418260 */ uchar FUN_00418260(int param_1, ushort param_2);
 	/* 419120 */ uchar* FUN_00419120();
 	/* 419130 */ uchar FUN_00419130(int param_1);
 	/* 419140 */ uint* FUN_00419140(uchar param_1);

@@ -40,6 +40,11 @@ uchar CLevelScript::FUN_004186e0(int param_1) {
 	return 0;
 }
 
+/* 4186F0-41876D 0007D	*/
+uchar CLevelScript::FUN_004186f0(uint* param_1) {
+	return 0;
+}
+
 /* 418BE0-418BEB 0000B	*/
 uchar CLevelScript::FUN_00418be0(int param_1) {
 	return 0;

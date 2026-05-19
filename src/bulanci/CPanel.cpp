@@ -1,5 +1,10 @@
 #include "CPanel.h"
 
+/* 412550-41258B 0003B	*/
+uchar CPanel::FUN_00412550(uchar param_1) {
+	return 0;
+}
+
 /* 426CE0-426D70 00090	*/
 uchar CPanel::FUN_00426ce0(short param_1) {
 	return 0;
@@ -22,6 +27,11 @@ uchar CPanel::FUN_004275b0(uchar param_1) {
 
 /* 4275C0-4275C8 00008	*/
 uchar CPanel::FUN_004275c0(uchar param_1) {
+	return 0;
+}
+
+/* 4275D0-427632 00062	*/
+uchar CPanel::FUN_004275d0(uint* param_1) {
 	return 0;
 }
 

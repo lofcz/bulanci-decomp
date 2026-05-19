@@ -20,6 +20,11 @@ uchar CDSAudioBankSample::FUN_00429360(uchar param_1) {
 	return 0;
 }
 
+/* 429370-4293E0 00070	*/
+uchar CDSAudioBankSample::FUN_00429370(uint* param_1) {
+	return 0;
+}
+
 /* 429510-42952E 0001E	*/
 uint* CDSAudioBankSample::FUN_00429510(uchar param_1) {
 	return 0;

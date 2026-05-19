@@ -5,6 +5,11 @@ uchar CListBox::FUN_00405fc0(int* param_1, int param_2) {
 	return 0;
 }
 
+/* 408200-408283 00083	*/
+uchar CListBox::FUN_00408200(uint* param_1) {
+	return 0;
+}
+
 /* 408290-408296 00006	*/
 uchar* CListBox::FUN_00408290() {
 	return 0;

@@ -65,6 +65,16 @@ uchar CDSGZipStream::FUN_004353c0(uint param_1, uint param_2, int param_3) {
 	return 0;
 }
 
+/* 435A20-435AD1 000B1	*/
+uchar CDSGZipStream::FUN_00435a20(int param_1) {
+	return 0;
+}
+
+/* 435AE0-435B6D 0008D	*/
+uint* CDSGZipStream::FUN_00435ae0(int param_1) {
+	return 0;
+}
+
 /* 435BA0-435C0D 0006D	*/
 uint* CDSGZipStream::FUN_00435ba0(int param_1) {
 	return 0;

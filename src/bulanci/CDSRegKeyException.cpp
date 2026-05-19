@@ -5,6 +5,11 @@ uchar* CDSRegKeyException::FUN_00437b20() {
 	return 0;
 }
 
+/* 437B30-437B9A 0006A	*/
+uchar CDSRegKeyException::FUN_00437b30(uint* param_1) {
+	return 0;
+}
+
 /* 437C40-437CCA 0008A	*/
 uchar* CDSRegKeyException::FUN_00437c40(wchar_t* param_1) {
 	return 0;

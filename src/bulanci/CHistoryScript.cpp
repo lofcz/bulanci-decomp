@@ -20,6 +20,11 @@ uchar CHistoryScript::FUN_004227a0(uchar param_1) {
 	return 0;
 }
 
+/* 4227B0-42280D 0005D	*/
+uchar CHistoryScript::FUN_004227b0(uint* param_1) {
+	return 0;
+}
+
 /* 422AE0-422AFE 0001E	*/
 uint* CHistoryScript::FUN_00422ae0(uchar param_1) {
 	return 0;

@@ -1,5 +1,10 @@
 #include "CDeath.h"
 
+/* 416650-416668 00018	*/
+uchar CDeath::FUN_00416650(int param_1) {
+	return 0;
+}
+
 /* 417A40-417A6F 0002F	*/
 uchar CDeath::FUN_00417a40(uint param_1, int param_2, int param_3) {
 	return 0;

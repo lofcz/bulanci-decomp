@@ -9,6 +9,7 @@ public:
 	/* 44735B */ void* scalar_deleting_destructor(uint param_1);
 	/* 447377 */ bool operator==(void* param_1);
 	/* 4498D0 */ static void _Type_info_dtor(void* param_1);
+	/* 449937 */ uchar FUN_00449937();
 };
 
 #endif

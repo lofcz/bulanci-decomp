@@ -10,6 +10,11 @@ uchar CDSImageMouse::FUN_0042aca0(uchar param_1) {
 	return 0;
 }
 
+/* 42ACB0-42AD12 00062	*/
+uchar CDSImageMouse::FUN_0042acb0(uint* param_1) {
+	return 0;
+}
+
 /* 42AF60-42AF7E 0001E	*/
 uint* CDSImageMouse::FUN_0042af60(uchar param_1) {
 	return 0;

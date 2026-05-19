@@ -5,6 +5,11 @@ uchar CPoemScroller::FUN_004240f0(int param_1) {
 	return 0;
 }
 
+/* 425CA0-425D98 000F8	*/
+uchar CPoemScroller::FUN_00425ca0(uint* param_1) {
+	return 0;
+}
+
 /* 425DA0-425DA6 00006	*/
 uchar* CPoemScroller::FUN_00425da0() {
 	return 0;
@@ -37,6 +42,16 @@ uchar CPoemScroller::FUN_00426030(int param_1) {
 
 /* 4264E0-4264FE 0001E	*/
 uint* CPoemScroller::FUN_004264e0(uchar param_1) {
+	return 0;
+}
+
+/* 436760-436768 00008	*/
+uchar CPoemScroller::FUN_00436760(int param_1) {
+	return 0;
+}
+
+/* 436E10-436E3B 0002B	*/
+uchar CPoemScroller::FUN_00436e10(uint param_1) {
 	return 0;
 }
 

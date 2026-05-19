@@ -13,6 +13,7 @@ public:
 	/* 433030 */ uchar FUN_00433030(uchar param_1);
 	/* 433080 */ uchar FUN_00433080(int param_1);
 	/* 433090 */ uchar FUN_00433090(int param_1);
+	/* 4330B0 */ uchar FUN_004330b0(uint* param_1);
 	/* 433160 */ uint* FUN_00433160(uchar param_1);
 	/* 433180 */ uchar FUN_00433180(int* param_1);
 };

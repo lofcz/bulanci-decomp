@@ -73,8 +73,45 @@ public class GenerateMapping extends GhidraScript
         }
         if (ty instanceof TypeDef)
         {
+            // Typedef handling rules - chosen so the resulting CSV
+            // entries are both informative *and* something
+            // generate_sources.py can emit as a self-contained C++
+            // declaration with at most a forward declaration:
+            //
+            //  - Typedefs whose base is a Pointer (`LPDIRECTDRAW`,
+            //    `LPCSTR`, `HWND`, `HANDLE`, ...) flatten to the
+            //    underlying pointer-to-struct / pointer-to-primitive.
+            //    Otherwise the stub generator would have to emit
+            //    `struct LPDIRECTDRAW;` which is invalid because
+            //    `LPDIRECTDRAW` is a typedef of a pointer, not a
+            //    struct tag.
+            //
+            //  - Typedefs whose base is a primitive or a struct
+            //    (`HRESULT`, `DWORD`, `BOOL`, `WAVEFORMATEX`,
+            //    `GUID`, ...) keep their typedef name so the
+            //    stubs read naturally. Any new typedef name that
+            //    pops up gets either forward-declared as
+            //    `struct Name;` (for unknown structs, harmless) or
+            //    needs to be added to `include/globals.h` as a
+            //    one-line `typedef ...`.
+            //
+            //  - Anonymous / synthetic typedefs (no name, or names
+            //    that match the base type's toString, or names that
+            //    start with `__` like compiler-internal aliases)
+            //    fall through to the base type so we don't leak
+            //    Ghidra-internal identifiers into the CSV.
             TypeDef typedef = (TypeDef)ty;
-            return transformType(typedef.getBaseDataType());
+            DataType base = typedef.getBaseDataType();
+            if (base instanceof Pointer) {
+                return transformType(base);
+            }
+            String name = typedef.getName();
+            if (name == null || name.isEmpty()
+                    || name.equals(base.toString())
+                    || name.startsWith("__")) {
+                return transformType(base);
+            }
+            return name;
         }
         return ty.getName();
     }

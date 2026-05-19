@@ -5,6 +5,7 @@
 
 class CDSDirectSound {
 public:
+	/* 43A350 */ uchar FUN_0043a350(int param_1);
 	/* 43C8A0 */ uchar* FUN_0043c8a0();
 	/* 43CA50 */ uchar FUN_0043ca50(uchar param_1);
 	/* 43CA60 */ uchar FUN_0043ca60(uchar param_1);

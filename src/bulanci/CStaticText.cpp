@@ -20,6 +20,11 @@ uchar CStaticText::FUN_004049a0(uchar param_1) {
 	return 0;
 }
 
+/* 4052E0-405370 00090	*/
+uchar CStaticText::FUN_004052e0(uint* param_1) {
+	return 0;
+}
+
 /* 4054D0-405553 00083	*/
 uchar CStaticText::FUN_004054d0(int param_1) {
 	return 0;

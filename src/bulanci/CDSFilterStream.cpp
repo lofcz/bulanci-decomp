@@ -40,6 +40,11 @@ uint CDSFilterStream::FUN_004300d0(uint param_1) {
 	return 0;
 }
 
+/* 430400-43041A 0001A	*/
+uchar CDSFilterStream::FUN_00430400(int param_1) {
+	return 0;
+}
+
 /* 430420-430485 00065	*/
 uchar CDSFilterStream::FUN_00430420(uint param_1, uint param_2) {
 	return 0;
@@ -62,6 +67,11 @@ uchar CDSFilterStream::FUN_004305c0(uint param_1, int param_2, uint param_3, int
 
 /* 430640-4306B0 00070	*/
 uchar CDSFilterStream::FUN_00430640(uint param_1, int param_2, uint param_3, int param_4) {
+	return 0;
+}
+
+/* 430B90-430C0A 0007A	*/
+uchar CDSFilterStream::FUN_00430b90(uint* param_1) {
 	return 0;
 }
 

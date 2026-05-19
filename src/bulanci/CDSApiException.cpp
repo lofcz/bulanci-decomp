@@ -5,6 +5,11 @@ uchar* CDSApiException::FUN_00434b00() {
 	return 0;
 }
 
+/* 434B20-434B76 00056	*/
+uchar CDSApiException::FUN_00434b20(uint* param_1) {
+	return 0;
+}
+
 /* 434C70-434CF4 00084	*/
 uchar* CDSApiException::FUN_00434c70(wchar_t* param_1) {
 	return 0;

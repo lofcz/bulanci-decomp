@@ -1,7 +1,32 @@
 #include "CListViewer.h"
 
+/* 404240-404289 00049	*/
+uchar CListViewer::FUN_00404240(int* param_1) {
+	return 0;
+}
+
+/* 4044F0-404524 00034	*/
+uchar CListViewer::FUN_004044f0(int* param_1, int* param_2) {
+	return 0;
+}
+
+/* 405B30-405BB5 00085	*/
+uint CListViewer::FUN_00405b30(int param_1, int param_2) {
+	return 0;
+}
+
 /* 405DD0-405DEB 0001B	*/
 uchar CListViewer::FUN_00405dd0(int* param_1) {
+	return 0;
+}
+
+/* 405DF0-405E04 00014	*/
+uchar CListViewer::FUN_00405df0(void* param_1) {
+	return 0;
+}
+
+/* 405E10-405E9E 0008E	*/
+uint CListViewer::FUN_00405e10(int param_1) {
 	return 0;
 }
 

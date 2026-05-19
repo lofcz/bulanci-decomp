@@ -15,13 +15,28 @@ uchar* CWeapon::FUN_00418f60() {
 	return 0;
 }
 
+/* 41BF00-41BF66 00066	*/
+uchar CWeapon::FUN_0041bf00(int* param_1) {
+	return 0;
+}
+
 /* 41BF70-41BF7F 0000F	*/
 uchar CWeapon::FUN_0041bf70(int param_1) {
 	return 0;
 }
 
+/* 41C550-41C5F1 000A1	*/
+uchar CWeapon::FUN_0041c550(uint* param_1) {
+	return 0;
+}
+
 /* 41C600-41C610 00010	*/
 uchar CWeapon::FUN_0041c600(uint param_1, int* param_2) {
+	return 0;
+}
+
+/* 41CB70-41CCD3 00163	*/
+uint* CWeapon::FUN_0041cb70(int param_1) {
 	return 0;
 }
 
