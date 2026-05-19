@@ -94,15 +94,23 @@ and was reverse-engineered from the binary plus its decompiled CDS\* classes.
 | 28      | `BitmapSpecial`   | u32 w, u32 h, u32 marker, u32 stride, u32 field4, byte padA=0xFF, u32 paletteCount, byte hasUnpacked; then `paletteCount*4` palette entries (BGR + reserved) and `stride*height` packed pixels. When `hasUnpacked==1` an additional `width*height` "unpacked" buffer follows (the runtime cache; we ignore it). `marker` is a bpp tier (0=1bpp, 1=2bpp, 2=4bpp, 3=8bpp, 4=16bpp, 5=24bpp BGR, 6=32bpp); all of 0..5 decode to PNG today. `field4` is a transparent palette index for indexed variants or a transparent RGB sentinel for marker 5. |
 | 43      | `AudioBank`       | u32 dataLen, u16 channels, u16 bits, u32 freq, then `dataLen` bytes of little-endian PCM. Companion `.wav` is written. |
 | 48      | `Mp3`             | int32 dataLen, uint32 size, u16 channels, u16 bits, u32 freq, MP3 stream                                   |
-| 52      | `BitmapSprite`    | Fixed 0x2c-byte header (11×u32: totalSize, encodedSize, encodedSize2, width, height, frameCount, channels=3, inMemSize, codec flags, encodedSize3, 24-bit packed tag) followed by an RLE/LC pixel stream that `CBulPicture` decodes at runtime. Header is fully recovered and sanity-checked; the per-frame RLE decoder is still TODO. See [`ghidra_analysis/sprite_container.md`](ghidra_analysis/sprite_container.md). |
+| 52      | `BitmapSprite`    | Fixed 0x2c-byte header (11×u32: totalSize, encodedSize, encodedSize2, width, height, frameCount, channels=3, inMemSize, `flags` = frameCount-1, encodedSize3 = frame-0 size, packed `numInner`) followed by a back-to-back **animation-frame stream** (each frame: `u32 frameSize, u8 numInner`, then `numInner` inner chunks each prefixed by `u32 chunkSize, u8 opcode`). The first frame's 5-byte header overlaps file offsets 0x24..0x28. Header, frame stream **and** the per-opcode pixel decoders (RLE 0x00/0x0e, delta 0x04/0x0f, palette 0x09 = FLI/FLC `COLOR_256` with a cursor-based relative-skip, region 0x0a/0x0b/0x0c, transparent-index 0x0d, mask plane 0x0e/0x0f) are fully recovered on 130/130 master-pack samples; the unpacker emits a horizontal atlas sprite-sheet (RGBA PNG, one stripe per frame), an `*.atlas.json` sidecar describing frame size, frame count, ring-frame index, a top-level `timing` block (raw u16 ticks from opcode 0x0C with carry-forward semantics matching the runtime's `frameDelayOverrideMs`, see [`ghidra_analysis/anim_runtime.md`](ghidra_analysis/anim_runtime.md)), and per-frame metadata (engine opcodes applied, NotifyMove origin, `durationTicks` + `effectiveDurationTicks`, parsed `events: [{kind, x, y}]` records from opcode 0x0B = per-frame anchor/attachment points, transparent-index hits), and an `*.atlas.gif` animated preview (per-frame local color tables for palette-cycle sprites, transparent slot marked via GCE, infinite loop via Netscape extension). Sprites with no inline palette (~41 recolour variants) get a grayscale fallback palette. **Transparency follows the engine's actual three-tier model** (see `CDSFlxFile::DecodeFrame @ 0x00432c60`): (1) per-pixel mask plane at `consumer+0x20` populated by opcodes 0x0e/0x0f — used by 39/130 sprites and gated by the masked-blit dispatch table at `DAT_004b0bc8`; (2) explicit color-key index from opcode 0x0d → `CBulPicture+0x46d` for 3/130 sprites; (3) implicit opaque for the remaining ~88 sprites whose engine-level BG is masked by a higher-layer compositor — for those the unpacker tallies the RGB at every bitmap-perimeter pixel across every frame and treats the dominant RGB (when it covers >50% of perimeter pixels) as a synthetic chroma key, exactly matching the engine's chroma-key blit kernels at `DAT_004b0ac8`. See [`ghidra_analysis/sprite_container.md`](ghidra_analysis/sprite_container.md) and [`ghidra_analysis/flx_file_format.md`](ghidra_analysis/flx_file_format.md). |
 | 54      | `MouseCursor`     | u32 totalSize, u32 frameCount, u32 …; small (8 KB) cursor frames + 24bpp BGR palette                       |
-| 58      | `DsmInner`        | u32 nameLen, char[nameLen] filename, u64 FILETIME, u32 fileLen, byte[fileLen] payload. The master pack carries one `BULANCI.TMP` entry — an embedded sub-archive used by `CDSDsmFile`. |
+| 58      | `DsmInner`        | u32 nameLen, char[nameLen] filename, u64 FILETIME, u32 fileLen, byte[fileLen] payload. The master pack carries one `BULANCI.TMP` entry — an MZ-prefixed PE blob unrelated to `CDSDsmFile` (see `ghidra_analysis/dsm_file_format.md`). |
 | 67      | `AudioBankIndex`  | u32 bankResourceID (the ClassID-43 partner), u32 reserved, u32 sampleCount, u32[sampleCount] byte lengths. Sums match the partner's `dataLen` exactly. |
-| 76      | `BitmapJpegAnim`  | u32 totalSize + 5×u32 descriptor + back-to-back JPEG frames. We auto-extract every embedded JPEG to `*.frameNNN.jpg`. |
+| 76      | `BitmapJpegAnim`  | `CDSDsmFile` synchronized MJPEG + 16-bit PCM movie: 36-byte `CDsmHeader` (`dwPayloadEndOffset`, `dwCanvasWidth/Height/PixelFormat`, `dwDurationMs`, `dwFrameCount`, `dwAudioByteCount`, `dwAudioFormatPacked`, `dwAudioSampleRate`) followed by `2 * dwFrameCount` interleaved `{u32 len, byte[len]}` chunks — one full JPEG (`FF D8 FF DB ...`) then one PCM-audio block per frame. We auto-extract every JPEG to `*.frameNNN.jpg` and concatenate every audio chunk into a single playable `*.audio.wav`. Full RE in `ghidra_analysis/dsm_file_format.md`. |
 | 94      | `Sign`            | uint32 packedDate, int32 len+UTF-16LE content, int32 len+UTF-16LE copyright, byte 0                        |
-| 2026    | `Script`          | int32 codeLen, int32 nExports, int32 nVars, byte[codeLen] bytecode, int32[nExports] entries — see disassembler below. |
-| 2043    | `TextBlock`       | u32 charCount, char[charCount] UTF-16LE. First codepoint usually `0x0001` (section/line marker). Decoded to `*.txt`. |
-| 2050    | `TextTable`       | u32 totalSize, u32 entryCount, u32×2 reserved, then mixed fixed-size records + UTF-16LE strings. Phase-1 extractor dumps a JSON sidecar listing every printable string found. |
+| 2026    | `Script`          | `CLevelScript`. int32 codeLen, int32 nExports, int32 nVars, byte[codeLen] bytecode, int32[nExports] entries — see disassembler below. |
+| 2043    | `Poem`            | `CPoem`. u32 charCount, char[charCount] UTF-16LE. First codepoint usually `0x0001` (section/line marker). Decoded to `*.txt`. |
+| 2050    | `HistoryScript`   | `CHistoryScript` — a `CDSScript` subclass behind the history dialog. Wire format identical to ClassID 2026; only the runtime opcode-45..52 extension differs (8 entries at `0x004af7ac`, not yet named). Disassembled with the base 0..44 opcode set; ext opcodes render as `<UNKNOWN op=N>`. |
+| 2076    | `HelpScript`      | `CHelpScript` — same as 2050 but for the help dialog (ext table at `0x004af2fc`). |
+
+The per-language UI string pool used by every dialog in `bulanci.exe`
+(`CDSStaticTexts`, 127 UTF-16LE entries) is **not** a `.eap` resource —
+it's baked into the executable's `.data` section. Dump it with
+[`ghidra_analysis/static_texts.py`](ghidra_analysis/static_texts.py); see
+[`ghidra_analysis/static_texts.md`](ghidra_analysis/static_texts.md) for
+the layout.
 
 ## Script bytecode disassembler
 
@@ -112,16 +120,16 @@ Each function entry starts with `byte varCount` followed by commands. The
 disassembler renders inline nested arguments compactly, e.g.
 
 ```
-fn export#1 @ 0x00d8:
+fn export#1 @ 0x0093  ; OnInit()  -- fires once during CBulanci construction; level scene setup happens here
   ; varCount=0
-    @0x00d9  SetGlobalVar(3, IntConst(0))
-    @0x00e0  IfEqual(IsNet(), IntConst(0), 251)
-    @0x00eb  SetGlobalVar(3, StrmCreateMem(IntConst(4096), IntConst(4096)))
-    @0x00f8  SetCommStrm(GetGlobalVar(3))
-    @0x00fb  LoadPreface(100001)
-    @0x0100  SetMusic(100003, 0)
-    @0x0109  SetInsertMode(IntConst(0))
-    @0x010f  InsertView(CreateImage(IntConst(0), IntConst(0), 100002))
+    @0x0094  RegisterTimer(IntConst(0), Add(Mul(Rand(IntConst(0), IntConst(10)), IntConst(1000)), IntConst(5000)), IntConst(6))
+    @0x00b6  LoadPreface(65640)
+    @0x00bb  SetMusic(65863, 0)
+    @0x00c4  SetInsertMode(IntConst(0))
+    @0x00ca  InsertView(CreateImage(IntConst(0), IntConst(0), 65643))
+    @0x00da  SetInsertMode(IntConst(2))
+    @0x00e0  InsertView(CreateObstacle(IntConst(170), IntConst(140), IntConst(265), IntConst(180)))
+    ...
 ```
 
 The native game's master-pack scripts use a *superset* of the editor's
@@ -136,6 +144,33 @@ engineered name that describes the engine call the handler forwards to
 (e.g. `BindToSlot`, `PlayAnim`, `TimerStart`, `CollResize`). The
 mapping reads naturally even when handlers compose deeply, e.g.
 `PlayAnim(GetSlot(IntConst(6)), IntConst(0))`.
+
+The script's **exports table is positional** — index N is wired to a
+fixed lifecycle event by the engine. A `CLevelScript` always declares
+exactly 11 exports (`exports[0..10]`); each is fired by a different
+engine call-site, with a fixed argc and a fixed argv shape. The
+disassembler renders every export as `fn export#N @ 0xNNNN  ; Name(args)
+-- when it fires`, e.g.
+
+```
+fn export#3  @ 0x04bc  ; OnBitmapEvt(slot, evt)   -- fires when a CBitmap
+                                                    sub-view emits an event …
+fn export#6  @ 0x0935  ; OnTimer(slotId)          -- fires when a
+                                                    RegisterTimer countdown
+                                                    hit zero …
+fn export#10 @ 0x049a  ; OnGameStart()            -- fires when the level
+                                                    transitions from
+                                                    loaded/paused to running …
+```
+
+Note the second example: `OnGameStart` lives at a *lower* bytecode
+address (0x049a) than `OnBitmapEvt` (0x04bc) — the master pack scripts
+do **not** put their exports in address order, so the disassembler is
+careful to label by exports-table position and pick each function's end
+from the sorted-address neighbour. The full per-export contract (which
+engine function fires it, what each argument means, what triggers it in
+the game world) is in
+[`ghidra_analysis/script_lifecycle.md`](ghidra_analysis/script_lifecycle.md).
 
 The disassembler also recognises functions with branchy control flow
 (`If*`, `Goto`, `Switch`, `Select`) and walks all reachable bytes inside
@@ -155,17 +190,18 @@ Override the side-car path with `--names-from PATH.eapres`.
 
 ## What is still out of scope
 
-- **`BitmapSprite` (ClassID 52) RLE pixels.** The 0x2c-byte header is now
-  fully recovered and sanity-checked: totalSize, the three encodedSize
-  mirrors, width/height/frameCount, channels (always 3), the
-  `CBulPicture`-shaped inMemSize hint, the codec-flags byte, and the
-  24-bit packed tag. The per-frame RLE/LC stream that follows is still
-  TODO — it's decoded at runtime by `CBulPicture` (factory at
-  `0x0040eb30`, palette+pixels layout documented in
-  [`ghidra_analysis/sprite_container.md`](ghidra_analysis/sprite_container.md)),
-  not by `CDSBitmap` itself, and tracking down the right vtable slot is
-  the remaining piece of work. The format is purely native, with no
-  editor source to cross-reference.
+- **`BitmapSprite` (ClassID 52) recolour-variant palettes.** The
+  container, frame stream and per-opcode pixel decoders are now fully
+  recovered and the unpacker emits indexed PNGs plus a per-sprite
+  atlas. 89/130 sprites carry their palette inline (FLX opcode 0x09)
+  and decode to correct full-colour PNGs. The remaining 41/130 are
+  recolour variants whose palette is inherited from a sibling resource
+  via the engine's ambient render context; the unpacker currently
+  falls back to a grayscale ramp for those. Picking the right sibling
+  palette automatically would let us emit colour PNGs for them too;
+  the manifest's `decoded.paletteSource` field distinguishes the two
+  cases. See [`ghidra_analysis/sprite_container.md`](ghidra_analysis/sprite_container.md)
+  and [`ghidra_analysis/flx_file_format.md`](ghidra_analysis/flx_file_format.md).
 - **Exact authoritative names** for the 36 game-only opcodes in the
   `CLevelScript` extension table. Argument shapes and runtime
   behaviours are recovered, and each opcode now has a descriptive name,

@@ -71,3 +71,10 @@ tools/ninja/*
 # Temporary objdiff CLI dumps (scripts/internal/near_miss.py and ad-hoc
 # diffs land here while exploring; never meant to be committed).
 /_diff*.json
+
+# Scratchpad notebooks under tools/bulanci_unpack/ghidra_analysis/.
+# Convention: `_scratch_*` is short-lived; promote to a real
+# `<component>.{py,md}` once the script is repeatable.  See
+# tools/bulanci_unpack/ghidra_analysis/README.md.
+tools/bulanci_unpack/ghidra_analysis/_scratch_*
+/ref

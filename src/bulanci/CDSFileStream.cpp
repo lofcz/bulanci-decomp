@@ -105,47 +105,241 @@ uchar CDSFileStream::FUN_004333e0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00433400 BEGIN
 /* 433400-433461 00061 */
-uchar CDSFileStream::FUN_00433400(void* param_1, DWORD param_2) { STUB_BODY(); return 0; }
+/* IDSStream slot 4 -- ReadBytes(buf, count).
+ *
+ * Reads up to `count` bytes from the file HANDLE at +0x10 of the
+ * IDSStream subobject.  Zero-length short-circuits (no kernel32 call).
+ *
+ *   ReadFile failure       -> RaiseStreamException(errno=1, ctx)
+ *   Short read (got < req) -> ThrowStreamErrorNoReturn(errno=1, ctx,
+ *                                                     ERROR_HANDLE_EOF=0x26)
+ */
+uchar CDSFileStream::FUN_00433400(void* param_1, DWORD param_2) {
+    DWORD nBytesToRead = param_2;
+    DWORD nBytesRead = 0;
+    if (param_2 != 0) {
+        BOOL ok = ReadFile(FileHandle(this), param_1, nBytesToRead, &nBytesRead, NULL);
+        if (ok == 0) {
+            /* RaiseStreamException(1, SelfOrNull(this)) -- TODO: helper is a
+             * non-static _Globals member in the current source layout; the
+             * binary expects a __cdecl free function. Wire up once the
+             * _Globals helpers are promoted out of the class. */
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(1, SelfOrNull(this));
+        }
+        if (nBytesToRead != nBytesRead) {
+            /* ThrowStreamErrorNoReturn(1, SelfOrNull(this), 0x26) */
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_004302e0(1, SelfOrNull(this), 0x26);
+        }
+    }
+    return 0;
+}
 // !FUNC 0x00433400 END
 
 // !FUNC 0x00433470 BEGIN
 /* 433470-4334BE 0004E */
-uchar CDSFileStream::FUN_00433470(void* param_1, DWORD param_2) { STUB_BODY(); return 0; }
+/* IDSStream slot 5 -- WriteBytes(buf, count).
+ *
+ * Writes `count` bytes to the file HANDLE at +0x10.  Zero-length is a
+ * no-op.  Any WriteFile failure OR short write raises
+ * RaiseStreamException(errno=2, ctx).
+ */
+uchar CDSFileStream::FUN_00433470(void* param_1, DWORD param_2) {
+    DWORD nBytesToWrite = param_2;
+    DWORD nBytesWritten = 0;
+    if (param_2 != 0) {
+        BOOL ok = WriteFile(FileHandle(this), param_1, nBytesToWrite, &nBytesWritten, NULL);
+        if (ok == 0 || nBytesWritten != nBytesToWrite) {
+            /* RaiseStreamException(2, SelfOrNull(this)) */
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(2, SelfOrNull(this));
+        }
+    }
+    return 0;
+}
 // !FUNC 0x00433470 END
 
 // !FUNC 0x004334c0 BEGIN
 /* 4334C0-433507 00047 */
-uchar CDSFileStream::FUN_004334c0(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4) { STUB_BODY(); return 0; }
+/* IDSStream slot 11 -- LockRegion(offLo, offHi, lenLo, lenHi).
+ *
+ * Direct passthrough to kernel32 LockFile.
+ *   Failure -> RaiseStreamException(errno=5, ctx)
+ */
+uchar CDSFileStream::FUN_004334c0(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4) {
+    BOOL ok = LockFile(FileHandle(this), param_1, param_2, param_3, param_4);
+    if (ok == 0) {
+        /* RaiseStreamException(5, SelfOrNull(this)) */
+        reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(5, SelfOrNull(this));
+    }
+    return 0;
+}
 // !FUNC 0x004334c0 END
 
 // !FUNC 0x00433510 BEGIN
 /* 433510-433557 00047 */
-uchar CDSFileStream::FUN_00433510(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4) { STUB_BODY(); return 0; }
+/* IDSStream slot 12 -- UnlockRegion(offLo, offHi, lenLo, lenHi).
+ *
+ * Direct passthrough to kernel32 UnlockFile.
+ *   Failure -> RaiseStreamException(errno=6, ctx)
+ */
+uchar CDSFileStream::FUN_00433510(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4) {
+    BOOL ok = UnlockFile(FileHandle(this), param_1, param_2, param_3, param_4);
+    if (ok == 0) {
+        /* RaiseStreamException(6, SelfOrNull(this)) */
+        reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(6, SelfOrNull(this));
+    }
+    return 0;
+}
 // !FUNC 0x00433510 END
 
 // !FUNC 0x00433560 BEGIN
 /* 433560-4335D3 00073 */
-uchar CDSFileStream::FUN_00433560(int param_1, int param_2, DWORD param_3) { STUB_BODY(); return 0; }
+/* IDSStream slot 10 -- SeekPosition(offsetLo, offsetHi, origin).
+ *
+ * Maps `origin` (0=BEGIN, 1=CURRENT, 2=END) onto the matching FILE_*
+ * values for SetFilePointer.  The high DWORD of the offset is passed
+ * via a stack temporary (PLONG out-param of SetFilePointer).
+ *   -1 return && GetLastError != 0 -> ThrowStreamErrorNoReturn(errno=3,
+ *                                                              ctx, win32err)
+ */
+uchar CDSFileStream::FUN_00433560(int param_1, int param_2, DWORD param_3) {
+    DWORD method;
+    if (param_3 == 0)      method = 0; /* FILE_BEGIN   */
+    else if (param_3 == 1) method = 1; /* FILE_CURRENT */
+    else if (param_3 == 2) method = 2; /* FILE_END     */
+    else                    method = param_3;
+
+    DWORD highTmp = static_cast<DWORD>(param_2);
+    DWORD lowRet = SetFilePointer(FileHandle(this),
+                                  static_cast<long>(param_1),
+                                  reinterpret_cast<PLONG>(&highTmp),
+                                  method);
+    if (lowRet == 0xffffffff) {
+        DWORD win32Err = GetLastError();
+        if (win32Err != 0) {
+            /* ThrowStreamErrorNoReturn(3, SelfOrNull(this), win32Err) */
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_004302e0(3, SelfOrNull(this), win32Err);
+        }
+    }
+    return 0;
+}
 // !FUNC 0x00433560 END
 
 // !FUNC 0x004335e0 BEGIN
 /* 4335E0-433658 00078 */
-uchar CDSFileStream::FUN_004335e0(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+/* IDSStream slot 9 -- SetStreamSize(sizeLo, sizeHi).
+ *
+ * 1. Tell()             (vtable +0x20, captures current position).
+ * 2. If size != UINT64_MAX, Seek(size, BEGIN)  (vtable +0x28).
+ * 3. SetEndOfFile(handle) -- failure -> RaiseStreamException(errno=4).
+ * 4. If size != UINT64_MAX, Seek(savedPos)     (vtable +0x28).
+ *
+ * NB: the second Seek receives `savedPos` as a 64-bit value (low+high
+ * registers).  Ghidra renders it as a single `uVar2` so we replicate
+ * with a `longlong` and pass low+high via the vtable.  We keep the
+ * Tell/Seek calls as raw vtable indirects to match the original.
+ */
+uchar CDSFileStream::FUN_004335e0(uint param_1, uint param_2) {
+    /* `*(int*)this` = primary vtable pointer; offsets +0x20 / +0x28
+     * are IDSStream slots Tell() and Seek() respectively. */
+    typedef longlong (__thiscall *TellFn)(void*);
+    typedef void     (__thiscall *SeekFn)(void*, longlong, DWORD);
+
+    void** vt = *reinterpret_cast<void***>(this);
+    TellFn pTell = reinterpret_cast<TellFn>(vt[8]);  /* +0x20 / 4 = slot 8 */
+    SeekFn pSeek = reinterpret_cast<SeekFn>(vt[10]); /* +0x28 / 4 = slot 10 */
+
+    longlong savedPos = pTell(this);
+    if ((param_1 & param_2) != 0xffffffffu) {
+        longlong target = (static_cast<longlong>(param_2) << 32) | static_cast<ulonglong>(param_1);
+        pSeek(this, target, 0 /* FILE_BEGIN */);
+    }
+    BOOL ok = SetEndOfFile(FileHandle(this));
+    if (ok == 0) {
+        /* RaiseStreamException(4, SelfOrNull(this)) */
+        reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(4, SelfOrNull(this));
+    }
+    if ((param_1 & param_2) != 0xffffffffu) {
+        pSeek(this, savedPos, 0 /* FILE_BEGIN */);
+    }
+    return 0;
+}
 // !FUNC 0x004335e0 END
 
 // !FUNC 0x00433660 BEGIN
 /* 433660-4336B1 00051 */
-longlong CDSFileStream::FUN_00433660(uint param_1) { STUB_BODY(); return 0; }
+/* IDSStream slot 7 -- GetSize : longlong.
+ *
+ * GetFileSize returns the low DWORD as its value and writes the high
+ * DWORD via the LPDWORD out-param.
+ *
+ *   low == 0xFFFFFFFF && GetLastError != 0 ->
+ *       ThrowStreamErrorNoReturn(errno=4, ctx, win32err)
+ *
+ * Result = (high << 32) | low.  Ghidra renders the 64-bit assemble
+ * as `__allmul(local, 0, 0, 1)` because MSVC lowers `(longlong)low + ((longlong)high << 32)`
+ * through the CRT helper on x86 -- it's just `(high:low)`.
+ */
+longlong CDSFileStream::FUN_00433660(uint param_1) {
+    DWORD high = 0;
+    DWORD low = GetFileSize(FileHandle(this), &high);
+    if (low == 0xffffffffu) {
+        DWORD win32Err = GetLastError();
+        if (win32Err != 0) {
+            /* ThrowStreamErrorNoReturn(4, SelfOrNull(this), win32Err) */
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_004302e0(4, SelfOrNull(this), win32Err);
+        }
+    }
+    return (static_cast<longlong>(high) << 32) | static_cast<ulonglong>(low);
+}
 // !FUNC 0x00433660 END
 
 // !FUNC 0x004336c0 BEGIN
 /* 4336C0-43371D 0005D */
-longlong CDSFileStream::FUN_004336c0(uint param_1) { STUB_BODY(); return 0; }
+/* IDSStream slot 8 -- TellPosition : longlong.
+ *
+ * Calls SetFilePointer(handle, 0, &high, FILE_CURRENT).  The return is
+ * the low DWORD; the high DWORD is written into the out-param.
+ *
+ *   ret == 0xFFFFFFFF && GetLastError != 0 ->
+ *       ThrowStreamErrorNoReturn(errno=3, ctx, win32err)
+ *
+ * Ghidra renders the 64-bit reassembly as
+ *   `__allmul(low, low>>31, 0, 1)`
+ * which is just `((longlong)(int)low) << 32` -- a sign-extended shift.
+ * That's identical to `(high:low)` since `high` holds the same value
+ * after the SetFilePointer call.
+ */
+longlong CDSFileStream::FUN_004336c0(uint param_1) {
+    DWORD high = 0;
+    DWORD low = SetFilePointer(FileHandle(this), 0,
+                               reinterpret_cast<PLONG>(&high),
+                               1 /* FILE_CURRENT */);
+    if (low == 0xffffffffu) {
+        DWORD win32Err = GetLastError();
+        if (win32Err != 0) {
+            /* ThrowStreamErrorNoReturn(3, SelfOrNull(this), win32Err) */
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_004302e0(3, SelfOrNull(this), win32Err);
+        }
+    }
+    return (static_cast<longlong>(high) << 32) | static_cast<ulonglong>(low);
+}
 // !FUNC 0x004336c0 END
 
 // !FUNC 0x00433720 BEGIN
 /* 433720-433747 00027 */
-uchar CDSFileStream::FUN_00433720(uint param_1) { STUB_BODY(); return 0; }
+/* IDSStream slot 6 -- FlushStream.
+ *
+ * Calls FlushFileBuffers(handle).  Failure ->
+ * RaiseStreamException(errno=7, ctx).
+ */
+uchar CDSFileStream::FUN_00433720(uint param_1) {
+    BOOL ok = FlushFileBuffers(FileHandle(this));
+    if (ok == 0) {
+        /* RaiseStreamException(7, SelfOrNull(this)) */
+        reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(7, SelfOrNull(this));
+    }
+    return 0;
+}
 // !FUNC 0x00433720 END
 
 // !FUNC 0x00433750 BEGIN

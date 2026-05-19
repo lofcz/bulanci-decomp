@@ -2932,7 +2932,7 @@ public:
 	/* 46EE60 */ static uint FUN_0046ee60(int param_1, int param_2, char* param_3, int param_4);
 	// !DECL 0x0046ee60 END
 	// !DECL 0x0046ef60 BEGIN
-	/* 46EF60 */ static uchar FUN_0046ef60(int param_1, char* param_2, int param_3);
+	/* 46EF60 */ static uint FUN_0046ef60(int param_1, char* param_2, int param_3);
 	// !DECL 0x0046ef60 END
 	// !DECL 0x0046ef80 BEGIN
 	/* 46EF80 */ static uint FUN_0046ef80(int* param_1, int param_2);
@@ -2977,7 +2977,7 @@ public:
 	/* 4702C0 */ static uint FUN_004702c0(int param_1, uint param_2, int param_3, int param_4, int param_5, uint param_6, char* param_7, int param_8);
 	// !DECL 0x004702c0 END
 	// !DECL 0x004704c0 BEGIN
-	/* 4704C0 */ static uchar FUN_004704c0(int param_1, uint param_2, char* param_3, int param_4);
+	/* 4704C0 */ static uint FUN_004704c0(int param_1, uint param_2, char* param_3, int param_4);
 	// !DECL 0x004704c0 END
 	// !DECL 0x004704f0 BEGIN
 	/* 4704F0 */ static uchar FUN_004704f0(int* param_1, int param_2, int* param_3);

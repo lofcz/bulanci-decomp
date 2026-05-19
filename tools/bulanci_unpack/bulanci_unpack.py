@@ -21,7 +21,8 @@ import sys
 import zlib
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import List, Optional, Tuple
+from collections import Counter
+from typing import Iterable, List, Optional, Tuple
 
 
 CONTAINER_MAGIC = 0x50495A47  # ASCII 'GZIP' as little-endian uint32
@@ -51,9 +52,16 @@ CLASS_DSM_INNER = 58             # embedded sub-archive (BULANCI.TMP)
 CLASS_AUDIO_BANK_INDEX = 67      # CDSAudioBankSample index into ClassID 43
 CLASS_BITMAP_JPEG_ANIM = 76      # animated/JPEG sprite (mixed header + JPEG)
 CLASS_SIGN = 94
-CLASS_SCRIPT = 2026
-CLASS_TEXT_BLOCK = 2043          # CDSStaticTexts: u32 charCount + UTF-16 chars
-CLASS_TEXT_TABLE = 2050          # CDSStaticTexts (multi-entry?) localised text table
+CLASS_SCRIPT = 2026              # CDSScript / CLevelScript level script
+CLASS_POEM = 2043                # CPoem: u32 charCount + UTF-16LE chars (Czech poem)
+CLASS_HISTORY_SCRIPT = 2050      # CHistoryScript: CDSScript subclass for the history dialog
+CLASS_HELP_SCRIPT = 2076         # CHelpScript: CDSScript subclass for the help dialog
+
+# Note: the engine-side per-language string pool (`CDSStaticTexts`) does NOT
+# live in any overlay/.eap resource -- it's baked into `bulanci.exe`'s .data
+# section as a single static singleton. See
+# `ghidra_analysis/static_texts.md` and `ghidra_analysis/static_texts.py`
+# for the layout and extractor.
 
 CLASS_NAMES = {
     CLASS_BITMAP_JPEG: "BitmapJPEG",
@@ -68,8 +76,9 @@ CLASS_NAMES = {
     CLASS_BITMAP_JPEG_ANIM: "BitmapJpegAnim",
     CLASS_SIGN: "Sign",
     CLASS_SCRIPT: "Script",
-    CLASS_TEXT_BLOCK: "TextBlock",
-    CLASS_TEXT_TABLE: "TextTable",
+    CLASS_POEM: "Poem",
+    CLASS_HISTORY_SCRIPT: "HistoryScript",
+    CLASS_HELP_SCRIPT: "HelpScript",
 }
 
 
@@ -676,17 +685,32 @@ def _save_sign(raw: bytes, base: Path) -> dict:
     return meta
 
 
-def _save_script(raw: bytes, base: Path) -> dict:
-    # Editor.Scripts.Script.Write:
-    #   int32 codeLen, int32 nExports, int32 nVars,
-    #   byte[codeLen] bytecode,
-    #   int32[nExports] entry offsets
+def _save_script(raw: bytes, base: Path, *, kind: str = "level_script") -> dict:
+    """Save a serialized `CDSScript` (or subclass).
+
+    On disk every script subclass uses the same wire format -- the engine's
+    deserialiser is on `CDSScript`, the subclass only differs in which
+    runtime opcode-extension table it installs. So this single handler
+    serves classIds 2026 (`CLevelScript`), 2050 (`CHistoryScript`) and
+    2076 (`CHelpScript`). `kind` selects which extension table the
+    disassembler should use; see `_disassemble_script`.
+
+    Wire format (Editor.Scripts.Script.Write):
+        int32 codeLen, int32 nExports, int32 nVars,
+        byte[codeLen] bytecode,
+        int32[nExports] entry offsets
+    """
     meta: dict = {"friendlyFile": None}
     if len(raw) < 12:
         meta["warning"] = "Script: header truncated"
         return meta
     code_len, n_exports, n_vars = struct.unpack_from("<iii", raw, 0)
-    meta["script"] = {"codeLen": code_len, "nExports": n_exports, "nVars": n_vars}
+    meta["script"] = {
+        "kind": kind,
+        "codeLen": code_len,
+        "nExports": n_exports,
+        "nVars": n_vars,
+    }
     if code_len < 0 or 12 + code_len + 4 * n_exports > len(raw):
         meta["warning"] = "Script: implausible sizes"
         return meta
@@ -698,10 +722,12 @@ def _save_script(raw: bytes, base: Path) -> dict:
     meta["script"]["entryPoints"] = exports
     (base.with_suffix(".script.bin")).write_bytes(code)
 
-    # Disassemble bytecode using the opcode table from
-    # editor_il_spy/Editor.Scripts/Opcode.cs.
+    # Disassemble bytecode. The opcode table is chosen by `kind`:
+    #   level_script   -> full coverage (base 0..44 + CLevelScript 45..102)
+    #   help_script    -> base only; 45..52 render as <UNKNOWN> until traced
+    #   history_script -> ditto
     try:
-        asm = _disassemble_script(code, exports)
+        asm = _disassemble_script(code, exports, kind=kind)
         out = base.with_suffix(".script.asm")
         out.write_text(asm, encoding="utf-8")
         meta["friendlyFile"] = out.name
@@ -709,6 +735,14 @@ def _save_script(raw: bytes, base: Path) -> dict:
         meta["warning"] = f"Script: disassembly failed: {exc}"
         meta["friendlyFile"] = base.with_suffix(".script.bin").name
     return meta
+
+
+def _save_history_script(raw: bytes, base: Path) -> dict:
+    return _save_script(raw, base, kind="history_script")
+
+
+def _save_help_script(raw: bytes, base: Path) -> dict:
+    return _save_script(raw, base, kind="help_script")
 
 
 # --------------------------------------------------------------------------------------
@@ -739,8 +773,11 @@ def _save_script(raw: bytes, base: Path) -> dict:
 # addresses and the base-vs-extension table layout that the native runtime
 # constructs at `this+0x2c` (45 base entries at 0x004b0118 + 58 CLevelScript
 # extension entries at 0x004af018 = opcodes 0..102 inclusive).
-_OPCODES = {
+_BASE_OPCODES: dict = {
     # --- CDSScript base opcodes (0..44, table at 0x004b0118) -----------------
+    # Shared by every script subclass (`CLevelScript`, `CHelpScript`,
+    # `CHistoryScript`). Built by `CDSScript::CDSScript` via
+    # `FUN_00438310(this, 0, &PTR_LAB_004b0118, 0x2d)`.
     0:   ("IntConst",         ["i32"]),
     1:   ("Rand",             ["sub", "sub"]),
     2:   ("GetGlobalVar",     ["u8"]),
@@ -786,7 +823,13 @@ _OPCODES = {
     42:  ("StrmSetSize",      ["sub", "sub"]),
     43:  ("StrmGetPos",       ["sub"]),
     44:  ("StrmGetSize",      ["sub"]),
+}
+
+
+_LEVELSCRIPT_EXT_OPCODES: dict = {
     # --- CLevelScript extension opcodes (45..102, table at 0x004af018) ------
+    # Installed by `CLevelScript::CLevelScript` via
+    # `FUN_00438310(this, 0x2d, &PTR_FUN_004af018, 0x3a)`.
     # Every entry has been verified against `bulanci.exe`'s handler. The
     # names come from one of three sources, in decreasing order of
     # confidence:
@@ -861,17 +904,134 @@ _OPCODES = {
 }
 
 
-def _disassemble_script(code: bytes, exports: List[int]) -> str:
+# CHelpScript / CHistoryScript install their *own* 8-entry extension tables
+# at offset 45..52, NOT the 58-entry CLevelScript extension. Until each
+# handler is traced and named, opcodes 45..52 in these scripts decode as
+# `<UNKNOWN op=N>`. Handler addresses (from `bulanci.exe`):
+#
+#   CHistoryScript table @ 0x004af7ac (CHistoryScript::CHistoryScript, 0x004226c0):
+#     45 -> 0x00422b00   46 -> 0x00422bc0   47 -> 0x00423530   48 -> 0x00421750
+#     49 -> 0x004215c0   50 -> 0x00422810   51 -> 0x004217e0   52 -> 0x00423820
+#
+#   CHelpScript table    @ 0x004af2fc (CHelpScript::CHelpScript,       0x004215e0):
+#     45 -> 0x00421940   46 -> 0x00421a00   47 -> 0x004221a0   48 -> 0x00421750
+#     49 -> 0x004215c0   50 -> 0x00422810   51 -> 0x004217e0   52 -> 0x00421af0
+#
+# Slots 48..51 are shared between the two -- likely generic helpers.
+_HELPSCRIPT_EXT_OPCODES: dict = {}
+_HISTORYSCRIPT_EXT_OPCODES: dict = {}
+
+
+_SCRIPT_OPCODES = {
+    "level_script":   {**_BASE_OPCODES, **_LEVELSCRIPT_EXT_OPCODES},
+    "help_script":    {**_BASE_OPCODES, **_HELPSCRIPT_EXT_OPCODES},
+    "history_script": {**_BASE_OPCODES, **_HISTORYSCRIPT_EXT_OPCODES},
+}
+
+
+# Per-export lifecycle annotation for `CLevelScript`-shaped scripts. The
+# engine invokes export#N for fixed lifecycle events (see
+# `ghidra_analysis/script_lifecycle.md`). For scripts that follow that
+# contract (every level script in the master pack does), the annotation
+# makes the disassembly much easier to read. Scripts with fewer exports
+# (e.g. help-page or history-page scripts only define export#0) just get
+# the export#0 label and the rest are left bare.
+# Each entry is (name, description, signature). `signature` is appended
+# after the name in the disassembly label so the argument shape the engine
+# guarantees is always visible. Mapping verified against every xref to
+# `CDSScript::CallExport` (`FUN_00438c40`) in `bulanci.exe`; see
+# `ghidra_analysis/script_lifecycle.md` for the full evidence chain.
+_LEVEL_SCRIPT_EXPORT_NAMES = {
+    0:  ("GetInfo",     "writes globals 0/1/2 = name/type/GUID for the level/help/history picker",
+         "(language)"),
+    1:  ("OnInit",      "fires once during CBulanci construction; level scene setup happens here",
+         "()"),
+    2:  ("OnDeinit",    "fires once during CGaming destruction; resource teardown",
+         "()"),
+    3:  ("OnBitmapEvt", "fires when a CBitmap sub-view emits an event (animation frame end, "
+                        "click/hit). slot = view.@0x70 = its CGaming slot, evt = the event code",
+         "(slot, evt)"),
+    4:  ("OnSlotPlaced", "fires when CExplosion / net-msg-0x0f spawns or moves a slot via "
+                         "`FUN_00417e80` and msg 0xd7 reaches it. slot = destination slot, "
+                         "msgHi/msgLo = the upper/lower halves of the spawn parameter",
+         "(slot, msgHi, msgLoBits)"),
+    5:  ("OnSlotDisplaced", "companion to OnSlotPlaced: fires on a *second* slot when its "
+                            "occupant gets displaced by a OnSlotPlaced event (msg 0xd8). "
+                            "slot = the displaced slot, byParam = the slot that displaced it",
+         "(slot, byParam)"),
+    6:  ("OnTimer",     "fires when a `RegisterTimer(slotId, delay, flags)` countdown (opcodes "
+                        "68..72; timer table at `this+0x440`) expires; the slot id passed back "
+                        "is the same slotId originally registered",
+         "(slotId)"),
+    7:  ("OnEnter",     "fires when a player/entity *enters* a `DefineTraceArea` rectangle. "
+                        "traceId = the first arg passed to DefineTraceArea, entitySlot = the "
+                        "0..3 player slot (or 0x88-N for slots 4..7) that crossed the boundary",
+         "(traceId, entitySlot)"),
+    8:  ("OnLeave",     "fires when a player/entity *leaves* a `DefineTraceArea` rectangle "
+                        "(symmetric to OnEnter, same argument shape)",
+         "(traceId, entitySlot)"),
+    9:  ("OnNetCustom", "fires from `CGame::ProcessNetMessage` case 0x15 with a stream handle. "
+                        "Scripts typically `StrmRead(handle, 1)` the leading opcode byte and "
+                        "switch on it to dispatch their own RPC sub-protocol",
+         "(streamHandle)"),
+    10: ("OnGameStart", "fires from `CGaming::FUN_0041c140(true)` whenever the level "
+                        "transitions from paused/loaded to running (level start, post-pause "
+                        "resume). Music is started and engine-side timer slots 1/2 are armed "
+                        "right after this returns",
+         "()"),
+}
+
+
+def _disassemble_script(
+    code: bytes,
+    exports: List[int],
+    kind: str = "level_script",
+) -> str:
     """Render the bytecode as a human-readable listing.
+
+    `kind` selects which extension opcode table (45..) to merge in:
+
+    * ``"level_script"`` – the canonical 58-entry `CLevelScript` extension
+      at `0x004af018`. Fully named.
+    * ``"history_script"`` – the 8-entry `CHistoryScript` extension at
+      `0x004af7ac`. Handler addresses are recorded in
+      `_HISTORYSCRIPT_EXT_OPCODES`'s preamble; not yet named, so opcodes
+      45..52 render as ``<UNKNOWN op=N>``.
+    * ``"help_script"`` – ditto for `CHelpScript` (table at `0x004af2fc`).
 
     Functions are anchored at the export offsets. The first byte at every
     function entry is `byte varCount`. We then iterate top-level commands;
     nested args within a command appear inline (so `SetGlobalVar 1 IntConst 1000`
     renders compactly).
+
+    IMPORTANT: the exports table is **positional, not address-sorted**. The
+    engine indexes it by lifecycle-event slot (`exports[0]` is always
+    `GetInfo`, `exports[1]` is always `OnInit`, etc. — see
+    `ghidra_analysis/script_lifecycle.md`). Several scripts in the master
+    pack place lifecycle exports out of address order (e.g.
+    `res_0000065859`'s `OnGameStart` lives at offset 1178, *before*
+    `OnBitmapEvt` at 1212), so sorting the table by address scrambles the
+    `export#N` labels. Walk the exports list in its original order and
+    use a separate sorted-address pass purely to find function ends.
     """
+    opcodes = _SCRIPT_OPCODES.get(kind)
+    if opcodes is None:
+        raise ValueError(f"unknown script kind {kind!r}; expected one of {list(_SCRIPT_OPCODES)}")
     lines: List[str] = []
-    func_starts = sorted(set(int(e) for e in exports))
-    fn_index = {addr: i for i, addr in enumerate(func_starts)}
+    exports_int = [int(e) for e in exports]
+    # Sorted distinct addresses → used only to find each function's `end_hint`.
+    sorted_addrs = sorted(set(exports_int))
+    next_addr_after = {
+        a: (sorted_addrs[i + 1] if i + 1 < len(sorted_addrs) else len(code))
+        for i, a in enumerate(sorted_addrs)
+    }
+    # Positional index → display label. When multiple exports share the same
+    # bytecode offset (common for "unused" lifecycle slots that point at the
+    # same `Return(0)` stub), every reference resolves to the lowest-index
+    # owner so the disassembly listing stays unambiguous.
+    fn_index: dict = {}
+    for i, addr in enumerate(exports_int):
+        fn_index.setdefault(addr, i)
 
     def export_label(off: int) -> str:
         i = fn_index.get(off)
@@ -882,7 +1042,7 @@ def _disassemble_script(code: bytes, exports: List[int]) -> str:
             raise ValueError(f"command at {off:#x}: past end of code")
         op = code[off]
         end = off + 1
-        info = _OPCODES.get(op)
+        info = opcodes.get(op)
         if info is None:
             return end, f"<UNKNOWN op={op}>"
         name, spec = info
@@ -982,7 +1142,7 @@ def _disassemble_script(code: bytes, exports: List[int]) -> str:
                 lines.append(f"  ; ABORT: too many commands; bailing")
                 break
             opc = code[off]
-            if opc not in _OPCODES:
+            if opc not in opcodes:
                 # An unknown top-level opcode means we've fallen off the
                 # back of the real script: encoder padding, an inline
                 # helper that isn't pointed at by the export table, or
@@ -1011,17 +1171,31 @@ def _disassemble_script(code: bytes, exports: List[int]) -> str:
             if opc == 13 or 18 <= opc <= 25:
                 seen_branch = True
 
-    if not func_starts:
+    if not exports_int:
         lines.append("; (no exports; full code dump)")
         disasm_function(0, len(code))
     else:
-        # First function may start before the first export (rare). The
-        # editor-generated script always has at least one exported function
-        # so this typically aligns.
-        for i, fs in enumerate(func_starts):
-            fe = func_starts[i + 1] if i + 1 < len(func_starts) else len(code)
+        # A CLevelScript-shaped script has exactly 11 exports (indices
+        # 0..10, see `ghidra_analysis/script_lifecycle.md`). When that
+        # signature matches, label each export with its lifecycle role so
+        # the disassembly reads as event handlers rather than anonymous
+        # functions. Scripts with a different shape (help/history pages
+        # only use export#0) get the bare `export#N` label for indices
+        # we don't have a contract for.
+        looks_like_level_script = len(exports_int) == 11
+        for i, fs in enumerate(exports_int):
+            fe = next_addr_after.get(fs, len(code))
             lines.append("")
-            lines.append(f"fn export#{i} @ {fs:#06x}:")
+            role = _LEVEL_SCRIPT_EXPORT_NAMES.get(i) if looks_like_level_script else None
+            if role is None and i == 0:
+                # Every script uses export#0 as `GetInfo(language)`, so
+                # label it even when the script doesn't look like a level.
+                role = _LEVEL_SCRIPT_EXPORT_NAMES[0]
+            if role is not None:
+                name, desc, sig = role
+                lines.append(f"fn export#{i} @ {fs:#06x}  ; {name}{sig}  -- {desc}")
+            else:
+                lines.append(f"fn export#{i} @ {fs:#06x}:")
             disasm_function(fs, fe)
 
     return "\n".join(lines) + "\n"
@@ -1119,19 +1293,31 @@ def _save_audio_bank_index(raw: bytes, base: Path) -> dict:
     return meta
 
 
-def _save_text_block(raw: bytes, base: Path) -> dict:
-    """ClassID 2043 - UTF-16LE text block.
+def _save_poem(raw: bytes, base: Path) -> dict:
+    """ClassID 2043 - `CPoem`: UTF-16LE text block.
 
-    Format: u32 charCount, char[charCount] UTF-16LE chars. The first char
-    is often a marker (0x0001 / 0x0002) used as a section / language flag.
+    Recovered via factory→vftable→RTTI: classID 2043's factory at
+    `0x00409ab0` builds a 28-byte object whose primary vftable's
+    TypeDescriptor decodes to `.?AVCPoem@@`. So this resource is a
+    self-contained Czech poem (or chapter title) -- not a "static text
+    table". The engine-side localised string pool is a separate
+    singleton inside `bulanci.exe`; see
+    `ghidra_analysis/static_texts.md`.
+
+    Wire format::
+
+        u32 charCount, char[charCount] UTF-16LE chars
+
+    The first character is often a marker (`0x0001`/`0x0002`) used as a
+    section/line flag.
     """
     meta: dict = {"friendlyFile": None}
     if len(raw) < 4:
-        meta["warning"] = "TextBlock: too short"
+        meta["warning"] = "Poem: too short"
         return meta
     char_count = struct.unpack_from("<I", raw, 0)[0]
     if char_count < 0 or 4 + char_count * 2 > len(raw):
-        meta["warning"] = f"TextBlock: implausible charCount {char_count}"
+        meta["warning"] = f"Poem: implausible charCount {char_count}"
         return meta
     chars = raw[4 : 4 + char_count * 2].decode("utf-16-le", errors="replace")
     meta["text"] = {
@@ -1142,61 +1328,6 @@ def _save_text_block(raw: bytes, base: Path) -> dict:
     out.write_text(chars, encoding="utf-8")
     meta["friendlyFile"] = out.name
     return meta
-
-
-def _save_text_table(raw: bytes, base: Path) -> dict:
-    """ClassID 2050 - structured text/data table.
-
-    Layout (best-effort, recovered empirically):
-        u32 totalSize     # full resource size in bytes (=len(raw)+16-ish)
-        u32 entryCount    # observed 1 in tutorial samples
-        u32 reserved
-        u32 reserved
-        ... payload mixing fixed-size records and UTF-16LE strings.
-
-    Phase 1 dumps a hex preview + extracts every embedded UTF-16LE string
-    that's >= 2 characters and surrounded by null sentinels.
-    """
-    meta: dict = {"friendlyFile": None}
-    if len(raw) < 16:
-        meta["warning"] = "TextTable: too short"
-        return meta
-    total_size, count, r1, r2 = struct.unpack_from("<IIII", raw, 0)
-    strings = _extract_utf16_strings(raw)
-    meta["textTable"] = {
-        "totalSize": total_size,
-        "count": count,
-        "reserved": [r1, r2],
-        "extractedStrings": strings,
-    }
-    out = base.with_suffix(".table.json")
-    out.write_text(json.dumps(meta["textTable"], ensure_ascii=False, indent=2), encoding="utf-8")
-    meta["friendlyFile"] = out.name
-    return meta
-
-
-def _extract_utf16_strings(buf: bytes, min_chars: int = 2) -> List[str]:
-    """Scan `buf` for printable-looking UTF-16LE substrings (>= `min_chars`).
-
-    Skips surrogate pairs (0xD800 - 0xDFFF) so the result is always safely
-    JSON-serialisable as UTF-8.
-    """
-    results: List[str] = []
-    n = len(buf) // 2
-    cu = struct.unpack(f"<{n}H", buf[: n * 2])
-    cur: List[str] = []
-    for v in cu:
-        is_ascii = 32 <= v < 127
-        is_unicode = 0x00A0 <= v <= 0xFFFD and not (0xD800 <= v <= 0xDFFF)
-        if is_ascii or is_unicode:
-            cur.append(chr(v))
-        else:
-            if len(cur) >= min_chars:
-                results.append("".join(cur))
-            cur = []
-    if len(cur) >= min_chars:
-        results.append("".join(cur))
-    return results
 
 
 def _save_dsm_inner(raw: bytes, base: Path) -> dict:
@@ -1243,56 +1374,690 @@ def _save_dsm_inner(raw: bytes, base: Path) -> dict:
 
 
 # BitmapSprite (ClassID 52) header constants. Header is exactly 11
-# little-endian u32s (= 0x2c bytes) followed by the RLE/LC payload that
-# `CBulPicture` decodes at runtime.
+# little-endian u32s (= 0x2c bytes). The header bytes at +0x24..+0x2c
+# double as the first frame's 5-byte header — see _walk_bitmap_sprite_frames.
 BITMAP_SPRITE_HEADER_SIZE = 0x2c
 BITMAP_SPRITE_FIELDS = 11
-# `channels` is 3 on every sample in the master pack (24bpp BGR pixels).
+# `channels` is 3 on every sample in the master pack (BGR palette triplets
+# arrive via inner opcode 0x09; pixels are 8bpp palette indices).
 BITMAP_SPRITE_EXPECTED_CHANNELS = 3
 # `inMemSize` (header[7]) commonly equals the `CBulPicture` allocation
-# size (0x470 bytes from `CBulPicture::FUN_0040eb30`). Other observed
-# values are extra runtime buffers above the base struct.
+# size (0x470 bytes from `CBulPicture::CBulPicture_Create` @ 0x0040eb30).
+# Other observed values are extra runtime buffers above the base struct.
 BITMAP_SPRITE_CBULPICTURE_SIZE = 0x470
+# Each outer-FRAME header is `u32 frameSize, u8 numInnerChunks`. The first
+# frame's 5-byte header starts at file offset 0x24 (i.e. the last 4 bytes
+# of `encodedSize3` + the low byte of `packed`); this overlap makes the
+# decoder reuse the same 9 file-header bytes for two distinct purposes.
+BITMAP_SPRITE_FIRST_CHUNK_OFFSET = 0x24
+BITMAP_SPRITE_CHUNK_HEADER_SIZE = 5
+# `flags` (header[8]) is `len(frames) - 1` on every observed sample.
+BITMAP_SPRITE_FLAGS_IS_CHUNK_COUNT_MINUS_1 = True
+# Empty terminator frames always have frameSize == 5 and numInnerChunks == 0.
+BITMAP_SPRITE_EMPTY_CHUNK_TAG = 0
+
+# Inner-chunk opcodes — the dispatch table inside
+# ``CDSFlxFile::FUN_00432c60`` (the per-frame switch). Empirically these
+# are the only opcodes the master-pack ever emits.
+BITMAP_SPRITE_INNER_OP_RLE = 0x00          # FUN_00432740: index RLE into pixel buf
+BITMAP_SPRITE_INNER_OP_DELTA = 0x04        # FUN_00432780: skip-delta RLE
+BITMAP_SPRITE_INNER_OP_MEMCPY = 0x08       # FUN_004327e0: raw memcpy
+BITMAP_SPRITE_INNER_OP_PALETTE = 0x09      # FUN_00432800: BGR palette update
+BITMAP_SPRITE_INNER_OP_RECT = 0x0A         # FUN_00436e80(x:i16, y:i16) — frame rect
+BITMAP_SPRITE_INNER_OP_REGIONS = 0x0B      # FUN_00432850: <=32 sub-rect table
+BITMAP_SPRITE_INNER_OP_TIME = 0x0C         # NotifyFrameTime(u16) @ 0x00436ef0 — frame timing
+BITMAP_SPRITE_INNER_OP_TRANSPARENT = 0x0D  # ctx[+0x18] = u8 transparent index
+BITMAP_SPRITE_INNER_OP_RLE_ALT = 0x0E      # FUN_00432740 into alt/mask buffer
+BITMAP_SPRITE_INNER_OP_DELTA_ALT = 0x0F    # FUN_00432780 into alt/mask buffer
+
+BITMAP_SPRITE_INNER_OP_NAMES = {
+    0x00: "rle",
+    0x04: "delta",
+    0x08: "memcpy",
+    0x09: "palette",
+    0x0A: "rect",
+    0x0B: "regions",
+    0x0C: "time",
+    0x0D: "transparent",
+    0x0E: "rleAlt",
+    0x0F: "deltaAlt",
+}
+
+
+def _walk_bitmap_sprite_frames(raw: bytes) -> tuple[list[dict], Optional[str]]:
+    """Walk the BitmapSprite outer-frame chain (Ghidra-verified).
+
+    The outer chunks are *animation frames*: a 5-byte header
+    ``(u32 frameSize, u8 numInnerChunks)`` followed by ``numInnerChunks``
+    back-to-back inner chunks. Each inner chunk has its own 5-byte header
+    ``(u32 chunkSize, u8 opcode)`` and a body of ``chunkSize - 5`` bytes.
+
+    Returns ``(frames, error)``. Each ``frames[i]`` dict carries:
+
+    * ``offset``        : file offset of the outer 5-byte header
+    * ``frameSize``     : total bytes including the outer 5-byte header
+    * ``numInner``      : number of inner chunks (= the legacy ``tag`` byte)
+    * ``innerOpcodes``  : list of opcode-byte ints, in order
+    * ``innerChunks``   : list of ``{offset, size, opcode, dataSize}``
+
+    Structural invariants (verified across all 130 master-pack samples):
+
+    * The first frame's 5-byte header starts at offset 0x24 of the resource
+      (the last 4 bytes of ``encodedSize3`` + the low byte of ``packed``).
+    * Frames pack back-to-back and the chain terminates exactly at EOF.
+    * ``flags + 1`` equals the total frame count on every sample.
+    * Empty frames (``numInner == 0``) always have ``frameSize == 5`` and
+      mean "reuse the previous frame's bitmap" in the animation timeline.
+    * The dispatch on inner opcodes goes through ``CDSFlxFile::FUN_00432c60``.
+    """
+    frames: list[dict] = []
+    pos = BITMAP_SPRITE_FIRST_CHUNK_OFFSET
+    end = len(raw)
+    while pos + BITMAP_SPRITE_CHUNK_HEADER_SIZE <= end:
+        fs = struct.unpack_from("<I", raw, pos)[0]
+        num_inner = raw[pos + 4]
+        if fs < BITMAP_SPRITE_CHUNK_HEADER_SIZE:
+            return frames, f"frame at 0x{pos:x} has size {fs} (< {BITMAP_SPRITE_CHUNK_HEADER_SIZE})"
+        if pos + fs > end:
+            return frames, f"frame at 0x{pos:x} overruns EOF (fs={fs}, remaining={end - pos})"
+        inner_chunks: list[dict] = []
+        inner_pos = pos + BITMAP_SPRITE_CHUNK_HEADER_SIZE
+        frame_end = pos + fs
+        for _ in range(num_inner):
+            if inner_pos + BITMAP_SPRITE_CHUNK_HEADER_SIZE > frame_end:
+                return frames, (
+                    f"inner-chunk header at 0x{inner_pos:x} overruns frame end"
+                )
+            ics = struct.unpack_from("<I", raw, inner_pos)[0]
+            iop = raw[inner_pos + 4]
+            if ics < BITMAP_SPRITE_CHUNK_HEADER_SIZE or inner_pos + ics > frame_end:
+                return frames, (
+                    f"inner chunk at 0x{inner_pos:x} has bad size {ics}"
+                )
+            inner_chunks.append({
+                "offset": inner_pos,
+                "size": ics,
+                "opcode": iop,
+                "dataSize": ics - BITMAP_SPRITE_CHUNK_HEADER_SIZE,
+            })
+            inner_pos += ics
+        if inner_pos != frame_end and num_inner > 0:
+            return frames, (
+                f"inner chunks of frame at 0x{pos:x} end at 0x{inner_pos:x} "
+                f"but frame ends at 0x{frame_end:x}"
+            )
+        frames.append({
+            "offset": pos,
+            # Keep the legacy field names so existing manifest consumers
+            # (and the chunkTags histogram) continue to work — these names
+            # are also retained inside ``chunks`` for backwards compat.
+            "chunkSize": fs,
+            "tag": num_inner,
+            "dataSize": fs - BITMAP_SPRITE_CHUNK_HEADER_SIZE,
+            "numInner": num_inner,
+            "innerOpcodes": [c["opcode"] for c in inner_chunks],
+            "innerChunks": inner_chunks,
+        })
+        pos += fs
+        if pos == end:
+            return frames, None
+    if pos != end:
+        return frames, f"chain stopped mid-stream at 0x{pos:x} (end=0x{end:x})"
+    return frames, None
+
+
+# Backwards-compat alias — older call sites still ask for "chunks".
+_walk_bitmap_sprite_chunks = _walk_bitmap_sprite_frames
+
+
+# ----------------------------------------------------------------------
+# CDSFlxFile inner-opcode decoders (port of ``CDSFlxFile::FUN_00432740``,
+# ``FUN_00432780``, ``FUN_00432800`` from bulanci.exe).
+# ----------------------------------------------------------------------
+
+def _flxrle_decode(body: bytes) -> bytes:
+    """Decode a CDSFlxFile RLE stream (port of FUN_00432740 @ 0x00432740).
+
+    Opcode set, single-byte ``N`` read at the head of each packet:
+
+      * ``N == 0x00`` (4-byte opcode):
+          read ``u16 count``, ``u8 value``; emit ``(count + 1)`` copies of value.
+      * ``N == 0x01..0x7f`` (2-byte opcode):
+          read ``u8 value``; emit ``(N + 1)`` copies of value.
+      * ``N == 0x80..0xff`` (``1 + L`` byte opcode):
+          ``L = 256 - N`` literal bytes follow; copy them verbatim.
+
+    The native function reads until ``source == end``; we mimic by
+    consuming the whole input buffer. Used for inner opcode 0x00 (and the
+    0x0e variant that writes into the alt/mask buffer).
+    """
+    out = bytearray()
+    pos = 0
+    end = len(body)
+    while pos < end:
+        n = body[pos]
+        pos += 1
+        if n == 0:
+            if pos + 3 > end:
+                raise ValueError("flxrle: long-run header underflow")
+            count = body[pos] | (body[pos + 1] << 8)
+            value = body[pos + 2]
+            pos += 3
+            out.extend([value] * (count + 1))
+        elif n < 0x80:
+            if pos >= end:
+                raise ValueError("flxrle: short-run value underflow")
+            value = body[pos]
+            pos += 1
+            out.extend([value] * (n + 1))
+        else:
+            cnt = 256 - n
+            if pos + cnt > end:
+                raise ValueError("flxrle: literal underflow")
+            out.extend(body[pos : pos + cnt])
+            pos += cnt
+    return bytes(out)
+
+
+def _flxdelta_apply(body: bytes, working: bytearray, start_pos: int = 0) -> int:
+    """Apply a CDSFlxFile delta stream to ``working`` starting at byte
+    ``start_pos`` (port of ``FUN_00432780`` @ 0x00432780).
+
+    Packet structure (read repeatedly until input is consumed):
+
+      * Skip prefix:
+          ``skip_byte = body[pos]``; advance ``pos``. If ``skip_byte == 0xff``
+          then read ``u16 long_skip`` from the next 2 bytes and use that
+          as the skip count (and advance ``pos`` by 2 more).
+          The destination pointer advances by ``skip`` bytes (existing
+          pixels are kept).
+      * Op byte:
+          - ``op == 0x00``                    → no data; loop back to read
+                                                the next skip+op pair.
+          - ``op == 0x01..0x7f``              → 2 more bytes (``op + 1``
+                                                copies of next value byte).
+          - ``op == 0x80`` + ``i16``          → if ``i16 >= 0``: long run
+                                                ``(i16 + 1)`` copies of next
+                                                value byte; if ``i16 < 0``:
+                                                literal of ``-i16`` bytes.
+          - ``op == 0x81..0xff``              → literal of ``(256 - op)``
+                                                bytes.
+
+    Returns the new destination cursor (= ``start_pos`` + accumulated
+    skips and emits). Mutates ``working`` in place.
+    """
+    pos = 0
+    dst = start_pos
+    end = len(body)
+    cap = len(working)
+    while pos < end:
+        # ---- skip prefix ------------------------------------------------
+        skip_byte = body[pos]
+        pos += 1
+        if skip_byte == 0xFF:
+            if pos + 2 > end:
+                raise ValueError("flxdelta: long-skip header underflow")
+            skip = body[pos] | (body[pos + 1] << 8)
+            pos += 2
+        else:
+            skip = skip_byte
+        dst += skip
+        if pos >= end:
+            break
+        # ---- op byte ---------------------------------------------------
+        op = body[pos]
+        pos += 1
+        if op == 0x00:
+            # No data; loop back for the next skip+op pair.
+            continue
+        if op == 0x80:
+            if pos + 2 > end:
+                raise ValueError("flxdelta: long-op header underflow")
+            raw_u16 = body[pos] | (body[pos + 1] << 8)
+            pos += 2
+            if raw_u16 < 0x8000:
+                # Positive long count -> long RUN of (raw_u16 + 1) of next value.
+                if pos >= end:
+                    raise ValueError("flxdelta: long-run value underflow")
+                value = body[pos]
+                pos += 1
+                count = raw_u16 + 1
+                if dst + count > cap:
+                    raise ValueError(
+                        f"flxdelta: long-run overruns buffer "
+                        f"({dst}+{count} > {cap})"
+                    )
+                for i in range(count):
+                    working[dst + i] = value
+                dst += count
+            else:
+                # Negative i16 -> literal of -i16 bytes (no value byte).
+                count = (~raw_u16 + 1) & 0xFFFF
+                if pos + count > end:
+                    raise ValueError("flxdelta: long literal underflow")
+                if dst + count > cap:
+                    raise ValueError(
+                        f"flxdelta: long literal overruns buffer "
+                        f"({dst}+{count} > {cap})"
+                    )
+                working[dst : dst + count] = body[pos : pos + count]
+                pos += count
+                dst += count
+            continue
+        if op < 0x80:
+            if pos >= end:
+                raise ValueError("flxdelta: short-run value underflow")
+            value = body[pos]
+            pos += 1
+            count = op + 1
+            if dst + count > cap:
+                raise ValueError(
+                    f"flxdelta: short-run overruns buffer "
+                    f"({dst}+{count} > {cap})"
+                )
+            for i in range(count):
+                working[dst + i] = value
+            dst += count
+        else:
+            count = 256 - op
+            if pos + count > end:
+                raise ValueError("flxdelta: short literal underflow")
+            if dst + count > cap:
+                raise ValueError(
+                    f"flxdelta: short literal overruns buffer "
+                    f"({dst}+{count} > {cap})"
+                )
+            working[dst : dst + count] = body[pos : pos + count]
+            pos += count
+            dst += count
+    return dst
+
+
+def _flxpalette_apply(body: bytes, palette: bytearray) -> int:
+    """Apply a CDSFlxFile palette-update stream (port of
+    ``CDSFlxFile::DecodePaletteRgb @ 0x00432800``).
+
+    This is the **classic FLI/FLC COLOR_256 chunk shape** as used by
+    Bulanci (FLX opcode 0x09). Packets repeat until ``body`` is fully
+    consumed; the consumer maintains a cursor into the 256-entry
+    palette buffer that PERSISTS across packets:
+
+        u8 skip          ; advance cursor by `skip` entries
+        u8 count_minus_1 ; write `count_minus_1 + 1` entries from cursor
+        repeat (count_minus_1 + 1) times:
+            u8 R
+            u8 G
+            u8 B          ; entry written to palette[cursor], cursor += 1
+
+    Ghidra disassembly (``param_3`` is a ``u16*`` so ``+ skip * 2``
+    advances by ``skip * 4`` bytes, i.e. ``skip`` BGRA entries):
+
+        param_3 = param_3 + (uint)*param_2 * 2;   // cursor += skip
+        param_2 = param_2 + 2;
+        iVar2 = *pbVar1 + 1;                       // count = body[1]+1
+        do {
+            *param_3 = *(undefined2 *)param_2;     // dst[0..1] = src[0..1]
+            *(byte *)(param_3 + 1) = param_2[2];   // dst[2]    = src[2]
+            param_2 = param_2 + 3;
+            param_3 = param_3 + 2;                 // cursor += 1 entry
+        } while (--iVar2 != 0);
+
+    The buffer is BGRA in memory but the FLX stream stores RGB in
+    file order (per the FLI/FLC inheritance) and the decompile writes
+    the bytes straight through, so on disk the byte at +0 of an entry
+    is the **R** channel, +1 is **G**, +2 is **B** (despite the BGRA
+    layout name). The PNG encoder accounts for that — see
+    ``_encode_png_indexed``.
+
+    ``palette`` is a 1024-byte buffer (256 entries * 4 bytes each).
+    Returns the number of palette entries updated.
+
+    Per the master-pack survey, the cursor is reset to 0 at the start
+    of every palette write (each opcode 0x09 chunk gets a fresh cursor).
+    Within a single chunk multiple packets accumulate via ``skip``.
+    """
+    pos = 0
+    end = len(body)
+    n_entries = 0
+    cursor = 0
+    while pos + 2 <= end:
+        skip = body[pos]
+        cnt = body[pos + 1] + 1
+        pos += 2
+        cursor += skip
+        if pos + cnt * 3 > end:
+            raise ValueError(
+                f"flxpalette: triplets underflow "
+                f"(pos={pos}, cnt={cnt}, end={end})"
+            )
+        for _ in range(cnt):
+            if cursor >= 256:
+                raise ValueError(
+                    f"flxpalette: cursor {cursor} >= 256 (skip={skip}, cnt={cnt})"
+                )
+            base = cursor * 4
+            palette[base + 0] = body[pos + 0]
+            palette[base + 1] = body[pos + 1]
+            palette[base + 2] = body[pos + 2]
+            # palette[base + 3] (A) intentionally left unchanged
+            pos += 3
+            cursor += 1
+            n_entries += 1
+    return n_entries
+
+
+# ----------------------------------------------------------------------
+# Tiny self-contained PNG encoder (uses only zlib from stdlib). We emit
+# 8bpp palette PNGs (PLTE + tRNS) — the natural representation for the
+# native sprites since they're palette-indexed.
+# ----------------------------------------------------------------------
+
+def _png_chunk(name: bytes, data: bytes) -> bytes:
+    crc = zlib.crc32(name + data) & 0xFFFFFFFF
+    return struct.pack(">I", len(data)) + name + data + struct.pack(">I", crc)
+
+
+def _encode_png_indexed(
+    width: int,
+    height: int,
+    pixels: bytes,
+    palette_bgra: bytes,
+    transparent_indices: Optional[Iterable[int]],
+) -> bytes:
+    """Write an 8bpp indexed PNG. Palette is BGRA (1024 bytes) — we
+    transpose to RGB for PNG's PLTE chunk and emit a tRNS chunk that
+    flags every entry in ``transparent_indices`` as fully transparent.
+
+    Accepts a single int, a set/list of ints, or None.
+    """
+    assert len(pixels) == width * height, "pixel count mismatch"
+    assert len(palette_bgra) == 1024, "palette must be 256 BGRA entries"
+    sig = b"\x89PNG\r\n\x1a\n"
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 3, 0, 0, 0)  # 8bpp palette
+    rgb = bytearray(256 * 3)
+    for i in range(256):
+        b = palette_bgra[i * 4 + 0]
+        g = palette_bgra[i * 4 + 1]
+        r = palette_bgra[i * 4 + 2]
+        rgb[i * 3 + 0] = r
+        rgb[i * 3 + 1] = g
+        rgb[i * 3 + 2] = b
+    # tRNS: alpha for each palette entry; default opaque, transparent
+    # indices zero-alpha. We always emit length 256 to be safe.
+    if transparent_indices is None:
+        idx_iter: Iterable[int] = ()
+    elif isinstance(transparent_indices, int):
+        idx_iter = (transparent_indices,)
+    else:
+        idx_iter = transparent_indices
+    trns_bytes = bytearray([0xFF] * 256)
+    has_any = False
+    for idx in idx_iter:
+        if 0 <= idx < 256:
+            trns_bytes[idx] = 0x00
+            has_any = True
+    trns_chunk = _png_chunk(b"tRNS", bytes(trns_bytes)) if has_any else b""
+    # Filter byte 0x00 per scanline, then deflate.
+    rows = bytearray()
+    for y in range(height):
+        rows.append(0x00)
+        rows.extend(pixels[y * width : (y + 1) * width])
+    idat = zlib.compress(bytes(rows), level=6)
+    return (
+        sig
+        + _png_chunk(b"IHDR", ihdr)
+        + _png_chunk(b"PLTE", bytes(rgb))
+        + trns_chunk
+        + _png_chunk(b"IDAT", idat)
+        + _png_chunk(b"IEND", b"")
+    )
+
+
+def _encode_png_rgba(width: int, height: int, rgba: bytes) -> bytes:
+    """Write a 32bpp RGBA PNG (color type 6). ``rgba`` is exactly
+    ``width * height * 4`` bytes in R,G,B,A order, row-major.
+
+    Used for the atlas image so each frame can be rendered with its
+    own per-frame palette state — required because 71/130 master-pack
+    BitmapSprites cycle their palette mid-animation.
+    """
+    assert len(rgba) == width * height * 4, "RGBA buffer size mismatch"
+    sig = b"\x89PNG\r\n\x1a\n"
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 6, 0, 0, 0)
+    rows = bytearray()
+    stride = width * 4
+    for y in range(height):
+        rows.append(0x00)
+        rows.extend(rgba[y * stride : (y + 1) * stride])
+    idat = zlib.compress(bytes(rows), level=6)
+    return (
+        sig
+        + _png_chunk(b"IHDR", ihdr)
+        + _png_chunk(b"IDAT", idat)
+        + _png_chunk(b"IEND", b"")
+    )
+
+
+def _lzw_encode_gif(data: bytes, min_code_size: int) -> bytes:
+    """GIF-flavour LZW encode ``data`` into a stream of length-prefixed
+    sub-blocks (no trailing 0x00 terminator — the caller appends it).
+
+    Implements the textbook GIF89a variant:
+
+    * Initial dictionary holds ``2^min_code_size`` single-byte codes
+      0..N-1. Reserved codes ``clear = N`` and ``eoi = N + 1`` follow,
+      so the first user-assigned code is ``N + 2``.
+    * Initial output code width is ``min_code_size + 1`` bits; codes
+      are packed LSB-first into the byte stream.
+    * When a new dictionary entry would exceed the current code width
+      capacity (and the width is still < 12), the width is bumped by
+      one bit *before* emitting the next code.
+    * When the dictionary reaches 4096 entries it is reset; a CLEAR
+      code is emitted at the current width and parsing continues with
+      a fresh dictionary and width = ``min_code_size + 1``.
+    * Output bytes are wrapped in ≤255-byte sub-blocks; the caller
+      appends the GIF block terminator (``0x00``).
+    """
+    clear_code = 1 << min_code_size
+    eoi_code = clear_code + 1
+    max_code = 1 << 12
+
+    bit_buf = 0
+    bit_len = 0
+    raw = bytearray()
+
+    def _emit(code: int, width: int) -> None:
+        nonlocal bit_buf, bit_len
+        bit_buf |= code << bit_len
+        bit_len += width
+        while bit_len >= 8:
+            raw.append(bit_buf & 0xFF)
+            bit_buf >>= 8
+            bit_len -= 8
+
+    dictionary: dict[bytes, int] = {bytes([i]): i for i in range(clear_code)}
+    next_code = eoi_code + 1
+    code_width = min_code_size + 1
+
+    _emit(clear_code, code_width)
+
+    prefix = b""
+    for byte in data:
+        candidate = prefix + bytes([byte])
+        if candidate in dictionary:
+            prefix = candidate
+            continue
+        _emit(dictionary[prefix], code_width)
+        if next_code < max_code:
+            dictionary[candidate] = next_code
+            next_code += 1
+            if next_code > (1 << code_width) and code_width < 12:
+                code_width += 1
+        else:
+            _emit(clear_code, code_width)
+            dictionary = {bytes([i]): i for i in range(clear_code)}
+            next_code = eoi_code + 1
+            code_width = min_code_size + 1
+        prefix = bytes([byte])
+
+    if prefix:
+        _emit(dictionary[prefix], code_width)
+    _emit(eoi_code, code_width)
+    if bit_len > 0:
+        raw.append(bit_buf & 0xFF)
+
+    blocks = bytearray()
+    for i in range(0, len(raw), 255):
+        chunk = raw[i : i + 255]
+        blocks.append(len(chunk))
+        blocks.extend(chunk)
+    return bytes(blocks)
+
+
+def _encode_gif_animated(
+    width: int,
+    height: int,
+    snapshots: list[bytes],
+    palette_snapshots: list[bytes],
+    transparent_index: Optional[int],
+    delay_centisecs: int = 10,
+) -> bytes:
+    """Encode a looping animated GIF89a from indexed-color frames.
+
+    Each frame ships with its own 256-entry local color table — the
+    cheapest way to render the 71/130 master-pack sprites that cycle
+    their palette mid-animation correctly. ``transparent_index``, when
+    set, is marked transparent in every frame's Graphic Control
+    Extension; per-frame disposal is set to *restore-to-background* so
+    the empty pixels of one frame don't bleed into the next.
+
+    The Netscape ``NETSCAPE2.0`` looping extension is emitted with a
+    zero loop count (infinite loop).
+    """
+    out = bytearray()
+    out += b"GIF89a"
+    out += struct.pack("<HHBBB", width, height, 0x00, 0, 0)
+    out += (
+        b"\x21\xFF\x0BNETSCAPE2.0\x03\x01"
+        + struct.pack("<H", 0)
+        + b"\x00"
+    )
+
+    has_alpha = transparent_index is not None and 0 <= transparent_index < 256
+    t_idx = transparent_index if has_alpha else 0
+    # GCE packed byte: reserved(3) | disposal(3)=2 | user_input(1)=0 | transparent(1)
+    gce_packed = (2 << 2) | (0x01 if has_alpha else 0x00)
+
+    for snap, pal_bgra in zip(snapshots, palette_snapshots):
+        out += b"\x21\xF9\x04"
+        out += struct.pack("<BHBB", gce_packed, max(1, delay_centisecs), t_idx, 0x00)
+        out += b"\x2C"
+        out += struct.pack("<HHHH", 0, 0, width, height)
+        out += bytes([0x80 | 0x07])
+        lct = bytearray(768)
+        for i in range(256):
+            b = pal_bgra[i * 4 + 0]
+            g = pal_bgra[i * 4 + 1]
+            r = pal_bgra[i * 4 + 2]
+            lct[i * 3 + 0] = r
+            lct[i * 3 + 1] = g
+            lct[i * 3 + 2] = b
+        out += bytes(lct)
+        out += b"\x08"
+        out += _lzw_encode_gif(bytes(snap), 8)
+        out += b"\x00"
+
+    out += b"\x3B"
+    return bytes(out)
+
+
+def _palette_indexed_to_rgba(
+    pixels: bytes,
+    palette_bgra: bytes,
+    transparent_indices: Iterable[int],
+) -> bytes:
+    """Apply a 256-entry BGRA palette to a buffer of indexed bytes,
+    producing R,G,B,A bytes (alpha 0 for ``transparent_indices``)."""
+    alpha = bytearray([0xFF] * 256)
+    for idx in transparent_indices:
+        if 0 <= idx < 256:
+            alpha[idx] = 0x00
+    out = bytearray(len(pixels) * 4)
+    for i, p in enumerate(pixels):
+        base = p * 4
+        out[i * 4 + 0] = palette_bgra[base + 2]  # R
+        out[i * 4 + 1] = palette_bgra[base + 1]  # G
+        out[i * 4 + 2] = palette_bgra[base + 0]  # B
+        out[i * 4 + 3] = alpha[p]
+    return bytes(out)
 
 
 def _save_bitmap_sprite(raw: bytes, base: Path) -> dict:
     """ClassID 52 - native sprite/animation container.
 
-    The factory for ClassID 52 lives at `0x00432a50` in `bulanci.exe` and
-    allocates an 80-byte handle whose vtable pointer chain matches the
-    ``CDSMpx``/``CDSFlx`` family. The handle doesn't directly contain pixel
-    data; instead it holds a reference to a ``CDSEasyMemStream`` of the raw
-    payload, and the actual sprite is lazily decoded the first time a
-    ``CBulPicture`` (1136 bytes, sibling factory at `0x0040eb30`) is
-    instantiated to draw it. The CBulPicture layout (see
+    Container layout (header + frame stream + per-opcode pixel decoders),
+    Ghidra-verified against the ClassID 52 factory at ``0x00432a50``, the
+    ``CDSFlxFile`` dispatcher at ``0x00432c60``, and the per-opcode
+    decoders at ``0x00432740`` / ``0x00432780`` / ``0x00432800``:
+
+    * 11 little-endian u32s (= 0x2c bytes) of metadata, fields below.
+    * A **frame stream** spanning the rest of the file. The first
+      frame's 5-byte header ``(u32 frameSize, u8 numInner)`` overlaps the
+      file header at offsets 0x24..0x28: ``encodedSize3`` IS the frame
+      size and the low byte of ``packed`` IS the per-frame inner-chunk
+      count. Subsequent frames have plain headers. Frames pack
+      back-to-back and the chain terminates exactly at end-of-file.
+      Frames with ``numInner == 0`` are always 5 bytes long ("reuse
+      previous frame" hints); frames with ``numInner >= 1`` carry that
+      many ``(u32 chunkSize, u8 opcode, byte[chunkSize-5] body)`` inner
+      chunks whose opcodes are dispatched per
+      ``ghidra_analysis/flx_file_format.md``.
+
+    The 80-byte ClassID 52 handle returned by the factory doesn't itself
+    hold pixel data — it's a stream descriptor. The actual pixels live in
+    a separately-allocated ``CBulPicture`` (1136 bytes, sibling factory at
+    ``0x0040eb30``) that is bound to the handle the first time the sprite
+    is drawn. The CBulPicture layout (see
     `tools/bulanci_unpack/ghidra_analysis/sprite_container.md`) confirms
     the runtime ends up with:
         +0x68            uchar* pixel data
         +0x6c..+0x46b    256-entry RGBA palette (1024 bytes)
         +0x46d           transparent color index (0xFF = no transparency)
 
-    The payload header parsed below is the bytes the engine reads out of
-    the stream to populate the lazy decoder. Field semantics were recovered
-    empirically by clustering sprites with identical metadata bytes:
+    Header fields (legacy names — empirically the "height" field is the
+    bitmap *width* and the "frameCount" field is the bitmap *height*;
+    see ``_decode_bitmap_sprite_frames`` for the verification):
 
         +0x00 u32 totalSize       == len(raw)
         +0x04 u32 encodedSize     bytes of "primary" encoded buffer
-        +0x08 u32 encodedSize2    duplicate of encodedSize (often equal)
-        +0x0c u32 width
-        +0x10 u32 height
-        +0x14 u32 frameCount      18..84 in the master pack
-        +0x18 u32 channels        3 for every observed file (BGR)
-        +0x1c u32 inMemSize       runtime CBulPicture size (often 0x470)
-        +0x20 u32 flags           small (8..20); compression/codec selector
-        +0x24 u32 encodedSize3    third copy of encodedSize; sometimes ==
-                                  encodedSize, sometimes a per-frame slice
-        +0x28 u32 packed          24-bit packed flags / palette pointer
-        +0x2c ... RLE/LC-style frame stream (decoder still TODO)
+                                  (= length of the first chunk's body when
+                                  measured from offset 0x29)
+        +0x08 u32 encodedSize2    duplicate of encodedSize on every sample
+                                  except a handful of compound atlases
+        +0x0c u32 width           0 = compound atlas, 0xFFFFFFFF = "fit"
+        +0x10 u32 height          **(bitmap width in pixels)**
+        +0x14 u32 frameCount      **(bitmap height in pixels)**
+        +0x18 u32 channels        3 for every observed file (BGR palette)
+        +0x1c u32 inMemSize       runtime allocation hint (264..4473)
+        +0x20 u32 flags           **= frameCount - 1 on every sample.**
+                                  Number of animation frames minus one.
+        +0x24 u32 encodedSize3    chunk-0 size (overlaps with first chunk
+                                  header; always == encodedSize)
+        +0x28 u32 packed          (numInner<<0) | (firstThreeBytesOfData<<8).
+                                  Low byte = first frame's numInner (1..3);
+                                  high 3 bytes = first 3 bytes of inner
+                                  chunk 0's body.
+        +0x2c ...                 frame-0 body + frame-1, frame-2, ...
+                                  back-to-back to end-of-file.
 
     Files that share width/height/frameCount/encodedSize/flags but differ
-    in `totalSize` are different recolours of the same base animation —
-    a strong hint that the per-frame data is a delta encoding relative to
-    a shared template.
+    in `totalSize` are different recolours of the same base animation; the
+    bytes that differ across recolour groups are isolated palette indices
+    inside chunk bodies — confirming the encoded payload is a byte-level
+    RLE rather than an entropy-coded stream. The 41 recolour-variant
+    sprites that don't carry an inline palette inherit one from a sibling
+    resource at runtime; the unpacker falls back to a 256-step grayscale
+    ramp for them and records ``decoded.paletteSource`` accordingly.
 
     The parser emits soft `sanityWarnings` rather than refusing extraction
     so that future format variants are easy to spot from the manifest
@@ -1375,9 +2140,894 @@ def _save_bitmap_sprite(raw: bytes, base: Path) -> dict:
     if notes:
         sprite["notes"] = notes
 
+    # --- frame stream inventory ------------------------------------------
+    # Walk the outer frame chain starting from the embedded first-frame
+    # header at offset 0x24. Cheap (no pixel decode) and gives the
+    # manifest a precise structural fingerprint that survives recolour
+    # edits.
+    frames, frame_error = _walk_bitmap_sprite_frames(raw)
+    if frames:
+        tag_histogram: dict = {}
+        inner_op_histogram: dict = {}
+        for fr in frames:
+            tag_histogram[fr["tag"]] = tag_histogram.get(fr["tag"], 0) + 1
+            for op in fr["innerOpcodes"]:
+                inner_op_histogram[op] = inner_op_histogram.get(op, 0) + 1
+        sprite["chunkCount"] = len(frames)
+        sprite["chunkTags"] = {str(t): n for t, n in sorted(tag_histogram.items())}
+        sprite["chunks"] = frames
+        sprite["innerOpcodes"] = {
+            f"0x{op:02x}": n for op, n in sorted(inner_op_histogram.items())
+        }
+        # `flags == chunkCount - 1` is a Ghidra/empirical invariant on
+        # every 130/130 master-pack samples. Surfacing the violation here
+        # makes new format variants immediately visible in the manifest.
+        if BITMAP_SPRITE_FLAGS_IS_CHUNK_COUNT_MINUS_1 and fields[8] + 1 != len(frames):
+            warnings.append(
+                f"flags {fields[8]} + 1 != chunkCount {len(frames)}"
+            )
+    if frame_error is not None:
+        warnings.append(f"frame-walk: {frame_error}")
+
+    # --- pixel decoding --------------------------------------------------
+    # Apply the per-opcode decoders we ported from CDSFlxFile and emit
+    # one PNG per non-empty animation frame, plus a horizontally-stacked
+    # atlas. The runtime bitmap layout is **row-major** with rows of
+    # ``fields[4]`` bytes and ``fields[5]`` rows total — this was
+    # verified across the entire master pack by:
+    #
+    #   1. Every keyframe RLE (inner opcode 0x00) decodes to exactly
+    #      ``fields[4] * fields[5]`` bytes (538/538 samples).
+    #   2. Rendering the resulting buffer as `fields[4] wide × fields[5]
+    #      tall` yields recognisable game sprites (characters, vehicles,
+    #      weapons). Both other orientations produce noise or rotated
+    #      content.
+    #
+    # The original "height"/"frameCount" header labels turn out to be
+    # the bitmap's width and height respectively — we keep the legacy
+    # names in the manifest (for stability) but use the empirical
+    # mapping when actually drawing pixels.
+    bitmap_w = fields[4]
+    bitmap_h = fields[5]
+    if (
+        frames
+        and frame_error is None
+        and 0 < bitmap_w <= 4096
+        and 0 < bitmap_h <= 4096
+        and bitmap_w * bitmap_h <= 1 << 22
+    ):
+        decoded = _decode_bitmap_sprite_frames(
+            raw, frames, bitmap_w, bitmap_h, base, warnings
+        )
+        if decoded:
+            sprite["decoded"] = decoded
+
     if warnings:
         sprite["sanityWarnings"] = warnings
     return meta
+
+
+def _decode_bitmap_sprite_frames(
+    raw: bytes,
+    frames: list[dict],
+    bitmap_w: int,
+    bitmap_h: int,
+    base: Path,
+    warnings: list,
+) -> Optional[dict]:
+    """Apply all inner-opcode decoders frame by frame and emit a single
+    horizontally-stacked atlas PNG plus a ``.atlas.json`` sidecar
+    describing the frame strip (frame size, count, per-frame
+    NotifyMove/duration/regions/etc.).
+
+    Side effects: writes files next to ``base`` and sweeps any stale
+    ``<stem>.frame*.png`` from previous unpacker runs. Returns a
+    metadata dict suitable for inclusion in ``sprite['decoded']``
+    (palette path, atlas path, summary stats). Returns ``None`` if any
+    decoder raises (in which case a soft warning is appended).
+    """
+    pixel_total = bitmap_w * bitmap_h
+    pixels = bytearray(pixel_total)
+    alt = bytearray(pixel_total)
+    palette = bytearray([0xFF] * 1024)  # init to (255,255,255,255) like CBulPicture
+    transparent_index: Optional[int] = None
+    n_palette_writes = 0
+    # One metadata dict per stored frame, in order. Populated below as
+    # we walk each frame's inner chunks; any NotifyMove / frame-timing /
+    # transparent-index / region ops fold into the same dict so the
+    # atlas sidecar has a single entry per frame.
+    per_frame: list[dict] = [
+        {"index": fi, "ops": []} for fi in range(len(frames))
+    ]
+    out_dir = base.parent
+    stem = base.name
+    keyframe_seen = False
+
+    try:
+        # First pass: apply all opcodes to learn the palette + per-frame
+        # metadata (transparency index, regions, timing). We DON'T
+        # snapshot the bitmap here — the second pass
+        # (``_redecode_for_atlas`` below) emits the atlas image from a
+        # clean replay.
+        for fr_idx, fr in enumerate(frames):
+            slot = per_frame[fr_idx]
+            ops_applied = slot["ops"]
+            for ic in fr["innerChunks"]:
+                op = ic["opcode"]
+                body = raw[ic["offset"] + 5 : ic["offset"] + ic["size"]]
+                if op == BITMAP_SPRITE_INNER_OP_RLE:
+                    decoded = _flxrle_decode(body)
+                    if len(decoded) != pixel_total:
+                        raise ValueError(
+                            f"frame {fr_idx} op=0x00: "
+                            f"got {len(decoded)} pixels, want {pixel_total}"
+                        )
+                    pixels[:] = decoded
+                    keyframe_seen = True
+                    ops_applied.append("rle")
+                elif op == BITMAP_SPRITE_INNER_OP_DELTA:
+                    if not keyframe_seen:
+                        warnings.append(
+                            f"frame {fr_idx}: delta opcode 0x04 before any keyframe"
+                        )
+                    _flxdelta_apply(body, pixels)
+                    ops_applied.append("delta")
+                elif op == BITMAP_SPRITE_INNER_OP_MEMCPY:
+                    if len(body) > pixel_total:
+                        raise ValueError(
+                            f"frame {fr_idx} op=0x08: memcpy {len(body)} > buffer {pixel_total}"
+                        )
+                    pixels[: len(body)] = body
+                    keyframe_seen = True
+                    ops_applied.append("memcpy")
+                elif op == BITMAP_SPRITE_INNER_OP_PALETTE:
+                    n_palette_writes += _flxpalette_apply(body, palette)
+                    ops_applied.append("palette")
+                elif op == BITMAP_SPRITE_INNER_OP_RECT:
+                    # FLX opcode 0x0A — NotifyMove(x, y). Per the engine
+                    # trace this broadcasts a new (x, y) screen origin
+                    # for the sprite at the start of this frame.
+                    if len(body) >= 4:
+                        mx, my = struct.unpack_from("<hh", body, 0)
+                        slot["move"] = [int(mx), int(my)]
+                    ops_applied.append("move")
+                elif op == BITMAP_SPRITE_INNER_OP_REGIONS:
+                    # FLX opcode 0x0B carries up to 32 5-byte records
+                    # ``(u8 kind, i16 x, i16 y)``. The engine fans these
+                    # out via NotifyRegionList (0x00436eb0); subscribers
+                    # include the script VM, which raises
+                    # ``OnBitmapEvt(slot, evt)`` with ``evt = kind``. In
+                    # the 130-sprite master pack every record carries
+                    # ``kind=0`` and the (x, y) varies per frame — i.e.
+                    # a per-frame anchor/attachment point.
+                    events: list[dict] = []
+                    rec_count = len(body) // 5
+                    for ri in range(rec_count):
+                        kind, ex, ey = struct.unpack_from("<Bhh", body, ri * 5)
+                        events.append(
+                            {"kind": int(kind), "x": int(ex), "y": int(ey)}
+                        )
+                    if events:
+                        slot["events"] = events
+                    ops_applied.append("regions")
+                elif op == BITMAP_SPRITE_INNER_OP_TIME:
+                    # FLX opcode 0x0C carries a single ``u16`` value,
+                    # broadcast via ``BroadcastFrameTimeHint @
+                    # 0x00436ef0`` to the consumer's per-instance
+                    # subscriber list (slot 4). **It is NOT a per-frame
+                    # timing override** for the track manager — an
+                    # exhaustive sweep of the binary's stores to
+                    # ``track_manager+0x44`` shows exactly one writer
+                    # (``TM_SetFrameDelayOverrideMs @ 0x00439720``,
+                    # fed by the construction-time speed formula
+                    # ``4725 / speed`` ms), and the
+                    # ``BroadcastFrameTimeHint`` fan-out callgraph
+                    # does NOT reach it. The raw u16 values in the
+                    # 130-sprite master pack are mostly ``0`` and
+                    # ``1`` — sub-perceptible as ms — corroborating
+                    # that this opcode is a side-channel notification,
+                    # likely a script-VM cadence hook whose listener
+                    # has not yet been mapped. See ``anim_runtime.md``
+                    # ("Frame timing and the clock").
+                    if len(body) >= 2:
+                        (t,) = struct.unpack_from("<H", body, 0)
+                        slot["durationTicks"] = int(t)
+                    ops_applied.append("time")
+                elif op == BITMAP_SPRITE_INNER_OP_TRANSPARENT:
+                    if body:
+                        transparent_index = body[0]
+                        slot["setTransparent"] = int(body[0])
+                    ops_applied.append("transparent")
+                elif op == BITMAP_SPRITE_INNER_OP_RLE_ALT:
+                    decoded = _flxrle_decode(body)
+                    if len(decoded) != pixel_total:
+                        raise ValueError(
+                            f"frame {fr_idx} op=0x0e: alt got {len(decoded)} bytes, "
+                            f"want {pixel_total}"
+                        )
+                    alt[:] = decoded
+                    ops_applied.append("rleAlt")
+                elif op == BITMAP_SPRITE_INNER_OP_DELTA_ALT:
+                    _flxdelta_apply(body, alt)
+                    ops_applied.append("deltaAlt")
+                else:
+                    ops_applied.append(f"unknown(0x{op:02x})")
+                    warnings.append(
+                        f"frame {fr_idx}: unknown inner opcode 0x{op:02x}"
+                    )
+            if fr["numInner"] == 0:
+                ops_applied.append("reuse")
+    except Exception as exc:  # decoder failure shouldn't sink extraction
+        warnings.append(f"decode: {exc}")
+        return None
+
+    # Animation-timing summary. The engine clock is real wall-clock
+    # milliseconds (``g_dwElapsedMs = timeGetTime() - g_dwStartMs``
+    # updated each frame in ``CDSApp_UpdateClock @ 0x0042e790``), and
+    # the CDSObject scheduler that drives ``TM_AdvanceFrame @
+    # 0x004399b0`` fires events when ``g_dwElapsedMs >= lastFire +
+    # delay`` — so every delay value the track manager arms is in ms.
+    # See ``anim_runtime.md`` "Frame timing and the clock" for the
+    # full chain.
+    #
+    # The actual per-frame delay at runtime depends on the spawner:
+    #   * If the construction site (e.g. ``CBulanek::FUN_0041e4b0``)
+    #     passes a non-100 speed, ``TM_SetFrameDelayOverrideMs``
+    #     writes ``trackMgr+0x44 = round(4725 / speed)`` ms, used
+    #     for every frame of the sequence.
+    #   * Otherwise (default speed=100) ``trackMgr+0x44 == -1`` and
+    #     each frame is held for the Bresenham slice
+    #     ``((f+1)*seq[0x10])/seq[0x14] - (f*seq[0x10])/seq[0x14]``
+    #     ms, where ``seq[0x10]`` is the sequence's declared total
+    #     duration and ``seq[0x14]`` is its frame count.
+    #
+    # FLX opcode 0x0C is a SIDE-CHANNEL notification, not a timing
+    # override (see the opcode handler comment above and
+    # ``anim_runtime.md``). We still surface the parsed u16 values
+    # per frame so consumers can investigate, but we deliberately do
+    # NOT roll them into an "effective duration" claim that would
+    # mislead about playback cadence.
+    explicit_time_frames = 0
+    first_time_frame: Optional[int] = None
+    for slot in per_frame:
+        if "durationTicks" in slot:
+            explicit_time_frames += 1
+            if first_time_frame is None:
+                first_time_frame = slot["index"]
+            slot["explicitTime"] = True
+    timing_block: dict = {
+        "engineClockUnit": "ms",
+        "engineClockSource": (
+            "timeGetTime() polled by CDSApp_UpdateClock @ 0x0042e790; "
+            "CDSObject scheduler fires events when "
+            "g_dwElapsedMs >= lastFire + delay (see anim_runtime.md)."
+        ),
+        "speedFormulaMs": {
+            "formula": "round(4725.0 / speed)",
+            "neutralSpeed": 100,
+            "numerator": 47.25,
+            "denominatorReference": 100.0,
+            "applies": (
+                "When the spawner passes speed != 100 to the construction "
+                "site (e.g. CBulanek::FUN_0041e4b0). At speed == 100 the "
+                "formula is skipped and trackMgr+0x44 stays at -1, "
+                "leaving the sequence-default cadence in effect."
+            ),
+        },
+        "sequenceDefaultCadenceMs": {
+            "formula": (
+                "delay_per_frame = ((f+1)*seq[0x10])/seq[0x14] "
+                "- (f*seq[0x10])/seq[0x14]"
+            ),
+            "totalDurationMs": None,
+            "note": (
+                "seq[0x14] = the sequence's frame count (see top-level "
+                "'frameCount'). seq[0x10] = total clip duration in ms, "
+                "set by the resource-pool wrapper at load time and NOT "
+                "present in any natural alignment of the on-disk "
+                "BitmapSprite header. Pinning it requires further "
+                "Ghidra work on the resource-pool side."
+            ),
+        },
+        "flxOpcode0x0c": {
+            "purpose": "side-channel notification",
+            "description": (
+                "u16 broadcast via BroadcastFrameTimeHint @ "
+                "0x00436ef0 to the consumer's per-instance subscriber "
+                "list (slot 4). Does NOT drive frameDelayOverrideMs. "
+                "Listener semantics not yet pinned; the master pack's "
+                "values (mostly 0/1) are too small to be ms delays."
+            ),
+            "explicitDurationFrames": explicit_time_frames,
+            "firstFrameWithOpcode": first_time_frame,
+            "anyPresent": explicit_time_frames > 0,
+        },
+    }
+
+    # If no palette ever arrived inline (~41/130 master-pack sprites
+    # inherit their palette from a sibling resource via the engine's
+    # ambient render context), fall back to a 256-step grayscale ramp so
+    # the structure is still visible. The manifest records `paletteSource`
+    # so consumers can tell if the colours are authoritative.
+    palette_source = "inline" if n_palette_writes > 0 else "grayscale-fallback"
+    if n_palette_writes == 0:
+        for i in range(256):
+            palette[i * 4 + 0] = i
+            palette[i * 4 + 1] = i
+            palette[i * 4 + 2] = i
+            palette[i * 4 + 3] = 0xFF
+
+    # Re-decode every frame from scratch so we can take a clean snapshot
+    # of the pixel buffer, the optional mask plane, AND the palette
+    # state after each frame's ops are applied. Per-frame palette is
+    # needed because 71/130 master-pack BitmapSprites update their
+    # palette mid-animation (color-cycle/glow effects); using the final
+    # cumulative palette for every frame would render frame 0..(k-1)
+    # with colours that don't exist yet at that frame.
+    snapshots, mask_snapshots, palette_snapshots, mask_was_written = (
+        _redecode_for_atlas(raw, frames, bitmap_w, bitmap_h)
+    )
+    # For sprites without an inline palette (~41/130 inherit it from a
+    # sibling resource at runtime) the per-frame palettes are all
+    # default-white; fall back to a grayscale ramp so the structure is
+    # still visible.
+    if n_palette_writes == 0:
+        gray = bytearray(1024)
+        for i in range(256):
+            gray[i * 4 + 0] = i
+            gray[i * 4 + 1] = i
+            gray[i * 4 + 2] = i
+            gray[i * 4 + 3] = 0xFF
+        palette_snapshots = [bytearray(gray) for _ in palette_snapshots]
+
+    # ---- Transparency resolution ---------------------------------------
+    #
+    # Per the FLX dispatcher (``CDSFlxFile::DecodeFrame @ 0x00432c60``)
+    # the engine supports two distinct mechanisms:
+    #
+    # 1. **Mask plane** (opcodes 0x0E RLE-into-mask and 0x0F delta-into-
+    #    mask, ``AllocMaskPlane @ 0x00436ff0`` — lazy w*h byte buffer at
+    #    consumer +0x20). The masked blit kernels (dispatch table at
+    #    ``BlitTable_Masked`` / ``DAT_004b0bc8``, e.g. ``BlitMasked`` @
+    #    0x004414e0) gate per-pixel opacity on this mask. **39 of 130
+    #    master-pack sprites use a mask plane** — that's the engine's
+    #    authoritative per-pixel alpha.
+    # 2. **Color-key index** (opcode 0x0D writes consumer +0x18; the
+    #    sibling ``CBulPicture +0x46d`` byte feeds the color-key blit
+    #    kernels at ``BlitTable_KeyAndMask`` / ``BlitTable_DestKey``).
+    #    Only 3 of 130 master-pack sprites use this.
+    #
+    # The remaining ~88 sprites are rendered by the engine fully
+    # opaque from the per-sprite blit's perspective; their visible
+    # in-game transparency comes from a destination-side chroma key
+    # (typical 8bpp DDraw pattern — the back-buffer the scene blits
+    # into is created with a colour key, so opaque source blits
+    # produce the right cut-out at flip time). We replicate that
+    # behaviour synthetically by treating the per-sprite perimeter-RGB
+    # palette index as a full chroma key (every matching pixel
+    # transparent, NOT just edge-connected ones — that matches
+    # ``BlitChromaKey``-style kernels @ 0x0043f470 in dispatch table
+    # ``BlitTable_ChromaKey``). This correctly resolves "hollow
+    # silhouette" encodings where the body fill reuses the same
+    # palette index as the rectangular BG (sprite 65797 frames 0/1 etc.).
+    bg_key_indices: set[int] = set()
+    transparency_source = "none"
+    reserved_alpha_idx: Optional[int] = None
+
+    if mask_was_written:
+        # Engine-authoritative per-pixel mask. Each mask snapshot holds
+        # ``w*h`` bytes; the "transparent" value is whichever byte the
+        # bitmap's corners agree on across frames (the BG is always
+        # contiguous along the bitmap edge — the corners can't be
+        # subject pixels without the engine's frame-overhang clipping
+        # going wrong).
+        reserved_alpha_idx = _apply_mask_plane_transparency(
+            snapshots, mask_snapshots, bitmap_w, bitmap_h
+        )
+        transparency_source = (
+            "mask-plane" if reserved_alpha_idx is not None else "none-no-free-slot"
+        )
+    else:
+        bg_key_indices, transparency_source = _resolve_bg_key_indices(
+            transparent_index, snapshots, bitmap_w, bitmap_h, palette
+        )
+        if bg_key_indices:
+            reserved_alpha_idx = _apply_chromakey_transparency(
+                snapshots, palette, bitmap_w, bitmap_h, bg_key_indices
+            )
+            if reserved_alpha_idx is None:
+                transparency_source = "none-no-free-slot"
+
+    transparent_indices: set[int] = (
+        {reserved_alpha_idx} if reserved_alpha_idx is not None else set()
+    )
+
+    # ---- FLI/FLC "ring frame" detection ------------------------------
+    #
+    # Per ``CDSFlxFile::DecodeFrame @ 0x00432c60`` the engine treats the
+    # frame stream as a circular buffer: when the cursor reaches
+    # ``*(this + 0x40)`` (stream end) it wraps to ``*(this + 0x3c)``
+    # (stream start). This means the last stored frame plays just like
+    # any other, but per the FLI/FLC convention every master-pack
+    # BitmapSprite (130 / 130) leaves that last frame's pixel buffer
+    # equal to the first frame's. The "ring frame" is a re-keyframe (or
+    # delta) whose sole purpose is to wrap the bitmap back to frame 0
+    # so the loop is seamless.
+    #
+    # A true ring frame must reproduce **both** the color plane AND
+    # the palette state of frame 0 — otherwise the rendered image
+    # differs (e.g. palette-cycle sprites that finish their cycle on
+    # the same color buffer as frame 0 but with a different palette
+    # snapshot — that's a real visible final frame, not a ring).
+    #
+    # For visualisation the ring frame is a duplicate that adds
+    # nothing — it makes the atlas read as if the animation has one
+    # extra frame. We detect it so the atlas only shows the unique
+    # part of the cycle; the sidecar still records the ring-frame
+    # index + its op list under ``ringFrame`` so the data round-trips.
+    ring_frame_index: Optional[int] = None
+    if (
+        len(snapshots) >= 2
+        and bytes(snapshots[0]) == bytes(snapshots[-1])
+        and bytes(palette_snapshots[0]) == bytes(palette_snapshots[-1])
+    ):
+        ring_frame_index = len(snapshots) - 1
+
+    # Sweep any stale per-frame PNGs from a previous unpacker run —
+    # we no longer emit them (the atlas + json sidecar + animated GIF
+    # replace them). This keeps ``unpacked/overlay`` from accumulating
+    # thousands of tiny PNG files between unpacker iterations.
+    for stale in out_dir.glob(f"{stem}.frame*.png"):
+        try:
+            stale.unlink()
+        except OSError:
+            pass
+
+    # The atlas stacks frames horizontally. Different frames can carry
+    # incompatible palettes (palette-cycle sprites), so the atlas is
+    # emitted as true-colour RGBA — each stripe is materialised
+    # through its own per-frame palette, so the animation reads
+    # correctly even for glow / fade sprites. The ring frame (if any)
+    # is skipped from the atlas image and called out in the JSON
+    # sidecar instead.
+    atlas_count = len(snapshots) - (1 if ring_frame_index is not None else 0)
+    atlas_path: Optional[Path] = None
+    gif_path: Optional[Path] = None
+    # Always sweep a previous run's GIF — keeps things tidy when a
+    # sprite's decoder result changes or the GIF is intentionally
+    # suppressed (atlas_count == 0).
+    for stale in out_dir.glob(f"{stem}.atlas.gif"):
+        try:
+            stale.unlink()
+        except OSError:
+            pass
+    if atlas_count > 0:
+        atlas_w = bitmap_w * atlas_count
+        atlas_rgba = bytearray(atlas_w * bitmap_h * 4)
+        for fi in range(atlas_count):
+            snap = snapshots[fi]
+            pal = palette_snapshots[fi]
+            stripe = _palette_indexed_to_rgba(
+                bytes(snap), bytes(pal), transparent_indices
+            )
+            stride = bitmap_w * 4
+            for y in range(bitmap_h):
+                src_off = y * stride
+                dst_off = (y * atlas_w + fi * bitmap_w) * 4
+                atlas_rgba[dst_off : dst_off + stride] = stripe[
+                    src_off : src_off + stride
+                ]
+        atlas_path = out_dir / f"{stem}.atlas.png"
+        atlas_path.write_bytes(
+            _encode_png_rgba(atlas_w, bitmap_h, bytes(atlas_rgba))
+        )
+
+        # Animated GIF sidecar — pure visualisation aid. One frame per
+        # entry in ``snapshots[:atlas_count]`` (the ring frame is
+        # dropped, the Netscape looping extension handles wraparound).
+        # Indexed snapshots + per-frame local colour tables let the
+        # palette-cycle sprites render correctly.
+        gif_transparent_idx: Optional[int] = (
+            next(iter(transparent_indices)) if transparent_indices else None
+        )
+        gif_path = out_dir / f"{stem}.atlas.gif"
+        gif_path.write_bytes(
+            _encode_gif_animated(
+                bitmap_w,
+                bitmap_h,
+                [bytes(snap) for snap in snapshots[:atlas_count]],
+                [bytes(pal) for pal in palette_snapshots[:atlas_count]],
+                gif_transparent_idx,
+            )
+        )
+
+    # Build the atlas JSON sidecar. Frame size is uniform across the
+    # whole sprite, so the sidecar is compact: top-level frame
+    # dimensions + a per-frame array carrying anything that varies
+    # (engine opcodes applied, NotifyMove origin (x, y), frame
+    # duration in ticks, dirty-rect / region / transparency-index
+    # markers).
+    atlas_meta: Optional[dict] = None
+    if atlas_path is not None:
+        # Filter ring-frame metadata into a sibling field so the
+        # primary ``frames`` array describes only what the atlas
+        # actually shows.
+        atlas_frames = per_frame[:atlas_count]
+        atlas_meta = {
+            "atlas": atlas_path.name,
+            "gif": gif_path.name if gif_path is not None else None,
+            "frameWidth": bitmap_w,
+            "frameHeight": bitmap_h,
+            "frameCount": atlas_count,
+            "framesStored": len(snapshots),
+            "paletteSource": palette_source,
+            "transparencySource": transparency_source,
+            "maskPlanePresent": mask_was_written,
+            "timing": timing_block,
+            "frames": atlas_frames,
+        }
+        if ring_frame_index is not None:
+            atlas_meta["ringFrameIndex"] = ring_frame_index
+            atlas_meta["ringFrame"] = per_frame[ring_frame_index]
+        sidecar_path = out_dir / f"{stem}.atlas.json"
+        sidecar_path.write_text(
+            json.dumps(atlas_meta, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+
+    return {
+        "bitmapWidth": bitmap_w,
+        "bitmapHeight": bitmap_h,
+        "paletteWrites": n_palette_writes,
+        "paletteSource": palette_source,
+        "transparentIndex": transparent_index,
+        "bgKeyIndices": sorted(bg_key_indices),
+        "transparentIndices": sorted(transparent_indices),
+        "transparencySource": transparency_source,
+        "maskPlanePresent": mask_was_written,
+        "atlasPng": atlas_path.name if atlas_path else None,
+        "atlasJson": (out_dir / f"{stem}.atlas.json").name if atlas_path else None,
+        "atlasGif": gif_path.name if gif_path else None,
+        "framesStored": len(snapshots),
+        "framesAnimated": atlas_count,
+        "ringFrameIndex": ring_frame_index,
+    }
+
+
+def _palette_siblings_of(palette: bytearray, rgb: Tuple[int, int, int]) -> set[int]:
+    """Return the set of palette indices whose RGB triple equals ``rgb``."""
+    return {
+        i
+        for i in range(256)
+        if (palette[i * 4], palette[i * 4 + 1], palette[i * 4 + 2]) == rgb
+    }
+
+
+def _chromakey_bg_mask(
+    snap: bytes, w: int, h: int, key_indices: set[int]
+) -> bytearray:
+    """Return a ``w*h`` mask where ``1`` means the pixel's palette index
+    is in ``key_indices`` (= the chroma key set) and ``0`` means it's a
+    subject pixel.
+
+    Mirrors the engine's chroma-key blit kernels (dispatch table
+    ``BlitTable_ChromaKey`` / ``DAT_004b0ac8``, kernels like
+    ``BlitChromaKey`` @ 0x0043f470) which skip *every* source pixel
+    matching the chroma byte irrespective of topology — the test is
+    the simple equality ``if (src_pixel != key) draw_pixel``.
+
+    Per-pixel transparency for engine-faithful sprite extraction:
+
+    * The 39 sprites that emit opcode ``0x0E/0x0F`` use the
+      authoritative mask plane and never reach this path.
+    * The 3 sprites that emit ``0x0D`` set an explicit chroma byte
+      and reach this path with that exact index.
+    * For the 88 remaining sprites the engine itself runs the opaque
+      blit kernel (``BlitTable_Opaque`` / ``DAT_004b08c8``); their
+      visible in-game transparency is achieved upstream (DDraw
+      destination-side color key on the back-buffer the scene blits
+      into — see the engine trace in sprite_container.md). The
+      perimeter-majority RGB index is the canonical "BG palette slot"
+      they're authored against, and using it as a synthetic chroma
+      key here produces the correct hollow silhouette that the game
+      shows (verified on 65797 where every frame paints body pixels
+      in the same palette index 104 as the rectangular BG, so the
+      "filled green oval" only resolves to a gray-outlined creature
+      when index 104 is fully chroma-keyed).
+    """
+    mask = bytearray(w * h)
+    for i in range(len(snap)):
+        if snap[i] in key_indices:
+            mask[i] = 1
+    return mask
+
+
+def _resolve_bg_key_indices(
+    explicit_index: Optional[int],
+    snapshots: list[bytes],
+    bitmap_w: int,
+    bitmap_h: int,
+    palette: bytearray,
+) -> Tuple[set[int], str]:
+    """Pick the set of palette indices that should be treated as
+    background chroma for the synthetic key.
+
+    Priority order:
+
+    1. ``"explicit"`` — FLX opcode 0x0D set an explicit
+       ``transparent_index``. We use ``palette[N]``'s RGB plus every
+       palette entry sharing that RGB.
+    2. ``"perimeter"`` — Tally the RGB of every pixel on the bitmap
+       perimeter (top row + bottom row + left col + right col) across
+       every emitted frame. If one RGB covers a clear majority of the
+       perimeter, that's the rectangular BG colour.
+
+       This generalises the previous "all four corners agree" rule:
+       the engine's chroma is a game-wide constant (FLI-conventional
+       magic green ``RGB(7,155,0)`` for this title), and many sprites
+       have content pixels touching one or two corners while the
+       remainder of the perimeter is still clean BG. A pure corner
+       vote bails in those cases; a perimeter vote does not.
+
+    3. ``"none"`` — no single RGB dominates the perimeter (the sprite
+       fills the bitmap edge-to-edge with content): emit opaque, the
+       engine would have relied on the destination-side chroma key
+       anyway.
+    """
+    if explicit_index is not None and 0 <= explicit_index < 256:
+        n = explicit_index
+        rgb = (palette[n * 4 + 0], palette[n * 4 + 1], palette[n * 4 + 2])
+        siblings = _palette_siblings_of(palette, rgb)
+        siblings.add(n)
+        return siblings, "explicit"
+
+    if not snapshots or bitmap_w < 3 or bitmap_h < 3:
+        return set(), "none"
+
+    # Tally the RGB at every perimeter pixel across every snapshot.
+    # We vote on RGB rather than palette index so palette-cycle
+    # sprites (whose BG re-indexes from frame to frame) still
+    # accumulate to the same RGB bucket.
+    perimeter_rgbs: Counter[Tuple[int, int, int]] = Counter()
+    for snap in snapshots:
+        for x in range(bitmap_w):
+            for y in (0, bitmap_h - 1):
+                idx = snap[y * bitmap_w + x]
+                perimeter_rgbs[
+                    (
+                        palette[idx * 4 + 0],
+                        palette[idx * 4 + 1],
+                        palette[idx * 4 + 2],
+                    )
+                ] += 1
+        for y in range(1, bitmap_h - 1):
+            for x in (0, bitmap_w - 1):
+                idx = snap[y * bitmap_w + x]
+                perimeter_rgbs[
+                    (
+                        palette[idx * 4 + 0],
+                        palette[idx * 4 + 1],
+                        palette[idx * 4 + 2],
+                    )
+                ] += 1
+    if not perimeter_rgbs:
+        return set(), "none"
+    (top_rgb, top_count), *_ = perimeter_rgbs.most_common(1)
+    total = sum(perimeter_rgbs.values())
+    # Majority threshold = 50% of perimeter pixels carry one RGB.
+    # In practice the engine's BG covers 80–100% of the perimeter
+    # whenever there *is* a BG; anything subject-edge-to-edge falls
+    # well below this and is left opaque.
+    if top_count * 2 <= total:
+        return set(), "none"
+    siblings = _palette_siblings_of(palette, top_rgb)
+    if not siblings:
+        return set(), "none"
+    return siblings, "perimeter"
+
+
+def _apply_mask_plane_transparency(
+    snapshots: list[bytearray],
+    mask_snapshots: list[Optional[bytearray]],
+    bitmap_w: int,
+    bitmap_h: int,
+) -> Optional[int]:
+    """Translate the engine's per-pixel mask plane (consumer +0x20,
+    populated by FLX opcodes 0x0E / 0x0F) into PNG alpha by rewriting
+    transparent pixels to a reserved palette index.
+
+    Per the Ghidra trace (``CDSFlxFile::AllocMaskPlane @ 0x00436ff0``)
+    the mask plane is byte-per-pixel, sized exactly w*h. The masked
+    blit kernels at ``BlitTable_Masked`` / ``DAT_004b0bc8`` (e.g.
+    ``BlitMasked`` @ 0x004414e0) then test each pixel's mask byte
+    against a reference value to decide opacity.
+
+    Empirically (verified across every mask-using sprite in the
+    master pack), the engine's per-frame BG identification rule is:
+
+        **A pixel is transparent iff its
+        ``(color[i], mask[i])`` pair matches the bitmap's corner
+        consensus ``(corner_color, corner_mask)`` pair.**
+
+    This is a stricter version of the "BG sentinel" rule: both the
+    color plane AND the mask plane must agree with the corners.
+    Sprites where the color plane uses a uniform fill index but the
+    mask plane carries the *actual* opacity (e.g. 65831's
+    color=104 grayscale fallback overlayed with mask=255 sentinel)
+    are handled correctly by the joint check, where a color-only or
+    mask-only check would either leave the BG fully opaque or wipe
+    the entire frame.
+
+    Cross-checked against four sprites with very different shapes:
+
+    * 65714 frame 0 (yellow explosion): corner pair (2, 2). BG =
+      pixels where color=2 AND mask=2 = 8417 px; subject = 67 px.
+    * 65791 frame 0 (wireframe cube): corner pair (0, 0). BG = 3724
+      px; subject (cube edges + interior) = 4088 px.
+    * 65831 frame 0 (gray sprite, grayscale-fallback palette): corner
+      pair (104, 255). BG = 2801 px where color=104 AND mask=255;
+      subject = 1654 px (the small figure on its gray BG).
+    * 65754 frame 0 (init splash): corner pair (104, 104). 100% of
+      pixels match — fully transparent initial frame.
+
+    The corner consensus is the *majority* corner value within each
+    frame (handles masks that don't perfectly reach every corner —
+    very rare on the master pack but possible). Reserves an unused
+    palette index for the alpha encoding (so we don't accidentally
+    clobber a real colour), or returns ``None`` if no free slot
+    exists in the palette.
+    """
+    used = bytearray(256)
+    for snap in snapshots:
+        for px in snap:
+            used[px] = 1
+    free_idx: Optional[int] = None
+    for i in range(256):
+        if not used[i]:
+            free_idx = i
+            break
+    if free_idx is None:
+        return None
+
+    last_x = bitmap_w - 1
+    last_row = (bitmap_h - 1) * bitmap_w
+    for snap, mask in zip(snapshots, mask_snapshots):
+        if mask is None:
+            continue
+        color_corners = [
+            snap[0],
+            snap[last_x],
+            snap[last_row],
+            snap[last_row + last_x],
+        ]
+        mask_corners = [
+            mask[0],
+            mask[last_x],
+            mask[last_row],
+            mask[last_row + last_x],
+        ]
+        ccounts: dict[int, int] = {}
+        mcounts: dict[int, int] = {}
+        for c in color_corners:
+            ccounts[c] = ccounts.get(c, 0) + 1
+        for m in mask_corners:
+            mcounts[m] = mcounts.get(m, 0) + 1
+        bg_color = max(ccounts, key=lambda c: ccounts[c])
+        bg_mask = max(mcounts, key=lambda c: mcounts[c])
+        for i in range(len(snap)):
+            if snap[i] == bg_color and mask[i] == bg_mask:
+                snap[i] = free_idx
+    return free_idx
+
+
+def _apply_chromakey_transparency(
+    snapshots: list[bytes],
+    palette: bytearray,
+    bitmap_w: int,
+    bitmap_h: int,
+    key_indices: set[int],
+) -> Optional[int]:
+    """Rewrite each snapshot in place so that every pixel whose palette
+    index is in ``key_indices`` is remapped to a single reserved
+    "transparent" palette index. Returns the reserved index (so the
+    caller can mark it transparent in the PNG ``tRNS`` chunk), or
+    ``None`` if no free palette slot is available.
+
+    This matches the engine's chroma-key blit semantics exactly:
+    every source pixel matching the key is skipped (per
+    ``BlitChromaKey`` @ 0x0043f470 and siblings in dispatch table
+    ``BlitTable_ChromaKey`` / ``DAT_004b0ac8``).
+    Sprites whose body and rectangular BG share the same palette
+    index — a very common encoding for "hollow silhouette" content —
+    therefore resolve to the correct cut-out shape rather than a
+    filled blob.
+
+    Picks a palette index that is currently unused by ANY snapshot so
+    we don't accidentally turn an in-use index transparent. If every
+    palette slot is occupied (extremely rare) the caller falls back
+    to emitting the sprite opaque.
+    """
+    used = bytearray(256)
+    for snap in snapshots:
+        for px in snap:
+            used[px] = 1
+    free_idx: Optional[int] = None
+    for i in range(256):
+        if not used[i]:
+            free_idx = i
+            break
+    if free_idx is None:
+        return None
+    for snap in snapshots:
+        mask = _chromakey_bg_mask(snap, bitmap_w, bitmap_h, key_indices)
+        for i, m in enumerate(mask):
+            if m:
+                snap[i] = free_idx
+    return free_idx
+
+
+def _redecode_for_atlas(
+    raw: bytes, frames: list[dict], bitmap_w: int, bitmap_h: int
+) -> Tuple[list[bytearray], list[Optional[bytearray]], list[bytearray], bool]:
+    """Re-run the per-frame decode for atlas emission, capturing the
+    color plane, the (lazy) mask plane, and the palette state after
+    every emitted frame.
+
+    Returns ``(color_snapshots, mask_snapshots, palette_snapshots,
+    mask_was_ever_written)``.
+
+    * ``color_snapshots`` — one mutable ``bytearray`` per emitted frame.
+      Empty frames are NOT emitted (they inherit the previous frame).
+    * ``mask_snapshots`` — same length; entry is ``None`` if no mask
+      bytes have been written yet (the engine renders fully opaque
+      until then), else a snapshot of the mask plane at this frame.
+    * ``palette_snapshots`` — same length; each entry is a copy of the
+      256-entry BGRA palette as-it-was at this frame's emit point.
+      This is what the engine would render the frame with; required
+      for sprites that update their palette mid-animation (71/130
+      master-pack sprites — verified empirically).
+    * ``mask_was_ever_written`` — True iff opcode 0x0e / 0x0f ever
+      fired across the whole stream.
+
+    Mirrors ``CDSFlxFile::DecodeFrame`` (0x00432c60). Per Ghidra the
+    mask plane is allocated lazily on the first 0x0e (``AllocMaskPlane
+    @ 0x00436ff0``) sized exactly w*h bytes, and the masked blit
+    kernels gate per-pixel opacity on the mask byte value.
+    """
+    pixel_total = bitmap_w * bitmap_h
+    pixels = bytearray(pixel_total)
+    mask = bytearray(pixel_total)
+    mask_inited = False
+    palette = bytearray([0xFF] * 1024)
+    color_snapshots: list[bytearray] = []
+    mask_snapshots: list[Optional[bytearray]] = []
+    palette_snapshots: list[bytearray] = []
+    keyframe_seen = False
+    for fr in frames:
+        for ic in fr["innerChunks"]:
+            op = ic["opcode"]
+            body = raw[ic["offset"] + 5 : ic["offset"] + ic["size"]]
+            if op == BITMAP_SPRITE_INNER_OP_RLE:
+                pixels[:] = _flxrle_decode(body)
+                keyframe_seen = True
+            elif op == BITMAP_SPRITE_INNER_OP_DELTA:
+                _flxdelta_apply(body, pixels)
+            elif op == BITMAP_SPRITE_INNER_OP_MEMCPY:
+                pixels[: len(body)] = body
+                keyframe_seen = True
+            elif op == BITMAP_SPRITE_INNER_OP_PALETTE:
+                _flxpalette_apply(body, palette)
+            elif op == BITMAP_SPRITE_INNER_OP_RLE_ALT:
+                mask[:] = _flxrle_decode(body)
+                mask_inited = True
+            elif op == BITMAP_SPRITE_INNER_OP_DELTA_ALT:
+                _flxdelta_apply(body, mask)
+                mask_inited = True
+        if keyframe_seen:
+            color_snapshots.append(bytearray(pixels))
+            mask_snapshots.append(bytearray(mask) if mask_inited else None)
+            palette_snapshots.append(bytearray(palette))
+    return color_snapshots, mask_snapshots, palette_snapshots, mask_inited
 
 
 def _save_mouse_cursor(raw: bytes, base: Path) -> dict:
@@ -1413,58 +3063,127 @@ def _save_mouse_cursor(raw: bytes, base: Path) -> dict:
 
 
 def _save_bitmap_jpeg_anim(raw: bytes, base: Path) -> dict:
-    """ClassID 76 - composite bitmap with embedded JPEG frames + audio.
+    """ClassID 76 - ``CDSDsmFile`` synchronized MJPEG + 16-bit PCM movie.
 
-    Phase 1 records the descriptor and extracts every JPEG SOI..EOI run
-    plus any obvious DSM-style PCM block found inside.
+    The on-disk format is a fixed 36-byte ``CDsmHeader`` followed by
+    ``2 * dwFrameCount`` interleaved ``{u32 len, byte[len] body}`` chunks:
+    chunk ``2k`` is a complete JPEG frame, chunk ``2k+1`` is the matching
+    frame's raw little-endian PCM audio. See
+    ``tools/bulanci_unpack/ghidra_analysis/dsm_file_format.md`` for the
+    full reverse-engineering writeup of the format and the ``CDSDsmFile``
+    class that consumes it.
+
+    We dump:
+      * one ``.frame<N>.jpg`` per video chunk (round-trippable to libjpeg),
+      * one consolidated ``.audio.wav`` containing every audio chunk
+        concatenated in order with a standard PCM WAVE header.
     """
     meta: dict = {"friendlyFile": None}
-    if len(raw) < 24:
-        meta["warning"] = "BitmapJpegAnim: too short"
+    if len(raw) < 36:
+        meta["warning"] = "BitmapJpegAnim: too short for CDsmHeader"
         return meta
-    fields = struct.unpack_from("<6I", raw, 0)
-    meta["jpegAnim"] = {
-        "totalSize": fields[0],
-        "field1": fields[1],
-        "field2": fields[2],
-        "field3": fields[3],
-        "field4": fields[4],
-        "field5": fields[5],
+    end_offset, w, h, fmt, dur_ms, frames, audio_bytes, audio_packed, rate = (
+        struct.unpack_from("<9I", raw, 0)
+    )
+    channels = audio_packed & 0xFFFF
+    bits = (audio_packed >> 16) & 0xFFFF
+    expected_audio = (dur_ms * rate * channels * bits) // 8 // 1000
+    header = {
+        "dwPayloadEndOffset": end_offset,
+        "dwCanvasWidth": w,
+        "dwCanvasHeight": h,
+        "dwPixelFormat": fmt,
+        "dwDurationMs": dur_ms,
+        "dwFrameCount": frames,
+        "dwAudioByteCount": audio_bytes,
+        "dwAudioFormatPacked": f"0x{audio_packed:08x}",
+        "dwAudioSampleRate": rate,
+        "audioChannels": channels,
+        "audioBitsPerSample": bits,
+        "calculatedAudioBytes": expected_audio,
+        "fps": round(frames * 1000 / dur_ms, 3) if dur_ms else None,
+        "pixelFormatHint": {5: "24bpp BGR", 6: "32bpp BGRA"}.get(fmt, "unknown"),
     }
-    # Find and dump embedded JPEGs (SOI marker 0xFFD8 followed by APP/DB/DA
-    # marker, then EOI 0xFFD9). We require at least a sensible JFIF/JFXX/DB
-    # second marker so spurious 0xFFD8 0xFF runs inside the audio payload
-    # don't get extracted as fake "frames".
-    jpegs = []
-    i = 0
-    idx = 0
-    valid_seg_markers = {0xE0, 0xE1, 0xE2, 0xE3, 0xDB, 0xC0, 0xC4, 0xDA, 0xC2}
-    while True:
-        soi = raw.find(b"\xff\xd8\xff", i)
-        if soi < 0:
+    warnings: list[str] = []
+    if end_offset != len(raw):
+        warnings.append(
+            f"dwPayloadEndOffset={end_offset} differs from file size {len(raw)}"
+        )
+    if abs(audio_bytes - expected_audio) > 8:
+        warnings.append(
+            f"dwAudioByteCount={audio_bytes} differs from expected "
+            f"{expected_audio} by {audio_bytes - expected_audio:+d}"
+        )
+    meta["jpegAnim"] = {"header": header}
+
+    jpeg_frames: list[dict] = []
+    audio_chunks: list[bytes] = []
+    off = 36
+    truncated = False
+    while off + 4 <= len(raw):
+        (chunk_len,) = struct.unpack_from("<I", raw, off)
+        body_start = off + 4
+        body_end = body_start + chunk_len
+        if chunk_len == 0 or body_end > len(raw):
+            truncated = True
             break
-        if soi + 3 >= len(raw):
-            break
-        next_marker = raw[soi + 3]
-        if next_marker not in valid_seg_markers:
-            i = soi + 2
-            continue
-        eoi = raw.find(b"\xff\xd9", soi + 4)
-        if eoi < 0:
-            break
-        blob = raw[soi : eoi + 2]
-        # Sanity floor; real JPEGs almost never come in below ~512 bytes.
-        if len(blob) < 256:
-            i = eoi + 2
-            continue
-        out = base.with_suffix(f".frame{idx:03d}.jpg")
-        out.write_bytes(blob)
-        jpegs.append({"offset": soi, "length": len(blob), "file": out.name})
-        idx += 1
-        i = eoi + 2
-    if jpegs:
-        meta["jpegAnim"]["jpegFrames"] = jpegs
-        meta["friendlyFile"] = jpegs[0]["file"]
+        body = raw[body_start:body_end]
+        is_jpeg = body[:3] == b"\xff\xd8\xff"
+        if is_jpeg:
+            idx = len(jpeg_frames)
+            out = base.with_suffix(f".frame{idx:03d}.jpg")
+            out.write_bytes(body)
+            jpeg_frames.append(
+                {"offset": body_start, "length": chunk_len, "file": out.name}
+            )
+        else:
+            audio_chunks.append(body)
+        off = body_end
+
+    if truncated:
+        warnings.append(f"chunk walk stopped early at offset 0x{off:x}")
+    if len(jpeg_frames) != frames:
+        warnings.append(
+            f"JPEG chunk count {len(jpeg_frames)} differs from "
+            f"dwFrameCount {frames}"
+        )
+
+    if audio_chunks and channels in (1, 2) and bits == 16 and rate > 0:
+        pcm = b"".join(audio_chunks)
+        wav_path = base.with_suffix(".audio.wav")
+        block_align = channels * bits // 8
+        byte_rate = rate * block_align
+        with wav_path.open("wb") as fh:
+            fh.write(b"RIFF")
+            fh.write(struct.pack("<I", 36 + len(pcm)))
+            fh.write(b"WAVE")
+            fh.write(b"fmt ")
+            fh.write(struct.pack("<I", 16))
+            fh.write(struct.pack("<H", 1))           # wFormatTag = PCM
+            fh.write(struct.pack("<H", channels))
+            fh.write(struct.pack("<I", rate))
+            fh.write(struct.pack("<I", byte_rate))
+            fh.write(struct.pack("<H", block_align))
+            fh.write(struct.pack("<H", bits))
+            fh.write(b"data")
+            fh.write(struct.pack("<I", len(pcm)))
+            fh.write(pcm)
+        meta["jpegAnim"]["audioWav"] = {
+            "file": wav_path.name,
+            "pcmBytes": len(pcm),
+            "expectedPcmBytes": audio_bytes,
+        }
+    elif audio_chunks:
+        warnings.append(
+            "audio chunks present but format not (16-bit mono/stereo PCM); "
+            "wav export skipped"
+        )
+
+    if jpeg_frames:
+        meta["jpegAnim"]["jpegFrames"] = jpeg_frames
+        meta["friendlyFile"] = jpeg_frames[0]["file"]
+    if warnings:
+        meta["jpegAnim"]["warnings"] = warnings
     return meta
 
 
@@ -1481,8 +3200,9 @@ _EXTRACTORS = {
     CLASS_BITMAP_JPEG_ANIM: _save_bitmap_jpeg_anim,
     CLASS_SIGN: _save_sign,
     CLASS_SCRIPT: _save_script,
-    CLASS_TEXT_BLOCK: _save_text_block,
-    CLASS_TEXT_TABLE: _save_text_table,
+    CLASS_POEM: _save_poem,
+    CLASS_HISTORY_SCRIPT: _save_history_script,
+    CLASS_HELP_SCRIPT: _save_help_script,
 }
 
 

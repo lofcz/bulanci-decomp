@@ -1,0 +1,637 @@
+[
+  {
+    "index": 0,
+    "ptr": "0x0047f668",
+    "value": ""
+  },
+  {
+    "index": 1,
+    "ptr": "0x00486c50",
+    "value": "Nelze alokovat paměť (potřebuje se %d bajtů)."
+  },
+  {
+    "index": 2,
+    "ptr": "0x00486c1c",
+    "value": "Systémová (API) chyba: %s"
+  },
+  {
+    "index": 3,
+    "ptr": "0x00486c00",
+    "value": "%s chyba: %s"
+  },
+  {
+    "index": 4,
+    "ptr": "0x00486ba8",
+    "value": "Nenalezeny informace pro vytvoření objektu."
+  },
+  {
+    "index": 5,
+    "ptr": "0x00486b40",
+    "value": "Nenalezen interface potřebný pro přístup k objektu."
+  },
+  {
+    "index": 6,
+    "ptr": "0x00486b14",
+    "value": "Operace byla zrušena."
+  },
+  {
+    "index": 7,
+    "ptr": "0x00486adc",
+    "value": "Chyba #%d na souboru %s: %s"
+  },
+  {
+    "index": 8,
+    "ptr": "0x00486ab0",
+    "value": "Nenalezen zdroj %08x."
+  },
+  {
+    "index": 9,
+    "ptr": "0x00486a70",
+    "value": "Byl specifikován neplatný čas."
+  },
+  {
+    "index": 10,
+    "ptr": "0x00486a18",
+    "value": "Chyba přístupu k registrovému klíči %s: %s"
+  },
+  {
+    "index": 11,
+    "ptr": "0x004869e4",
+    "value": "Neplatný formát souboru."
+  },
+  {
+    "index": 12,
+    "ptr": "0x004869a0",
+    "value": "Duplicitní identifikátory zdrojů."
+  },
+  {
+    "index": 13,
+    "ptr": "0x00486958",
+    "value": "Nelze přidat položku do kolekce."
+  },
+  {
+    "index": 14,
+    "ptr": "0x00486908",
+    "value": "Specifikován neplatný (NULL) ukazatel."
+  },
+  {
+    "index": 15,
+    "ptr": "0x004868d4",
+    "value": "JPEG obrázek je zničen."
+  },
+  {
+    "index": 16,
+    "ptr": "0x00486890",
+    "value": "Vstupní fronta událostí je plná."
+  },
+  {
+    "index": 17,
+    "ptr": "0x00486850",
+    "value": "Nebyl nalezen zdrojový soubor."
+  },
+  {
+    "index": 18,
+    "ptr": "0x00486818",
+    "value": "Nelze registrovat položku."
+  },
+  {
+    "index": 19,
+    "ptr": "0x004867dc",
+    "value": "Nelze odregistrovat položku."
+  },
+  {
+    "index": 20,
+    "ptr": "0x00486790",
+    "value": "Katastrofické selhání neznámého typu."
+  },
+  {
+    "index": 21,
+    "ptr": "0x00486774",
+    "value": "DirectDraw"
+  },
+  {
+    "index": 22,
+    "ptr": "0x0048675c",
+    "value": "DirectSound"
+  },
+  {
+    "index": 23,
+    "ptr": "0x00486744",
+    "value": "DirectPlay"
+  },
+  {
+    "index": 24,
+    "ptr": "0x004866e0",
+    "value": "Došlo k podtečení dat v zásobníku nebo ve frontě."
+  },
+  {
+    "index": 25,
+    "ptr": "0x00486678",
+    "value": "Došlo k přetečení dat v zásobníku nebo ve frontě."
+  },
+  {
+    "index": 26,
+    "ptr": "0x00486630",
+    "value": "Neplatný index v seznamu položek."
+  },
+  {
+    "index": 27,
+    "ptr": "0x004865f4",
+    "value": "Někdo z hráčů opustil hru."
+  },
+  {
+    "index": 28,
+    "ptr": "0x00486578",
+    "value": "\u0001Připojení ke hře bylo odmítnuto,\n\u0001protože tato hra již běží."
+  },
+  {
+    "index": 29,
+    "ptr": "0x0048656c",
+    "value": "Ok"
+  },
+  {
+    "index": 30,
+    "ptr": "0x0048655c",
+    "value": "Zrušit"
+  },
+  {
+    "index": 31,
+    "ptr": "0x004864b8",
+    "value": "\u0001Zadejte název nebo IP adresu počítače.\nNezadá-li se nic, bude se počítač hledat."
+  },
+  {
+    "index": 32,
+    "ptr": "0x00486480",
+    "value": "Inicializuje se hledání..."
+  },
+  {
+    "index": 33,
+    "ptr": "0x0048646c",
+    "value": "Připojit"
+  },
+  {
+    "index": 34,
+    "ptr": "0x00486460",
+    "value": "Hru:"
+  },
+  {
+    "index": 35,
+    "ptr": "0x0048644c",
+    "value": "Vytvořit"
+  },
+  {
+    "index": 36,
+    "ptr": "0x00486434",
+    "value": "Připojit se"
+  },
+  {
+    "index": 37,
+    "ptr": "0x0048640c",
+    "value": "Počet hráčů celkem:"
+  },
+  {
+    "index": 38,
+    "ptr": "0x004863fc",
+    "value": "1 hráč"
+  },
+  {
+    "index": 39,
+    "ptr": "0x004863ec",
+    "value": "2 hráči"
+  },
+  {
+    "index": 40,
+    "ptr": "0x004863dc",
+    "value": "3 hráči"
+  },
+  {
+    "index": 41,
+    "ptr": "0x004863cc",
+    "value": "4 hráči"
+  },
+  {
+    "index": 42,
+    "ptr": "0x004863a4",
+    "value": "Na tomto počítači:"
+  },
+  {
+    "index": 43,
+    "ptr": "0x00486380",
+    "value": "Způsob připojení:"
+  },
+  {
+    "index": 44,
+    "ptr": "0x00486360",
+    "value": "TCP/IP protokol"
+  },
+  {
+    "index": 45,
+    "ptr": "0x00486344",
+    "value": "IPX protokol"
+  },
+  {
+    "index": 46,
+    "ptr": "0x00486314",
+    "value": "Přímé propojení kabelem"
+  },
+  {
+    "index": 47,
+    "ptr": "0x00486308",
+    "value": "Modem"
+  },
+  {
+    "index": 48,
+    "ptr": "0x004862fc",
+    "value": "Dále"
+  },
+  {
+    "index": 49,
+    "ptr": "0x004862e8",
+    "value": "Ovládání"
+  },
+  {
+    "index": 50,
+    "ptr": "0x004862d4",
+    "value": "Typ hry:"
+  },
+  {
+    "index": 51,
+    "ptr": "0x004862c4",
+    "value": "Typ hry"
+  },
+  {
+    "index": 52,
+    "ptr": "0x004862b4",
+    "value": "Levely:"
+  },
+  {
+    "index": 53,
+    "ptr": "0x004862a8",
+    "value": "Chat:"
+  },
+  {
+    "index": 54,
+    "ptr": "0x0048629c",
+    "value": "Start"
+  },
+  {
+    "index": 55,
+    "ptr": "0x00486264",
+    "value": "Jméno \"%s\" je již použito."
+  },
+  {
+    "index": 56,
+    "ptr": "0x00486218",
+    "value": "Kdo %d-krát zasáhne soupeře, vyhrál."
+  },
+  {
+    "index": 57,
+    "ptr": "0x004861dc",
+    "value": "Hra končí po %d vteřinách."
+  },
+  {
+    "index": 58,
+    "ptr": "0x00486170",
+    "value": "Vlevo:\nVpravo:\nNahoru:\nDolu:\nStřílení:\nZměna zbraně:"
+  },
+  {
+    "index": 59,
+    "ptr": "0x0048615c",
+    "value": "na zásahy"
+  },
+  {
+    "index": 60,
+    "ptr": "0x0048614c",
+    "value": "na čas"
+  },
+  {
+    "index": 61,
+    "ptr": "0x00486120",
+    "value": "Počet zásahů k výhře:"
+  },
+  {
+    "index": 62,
+    "ptr": "0x004860f0",
+    "value": "Délka hry ve vteřinách:"
+  },
+  {
+    "index": 63,
+    "ptr": "0x004860bc",
+    "value": "Čekám na zbytek hráčů..."
+  },
+  {
+    "index": 64,
+    "ptr": "0x004860a0",
+    "value": "Hledám hry..."
+  },
+  {
+    "index": 65,
+    "ptr": "0x00486080",
+    "value": "Připojuji se..."
+  },
+  {
+    "index": 66,
+    "ptr": "0x00486068",
+    "value": "šipka vlevo"
+  },
+  {
+    "index": 67,
+    "ptr": "0x0048604c",
+    "value": "šipka vpravo"
+  },
+  {
+    "index": 68,
+    "ptr": "0x00486030",
+    "value": "šipka nahoru"
+  },
+  {
+    "index": 69,
+    "ptr": "0x00486018",
+    "value": "šipka dolů"
+  },
+  {
+    "index": 70,
+    "ptr": "0x00486004",
+    "value": "mezerník"
+  },
+  {
+    "index": 71,
+    "ptr": "0x00485ff8",
+    "value": "Num 1"
+  },
+  {
+    "index": 72,
+    "ptr": "0x00485fec",
+    "value": "Num 0"
+  },
+  {
+    "index": 73,
+    "ptr": "0x00485fe0",
+    "value": "Num 4"
+  },
+  {
+    "index": 74,
+    "ptr": "0x00485fd4",
+    "value": "Num 5"
+  },
+  {
+    "index": 75,
+    "ptr": "0x00485fc8",
+    "value": "Num 6"
+  },
+  {
+    "index": 76,
+    "ptr": "0x00485fbc",
+    "value": "Num 8"
+  },
+  {
+    "index": 77,
+    "ptr": "0x00485f94",
+    "value": "Načítá se level..."
+  },
+  {
+    "index": 78,
+    "ptr": "0x00485ad8",
+    "value": "    Cílem projektu Bulánci bylo vytvořit hru, která by ukázala možnosti výroby\na šíření nezávislých her v prostředí internetu. Tato hra je distribuována zcela\nzdarma. Můžete ji libovolně kopírovat, šířit, zasílat přátelům či nabízet ke\nstažení.\n\n    Hra Bulánci Vám také dává možnost vytvořit si své vlastní levely\nprostřednictvím editoru nebo si stáhnout levely jiných hráčů z internetu.\nPodrobné informace o hře, odkazy na klany či oficiální přídavky ke stažení\nnajdete na adrese www.bulanci.cz.\n\n\n    Děkujeme"
+  },
+  {
+    "index": 79,
+    "ptr": "0x00485a98",
+    "value": "Radek Matějka\nmanaging director"
+  },
+  {
+    "index": 80,
+    "ptr": "0x00485a58",
+    "value": "Lubor Kopecký\nmarketing manager"
+  },
+  {
+    "index": 81,
+    "ptr": "0x00485a10",
+    "value": "Jaroslav Wagner\ncreative manager"
+  },
+  {
+    "index": 82,
+    "ptr": "0x004859c8",
+    "value": "Kamila Hurníková\nbusiness manager"
+  },
+  {
+    "index": 83,
+    "ptr": "0x004859b4",
+    "value": "Konec hry"
+  },
+  {
+    "index": 84,
+    "ptr": "0x0048598c",
+    "value": "Hra je pozastavena"
+  },
+  {
+    "index": 85,
+    "ptr": "0x00485978",
+    "value": "Pozastav"
+  },
+  {
+    "index": 86,
+    "ptr": "0x00485964",
+    "value": "Pokračuj"
+  },
+  {
+    "index": 87,
+    "ptr": "0x00485950",
+    "value": "Nastavení"
+  },
+  {
+    "index": 88,
+    "ptr": "0x004858a8",
+    "value": "\u0001Připojení ke hře bylo odmítnuto,\n\u0001protože je na tomto počítači příliš mnoho hráčů."
+  },
+  {
+    "index": 89,
+    "ptr": "0x00485810",
+    "value": "\u0001Připojení ke hře bylo odmítnuto,\n\u0001protože nejsou žádné společné levely."
+  },
+  {
+    "index": 90,
+    "ptr": "0x00485800",
+    "value": "Pauza"
+  },
+  {
+    "index": 91,
+    "ptr": "0x004857e8",
+    "value": "Zabil: %dx"
+  },
+  {
+    "index": 92,
+    "ptr": "0x004857a0",
+    "value": "Vyvážení: %d%% hudby a %d%% efektů"
+  },
+  {
+    "index": 93,
+    "ptr": "0x00485784",
+    "value": "Verze: 1.80"
+  },
+  {
+    "index": 94,
+    "ptr": "0x00485768",
+    "value": "Počet životů:"
+  },
+  {
+    "index": 95,
+    "ptr": "0x00485754",
+    "value": "na životy"
+  },
+  {
+    "index": 96,
+    "ptr": "0x00485710",
+    "value": "Kdo bude %d-krát zabit, skončil."
+  },
+  {
+    "index": 97,
+    "ptr": "0x004856f4",
+    "value": "Mrtev: %dx"
+  },
+  {
+    "index": 98,
+    "ptr": "0x0047f668",
+    "value": ""
+  },
+  {
+    "index": 99,
+    "ptr": "0x004856b0",
+    "value": "Nelze inicializovat DirectInput."
+  },
+  {
+    "index": 100,
+    "ptr": "0x0048569c",
+    "value": "Pořadí"
+  },
+  {
+    "index": 101,
+    "ptr": "0x00485690",
+    "value": "Level"
+  },
+  {
+    "index": 102,
+    "ptr": "0x00485684",
+    "value": "Jméno"
+  },
+  {
+    "index": 103,
+    "ptr": "0x00485678",
+    "value": "Zabil"
+  },
+  {
+    "index": 104,
+    "ptr": "0x0048566c",
+    "value": "Mrtev"
+  },
+  {
+    "index": 105,
+    "ptr": "0x0048565c",
+    "value": "Rozdíl"
+  },
+  {
+    "index": 106,
+    "ptr": "0x00485610",
+    "value": "Hra je vytvořena, stiskněte Start..."
+  },
+  {
+    "index": 107,
+    "ptr": "0x004855ec",
+    "value": "1 hráč (trénink)"
+  },
+  {
+    "index": 108,
+    "ptr": "0x004855d4",
+    "value": "Mód zbraní:"
+  },
+  {
+    "index": 109,
+    "ptr": "0x004855b0",
+    "value": "pouze brokovnice"
+  },
+  {
+    "index": 110,
+    "ptr": "0x00485590",
+    "value": "všechny zbraně"
+  },
+  {
+    "index": 111,
+    "ptr": "0x00485580",
+    "value": "Koupit"
+  },
+  {
+    "index": 112,
+    "ptr": "0x00485530",
+    "value": "Serial number is invalid for this name."
+  },
+  {
+    "index": 113,
+    "ptr": "0x004854d8",
+    "value": "Time is up. If you like this game, buy it !"
+  },
+  {
+    "index": 114,
+    "ptr": "0x004854c0",
+    "value": "exit reg ok"
+  },
+  {
+    "index": 115,
+    "ptr": "0x004854a4",
+    "value": "exit reg bad"
+  },
+  {
+    "index": 116,
+    "ptr": "0x00485490",
+    "value": "Download"
+  },
+  {
+    "index": 117,
+    "ptr": "0x00485468",
+    "value": "1 player - training"
+  },
+  {
+    "index": 118,
+    "ptr": "0x0048544c",
+    "value": "Weapon mode:"
+  },
+  {
+    "index": 119,
+    "ptr": "0x00485430",
+    "value": "shotgun only"
+  },
+  {
+    "index": 120,
+    "ptr": "0x00485418",
+    "value": "all weapons"
+  },
+  {
+    "index": 121,
+    "ptr": "0x00485410",
+    "value": "Buy"
+  },
+  {
+    "index": 122,
+    "ptr": "0x00485530",
+    "value": "Serial number is invalid for this name."
+  },
+  {
+    "index": 123,
+    "ptr": "0x00484ec8",
+    "value": "Your free trial period of Combat Pillows has expired. If you'd\nlike to continue playing, please register it!\n\nWhen you register, you will receive your unique serial number,\nwhich will turn your trial version into a full unlimited game.\nYou will also become eligible for our professional support,\nand for access to secret online area at CombatPillows.com\nwhich will let you download several exclusive add-ons for\nthe game secret levels, movies, and more. All our registered\ncustomers always receive substantial di"
+  },
+  {
+    "index": 124,
+    "ptr": "0x00484728",
+    "value": "Additional game levels and movies can be downloaded from www.iwannaplay.com, where\nyou can also find detailed information about the game, some useful advice and a FAQ section,\nand where, at the same time, you can download a number of interesting wallpapers, skins,\nscreensavers and other continuously developed bonus items by clicking on button \"Download\".\n\nBy registering you will get the full version of the game together with related support but also\nthe access to a secret section of http://www.iwannaplay.co"
+  },
+  {
+    "index": 125,
+    "ptr": "0x00483c58",
+    "value": "Additional game levels and movies can be downloaded from www.iwannaplay.com, where\nyou can also find detailed information about the game, some useful advice and a FAQ section,\nand where, at the same time, you can download a number of interesting wallpapers, skins,\nscreensavers and other continuously developed bonus items by clicking on button \"Download\".\n\nThis is a fully functional unregistered version of Combat Pillows with no expiration. You may\nstart the game 15 times without registering to evaluate the "
+  },
+  {
+    "index": 126,
+    "ptr": "0x00485490",
+    "value": "Download"
+  }
+]

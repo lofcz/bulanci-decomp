@@ -1,21 +1,40 @@
 # CDSScript / CLevelScript dispatch table
 
-A `CLevelScript` instance dispatches script opcodes through a per-instance
-function-pointer table at `this+0x2c`. The table is built by two
-back-to-back `memcpy`-style splices:
+Every `CDSScript` subclass dispatches script opcodes through a
+per-instance function-pointer table at `this+0x2c`. The table is built
+in two splices: the base table (shared by every subclass) plus a
+subclass-specific extension table.
 
 1. `CDSScript::CDSScript` (`0x00438390`)
    calls
    `FUN_00438310(this, 0, &PTR_LAB_004b0118, 0x2d)` to install opcodes 0..44
    from the base table at **`0x004b0118`** (45 entries, 180 bytes).
-2. `CLevelScript::CLevelScript` (`0x004185c0`)
-   calls
-   `FUN_00438310(this, 0x2d, &PTR_FUN_004af018, 0x3a)` to install opcodes
-   45..102 from the extension table at **`0x004af018`** (58 entries, 232 bytes).
+2. The subclass constructor appends its own extension:
 
-Net dispatch table = 103 entries (opcodes 0..102 inclusive). Higher opcode
-numbers seen in disassembled scripts (216, 217, 255, ...) are always parser
-artifacts caused by mis-counting the previous opcode's arguments.
+   | subclass          | constructor       | call                                                          | extension table                   | count | net opcode range |
+   |---|---|---|---|---|---|
+   | `CLevelScript`    | `0x004185c0`      | `FUN_00438310(this, 0x2d, &PTR_FUN_004af018, 0x3a)`           | **`0x004af018`** (232 bytes)      | 58    | 0..102           |
+   | `CHistoryScript`  | `0x004226c0`      | `FUN_00438310(this, 0x2d, &PTR_FUN_004af7ac, 0x08)`           | **`0x004af7ac`** ( 32 bytes)      |  8    | 0..52            |
+   | `CHelpScript`     | `0x004215e0`      | `FUN_00438310(this, 0x2d, &PTR_FUN_004af2fc, 0x08)`           | **`0x004af2fc`** ( 32 bytes)      |  8    | 0..52            |
+
+   ClassIDs: `CLevelScript`=2026, `CHistoryScript`=2050, `CHelpScript`=2076.
+
+   `CHistoryScript` and `CHelpScript` are the scripts behind the in-game
+   history-page and help-page dialogs (see `script_lifecycle.md`'s
+   `CHistoryDlg::FUN_00422f70` / `CHelpDlg::FUN_00421c10` callers of
+   `CallExport(slot=0, lang=1)`). Their 8-entry extension tables only
+   add the rendering primitives those dialogs need; they don't carry
+   the world-simulation opcodes 53..102 from `CLevelScript`.
+
+Net dispatch tables:
+
+* `CLevelScript`: 103 entries (opcodes 0..102 inclusive). Higher opcode
+  numbers seen in disassembled level scripts (216, 217, 255, ...) are
+  always parser artifacts caused by mis-counting the previous opcode's
+  arguments.
+* `CHistoryScript` / `CHelpScript`: 53 entries (opcodes 0..52). Opcodes
+  45..52 are *different* between the two, so the same byte value means
+  different things depending on which script subclass owns the bytecode.
 
 The dispatcher itself is `FUN_004384c0`:
 
@@ -160,6 +179,37 @@ identifier is unknown.
 | 101 |   56 | `0x0041f730` | `InsertOpponent`      | sub*4                |                                                                |
 | 102 |   57 | `0x0041da50` | `CreateMine`          | sub,sub              | single mine at (x, y); allocates 0x118 bytes                   |
 
+## CHistoryScript extension @ `0x004af7ac` (opcodes 45..52)
+
+Raw handler addresses, recovered with `read_memory`. Not yet
+hand-traced, so the unpacker's disassembler emits `<UNKNOWN op=N>`
+for these. Slots 48..51 are byte-for-byte identical to the
+CHelpScript table below — almost certainly four shared helpers.
+
+| op  | ext# | handler      | shared with CHelpScript? |
+|---:|---:|---|---|
+| 45 |  0 | `0x00422b00` | no  |
+| 46 |  1 | `0x00422bc0` | no  |
+| 47 |  2 | `0x00423530` | no  |
+| 48 |  3 | `0x00421750` | **yes** |
+| 49 |  4 | `0x004215c0` | **yes** |
+| 50 |  5 | `0x00422810` | **yes** |
+| 51 |  6 | `0x004217e0` | **yes** |
+| 52 |  7 | `0x00423820` | no  |
+
+## CHelpScript extension @ `0x004af2fc` (opcodes 45..52)
+
+| op  | ext# | handler      | shared with CHistoryScript? |
+|---:|---:|---|---|
+| 45 |  0 | `0x00421940` | no  |
+| 46 |  1 | `0x00421a00` | no  |
+| 47 |  2 | `0x004221a0` | no  |
+| 48 |  3 | `0x00421750` | **yes** |
+| 49 |  4 | `0x004215c0` | **yes** |
+| 50 |  5 | `0x00422810` | **yes** |
+| 51 |  6 | `0x004217e0` | **yes** |
+| 52 |  7 | `0x00421af0` | no  |
+
 ## Notes
 
 - The `Editor.Scripts.Opcode.cs` enum names roughly half of the 103-entry
@@ -196,6 +246,18 @@ identifier is unknown.
   are used heavily by the native master pack.
 
 ## What's still unknown
+
+- The 8 CHistoryScript-extension and 8 CHelpScript-extension handlers
+  (opcodes 45..52 in each) are addresses only — none of them has been
+  hand-disassembled yet. Until that's done, history/help scripts only
+  decode their base opcodes 0..44; any opcode in `[45..52]` renders as
+  `<UNKNOWN op=N>` in the unpacker's listing. Tracing them is mostly
+  a matter of disassembling 12 unique handlers (4 shared + 4 distinct
+  per subclass) and inferring the argument shape via calls to the
+  bytecode argument readers (`FUN_004384c0`, `FUN_00438350`,
+  `FUN_00438360`, `FUN_00438380`).
+
+
 
 - A handful of names tagged **e** in the extension table are best
   guesses for the runtime behaviour they implement and may not match the

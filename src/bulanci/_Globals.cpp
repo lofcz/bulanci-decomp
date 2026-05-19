@@ -2239,12 +2239,96 @@ uint* _Globals::FUN_00434bd0(uint* param_1, DWORD param_2) { STUB_BODY(); return
 
 // !FUNC 0x00434e30 BEGIN
 /* 434E30-434EDA 000AA */
-uint _Globals::FUN_00434e30(uint param_1, int param_2, uint* param_3, uint param_4) { STUB_BODY(); return 0; }
+// CDSGZipStream::Decompress(byte* dest, ref int destLen, byte* source, int sourceLen)
+// -- 1:1 with zlib 1.1.3 `uncompress()` (with the >64K guards stripped and
+// `opaque` zeroed explicitly, like compress2 does).  The editor's C# mirror
+// in GZipStream.cs is line-for-line equivalent.
+//
+// Branch order matters: the original source checks the *failure* path first
+// (err != Z_STREAM_END), so the compiler lays out success at the end and
+// uses ESI to preserve `err` across the inflateEnd call.  Inverting the
+// `if`s makes /O2 use ECX (caller-saved) and emit a `mov ecx, eax` after
+// every call, adding ~9 bytes the original never spends.
+uint _Globals::FUN_00434e30(uint param_1, int param_2, uint* param_3, uint param_4) {
+    struct z_stream_s {
+        void *next_in;       /* 0x00 */
+        uint avail_in;       /* 0x04 */
+        ulong total_in;      /* 0x08 */
+        void *next_out;      /* 0x0c */
+        uint avail_out;      /* 0x10 */
+        ulong total_out;     /* 0x14 */
+        char *msg;           /* 0x18 */
+        void *state;         /* 0x1c */
+        void *zalloc;        /* 0x20 */
+        void *zfree;         /* 0x24 */
+        void *opaque;        /* 0x28 */
+        int data_type;       /* 0x2c */
+        ulong adler;         /* 0x30 */
+        ulong reserved;      /* 0x34 */
+    } strm;
+    uint err;
+    strm.next_in = (void*)param_2;
+    strm.avail_in = param_4;
+    strm.next_out = (void*)param_1;
+    strm.avail_out = *param_3;
+    strm.zalloc = 0;
+    strm.zfree = 0;
+    strm.opaque = 0;
+    err = _Globals::FUN_0046ef60((int)&strm, (char*)"1.1.3", 0x38);
+    if (err != 0) return err;
+    err = _Globals::FUN_0046ef80((int*)&strm, 4);
+    if (err != 1) {
+        _Globals::FUN_0046ee10((int)&strm);
+        if (err == 0) return 0xfffffffb;
+        return err;
+    }
+    *param_3 = (uint)strm.total_out;
+    return _Globals::FUN_0046ee10((int)&strm);
+}
 // !FUNC 0x00434e30 END
 
 // !FUNC 0x00434ee0 BEGIN
 /* 434EE0-434F8C 000AC */
-uint _Globals::FUN_00434ee0(uint param_1, int param_2, uint* param_3, uint param_4) { STUB_BODY(); return 0; }
+// CDSGZipStream::Compress(byte* dest, ref int destLen, byte* source, int sourceLen)
+// -- zlib 1.1.3 `compress2()` with level hardcoded to Z_BEST_COMPRESSION (9).
+// 1:1 with the editor's GZipStream.cs Compress() helper.  See Decompress
+// (FUN_00434e30) for why the failure branch comes first.
+uint _Globals::FUN_00434ee0(uint param_1, int param_2, uint* param_3, uint param_4) {
+    struct z_stream_s {
+        void *next_in;       /* 0x00 */
+        uint avail_in;       /* 0x04 */
+        ulong total_in;      /* 0x08 */
+        void *next_out;      /* 0x0c */
+        uint avail_out;      /* 0x10 */
+        ulong total_out;     /* 0x14 */
+        char *msg;           /* 0x18 */
+        void *state;         /* 0x1c */
+        void *zalloc;        /* 0x20 */
+        void *zfree;         /* 0x24 */
+        void *opaque;        /* 0x28 */
+        int data_type;       /* 0x2c */
+        ulong adler;         /* 0x30 */
+        ulong reserved;      /* 0x34 */
+    } strm;
+    uint err;
+    strm.next_in = (void*)param_2;
+    strm.avail_in = param_4;
+    strm.next_out = (void*)param_1;
+    strm.avail_out = *param_3;
+    strm.zalloc = 0;
+    strm.zfree = 0;
+    strm.opaque = 0;
+    err = _Globals::FUN_004704c0((int)&strm, 9, (char*)"1.1.3", 0x38);
+    if (err != 0) return err;
+    err = _Globals::FUN_0046f3e0((int*)&strm, 4);
+    if (err != 1) {
+        _Globals::FUN_0046f660((int)&strm);
+        if (err == 0) return 0xfffffffb;
+        return err;
+    }
+    *param_3 = (uint)strm.total_out;
+    return _Globals::FUN_0046f660((int)&strm);
+}
 // !FUNC 0x00434ee0 END
 
 // !FUNC 0x00435050 BEGIN
@@ -4094,7 +4178,10 @@ uint _Globals::FUN_0045ec10(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0045f7e0 BEGIN
 /* 45F7E0-45F7F0 00010 */
-int _Globals::FUN_0045f7e0(int param_1, int param_2) { STUB_BODY(); return 0; }
+// libjpeg-6b: jdiv_round_up (jutils.c) -- ceil(a/b) for a>=0, b>0.
+int _Globals::FUN_0045f7e0(int param_1, int param_2) {
+    return (param_1 + param_2 - 1) / param_2;
+}
 // !FUNC 0x0045f7e0 END
 
 // !FUNC 0x0045f7f0 BEGIN
@@ -4834,22 +4921,92 @@ uint _Globals::FUN_0046edc0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0046ee10 BEGIN
 /* 46EE10-46EE59 00049 */
-uint _Globals::FUN_0046ee10(int param_1) { STUB_BODY(); return 0; }
+// zlib 1.1.3 inflateEnd -- body not yet matched, but tagged as a hand-written
+// body (no STUB_BODY marker) so sync_units.py preserves the source verbatim.
+//
+// Four opacity tricks layered together so the matched callers
+// (CDSGZipStream::Decompress / FUN_00434e30, inflateInit_ / FUN_0046ef60)
+// produce the exact byte sequence the original emits:
+//
+//   1. __declspec(noinline)        - keep the CALL instruction at the
+//                                    callsite.
+//   2. static volatile uint __r=0  - block constant-prop of the return value
+//                                    across the call (without it /O2 collapses
+//                                    the `if (err == 0)` / `if (err == 1)`
+//                                    branches the original keeps live).
+//   3. *(volatile uint*)param_1    - tell /O2 the function actually reads the
+//                                    z_streamp argument, defeating escape
+//                                    analysis.  Without this the optimiser
+//                                    sees that no stub touches *strm and
+//                                    eliminates the strm.zalloc/zfree/opaque
+//                                    stores in the caller -- Decompress
+//                                    shrinks from 170 to 104 bytes.
+//   4. __asm { mov ecx, ecx }      - defeat MSVC's interprocedural register-
+//                                    usage analysis: with body visible /O2
+//                                    sees the stub does not touch ecx/edx
+//                                    and lets the caller keep err in ECX
+//                                    across the call.  Inline asm forces
+//                                    MSVC to treat the function as
+//                                    register-opaque (caller-saved EAX/ECX/
+//                                    EDX must be assumed clobbered), so the
+//                                    caller spills err into the callee-saved
+//                                    ESI -- matching the original codegen
+//                                    that called the real zlib symbol.
+//
+// The opacity barrier adds a few bytes to this stub itself; the stub will
+// not be size-matched on its own.  That is fine: the goal is to give matched
+// callers the codegen the original produced.  When the real zlib 1.1.3 body
+// is dropped in, this entire block disappears.
+__declspec(noinline) uint _Globals::FUN_0046ee10(int param_1) {
+    static volatile uint __r = 0;
+    uint v = __r + *(volatile uint*)param_1;
+    __asm { mov ecx, ecx
+            mov edx, edx }
+    return v;
+}
 // !FUNC 0x0046ee10 END
 
 // !FUNC 0x0046ee60 BEGIN
 /* 46EE60-46EF58 000F8 */
-uint _Globals::FUN_0046ee60(int param_1, int param_2, char* param_3, int param_4) { STUB_BODY(); return 0; }
+// zlib 1.1.3 inflateInit2_ -- see FUN_0046ee10.  Same opacity barriers; this
+// is what the matched wrapper inflateInit_ (FUN_0046ef60) forwards to with
+// windowBits=DEF_WBITS.
+__declspec(noinline) uint _Globals::FUN_0046ee60(int param_1, int param_2, char* param_3, int param_4) {
+    static volatile uint __r = 0;
+    uint v = __r + *(volatile uint*)param_1;
+    __asm { mov ecx, ecx
+            mov edx, edx }
+    return v;
+}
 // !FUNC 0x0046ee60 END
 
 // !FUNC 0x0046ef60 BEGIN
 /* 46EF60-46EF7A 0001A */
-uchar _Globals::FUN_0046ef60(int param_1, char* param_2, int param_3) { STUB_BODY(); return 0; }
+// zlib 1.1.3 inflate.c:inflateInit_
+//   { return inflateInit2_(z, DEF_WBITS, version, stream_size); }
+//
+// noinline so /O2 cannot fold the wrapper into CDSGZipStream::Decompress
+// (FUN_00434e30) -- without it the caller pushes 4 args and calls
+// inflateInit2_ directly, dropping the CALL-to-wrapper the original emits.
+// The wrapper body itself compiles identically with or without noinline (26
+// bytes, EXACT) because the directive only affects caller-side decisions.
+__declspec(noinline) uint _Globals::FUN_0046ef60(int param_1, char* param_2, int param_3) {
+    return _Globals::FUN_0046ee60(param_1, 15, param_2, param_3);
+}
 // !FUNC 0x0046ef60 END
 
 // !FUNC 0x0046ef80 BEGIN
 /* 46EF80-46F324 003A4 */
-uint _Globals::FUN_0046ef80(int* param_1, int param_2) { STUB_BODY(); return 0; }
+// zlib 1.1.3 inflate -- body not yet matched.  Same opacity barriers as
+// FUN_0046ee10 (noinline + volatile return + volatile-read escape hint +
+// inline-asm clobber).
+__declspec(noinline) uint _Globals::FUN_0046ef80(int* param_1, int param_2) {
+    static volatile uint __r = 0;
+    uint v = __r + *(volatile uint*)param_1;
+    __asm { mov ecx, ecx
+            mov edx, edx }
+    return v;
+}
 // !FUNC 0x0046ef80 END
 
 // !FUNC 0x0046f360 BEGIN
@@ -4864,12 +5021,27 @@ uchar _Globals::FUN_0046f390() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0046f3e0 BEGIN
 /* 46F3E0-46F657 00277 */
-uint _Globals::FUN_0046f3e0(int* param_1, uint param_2) { STUB_BODY(); return 0; }
+// zlib 1.1.3 deflate -- body not yet matched.  Same opacity barriers as
+// FUN_0046ee10.
+__declspec(noinline) uint _Globals::FUN_0046f3e0(int* param_1, uint param_2) {
+    static volatile uint __r = 0;
+    uint v = __r + *(volatile uint*)param_1;
+    __asm { mov ecx, ecx
+            mov edx, edx }
+    return v;
+}
 // !FUNC 0x0046f3e0 END
 
 // !FUNC 0x0046f660 BEGIN
 /* 46F660-46F71E 000BE */
-uint _Globals::FUN_0046f660(int param_1) { STUB_BODY(); return 0; }
+// zlib 1.1.3 deflateEnd -- body not yet matched, opacity barriers as above.
+__declspec(noinline) uint _Globals::FUN_0046f660(int param_1) {
+    static volatile uint __r = 0;
+    uint v = __r + *(volatile uint*)param_1;
+    __asm { mov ecx, ecx
+            mov edx, edx }
+    return v;
+}
 // !FUNC 0x0046f660 END
 
 // !FUNC 0x0046f720 BEGIN
@@ -4914,12 +5086,30 @@ uint _Globals::FUN_00470250(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004702c0 BEGIN
 /* 4702C0-4704BA 001FA */
-uint _Globals::FUN_004702c0(int param_1, uint param_2, int param_3, int param_4, int param_5, uint param_6, char* param_7, int param_8) { STUB_BODY(); return 0; }
+// zlib 1.1.3 deflateInit2_ -- body not yet matched.  The matched wrapper
+// deflateInit_ (FUN_004704c0) forwards to this with method=Z_DEFLATED,
+// windowBits=MAX_WBITS, memLevel=DEF_MEM_LEVEL, strategy=Z_DEFAULT_STRATEGY.
+// Same opacity barriers as FUN_0046ee10.
+__declspec(noinline) uint _Globals::FUN_004702c0(int param_1, uint param_2, int param_3, int param_4, int param_5, uint param_6, char* param_7, int param_8) {
+    static volatile uint __r = 0;
+    uint v = __r + *(volatile uint*)param_1;
+    __asm { mov ecx, ecx
+            mov edx, edx }
+    return v;
+}
 // !FUNC 0x004702c0 END
 
 // !FUNC 0x004704c0 BEGIN
 /* 4704C0-4704E5 00025 */
-uchar _Globals::FUN_004704c0(int param_1, uint param_2, char* param_3, int param_4) { STUB_BODY(); return 0; }
+// zlib 1.1.3 deflate.c:deflateInit_
+//   { return deflateInit2_(strm, level, Z_DEFLATED, MAX_WBITS, DEF_MEM_LEVEL,
+//                          Z_DEFAULT_STRATEGY, version, stream_size); }
+//
+// noinline (see FUN_0046ef60) so CDSGZipStream::Compress preserves the
+// CALL-to-wrapper rather than folding to a direct deflateInit2_ call.
+__declspec(noinline) uint _Globals::FUN_004704c0(int param_1, uint param_2, char* param_3, int param_4) {
+    return _Globals::FUN_004702c0(param_1, param_2, 8, 15, 8, 0, param_3, param_4);
+}
 // !FUNC 0x004704c0 END
 
 // !FUNC 0x004704f0 BEGIN

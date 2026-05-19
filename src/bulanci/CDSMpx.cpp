@@ -174,12 +174,33 @@ uchar CDSMpx::FUN_00459620(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00459650 BEGIN
 /* 459650-459667 00017 */
-uchar CDSMpx::FUN_00459650(uint* param_1, uint param_2) { STUB_BODY(); return 0; }
+// libmad 0.15.1b bit.c::mad_bit_init.
+// Upstream signature is `void(struct mad_bitptr*, unsigned char const*)`; the
+// Ghidra-recovered `uchar` return is vestigial (RET clobbers eax) and the
+// surrounding block keeps the recovered shape so the COFF prototype stays
+// stable. mad_bitptr layout (8 bytes):
+//   { unsigned char const *byte; ushort cache; ushort left; }
+uchar CDSMpx::FUN_00459650(uint* param_1, uint param_2) {
+    *param_1 = param_2;
+    *reinterpret_cast<unsigned short*>(reinterpret_cast<char*>(param_1) + 4) = 0;
+    *reinterpret_cast<unsigned short*>(reinterpret_cast<char*>(param_1) + 6) = 8;
+    return 0;
+}
 // !FUNC 0x00459650 END
 
 // !FUNC 0x00459690 BEGIN
 /* 459690-4596A1 00011 */
-int CDSMpx::FUN_00459690(int* param_1) { STUB_BODY(); return 0; }
+// libmad 0.15.1b bit.c::mad_bit_nextbyte. Returns pointer to next unprocessed
+// byte: bitptr->byte when bit pointer is byte-aligned (left == CHAR_BIT),
+// else byte+1.  MSVC8 /O2 hoists the load above the branch (matches the
+// observed `mov [eax] / jz` shape at 0x00459690).
+int CDSMpx::FUN_00459690(int* param_1) {
+    int iVar1 = *param_1;
+    if (*reinterpret_cast<short*>(reinterpret_cast<char*>(param_1) + 6) != 8) {
+        iVar1 = iVar1 + 1;
+    }
+    return iVar1;
+}
 // !FUNC 0x00459690 END
 
 // !FUNC 0x004597b0 BEGIN

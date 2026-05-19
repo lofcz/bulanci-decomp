@@ -53,6 +53,28 @@ def http_get_json(base_url: str, path: str, params: dict | None = None, timeout:
     return json.loads(body)
 
 
+def http_post_json(base_url: str, path: str, params: dict | None = None, timeout: float = 60.0) -> str:
+    """POST a JSON body to the MCP server.
+
+    `/run_script_inline` rejects form-encoded bodies ("code parameter
+    required") and only accepts JSON; POST is needed because the inline Java
+    source can exceed sensible URL-length limits.
+    """
+    url = f"{base_url.rstrip('/')}{path}"
+    data = json.dumps(params or {}).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=data,
+        headers={
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return resp.read().decode("utf-8", errors="replace")
+
+
 # --- type normalisation, mirroring GenerateMapping.java ---------------------
 
 _TYPE_NORMALISE = {
@@ -215,6 +237,87 @@ def parse_function_text(body: str) -> dict | None:
     }
 
 
+# --- namespace lookup -------------------------------------------------------
+
+# Inline Ghidra/Java that dumps `<entryAddrHex>\t<getName(true)>\n` for every
+# non-thunk, non-external function. Mirrors what `GenerateMapping.java` does
+# when it calls `func.getName(true)`. The MCP `/get_function_by_address`
+# signature endpoint does NOT include the parent namespace, so without this
+# pass every class-namespaced row (e.g. `CGame::CGame_ProcessNetMessage`)
+# would get downgraded to a bare name, which would then collide with the
+# `_Globals::`-promotion logic in `seed_units_listing.py` and silently
+# orphan every hand-matched body in `src/bulanci/<ClassName>.cpp`.
+_NS_DUMP_SCRIPT = """
+import ghidra.app.script.GhidraScript;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionIterator;
+
+public class McpInline extends GhidraScript {
+    @Override public void run() throws Exception {
+        StringBuilder sb = new StringBuilder();
+        FunctionIterator it = currentProgram.getListing().getFunctions(true);
+        while (it.hasNext()) {
+            Function f = it.next();
+            if (f.isThunk() || f.isExternal()) continue;
+            sb.append(Long.toHexString(f.getEntryPoint().getOffset()));
+            sb.append('\\t');
+            sb.append(f.getName(true));
+            sb.append('\\n');
+        }
+        println(sb.toString());
+    }
+}
+"""
+
+
+def fetch_namespace_map(base_url: str, program: str) -> dict[str, str]:
+    """Return {entryAddrHex(no 0x, lowercase) : qualified_name} for every
+    non-thunk, non-external function in the open program.
+
+    Calls `run_script_inline` so the result is exactly `Function.getName(true)`
+    -- the same source `scripts/ghidra/GenerateMapping.java` reads. If the
+    MCP server has scripting disabled (`GHIDRA_MCP_ALLOW_SCRIPTS` unset),
+    returns an empty dict and the caller falls back to bare names.
+    """
+    print(f"[mcp] resolving namespaces via run_script_inline", file=sys.stderr)
+    try:
+        body = http_post_json(
+            base_url, "/run_script_inline",
+            {"code": _NS_DUMP_SCRIPT, "program": program},
+            timeout=120.0,
+        )
+    except Exception as e:
+        print(
+            f"[mcp] namespace dump failed ({e}); falling back to bare names. "
+            f"Class-namespaced rows will be downgraded -- expect "
+            f"sync_units.py to orphan hand-matched bodies. Set "
+            f"GHIDRA_MCP_ALLOW_SCRIPTS=1 on the MCP server to enable.",
+            file=sys.stderr,
+        )
+        return {}
+
+    out: dict[str, str] = {}
+    for raw_line in body.splitlines():
+        line = raw_line.strip()
+        if "\t" not in line:
+            continue
+        addr, qual = line.split("\t", 1)
+        addr = addr.strip().lower()
+        qual = qual.strip()
+        if not addr or not qual:
+            continue
+        try:
+            int(addr, 16)
+        except ValueError:
+            # Non-hex content (e.g. embedded warning lines from the
+            # JavaScriptProvider's compiler) -- skip.
+            continue
+        out[addr] = qual
+
+    print(f"[mcp] namespace map: {len(out)} entries", file=sys.stderr)
+    return out
+
+
 # --- main pipeline ----------------------------------------------------------
 
 def list_all_functions(base_url: str, program: str) -> list[dict]:
@@ -241,11 +344,26 @@ def fetch_function_record(base_url: str, program: str, addr: str) -> dict | None
     return parse_function_text(body)
 
 
-def format_csv_row(name: str, addr: int, size: int, sig: str) -> str | None:
+def format_csv_row(
+    name: str,
+    addr: int,
+    size: int,
+    sig: str,
+    ns_map: dict[str, str] | None = None,
+) -> str | None:
     qualified, conv, rettype, varargs, args = parse_signature(sig)
-    # GenerateMapping.java prefers the qualified name from the signature when
-    # present; fall back to the short Ghidra name otherwise.
-    qualified_name = qualified or name
+    # The MCP signature line drops the parent namespace; `ns_map` (built once
+    # via `fetch_namespace_map`) restores it so that e.g.
+    #   `CGame_ProcessNetMessage` -> `CGame::CGame_ProcessNetMessage`
+    # matches what `GenerateMapping.java`'s `func.getName(true)` would
+    # produce. Falls back to whatever the signature contained (or the bare
+    # symbol name) if the dump was unavailable.
+    addr_key = f"{addr:x}".lower()
+    qualified_name = ""
+    if ns_map:
+        qualified_name = ns_map.get(addr_key, "")
+    if not qualified_name:
+        qualified_name = qualified or name
     parts: list[str] = [
         "",                      # mangled_name (not exposed via MCP)
         qualified_name,
@@ -268,6 +386,10 @@ def export(base_url: str, program: str, output: Path, workers: int, limit: int |
         funcs = funcs[:limit]
     print(f"[mcp] {len(funcs)} candidate functions; pulling per-function details with {workers} workers", file=sys.stderr)
 
+    # Resolve `getName(true)` namespaces in one inline-script round-trip,
+    # then thread the result through every per-function fetch.
+    ns_map = fetch_namespace_map(base_url, program)
+
     rows: list[tuple[int, str]] = []  # (sort_key, csv_line)
     started = time.time()
 
@@ -281,7 +403,9 @@ def export(base_url: str, program: str, output: Path, workers: int, limit: int |
             return idx, None
         if rec is None:
             return idx, None
-        line = format_csv_row(rec["name"], rec["entry"], rec["size"], rec["signature"])
+        line = format_csv_row(
+            rec["name"], rec["entry"], rec["size"], rec["signature"], ns_map=ns_map,
+        )
         return idx, line
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as ex:

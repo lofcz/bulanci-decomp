@@ -56,6 +56,13 @@ FUNC_BEGIN = re.compile(r"^// !FUNC (0x[0-9a-fA-F]+) BEGIN\s*$")
 FUNC_END = re.compile(r"^// !FUNC (0x[0-9a-fA-F]+) END\s*$")
 DECL_BEGIN = re.compile(r"^\s*// !DECL (0x[0-9a-fA-F]+) BEGIN\s*$")
 DECL_END = re.compile(r"^\s*// !DECL (0x[0-9a-fA-F]+) END\s*$")
+# Per-file user-owned region (cross-unit forward declarations, ad-hoc
+# #include directives, etc.) sitting between the auto-emitted
+# `#include "<unit>.h"` line and the first `// !FUNC` block.  Preserved
+# verbatim across syncs.  Use sparingly: pollution shows up in every
+# regenerated unit and the contents are NOT shared between units.
+PROLOGUE_BEGIN = re.compile(r"^// !PROLOGUE BEGIN\s*$")
+PROLOGUE_END = re.compile(r"^// !PROLOGUE END\s*$")
 
 # Hand-written matched bodies are identified by the *absence* of this
 # substring; stubs carry it because `render_func_body()` always writes
@@ -90,15 +97,38 @@ def _iter_blocks(text: str, begin_re: re.Pattern, end_re: re.Pattern):
             cur_content.append(line)
 
 
+def _extract_prologue(text: str) -> list[str] | None:
+    """Pull the contents of a `// !PROLOGUE BEGIN .. // !PROLOGUE END` block
+    if present.  Returns the inner lines (sans the markers), or None when
+    no prologue block exists.  Only the first occurrence is honoured.
+    """
+    in_block = False
+    inner: list[str] = []
+    for line in text.splitlines():
+        if not in_block and PROLOGUE_BEGIN.match(line):
+            in_block = True
+            continue
+        if in_block and PROLOGUE_END.match(line):
+            return inner
+        if in_block:
+            inner.append(line)
+    return None
+
+
 def scan_existing(src_dir: Path, include_dir: Path):
     """Returns:
         body_cache: {addr: (current_unit, is_stub, content_lines)}
         decl_cache: {addr: (current_unit, content_lines)}
+        prologue_cache: {unit_stem: content_lines}
     """
     body_cache: dict[int, tuple[str, bool, list[str]]] = {}
     decl_cache: dict[int, tuple[str, list[str]]] = {}
+    prologue_cache: dict[str, list[str]] = {}
     for cpp in sorted(src_dir.glob("*.cpp")):
         text = cpp.read_text(encoding="utf-8", errors="replace")
+        prologue = _extract_prologue(text)
+        if prologue is not None:
+            prologue_cache[cpp.stem] = prologue
         for addr, content in _iter_blocks(text, FUNC_BEGIN, FUNC_END):
             is_stub = STUB_MARKER in "\n".join(content)
             if addr in body_cache:
@@ -114,7 +144,7 @@ def scan_existing(src_dir: Path, include_dir: Path):
                       f"{decl_cache[addr][0]}.h and {h.stem}.h; "
                       f"keeping the latter.")
             decl_cache[addr] = (h.stem, content)
-    return body_cache, decl_cache
+    return body_cache, decl_cache, prologue_cache
 
 
 # ---------------------------------------------------------------------------
@@ -161,14 +191,23 @@ def plan_expected(unit: DecompUnit):
 
 
 def _render_unit_source(unit_name: str, funs: list, namespaces: list[str],
-                        body_cache: dict[int, tuple[str, bool, list[str]]]):
+                        body_cache: dict[int, tuple[str, bool, list[str]]],
+                        prologue: list[str] | None = None):
     """Render the .cpp file for one unit.  Hand-edited bodies (no
     STUB_BODY marker) are embedded verbatim regardless of where they
-    previously lived; stubs are always re-rendered."""
+    previously lived; stubs are always re-rendered.  A `// !PROLOGUE
+    BEGIN/END` block (cross-unit forward decls etc.) is re-emitted
+    verbatim if `prologue` is non-empty."""
     leaves = _leaf_class_names(namespaces)
     out: list[str] = []
     out.append(f'#include "{unit_name}.h"\n')
     out.append("\n")
+    if prologue:
+        out.append("// !PROLOGUE BEGIN\n")
+        for line in prologue:
+            out.append(line + "\n")
+        out.append("// !PROLOGUE END\n")
+        out.append("\n")
     for fun in funs:
         out.append(_func_begin(fun.start))
         cached = body_cache.get(fun.start)
@@ -275,7 +314,7 @@ def sync(unit: DecompUnit, dry_run: bool = False) -> dict:
     src_dir.mkdir(parents=True, exist_ok=True)
     include_dir.mkdir(parents=True, exist_ok=True)
 
-    body_cache, decl_cache = scan_existing(src_dir, include_dir)
+    body_cache, decl_cache, prologue_cache = scan_existing(src_dir, include_dir)
     per_unit_funs, per_unit_ns, addr_to_unit, orphan_ns = plan_expected(unit)
 
     if orphan_ns:
@@ -303,7 +342,8 @@ def sync(unit: DecompUnit, dry_run: bool = False) -> dict:
         namespaces = per_unit_ns[unit_name]
         funs_by_ns = _funs_by_namespace(funs)
 
-        new_cpp = _render_unit_source(unit_name, funs, namespaces, body_cache)
+        new_cpp = _render_unit_source(unit_name, funs, namespaces, body_cache,
+                                      prologue=prologue_cache.get(unit_name))
         new_h = _render_unit_header(unit_name, funs_by_ns, namespaces,
                                     decl_cache, body_cache)
 

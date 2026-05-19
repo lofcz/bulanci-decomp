@@ -2920,7 +2920,7 @@
 ;_Globals::FUN_0046edc0;0x46edc0;0x42;__cdecl;;uint;int
 ;_Globals::FUN_0046ee10;0x46ee10;0x49;__cdecl;;uint;int
 ;_Globals::FUN_0046ee60;0x46ee60;0xf8;__cdecl;;uint;int;int;char*;int
-;_Globals::FUN_0046ef60;0x46ef60;0x1a;__cdecl;;uchar;int;char*;int
+;_Globals::FUN_0046ef60;0x46ef60;0x1a;__cdecl;;uint;int;char*;int
 ;_Globals::FUN_0046ef80;0x46ef80;0x3a4;__cdecl;;uint;int*;int
 ;_Globals::FUN_0046f360;0x46f360;0x27;__fastcall;;uchar;uint
 ;_Globals::FUN_0046f390;0x46f390;0x4e;__stdcall;;uchar
@@ -2935,7 +2935,7 @@
 ;_Globals::FUN_0046fe80;0x46fe80;0x3cd;__cdecl;;uchar;int*;int
 ;_Globals::FUN_00470250;0x470250;0x70;__cdecl;;uint;int
 ;_Globals::FUN_004702c0;0x4702c0;0x1fa;__cdecl;;uint;int;uint;int;int;int;uint;char*;int
-;_Globals::FUN_004704c0;0x4704c0;0x25;__cdecl;;uchar;int;uint;char*;int
+;_Globals::FUN_004704c0;0x4704c0;0x25;__cdecl;;uint;int;uint;char*;int
 ;_Globals::FUN_004704f0;0x4704f0;0x7d;__cdecl;;uchar;int*;int;int*
 ;_Globals::FUN_00470570;0x470570;0xa7;__cdecl;;int*;int;int;int
 ;_Globals::FUN_00470620;0x470620;0xa63;__cdecl;;uchar;uint*;int*;int

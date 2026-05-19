@@ -57,11 +57,31 @@ def main(out_dir: str) -> int:
     print(f"  channels != 3        : {len(bad_channels)}")
     print(f"  totalSize != size    : {len(bad_total)}")
 
+    # Chunk-walker invariants. The walker stamps `chunkCount` and a
+    # per-tag histogram on every sprite; missing fields would indicate
+    # the chain failed to walk (the parser logs that as a sanity warning).
+    missing_chunks = [r for r in sprites if "chunkCount" not in r.get("sprite", {})]
+    print(f"  missing chunkCount   : {len(missing_chunks)}")
+    bad_chunk_flag = [
+        r for r in sprites
+        if r["sprite"].get("flags") + 1 != r["sprite"].get("chunkCount", -1)
+    ]
+    print(f"  flags+1 != chunkCount: {len(bad_chunk_flag)}")
+    # Aggregate tag histogram across the whole pack. Useful for spotting
+    # rare tags (4, 5) that appear only inside the bigger atlases.
+    tag_total: Counter = Counter()
+    for r in sprites:
+        for tag, n in (r.get("sprite", {}).get("chunkTags") or {}).items():
+            tag_total[int(tag)] += n
+    print(f"  global chunk-tags    : {dict(sorted(tag_total.items()))}")
+
     # Histograms for quick eyeballing.
     flag_hist = Counter(r["sprite"]["flags"] for r in sprites)
     width_hist = Counter(r["sprite"]["width"] for r in sprites)
+    chunk_hist = Counter(r["sprite"].get("chunkCount") for r in sprites)
     print("  flags top-8          :", flag_hist.most_common(8))
     print("  width top-8          :", width_hist.most_common(8))
+    print("  chunkCount top-8     :", chunk_hist.most_common(8))
     return 0
 
 
