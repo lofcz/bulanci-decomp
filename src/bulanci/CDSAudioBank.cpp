@@ -12,7 +12,9 @@ uchar CDSAudioBank::FUN_00429240(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004292f0 BEGIN
 /* 4292F0-4292F6 00006 */
-uchar* CDSAudioBank::FUN_004292f0() { STUB_BODY(); return 0; }
+uchar* CDSAudioBank::FUN_004292f0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3ae0);
+}
 // !FUNC 0x004292f0 END
 
 // !FUNC 0x00429310 BEGIN

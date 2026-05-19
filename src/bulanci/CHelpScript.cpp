@@ -7,7 +7,9 @@ uint* CHelpScript::FUN_004215e0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00421680 BEGIN
 /* 421680-421686 00006 */
-uchar* CHelpScript::FUN_00421680() { STUB_BODY(); return 0; }
+uchar* CHelpScript::FUN_00421680() {
+    return reinterpret_cast<uchar*>(&DAT_004b3894);
+}
 // !FUNC 0x00421680 END
 
 // !FUNC 0x00421690 BEGIN

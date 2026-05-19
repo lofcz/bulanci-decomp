@@ -22,7 +22,9 @@ uchar CPoemScroller::FUN_00425ca0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00425da0 BEGIN
 /* 425DA0-425DA6 00006 */
-uchar* CPoemScroller::FUN_00425da0() { STUB_BODY(); return 0; }
+uchar* CPoemScroller::FUN_00425da0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3998);
+}
 // !FUNC 0x00425da0 END
 
 // !FUNC 0x00425db0 BEGIN

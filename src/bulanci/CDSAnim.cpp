@@ -7,7 +7,9 @@ uint* CDSAnim::FUN_00439470(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00439510 BEGIN
 /* 439510-439516 00006 */
-uchar* CDSAnim::FUN_00439510() { STUB_BODY(); return 0; }
+uchar* CDSAnim::FUN_00439510() {
+    return reinterpret_cast<uchar*>(&DAT_004b832c);
+}
 // !FUNC 0x00439510 END
 
 // !FUNC 0x00439560 BEGIN

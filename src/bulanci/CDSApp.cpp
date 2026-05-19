@@ -22,7 +22,9 @@ uint* CDSApp::FUN_0042afd0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042b130 BEGIN
 /* 42B130-42B136 00006 */
-uchar* CDSApp::FUN_0042b130() { STUB_BODY(); return 0; }
+uchar* CDSApp::FUN_0042b130() {
+    return reinterpret_cast<uchar*>(&DAT_004b3b20);
+}
 // !FUNC 0x0042b130 END
 
 // !FUNC 0x0042b140 BEGIN

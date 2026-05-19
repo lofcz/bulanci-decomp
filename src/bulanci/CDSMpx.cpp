@@ -2,7 +2,9 @@
 
 // !FUNC 0x00432f10 BEGIN
 /* 432F10-432F16 00006 */
-uchar* CDSMpx::FUN_00432f10() { STUB_BODY(); return 0; }
+uchar* CDSMpx::FUN_00432f10() {
+    return reinterpret_cast<uchar*>(&DAT_004b8510);
+}
 // !FUNC 0x00432f10 END
 
 // !FUNC 0x00432f20 BEGIN

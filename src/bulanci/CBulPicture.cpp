@@ -17,7 +17,9 @@ uchar CBulPicture::FUN_0040b050(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040b8b0 BEGIN
 /* 40B8B0-40B8B6 00006 */
-uchar* CBulPicture::FUN_0040b8b0() { STUB_BODY(); return 0; }
+uchar* CBulPicture::FUN_0040b8b0() {
+    return reinterpret_cast<uchar*>(&DAT_004b358c);
+}
 // !FUNC 0x0040b8b0 END
 
 // !FUNC 0x0040b8c0 BEGIN

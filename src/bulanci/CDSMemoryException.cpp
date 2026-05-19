@@ -12,6 +12,8 @@ uint* CDSMemoryException::FUN_00434a70(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00434a90 BEGIN
 /* 434A90-434A96 00006 */
-uchar* CDSMemoryException::FUN_00434a90() { STUB_BODY(); return 0; }
+uchar* CDSMemoryException::FUN_00434a90() {
+    return reinterpret_cast<uchar*>(&DAT_004b81d4);
+}
 // !FUNC 0x00434a90 END
 

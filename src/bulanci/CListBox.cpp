@@ -12,7 +12,9 @@ uchar CListBox::FUN_00408200(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00408290 BEGIN
 /* 408290-408296 00006 */
-uchar* CListBox::FUN_00408290() { STUB_BODY(); return 0; }
+uchar* CListBox::FUN_00408290() {
+    return reinterpret_cast<uchar*>(&DAT_004b33e0);
+}
 // !FUNC 0x00408290 END
 
 // !FUNC 0x004082a0 BEGIN

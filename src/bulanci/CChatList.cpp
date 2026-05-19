@@ -32,7 +32,9 @@ uint* CChatList::FUN_0040d010(int* param_1, uint param_2, uint param_3) { STUB_B
 
 // !FUNC 0x0040d090 BEGIN
 /* 40D090-40D096 00006 */
-uchar* CChatList::FUN_0040d090() { STUB_BODY(); return 0; }
+uchar* CChatList::FUN_0040d090() {
+    return reinterpret_cast<uchar*>(&DAT_004b3668);
+}
 // !FUNC 0x0040d090 END
 
 // !FUNC 0x0040d0b0 BEGIN

@@ -42,7 +42,9 @@ uint* CScrollBar::FUN_00404790(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00404840 BEGIN
 /* 404840-404846 00006 */
-uchar* CScrollBar::FUN_00404840() { STUB_BODY(); return 0; }
+uchar* CScrollBar::FUN_00404840() {
+    return reinterpret_cast<uchar*>(&DAT_004b3314);
+}
 // !FUNC 0x00404840 END
 
 // !FUNC 0x00404850 BEGIN

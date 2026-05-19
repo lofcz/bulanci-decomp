@@ -7,7 +7,9 @@ uchar CDSMpxDecoder::FUN_004468b0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00446930 BEGIN
 /* 446930-446936 00006 */
-uchar* CDSMpxDecoder::FUN_00446930() { STUB_BODY(); return 0; }
+uchar* CDSMpxDecoder::FUN_00446930() {
+    return reinterpret_cast<uchar*>(&DAT_004b84fc);
+}
 // !FUNC 0x00446930 END
 
 // !FUNC 0x00446ae0 BEGIN

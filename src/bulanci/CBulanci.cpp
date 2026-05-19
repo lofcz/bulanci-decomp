@@ -67,7 +67,9 @@ uint* CBulanci::FUN_004026f0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00402830 BEGIN
 /* 402830-402836 00006 */
-uchar* CBulanci::FUN_00402830() { STUB_BODY(); return 0; }
+uchar* CBulanci::FUN_00402830() {
+    return reinterpret_cast<uchar*>(&DAT_004b3300);
+}
 // !FUNC 0x00402830 END
 
 // !FUNC 0x00402840 BEGIN
@@ -92,12 +94,16 @@ uchar CBulanci::FUN_00402870(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00402880 BEGIN
 /* 402880-402886 00006 */
-uchar* CBulanci::FUN_00402880() { STUB_BODY(); return 0; }
+uchar* CBulanci::FUN_00402880() {
+    return reinterpret_cast<uchar*>(&DAT_004b7c38);
+}
 // !FUNC 0x00402880 END
 
 // !FUNC 0x00402890 BEGIN
 /* 402890-402896 00006 */
-uchar* CBulanci::FUN_00402890() { STUB_BODY(); return 0; }
+uchar* CBulanci::FUN_00402890() {
+    return reinterpret_cast<uchar*>(&DAT_004b7c50);
+}
 // !FUNC 0x00402890 END
 
 // !FUNC 0x004028a0 BEGIN

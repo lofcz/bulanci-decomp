@@ -2,7 +2,9 @@
 
 // !FUNC 0x00447210 BEGIN
 /* 447210-447216 00006 */
-uchar* CDSWorkingThread::FUN_00447210() { STUB_BODY(); return 0; }
+uchar* CDSWorkingThread::FUN_00447210() {
+    return reinterpret_cast<uchar*>(&DAT_004b8590);
+}
 // !FUNC 0x00447210 END
 
 // !FUNC 0x00447220 BEGIN

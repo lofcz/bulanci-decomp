@@ -7,7 +7,9 @@ uchar CDSAudioPlayer::FUN_0043a4f0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043a570 BEGIN
 /* 43A570-43A576 00006 */
-uchar* CDSAudioPlayer::FUN_0043a570() { STUB_BODY(); return 0; }
+uchar* CDSAudioPlayer::FUN_0043a570() {
+    return reinterpret_cast<uchar*>(&DAT_004b83a0);
+}
 // !FUNC 0x0043a570 END
 
 // !FUNC 0x0043a580 BEGIN

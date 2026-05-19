@@ -2,7 +2,9 @@
 
 // !FUNC 0x0040b770 BEGIN
 /* 40B770-40B776 00006 */
-uchar* CSessionItem::FUN_0040b770() { STUB_BODY(); return 0; }
+uchar* CSessionItem::FUN_0040b770() {
+    return reinterpret_cast<uchar*>(&DAT_004b3510);
+}
 // !FUNC 0x0040b770 END
 
 // !FUNC 0x0040e8b0 BEGIN

@@ -2,7 +2,9 @@
 
 // !FUNC 0x00403500 BEGIN
 /* 403500-403506 00006 */
-uchar* CItemInfo::FUN_00403500() { STUB_BODY(); return 0; }
+uchar* CItemInfo::FUN_00403500() {
+    return reinterpret_cast<uchar*>(&DAT_004b33b8);
+}
 // !FUNC 0x00403500 END
 
 // !FUNC 0x00434b10 BEGIN

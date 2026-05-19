@@ -2,7 +2,9 @@
 
 // !FUNC 0x00434ac0 BEGIN
 /* 434AC0-434AC6 00006 */
-uchar* CDSSimpleException::FUN_00434ac0() { STUB_BODY(); return 0; }
+uchar* CDSSimpleException::FUN_00434ac0() {
+    return reinterpret_cast<uchar*>(&DAT_004b81fc);
+}
 // !FUNC 0x00434ac0 END
 
 // !FUNC 0x00434ad0 BEGIN

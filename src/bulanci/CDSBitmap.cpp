@@ -2,7 +2,9 @@
 
 // !FUNC 0x00422980 BEGIN
 /* 422980-422986 00006 */
-uchar* CDSBitmap::FUN_00422980() { STUB_BODY(); return 0; }
+uchar* CDSBitmap::FUN_00422980() {
+    return reinterpret_cast<uchar*>(&DAT_004b830c);
+}
 // !FUNC 0x00422980 END
 
 // !FUNC 0x00422990 BEGIN

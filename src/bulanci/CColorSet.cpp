@@ -7,7 +7,9 @@ uchar CColorSet::FUN_0040aed0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040b780 BEGIN
 /* 40B780-40B786 00006 */
-uchar* CColorSet::FUN_0040b780() { STUB_BODY(); return 0; }
+uchar* CColorSet::FUN_0040b780() {
+    return reinterpret_cast<uchar*>(&DAT_004b3558);
+}
 // !FUNC 0x0040b780 END
 
 // !FUNC 0x0040b790 BEGIN

@@ -2,7 +2,9 @@
 
 // !FUNC 0x004032c0 BEGIN
 /* 4032C0-4032C6 00006 */
-uchar* CDSChained::FUN_004032c0() { STUB_BODY(); return 0; }
+uchar* CDSChained::FUN_004032c0() {
+    return reinterpret_cast<uchar*>(&DAT_004b7cb8);
+}
 // !FUNC 0x004032c0 END
 
 // !FUNC 0x004032d0 BEGIN

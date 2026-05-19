@@ -12,6 +12,8 @@ uint* CHistoryView::FUN_00422a70(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00422ad0 BEGIN
 /* 422AD0-422AD6 00006 */
-uchar* CHistoryView::FUN_00422ad0() { STUB_BODY(); return 0; }
+uchar* CHistoryView::FUN_00422ad0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3928);
+}
 // !FUNC 0x00422ad0 END
 

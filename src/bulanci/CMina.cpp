@@ -22,7 +22,9 @@ uint* CMina::FUN_0041a990(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041aa30 BEGIN
 /* 41AA30-41AA36 00006 */
-uchar* CMina::FUN_0041aa30() { STUB_BODY(); return 0; }
+uchar* CMina::FUN_0041aa30() {
+    return reinterpret_cast<uchar*>(&DAT_004b384c);
+}
 // !FUNC 0x0041aa30 END
 
 // !FUNC 0x0041aa50 BEGIN

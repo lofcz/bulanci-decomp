@@ -12,7 +12,9 @@ uchar CScoreItem::FUN_00408f90(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004093a0 BEGIN
 /* 4093A0-4093A6 00006 */
-uchar* CScoreItem::FUN_004093a0() { STUB_BODY(); return 0; }
+uchar* CScoreItem::FUN_004093a0() {
+    return reinterpret_cast<uchar*>(&DAT_004b34c0);
+}
 // !FUNC 0x004093a0 END
 
 // !FUNC 0x004093b0 BEGIN

@@ -27,7 +27,9 @@ uint* CIcon::FUN_004049e0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00404a60 BEGIN
 /* 404A60-404A66 00006 */
-uchar* CIcon::FUN_00404a60() { STUB_BODY(); return 0; }
+uchar* CIcon::FUN_00404a60() {
+    return reinterpret_cast<uchar*>(&DAT_004b343c);
+}
 // !FUNC 0x00404a60 END
 
 // !FUNC 0x00404a70 BEGIN

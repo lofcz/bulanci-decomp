@@ -22,12 +22,16 @@ uchar CDSDsmFile::Catch_00428d10() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00428da0 BEGIN
 /* 428DA0-428DA6 00006 */
-uchar* CDSDsmFile::FUN_00428da0() { STUB_BODY(); return 0; }
+uchar* CDSDsmFile::FUN_00428da0() {
+    return reinterpret_cast<uchar*>(&DAT_004b836c);
+}
 // !FUNC 0x00428da0 END
 
 // !FUNC 0x00428db0 BEGIN
 /* 428DB0-428DB6 00006 */
-uchar* CDSDsmFile::FUN_00428db0() { STUB_BODY(); return 0; }
+uchar* CDSDsmFile::FUN_00428db0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3a64);
+}
 // !FUNC 0x00428db0 END
 
 // !FUNC 0x00428dc0 BEGIN

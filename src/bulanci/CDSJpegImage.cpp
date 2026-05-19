@@ -12,7 +12,9 @@ uchar CDSJpegImage::FUN_00431cc0(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00431d50 BEGIN
 /* 431D50-431D56 00006 */
-uchar* CDSJpegImage::FUN_00431d50() { STUB_BODY(); return 0; }
+uchar* CDSJpegImage::FUN_00431d50() {
+    return reinterpret_cast<uchar*>(&DAT_004b7d80);
+}
 // !FUNC 0x00431d50 END
 
 // !FUNC 0x00431d60 BEGIN

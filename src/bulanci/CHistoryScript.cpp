@@ -7,7 +7,9 @@ uint* CHistoryScript::FUN_004226c0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00422760 BEGIN
 /* 422760-422766 00006 */
-uchar* CHistoryScript::FUN_00422760() { STUB_BODY(); return 0; }
+uchar* CHistoryScript::FUN_00422760() {
+    return reinterpret_cast<uchar*>(&DAT_004b38e8);
+}
 // !FUNC 0x00422760 END
 
 // !FUNC 0x00422780 BEGIN

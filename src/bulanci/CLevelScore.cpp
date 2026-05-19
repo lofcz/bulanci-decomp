@@ -7,7 +7,9 @@ uchar CLevelScore::FUN_00409050(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00409310 BEGIN
 /* 409310-409316 00006 */
-uchar* CLevelScore::FUN_00409310() { STUB_BODY(); return 0; }
+uchar* CLevelScore::FUN_00409310() {
+    return reinterpret_cast<uchar*>(&DAT_004b34d4);
+}
 // !FUNC 0x00409310 END
 
 // !FUNC 0x00409320 BEGIN

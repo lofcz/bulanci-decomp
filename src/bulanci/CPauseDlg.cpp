@@ -22,7 +22,9 @@ uchar CPauseDlg::FUN_0040b410(ushort param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040be10 BEGIN
 /* 40BE10-40BE16 00006 */
-uchar* CPauseDlg::FUN_0040be10() { STUB_BODY(); return 0; }
+uchar* CPauseDlg::FUN_0040be10() {
+    return reinterpret_cast<uchar*>(&DAT_004b367c);
+}
 // !FUNC 0x0040be10 END
 
 // !FUNC 0x0040f090 BEGIN

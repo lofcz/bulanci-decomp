@@ -32,7 +32,9 @@ uint* CButton::FUN_00404b10(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00404ba0 BEGIN
 /* 404BA0-404BA6 00006 */
-uchar* CButton::FUN_00404ba0() { STUB_BODY(); return 0; }
+uchar* CButton::FUN_00404ba0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3370);
+}
 // !FUNC 0x00404ba0 END
 
 // !FUNC 0x00404bb0 BEGIN

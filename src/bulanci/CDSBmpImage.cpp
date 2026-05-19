@@ -12,7 +12,9 @@ uchar CDSBmpImage::FUN_004320c0(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00432290 BEGIN
 /* 432290-432296 00006 */
-uchar* CDSBmpImage::FUN_00432290() { STUB_BODY(); return 0; }
+uchar* CDSBmpImage::FUN_00432290() {
+    return reinterpret_cast<uchar*>(&DAT_004b7dc4);
+}
 // !FUNC 0x00432290 END
 
 // !FUNC 0x004322a0 BEGIN

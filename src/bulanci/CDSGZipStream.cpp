@@ -12,7 +12,9 @@ uchar CDSGZipStream::FUN_004098a0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00409960 BEGIN
 /* 409960-409966 00006 */
-uchar* CDSGZipStream::FUN_00409960() { STUB_BODY(); return 0; }
+uchar* CDSGZipStream::FUN_00409960() {
+    return reinterpret_cast<uchar*>(&DAT_004b8210);
+}
 // !FUNC 0x00409960 END
 
 // !FUNC 0x00409980 BEGIN

@@ -17,7 +17,9 @@ uint* CHelpDlg::FUN_00421e40(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004220a0 BEGIN
 /* 4220A0-4220A6 00006 */
-uchar* CHelpDlg::FUN_004220a0() { STUB_BODY(); return 0; }
+uchar* CHelpDlg::FUN_004220a0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3880);
+}
 // !FUNC 0x004220a0 END
 
 // !FUNC 0x004220b0 BEGIN

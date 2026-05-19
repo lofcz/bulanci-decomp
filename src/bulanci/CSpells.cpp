@@ -7,7 +7,9 @@ uchar CSpells::FUN_00426da0(short param_1, uint param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x004274b0 BEGIN
 /* 4274B0-4274B6 00006 */
-uchar* CSpells::FUN_004274b0() { STUB_BODY(); return 0; }
+uchar* CSpells::FUN_004274b0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3a30);
+}
 // !FUNC 0x004274b0 END
 
 // !FUNC 0x004278c0 BEGIN

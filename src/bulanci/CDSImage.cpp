@@ -7,12 +7,16 @@ uchar CDSImage::FUN_00425580(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004255e0 BEGIN
 /* 4255E0-4255E6 00006 */
-uchar* CDSImage::FUN_004255e0() { STUB_BODY(); return 0; }
+uchar* CDSImage::FUN_004255e0() {
+    return reinterpret_cast<uchar*>(&DAT_004b8268);
+}
 // !FUNC 0x004255e0 END
 
 // !FUNC 0x004255f0 BEGIN
 /* 4255F0-4255F6 00006 */
-uchar* CDSImage::FUN_004255f0() { STUB_BODY(); return 0; }
+uchar* CDSImage::FUN_004255f0() {
+    return reinterpret_cast<uchar*>(&DAT_004b8270);
+}
 // !FUNC 0x004255f0 END
 
 // !FUNC 0x00425600 BEGIN

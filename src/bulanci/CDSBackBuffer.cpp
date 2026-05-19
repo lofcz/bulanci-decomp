@@ -2,7 +2,9 @@
 
 // !FUNC 0x0042ad20 BEGIN
 /* 42AD20-42AD26 00006 */
-uchar* CDSBackBuffer::FUN_0042ad20() { STUB_BODY(); return 0; }
+uchar* CDSBackBuffer::FUN_0042ad20() {
+    return reinterpret_cast<uchar*>(&DAT_004b3b34);
+}
 // !FUNC 0x0042ad20 END
 
 // !FUNC 0x0042ad30 BEGIN

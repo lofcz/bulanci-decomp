@@ -77,7 +77,9 @@ uchar CGame::FUN_00414550(uint param_1, uint param_2, uint param_3) { STUB_BODY(
 
 // !FUNC 0x00414c60 BEGIN
 /* 414C60-414C66 00006 */
-uchar* CGame::FUN_00414c60() { STUB_BODY(); return 0; }
+uchar* CGame::FUN_00414c60() {
+    return reinterpret_cast<uchar*>(&DAT_004b3700);
+}
 // !FUNC 0x00414c60 END
 
 // !FUNC 0x00414c70 BEGIN
@@ -92,7 +94,9 @@ uchar CGame::FUN_00414c80(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00414c90 BEGIN
 /* 414C90-414C96 00006 */
-uchar* CGame::FUN_00414c90() { STUB_BODY(); return 0; }
+uchar* CGame::FUN_00414c90() {
+    return reinterpret_cast<uchar*>(&DAT_004b7c30);
+}
 // !FUNC 0x00414c90 END
 
 // !FUNC 0x00414ca0 BEGIN

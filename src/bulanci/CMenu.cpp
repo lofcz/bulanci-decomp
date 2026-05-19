@@ -134,7 +134,9 @@ uint* CMenu::FUN_00424520(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004245b0 BEGIN
 /* 4245B0-4245B6 00006 */
-uchar* CMenu::FUN_004245b0() { STUB_BODY(); return 0; }
+uchar* CMenu::FUN_004245b0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3984);
+}
 // !FUNC 0x004245b0 END
 
 // !FUNC 0x004245d0 BEGIN

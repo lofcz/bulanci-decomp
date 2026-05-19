@@ -12,7 +12,9 @@ int CDSDirectXException::FUN_0043b720(int param_1, int param_2) { STUB_BODY(); r
 
 // !FUNC 0x0043b750 BEGIN
 /* 43B750-43B756 00006 */
-uchar* CDSDirectXException::FUN_0043b750() { STUB_BODY(); return 0; }
+uchar* CDSDirectXException::FUN_0043b750() {
+    return reinterpret_cast<uchar*>(&DAT_004b83fc);
+}
 // !FUNC 0x0043b750 END
 
 // !FUNC 0x0043b760 BEGIN

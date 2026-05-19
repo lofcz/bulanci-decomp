@@ -7,7 +7,9 @@ uint* CDSScript::FUN_00438390(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004383e0 BEGIN
 /* 4383E0-4383E6 00006 */
-uchar* CDSScript::FUN_004383e0() { STUB_BODY(); return 0; }
+uchar* CDSScript::FUN_004383e0() {
+    return reinterpret_cast<uchar*>(&DAT_004b82dc);
+}
 // !FUNC 0x004383e0 END
 
 // !FUNC 0x004383f0 BEGIN

@@ -12,7 +12,9 @@ uchar CGameTypeDlg::FUN_0040ab00(short param_1, int param_2, uint param_3) { STU
 
 // !FUNC 0x0040bc00 BEGIN
 /* 40BC00-40BC06 00006 */
-uchar* CGameTypeDlg::FUN_0040bc00() { STUB_BODY(); return 0; }
+uchar* CGameTypeDlg::FUN_0040bc00() {
+    return reinterpret_cast<uchar*>(&DAT_004b35c8);
+}
 // !FUNC 0x0040bc00 END
 
 // !FUNC 0x0040ee40 BEGIN

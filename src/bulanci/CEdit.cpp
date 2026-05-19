@@ -27,7 +27,9 @@ uint* CEdit::FUN_00404d10(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00404dc0 BEGIN
 /* 404DC0-404DC6 00006 */
-uchar* CEdit::FUN_00404dc0() { STUB_BODY(); return 0; }
+uchar* CEdit::FUN_00404dc0() {
+    return reinterpret_cast<uchar*>(&DAT_004b33f4);
+}
 // !FUNC 0x00404dc0 END
 
 // !FUNC 0x00404dd0 BEGIN

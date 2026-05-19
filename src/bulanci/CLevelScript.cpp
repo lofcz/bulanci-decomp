@@ -12,7 +12,9 @@ uint* CLevelScript::FUN_004185c0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00418680 BEGIN
 /* 418680-418686 00006 */
-uchar* CLevelScript::FUN_00418680() { STUB_BODY(); return 0; }
+uchar* CLevelScript::FUN_00418680() {
+    return reinterpret_cast<uchar*>(&DAT_004b3488);
+}
 // !FUNC 0x00418680 END
 
 // !FUNC 0x00418690 BEGIN

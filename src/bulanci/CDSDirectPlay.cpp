@@ -7,7 +7,9 @@ uint* CDSDirectPlay::FUN_0043b270(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043b2d0 BEGIN
 /* 43B2D0-43B2D6 00006 */
-uchar* CDSDirectPlay::FUN_0043b2d0() { STUB_BODY(); return 0; }
+uchar* CDSDirectPlay::FUN_0043b2d0() {
+    return reinterpret_cast<uchar*>(&DAT_004b83c8);
+}
 // !FUNC 0x0043b2d0 END
 
 // !FUNC 0x0043b2e0 BEGIN

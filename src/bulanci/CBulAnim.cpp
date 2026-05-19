@@ -17,12 +17,16 @@ uchar CBulAnim::FUN_0040b020(short param_1, uint param_2) { STUB_BODY(); return 
 
 // !FUNC 0x0040b820 BEGIN
 /* 40B820-40B826 00006 */
-uchar* CBulAnim::FUN_0040b820() { STUB_BODY(); return 0; }
+uchar* CBulAnim::FUN_0040b820() {
+    return reinterpret_cast<uchar*>(&DAT_004b82fc);
+}
 // !FUNC 0x0040b820 END
 
 // !FUNC 0x0040b830 BEGIN
 /* 40B830-40B836 00006 */
-uchar* CBulAnim::FUN_0040b830() { STUB_BODY(); return 0; }
+uchar* CBulAnim::FUN_0040b830() {
+    return reinterpret_cast<uchar*>(&DAT_004b8304);
+}
 // !FUNC 0x0040b830 END
 
 // !FUNC 0x0040b840 BEGIN
@@ -37,7 +41,9 @@ uchar CBulAnim::FUN_0040b850(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040b870 BEGIN
 /* 40B870-40B876 00006 */
-uchar* CBulAnim::FUN_0040b870() { STUB_BODY(); return 0; }
+uchar* CBulAnim::FUN_0040b870() {
+    return reinterpret_cast<uchar*>(&DAT_004b35a0);
+}
 // !FUNC 0x0040b870 END
 
 // !FUNC 0x0040b880 BEGIN

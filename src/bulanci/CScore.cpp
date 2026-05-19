@@ -7,7 +7,9 @@ uint CScore::FUN_0040abe0(char param_1, char param_2) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040bdd0 BEGIN
 /* 40BDD0-40BDD6 00006 */
-uchar* CScore::FUN_0040bdd0() { STUB_BODY(); return 0; }
+uchar* CScore::FUN_0040bdd0() {
+    return reinterpret_cast<uchar*>(&DAT_004b362c);
+}
 // !FUNC 0x0040bdd0 END
 
 // !FUNC 0x0040bde0 BEGIN

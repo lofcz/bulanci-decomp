@@ -12,7 +12,9 @@ uint* CStaticText::FUN_00404910(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00404970 BEGIN
 /* 404970-404976 00006 */
-uchar* CStaticText::FUN_00404970() { STUB_BODY(); return 0; }
+uchar* CStaticText::FUN_00404970() {
+    return reinterpret_cast<uchar*>(&DAT_004b3348);
+}
 // !FUNC 0x00404970 END
 
 // !FUNC 0x00404980 BEGIN

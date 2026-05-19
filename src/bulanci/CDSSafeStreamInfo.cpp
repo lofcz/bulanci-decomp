@@ -2,7 +2,9 @@
 
 // !FUNC 0x00446cb0 BEGIN
 /* 446CB0-446CB6 00006 */
-uchar* CDSSafeStreamInfo::FUN_00446cb0() { STUB_BODY(); return 0; }
+uchar* CDSSafeStreamInfo::FUN_00446cb0() {
+    return reinterpret_cast<uchar*>(&DAT_004b8574);
+}
 // !FUNC 0x00446cb0 END
 
 // !FUNC 0x00446cc0 BEGIN

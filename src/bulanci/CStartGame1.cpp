@@ -62,7 +62,9 @@ int* CStartGame1::FUN_0040f400(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040f4b0 BEGIN
 /* 40F4B0-40F4B6 00006 */
-uchar* CStartGame1::FUN_0040f4b0() { STUB_BODY(); return 0; }
+uchar* CStartGame1::FUN_0040f4b0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3538);
+}
 // !FUNC 0x0040f4b0 END
 
 // !FUNC 0x0040f4c0 BEGIN

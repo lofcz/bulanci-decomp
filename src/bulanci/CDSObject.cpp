@@ -2,7 +2,9 @@
 
 // !FUNC 0x004011e0 BEGIN
 /* 4011E0-4011E6 00006 */
-uchar* CDSObject::FUN_004011e0() { STUB_BODY(); return 0; }
+uchar* CDSObject::FUN_004011e0() {
+    return reinterpret_cast<uchar*>(&DAT_004b7bfc);
+}
 // !FUNC 0x004011e0 END
 
 // !FUNC 0x00403510 BEGIN

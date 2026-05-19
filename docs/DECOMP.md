@@ -174,6 +174,54 @@ the same qualified form via the Win32 `UnDecorateSymbolName` API
 with `?` are left alone. After this both sides of the diff use
 identical raw names and pairing works the way report.json expects.
 
+The same rewriter also strips MSVC's leading-underscore prefix from
+C-linkage data symbols whose stripped form matches one of Ghidra's
+auto-naming patterns (`DAT_xxxxxxxx`, `LAB_xxxxxxxx`,
+`PTR_<api>_xxxxxxxx`, `s_xxx_xxxxxxxx`, `switchD_*`,
+`switchdataD_*`, `IMAGE_DOS_HEADER_*`, `thunk_FUN_*`).  This lets
+our compiled `mov eax, offset _DAT_xxxx; ret` align with
+ExportDelinker's relocation against the bare `DAT_xxxx` symbol.
+
+### Externs for ExportDelinker's data symbols
+
+ExportDelinker preserves the original `.text` bytes verbatim and emits
+COFF relocations against the data symbols the function touches
+(`DAT_xxxxxxxx`, `PTR_<api>_xxxxxxxx`, `LAB_xxxxxxxx`, ...).  For our
+compiled stub to produce a matching relocation it needs to *see* the
+same symbol name.  `scripts/internal/extract_externs.py` walks every
+`build/orig/bulanci/*.obj`, collects symbol-table entries that are
+referenced but never defined in our set, filters them to the
+Ghidra-style naming patterns above, and writes them into
+`include/bulanci/_externs.h` as `extern "C" unsigned char NAME;`.
+That header is included from `include/globals.h` so every translation
+unit sees the declarations.
+
+Refresh it after `configure.py` rebuilds the target objects:
+
+```bash
+python scripts/internal/extract_externs.py
+```
+
+The type is intentionally `unsigned char` — only the *symbol name* and
+the *relocation type* (DIR32) matter for pairing.  Hand-matched bodies
+cast the address as needed: `return reinterpret_cast<T*>(&DAT_xxxx);`.
+
+### Auto-matching simple patterns
+
+`scripts/internal/match_global_returns.py` is the first
+pattern-matcher: it picks every size-6 pointer-return method, asks
+Ghidra MCP for the decompilation in 15-function batches (the MCP
+endpoint silently caps batches at 20), and when the body parses as
+`return &DAT_xxxxxxxx;` it rewrites the matching `// !FUNC <addr>`
+block in `src/bulanci/<unit>.cpp` with the real return expression.
+Sync is preserved by `sync_units.py` because the rewritten body no
+longer contains `STUB_BODY(`.
+
+Add more matchers in the same shape for other patterns (member-field
+getters, vftable writes, this-adjusting thunks, MSVC EH funclets) as
+they become the largest remaining buckets in
+`scripts/internal/near_miss.py`.
+
 ## Workflow: refresh from Ghidra changes
 
 After renaming/promoting/annotating in the Ghidra GUI:

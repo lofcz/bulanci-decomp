@@ -2,7 +2,9 @@
 
 // !FUNC 0x004170e0 BEGIN
 /* 4170E0-4170E6 00006 */
-uchar* CShot::FUN_004170e0() { STUB_BODY(); return 0; }
+uchar* CShot::FUN_004170e0() {
+    return reinterpret_cast<uchar*>(&DAT_004b37bc);
+}
 // !FUNC 0x004170e0 END
 
 // !FUNC 0x004170f0 BEGIN

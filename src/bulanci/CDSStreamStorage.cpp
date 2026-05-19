@@ -2,7 +2,9 @@
 
 // !FUNC 0x00401850 BEGIN
 /* 401850-401856 00006 */
-uchar* CDSStreamStorage::FUN_00401850() { STUB_BODY(); return 0; }
+uchar* CDSStreamStorage::FUN_00401850() {
+    return reinterpret_cast<uchar*>(&DAT_004b7eb0);
+}
 // !FUNC 0x00401850 END
 
 // !FUNC 0x00401860 BEGIN
@@ -27,7 +29,9 @@ uchar CDSStreamStorage::FUN_004018a0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004018b0 BEGIN
 /* 4018B0-4018B6 00006 */
-uchar* CDSStreamStorage::FUN_004018b0() { STUB_BODY(); return 0; }
+uchar* CDSStreamStorage::FUN_004018b0() {
+    return reinterpret_cast<uchar*>(&DAT_004b7f0c);
+}
 // !FUNC 0x004018b0 END
 
 // !FUNC 0x004018c0 BEGIN

@@ -12,7 +12,9 @@ uint* CStartGame2::FUN_00407d50(uint param_1, uint param_2, uint param_3, uint p
 
 // !FUNC 0x0040bb40 BEGIN
 /* 40BB40-40BB46 00006 */
-uchar* CStartGame2::FUN_0040bb40() { STUB_BODY(); return 0; }
+uchar* CStartGame2::FUN_0040bb40() {
+    return reinterpret_cast<uchar*>(&DAT_004b356c);
+}
 // !FUNC 0x0040bb40 END
 
 // !FUNC 0x0040bb50 BEGIN

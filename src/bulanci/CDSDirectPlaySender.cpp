@@ -7,12 +7,16 @@ uchar CDSDirectPlaySender::FUN_0043ad20(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043b120 BEGIN
 /* 43B120-43B126 00006 */
-uchar* CDSDirectPlaySender::FUN_0043b120() { STUB_BODY(); return 0; }
+uchar* CDSDirectPlaySender::FUN_0043b120() {
+    return reinterpret_cast<uchar*>(&DAT_004b8588);
+}
 // !FUNC 0x0043b120 END
 
 // !FUNC 0x0043b130 BEGIN
 /* 43B130-43B136 00006 */
-uchar* CDSDirectPlaySender::FUN_0043b130() { STUB_BODY(); return 0; }
+uchar* CDSDirectPlaySender::FUN_0043b130() {
+    return reinterpret_cast<uchar*>(&DAT_004b83dc);
+}
 // !FUNC 0x0043b130 END
 
 // !FUNC 0x0043b140 BEGIN

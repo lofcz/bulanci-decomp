@@ -2,7 +2,9 @@
 
 // !FUNC 0x00403390 BEGIN
 /* 403390-403396 00006 */
-uchar* CDSView::FUN_00403390() { STUB_BODY(); return 0; }
+uchar* CDSView::FUN_00403390() {
+    return reinterpret_cast<uchar*>(&DAT_004b3bac);
+}
 // !FUNC 0x00403390 END
 
 // !FUNC 0x004034a0 BEGIN

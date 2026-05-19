@@ -2,7 +2,9 @@
 
 // !FUNC 0x0040b760 BEGIN
 /* 40B760-40B766 00006 */
-uchar* CMsgDialog::FUN_0040b760() { STUB_BODY(); return 0; }
+uchar* CMsgDialog::FUN_0040b760() {
+    return reinterpret_cast<uchar*>(&DAT_004b3524);
+}
 // !FUNC 0x0040b760 END
 
 // !FUNC 0x0040be80 BEGIN

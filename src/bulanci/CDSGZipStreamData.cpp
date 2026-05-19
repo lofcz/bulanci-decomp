@@ -2,7 +2,9 @@
 
 // !FUNC 0x00434fa0 BEGIN
 /* 434FA0-434FA6 00006 */
-uchar* CDSGZipStreamData::FUN_00434fa0() { STUB_BODY(); return 0; }
+uchar* CDSGZipStreamData::FUN_00434fa0() {
+    return reinterpret_cast<uchar*>(&DAT_004b8248);
+}
 // !FUNC 0x00434fa0 END
 
 // !FUNC 0x00434fb0 BEGIN

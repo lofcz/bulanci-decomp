@@ -17,7 +17,9 @@ uchar CWeapon::FUN_00417a00(uint param_1, uint param_2, int param_3) { STUB_BODY
 
 // !FUNC 0x00418f60 BEGIN
 /* 418F60-418F66 00006 */
-uchar* CWeapon::FUN_00418f60() { STUB_BODY(); return 0; }
+uchar* CWeapon::FUN_00418f60() {
+    return reinterpret_cast<uchar*>(&DAT_004b3754);
+}
 // !FUNC 0x00418f60 END
 
 // !FUNC 0x0041bf00 BEGIN

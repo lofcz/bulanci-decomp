@@ -17,7 +17,9 @@ uchar CColorSwitch::FUN_0040aa60(char* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040b950 BEGIN
 /* 40B950-40B956 00006 */
-uchar* CColorSwitch::FUN_0040b950() { STUB_BODY(); return 0; }
+uchar* CColorSwitch::FUN_0040b950() {
+    return reinterpret_cast<uchar*>(&DAT_004b3640);
+}
 // !FUNC 0x0040b950 END
 
 // !FUNC 0x0040b960 BEGIN

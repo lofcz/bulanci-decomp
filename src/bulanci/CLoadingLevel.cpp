@@ -7,6 +7,8 @@ uint* CLoadingLevel::FUN_0040dfb0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040e100 BEGIN
 /* 40E100-40E106 00006 */
-uchar* CLoadingLevel::FUN_0040e100() { STUB_BODY(); return 0; }
+uchar* CLoadingLevel::FUN_0040e100() {
+    return reinterpret_cast<uchar*>(&DAT_004b3618);
+}
 // !FUNC 0x0040e100 END
 

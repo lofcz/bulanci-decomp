@@ -27,7 +27,9 @@ uint* CAdvertising::FUN_0040e5f0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040e710 BEGIN
 /* 40E710-40E716 00006 */
-uchar* CAdvertising::FUN_0040e710() { STUB_BODY(); return 0; }
+uchar* CAdvertising::FUN_0040e710() {
+    return reinterpret_cast<uchar*>(&DAT_004b36cc);
+}
 // !FUNC 0x0040e710 END
 
 // !FUNC 0x0040e720 BEGIN

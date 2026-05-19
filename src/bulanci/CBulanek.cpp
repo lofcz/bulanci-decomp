@@ -137,7 +137,9 @@ uchar CBulanek::FUN_004184a0(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00418e90 BEGIN
 /* 418E90-418E96 00006 */
-uchar* CBulanek::FUN_00418e90() { STUB_BODY(); return 0; }
+uchar* CBulanek::FUN_00418e90() {
+    return reinterpret_cast<uchar*>(&DAT_004b3734);
+}
 // !FUNC 0x00418e90 END
 
 // !FUNC 0x00418ea0 BEGIN

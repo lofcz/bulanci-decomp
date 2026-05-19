@@ -7,6 +7,8 @@ uint* CHelpView::FUN_004218a0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00421900 BEGIN
 /* 421900-421906 00006 */
-uchar* CHelpView::FUN_00421900() { STUB_BODY(); return 0; }
+uchar* CHelpView::FUN_00421900() {
+    return reinterpret_cast<uchar*>(&DAT_004b38c0);
+}
 // !FUNC 0x00421900 END
 

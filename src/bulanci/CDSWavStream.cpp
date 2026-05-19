@@ -2,7 +2,9 @@
 
 // !FUNC 0x0041a5c0 BEGIN
 /* 41A5C0-41A5C6 00006 */
-uchar* CDSWavStream::FUN_0041a5c0() { STUB_BODY(); return 0; }
+uchar* CDSWavStream::FUN_0041a5c0() {
+    return reinterpret_cast<uchar*>(&DAT_004b843c);
+}
 // !FUNC 0x0041a5c0 END
 
 // !FUNC 0x0041a5d0 BEGIN

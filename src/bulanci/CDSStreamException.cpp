@@ -2,7 +2,9 @@
 
 // !FUNC 0x0042ffe0 BEGIN
 /* 42FFE0-42FFE6 00006 */
-uchar* CDSStreamException::FUN_0042ffe0() { STUB_BODY(); return 0; }
+uchar* CDSStreamException::FUN_0042ffe0() {
+    return reinterpret_cast<uchar*>(&DAT_004b7ce8);
+}
 // !FUNC 0x0042ffe0 END
 
 // !FUNC 0x00430000 BEGIN

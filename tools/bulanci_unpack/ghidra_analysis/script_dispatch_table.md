@@ -85,76 +85,80 @@ Argument readers used by the handlers:
 
 ## CLevelScript extension @ `0x004af018` (opcodes 45..102)
 
-Naming key:
-- "editor" = name from `editor_il_spy/Editor.Scripts/Opcode.cs`
-- "verified" = argument shape recovered by hand-disassembling the handler
-- "?" = handler exists, semantics are not yet documented here
-
 All 58 entries below have been verified by hand-disassembling the
-handler. The column "shape" is the argument list the handler reads off
-the bytecode stream before producing a result; "notes" hints at the
-runtime behaviour we recovered.
+handler. The "name" column is what the unpacker's disassembler prints
+for each opcode; the column "shape" is the argument list the handler
+reads off the bytecode stream before producing a result; "notes" hints
+at the runtime behaviour we recovered.
 
-| op  | ext# | handler      | shape                | notes                                                          |
-|----:|-----:|--------------|----------------------|----------------------------------------------------------------|
-|  45 |    0 | `0x0041d6e0` | sub,sub,u8,u8,i32[n] | CreateAnim (frames=[…]) — also writes a CAnim at this+0xF0    |
-|  46 |    1 | `0x0041d820` | sub,sub,i32          | CreateImage(x, y, imageID); allocates a CGameView wrapper      |
-|  47 |    2 | `0x00418800` | sub,sub,sub,sub      | CreateObstacle (editor name)                                   |
-|  48 |    3 | `0x004187a0` | sub*5                | SetObstacleBounds                                              |
-|  49 |    4 | `0x0041a470` | sub,sub              | SetOrderAxis                                                   |
-|  50 |    5 | `0x00420610` | —                    | InsertBulanci (no args)                                        |
-|  51 |    6 | `0x0041a4a0` | sub                  | InsertView (1 sub = view object)                               |
-|  52 |    7 | `0x00416ae0` | sub                  | SetInsertMode                                                  |
-|  53 |    8 | `0x0041d8f0` | i32                  | LoadPreface(imageID)                                           |
-|  54 |    9 | `0x0041bb00` | i32,i32              | SetMusic(trackID, volume)                                      |
-|  55 |   10 | `0x00416ab0` | sub,sub              | obj.flag@0x69 = (sub2 > 0) — bool setter on the view object    |
-|  56 |   11 | `0x00418770` | sub,sub              | links sub1 (view) and sub2 (int tag) via FUN_00418080          |
-|  57 |   12 | `0x004188b0` | sub                  | calls CGameView::FUN_004184a0 on this+0x458 with sub — used as bridge for InsertView-shape calls |
-|  58 |   13 | `0x004188e0` | sub,sub,sub          | CBulanci::FUN_0042cc80(sub1, sub2, sub3)                       |
-|  59 |   14 | `0x00416b10` | sub                  | _Globals::FUN_0042c990(sub) — destroys a managed object        |
-|  60 |   15 | `0x00416b30` | sub                  | simple 1-sub setter                                            |
-|  61 |   16 | `0x00418920` | sub,sub,sub          | 3 subs consumed; returns first                                 |
-|  62 |   17 | `0x00416b50` | sub                  | simple 1-sub setter (different field than op60)                |
-|  63 |   18 | `0x00416b70` | sub,sub,sub          | 3-arg view setter                                              |
-|  64 |   19 | `0x00416bb0` | sub                  | sub→ESI; CAnim::FUN_00438fb0 on ESI+0x98 — animation-start    |
-|  65 |   20 | `0x00418950` | sub,sub              | calls FUN_00418000(sub1, sub2)                                 |
-|  66 |   21 | `0x00416bd0` | sub,sub              | CAnim::FUN_00438fd0 on sub1+0x98 with sub2 — anim-set-frame    |
-|  67 |   22 | `0x0041f610` | sub*5                | view-state mutator (sub3, sub4 used as bools)                  |
-|  68 |   23 | `0x00416c00` | sub,sub,sub          | 3-sub view setter                                              |
-|  69 |   24 | `0x00416c40` | sub                  | this+0x440 container method `0x0042f330(sub, -1)`              |
-|  70 |   25 | `0x00416c70` | sub                  | this+0x440 container method `0x0042f300(sub)`                  |
-|  71 |   26 | `0x00416c90` | sub                  | this+0x440 container method `0x0042eac0(sub)`                  |
-|  72 |   27 | `0x00416cb0` | sub,sub              | this+0x440 container method `0x0042f2d0(sub1, sub2)`           |
-|  73 |   28 | `0x0041bb30` | sub*5 (via 0x416ce0) | reads 5 subs into a packed struct, forwards to `0x0041b420`    |
-|  74 |   29 | `0x00416d30` | —                    | IsServer                                                       |
-|  75 |   30 | `0x00416d50` | sub                  | StrmSend                                                       |
-|  76 |   31 | `0x00416d70` | sub                  | SetCommStrm                                                    |
-|  77 |   32 | `0x00416d90` | —                    | IsNet                                                          |
-|  78 |   33 | `0x00418980` | sub,sub              | view+0x94 (anim slot?) setter                                  |
-|  79 |   34 | `0x0041d990` | sub,i32              | spawn-and-bind: sub = parent view, i32 = CMenu image ID        |
-|  80 |   35 | `0x00416dc0` | sub,sub              | sets a flag on sub1                                            |
-|  81 |   36 | `0x004189b0` | sub,sub              | this+0x440 map: `map[sub1].@0x18 = sub2` (set)                 |
-|  82 |   37 | `0x004189e0` | sub                  | this+0x440 map: returns `map[sub].@0x18` (get)                 |
-|  83 |   38 | `0x0041bb80` | sub*6                | DefineTraceArea                                                |
-|  84 |   39 | `0x0041e3e0` | sub                  | type-tests sub (must be ClassID 0x7ec) and calls `0x0041db00`  |
-|  85 |   40 | `0x0041e430` | sub*4                | TeleportPlayerTo                                               |
-|  86 |   41 | `0x0041a4d0` | sub,sub              | bind sub1 (view) via FUN_00419ca0 and optionally release       |
-|  87 |   42 | `0x00418a00` | sub                  | type query: invokes sub.vt[0] with `0x4b3768` and compares     |
-|  88 |   43 | `0x00416df0` | sub,sub              | obj.FUN_00439a30(idx) — anim/sound at sub2 within sub1         |
-|  89 |   44 | `0x00418a50` | —                    | allocates a new 0x18-byte "list" object (vtable `0x47f700`)   |
-|  90 |   45 | `0x00418a90` | sub                  | sub != 0 ? sub.@0xc : 0 — read a field from sub                |
-|  91 |   46 | `0x00416e40` | sub,sub,sub          | obj.FUN_00431000(idx, bool)                                    |
-|  92 |   47 | `0x00418ab0` | sub,sub              | array index: returns `((u32*)sub1.@0x8)[sub2]`                 |
-|  93 |   48 | `0x00418ae0` | sub,sub,sub          | array set: `((u32*)sub1.@0x8)[sub2] = sub3`                    |
-|  94 |   49 | `0x00416e80` | sub*4                | obj.FUN_00431100(sub2, sub3, sub4 != 0)                        |
-|  95 |   50 | `0x00418b20` | sub,sub,sub          | obj.FUN_004310b0(sub3, sub2_or_obj_default)                    |
-|  96 |   51 | `0x00416ee0` | sub                  | view-state op (already verified earlier)                       |
-|  97 |   52 | `0x00418b60` | i32                  | CMenu::FUN_00413b20(i32) image lookup                          |
-|  98 |   53 | `0x0041f6a0` | sub*6                | 6-arg helper that ultimately calls `0x00416810` (object lookup) |
-|  99 |   54 | `0x00416f00` | sub,sub              | EnableFireThrough                                              |
-| 100 |   55 | `0x00420630` | —                    | InsertVampires                                                 |
-| 101 |   56 | `0x0041f730` | sub*4                | InsertOpponent                                                 |
-| 102 |   57 | `0x0041da50` | sub,sub              | CreateMine                                                     |
+Names without a footnote come from
+`editor_il_spy/Editor.Scripts/Opcode.cs` (the editor only emits these
+opcodes from its UI). Names tagged **e** are reverse-engineered: they
+describe the engine call the handler forwards to. They are best-effort
+labels rather than authoritative names from the original source — the
+shape and the runtime effect are pinned down, but the original C++
+identifier is unknown.
+
+| op  | ext# | handler      | name                  | shape                | notes                                                          |
+|----:|-----:|--------------|-----------------------|----------------------|----------------------------------------------------------------|
+|  45 |    0 | `0x0041d6e0` | `CreateAnim`          | sub,sub,u8,u8,i32[n] | also writes a CAnim at this+0xF0; the `i32[n]` are CMenu image IDs |
+|  46 |    1 | `0x0041d820` | `CreateImage`         | sub,sub,i32          | (x, y, imageID); allocates a CGameView wrapper                 |
+|  47 |    2 | `0x00418800` | `CreateObstacle`      | sub,sub,sub,sub      | rectangular CObstacle (0x88 bytes)                             |
+|  48 |    3 | `0x004187a0` | `SetObstacleBounds`   | sub*5                | mutates an existing CObstacle's bounds                         |
+|  49 |    4 | `0x0041a470` | `SetOrderAxis`        | sub,sub              | depth-sort axis configuration                                  |
+|  50 |    5 | `0x00420610` | `InsertBulanci`       | —                    | spawn the local player avatar                                  |
+|  51 |    6 | `0x0041a4a0` | `InsertView`          | sub                  | register a view object in the CGaming world                    |
+|  52 |    7 | `0x00416ae0` | `SetInsertMode`       | sub                  | sets the insertion bucket for subsequent `InsertView` calls    |
+|  53 |    8 | `0x0041d8f0` | `LoadPreface`         | i32                  | preload an image bundle                                        |
+|  54 |    9 | `0x0041bb00` | `SetMusic`            | i32,i32              | (trackID, volume)                                              |
+|  55 |   10 | `0x00416ab0` | `SetActive` **e**     | sub,sub              | `view.@0x69 = (level > 0)` — collision/active flag             |
+|  56 |   11 | `0x00418770` | `BindToSlot` **e**    | sub,sub              | `CGaming.views[slot] = view` and `view.@0x70 = slot` (0xFF unbinds) |
+|  57 |   12 | `0x004188b0` | `ResortDepth` **e**   | sub                  | re-sort `view` in `CGaming::FUN_004184a0`'s ordered list       |
+|  58 |   13 | `0x004188e0` | `TranslateTo` **e**   | sub,sub,sub          | `CBulanek::FUN_0042cc80(target, x, y)` — coordinate translate  |
+|  59 |   14 | `0x00416b10` | `HideView` **e**      | sub                  | `view.flags |= 1` + freeze + `FUN_0042c290(view, 1)`           |
+|  60 |   15 | `0x00416b30` | `ShowView` **e**      | sub                  | `view.flags &= ~1` + wake + `FUN_0042c290(view, 0)` (inverse of HideView) |
+|  61 |   16 | `0x00418920` | `EvalSeq3` **e**      | sub,sub,sub          | evaluate three sub-exprs, return first (rare combinator)       |
+|  62 |   17 | `0x00416b50` | `GetSlot` **e**       | sub                  | `CGaming::GetSlot(idx)` — returns the view bound to a slot     |
+|  63 |   18 | `0x00416b70` | `SetAnim` **e**       | sub,sub,sub          | `view+0x98 → FUN_004391e0(animID, flags, 0)`                   |
+|  64 |   19 | `0x00416bb0` | `AnimResume` **e**    | sub                  | `view+0x98 → FUN_00438fb0` — clear paused flag and restart    |
+|  65 |   20 | `0x00418950` | `SpawnAtView` **e**   | sub,sub              | spawns a projectile/decal at the view's position; sub2 = kind  |
+|  66 |   21 | `0x00416bd0` | `SetAnimFrame` **e**  | sub,sub              | `view+0x98 → FUN_00439710` writes anim frame index             |
+|  67 |   22 | `0x0041f610` | `SpawnEnemyAt` **e**  | sub*5                | 5-arg spawn (slot+team+flags+pos+state); cousin of `InsertOpponent` |
+|  68 |   23 | `0x00416c00` | `RegisterTimer` **e** | sub,sub,sub          | allocate a 0x1c-byte entry in `this+0x440` timer table         |
+|  69 |   24 | `0x00416c40` | `TimerStop` **e**     | sub                  | decrement timer's refcount; reschedule when zero               |
+|  70 |   25 | `0x00416c70` | `TimerStart` **e**    | sub                  | set running bit (1) and increment refcount                     |
+|  71 |   26 | `0x00416c90` | `TimerRelease` **e**  | sub                  | free the timer slot                                            |
+|  72 |   27 | `0x00416cb0` | `TimerSetData` **e**  | sub,sub              | store payload at `slot.@4`                                     |
+|  73 |   28 | `0x0041bb30` | `DefineDangerZone` **e** | sub*5             | (kind, x1, y1, x2, y2) — adds a CMine-shape zone to `this+0x2d8` |
+|  74 |   29 | `0x00416d30` | `IsServer`            | —                    |                                                                |
+|  75 |   30 | `0x00416d50` | `StrmSend`            | sub                  |                                                                |
+|  76 |   31 | `0x00416d70` | `SetCommStrm`         | sub                  |                                                                |
+|  77 |   32 | `0x00416d90` | `IsNet`               | —                    |                                                                |
+|  78 |   33 | `0x00418980` | `SetAnimDirection` **e** | sub,sub           | `view.@0x94 (anim) .@0x18 = (byte)direction`                   |
+|  79 |   34 | `0x0041d990` | `SetViewImage` **e**  | sub,i32              | look up image by i32 in CMenu and bind to the view             |
+|  80 |   35 | `0x00416dc0` | `PlayAnim` **e**      | sub,sub              | `view+0x98 → FUN_004390d0(loop?)` — start + optional loop      |
+|  81 |   36 | `0x004189b0` | `MapSet` **e**        | sub,sub              | `this+0x440` map: `map[key].@0x18 = value`                     |
+|  82 |   37 | `0x004189e0` | `MapGet` **e**        | sub                  | `this+0x440` map: returns `map[key].@0x18`                     |
+|  83 |   38 | `0x0041bb80` | `DefineTraceArea`     | sub*6                |                                                                |
+|  84 |   39 | `0x0041e3e0` | `KillObject` **e**    | sub                  | type-check sub against ClassID 0x7ec then `CBulanek::FUN_0041db00(-1,-1,0)` |
+|  85 |   40 | `0x0041e430` | `TeleportPlayerTo`    | sub*4                |                                                                |
+|  86 |   41 | `0x0041a4d0` | `RemoveView` **e**    | sub,sub              | unbind from CGaming via `FUN_00419ca0`; if sub2 != 0 also release the view |
+|  87 |   42 | `0x00418a00` | `IsViewKind` **e**    | sub                  | `IsKindOf(sub, ClassID 0x7ef = 2031)` — true for `CLevelScript` view |
+|  88 |   43 | `0x00416df0` | `SeekAnim` **e**      | sub,sub              | type-check sub then `view+0xa8 → FUN_00439a30(frameIdx)` — advance to frame |
+|  89 |   44 | `0x00418a50` | `NewCollection` **e** | —                    | allocate a fresh `CDSCollection` (vtable `0x47f700`, init capacity 32) |
+|  90 |   45 | `0x00418a90` | `GetField0C` **e**    | sub                  | returns `sub.@0xC` (anim flags on a view, or item 1 on a tuple) |
+|  91 |   46 | `0x00416e40` | `CollResize` **e**    | sub,sub,sub          | `CDSCollection::Resize(coll, newSize, freeItems != 0)`         |
+|  92 |   47 | `0x00418ab0` | `ArrayGet` **e**      | sub,sub              | `((u32*)coll.@0x8)[idx]`                                       |
+|  93 |   48 | `0x00418ae0` | `ArraySet` **e**      | sub,sub,sub          | `((u32*)coll.@0x8)[idx] = value`                               |
+|  94 |   49 | `0x00416e80` | `CollRemove` **e**    | sub*4                | `CDSCollection::Remove(coll, idx, count, freeItems != 0)`      |
+|  95 |   50 | `0x00418b20` | `CollInsert` **e**    | sub,sub,sub          | `CDSCollection::Insert(coll, value, index_or_default)`         |
+|  96 |   51 | `0x00416ee0` | `FreeObject` **e**    | sub                  | virtual `Release` via `sub.vt[2]` — refcounted destroy        |
+|  97 |   52 | `0x00418b60` | `GetImage` **e**      | i32                  | `CMenu::FUN_00413b20(id)` — look up a CMenu image by ID        |
+|  98 |   53 | `0x0041f6a0` | `SpawnOpponentEx` **e** | sub*6              | 6-arg enemy spawn (x, y, kind, team, flags, parentSlot); calls `0x0041f230` |
+|  99 |   54 | `0x00416f00` | `EnableFireThrough`   | sub,sub              |                                                                |
+| 100 |   55 | `0x00420630` | `InsertVampires`      | —                    |                                                                |
+| 101 |   56 | `0x0041f730` | `InsertOpponent`      | sub*4                |                                                                |
+| 102 |   57 | `0x0041da50` | `CreateMine`          | sub,sub              | single mine at (x, y); allocates 0x118 bytes                   |
 
 ## Notes
 
@@ -173,12 +177,19 @@ runtime behaviour we recovered.
   `CGameView::FUN_004191a0` / `CAnim::FUN_00419940`-shaped helper. The
   return value of those helpers is what `InsertView` (51) consumes from
   its sub-expression.
-- Opcodes 69..72 all access the same `this+0x440` container (different
-  `FUN_0042ex…` member methods); 81..82 are a get/set pair on that same
-  container's `[key].@0x18` slot, suggesting it's a string-keyed object
-  map. 92..93 are an array get/set pair through `sub.@0x8`. Multiple
-  handlers (55, 59, 86, 88, 90, 91, 95) operate on the "view" object the
-  expression returns at `sub.@0xXX`.
+- Opcodes 68..72 all access the same `this+0x440` container, which the
+  engine treats as a small refcounted-slot timer table; each slot is a
+  0x1c-byte record managed by `FUN_0042ex…` helpers. 81..82 are a
+  get/set pair on that container's `[key].@0x18` slot, so the same
+  structure also doubles as a key→object map. 92..95 are the four
+  collection mutators (`Resize`, `Get`, `Set`, `Remove`, `Insert`) on a
+  `CDSCollection` (vtable `0x47f700`, the type that opcode 89 returns).
+- Multiple handlers (55, 57..60, 63..66, 78, 80, 84, 86..88) operate on
+  a "view" object, accessing fields at `view+0x14` (flags),
+  `view+0x69` (active), `view+0x70` (slot), `view+0x94`/`+0x98`/`+0xa8`
+  (anim component) and `view+0x440` (timer/map table). The view itself
+  is typically created by `CreateAnim`/`CreateImage`/`InsertOpponent`
+  and retrieved later by `GetSlot(slotID)`.
 - The base table also contains the "rare" expression helpers (`Clamp`,
   `Select`, `Negate`, the eight comparison forms, the bitwise group, and
   the `Strm*` family) that the editor's UI never offers. Most of them
@@ -186,11 +197,17 @@ runtime behaviour we recovered.
 
 ## What's still unknown
 
-- Semantic role / human-readable name of the 26 `opNN` handlers (55..73
-  except `*4`/`5`/`8`/`9`, plus 78..82, 84, 86..91, 94..98). The shapes
-  are pinned down but the runtime behaviour they map to in the editor's
-  intent has to be inferred from caller patterns.
-- Some handlers (89 in particular — allocates a fresh 0x18-byte list
-  object with vftable `0x47f700`) look like constructors for nested
-  scripting types; the resulting objects' own dispatch tables are
-  separate work.
+- A handful of names tagged **e** in the extension table are best
+  guesses for the runtime behaviour they implement and may not match the
+  original developer's identifier exactly. Concretely:
+  - `EvalSeq3` (61) discards two of its three sub-expressions; its only
+    observable effect is evaluating them for side-effects.
+  - `SetAnimDirection` (78) and `GetField0C` (90) touch single bytes /
+    `@0x0C` slots whose semantic role is inferred from the surrounding
+    animation/view structure.
+  - `SpawnEnemyAt` (67) and `SpawnOpponentEx` (98) share a deep helper
+    with `InsertOpponent` (101); the precise difference in semantics is
+    a handful of additional fields that are passed through unchanged.
+- The CBulPicture animation component used by 63..66, 78, 80 and the
+  CDSAnim sub-object at `+0x98` have their own vtables; tagging each
+  slot is separate work.

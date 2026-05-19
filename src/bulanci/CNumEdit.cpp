@@ -17,7 +17,9 @@ uint CNumEdit::FUN_00406290(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00406750 BEGIN
 /* 406750-406756 00006 */
-uchar* CNumEdit::FUN_00406750() { STUB_BODY(); return 0; }
+uchar* CNumEdit::FUN_00406750() {
+    return reinterpret_cast<uchar*>(&DAT_004b3414);
+}
 // !FUNC 0x00406750 END
 
 // !FUNC 0x00407220 BEGIN

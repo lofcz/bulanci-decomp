@@ -12,7 +12,9 @@ uint* CShotCounter::FUN_00427210(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00427290 BEGIN
 /* 427290-427296 00006 */
-uchar* CShotCounter::FUN_00427290() { STUB_BODY(); return 0; }
+uchar* CShotCounter::FUN_00427290() {
+    return reinterpret_cast<uchar*>(&DAT_004b3a1c);
+}
 // !FUNC 0x00427290 END
 
 // !FUNC 0x004272a0 BEGIN

@@ -12,6 +12,8 @@ uint* CSessionList::FUN_0040c2d0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040c530 BEGIN
 /* 40C530-40C536 00006 */
-uchar* CSessionList::FUN_0040c530() { STUB_BODY(); return 0; }
+uchar* CSessionList::FUN_0040c530() {
+    return reinterpret_cast<uchar*>(&DAT_004b34fc);
+}
 // !FUNC 0x0040c530 END
 

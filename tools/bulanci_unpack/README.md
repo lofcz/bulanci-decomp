@@ -128,10 +128,14 @@ The native game's master-pack scripts use a *superset* of the editor's
 opcode enum. All 103 opcodes (45 base `CDSScript` + 58 `CLevelScript`
 extension entries) are documented in
 [`ghidra_analysis/script_dispatch_table.md`](ghidra_analysis/script_dispatch_table.md);
-every handler in `bulanci.exe` has been hand-disassembled to recover its
-argument shape. Game-only opcodes whose semantic name isn't in the
-editor enum get a `opNN` mnemonic, but their arguments parse correctly,
-so calls compose naturally (e.g. `op80(op62(IntConst(6)), IntConst(0))`).
+every handler in `bulanci.exe` has been hand-disassembled to recover
+both its argument shape and a human-readable name. Names come from the
+editor's `Editor.Scripts.Opcode` enum where possible; for the 36 game-
+only opcodes the editor never emits, the unpacker uses a reverse-
+engineered name that describes the engine call the handler forwards to
+(e.g. `BindToSlot`, `PlayAnim`, `TimerStart`, `CollResize`). The
+mapping reads naturally even when handlers compose deeply, e.g.
+`PlayAnim(GetSlot(IntConst(6)), IntConst(0))`.
 
 The disassembler also recognises functions with branchy control flow
 (`If*`, `Goto`, `Switch`, `Select`) and walks all reachable bytes inside
@@ -162,12 +166,15 @@ Override the side-car path with `--names-from PATH.eapres`.
   not by `CDSBitmap` itself, and tracking down the right vtable slot is
   the remaining piece of work. The format is purely native, with no
   editor source to cross-reference.
-- **Semantic names** for the 26 game-only `opNN` mnemonics in the
-  `CLevelScript` extension table. Argument shapes are all verified (no
-  more `<UNKNOWN op=N>` markers), but the human-meaningful operation
-  most of these handlers perform is inferred only from caller patterns.
-  See the "What's still unknown" section of
-  [`ghidra_analysis/script_dispatch_table.md`](ghidra_analysis/script_dispatch_table.md).
+- **Exact authoritative names** for the 36 game-only opcodes in the
+  `CLevelScript` extension table. Argument shapes and runtime
+  behaviours are recovered, and each opcode now has a descriptive name,
+  but those names reflect the engine call the handler forwards to (e.g.
+  `RegisterTimer`, `PlayAnim`, `CollInsert`) rather than the original
+  C++ identifier from the lost developer-side source. See the "What's
+  still unknown" section of
+  [`ghidra_analysis/script_dispatch_table.md`](ghidra_analysis/script_dispatch_table.md)
+  for the handful of names that are best-effort guesses.
 - A native C++ port of the unpacker. The Phase 1 unpacker is intentionally
   a Python throwaway tool; a parallel MSVC C++ implementation will land
   when we build the proper toolchain.

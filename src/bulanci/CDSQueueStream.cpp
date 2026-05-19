@@ -7,7 +7,9 @@ uchar CDSQueueStream::FUN_00428960(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00428a20 BEGIN
 /* 428A20-428A26 00006 */
-uchar* CDSQueueStream::FUN_00428a20() { STUB_BODY(); return 0; }
+uchar* CDSQueueStream::FUN_00428a20() {
+    return reinterpret_cast<uchar*>(&DAT_004b847c);
+}
 // !FUNC 0x00428a20 END
 
 // !FUNC 0x00428a30 BEGIN

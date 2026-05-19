@@ -2,7 +2,9 @@
 
 // !FUNC 0x0040b9f0 BEGIN
 /* 40B9F0-40B9F6 00006 */
-uchar* CChatEdit::FUN_0040b9f0() { STUB_BODY(); return 0; }
+uchar* CChatEdit::FUN_0040b9f0() {
+    return reinterpret_cast<uchar*>(&DAT_004b35dc);
+}
 // !FUNC 0x0040b9f0 END
 
 // !FUNC 0x0040ce50 BEGIN

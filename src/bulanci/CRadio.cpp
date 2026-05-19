@@ -42,7 +42,9 @@ uint* CRadio::FUN_00407300(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004073a0 BEGIN
 /* 4073A0-4073A6 00006 */
-uchar* CRadio::FUN_004073a0() { STUB_BODY(); return 0; }
+uchar* CRadio::FUN_004073a0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3334);
+}
 // !FUNC 0x004073a0 END
 
 // !FUNC 0x004073b0 BEGIN

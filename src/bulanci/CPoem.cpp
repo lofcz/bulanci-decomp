@@ -7,7 +7,9 @@ uchar CPoem::FUN_00409100(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00409420 BEGIN
 /* 409420-409426 00006 */
-uchar* CPoem::FUN_00409420() { STUB_BODY(); return 0; }
+uchar* CPoem::FUN_00409420() {
+    return reinterpret_cast<uchar*>(&DAT_004b3450);
+}
 // !FUNC 0x00409420 END
 
 // !FUNC 0x00409430 BEGIN
@@ -27,7 +29,9 @@ uchar CPoem::FUN_00409460(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00409470 BEGIN
 /* 409470-409476 00006 */
-uchar* CPoem::FUN_00409470() { STUB_BODY(); return 0; }
+uchar* CPoem::FUN_00409470() {
+    return reinterpret_cast<uchar*>(&DAT_004b7f04);
+}
 // !FUNC 0x00409470 END
 
 // !FUNC 0x00409480 BEGIN

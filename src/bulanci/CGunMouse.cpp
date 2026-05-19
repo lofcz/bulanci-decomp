@@ -52,7 +52,9 @@ uchar CGunMouse::FUN_00425730(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00425850 BEGIN
 /* 425850-425856 00006 */
-uchar* CGunMouse::FUN_00425850() { STUB_BODY(); return 0; }
+uchar* CGunMouse::FUN_00425850() {
+    return reinterpret_cast<uchar*>(&DAT_004b393c);
+}
 // !FUNC 0x00425850 END
 
 // !FUNC 0x00425860 BEGIN

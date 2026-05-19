@@ -7,7 +7,9 @@ uchar CBitmap::FUN_00418260(int param_1, ushort param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x00419120 BEGIN
 /* 419120-419126 00006 */
-uchar* CBitmap::FUN_00419120() { STUB_BODY(); return 0; }
+uchar* CBitmap::FUN_00419120() {
+    return reinterpret_cast<uchar*>(&DAT_004b3818);
+}
 // !FUNC 0x00419120 END
 
 // !FUNC 0x00419130 BEGIN

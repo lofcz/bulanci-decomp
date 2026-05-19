@@ -7,7 +7,9 @@ int* CRuch::FUN_00423c20(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00423d00 BEGIN
 /* 423D00-423D06 00006 */
-uchar* CRuch::FUN_00423d00() { STUB_BODY(); return 0; }
+uchar* CRuch::FUN_00423d00() {
+    return reinterpret_cast<uchar*>(&DAT_004b3950);
+}
 // !FUNC 0x00423d00 END
 
 // !FUNC 0x00423d10 BEGIN

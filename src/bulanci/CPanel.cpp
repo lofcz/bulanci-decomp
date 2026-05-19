@@ -17,7 +17,9 @@ uint* CPanel::FUN_00427510(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00427590 BEGIN
 /* 427590-427596 00006 */
-uchar* CPanel::FUN_00427590() { STUB_BODY(); return 0; }
+uchar* CPanel::FUN_00427590() {
+    return reinterpret_cast<uchar*>(&DAT_004b3a08);
+}
 // !FUNC 0x00427590 END
 
 // !FUNC 0x004275a0 BEGIN

@@ -7,7 +7,9 @@ uint* CSetupDlg::FUN_0040e290(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040e4d0 BEGIN
 /* 40E4D0-40E4D6 00006 */
-uchar* CSetupDlg::FUN_0040e4d0() { STUB_BODY(); return 0; }
+uchar* CSetupDlg::FUN_0040e4d0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3690);
+}
 // !FUNC 0x0040e4d0 END
 
 // !FUNC 0x0040e4e0 BEGIN

@@ -2,7 +2,9 @@
 
 // !FUNC 0x0042ea70 BEGIN
 /* 42EA70-42EA76 00006 */
-uchar* CDSUpdatedItem::FUN_0042ea70() { STUB_BODY(); return 0; }
+uchar* CDSUpdatedItem::FUN_0042ea70() {
+    return reinterpret_cast<uchar*>(&DAT_004b7c80);
+}
 // !FUNC 0x0042ea70 END
 
 // !FUNC 0x0042f060 BEGIN

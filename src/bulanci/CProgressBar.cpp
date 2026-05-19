@@ -2,7 +2,9 @@
 
 // !FUNC 0x0040ad80 BEGIN
 /* 40AD80-40AD86 00006 */
-uchar* CProgressBar::FUN_0040ad80() { STUB_BODY(); return 0; }
+uchar* CProgressBar::FUN_0040ad80() {
+    return reinterpret_cast<uchar*>(&DAT_004b3604);
+}
 // !FUNC 0x0040ad80 END
 
 // !FUNC 0x0040b1f0 BEGIN

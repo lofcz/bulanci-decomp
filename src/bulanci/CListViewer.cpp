@@ -57,7 +57,9 @@ uint* CListViewer::FUN_00407f50(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00407fd0 BEGIN
 /* 407FD0-407FD6 00006 */
-uchar* CListViewer::FUN_00407fd0() { STUB_BODY(); return 0; }
+uchar* CListViewer::FUN_00407fd0() {
+    return reinterpret_cast<uchar*>(&DAT_004b33a4);
+}
 // !FUNC 0x00407fd0 END
 
 // !FUNC 0x00407fe0 BEGIN

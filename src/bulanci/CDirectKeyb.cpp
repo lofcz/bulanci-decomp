@@ -12,7 +12,9 @@ uchar CDirectKeyb::Catch_00412302() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00412340 BEGIN
 /* 412340-412346 00006 */
-uchar* CDirectKeyb::FUN_00412340() { STUB_BODY(); return 0; }
+uchar* CDirectKeyb::FUN_00412340() {
+    return reinterpret_cast<uchar*>(&DAT_004b36ec);
+}
 // !FUNC 0x00412340 END
 
 // !FUNC 0x00412350 BEGIN

@@ -32,7 +32,9 @@ uchar CDSFlxFile::FUN_00432850(int param_1, uchar* param_2, void* param_3) { STU
 
 // !FUNC 0x004328e0 BEGIN
 /* 4328E0-4328E6 00006 */
-uchar* CDSFlxFile::FUN_004328e0() { STUB_BODY(); return 0; }
+uchar* CDSFlxFile::FUN_004328e0() {
+    return reinterpret_cast<uchar*>(&DAT_004b7e08);
+}
 // !FUNC 0x004328e0 END
 
 // !FUNC 0x004328f0 BEGIN

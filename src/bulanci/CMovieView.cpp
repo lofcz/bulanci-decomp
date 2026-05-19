@@ -17,7 +17,9 @@ uchar CMovieView::FUN_00422860(short param_1, int param_2) { STUB_BODY(); return
 
 // !FUNC 0x00422a20 BEGIN
 /* 422A20-422A26 00006 */
-uchar* CMovieView::FUN_00422a20() { STUB_BODY(); return 0; }
+uchar* CMovieView::FUN_00422a20() {
+    return reinterpret_cast<uchar*>(&DAT_004b3914);
+}
 // !FUNC 0x00422a20 END
 
 // !FUNC 0x00422a30 BEGIN

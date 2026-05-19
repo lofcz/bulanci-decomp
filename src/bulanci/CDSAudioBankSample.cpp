@@ -7,7 +7,9 @@ uchar CDSAudioBankSample::FUN_004291d0(uint* param_1, void* param_2, uint param_
 
 // !FUNC 0x00429340 BEGIN
 /* 429340-429346 00006 */
-uchar* CDSAudioBankSample::FUN_00429340() { STUB_BODY(); return 0; }
+uchar* CDSAudioBankSample::FUN_00429340() {
+    return reinterpret_cast<uchar*>(&DAT_004b3ab4);
+}
 // !FUNC 0x00429340 END
 
 // !FUNC 0x00429350 BEGIN

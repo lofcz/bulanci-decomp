@@ -2,7 +2,9 @@
 
 // !FUNC 0x00404c70 BEGIN
 /* 404C70-404C76 00006 */
-uchar* CListBoxItem::FUN_00404c70() { STUB_BODY(); return 0; }
+uchar* CListBoxItem::FUN_00404c70() {
+    return reinterpret_cast<uchar*>(&DAT_004b33cc);
+}
 // !FUNC 0x00404c70 END
 
 // !FUNC 0x00404cb0 BEGIN

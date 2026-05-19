@@ -26,6 +26,7 @@ names no longer start with `?` so they're left alone).
 
 import argparse
 import ctypes
+import re
 import struct
 import sys
 from ctypes import wintypes
@@ -39,15 +40,42 @@ UnDecorateSymbolName.restype = wintypes.DWORD
 
 UNDNAME_NAME_ONLY = 0x1000  # strip type/decoration info entirely
 
+# Ghidra-auto data-symbol patterns produced by `extract_externs.py`.
+# cl.exe prefixes every C-linkage data symbol with `_` in 32-bit mode;
+# the matching ExportDelinker symbol has no prefix.  Whitelist the
+# patterns we own so we don't accidentally rename real MSVCRT helpers
+# like `_main`, `_atexit`, `__except_handler4`, etc.
+DATA_UNDERSCORE_PATTERNS = re.compile(
+    r"^_("
+    r"DAT_[0-9a-fA-F]{8}|"
+    r"LAB_[0-9a-fA-F]{8}|"
+    r"PTR_.+_[0-9a-fA-F]{8}|"
+    r"s_.+_[0-9a-fA-F]{8}|"
+    r"IMAGE_DOS_HEADER_[0-9a-fA-F]{8}|"
+    r"switchD_[0-9a-fA-F]{8}|"
+    r"switchdataD_[0-9a-fA-F]{8}|"
+    r"thunk_FUN_[0-9a-fA-F]{8}"
+    r")$"
+)
+
 
 def demangle(name: str) -> str:
-    if not name.startswith("?"):
-        return name
-    buf = ctypes.create_string_buffer(4096)
-    n = UnDecorateSymbolName(name.encode("latin1"), buf, 4096, UNDNAME_NAME_ONLY)
-    if n == 0:
-        return name
-    return buf.value.decode("latin1")
+    if name.startswith("?"):
+        # MSVC-mangled C++ symbol - run through UnDecorateSymbolName
+        # with NAME_ONLY so we land on `CClass::Method` (matches
+        # ExportDelinker's output exactly).
+        buf = ctypes.create_string_buffer(4096)
+        n = UnDecorateSymbolName(name.encode("latin1"), buf, 4096,
+                                 UNDNAME_NAME_ONLY)
+        if n == 0:
+            return name
+        return buf.value.decode("latin1")
+    if DATA_UNDERSCORE_PATTERNS.match(name):
+        # cl.exe's C-linkage underscore for one of our extern data
+        # symbols.  Strip it so the COFF symbol pairs against the
+        # target object that uses the bare Ghidra name.
+        return name[1:]
+    return name
 
 
 def rewrite_obj(path: Path) -> tuple[int, int]:

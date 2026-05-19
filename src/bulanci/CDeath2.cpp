@@ -12,7 +12,9 @@ uchar CDeath2::FUN_00417b10(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00419b00 BEGIN
 /* 419B00-419B06 00006 */
-uchar* CDeath2::FUN_00419b00() { STUB_BODY(); return 0; }
+uchar* CDeath2::FUN_00419b00() {
+    return reinterpret_cast<uchar*>(&DAT_004b37f0);
+}
 // !FUNC 0x00419b00 END
 
 // !FUNC 0x0041a8c0 BEGIN

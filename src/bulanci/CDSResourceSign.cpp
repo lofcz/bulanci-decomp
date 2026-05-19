@@ -27,7 +27,9 @@ uint* CDSResourceSign::FUN_00434540(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004345c0 BEGIN
 /* 4345C0-4345C6 00006 */
-uchar* CDSResourceSign::FUN_004345c0() { STUB_BODY(); return 0; }
+uchar* CDSResourceSign::FUN_004345c0() {
+    return reinterpret_cast<uchar*>(&DAT_004b7f48);
+}
 // !FUNC 0x004345c0 END
 
 // !FUNC 0x004345d0 BEGIN

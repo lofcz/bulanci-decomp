@@ -2,12 +2,16 @@
 
 // !FUNC 0x004011f0 BEGIN
 /* 4011F0-4011F6 00006 */
-uchar* CDSChain::FUN_004011f0() { STUB_BODY(); return 0; }
+uchar* CDSChain::FUN_004011f0() {
+    return reinterpret_cast<uchar*>(&DAT_004b7cd8);
+}
 // !FUNC 0x004011f0 END
 
 // !FUNC 0x00401200 BEGIN
 /* 401200-401206 00006 */
-uchar* CDSChain::FUN_00401200() { STUB_BODY(); return 0; }
+uchar* CDSChain::FUN_00401200() {
+    return reinterpret_cast<uchar*>(&DAT_004b7c98);
+}
 // !FUNC 0x00401200 END
 
 // !FUNC 0x00401210 BEGIN

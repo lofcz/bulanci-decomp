@@ -2,7 +2,9 @@
 
 // !FUNC 0x0042ac80 BEGIN
 /* 42AC80-42AC86 00006 */
-uchar* CDSImageMouse::FUN_0042ac80() { STUB_BODY(); return 0; }
+uchar* CDSImageMouse::FUN_0042ac80() {
+    return reinterpret_cast<uchar*>(&DAT_004b3b74);
+}
 // !FUNC 0x0042ac80 END
 
 // !FUNC 0x0042aca0 BEGIN

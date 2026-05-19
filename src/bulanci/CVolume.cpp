@@ -2,7 +2,9 @@
 
 // !FUNC 0x0040be30 BEGIN
 /* 40BE30-40BE36 00006 */
-uchar* CVolume::FUN_0040be30() { STUB_BODY(); return 0; }
+uchar* CVolume::FUN_0040be30() {
+    return reinterpret_cast<uchar*>(&DAT_004b36a4);
+}
 // !FUNC 0x0040be30 END
 
 // !FUNC 0x0040be40 BEGIN

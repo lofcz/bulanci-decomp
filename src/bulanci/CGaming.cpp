@@ -97,7 +97,9 @@ uint* CGaming::FUN_0041ab70(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041aca0 BEGIN
 /* 41ACA0-41ACA6 00006 */
-uchar* CGaming::FUN_0041aca0() { STUB_BODY(); return 0; }
+uchar* CGaming::FUN_0041aca0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3788);
+}
 // !FUNC 0x0041aca0 END
 
 // !FUNC 0x0041acb0 BEGIN

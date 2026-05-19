@@ -2,7 +2,9 @@
 
 // !FUNC 0x004339f0 BEGIN
 /* 4339F0-4339F6 00006 */
-uchar* CDSResInfo::FUN_004339f0() { STUB_BODY(); return 0; }
+uchar* CDSResInfo::FUN_004339f0() {
+    return reinterpret_cast<uchar*>(&DAT_004b7f28);
+}
 // !FUNC 0x004339f0 END
 
 // !FUNC 0x00433a00 BEGIN

@@ -787,11 +787,19 @@ _OPCODES = {
     43:  ("StrmGetPos",       ["sub"]),
     44:  ("StrmGetSize",      ["sub"]),
     # --- CLevelScript extension opcodes (45..102, table at 0x004af018) ------
-    # Every entry in this block has been verified by hand-disassembling the
-    # handler in `bulanci.exe`; opcodes whose name comes from
-    # `Editor.Scripts.Opcode.cs` are kept as-is, the rest are named `opNN`
-    # until their semantic role can be pinned down. See
-    # `ghidra_analysis/script_dispatch_table.md` for per-handler addresses.
+    # Every entry has been verified against `bulanci.exe`'s handler. The
+    # names come from one of three sources, in decreasing order of
+    # confidence:
+    #   1. The editor's `Editor.Scripts.Opcode.cs` enum (45..54, 74..77,
+    #      83, 85, 99..102; the editor only emits these opcodes itself).
+    #   2. A directly-named runtime helper the handler forwards to
+    #      (e.g. opcode 65 calls a "spawn projectile at view" helper, so
+    #      the script-side name is `SpawnAtView`).
+    #   3. A best-effort name extracted from the handler's observable
+    #      effect on the engine state (object slot table, animation
+    #      component, collection methods, etc.).
+    # See `ghidra_analysis/script_dispatch_table.md` for per-handler
+    # addresses and the underlying engine call.
     45:  ("CreateAnim",       "_create_anim"),  # 2 sub + u8 + u8 count + count*i32
     46:  ("CreateImage",      ["sub", "sub", "i32"]),  # x, y, imageID
     47:  ("CreateObstacle",   ["sub", "sub", "sub", "sub"]),
@@ -802,50 +810,50 @@ _OPCODES = {
     52:  ("SetInsertMode",    ["sub"]),
     53:  ("LoadPreface",      ["i32"]),
     54:  ("SetMusic",         ["i32", "i32"]),
-    55:  ("op55",             ["sub", "sub"]),
-    56:  ("op56",             ["sub", "sub"]),
-    57:  ("op57",             ["sub"]),
-    58:  ("op58",             ["sub", "sub", "sub"]),
-    59:  ("op59",             ["sub"]),
-    60:  ("op60",             ["sub"]),
-    61:  ("op61",             ["sub", "sub", "sub"]),
-    62:  ("op62",             ["sub"]),
-    63:  ("op63",             ["sub", "sub", "sub"]),
-    64:  ("op64",             ["sub"]),
-    65:  ("op65",             ["sub", "sub"]),
-    66:  ("op66",             ["sub", "sub"]),
-    67:  ("op67",             ["sub", "sub", "sub", "sub", "sub"]),
-    68:  ("op68",             ["sub", "sub", "sub"]),
-    69:  ("op69",             ["sub"]),
-    70:  ("op70",             ["sub"]),
-    71:  ("op71",             ["sub"]),
-    72:  ("op72",             ["sub", "sub"]),
-    73:  ("op73",             ["sub", "sub", "sub", "sub", "sub"]),
+    55:  ("SetActive",        ["sub", "sub"]),    # view.@0x69 = (level > 0)
+    56:  ("BindToSlot",       ["sub", "sub"]),    # CGaming.views[slot] = view
+    57:  ("ResortDepth",      ["sub"]),           # CGaming::ReorderByDepth(view)
+    58:  ("TranslateTo",      ["sub", "sub", "sub"]),  # CBulanek translate-to (x, y)
+    59:  ("HideView",         ["sub"]),           # set bit 0 in flags + freeze
+    60:  ("ShowView",         ["sub"]),           # clear bit 0 in flags + wake
+    61:  ("EvalSeq3",         ["sub", "sub", "sub"]),  # evaluate 3 sub-exprs, return first
+    62:  ("GetSlot",          ["sub"]),           # CGaming.views[slot]
+    63:  ("SetAnim",          ["sub", "sub", "sub"]),  # view+0x98: anim id + flags
+    64:  ("AnimResume",       ["sub"]),           # restart paused animation
+    65:  ("SpawnAtView",      ["sub", "sub"]),    # create projectile at view, kind
+    66:  ("SetAnimFrame",     ["sub", "sub"]),    # view+0x98: anim.frameIndex = f
+    67:  ("SpawnEnemyAt",     ["sub", "sub", "sub", "sub", "sub"]),  # 5-arg spawn (view+rect+state)
+    68:  ("RegisterTimer",    ["sub", "sub", "sub"]),  # this+0x440 timer slot
+    69:  ("TimerStop",        ["sub"]),           # decrement timer count
+    70:  ("TimerStart",       ["sub"]),           # set timer running bit
+    71:  ("TimerRelease",     ["sub"]),           # free the timer slot
+    72:  ("TimerSetData",     ["sub", "sub"]),    # store payload at slot.@4
+    73:  ("DefineDangerZone", ["sub", "sub", "sub", "sub", "sub"]),  # kind + (x1,y1,x2,y2)
     74:  ("IsServer",         []),
     75:  ("StrmSend",         ["sub"]),
     76:  ("SetCommStrm",      ["sub"]),
     77:  ("IsNet",            []),
-    78:  ("op78",             ["sub", "sub"]),
-    79:  ("op79",             ["sub", "i32"]),
-    80:  ("op80",             ["sub", "sub"]),
+    78:  ("SetAnimDirection", ["sub", "sub"]),    # view.anim.@0x18 = direction
+    79:  ("SetViewImage",     ["sub", "i32"]),    # view.@0x94+offset = CMenu.image[id]
+    80:  ("PlayAnim",         ["sub", "sub"]),    # view+0x98: run + (loop?)
     81:  ("MapSet",           ["sub", "sub"]),    # map[key].@0x18 = value
     82:  ("MapGet",           ["sub"]),           # returns map[key].@0x18
     83:  ("DefineTraceArea",  ["sub", "sub", "sub", "sub", "sub", "sub"]),
-    84:  ("op84",             ["sub"]),
+    84:  ("KillObject",       ["sub"]),           # CBulanek::Damage on a GameView
     85:  ("TeleportPlayerTo", ["sub", "sub", "sub", "sub"]),
-    86:  ("op86",             ["sub", "sub"]),
-    87:  ("op87",             ["sub"]),
-    88:  ("op88",             ["sub", "sub"]),
-    89:  ("op89",             []),               # allocates a fresh "list" object
-    90:  ("op90",             ["sub"]),
-    91:  ("op91",             ["sub", "sub", "sub"]),
-    92:  ("ArrayGet",         ["sub", "sub"]),    # arr.@0x8[idx]
-    93:  ("ArraySet",         ["sub", "sub", "sub"]),  # arr.@0x8[idx] = value
-    94:  ("op94",             ["sub", "sub", "sub", "sub"]),
-    95:  ("op95",             ["sub", "sub", "sub"]),
-    96:  ("op96",             ["sub"]),
-    97:  ("op97",             ["i32"]),          # CMenu image lookup
-    98:  ("op98",             ["sub", "sub", "sub", "sub", "sub", "sub"]),
+    86:  ("RemoveView",       ["sub", "sub"]),    # unbind from CGaming + optional release
+    87:  ("IsViewKind",       ["sub"]),           # IsKindOf(view, CLevelScript-class-2031)
+    88:  ("SeekAnim",         ["sub", "sub"]),    # advance anim frame counter
+    89:  ("NewCollection",    []),                # allocate a fresh CDSCollection
+    90:  ("GetField0C",       ["sub"]),           # returns view.@0xC (anim flags?)
+    91:  ("CollResize",       ["sub", "sub", "sub"]),     # CDSCollection::Resize
+    92:  ("ArrayGet",         ["sub", "sub"]),    # ((u32*)arr.@8)[idx]
+    93:  ("ArraySet",         ["sub", "sub", "sub"]),     # ((u32*)arr.@8)[idx] = v
+    94:  ("CollRemove",       ["sub", "sub", "sub", "sub"]),  # CDSCollection::Remove
+    95:  ("CollInsert",       ["sub", "sub", "sub"]),     # CDSCollection::Insert
+    96:  ("FreeObject",       ["sub"]),           # call vtable[2] (Release)
+    97:  ("GetImage",         ["i32"]),           # CMenu image lookup by ID
+    98:  ("SpawnOpponentEx",  ["sub", "sub", "sub", "sub", "sub", "sub"]),  # 6-arg InsertOpponent
     99:  ("EnableFireThrough", ["sub", "sub"]),
     100: ("InsertVampires",   []),
     101: ("InsertOpponent",   ["sub", "sub", "sub", "sub"]),

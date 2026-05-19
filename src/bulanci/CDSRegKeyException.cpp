@@ -2,7 +2,9 @@
 
 // !FUNC 0x00437b20 BEGIN
 /* 437B20-437B26 00006 */
-uchar* CDSRegKeyException::FUN_00437b20() { STUB_BODY(); return 0; }
+uchar* CDSRegKeyException::FUN_00437b20() {
+    return reinterpret_cast<uchar*>(&DAT_004b82c8);
+}
 // !FUNC 0x00437b20 END
 
 // !FUNC 0x00437b30 BEGIN

@@ -22,7 +22,9 @@ uchar CDeath::FUN_00417a90(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00419a80 BEGIN
 /* 419A80-419A86 00006 */
-uchar* CDeath::FUN_00419a80() { STUB_BODY(); return 0; }
+uchar* CDeath::FUN_00419a80() {
+    return reinterpret_cast<uchar*>(&DAT_004b37dc);
+}
 // !FUNC 0x00419a80 END
 
 // !FUNC 0x0041a860 BEGIN

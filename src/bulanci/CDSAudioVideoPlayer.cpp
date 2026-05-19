@@ -7,7 +7,9 @@ uchar CDSAudioVideoPlayer::FUN_0043bc10(uint* param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x0043bc90 BEGIN
 /* 43BC90-43BC96 00006 */
-uchar* CDSAudioVideoPlayer::FUN_0043bc90() { STUB_BODY(); return 0; }
+uchar* CDSAudioVideoPlayer::FUN_0043bc90() {
+    return reinterpret_cast<uchar*>(&DAT_004b8468);
+}
 // !FUNC 0x0043bc90 END
 
 // !FUNC 0x0043bca0 BEGIN

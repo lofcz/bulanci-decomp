@@ -17,7 +17,9 @@ uint* CExplosion::FUN_0041aad0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041ab20 BEGIN
 /* 41AB20-41AB26 00006 */
-uchar* CExplosion::FUN_0041ab20() { STUB_BODY(); return 0; }
+uchar* CExplosion::FUN_0041ab20() {
+    return reinterpret_cast<uchar*>(&DAT_004b386c);
+}
 // !FUNC 0x0041ab20 END
 
 // !FUNC 0x0041b250 BEGIN

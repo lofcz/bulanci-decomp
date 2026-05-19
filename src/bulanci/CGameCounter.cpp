@@ -12,7 +12,9 @@ uint* CGameCounter::FUN_0040bc20(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040bca0 BEGIN
 /* 40BCA0-40BCA6 00006 */
-uchar* CGameCounter::FUN_0040bca0() { STUB_BODY(); return 0; }
+uchar* CGameCounter::FUN_0040bca0() {
+    return reinterpret_cast<uchar*>(&DAT_004b35f0);
+}
 // !FUNC 0x0040bca0 END
 
 // !FUNC 0x0040bcb0 BEGIN

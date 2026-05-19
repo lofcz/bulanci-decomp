@@ -12,7 +12,9 @@ uchar CDSDirectSound::Catch_0043a483() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043c8a0 BEGIN
 /* 43C8A0-43C8A6 00006 */
-uchar* CDSDirectSound::FUN_0043c8a0() { STUB_BODY(); return 0; }
+uchar* CDSDirectSound::FUN_0043c8a0() {
+    return reinterpret_cast<uchar*>(&DAT_004b84c0);
+}
 // !FUNC 0x0043c8a0 END
 
 // !FUNC 0x0043c8b0 BEGIN

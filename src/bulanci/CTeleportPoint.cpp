@@ -7,7 +7,9 @@ uint* CTeleportPoint::FUN_0041a920(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041a970 BEGIN
 /* 41A970-41A976 00006 */
-uchar* CTeleportPoint::FUN_0041a970() { STUB_BODY(); return 0; }
+uchar* CTeleportPoint::FUN_0041a970() {
+    return reinterpret_cast<uchar*>(&DAT_004b3838);
+}
 // !FUNC 0x0041a970 END
 
 // !FUNC 0x0041c9a0 BEGIN

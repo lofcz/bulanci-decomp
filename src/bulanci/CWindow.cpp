@@ -7,7 +7,9 @@ uint CWindow::FUN_00403d60(char param_1, char param_2) { STUB_BODY(); return 0; 
 
 // !FUNC 0x004049b0 BEGIN
 /* 4049B0-4049B6 00006 */
-uchar* CWindow::FUN_004049b0() { STUB_BODY(); return 0; }
+uchar* CWindow::FUN_004049b0() {
+    return reinterpret_cast<uchar*>(&DAT_004b335c);
+}
 // !FUNC 0x004049b0 END
 
 // !FUNC 0x00405560 BEGIN

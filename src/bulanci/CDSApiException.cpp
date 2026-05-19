@@ -2,7 +2,9 @@
 
 // !FUNC 0x00434b00 BEGIN
 /* 434B00-434B06 00006 */
-uchar* CDSApiException::FUN_00434b00() { STUB_BODY(); return 0; }
+uchar* CDSApiException::FUN_00434b00() {
+    return reinterpret_cast<uchar*>(&DAT_004b81e8);
+}
 // !FUNC 0x00434b00 END
 
 // !FUNC 0x00434b20 BEGIN

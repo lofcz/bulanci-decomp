@@ -17,7 +17,9 @@ uint* CHistoryDlg::FUN_004231d0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00423430 BEGIN
 /* 423430-423436 00006 */
-uchar* CHistoryDlg::FUN_00423430() { STUB_BODY(); return 0; }
+uchar* CHistoryDlg::FUN_00423430() {
+    return reinterpret_cast<uchar*>(&DAT_004b38d4);
+}
 // !FUNC 0x00423430 END
 
 // !FUNC 0x00423440 BEGIN

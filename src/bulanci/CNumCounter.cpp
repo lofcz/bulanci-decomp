@@ -17,7 +17,9 @@ uint* CNumCounter::FUN_00427340(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004273e0 BEGIN
 /* 4273E0-4273E6 00006 */
-uchar* CNumCounter::FUN_004273e0() { STUB_BODY(); return 0; }
+uchar* CNumCounter::FUN_004273e0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3a44);
+}
 // !FUNC 0x004273e0 END
 
 // !FUNC 0x004273f0 BEGIN

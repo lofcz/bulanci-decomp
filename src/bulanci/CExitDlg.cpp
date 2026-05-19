@@ -12,7 +12,9 @@ uint* CExitDlg::FUN_00411b50(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00411de0 BEGIN
 /* 411DE0-411DE6 00006 */
-uchar* CExitDlg::FUN_00411de0() { STUB_BODY(); return 0; }
+uchar* CExitDlg::FUN_00411de0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3654);
+}
 // !FUNC 0x00411de0 END
 
 // !FUNC 0x004390d0 BEGIN

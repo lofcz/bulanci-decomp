@@ -7,7 +7,9 @@ uint* CDSEasyMemStream::FUN_00409170(uchar* param_1, uint param_2) { STUB_BODY()
 
 // !FUNC 0x004091f0 BEGIN
 /* 4091F0-4091F6 00006 */
-uchar* CDSEasyMemStream::FUN_004091f0() { STUB_BODY(); return 0; }
+uchar* CDSEasyMemStream::FUN_004091f0() {
+    return reinterpret_cast<uchar*>(&DAT_004b7d34);
+}
 // !FUNC 0x004091f0 END
 
 // !FUNC 0x00409200 BEGIN

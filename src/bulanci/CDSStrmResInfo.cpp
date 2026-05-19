@@ -12,6 +12,8 @@ uchar CDSStrmResInfo::FUN_00433980(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00433a90 BEGIN
 /* 433A90-433A96 00006 */
-uchar* CDSStrmResInfo::FUN_00433a90() { STUB_BODY(); return 0; }
+uchar* CDSStrmResInfo::FUN_00433a90() {
+    return reinterpret_cast<uchar*>(&DAT_004b7ef0);
+}
 // !FUNC 0x00433a90 END
 

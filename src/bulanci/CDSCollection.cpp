@@ -2,7 +2,9 @@
 
 // !FUNC 0x00401230 BEGIN
 /* 401230-401236 00006 */
-uchar* CDSCollection::FUN_00401230() { STUB_BODY(); return 0; }
+uchar* CDSCollection::FUN_00401230() {
+    return reinterpret_cast<uchar*>(&DAT_004b7d60);
+}
 // !FUNC 0x00401230 END
 
 // !FUNC 0x00401240 BEGIN

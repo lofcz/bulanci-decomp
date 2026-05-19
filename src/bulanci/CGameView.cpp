@@ -2,7 +2,9 @@
 
 // !FUNC 0x00416f30 BEGIN
 /* 416F30-416F36 00006 */
-uchar* CGameView::FUN_00416f30() { STUB_BODY(); return 0; }
+uchar* CGameView::FUN_00416f30() {
+    return reinterpret_cast<uchar*>(&DAT_004b3804);
+}
 // !FUNC 0x00416f30 END
 
 // !FUNC 0x00416f50 BEGIN

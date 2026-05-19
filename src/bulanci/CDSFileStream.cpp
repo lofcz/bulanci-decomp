@@ -7,22 +7,30 @@ uint* CDSFileStream::FUN_00401540(int param_1, uchar* param_2) { STUB_BODY(); re
 
 // !FUNC 0x00401600 BEGIN
 /* 401600-401606 00006 */
-uchar* CDSFileStream::FUN_00401600() { STUB_BODY(); return 0; }
+uchar* CDSFileStream::FUN_00401600() {
+    return reinterpret_cast<uchar*>(&DAT_004b7c20);
+}
 // !FUNC 0x00401600 END
 
 // !FUNC 0x00401610 BEGIN
 /* 401610-401616 00006 */
-uchar* CDSFileStream::FUN_00401610() { STUB_BODY(); return 0; }
+uchar* CDSFileStream::FUN_00401610() {
+    return reinterpret_cast<uchar*>(&DAT_004b7c28);
+}
 // !FUNC 0x00401610 END
 
 // !FUNC 0x00401620 BEGIN
 /* 401620-401626 00006 */
-uchar* CDSFileStream::FUN_00401620() { STUB_BODY(); return 0; }
+uchar* CDSFileStream::FUN_00401620() {
+    return reinterpret_cast<uchar*>(&DAT_004b7ce0);
+}
 // !FUNC 0x00401620 END
 
 // !FUNC 0x00401630 BEGIN
 /* 401630-401636 00006 */
-uchar* CDSFileStream::FUN_00401630() { STUB_BODY(); return 0; }
+uchar* CDSFileStream::FUN_00401630() {
+    return reinterpret_cast<uchar*>(&DAT_004b7e78);
+}
 // !FUNC 0x00401630 END
 
 // !FUNC 0x00401640 BEGIN

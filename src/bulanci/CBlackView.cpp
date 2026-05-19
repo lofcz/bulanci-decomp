@@ -2,7 +2,9 @@
 
 // !FUNC 0x00403520 BEGIN
 /* 403520-403526 00006 */
-uchar* CBlackView::FUN_00403520() { STUB_BODY(); return 0; }
+uchar* CBlackView::FUN_00403520() {
+    return reinterpret_cast<uchar*>(&DAT_004b3428);
+}
 // !FUNC 0x00403520 END
 
 // !FUNC 0x00404590 BEGIN

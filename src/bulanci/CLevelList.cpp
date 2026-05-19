@@ -7,7 +7,9 @@ uint* CLevelList::FUN_0040b0c0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040b120 BEGIN
 /* 40B120-40B126 00006 */
-uchar* CLevelList::FUN_0040b120() { STUB_BODY(); return 0; }
+uchar* CLevelList::FUN_0040b120() {
+    return reinterpret_cast<uchar*>(&DAT_004b36b8);
+}
 // !FUNC 0x0040b120 END
 
 // !FUNC 0x0040d490 BEGIN

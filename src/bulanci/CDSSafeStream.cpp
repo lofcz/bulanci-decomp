@@ -7,7 +7,9 @@ uint* CDSSafeStream::FUN_00433ab0(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00433b60 BEGIN
 /* 433B60-433B66 00006 */
-uchar* CDSSafeStream::FUN_00433b60() { STUB_BODY(); return 0; }
+uchar* CDSSafeStream::FUN_00433b60() {
+    return reinterpret_cast<uchar*>(&DAT_004b853c);
+}
 // !FUNC 0x00433b60 END
 
 // !FUNC 0x00433b70 BEGIN

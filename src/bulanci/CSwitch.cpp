@@ -7,7 +7,9 @@ uchar CSwitch::FUN_00423950(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004239e0 BEGIN
 /* 4239E0-4239E6 00006 */
-uchar* CSwitch::FUN_004239e0() { STUB_BODY(); return 0; }
+uchar* CSwitch::FUN_004239e0() {
+    return reinterpret_cast<uchar*>(&DAT_004b3970);
+}
 // !FUNC 0x004239e0 END
 
 // !FUNC 0x004239f0 BEGIN

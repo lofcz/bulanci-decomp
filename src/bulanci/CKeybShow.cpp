@@ -2,7 +2,9 @@
 
 // !FUNC 0x0040bbf0 BEGIN
 /* 40BBF0-40BBF6 00006 */
-uchar* CKeybShow::FUN_0040bbf0() { STUB_BODY(); return 0; }
+uchar* CKeybShow::FUN_0040bbf0() {
+    return reinterpret_cast<uchar*>(&DAT_004b35b4);
+}
 // !FUNC 0x0040bbf0 END
 
 // !FUNC 0x0040edb0 BEGIN

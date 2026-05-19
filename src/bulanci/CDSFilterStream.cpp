@@ -12,7 +12,9 @@ int CDSFilterStream::FUN_0042ffa0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00430080 BEGIN
 /* 430080-430086 00006 */
-uchar* CDSFilterStream::FUN_00430080() { STUB_BODY(); return 0; }
+uchar* CDSFilterStream::FUN_00430080() {
+    return reinterpret_cast<uchar*>(&DAT_004b7cfc);
+}
 // !FUNC 0x00430080 END
 
 // !FUNC 0x00430090 BEGIN

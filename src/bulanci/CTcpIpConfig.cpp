@@ -7,6 +7,8 @@ uint* CTcpIpConfig::FUN_0040c060(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040c2c0 BEGIN
 /* 40C2C0-40C2C6 00006 */
-uchar* CTcpIpConfig::FUN_0040c2c0() { STUB_BODY(); return 0; }
+uchar* CTcpIpConfig::FUN_0040c2c0() {
+    return reinterpret_cast<uchar*>(&DAT_004b34e8);
+}
 // !FUNC 0x0040c2c0 END
 

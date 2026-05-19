@@ -12,7 +12,9 @@ uint* CAnim::FUN_00419870(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00419920 BEGIN
 /* 419920-419926 00006 */
-uchar* CAnim::FUN_00419920() { STUB_BODY(); return 0; }
+uchar* CAnim::FUN_00419920() {
+    return reinterpret_cast<uchar*>(&DAT_004b3768);
+}
 // !FUNC 0x00419920 END
 
 // !FUNC 0x00419930 BEGIN

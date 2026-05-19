@@ -7,7 +7,9 @@ uint* CObstacle::FUN_00416f60(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00416fb0 BEGIN
 /* 416FB0-416FB6 00006 */
-uchar* CObstacle::FUN_00416fb0() { STUB_BODY(); return 0; }
+uchar* CObstacle::FUN_00416fb0() {
+    return reinterpret_cast<uchar*>(&DAT_004b37a8);
+}
 // !FUNC 0x00416fb0 END
 
 // !FUNC 0x00416fc0 BEGIN

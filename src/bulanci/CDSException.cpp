@@ -12,7 +12,9 @@ uchar CDSException::FUN_00434a10(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00434a30 BEGIN
 /* 434A30-434A36 00006 */
-uchar* CDSException::FUN_00434a30() { STUB_BODY(); return 0; }
+uchar* CDSException::FUN_00434a30() {
+    return reinterpret_cast<uchar*>(&DAT_004b81c0);
+}
 // !FUNC 0x00434a30 END
 
 // !FUNC 0x00434a40 BEGIN

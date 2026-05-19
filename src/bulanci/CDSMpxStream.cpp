@@ -7,7 +7,9 @@ uchar CDSMpxStream::FUN_00432eb0(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00432fe0 BEGIN
 /* 432FE0-432FE6 00006 */
-uchar* CDSMpxStream::FUN_00432fe0() { STUB_BODY(); return 0; }
+uchar* CDSMpxStream::FUN_00432fe0() {
+    return reinterpret_cast<uchar*>(&DAT_004b7e4c);
+}
 // !FUNC 0x00432fe0 END
 
 // !FUNC 0x00432ff0 BEGIN

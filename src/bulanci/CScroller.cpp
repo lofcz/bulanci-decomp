@@ -12,7 +12,9 @@ uint* CScroller::FUN_004033d0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00403470 BEGIN
 /* 403470-403476 00006 */
-uchar* CScroller::FUN_00403470() { STUB_BODY(); return 0; }
+uchar* CScroller::FUN_00403470() {
+    return reinterpret_cast<uchar*>(&DAT_004b3384);
+}
 // !FUNC 0x00403470 END
 
 // !FUNC 0x00403480 BEGIN
@@ -37,7 +39,9 @@ uchar CScroller::FUN_004034c0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004034d0 BEGIN
 /* 4034D0-4034D6 00006 */
-uchar* CScroller::FUN_004034d0() { STUB_BODY(); return 0; }
+uchar* CScroller::FUN_004034d0() {
+    return reinterpret_cast<uchar*>(&DAT_004b7c40);
+}
 // !FUNC 0x004034d0 END
 
 // !FUNC 0x004034e0 BEGIN
