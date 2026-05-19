@@ -46,4 +46,23 @@ typedef void *LPVOID;
 #define TRUE 1
 #define FALSE 0
 
+/*
+ * STUB_BODY() - marks an unmatched function body in the splat-style src/
+ * tree.  We can't use sotn/pokeemerald's `INCLUDE_ASM(folder, name)` trick
+ * because the MSVC linker can't pull external `.s` fragments at link time:
+ * every stub TU still has to provide a real C++ body for its symbol.
+ *
+ * `scripts/sync_units.py` recognises any function block whose body starts
+ * with `STUB_BODY(` as "not yet matched" and may rewrite the signature
+ * line when Ghidra moves the function to a new namespace.  Once you hand-
+ * write a matching body, the STUB_BODY marker disappears and `sync_units`
+ * leaves the block alone (only the `// !FUNC <addr>` markers are migrated
+ * verbatim if the namespace assignment changes again).
+ *
+ * The macro itself is a no-op so the stub TU links cleanly.  Returning a
+ * default-constructed value of an arbitrary scalar/pointer return type is
+ * done by the generator on the line following STUB_BODY when needed.
+ */
+#define STUB_BODY(...) ((void)0)
+
 #endif

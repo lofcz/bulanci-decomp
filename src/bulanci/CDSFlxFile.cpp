@@ -1,137 +1,137 @@
 #include "CDSFlxFile.h"
 
-/* 432740-432778 00038	*/
-uchar CDSFlxFile::FUN_00432740(int param_1, ushort* param_2, uchar* param_3) {
-	return 0;
-}
+// !FUNC 0x00432740 BEGIN
+/* 432740-432778 00038 */
+uchar CDSFlxFile::FUN_00432740(int param_1, ushort* param_2, uchar* param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x00432740 END
 
-/* 432780-4327D5 00055	*/
-uchar CDSFlxFile::FUN_00432780(int param_1, ushort* param_2, uchar* param_3) {
-	return 0;
-}
+// !FUNC 0x00432780 BEGIN
+/* 432780-4327D5 00055 */
+uchar CDSFlxFile::FUN_00432780(int param_1, ushort* param_2, uchar* param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x00432780 END
 
-/* 4327E0-4327F8 00018	*/
-uchar CDSFlxFile::FUN_004327e0(size_t param_1, void* param_2, void* param_3) {
-	return 0;
-}
+// !FUNC 0x004327e0 BEGIN
+/* 4327E0-4327F8 00018 */
+uchar CDSFlxFile::FUN_004327e0(size_t param_1, void* param_2, void* param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x004327e0 END
 
-/* 432800-432839 00039	*/
-uchar CDSFlxFile::FUN_00432800(int param_1, uchar* param_2, ushort* param_3) {
-	return 0;
-}
+// !FUNC 0x00432800 BEGIN
+/* 432800-432839 00039 */
+uchar CDSFlxFile::FUN_00432800(int param_1, uchar* param_2, ushort* param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x00432800 END
 
-/* 432840-43284D 0000D	*/
-uchar CDSFlxFile::FUN_00432840(uint* param_1) {
-	return 0;
-}
+// !FUNC 0x00432840 BEGIN
+/* 432840-43284D 0000D */
+uchar CDSFlxFile::FUN_00432840(uint* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432840 END
 
-/* 432850-4328D3 00083	*/
-uchar CDSFlxFile::FUN_00432850(int param_1, uchar* param_2, void* param_3) {
-	return 0;
-}
+// !FUNC 0x00432850 BEGIN
+/* 432850-4328D3 00083 */
+uchar CDSFlxFile::FUN_00432850(int param_1, uchar* param_2, void* param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x00432850 END
 
-/* 4328E0-4328E6 00006	*/
-uchar* CDSFlxFile::FUN_004328e0() {
-	return 0;
-}
+// !FUNC 0x004328e0 BEGIN
+/* 4328E0-4328E6 00006 */
+uchar* CDSFlxFile::FUN_004328e0() { STUB_BODY(); return 0; }
+// !FUNC 0x004328e0 END
 
-/* 4328F0-4328F8 00008	*/
-uchar CDSFlxFile::FUN_004328f0(uchar param_1) {
-	return 0;
-}
+// !FUNC 0x004328f0 BEGIN
+/* 4328F0-4328F8 00008 */
+uchar CDSFlxFile::FUN_004328f0(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004328f0 END
 
-/* 432900-432908 00008	*/
-uchar CDSFlxFile::FUN_00432900(int param_1) {
-	return 0;
-}
+// !FUNC 0x00432900 BEGIN
+/* 432900-432908 00008 */
+uchar CDSFlxFile::FUN_00432900(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432900 END
 
-/* 432910-432918 00008	*/
-uchar CDSFlxFile::FUN_00432910(uchar param_1) {
-	return 0;
-}
+// !FUNC 0x00432910 BEGIN
+/* 432910-432918 00008 */
+uchar CDSFlxFile::FUN_00432910(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432910 END
 
-/* 432920-432928 00008	*/
-uchar CDSFlxFile::FUN_00432920(uchar param_1) {
-	return 0;
-}
+// !FUNC 0x00432920 BEGIN
+/* 432920-432928 00008 */
+uchar CDSFlxFile::FUN_00432920(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432920 END
 
-/* 432930-432938 00008	*/
-uchar CDSFlxFile::FUN_00432930(int param_1) {
-	return 0;
-}
+// !FUNC 0x00432930 BEGIN
+/* 432930-432938 00008 */
+uchar CDSFlxFile::FUN_00432930(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432930 END
 
-/* 432940-432948 00008	*/
-uchar CDSFlxFile::FUN_00432940(uchar param_1) {
-	return 0;
-}
+// !FUNC 0x00432940 BEGIN
+/* 432940-432948 00008 */
+uchar CDSFlxFile::FUN_00432940(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432940 END
 
-/* 432950-432979 00029	*/
-uchar CDSFlxFile::FUN_00432950(int param_1) {
-	return 0;
-}
+// !FUNC 0x00432950 BEGIN
+/* 432950-432979 00029 */
+uchar CDSFlxFile::FUN_00432950(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432950 END
 
-/* 432980-432988 00008	*/
-uchar CDSFlxFile::FUN_00432980(int param_1) {
-	return 0;
-}
+// !FUNC 0x00432980 BEGIN
+/* 432980-432988 00008 */
+uchar CDSFlxFile::FUN_00432980(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432980 END
 
-/* 432990-432998 00008	*/
-uchar CDSFlxFile::FUN_00432990(int param_1) {
-	return 0;
-}
+// !FUNC 0x00432990 BEGIN
+/* 432990-432998 00008 */
+uchar CDSFlxFile::FUN_00432990(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432990 END
 
-/* 4329A0-4329A8 00008	*/
-uchar CDSFlxFile::FUN_004329a0(int param_1) {
-	return 0;
-}
+// !FUNC 0x004329a0 BEGIN
+/* 4329A0-4329A8 00008 */
+uchar CDSFlxFile::FUN_004329a0(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004329a0 END
 
-/* 4329B0-4329B8 00008	*/
-uchar CDSFlxFile::FUN_004329b0(int param_1) {
-	return 0;
-}
+// !FUNC 0x004329b0 BEGIN
+/* 4329B0-4329B8 00008 */
+uchar CDSFlxFile::FUN_004329b0(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004329b0 END
 
-/* 4329C0-432A43 00083	*/
-uchar CDSFlxFile::FUN_004329c0(uint* param_1) {
-	return 0;
-}
+// !FUNC 0x004329c0 BEGIN
+/* 4329C0-432A43 00083 */
+uchar CDSFlxFile::FUN_004329c0(uint* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004329c0 END
 
-/* 432AA0-432ABE 0001E	*/
-uint* CDSFlxFile::FUN_00432aa0(uchar param_1) {
-	return 0;
-}
+// !FUNC 0x00432aa0 BEGIN
+/* 432AA0-432ABE 0001E */
+uint* CDSFlxFile::FUN_00432aa0(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432aa0 END
 
-/* 432AC0-432B5D 0009D	*/
-uchar CDSFlxFile::FUN_00432ac0(int* param_1) {
-	return 0;
-}
+// !FUNC 0x00432ac0 BEGIN
+/* 432AC0-432B5D 0009D */
+uchar CDSFlxFile::FUN_00432ac0(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432ac0 END
 
-/* 432B60-432BD2 00072	*/
-uchar CDSFlxFile::FUN_00432b60(int param_1) {
-	return 0;
-}
+// !FUNC 0x00432b60 BEGIN
+/* 432B60-432BD2 00072 */
+uchar CDSFlxFile::FUN_00432b60(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432b60 END
 
-/* 432BE0-432C51 00071	*/
-uchar CDSFlxFile::FUN_00432be0(int param_1) {
-	return 0;
-}
+// !FUNC 0x00432be0 BEGIN
+/* 432BE0-432C51 00071 */
+uchar CDSFlxFile::FUN_00432be0(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00432be0 END
 
-/* 432C60-432E51 001F1	*/
-uchar CDSFlxFile::FUN_00432c60(uint* param_1, void* param_2) {
-	return 0;
-}
+// !FUNC 0x00432c60 BEGIN
+/* 432C60-432E51 001F1 */
+uchar CDSFlxFile::FUN_00432c60(uint* param_1, void* param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x00432c60 END
 
-/* 436E80-436EAD 0002D	*/
-uchar CDSFlxFile::FUN_00436e80(uint param_1) {
-	return 0;
-}
+// !FUNC 0x00436e80 BEGIN
+/* 436E80-436EAD 0002D */
+uchar CDSFlxFile::FUN_00436e80(uint param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00436e80 END
 
-/* 436EB0-436EE4 00034	*/
-uchar CDSFlxFile::FUN_00436eb0(uint param_1, uint param_2) {
-	return 0;
-}
+// !FUNC 0x00436eb0 BEGIN
+/* 436EB0-436EE4 00034 */
+uchar CDSFlxFile::FUN_00436eb0(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x00436eb0 END
 
-/* 436FF0-437025 00035	*/
-uchar CDSFlxFile::FUN_00436ff0(int param_1) {
-	return 0;
-}
+// !FUNC 0x00436ff0 BEGIN
+/* 436FF0-437025 00035 */
+uchar CDSFlxFile::FUN_00436ff0(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00436ff0 END
 

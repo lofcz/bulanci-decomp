@@ -7,9 +7,10 @@ removes a concrete blocker for the next, and each phase has an exit
 criterion you can measure against `report.json`.
 
 The numbers throughout are current as of the latest run (`report.json`
-committed alongside this doc): **136 translation units, 3 996 functions,
-422 487 bytes of code, 0% matched, 1 354 functions (34%) attributed to
-a class namespace, 2 642 functions still in `_Globals`.**
+committed alongside this doc): **138 translation units, 3 996 functions,
+422 487 bytes of code, 0% matched, 1 954 functions (49%) attributed to
+a class or runtime namespace, 2 042 functions still in `_Globals`
+(44.5% of code, down from 88% at session start).**
 
 ---
 
@@ -47,7 +48,7 @@ Goal: minimise how many functions remain in `_Globals` before agents
 start touching code, because every function in `_Globals` is a function
 that *every* agent will trip over.
 
-The pipeline already runs six Ghidra-side promoters in order
+The pipeline runs ten Ghidra-side promoters in order
 (`scripts/promote_namespaces.py`):
 
 1. `ApplyFidDb.java` - applies attached FunctionID databases to name
@@ -58,18 +59,49 @@ The pipeline already runs six Ghidra-side promoters in order
 2. `AssignEntryPoints.java` - names the PE entry as `_mainCRTStartup`
    and walks one hop to anchor `WinMain` / `WndProc` / `DialogProc`
    from `RegisterClass*` / `DialogBox*` argument slots.
-3. `PromoteVftableMembers.java` - reparents every RTTI vftable
+3. `PromoteMsvcrt.java` - carves every underscore-prefixed CRT helper
+   (~232 functions: `_malloc`, `_free`, `__SEH_prolog4`,
+   `___tmainCRTStartup`, `_CxxThrowException@8`, `__alloca_probe_*`,
+   `__cinit`, `___sbh_*`, `_memcpy`, ...) into a dedicated
+   `Runtime::MSVCRT` namespace. They land in the new `Runtime.cpp`
+   translation unit (132k code bytes) and stop polluting `_Globals`.
+4. `PromoteVftableMembers.java` - reparents every RTTI vftable
    member into its class namespace (922 today).
-4. `AssignByStringRefs.java` - matches debug strings (incl. RTTI
+5. `PromoteByVtableWrite.java` - decompiles every `FUN_xxxx` in the
+   global namespace and looks for a STORE op whose value is a known
+   vftable address. Whoever writes a vftable into `*this` is a
+   constructor (and most destructors write their parent's vftable
+   too). Captures the constructors that PromoteVftableMembers
+   couldn't see because they're never themselves listed in a
+   vftable. Adds a single-class fallback for static factories that
+   initialise an object on the stack. Today: 164 functions
+   reparented.
+6. `AssignByStringRefs.java` - matches debug strings (incl. RTTI
    mangled forms and `C`/`CDS`-stripped aliases) to class names and
    reparents single-class referrers (~5 direct hits today).
-5. `AssignByThisPointerType.java` - reparents file-scope functions
-   whose first parameter has a recovered class-pointer type. Catches
-   non-virtual methods Ghidra typed but never assigned.
-6. `PropagateCallerNamespaces.java` - iterates to a fixed point:
-   functions whose entire caller set lives in one class get attributed
-   to that class (402 today, plus 14 more on the second pass after the
-   string-driven seeds).
+7. `AssignByThisPointerType.java` - reparents file-scope functions
+   whose *stored* first parameter has a recovered class-pointer type.
+   Catches non-virtual methods Ghidra typed but never assigned.
+8. `PromoteByConstantThis.java` - decompiles every function once and
+   aggregates, per callee, the data type of arg0 *at the call site*.
+   If every typed call site agrees on the same `CClass*`, reparent
+   the callee. Closes the gap left by `AssignByThisPointerType`:
+   functions whose stored signature is still `undefined4 *` even
+   though every caller's HighFunction proves arg0 is a class
+   pointer. Today: 96 functions reparented at min-sites=1.
+9. `PropagateCallerNamespaces.java` - iterates to a fixed point:
+   functions whose entire caller set lives in one class get
+   attributed to that class (402 today on the first run, ~80 more
+   after the constructor / constant-this passes seed more classed
+   callers).
+10. `PromoteEhFunclets.java` - for each MSVC `Catch@xxxx` /
+    `Unwind@xxxx` funclet, find the nearest preceding non-funclet
+    function within 0x40 bytes; if that anchor has a class namespace,
+    the funclet inherits it. Runs last so it benefits from every
+    prior pass. Today this rescues ~30 funclets directly: most of the
+    1074 EH funclets are adjacent to a still-unclassified `FUN_xxxx`,
+    so each class-promotion of a `FUN_xxxx` typically drags ~5-15 EH
+    funclets along with it next run.
 
 **Open work in this phase:**
 
@@ -104,7 +136,28 @@ The pipeline already runs six Ghidra-side promoters in order
   types in its DTM (up from ~500 originally).
 
 **Exit criterion:** `_Globals` accounts for <= 30% of `total_code`
-(currently ~88%) and contains <= 1 000 functions (currently 2 642).
+(currently 44.5%) and contains <= 1 000 functions (currently 2 042).
+
+**Recent progress (May 2026):** `_Globals` shrank from 2 642 -> 2 042
+(-600 functions, **-22.7%**) across two rounds of new passes:
+
+* Round 1 (~-257): `PromoteMsvcrt.java` carved 232 MSVCRT helpers into
+  a `Runtime::MSVCRT` namespace; `PromoteEhFunclets.java` attributed
+  26 EH funclets adjacent to classed neighbours.
+* Round 2 (~-343): `PromoteByVtableWrite.java` reparented 164
+  constructors / destructors by their vftable-store pattern;
+  `PromoteByConstantThis.java` aggregated arg0 types at call sites to
+  promote another 96 functions; the existing callgraph pass cascaded
+  78 more after those seeds, and EH funclets picked up 5 more.
+
+The remaining 2 042 `_Globals` functions are dominated by 1 023
+`Unwind@xxxx` / 51 `Catch@xxxx` MSVC EH funclets whose immediate
+neighbour is itself an unclassified `FUN_xxxx`. Every class promotion
+of one of those parents will drag 5-15 funclets into the class with it
+next run; the cheapest path to <1 000 in `_Globals` is to keep
+sharpening the call-site type-flow heuristics (lower
+`--constant-this-dominance` to 0.66, allow `--callgraph-ambiguity 1`)
+and re-run the chain.
 
 ---
 

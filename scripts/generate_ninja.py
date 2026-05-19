@@ -43,7 +43,20 @@ def generateNinja(decompUnits: list[DecompUnit], output_path: Path):
             "cl_flags",
             f"{DEFAULT_CL_FLAGS} {include_flags} /I tools/",
         )
-        writer.rule("cc", "$cl /nologo $cl_flags /c $in /Fd$out.pdb /Fo$out", deps="msvc")
+        # Compile + immediately demangle the COFF symbol table so the
+        # resulting .obj's symbols match what ExportDelinker writes into
+        # the target objects (`CDSApp::FUN_xxxx` rather than the MSVC-
+        # mangled `?FUN_xxxx@CDSApp@@QAEXXZ` cl.exe emits).  Pairing in
+        # `objdiff-cli report generate` is by exact raw-symbol equality,
+        # not by demangling, so we rewrite the names ourselves.
+        # See `scripts/internal/compile_unit.py` (the wrapper) and
+        # `scripts/internal/demangle_obj_symbols.py` (the rewriter).
+        writer.rule(
+            "cc",
+            "python scripts\\internal\\compile_unit.py --out $out "
+            "-- $cl /nologo $cl_flags /c $in /Fd$out.pdb /Fo$out",
+            deps="msvc",
+        )
 
         any_build = False
         for decompUnit in decompUnits:

@@ -5,12 +5,27 @@
 
 class CHelpScript {
 public:
+	// !DECL 0x004215e0 BEGIN
+	/* 4215E0 */ uint* FUN_004215e0(uint* param_1);
+	// !DECL 0x004215e0 END
+	// !DECL 0x00421680 BEGIN
 	/* 421680 */ uchar* FUN_00421680();
+	// !DECL 0x00421680 END
+	// !DECL 0x00421690 BEGIN
 	/* 421690 */ uchar FUN_00421690(uchar param_1);
+	// !DECL 0x00421690 END
+	// !DECL 0x004216a0 BEGIN
 	/* 4216A0 */ uchar FUN_004216a0(uchar param_1);
+	// !DECL 0x004216a0 END
+	// !DECL 0x004216b0 BEGIN
 	/* 4216B0 */ uchar FUN_004216b0(uchar param_1);
+	// !DECL 0x004216b0 END
+	// !DECL 0x004216f0 BEGIN
 	/* 4216F0 */ uchar FUN_004216f0(uint* param_1);
+	// !DECL 0x004216f0 END
+	// !DECL 0x00421920 BEGIN
 	/* 421920 */ uint* FUN_00421920(uchar param_1);
+	// !DECL 0x00421920 END
 };
 
 #endif

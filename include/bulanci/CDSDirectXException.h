@@ -5,12 +5,30 @@
 
 class CDSDirectXException {
 public:
+	// !DECL 0x0043b6f0 BEGIN
 	/* 43B6F0 */ static uint FUN_0043b6f0(int param_1);
+	// !DECL 0x0043b6f0 END
+	// !DECL 0x0043b720 BEGIN
 	/* 43B720 */ static int FUN_0043b720(int param_1, int param_2);
+	// !DECL 0x0043b720 END
+	// !DECL 0x0043b750 BEGIN
 	/* 43B750 */ uchar* FUN_0043b750();
+	// !DECL 0x0043b750 END
+	// !DECL 0x0043b760 BEGIN
 	/* 43B760 */ uchar FUN_0043b760(uint* param_1);
+	// !DECL 0x0043b760 END
+	// !DECL 0x0043b7c0 BEGIN
 	/* 43B7C0 */ uchar* FUN_0043b7c0(wchar_t* param_1);
+	// !DECL 0x0043b7c0 END
+	// !DECL 0x0043b820 BEGIN
+	/* 43B820 */ uchar FUN_0043b820(uint param_1, uint param_2);
+	// !DECL 0x0043b820 END
+	// !DECL 0x0043b8b0 BEGIN
+	/* 43B8B0 */ uint* FUN_0043b8b0();
+	// !DECL 0x0043b8b0 END
+	// !DECL 0x0043b930 BEGIN
 	/* 43B930 */ uint* FUN_0043b930(uchar param_1);
+	// !DECL 0x0043b930 END
 };
 
 #endif

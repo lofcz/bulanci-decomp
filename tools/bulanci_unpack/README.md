@@ -82,27 +82,95 @@ data section:                              // back-to-back resource entries
 
 ## Known `ClassID`s
 
-| ClassID | Class                  | Encoding                                                           |
-|---------|------------------------|--------------------------------------------------------------------|
-| 21      | `BitmapJPEG`           | Raw JPEG bytes                                                     |
-| 22      | `BitmapBMP`            | Raw BMP bytes                                                      |
-| 28      | `BitmapSpecial`        | width, height, 5, stride, transparentRGB, padA, 0x01000000, padB, BGR24 pixels |
-| 48      | `Mp3`                  | int32 dataLen, uint32 size, u16 channels, u16 bits, u32 freq, MP3 stream |
-| 94      | `Sign`                 | uint32 packedDate, int32 len+UTF-16LE content, int32 len+UTF-16LE copyright, byte 0 |
-| 2026    | `Script`               | int32 codeLen, int32 nExports, int32 nVars, byte[codeLen] bytecode, int32[nExports] entries |
+The first half of the table is the editor-visible class set (defined in
+[`editor_il_spy/Editor.ResourceItems/`](../../editor_il_spy/Editor.ResourceItems));
+the second half is recovered from `bulanci.exe`'s master pack (format tag 32)
+and was reverse-engineered from the binary plus its decompiled CDS\* classes.
 
-## What is intentionally out of scope (Phase 1)
+| ClassID | Class             | Encoding                                                                                                   |
+|---------|-------------------|------------------------------------------------------------------------------------------------------------|
+| 21      | `BitmapJPEG`      | Raw JPEG bytes                                                                                             |
+| 22      | `BitmapBMP`       | Raw BMP bytes                                                                                              |
+| 28      | `BitmapSpecial`   | u32 w, u32 h, u32 marker, u32 stride, u32 field4, byte padA=0xFF, u32 paletteCount, byte hasUnpacked; then `paletteCount*4` palette entries (BGR + reserved) and `stride*height` packed pixels. When `hasUnpacked==1` an additional `width*height` "unpacked" buffer follows (the runtime cache; we ignore it). `marker` is a bpp tier (0=1bpp, 1=2bpp, 2=4bpp, 3=8bpp, 4=16bpp, 5=24bpp BGR, 6=32bpp); all of 0..5 decode to PNG today. `field4` is a transparent palette index for indexed variants or a transparent RGB sentinel for marker 5. |
+| 43      | `AudioBank`       | u32 dataLen, u16 channels, u16 bits, u32 freq, then `dataLen` bytes of little-endian PCM. Companion `.wav` is written. |
+| 48      | `Mp3`             | int32 dataLen, uint32 size, u16 channels, u16 bits, u32 freq, MP3 stream                                   |
+| 52      | `BitmapSprite`    | Fixed 0x2c-byte header (11×u32: totalSize, encodedSize, encodedSize2, width, height, frameCount, channels=3, inMemSize, codec flags, encodedSize3, 24-bit packed tag) followed by an RLE/LC pixel stream that `CBulPicture` decodes at runtime. Header is fully recovered and sanity-checked; the per-frame RLE decoder is still TODO. See [`ghidra_analysis/sprite_container.md`](ghidra_analysis/sprite_container.md). |
+| 54      | `MouseCursor`     | u32 totalSize, u32 frameCount, u32 …; small (8 KB) cursor frames + 24bpp BGR palette                       |
+| 58      | `DsmInner`        | u32 nameLen, char[nameLen] filename, u64 FILETIME, u32 fileLen, byte[fileLen] payload. The master pack carries one `BULANCI.TMP` entry — an embedded sub-archive used by `CDSDsmFile`. |
+| 67      | `AudioBankIndex`  | u32 bankResourceID (the ClassID-43 partner), u32 reserved, u32 sampleCount, u32[sampleCount] byte lengths. Sums match the partner's `dataLen` exactly. |
+| 76      | `BitmapJpegAnim`  | u32 totalSize + 5×u32 descriptor + back-to-back JPEG frames. We auto-extract every embedded JPEG to `*.frameNNN.jpg`. |
+| 94      | `Sign`            | uint32 packedDate, int32 len+UTF-16LE content, int32 len+UTF-16LE copyright, byte 0                        |
+| 2026    | `Script`          | int32 codeLen, int32 nExports, int32 nVars, byte[codeLen] bytecode, int32[nExports] entries — see disassembler below. |
+| 2043    | `TextBlock`       | u32 charCount, char[charCount] UTF-16LE. First codepoint usually `0x0001` (section/line marker). Decoded to `*.txt`. |
+| 2050    | `TextTable`       | u32 totalSize, u32 entryCount, u32×2 reserved, then mixed fixed-size records + UTF-16LE strings. Phase-1 extractor dumps a JSON sidecar listing every printable string found. |
 
-- Converting `BitmapSpecial` (24bpp BGR with sentinel-color transparency) to PNG.
-  We capture the parsed header in `_manifest.json` and the raw pixel bytes in
-  `res_*.bin`; the PNG converter is a Phase 2 task.
-- Disassembling the `Script` bytecode (opcodes already mapped in
-  `Editor.Scripts.Opcode` — see [`Opcode.cs`](../../editor_il_spy/Editor.Scripts/Opcode.cs)).
-- Resolving resource names: the `.eap` bundle stores numeric IDs only; the
-  human-readable names live in the matching `.eapres` XML.
-- A native C++ port of the unpacker. The Phase 1 unpacker is intentionally a
-  Python throwaway tool; a parallel MSVC C++ implementation will land when we
-  build the proper toolchain.
+## Script bytecode disassembler
+
+`Script` (ClassID 2026) bodies are disassembled to `*.script.asm` per the
+opcode table in [`Opcode.cs`](../../editor_il_spy/Editor.Scripts/Opcode.cs).
+Each function entry starts with `byte varCount` followed by commands. The
+disassembler renders inline nested arguments compactly, e.g.
+
+```
+fn export#1 @ 0x00d8:
+  ; varCount=0
+    @0x00d9  SetGlobalVar(3, IntConst(0))
+    @0x00e0  IfEqual(IsNet(), IntConst(0), 251)
+    @0x00eb  SetGlobalVar(3, StrmCreateMem(IntConst(4096), IntConst(4096)))
+    @0x00f8  SetCommStrm(GetGlobalVar(3))
+    @0x00fb  LoadPreface(100001)
+    @0x0100  SetMusic(100003, 0)
+    @0x0109  SetInsertMode(IntConst(0))
+    @0x010f  InsertView(CreateImage(IntConst(0), IntConst(0), 100002))
+```
+
+The native game's master-pack scripts use a *superset* of the editor's
+opcode enum. All 103 opcodes (45 base `CDSScript` + 58 `CLevelScript`
+extension entries) are documented in
+[`ghidra_analysis/script_dispatch_table.md`](ghidra_analysis/script_dispatch_table.md);
+every handler in `bulanci.exe` has been hand-disassembled to recover its
+argument shape. Game-only opcodes whose semantic name isn't in the
+editor enum get a `opNN` mnemonic, but their arguments parse correctly,
+so calls compose naturally (e.g. `op80(op62(IntConst(6)), IntConst(0))`).
+
+The disassembler also recognises functions with branchy control flow
+(`If*`, `Goto`, `Switch`, `Select`) and walks all reachable bytes inside
+them. Functions without branches stop at the first `Return`, and any
+trailing bytes are flagged as `; (N byte(s) of unreachable tail/inline
+helper)` — typically these are subroutines that `Call` opcodes target
+but the export table doesn't list as top-level entries. As a result no
+`<UNKNOWN op=N>` markers should ever appear in a freshly unpacked
+`.script.asm`.
+
+## Name resolution from `.eapres`
+
+`tools/bulanci_unpack/bulanci_unpack.py eap LEVEL.eap -o out/` automatically
+pairs `LEVEL.eap` with a sibling `LEVEL.eapres` (the editor's XML side car).
+The names typed in the editor flow into each manifest entry's `name` field.
+Override the side-car path with `--names-from PATH.eapres`.
+
+## What is still out of scope
+
+- **`BitmapSprite` (ClassID 52) RLE pixels.** The 0x2c-byte header is now
+  fully recovered and sanity-checked: totalSize, the three encodedSize
+  mirrors, width/height/frameCount, channels (always 3), the
+  `CBulPicture`-shaped inMemSize hint, the codec-flags byte, and the
+  24-bit packed tag. The per-frame RLE/LC stream that follows is still
+  TODO — it's decoded at runtime by `CBulPicture` (factory at
+  `0x0040eb30`, palette+pixels layout documented in
+  [`ghidra_analysis/sprite_container.md`](ghidra_analysis/sprite_container.md)),
+  not by `CDSBitmap` itself, and tracking down the right vtable slot is
+  the remaining piece of work. The format is purely native, with no
+  editor source to cross-reference.
+- **Semantic names** for the 26 game-only `opNN` mnemonics in the
+  `CLevelScript` extension table. Argument shapes are all verified (no
+  more `<UNKNOWN op=N>` markers), but the human-meaningful operation
+  most of these handlers perform is inferred only from caller patterns.
+  See the "What's still unknown" section of
+  [`ghidra_analysis/script_dispatch_table.md`](ghidra_analysis/script_dispatch_table.md).
+- A native C++ port of the unpacker. The Phase 1 unpacker is intentionally
+  a Python throwaway tool; a parallel MSVC C++ implementation will land
+  when we build the proper toolchain.
 
 ## Verification samples shipped with this repo
 

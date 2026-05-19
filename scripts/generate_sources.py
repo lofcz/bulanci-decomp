@@ -1,3 +1,37 @@
+"""Bootstrap stub generator.
+
+This script emits the *initial* C++ scaffold for every unit listed in
+`config/bulanci/units_listing.csv` from `config/bulanci/mapping.csv`.
+
+Splat-style ownership rules (see `docs/DECOMP.md`):
+  * `src/bulanci/<unit>.cpp` and `include/bulanci/<unit>.h` are hand-owned
+    once they exist.  This script refuses to overwrite them by default.
+  * On every subsequent Ghidra promotion pass, run
+    `scripts/sync_units.py` instead: it diffs the per-function markers
+    against the current `mapping.csv` and moves blocks between unit
+    files atomically, preserving any hand-written matched bodies.
+  * `--force` overrides the bootstrap check (nuclear: wipes hand-edits).
+
+Marker format (parsed by `sync_units.py`):
+
+    // !FUNC 0x00418c00 BEGIN
+    /* 00418C00-00418C5A 0005A */
+    void ODSImage::FUN_00418c00(int* param_1) { STUB_BODY(); }
+    // !FUNC 0x00418c00 END
+
+    class ODSImage {
+    public:
+        // !DECL 0x00418c00 BEGIN
+        /* 00418C00 */ void FUN_00418c00(int* param_1);
+        // !DECL 0x00418c00 END
+    };
+
+Addresses are the canonical function-start address (8-digit lowercase
+hex with `0x` prefix); they're the stable identity even after Ghidra
+renames a `FUN_xxx` into `CFoo::Init`.
+"""
+
+import argparse
 import os
 import re
 from pathlib import Path
@@ -235,28 +269,73 @@ def _collect_unknown_types(funByNamespaces, unitNamespaces) -> list[str]:
     return sorted(seen)
 
 
-def generateSources(decompUnit: DecompUnit):
+def generateSources(decompUnit: DecompUnit, force: bool = False):
+    """Scaffold any missing unit files.  Existing files are left alone
+    unless `force=True` (in which case they're overwritten - destructive
+    to hand-edits).  Future namespace shifts should go through
+    `scripts/sync_units.py`."""
     os.makedirs(str(decompUnit.srcPath), exist_ok=True)
     os.makedirs(str(decompUnit.includePath), exist_ok=True)
+    skipped = 0
+    scaffolded = 0
     for unit, namespaces in decompUnit.units.items():
-        generateUnitSources(decompUnit.mappings, unit, namespaces, decompUnit.srcPath, decompUnit.includePath)
+        if generateUnitSources(decompUnit.mappings, unit, namespaces,
+                               decompUnit.srcPath, decompUnit.includePath,
+                               force=force):
+            scaffolded += 1
+        else:
+            skipped += 1
+    print(f"  scaffolded {scaffolded} unit(s); preserved {skipped} existing unit(s).")
+    if skipped and not force:
+        print("  (existing units are hand-owned; run scripts/sync_units.py to "
+              "migrate per-function blocks, or pass --force to rebuild from scratch.)")
 
 
-def generateUnitSources(funByNamespaces, unitName, unitNamespaces, source_dir, include_dir):
+def generateUnitSources(funByNamespaces, unitName, unitNamespaces, source_dir, include_dir, force: bool = False) -> bool:
+    """Returns True when at least one file (header or source) was
+    (re)written.  Both files have identical lifecycle semantics: if
+    either one already exists and `force` is False, both are preserved
+    to avoid drifting headers from their .cpp."""
     # Sanitise + dedup names BEFORE either header or source is emitted so
     # both files agree on the suffixed/sanitised name and the resulting
     # COFF symbols line up with what ExportDelinker writes for the target.
     _sanitize_and_dedup(funByNamespaces, unitNamespaces)
 
     header_file = include_dir / (unitName + ".h")
-    if not header_file.exists():
-        with header_file.open("w") as file:
-            generateUnitHeader(file, funByNamespaces, unitName, unitNamespaces)
-
     source_file = source_dir / (unitName + '.cpp')
-    if not source_file.exists():
-        with source_file.open("w") as file:
-            generateUnitSource(file, funByNamespaces, unitName, unitNamespaces)
+
+    if not force and (header_file.exists() or source_file.exists()):
+        # Hand-owned: leave both alone.  sync_units.py handles per-function
+        # migration in place; this generator only bootstraps new units.
+        return False
+
+    with header_file.open("w", encoding="utf-8", newline="") as f:
+        generateUnitHeader(f, funByNamespaces, unitName, unitNamespaces)
+    with source_file.open("w", encoding="utf-8", newline="") as f:
+        generateUnitSource(f, funByNamespaces, unitName, unitNamespaces)
+    return True
+
+
+# --- Marker emission ------------------------------------------------------
+#
+# All migration tooling keys off these exact strings.  The format is
+# `// !FUNC 0xXXXXXXXX BEGIN` / `// !DECL 0xXXXXXXXX BEGIN` with 8-digit
+# lowercase hex.  `sync_units.py` uses the same regex; keep in sync.
+
+def _func_begin(addr: int) -> str:
+    return f"// !FUNC 0x{addr:08x} BEGIN\n"
+
+
+def _func_end(addr: int) -> str:
+    return f"// !FUNC 0x{addr:08x} END\n"
+
+
+def _decl_begin(addr: int) -> str:
+    return f"\t// !DECL 0x{addr:08x} BEGIN\n"
+
+
+def _decl_end(addr: int) -> str:
+    return f"\t// !DECL 0x{addr:08x} END\n"
 
 
 def _classify_namespaces(unitNamespaces):
@@ -363,19 +442,32 @@ def generateUnitHeaderClass(headerFile, funByNamespaces, ns, classDisplayName, l
     headerFile.write("};\n\n")
 
 
-def generateUnitHeaderFunction(headerFile, fun: Function, leaves: set[str]):
-    headerFile.write(f"\t/* {fun.start:X} */ ")
+def render_decl_line(fun: Function, leaves: set[str]) -> str:
+    """Return the single-line declaration body that sits between
+    `// !DECL <addr> BEGIN` and `// !DECL <addr> END`.  Shared between
+    the bootstrap generator and `sync_units.py` so a re-synced block
+    matches a fresh scaffold byte-for-byte."""
+    parts: list[str] = [f"\t/* {fun.start:X} */ "]
     if fun.type is FunctionType.STATIC:
-        headerFile.write("static ")
+        parts.append("static ")
     if fun.type is not FunctionType.CONSTRUCTOR and not _is_implicit_constructor(fun):
-        headerFile.write(f"{_safe_return_type(fun.returnType, leaves)} ")
-    headerFile.write(f"{fun.name}(")
-    headerFile.write(", ".join(f"{_safe_arg_type(arg, leaves)} param_{param_idx+1}" for param_idx, arg in enumerate(fun.args)))
+        parts.append(f"{_safe_return_type(fun.returnType, leaves)} ")
+    parts.append(f"{fun.name}(")
+    parts.append(", ".join(
+        f"{_safe_arg_type(arg, leaves)} param_{param_idx+1}"
+        for param_idx, arg in enumerate(fun.args)))
     if fun.hasVarArgs:
         if len(fun.args) > 0:
-            headerFile.write(", ")
-        headerFile.write("...")
-    headerFile.write(");\n")
+            parts.append(", ")
+        parts.append("...")
+    parts.append(");\n")
+    return "".join(parts)
+
+
+def generateUnitHeaderFunction(headerFile, fun: Function, leaves: set[str]):
+    headerFile.write(_decl_begin(fun.start))
+    headerFile.write(render_decl_line(fun, leaves))
+    headerFile.write(_decl_end(fun.start))
 
 
 def generateUnitSource(source_file, funByNamespaces, unitName, unitNamespaces):
@@ -384,30 +476,49 @@ def generateUnitSource(source_file, funByNamespaces, unitName, unitNamespaces):
     for ns in unitNamespaces:
         if ns in funByNamespaces:
             for fun in funByNamespaces[ns]:
-                # No filter: names were sanitised in _sanitize_and_dedup
-                # before this point and every function must reach the COFF.
                 generateUnitSourceFunction(source_file, fun, leaves)
 
 
-def generateUnitSourceFunction(source_file, fun: Function, leaves: set[str]):
-    source_file.write(f"/* {fun.start:X}-{fun.end:X} {fun.size:05X}\t*/\n")
+def render_func_body(fun: Function, leaves: set[str]) -> str:
+    """Return the full function block body (signature + STUB body) that
+    sits between `// !FUNC <addr> BEGIN` and `// !FUNC <addr> END`.
+    Shared between the bootstrap generator and `sync_units.py`."""
     is_ctor_like = fun.type is FunctionType.CONSTRUCTOR or _is_implicit_constructor(fun)
     safe_ret = _safe_return_type(fun.returnType, leaves)
+    parts: list[str] = [f"/* {fun.start:X}-{fun.end:X} {fun.size:05X} */\n"]
     if not is_ctor_like:
-        source_file.write(f"{safe_ret} ")
-    source_file.write(f"{fun.namespace}::{fun.name}(")
-    source_file.write(", ".join(f"{_safe_arg_type(arg, leaves)} param_{param_idx+1}" for param_idx, arg in enumerate(fun.args)))
+        parts.append(f"{safe_ret} ")
+    parts.append(f"{fun.namespace}::{fun.name}(")
+    parts.append(", ".join(
+        f"{_safe_arg_type(arg, leaves)} param_{param_idx+1}"
+        for param_idx, arg in enumerate(fun.args)))
     if fun.hasVarArgs:
         if len(fun.args) > 0:
-            source_file.write(", ")
-        source_file.write("...")
-    source_file.write(") {\n")
+            parts.append(", ")
+        parts.append("...")
+    parts.append(") { STUB_BODY();")
     if safe_ret != 'void' and not is_ctor_like:
-        source_file.write("\treturn 0;\n")
-    source_file.write("}\n\n")
+        parts.append(" return 0;")
+    parts.append(" }\n")
+    return "".join(parts)
+
+
+def generateUnitSourceFunction(source_file, fun: Function, leaves: set[str]):
+    source_file.write(_func_begin(fun.start))
+    source_file.write(render_func_body(fun, leaves))
+    source_file.write(_func_end(fun.start))
+    source_file.write("\n")
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--force", action="store_true",
+                        help="Overwrite existing unit files even if they were hand-edited. "
+                             "Use only for one-time migrations (current PR moved to markers) "
+                             "or to wipe & re-scaffold from a clean slate. Prefer "
+                             "`scripts/sync_units.py` for ongoing namespace shifts.")
+    args = parser.parse_args()
     os.chdir(WORKSPACE_PATH)
     unit = DecompUnit("Game code", "bulanci", "bulanci.exe")
-    generateSources(unit)
+    generateSources(unit, force=args.force)

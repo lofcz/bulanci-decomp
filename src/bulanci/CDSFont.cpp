@@ -1,17 +1,17 @@
 #include "CDSFont.h"
 
-/* 4372B0-4372E7 00037	*/
-uchar CDSFont::FUN_004372b0(int* param_1) {
-	return 0;
-}
+// !FUNC 0x004372b0 BEGIN
+/* 4372B0-4372E7 00037 */
+uchar CDSFont::FUN_004372b0(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004372b0 END
 
-/* 4372F0-437327 00037	*/
-uchar CDSFont::FUN_004372f0(int* param_1) {
-	return 0;
-}
+// !FUNC 0x004372f0 BEGIN
+/* 4372F0-437327 00037 */
+uchar CDSFont::FUN_004372f0(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004372f0 END
 
-/* 437510-437516 00006	*/
-uchar* CDSFont::FUN_00437510() {
-	return 0;
-}
+// !FUNC 0x00437510 BEGIN
+/* 437510-437516 00006 */
+uchar* CDSFont::FUN_00437510() { STUB_BODY(); return 0; }
+// !FUNC 0x00437510 END
 

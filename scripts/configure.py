@@ -5,6 +5,7 @@ from pathlib import Path
 from generate_sources import generateSources
 from generate_ninja import generateNinja
 from generate_objdiff import generateObjdiffConfig
+from sync_units import sync as syncUnits
 from project import DecompUnit
 
 
@@ -30,8 +31,18 @@ def configure(
         for unit in decompUnits:
             exportObjs(unit, mode=ghidra_mode)
 
+    # Splat-style pipeline (see docs/DECOMP.md):
+    #   1. generateSources() scaffolds any unit that doesn't exist yet
+    #      (bootstrap-only; refuses to clobber hand-edited files).
+    #   2. syncUnits() applies per-function migrations: moves blocks
+    #      between unit .cpp/.h when mapping.csv changes, preserving
+    #      any matched bodies and refreshing stubs.
+    # Together they replace the old "rewrite every unit from scratch"
+    # behaviour that would silently drop matched code.
     for unit in decompUnits:
         generateSources(unit)
+    for unit in decompUnits:
+        syncUnits(unit)
 
     generateNinja(decompUnits, Path("."))
     generateObjdiffConfig(decompUnits, Path("./build/orig"), Path("./build/Src"), Path("."))

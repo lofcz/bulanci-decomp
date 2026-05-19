@@ -1,67 +1,67 @@
 #include "CGunMouse.h"
 
-/* 4238E0-4238F2 00012	*/
-uchar CGunMouse::FUN_004238e0(int param_1) {
-	return 0;
-}
+// !FUNC 0x004238e0 BEGIN
+/* 4238E0-4238F2 00012 */
+uchar CGunMouse::FUN_004238e0(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004238e0 END
 
-/* 423900-42394F 0004F	*/
-uchar CGunMouse::FUN_00423900(uint param_1, int* param_2) {
-	return 0;
-}
+// !FUNC 0x00423900 BEGIN
+/* 423900-42394F 0004F */
+uchar CGunMouse::FUN_00423900(uint param_1, int* param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x00423900 END
 
-/* 423AC0-423AC8 00008	*/
-uchar CGunMouse::FUN_00423ac0(int param_1) {
-	return 0;
-}
+// !FUNC 0x00423ac0 BEGIN
+/* 423AC0-423AC8 00008 */
+uchar CGunMouse::FUN_00423ac0(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00423ac0 END
 
-/* 423B50-423BC1 00071	*/
-uchar CGunMouse::FUN_00423b50(int param_1) {
-	return 0;
-}
+// !FUNC 0x00423b50 BEGIN
+/* 423B50-423BC1 00071 */
+uchar CGunMouse::FUN_00423b50(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00423b50 END
 
-/* 423BD0-423C1E 0004E	*/
-uchar CGunMouse::FUN_00423bd0(uint param_1, short param_2) {
-	return 0;
-}
+// !FUNC 0x00423bd0 BEGIN
+/* 423BD0-423C1E 0004E */
+uchar CGunMouse::FUN_00423bd0(uint param_1, short param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x00423bd0 END
 
-/* 424370-4243AB 0003B	*/
-uint CGunMouse::FUN_00424370(uint* param_1) {
-	return 0;
-}
+// !FUNC 0x00424370 BEGIN
+/* 424370-4243AB 0003B */
+uint CGunMouse::FUN_00424370(uint* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00424370 END
 
-/* 4243B0-4243F1 00041	*/
-uint CGunMouse::FUN_004243b0(uint* param_1) {
-	return 0;
-}
+// !FUNC 0x004243b0 BEGIN
+/* 4243B0-4243F1 00041 */
+uint CGunMouse::FUN_004243b0(uint* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004243b0 END
 
-/* 424610-4249A7 00397	*/
-uchar CGunMouse::FUN_00424610(int param_1) {
-	return 0;
-}
+// !FUNC 0x00424610 BEGIN
+/* 424610-4249A7 00397 */
+uchar CGunMouse::FUN_00424610(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00424610 END
 
-/* 4249B0-424BC0 00210	*/
-uchar CGunMouse::FUN_004249b0(int param_1) {
-	return 0;
-}
+// !FUNC 0x004249b0 BEGIN
+/* 4249B0-424BC0 00210 */
+uchar CGunMouse::FUN_004249b0(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004249b0 END
 
-/* 425730-425846 00116	*/
-uchar CGunMouse::FUN_00425730(uint* param_1) {
-	return 0;
-}
+// !FUNC 0x00425730 BEGIN
+/* 425730-425846 00116 */
+uchar CGunMouse::FUN_00425730(uint* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00425730 END
 
-/* 425850-425856 00006	*/
-uchar* CGunMouse::FUN_00425850() {
-	return 0;
-}
+// !FUNC 0x00425850 BEGIN
+/* 425850-425856 00006 */
+uchar* CGunMouse::FUN_00425850() { STUB_BODY(); return 0; }
+// !FUNC 0x00425850 END
 
-/* 425860-425868 00008	*/
-uchar CGunMouse::FUN_00425860(uchar param_1) {
-	return 0;
-}
+// !FUNC 0x00425860 BEGIN
+/* 425860-425868 00008 */
+uchar CGunMouse::FUN_00425860(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00425860 END
 
-/* 4262A0-4262BE 0001E	*/
-uint* CGunMouse::FUN_004262a0(uchar param_1) {
-	return 0;
-}
+// !FUNC 0x004262a0 BEGIN
+/* 4262A0-4262BE 0001E */
+uint* CGunMouse::FUN_004262a0(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004262a0 END
 

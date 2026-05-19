@@ -1,27 +1,32 @@
 #include "CDSDirectPlaySender.h"
 
-/* 43AD20-43AD55 00035	*/
-uchar CDSDirectPlaySender::FUN_0043ad20(int param_1) {
-	return 0;
-}
+// !FUNC 0x0043ad20 BEGIN
+/* 43AD20-43AD55 00035 */
+uchar CDSDirectPlaySender::FUN_0043ad20(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0043ad20 END
 
-/* 43B120-43B126 00006	*/
-uchar* CDSDirectPlaySender::FUN_0043b120() {
-	return 0;
-}
+// !FUNC 0x0043b120 BEGIN
+/* 43B120-43B126 00006 */
+uchar* CDSDirectPlaySender::FUN_0043b120() { STUB_BODY(); return 0; }
+// !FUNC 0x0043b120 END
 
-/* 43B130-43B136 00006	*/
-uchar* CDSDirectPlaySender::FUN_0043b130() {
-	return 0;
-}
+// !FUNC 0x0043b130 BEGIN
+/* 43B130-43B136 00006 */
+uchar* CDSDirectPlaySender::FUN_0043b130() { STUB_BODY(); return 0; }
+// !FUNC 0x0043b130 END
 
-/* 43B140-43B148 00008	*/
-uchar CDSDirectPlaySender::FUN_0043b140(uchar param_1) {
-	return 0;
-}
+// !FUNC 0x0043b140 BEGIN
+/* 43B140-43B148 00008 */
+uchar CDSDirectPlaySender::FUN_0043b140(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0043b140 END
 
-/* 43B530-43B54E 0001E	*/
-uint* CDSDirectPlaySender::FUN_0043b530(uchar param_1) {
-	return 0;
-}
+// !FUNC 0x0043b150 BEGIN
+/* 43B150-43B1FD 000AD */
+uchar CDSDirectPlaySender::FUN_0043b150(uint* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0043b150 END
+
+// !FUNC 0x0043b530 BEGIN
+/* 43B530-43B54E 0001E */
+uint* CDSDirectPlaySender::FUN_0043b530(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0043b530 END
 

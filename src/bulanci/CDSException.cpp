@@ -1,32 +1,42 @@
 #include "CDSException.h"
 
-/* 42FFF0-430000 00010	*/
-uchar CDSException::FUN_0042fff0(int* param_1) {
-	return 0;
-}
+// !FUNC 0x0042fff0 BEGIN
+/* 42FFF0-430000 00010 */
+uchar CDSException::FUN_0042fff0(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0042fff0 END
 
-/* 434A30-434A36 00006	*/
-uchar* CDSException::FUN_00434a30() {
-	return 0;
-}
+// !FUNC 0x00434a10 BEGIN
+/* 434A10-434A28 00018 */
+uchar CDSException::FUN_00434a10(uint* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00434a10 END
 
-/* 434AE0-434AFF 0001F	*/
-uint* CDSException::FUN_00434ae0(uchar param_1) {
-	return 0;
-}
+// !FUNC 0x00434a30 BEGIN
+/* 434A30-434A36 00006 */
+uchar* CDSException::FUN_00434a30() { STUB_BODY(); return 0; }
+// !FUNC 0x00434a30 END
 
-/* 434B80-434BC9 00049	*/
-wchar_t* CDSException::FUN_00434b80(int* param_1) {
-	return 0;
-}
+// !FUNC 0x00434a40 BEGIN
+/* 434A40-434A67 00027 */
+uchar CDSException::FUN_00434a40(uint param_1, uint param_2, uchar param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x00434a40 END
 
-/* 448A6D-448A97 0002A	*/
-uchar CDSException::_purecall() {
-	return 0;
-}
+// !FUNC 0x00434ae0 BEGIN
+/* 434AE0-434AFF 0001F */
+uint* CDSException::FUN_00434ae0(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00434ae0 END
 
-/* 44D39D-44D3BB 0001E	*/
-uint CDSException::_set_abort_behavior(uint param_1, uint param_2) {
-	return 0;
-}
+// !FUNC 0x00434b80 BEGIN
+/* 434B80-434BC9 00049 */
+wchar_t* CDSException::FUN_00434b80(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00434b80 END
+
+// !FUNC 0x00448a6d BEGIN
+/* 448A6D-448A97 0002A */
+uchar CDSException::_purecall() { STUB_BODY(); return 0; }
+// !FUNC 0x00448a6d END
+
+// !FUNC 0x0044d39d BEGIN
+/* 44D39D-44D3BB 0001E */
+uint CDSException::_set_abort_behavior(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x0044d39d END
 

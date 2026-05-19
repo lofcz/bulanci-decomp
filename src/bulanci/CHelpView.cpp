@@ -1,7 +1,12 @@
 #include "CHelpView.h"
 
-/* 421900-421906 00006	*/
-uchar* CHelpView::FUN_00421900() {
-	return 0;
-}
+// !FUNC 0x004218a0 BEGIN
+/* 4218A0-4218F7 00057 */
+uint* CHelpView::FUN_004218a0(uint* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004218a0 END
+
+// !FUNC 0x00421900 BEGIN
+/* 421900-421906 00006 */
+uchar* CHelpView::FUN_00421900() { STUB_BODY(); return 0; }
+// !FUNC 0x00421900 END
 

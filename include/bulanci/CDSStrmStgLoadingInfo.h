@@ -5,7 +5,9 @@
 
 class CDSStrmStgLoadingInfo {
 public:
+	// !DECL 0x00433db0 BEGIN
 	/* 433DB0 */ uchar* FUN_00433db0();
+	// !DECL 0x00433db0 END
 };
 
 #endif

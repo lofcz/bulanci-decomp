@@ -129,6 +129,8 @@ CTeleportPoint,CTeleportPoint
 CVolume,CVolume
 CWeapon,CWeapon
 CWindow,CWindow
+ODSImage,ODSImage
+Runtime,Runtime::MSVCRT
 _Globals,_Globals
 _LocaleUpdate,_LocaleUpdate
 exception,exception
