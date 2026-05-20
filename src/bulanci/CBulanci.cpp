@@ -359,6 +359,11 @@ uint* CBulanci::CGaming_ctor(int* param_1) { STUB_BODY(); return 0; }
 uchar CBulanci::Catch_00420455() { STUB_BODY(); return 0; }
 // !FUNC 0x00420455 END
 
+// !FUNC 0x00422550 BEGIN
+/* 422550-4225FC 000AC */
+void* CBulanci::CDSAudioPlayer_CreateFromResource(uchar* param_1, uint param_2, int param_3, uint param_4, char param_5) { STUB_BODY(); return 0; }
+// !FUNC 0x00422550 END
+
 // !FUNC 0x00423ea0 BEGIN
 /* 423EA0-423EEF 0004F */
 uchar CBulanci::CRuch_EnableDisable(char param_1) { STUB_BODY(); return 0; }
@@ -373,6 +378,11 @@ uchar CBulanci::CMenu_EnableAllRuch(char param_1) { STUB_BODY(); return 0; }
 /* 424BC0-424CED 0012D */
 uint* CBulanci::CSwitch_ctor(uint param_1, uint param_2, int param_3, ushort param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00424bc0 END
+
+// !FUNC 0x004252a0 BEGIN
+/* 4252A0-4252E9 00049 */
+uchar CBulanci::CMenu_LoadBackgroundMusic(uint param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004252a0 END
 
 // !FUNC 0x004252f0 BEGIN
 /* 4252F0-425333 00043 */

@@ -1206,6 +1206,11 @@ uint* _Globals::CreateObject_00421ba0() { STUB_BODY(); return 0; }
 uint* _Globals::CreateObject_00422280() { STUB_BODY(); return 0; }
 // !FUNC 0x00422280 END
 
+// !FUNC 0x00422310 BEGIN
+/* 422310-4223B4 000A4 */
+void* _Globals::CDSAudioPlayer_Create(uchar* param_1, int* param_2, int param_3, uint param_4, char param_5) { STUB_BODY(); return 0; }
+// !FUNC 0x00422310 END
+
 // !FUNC 0x004223c0 BEGIN
 /* 4223C0-4223DB 0001B */
 uchar _Globals::FUN_004223c0(int* param_1, uchar param_2) { STUB_BODY(); return 0; }
@@ -1250,6 +1255,11 @@ uint* _Globals::CreateObject_00423610() { STUB_BODY(); return 0; }
 /* 423F20-423F6E 0004E */
 uchar _Globals::CSwitch_PlayHoverTrack(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423f20 END
+
+// !FUNC 0x00424010 BEGIN
+/* 424010-424078 00068 */
+uchar _Globals::CMenu_EnableBackgroundState(char param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00424010 END
 
 // !FUNC 0x00424400 BEGIN
 /* 424400-424424 00024 */
@@ -2721,6 +2731,16 @@ uchar _Globals::FUN_0043a590() { STUB_BODY(); return 0; }
 /* 43A5E0-43A629 00049 */
 uchar _Globals::FUN_0043a5e0(void* param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0043a5e0 END
+
+// !FUNC 0x0043a760 BEGIN
+/* 43A760-43A9D0 00270 */
+uchar _Globals::CDSAudioPlayer_Init(int* param_1, uint param_2, uint param_3, uchar* param_4) { STUB_BODY(); return 0; }
+// !FUNC 0x0043a760 END
+
+// !FUNC 0x0043a9d0 BEGIN
+/* 43A9D0-43AA63 00093 */
+uchar _Globals::CDSAudioPlayer_Play(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0043a9d0 END
 
 // !FUNC 0x0043aae0 BEGIN
 /* 43AAE0-43AB3D 0005D */

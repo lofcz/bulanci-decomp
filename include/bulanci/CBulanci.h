@@ -226,6 +226,9 @@ public:
 	// !DECL 0x00420455 BEGIN
 	/* 420455 */ uchar Catch_00420455();
 	// !DECL 0x00420455 END
+	// !DECL 0x00422550 BEGIN
+	/* 422550 */ static void* CDSAudioPlayer_CreateFromResource(uchar* param_1, uint param_2, int param_3, uint param_4, char param_5);
+	// !DECL 0x00422550 END
 	// !DECL 0x00423ea0 BEGIN
 	/* 423EA0 */ uchar CRuch_EnableDisable(char param_1);
 	// !DECL 0x00423ea0 END
@@ -235,6 +238,9 @@ public:
 	// !DECL 0x00424bc0 BEGIN
 	/* 424BC0 */ uint* CSwitch_ctor(uint param_1, uint param_2, int param_3, ushort param_4);
 	// !DECL 0x00424bc0 END
+	// !DECL 0x004252a0 BEGIN
+	/* 4252A0 */ uchar CMenu_LoadBackgroundMusic(uint param_1);
+	// !DECL 0x004252a0 END
 	// !DECL 0x004252f0 BEGIN
 	/* 4252F0 */ uchar CMenu_SetDayNightBg(char param_1);
 	// !DECL 0x004252f0 END

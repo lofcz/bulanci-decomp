@@ -735,6 +735,9 @@ public:
 	// !DECL 0x00422280 BEGIN
 	/* 422280 */ uint* CreateObject_00422280();
 	// !DECL 0x00422280 END
+	// !DECL 0x00422310 BEGIN
+	/* 422310 */ static void* CDSAudioPlayer_Create(uchar* param_1, int* param_2, int param_3, uint param_4, char param_5);
+	// !DECL 0x00422310 END
 	// !DECL 0x004223c0 BEGIN
 	/* 4223C0 */ uchar FUN_004223c0(int* param_1, uchar param_2);
 	// !DECL 0x004223c0 END
@@ -762,6 +765,9 @@ public:
 	// !DECL 0x00423f20 BEGIN
 	/* 423F20 */ uchar CSwitch_PlayHoverTrack(int param_1);
 	// !DECL 0x00423f20 END
+	// !DECL 0x00424010 BEGIN
+	/* 424010 */ uchar CMenu_EnableBackgroundState(char param_1);
+	// !DECL 0x00424010 END
 	// !DECL 0x00424400 BEGIN
 	/* 424400 */ static uchar FUN_00424400(uint* param_1, int param_2);
 	// !DECL 0x00424400 END
@@ -1593,6 +1599,12 @@ public:
 	// !DECL 0x0043a5e0 BEGIN
 	/* 43A5E0 */ static uchar FUN_0043a5e0(void* param_1, int param_2);
 	// !DECL 0x0043a5e0 END
+	// !DECL 0x0043a760 BEGIN
+	/* 43A760 */ uchar CDSAudioPlayer_Init(int* param_1, uint param_2, uint param_3, uchar* param_4);
+	// !DECL 0x0043a760 END
+	// !DECL 0x0043a9d0 BEGIN
+	/* 43A9D0 */ uchar CDSAudioPlayer_Play(uchar param_1);
+	// !DECL 0x0043a9d0 END
 	// !DECL 0x0043aae0 BEGIN
 	/* 43AAE0 */ uchar FUN_0043aae0(int param_1);
 	// !DECL 0x0043aae0 END
