@@ -12,7 +12,7 @@ uchar CBulPicture::FUN_0040aaa0(short param_1, uint param_2) { STUB_BODY(); retu
 
 // !FUNC 0x0040b050 BEGIN
 /* 40B050-40B0B5 00065 */
-uchar CBulPicture::FUN_0040b050(int param_1) { STUB_BODY(); return 0; }
+uchar CBulPicture::DrawSurface(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b050 END
 
 // !FUNC 0x0040b8b0 BEGIN
@@ -44,7 +44,7 @@ uchar CBulPicture::FUN_0040b8f0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040eb30 BEGIN
 /* 40EB30-40EBCA 0009A */
-uint* CBulPicture::FUN_0040eb30() { STUB_BODY(); return 0; }
+uint* CBulPicture::CBulPicture_Create() { STUB_BODY(); return 0; }
 // !FUNC 0x0040eb30 END
 
 // !FUNC 0x0040ebd0 BEGIN

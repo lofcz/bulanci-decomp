@@ -281,8 +281,18 @@ do {
 ```
 
 89/130 master-pack sprites carry an inline palette; the remaining 41
-inherit a palette from a sibling resource at runtime (see Open
-Questions).
+inherit a palette from a sibling resource at runtime via the engine's
+ambient render context. The inheritance rule is empirically
+**"most-recently-loaded inline-palette sibling, in resource load
+order"** — every recolour variant in the master pack is a contiguous
+ID-range follower of an inline-palette head sprite (see §9 for the
+groupings). The unpacker mirrors that rule by carrying a single
+1024-byte palette buffer across the per-pack `save_resource` loop in
+`tools/bulanci_unpack/bulanci_unpack.py`; sprites without an
+opcode-0x09 packet seed their decode from the previous sibling's
+final palette and surface the link in `decoded.inheritedFrom` /
+`decoded.paletteSource == "inherited"`. All 41 master-pack recolour
+variants now render in their authentic colours.
 
 ### 4.5 `DecodeRegionList` @ `0x00432850`
 
@@ -450,11 +460,16 @@ GIF GCE transparent index).
 1. **Header field `+0x0c` ("width" = `104` for most sprites).** Likely
    a screen-tile size or display-rect width (sentinels `0` =
    compound atlas, `0xFFFFFFFF` = fit-to-source).
-2. **Palette inheritance.** 41/130 sprites carry no inline palette
-   and inherit one from a sibling resource at runtime. The exact
-   sibling-lookup rule is TBD (most likely the most-recently-loaded
-   sibling of the same ClassID, or a global palette surviving across
-   loads).
+2. ~~**Palette inheritance.**~~ **Resolved.** 41/130 sprites carry
+   no inline palette and inherit from the most-recently-loaded
+   inline-palette sibling at runtime. Confirmed by the load-order
+   grouping in the master pack (3 inline heads cover all 41
+   followers: 65715 → 65716..65747 (33 sprites), 65753 → 65754,
+   65830 → 65831..65838) and by the visual plausibility of the
+   reconstructed renders (cohesive Bulánek character / decoration
+   palettes). The unpacker now carries a 1024-byte ambient palette
+   buffer across `save_resource` calls and stamps every inheriting
+   sprite's atlas sidecar with `inheritedFrom: <head_id>`.
 3. **Inner opcodes `0x08 / 0x0A / 0x0B / 0x0C / 0x0F`.** All are
    implemented and dispatched, but `0x08` does not appear in the
    master pack; `0x0A..0x0C` appear sparingly. Future sample sets

@@ -66,17 +66,12 @@ uchar CGameView::FUN_0041acf0(short param_1, uint param_2, uint* param_3) { STUB
 // !FUNC 0x0041acf0 END
 
 // !FUNC 0x0041e4b0 BEGIN
-/* 41E4B0-41EA83 005D3 */
+/* 41E4B0-41EA87 005D7 */
 uint* CGameView::FUN_0041e4b0(uchar* param_1, uchar param_2, void* param_3, int param_4, uint* param_5, int param_6, int param_7, int param_8) { STUB_BODY(); return 0; }
 // !FUNC 0x0041e4b0 END
 
-// !FUNC 0x0041edf0 BEGIN
-/* 41EDF0-41EFAB 001BB */
-int* CGameView::FUN_0041edf0(int* param_1, void* param_2, uchar param_3, uchar param_4, uchar param_5, int param_6) { STUB_BODY(); return 0; }
-// !FUNC 0x0041edf0 END
-
 // !FUNC 0x00439720 BEGIN
 /* 439720-43972A 0000A */
-uchar CGameView::FUN_00439720(uint param_1) { STUB_BODY(); return 0; }
+void CGameView::TM_SetFrameDelayOverrideMs(int param_1) { STUB_BODY(); }
 // !FUNC 0x00439720 END
 

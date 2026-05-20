@@ -92,13 +92,18 @@ uchar CMina::FUN_0041c0d0(int param_1) { STUB_BODY(); return 0; }
 uint* CMina::FUN_0041c530(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041c530 END
 
+// !FUNC 0x0041cb70 BEGIN
+/* 41CB70-41CCD3 00163 */
+uint* CMina::CMina_Ctor(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0041cb70 END
+
 // !FUNC 0x0041cce0 BEGIN
 /* 41CCE0-41CE2E 0014E */
-uint* CMina::FUN_0041cce0(int param_1) { STUB_BODY(); return 0; }
+uint* CMina::InitMine(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041cce0 END
 
 // !FUNC 0x0041efb0 BEGIN
 /* 41EFB0-41EFD4 00024 */
-uchar CMina::FUN_0041efb0(short param_1, uint param_2, uint* param_3) { STUB_BODY(); return 0; }
+uchar CMina::OnEvent(short param_1, uint param_2, uint* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0041efb0 END
 

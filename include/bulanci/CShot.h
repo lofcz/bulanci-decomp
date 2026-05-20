@@ -45,11 +45,14 @@ public:
 	/* 41B1D0 */ uchar FUN_0041b1d0(void* param_1);
 	// !DECL 0x0041b1d0 END
 	// !DECL 0x0041de60 BEGIN
-	/* 41DE60 */ uint FUN_0041de60(int* param_1, int* param_2, uchar* param_3);
+	/* 41DE60 */ uint TraceCollision(int* param_1, int* param_2, uchar* param_3);
 	// !DECL 0x0041de60 END
 	// !DECL 0x0041df60 BEGIN
-	/* 41DF60 */ uchar FUN_0041df60(int* param_1);
+	/* 41DF60 */ uchar Update(int* param_1);
 	// !DECL 0x0041df60 END
+	// !DECL 0x0041edf0 BEGIN
+	/* 41EDF0 */ int* CShot_Ctor(int* param_1, void* param_2, uchar param_3, uchar param_4, uchar param_5, int param_6);
+	// !DECL 0x0041edf0 END
 };
 
 #endif

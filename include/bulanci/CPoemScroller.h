@@ -6,46 +6,46 @@
 class CPoemScroller {
 public:
 	// !DECL 0x004032a0 BEGIN
-	/* 4032A0 */ uint FUN_004032a0(int* param_1);
+	/* 4032A0 */ uint DeletingDestructorThunk_18(int* param_1);
 	// !DECL 0x004032a0 END
 	// !DECL 0x00404e80 BEGIN
-	/* 404E80 */ static uchar FUN_00404e80(void* param_1, int* param_2, int param_3, uint param_4);
+	/* 404E80 */ static uchar BlitStatic(void* param_1, int* param_2, int param_3, uint param_4);
 	// !DECL 0x00404e80 END
 	// !DECL 0x004240f0 BEGIN
-	/* 4240F0 */ uchar FUN_004240f0(int param_1);
+	/* 4240F0 */ uchar Render(int param_1);
 	// !DECL 0x004240f0 END
 	// !DECL 0x00425ca0 BEGIN
-	/* 425CA0 */ uchar FUN_00425ca0(uint* param_1);
+	/* 425CA0 */ uchar Destructor(uint* param_1);
 	// !DECL 0x00425ca0 END
 	// !DECL 0x00425da0 BEGIN
-	/* 425DA0 */ uchar* FUN_00425da0();
+	/* 425DA0 */ uchar* GetClassIdentifier();
 	// !DECL 0x00425da0 END
 	// !DECL 0x00425db0 BEGIN
-	/* 425DB0 */ uchar FUN_00425db0(uchar param_1);
+	/* 425DB0 */ uchar DeletingDestructorThunk_10(uchar param_1);
 	// !DECL 0x00425db0 END
 	// !DECL 0x00425dc0 BEGIN
-	/* 425DC0 */ uchar FUN_00425dc0(uchar param_1);
+	/* 425DC0 */ uchar DeletingDestructorThunk_1c(uchar param_1);
 	// !DECL 0x00425dc0 END
 	// !DECL 0x00425dd0 BEGIN
-	/* 425DD0 */ uchar FUN_00425dd0(uchar param_1);
+	/* 425DD0 */ uchar DeletingDestructorThunk_24(uchar param_1);
 	// !DECL 0x00425dd0 END
 	// !DECL 0x00425de0 BEGIN
-	/* 425DE0 */ uchar FUN_00425de0(uchar param_1);
+	/* 425DE0 */ uchar DeletingDestructorThunk_4(uchar param_1);
 	// !DECL 0x00425de0 END
 	// !DECL 0x00425df0 BEGIN
-	/* 425DF0 */ uchar FUN_00425df0(int param_1);
+	/* 425DF0 */ uchar PickNextPoem(int param_1);
 	// !DECL 0x00425df0 END
 	// !DECL 0x00426030 BEGIN
-	/* 426030 */ uchar FUN_00426030(int param_1);
+	/* 426030 */ uchar OnScrollTick(int param_1);
 	// !DECL 0x00426030 END
 	// !DECL 0x004262c0 BEGIN
-	/* 4262C0 */ uint* FUN_004262c0(uint* param_1);
+	/* 4262C0 */ uint* Constructor(uint* param_1);
 	// !DECL 0x004262c0 END
 	// !DECL 0x004264c5 BEGIN
-	/* 4264C5 */ uchar Catch_004264c5();
+	/* 4264C5 */ uchar CatchExceptionHelper();
 	// !DECL 0x004264c5 END
 	// !DECL 0x004264e0 BEGIN
-	/* 4264E0 */ uint* FUN_004264e0(uchar param_1);
+	/* 4264E0 */ uint* ScalarDeletingDestructor(uchar param_1);
 	// !DECL 0x004264e0 END
 	// !DECL 0x00433280 BEGIN
 	/* 433280 */ uchar FUN_00433280(int* param_1);
@@ -75,7 +75,7 @@ public:
 	/* 436310 */ uchar FUN_00436310(int param_1, int param_2, int param_3, uint param_4, int param_5);
 	// !DECL 0x00436310 END
 	// !DECL 0x00436420 BEGIN
-	/* 436420 */ uchar FUN_00436420(int param_1, int param_2, int param_3, uint param_4, int param_5);
+	/* 436420 */ uchar CDSImage_DrawVerticalLine(int param_1, int param_2, int param_3, uint param_4, int param_5);
 	// !DECL 0x00436420 END
 	// !DECL 0x00436530 BEGIN
 	/* 436530 */ uchar FUN_00436530(int* param_1, uint param_2, int param_3);
@@ -90,7 +90,7 @@ public:
 	/* 436770 */ uchar FUN_00436770(int* param_1, void* param_2, int* param_3);
 	// !DECL 0x00436770 END
 	// !DECL 0x004368d0 BEGIN
-	/* 4368D0 */ uchar FUN_004368d0(int* param_1, void* param_2, int* param_3, uint* param_4);
+	/* 4368D0 */ uchar BlitDispatch(int* param_1, void* param_2, int* param_3, uint* param_4);
 	// !DECL 0x004368d0 END
 	// !DECL 0x00436e10 BEGIN
 	/* 436E10 */ uchar FUN_00436e10(uint param_1);

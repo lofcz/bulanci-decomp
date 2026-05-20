@@ -69,11 +69,16 @@ uchar CShot::FUN_0041b1d0(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041de60 BEGIN
 /* 41DE60-41DF60 00100 */
-uint CShot::FUN_0041de60(int* param_1, int* param_2, uchar* param_3) { STUB_BODY(); return 0; }
+uint CShot::TraceCollision(int* param_1, int* param_2, uchar* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0041de60 END
 
 // !FUNC 0x0041df60 BEGIN
 /* 41DF60-41E065 00105 */
-uchar CShot::FUN_0041df60(int* param_1) { STUB_BODY(); return 0; }
+uchar CShot::Update(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041df60 END
+
+// !FUNC 0x0041edf0 BEGIN
+/* 41EDF0-41EFAB 001BB */
+int* CShot::CShot_Ctor(int* param_1, void* param_2, uchar param_3, uchar param_4, uchar param_5, int param_6) { STUB_BODY(); return 0; }
+// !FUNC 0x0041edf0 END
 

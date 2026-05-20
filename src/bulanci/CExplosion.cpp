@@ -23,22 +23,22 @@ uchar* CExplosion::FUN_0041ab20() {
 // !FUNC 0x0041ab20 END
 
 // !FUNC 0x0041b250 BEGIN
-/* 41B250-41B380 00130 */
-uint CExplosion::FUN_0041b250(int* param_1, int param_2, int param_3, char param_4, uchar param_5) { STUB_BODY(); return 0; }
+/* 41B250-41B383 00133 */
+uint CExplosion::DamageAtPoint(int* param_1, int param_2, int param_3, char param_4, uchar param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x0041b250 END
 
 // !FUNC 0x0041ce30 BEGIN
 /* 41CE30-41CFA9 00179 */
-uint* CExplosion::FUN_0041ce30(uint param_1, uchar param_2) { STUB_BODY(); return 0; }
+uint* CExplosion::CExplosion_Ctor(uint param_1, uchar param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041ce30 END
 
 // !FUNC 0x0041e140 BEGIN
 /* 41E140-41E2BC 0017C */
-uchar CExplosion::FUN_0041e140(void* param_1) { STUB_BODY(); return 0; }
+uchar CExplosion::ApplyAreaDamage(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041e140 END
 
 // !FUNC 0x0041efe0 BEGIN
 /* 41EFE0-41F00C 0002C */
-uchar CExplosion::FUN_0041efe0(uint param_1, short param_2) { STUB_BODY(); return 0; }
+uchar CExplosion::OnEvent(uint param_1, short param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041efe0 END
 

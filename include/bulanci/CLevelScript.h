@@ -9,7 +9,7 @@ public:
 	/* 416A90 */ uchar FUN_00416a90(int param_1);
 	// !DECL 0x00416a90 END
 	// !DECL 0x004185c0 BEGIN
-	/* 4185C0 */ uint* FUN_004185c0(uint* param_1);
+	/* 4185C0 */ uint* ctor(uint* param_1);
 	// !DECL 0x004185c0 END
 	// !DECL 0x00418680 BEGIN
 	/* 418680 */ uchar* FUN_00418680();

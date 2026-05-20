@@ -11,6 +11,9 @@ public:
 	// !DECL 0x00428880 BEGIN
 	/* 428880 */ uchar* FUN_00428880();
 	// !DECL 0x00428880 END
+	// !DECL 0x0042eeb0 BEGIN
+	/* 42EEB0 */ uint* factory();
+	// !DECL 0x0042eeb0 END
 };
 
 #endif

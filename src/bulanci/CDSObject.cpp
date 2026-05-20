@@ -38,7 +38,7 @@ uchar CDSObject::FUN_004256c0(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004256c0 END
 
 // !FUNC 0x0042eb00 BEGIN
-/* 42EB00-42EB29 00029 */
+/* 42EB00-42EB2C 0002C */
 uchar CDSObject::FUN_0042eb00(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042eb00 END
 
@@ -54,12 +54,12 @@ uchar CDSObject::FUN_004323d0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00439c70 BEGIN
 /* 439C70-439D06 00096 */
-uint* CDSObject::FUN_00439c70(uint* param_1) { STUB_BODY(); return 0; }
+uint* CDSObject::ConstructTrackManager(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00439c70 END
 
 // !FUNC 0x0043b060 BEGIN
 /* 43B060-43B117 000B7 */
-uint* CDSObject::FUN_0043b060(uint* param_1) { STUB_BODY(); return 0; }
+uint* CDSObject::CDSDirectPlaySender_ctor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043b060 END
 
 // !FUNC 0x0043c7c0 BEGIN

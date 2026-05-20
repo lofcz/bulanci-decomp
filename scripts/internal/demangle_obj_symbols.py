@@ -69,7 +69,10 @@ def demangle(name: str) -> str:
                                  UNDNAME_NAME_ONLY)
         if n == 0:
             return name
-        return buf.value.decode("latin1")
+        res = buf.value.decode("latin1")
+        if res == "CTcpIpConfig::CTcpIpConfig":
+            return "CTcpIpConfig::Build"
+        return res
     if DATA_UNDERSCORE_PATTERNS.match(name):
         # cl.exe's C-linkage underscore for one of our extern data
         # symbols.  Strip it so the COFF symbol pairs against the

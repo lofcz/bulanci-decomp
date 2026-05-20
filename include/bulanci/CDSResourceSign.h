@@ -6,49 +6,49 @@
 class CDSResourceSign {
 public:
 	// !DECL 0x0042e680 BEGIN
-	/* 42E680 */ uchar FUN_0042e680(int* param_1);
+	/* 42E680 */ uchar CDSResourceSign_ReadDateField(int* param_1);
 	// !DECL 0x0042e680 END
 	// !DECL 0x0042e6a0 BEGIN
-	/* 42E6A0 */ uchar FUN_0042e6a0(int* param_1);
+	/* 42E6A0 */ uchar CDSResourceSign_WriteDateField(int* param_1);
 	// !DECL 0x0042e6a0 END
 	// !DECL 0x00434310 BEGIN
-	/* 434310 */ uchar FUN_00434310(int* param_1);
+	/* 434310 */ uchar CDSResourceSign_WriteToStream(int* param_1);
 	// !DECL 0x00434310 END
 	// !DECL 0x004343a0 BEGIN
-	/* 4343A0 */ uchar FUN_004343a0(int* param_1);
+	/* 4343A0 */ uchar CDSResourceSign_ReadFromStream(int* param_1);
 	// !DECL 0x004343a0 END
 	// !DECL 0x00434540 BEGIN
-	/* 434540 */ uint* FUN_00434540(uint* param_1);
+	/* 434540 */ uint* CDSResourceSign_ctor(uint* param_1);
 	// !DECL 0x00434540 END
 	// !DECL 0x004345c0 BEGIN
-	/* 4345C0 */ uchar* FUN_004345c0();
+	/* 4345C0 */ uchar* CDSResourceSign_GetClassData();
 	// !DECL 0x004345c0 END
 	// !DECL 0x004345d0 BEGIN
-	/* 4345D0 */ uchar FUN_004345d0(uchar param_1);
+	/* 4345D0 */ uchar CDSResourceSign_scalar_deleting_dtor_thunk_n0x4(uchar param_1);
 	// !DECL 0x004345d0 END
 	// !DECL 0x004345e0 BEGIN
-	/* 4345E0 */ uchar FUN_004345e0(uchar param_1);
+	/* 4345E0 */ uchar CDSResourceSign_scalar_deleting_dtor_thunk_n0x8(uchar param_1);
 	// !DECL 0x004345e0 END
 	// !DECL 0x004345f0 BEGIN
-	/* 4345F0 */ uchar FUN_004345f0(uchar param_1);
+	/* 4345F0 */ uchar CDSResourceSign_scalar_deleting_dtor_thunk_n0x10(uchar param_1);
 	// !DECL 0x004345f0 END
 	// !DECL 0x00434610 BEGIN
-	/* 434610 */ uchar FUN_00434610(int param_1);
+	/* 434610 */ uchar CDSResourceSign_Release(int param_1);
 	// !DECL 0x00434610 END
 	// !DECL 0x00434640 BEGIN
-	/* 434640 */ uchar FUN_00434640(int param_1);
+	/* 434640 */ uchar CDSResourceSign_Release_thunk_n0x4(int param_1);
 	// !DECL 0x00434640 END
 	// !DECL 0x00434650 BEGIN
-	/* 434650 */ uchar FUN_00434650(int param_1);
+	/* 434650 */ uchar CDSResourceSign_Release_thunk_n0x8(int param_1);
 	// !DECL 0x00434650 END
 	// !DECL 0x00434660 BEGIN
-	/* 434660 */ uchar FUN_00434660(int param_1);
+	/* 434660 */ uchar CDSResourceSign_Release_thunk_n0x10(int param_1);
 	// !DECL 0x00434660 END
 	// !DECL 0x00434670 BEGIN
-	/* 434670 */ uchar FUN_00434670(uint* param_1);
+	/* 434670 */ uchar CDSResourceSign_dtor(uint* param_1);
 	// !DECL 0x00434670 END
 	// !DECL 0x004349a0 BEGIN
-	/* 4349A0 */ uint* FUN_004349a0(uchar param_1);
+	/* 4349A0 */ uint* CDSResourceSign_scalar_deleting_dtor(uchar param_1);
 	// !DECL 0x004349a0 END
 };
 

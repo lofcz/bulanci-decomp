@@ -6,7 +6,7 @@
 class CDSMpxStream {
 public:
 	// !DECL 0x00432eb0 BEGIN
-	/* 432EB0 */ uchar FUN_00432eb0(int* param_1);
+	/* 432EB0 */ uchar SaveMpxFile(int* param_1);
 	// !DECL 0x00432eb0 END
 	// !DECL 0x00432fe0 BEGIN
 	/* 432FE0 */ uchar* FUN_00432fe0();
@@ -36,7 +36,7 @@ public:
 	/* 433160 */ uint* FUN_00433160(uchar param_1);
 	// !DECL 0x00433160 END
 	// !DECL 0x00433180 BEGIN
-	/* 433180 */ uchar FUN_00433180(int* param_1);
+	/* 433180 */ uchar LoadMpxFile(int* param_1);
 	// !DECL 0x00433180 END
 };
 

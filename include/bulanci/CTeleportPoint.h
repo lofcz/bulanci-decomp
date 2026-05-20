@@ -12,13 +12,13 @@ public:
 	/* 41A970 */ uchar* FUN_0041a970();
 	// !DECL 0x0041a970 END
 	// !DECL 0x0041c9a0 BEGIN
-	/* 41C9A0 */ uint* FUN_0041c9a0(int* param_1, uint param_2, uchar param_3);
+	/* 41C9A0 */ uint* CTeleportPoint_Ctor(int* param_1, uint param_2, uchar param_3);
 	// !DECL 0x0041c9a0 END
 	// !DECL 0x0041fca0 BEGIN
-	/* 41FCA0 */ uchar FUN_0041fca0(int* param_1);
+	/* 41FCA0 */ uchar TriggerTeleportFX(int* param_1);
 	// !DECL 0x0041fca0 END
 	// !DECL 0x0041fed0 BEGIN
-	/* 41FED0 */ uchar FUN_0041fed0(uint param_1, short param_2);
+	/* 41FED0 */ uchar OnEvent(uint param_1, short param_2);
 	// !DECL 0x0041fed0 END
 };
 

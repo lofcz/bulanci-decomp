@@ -6,22 +6,22 @@
 class CLevelScore {
 public:
 	// !DECL 0x00409050 BEGIN
-	/* 409050 */ uchar FUN_00409050(int* param_1);
+	/* 409050 */ uchar Deserialize(int* param_1);
 	// !DECL 0x00409050 END
 	// !DECL 0x00409310 BEGIN
-	/* 409310 */ uchar* FUN_00409310();
+	/* 409310 */ uchar* GetClassIdentifier();
 	// !DECL 0x00409310 END
 	// !DECL 0x00409320 BEGIN
-	/* 409320 */ uchar FUN_00409320(uchar param_1);
+	/* 409320 */ uchar DeletingDestructorThunk_4(uchar param_1);
 	// !DECL 0x00409320 END
 	// !DECL 0x00409330 BEGIN
-	/* 409330 */ uchar FUN_00409330(uint* param_1);
+	/* 409330 */ uchar CLevelScore_dtor(uint* param_1);
 	// !DECL 0x00409330 END
 	// !DECL 0x00409690 BEGIN
-	/* 409690 */ uchar FUN_00409690(void* param_1);
+	/* 409690 */ uchar Serialize(void* param_1);
 	// !DECL 0x00409690 END
 	// !DECL 0x00409a40 BEGIN
-	/* 409A40 */ uint* FUN_00409a40(uchar param_1);
+	/* 409A40 */ uint* CLevelScore_scalar_deleting_dtor(uchar param_1);
 	// !DECL 0x00409a40 END
 };
 

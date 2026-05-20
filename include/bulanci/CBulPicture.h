@@ -12,7 +12,7 @@ public:
 	/* 40AAA0 */ uchar FUN_0040aaa0(short param_1, uint param_2);
 	// !DECL 0x0040aaa0 END
 	// !DECL 0x0040b050 BEGIN
-	/* 40B050 */ uchar FUN_0040b050(int param_1);
+	/* 40B050 */ uchar DrawSurface(int param_1);
 	// !DECL 0x0040b050 END
 	// !DECL 0x0040b8b0 BEGIN
 	/* 40B8B0 */ uchar* FUN_0040b8b0();
@@ -30,7 +30,7 @@ public:
 	/* 40B8F0 */ uchar FUN_0040b8f0(uint* param_1);
 	// !DECL 0x0040b8f0 END
 	// !DECL 0x0040eb30 BEGIN
-	/* 40EB30 */ uint* FUN_0040eb30();
+	/* 40EB30 */ uint* CBulPicture_Create();
 	// !DECL 0x0040eb30 END
 	// !DECL 0x0040ebd0 BEGIN
 	/* 40EBD0 */ uint* FUN_0040ebd0(uchar param_1);

@@ -5,8 +5,20 @@
 
 class CDSScript {
 public:
+	// !DECL 0x00438310 BEGIN
+	/* 438310 */ uchar InstallOpcodeTable(int param_1, void* param_2, int param_3);
+	// !DECL 0x00438310 END
+	// !DECL 0x00438350 BEGIN
+	/* 438350 */ uint ReadI32(int param_1);
+	// !DECL 0x00438350 END
+	// !DECL 0x00438360 BEGIN
+	/* 438360 */ ushort ReadU16(int param_1);
+	// !DECL 0x00438360 END
+	// !DECL 0x00438380 BEGIN
+	/* 438380 */ uint ReadU8(int param_1);
+	// !DECL 0x00438380 END
 	// !DECL 0x00438390 BEGIN
-	/* 438390 */ uint* FUN_00438390(uint* param_1);
+	/* 438390 */ uint* ctor(uint* param_1);
 	// !DECL 0x00438390 END
 	// !DECL 0x004383e0 BEGIN
 	/* 4383E0 */ uchar* FUN_004383e0();
@@ -17,6 +29,12 @@ public:
 	// !DECL 0x00438400 BEGIN
 	/* 438400 */ uchar FUN_00438400(uint* param_1);
 	// !DECL 0x00438400 END
+	// !DECL 0x004384c0 BEGIN
+	/* 4384C0 */ uchar ReadSubExpr(int param_1);
+	// !DECL 0x004384c0 END
+	// !DECL 0x00438c40 BEGIN
+	/* 438C40 */ uint CallExport(int param_1, int param_2, void* param_3);
+	// !DECL 0x00438c40 END
 	// !DECL 0x00438c90 BEGIN
 	/* 438C90 */ uint* FUN_00438c90(uchar param_1);
 	// !DECL 0x00438c90 END

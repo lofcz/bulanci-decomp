@@ -7,7 +7,7 @@ uchar CExitDlg::FUN_0040b290(ushort param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00411b50 BEGIN
 /* 411B50-411DD3 00283 */
-uint* CExitDlg::FUN_00411b50(uint* param_1) { STUB_BODY(); return 0; }
+uint* CExitDlg::CExitDlg_ctor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00411b50 END
 
 // !FUNC 0x00411de0 BEGIN

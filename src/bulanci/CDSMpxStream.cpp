@@ -2,7 +2,7 @@
 
 // !FUNC 0x00432eb0 BEGIN
 /* 432EB0-432F05 00055 */
-uchar CDSMpxStream::FUN_00432eb0(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSMpxStream::SaveMpxFile(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00432eb0 END
 
 // !FUNC 0x00432fe0 BEGIN
@@ -54,6 +54,6 @@ uint* CDSMpxStream::FUN_00433160(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00433180 BEGIN
 /* 433180-4331D2 00052 */
-uchar CDSMpxStream::FUN_00433180(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSMpxStream::LoadMpxFile(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433180 END
 

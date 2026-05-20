@@ -36,10 +36,10 @@ public:
 	/* 4323D0 */ uchar FUN_004323d0(uint* param_1);
 	// !DECL 0x004323d0 END
 	// !DECL 0x00439c70 BEGIN
-	/* 439C70 */ uint* FUN_00439c70(uint* param_1);
+	/* 439C70 */ uint* ConstructTrackManager(uint* param_1);
 	// !DECL 0x00439c70 END
 	// !DECL 0x0043b060 BEGIN
-	/* 43B060 */ uint* FUN_0043b060(uint* param_1);
+	/* 43B060 */ uint* CDSDirectPlaySender_ctor(uint* param_1);
 	// !DECL 0x0043b060 END
 	// !DECL 0x0043c7c0 BEGIN
 	/* 43C7C0 */ uint* FUN_0043c7c0(uint* param_1);

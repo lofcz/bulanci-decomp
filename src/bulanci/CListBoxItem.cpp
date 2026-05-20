@@ -19,6 +19,6 @@ uint* CListBoxItem::FUN_004066c0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040b640 BEGIN
 /* 40B640-40B6C9 00089 */
-uint* CListBoxItem::FUN_0040b640(int param_1) { STUB_BODY(); return 0; }
+uint* CListBoxItem::CListBoxItem_ctor(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b640 END
 

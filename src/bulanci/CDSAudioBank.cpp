@@ -6,7 +6,7 @@ uchar CDSAudioBank::FUN_00406340(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00406340 END
 
 // !FUNC 0x00429240 BEGIN
-/* 429240-429273 00033 */
+/* 429240-429276 00036 */
 uchar CDSAudioBank::FUN_00429240(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00429240 END
 

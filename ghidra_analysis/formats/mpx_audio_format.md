@@ -699,3 +699,153 @@ compiled under MSVC8 / `/O2` is in place.
   `linear_table`) is *exactly* libmad's signature, not an
   in-house re-implementation. Earlier puzzlement about the
   combination resolved once the actual upstream sources were on disk.
+
+## 10. Porting progress (objdiff matches)
+
+Hand-port targets live inside `src/bulanci/CDSMpx.cpp` as `CDSMpx::mad_*`
+class methods (see `// !FUNC ADDR BEGIN/END` blocks).  Each method body
+is transcribed verbatim from `ref/libmad-0.15.1b/<file>.c` with the
+minimal shape adjustments needed for the project's COFF-friendly
+prototypes (`int*` instead of `struct mad_bitptr*`, `uint*` instead of
+`struct mad_stream*`, etc.).  A small `MadBitptr_layout` struct lives in
+the `// !PROLOGUE BEGIN/END` block at the top of the file so the bit
+helpers can address `byte / cache / left` by name without depending on
+libmad's full headers.
+
+Two MSVC8 quirks recur and have project-wide implications:
+
+* **`__declspec(noinline)` on every libmad helper** that's referenced
+  from another `mad_*` function.  Upstream libmad ships `bit.c`,
+  `stream.c`, `frame.c`, etc. as separate translation units; concatenating
+  them into one `CDSMpx.cpp` lets MSVC8 /O2 inline 17-byte leaf calls
+  into their callers, which inflates the caller's size and destroys the
+  byte-match.  The `noinline` attribute restores the orig's per-call
+  CALL/RET shape.
+* **`void` returns instead of `uchar` where libmad's source returns
+  `void`.**  Ghidra's recovered prototype defaults to `uchar` because the
+  `RET` instruction clobbers the `al` register; if we keep `uchar` the
+  port's `return 0;` makes MSVC emit an extra `xor al, al` not present
+  in the orig.  Prototypes are flipped to `void` in Ghidra (via
+  `set_function_prototype` MCP) before re-running `export_mapping_via_mcp`
+  and `sync_units`.  Affected so far: `mad_bit_init`, `mad_bit_skip`,
+  `mad_header_init`, `mad_frame_mute`, `mad_frame_init`.
+
+### 10.1 `bit.c` (six functions, complete)
+
+| addr       | function           | size  | match% | residual diff                                  |
+|------------|--------------------|-------|--------|------------------------------------------------|
+| `0x459650` | `mad_bit_init`     | 23 B  | 100.0% | -                                              |
+| `0x459670` | `mad_bit_length`   | 31 B  | 100.0% | -                                              |
+| `0x459690` | `mad_bit_nextbyte` | 17 B  | 100.0% | -                                              |
+| `0x4596b0` | `mad_bit_skip`     | 64 B  | 100.0% | -                                              |
+| `0x4596f0` | `mad_bit_read`     | 177 B | 97.6%  | 3-byte `lea ecx, [ecx]` loop-alignment NOP     |
+| `0x4597b0` | `mad_bit_crc`      | 335 B | 84.8%  | EBP-frame + `and esp, 0xfffffff8` (orig has    |
+|            |                    |       |        | aligned stack; MSVC8 here picks ebp as the     |
+|            |                    |       |        | loop counter vs orig's ebx).  Cannot reproduce |
+|            |                    |       |        | the aligned prologue from portable C; neither  |
+|            |                    |       |        | `#pragma optimize("y", off)` nor               |
+|            |                    |       |        | `__declspec(align(8))` on the bitptr local     |
+|            |                    |       |        | triggers it under MSVC8 /O2.                   |
+
+Notable port details:
+
+* `mad_bit_read` uses an explicit `static_cast<unsigned int>` on the
+  fast-path AND so MSVC picks `shr` over `sar` for the unsigned shift
+  (matches orig's `shr eax, cl` at `+0x38`).
+* `mad_bit_crc` reconstructs the by-value `mad_bitptr` on the caller's
+  frame so it can `lea ecx, [&bitptr]` for the inner `mad_bit_read`
+  calls.  The orig stores its struct at `[ebp+0xc]` in the aligned
+  region; ours sits at `[esp+0xc]` in the FPO frame.
+
+### 10.2 `stream.c` (one function ported, others inlined upstream)
+
+| addr       | function          | size | match% | residual diff                       |
+|------------|-------------------|------|--------|--------------------------------------|
+| `0x456850` | `mad_stream_sync` | 83 B | 94.2%  | orig uses esi for stream ptr (saved  |
+|            |                   |      |        | via `push esi`); mine picks ecx and  |
+|            |                   |      |        | skips the push/pop.  Functionally    |
+|            |                   |      |        | identical; ~5 bytes of diff.         |
+
+`mad_stream_init`, `mad_stream_buffer`, `mad_stream_skip`,
+`mad_stream_finish`, `mad_stream_errorstr` all got inlined into their
+callers in the orig (verified: no standalone symbols at those entries).
+
+### 10.3 `synth.c` (two of two init-side functions matched; DCT32 pending)
+
+| addr       | function          | size  | match%   | residual diff                            |
+|------------|-------------------|-------|----------|------------------------------------------|
+| `0x4568b0` | `mad_synth_mute`  |  84 B | 88.7%    | same MSVC8 loop-alignment NOP pattern as |
+|            |                   |       |          | `mad_frame_mute`: 9 bytes of `lea`/`mov` |
+|            |                   |       |          | filler at three loop heads, plus a `eax` |
+|            |                   |       |          | vs `esi` register swap on the s-counter. |
+| `0x458eb0` | `mad_synth_init`  |  44 B | **100%** | -                                        |
+| `0x458f20` | `mad_frame_finish`|  36 B | 99.5%    | byte-identical; objdiff reports a       |
+|            | (in `_Globals.cpp`)|      |          | mismatch on the `call _free` symbol      |
+|            |                   |       |          | name (orig uses the address-suffixed     |
+|            |                   |       |          | overload `_free_00447392`, mine resolves |
+|            |                   |       |          | to the plain `_free`).  Relocation       |
+|            |                   |       |          | metadata only, no code byte differs.     |
+
+`mad_synth_init` matches byte-exact even though libmad's source emits
+`synth->pcm.channels = 0; synth->pcm.length = 0;` as two ushort fields;
+MSVC8 keeps them as two distinct 16-bit stores rather than folding into
+one 32-bit store, matching the orig.
+
+The big synth.c entry point -- `mad_synth_frame_dct32_full` (`0x456910`,
+4481 B) -- is still on the queue.  It's libmad's polyphase synthesis
+butterfly with 31 baked-in `MAD_F(...)` cosine constants
+(`g_anMadDct32Costab` at `0x0048af70`); essentially a fully-unrolled DCT-IV
+that should compile byte-exact from `synth.c::dct32()` once the
+`OPT_DCTO` build flag is locked down (§9.2).
+
+### 10.5 `frame.c` (three of three relevant functions, all matched)
+
+| addr       | function          | size  | match%   | residual diff                            |
+|------------|-------------------|-------|----------|------------------------------------------|
+| `0x458ee0` | `mad_header_init` | 56 B  | **100%** | -                                        |
+| `0x4595a0` | `mad_frame_mute`  | 106 B | 89.1%    | orig uses esi for outer-loop counter and |
+|            |                   |       |          | edi for the zero; mine has them swapped. |
+|            |                   |       |          | Plus two `lea esp, [esp]` 4-byte NOPs    |
+|            |                   |       |          | that MSVC8 places at slightly different  |
+|            |                   |       |          | offsets to align the inner loop head.    |
+| `0x459620` | `mad_frame_init`  | 33 B  | **100%** | -                                        |
+
+The `mad_header_init` port is byte-exact only because we load
+`mad_timer_zero` (`DAT_0049c54c`/`DAT_0049c550`) via two `*reinterpret_cast`
+reads instead of emitting two immediate-zero stores.  Without that the
+diff is 6 bytes (`mov [eax+0x24], ecx; mov [eax+0x28], ecx` vs the orig's
+`mov ecx, [DAT_0049c54c]; mov [eax+0x24], ecx; mov edx, [DAT_0049c550];
+mov [eax+0x28], edx`).  libmad's source actually writes
+`header->duration = mad_timer_zero;` so the orig is preserving the load
+because `mad_timer_zero` is an `extern const` in another TU and MSVC8
+can't const-propagate it without WPO.
+
+### 10.6 Aggregate
+
+```
+CDSMpx .text section match: 6.36%  (17996 B total)
+```
+
+The numerator counts the twelve `CDSMpx::mad_*` ports above (six `bit.c`
++ one `stream.c` + two `synth.c` init helpers + three `frame.c` init
+helpers).  `mad_frame_finish` lives in `_Globals.cpp` and is counted
+separately.  The denominator includes ~12 KB of Bulanci-specific glue
+(`AttachBitstream`, `RefillInputBuffer`, `DecodeFrame`,
+`ResolveResource`, `CreateFromHandle`, etc.) and ~5 KB of the big libmad
+work functions (`mad_layer_I`, `mad_layer_II`, `mad_layer_III`,
+`mad_synth_frame_dct32_full`, `mad_header_decode`) which are next on the
+porting queue.
+
+### 10.7 Next targets (by ascending size)
+
+| addr       | function                       | size   | notes                                |
+|------------|--------------------------------|--------|--------------------------------------|
+| `0x4567b0` | (unrenamed `FUN_004567b0`)     |  69 B  | small bit-twiddler near `mad_stream_sync`; possibly `mad_stream_buffer`/`mad_stream_skip` |
+| `0x456820` | (unrenamed `FUN_00456820`)     |  46 B  | three-arg helper next to `mad_stream_sync` |
+| `0x45c480` | `mad_layer_I_sample`           |  88 B  | static helper; Ghidra recovers args via EAX+EDI (custom MSVC8 reg convention); needs naked/asm or alternate strategy |
+| `0x458f50` | `mad_header_decode`            | 472 B  | sysparam in ESI (header*); standard libmad logic, needs custom calling convention for byte match |
+| `0x45c100` | `mad_layer_III`                | 895 B  | Layer III decoder body (Huffman side-info only; main tables in static helpers) |
+| `0x45c4e0` | `mad_layer_I`                  | 786 B  | Layer I decoder; calls `mad_layer_I_sample` heavily |
+| `0x45c800` | `mad_layer_II_samples`         | 188 B  | Layer II requantizer |
+| `0x45c8c0` | `mad_layer_II`                 | 1675 B | Layer II decoder |
+| `0x456910` | `mad_synth_frame_dct32_full`   | 4481 B | the polyphase DCT32 butterfly; 31 baked-in cosine constants from `g_anMadDct32Costab` |

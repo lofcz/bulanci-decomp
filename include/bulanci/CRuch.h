@@ -6,7 +6,7 @@
 class CRuch {
 public:
 	// !DECL 0x00423c20 BEGIN
-	/* 423C20 */ int* FUN_00423c20(int* param_1);
+	/* 423C20 */ int* CRuch_ctor(int* param_1);
 	// !DECL 0x00423c20 END
 	// !DECL 0x00423d00 BEGIN
 	/* 423D00 */ uchar* FUN_00423d00();
@@ -30,10 +30,10 @@ public:
 	/* 423DC0 */ uint* FUN_00423dc0(uchar param_1);
 	// !DECL 0x00423dc0 END
 	// !DECL 0x00423de0 BEGIN
-	/* 423DE0 */ uchar FUN_00423de0(void* param_1);
+	/* 423DE0 */ uchar CRuch_OnScheduledTick(void* param_1);
 	// !DECL 0x00423de0 END
 	// !DECL 0x00423e60 BEGIN
-	/* 423E60 */ uchar FUN_00423e60(int param_1);
+	/* 423E60 */ uchar CRuch_Render_DrawVerticalLine(int param_1);
 	// !DECL 0x00423e60 END
 };
 

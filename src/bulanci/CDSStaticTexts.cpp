@@ -14,3 +14,8 @@ uchar* CDSStaticTexts::FUN_00428880() {
 }
 // !FUNC 0x00428880 END
 
+// !FUNC 0x0042eeb0 BEGIN
+/* 42EEB0-42EED7 00027 */
+uint* CDSStaticTexts::factory() { STUB_BODY(); return 0; }
+// !FUNC 0x0042eeb0 END
+

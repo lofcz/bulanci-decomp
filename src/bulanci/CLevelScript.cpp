@@ -7,7 +7,7 @@ uchar CLevelScript::FUN_00416a90(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004185c0 BEGIN
 /* 4185C0-418674 000B4 */
-uint* CLevelScript::FUN_004185c0(uint* param_1) { STUB_BODY(); return 0; }
+uint* CLevelScript::ctor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004185c0 END
 
 // !FUNC 0x00418680 BEGIN

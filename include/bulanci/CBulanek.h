@@ -9,13 +9,13 @@ public:
 	/* 412850 */ uchar FUN_00412850(uchar param_1, uint param_2, uint* param_3);
 	// !DECL 0x00412850 END
 	// !DECL 0x00412a40 BEGIN
-	/* 412A40 */ uchar FUN_00412a40(uchar param_1, uchar param_2);
+	/* 412A40 */ uchar CGame_NetSendDamage_t0c(uchar param_1, uchar param_2);
 	// !DECL 0x00412a40 END
 	// !DECL 0x00412b10 BEGIN
-	/* 412B10 */ uchar FUN_00412b10(uchar param_1, uchar param_2, ushort* param_3);
+	/* 412B10 */ uchar CGame_NetSendPlayerState_t0d(uchar param_1, uchar param_2, ushort* param_3);
 	// !DECL 0x00412b10 END
 	// !DECL 0x00412c40 BEGIN
-	/* 412C40 */ uchar FUN_00412c40(uchar param_1);
+	/* 412C40 */ uchar CGame_NetSendPlayerDie_t11(uchar param_1);
 	// !DECL 0x00412c40 END
 	// !DECL 0x00416490 BEGIN
 	/* 416490 */ uint FUN_00416490(int param_1);
@@ -153,7 +153,7 @@ public:
 	/* 41DB00 */ uint FUN_0041db00(int param_1, int param_2, char param_3);
 	// !DECL 0x0041db00 END
 	// !DECL 0x0041ea90 BEGIN
-	/* 41EA90 */ uchar FUN_0041ea90(uchar param_1);
+	/* 41EA90 */ uchar CBulanek_ApplyPickupEffect(uchar param_1);
 	// !DECL 0x0041ea90 END
 	// !DECL 0x0041eca0 BEGIN
 	/* 41ECA0 */ uchar FUN_0041eca0(void* param_1);
@@ -162,7 +162,7 @@ public:
 	/* 41ED10 */ uchar FUN_0041ed10(void* param_1);
 	// !DECL 0x0041ed10 END
 	// !DECL 0x0041f900 BEGIN
-	/* 41F900 */ uchar FUN_0041f900(uchar param_1, uchar param_2);
+	/* 41F900 */ uchar CBulanek_OnDeath(uchar param_1, uchar param_2);
 	// !DECL 0x0041f900 END
 	// !DECL 0x0041fb90 BEGIN
 	/* 41FB90 */ uchar FUN_0041fb90(int* param_1);
@@ -192,7 +192,7 @@ public:
 	/* 42CC80 */ uchar FUN_0042cc80(int param_1, int param_2);
 	// !DECL 0x0042cc80 END
 	// !DECL 0x0042eac0 BEGIN
-	/* 42EAC0 */ uchar FUN_0042eac0(uint param_1);
+	/* 42EAC0 */ void Scheduler_FreeSlotIfLive(uint param_1);
 	// !DECL 0x0042eac0 END
 	// !DECL 0x0042f880 BEGIN
 	/* 42F880 */ uchar FUN_0042f880(int param_1);

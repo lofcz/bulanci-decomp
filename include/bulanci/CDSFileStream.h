@@ -21,7 +21,7 @@ public:
 	/* 401630 */ uchar* FUN_00401630();
 	// !DECL 0x00401630 END
 	// !DECL 0x00401640 BEGIN
-	/* 401640 */ uchar FUN_00401640(int param_1);
+	/* 401640 */ void CloseStream(int param_1);
 	// !DECL 0x00401640 END
 	// !DECL 0x00401660 BEGIN
 	/* 401660 */ uchar FUN_00401660(int param_1);
@@ -33,13 +33,13 @@ public:
 	/* 4016A0 */ uchar FUN_004016a0(uchar param_1);
 	// !DECL 0x004016a0 END
 	// !DECL 0x004016b0 BEGIN
-	/* 4016B0 */ uchar FUN_004016b0(uchar param_1);
+	/* 4016B0 */ uchar ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x004016b0 END
 	// !DECL 0x004016c0 BEGIN
 	/* 4016C0 */ uchar FUN_004016c0(uint* param_1);
 	// !DECL 0x004016c0 END
 	// !DECL 0x00401740 BEGIN
-	/* 401740 */ uint* FUN_00401740(uint* param_1);
+	/* 401740 */ uint* GetStreamName(uint* param_1);
 	// !DECL 0x00401740 END
 	// !DECL 0x00401770 BEGIN
 	/* 401770 */ uint* FUN_00401770(uchar param_1);
@@ -60,37 +60,37 @@ public:
 	/* 429300 */ uchar FUN_00429300(int param_1);
 	// !DECL 0x00429300 END
 	// !DECL 0x004333e0 BEGIN
-	/* 4333E0 */ uchar FUN_004333e0(int param_1);
+	/* 4333E0 */ void CloseFileHandle(int param_1);
 	// !DECL 0x004333e0 END
 	// !DECL 0x00433400 BEGIN
-	/* 433400 */ uchar FUN_00433400(void* param_1, DWORD param_2);
+	/* 433400 */ void ReadBytes(void* param_1, DWORD param_2);
 	// !DECL 0x00433400 END
 	// !DECL 0x00433470 BEGIN
-	/* 433470 */ uchar FUN_00433470(void* param_1, DWORD param_2);
+	/* 433470 */ void WriteBytes(void* param_1, DWORD param_2);
 	// !DECL 0x00433470 END
 	// !DECL 0x004334c0 BEGIN
-	/* 4334C0 */ uchar FUN_004334c0(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4);
+	/* 4334C0 */ void LockRegion(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4);
 	// !DECL 0x004334c0 END
 	// !DECL 0x00433510 BEGIN
-	/* 433510 */ uchar FUN_00433510(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4);
+	/* 433510 */ void UnlockRegion(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4);
 	// !DECL 0x00433510 END
 	// !DECL 0x00433560 BEGIN
-	/* 433560 */ uchar FUN_00433560(int param_1, int param_2, DWORD param_3);
+	/* 433560 */ void SeekPosition(long param_1, long param_2, DWORD param_3);
 	// !DECL 0x00433560 END
 	// !DECL 0x004335e0 BEGIN
-	/* 4335E0 */ uchar FUN_004335e0(uint param_1, uint param_2);
+	/* 4335E0 */ void SetStreamSize(uint param_1, uint param_2);
 	// !DECL 0x004335e0 END
 	// !DECL 0x00433660 BEGIN
-	/* 433660 */ longlong FUN_00433660(uint param_1);
+	/* 433660 */ longlong GetSize();
 	// !DECL 0x00433660 END
 	// !DECL 0x004336c0 BEGIN
-	/* 4336C0 */ longlong FUN_004336c0(uint param_1);
+	/* 4336C0 */ longlong TellPosition();
 	// !DECL 0x004336c0 END
 	// !DECL 0x00433720 BEGIN
-	/* 433720 */ uchar FUN_00433720(uint param_1);
+	/* 433720 */ void FlushStream();
 	// !DECL 0x00433720 END
 	// !DECL 0x00433750 BEGIN
-	/* 433750 */ uchar FUN_00433750(WCHAR* param_1, DWORD param_2);
+	/* 433750 */ uchar FUN_00433750(int param_1, DWORD param_2);
 	// !DECL 0x00433750 END
 	// !DECL 0x004338d0 BEGIN
 	/* 4338D0 */ uchar FUN_004338d0(int param_1);

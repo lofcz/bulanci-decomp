@@ -63,13 +63,13 @@ public:
 	/* 40FC20 */ uchar FUN_0040fc20(ushort param_1);
 	// !DECL 0x0040fc20 END
 	// !DECL 0x00412c70 BEGIN
-	/* 412C70 */ uchar FUN_00412c70(uchar param_1, void* param_2, char param_3);
+	/* 412C70 */ uchar CGame_NetSendSetAvatar_t03(uchar param_1, void* param_2, char param_3);
 	// !DECL 0x00412c70 END
 	// !DECL 0x00412cd0 BEGIN
-	/* 412CD0 */ uchar FUN_00412cd0(void* param_1, char param_2);
+	/* 412CD0 */ uchar CGame_NetSendSlotCount_t04(void* param_1, char param_2);
 	// !DECL 0x00412cd0 END
 	// !DECL 0x00412d40 BEGIN
-	/* 412D40 */ uchar FUN_00412d40(void* param_1, char param_2);
+	/* 412D40 */ uchar CGame_NetSendAdminByte_t64(void* param_1, char param_2);
 	// !DECL 0x00412d40 END
 	// !DECL 0x00412e90 BEGIN
 	/* 412E90 */ uchar FUN_00412e90(uchar param_1, char param_2, void* param_3);
@@ -81,13 +81,13 @@ public:
 	/* 412F10 */ uchar FUN_00412f10(char param_1, void* param_2);
 	// !DECL 0x00412f10 END
 	// !DECL 0x004139b0 BEGIN
-	/* 4139B0 */ uchar FUN_004139b0(uchar param_1, void* param_2, char param_3);
+	/* 4139B0 */ uchar CGame_NetSendRename_t02(uchar param_1, void* param_2, char param_3);
 	// !DECL 0x004139b0 END
 	// !DECL 0x00413a80 BEGIN
 	/* 413A80 */ uchar FUN_00413a80(uchar param_1, int param_2, void* param_3);
 	// !DECL 0x00413a80 END
 	// !DECL 0x00414340 BEGIN
-	/* 414340 */ uchar FUN_00414340(void* param_1, char param_2);
+	/* 414340 */ uchar CGame_NetSendSetLevel_t05(void* param_1, char param_2);
 	// !DECL 0x00414340 END
 	// !DECL 0x00414420 BEGIN
 	/* 414420 */ uchar FUN_00414420(int param_1, void* param_2);

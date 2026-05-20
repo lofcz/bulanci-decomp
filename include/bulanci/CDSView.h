@@ -27,7 +27,7 @@ public:
 	/* 423DB0 */ uchar FUN_00423db0(int param_1);
 	// !DECL 0x00423db0 END
 	// !DECL 0x0042c040 BEGIN
-	/* 42C040 */ uchar FUN_0042c040(int param_1);
+	/* 42C040 */ uchar CDSView_DispatchEvent(int param_1);
 	// !DECL 0x0042c040 END
 	// !DECL 0x0042c0c0 BEGIN
 	/* 42C0C0 */ uint FUN_0042c0c0(int param_1);
@@ -38,6 +38,9 @@ public:
 	// !DECL 0x0042cea0 BEGIN
 	/* 42CEA0 */ uchar FUN_0042cea0(uint* param_1);
 	// !DECL 0x0042cea0 END
+	// !DECL 0x0042cf50 BEGIN
+	/* 42CF50 */ uchar OnLButtonDown(int* param_1);
+	// !DECL 0x0042cf50 END
 };
 
 #endif

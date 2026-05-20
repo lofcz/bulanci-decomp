@@ -7,12 +7,12 @@ uint CDSApp::FUN_004033a0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00429db0 BEGIN
 /* 429DB0-429F6D 001BD */
-uchar CDSApp::FUN_00429db0(int param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_DispatchInputEvent(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00429db0 END
 
 // !FUNC 0x0042a210 BEGIN
 /* 42A210-42A324 00114 */
-uchar CDSApp::FUN_0042a210(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_OnCreate(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042a210 END
 
 // !FUNC 0x0042afd0 BEGIN
@@ -22,7 +22,7 @@ uint* CDSApp::FUN_0042afd0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042b130 BEGIN
 /* 42B130-42B136 00006 */
-uchar* CDSApp::FUN_0042b130() {
+uchar* CDSApp::CDSApp_GetClassTable() {
     return reinterpret_cast<uchar*>(&DAT_004b3b20);
 }
 // !FUNC 0x0042b130 END
@@ -59,7 +59,7 @@ uchar CDSApp::FUN_0042b48c() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042b560 BEGIN
 /* 42B560-42B592 00032 */
-uchar CDSApp::FUN_0042b560(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_dtor(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042b560 END
 
 // !FUNC 0x0042b8e0 BEGIN
@@ -79,7 +79,7 @@ uchar CDSApp::FUN_0042b900(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042b980 BEGIN
 /* 42B980-42B99E 0001E */
-uint* CDSApp::FUN_0042b980(uchar param_1) { STUB_BODY(); return 0; }
+uint* CDSApp::CDSApp_DtorScalar(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042b980 END
 
 // !FUNC 0x0042c7d0 BEGIN
@@ -94,7 +94,7 @@ uchar CDSApp::FUN_0042ccf0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042e770 BEGIN
 /* 42E770-42E786 00016 */
-uchar CDSApp::FUN_0042e770() { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_InitClock() { STUB_BODY(); return 0; }
 // !FUNC 0x0042e770 END
 
 // !FUNC 0x0042f530 BEGIN
@@ -104,7 +104,7 @@ uchar CDSApp::FUN_0042f530() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00437fb0 BEGIN
 /* 437FB0-437FDF 0002F */
-uchar CDSApp::FUN_00437fb0(WCHAR* param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::FUN_00437fb0(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00437fb0 END
 
 // !FUNC 0x0043c9f0 BEGIN
@@ -119,7 +119,7 @@ int CDSApp::FUN_0043cb20(ushort param_1, int param_2, ushort param_3, uint param
 
 // !FUNC 0x0043cbc0 BEGIN
 /* 43CBC0-43CCB0 000F0 */
-uchar CDSApp::FUN_0043cbc0(uint param_1, ushort param_2, int param_3, ushort param_4) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSDirectSound_InitPrimary(uint param_1, ushort param_2, int param_3, ushort param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0043cbc0 END
 
 // !FUNC 0x004465b0 BEGIN
@@ -129,6 +129,6 @@ uchar CDSApp::FUN_004465b0() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00467430 BEGIN
 /* 467430-467431 00001 */
-void CDSApp::FUN_00467430() { STUB_BODY(); }
+void CDSApp::CDSApp_PreCreateHook() { STUB_BODY(); }
 // !FUNC 0x00467430 END
 

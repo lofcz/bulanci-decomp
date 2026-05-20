@@ -12,21 +12,13 @@ struct FILE;
 struct LONG;
 struct _CONTEXT;
 struct _EXCEPTION_POINTERS;
-struct _IMAGE_SECTION_HEADER;
 struct _LDBL12;
-struct _PHNDLR;
-struct _RTL_CRITICAL_SECTION;
 struct _StartAddress;
 struct _func_3814;
 struct _func_void_void_ptr;
-struct _onexit_t;
 struct _s_FuncInfo;
 struct _s_TryBlockMapEntry;
-struct _strflt;
-struct _tiddata;
 struct localeinfo_struct;
-struct threadlocaleinfostruct;
-struct threadmbcinfostruct;
 
 namespace Runtime {
 
@@ -90,7 +82,7 @@ public:
 	/* 447D5A */ static uint _onexit_nolock(uint param_1);
 	// !DECL 0x00447d5a END
 	// !DECL 0x00447e36 BEGIN
-	/* 447E36 */ static _onexit_t* _onexit(_onexit_t* param_1);
+	/* 447E36 */ static int _onexit(int param_1);
 	// !DECL 0x00447e36 END
 	// !DECL 0x00447e72 BEGIN
 	/* 447E72 */ static int _atexit(_func_3814* param_1);
@@ -141,10 +133,10 @@ public:
 	/* 449255 */ static wchar_t* _wcsncpy(wchar_t* param_1, wchar_t* param_2, size_t param_3);
 	// !DECL 0x00449255 END
 	// !DECL 0x00449292 BEGIN
-	/* 449292 */ static int _vswprintf_l(wchar_t* param_1, size_t param_2, wchar_t* param_3, localeinfo_struct* param_4, char* param_5);
+	/* 449292 */ static int _vswprintf_l(wchar_t* param_1, size_t param_2, wchar_t* param_3, int param_4, int param_5);
 	// !DECL 0x00449292 END
 	// !DECL 0x00449329 BEGIN
-	/* 449329 */ static int _vswprintf(wchar_t* param_1, wchar_t* param_2, char* param_3);
+	/* 449329 */ static int _vswprintf(wchar_t* param_1, wchar_t* param_2, int param_3);
 	// !DECL 0x00449329 END
 	// !DECL 0x00449340 BEGIN
 	/* 449340 */ static int* _V6_HeapAlloc(uint* param_1);
@@ -231,7 +223,7 @@ public:
 	/* 44A769 */ uchar _SEH_epilog4();
 	// !DECL 0x0044a769 END
 	// !DECL 0x0044a780 BEGIN
-	/* 44A780 */ static uint _except_handler4(int* param_1, void* param_2, uint param_3);
+	/* 44A780 */ static uint _except_handler4(int* param_1, PVOID param_2, uint param_3);
 	// !DECL 0x0044a780 END
 	// !DECL 0x0044a920 BEGIN
 	/* 44A920 */ static int _callnewh(size_t param_1);
@@ -261,19 +253,19 @@ public:
 	/* 44ABA2 */ static void _mtterm();
 	// !DECL 0x0044aba2 END
 	// !DECL 0x0044abdf BEGIN
-	/* 44ABDF */ static void _initptd(_tiddata* param_1, threadlocaleinfostruct* param_2);
+	/* 44ABDF */ static void _initptd(int param_1, int param_2);
 	// !DECL 0x0044abdf END
 	// !DECL 0x0044ac93 BEGIN
-	/* 44AC93 */ static _tiddata* _getptd_noexit();
+	/* 44AC93 */ static int _getptd_noexit();
 	// !DECL 0x0044ac93 END
 	// !DECL 0x0044ad16 BEGIN
-	/* 44AD16 */ static _tiddata* _getptd();
+	/* 44AD16 */ static int _getptd();
 	// !DECL 0x0044ad16 END
 	// !DECL 0x0044ad2e BEGIN
 	/* 44AD2E */ uchar _freefls_4(void* param_1);
 	// !DECL 0x0044ad2e END
 	// !DECL 0x0044ae4f BEGIN
-	/* 44AE4F */ static void _freeptd(_tiddata* param_1);
+	/* 44AE4F */ static void _freeptd(int param_1);
 	// !DECL 0x0044ae4f END
 	// !DECL 0x0044aeb8 BEGIN
 	/* 44AEB8 */ static int _mtinit();
@@ -360,7 +352,7 @@ public:
 	/* 44C509 */ static uint* _VEC_memcpy(uint* param_1, uint* param_2, uint param_3);
 	// !DECL 0x0044c509 END
 	// !DECL 0x0044c7fa BEGIN
-	/* 44C7FA */ static threadmbcinfostruct* _updatetmbcinfo();
+	/* 44C7FA */ static int _updatetmbcinfo();
 	// !DECL 0x0044c7fa END
 	// !DECL 0x0044c918 BEGIN
 	/* 44C918 */ static uchar _setmbcp_nolock(uint param_1, int param_2);
@@ -387,7 +379,7 @@ public:
 	/* 44CFED */ static int _crtLCMapStringW_stat(localeinfo_struct* param_1, ulong param_2, ulong param_3, wchar_t* param_4, int param_5, wchar_t* param_6, int param_7, int param_8);
 	// !DECL 0x0044cfed END
 	// !DECL 0x0044d24e BEGIN
-	/* 44D24E */ static int _crtLCMapStringW(WCHAR* param_1, DWORD param_2, WCHAR* param_3, int param_4, WCHAR* param_5, int param_6);
+	/* 44D24E */ static int _crtLCMapStringW(int param_1, DWORD param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0044d24e END
 	// !DECL 0x0044d28e BEGIN
 	/* 44D28E */ static size_t _wcsnlen(wchar_t* param_1, size_t param_2);
@@ -402,13 +394,13 @@ public:
 	/* 44D55B */ static void _FF_MSGBANNER();
 	// !DECL 0x0044d55b END
 	// !DECL 0x0044d59e BEGIN
-	/* 44D59E */ static void _forcdecpt_l(char* param_1, localeinfo_struct* param_2);
+	/* 44D59E */ static void _forcdecpt_l(char* param_1, int param_2);
 	// !DECL 0x0044d59e END
 	// !DECL 0x0044d60f BEGIN
-	/* 44D60F */ static void _cropzeros_l(char* param_1, localeinfo_struct* param_2);
+	/* 44D60F */ static void _cropzeros_l(char* param_1, int param_2);
 	// !DECL 0x0044d60f END
 	// !DECL 0x0044d6a5 BEGIN
-	/* 44D6A5 */ static void _fassign_l(int param_1, char* param_2, char* param_3, localeinfo_struct* param_4);
+	/* 44D6A5 */ static void _fassign_l(int param_1, char* param_2, char* param_3, int param_4);
 	// !DECL 0x0044d6a5 END
 	// !DECL 0x0044d6fc BEGIN
 	/* 44D6FC */ uchar _shift();
@@ -435,7 +427,7 @@ public:
 	/* 44DEAD */ static uchar _cftog_l(double* param_1, uchar* param_2, uint param_3, size_t param_4, int param_5, localeinfo_struct* param_6);
 	// !DECL 0x0044dead END
 	// !DECL 0x0044dfa5 BEGIN
-	/* 44DFA5 */ static errno_t _cfltcvt_l(double* param_1, char* param_2, size_t param_3, int param_4, int param_5, int param_6, localeinfo_struct* param_7);
+	/* 44DFA5 */ static errno_t _cfltcvt_l(double* param_1, char* param_2, size_t param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0044dfa5 END
 	// !DECL 0x0044e02b BEGIN
 	/* 44E02B */ static errno_t _cfltcvt(double* param_1, char* param_2, size_t param_3, int param_4, int param_5, int param_6);
@@ -465,7 +457,7 @@ public:
 	/* 44E538 */ static int _setargv();
 	// !DECL 0x0044e538 END
 	// !DECL 0x0044e5f1 BEGIN
-	/* 44E5F1 */ static void* _crtGetEnvironmentStringsA();
+	/* 44E5F1 */ static LPVOID _crtGetEnvironmentStringsA();
 	// !DECL 0x0044e5f1 END
 	// !DECL 0x0044e726 BEGIN
 	/* 44E726 */ static int _ioinit();
@@ -480,16 +472,16 @@ public:
 	/* 44EDC0 */ static int _flsbuf(int param_1, FILE* param_2);
 	// !DECL 0x0044edc0 END
 	// !DECL 0x0044efb9 BEGIN
-	/* 44EFB9 */ static int _woutput_l(FILE* param_1, wchar_t* param_2, localeinfo_struct* param_3, char* param_4);
+	/* 44EFB9 */ static int _woutput_l(FILE* param_1, wchar_t* param_2, int param_3, int param_4);
 	// !DECL 0x0044efb9 END
 	// !DECL 0x0044f8d0 BEGIN
-	/* 44F8D0 */ static BOOL _ValidateImageBase(BYTE* param_1);
+	/* 44F8D0 */ static BOOL _ValidateImageBase(int param_1);
 	// !DECL 0x0044f8d0 END
 	// !DECL 0x0044f900 BEGIN
-	/* 44F900 */ static _IMAGE_SECTION_HEADER* _FindPESection(BYTE* param_1, DWORD_PTR param_2);
+	/* 44F900 */ static int _FindPESection(int param_1, DWORD_PTR param_2);
 	// !DECL 0x0044f900 END
 	// !DECL 0x0044f942 BEGIN
-	/* 44F942 */ static BOOL _IsNonwritableInCurrentImage(BYTE* param_1);
+	/* 44F942 */ static BOOL _IsNonwritableInCurrentImage(int param_1);
 	// !DECL 0x0044f942 END
 	// !DECL 0x0044f9ae BEGIN
 	/* 44F9AE */ static int _ValidateRead(void* param_1, uint param_2);
@@ -501,7 +493,7 @@ public:
 	/* 44FA20 */ static size_t _strlen(char* param_1);
 	// !DECL 0x0044fa20 END
 	// !DECL 0x0044fab5 BEGIN
-	/* 44FAB5 */ uint _crtInitCritSecNoSpinCount_8(_RTL_CRITICAL_SECTION* param_1);
+	/* 44FAB5 */ uint _crtInitCritSecNoSpinCount_8(LPCRITICAL_SECTION param_1);
 	// !DECL 0x0044fab5 END
 	// !DECL 0x0044fac5 BEGIN
 	/* 44FAC5 */ static int _crtInitCritSecAndSpinCount(uint param_1, uint param_2);
@@ -519,7 +511,7 @@ public:
 	/* 44FC95 */ uchar _EH4_TransferToHandler(uchar* param_1);
 	// !DECL 0x0044fc95 END
 	// !DECL 0x0044fcae BEGIN
-	/* 44FCAE */ uchar _EH4_GlobalUnwind(void* param_1);
+	/* 44FCAE */ uchar _EH4_GlobalUnwind(PVOID param_1);
 	// !DECL 0x0044fcae END
 	// !DECL 0x0044fcc8 BEGIN
 	/* 44FCC8 */ uchar _EH4_LocalUnwind(int param_1, uint param_2, uint param_3, uint* param_4);
@@ -528,7 +520,7 @@ public:
 	/* 44FCE7 */ static uchar _EH_prolog3_catch(int param_1);
 	// !DECL 0x0044fce7 END
 	// !DECL 0x0044fd20 BEGIN
-	/* 44FD20 */ static uchar _global_unwind2(void* param_1);
+	/* 44FD20 */ static uchar _global_unwind2(PVOID param_1);
 	// !DECL 0x0044fd20 END
 	// !DECL 0x0044fd85 BEGIN
 	/* 44FD85 */ static uchar _local_unwind2(int param_1, uint param_2);
@@ -546,7 +538,7 @@ public:
 	/* 44FF14 */ static uchar _initp_misc_winsig(uint param_1);
 	// !DECL 0x0044ff14 END
 	// !DECL 0x0044ff61 BEGIN
-	/* 44FF61 */ static _PHNDLR* _get_sigabrt();
+	/* 44FF61 */ static int _get_sigabrt();
 	// !DECL 0x0044ff61 END
 	// !DECL 0x0044ff6e BEGIN
 	/* 44FF6E */ static int _raise(int param_1);
@@ -555,13 +547,13 @@ public:
 	/* 450128 */ static int _crtLCMapStringA_stat(localeinfo_struct* param_1, ulong param_2, ulong param_3, char* param_4, int param_5, char* param_6, int param_7, int param_8, int param_9);
 	// !DECL 0x00450128 END
 	// !DECL 0x004504ca BEGIN
-	/* 4504CA */ static int _crtLCMapStringA(localeinfo_struct* param_1, WCHAR* param_2, DWORD param_3, CHAR* param_4, int param_5, CHAR* param_6, int param_7, int param_8, BOOL param_9);
+	/* 4504CA */ static int _crtLCMapStringA(int param_1, int param_2, DWORD param_3, int param_4, int param_5, int param_6, int param_7, int param_8, BOOL param_9);
 	// !DECL 0x004504ca END
 	// !DECL 0x0045050d BEGIN
 	/* 45050D */ static int _crtGetStringTypeA_stat(localeinfo_struct* param_1, ulong param_2, char* param_3, int param_4, ushort* param_5, int param_6, int param_7, int param_8);
 	// !DECL 0x0045050d END
 	// !DECL 0x004506c5 BEGIN
-	/* 4506C5 */ static BOOL _crtGetStringTypeA(localeinfo_struct* param_1, DWORD param_2, CHAR* param_3, int param_4, WORD* param_5, int param_6, BOOL param_7);
+	/* 4506C5 */ static BOOL _crtGetStringTypeA(int param_1, DWORD param_2, int param_3, int param_4, int param_5, int param_6, BOOL param_7);
 	// !DECL 0x004506c5 END
 	// !DECL 0x00450705 BEGIN
 	/* 450705 */ static uchar _free_lc_time(uint* param_1);
@@ -588,16 +580,16 @@ public:
 	/* 450B10 */ static uchar _ansicp(int param_1);
 	// !DECL 0x00450b10 END
 	// !DECL 0x00450b57 BEGIN
-	/* 450B57 */ static uchar _convertcp(int param_1, int param_2, char* param_3, uint* param_4, CHAR* param_5, int param_6);
+	/* 450B57 */ static uchar _convertcp(int param_1, int param_2, char* param_3, uint* param_4, int param_5, int param_6);
 	// !DECL 0x00450b57 END
 	// !DECL 0x00450d09 BEGIN
-	/* 450D09 */ static int _crtMessageBoxA(CHAR* param_1, CHAR* param_2, int param_3);
+	/* 450D09 */ static int _crtMessageBoxA(int param_1, int param_2, int param_3);
 	// !DECL 0x00450d09 END
 	// !DECL 0x00450ea7 BEGIN
 	/* 450EA7 */ static int _set_error_mode(int param_1);
 	// !DECL 0x00450ea7 END
 	// !DECL 0x00450eed BEGIN
-	/* 450EED */ static int _isdigit_l(int param_1, localeinfo_struct* param_2);
+	/* 450EED */ static int _isdigit_l(int param_1, int param_2);
 	// !DECL 0x00450eed END
 	// !DECL 0x00450f3c BEGIN
 	/* 450F3C */ static int _isdigit(int param_1);
@@ -606,19 +598,19 @@ public:
 	/* 450F70 */ static char* _strrchr(char* param_1, int param_2);
 	// !DECL 0x00450f70 END
 	// !DECL 0x00450f9d BEGIN
-	/* 450F9D */ static int _tolower_l(int param_1, localeinfo_struct* param_2);
+	/* 450F9D */ static int _tolower_l(int param_1, int param_2);
 	// !DECL 0x00450f9d END
 	// !DECL 0x004510b4 BEGIN
 	/* 4510B4 */ static int _tolower(int param_1);
 	// !DECL 0x004510b4 END
 	// !DECL 0x00451227 BEGIN
-	/* 451227 */ static errno_t _fptostr(char* param_1, size_t param_2, int param_3, _strflt* param_4);
+	/* 451227 */ static errno_t _fptostr(char* param_1, size_t param_2, int param_3, int param_4);
 	// !DECL 0x00451227 END
 	// !DECL 0x004512e4 BEGIN
 	/* 4512E4 */ static uchar _dtold(uint* param_1, uint* param_2);
 	// !DECL 0x004512e4 END
 	// !DECL 0x0045139f BEGIN
-	/* 45139F */ static _strflt* _fltout2(int param_1, _strflt* param_2, char* param_3, size_t param_4);
+	/* 45139F */ static int _fltout2(int param_1, int param_2, char* param_3, size_t param_4);
 	// !DECL 0x0045139f END
 	// !DECL 0x00451430 BEGIN
 	/* 451430 */ int _alldvrm(uint param_1, uint param_2, uint param_3, uint param_4);
@@ -666,13 +658,13 @@ public:
 	/* 45333D */ static int _get_printf_count_output();
 	// !DECL 0x0045333d END
 	// !DECL 0x00453353 BEGIN
-	/* 453353 */ static int _mbtowc_l(wchar_t* param_1, char* param_2, size_t param_3, localeinfo_struct* param_4);
+	/* 453353 */ static int _mbtowc_l(wchar_t* param_1, char* param_2, size_t param_3, int param_4);
 	// !DECL 0x00453353 END
 	// !DECL 0x00453466 BEGIN
 	/* 453466 */ static int _mbtowc(wchar_t* param_1, char* param_2, size_t param_3);
 	// !DECL 0x00453466 END
 	// !DECL 0x0045347d BEGIN
-	/* 45347D */ static int _isleadbyte_l(int param_1, localeinfo_struct* param_2);
+	/* 45347D */ static int _isleadbyte_l(int param_1, int param_2);
 	// !DECL 0x0045347d END
 	// !DECL 0x004534b3 BEGIN
 	/* 4534B3 */ static int _isleadbyte(int param_1);
@@ -681,10 +673,10 @@ public:
 	/* 4534C1 */ static long _atol(char* param_1);
 	// !DECL 0x004534c1 END
 	// !DECL 0x004534d2 BEGIN
-	/* 4534D2 */ static int _isctype_l(int param_1, int param_2, localeinfo_struct* param_3);
+	/* 4534D2 */ static int _isctype_l(int param_1, int param_2, int param_3);
 	// !DECL 0x004534d2 END
 	// !DECL 0x00453588 BEGIN
-	/* 453588 */ static uint _strgtold12_l(_LDBL12* param_1, char** param_2, char* param_3, int param_4, int param_5, int param_6, int param_7, localeinfo_struct* param_8);
+	/* 453588 */ static uint _strgtold12_l(_LDBL12* param_1, char** param_2, char* param_3, int param_4, int param_5, int param_6, int param_7, int param_8);
 	// !DECL 0x00453588 END
 	// !DECL 0x00454514 BEGIN
 	/* 454514 */ uint _hw_cw();
@@ -708,7 +700,7 @@ public:
 	/* 454DE1 */ static int _flswbuf(int param_1, FILE* param_2);
 	// !DECL 0x00454de1 END
 	// !DECL 0x00454f51 BEGIN
-	/* 454F51 */ static errno_t _wctomb_s_l(int* param_1, char* param_2, size_t param_3, wchar_t param_4, localeinfo_struct* param_5);
+	/* 454F51 */ static errno_t _wctomb_s_l(int* param_1, char* param_2, size_t param_3, wchar_t param_4, int param_5);
 	// !DECL 0x00454f51 END
 	// !DECL 0x004550b0 BEGIN
 	/* 4550B0 */ static errno_t _wctomb_s(int* param_1, char* param_2, int param_3, wchar_t param_4);

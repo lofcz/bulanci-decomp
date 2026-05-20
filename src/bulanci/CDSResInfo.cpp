@@ -22,11 +22,6 @@ uchar CDSResInfo::FUN_00433a10(uint* param_1) { STUB_BODY(); return 0; }
 uint* CDSResInfo::FUN_00433a70(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433a70 END
 
-// !FUNC 0x00433aa0 BEGIN
-/* 433AA0-433AA5 00005 */
-uchar CDSResInfo::FUN_00433aa0(uint* param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00433aa0 END
-
 // !FUNC 0x00434270 BEGIN
 /* 434270-434286 00016 */
 uchar CDSResInfo::FUN_00434270(int param_1) { STUB_BODY(); return 0; }

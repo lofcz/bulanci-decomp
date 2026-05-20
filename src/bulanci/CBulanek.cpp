@@ -7,17 +7,17 @@ uchar CBulanek::FUN_00412850(uchar param_1, uint param_2, uint* param_3) { STUB_
 
 // !FUNC 0x00412a40 BEGIN
 /* 412A40-412A74 00034 */
-uchar CBulanek::FUN_00412a40(uchar param_1, uchar param_2) { STUB_BODY(); return 0; }
+uchar CBulanek::CGame_NetSendDamage_t0c(uchar param_1, uchar param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00412a40 END
 
 // !FUNC 0x00412b10 BEGIN
 /* 412B10-412B5D 0004D */
-uchar CBulanek::FUN_00412b10(uchar param_1, uchar param_2, ushort* param_3) { STUB_BODY(); return 0; }
+uchar CBulanek::CGame_NetSendPlayerState_t0d(uchar param_1, uchar param_2, ushort* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00412b10 END
 
 // !FUNC 0x00412c40 BEGIN
 /* 412C40-412C6C 0002C */
-uchar CBulanek::FUN_00412c40(uchar param_1) { STUB_BODY(); return 0; }
+uchar CBulanek::CGame_NetSendPlayerDie_t11(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00412c40 END
 
 // !FUNC 0x00416490 BEGIN
@@ -126,7 +126,7 @@ uint CBulanek::FUN_00417f80(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00417f80 END
 
 // !FUNC 0x004180e0 BEGIN
-/* 4180E0-41824E 0016E */
+/* 4180E0-418255 00175 */
 uchar CBulanek::FUN_004180e0(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004180e0 END
 
@@ -163,7 +163,7 @@ uchar CBulanek::FUN_00418ee0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418ee0 END
 
 // !FUNC 0x004192b0 BEGIN
-/* 4192B0-41944C 0019C */
+/* 4192B0-41947A 001CA */
 uint CBulanek::FUN_004192b0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004192b0 END
 
@@ -173,7 +173,7 @@ uint CBulanek::FUN_004194b0(uint param_1, uint param_2) { STUB_BODY(); return 0;
 // !FUNC 0x004194b0 END
 
 // !FUNC 0x004194c7 BEGIN
-/* 4194C7-41951F 00058 */
+/* 4194C7-419525 0005E */
 uint CBulanek::FUN_004194c7(uint param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004194c7 END
 
@@ -228,7 +228,7 @@ uint* CBulanek::FUN_0041bc20(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bc20 END
 
 // !FUNC 0x0041c610 BEGIN
-/* 41C610-41C850 00240 */
+/* 41C610-41C857 00247 */
 uchar CBulanek::FUN_0041c610(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041c610 END
 
@@ -249,7 +249,7 @@ uint CBulanek::FUN_0041db00(int param_1, int param_2, char param_3) { STUB_BODY(
 
 // !FUNC 0x0041ea90 BEGIN
 /* 41EA90-41EB9D 0010D */
-uchar CBulanek::FUN_0041ea90(uchar param_1) { STUB_BODY(); return 0; }
+uchar CBulanek::CBulanek_ApplyPickupEffect(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041ea90 END
 
 // !FUNC 0x0041eca0 BEGIN
@@ -263,12 +263,12 @@ uchar CBulanek::FUN_0041ed10(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041ed10 END
 
 // !FUNC 0x0041f900 BEGIN
-/* 41F900-41FB8B 0028B */
-uchar CBulanek::FUN_0041f900(uchar param_1, uchar param_2) { STUB_BODY(); return 0; }
+/* 41F900-41FB8E 0028E */
+uchar CBulanek::CBulanek_OnDeath(uchar param_1, uchar param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f900 END
 
 // !FUNC 0x0041fb90 BEGIN
-/* 41FB90-41FC9D 0010D */
+/* 41FB90-41FCA0 00110 */
 uchar CBulanek::FUN_0041fb90(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041fb90 END
 
@@ -314,7 +314,7 @@ uchar CBulanek::FUN_0042cc80(int param_1, int param_2) { STUB_BODY(); return 0; 
 
 // !FUNC 0x0042eac0 BEGIN
 /* 42EAC0-42EAF2 00032 */
-uchar CBulanek::FUN_0042eac0(uint param_1) { STUB_BODY(); return 0; }
+void CBulanek::Scheduler_FreeSlotIfLive(uint param_1) { STUB_BODY(); }
 // !FUNC 0x0042eac0 END
 
 // !FUNC 0x0042f880 BEGIN

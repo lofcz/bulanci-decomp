@@ -6,10 +6,10 @@
 class CSessionItem {
 public:
 	// !DECL 0x0040b770 BEGIN
-	/* 40B770 */ uchar* FUN_0040b770();
+	/* 40B770 */ uchar* CSessionItem_GetTypeDescriptor();
 	// !DECL 0x0040b770 END
 	// !DECL 0x0040e8b0 BEGIN
-	/* 40E8B0 */ uint* FUN_0040e8b0(int param_1);
+	/* 40E8B0 */ uint* CSessionItem_Initialize(int param_1);
 	// !DECL 0x0040e8b0 END
 };
 

@@ -6,7 +6,7 @@
 class CGame {
 public:
 	// !DECL 0x00401d00 BEGIN
-	/* 401D00 */ int* FUN_00401d00(CHAR* param_1);
+	/* 401D00 */ int* FUN_00401d00(int param_1);
 	// !DECL 0x00401d00 END
 	// !DECL 0x0040a840 BEGIN
 	/* 40A840 */ uchar FUN_0040a840(int param_1);
@@ -24,10 +24,10 @@ public:
 	/* 4121A0 */ char FUN_004121a0(uchar param_1);
 	// !DECL 0x004121a0 END
 	// !DECL 0x00412800 BEGIN
-	/* 412800 */ uchar FUN_00412800(int param_1);
+	/* 412800 */ uchar CGame_OnSysMsg_DestroyPlayer(int param_1);
 	// !DECL 0x00412800 END
 	// !DECL 0x00412da0 BEGIN
-	/* 412DA0 */ uchar FUN_00412da0(char param_1);
+	/* 412DA0 */ uchar CGame_NetSendCountdown_t07(char param_1);
 	// !DECL 0x00412da0 END
 	// !DECL 0x00413120 BEGIN
 	/* 413120 */ int FUN_00413120(uchar param_1, uchar param_2);
@@ -42,13 +42,16 @@ public:
 	/* 413880 */ uint FUN_00413880(uchar param_1, uchar param_2);
 	// !DECL 0x00413880 END
 	// !DECL 0x004138b0 BEGIN
-	/* 4138B0 */ uchar FUN_004138b0(uint param_1, uint param_2, uint param_3);
+	/* 4138B0 */ uchar CGame_NetSendOpposingEvent_t17(uint param_1, uint param_2, uint param_3);
 	// !DECL 0x004138b0 END
+	// !DECL 0x00413b90 BEGIN
+	/* 413B90 */ uchar NetSendChat(uchar param_1, int* param_2, void* param_3);
+	// !DECL 0x00413b90 END
 	// !DECL 0x004144f0 BEGIN
 	/* 4144F0 */ uchar FUN_004144f0(uchar param_1, uchar param_2, uint param_3, char param_4);
 	// !DECL 0x004144f0 END
 	// !DECL 0x00414550 BEGIN
-	/* 414550 */ uchar FUN_00414550(uint param_1, uint param_2, uint param_3);
+	/* 414550 */ uchar CGame_NetSendTeamScoreEvent_t16(uint param_1, uint param_2, uint param_3);
 	// !DECL 0x00414550 END
 	// !DECL 0x00414c60 BEGIN
 	/* 414C60 */ uchar* FUN_00414c60();
@@ -69,7 +72,7 @@ public:
 	/* 415220 */ uchar FUN_00415220(int* param_1, int param_2);
 	// !DECL 0x00415220 END
 	// !DECL 0x00415290 BEGIN
-	/* 415290 */ uchar FUN_00415290(int param_1, int* param_2);
+	/* 415290 */ uchar CGame_ProcessNetMessage(int param_1, int* param_2);
 	// !DECL 0x00415290 END
 	// !DECL 0x00415f60 BEGIN
 	/* 415F60 */ uint* FUN_00415f60(uchar param_1);
@@ -90,22 +93,22 @@ public:
 	/* 4180C0 */ uchar FUN_004180c0(uchar param_1);
 	// !DECL 0x004180c0 END
 	// !DECL 0x004185a0 BEGIN
-	/* 4185A0 */ uchar FUN_004185a0(uint param_1);
+	/* 4185A0 */ uchar CGame_OnNetMsg_t15_FireOnNetCustom(uint param_1);
 	// !DECL 0x004185a0 END
 	// !DECL 0x0041a0c0 BEGIN
-	/* 41A0C0 */ uchar FUN_0041a0c0(uchar param_1);
+	/* 41A0C0 */ uchar CGame_DestroyObjectAtSlot(uchar param_1);
 	// !DECL 0x0041a0c0 END
 	// !DECL 0x0041d280 BEGIN
-	/* 41D280 */ uchar FUN_0041d280(uint param_1, uint param_2, int* param_3);
+	/* 41D280 */ uchar CGame_OnNetMsg_t18_PlaceWorldPickup(uint param_1, uint param_2, int* param_3);
 	// !DECL 0x0041d280 END
 	// !DECL 0x0041d2c0 BEGIN
-	/* 41D2C0 */ uchar FUN_0041d2c0(int* param_1);
+	/* 41D2C0 */ uchar CGame_OnNetMsg_t13_PlaceSpecialPickup(int* param_1);
 	// !DECL 0x0041d2c0 END
 	// !DECL 0x0041f010 BEGIN
-	/* 41F010 */ uchar FUN_0041f010(uchar param_1, uchar param_2, uchar param_3);
+	/* 41F010 */ uchar CGame_OnNetMsg_t19_PlayerPickedUpWorldObj(uchar param_1, uchar param_2, uchar param_3);
 	// !DECL 0x0041f010 END
 	// !DECL 0x0041f030 BEGIN
-	/* 41F030 */ uchar FUN_0041f030(uchar param_1);
+	/* 41F030 */ uchar CGame_OnNetMsg_t14_PlayerPickedUpSpecial(uchar param_1);
 	// !DECL 0x0041f030 END
 	// !DECL 0x0041f210 BEGIN
 	/* 41F210 */ uchar FUN_0041f210(uchar param_1, uchar param_2);
@@ -120,16 +123,19 @@ public:
 	/* 4209F0 */ uchar FUN_004209f0(uchar param_1, uchar param_2, int* param_3);
 	// !DECL 0x004209f0 END
 	// !DECL 0x00420a70 BEGIN
-	/* 420A70 */ uchar FUN_00420a70(uchar param_1);
+	/* 420A70 */ uchar CGame_OnNetMsg_t0e_PrimaryAction(uchar param_1);
 	// !DECL 0x00420a70 END
 	// !DECL 0x00428e20 BEGIN
 	/* 428E20 */ uchar FUN_00428e20(int param_1);
 	// !DECL 0x00428e20 END
+	// !DECL 0x0042eff0 BEGIN
+	/* 42EFF0 */ uchar BroadcastEvent(ushort param_1, uint param_2, uint param_3, void* param_4);
+	// !DECL 0x0042eff0 END
 	// !DECL 0x0043ab70 BEGIN
-	/* 43AB70 */ uchar FUN_0043ab70(uint param_1, uint param_2, uint param_3);
+	/* 43AB70 */ uchar CDSDirectPlay_Receive(uint param_1, uint param_2, uint param_3);
 	// !DECL 0x0043ab70 END
 	// !DECL 0x0043ac00 BEGIN
-	/* 43AC00 */ uchar FUN_0043ac00(uint param_1, uint param_2);
+	/* 43AC00 */ uchar CDSDirectPlay_EnumSessions(uint param_1, uint param_2);
 	// !DECL 0x0043ac00 END
 	// !DECL 0x0043ca40 BEGIN
 	/* 43CA40 */ uchar FUN_0043ca40(int param_1);

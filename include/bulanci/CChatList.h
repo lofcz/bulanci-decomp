@@ -21,16 +21,16 @@ public:
 	/* 405EA0 */ uchar FUN_00405ea0(void* param_1);
 	// !DECL 0x00405ea0 END
 	// !DECL 0x0040d010 BEGIN
-	/* 40D010 */ uint* FUN_0040d010(int* param_1, uint param_2, uint param_3);
+	/* 40D010 */ uint* CChatList_BuildAt(int* param_1, uint param_2, uint param_3);
 	// !DECL 0x0040d010 END
 	// !DECL 0x0040d090 BEGIN
-	/* 40D090 */ uchar* FUN_0040d090();
+	/* 40D090 */ uchar* CChatList_GetTypeDescriptor();
 	// !DECL 0x0040d090 END
 	// !DECL 0x0040d0b0 BEGIN
-	/* 40D0B0 */ uchar FUN_0040d0b0(short param_1, int param_2, uint* param_3);
+	/* 40D0B0 */ uchar CChatList_OnEvent(short param_1, int param_2, uint* param_3);
 	// !DECL 0x0040d0b0 END
 	// !DECL 0x0040ff20 BEGIN
-	/* 40FF20 */ uint* FUN_0040ff20();
+	/* 40FF20 */ uint* CChatList_Allocate();
 	// !DECL 0x0040ff20 END
 };
 

@@ -2,74 +2,74 @@
 
 // !FUNC 0x004032a0 BEGIN
 /* 4032A0-4032B8 00018 */
-uint CPoemScroller::FUN_004032a0(int* param_1) { STUB_BODY(); return 0; }
+uint CPoemScroller::DeletingDestructorThunk_18(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004032a0 END
 
 // !FUNC 0x00404e80 BEGIN
 /* 404E80-404F6C 000EC */
-uchar CPoemScroller::FUN_00404e80(void* param_1, int* param_2, int param_3, uint param_4) { STUB_BODY(); return 0; }
+uchar CPoemScroller::BlitStatic(void* param_1, int* param_2, int param_3, uint param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00404e80 END
 
 // !FUNC 0x004240f0 BEGIN
 /* 4240F0-42436B 0027B */
-uchar CPoemScroller::FUN_004240f0(int param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::Render(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004240f0 END
 
 // !FUNC 0x00425ca0 BEGIN
 /* 425CA0-425D98 000F8 */
-uchar CPoemScroller::FUN_00425ca0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::Destructor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00425ca0 END
 
 // !FUNC 0x00425da0 BEGIN
 /* 425DA0-425DA6 00006 */
-uchar* CPoemScroller::FUN_00425da0() {
+uchar* CPoemScroller::GetClassIdentifier() {
     return reinterpret_cast<uchar*>(&DAT_004b3998);
 }
 // !FUNC 0x00425da0 END
 
 // !FUNC 0x00425db0 BEGIN
 /* 425DB0-425DB8 00008 */
-uchar CPoemScroller::FUN_00425db0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::DeletingDestructorThunk_10(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00425db0 END
 
 // !FUNC 0x00425dc0 BEGIN
 /* 425DC0-425DC8 00008 */
-uchar CPoemScroller::FUN_00425dc0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::DeletingDestructorThunk_1c(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00425dc0 END
 
 // !FUNC 0x00425dd0 BEGIN
 /* 425DD0-425DD8 00008 */
-uchar CPoemScroller::FUN_00425dd0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::DeletingDestructorThunk_24(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00425dd0 END
 
 // !FUNC 0x00425de0 BEGIN
 /* 425DE0-425DE8 00008 */
-uchar CPoemScroller::FUN_00425de0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::DeletingDestructorThunk_4(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00425de0 END
 
 // !FUNC 0x00425df0 BEGIN
 /* 425DF0-42602F 0023F */
-uchar CPoemScroller::FUN_00425df0(int param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::PickNextPoem(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00425df0 END
 
 // !FUNC 0x00426030 BEGIN
 /* 426030-42605A 0002A */
-uchar CPoemScroller::FUN_00426030(int param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::OnScrollTick(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00426030 END
 
 // !FUNC 0x004262c0 BEGIN
 /* 4262C0-4264C5 00205 */
-uint* CPoemScroller::FUN_004262c0(uint* param_1) { STUB_BODY(); return 0; }
+uint* CPoemScroller::Constructor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004262c0 END
 
 // !FUNC 0x004264c5 BEGIN
 /* 4264C5-4264D6 00011 */
-uchar CPoemScroller::Catch_004264c5() { STUB_BODY(); return 0; }
+uchar CPoemScroller::CatchExceptionHelper() { STUB_BODY(); return 0; }
 // !FUNC 0x004264c5 END
 
 // !FUNC 0x004264e0 BEGIN
 /* 4264E0-4264FE 0001E */
-uint* CPoemScroller::FUN_004264e0(uchar param_1) { STUB_BODY(); return 0; }
+uint* CPoemScroller::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004264e0 END
 
 // !FUNC 0x00433280 BEGIN
@@ -119,7 +119,7 @@ uchar CPoemScroller::FUN_00436310(int param_1, int param_2, int param_3, uint pa
 
 // !FUNC 0x00436420 BEGIN
 /* 436420-436528 00108 */
-uchar CPoemScroller::FUN_00436420(int param_1, int param_2, int param_3, uint param_4, int param_5) { STUB_BODY(); return 0; }
+uchar CPoemScroller::CDSImage_DrawVerticalLine(int param_1, int param_2, int param_3, uint param_4, int param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00436420 END
 
 // !FUNC 0x00436530 BEGIN
@@ -128,7 +128,7 @@ uchar CPoemScroller::FUN_00436530(int* param_1, uint param_2, int param_3) { STU
 // !FUNC 0x00436530 END
 
 // !FUNC 0x004365f0 BEGIN
-/* 4365F0-436745 00155 */
+/* 4365F0-436748 00158 */
 uchar CPoemScroller::FUN_004365f0(int* param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004365f0 END
 
@@ -144,7 +144,7 @@ uchar CPoemScroller::FUN_00436770(int* param_1, void* param_2, int* param_3) { S
 
 // !FUNC 0x004368d0 BEGIN
 /* 4368D0-436C60 00390 */
-uchar CPoemScroller::FUN_004368d0(int* param_1, void* param_2, int* param_3, uint* param_4) { STUB_BODY(); return 0; }
+uchar CPoemScroller::BlitDispatch(int* param_1, void* param_2, int* param_3, uint* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x004368d0 END
 
 // !FUNC 0x00436e10 BEGIN

@@ -6,13 +6,13 @@
 class CLevelList {
 public:
 	// !DECL 0x0040b0c0 BEGIN
-	/* 40B0C0 */ uint* FUN_0040b0c0(uint* param_1);
+	/* 40B0C0 */ uint* CLevelList_ctor(uint* param_1);
 	// !DECL 0x0040b0c0 END
 	// !DECL 0x0040b120 BEGIN
-	/* 40B120 */ uchar* FUN_0040b120();
+	/* 40B120 */ uchar* CLevelList_GetTypeDescriptor();
 	// !DECL 0x0040b120 END
 	// !DECL 0x0040d490 BEGIN
-	/* 40D490 */ uchar FUN_0040d490(int* param_1, int param_2);
+	/* 40D490 */ uchar CLevelList_RenderItem(int* param_1, int param_2);
 	// !DECL 0x0040d490 END
 };
 

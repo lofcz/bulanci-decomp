@@ -59,11 +59,14 @@ public:
 	// !DECL 0x0041c530 BEGIN
 	/* 41C530 */ uint* FUN_0041c530(uchar param_1);
 	// !DECL 0x0041c530 END
+	// !DECL 0x0041cb70 BEGIN
+	/* 41CB70 */ uint* CMina_Ctor(int param_1);
+	// !DECL 0x0041cb70 END
 	// !DECL 0x0041cce0 BEGIN
-	/* 41CCE0 */ uint* FUN_0041cce0(int param_1);
+	/* 41CCE0 */ uint* InitMine(int param_1);
 	// !DECL 0x0041cce0 END
 	// !DECL 0x0041efb0 BEGIN
-	/* 41EFB0 */ uchar FUN_0041efb0(short param_1, uint param_2, uint* param_3);
+	/* 41EFB0 */ uchar OnEvent(short param_1, uint param_2, uint* param_3);
 	// !DECL 0x0041efb0 END
 };
 

@@ -283,7 +283,7 @@ script-VM cadence hooks or a debug timing hint. Whatever it does, it
 
 `CBulPicture` is one concrete implementation of `CDSAnimSequence` — the
 RLE/delta payload exposed via the editor's BitmapSprite (`ClassID 52`)
-container (see `sprite_container.md`). Two virtual slots glue it to the
+container (see `../formats/sprite_container.md`). Two virtual slots glue it to the
 anim runtime:
 
 * **`seq->vfn[7]`** (offset `+0x1c`) — called by `TM_AdvanceFrame` with
@@ -359,7 +359,7 @@ FUN_004391e0(this_02 + 0x78,
 This shows that the four "tracks" of a team-slot `CBulAnim` are the
 four facing/animation variants packaged into one BitmapSprite resource
 (consistent with the 130 master-pack samples documented in
-`sprite_container.md`).
+`../formats/sprite_container.md`).
 
 ## Cleanup chain
 
@@ -427,5 +427,5 @@ most-derived `CBulAnim::FUN_004396f0`).
 * Script-side handling of frame events: `script_lifecycle.md`
   (`OnBitmapEvt = exports[3]`, dispatched by the engine when an IDSAnim
   slot-0 record's kind matches the script's registered events).
-* RLE / delta / palette payload format: `flx_file_format.md`.
-* BitmapSprite container that holds the sequence headers: `sprite_container.md`.
+* RLE / delta / palette payload format: `../formats/flx_file_format.md`.
+* BitmapSprite container that holds the sequence headers: `../formats/sprite_container.md`.

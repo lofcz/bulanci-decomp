@@ -18,16 +18,16 @@ public:
 	/* 412FA0 */ uchar FUN_00412fa0(void* param_1);
 	// !DECL 0x00412fa0 END
 	// !DECL 0x00413180 BEGIN
-	/* 413180 */ uchar FUN_00413180(char param_1, short param_2);
+	/* 413180 */ uchar CGame_NetSendRoundResult_t0b(char param_1, short param_2);
 	// !DECL 0x00413180 END
 	// !DECL 0x00413390 BEGIN
 	/* 413390 */ uchar FUN_00413390(char param_1, char param_2);
 	// !DECL 0x00413390 END
 	// !DECL 0x00415f80 BEGIN
-	/* 415F80 */ uchar FUN_00415f80(void* param_1);
+	/* 415F80 */ uchar CGaming_DrainRecordedNetMessages(void* param_1);
 	// !DECL 0x00415f80 END
 	// !DECL 0x00416810 BEGIN
-	/* 416810 */ uint FUN_00416810(uchar param_1);
+	/* 416810 */ uint CGaming_GetObjectAtSlotSafe(uchar param_1);
 	// !DECL 0x00416810 END
 	// !DECL 0x00416860 BEGIN
 	/* 416860 */ uchar FUN_00416860(char param_1);
@@ -81,7 +81,7 @@ public:
 	/* 41B3B0 */ uchar FUN_0041b3b0(int param_1);
 	// !DECL 0x0041b3b0 END
 	// !DECL 0x0041b500 BEGIN
-	/* 41B500 */ uchar FUN_0041b500(void* param_1);
+	/* 41B500 */ uchar CGaming_TickAmbientAnimations(void* param_1);
 	// !DECL 0x0041b500 END
 	// !DECL 0x0041b5a0 BEGIN
 	/* 41B5A0 */ uchar FUN_0041b5a0(int* param_1);
@@ -90,7 +90,7 @@ public:
 	/* 41B620 */ uchar FUN_0041b620(void* param_1);
 	// !DECL 0x0041b620 END
 	// !DECL 0x0041b850 BEGIN
-	/* 41B850 */ uchar FUN_0041b850(uint* param_1);
+	/* 41B850 */ uchar CGaming_dtor(uint* param_1);
 	// !DECL 0x0041b850 END
 	// !DECL 0x0041bab0 BEGIN
 	/* 41BAB0 */ uchar FUN_0041bab0(void* param_1);
@@ -105,19 +105,19 @@ public:
 	/* 41C290 */ uchar FUN_0041c290(void* param_1);
 	// !DECL 0x0041c290 END
 	// !DECL 0x0041d5f0 BEGIN
-	/* 41D5F0 */ uchar FUN_0041d5f0(ushort param_1, int param_2);
+	/* 41D5F0 */ uchar CGaming_OnCmd(ushort param_1, int param_2);
 	// !DECL 0x0041d5f0 END
 	// !DECL 0x0041e350 BEGIN
-	/* 41E350 */ int FUN_0041e350(void* param_1);
+	/* 41E350 */ int CGaming_RandomPickupSpawner_Tick(void* param_1);
 	// !DECL 0x0041e350 END
 	// !DECL 0x0041f050 BEGIN
-	/* 41F050 */ uchar FUN_0041f050(int param_1);
+	/* 41F050 */ uchar CGaming_OnSchedulerTimer(int param_1);
 	// !DECL 0x0041f050 END
 	// !DECL 0x00420480 BEGIN
 	/* 420480 */ uchar FUN_00420480(int* param_1);
 	// !DECL 0x00420480 END
 	// !DECL 0x004206a0 BEGIN
-	/* 4206A0 */ uchar FUN_004206a0(ushort param_1, int* param_2, uint param_3);
+	/* 4206A0 */ uchar CGaming_OnCustomEvent(ushort param_1, int* param_2, uint param_3);
 	// !DECL 0x004206a0 END
 	// !DECL 0x00429d90 BEGIN
 	/* 429D90 */ uchar FUN_00429d90(int param_1);

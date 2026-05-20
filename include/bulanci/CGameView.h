@@ -44,11 +44,8 @@ public:
 	// !DECL 0x0041e4b0 BEGIN
 	/* 41E4B0 */ uint* FUN_0041e4b0(uchar* param_1, uchar param_2, void* param_3, int param_4, uint* param_5, int param_6, int param_7, int param_8);
 	// !DECL 0x0041e4b0 END
-	// !DECL 0x0041edf0 BEGIN
-	/* 41EDF0 */ int* FUN_0041edf0(int* param_1, void* param_2, uchar param_3, uchar param_4, uchar param_5, int param_6);
-	// !DECL 0x0041edf0 END
 	// !DECL 0x00439720 BEGIN
-	/* 439720 */ uchar FUN_00439720(uint param_1);
+	/* 439720 */ void TM_SetFrameDelayOverrideMs(int param_1);
 	// !DECL 0x00439720 END
 };
 

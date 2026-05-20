@@ -12,7 +12,7 @@ uchar CHistoryDlg::FUN_00423130(ushort param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004231d0 BEGIN
 /* 4231D0-423423 00253 */
-uint* CHistoryDlg::FUN_004231d0(uint* param_1) { STUB_BODY(); return 0; }
+uint* CHistoryDlg::CHistoryDlg_ctor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004231d0 END
 
 // !FUNC 0x00423430 BEGIN

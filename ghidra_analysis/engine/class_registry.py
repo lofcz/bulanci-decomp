@@ -23,7 +23,7 @@ Output is sorted by classId. Useful for:
 * Auditing the small interface-tier IDs (3..94) that the engine
   uses internally for its type system.
 * Following factories back to a vftable RTTI walk when you want a
-  class's name (see `static_texts.md` for the recipe).
+  class's name (see `../formats/static_texts.md` for the recipe).
 
 Run::
 

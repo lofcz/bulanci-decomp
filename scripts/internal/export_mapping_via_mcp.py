@@ -204,6 +204,14 @@ def parse_signature(sig: str) -> tuple[str, str, str, bool, list[str]]:
 
     qualified_name = tokens[-1]
     return_type_tokens = tokens[:-1]
+    # MSVC `noreturn` is an attribute that lives on the function
+    # declaration, not part of the return type.  `GenerateMapping.java`
+    # never emitted it because it pulled `getReturnType()` directly, but
+    # the MCP signature line includes a literal `noreturn` prefix.  Drop
+    # it here so the CSV stays type-only and the generator emits valid
+    # C++ (a re-added attribute would belong in a `// !PROLOGUE` block).
+    if return_type_tokens and return_type_tokens[0] == "noreturn":
+        return_type_tokens = return_type_tokens[1:]
     return_type = " ".join(return_type_tokens).replace(" *", "*") if return_type_tokens else "void"
     return_type = _normalise_type(return_type or "void")
 

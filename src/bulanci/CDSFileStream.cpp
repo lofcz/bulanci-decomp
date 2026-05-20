@@ -1,5 +1,31 @@
 #include "CDSFileStream.h"
 
+// !PROLOGUE BEGIN
+typedef long* PLONG;
+typedef DWORD* LPDWORD;
+#include "_Globals.h"
+
+extern "C" {
+    __declspec(dllimport) BOOL __stdcall ReadFile(HANDLE, LPVOID, DWORD, LPDWORD, void*);
+    __declspec(dllimport) BOOL __stdcall WriteFile(HANDLE, const void*, DWORD, LPDWORD, void*);
+    __declspec(dllimport) BOOL __stdcall LockFile(HANDLE, DWORD, DWORD, DWORD, DWORD);
+    __declspec(dllimport) BOOL __stdcall UnlockFile(HANDLE, DWORD, DWORD, DWORD, DWORD);
+    __declspec(dllimport) DWORD __stdcall SetFilePointer(HANDLE, long, PLONG, DWORD);
+    __declspec(dllimport) DWORD __stdcall GetLastError();
+    __declspec(dllimport) BOOL __stdcall SetEndOfFile(HANDLE);
+    __declspec(dllimport) DWORD __stdcall GetFileSize(HANDLE, LPDWORD);
+    __declspec(dllimport) BOOL __stdcall FlushFileBuffers(HANDLE);
+}
+
+inline HANDLE FileHandle(CDSFileStream* self) {
+    return *reinterpret_cast<HANDLE*>(reinterpret_cast<char*>(self) + 16);
+}
+
+inline int* SelfOrNull(CDSFileStream* self) {
+    return reinterpret_cast<int*>(self);
+}
+// !PROLOGUE END
+
 // !FUNC 0x00401540 BEGIN
 /* 401540-4015FC 000BC */
 uint* CDSFileStream::FUN_00401540(int param_1, uchar* param_2) { STUB_BODY(); return 0; }
@@ -35,7 +61,7 @@ uchar* CDSFileStream::FUN_00401630() {
 
 // !FUNC 0x00401640 BEGIN
 /* 401640-401654 00014 */
-uchar CDSFileStream::FUN_00401640(int param_1) { STUB_BODY(); return 0; }
+void CDSFileStream::CloseStream(int param_1) { STUB_BODY(); }
 // !FUNC 0x00401640 END
 
 // !FUNC 0x00401660 BEGIN
@@ -55,7 +81,7 @@ uchar CDSFileStream::FUN_004016a0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004016b0 BEGIN
 /* 4016B0-4016B8 00008 */
-uchar CDSFileStream::FUN_004016b0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004016b0 END
 
 // !FUNC 0x004016c0 BEGIN
@@ -65,7 +91,7 @@ uchar CDSFileStream::FUN_004016c0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00401740 BEGIN
 /* 401740-401766 00026 */
-uint* CDSFileStream::FUN_00401740(uint* param_1) { STUB_BODY(); return 0; }
+uint* CDSFileStream::GetStreamName(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401740 END
 
 // !FUNC 0x00401770 BEGIN
@@ -100,7 +126,7 @@ uchar CDSFileStream::FUN_00429300(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004333e0 BEGIN
 /* 4333E0-4333FB 0001B */
-uchar CDSFileStream::FUN_004333e0(int param_1) { STUB_BODY(); return 0; }
+void CDSFileStream::CloseFileHandle(int param_1) { STUB_BODY(); }
 // !FUNC 0x004333e0 END
 
 // !FUNC 0x00433400 BEGIN
@@ -114,7 +140,7 @@ uchar CDSFileStream::FUN_004333e0(int param_1) { STUB_BODY(); return 0; }
  *   Short read (got < req) -> ThrowStreamErrorNoReturn(errno=1, ctx,
  *                                                     ERROR_HANDLE_EOF=0x26)
  */
-uchar CDSFileStream::FUN_00433400(void* param_1, DWORD param_2) {
+void CDSFileStream::ReadBytes(void* param_1, DWORD param_2) {
     DWORD nBytesToRead = param_2;
     DWORD nBytesRead = 0;
     if (param_2 != 0) {
@@ -124,14 +150,13 @@ uchar CDSFileStream::FUN_00433400(void* param_1, DWORD param_2) {
              * non-static _Globals member in the current source layout; the
              * binary expects a __cdecl free function. Wire up once the
              * _Globals helpers are promoted out of the class. */
-            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(1, SelfOrNull(this));
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->RaiseStreamException(1, SelfOrNull(this));
         }
         if (nBytesToRead != nBytesRead) {
             /* ThrowStreamErrorNoReturn(1, SelfOrNull(this), 0x26) */
-            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_004302e0(1, SelfOrNull(this), 0x26);
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->ThrowStreamErrorNoReturn(1, SelfOrNull(this), 0x26);
         }
     }
-    return 0;
 }
 // !FUNC 0x00433400 END
 
@@ -143,17 +168,16 @@ uchar CDSFileStream::FUN_00433400(void* param_1, DWORD param_2) {
  * no-op.  Any WriteFile failure OR short write raises
  * RaiseStreamException(errno=2, ctx).
  */
-uchar CDSFileStream::FUN_00433470(void* param_1, DWORD param_2) {
+void CDSFileStream::WriteBytes(void* param_1, DWORD param_2) {
     DWORD nBytesToWrite = param_2;
     DWORD nBytesWritten = 0;
     if (param_2 != 0) {
         BOOL ok = WriteFile(FileHandle(this), param_1, nBytesToWrite, &nBytesWritten, NULL);
         if (ok == 0 || nBytesWritten != nBytesToWrite) {
             /* RaiseStreamException(2, SelfOrNull(this)) */
-            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(2, SelfOrNull(this));
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->RaiseStreamException(2, SelfOrNull(this));
         }
     }
-    return 0;
 }
 // !FUNC 0x00433470 END
 
@@ -164,13 +188,12 @@ uchar CDSFileStream::FUN_00433470(void* param_1, DWORD param_2) {
  * Direct passthrough to kernel32 LockFile.
  *   Failure -> RaiseStreamException(errno=5, ctx)
  */
-uchar CDSFileStream::FUN_004334c0(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4) {
+void CDSFileStream::LockRegion(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4) {
     BOOL ok = LockFile(FileHandle(this), param_1, param_2, param_3, param_4);
     if (ok == 0) {
         /* RaiseStreamException(5, SelfOrNull(this)) */
-        reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(5, SelfOrNull(this));
-    }
-    return 0;
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->RaiseStreamException(5, SelfOrNull(this));
+        }
 }
 // !FUNC 0x004334c0 END
 
@@ -181,13 +204,12 @@ uchar CDSFileStream::FUN_004334c0(DWORD param_1, DWORD param_2, DWORD param_3, D
  * Direct passthrough to kernel32 UnlockFile.
  *   Failure -> RaiseStreamException(errno=6, ctx)
  */
-uchar CDSFileStream::FUN_00433510(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4) {
+void CDSFileStream::UnlockRegion(DWORD param_1, DWORD param_2, DWORD param_3, DWORD param_4) {
     BOOL ok = UnlockFile(FileHandle(this), param_1, param_2, param_3, param_4);
     if (ok == 0) {
         /* RaiseStreamException(6, SelfOrNull(this)) */
-        reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(6, SelfOrNull(this));
+        reinterpret_cast<_Globals*>(SelfOrNull(this))->RaiseStreamException(6, SelfOrNull(this));
     }
-    return 0;
 }
 // !FUNC 0x00433510 END
 
@@ -201,7 +223,7 @@ uchar CDSFileStream::FUN_00433510(DWORD param_1, DWORD param_2, DWORD param_3, D
  *   -1 return && GetLastError != 0 -> ThrowStreamErrorNoReturn(errno=3,
  *                                                              ctx, win32err)
  */
-uchar CDSFileStream::FUN_00433560(int param_1, int param_2, DWORD param_3) {
+void CDSFileStream::SeekPosition(long param_1, long param_2, DWORD param_3) {
     DWORD method;
     if (param_3 == 0)      method = 0; /* FILE_BEGIN   */
     else if (param_3 == 1) method = 1; /* FILE_CURRENT */
@@ -217,10 +239,9 @@ uchar CDSFileStream::FUN_00433560(int param_1, int param_2, DWORD param_3) {
         DWORD win32Err = GetLastError();
         if (win32Err != 0) {
             /* ThrowStreamErrorNoReturn(3, SelfOrNull(this), win32Err) */
-            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_004302e0(3, SelfOrNull(this), win32Err);
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->ThrowStreamErrorNoReturn(3, SelfOrNull(this), win32Err);
         }
     }
-    return 0;
 }
 // !FUNC 0x00433560 END
 
@@ -238,7 +259,7 @@ uchar CDSFileStream::FUN_00433560(int param_1, int param_2, DWORD param_3) {
  * with a `longlong` and pass low+high via the vtable.  We keep the
  * Tell/Seek calls as raw vtable indirects to match the original.
  */
-uchar CDSFileStream::FUN_004335e0(uint param_1, uint param_2) {
+void CDSFileStream::SetStreamSize(uint param_1, uint param_2) {
     /* `*(int*)this` = primary vtable pointer; offsets +0x20 / +0x28
      * are IDSStream slots Tell() and Seek() respectively. */
     typedef longlong (__thiscall *TellFn)(void*);
@@ -256,12 +277,11 @@ uchar CDSFileStream::FUN_004335e0(uint param_1, uint param_2) {
     BOOL ok = SetEndOfFile(FileHandle(this));
     if (ok == 0) {
         /* RaiseStreamException(4, SelfOrNull(this)) */
-        reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(4, SelfOrNull(this));
+        reinterpret_cast<_Globals*>(SelfOrNull(this))->RaiseStreamException(4, SelfOrNull(this));
     }
     if ((param_1 & param_2) != 0xffffffffu) {
         pSeek(this, savedPos, 0 /* FILE_BEGIN */);
     }
-    return 0;
 }
 // !FUNC 0x004335e0 END
 
@@ -279,14 +299,14 @@ uchar CDSFileStream::FUN_004335e0(uint param_1, uint param_2) {
  * as `__allmul(local, 0, 0, 1)` because MSVC lowers `(longlong)low + ((longlong)high << 32)`
  * through the CRT helper on x86 -- it's just `(high:low)`.
  */
-longlong CDSFileStream::FUN_00433660(uint param_1) {
+longlong CDSFileStream::GetSize() {
     DWORD high = 0;
     DWORD low = GetFileSize(FileHandle(this), &high);
     if (low == 0xffffffffu) {
         DWORD win32Err = GetLastError();
         if (win32Err != 0) {
             /* ThrowStreamErrorNoReturn(4, SelfOrNull(this), win32Err) */
-            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_004302e0(4, SelfOrNull(this), win32Err);
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->ThrowStreamErrorNoReturn(4, SelfOrNull(this), win32Err);
         }
     }
     return (static_cast<longlong>(high) << 32) | static_cast<ulonglong>(low);
@@ -309,7 +329,7 @@ longlong CDSFileStream::FUN_00433660(uint param_1) {
  * That's identical to `(high:low)` since `high` holds the same value
  * after the SetFilePointer call.
  */
-longlong CDSFileStream::FUN_004336c0(uint param_1) {
+longlong CDSFileStream::TellPosition() {
     DWORD high = 0;
     DWORD low = SetFilePointer(FileHandle(this), 0,
                                reinterpret_cast<PLONG>(&high),
@@ -318,7 +338,7 @@ longlong CDSFileStream::FUN_004336c0(uint param_1) {
         DWORD win32Err = GetLastError();
         if (win32Err != 0) {
             /* ThrowStreamErrorNoReturn(3, SelfOrNull(this), win32Err) */
-            reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_004302e0(3, SelfOrNull(this), win32Err);
+            reinterpret_cast<_Globals*>(SelfOrNull(this))->ThrowStreamErrorNoReturn(3, SelfOrNull(this), win32Err);
         }
     }
     return (static_cast<longlong>(high) << 32) | static_cast<ulonglong>(low);
@@ -332,19 +352,18 @@ longlong CDSFileStream::FUN_004336c0(uint param_1) {
  * Calls FlushFileBuffers(handle).  Failure ->
  * RaiseStreamException(errno=7, ctx).
  */
-uchar CDSFileStream::FUN_00433720(uint param_1) {
+void CDSFileStream::FlushStream() {
     BOOL ok = FlushFileBuffers(FileHandle(this));
     if (ok == 0) {
         /* RaiseStreamException(7, SelfOrNull(this)) */
-        reinterpret_cast<_Globals*>(SelfOrNull(this))->FUN_00430270(7, SelfOrNull(this));
+        reinterpret_cast<_Globals*>(SelfOrNull(this))->RaiseStreamException(7, SelfOrNull(this));
     }
-    return 0;
 }
 // !FUNC 0x00433720 END
 
 // !FUNC 0x00433750 BEGIN
 /* 433750-433877 00127 */
-uchar CDSFileStream::FUN_00433750(WCHAR* param_1, DWORD param_2) { STUB_BODY(); return 0; }
+uchar CDSFileStream::FUN_00433750(int param_1, DWORD param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00433750 END
 
 // !FUNC 0x004338d0 BEGIN

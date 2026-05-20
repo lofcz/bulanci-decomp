@@ -23,10 +23,28 @@ python tools/bulanci_unpack/bulanci_unpack.py overlay orig/bulanci.exe   -o unpa
 python tools/bulanci_unpack/bulanci_unpack.py eap     tutorial.eap       -o unpacked/tutorial_eap
 python tools/bulanci_unpack/bulanci_unpack.py eapres  tutorial.eapres    -o unpacked/tutorial_eapres
 python tools/bulanci_unpack/bulanci_unpack.py auto    <file>             -o unpacked/<name>
+
+# Full batch: unpack bulanci.exe + every *.eap / *.eapres under orig/
+python tools/bulanci_unpack/bulanci_unpack.py all
+# Equivalent:
+python tools/bulanci_unpack/bulanci_unpack.py all -i orig -o unpacked
+# Keep existing files in target subdirs (default is to wipe each one first):
+python tools/bulanci_unpack/bulanci_unpack.py all --no-clean
 ```
 
-The `auto` subcommand routes by extension (`.exe` -> overlay, `.eap` -> eap,
-`.eapres` -> eapres).
+The `auto` subcommand routes a single file by extension (`.exe` -> overlay,
+`.eap` -> eap, `.eapres` -> eapres).
+
+The `all` subcommand is the repeatable batch driver: it walks `--input-dir`
+(default `orig/`), routes each file the same way as `auto`, lands them under
+`--output-dir/<subdir>/` (`bulanci.exe -> overlay/`, `<name>.eap ->
+<name>_eap/`, `<name>.eapres -> <name>_eapres/`), and prints an aggregate
+roll-up at the end (per-pack resource counts + a column flagging packs
+that carry class-22 `BitmapBMP` resources). `.eap` files are auto-paired
+with their sibling `.eapres` so manifest entries get the editor's
+human-readable names. Non-container files in the input directory
+(`Editor.exe`, `NAudio.dll`, `zlib.net.dll`, `hashes`, `.gitkeep`) are
+silently skipped.
 
 ## Output layout
 
@@ -94,22 +112,22 @@ and was reverse-engineered from the binary plus its decompiled CDS\* classes.
 | 28      | `BitmapSpecial`   | u32 w, u32 h, u32 marker, u32 stride, u32 field4, byte padA=0xFF, u32 paletteCount, byte hasUnpacked; then `paletteCount*4` palette entries (BGR + reserved) and `stride*height` packed pixels. When `hasUnpacked==1` an additional `width*height` "unpacked" buffer follows (the runtime cache; we ignore it). `marker` is a bpp tier (0=1bpp, 1=2bpp, 2=4bpp, 3=8bpp, 4=16bpp, 5=24bpp BGR, 6=32bpp); all of 0..5 decode to PNG today. `field4` is a transparent palette index for indexed variants or a transparent RGB sentinel for marker 5. |
 | 43      | `AudioBank`       | u32 dataLen, u16 channels, u16 bits, u32 freq, then `dataLen` bytes of little-endian PCM. Companion `.wav` is written. |
 | 48      | `Mp3`             | int32 dataLen, uint32 size, u16 channels, u16 bits, u32 freq, MP3 stream                                   |
-| 52      | `BitmapSprite`    | Fixed 0x2c-byte header (11×u32: totalSize, encodedSize, encodedSize2, width, height, frameCount, channels=3, inMemSize, `flags` = frameCount-1, encodedSize3 = frame-0 size, packed `numInner`) followed by a back-to-back **animation-frame stream** (each frame: `u32 frameSize, u8 numInner`, then `numInner` inner chunks each prefixed by `u32 chunkSize, u8 opcode`). The first frame's 5-byte header overlaps file offsets 0x24..0x28. Header, frame stream **and** the per-opcode pixel decoders (RLE 0x00/0x0e, delta 0x04/0x0f, palette 0x09 = FLI/FLC `COLOR_256` with a cursor-based relative-skip, region 0x0a/0x0b/0x0c, transparent-index 0x0d, mask plane 0x0e/0x0f) are fully recovered on 130/130 master-pack samples; the unpacker emits a horizontal atlas sprite-sheet (RGBA PNG, one stripe per frame), an `*.atlas.json` sidecar describing frame size, frame count, ring-frame index, a top-level `timing` block (raw u16 ticks from opcode 0x0C with carry-forward semantics matching the runtime's `frameDelayOverrideMs`, see [`ghidra_analysis/anim_runtime.md`](ghidra_analysis/anim_runtime.md)), and per-frame metadata (engine opcodes applied, NotifyMove origin, `durationTicks` + `effectiveDurationTicks`, parsed `events: [{kind, x, y}]` records from opcode 0x0B = per-frame anchor/attachment points, transparent-index hits), and an `*.atlas.gif` animated preview (per-frame local color tables for palette-cycle sprites, transparent slot marked via GCE, infinite loop via Netscape extension). Sprites with no inline palette (~41 recolour variants) get a grayscale fallback palette. **Transparency follows the engine's actual three-tier model** (see `CDSFlxFile::DecodeFrame @ 0x00432c60`): (1) per-pixel mask plane at `consumer+0x20` populated by opcodes 0x0e/0x0f — used by 39/130 sprites and gated by the masked-blit dispatch table at `DAT_004b0bc8`; (2) explicit color-key index from opcode 0x0d → `CBulPicture+0x46d` for 3/130 sprites; (3) implicit opaque for the remaining ~88 sprites whose engine-level BG is masked by a higher-layer compositor — for those the unpacker tallies the RGB at every bitmap-perimeter pixel across every frame and treats the dominant RGB (when it covers >50% of perimeter pixels) as a synthetic chroma key, exactly matching the engine's chroma-key blit kernels at `DAT_004b0ac8`. See [`ghidra_analysis/sprite_container.md`](ghidra_analysis/sprite_container.md) and [`ghidra_analysis/flx_file_format.md`](ghidra_analysis/flx_file_format.md). |
+| 52      | `BitmapSprite`    | Fixed 0x2c-byte header (11×u32: totalSize, encodedSize, encodedSize2, width, height, frameCount, channels=3, inMemSize, `flags` = frameCount-1, encodedSize3 = frame-0 size, packed `numInner`) followed by a back-to-back **animation-frame stream** (each frame: `u32 frameSize, u8 numInner`, then `numInner` inner chunks each prefixed by `u32 chunkSize, u8 opcode`). The first frame's 5-byte header overlaps file offsets 0x24..0x28. Header, frame stream **and** the per-opcode pixel decoders (RLE 0x00/0x0e, delta 0x04/0x0f, palette 0x09 = FLI/FLC `COLOR_256` with a cursor-based relative-skip, region 0x0a/0x0b/0x0c, transparent-index 0x0d, mask plane 0x0e/0x0f) are fully recovered on 130/130 master-pack samples; the unpacker emits a horizontal atlas sprite-sheet (RGBA PNG, one stripe per frame), an `*.atlas.json` sidecar describing frame size, frame count, ring-frame index, a top-level `timing` block (raw u16 ticks from opcode 0x0C with carry-forward semantics matching the runtime's `frameDelayOverrideMs`, see [`../../ghidra_analysis/anim_runtime.md`](../../ghidra_analysis/anim_runtime.md)), and per-frame metadata (engine opcodes applied, NotifyMove origin, `durationTicks` + `effectiveDurationTicks`, parsed `events: [{kind, x, y}]` records from opcode 0x0B = per-frame anchor/attachment points, transparent-index hits), and an `*.atlas.gif` animated preview (per-frame local color tables for palette-cycle sprites, transparent slot marked via GCE, infinite loop via Netscape extension). Sprites with no inline palette (~41 recolour variants) get a grayscale fallback palette. **Transparency follows the engine's actual three-tier model** (see `CDSFlxFile::DecodeFrame @ 0x00432c60`): (1) per-pixel mask plane at `consumer+0x20` populated by opcodes 0x0e/0x0f — used by 39/130 sprites and gated by the masked-blit dispatch table at `DAT_004b0bc8`; (2) explicit color-key index from opcode 0x0d → `CBulPicture+0x46d` for 3/130 sprites; (3) implicit opaque for the remaining ~88 sprites whose engine-level BG is masked by a higher-layer compositor — for those the unpacker tallies the RGB at every bitmap-perimeter pixel across every frame and treats the dominant RGB (when it covers >50% of perimeter pixels) as a synthetic chroma key, exactly matching the engine's chroma-key blit kernels at `DAT_004b0ac8`. See [`../../ghidra_analysis/sprite_container.md`](../../ghidra_analysis/sprite_container.md) and [`../../ghidra_analysis/flx_file_format.md`](../../ghidra_analysis/flx_file_format.md). |
 | 54      | `MouseCursor`     | u32 totalSize, u32 frameCount, u32 …; small (8 KB) cursor frames + 24bpp BGR palette                       |
-| 58      | `DsmInner`        | u32 nameLen, char[nameLen] filename, u64 FILETIME, u32 fileLen, byte[fileLen] payload. The master pack carries one `BULANCI.TMP` entry — an MZ-prefixed PE blob unrelated to `CDSDsmFile` (see `ghidra_analysis/dsm_file_format.md`). |
+| 58      | `DsmInner`        | u32 nameLen, char[nameLen] filename, u64 FILETIME, u32 fileLen, byte[fileLen] payload. The master pack carries one `BULANCI.TMP` entry — an MZ-prefixed PE blob unrelated to `CDSDsmFile` (see `../../ghidra_analysis/dsm_file_format.md`). |
 | 67      | `AudioBankIndex`  | u32 bankResourceID (the ClassID-43 partner), u32 reserved, u32 sampleCount, u32[sampleCount] byte lengths. Sums match the partner's `dataLen` exactly. |
-| 76      | `BitmapJpegAnim`  | `CDSDsmFile` synchronized MJPEG + 16-bit PCM movie: 36-byte `CDsmHeader` (`dwPayloadEndOffset`, `dwCanvasWidth/Height/PixelFormat`, `dwDurationMs`, `dwFrameCount`, `dwAudioByteCount`, `dwAudioFormatPacked`, `dwAudioSampleRate`) followed by `2 * dwFrameCount` interleaved `{u32 len, byte[len]}` chunks — one full JPEG (`FF D8 FF DB ...`) then one PCM-audio block per frame. We auto-extract every JPEG to `*.frameNNN.jpg` and concatenate every audio chunk into a single playable `*.audio.wav`. Full RE in `ghidra_analysis/dsm_file_format.md`. |
+| 76      | `BitmapJpegAnim`  | `CDSDsmFile` synchronized MJPEG + 16-bit PCM movie: 36-byte `CDsmHeader` (`dwPayloadEndOffset`, `dwCanvasWidth/Height/PixelFormat`, `dwDurationMs`, `dwFrameCount`, `dwAudioByteCount`, `dwAudioFormatPacked`, `dwAudioSampleRate`) followed by `2 * dwFrameCount` interleaved `{u32 len, byte[len]}` chunks — one full JPEG (`FF D8 FF DB ...`) then one PCM-audio block per frame. We auto-extract every JPEG to `*.frameNNN.jpg` and concatenate every audio chunk into a single playable `*.audio.wav`. Full RE in `../../ghidra_analysis/dsm_file_format.md`. |
 | 94      | `Sign`            | uint32 packedDate, int32 len+UTF-16LE content, int32 len+UTF-16LE copyright, byte 0                        |
 | 2026    | `Script`          | `CLevelScript`. int32 codeLen, int32 nExports, int32 nVars, byte[codeLen] bytecode, int32[nExports] entries — see disassembler below. |
-| 2043    | `Poem`            | `CPoem`. u32 charCount, char[charCount] UTF-16LE. First codepoint usually `0x0001` (section/line marker). Decoded to `*.txt`. |
+| 2043    | `Poem`            | `CPoem`. u32 charCount, char[charCount] UTF-16LE consumed by the main-menu `CPoemScroller`. Inline markup is per-line (parsed by `TextShaper_LayOutAndRender @ 0x004375e0`, see [`../../ghidra_analysis/main_menu.md`](../../ghidra_analysis/main_menu.md) §9.3): `\n` = line break (no auto-wrap), `\1<text>\n` = CENTER, `\2<text>\n` = RIGHT, `\t` = 4-space tab, no prefix = LEFT. Typical layout is `\1Title\n` + verses + `\2by Author\n`. The unpacker writes the byte-faithful source to `*.bin` and a readable rendering to `*.txt` (each line prefixed with `[CENTER]` / `[RIGHT]` when the source carries the marker; tabs expanded; trailing `\0` stripped). |
 | 2050    | `HistoryScript`   | `CHistoryScript` — a `CDSScript` subclass behind the history dialog. Wire format identical to ClassID 2026; only the runtime opcode-45..52 extension differs (8 entries at `0x004af7ac`, not yet named). Disassembled with the base 0..44 opcode set; ext opcodes render as `<UNKNOWN op=N>`. |
 | 2076    | `HelpScript`      | `CHelpScript` — same as 2050 but for the help dialog (ext table at `0x004af2fc`). |
 
 The per-language UI string pool used by every dialog in `bulanci.exe`
 (`CDSStaticTexts`, 127 UTF-16LE entries) is **not** a `.eap` resource —
 it's baked into the executable's `.data` section. Dump it with
-[`ghidra_analysis/static_texts.py`](ghidra_analysis/static_texts.py); see
-[`ghidra_analysis/static_texts.md`](ghidra_analysis/static_texts.md) for
+[`../../ghidra_analysis/static_texts.py`](../../ghidra_analysis/static_texts.py); see
+[`../../ghidra_analysis/static_texts.md`](../../ghidra_analysis/static_texts.md) for
 the layout.
 
 ## Script bytecode disassembler
@@ -135,7 +153,7 @@ fn export#1 @ 0x0093  ; OnInit()  -- fires once during CBulanci construction; le
 The native game's master-pack scripts use a *superset* of the editor's
 opcode enum. All 103 opcodes (45 base `CDSScript` + 58 `CLevelScript`
 extension entries) are documented in
-[`ghidra_analysis/script_dispatch_table.md`](ghidra_analysis/script_dispatch_table.md);
+[`../../ghidra_analysis/script_dispatch_table.md`](../../ghidra_analysis/script_dispatch_table.md);
 every handler in `bulanci.exe` has been hand-disassembled to recover
 both its argument shape and a human-readable name. Names come from the
 editor's `Editor.Scripts.Opcode` enum where possible; for the 36 game-
@@ -170,7 +188,7 @@ careful to label by exports-table position and pick each function's end
 from the sorted-address neighbour. The full per-export contract (which
 engine function fires it, what each argument means, what triggers it in
 the game world) is in
-[`ghidra_analysis/script_lifecycle.md`](ghidra_analysis/script_lifecycle.md).
+[`../../ghidra_analysis/script_lifecycle.md`](../../ghidra_analysis/script_lifecycle.md).
 
 The disassembler also recognises functions with branchy control flow
 (`If*`, `Goto`, `Switch`, `Select`) and walks all reachable bytes inside
@@ -188,20 +206,29 @@ pairs `LEVEL.eap` with a sibling `LEVEL.eapres` (the editor's XML side car).
 The names typed in the editor flow into each manifest entry's `name` field.
 Override the side-car path with `--names-from PATH.eapres`.
 
+## `BitmapSprite` (ClassID 52) palette resolution
+
+The container, frame stream and per-opcode pixel decoders are fully
+recovered and the unpacker emits indexed PNGs plus a per-sprite atlas.
+**All 130/130 master-pack sprites now render in their authentic
+colours.** 89 carry their palette inline via FLX opcode 0x09; the
+remaining 41 are recolour variants that inherit the palette from the
+most-recently-loaded inline-palette sibling — empirically confirmed
+by the master pack's three load-order chains (`65715` → 32 followers,
+`65753` → 1 follower, `65830` → 8 followers) and by visual
+verification of the resulting renders. The unpacker mirrors that
+runtime lookup by threading a 1024-byte ambient-palette state through
+the per-pack `save_resource` loop, and each inheriting sprite's atlas
+sidecar records the provenance under `paletteSource: "inherited"` and
+`inheritedFrom: <sibling ID>`. The grayscale-ramp fallback is now
+reserved for the (currently empty) corner case where a sprite has
+neither an inline palette nor any sibling to inherit from. See
+[`../../ghidra_analysis/sprite_container.md`](../../ghidra_analysis/sprite_container.md)
+and [`../../ghidra_analysis/flx_file_format.md`](../../ghidra_analysis/flx_file_format.md)
+for the engine-side reference.
+
 ## What is still out of scope
 
-- **`BitmapSprite` (ClassID 52) recolour-variant palettes.** The
-  container, frame stream and per-opcode pixel decoders are now fully
-  recovered and the unpacker emits indexed PNGs plus a per-sprite
-  atlas. 89/130 sprites carry their palette inline (FLX opcode 0x09)
-  and decode to correct full-colour PNGs. The remaining 41/130 are
-  recolour variants whose palette is inherited from a sibling resource
-  via the engine's ambient render context; the unpacker currently
-  falls back to a grayscale ramp for those. Picking the right sibling
-  palette automatically would let us emit colour PNGs for them too;
-  the manifest's `decoded.paletteSource` field distinguishes the two
-  cases. See [`ghidra_analysis/sprite_container.md`](ghidra_analysis/sprite_container.md)
-  and [`ghidra_analysis/flx_file_format.md`](ghidra_analysis/flx_file_format.md).
 - **Exact authoritative names** for the 36 game-only opcodes in the
   `CLevelScript` extension table. Argument shapes and runtime
   behaviours are recovered, and each opcode now has a descriptive name,
@@ -209,7 +236,7 @@ Override the side-car path with `--names-from PATH.eapres`.
   `RegisterTimer`, `PlayAnim`, `CollInsert`) rather than the original
   C++ identifier from the lost developer-side source. See the "What's
   still unknown" section of
-  [`ghidra_analysis/script_dispatch_table.md`](ghidra_analysis/script_dispatch_table.md)
+  [`../../ghidra_analysis/script_dispatch_table.md`](../../ghidra_analysis/script_dispatch_table.md)
   for the handful of names that are best-effort guesses.
 - A native C++ port of the unpacker. The Phase 1 unpacker is intentionally
   a Python throwaway tool; a parallel MSVC C++ implementation will land

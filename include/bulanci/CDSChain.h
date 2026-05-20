@@ -27,7 +27,7 @@ public:
 	/* 42AC90 */ int FUN_0042ac90();
 	// !DECL 0x0042ac90 END
 	// !DECL 0x0042fb70 BEGIN
-	/* 42FB70 */ uchar FUN_0042fb70(WCHAR* param_1);
+	/* 42FB70 */ uchar FUN_0042fb70(int param_1);
 	// !DECL 0x0042fb70 END
 	// !DECL 0x0042fc30 BEGIN
 	/* 42FC30 */ uchar FUN_0042fc30(int* param_1);

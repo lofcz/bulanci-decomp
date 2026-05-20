@@ -38,7 +38,7 @@ uchar CStartGame2::FUN_0040bb80(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040bb80 END
 
 // !FUNC 0x0040d3f0 BEGIN
-/* 40D3F0-40D485 00095 */
+/* 40D3F0-40D48D 0009D */
 uchar CStartGame2::FUN_0040d3f0(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040d3f0 END
 
@@ -58,7 +58,7 @@ uchar CStartGame2::FUN_0040d6b0(ushort param_1, int param_2, uint param_3) { STU
 // !FUNC 0x0040d6b0 END
 
 // !FUNC 0x0040d7e0 BEGIN
-/* 40D7E0-40D921 00141 */
+/* 40D7E0-40D928 00148 */
 uchar CStartGame2::FUN_0040d7e0(short param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0040d7e0 END
 
@@ -83,7 +83,7 @@ uint* CStartGame2::FUN_0040ed90(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ed90 END
 
 // !FUNC 0x0040f610 BEGIN
-/* 40F610-40F7BF 001AF */
+/* 40F610-40F7C6 001B6 */
 uint CStartGame2::FUN_0040f610(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f610 END
 
@@ -99,17 +99,17 @@ uchar CStartGame2::FUN_0040fc20(ushort param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00412c70 BEGIN
 /* 412C70-412CCF 0005F */
-uchar CStartGame2::FUN_00412c70(uchar param_1, void* param_2, char param_3) { STUB_BODY(); return 0; }
+uchar CStartGame2::CGame_NetSendSetAvatar_t03(uchar param_1, void* param_2, char param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00412c70 END
 
 // !FUNC 0x00412cd0 BEGIN
 /* 412CD0-412D31 00061 */
-uchar CStartGame2::FUN_00412cd0(void* param_1, char param_2) { STUB_BODY(); return 0; }
+uchar CStartGame2::CGame_NetSendSlotCount_t04(void* param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00412cd0 END
 
 // !FUNC 0x00412d40 BEGIN
 /* 412D40-412D96 00056 */
-uchar CStartGame2::FUN_00412d40(void* param_1, char param_2) { STUB_BODY(); return 0; }
+uchar CStartGame2::CGame_NetSendAdminByte_t64(void* param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00412d40 END
 
 // !FUNC 0x00412e90 BEGIN
@@ -129,7 +129,7 @@ uchar CStartGame2::FUN_00412f10(char param_1, void* param_2) { STUB_BODY(); retu
 
 // !FUNC 0x004139b0 BEGIN
 /* 4139B0-413A74 000C4 */
-uchar CStartGame2::FUN_004139b0(uchar param_1, void* param_2, char param_3) { STUB_BODY(); return 0; }
+uchar CStartGame2::CGame_NetSendRename_t02(uchar param_1, void* param_2, char param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004139b0 END
 
 // !FUNC 0x00413a80 BEGIN
@@ -139,7 +139,7 @@ uchar CStartGame2::FUN_00413a80(uchar param_1, int param_2, void* param_3) { STU
 
 // !FUNC 0x00414340 BEGIN
 /* 414340-41441F 000DF */
-uchar CStartGame2::FUN_00414340(void* param_1, char param_2) { STUB_BODY(); return 0; }
+uchar CStartGame2::CGame_NetSendSetLevel_t05(void* param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00414340 END
 
 // !FUNC 0x00414420 BEGIN

@@ -7,7 +7,7 @@ uchar CScroller::FUN_00403120(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004033d0 BEGIN
 /* 4033D0-403469 00099 */
-uint* CScroller::FUN_004033d0(uint* param_1) { STUB_BODY(); return 0; }
+uint* CScroller::CScroller_ctor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004033d0 END
 
 // !FUNC 0x00403470 BEGIN
@@ -101,7 +101,7 @@ bool CScroller::FUN_00406cc0(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004089c0 BEGIN
 /* 4089C0-408BF2 00232 */
-uint* CScroller::FUN_004089c0(int param_1, int param_2, uint param_3, int param_4) { STUB_BODY(); return 0; }
+uint* CScroller::CScroller_BuildAt(int param_1, int param_2, uint param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x004089c0 END
 
 // !FUNC 0x004229a0 BEGIN

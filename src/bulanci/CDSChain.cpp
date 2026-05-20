@@ -42,8 +42,8 @@ int CDSChain::FUN_0042ac90() {
 // !FUNC 0x0042ac90 END
 
 // !FUNC 0x0042fb70 BEGIN
-/* 42FB70-42FC19 000A9 */
-uchar CDSChain::FUN_0042fb70(WCHAR* param_1) { STUB_BODY(); return 0; }
+/* 42FB70-42FC2F 000BF */
+uchar CDSChain::FUN_0042fb70(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042fb70 END
 
 // !FUNC 0x0042fc30 BEGIN

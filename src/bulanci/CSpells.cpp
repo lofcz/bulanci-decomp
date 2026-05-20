@@ -2,7 +2,7 @@
 
 // !FUNC 0x00426da0 BEGIN
 /* 426DA0-426E0F 0006F */
-uchar CSpells::FUN_00426da0(short param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CSpells::OnEvent(short param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00426da0 END
 
 // !FUNC 0x004274b0 BEGIN
@@ -14,7 +14,7 @@ uchar* CSpells::FUN_004274b0() {
 
 // !FUNC 0x004278c0 BEGIN
 /* 4278C0-4279EC 0012C */
-uchar CSpells::FUN_004278c0(int param_1) { STUB_BODY(); return 0; }
+uchar CSpells::Draw(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004278c0 END
 
 // !FUNC 0x00427b10 BEGIN

@@ -9,6 +9,17 @@ than **"produce byte-exact COFF for symbol X"** (the latter belongs in
 or lower the confidence of a subsystem so the next agent can pick up
 where you left off.
 
+## Workspace Structure
+
+The analysis files are structured in subfolders by responsibility:
+
+* **`formats/`**: Asset decoders, codecs, compression wrappers, containers, and localised text data.
+* **`netcode/`**: Remote protocol details, DirectPlay bindings, and synchronization dispatchers.
+* **`engine/`**: Script virtual machine, app shell windows, rendering hooks, and rtti class lists.
+* **`gameplay/`**: Start/lobby menus, gameplay state orchestration, and active entity behaviors.
+
+See [`STATUS.md`](STATUS.md) for the central tracking dashboard detailing current confidence levels and artefacts for each subsystem.
+
 ## File conventions
 
 | Pattern | What it is | Committed? |

@@ -319,7 +319,7 @@ The engine ships only **events**, never per-tick snapshots. Conceptually:
   `CChainedStrm`-shaped stream) and the engine fires script export #9
   (`OnNetCustom(handle)`). Levels can therefore define their own
   sub-protocol on top of this single multiplexed channel — see
-  `script_lifecycle.md` for the `OnNetCustom` end of the contract and
+  `../engine/script_lifecycle.md` for the `OnNetCustom` end of the contract and
   `unpacked/overlay/res_0000065859`'s `fn export#10`, which `StrmRead(_,
   1)` and switches on the first byte to demux level-internal events.
 

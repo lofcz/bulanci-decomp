@@ -48,7 +48,7 @@ uchar CDSCollection::FUN_00431260(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00431260 END
 
 // !FUNC 0x00431360 BEGIN
-/* 431360-431409 000A9 */
+/* 431360-431421 000C1 */
 uchar CDSCollection::FUN_00431360(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00431360 END
 

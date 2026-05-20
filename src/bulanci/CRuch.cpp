@@ -2,7 +2,7 @@
 
 // !FUNC 0x00423c20 BEGIN
 /* 423C20-423D00 000E0 */
-int* CRuch::FUN_00423c20(int* param_1) { STUB_BODY(); return 0; }
+int* CRuch::CRuch_ctor(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423c20 END
 
 // !FUNC 0x00423d00 BEGIN
@@ -44,11 +44,11 @@ uint* CRuch::FUN_00423dc0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00423de0 BEGIN
 /* 423DE0-423E5E 0007E */
-uchar CRuch::FUN_00423de0(void* param_1) { STUB_BODY(); return 0; }
+uchar CRuch::CRuch_OnScheduledTick(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423de0 END
 
 // !FUNC 0x00423e60 BEGIN
 /* 423E60-423E95 00035 */
-uchar CRuch::FUN_00423e60(int param_1) { STUB_BODY(); return 0; }
+uchar CRuch::CRuch_Render_DrawVerticalLine(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423e60 END
 

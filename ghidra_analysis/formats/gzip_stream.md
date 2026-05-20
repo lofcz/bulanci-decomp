@@ -332,23 +332,77 @@ blocks through zlib 1.1.3 will reproduce the original file exactly.
 
 ### Match status
 
-Source for these blocks lives in `src/bulanci/_Globals.cpp` and is
-preserved verbatim across `sync_units` runs (no `STUB_BODY()` marker).
-Current byte status against `build/orig/bulanci/_Globals.obj` -- run
-`python scripts/internal/zlib_status.py` to refresh:
+The 16 identified zlib helpers were renamed in Ghidra under the
+`zlib::` namespace and migrated to a new `zlib` unit (own
+`src/bulanci/zlib.cpp` / `include/bulanci/zlib.h` / `build.ninja` rule
++ `config/bulanci/units_listing.csv` row).  After the rename
+`scripts/generate_sources.py:_sanitize_symbol_name()` and Ghidra's
+`ExportDelinker.java:sanitizeSymbolNames()` both strip trailing
+underscores, so COFF symbols on each side pair under the stripped
+form (`zlib::inflateInit`, `zlib::deflateInit2`, ...).
 
-| RVA          | Symbol                          | Status                                              |
-|--------------|---------------------------------|-----------------------------------------------------|
-| `0x0046ef60` | `inflateInit_`                  | **EXACT** (26 / 26 bytes)                           |
-| `0x004704c0` | `deflateInit_`                  | **EXACT** (37 / 37 bytes)                           |
-| `0x00434e30` | `CDSGZipStream::Decompress`     | length match (170 / 170); 33 bytes differ           |
-| `0x00434ee0` | `CDSGZipStream::Compress`       | length match (172 / 172); 33 bytes differ           |
-| `0x0046ee10` | `inflateEnd`                    | stub (real zlib 1.1.3 body needed)                  |
-| `0x0046ee60` | `inflateInit2_`                 | stub                                                |
-| `0x0046ef80` | `inflate`                       | stub                                                |
-| `0x0046f3e0` | `deflate`                       | stub                                                |
-| `0x0046f660` | `deflateEnd`                    | stub                                                |
-| `0x004702c0` | `deflateInit2_`                 | stub                                                |
+The engine-level `CDSGZipStream::Decompress` and `::Compress` stay in
+`_Globals.cpp` (still under `_Globals::FUN_00434e30` /
+`_Globals::FUN_00434ee0`) and call into `zlib::*` via the new header.
+
+Run `python scripts/internal/zlib_status.py` to refresh.  A
+`build/orig/bulanci/zlib.obj` baseline is required for the right
+column; regenerate it via `python scripts/export_ghidra_objs.py` (close
+the Ghidra GUI first) after any rename / mapping change.
+
+| RVA          | C source-level name              | COFF symbol                       | Status                                       |
+|--------------|----------------------------------|-----------------------------------|----------------------------------------------|
+| `0x0046ef60` | `inflateInit_`                   | `zlib::inflateInit`               | **EXACT** (26 / 26 bytes) -- real zlib body  |
+| `0x004704c0` | `deflateInit_`                   | `zlib::deflateInit`               | **EXACT** (37 / 37 bytes) -- real zlib body  |
+| `0x00471260` | `zcalloc`                        | `zlib::zcalloc`                   | **EXACT** (19 / 19 bytes) -- real zlib body  |
+| `0x004733d0` | `inflate_codes_free`             | `zlib::inflate_codes_free`        | **EXACT** (22 / 22 bytes) -- real zlib body  |
+| `0x00434e30` | `CDSGZipStream::Decompress`      | `_Globals::FUN_00434e30`          | length match (170 / 170); 33 bytes differ    |
+| `0x00434ee0` | `CDSGZipStream::Compress`        | `_Globals::FUN_00434ee0`          | length match (172 / 172); 33 bytes differ    |
+| `0x0046ee10` | `inflateEnd`                     | `zlib::inflateEnd`                | opacity-barrier stub (real body needed)      |
+| `0x0046ee60` | `inflateInit2_`                  | `zlib::inflateInit2`              | opacity-barrier stub                         |
+| `0x0046ef80` | `inflate`                        | `zlib::inflate`                   | opacity-barrier stub                         |
+| `0x0046f3e0` | `deflate`                        | `zlib::deflate`                   | opacity-barrier stub                         |
+| `0x0046f660` | `deflateEnd`                     | `zlib::deflateEnd`                | opacity-barrier stub                         |
+| `0x004702c0` | `deflateInit2_`                  | `zlib::deflateInit2`              | opacity-barrier stub                         |
+| `0x0046edc0` | `inflateReset`                   | `zlib::inflateReset`              | `STUB_BODY()` (3 bytes)                      |
+| `0x004704f0` | `inflate_blocks_reset`           | `zlib::inflate_blocks_reset`      | `STUB_BODY()` (3 bytes)                      |
+| `0x00470570` | `inflate_blocks_new`             | `zlib::inflate_blocks_new`        | `STUB_BODY()` (3 bytes)                      |
+| `0x00470620` | `inflate_blocks`                 | `zlib::inflate_blocks`            | `STUB_BODY()` (3 bytes)                      |
+| `0x004710e0` | `inflate_blocks_free`            | `zlib::inflate_blocks_free`       | `STUB_BODY()` (3 bytes)                      |
+| `0x00471290` | `init_block` (trees.c)           | `zlib::init_block`                | `STUB_BODY()` (5 bytes, __fastcall)          |
+
+#### Zlib helper inventory (0x46d000-0x474000)
+
+The address range `0x46d000-0x474000` contains ~50 statically-linked zlib
+1.1.3 helpers.  These are the ones identified so far via Ghidra call-graph
++ string xrefs + body shape; the rest still need identification.
+
+| RVA          | Likely zlib name             | Confidence  | How identified                              |
+|--------------|------------------------------|-------------|---------------------------------------------|
+| `0x0046edc0` | `inflateReset`               | high        | caller of `inflate_blocks_reset`            |
+| `0x0046ee10` | `inflateEnd`                 | confirmed   | callee of `Decompress` cleanup              |
+| `0x0046ee60` | `inflateInit2_`              | confirmed   | called by `inflateInit_` wrapper            |
+| `0x0046ef60` | `inflateInit_`               | confirmed   | DEF_WBITS=15 wrapper                        |
+| `0x0046ef80` | `inflate`                    | confirmed   | xrefs zlib state-machine error strings      |
+| `0x0046f3e0` | `deflate`                    | confirmed   | called by `Compress` engine                 |
+| `0x0046f660` | `deflateEnd`                 | confirmed   | callee of `Compress` cleanup                |
+| `0x004702c0` | `deflateInit2_`              | confirmed   | called by `deflateInit_` wrapper            |
+| `0x004704c0` | `deflateInit_`               | confirmed   | level-9 hardcoded wrapper                   |
+| `0x004704f0` | `inflate_blocks_reset`       | high        | called from `inflate` BLOCKS state          |
+| `0x00470570` | `inflate_blocks_new`         | high        | called from `inflateInit2_`                 |
+| `0x00470620` | `inflate_blocks`             | high        | 2683-byte state machine + zlib err strings  |
+| `0x004710e0` | `inflate_blocks_free`        | high        | called from `inflateEnd`                    |
+| `0x00471260` | `zcalloc`                    | confirmed   | matched: `calloc(items, size)` byte-exact   |
+| `0x00471290` | `init_block` (trees.c)       | high        | 286/30/19 loop counts = L/D/BL_CODES        |
+| `0x004733d0` | `inflate_codes_free`         | confirmed   | matched: `ZFREE(z, c)` byte-exact           |
+
+Remaining helpers (`huft_build`, `inflate_codes` state machine,
+`inflate_fast`, `inflate_trees_*`, `_tr_init`, `_tr_flush_block`,
+`compress_block`, `send_tree`, `build_tree`, `deflate_fast`,
+`deflate_slow`, `lm_init`, `longest_match`, `adler32`, `crc32`, `zcfree`,
+`zmemcpy/set/cmp`, `zError`) still need identification.  See
+`scripts/internal/zlib_status.py` and `zlib_dump_pair.py` for byte-diff
+tooling.
 
 #### Why the engine helpers don't byte-match
 

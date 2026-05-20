@@ -8,22 +8,10 @@
  * pointers so a struct forward-decl is enough. */
 struct EHExceptionRecord;
 struct EHRegistrationNode;
-struct HKEY__;
-struct HWND__;
-struct TranslatorGuardRN;
 struct _CONTEXT;
 struct _CRT_DOUBLE;
 struct _CRT_FLOAT;
 struct _LDBL12;
-struct _RTL_CRITICAL_SECTION;
-struct _func_void_void_ptr;
-struct _s_CatchableType;
-struct _s_ESTypeList;
-struct _s_FuncInfo;
-struct _s_HandlerType;
-struct _s_TryBlockMapEntry;
-struct localeinfo_struct;
-struct threadmbcinfostruct;
 
 class _Globals {
 public:
@@ -46,10 +34,10 @@ public:
 	/* 4011B0 */ uint* FUN_004011b0(int* param_1);
 	// !DECL 0x004011b0 END
 	// !DECL 0x004011d0 BEGIN
-	/* 4011D0 */ uchar FUN_004011d0(_RTL_CRITICAL_SECTION* param_1);
+	/* 4011D0 */ uchar FUN_004011d0(LPCRITICAL_SECTION param_1);
 	// !DECL 0x004011d0 END
 	// !DECL 0x00401290 BEGIN
-	/* 401290 */ uchar FUN_00401290(CHAR* param_1, int param_2);
+	/* 401290 */ uchar FUN_00401290(int param_1, int param_2);
 	// !DECL 0x00401290 END
 	// !DECL 0x00401340 BEGIN
 	/* 401340 */ uchar FUN_00401340(int* param_1);
@@ -82,10 +70,10 @@ public:
 	/* 402290 */ uchar FUN_00402290(int param_1);
 	// !DECL 0x00402290 END
 	// !DECL 0x00402680 BEGIN
-	/* 402680 */ uint FUN_00402680(uint param_1, uint param_2, CHAR* param_3);
+	/* 402680 */ uint WinMain(uint param_1, uint param_2, int param_3);
 	// !DECL 0x00402680 END
 	// !DECL 0x00402a90 BEGIN
-	/* 402A90 */ uint* CreateObject();
+	/* 402A90 */ uint* CBulanci_CreateObject();
 	// !DECL 0x00402a90 END
 	// !DECL 0x00402e20 BEGIN
 	/* 402E20 */ uchar FUN_00402e20(uint* param_1);
@@ -112,7 +100,7 @@ public:
 	/* 4045D0 */ uchar FUN_004045d0(uint* param_1);
 	// !DECL 0x004045d0 END
 	// !DECL 0x004045f0 BEGIN
-	/* 4045F0 */ uchar FUN_004045f0(WCHAR* param_1, int param_2);
+	/* 4045F0 */ uchar FUN_004045f0(int param_1, int param_2);
 	// !DECL 0x004045f0 END
 	// !DECL 0x004046c0 BEGIN
 	/* 4046C0 */ uchar FUN_004046c0(int param_1, int param_2);
@@ -127,7 +115,7 @@ public:
 	/* 404890 */ uchar FUN_00404890(uint* param_1);
 	// !DECL 0x00404890 END
 	// !DECL 0x00404be0 BEGIN
-	/* 404BE0 */ uint* CreateObject_00404be0();
+	/* 404BE0 */ uint* CreateObject();
 	// !DECL 0x00404be0 END
 	// !DECL 0x00404f70 BEGIN
 	/* 404F70 */ int FUN_00404f70(int param_1);
@@ -181,13 +169,13 @@ public:
 	/* 407020 */ uchar FUN_00407020(void* param_1);
 	// !DECL 0x00407020 END
 	// !DECL 0x004070c0 BEGIN
-	/* 4070C0 */ uint FUN_004070c0(WCHAR* param_1, char param_2);
+	/* 4070C0 */ uint FUN_004070c0(int param_1, char param_2);
 	// !DECL 0x004070c0 END
 	// !DECL 0x004072b0 BEGIN
 	/* 4072B0 */ int FUN_004072b0(uint param_1, int param_2);
 	// !DECL 0x004072b0 END
 	// !DECL 0x004075f0 BEGIN
-	/* 4075F0 */ uchar FUN_004075f0(WCHAR* param_1, uint param_2);
+	/* 4075F0 */ uchar FUN_004075f0(int param_1, uint param_2);
 	// !DECL 0x004075f0 END
 	// !DECL 0x00407710 BEGIN
 	/* 407710 */ uchar FUN_00407710(uint param_1, int param_2);
@@ -217,7 +205,7 @@ public:
 	/* 409110 */ uchar FUN_00409110(int param_1);
 	// !DECL 0x00409110 END
 	// !DECL 0x00409510 BEGIN
-	/* 409510 */ uint* FUN_00409510(HKEY__* param_1, int param_2, uchar* param_3);
+	/* 409510 */ uint* FUN_00409510(int param_1, int param_2, uchar* param_3);
 	// !DECL 0x00409510 END
 	// !DECL 0x004095b0 BEGIN
 	/* 4095B0 */ uchar FUN_004095b0(int* param_1);
@@ -231,11 +219,8 @@ public:
 	// !DECL 0x0040a380 BEGIN
 	/* 40A380 */ uchar FUN_0040a380(uchar* param_1);
 	// !DECL 0x0040a380 END
-	// !DECL 0x0040a730 BEGIN
-	/* 40A730 */ static bool FID_conflict_operator(uchar* param_1, uchar* param_2);
-	// !DECL 0x0040a730 END
 	// !DECL 0x0040a7d0 BEGIN
-	/* 40A7D0 */ uchar FUN_0040a7d0(uint* param_1);
+	/* 40A7D0 */ uchar CDSAnim_CleanupBody(uint* param_1);
 	// !DECL 0x0040a7d0 END
 	// !DECL 0x0040ace0 BEGIN
 	/* 40ACE0 */ static int FUN_0040ace0(int param_1, int param_2);
@@ -304,10 +289,10 @@ public:
 	/* 412460 */ uchar FUN_00412460(int param_1);
 	// !DECL 0x00412460 END
 	// !DECL 0x00412490 BEGIN
-	/* 412490 */ uchar FUN_00412490(uchar param_1);
+	/* 412490 */ uchar GetMaxAmmoForKind(uchar param_1);
 	// !DECL 0x00412490 END
 	// !DECL 0x004124a0 BEGIN
-	/* 4124A0 */ uchar FUN_004124a0(uint param_1);
+	/* 4124A0 */ uchar CGame_NetSendKick_t0a(uint param_1);
 	// !DECL 0x004124a0 END
 	// !DECL 0x00412590 BEGIN
 	/* 412590 */ uint FUN_00412590(uchar param_1);
@@ -337,31 +322,31 @@ public:
 	/* 412930 */ uint FUN_00412930(uchar param_1);
 	// !DECL 0x00412930 END
 	// !DECL 0x00412950 BEGIN
-	/* 412950 */ uchar FUN_00412950(ushort* param_1);
+	/* 412950 */ uchar CGame_NetSendWorldEvent_t13(ushort* param_1);
 	// !DECL 0x00412950 END
 	// !DECL 0x00412990 BEGIN
-	/* 412990 */ uchar FUN_00412990(uchar param_1);
+	/* 412990 */ uchar CGame_NetSendPlayerEvent2_t14(uchar param_1);
 	// !DECL 0x00412990 END
 	// !DECL 0x00412a00 BEGIN
-	/* 412A00 */ uchar FUN_00412a00(ushort param_1);
+	/* 412A00 */ uchar CGame_NetSendRoundTimer_t12(ushort param_1);
 	// !DECL 0x00412a00 END
 	// !DECL 0x00412a80 BEGIN
-	/* 412A80 */ uchar FUN_00412a80(uchar param_1, uchar param_2, uchar param_3);
+	/* 412A80 */ uchar CGame_NetSendTriByteEvent_t19(uchar param_1, uchar param_2, uchar param_3);
 	// !DECL 0x00412a80 END
 	// !DECL 0x00412ac0 BEGIN
-	/* 412AC0 */ uchar FUN_00412ac0(uchar param_1, uchar param_2, ushort* param_3);
+	/* 412AC0 */ uchar CGame_NetSendPlaceObject_t18(uchar param_1, uchar param_2, ushort* param_3);
 	// !DECL 0x00412ac0 END
 	// !DECL 0x00412b60 BEGIN
-	/* 412B60 */ uchar FUN_00412b60(uchar param_1);
+	/* 412B60 */ uchar CGame_NetSendPlayerEvent1_t0e(uchar param_1);
 	// !DECL 0x00412b60 END
 	// !DECL 0x00412b90 BEGIN
-	/* 412B90 */ uchar FUN_00412b90(uchar param_1, uchar param_2, uchar param_3, ushort* param_4);
+	/* 412B90 */ uchar CGame_NetSendShotSpawn_t0f(uchar param_1, uchar param_2, uchar param_3, ushort* param_4);
 	// !DECL 0x00412b90 END
 	// !DECL 0x00412bf0 BEGIN
-	/* 412BF0 */ uchar FUN_00412bf0(uchar param_1, uchar param_2, ushort* param_3);
+	/* 412BF0 */ uchar CGame_NetSendHit_t10(uchar param_1, uchar param_2, ushort* param_3);
 	// !DECL 0x00412bf0 END
 	// !DECL 0x00412df0 BEGIN
-	/* 412DF0 */ uchar FUN_00412df0(int* param_1);
+	/* 412DF0 */ uchar CGame_NetSendCustomScriptPayload_t15(int* param_1);
 	// !DECL 0x00412df0 END
 	// !DECL 0x00412f40 BEGIN
 	/* 412F40 */ static uchar FUN_00412f40(void* param_1, void* param_2, int param_3);
@@ -391,7 +376,7 @@ public:
 	/* 413560 */ int FUN_00413560(int param_1);
 	// !DECL 0x00413560 END
 	// !DECL 0x004137b0 BEGIN
-	/* 4137B0 */ uchar FUN_004137b0(void* param_1);
+	/* 4137B0 */ uchar CMenu_ShowConnectingDialog(void* param_1);
 	// !DECL 0x004137b0 END
 	// !DECL 0x00413c50 BEGIN
 	/* 413C50 */ static uchar FUN_00413c50(uint* param_1, int param_2);
@@ -427,7 +412,7 @@ public:
 	/* 414910 */ uchar FUN_00414910(void* param_1);
 	// !DECL 0x00414910 END
 	// !DECL 0x00414920 BEGIN
-	/* 414920 */ int FUN_00414920(int param_1, uchar* param_2, uchar* param_3);
+	/* 414920 */ int CGame_LevelList_AddByName(int param_1, uchar* param_2, uchar* param_3);
 	// !DECL 0x00414920 END
 	// !DECL 0x00415ef0 BEGIN
 	/* 415EF0 */ uint* CreateObject_00415ef0();
@@ -463,7 +448,7 @@ public:
 	/* 4167E0 */ uchar FUN_004167e0(int param_1, char param_2);
 	// !DECL 0x004167e0 END
 	// !DECL 0x004168d0 BEGIN
-	/* 4168D0 */ uint FUN_004168d0(uchar param_1);
+	/* 4168D0 */ uint CGaming_GetObjectAtSlotUnchecked(uchar param_1);
 	// !DECL 0x004168d0 END
 	// !DECL 0x00416970 BEGIN
 	/* 416970 */ int FUN_00416970(int param_1);
@@ -505,7 +490,7 @@ public:
 	/* 417500 */ uchar FUN_00417500(void* param_1);
 	// !DECL 0x00417500 END
 	// !DECL 0x00417950 BEGIN
-	/* 417950 */ static uchar FUN_00417950(int param_1, uchar param_2, int* param_3);
+	/* 417950 */ static void FUN_00417950(int param_1, uchar param_2, int* param_3);
 	// !DECL 0x00417950 END
 	// !DECL 0x004179c0 BEGIN
 	/* 4179C0 */ static uchar FUN_004179c0(uchar param_1, int* param_2);
@@ -526,7 +511,7 @@ public:
 	/* 417E80 */ uchar FUN_00417e80(uchar param_1, uchar param_2, uchar param_3, int* param_4, char param_5);
 	// !DECL 0x00417e80 END
 	// !DECL 0x00417fb0 BEGIN
-	/* 417FB0 */ uchar FUN_00417fb0(int param_1, uchar param_2);
+	/* 417FB0 */ uchar CGaming_RegisterObjectAtSlot(int param_1, uchar param_2);
 	// !DECL 0x00417fb0 END
 	// !DECL 0x00418000 BEGIN
 	/* 418000 */ uchar FUN_00418000(uchar param_1, int param_2);
@@ -652,7 +637,7 @@ public:
 	/* 41BF80 */ uchar FUN_0041bf80(int* param_1);
 	// !DECL 0x0041bf80 END
 	// !DECL 0x0041d240 BEGIN
-	/* 41D240 */ uint FUN_0041d240(uint param_1, uint param_2);
+	/* 41D240 */ uint CGame_SpawnPickupObject(uint param_1, uint param_2);
 	// !DECL 0x0041d240 END
 	// !DECL 0x0041d3c6 BEGIN
 	/* 41D3C6 */ uchar* Catch_0041d3c6();
@@ -676,25 +661,25 @@ public:
 	/* 41DD70 */ uchar FUN_0041dd70(int param_1, void* param_2);
 	// !DECL 0x0041dd70 END
 	// !DECL 0x0041e070 BEGIN
-	/* 41E070 */ uchar* FUN_0041e070(int* param_1);
+	/* 41E070 */ uchar* ExplodeMine(int* param_1);
 	// !DECL 0x0041e070 END
 	// !DECL 0x0041e2c0 BEGIN
-	/* 41E2C0 */ uchar FUN_0041e2c0(uint param_1);
+	/* 41E2C0 */ uchar CGaming_SpawnPickupAndBroadcast(uint param_1);
 	// !DECL 0x0041e2c0 END
 	// !DECL 0x0041e3e0 BEGIN
 	/* 41E3E0 */ static uint FUN_0041e3e0(int param_1);
 	// !DECL 0x0041e3e0 END
 	// !DECL 0x0041eba0 BEGIN
-	/* 41EBA0 */ uchar FUN_0041eba0(uchar param_1, uchar param_2);
+	/* 41EBA0 */ uchar CGame_ApplyPickup(uchar param_1, uchar param_2);
 	// !DECL 0x0041eba0 END
 	// !DECL 0x0041ed60 BEGIN
-	/* 41ED60 */ uchar FUN_0041ed60(int param_1);
+	/* 41ED60 */ uchar DetonatePlayerMines(int param_1);
 	// !DECL 0x0041ed60 END
 	// !DECL 0x0041f0c0 BEGIN
 	/* 41F0C0 */ uchar FUN_0041f0c0(int* param_1);
 	// !DECL 0x0041f0c0 END
 	// !DECL 0x0041f1d0 BEGIN
-	/* 41F1D0 */ uchar FUN_0041f1d0(char param_1);
+	/* 41F1D0 */ uchar CGaming_SpawnSpecialPickupIfAllowed(char param_1);
 	// !DECL 0x0041f1d0 END
 	// !DECL 0x0041f230 BEGIN
 	/* 41F230 */ uchar FUN_0041f230(int* param_1, uchar param_2, uchar param_3, uchar param_4, int* param_5, int param_6);
@@ -736,35 +721,17 @@ public:
 	/* 4205A0 */ uchar FUN_004205a0(void* param_1);
 	// !DECL 0x004205a0 END
 	// !DECL 0x00420650 BEGIN
-	/* 420650 */ uchar FUN_00420650(void* param_1);
+	/* 420650 */ uchar CBulanek_DispatchCurrentWeaponAction(void* param_1);
 	// !DECL 0x00420650 END
 	// !DECL 0x004208c0 BEGIN
-	/* 4208C0 */ uchar FUN_004208c0(int param_1);
+	/* 4208C0 */ uchar CBulanek_TriggerPrimaryActionAndBroadcast(int param_1);
 	// !DECL 0x004208c0 END
-	// !DECL 0x004215c0 BEGIN
-	/* 4215C0 */ static uint FUN_004215c0(int param_1);
-	// !DECL 0x004215c0 END
-	// !DECL 0x00421750 BEGIN
-	/* 421750 */ static uchar FUN_00421750(int param_1);
-	// !DECL 0x00421750 END
 	// !DECL 0x00421830 BEGIN
 	/* 421830 */ uint* CreateObject_00421830();
 	// !DECL 0x00421830 END
-	// !DECL 0x00421940 BEGIN
-	/* 421940 */ static uchar FUN_00421940(int param_1);
-	// !DECL 0x00421940 END
-	// !DECL 0x00421a00 BEGIN
-	/* 421A00 */ static uchar FUN_00421a00(int param_1);
-	// !DECL 0x00421a00 END
-	// !DECL 0x00421af0 BEGIN
-	/* 421AF0 */ static uchar FUN_00421af0(int param_1);
-	// !DECL 0x00421af0 END
 	// !DECL 0x00421ba0 BEGIN
 	/* 421BA0 */ uint* CreateObject_00421ba0();
 	// !DECL 0x00421ba0 END
-	// !DECL 0x004221a0 BEGIN
-	/* 4221A0 */ static uint* FUN_004221a0(int param_1);
-	// !DECL 0x004221a0 END
 	// !DECL 0x00422280 BEGIN
 	/* 422280 */ uint* CreateObject_00422280();
 	// !DECL 0x00422280 END
@@ -786,32 +753,17 @@ public:
 	// !DECL 0x00422620 BEGIN
 	/* 422620 */ uchar FUN_00422620(uint param_1);
 	// !DECL 0x00422620 END
-	// !DECL 0x00422810 BEGIN
-	/* 422810 */ static int FUN_00422810(int param_1);
-	// !DECL 0x00422810 END
 	// !DECL 0x004229b0 BEGIN
 	/* 4229B0 */ uint* CreateObject_004229b0();
 	// !DECL 0x004229b0 END
-	// !DECL 0x00422b00 BEGIN
-	/* 422B00 */ static uchar FUN_00422b00(int param_1);
-	// !DECL 0x00422b00 END
-	// !DECL 0x00422bc0 BEGIN
-	/* 422BC0 */ static uchar FUN_00422bc0(int param_1);
-	// !DECL 0x00422bc0 END
 	// !DECL 0x00422f00 BEGIN
 	/* 422F00 */ uint* CreateObject_00422f00();
 	// !DECL 0x00422f00 END
-	// !DECL 0x00423530 BEGIN
-	/* 423530 */ static uint* FUN_00423530(int param_1);
-	// !DECL 0x00423530 END
 	// !DECL 0x00423610 BEGIN
 	/* 423610 */ uint* CreateObject_00423610();
 	// !DECL 0x00423610 END
-	// !DECL 0x00423820 BEGIN
-	/* 423820 */ static uint FUN_00423820(int param_1);
-	// !DECL 0x00423820 END
 	// !DECL 0x00423f20 BEGIN
-	/* 423F20 */ uchar FUN_00423f20(int param_1);
+	/* 423F20 */ uchar CSwitch_PlayHoverTrack(int param_1);
 	// !DECL 0x00423f20 END
 	// !DECL 0x00424010 BEGIN
 	/* 424010 */ uchar FUN_00424010(char param_1);
@@ -823,7 +775,7 @@ public:
 	/* 424430 */ int* CreateObject_00424430();
 	// !DECL 0x00424430 END
 	// !DECL 0x00424d30 BEGIN
-	/* 424D30 */ uchar FUN_00424d30(int param_1);
+	/* 424D30 */ uchar Button_Click(int param_1);
 	// !DECL 0x00424d30 END
 	// !DECL 0x00425060 BEGIN
 	/* 425060 */ uchar FUN_00425060(int param_1);
@@ -835,7 +787,7 @@ public:
 	/* 425160 */ uint* CreateObject_00425160();
 	// !DECL 0x00425160 END
 	// !DECL 0x004251d0 BEGIN
-	/* 4251D0 */ uint* CreateObject_004251d0();
+	/* 4251D0 */ uint* CMenu_CreateObject();
 	// !DECL 0x004251d0 END
 	// !DECL 0x00425450 BEGIN
 	/* 425450 */ uchar FUN_00425450(void* param_1);
@@ -901,13 +853,13 @@ public:
 	/* 429BD0 */ uint FUN_00429bd0(int param_1);
 	// !DECL 0x00429bd0 END
 	// !DECL 0x00429c00 BEGIN
-	/* 429C00 */ int FUN_00429c00(HWND__* param_1, int param_2, int param_3, int param_4);
+	/* 429C00 */ int CDSApp_WndProc(HWND param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x00429c00 END
 	// !DECL 0x00429c8d BEGIN
 	/* 429C8D */ uint Catch_00429c8d();
 	// !DECL 0x00429c8d END
 	// !DECL 0x00429cc0 BEGIN
-	/* 429CC0 */ uchar FUN_00429cc0(ushort param_1, uchar param_2, uchar param_3);
+	/* 429CC0 */ uchar CDSApp_KeybQueue(ushort param_1, uchar param_2, uchar param_3);
 	// !DECL 0x00429cc0 END
 	// !DECL 0x0042a040 BEGIN
 	/* 42A040 */ static uchar FUN_0042a040(uint* param_1, int param_2);
@@ -934,7 +886,7 @@ public:
 	/* 42A9C0 */ uchar FUN_0042a9c0(int param_1, uint param_2);
 	// !DECL 0x0042a9c0 END
 	// !DECL 0x0042aa60 BEGIN
-	/* 42AA60 */ static uint FUN_0042aa60(uint param_1, uint param_2, int param_3);
+	/* 42AA60 */ static uint CDSApp_AppMain(uint param_1, uint param_2, int param_3);
 	// !DECL 0x0042aa60 END
 	// !DECL 0x0042ab28 BEGIN
 	/* 42AB28 */ uchar Catch_0042ab28();
@@ -970,16 +922,16 @@ public:
 	/* 42BBE0 */ uchar FUN_0042bbe0(int param_1);
 	// !DECL 0x0042bbe0 END
 	// !DECL 0x0042bc00 BEGIN
-	/* 42BC00 */ uchar FUN_0042bc00(int* param_1);
+	/* 42BC00 */ uchar CDSApp_RenderFrame(int* param_1);
 	// !DECL 0x0042bc00 END
 	// !DECL 0x0042bda0 BEGIN
-	/* 42BDA0 */ uchar FUN_0042bda0(int* param_1);
+	/* 42BDA0 */ uchar CDSApp_FrameBody(int* param_1);
 	// !DECL 0x0042bda0 END
 	// !DECL 0x0042be60 BEGIN
-	/* 42BE60 */ uchar FUN_0042be60(int* param_1);
+	/* 42BE60 */ uchar CDSApp_PumpTick(int* param_1);
 	// !DECL 0x0042be60 END
 	// !DECL 0x0042bed0 BEGIN
-	/* 42BED0 */ uchar FUN_0042bed0(uint param_1);
+	/* 42BED0 */ uchar CDSView_SetModalEligible(uint param_1);
 	// !DECL 0x0042bed0 END
 	// !DECL 0x0042bfc0 BEGIN
 	/* 42BFC0 */ uchar FUN_0042bfc0(void* param_1, int param_2);
@@ -997,7 +949,7 @@ public:
 	/* 42C230 */ uchar FUN_0042c230(int* param_1);
 	// !DECL 0x0042c230 END
 	// !DECL 0x0042c290 BEGIN
-	/* 42C290 */ uchar FUN_0042c290(uint param_1);
+	/* 42C290 */ uchar CDSView_SetActive(uint param_1);
 	// !DECL 0x0042c290 END
 	// !DECL 0x0042c3c0 BEGIN
 	/* 42C3C0 */ uchar FUN_0042c3c0(ushort param_1);
@@ -1018,7 +970,7 @@ public:
 	/* 42C880 */ uchar FUN_0042c880(int* param_1);
 	// !DECL 0x0042c880 END
 	// !DECL 0x0042c8e0 BEGIN
-	/* 42C8E0 */ uchar FUN_0042c8e0(int* param_1);
+	/* 42C8E0 */ uchar CDSView_AcquireKeyboardFocus(int* param_1);
 	// !DECL 0x0042c8e0 END
 	// !DECL 0x0042c960 BEGIN
 	/* 42C960 */ uchar FUN_0042c960(int* param_1);
@@ -1054,7 +1006,7 @@ public:
 	/* 42D0B0 */ uchar FUN_0042d0b0(int* param_1, int param_2);
 	// !DECL 0x0042d0b0 END
 	// !DECL 0x0042d1a0 BEGIN
-	/* 42D1A0 */ ushort FUN_0042d1a0(void* param_1);
+	/* 42D1A0 */ ushort CDSView_DoModal(void* param_1);
 	// !DECL 0x0042d1a0 END
 	// !DECL 0x0042d2d0 BEGIN
 	/* 42D2D0 */ uchar FUN_0042d2d0(void* param_1);
@@ -1090,7 +1042,7 @@ public:
 	/* 42D8A0 */ uchar FUN_0042d8a0(void* param_1);
 	// !DECL 0x0042d8a0 END
 	// !DECL 0x0042db60 BEGIN
-	/* 42DB60 */ uchar FUN_0042db60(WCHAR* param_1, int param_2);
+	/* 42DB60 */ uchar FUN_0042db60(int param_1, int param_2);
 	// !DECL 0x0042db60 END
 	// !DECL 0x0042dc50 BEGIN
 	/* 42DC50 */ int* FUN_0042dc50(int* param_1);
@@ -1105,7 +1057,7 @@ public:
 	/* 42E630 */ static uint FUN_0042e630(uint param_1);
 	// !DECL 0x0042e630 END
 	// !DECL 0x0042e790 BEGIN
-	/* 42E790 */ uchar FUN_0042e790();
+	/* 42E790 */ void CDSApp_UpdateClock();
 	// !DECL 0x0042e790 END
 	// !DECL 0x0042e7b0 BEGIN
 	/* 42E7B0 */ uchar FUN_0042e7b0(uint* param_1, uint param_2, uint param_3);
@@ -1114,7 +1066,7 @@ public:
 	/* 42E8F0 */ uchar FUN_0042e8f0(uint param_1);
 	// !DECL 0x0042e8f0 END
 	// !DECL 0x0042e910 BEGIN
-	/* 42E910 */ int* FUN_0042e910(int param_1, int param_2, int param_3);
+	/* 42E910 */ int* HandleClassRegister(int param_1, int param_2, int param_3);
 	// !DECL 0x0042e910 END
 	// !DECL 0x0042e960 BEGIN
 	/* 42E960 */ uint FUN_0042e960(int param_1);
@@ -1123,10 +1075,10 @@ public:
 	/* 42E980 */ uchar FUN_0042e980(int param_1, uint param_2, uint param_3);
 	// !DECL 0x0042e980 END
 	// !DECL 0x0042e9a0 BEGIN
-	/* 42E9A0 */ uint FUN_0042e9a0(int param_1);
+	/* 42E9A0 */ uint HandleVirtualBaseCast(int param_1);
 	// !DECL 0x0042e9a0 END
 	// !DECL 0x0042e9f0 BEGIN
-	/* 42E9F0 */ int FUN_0042e9f0(int param_1);
+	/* 42E9F0 */ int CheckedVirtualBaseCast(int param_1);
 	// !DECL 0x0042e9f0 END
 	// !DECL 0x0042ea40 BEGIN
 	/* 42EA40 */ static uchar FUN_0042ea40(int param_1, int param_2);
@@ -1135,16 +1087,16 @@ public:
 	/* 42EA80 */ uchar FUN_0042ea80(int* param_1);
 	// !DECL 0x0042ea80 END
 	// !DECL 0x0042eaa0 BEGIN
-	/* 42EAA0 */ bool FUN_0042eaa0(uint param_1);
+	/* 42EAA0 */ bool Scheduler_IsSlotLive(uint param_1);
 	// !DECL 0x0042eaa0 END
 	// !DECL 0x0042eb30 BEGIN
-	/* 42EB30 */ uchar FUN_0042eb30(int* param_1);
+	/* 42EB30 */ void Scheduler_DispatchDueEvents(int* param_1);
 	// !DECL 0x0042eb30 END
 	// !DECL 0x0042ebb0 BEGIN
-	/* 42EBB0 */ uchar FUN_0042ebb0(uint param_1);
+	/* 42EBB0 */ void Scheduler_EnsureCapacity(uint param_1);
 	// !DECL 0x0042ebb0 END
 	// !DECL 0x0042ebf0 BEGIN
-	/* 42EBF0 */ uchar FUN_0042ebf0();
+	/* 42EBF0 */ uchar CDSApp_PulseTasks();
 	// !DECL 0x0042ebf0 END
 	// !DECL 0x0042ec90 BEGIN
 	/* 42EC90 */ uint FUN_0042ec90(uint* param_1);
@@ -1168,19 +1120,19 @@ public:
 	/* 42EE40 */ uchar FUN_0042ee40(int param_1);
 	// !DECL 0x0042ee40 END
 	// !DECL 0x0042ef00 BEGIN
-	/* 42EF00 */ static uint FUN_0042ef00(WCHAR* param_1, uint param_2, int param_3);
+	/* 42EF00 */ static uint InitializeByClassId(int param_1, uint param_2, int param_3);
 	// !DECL 0x0042ef00 END
 	// !DECL 0x0042f1e0 BEGIN
-	/* 42F1E0 */ uint FUN_0042f1e0(uint param_1);
+	/* 42F1E0 */ void* Scheduler_GetEventSlot(uint param_1);
 	// !DECL 0x0042f1e0 END
 	// !DECL 0x0042f210 BEGIN
-	/* 42F210 */ uchar FUN_0042f210(uint param_1, uint param_2, uint param_3);
+	/* 42F210 */ void Scheduler_RegisterEventSlot(uint param_1, uint param_2, uint param_3);
 	// !DECL 0x0042f210 END
 	// !DECL 0x0042f290 BEGIN
-	/* 42F290 */ uchar FUN_0042f290(uint param_1, int param_2);
+	/* 42F290 */ void Scheduler_SetEventLastFireMs(uint param_1, int param_2);
 	// !DECL 0x0042f290 END
 	// !DECL 0x0042f2d0 BEGIN
-	/* 42F2D0 */ uchar FUN_0042f2d0(uint param_1, uint param_2);
+	/* 42F2D0 */ void Scheduler_SetEventDelayMs(uint param_1, uint param_2);
 	// !DECL 0x0042f2d0 END
 	// !DECL 0x0042f300 BEGIN
 	/* 42F300 */ uchar FUN_0042f300(uint param_1);
@@ -1192,10 +1144,10 @@ public:
 	/* 42F390 */ uint FUN_0042f390(ushort param_1, ushort param_2, uint param_3, uint param_4);
 	// !DECL 0x0042f390 END
 	// !DECL 0x0042f410 BEGIN
-	/* 42F410 */ uint FUN_0042f410();
+	/* 42F410 */ uint CDSApp_PollEventQueue();
 	// !DECL 0x0042f410 END
 	// !DECL 0x0042f460 BEGIN
-	/* 42F460 */ uchar FUN_0042f460();
+	/* 42F460 */ uchar CDSApp_DispatchOneEvent();
 	// !DECL 0x0042f460 END
 	// !DECL 0x0042f590 BEGIN
 	/* 42F590 */ static uint FUN_0042f590(void* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5);
@@ -1216,10 +1168,10 @@ public:
 	/* 42F690 */ uchar FUN_0042f690(int param_1);
 	// !DECL 0x0042f690 END
 	// !DECL 0x0042f6f0 BEGIN
-	/* 42F6F0 */ void* FUN_0042f6f0(uchar* param_1);
+	/* 42F6F0 */ void* Runtime_MallocOrThrow(uchar* param_1);
 	// !DECL 0x0042f6f0 END
 	// !DECL 0x0042f720 BEGIN
-	/* 42F720 */ uchar FUN_0042f720(void* param_1);
+	/* 42F720 */ void Runtime_Free(void* param_1);
 	// !DECL 0x0042f720 END
 	// !DECL 0x0042f730 BEGIN
 	/* 42F730 */ void* FUN_0042f730(void* param_1, uchar* param_2);
@@ -1267,10 +1219,10 @@ public:
 	/* 42FDF0 */ uchar FUN_0042fdf0(int* param_1, uint param_2, int param_3, uchar* param_4, uint param_5);
 	// !DECL 0x0042fdf0 END
 	// !DECL 0x00430270 BEGIN
-	/* 430270 */ uchar FUN_00430270(uint param_1, int* param_2);
+	/* 430270 */ static void RaiseStreamException(uint param_1, int* param_2);
 	// !DECL 0x00430270 END
 	// !DECL 0x004302e0 BEGIN
-	/* 4302E0 */ uchar FUN_004302e0(uint param_1, int* param_2, uint param_3);
+	/* 4302E0 */ static void ThrowStreamErrorNoReturn(uint param_1, int* param_2, uint param_3);
 	// !DECL 0x004302e0 END
 	// !DECL 0x00430a70 BEGIN
 	/* 430A70 */ uchar FUN_00430a70(int param_1);
@@ -1360,10 +1312,10 @@ public:
 	/* 4344D0 */ uint* CreateObject_004344d0();
 	// !DECL 0x004344d0 END
 	// !DECL 0x00434930 BEGIN
-	/* 434930 */ uint* CreateObject_00434930();
+	/* 434930 */ uint* InitializeAndAllocate();
 	// !DECL 0x00434930 END
 	// !DECL 0x004349e0 BEGIN
-	/* 4349E0 */ uchar FUN_004349e0(uchar* param_1);
+	/* 4349E0 */ void Runtime_ThrowBadAlloc(uchar* param_1);
 	// !DECL 0x004349e0 END
 	// !DECL 0x00434bd0 BEGIN
 	/* 434BD0 */ static uint* FUN_00434bd0(uint* param_1, DWORD param_2);
@@ -1423,10 +1375,10 @@ public:
 	/* 435FB0 */ static uchar FUN_00435fb0(int param_1, int param_2, uint param_3, int param_4, int param_5);
 	// !DECL 0x00435fb0 END
 	// !DECL 0x004360d0 BEGIN
-	/* 4360D0 */ int FUN_004360d0(int param_1);
+	/* 4360D0 */ int GetPaletteBuffer(int param_1);
 	// !DECL 0x004360d0 END
 	// !DECL 0x004360f0 BEGIN
-	/* 4360F0 */ int FUN_004360f0(int param_1);
+	/* 4360F0 */ int GetColorPlane(int param_1);
 	// !DECL 0x004360f0 END
 	// !DECL 0x00436750 BEGIN
 	/* 436750 */ uchar FUN_00436750(int param_1);
@@ -1441,10 +1393,10 @@ public:
 	/* 436D90 */ uchar FUN_00436d90(int param_1);
 	// !DECL 0x00436d90 END
 	// !DECL 0x00436e40 BEGIN
-	/* 436E40 */ uchar FUN_00436e40(uint param_1, uint param_2);
+	/* 436E40 */ uchar NotifyDirtyRect(uint param_1, uint param_2);
 	// !DECL 0x00436e40 END
 	// !DECL 0x00436ef0 BEGIN
-	/* 436EF0 */ uchar FUN_00436ef0(uint param_1);
+	/* 436EF0 */ void BroadcastFrameTimeHint(uint param_1);
 	// !DECL 0x00436ef0 END
 	// !DECL 0x00436f20 BEGIN
 	/* 436F20 */ uchar FUN_00436f20(uint* param_1);
@@ -1456,7 +1408,7 @@ public:
 	/* 437030 */ uchar FUN_00437030(void* param_1);
 	// !DECL 0x00437030 END
 	// !DECL 0x00437080 BEGIN
-	/* 437080 */ uchar FUN_00437080(void* param_1);
+	/* 437080 */ uchar NotifyDirtyAll(void* param_1);
 	// !DECL 0x00437080 END
 	// !DECL 0x004370b0 BEGIN
 	/* 4370B0 */ uchar FUN_004370b0(uint param_1);
@@ -1468,10 +1420,10 @@ public:
 	/* 437370 */ uchar FUN_00437370(uchar param_1, void* param_2, int* param_3, int param_4, uchar* param_5, uint* param_6);
 	// !DECL 0x00437370 END
 	// !DECL 0x00437440 BEGIN
-	/* 437440 */ uchar FUN_00437440(WCHAR* param_1, int param_2);
+	/* 437440 */ uchar FUN_00437440(int param_1, int param_2);
 	// !DECL 0x00437440 END
 	// !DECL 0x004375e0 BEGIN
-	/* 4375E0 */ uchar FUN_004375e0(WCHAR* param_1, uint* param_2, void* param_3, uint* param_4);
+	/* 4375E0 */ uchar TextShaper_LayOutAndRender(int param_1, uint* param_2, void* param_3, uint* param_4);
 	// !DECL 0x004375e0 END
 	// !DECL 0x00437b00 BEGIN
 	/* 437B00 */ uchar FUN_00437b00(uint* param_1);
@@ -1480,7 +1432,7 @@ public:
 	/* 437CD0 */ uchar FUN_00437cd0(uint param_1);
 	// !DECL 0x00437cd0 END
 	// !DECL 0x00437d60 BEGIN
-	/* 437D60 */ uchar FUN_00437d60(HKEY__* param_1, WCHAR* param_2, int param_3);
+	/* 437D60 */ uchar FUN_00437d60(int param_1, int param_2, int param_3);
 	// !DECL 0x00437d60 END
 	// !DECL 0x00437ed0 BEGIN
 	/* 437ED0 */ uchar FUN_00437ed0(uint param_1, uint param_2);
@@ -1494,24 +1446,9 @@ public:
 	// !DECL 0x004382f0 BEGIN
 	/* 4382F0 */ uchar FUN_004382f0(int param_1, uint param_2);
 	// !DECL 0x004382f0 END
-	// !DECL 0x00438310 BEGIN
-	/* 438310 */ uchar FUN_00438310(int param_1, void* param_2, int param_3);
-	// !DECL 0x00438310 END
-	// !DECL 0x00438350 BEGIN
-	/* 438350 */ uint FUN_00438350(int param_1);
-	// !DECL 0x00438350 END
-	// !DECL 0x00438360 BEGIN
-	/* 438360 */ ushort FUN_00438360(int param_1);
-	// !DECL 0x00438360 END
-	// !DECL 0x00438380 BEGIN
-	/* 438380 */ uint FUN_00438380(int param_1);
-	// !DECL 0x00438380 END
 	// !DECL 0x004384a0 BEGIN
 	/* 4384A0 */ static uchar FUN_004384a0(void* param_1);
 	// !DECL 0x004384a0 END
-	// !DECL 0x004384c0 BEGIN
-	/* 4384C0 */ uchar FUN_004384c0(int param_1);
-	// !DECL 0x004384c0 END
 	// !DECL 0x004388a0 BEGIN
 	/* 4388A0 */ static ushort FUN_004388a0(int param_1);
 	// !DECL 0x004388a0 END
@@ -1530,9 +1467,6 @@ public:
 	// !DECL 0x00438bef BEGIN
 	/* 438BEF */ uchar Catch_00438bef();
 	// !DECL 0x00438bef END
-	// !DECL 0x00438c40 BEGIN
-	/* 438C40 */ uint FUN_00438c40(int param_1, int param_2, void* param_3);
-	// !DECL 0x00438c40 END
 	// !DECL 0x00438cb0 BEGIN
 	/* 438CB0 */ static int FUN_00438cb0(int param_1);
 	// !DECL 0x00438cb0 END
@@ -1546,34 +1480,34 @@ public:
 	/* 438D50 */ static int FUN_00438d50(int param_1);
 	// !DECL 0x00438d50 END
 	// !DECL 0x00438f90 BEGIN
-	/* 438F90 */ uchar FUN_00438f90(int* param_1);
+	/* 438F90 */ uchar TM_BindSequence(int* param_1);
 	// !DECL 0x00438f90 END
 	// !DECL 0x00438fb0 BEGIN
-	/* 438FB0 */ uchar FUN_00438fb0(int param_1);
+	/* 438FB0 */ uchar TM_RewindCurrent(int param_1);
 	// !DECL 0x00438fb0 END
 	// !DECL 0x00438fd0 BEGIN
 	/* 438FD0 */ uchar FUN_00438fd0(uint param_1);
 	// !DECL 0x00438fd0 END
 	// !DECL 0x00438fe0 BEGIN
-	/* 438FE0 */ uchar FUN_00438fe0(char param_1);
+	/* 438FE0 */ uchar TM_RenderFrame(char param_1);
 	// !DECL 0x00438fe0 END
 	// !DECL 0x00439080 BEGIN
-	/* 439080 */ uchar FUN_00439080(int param_1);
+	/* 439080 */ uchar TM_TickBlit(int param_1);
 	// !DECL 0x00439080 END
 	// !DECL 0x00439100 BEGIN
-	/* 439100 */ uchar FUN_00439100(int* param_1);
+	/* 439100 */ uchar TM_SetCurrentSequence(int* param_1);
 	// !DECL 0x00439100 END
 	// !DECL 0x004391e0 BEGIN
-	/* 4391E0 */ uchar FUN_004391e0(int param_1, int param_2, uint* param_3);
+	/* 4391E0 */ uchar TM_SetTrack(int param_1, int param_2, uint* param_3);
 	// !DECL 0x004391e0 END
 	// !DECL 0x00439270 BEGIN
-	/* 439270 */ uchar FUN_00439270(void* param_1);
+	/* 439270 */ uchar AnimInner_Init(void* param_1);
 	// !DECL 0x00439270 END
 	// !DECL 0x004392e0 BEGIN
-	/* 4392E0 */ uchar FUN_004392e0(void* param_1);
+	/* 4392E0 */ uchar AnimInner_Teardown(void* param_1);
 	// !DECL 0x004392e0 END
 	// !DECL 0x00439350 BEGIN
-	/* 439350 */ void* FUN_00439350(int* param_1, int param_2);
+	/* 439350 */ void* AnimInner_InitParam(int* param_1, int param_2);
 	// !DECL 0x00439350 END
 	// !DECL 0x00439610 BEGIN
 	/* 439610 */ uint* CreateObject_00439610();
@@ -1591,22 +1525,22 @@ public:
 	/* 4397E0 */ static uchar FUN_004397e0(uint* param_1, uint* param_2, int param_3);
 	// !DECL 0x004397e0 END
 	// !DECL 0x00439840 BEGIN
-	/* 439840 */ uchar FUN_00439840(int param_1);
+	/* 439840 */ uchar TM_PauseAndStampClock(int param_1);
 	// !DECL 0x00439840 END
 	// !DECL 0x004398b0 BEGIN
-	/* 4398B0 */ uchar FUN_004398b0(int param_1);
+	/* 4398B0 */ uchar TM_ClearTracks(int param_1);
 	// !DECL 0x004398b0 END
 	// !DECL 0x00439900 BEGIN
 	/* 439900 */ uchar FUN_00439900(uint param_1);
 	// !DECL 0x00439900 END
 	// !DECL 0x00439940 BEGIN
-	/* 439940 */ uchar FUN_00439940(uchar param_1);
+	/* 439940 */ uchar TM_Play(uchar param_1);
 	// !DECL 0x00439940 END
 	// !DECL 0x00439990 BEGIN
 	/* 439990 */ uint FUN_00439990(int param_1);
 	// !DECL 0x00439990 END
 	// !DECL 0x004399b0 BEGIN
-	/* 4399B0 */ uchar FUN_004399b0(int param_1);
+	/* 4399B0 */ void TM_AdvanceFrame(int param_1);
 	// !DECL 0x004399b0 END
 	// !DECL 0x00439a30 BEGIN
 	/* 439A30 */ uchar FUN_00439a30(int param_1);
@@ -1615,22 +1549,22 @@ public:
 	/* 439A70 */ int FUN_00439a70(uint* param_1, int param_2);
 	// !DECL 0x00439a70 END
 	// !DECL 0x00439b40 BEGIN
-	/* 439B40 */ uchar FUN_00439b40(int param_1);
+	/* 439B40 */ uchar BeginCurrentTrackPlayback(int param_1);
 	// !DECL 0x00439b40 END
 	// !DECL 0x00439bc0 BEGIN
 	/* 439BC0 */ uchar FUN_00439bc0(void* param_1);
 	// !DECL 0x00439bc0 END
 	// !DECL 0x00439bd0 BEGIN
-	/* 439BD0 */ int FUN_00439bd0(uint* param_1, uchar* param_2, int param_3);
+	/* 439BD0 */ int InsertOrFindTrack(uint* param_1, uchar* param_2, int param_3);
 	// !DECL 0x00439bd0 END
 	// !DECL 0x00439e00 BEGIN
-	/* 439E00 */ uchar FUN_00439e00(int* param_1);
+	/* 439E00 */ uchar AddTrackSource(int* param_1);
 	// !DECL 0x00439e00 END
 	// !DECL 0x00439e79 BEGIN
 	/* 439E79 */ uchar Catch_00439e79();
 	// !DECL 0x00439e79 END
 	// !DECL 0x00439eb0 BEGIN
-	/* 439EB0 */ uchar FUN_00439eb0(int param_1, char param_2);
+	/* 439EB0 */ uchar SetCurrentTrack(int param_1, char param_2);
 	// !DECL 0x00439eb0 END
 	// !DECL 0x00439f50 BEGIN
 	/* 439F50 */ uint* CreateObject_00439f50();
@@ -1639,7 +1573,7 @@ public:
 	/* 439FE0 */ uchar FUN_00439fe0(int param_1);
 	// !DECL 0x00439fe0 END
 	// !DECL 0x0043a000 BEGIN
-	/* 43A000 */ int FUN_0043a000(int param_1);
+	/* 43A000 */ int ComputeDurationMs(int param_1);
 	// !DECL 0x0043a000 END
 	// !DECL 0x0043a030 BEGIN
 	/* 43A030 */ uchar FUN_0043a030(uint param_1);
@@ -1675,10 +1609,10 @@ public:
 	/* 43AAE0 */ uchar FUN_0043aae0(int param_1);
 	// !DECL 0x0043aae0 END
 	// !DECL 0x0043abc0 BEGIN
-	/* 43ABC0 */ uchar FUN_0043abc0(int param_1);
+	/* 43ABC0 */ uchar CDSDirectPlaySender_Unbind(int param_1);
 	// !DECL 0x0043abc0 END
 	// !DECL 0x0043ace0 BEGIN
-	/* 43ACE0 */ uchar FUN_0043ace0(int param_1);
+	/* 43ACE0 */ uchar CDSDirectPlay_CloseSession(int param_1);
 	// !DECL 0x0043ace0 END
 	// !DECL 0x0043ad55 BEGIN
 	/* 43AD55 */ uchar FUN_0043ad55();
@@ -1687,7 +1621,7 @@ public:
 	/* 43ADE5 */ uchar Catch_0043ade5();
 	// !DECL 0x0043ade5 END
 	// !DECL 0x0043ae20 BEGIN
-	/* 43AE20 */ uchar FUN_0043ae20(int param_1);
+	/* 43AE20 */ uchar CDSDirectPlay_Shutdown(int param_1);
 	// !DECL 0x0043ae20 END
 	// !DECL 0x0043b200 BEGIN
 	/* 43B200 */ uint* CreateObject_0043b200();
@@ -1699,10 +1633,10 @@ public:
 	/* 43B590 */ uint* CreateObject_0043b590();
 	// !DECL 0x0043b590 END
 	// !DECL 0x0043b680 BEGIN
-	/* 43B680 */ uchar FUN_0043b680(void* param_1, uchar* param_2);
+	/* 43B680 */ uchar CDSDirectPlaySender_EnqueueSend(void* param_1, uchar* param_2);
 	// !DECL 0x0043b680 END
 	// !DECL 0x0043b6d0 BEGIN
-	/* 43B6D0 */ uchar FUN_0043b6d0(uint param_1, void* param_2, uchar* param_3);
+	/* 43B6D0 */ uchar CDSDirectPlay_Send(uint param_1, void* param_2, uchar* param_3);
 	// !DECL 0x0043b6d0 END
 	// !DECL 0x0043bc00 BEGIN
 	/* 43BC00 */ uchar FUN_0043bc00(int param_1);
@@ -1882,7 +1816,7 @@ public:
 	/* 43F3C0 */ static uchar FUN_0043f3c0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
 	// !DECL 0x0043f3c0 END
 	// !DECL 0x0043f470 BEGIN
-	/* 43F470 */ static uchar FUN_0043f470(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 43F470 */ static uchar BlitChromaKey(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x0043f470 END
 	// !DECL 0x0043f630 BEGIN
 	/* 43F630 */ static uchar FUN_0043f630(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
@@ -1945,7 +1879,7 @@ public:
 	/* 441390 */ static uchar FUN_00441390(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
 	// !DECL 0x00441390 END
 	// !DECL 0x004414e0 BEGIN
-	/* 4414E0 */ static uchar FUN_004414e0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 4414E0 */ static uchar BlitMasked(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x004414e0 END
 	// !DECL 0x004416a0 BEGIN
 	/* 4416A0 */ static uchar FUN_004416a0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
@@ -2100,35 +2034,23 @@ public:
 	// !DECL 0x004476c1 BEGIN
 	/* 4476C1 */ uchar FUN_004476c1();
 	// !DECL 0x004476c1 END
-	// !DECL 0x0044783e BEGIN
-	/* 44783E */ uchar FID_conflict_CallMemberFunction1(uint param_1, uchar* param_2);
-	// !DECL 0x0044783e END
 	// !DECL 0x00447897 BEGIN
 	/* 447897 */ static uint FID_conflict_CxxFrameHandler3(EHExceptionRecord* param_1, EHRegistrationNode* param_2, _CONTEXT* param_3, void* param_4);
 	// !DECL 0x00447897 END
-	// !DECL 0x004479d2 BEGIN
-	/* 4479D2 */ static int TranslatorGuardHandler(EHExceptionRecord* param_1, TranslatorGuardRN* param_2, void* param_3, void* param_4);
-	// !DECL 0x004479d2 END
 	// !DECL 0x00447c42 BEGIN
-	/* 447C42 */ static uchar FUN_00447c42(size_t param_1);
+	/* 447C42 */ static void* FUN_00447c42(size_t param_1);
 	// !DECL 0x00447c42 END
 	// !DECL 0x00447e6c BEGIN
 	/* 447E6C */ uchar FUN_00447e6c();
 	// !DECL 0x00447e6c END
-	// !DECL 0x00448657 BEGIN
-	/* 448657 */ void eh_vector_constructor_iterator(void* param_1, uint param_2, int param_3, _func_void_void_ptr* param_4, _func_void_void_ptr* param_5);
-	// !DECL 0x00448657 END
 	// !DECL 0x004486a4 BEGIN
 	/* 4486A4 */ uchar FUN_004486a4();
 	// !DECL 0x004486a4 END
-	// !DECL 0x0044871a BEGIN
-	/* 44871A */ void eh_vector_destructor_iterator(void* param_1, uint param_2, int param_3, _func_void_void_ptr* param_4);
-	// !DECL 0x0044871a END
 	// !DECL 0x00448765 BEGIN
 	/* 448765 */ uchar FUN_00448765();
 	// !DECL 0x00448765 END
 	// !DECL 0x004489d1 BEGIN
-	/* 4489D1 */ static errno_t FID_conflict_wcslwr_s_l(wchar_t* param_1, size_t param_2, localeinfo_struct* param_3);
+	/* 4489D1 */ static errno_t FID_conflict_wcslwr_s_l(wchar_t* param_1, size_t param_2, int param_3);
 	// !DECL 0x004489d1 END
 	// !DECL 0x00448a97 BEGIN
 	/* 448A97 */ static void FUN_00448a97();
@@ -2178,36 +2100,12 @@ public:
 	// !DECL 0x0044b1cf BEGIN
 	/* 44B1CF */ uchar FUN_0044b1cf();
 	// !DECL 0x0044b1cf END
-	// !DECL 0x0044b2a8 BEGIN
-	/* 44B2A8 */ static uchar IsInExceptionSpec(EHExceptionRecord* param_1, _s_ESTypeList* param_2);
-	// !DECL 0x0044b2a8 END
-	// !DECL 0x0044b321 BEGIN
-	/* 44B321 */ static void CallUnexpected(_s_ESTypeList* param_1);
-	// !DECL 0x0044b321 END
 	// !DECL 0x0044b352 BEGIN
 	/* 44B352 */ uchar Catch_All_0044b352();
 	// !DECL 0x0044b352 END
-	// !DECL 0x0044b36a BEGIN
-	/* 44B36A */ static void* CallCatchBlock(EHExceptionRecord* param_1, EHRegistrationNode* param_2, _CONTEXT* param_3, _s_FuncInfo* param_4, void* param_5, int param_6, ulong param_7);
-	// !DECL 0x0044b36a END
 	// !DECL 0x0044b490 BEGIN
 	/* 44B490 */ uchar FUN_0044b490();
 	// !DECL 0x0044b490 END
-	// !DECL 0x0044b716 BEGIN
-	/* 44B716 */ static void CatchIt(EHExceptionRecord* param_1, EHRegistrationNode* param_2, _CONTEXT* param_3, void* param_4, _s_FuncInfo* param_5, _s_HandlerType* param_6, _s_CatchableType* param_7, _s_TryBlockMapEntry* param_8, int param_9, EHRegistrationNode* param_10, uchar param_11);
-	// !DECL 0x0044b716 END
-	// !DECL 0x0044b782 BEGIN
-	/* 44B782 */ static void FindHandlerForForeignException(EHExceptionRecord* param_1, EHRegistrationNode* param_2, _CONTEXT* param_3, void* param_4, _s_FuncInfo* param_5, int param_6, int param_7, EHRegistrationNode* param_8);
-	// !DECL 0x0044b782 END
-	// !DECL 0x0044b874 BEGIN
-	/* 44B874 */ static void FindHandler(EHExceptionRecord* param_1, EHRegistrationNode* param_2, _CONTEXT* param_3, void* param_4, _s_FuncInfo* param_5, uchar param_6, int param_7, EHRegistrationNode* param_8);
-	// !DECL 0x0044b874 END
-	// !DECL 0x0044bcc6 BEGIN
-	/* 44BCC6 */ static void terminate();
-	// !DECL 0x0044bcc6 END
-	// !DECL 0x0044bcff BEGIN
-	/* 44BCFF */ static void unexpected();
-	// !DECL 0x0044bcff END
 	// !DECL 0x0044bfad BEGIN
 	/* 44BFAD */ static uchar fastzero_I(void* param_1, uint param_2);
 	// !DECL 0x0044bfad END
@@ -2229,21 +2127,9 @@ public:
 	// !DECL 0x0044c482 BEGIN
 	/* 44C482 */ static uchar FUN_0044c482(uint* param_1, uint* param_2, uint param_3);
 	// !DECL 0x0044c482 END
-	// !DECL 0x0044c5ec BEGIN
-	/* 44C5EC */ static int CPtoLCID(int param_1);
-	// !DECL 0x0044c5ec END
-	// !DECL 0x0044c61b BEGIN
-	/* 44C61B */ static void setSBCS(threadmbcinfostruct* param_1);
-	// !DECL 0x0044c61b END
-	// !DECL 0x0044c670 BEGIN
-	/* 44C670 */ static void setSBUpLow(threadmbcinfostruct* param_1);
-	// !DECL 0x0044c670 END
 	// !DECL 0x0044c895 BEGIN
 	/* 44C895 */ uchar FUN_0044c895();
 	// !DECL 0x0044c895 END
-	// !DECL 0x0044c89e BEGIN
-	/* 44C89E */ static int getSystemCP(int param_1);
-	// !DECL 0x0044c89e END
 	// !DECL 0x0044cc24 BEGIN
 	/* 44CC24 */ uchar FUN_0044cc24();
 	// !DECL 0x0044cc24 END
@@ -2284,14 +2170,11 @@ public:
 	/* 45011E */ static uchar FUN_0045011e(uint param_1);
 	// !DECL 0x0045011e END
 	// !DECL 0x004510db BEGIN
-	/* 4510DB */ static int FID_conflict_atoflt_l(_CRT_FLOAT* param_1, char* param_2, localeinfo_struct* param_3);
+	/* 4510DB */ static int FID_conflict_atoflt_l(_CRT_FLOAT* param_1, char* param_2, int param_3);
 	// !DECL 0x004510db END
 	// !DECL 0x00451181 BEGIN
-	/* 451181 */ static int FID_conflict_atoflt_l_00451181(_CRT_FLOAT* param_1, char* param_2, localeinfo_struct* param_3);
+	/* 451181 */ static int FID_conflict_atoflt_l_00451181(_CRT_FLOAT* param_1, char* param_2, int param_3);
 	// !DECL 0x00451181 END
-	// !DECL 0x004515a2 BEGIN
-	/* 4515A2 */ static int x_ismbbtype_l(localeinfo_struct* param_1, uint param_2, int param_3, int param_4);
-	// !DECL 0x004515a2 END
 	// !DECL 0x00451825 BEGIN
 	/* 451825 */ static int FID_conflict_ld12tod(_LDBL12* param_1, _CRT_DOUBLE* param_2);
 	// !DECL 0x00451825 END
@@ -2316,24 +2199,12 @@ public:
 	// !DECL 0x00454ad7 BEGIN
 	/* 454AD7 */ static uchar FUN_00454ad7(uint param_1);
 	// !DECL 0x00454ad7 END
-	// !DECL 0x004550cb BEGIN
-	/* 4550CB */ static ulong strtoxl(localeinfo_struct* param_1, char* param_2, char** param_3, int param_4, int param_5);
-	// !DECL 0x004550cb END
 	// !DECL 0x00456800 BEGIN
 	/* 456800 */ static uchar FUN_00456800(int param_1);
 	// !DECL 0x00456800 END
 	// !DECL 0x00458f20 BEGIN
-	/* 458F20 */ static uchar FUN_00458f20(int param_1);
+	/* 458F20 */ static void mad_frame_finish(int* param_1);
 	// !DECL 0x00458f20 END
-	// !DECL 0x00459670 BEGIN
-	/* 459670 */ static int FUN_00459670(int* param_1, int* param_2);
-	// !DECL 0x00459670 END
-	// !DECL 0x004596b0 BEGIN
-	/* 4596B0 */ static uchar FUN_004596b0(int* param_1, uint param_2);
-	// !DECL 0x004596b0 END
-	// !DECL 0x004596f0 BEGIN
-	/* 4596F0 */ static uint FUN_004596f0(int* param_1, uint param_2);
-	// !DECL 0x004596f0 END
 	// !DECL 0x00459900 BEGIN
 	/* 459900 */ static int FUN_00459900(uint param_1, int param_2, uint* param_3, int* param_4);
 	// !DECL 0x00459900 END
@@ -2388,12 +2259,6 @@ public:
 	// !DECL 0x0045bbb0 BEGIN
 	/* 45BBB0 */ static int FUN_0045bbb0(int* param_1, int param_2, int param_3, uint param_4);
 	// !DECL 0x0045bbb0 END
-	// !DECL 0x0045c480 BEGIN
-	/* 45C480 */ uint FUN_0045c480();
-	// !DECL 0x0045c480 END
-	// !DECL 0x0045c800 BEGIN
-	/* 45C800 */ static uchar FUN_0045c800(uint* param_1);
-	// !DECL 0x0045c800 END
 	// !DECL 0x0045d160 BEGIN
 	/* 45D160 */ static uchar FUN_0045d160(int param_1);
 	// !DECL 0x0045d160 END
@@ -2922,33 +2787,12 @@ public:
 	// !DECL 0x0046e320 BEGIN
 	/* 46E320 */ static uchar FUN_0046e320(int param_1);
 	// !DECL 0x0046e320 END
-	// !DECL 0x0046edc0 BEGIN
-	/* 46EDC0 */ static uint FUN_0046edc0(int param_1);
-	// !DECL 0x0046edc0 END
-	// !DECL 0x0046ee10 BEGIN
-	/* 46EE10 */ static uint FUN_0046ee10(int param_1);
-	// !DECL 0x0046ee10 END
-	// !DECL 0x0046ee60 BEGIN
-	/* 46EE60 */ static uint FUN_0046ee60(int param_1, int param_2, char* param_3, int param_4);
-	// !DECL 0x0046ee60 END
-	// !DECL 0x0046ef60 BEGIN
-	/* 46EF60 */ static uint FUN_0046ef60(int param_1, char* param_2, int param_3);
-	// !DECL 0x0046ef60 END
-	// !DECL 0x0046ef80 BEGIN
-	/* 46EF80 */ static uint FUN_0046ef80(int* param_1, int param_2);
-	// !DECL 0x0046ef80 END
 	// !DECL 0x0046f360 BEGIN
 	/* 46F360 */ uchar FUN_0046f360(uint param_1);
 	// !DECL 0x0046f360 END
 	// !DECL 0x0046f390 BEGIN
 	/* 46F390 */ uchar FUN_0046f390();
 	// !DECL 0x0046f390 END
-	// !DECL 0x0046f3e0 BEGIN
-	/* 46F3E0 */ static uint FUN_0046f3e0(int* param_1, uint param_2);
-	// !DECL 0x0046f3e0 END
-	// !DECL 0x0046f660 BEGIN
-	/* 46F660 */ static uint FUN_0046f660(int param_1);
-	// !DECL 0x0046f660 END
 	// !DECL 0x0046f720 BEGIN
 	/* 46F720 */ uint FUN_0046f720(void* param_1);
 	// !DECL 0x0046f720 END
@@ -2973,33 +2817,9 @@ public:
 	// !DECL 0x00470250 BEGIN
 	/* 470250 */ static uint FUN_00470250(int param_1);
 	// !DECL 0x00470250 END
-	// !DECL 0x004702c0 BEGIN
-	/* 4702C0 */ static uint FUN_004702c0(int param_1, uint param_2, int param_3, int param_4, int param_5, uint param_6, char* param_7, int param_8);
-	// !DECL 0x004702c0 END
-	// !DECL 0x004704c0 BEGIN
-	/* 4704C0 */ static uint FUN_004704c0(int param_1, uint param_2, char* param_3, int param_4);
-	// !DECL 0x004704c0 END
-	// !DECL 0x004704f0 BEGIN
-	/* 4704F0 */ static uchar FUN_004704f0(int* param_1, int param_2, int* param_3);
-	// !DECL 0x004704f0 END
-	// !DECL 0x00470570 BEGIN
-	/* 470570 */ static int* FUN_00470570(int param_1, int param_2, int param_3);
-	// !DECL 0x00470570 END
-	// !DECL 0x00470620 BEGIN
-	/* 470620 */ static uchar FUN_00470620(uint* param_1, int* param_2, int param_3);
-	// !DECL 0x00470620 END
-	// !DECL 0x004710e0 BEGIN
-	/* 4710E0 */ static uint FUN_004710e0(int* param_1, int param_2);
-	// !DECL 0x004710e0 END
 	// !DECL 0x00471120 BEGIN
 	/* 471120 */ static uint FUN_00471120(uint param_1, uchar* param_2, uint param_3);
 	// !DECL 0x00471120 END
-	// !DECL 0x00471260 BEGIN
-	/* 471260 */ static uchar FUN_00471260(uint param_1, size_t param_2, size_t param_3);
-	// !DECL 0x00471260 END
-	// !DECL 0x00471290 BEGIN
-	/* 471290 */ uchar FUN_00471290(uint param_1, int param_2);
-	// !DECL 0x00471290 END
 	// !DECL 0x00471300 BEGIN
 	/* 471300 */ static uchar FUN_00471300(int param_1);
 	// !DECL 0x00471300 END
@@ -3060,9 +2880,6 @@ public:
 	// !DECL 0x00472d30 BEGIN
 	/* 472D30 */ static uchar FUN_00472d30(uint param_1, int* param_2, int param_3);
 	// !DECL 0x00472d30 END
-	// !DECL 0x004733d0 BEGIN
-	/* 4733D0 */ static uchar FUN_004733d0(uint param_1, int param_2);
-	// !DECL 0x004733d0 END
 	// !DECL 0x004733f0 BEGIN
 	/* 4733F0 */ uint FUN_004733f0(uint param_1, uint param_2, int param_3, int param_4, uint* param_5, int param_6, uint* param_7, uint* param_8);
 	// !DECL 0x004733f0 END
@@ -6151,7 +5968,7 @@ public:
 	/* 47AFB0 */ uchar Unwind_0047afb0();
 	// !DECL 0x0047afb0 END
 	// !DECL 0x0047aff0 BEGIN
-	/* 47AFF0 */ uchar FUN_0047aff0();
+	/* 47AFF0 */ uchar CBulanci_RegisterAppDescriptor();
 	// !DECL 0x0047aff0 END
 };
 

@@ -6,7 +6,7 @@
 class CHelpScript {
 public:
 	// !DECL 0x004215e0 BEGIN
-	/* 4215E0 */ uint* FUN_004215e0(uint* param_1);
+	/* 4215E0 */ uint* ctor(uint* param_1);
 	// !DECL 0x004215e0 END
 	// !DECL 0x00421680 BEGIN
 	/* 421680 */ uchar* FUN_00421680();
@@ -26,6 +26,18 @@ public:
 	// !DECL 0x00421920 BEGIN
 	/* 421920 */ uint* FUN_00421920(uchar param_1);
 	// !DECL 0x00421920 END
+	// !DECL 0x00421940 BEGIN
+	/* 421940 */ static uchar ext_op45(int param_1);
+	// !DECL 0x00421940 END
+	// !DECL 0x00421a00 BEGIN
+	/* 421A00 */ static uchar ext_op46(int param_1);
+	// !DECL 0x00421a00 END
+	// !DECL 0x00421af0 BEGIN
+	/* 421AF0 */ static uchar ext_op52(int param_1);
+	// !DECL 0x00421af0 END
+	// !DECL 0x004221a0 BEGIN
+	/* 4221A0 */ static uint* ext_op47(int param_1);
+	// !DECL 0x004221a0 END
 };
 
 #endif

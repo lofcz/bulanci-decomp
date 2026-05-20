@@ -15,7 +15,7 @@ public:
 	/* 4066C0 */ uint* FUN_004066c0(uchar param_1);
 	// !DECL 0x004066c0 END
 	// !DECL 0x0040b640 BEGIN
-	/* 40B640 */ uint* FUN_0040b640(int param_1);
+	/* 40B640 */ uint* CListBoxItem_ctor(int param_1);
 	// !DECL 0x0040b640 END
 };
 

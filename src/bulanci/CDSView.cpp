@@ -39,7 +39,7 @@ uchar CDSView::FUN_00423db0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042c040 BEGIN
 /* 42C040-42C0B5 00075 */
-uchar CDSView::FUN_0042c040(int param_1) { STUB_BODY(); return 0; }
+uchar CDSView::CDSView_DispatchEvent(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042c040 END
 
 // !FUNC 0x0042c0c0 BEGIN
@@ -56,4 +56,9 @@ uchar CDSView::FUN_0042ca30(int* param_1, uint param_2) { STUB_BODY(); return 0;
 /* 42CEA0-42CF43 000A3 */
 uchar CDSView::FUN_0042cea0(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042cea0 END
+
+// !FUNC 0x0042cf50 BEGIN
+/* 42CF50-42CF58 00008 */
+uchar CDSView::OnLButtonDown(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0042cf50 END
 

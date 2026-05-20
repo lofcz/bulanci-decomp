@@ -202,7 +202,7 @@ and is registered for atexit via `FUN_00447e72` from `0x0047c2f0`.
 
 The single existing language selector in `bulanci.exe` (the immediate
 `1` pushed before every `CDSScript::CallExport(slot=0, ...)` — see
-[`script_lifecycle.md`](script_lifecycle.md)) is **orthogonal** to
+[`script_lifecycle.md`](../engine/script_lifecycle.md)) is **orthogonal** to
 the static-text pool. It only affects per-script bytecode constants
 that the script writes back to `globals[0..2]` for the level/help/history
 enumerator. The static-text pool is set at link time and never

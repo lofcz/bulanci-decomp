@@ -12,7 +12,7 @@ public:
 	/* 423130 */ uchar FUN_00423130(ushort param_1);
 	// !DECL 0x00423130 END
 	// !DECL 0x004231d0 BEGIN
-	/* 4231D0 */ uint* FUN_004231d0(uint* param_1);
+	/* 4231D0 */ uint* CHistoryDlg_ctor(uint* param_1);
 	// !DECL 0x004231d0 END
 	// !DECL 0x00423430 BEGIN
 	/* 423430 */ uchar* FUN_00423430();

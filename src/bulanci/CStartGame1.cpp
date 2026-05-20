@@ -12,7 +12,7 @@ uchar CStartGame1::FUN_00403d20(int param_1, char param_2) { STUB_BODY(); return
 
 // !FUNC 0x0040a860 BEGIN
 /* 40A860-40A8C0 00060 */
-uchar CStartGame1::FUN_0040a860(int param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_ApplyHostJoinVisibility(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040a860 END
 
 // !FUNC 0x0040a8c0 BEGIN
@@ -22,7 +22,7 @@ uchar CStartGame1::FUN_0040a8c0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040a970 BEGIN
 /* 40A970-40A9CA 0005A */
-uchar CStartGame1::FUN_0040a970(char param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_ApplyJoinModeVisibility(char param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040a970 END
 
 // !FUNC 0x0040a9d0 BEGIN
@@ -42,27 +42,27 @@ uchar CStartGame1::FUN_0040ae00(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040ae30 BEGIN
 /* 40AE30-40AE8C 0005C */
-uchar CStartGame1::FUN_0040ae30(short param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_OnRadioChange(short param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ae30 END
 
 // !FUNC 0x0040ae90 BEGIN
 /* 40AE90-40AECB 0003B */
-uchar CStartGame1::FUN_0040ae90(ushort param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_OnEvent(ushort param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ae90 END
 
 // !FUNC 0x0040c650 BEGIN
 /* 40C650-40CC5D 0060D */
-uchar CStartGame1::FUN_0040c650(int* param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_BuildUi(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040c650 END
 
 // !FUNC 0x0040f400 BEGIN
 /* 40F400-40F4AB 000AB */
-int* CStartGame1::FUN_0040f400(int* param_1) { STUB_BODY(); return 0; }
+int* CStartGame1::CStartGame1_ctor(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f400 END
 
 // !FUNC 0x0040f4b0 BEGIN
 /* 40F4B0-40F4B6 00006 */
-uchar* CStartGame1::FUN_0040f4b0() {
+uchar* CStartGame1::CStartGame1_GetSingleton() {
     return reinterpret_cast<uchar*>(&DAT_004b3538);
 }
 // !FUNC 0x0040f4b0 END

@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import struct
 import sys
 import zlib
@@ -60,7 +61,7 @@ CLASS_HELP_SCRIPT = 2076         # CHelpScript: CDSScript subclass for the help 
 # Note: the engine-side per-language string pool (`CDSStaticTexts`) does NOT
 # live in any overlay/.eap resource -- it's baked into `bulanci.exe`'s .data
 # section as a single static singleton. See
-# `ghidra_analysis/static_texts.md` and `ghidra_analysis/static_texts.py`
+# `../../ghidra_analysis/static_texts.md` and `../../ghidra_analysis/static_texts.py`
 # for the layout and extractor.
 
 CLASS_NAMES = {
@@ -769,7 +770,7 @@ def _save_help_script(raw: bytes, base: Path) -> dict:
 #   * `FUN_00438360` -> reads a `u16`
 #   * `FUN_00438380` -> reads a `u8`
 #
-# See `ghidra_analysis/script_dispatch_table.md` for the per-opcode handler
+# See `../../ghidra_analysis/script_dispatch_table.md` for the per-opcode handler
 # addresses and the base-vs-extension table layout that the native runtime
 # constructs at `this+0x2c` (45 base entries at 0x004b0118 + 58 CLevelScript
 # extension entries at 0x004af018 = opcodes 0..102 inclusive).
@@ -841,7 +842,7 @@ _LEVELSCRIPT_EXT_OPCODES: dict = {
     #   3. A best-effort name extracted from the handler's observable
     #      effect on the engine state (object slot table, animation
     #      component, collection methods, etc.).
-    # See `ghidra_analysis/script_dispatch_table.md` for per-handler
+    # See `../../ghidra_analysis/script_dispatch_table.md` for per-handler
     # addresses and the underlying engine call.
     45:  ("CreateAnim",       "_create_anim"),  # 2 sub + u8 + u8 count + count*i32
     46:  ("CreateImage",      ["sub", "sub", "i32"]),  # x, y, imageID
@@ -931,7 +932,7 @@ _SCRIPT_OPCODES = {
 
 # Per-export lifecycle annotation for `CLevelScript`-shaped scripts. The
 # engine invokes export#N for fixed lifecycle events (see
-# `ghidra_analysis/script_lifecycle.md`). For scripts that follow that
+# `../../ghidra_analysis/script_lifecycle.md`). For scripts that follow that
 # contract (every level script in the master pack does), the annotation
 # makes the disassembly much easier to read. Scripts with fewer exports
 # (e.g. help-page or history-page scripts only define export#0) just get
@@ -940,7 +941,7 @@ _SCRIPT_OPCODES = {
 # after the name in the disassembly label so the argument shape the engine
 # guarantees is always visible. Mapping verified against every xref to
 # `CDSScript::CallExport` (`FUN_00438c40`) in `bulanci.exe`; see
-# `ghidra_analysis/script_lifecycle.md` for the full evidence chain.
+# `../../ghidra_analysis/script_lifecycle.md` for the full evidence chain.
 _LEVEL_SCRIPT_EXPORT_NAMES = {
     0:  ("GetInfo",     "writes globals 0/1/2 = name/type/GUID for the level/help/history picker",
          "(language)"),
@@ -1007,7 +1008,7 @@ def _disassemble_script(
     IMPORTANT: the exports table is **positional, not address-sorted**. The
     engine indexes it by lifecycle-event slot (`exports[0]` is always
     `GetInfo`, `exports[1]` is always `OnInit`, etc. — see
-    `ghidra_analysis/script_lifecycle.md`). Several scripts in the master
+    `../../ghidra_analysis/script_lifecycle.md`). Several scripts in the master
     pack place lifecycle exports out of address order (e.g.
     `res_0000065859`'s `OnGameStart` lives at offset 1178, *before*
     `OnBitmapEvt` at 1212), so sorting the table by address scrambles the
@@ -1176,7 +1177,7 @@ def _disassemble_script(
         disasm_function(0, len(code))
     else:
         # A CLevelScript-shaped script has exactly 11 exports (indices
-        # 0..10, see `ghidra_analysis/script_lifecycle.md`). When that
+        # 0..10, see `../../ghidra_analysis/script_lifecycle.md`). When that
         # signature matches, label each export with its lifecycle role so
         # the disassembly reads as event handlers rather than anonymous
         # functions. Scripts with a different shape (help/history pages
@@ -1294,7 +1295,8 @@ def _save_audio_bank_index(raw: bytes, base: Path) -> dict:
 
 
 def _save_poem(raw: bytes, base: Path) -> dict:
-    """ClassID 2043 - `CPoem`: UTF-16LE text block.
+    """ClassID 2043 - `CPoem`: UTF-16LE text block consumed by the menu's
+    poem scroller (`CPoemScroller`).
 
     Recovered via factory→vftable→RTTI: classID 2043's factory at
     `0x00409ab0` builds a 28-byte object whose primary vftable's
@@ -1302,14 +1304,37 @@ def _save_poem(raw: bytes, base: Path) -> dict:
     self-contained Czech poem (or chapter title) -- not a "static text
     table". The engine-side localised string pool is a separate
     singleton inside `bulanci.exe`; see
-    `ghidra_analysis/static_texts.md`.
+    `../../ghidra_analysis/static_texts.md`.
 
     Wire format::
 
         u32 charCount, char[charCount] UTF-16LE chars
 
-    The first character is often a marker (`0x0001`/`0x0002`) used as a
-    section/line flag.
+    Inline markup language (per-line, parsed by
+    `TextShaper_LayOutAndRender @ 0x004375e0`; full description in
+    `../../ghidra_analysis/main_menu.md` §9.3):
+
+    - `\\x0a` (`\\n`): line break. There is no auto-wrap -- every visual
+      line is delimited by an explicit `\\n`.
+    - `\\x01` at column 0: render the rest of the line CENTER aligned.
+    - `\\x02` at column 0: render the rest of the line RIGHT aligned.
+    - No prefix: default LEFT alignment.
+    - `\\x09` (`\\t`): horizontal tab, expanded to 4 spaces.
+
+    A typical poem therefore reads::
+
+        \\1Title line\\n               <- centered
+        Verse line\\n                  <- left
+        ... more verses ...
+        \\2by Author\\n                <- right-aligned signature
+        \\0                            <- (optional) terminator
+
+    The companion `<base>.bin` is the byte-faithful wire form (keep it
+    if you need a round-trip source). The `<base>.txt` we emit here is
+    the human-readable rendering: each `\\x01`/`\\x02` line is prefixed
+    with `[CENTER]` / `[RIGHT]`, tabs are expanded to four spaces, and
+    `\\x00` terminators are stripped. The manifest gets a structured
+    `lines: [{align, text}]` array plus a `markers` tally.
     """
     meta: dict = {"friendlyFile": None}
     if len(raw) < 4:
@@ -1320,13 +1345,48 @@ def _save_poem(raw: bytes, base: Path) -> dict:
         meta["warning"] = f"Poem: implausible charCount {char_count}"
         return meta
     chars = raw[4 : 4 + char_count * 2].decode("utf-16-le", errors="replace")
+
+    raw_text = chars.rstrip("\x00")
+    parsed_lines: List[dict] = []
+    markers = {"center": 0, "right": 0, "tab": 0, "newline": 0}
+    for line in raw_text.split("\n"):
+        align = "left"
+        body = line
+        if body.startswith("\x01"):
+            align = "center"
+            body = body[1:]
+            markers["center"] += 1
+        elif body.startswith("\x02"):
+            align = "right"
+            body = body[1:]
+            markers["right"] += 1
+        if "\t" in body:
+            markers["tab"] += body.count("\t")
+        body_expanded = body.replace("\t", "    ")
+        parsed_lines.append({"align": align, "text": body_expanded})
+    markers["newline"] = max(0, len(parsed_lines) - 1)
+
     meta["text"] = {
         "charCount": char_count,
-        "preview": chars[:200],
+        "lineCount": len(parsed_lines),
+        "markers": markers,
+        "lines": parsed_lines,
     }
-    out = base.with_suffix(".txt")
-    out.write_text(chars, encoding="utf-8")
-    meta["friendlyFile"] = out.name
+
+    pretty_lines = []
+    for entry in parsed_lines:
+        text = entry["text"]
+        tag = entry["align"]
+        if tag == "center":
+            pretty_lines.append(f"[CENTER] {text}".rstrip())
+        elif tag == "right":
+            pretty_lines.append(f"[RIGHT]  {text}".rstrip())
+        else:
+            pretty_lines.append(text.rstrip())
+    out_txt = base.with_suffix(".txt")
+    out_txt.write_text("\n".join(pretty_lines).rstrip() + "\n", encoding="utf-8")
+    meta["friendlyFile"] = out_txt.name
+
     return meta
 
 
@@ -1992,7 +2052,13 @@ def _palette_indexed_to_rgba(
     return bytes(out)
 
 
-def _save_bitmap_sprite(raw: bytes, base: Path) -> dict:
+def _save_bitmap_sprite(
+    raw: bytes,
+    base: Path,
+    inherited_palette: Optional[bytes] = None,
+    inherited_palette_source_id: Optional[int] = None,
+    sprite_state: Optional[dict] = None,
+) -> dict:
     """ClassID 52 - native sprite/animation container.
 
     Container layout (header + frame stream + per-opcode pixel decoders),
@@ -2011,14 +2077,14 @@ def _save_bitmap_sprite(raw: bytes, base: Path) -> dict:
       previous frame" hints); frames with ``numInner >= 1`` carry that
       many ``(u32 chunkSize, u8 opcode, byte[chunkSize-5] body)`` inner
       chunks whose opcodes are dispatched per
-      ``ghidra_analysis/flx_file_format.md``.
+      ``../../ghidra_analysis/flx_file_format.md``.
 
     The 80-byte ClassID 52 handle returned by the factory doesn't itself
     hold pixel data — it's a stream descriptor. The actual pixels live in
     a separately-allocated ``CBulPicture`` (1136 bytes, sibling factory at
     ``0x0040eb30``) that is bound to the handle the first time the sprite
     is drawn. The CBulPicture layout (see
-    `tools/bulanci_unpack/ghidra_analysis/sprite_container.md`) confirms
+    `../../ghidra_analysis/sprite_container.md`) confirms
     the runtime ends up with:
         +0x68            uchar* pixel data
         +0x6c..+0x46b    256-entry RGBA palette (1024 bytes)
@@ -2054,10 +2120,16 @@ def _save_bitmap_sprite(raw: bytes, base: Path) -> dict:
     in `totalSize` are different recolours of the same base animation; the
     bytes that differ across recolour groups are isolated palette indices
     inside chunk bodies — confirming the encoded payload is a byte-level
-    RLE rather than an entropy-coded stream. The 41 recolour-variant
-    sprites that don't carry an inline palette inherit one from a sibling
-    resource at runtime; the unpacker falls back to a 256-step grayscale
-    ramp for them and records ``decoded.paletteSource`` accordingly.
+    RLE rather than an entropy-coded stream. The 41 master-pack recolour
+    variants that don't carry an inline palette inherit it from the
+    most-recently-loaded inline-palette sibling — the engine keeps the
+    FLX palette buffer live across consecutive sprite loads in the same
+    render context, and the unpacker mirrors that lookup via the
+    ``sprite_state`` ambient-palette plumbed in from
+    :func:`save_resource`. The atlas sidecar records the provenance in
+    ``paletteSource = "inherited"`` and ``inheritedFrom = <sibling ID>``;
+    only sprites with neither an inline palette nor any sibling to
+    inherit from fall back to a 256-step grayscale ramp.
 
     The parser emits soft `sanityWarnings` rather than refusing extraction
     so that future format variants are easy to spot from the manifest
@@ -2197,10 +2269,31 @@ def _save_bitmap_sprite(raw: bytes, base: Path) -> dict:
         and bitmap_w * bitmap_h <= 1 << 22
     ):
         decoded = _decode_bitmap_sprite_frames(
-            raw, frames, bitmap_w, bitmap_h, base, warnings
+            raw,
+            frames,
+            bitmap_w,
+            bitmap_h,
+            base,
+            warnings,
+            inherited_palette=inherited_palette,
+            inherited_palette_source_id=inherited_palette_source_id,
         )
         if decoded:
             sprite["decoded"] = decoded
+            # Propagate the final palette upstream so the next sibling
+            # sprite without its own opcode-0x09 palette can inherit
+            # it. The engine keeps the palette buffer live across
+            # consecutive sprite loads in the same render context;
+            # ``sprite_state`` mirrors that ambient store.
+            if sprite_state is not None:
+                final_pal = decoded.pop("_finalPalette", None)
+                if final_pal is not None and decoded.get(
+                    "paletteSource"
+                ) == "inline":
+                    sprite_state["ambient"] = bytes(final_pal)
+                    sprite_state["sourceId"] = decoded.get("_sourceId")
+                # The ``_*`` private keys never go into the manifest.
+                decoded.pop("_sourceId", None)
 
     if warnings:
         sprite["sanityWarnings"] = warnings
@@ -2214,22 +2307,52 @@ def _decode_bitmap_sprite_frames(
     bitmap_h: int,
     base: Path,
     warnings: list,
+    inherited_palette: Optional[bytes] = None,
+    inherited_palette_source_id: Optional[int] = None,
 ) -> Optional[dict]:
     """Apply all inner-opcode decoders frame by frame and emit a single
     horizontally-stacked atlas PNG plus a ``.atlas.json`` sidecar
     describing the frame strip (frame size, count, per-frame
     NotifyMove/duration/regions/etc.).
 
+    ``inherited_palette`` (optional) — a 1024-byte BGRA palette
+    snapshot left by the most-recently-loaded sibling sprite that
+    carried an inline FLX opcode-0x09 palette. The engine keeps the
+    palette buffer live across consecutive sprite loads in the same
+    render context, so a sprite with no inline palette inherits the
+    sibling's final palette. Passing it here lets the unpacker render
+    the recolour-variant sprites in their authentic colours instead
+    of falling back to a grayscale ramp.
+
+    ``inherited_palette_source_id`` (optional) — the resource ID of
+    the sibling whose palette is being inherited. Recorded in the
+    atlas sidecar's ``inheritedFrom`` field for provenance.
+
     Side effects: writes files next to ``base`` and sweeps any stale
     ``<stem>.frame*.png`` from previous unpacker runs. Returns a
     metadata dict suitable for inclusion in ``sprite['decoded']``
     (palette path, atlas path, summary stats). Returns ``None`` if any
-    decoder raises (in which case a soft warning is appended).
+    decoder raises (in which case a soft warning is appended). The
+    returned dict also carries a private ``_finalPalette`` field
+    (stripped before manifest serialisation) so the caller can update
+    its ambient palette state for the next sibling.
     """
     pixel_total = bitmap_w * bitmap_h
     pixels = bytearray(pixel_total)
     alt = bytearray(pixel_total)
-    palette = bytearray([0xFF] * 1024)  # init to (255,255,255,255) like CBulPicture
+    have_inherited = (
+        inherited_palette is not None and len(inherited_palette) == 1024
+    )
+    if have_inherited:
+        # Seed the palette buffer from the inheriting sibling. The
+        # opcode-0x09 handler still mutates it normally below — the
+        # engine permits a sprite to seed-then-modify the inherited
+        # palette mid-stream, though no master-pack sprite exercises
+        # both behaviours simultaneously.
+        palette = bytearray(inherited_palette)
+    else:
+        # init to (255,255,255,255) like CBulPicture +0x6c..+0x46b
+        palette = bytearray([0xFF] * 1024)
     transparent_index: Optional[int] = None
     n_palette_writes = 0
     # One metadata dict per stored frame, in order. Populated below as
@@ -2444,13 +2567,31 @@ def _decode_bitmap_sprite_frames(
         },
     }
 
-    # If no palette ever arrived inline (~41/130 master-pack sprites
-    # inherit their palette from a sibling resource via the engine's
-    # ambient render context), fall back to a 256-step grayscale ramp so
-    # the structure is still visible. The manifest records `paletteSource`
-    # so consumers can tell if the colours are authoritative.
-    palette_source = "inline" if n_palette_writes > 0 else "grayscale-fallback"
-    if n_palette_writes == 0:
+    # Palette-source decision. The engine's runtime keeps a single
+    # BGRA palette buffer (CBulPicture +0x6c..+0x46b) and FLX
+    # opcode-0x09 either writes into it directly (89/130 master-pack
+    # sprites) or — when absent — leaves whatever the previously
+    # loaded sibling left behind. The unpacker mirrors that lookup
+    # via ``inherited_palette``. Three terminal cases:
+    #
+    #   * ``inline``              — this sprite carried at least one
+    #                                opcode-0x09 packet.
+    #   * ``inherited``           — no opcode-0x09 was seen, but the
+    #                                caller supplied a sibling palette
+    #                                we can use authoritatively.
+    #   * ``grayscale-fallback``  — no opcode-0x09 AND no inherited
+    #                                palette (e.g. the first sprite in
+    #                                a pack or a one-off without a
+    #                                sibling). Falls back to a 256-step
+    #                                grayscale ramp so the structure is
+    #                                still visible.
+    if n_palette_writes > 0:
+        palette_source = "inline"
+    elif have_inherited:
+        palette_source = "inherited"
+    else:
+        palette_source = "grayscale-fallback"
+    if palette_source == "grayscale-fallback":
         for i in range(256):
             palette[i * 4 + 0] = i
             palette[i * 4 + 1] = i
@@ -2464,14 +2605,22 @@ def _decode_bitmap_sprite_frames(
     # palette mid-animation (color-cycle/glow effects); using the final
     # cumulative palette for every frame would render frame 0..(k-1)
     # with colours that don't exist yet at that frame.
-    snapshots, mask_snapshots, palette_snapshots, mask_was_written = (
-        _redecode_for_atlas(raw, frames, bitmap_w, bitmap_h)
+    # ``initial_palette`` seeds the per-frame snapshot buffer the same
+    # way as the first pass — inherited sprites need it so their per-
+    # frame palette snapshots reflect the sibling's colours.
+    seed_palette: Optional[bytes] = (
+        bytes(inherited_palette) if have_inherited else None
     )
-    # For sprites without an inline palette (~41/130 inherit it from a
-    # sibling resource at runtime) the per-frame palettes are all
-    # default-white; fall back to a grayscale ramp so the structure is
-    # still visible.
-    if n_palette_writes == 0:
+    snapshots, mask_snapshots, palette_snapshots, mask_was_written = (
+        _redecode_for_atlas(
+            raw, frames, bitmap_w, bitmap_h, initial_palette=seed_palette
+        )
+    )
+    # For sprites that landed on the grayscale-fallback branch the
+    # per-frame palette snapshots will be all-white; overwrite each
+    # with the grayscale ramp so the atlas RGBA emitter doesn't
+    # render a solid white stripe.
+    if palette_source == "grayscale-fallback":
         gray = bytearray(1024)
         for i in range(256):
             gray[i * 4 + 0] = i
@@ -2666,6 +2815,8 @@ def _decode_bitmap_sprite_frames(
             "timing": timing_block,
             "frames": atlas_frames,
         }
+        if palette_source == "inherited" and inherited_palette_source_id is not None:
+            atlas_meta["inheritedFrom"] = inherited_palette_source_id
         if ring_frame_index is not None:
             atlas_meta["ringFrameIndex"] = ring_frame_index
             atlas_meta["ringFrame"] = per_frame[ring_frame_index]
@@ -2675,7 +2826,7 @@ def _decode_bitmap_sprite_frames(
             encoding="utf-8",
         )
 
-    return {
+    result: dict = {
         "bitmapWidth": bitmap_w,
         "bitmapHeight": bitmap_h,
         "paletteWrites": n_palette_writes,
@@ -2692,6 +2843,23 @@ def _decode_bitmap_sprite_frames(
         "framesAnimated": atlas_count,
         "ringFrameIndex": ring_frame_index,
     }
+    if palette_source == "inherited" and inherited_palette_source_id is not None:
+        result["inheritedFrom"] = inherited_palette_source_id
+    # Private bridge fields consumed by ``_save_bitmap_sprite`` to
+    # update the caller's ambient palette state; stripped before the
+    # dict is folded into the manifest.
+    if palette_source == "inline":
+        result["_finalPalette"] = bytes(palette_snapshots[-1]) if palette_snapshots else bytes(palette)
+        # Resource ID is encoded in ``base.name`` as
+        # ``res_<10-digit ID>_52_BitmapSprite``; pull it back out so the
+        # caller can stamp the next inheriting sprite's
+        # ``inheritedFrom`` field.
+        try:
+            sid_str = base.name.split("_")[1]
+            result["_sourceId"] = int(sid_str)
+        except (IndexError, ValueError):
+            pass
+    return result
 
 
 def _palette_siblings_of(palette: bytearray, rgb: Tuple[int, int, int]) -> set[int]:
@@ -2967,7 +3135,11 @@ def _apply_chromakey_transparency(
 
 
 def _redecode_for_atlas(
-    raw: bytes, frames: list[dict], bitmap_w: int, bitmap_h: int
+    raw: bytes,
+    frames: list[dict],
+    bitmap_w: int,
+    bitmap_h: int,
+    initial_palette: Optional[bytes] = None,
 ) -> Tuple[list[bytearray], list[Optional[bytearray]], list[bytearray], bool]:
     """Re-run the per-frame decode for atlas emission, capturing the
     color plane, the (lazy) mask plane, and the palette state after
@@ -2989,6 +3161,17 @@ def _redecode_for_atlas(
     * ``mask_was_ever_written`` — True iff opcode 0x0e / 0x0f ever
       fired across the whole stream.
 
+    ``initial_palette`` (optional) seeds the 256-entry BGRA palette
+    buffer before the decode starts. The engine's render context
+    keeps the palette buffer live across sibling sprites loaded in
+    the same load batch, so a sprite without its own opcode-0x09
+    palette write inherits whatever the previously-loaded inline
+    sibling left behind. Callers pass that sibling's final palette
+    here so the inheriting sprite renders in colour rather than
+    falling back to a grayscale ramp. ``None`` keeps the engine's
+    own default (``CBulPicture`` init writes ``0xFFFFFFFF`` into
+    every slot).
+
     Mirrors ``CDSFlxFile::DecodeFrame`` (0x00432c60). Per Ghidra the
     mask plane is allocated lazily on the first 0x0e (``AllocMaskPlane
     @ 0x00436ff0``) sized exactly w*h bytes, and the masked blit
@@ -2998,7 +3181,10 @@ def _redecode_for_atlas(
     pixels = bytearray(pixel_total)
     mask = bytearray(pixel_total)
     mask_inited = False
-    palette = bytearray([0xFF] * 1024)
+    if initial_palette is not None and len(initial_palette) == 1024:
+        palette = bytearray(initial_palette)
+    else:
+        palette = bytearray([0xFF] * 1024)
     color_snapshots: list[bytearray] = []
     mask_snapshots: list[Optional[bytearray]] = []
     palette_snapshots: list[bytearray] = []
@@ -3069,7 +3255,7 @@ def _save_bitmap_jpeg_anim(raw: bytes, base: Path) -> dict:
     ``2 * dwFrameCount`` interleaved ``{u32 len, byte[len] body}`` chunks:
     chunk ``2k`` is a complete JPEG frame, chunk ``2k+1`` is the matching
     frame's raw little-endian PCM audio. See
-    ``tools/bulanci_unpack/ghidra_analysis/dsm_file_format.md`` for the
+    ``../../ghidra_analysis/dsm_file_format.md`` for the
     full reverse-engineering writeup of the format and the ``CDSDsmFile``
     class that consumes it.
 
@@ -3206,8 +3392,22 @@ _EXTRACTORS = {
 }
 
 
-def save_resource(rh: ResourceHeader, raw: bytes, out_dir: Path) -> dict:
-    """Write `res_<ID>_<ClassID>_<Name>.bin` + any friendly companion file."""
+def save_resource(
+    rh: ResourceHeader,
+    raw: bytes,
+    out_dir: Path,
+    sprite_state: Optional[dict] = None,
+) -> dict:
+    """Write `res_<ID>_<ClassID>_<Name>.bin` + any friendly companion file.
+
+    ``sprite_state`` (optional) — caller-owned mutable dict carrying
+    the ambient FLX palette across consecutive resources, mirroring
+    the engine's render context. Keys: ``ambient`` (1024-byte BGRA
+    palette of the most-recently loaded inline-palette sibling, or
+    None) and ``sourceId`` (its resource ID). BitmapSprite is the
+    only extractor that reads / writes it today; everything else
+    ignores it.
+    """
     class_label = CLASS_NAMES.get(rh.class_id, f"cls{rh.class_id}")
     base = out_dir / f"res_{rh.id:010d}_{rh.class_id}_{class_label}"
     raw_path = base.with_suffix(".bin")
@@ -3224,7 +3424,18 @@ def save_resource(rh: ResourceHeader, raw: bytes, out_dir: Path) -> dict:
     extractor = _EXTRACTORS.get(rh.class_id)
     if extractor is not None:
         try:
-            meta.update(extractor(raw, base))
+            if rh.class_id == CLASS_BITMAP_SPRITE and sprite_state is not None:
+                meta.update(
+                    _save_bitmap_sprite(
+                        raw,
+                        base,
+                        inherited_palette=sprite_state.get("ambient"),
+                        inherited_palette_source_id=sprite_state.get("sourceId"),
+                        sprite_state=sprite_state,
+                    )
+                )
+            else:
+                meta.update(extractor(raw, base))
         except Exception as exc:  # noqa: BLE001
             meta["warning"] = f"Extractor failed: {exc}"
     return meta
@@ -3334,6 +3545,14 @@ def unpack(
         else:
             tag_note += " (unknown variant)"
         mf.notes.append(tag_note)
+        # Ambient palette inheritance state for BitmapSprite resources.
+        # Mirrors the engine's render context: the FLX palette buffer
+        # in CBulPicture +0x6c..+0x46b is left live across consecutive
+        # sprite loads in the same pack, so a sprite without an inline
+        # FLX opcode-0x09 palette inherits whatever the previously
+        # loaded sibling left behind. Headers are walked in load order
+        # below, which matches the engine's resource-pool load order.
+        sprite_state: dict = {"ambient": None, "sourceId": None}
         for rh in headers:
             try:
                 raw = _slice_resource(rh, data_section)
@@ -3349,7 +3568,7 @@ def unpack(
                     }
                 )
                 continue
-            meta = save_resource(rh, raw, out_dir)
+            meta = save_resource(rh, raw, out_dir, sprite_state=sprite_state)
             if id_name_map and rh.id in id_name_map:
                 meta["name"] = id_name_map[rh.id]
             mf.resources.append(meta)
@@ -3423,6 +3642,141 @@ def cmd_auto(args: argparse.Namespace) -> Manifest:
     return unpack(buf, 0, Path(args.output), source=args.input, source_type="auto")
 
 
+# Skipped silently by `cmd_all`: companion DLLs / .NET editor binaries / book-
+# keeping that live alongside bulanci.exe in `orig/` but aren't unpackable
+# containers.
+_ALL_SKIP_NAMES = frozenset({
+    "editor.exe",
+    "naudio.dll",
+    "zlib.net.dll",
+    "hashes",
+    ".gitkeep",
+    ".gitignore",
+})
+
+
+def cmd_all(args: argparse.Namespace) -> int:
+    """Batch-unpack every supported file in `args.input_dir`.
+
+    Routes by extension, mirroring the layout already used by the rest of
+    the project:
+
+        bulanci.exe         ->  <output>/overlay/
+        <name>.eap          ->  <output>/<name>_eap/      (paired with sibling .eapres)
+        <name>.eapres       ->  <output>/<name>_eapres/
+
+    Returns a shell-style exit code: 0 if every supported input succeeded,
+    otherwise the number of failed files.
+    """
+    input_dir = Path(args.input_dir)
+    output_dir = Path(args.output_dir)
+    if not input_dir.is_dir():
+        print(f"ERROR: not a directory: {input_dir}", file=sys.stderr)
+        return 2
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # (input_path, mode, output_subdir)
+    plan: List[Tuple[Path, str, Path]] = []
+    skipped: List[Path] = []
+    for p in sorted(input_dir.iterdir()):
+        if not p.is_file():
+            continue
+        name = p.name.lower()
+        stem = p.stem
+        if name == "bulanci.exe":
+            plan.append((p, "overlay", output_dir / "overlay"))
+        elif name.endswith(".eap"):
+            plan.append((p, "eap", output_dir / f"{stem}_eap"))
+        elif name.endswith(".eapres"):
+            plan.append((p, "eapres", output_dir / f"{stem}_eapres"))
+        elif name in _ALL_SKIP_NAMES:
+            skipped.append(p)
+        else:
+            skipped.append(p)
+
+    if not plan:
+        print(f"No supported inputs under {input_dir} "
+              f"(looked for bulanci.exe / *.eap / *.eapres)")
+        return 0
+
+    print(f"== Bulanci batch unpack ==")
+    print(f"  input dir   : {input_dir}")
+    print(f"  output dir  : {output_dir}")
+    print(f"  clean mode  : {'wipe target subdirs first' if args.clean else 'overwrite in place'}")
+    print(f"  to process  : {len(plan)} file(s)")
+    for src, mode, dest in plan:
+        print(f"     {mode:7s} {src.name:<32s} -> {dest.name}/")
+    if skipped:
+        print(f"  skipping    : {', '.join(s.name for s in skipped)}")
+    print()
+
+    manifests: List[Manifest] = []
+    failures: List[Tuple[Path, BaseException]] = []
+
+    for src, mode, dest in plan:
+        print()
+        print(f"--- [{mode}] {src.name} -> {dest} ---")
+        if args.clean and dest.exists():
+            shutil.rmtree(dest)
+        sub_args = argparse.Namespace(input=str(src), output=str(dest))
+        try:
+            if mode == "overlay":
+                mf = cmd_overlay(sub_args)
+            elif mode == "eap":
+                sibling = src.with_suffix(".eapres")
+                sub_args.names_from = str(sibling) if sibling.exists() else None
+                mf = cmd_eap(sub_args)
+            elif mode == "eapres":
+                mf = cmd_eapres(sub_args)
+            else:
+                continue
+            manifests.append(mf)
+            _print_summary(mf)
+        except BaseException as exc:  # noqa: BLE001 - propagate everything as a failure record
+            failures.append((src, exc))
+            print(f"  ERROR: {exc}", file=sys.stderr)
+
+    # ---- Aggregate roll-up ------------------------------------------------
+    print()
+    print("=" * 72)
+    print(f"== Batch summary: {len(manifests)} succeeded, {len(failures)} failed ==")
+    print()
+
+    total_by_class: Counter = Counter()
+    rows: List[Tuple[str, str, int, int]] = []  # (name, type, total, bmp)
+    for mf in manifests:
+        bc: Counter = Counter()
+        for r in mf.resources:
+            cls = r.get("className", "?")
+            bc[cls] += 1
+            total_by_class[cls] += 1
+        rows.append((
+            Path(mf.source).name,
+            mf.source_type,
+            len(mf.resources),
+            bc.get("BitmapBMP", 0),
+        ))
+
+    print(f"  {'source':<32s} {'type':<8s} {'total':>6s} {'BMP':>4s}")
+    print("  " + "-" * 60)
+    for name, typ, total, bmp in rows:
+        marker = "   <-- has BitmapBMP" if bmp > 0 else ""
+        print(f"  {name:<32s} {typ:<8s} {total:>6d} {bmp:>4d}{marker}")
+    if total_by_class:
+        print()
+        print("  Aggregate class distribution across all packs:")
+        for k, v in total_by_class.most_common():
+            print(f"    {k:<20s} {v}")
+
+    if failures:
+        print()
+        print("Failures:")
+        for src, exc in failures:
+            print(f"  {src.name}: {exc}")
+        return len(failures)
+    return 0
+
+
 def _print_summary(mf: Manifest) -> None:
     print()
     print(f"== Unpack summary: {mf.source} ==")
@@ -3479,13 +3833,47 @@ def main(argv: Optional[List[str]] = None) -> int:
     p_auto.add_argument("-o", "--output", required=True)
     p_auto.set_defaults(func=cmd_auto)
 
+    p_all = sub.add_parser(
+        "all",
+        help="Batch-unpack bulanci.exe + every *.eap / *.eapres under a directory",
+        description=(
+            "Walk an input directory and route each supported file through "
+            "the matching unpack mode (overlay / eap / eapres). bulanci.exe "
+            "lands in <output>/overlay/, each <name>.eap in <output>/<name>_eap/, "
+            "each <name>.eapres in <output>/<name>_eapres/. .eap files are "
+            "auto-paired with their sibling .eapres for resource-name "
+            "resolution."
+        ),
+    )
+    p_all.add_argument(
+        "-i", "--input-dir", default="orig",
+        help="Directory to scan for inputs (default: orig)",
+    )
+    p_all.add_argument(
+        "-o", "--output-dir", default="unpacked",
+        help="Root directory for per-pack output subdirs (default: unpacked)",
+    )
+    p_all.add_argument(
+        "--clean", dest="clean", action="store_true", default=True,
+        help="Wipe each target subdirectory before unpacking (default)",
+    )
+    p_all.add_argument(
+        "--no-clean", dest="clean", action="store_false",
+        help="Keep existing files in target subdirs (overwrite in place)",
+    )
+    p_all.set_defaults(func=cmd_all)
+
     args = parser.parse_args(argv)
     try:
-        mf = args.func(args)
+        result = args.func(args)
     except Exception as exc:  # noqa: BLE001
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
-    _print_summary(mf)
+    if isinstance(result, Manifest):
+        _print_summary(result)
+        return 0
+    if isinstance(result, int):
+        return result
     return 0
 
 

@@ -223,9 +223,17 @@ reading is FLI/FLC-faithful and produces correct grayscale gradients
 on those samples.
 
 Empirically: 89/130 BitmapSprite master-pack sprites carry an inline
-palette via this tag; the remaining 41/130 inherit a palette from a
-sibling resource and the unpacker falls back to a grayscale ramp for
-visualisation (`paletteSource: "grayscale-fallback"` in the manifest).
+palette via this tag; the remaining 41/130 inherit the palette from
+the most-recently-loaded inline-palette sibling (the engine keeps the
+palette buffer live across consecutive sprite loads in the same
+render context). The unpacker mirrors that lookup by threading a
+1024-byte ambient-palette state through the per-pack `save_resource`
+loop, and stamps each inheriting sprite's atlas sidecar with
+`paletteSource: "inherited"` plus `inheritedFrom: <head_id>`. Only
+sprites with no inline palette **and** no sibling to inherit from
+(e.g. the very first sprite in a pack or a hand-authored one-off)
+fall back to a 256-step grayscale ramp; the master pack contains
+none of those after the inheritance resolution.
 
 ### `DecodeRegionList` @ `0x00432850` (tag 11)
 

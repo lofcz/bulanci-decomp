@@ -12,13 +12,13 @@ public:
 	/* 403D20 */ uchar FUN_00403d20(int param_1, char param_2);
 	// !DECL 0x00403d20 END
 	// !DECL 0x0040a860 BEGIN
-	/* 40A860 */ uchar FUN_0040a860(int param_1);
+	/* 40A860 */ uchar CStartGame1_ApplyHostJoinVisibility(int param_1);
 	// !DECL 0x0040a860 END
 	// !DECL 0x0040a8c0 BEGIN
 	/* 40A8C0 */ uchar FUN_0040a8c0(int param_1);
 	// !DECL 0x0040a8c0 END
 	// !DECL 0x0040a970 BEGIN
-	/* 40A970 */ uchar FUN_0040a970(char param_1);
+	/* 40A970 */ uchar CStartGame1_ApplyJoinModeVisibility(char param_1);
 	// !DECL 0x0040a970 END
 	// !DECL 0x0040a9d0 BEGIN
 	/* 40A9D0 */ uchar FUN_0040a9d0(int param_1);
@@ -30,19 +30,19 @@ public:
 	/* 40AE00 */ uchar FUN_0040ae00(int param_1);
 	// !DECL 0x0040ae00 END
 	// !DECL 0x0040ae30 BEGIN
-	/* 40AE30 */ uchar FUN_0040ae30(short param_1, int param_2, uint param_3);
+	/* 40AE30 */ uchar CStartGame1_OnRadioChange(short param_1, int param_2, uint param_3);
 	// !DECL 0x0040ae30 END
 	// !DECL 0x0040ae90 BEGIN
-	/* 40AE90 */ uchar FUN_0040ae90(ushort param_1);
+	/* 40AE90 */ uchar CStartGame1_OnEvent(ushort param_1);
 	// !DECL 0x0040ae90 END
 	// !DECL 0x0040c650 BEGIN
-	/* 40C650 */ uchar FUN_0040c650(int* param_1);
+	/* 40C650 */ uchar CStartGame1_BuildUi(int* param_1);
 	// !DECL 0x0040c650 END
 	// !DECL 0x0040f400 BEGIN
-	/* 40F400 */ int* FUN_0040f400(int* param_1);
+	/* 40F400 */ int* CStartGame1_ctor(int* param_1);
 	// !DECL 0x0040f400 END
 	// !DECL 0x0040f4b0 BEGIN
-	/* 40F4B0 */ uchar* FUN_0040f4b0();
+	/* 40F4B0 */ uchar* CStartGame1_GetSingleton();
 	// !DECL 0x0040f4b0 END
 	// !DECL 0x0040f4c0 BEGIN
 	/* 40F4C0 */ uchar FUN_0040f4c0(uchar param_1);

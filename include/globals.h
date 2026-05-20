@@ -40,6 +40,33 @@ typedef int errno_t;
 typedef void *PVOID;
 typedef void *LPVOID;
 
+struct RECT {
+    long left;
+    long top;
+    long right;
+    long bottom;
+};
+
+/* Win32 window-message types referenced by CDSApp_WndProc and the few
+ * Ghidra-recovered WindowProc-style entries.  We keep them as typedef stubs
+ * (not via <windows.h>) so a stub-only build can pick up the symbol shapes
+ * without pulling in the full SDK. */
+struct HWND__;
+typedef struct HWND__ *HWND;
+typedef unsigned int UINT;
+typedef unsigned int WPARAM;
+typedef long LPARAM;
+typedef long LRESULT;
+
+/* Win32 sync / kernel types -- only stubs, just enough that signatures
+ * involving them compile. */
+struct _RTL_CRITICAL_SECTION;
+typedef struct _RTL_CRITICAL_SECTION CRITICAL_SECTION;
+typedef CRITICAL_SECTION *LPCRITICAL_SECTION;
+typedef void *HANDLE;
+typedef void *HMODULE;
+typedef void *HINSTANCE;
+
 #define DWORD_PTR DWORD
 
 #define NULL 0
