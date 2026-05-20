@@ -7,12 +7,12 @@ uchar CEdit::CEdit_GetTextLength(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00403170 BEGIN
 /* 403170-403183 00013 */
-uchar CEdit::CEdit_CopyText(void* param_1) { STUB_BODY(); return 0; }
+uchar CEdit::CEdit_SaveData(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00403170 END
 
 // !FUNC 0x00403190 BEGIN
 /* 403190-403196 00006 */
-uint CEdit::CEdit_IsEditMarker() { STUB_BODY(); return 0; }
+uint CEdit::CEdit_GetDataSize() { STUB_BODY(); return 0; }
 // !FUNC 0x00403190 END
 
 // !FUNC 0x00404530 BEGIN
@@ -99,7 +99,7 @@ uchar CEdit::CEdit_OnChar(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00407d20 BEGIN
 /* 407D20-407D49 00029 */
-uchar CEdit::CEdit_Invalidate(int* param_1) { STUB_BODY(); return 0; }
+uchar CEdit::CEdit_LoadData(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00407d20 END
 
 // !FUNC 0x0040ba00 BEGIN

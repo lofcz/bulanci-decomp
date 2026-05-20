@@ -1,9 +1,12 @@
 #include "CBulanci.h"
+
+// !PROLOGUE BEGIN
 #include "_Globals.h"
 
 CBulanci::~CBulanci() {
 	reinterpret_cast<_Globals*>(this)->FUN_0042d2d0(this);
 }
+// !PROLOGUE END
 
 // !FUNC 0x00401350 BEGIN
 /* 401350-4013A7 00057 */
@@ -298,7 +301,7 @@ uchar CBulanci::CGame_GetOrCreateLevelScore(void* param_1) { STUB_BODY(); return
 
 // !FUNC 0x00416770 BEGIN
 /* 416770-416773 00003 */
-uchar CBulanci::FUN_00416770() { STUB_BODY(); return 0; }
+uchar CBulanci::CDSView_OnMouseDummy() { STUB_BODY(); return 0; }
 // !FUNC 0x00416770 END
 
 // !FUNC 0x00416a70 BEGIN
@@ -356,11 +359,6 @@ uint* CBulanci::CGaming_ctor(int* param_1) { STUB_BODY(); return 0; }
 uchar CBulanci::Catch_00420455() { STUB_BODY(); return 0; }
 // !FUNC 0x00420455 END
 
-// !FUNC 0x00422550 BEGIN
-/* 422550-4225FC 000AC */
-void* CBulanci::FUN_00422550(uchar* param_1, uint param_2, int param_3, uint param_4, char param_5) { STUB_BODY(); return 0; }
-// !FUNC 0x00422550 END
-
 // !FUNC 0x00423ea0 BEGIN
 /* 423EA0-423EEF 0004F */
 uchar CBulanci::CRuch_EnableDisable(char param_1) { STUB_BODY(); return 0; }
@@ -375,11 +373,6 @@ uchar CBulanci::CMenu_EnableAllRuch(char param_1) { STUB_BODY(); return 0; }
 /* 424BC0-424CED 0012D */
 uint* CBulanci::CSwitch_ctor(uint param_1, uint param_2, int param_3, ushort param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00424bc0 END
-
-// !FUNC 0x004252a0 BEGIN
-/* 4252A0-4252E9 00049 */
-uchar CBulanci::CMenu_LoadInfoOverlayBg(uint param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x004252a0 END
 
 // !FUNC 0x004252f0 BEGIN
 /* 4252F0-425333 00043 */
@@ -538,17 +531,17 @@ uint CBulanci::CDSView_OnChar(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042c2e0 BEGIN
 /* 42C2E0-42C318 00038 */
-int CBulanci::FUN_0042c2e0(int param_1) { STUB_BODY(); return 0; }
+int CBulanci::CDSView_GetDataSize(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042c2e0 END
 
 // !FUNC 0x0042c320 BEGIN
 /* 42C320-42C364 00044 */
-uchar CBulanci::FUN_0042c320(int param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CDSView_SaveData(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042c320 END
 
 // !FUNC 0x0042c370 BEGIN
 /* 42C370-42C3B4 00044 */
-uchar CBulanci::FUN_0042c370(int param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CDSView_LoadData(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042c370 END
 
 // !FUNC 0x0042c3e0 BEGIN
@@ -708,7 +701,7 @@ uchar CBulanci::InitializeClassIdLookup(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042f3e0 BEGIN
 /* 42F3E0-42F404 00024 */
-uint CBulanci::FUN_0042f3e0(int* param_1) { STUB_BODY(); return 0; }
+uint CBulanci::CDSEventHandler_EnqueueEvent(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042f3e0 END
 
 // !FUNC 0x0042f4b0 BEGIN

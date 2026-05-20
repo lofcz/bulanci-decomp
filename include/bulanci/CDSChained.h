@@ -9,7 +9,7 @@ public:
 	/* 4032C0 */ uchar* FUN_004032c0();
 	// !DECL 0x004032c0 END
 	// !DECL 0x004032d0 BEGIN
-	/* 4032D0 */ uint* FUN_004032d0(uint* param_1);
+	/* 4032D0 */ uint* CDSChained_ctor(uint* param_1);
 	// !DECL 0x004032d0 END
 	// !DECL 0x0040b560 BEGIN
 	/* 40B560 */ uint* FUN_0040b560(uint* param_1);

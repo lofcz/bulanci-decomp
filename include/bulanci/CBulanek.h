@@ -75,7 +75,7 @@ public:
 	/* 4179E0 */ uchar FUN_004179e0(uchar param_1);
 	// !DECL 0x004179e0 END
 	// !DECL 0x00417e40 BEGIN
-	/* 417E40 */ bool FUN_00417e40(uchar param_1);
+	/* 417E40 */ bool CGaming_IsPlayerSlotOccupied(uchar param_1);
 	// !DECL 0x00417e40 END
 	// !DECL 0x00417f80 BEGIN
 	/* 417F80 */ uint FUN_00417f80(uchar param_1);
@@ -102,7 +102,7 @@ public:
 	/* 418EE0 */ uchar FUN_00418ee0(uchar param_1);
 	// !DECL 0x00418ee0 END
 	// !DECL 0x004192b0 BEGIN
-	/* 4192B0 */ uint FUN_004192b0(uchar param_1);
+	/* 4192B0 */ uint CBulanek_CheckSlotCollision(uchar param_1);
 	// !DECL 0x004192b0 END
 	// !DECL 0x004194b0 BEGIN
 	/* 4194B0 */ uint FUN_004194b0(uint param_1, uint param_2);

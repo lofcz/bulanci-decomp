@@ -2,6 +2,7 @@
 #define _C_TCP_IP_CONFIG
 
 #include <globals.h>
+
 #include "CWindow.h"
 
 class CTcpIpConfig : public CWindow {
@@ -10,7 +11,7 @@ public:
 	/* 40C060 */ CTcpIpConfig();
 	// !DECL 0x0040c060 END
 	// !DECL 0x0040c2c0 BEGIN
-	/* 40C2C0 */ virtual uchar* GetClassMeta();
+	/* 40C2C0 */ uchar* GetClassMeta();
 	// !DECL 0x0040c2c0 END
 };
 

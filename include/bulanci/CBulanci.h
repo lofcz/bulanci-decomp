@@ -18,6 +18,7 @@ public:
 		FUN_0042d510(param_1);
 	}
 	~CBulanci();
+
 	// !DECL 0x00401350 BEGIN
 	/* 401350 */ int* FUN_00401350(int* param_1);
 	// !DECL 0x00401350 END
@@ -190,7 +191,7 @@ public:
 	/* 414280 */ uchar CGame_GetOrCreateLevelScore(void* param_1);
 	// !DECL 0x00414280 END
 	// !DECL 0x00416770 BEGIN
-	/* 416770 */ uchar FUN_00416770();
+	/* 416770 */ uchar CDSView_OnMouseDummy();
 	// !DECL 0x00416770 END
 	// !DECL 0x00416a70 BEGIN
 	/* 416A70 */ uchar FUN_00416a70(uint param_1, uint param_2);
@@ -225,9 +226,6 @@ public:
 	// !DECL 0x00420455 BEGIN
 	/* 420455 */ uchar Catch_00420455();
 	// !DECL 0x00420455 END
-	// !DECL 0x00422550 BEGIN
-	/* 422550 */ static void* FUN_00422550(uchar* param_1, uint param_2, int param_3, uint param_4, char param_5);
-	// !DECL 0x00422550 END
 	// !DECL 0x00423ea0 BEGIN
 	/* 423EA0 */ uchar CRuch_EnableDisable(char param_1);
 	// !DECL 0x00423ea0 END
@@ -237,9 +235,6 @@ public:
 	// !DECL 0x00424bc0 BEGIN
 	/* 424BC0 */ uint* CSwitch_ctor(uint param_1, uint param_2, int param_3, ushort param_4);
 	// !DECL 0x00424bc0 END
-	// !DECL 0x004252a0 BEGIN
-	/* 4252A0 */ uchar CMenu_LoadInfoOverlayBg(uint param_1);
-	// !DECL 0x004252a0 END
 	// !DECL 0x004252f0 BEGIN
 	/* 4252F0 */ uchar CMenu_SetDayNightBg(char param_1);
 	// !DECL 0x004252f0 END
@@ -334,13 +329,13 @@ public:
 	/* 42C100 */ uint CDSView_OnChar(int param_1);
 	// !DECL 0x0042c100 END
 	// !DECL 0x0042c2e0 BEGIN
-	/* 42C2E0 */ int FUN_0042c2e0(int param_1);
+	/* 42C2E0 */ int CDSView_GetDataSize(int param_1);
 	// !DECL 0x0042c2e0 END
 	// !DECL 0x0042c320 BEGIN
-	/* 42C320 */ uchar FUN_0042c320(int param_1);
+	/* 42C320 */ uchar CDSView_SaveData(int param_1);
 	// !DECL 0x0042c320 END
 	// !DECL 0x0042c370 BEGIN
-	/* 42C370 */ uchar FUN_0042c370(int param_1);
+	/* 42C370 */ uchar CDSView_LoadData(int param_1);
 	// !DECL 0x0042c370 END
 	// !DECL 0x0042c3e0 BEGIN
 	/* 42C3E0 */ uint CDSView_IsModalDoneRecursive(uint param_1);
@@ -436,7 +431,7 @@ public:
 	/* 42EA20 */ static uchar InitializeClassIdLookup(int param_1);
 	// !DECL 0x0042ea20 END
 	// !DECL 0x0042f3e0 BEGIN
-	/* 42F3E0 */ uint FUN_0042f3e0(int* param_1);
+	/* 42F3E0 */ uint CDSEventHandler_EnqueueEvent(int* param_1);
 	// !DECL 0x0042f3e0 END
 	// !DECL 0x0042f4b0 BEGIN
 	/* 42F4B0 */ static uchar FUN_0042f4b0(int param_1, uint param_2, uint param_3, uint param_4);

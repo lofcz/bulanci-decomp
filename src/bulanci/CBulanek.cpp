@@ -117,7 +117,7 @@ uchar CBulanek::FUN_004179e0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00417e40 BEGIN
 /* 417E40-417E76 00036 */
-bool CBulanek::FUN_00417e40(uchar param_1) { STUB_BODY(); return 0; }
+bool CBulanek::CGaming_IsPlayerSlotOccupied(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00417e40 END
 
 // !FUNC 0x00417f80 BEGIN
@@ -164,7 +164,7 @@ uchar CBulanek::FUN_00418ee0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004192b0 BEGIN
 /* 4192B0-41947A 001CA */
-uint CBulanek::FUN_004192b0(uchar param_1) { STUB_BODY(); return 0; }
+uint CBulanek::CBulanek_CheckSlotCollision(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004192b0 END
 
 // !FUNC 0x004194b0 BEGIN

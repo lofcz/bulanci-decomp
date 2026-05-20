@@ -9,7 +9,7 @@ public:
 	/* 402FB0 */ uchar CRadio_OnMouseDown(uint param_1, short param_2);
 	// !DECL 0x00402fb0 END
 	// !DECL 0x00403010 BEGIN
-	/* 403010 */ uint CRadio_IsRadioMarker();
+	/* 403010 */ uint CRadio_GetDataSize();
 	// !DECL 0x00403010 END
 	// !DECL 0x00403020 BEGIN
 	/* 403020 */ uchar CRadio_Invalidate(int* param_1);
@@ -21,7 +21,7 @@ public:
 	/* 403CC0 */ uchar CRadio_SetSelected(char param_1);
 	// !DECL 0x00403cc0 END
 	// !DECL 0x00403d10 BEGIN
-	/* 403D10 */ uchar CRadio_SetSelectedFromPtr(char* param_1);
+	/* 403D10 */ uchar CRadio_LoadData(char* param_1);
 	// !DECL 0x00403d10 END
 	// !DECL 0x00405240 BEGIN
 	/* 405240 */ uchar CRadio_OnMouseUp(uint param_1, uchar param_2);
@@ -51,7 +51,7 @@ public:
 	/* 408540 */ uint* CRadio_BuildAt(uint param_1, uint param_2);
 	// !DECL 0x00408540 END
 	// !DECL 0x0040aa00 BEGIN
-	/* 40AA00 */ uchar FUN_0040aa00(uchar* param_1);
+	/* 40AA00 */ uchar CRadio_SaveData(uchar* param_1);
 	// !DECL 0x0040aa00 END
 };
 

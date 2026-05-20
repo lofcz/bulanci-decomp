@@ -9,10 +9,10 @@ public:
 	/* 403150 */ uchar CEdit_GetTextLength(int param_1);
 	// !DECL 0x00403150 END
 	// !DECL 0x00403170 BEGIN
-	/* 403170 */ uchar CEdit_CopyText(void* param_1);
+	/* 403170 */ uchar CEdit_SaveData(void* param_1);
 	// !DECL 0x00403170 END
 	// !DECL 0x00403190 BEGIN
-	/* 403190 */ uint CEdit_IsEditMarker();
+	/* 403190 */ uint CEdit_GetDataSize();
 	// !DECL 0x00403190 END
 	// !DECL 0x00404530 BEGIN
 	/* 404530 */ uchar CEdit_MeasureCharWidth(uchar param_1);
@@ -60,6 +60,7 @@ public:
 	CEdit(RECT rect, uint param_5, uint param_6, uint param_7, uint param_8) {
 		CEdit_BuildAt(rect.left, rect.top, rect.right, rect.bottom, param_5, param_6, param_7, param_8);
 	}
+
 	// !DECL 0x004078f0 BEGIN
 	/* 4078F0 */ char FUN_004078f0(uchar* param_1, uchar* param_2);
 	// !DECL 0x004078f0 END
@@ -67,7 +68,7 @@ public:
 	/* 407B40 */ uchar CEdit_OnChar(uchar param_1);
 	// !DECL 0x00407b40 END
 	// !DECL 0x00407d20 BEGIN
-	/* 407D20 */ uchar CEdit_Invalidate(int* param_1);
+	/* 407D20 */ uchar CEdit_LoadData(int* param_1);
 	// !DECL 0x00407d20 END
 	// !DECL 0x0040ba00 BEGIN
 	/* 40BA00 */ uchar FUN_0040ba00(uchar param_1);

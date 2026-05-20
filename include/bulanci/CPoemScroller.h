@@ -48,7 +48,7 @@ public:
 	/* 4264E0 */ uint* ScalarDeletingDestructor(uchar param_1);
 	// !DECL 0x004264e0 END
 	// !DECL 0x00433280 BEGIN
-	/* 433280 */ uchar FUN_00433280(int* param_1);
+	/* 433280 */ uchar rect_Intersect(int* param_1);
 	// !DECL 0x00433280 END
 	// !DECL 0x00435c20 BEGIN
 	/* 435C20 */ int FUN_00435c20(uint param_1);

@@ -2,6 +2,7 @@
 #define _C_STATIC_TEXT
 
 #include <globals.h>
+
 #include "CBulanci.h"
 
 class CStaticText {

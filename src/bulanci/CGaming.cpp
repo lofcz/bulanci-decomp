@@ -67,12 +67,12 @@ int CGaming::FUN_00416940(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00419ca0 BEGIN
 /* 419CA0-419D14 00074 */
-uchar CGaming::FUN_00419ca0(int* param_1) { STUB_BODY(); return 0; }
+uchar CGaming::CGaming_UnregisterAndRemoveObject(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00419ca0 END
 
 // !FUNC 0x00419d20 BEGIN
 /* 419D20-419D60 00040 */
-uchar CGaming::FUN_00419d20(void* param_1) { STUB_BODY(); return 0; }
+uchar CGaming::CGaming_ClearAllEntities(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00419d20 END
 
 // !FUNC 0x00419e40 BEGIN
@@ -87,7 +87,7 @@ uchar CGaming::FUN_0041a270(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041a2a0 BEGIN
 /* 41A2A0-41A2EC 0004C */
-uchar CGaming::FUN_0041a2a0(void* param_1) { STUB_BODY(); return 0; }
+uchar CGaming::CGaming_CleanupInactiveBullets(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a2a0 END
 
 // !FUNC 0x0041ab70 BEGIN
@@ -159,7 +159,7 @@ uint* CGaming::FUN_0041bee0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041c140 BEGIN
 /* 41C140-41C284 00144 */
-uchar CGaming::FUN_0041c140(char param_1) { STUB_BODY(); return 0; }
+uchar CGaming::CGaming_OnResumeOrStartGame(char param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041c140 END
 
 // !FUNC 0x0041c290 BEGIN

@@ -89,7 +89,7 @@ uchar CDSApp::FUN_0042c7d0(ushort param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042ccf0 BEGIN
 /* 42CCF0-42CE30 00140 */
-uchar CDSApp::FUN_0042ccf0(int param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSView_RenderChildren(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042ccf0 END
 
 // !FUNC 0x0042e770 BEGIN

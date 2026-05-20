@@ -1,4 +1,6 @@
 #include "CTcpIpConfig.h"
+
+// !PROLOGUE BEGIN
 #include "CBulanci.h"
 #include "CWindow.h"
 #include "CStaticText.h"
@@ -7,6 +9,7 @@
 #include "_Globals.h"
 
 #define g_pStaticTextsPool (*reinterpret_cast<const wchar_t***>(&PTR_PTR_004afbbc))
+// !PROLOGUE END
 
 // !FUNC 0x0040c060 BEGIN
 /* 40C060-40C2BB 0025B */
@@ -73,3 +76,4 @@ uchar* CTcpIpConfig::GetClassMeta() {
     return reinterpret_cast<uchar*>(&DAT_004b34e8);
 }
 // !FUNC 0x0040c2c0 END
+

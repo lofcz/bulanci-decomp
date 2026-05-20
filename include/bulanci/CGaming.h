@@ -45,10 +45,10 @@ public:
 	/* 416940 */ int FUN_00416940(int param_1);
 	// !DECL 0x00416940 END
 	// !DECL 0x00419ca0 BEGIN
-	/* 419CA0 */ uchar FUN_00419ca0(int* param_1);
+	/* 419CA0 */ uchar CGaming_UnregisterAndRemoveObject(int* param_1);
 	// !DECL 0x00419ca0 END
 	// !DECL 0x00419d20 BEGIN
-	/* 419D20 */ uchar FUN_00419d20(void* param_1);
+	/* 419D20 */ uchar CGaming_ClearAllEntities(void* param_1);
 	// !DECL 0x00419d20 END
 	// !DECL 0x00419e40 BEGIN
 	/* 419E40 */ uchar FUN_00419e40(void* param_1);
@@ -57,7 +57,7 @@ public:
 	/* 41A270 */ uchar FUN_0041a270(uint* param_1);
 	// !DECL 0x0041a270 END
 	// !DECL 0x0041a2a0 BEGIN
-	/* 41A2A0 */ uchar FUN_0041a2a0(void* param_1);
+	/* 41A2A0 */ uchar CGaming_CleanupInactiveBullets(void* param_1);
 	// !DECL 0x0041a2a0 END
 	// !DECL 0x0041ab70 BEGIN
 	/* 41AB70 */ uint* FUN_0041ab70(uint* param_1);
@@ -99,7 +99,7 @@ public:
 	/* 41BEE0 */ uint* FUN_0041bee0(uchar param_1);
 	// !DECL 0x0041bee0 END
 	// !DECL 0x0041c140 BEGIN
-	/* 41C140 */ uchar FUN_0041c140(char param_1);
+	/* 41C140 */ uchar CGaming_OnResumeOrStartGame(char param_1);
 	// !DECL 0x0041c140 END
 	// !DECL 0x0041c290 BEGIN
 	/* 41C290 */ uchar FUN_0041c290(void* param_1);

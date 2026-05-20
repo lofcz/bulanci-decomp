@@ -508,7 +508,7 @@ public:
 	/* 417DD0 */ uchar FUN_00417dd0(uint param_1, char param_2, uint* param_3, char param_4);
 	// !DECL 0x00417dd0 END
 	// !DECL 0x00417e80 BEGIN
-	/* 417E80 */ uchar FUN_00417e80(uchar param_1, uchar param_2, uchar param_3, int* param_4, char param_5);
+	/* 417E80 */ uchar CGaming_OnSlotPlacementEvent(uchar param_1, uchar param_2, uchar param_3, int* param_4, char param_5);
 	// !DECL 0x00417e80 END
 	// !DECL 0x00417fb0 BEGIN
 	/* 417FB0 */ uchar CGaming_RegisterObjectAtSlot(int param_1, uchar param_2);
@@ -577,10 +577,10 @@ public:
 	/* 41A020 */ uchar FUN_0041a020(void* param_1, int* param_2, uint param_3);
 	// !DECL 0x0041a020 END
 	// !DECL 0x0041a0f0 BEGIN
-	/* 41A0F0 */ uint FUN_0041a0f0(uchar param_1, uint* param_2);
+	/* 41A0F0 */ uint CGaming_TryGetPlayerCoords(uchar param_1, uint* param_2);
 	// !DECL 0x0041a0f0 END
 	// !DECL 0x0041a140 BEGIN
-	/* 41A140 */ uchar FUN_0041a140(int* param_1);
+	/* 41A140 */ uchar CGaming_RespawnPlayerAtSafeLocation(int* param_1);
 	// !DECL 0x0041a140 END
 	// !DECL 0x0041a6a0 BEGIN
 	/* 41A6A0 */ uint* CreateObject_0041a6a0();
@@ -676,19 +676,19 @@ public:
 	/* 41ED60 */ uchar DetonatePlayerMines(int param_1);
 	// !DECL 0x0041ed60 END
 	// !DECL 0x0041f0c0 BEGIN
-	/* 41F0C0 */ uchar FUN_0041f0c0(int* param_1);
+	/* 41F0C0 */ uchar CGaming_TickPlayerCollisions(int* param_1);
 	// !DECL 0x0041f0c0 END
 	// !DECL 0x0041f1d0 BEGIN
 	/* 41F1D0 */ uchar CGaming_SpawnSpecialPickupIfAllowed(char param_1);
 	// !DECL 0x0041f1d0 END
 	// !DECL 0x0041f230 BEGIN
-	/* 41F230 */ uchar FUN_0041f230(int* param_1, uchar param_2, uchar param_3, uchar param_4, int* param_5, int param_6);
+	/* 41F230 */ uchar CGaming_SpawnBulletAndPlaySound(int* param_1, uchar param_2, uchar param_3, uchar param_4, int* param_5, int param_6);
 	// !DECL 0x0041f230 END
 	// !DECL 0x0041f350 BEGIN
-	/* 41F350 */ uchar FUN_0041f350(int* param_1);
+	/* 41F350 */ uchar CGaming_ProcessRoundStateAndScoring(int* param_1);
 	// !DECL 0x0041f350 END
 	// !DECL 0x0041f500 BEGIN
-	/* 41F500 */ uchar FUN_0041f500(uchar param_1, uint* param_2, int param_3, int param_4, int param_5);
+	/* 41F500 */ uchar CGaming_SpawnAndInitializePlayer(uchar param_1, uint* param_2, int param_3, int param_4, int param_5);
 	// !DECL 0x0041f500 END
 	// !DECL 0x0041f5d0 BEGIN
 	/* 41F5D0 */ uchar FUN_0041f5d0(uint* param_1, int param_2, int param_3, int param_4);
@@ -735,9 +735,6 @@ public:
 	// !DECL 0x00422280 BEGIN
 	/* 422280 */ uint* CreateObject_00422280();
 	// !DECL 0x00422280 END
-	// !DECL 0x00422310 BEGIN
-	/* 422310 */ static void* FUN_00422310(uchar* param_1, int* param_2, int param_3, uint param_4, char param_5);
-	// !DECL 0x00422310 END
 	// !DECL 0x004223c0 BEGIN
 	/* 4223C0 */ uchar FUN_004223c0(int* param_1, uchar param_2);
 	// !DECL 0x004223c0 END
@@ -765,9 +762,6 @@ public:
 	// !DECL 0x00423f20 BEGIN
 	/* 423F20 */ uchar CSwitch_PlayHoverTrack(int param_1);
 	// !DECL 0x00423f20 END
-	// !DECL 0x00424010 BEGIN
-	/* 424010 */ uchar FUN_00424010(char param_1);
-	// !DECL 0x00424010 END
 	// !DECL 0x00424400 BEGIN
 	/* 424400 */ static uchar FUN_00424400(uint* param_1, int param_2);
 	// !DECL 0x00424400 END
@@ -1105,19 +1099,19 @@ public:
 	/* 42ECC0 */ static uint FUN_0042ecc0(void* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5);
 	// !DECL 0x0042ecc0 END
 	// !DECL 0x0042ecf0 BEGIN
-	/* 42ECF0 */ uint FUN_0042ecf0(uint* param_1);
+	/* 42ECF0 */ uint CDSQueue_Push(uint* param_1);
 	// !DECL 0x0042ecf0 END
 	// !DECL 0x0042ed70 BEGIN
-	/* 42ED70 */ uint FUN_0042ed70(int param_1);
+	/* 42ED70 */ uint CDSQueue_PopDiscard(int param_1);
 	// !DECL 0x0042ed70 END
 	// !DECL 0x0042eda0 BEGIN
-	/* 42EDA0 */ uint FUN_0042eda0(uint* param_1);
+	/* 42EDA0 */ uint CDSQueue_PopCopy(uint* param_1);
 	// !DECL 0x0042eda0 END
 	// !DECL 0x0042ee20 BEGIN
-	/* 42EE20 */ int FUN_0042ee20(int param_1);
+	/* 42EE20 */ int CDSQueue_Peek(int param_1);
 	// !DECL 0x0042ee20 END
 	// !DECL 0x0042ee40 BEGIN
-	/* 42EE40 */ uchar FUN_0042ee40(int param_1);
+	/* 42EE40 */ uchar CDSQueue_SetCapacity(int param_1);
 	// !DECL 0x0042ee40 END
 	// !DECL 0x0042ef00 BEGIN
 	/* 42EF00 */ static uint InitializeByClassId(int param_1, uint param_2, int param_3);
@@ -1153,7 +1147,7 @@ public:
 	/* 42F590 */ static uint FUN_0042f590(void* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5);
 	// !DECL 0x0042f590 END
 	// !DECL 0x0042f5c0 BEGIN
-	/* 42F5C0 */ uint FUN_0042f5c0(int param_1);
+	/* 42F5C0 */ uint CDSQueue_Init(int param_1);
 	// !DECL 0x0042f5c0 END
 	// !DECL 0x0042f5f0 BEGIN
 	/* 42F5F0 */ uchar FUN_0042f5f0(int param_1);
@@ -1162,7 +1156,7 @@ public:
 	/* 42F620 */ uchar FUN_0042f620(int param_1);
 	// !DECL 0x0042f620 END
 	// !DECL 0x0042f640 BEGIN
-	/* 42F640 */ int FUN_0042f640(int param_1);
+	/* 42F640 */ int CDSEventHandler_ctor(int param_1);
 	// !DECL 0x0042f640 END
 	// !DECL 0x0042f690 BEGIN
 	/* 42F690 */ uchar FUN_0042f690(int param_1);
@@ -1599,12 +1593,6 @@ public:
 	// !DECL 0x0043a5e0 BEGIN
 	/* 43A5E0 */ static uchar FUN_0043a5e0(void* param_1, int param_2);
 	// !DECL 0x0043a5e0 END
-	// !DECL 0x0043a760 BEGIN
-	/* 43A760 */ uchar FUN_0043a760(int* param_1, uint param_2, uint param_3, uchar* param_4);
-	// !DECL 0x0043a760 END
-	// !DECL 0x0043a9d0 BEGIN
-	/* 43A9D0 */ uchar FUN_0043a9d0(uchar param_1);
-	// !DECL 0x0043a9d0 END
 	// !DECL 0x0043aae0 BEGIN
 	/* 43AAE0 */ uchar FUN_0043aae0(int param_1);
 	// !DECL 0x0043aae0 END
@@ -2038,7 +2026,7 @@ public:
 	/* 447897 */ static uint FID_conflict_CxxFrameHandler3(EHExceptionRecord* param_1, EHRegistrationNode* param_2, _CONTEXT* param_3, void* param_4);
 	// !DECL 0x00447897 END
 	// !DECL 0x00447c42 BEGIN
-	/* 447C42 */ static void* FUN_00447c42(size_t param_1);
+	/* 447C42 */ static uchar FUN_00447c42(size_t param_1);
 	// !DECL 0x00447c42 END
 	// !DECL 0x00447e6c BEGIN
 	/* 447E6C */ uchar FUN_00447e6c();

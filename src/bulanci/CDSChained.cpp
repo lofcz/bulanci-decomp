@@ -9,7 +9,7 @@ uchar* CDSChained::FUN_004032c0() {
 
 // !FUNC 0x004032d0 BEGIN
 /* 4032D0-40338A 000BA */
-uint* CDSChained::FUN_004032d0(uint* param_1) { STUB_BODY(); return 0; }
+uint* CDSChained::CDSChained_ctor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004032d0 END
 
 // !FUNC 0x0040b560 BEGIN

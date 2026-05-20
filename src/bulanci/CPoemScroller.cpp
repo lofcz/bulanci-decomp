@@ -74,7 +74,7 @@ uint* CPoemScroller::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); retu
 
 // !FUNC 0x00433280 BEGIN
 /* 433280-4332C8 00048 */
-uchar CPoemScroller::FUN_00433280(int* param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::rect_Intersect(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433280 END
 
 // !FUNC 0x00435c20 BEGIN

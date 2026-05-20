@@ -57,7 +57,7 @@ public:
 	/* 42C7D0 */ uchar FUN_0042c7d0(ushort param_1);
 	// !DECL 0x0042c7d0 END
 	// !DECL 0x0042ccf0 BEGIN
-	/* 42CCF0 */ uchar FUN_0042ccf0(int param_1);
+	/* 42CCF0 */ uchar CDSView_RenderChildren(int param_1);
 	// !DECL 0x0042ccf0 END
 	// !DECL 0x0042e770 BEGIN
 	/* 42E770 */ uchar CDSApp_InitClock();

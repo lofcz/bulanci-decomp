@@ -7,7 +7,7 @@ uchar CRadio::CRadio_OnMouseDown(uint param_1, short param_2) { STUB_BODY(); ret
 
 // !FUNC 0x00403010 BEGIN
 /* 403010-403016 00006 */
-uint CRadio::CRadio_IsRadioMarker() { STUB_BODY(); return 0; }
+uint CRadio::CRadio_GetDataSize() { STUB_BODY(); return 0; }
 // !FUNC 0x00403010 END
 
 // !FUNC 0x00403020 BEGIN
@@ -27,7 +27,7 @@ uchar CRadio::CRadio_SetSelected(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00403d10 BEGIN
 /* 403D10-403D20 00010 */
-uchar CRadio::CRadio_SetSelectedFromPtr(char* param_1) { STUB_BODY(); return 0; }
+uchar CRadio::CRadio_LoadData(char* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00403d10 END
 
 // !FUNC 0x00405240 BEGIN
@@ -79,6 +79,6 @@ uint* CRadio::CRadio_BuildAt(uint param_1, uint param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x0040aa00 BEGIN
 /* 40AA00-40AA0C 0000C */
-uchar CRadio::FUN_0040aa00(uchar* param_1) { STUB_BODY(); return 0; }
+uchar CRadio::CRadio_SaveData(uchar* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040aa00 END
 
