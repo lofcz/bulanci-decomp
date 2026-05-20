@@ -51753,7 +51753,7 @@ undefined LAB_0046c880;
 undefined FUN_0046c690;
 undefined FUN_0046c850;
 undefined LAB_00471280;
-undefined zlib::zcalloc;
+undefined zcalloc;
 pointer switchdataD_0046f324;
 undefined *PTR_s_buffer_error_004b2154;
 undefined *PTR_s_stream_error_004b2148;
@@ -52837,7 +52837,7 @@ bool CBulanci::FUN_00401c59(void)
     *(undefined1 *)((int)unaff_ESI + 0x4c8) = 1;
   }
   *(undefined4 *)(unaff_EBP + -4) = 0xffffffff;
-  CScore::FUN_0040e120((undefined4 *)(unaff_EBP + -0x90));
+  CScore::Destructor((undefined4 *)(unaff_EBP + -0x90));
   ExceptionList = *(void **)(unaff_EBP + -0xc);
   return unaff_BL == '\0';
 }
@@ -53254,7 +53254,7 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort param_1,undefi
   uint uVar3;
   CBulanci *pCVar4;
   undefined4 *this_00;
-  CBulanci local_9c [144];
+  CAdvertising local_9c [144];
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -53269,7 +53269,7 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort param_1,undefi
       if (param_1 == 0xf7) {
         CAdvertising::CAdvertising_ctor((undefined4 *)local_9c);
         local_4 = 1;
-        CAdvertising_LoadSplashImage(local_9c,0x1013a);
+        CAdvertising::LoadSplashImage(local_9c,0x1013a);
         _Globals::CDSView_DoModal(local_9c,this);
         local_4 = 0xffffffff;
         _Globals::FUN_00401a10((undefined4 *)local_9c);
@@ -53509,7 +53509,38 @@ void __fastcall CBulanci::FUN_004028d0(undefined4 *param_1)
 
 
 
-int * __thiscall CBulanci::FUN_00402990(CBulanci *this,int param_1,int param_2,int *param_3)
+// CBulanci::BuildBitmapCache(this, const u32* ids, count, ResourcePool* pool)
+// 
+// Builds the global BitmapSpecial cache for the menu/UI. NOT an
+// audio bank despite the Ghidra-named CDSAudioBank wrapper -- this
+// is a generic resource pre-cache.
+// 
+// Allocates an 8-byte slot-table header via FUN_00447c42(8), zeros
+// it, calls CDSAudioBank::FUN_00406340(this, count) which allocates
+// the slot pointer array (count * sizeof(void*)) and assigns it to
+// slot_table[0]. Then memsets the slot array to zero and stashes
+// the table at this+0x4b0.
+// 
+// Load loop (descending so count is decremented in place):
+//   - pool->Lookup(ids[i], 0) -> resource handle
+//   - HandleVirtualBaseCast(handle, 0xf) -> AddRef on subobject 0xf
+//   - HandleVirtualBaseCast(handle, 0xe) -> AddRef on subobject 0xe
+//   - slot_table->slots[i] = handle
+// 
+// Called exactly once from CBulanci_OnCreate @ 0x00402b56 with
+// (ids = 0x004ae008, count = 0x6e, pool = NULL -> uses this+0x70).
+// 
+// All 110 IDs in 0x004ae008 resolve to BitmapSpecial (class 28)
+// resources: menu/dialog backgrounds, CSwitch button frames, CRuch
+// gradient bands, etc. The dual-interface AddRef (0xe and 0xf) is
+// the standard CDSImage / IDSDrawable interface pair.
+// 
+// Not to be confused with the real audio bank at this+0x4c0
+// (AudioBankIndex 0x10004 -> AudioBank 0x10152). See
+// main_menu.md §1 step (c) and §10.
+
+int * __thiscall
+CBulanci::CBulanci_BuildBitmapCache(CBulanci *this,int param_1,int param_2,int *param_3)
 
 {
   int iVar1;
@@ -53616,7 +53647,7 @@ void __fastcall CBulanci::CBulanci_OnCreate(int *param_1)
   uVar2 = FUN_0042e730(piVar1);
   FUN_004477df(uVar2);
   CDSApp::CDSApp_OnCreate(param_1);
-  FUN_00402990((CBulanci *)param_1,0x4ae008,0x6e,(int *)0x0);
+  CBulanci_BuildBitmapCache((CBulanci *)param_1,0x4ae008,0x6e,(int *)0x0);
   iVar3 = (**(code **)(*(int *)param_1[0x1c] + 0x10))(0x10004,0);
   if ((int *)param_1[0x130] != (int *)0x0) {
     (**(code **)(*(int *)param_1[0x130] + 8))();
@@ -53783,7 +53814,9 @@ void __fastcall _Globals::FUN_00402e20(undefined4 *param_1)
 
 
 
-void __cdecl CScrollBar::FUN_00402e80(void *param_1,int param_2,int param_3,int param_4,int param_5)
+void __cdecl
+CScrollBar::CScrollBar_BlitVerticalTrack
+          (void *param_1,int param_2,int param_3,int param_4,int param_5)
 
 {
   CPoemScroller::FUN_00436310(param_1,param_2,param_3,param_4,0xb7b7b7,param_5);
@@ -53794,7 +53827,9 @@ void __cdecl CScrollBar::FUN_00402e80(void *param_1,int param_2,int param_3,int 
 
 
 
-void __cdecl CScrollBar::FUN_00402ee0(void *param_1,int param_2,int param_3,int param_4,int param_5)
+void __cdecl
+CScrollBar::CScrollBar_BlitHorizontalTrack
+          (void *param_1,int param_2,int param_3,int param_4,int param_5)
 
 {
   CPoemScroller::CDSImage_DrawVerticalLine(param_1,param_2,param_3,param_4,0xb7b7b7,param_5);
@@ -53816,7 +53851,7 @@ int __cdecl _Globals::FUN_00402f40(ushort param_1)
 
 
 
-void __fastcall CScrollBar::FUN_00402f60(int param_1)
+void __fastcall CScrollBar::CScrollBar_OnMouseMove(int param_1)
 
 {
   if ((*(byte *)(param_1 + 0xa4) & 3) == 1) {
@@ -53833,7 +53868,7 @@ void __fastcall CScrollBar::FUN_00402f60(int param_1)
 
 
 
-void __thiscall CRadio::FUN_00402fb0(CRadio *this,undefined4 param_1,short param_2)
+void __thiscall CRadio::CRadio_OnMouseDown(CRadio *this,undefined4 param_1,short param_2)
 
 {
   byte bVar1;
@@ -53855,7 +53890,7 @@ void __thiscall CRadio::FUN_00402fb0(CRadio *this,undefined4 param_1,short param
 
 
 
-undefined4 CRadio::FUN_00403010(void)
+undefined4 CRadio::CRadio_IsRadioMarker(void)
 
 {
   return 1;
@@ -53863,7 +53898,7 @@ undefined4 CRadio::FUN_00403010(void)
 
 
 
-void __fastcall CRadio::FUN_00403020(int *param_1)
+void __fastcall CRadio::CRadio_Invalidate(int *param_1)
 
 {
   code *pcVar1;
@@ -53876,7 +53911,7 @@ void __fastcall CRadio::FUN_00403020(int *param_1)
 
 
 
-void __thiscall CStaticText::FUN_00403040(CStaticText *this,void *param_1,int param_2)
+void __thiscall CStaticText::CStaticText_SetStyle(CStaticText *this,void *param_1,int param_2)
 
 {
   Runtime::MSVCRT::_memcpy(this + 0x84,param_1,param_2 * 4);
@@ -53885,7 +53920,7 @@ void __thiscall CStaticText::FUN_00403040(CStaticText *this,void *param_1,int pa
 
 
 
-void __thiscall CIcon::FUN_00403070(CIcon *this,undefined4 param_1,short param_2)
+void __thiscall CIcon::CIcon_OnMouseDown(CIcon *this,undefined4 param_1,short param_2)
 
 {
   if (param_2 == 1) {
@@ -53898,7 +53933,7 @@ void __thiscall CIcon::FUN_00403070(CIcon *this,undefined4 param_1,short param_2
 
 
 
-void __fastcall CIcon::FUN_004030a0(int *param_1)
+void __fastcall CIcon::CIcon_Invalidate(int *param_1)
 
 {
   (**(code **)(*param_1 + 0x24))(0,0);
@@ -53907,7 +53942,7 @@ void __fastcall CIcon::FUN_004030a0(int *param_1)
 
 
 
-void __fastcall CButton::FUN_004030b0(int param_1)
+void __fastcall CButton::CButton_PlayClickSound(int param_1)
 
 {
   int *piVar1;
@@ -53923,7 +53958,7 @@ void __fastcall CButton::FUN_004030b0(int param_1)
 
 
 
-void __thiscall CButton::FUN_004030e0(CButton *this,undefined4 param_1,short param_2)
+void __thiscall CButton::CButton_OnMouseDown(CButton *this,undefined4 param_1,short param_2)
 
 {
   byte bVar1;
@@ -53932,7 +53967,7 @@ void __thiscall CButton::FUN_004030e0(CButton *this,undefined4 param_1,short par
     bVar1 = _Globals::CDSView_AcquireKeyboardFocus((int *)this);
     if (bVar1 != 0) {
       this[0x8f] = (CButton)0x1;
-      FUN_004030b0((int)this);
+      CButton_PlayClickSound((int)this);
       _Globals::FUN_0042c860((int *)this);
       (**(code **)(*(int *)this + 0x24))(0,0);
     }
@@ -53953,7 +53988,7 @@ void __fastcall CScroller::FUN_00403120(void *param_1)
 
 
 
-void __fastcall CEdit::FUN_00403150(int param_1)
+void __fastcall CEdit::CEdit_GetTextLength(int param_1)
 
 {
   *(bool *)(param_1 + 0x38) = *(char *)(param_1 + 0x38) == '\0';
@@ -53963,7 +53998,7 @@ void __fastcall CEdit::FUN_00403150(int param_1)
 
 
 
-void __thiscall CEdit::FUN_00403170(CEdit *this,void *param_1)
+void __thiscall CEdit::CEdit_CopyText(CEdit *this,void *param_1)
 
 {
   _Globals::FUN_0042d490(param_1,(int *)(this + 0x98));
@@ -53972,7 +54007,7 @@ void __thiscall CEdit::FUN_00403170(CEdit *this,void *param_1)
 
 
 
-undefined4 CEdit::FUN_00403190(void)
+undefined4 CEdit::CEdit_IsEditMarker(void)
 
 {
   return 4;
@@ -53980,7 +54015,7 @@ undefined4 CEdit::FUN_00403190(void)
 
 
 
-void __thiscall CNumEdit::FUN_004031a0(CNumEdit *this,undefined4 *param_1)
+void __thiscall CNumEdit::CNumEdit_GetValue(CNumEdit *this,undefined4 *param_1)
 
 {
   *param_1 = *(undefined4 *)(this + 0xc0);
@@ -54068,7 +54103,7 @@ void __cdecl _Globals::FUN_00403240(undefined4 *param_1,undefined4 *param_2,int 
 
 
 
-undefined4 __fastcall CPoemScroller::FUN_004032a0(int *param_1)
+undefined4 __fastcall CPoemScroller::DeletingDestructorThunk_18(int *param_1)
 
 {
   if ((*param_1 < param_1[2]) && (param_1[1] < param_1[3])) {
@@ -54156,7 +54191,7 @@ bool __thiscall CGaming::FUN_004033b0(CGaming *this,uint param_1)
 
 
 
-undefined4 * __fastcall CScroller::FUN_004033d0(undefined4 *param_1)
+undefined4 * __fastcall CScroller::CScroller_ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -54277,7 +54312,7 @@ void __fastcall CDSObject::FUN_00403510(undefined4 *param_1)
 
 
 
-undefined * CBlackView::FUN_00403520(void)
+undefined * CBlackView::GetClassTable(void)
 
 {
   return &DAT_004b3428;
@@ -54285,7 +54320,7 @@ undefined * CBlackView::FUN_00403520(void)
 
 
 
-void __fastcall CScrollBar::FUN_00403530(int param_1)
+void __fastcall CScrollBar::CScrollBar_Render(int param_1)
 
 {
   int iVar1;
@@ -54347,8 +54382,8 @@ void __fastcall CScrollBar::FUN_00403530(int param_1)
     iVar8 = *(int *)(param_1 + 0x3c) - iVar6;
     iVar6 = *(int *)(param_1 + 0x34) + iVar6;
     iVar9 = (*piVar11 + -9) / 2;
-    FUN_00402ee0(local_28,*(int *)(param_1 + 0x30) + iVar9,iVar6,iVar8,iVar5);
-    FUN_00402ee0(local_28,*(int *)(param_1 + 0x30) + 9 + iVar9,iVar6,iVar8,iVar5);
+    CScrollBar_BlitHorizontalTrack(local_28,*(int *)(param_1 + 0x30) + iVar9,iVar6,iVar8,iVar5);
+    CScrollBar_BlitHorizontalTrack(local_28,*(int *)(param_1 + 0x30) + 9 + iVar9,iVar6,iVar8,iVar5);
   }
   else {
     iVar6 = *piVar11;
@@ -54357,8 +54392,8 @@ void __fastcall CScrollBar::FUN_00403530(int param_1)
     iVar8 = *(int *)(param_1 + 0x38) - iVar6;
     iVar6 = *(int *)(param_1 + 0x30) + iVar6;
     iVar9 = (*(int *)(iVar1 + 8) + -9) / 2;
-    FUN_00402e80(local_28,iVar6,*(int *)(param_1 + 0x34) + iVar9,iVar8,iVar5);
-    FUN_00402e80(local_28,iVar6,iVar9 + 6 + *(int *)(param_1 + 0x34),iVar8,iVar5);
+    CScrollBar_BlitVerticalTrack(local_28,iVar6,*(int *)(param_1 + 0x34) + iVar9,iVar8,iVar5);
+    CScrollBar_BlitVerticalTrack(local_28,iVar6,iVar9 + 6 + *(int *)(param_1 + 0x34),iVar8,iVar5);
   }
   iVar5 = 0;
   if (*(int *)(param_1 + 0xac) != *(int *)(param_1 + 0xa8)) {
@@ -54397,7 +54432,7 @@ void __fastcall CScrollBar::FUN_00403530(int param_1)
 
 
 
-undefined8 __thiscall CScrollBar::FUN_00403860(CScrollBar *this,int *param_1)
+undefined8 __thiscall CScrollBar::CScrollBar_HitTest(CScrollBar *this,int *param_1)
 
 {
   uint uVar1;
@@ -54457,20 +54492,20 @@ undefined8 __thiscall CScrollBar::FUN_00403860(CScrollBar *this,int *param_1)
 
 
 
-void __thiscall CScrollBar::FUN_00403980(CScrollBar *this,int *param_1)
+void __thiscall CScrollBar::CScrollBar_OnKeyDown(CScrollBar *this,int *param_1)
 
 {
   code *pcVar1;
   CScrollBar CVar2;
   undefined8 uVar3;
   
-  uVar3 = FUN_00403860(this,param_1);
+  uVar3 = CScrollBar_HitTest(this,param_1);
   switch((int)uVar3) {
   case 1:
     if (((byte)this[0xa4] & 3) != 0) {
       return;
     }
-    FUN_00402f60((int)this);
+    CScrollBar_OnMouseMove((int)this);
     CVar2 = (CScrollBar)((byte)this[0xa4] & 0xfd | 1);
     goto LAB_00403a46;
   case 2:
@@ -54478,14 +54513,14 @@ void __thiscall CScrollBar::FUN_00403980(CScrollBar *this,int *param_1)
     CVar2 = this[0xa4];
     if (((((byte)CVar2 & 3) == 1) || (((byte)CVar2 & 0xc) == 4)) || (((byte)CVar2 & 0x30) == 0x10))
     {
-      FUN_00402f60((int)this);
+      CScrollBar_OnMouseMove((int)this);
       (**(code **)(*(int *)this + 0x24))(0,0);
       return;
     }
     break;
   case 3:
     if (((byte)this[0xa4] & 0xc) == 0) {
-      FUN_00402f60((int)this);
+      CScrollBar_OnMouseMove((int)this);
       this[0xa4] = (CScrollBar)((byte)this[0xa4] & 0xf7 | 4);
       (**(code **)(*(int *)this + 0x24))(0,0);
       return;
@@ -54495,7 +54530,7 @@ void __thiscall CScrollBar::FUN_00403980(CScrollBar *this,int *param_1)
     if (((byte)this[0xa4] & 0x30) != 0) {
       return;
     }
-    FUN_00402f60((int)this);
+    CScrollBar_OnMouseMove((int)this);
     CVar2 = (CScrollBar)((byte)this[0xa4] & 0xdf | 0x10);
 LAB_00403a46:
     pcVar1 = *(code **)(*(int *)this + 0x24);
@@ -54507,7 +54542,7 @@ LAB_00403a46:
 
 
 
-void __fastcall CScrollBar::FUN_00403a80(int param_1)
+void __fastcall CScrollBar::CScrollBar_OnTimerTick(int param_1)
 
 {
   byte bVar1;
@@ -54515,7 +54550,7 @@ void __fastcall CScrollBar::FUN_00403a80(int param_1)
   
   bVar1 = *(byte *)(param_1 + 0xa4);
   if ((((bVar1 & 3) == 1) || ((bVar1 & 0xc) == 4)) || ((bVar1 & 0x30) == 0x10)) {
-    FUN_00402f60(param_1);
+    CScrollBar_OnMouseMove(param_1);
     (**(code **)(*extraout_ECX + 0x24))(0,0);
   }
   return;
@@ -54523,7 +54558,7 @@ void __fastcall CScrollBar::FUN_00403a80(int param_1)
 
 
 
-void __fastcall CRadio::FUN_00403ac0(int param_1)
+void __fastcall CRadio::CRadio_Render(int param_1)
 
 {
   int iVar1;
@@ -54624,7 +54659,7 @@ void __fastcall CRadio::FUN_00403ac0(int param_1)
 
 
 
-void __thiscall CRadio::FUN_00403cc0(CRadio *this,char param_1)
+void __thiscall CRadio::CRadio_SetSelected(CRadio *this,char param_1)
 
 {
   void *pvVar1;
@@ -54645,10 +54680,10 @@ void __thiscall CRadio::FUN_00403cc0(CRadio *this,char param_1)
 
 
 
-void __thiscall CRadio::FUN_00403d10(CRadio *this,char *param_1)
+void __thiscall CRadio::CRadio_SetSelectedFromPtr(CRadio *this,char *param_1)
 
 {
-  FUN_00403cc0(this,*param_1);
+  CRadio_SetSelected(this,*param_1);
   return;
 }
 
@@ -54687,7 +54722,7 @@ uint __thiscall CWindow::FUN_00403d60(CWindow *this,char param_1,char param_2)
   
   if (param_1 == '\t') {
     if (param_2 == '\0') {
-      bVar1 = FUN_0042ccd0(this,~*(byte *)((int)g_pApp + 0x110) & 1);
+      bVar1 = CWindow_FocusSibling(this,~*(byte *)((int)g_pApp + 0x110) & 1);
       uVar2 = CONCAT31(extraout_var,bVar1);
       if (bVar1 != 0) goto LAB_00403e2a;
     }
@@ -54726,7 +54761,7 @@ LAB_00403e2a:
 
 
 
-void __fastcall CIcon::FUN_00403e40(int param_1)
+void __fastcall CIcon::CIcon_Render(int param_1)
 
 {
   CPoemScroller *this;
@@ -54759,7 +54794,7 @@ void __fastcall CIcon::FUN_00403e40(int param_1)
 
 
 
-void __thiscall CIcon::FUN_00403ea0(CIcon *this,undefined4 param_1,byte param_2)
+void __thiscall CIcon::CIcon_OnMouseUp(CIcon *this,undefined4 param_1,byte param_2)
 
 {
   char cVar1;
@@ -54791,7 +54826,7 @@ void __thiscall CIcon::FUN_00403ea0(CIcon *this,undefined4 param_1,byte param_2)
 
 
 
-void __thiscall CButton::FUN_00403f20(CButton *this,undefined4 param_1,byte param_2)
+void __thiscall CButton::CButton_OnMouseUp(CButton *this,undefined4 param_1,byte param_2)
 
 {
   char cVar1;
@@ -54818,7 +54853,37 @@ void __thiscall CButton::FUN_00403f20(CButton *this,undefined4 param_1,byte para
 
 
 
-uint __thiscall CButton::FUN_00403f90(CButton *this,byte param_1,char param_2)
+// CButton::OnKeyDown(this, scanCode, isKeyUp)
+// 
+// Vtable slot for OnKeyDown (the input-aware view chain calls this
+// when the button is in keyboard focus).
+// 
+// Guard: ignores the event if (a) the button is already pressed
+// (this+0x8f != 0), (b) it's a key-up edge (isKeyUp != 0), or
+// (c) g_pApp+0x111 has bits 0..1 set (engine 'all-input-blocked'
+// state, e.g. during modal transitions).
+// 
+// Scancodes handled:
+//   0x0d (RETURN / Enter):
+//     - Fire cmd: Scheduler_PostMessage(parent+0x10, 0x100,
+//       this+0x8c, 0, 0).
+//     - Play click sound via CButton_PlayClickSound.
+//     - Return 1 (handled).
+//   0x25 / 0x26 (LEFT / UP):
+//     - CWindow::FUN_0042ccd0(parent@this+0x4c, false)
+//       -> move focus to previous sibling.
+//     - Return 1.
+//   0x27 / 0x28 (RIGHT / DOWN):
+//     - CWindow::FUN_0042ccd0(parent@this+0x4c, true)
+//       -> move focus to next sibling.
+//     - Return 1.
+//   Anything else: return 0 (event not consumed).
+// 
+// This is the per-button arrow-key navigation that lets you walk
+// between Yes/No/Cancel-style buttons in CExitDlg etc. without a
+// mouse.
+
+uint __thiscall CButton::CButton_OnKeyDown(CButton *this,byte param_1,char param_2)
 
 {
   void *in_EAX;
@@ -54839,15 +54904,15 @@ uint __thiscall CButton::FUN_00403f90(CButton *this,byte param_1,char param_2)
         pvVar1 = (void *)(*(int *)(this + 0x4c) + 0x10);
       }
       _Globals::FUN_0042f590(pvVar1,0x100,*(undefined2 *)(this + 0x8c),0,0);
-      uVar2 = FUN_004030b0((int)this);
+      uVar2 = CButton_PlayClickSound((int)this);
       return CONCAT31((int3)((uint)uVar2 >> 8),1);
     case 0x25:
     case 0x26:
-      CWindow::FUN_0042ccd0(*(CWindow **)(this + 0x4c),'\0');
+      CWindow::CWindow_FocusSibling(*(CWindow **)(this + 0x4c),'\0');
       return CONCAT31(extraout_var,1);
     case 0x27:
     case 0x28:
-      CWindow::FUN_0042ccd0(*(CWindow **)(this + 0x4c),'\x01');
+      CWindow::CWindow_FocusSibling(*(CWindow **)(this + 0x4c),'\x01');
       return CONCAT31(extraout_var_00,1);
     }
   }
@@ -54856,7 +54921,7 @@ uint __thiscall CButton::FUN_00403f90(CButton *this,byte param_1,char param_2)
 
 
 
-void __thiscall CButton::FUN_00404060(CButton *this,short param_1)
+void __thiscall CButton::CButton_OnFocusReceived(CButton *this,short param_1)
 
 {
   void *pvVar1;
@@ -54870,7 +54935,7 @@ void __thiscall CButton::FUN_00404060(CButton *this,short param_1)
       pvVar1 = (void *)(*(int *)(this + 0x4c) + 0x10);
     }
     _Globals::FUN_0042f590(pvVar1,0x100,*(undefined2 *)(this + 0x8c),0,0);
-    FUN_004030b0((int)this);
+    CButton_PlayClickSound((int)this);
   }
   return;
 }
@@ -55150,7 +55215,7 @@ void __thiscall CListViewer::FUN_004044f0(CListViewer *this,int *param_1,int *pa
 
 
 
-void __thiscall CEdit::FUN_00404530(CEdit *this,byte param_1)
+void __thiscall CEdit::CEdit_MeasureCharWidth(CEdit *this,byte param_1)
 
 {
   _Globals::FUN_00437330(*(void **)(this + 0x80),param_1,(byte *)(this + 0x84));
@@ -55159,7 +55224,7 @@ void __thiscall CEdit::FUN_00404530(CEdit *this,byte param_1)
 
 
 
-undefined4 __thiscall CNumEdit::FUN_00404550(CNumEdit *this,short param_1)
+undefined4 __thiscall CNumEdit::CNumEdit_ValidateRange(CNumEdit *this,short param_1)
 
 {
   undefined4 in_EAX;
@@ -55176,7 +55241,7 @@ undefined4 __thiscall CNumEdit::FUN_00404550(CNumEdit *this,short param_1)
 
 
 
-void __fastcall CBlackView::FUN_00404590(int param_1)
+void __fastcall CBlackView::OnDraw(int param_1)
 
 {
   if (g_pApp != (void *)0xffffff84) {
@@ -55295,7 +55360,7 @@ undefined4 __thiscall _Globals::FUN_00404730(void *this,int *param_1)
 
 
 
-undefined4 * __fastcall CScrollBar::FUN_00404790(undefined4 *param_1)
+undefined4 * __fastcall CScrollBar::CScrollBar_ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -55325,7 +55390,7 @@ undefined4 * __fastcall CScrollBar::FUN_00404790(undefined4 *param_1)
 
 
 
-undefined * CScrollBar::FUN_00404840(void)
+undefined * CScrollBar::CScrollBar_GetTypeDescriptor(void)
 
 {
   return &DAT_004b3314;
@@ -55333,37 +55398,37 @@ undefined * CScrollBar::FUN_00404840(void)
 
 
 
-void __thiscall CScrollBar::FUN_00404850(CScrollBar *this,byte param_1)
+void __thiscall CScrollBar::CScrollBar_AdjustorThunk04_Dtor(CScrollBar *this,byte param_1)
 
 {
-  FUN_00406430(this + -0x68,param_1);
+  CScrollBar_vDtor(this + -0x68,param_1);
   return;
 }
 
 
 
-void __thiscall CScrollBar::FUN_00404860(CScrollBar *this,byte param_1)
+void __thiscall CScrollBar::CScrollBar_AdjustorThunk10_Dtor(CScrollBar *this,byte param_1)
 
 {
-  FUN_00406430(this + -0x10,param_1);
+  CScrollBar_vDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __thiscall CScrollBar::FUN_00404870(CScrollBar *this,byte param_1)
+void __thiscall CScrollBar::CScrollBar_AdjustorThunk18_Dtor(CScrollBar *this,byte param_1)
 
 {
-  FUN_00406430(this + -0x18,param_1);
+  CScrollBar_vDtor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __thiscall CScrollBar::FUN_00404880(CScrollBar *this,byte param_1)
+void __thiscall CScrollBar::CScrollBar_AdjustorThunk68_Dtor(CScrollBar *this,byte param_1)
 
 {
-  FUN_00406430(this + -4,param_1);
+  CScrollBar_vDtor(this + -4,param_1);
   return;
 }
 
@@ -55396,7 +55461,7 @@ void __fastcall _Globals::FUN_00404890(undefined4 *param_1)
 
 
 
-undefined4 * __fastcall CStaticText::FUN_00404910(undefined4 *param_1)
+undefined4 * __fastcall CStaticText::CStaticText_ctor(undefined4 *param_1)
 
 {
   CDSChained::FUN_004032d0(param_1);
@@ -55417,7 +55482,7 @@ undefined4 * __fastcall CStaticText::FUN_00404910(undefined4 *param_1)
 
 
 
-undefined * CStaticText::FUN_00404970(void)
+undefined * CStaticText::CStaticText_GetTypeDescriptor(void)
 
 {
   return &DAT_004b3348;
@@ -55425,34 +55490,34 @@ undefined * CStaticText::FUN_00404970(void)
 
 
 
-void __thiscall CStaticText::FUN_00404980(CStaticText *this,byte param_1)
+void __thiscall CStaticText::CStaticText_AdjustorThunk04_Dtor(CStaticText *this,byte param_1)
 
 {
-  FUN_004064c0(this + -4,param_1);
+  CStaticText_vDtor(this + -4,param_1);
   return;
 }
 
 
 
-void __thiscall CStaticText::FUN_00404990(CStaticText *this,byte param_1)
+void __thiscall CStaticText::CStaticText_AdjustorThunk10_Dtor(CStaticText *this,byte param_1)
 
 {
-  FUN_004064c0(this + -0x10,param_1);
+  CStaticText_vDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __thiscall CStaticText::FUN_004049a0(CStaticText *this,byte param_1)
+void __thiscall CStaticText::CStaticText_AdjustorThunk18_Dtor(CStaticText *this,byte param_1)
 
 {
-  FUN_004064c0(this + -0x18,param_1);
+  CStaticText_vDtor(this + -0x18,param_1);
   return;
 }
 
 
 
-undefined * CWindow::FUN_004049b0(void)
+undefined * CWindow::CWindow_GetTypeDescriptor(void)
 
 {
   return &DAT_004b335c;
@@ -55478,7 +55543,7 @@ void __fastcall CBulanci::FUN_004049d0(int param_1)
 
 
 
-undefined4 * __fastcall CIcon::FUN_004049e0(undefined4 *param_1)
+undefined4 * __fastcall CIcon::CIcon_ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -55503,7 +55568,7 @@ undefined4 * __fastcall CIcon::FUN_004049e0(undefined4 *param_1)
 
 
 
-undefined * CIcon::FUN_00404a60(void)
+undefined * CIcon::CIcon_GetTypeDescriptor(void)
 
 {
   return &DAT_004b343c;
@@ -55511,34 +55576,34 @@ undefined * CIcon::FUN_00404a60(void)
 
 
 
-void __thiscall CIcon::FUN_00404a70(CIcon *this,byte param_1)
+void __thiscall CIcon::CIcon_AdjustorThunk04_Dtor(CIcon *this,byte param_1)
 
 {
-  FUN_004065e0(this + -0x18,param_1);
+  CIcon_vDtor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __thiscall CIcon::FUN_00404a80(CIcon *this,byte param_1)
+void __thiscall CIcon::CIcon_AdjustorThunk10_Dtor(CIcon *this,byte param_1)
 
 {
-  FUN_004065e0(this + -4,param_1);
+  CIcon_vDtor(this + -4,param_1);
   return;
 }
 
 
 
-void __thiscall CIcon::FUN_00404a90(CIcon *this,byte param_1)
+void __thiscall CIcon::CIcon_AdjustorThunk18_Dtor(CIcon *this,byte param_1)
 
 {
-  FUN_004065e0(this + -0x10,param_1);
+  CIcon_vDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __fastcall CIcon::FUN_00404aa0(undefined4 *param_1)
+void __fastcall CIcon::CIcon_dtor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -55558,7 +55623,7 @@ void __fastcall CIcon::FUN_00404aa0(undefined4 *param_1)
 
 
 
-undefined4 * __fastcall CButton::FUN_00404b10(undefined4 *param_1)
+undefined4 * __fastcall CButton::CButton_ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -55587,7 +55652,7 @@ undefined4 * __fastcall CButton::FUN_00404b10(undefined4 *param_1)
 
 
 
-undefined * CButton::FUN_00404ba0(void)
+undefined * CButton::CButton_GetTypeDescriptor(void)
 
 {
   return &DAT_004b3370;
@@ -55595,28 +55660,28 @@ undefined * CButton::FUN_00404ba0(void)
 
 
 
-void __thiscall CButton::FUN_00404bb0(CButton *this,byte param_1)
+void __thiscall CButton::CButton_AdjustorThunk04_Dtor(CButton *this,byte param_1)
 
 {
-  FUN_00406670(this + -4,param_1);
+  CButton_vDtor(this + -4,param_1);
   return;
 }
 
 
 
-void __thiscall CButton::FUN_00404bc0(CButton *this,byte param_1)
+void __thiscall CButton::CButton_AdjustorThunk10_Dtor(CButton *this,byte param_1)
 
 {
-  FUN_00406670(this + -0x10,param_1);
+  CButton_vDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __thiscall CButton::FUN_00404bd0(CButton *this,byte param_1)
+void __thiscall CButton::CButton_AdjustorThunk18_Dtor(CButton *this,byte param_1)
 
 {
-  FUN_00406670(this + -0x18,param_1);
+  CButton_vDtor(this + -0x18,param_1);
   return;
 }
 
@@ -55644,7 +55709,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x9c);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CScroller::FUN_004033d0(puVar1);
+    puVar1 = CScroller::CScroller_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -55693,7 +55758,7 @@ void __fastcall CListBoxItem::FUN_00404cb0(undefined4 *param_1)
 
 
 
-undefined4 * __fastcall CEdit::FUN_00404d10(undefined4 *param_1)
+undefined4 * __fastcall CEdit::CEdit_ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -55726,7 +55791,7 @@ undefined4 * __fastcall CEdit::FUN_00404d10(undefined4 *param_1)
 
 
 
-undefined * CEdit::FUN_00404dc0(void)
+undefined * CEdit::CEdit_GetTypeDescriptor(void)
 
 {
   return &DAT_004b33f4;
@@ -55734,10 +55799,10 @@ undefined * CEdit::FUN_00404dc0(void)
 
 
 
-void __thiscall CEdit::FUN_00404dd0(CEdit *this,byte param_1)
+void __thiscall CEdit::CEdit_AdjustorThunk04_Dtor(CEdit *this,byte param_1)
 
 {
-  FUN_0040ba10(this + -0x68,param_1);
+  CEdit_vDtor(this + -0x68,param_1);
   return;
 }
 
@@ -55752,16 +55817,16 @@ void __fastcall CScroller::FUN_00404de0(int param_1)
 
 
 
-void __thiscall CEdit::FUN_00404df0(CEdit *this,byte param_1)
+void __thiscall CEdit::CEdit_AdjustorThunk10_Dtor(CEdit *this,byte param_1)
 
 {
-  FUN_0040ba10(this + -4,param_1);
+  CEdit_vDtor(this + -4,param_1);
   return;
 }
 
 
 
-undefined4 * CBlackView::FUN_00404e00(void)
+undefined4 * CBlackView::CreateObject(void)
 
 {
   undefined4 *puVar1;
@@ -55792,7 +55857,7 @@ undefined4 * CBlackView::FUN_00404e00(void)
 
 
 
-void __cdecl CPoemScroller::FUN_00404e80(void *param_1,int *param_2,int param_3,uint param_4)
+void __cdecl CPoemScroller::BlitStatic(void *param_1,int *param_2,int param_3,uint param_4)
 
 {
   int local_10;
@@ -55858,7 +55923,7 @@ int __thiscall _Globals::FUN_00404f70(void *this,int param_1)
 
 
 
-void __thiscall CScrollBar::FUN_00404fe0(CScrollBar *this,int *param_1)
+void __thiscall CScrollBar::CScrollBar_dtor(CScrollBar *this,int *param_1)
 
 {
   uint uVar1;
@@ -55896,7 +55961,7 @@ void __thiscall CScrollBar::FUN_00404fe0(CScrollBar *this,int *param_1)
     }
   }
   if (*(int *)(this + 0xc0) == 0) {
-    FUN_00403980(this,param_1);
+    CScrollBar_OnKeyDown(this,param_1);
   }
   return;
 }
@@ -55966,14 +56031,14 @@ void __thiscall _Globals::FUN_004051d0(void *this,int param_1,int param_2)
 
 
 
-void __thiscall CRadio::FUN_00405240(CRadio *this,undefined4 param_1,byte param_2)
+void __thiscall CRadio::CRadio_OnMouseUp(CRadio *this,undefined4 param_1,byte param_2)
 
 {
   if (((param_2 & 1) != 0) && (this[0x69] != (CRadio)0xff)) {
     _Globals::FUN_0042cf60((int *)this);
     this[0x6b] = (CRadio)0x0;
     if (this[0x6a] == this[0x69]) {
-      FUN_00403cc0(this,(char)this[0x69]);
+      CRadio_SetSelected(this,(char)this[0x69]);
     }
     (**(code **)(*(int *)this + 0x24))(0,0);
     this[0x69] = (CRadio)0xff;
@@ -56005,7 +56070,7 @@ int __thiscall _Globals::FUN_00405280(void *this,int *param_1)
 
 
 
-void __fastcall CStaticText::FUN_004052e0(undefined4 *param_1)
+void __fastcall CStaticText::CStaticText_dtor(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -56109,7 +56174,27 @@ void __thiscall CStartGame2::FUN_00405440(CStartGame2 *this,int param_1,int para
 
 
 
-void __fastcall CStaticText::FUN_004054d0(int param_1)
+// CStaticText::Render(this)
+// 
+// Draws the label string inside this+0x20..0x2c using the cached
+// font and current style.
+// 
+//   1. Colour selection:
+//      - If this+0x94 == 0 (not force-default):
+//          tint = 0x909090   (grey)
+//          if flags & 4 (disabled-highlight): tint = 0x303030
+//          stash at this+0x7c.
+//      - this+0x94 != 0 leaves whatever tint was set before.
+//   2. Copy on-screen rect from this+0x30..0x3c into locals.
+//   3. ctx = (g_pApp == 0xffffff84 sentinel ? NULL : g_pApp+0x80)
+//      -- the per-frame draw context.
+//   4. text = this+0x80, or PTR_DAT_004ae414 if NULL.
+//   5. TextShaper_LayOutAndRender(text, rect, ctx, &this+0x6c)
+//      -- shape-flags word at this+0x6c controls clipping/wrap/
+//      align/colour-source.
+//   6. Restore tint at this+0x7c to 0xffffffff.
+
+void __fastcall CStaticText::CStaticText_Render(int param_1)
 
 {
   LPCWSTR pWVar1;
@@ -56144,8 +56229,44 @@ void __fastcall CStaticText::FUN_004054d0(int param_1)
 
 
 
+// CWindow::BuildAt(this, left, top, right, bottom, modalFlag)
+// 
+// Base dialog / container class. Every dialog in the game
+// (CExitDlg, CMsgDialog, CHelpDlg, CSetupDlg, CStartGame2,
+// CTcpIpConfig, CSessionList, CHistoryDlg, CGameTypeDlg)
+// derives from CWindow.
+// 
+// Arguments:
+//   param_1..4 : screen rectangle (l, t, r, b)
+//   param_5 (u8): modalFlag (stored at this+0x68)
+//                 0 = transparent container (no event capture)
+//                 1 = modal (captures input + dims background)
+// 
+// Procedure:
+//   1. CDSChained::FUN_004032d0(this) -- chain ctor.
+//   2. Install 4 vftables.
+//   3. this+0x6c = 0 (default-focus pointer; set later via
+//      FUN_0042d080 if a child should be focused on open).
+//   4. Stash rect at +0x20..+0x2c.
+//   5. this+0x68 = modalFlag.
+//   6. this+0x14 |= 0x77f (active+visible+dirty+focusable+container+
+//      all standard view bits).
+//   7. this+0x46 |= 1 (keyboard-focusable container).
+// 
+// Layout (size ~0x70 before subclass extension):
+//   +0x00..+0x18  four vftables
+//   +0x20..+0x2c  bounding box
+//   +0x68 (u8)    modal flag (0/1)
+//   +0x6c         default-focus child pointer
+// 
+// CWindow_FocusSibling(direction) walks the child chain via
+// FUN_0042c660 to find the next/previous focusable child and
+// acquires keyboard focus on it -- this is what powers TAB-like
+// navigation between buttons in a dialog (called from CButton's
+// arrow-key handler).
+
 undefined4 * __thiscall
-CWindow::FUN_00405560
+CWindow::CWindow_BuildAt
           (CWindow *this,undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
           ,CWindow param_5)
 
@@ -56168,7 +56289,7 @@ CWindow::FUN_00405560
 
 
 
-void __fastcall CWindow::FUN_004055c0(int param_1)
+void __fastcall CWindow::CWindow_Render(int param_1)
 
 {
   void *pvVar1;
@@ -56180,7 +56301,7 @@ void __fastcall CWindow::FUN_004055c0(int param_1)
     pvVar1 = (void *)((int)g_pApp + 0x80);
   }
   if (*(char *)(param_1 + 0x68) != '\0') {
-    CPoemScroller::FUN_00404e80(pvVar1,(int *)(param_1 + 0x30),0xbfbfbf,0);
+    CPoemScroller::BlitStatic(pvVar1,(int *)(param_1 + 0x30),0xbfbfbf,0);
   }
   CDSApp::FUN_0042ccf0(param_1);
   return;
@@ -56188,7 +56309,7 @@ void __fastcall CWindow::FUN_004055c0(int param_1)
 
 
 
-void __fastcall CButton::FUN_00405600(undefined4 *param_1)
+void __fastcall CButton::CButton_dtor(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -56222,7 +56343,35 @@ void __fastcall CButton::FUN_00405600(undefined4 *param_1)
 
 
 
-void __fastcall CButton::FUN_004056b0(int param_1)
+// CButton::Render(this)
+// 
+// Draws the button in its current state, then overlays the label.
+// 
+//   1. tint = FUN_00402f40(flags & 6)
+//      -- look up a tint color based on the disabled/highlight bits;
+//      0x909090 sentinel means 'no tint'.
+//   2. If tinted: paint tint into all 3 state-bitmaps' alpha field
+//      (offset +0x18 on the bitmap object), and stash the chosen
+//      tint at this+0x88. Restored to 0xff/0xffffffff at the end.
+//   3. Pick the right state index:
+//      - this+0x8f != 0      -> 2 (pressed)
+//      - flags & 8           -> 1 (hover/highlight)
+//      - else                -> 0 (normal)
+//   4. CPoemScroller::BlitDispatch(g_pApp+0x80, render_rect@this+0x30,
+//      bitmap[i], 0, 0)   -- the generic blit helper. Despite the
+//      CPoemScroller:: prefix Ghidra gave it, this is the shared
+//      bitmap blit dispatcher used by every widget.
+//   5. Copy render_rect to a local. If pressed, offset y+1 and
+//      bottom+1 (creates the 'depressed by 1 px' visual).
+//   6. TextShaper_LayOutAndRender(text @ this+0x90 or default
+//      DAT_004ae414 if NULL, local_rect, ctx@g_pApp+0x80,
+//      text_state@this+0x78)
+//      -- renders the wchar_t* label with the per-button font and
+//      style state; the layout is centred + clipped to local_rect.
+//   7. If tinted: restore bitmap alpha (0xff) and this+0x88 to
+//      0xffffffff.
+
+void __fastcall CButton::CButton_Render(int param_1)
 
 {
   int iVar1;
@@ -56314,7 +56463,7 @@ void __fastcall CScroller::FUN_004057c0(int *param_1)
   }
   uVar3 = 0xffffffff;
   iVar1 = _Globals::FUN_00402f40(*(byte *)(param_1 + 0x11) & 6);
-  CPoemScroller::FUN_00404e80(pvVar2,param_1 + 0xc,iVar1,uVar3);
+  CPoemScroller::BlitStatic(pvVar2,param_1 + 0xc,iVar1,uVar3);
   local_20 = 0;
   local_1c = 0;
   local_18 = 0;
@@ -56455,7 +56604,8 @@ void __thiscall CChatList::FUN_00405b10(CChatList *this,undefined4 param_1,undef
 
 
 
-undefined4 __thiscall CListViewer::FUN_00405b30(CListViewer *this,int param_1,int param_2)
+undefined4 __thiscall
+CListViewer::CListViewer_HitTestItem(CListViewer *this,int param_1,int param_2)
 
 {
   int iVar1;
@@ -56593,7 +56743,7 @@ undefined4 __thiscall CChatList::FUN_00405ca0(CChatList *this,int param_1)
 
 
 
-void __thiscall CListViewer::FUN_00405dd0(CListViewer *this,int *param_1)
+void __thiscall CListViewer::CListViewer_OnMouseClick(CListViewer *this,int *param_1)
 
 {
   _Globals::FUN_00404390(this,param_1);
@@ -56606,13 +56756,13 @@ void __thiscall CListViewer::FUN_00405dd0(CListViewer *this,int *param_1)
 void __fastcall CListViewer::FUN_00405df0(void *param_1)
 
 {
-  FUN_00405b30(param_1,*(int *)((int)param_1 + 0x80),*(int *)((int)param_1 + 0x84));
+  CListViewer_HitTestItem(param_1,*(int *)((int)param_1 + 0x80),*(int *)((int)param_1 + 0x84));
   return;
 }
 
 
 
-undefined4 __thiscall CListViewer::FUN_00405e10(CListViewer *this,int param_1)
+undefined4 __thiscall CListViewer::CListViewer_AddItem(CListViewer *this,int param_1)
 
 {
   undefined4 uVar1;
@@ -56700,7 +56850,7 @@ void __fastcall CChatList::FUN_00405ea0(void *param_1)
 
 
 
-void __thiscall CListBox::FUN_00405fc0(CListBox *this,int *param_1,int param_2)
+void __thiscall CListBox::CListBox__CListBox_RenderItem(CListBox *this,int *param_1,int param_2)
 
 {
   LPCWSTR pWVar1;
@@ -56734,7 +56884,7 @@ void __thiscall CListBox::FUN_00405fc0(CListBox *this,int *param_1,int param_2)
 
 
 
-void __fastcall CEdit::FUN_00406050(undefined4 *param_1)
+void __fastcall CEdit::CEdit_dtor(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -56769,7 +56919,7 @@ void __fastcall CEdit::FUN_00406050(undefined4 *param_1)
 
 
 
-void __fastcall CEdit::FUN_00406100(int param_1)
+void __fastcall CEdit::CEdit_Render(int param_1)
 
 {
   int iVar1;
@@ -56791,7 +56941,7 @@ void __fastcall CEdit::FUN_00406100(int param_1)
     this = (CPoemScroller *)((int)g_pApp + 0x80);
   }
   iVar1 = _Globals::FUN_00402f40(*(byte *)(param_1 + 0x44) & 6);
-  CPoemScroller::FUN_00404e80(this,(int *)(param_1 + 0x30),iVar1,0);
+  CPoemScroller::BlitStatic(this,(int *)(param_1 + 0x30),iVar1,0);
   local_1c = *(int *)(param_1 + 0x34);
   local_20 = *(int *)(param_1 + 0x30) + 5;
   local_14 = *(undefined4 *)(param_1 + 0x3c);
@@ -56822,7 +56972,7 @@ void __fastcall CEdit::FUN_00406100(int param_1)
 
 
 
-undefined4 * CEdit::FUN_00406230(undefined4 *param_1,byte param_2)
+undefined4 * CEdit::CEdit_OnTimerTick(undefined4 *param_1,byte param_2)
 
 {
   undefined2 uStack0000000a;
@@ -56836,7 +56986,7 @@ undefined4 * CEdit::FUN_00406230(undefined4 *param_1,byte param_2)
 
 
 
-undefined4 CEdit::FUN_00406270(int param_1)
+undefined4 CEdit::CEdit_SetText(int param_1)
 
 {
   undefined4 uVar1;
@@ -56850,7 +57000,7 @@ undefined4 CEdit::FUN_00406270(int param_1)
 
 
 
-undefined4 __thiscall CNumEdit::FUN_00406290(CNumEdit *this,int param_1)
+undefined4 __thiscall CNumEdit::CNumEdit_OnTextChanged(CNumEdit *this,int param_1)
 
 {
   undefined4 uVar1;
@@ -56910,7 +57060,7 @@ void __thiscall CDSAudioBank::FUN_00406340(CDSAudioBank *this,int param_1)
 
 
 
-void __thiscall CEdit::FUN_00406390(CEdit *this,int *param_1,size_t param_2,int *param_3)
+void __thiscall CEdit::CEdit_InsertTextAt(CEdit *this,int *param_1,size_t param_2,int *param_3)
 
 {
   wchar_t *pwVar1;
@@ -56952,7 +57102,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0xcc);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CScrollBar::FUN_00404790(puVar1);
+    puVar1 = CScrollBar::CScrollBar_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -56962,7 +57112,7 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CScrollBar::FUN_00406430(CScrollBar *this,byte param_1)
+undefined4 * __thiscall CScrollBar::CScrollBar_vDtor(CScrollBar *this,byte param_1)
 
 {
   _Globals::FUN_00404890((undefined4 *)this);
@@ -56996,7 +57146,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x98);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CStaticText::FUN_00404910(puVar1);
+    puVar1 = CStaticText::CStaticText_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -57006,10 +57156,10 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CStaticText::FUN_004064c0(CStaticText *this,byte param_1)
+undefined4 * __thiscall CStaticText::CStaticText_vDtor(CStaticText *this,byte param_1)
 
 {
-  FUN_004052e0((undefined4 *)this);
+  CStaticText_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -57018,7 +57168,7 @@ undefined4 * __thiscall CStaticText::FUN_004064c0(CStaticText *this,byte param_1
 
 
 
-undefined4 * CWindow::FUN_004064e0(void)
+undefined4 * CWindow::CWindow_dtor(void)
 
 {
   undefined4 *puVar1;
@@ -57073,7 +57223,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x78);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CIcon::FUN_004049e0(puVar1);
+    puVar1 = CIcon::CIcon_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -57083,10 +57233,10 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CIcon::FUN_004065e0(CIcon *this,byte param_1)
+undefined4 * __thiscall CIcon::CIcon_vDtor(CIcon *this,byte param_1)
 
 {
-  FUN_00404aa0((undefined4 *)this);
+  CIcon_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -57117,7 +57267,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x98);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CButton::FUN_00404b10(puVar1);
+    puVar1 = CButton::CButton_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -57127,10 +57277,10 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CButton::FUN_00406670(CButton *this,byte param_1)
+undefined4 * __thiscall CButton::CButton_vDtor(CButton *this,byte param_1)
 
 {
-  FUN_00405600((undefined4 *)this);
+  CButton_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -57173,7 +57323,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0xb8);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CEdit::FUN_00404d10(puVar1);
+    puVar1 = CEdit::CEdit_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -57183,7 +57333,7 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined * CNumEdit::FUN_00406750(void)
+undefined * CNumEdit::CNumEdit_GetTypeDescriptor(void)
 
 {
   return &DAT_004b3414;
@@ -57191,16 +57341,16 @@ undefined * CNumEdit::FUN_00406750(void)
 
 
 
-void __thiscall CEdit::FUN_00406760(CEdit *this,byte param_1)
+void __thiscall CEdit::CEdit_AdjustorThunk18_Dtor(CEdit *this,byte param_1)
 
 {
-  FUN_0040ba10(this + -0x18,param_1);
+  CEdit_vDtor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __fastcall CScrollBar::FUN_00406770(void *param_1)
+void __fastcall CScrollBar::CScrollBar_Invalidate(void *param_1)
 
 {
   void *pvVar1;
@@ -57270,7 +57420,7 @@ LAB_0040685f:
     piVar4 = (int *)((int)g_pApp + 0xf0);
     cVar3 = (**(code **)(*(int *)this + 0x1c))(piVar4);
     if (cVar3 != '\0') {
-      CScrollBar::FUN_00403980(this,piVar4);
+      CScrollBar::CScrollBar_OnKeyDown(this,piVar4);
     }
     pcVar2 = *(code **)(*(int *)this + 0x24);
     *(undefined4 *)((int)this + 0xc0) = 0;
@@ -57351,7 +57501,7 @@ void __thiscall _Globals::FUN_00406a20(void *this,int *param_1)
 
 
 undefined4 * __thiscall
-CStaticText::FUN_00406a50
+CStaticText::CStaticText_BuildAtAuto
           (CStaticText *this,int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
           undefined4 param_5)
 
@@ -57406,7 +57556,7 @@ CStaticText::FUN_00406a50
   _Globals::TextShaper_LayOutAndRender
             (pWVar3,(uint *)(this + 0x20),(void *)0x0,(uint *)(this + 0x6c));
   this[0x94] = (CStaticText)0x0;
-  FUN_00403040(this,&DAT_004ae418,4);
+  CStaticText_SetStyle(this,&DAT_004ae418,4);
   local_c = (void *)0xffffffff;
   if (param_1 != 0) {
     _Globals::FUN_0042d2d0((void *)(param_1 + -0xc));
@@ -57417,8 +57567,53 @@ CStaticText::FUN_00406a50
 
 
 
+// CStaticText::BuildAt(this, w, h, text:wchar_t*, eventTarget,
+//                      evtBindArg, shapeFlags, fontResId)
+// 
+// Placement constructor for a fixed-size on-screen text label.
+// Used by every dialog (CExitDlg, CHelpDlg, CMsgDialog,
+// CTcpIpConfig, CStartGame2) to render Czech UI strings from
+// the CDSStaticTexts pool.
+// 
+// Arguments (from call-site analysis):
+//   param_1, param_2 : (w, h) -- written to this+0x28/+0x2c
+//                      after concatenation with the unaff_retaddr-
+//                      interpreted x/y the caller leaves on the
+//                      stack. Total bounding box ends up at
+//                      +0x20..+0x2c (l, t, r, b).
+//   param_3 (text*)  : wchar_t* string to display. Smart-pointer
+//                      assigned via FUN_0042d490 (AddRef/Release).
+//   param_4          : event-handler target / parent
+//   param_5/param_6  : extra style/anchor params
+//   param_7 (u32)    : shape flags, masked with 0xffffffef; stored
+//                      at +0x6c -> passed to TextShaper as the
+//                      layout flag word.
+//   param_8 (u32)    : font resource ID (commonly 0x100ae for
+//                      dialog body text, 0x100af for headings).
+// 
+// Layout (size ~0x98):
+//   +0x00..+0x18  four vftables
+//   +0x20..+0x2c  bounding box (l, t, r, b)
+//   +0x30..+0x3c  on-screen rect (per-frame copy of +0x20)
+//   +0x44         CDSView flags  (bit 2 = disabled)
+//   +0x68         CDSFont* handle (loaded from resource pool)
+//   +0x6c (u32)   text-shape flags (TextShaper layout word)
+//   +0x70 (u32)   user data
+//   +0x74 (u32)   reserved
+//   +0x78         pointer to style block (default = this+0x84)
+//   +0x7c (u32)   tint colour (0xffffffff = default, 0x909090 =
+//                 disabled grey, 0x303030 = disabled-highlight)
+//   +0x80         text wchar_t* (smart-pointer slot)
+//   +0x84..+0x93  inline default style block (4x u32 = ARGB ramps,
+//                 seeded by CStaticText_SetStyle from
+//                 DAT_004ae418)
+//   +0x94 (uchar) 'force-default-colour' override flag
+// 
+// Calls CStaticText_SetStyle(this, &DAT_004ae418, 4) to seed the
+// style block.
+
 undefined4 * __thiscall
-CStaticText::FUN_00406ba0
+CStaticText::CStaticText_BuildAt
           (CStaticText *this,undefined4 param_1,undefined4 param_2,int param_3,undefined4 param_4,
           undefined4 param_5,undefined4 param_6,uint param_7,undefined4 param_8)
 
@@ -57464,7 +57659,7 @@ CStaticText::FUN_00406ba0
   *(undefined4 *)(this + 0x28) = param_1;
   *(undefined4 *)(this + 0x2c) = param_2;
   this[0x94] = (CStaticText)0x0;
-  FUN_00403040(this,&DAT_004ae418,4);
+  CStaticText_SetStyle(this,&DAT_004ae418,4);
   local_c = (void *)0xffffffff;
   if (param_3 != 0) {
     _Globals::FUN_0042d2d0((void *)(param_3 + -0xc));
@@ -57539,7 +57734,7 @@ void __thiscall CListViewer::FUN_00406d00(CListViewer *this,int *param_1)
   local_c = *(undefined4 *)(this_01 + 0x28);
   local_8 = *(undefined4 *)(this_01 + 0x2c);
   local_4 = *(undefined4 *)(this_01 + 0x30);
-  for (; iVar1 != 0; iVar1 = FUN_00405e10(this,iVar1)) {
+  for (; iVar1 != 0; iVar1 = CListViewer_AddItem(this,iVar1)) {
     FUN_00404290(this,*(int *)(iVar1 + 4),&local_30);
     local_30 = local_30 + (*param_1 - *(int *)(this + 0x80));
     local_2c = local_2c + (param_1[1] - *(int *)(this + 0x84));
@@ -57569,7 +57764,7 @@ void __thiscall CListViewer::FUN_00406d00(CListViewer *this,int *param_1)
 
 
 
-void __thiscall CEdit::FUN_00406eb0(CEdit *this,uint param_1)
+void __thiscall CEdit::CEdit_LayoutToCaret(CEdit *this,uint param_1)
 
 {
   UINT UVar1;
@@ -57614,7 +57809,7 @@ void __thiscall CEdit::FUN_00406eb0(CEdit *this,uint param_1)
     *(undefined4 *)(this + 0xa4) = 0;
     if (0 < *(int *)(this + 0xb4)) {
       do {
-        iVar2 = FUN_00404530(this,local_94[iVar5]);
+        iVar2 = CEdit_MeasureCharWidth(this,local_94[iVar5]);
         iVar5 = iVar5 + 1;
         *(int *)(this + 0xa4) = *(int *)(this + 0xa4) + iVar2 + *(int *)(this + 0x88);
       } while (iVar5 < *(int *)(this + 0xb4));
@@ -57631,7 +57826,7 @@ void __thiscall CEdit::FUN_00406eb0(CEdit *this,uint param_1)
     else {
       auStack_98[0] = local_94[iVar5];
     }
-    iVar5 = FUN_00404530(this,auStack_98[0]);
+    iVar5 = CEdit_MeasureCharWidth(this,auStack_98[0]);
     *(int *)(this + 0xac) = iVar5 + 2 + *(int *)(this + 0xa4);
     if (local_94 != local_90) {
       Runtime::MSVCRT::_free(local_94);
@@ -57651,13 +57846,13 @@ void __fastcall _Globals::FUN_00407020(void *param_1)
   
   uVar1 = *(uint *)((int)param_1 + 0xb4);
   *(undefined4 *)((int)param_1 + 0xb4) = 0xffffffff;
-  CEdit::FUN_00406eb0(param_1,uVar1);
+  CEdit::CEdit_LayoutToCaret(param_1,uVar1);
   return;
 }
 
 
 
-void __thiscall CEdit::FUN_00407040(CEdit *this,short param_1,void *param_2)
+void __thiscall CEdit::CEdit_OnFocusEvent(CEdit *this,short param_1,void *param_2)
 
 {
   uint uVar1;
@@ -57673,7 +57868,7 @@ void __thiscall CEdit::FUN_00407040(CEdit *this,short param_1,void *param_2)
       else {
         uVar1 = *(uint *)(*(int *)(this + 0x98) + -0xc);
       }
-      FUN_00406eb0(this,uVar1);
+      CEdit_LayoutToCaret(this,uVar1);
       _Globals::FUN_0042f330(this + 0x68,0,-1);
       return;
     }
@@ -57756,7 +57951,7 @@ LAB_004071e9:
 
 
 
-void __fastcall CNumEdit::FUN_00407220(void *param_1)
+void __fastcall CNumEdit::CNumEdit_OnFocusOut(void *param_1)
 
 {
   undefined1 *puStack00000004;
@@ -57807,7 +58002,7 @@ int __thiscall _Globals::FUN_004072b0(void *this,undefined4 param_1,int param_2)
 
 
 
-undefined4 * __fastcall CRadio::FUN_00407300(undefined4 *param_1)
+undefined4 * __fastcall CRadio::CRadio_ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -57839,7 +58034,7 @@ undefined4 * __fastcall CRadio::FUN_00407300(undefined4 *param_1)
 
 
 
-undefined * CRadio::FUN_004073a0(void)
+undefined * CRadio::CRadio_GetTypeDescriptor(void)
 
 {
   return &DAT_004b3334;
@@ -57847,34 +58042,66 @@ undefined * CRadio::FUN_004073a0(void)
 
 
 
-void __thiscall CRadio::FUN_004073b0(CRadio *this,byte param_1)
+void __thiscall CRadio::CRadio_AdjustorThunk04_Dtor(CRadio *this,byte param_1)
 
 {
-  FUN_00407f30(this + -0x18,param_1);
+  CRadio_vDtor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __thiscall CRadio::FUN_004073c0(CRadio *this,byte param_1)
+void __thiscall CRadio::CRadio_AdjustorThunk10_Dtor(CRadio *this,byte param_1)
 
 {
-  FUN_00407f30(this + -4,param_1);
+  CRadio_vDtor(this + -4,param_1);
   return;
 }
 
 
 
-void __thiscall CRadio::FUN_004073d0(CRadio *this,byte param_1)
+void __thiscall CRadio::CRadio_AdjustorThunk18_Dtor(CRadio *this,byte param_1)
 
 {
-  FUN_00407f30(this + -0x10,param_1);
+  CRadio_vDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-undefined4 * CNumEdit::FUN_004073e0(void)
+// CNumEdit::Allocate()
+// 
+// Factory for the numeric (integer) input field. Subclass of
+// CEdit -- shares the same caret/blink/text-buffer machinery but
+// filters input to digits, keeps a parsed integer at +0xc0, and
+// validates against an [min..max] range (+0xb8..+0xbc).
+// 
+// Procedure:
+//   1. malloc(0xc4) -- 4 bytes larger than the CEdit base (0xb8
+//      -> 0xc4) to make room for {min, max, intValue}.
+//   2. CEdit_ctor(p) -- runs the CEdit base ctor (which installs
+//      the CEdit vftables and CDSUpdatedItem subobject).
+//   3. Overwrite the 5 vftables at +0x00, +0x04, +0x10, +0x18,
+//      +0x68 with CNumEdit's vftables (the OnTextChanged,
+//      OnFocusOut, and ValidateRange hooks).
+// 
+// Layout (size 0xc4) extends CEdit:
+//   +0x00..+0xb7  CEdit base (font, caret, buffer, etc.)
+//   +0xb8 (s32)   min value (inclusive)
+//   +0xbc (s32)   max value (inclusive)
+//   +0xc0 (s32)   currently parsed integer
+// 
+// Key overrides:
+//   OnTextChanged : parses buffer via _Globals::FUN_0042d2f0
+//                   (wcstol-style helper) -> stores at +0xc0.
+//   OnFocusOut    : re-formats +0xc0 to canonical decimal text
+//                   and writes it back into the CEdit buffer via
+//                   the FUN_004070c0 validation pipe (so the
+//                   display shows e.g. '5' even if the user typed
+//                   '0005').
+//   ValidateRange : returns 1 iff min <= value <= max.
+
+undefined4 * CNumEdit::CNumEdit_Allocate(void)
 
 {
   undefined4 *puVar1;
@@ -57891,7 +58118,7 @@ undefined4 * CNumEdit::FUN_004073e0(void)
   local_4 = 0;
   puVar2 = (undefined4 *)0x0;
   if (puVar1 != (undefined4 *)0x0) {
-    CEdit::FUN_00404d10(puVar1);
+    CEdit::CEdit_ctor(puVar1);
     *puVar1 = vftable;
     puVar1[1] = vftable;
     puVar1[4] = vftable;
@@ -57905,7 +58132,7 @@ undefined4 * CNumEdit::FUN_004073e0(void)
 
 
 
-void __thiscall CScrollBar::FUN_00407460(CScrollBar *this,int *param_1,short param_2)
+void __thiscall CScrollBar::CScrollBar_OnMouseDown(CScrollBar *this,int *param_1,short param_2)
 
 {
   byte bVar1;
@@ -57914,7 +58141,7 @@ void __thiscall CScrollBar::FUN_00407460(CScrollBar *this,int *param_1,short par
   bVar1 = _Globals::CDSView_AcquireKeyboardFocus(*(int **)(this + 0x4c));
   if (((bVar1 != 0) && (param_2 == 1)) && (*(int *)(this + 0xc0) == 0)) {
     this[0xbd] = (CScrollBar)0x1;
-    uVar2 = FUN_00403860(this,param_1);
+    uVar2 = CScrollBar_HitTest(this,param_1);
     _Globals::FUN_00406810(this,(int)uVar2,param_1);
     if ((*(int *)(this + 0xc0) != 2) && (*(int *)(this + 0xc0) != 4)) {
       _Globals::FUN_0042c860((int *)this);
@@ -57925,7 +58152,7 @@ void __thiscall CScrollBar::FUN_00407460(CScrollBar *this,int *param_1,short par
 
 
 
-void __thiscall CScrollBar::FUN_004074c0(CScrollBar *this,undefined4 param_1,byte param_2)
+void __thiscall CScrollBar::CScrollBar_OnMouseUp(CScrollBar *this,undefined4 param_1,byte param_2)
 
 {
   int iVar1;
@@ -57942,7 +58169,7 @@ void __thiscall CScrollBar::FUN_004074c0(CScrollBar *this,undefined4 param_1,byt
 
 
 
-void __fastcall CRadio::FUN_00407500(undefined4 *param_1)
+void __fastcall CRadio::CRadio_dtor(undefined4 *param_1)
 
 {
   int *_Memory;
@@ -58085,10 +58312,75 @@ void __thiscall _Globals::FUN_00407710(void *this,undefined4 param_1,int param_2
 
 
 
+// CEdit::BuildAt(this, x, y, parent, maxLen, evtBindArg,
+//                shapeBits, flags, fontResId)
+// 
+// Placement constructor for a single-line text input field. Used
+// in CTcpIpConfig (server-IP entry), CStartGame2 (player nick),
+// CSetupDlg (keybind name), and the chat composer line in
+// CChatList.
+// 
+// Arguments:
+//   param_1, param_2 : screen X, Y (top-left)
+//   param_3          : parent CDSChained* (event-handler at
+//                      parent+0x10 receives change notifications)
+//   param_4 (u32)    : 'maxLen' -- maximum number of chars
+//                      accepted (stored at this+0x9c)
+//   param_5/6/7      : layout/shape extras; param_7 OR'd 0x14 into
+//                      this+0x84 (the TextShaper flag word; mask is
+//                      param_7 & 0x23 | 0x14 -> default = bit2 |
+//                      bit4 set, optional caller bits 0/1/5)
+//   param_8 (u32)    : font resource ID (e.g. 0x100ae)
+// 
+// Procedure:
+//   1. CDSChained::FUN_004032d0(this) -- chain ctor.
+//   2. CDSUpdatedItem::FUN_0042f060(this+0x68) -- 'ticked view'
+//      subobject for the caret-blink timer.
+//   3. Install 5 vftables: +0x00, +0x04, +0x10, +0x18 (the four
+//      normal CDSView subobjects) PLUS +0x68 (the CDSUpdatedItem
+//      subobject).
+//   4. Zero this+0x80/+0x88/+0x8c/+0x98/+0xa4/+0xa8/+0xac/+0xb0.
+//   5. Load font via g_pApp+0x70 pool, stash at this+0x80.
+//   6. this+0x88 = param_4 (maxLen),
+//      this+0x90 = &DAT_004ae418 (default style block),
+//      this+0x94 = 0xffffffff (no tint),
+//      this+0x84 = param_7 & 0x23 | 0x14 (text-shape flags),
+//      this+0x9c = param_3 (parent),
+//      this+0xb4 = 0xffffffff (caret column = -1 = re-layout next).
+//   7. Geometry: this+0x20 = x, this+0x24 = y,
+//      this+0x28 = (right edge from unaff_retaddr -- caller's stack
+//      leftover bug),
+//      this+0x2c = y + 0x17 (default edit height -- one font row +
+//      2 px padding * 2 + caret slack).
+//   8. CEdit_LayoutToCaret(this, 0) -- compute initial caret column
+//      at position 0.
+//   9. this+0x14 |= 0x215 (active|visible|focusable|dirty|input),
+//      this+0x46 |= 0x41 (keyboard-focusable + char-input-enabled).
+//  10. Scheduler_RegisterEventSlot(this+0x68, slotId=0, periodMs=
+//      1000, eventId=7) -- arms the caret-blink timer (toggles
+//      visibility every second while focused).
+// 
+// Layout (size ~0xb8):
+//   +0x68         CDSUpdatedItem subobject (timer host)
+//   +0x80         CDSFont*
+//   +0x84 (u32)   TextShaper flag word
+//   +0x88 (u32)   caret/text padding width
+//   +0x90         style block ptr (DAT_004ae418)
+//   +0x94 (u32)   tint colour (0xffffffff = none)
+//   +0x98         wchar_t* buffer (smart-pointer; len at offset -0xc)
+//   +0x9c (u32)   maxLen (max chars accepted)
+//   +0xa0 (u8)    focused flag
+//   +0xa1 (u8)    select-all-on-focus pending flag
+//   +0xa4 (s32)   caret X pixel
+//   +0xa8 (s32)   caret Y pixel
+//   +0xac (s32)   caret right pixel
+//   +0xb0 (s32)   caret bottom pixel (height = font_row + 2)
+//   +0xb4 (u32)   caret column (char index)
+
 undefined4 * __thiscall
-CEdit::FUN_00407760(CEdit *this,undefined4 param_1,undefined4 param_2,undefined4 param_3,
-                   undefined4 param_4,undefined4 param_5,undefined4 param_6,uint param_7,
-                   undefined4 param_8)
+CEdit::CEdit_BuildAt
+          (CEdit *this,undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+          undefined4 param_5,undefined4 param_6,uint param_7,undefined4 param_8)
 
 {
   CEdit *this_00;
@@ -58145,7 +58437,7 @@ CEdit::FUN_00407760(CEdit *this,undefined4 param_1,undefined4 param_2,undefined4
   iVar1 = *(int *)(*(int *)(this + 0x80) + 0x564);
   *(undefined4 *)(this + 0xa8) = 0;
   *(int *)(this + 0xb0) = iVar1 + 2;
-  FUN_00406eb0(this,0);
+  CEdit_LayoutToCaret(this,0);
   *(ushort *)(this + 0x14) = *(ushort *)(this + 0x14) | 0x215;
   *(ushort *)(this + 0x46) = *(ushort *)(this + 0x46) | 0x41;
   _Globals::Scheduler_RegisterEventSlot(this_00,0,1000,7);
@@ -58194,7 +58486,7 @@ char __thiscall CEdit::FUN_004078f0(CEdit *this,undefined1 *param_1,undefined1 *
       cVar5 = false;
     }
     else {
-      FUN_00406eb0(this,*(int *)(this + 0xb4) - 1);
+      CEdit_LayoutToCaret(this,*(int *)(this + 0xb4) - 1);
       puVar2 = param_1;
       cVar5 = true;
     }
@@ -58251,7 +58543,7 @@ LAB_00407a3f:
     goto LAB_00407971;
   }
   ExceptionList = &local_c;
-  cVar5 = FUN_00406eb0(this,uVar1);
+  cVar5 = CEdit_LayoutToCaret(this,uVar1);
 LAB_00407971:
   if (cVar5 != '\0') {
 LAB_00407975:
@@ -58265,7 +58557,7 @@ LAB_00407975:
 
 
 
-undefined1 __thiscall CEdit::FUN_00407b40(CEdit *this,byte param_1)
+undefined1 __thiscall CEdit::CEdit_OnChar(CEdit *this,byte param_1)
 
 {
   uint uVar1;
@@ -58313,7 +58605,7 @@ undefined1 __thiscall CEdit::FUN_00407b40(CEdit *this,byte param_1)
       piVar4 = *(int **)(iStack_18 + -0xc);
     }
     if (*(int **)(this + 0xb4) == piVar4) goto LAB_00407c38;
-    FUN_00406390((CEdit *)&iStack_18,*(int **)(this + 0xb4),1,(int *)&local_14);
+    CEdit_InsertTextAt((CEdit *)&iStack_18,*(int **)(this + 0xb4),1,(int *)&local_14);
     cVar7 = '\0';
     puStack_10 = &stack0xffffffd4;
     pWVar6 = (LPCWSTR)0x0;
@@ -58357,7 +58649,7 @@ LAB_00407c38:
     if (local_14 == (wchar_t *)0x0) goto LAB_00407ca2;
     iVar3 = *(int *)(local_14 + -6);
   }
-  FUN_00406eb0(this,*(int *)(this + 0xb4) + iVar3);
+  CEdit_LayoutToCaret(this,*(int *)(this + 0xb4) + iVar3);
   this[0xa0] = (CEdit)0x1;
   _Globals::Scheduler_SetEventLastFireMs(this + 0x68,0,-1);
   (**(code **)(*(int *)this + 0x24))();
@@ -58377,7 +58669,7 @@ LAB_00407cda:
 
 
 
-void __thiscall CEdit::FUN_00407d20(CEdit *this,int *param_1)
+void __thiscall CEdit::CEdit_Invalidate(CEdit *this,int *param_1)
 
 {
   LPCWSTR pWVar1;
@@ -58399,7 +58691,7 @@ CStartGame2::FUN_00407d50
           undefined4 param_8)
 
 {
-  CEdit::FUN_00407760((CEdit *)this,param_1,param_2,param_3,param_4,param_5,param_8,0,0x100af);
+  CEdit::CEdit_BuildAt((CEdit *)this,param_1,param_2,param_3,param_4,param_5,param_8,0,0x100af);
   *(ushort *)(this + 0x46) = *(ushort *)(this + 0x46) | 0x40;
   *(undefined4 *)(this + 0xb8) = param_6;
   *(undefined4 *)(this + 0xc0) = param_6;
@@ -58414,13 +58706,13 @@ CStartGame2::FUN_00407d50
 
 
 
-undefined1 __thiscall CNumEdit::FUN_00407de0(CNumEdit *this,byte param_1)
+undefined1 __thiscall CNumEdit::CNumEdit_AdjustorThunk04_Dtor(CNumEdit *this,byte param_1)
 
 {
   undefined1 uVar1;
   
   if ((byte)(param_1 - 0x30) < 10) {
-    uVar1 = CEdit::FUN_00407b40((CEdit *)this,param_1);
+    uVar1 = CEdit::CEdit_OnChar((CEdit *)this,param_1);
     return uVar1;
   }
   return 0;
@@ -58428,10 +58720,10 @@ undefined1 __thiscall CNumEdit::FUN_00407de0(CNumEdit *this,byte param_1)
 
 
 
-void __fastcall CNumEdit::FUN_00407e00(void *param_1)
+void __fastcall CNumEdit::CNumEdit_vDtor(void *param_1)
 
 {
-  FUN_00407220(param_1);
+  CNumEdit_OnFocusOut(param_1);
   return;
 }
 
@@ -58503,7 +58795,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0xa8);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CRadio::FUN_00407300(puVar1);
+    puVar1 = CRadio::CRadio_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -58513,10 +58805,10 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CRadio::FUN_00407f30(CRadio *this,byte param_1)
+undefined4 * __thiscall CRadio::CRadio_vDtor(CRadio *this,byte param_1)
 
 {
-  FUN_00407500((undefined4 *)this);
+  CRadio_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -58525,10 +58817,10 @@ undefined4 * __thiscall CRadio::FUN_00407f30(CRadio *this,byte param_1)
 
 
 
-undefined4 * __fastcall CListViewer::FUN_00407f50(undefined4 *param_1)
+undefined4 * __fastcall CListViewer::CListViewer_ctor(undefined4 *param_1)
 
 {
-  CScroller::FUN_004033d0(param_1);
+  CScroller::CScroller_ctor(param_1);
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -58549,7 +58841,7 @@ undefined4 * __fastcall CListViewer::FUN_00407f50(undefined4 *param_1)
 
 
 
-undefined * CListViewer::FUN_00407fd0(void)
+undefined * CListViewer::CListViewer_GetTypeDescriptor(void)
 
 {
   return &DAT_004b33a4;
@@ -58560,7 +58852,7 @@ undefined * CListViewer::FUN_00407fd0(void)
 void __thiscall CListViewer::FUN_00407fe0(CListViewer *this,byte param_1)
 
 {
-  FUN_00408330(this + -0x68,param_1);
+  CListViewer_vDtor(this + -0x68,param_1);
   return;
 }
 
@@ -58569,7 +58861,7 @@ void __thiscall CListViewer::FUN_00407fe0(CListViewer *this,byte param_1)
 void __thiscall CListViewer::FUN_00407ff0(CListViewer *this,byte param_1)
 
 {
-  FUN_00408330(this + -0x10,param_1);
+  CListViewer_vDtor(this + -0x10,param_1);
   return;
 }
 
@@ -58578,7 +58870,7 @@ void __thiscall CListViewer::FUN_00407ff0(CListViewer *this,byte param_1)
 void __thiscall CListViewer::FUN_00408000(CListViewer *this,byte param_1)
 
 {
-  FUN_00408330(this + -0x18,param_1);
+  CListViewer_vDtor(this + -0x18,param_1);
   return;
 }
 
@@ -58587,13 +58879,13 @@ void __thiscall CListViewer::FUN_00408000(CListViewer *this,byte param_1)
 void __thiscall CListViewer::FUN_00408010(CListViewer *this,byte param_1)
 
 {
-  FUN_00408330(this + -4,param_1);
+  CListViewer_vDtor(this + -4,param_1);
   return;
 }
 
 
 
-void __fastcall CListViewer::FUN_00408020(undefined4 *param_1)
+void __fastcall CListViewer::CListViewer_dtor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -58678,7 +58970,7 @@ void __thiscall CListViewer::FUN_004081a0(CListViewer *this,int *param_1)
     local_8 = 0;
     local_4 = 0;
     FUN_004044f0(this,&local_8,param_1);
-    iVar2 = FUN_00405b30(this_00,local_8,local_4);
+    iVar2 = CListViewer_HitTestItem(this_00,local_8,local_4);
     if (iVar2 != 0) {
       _Globals::FUN_004080d0(this,*(int *)(iVar2 + 4),'\x01');
     }
@@ -58688,7 +58980,7 @@ void __thiscall CListViewer::FUN_004081a0(CListViewer *this,int *param_1)
 
 
 
-void __fastcall CListBox::FUN_00408200(undefined4 *param_1)
+void __fastcall CListBox::CListBox__CListBox_dtor(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -58710,14 +59002,14 @@ void __fastcall CListBox::FUN_00408200(undefined4 *param_1)
     (**(code **)(*(int *)param_1[0x33] + 8))(uVar1);
   }
   local_4 = 0xffffffff;
-  CListViewer::FUN_00408020(param_1);
+  ::CListViewer::CListViewer_dtor(param_1);
   ExceptionList = local_c;
   return;
 }
 
 
 
-undefined * CListBox::FUN_00408290(void)
+undefined * CListBox::CListBox__CListBox_GetTypeDescriptor(void)
 
 {
   return &DAT_004b33e0;
@@ -58725,19 +59017,19 @@ undefined * CListBox::FUN_00408290(void)
 
 
 
-void __thiscall CListBox::FUN_004082a0(CListBox *this,byte param_1)
+void __thiscall CListBox::CListBox__FUN_004082a0(CListBox *this,byte param_1)
 
 {
-  FUN_00408350(this + -0x10,param_1);
+  CListBox__CListBox_vDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __thiscall CListBox::FUN_004082b0(CListBox *this,byte param_1)
+void __thiscall CListBox::CListBox__FUN_004082b0(CListBox *this,byte param_1)
 
 {
-  FUN_00408350(this + -0x18,param_1);
+  CListBox__CListBox_vDtor(this + -0x18,param_1);
   return;
 }
 
@@ -58765,7 +59057,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0xcc);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CListViewer::FUN_00407f50(puVar1);
+    puVar1 = CListViewer::CListViewer_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -58775,10 +59067,10 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CListViewer::FUN_00408330(CListViewer *this,byte param_1)
+undefined4 * __thiscall CListViewer::CListViewer_vDtor(CListViewer *this,byte param_1)
 
 {
-  FUN_00408020((undefined4 *)this);
+  CListViewer_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -58787,10 +59079,10 @@ undefined4 * __thiscall CListViewer::FUN_00408330(CListViewer *this,byte param_1
 
 
 
-undefined4 * __thiscall CListBox::FUN_00408350(CListBox *this,byte param_1)
+undefined4 * __thiscall CListBox::CListBox__CListBox_vDtor(CListBox *this,byte param_1)
 
 {
-  FUN_00408200((undefined4 *)this);
+  CListBox__CListBox_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -58798,9 +59090,87 @@ undefined4 * __thiscall CListBox::FUN_00408350(CListBox *this,byte param_1)
 }
 
 
+
+// CScrollBar::BuildAt(this, left, top, right, bottom, &bitmaps)
+// 
+// Placement ctor for the linear scrollbar/slider widget. Used by
+// CSetupDlg (volume sliders, via CVolume subclass), and various
+// list views that need scroll thumbs.
+// 
+// Orientation is auto-detected from the rect aspect ratio:
+//   if (bottom - top) < (right - left) -> horizontal (+0xbc = 1)
+//   else                                -> vertical   (+0xbc = 0)
+// 
+// Resources (9 bitmaps, in this slot order):
+//   +0x80: top/left button   [normal]
+//   +0x84:                   [pressed]
+//   +0x88:                   [disabled]
+//   +0x8c: thumb             [normal]
+//   +0x90:                   [pressed]
+//   +0x94:                   [disabled]
+//   +0x98: bottom/right btn  [normal]
+//   +0x9c:                   [pressed]
+//   +0xa0:                   [disabled]
+// 
+// Default bitmaps if &bitmaps==NULL:
+//   horizontal -> &DAT_004ae5c4 (9 IDs)
+//   vertical   -> &DAT_004ae5a0 (9 IDs)
+// 
+// Procedure:
+//   1. CDSChained::FUN_004032d0(this) -- chain ctor.
+//   2. CDSUpdatedItem::FUN_0042f060(this+0x68) -- ticked subobject.
+//   3. Install 5 vftables (+0x00/+0x04/+0x10/+0x18/+0x68).
+//   4. eh_vector_constructor for 9 bitmap subobjects at this+0x80.
+//   5. Determine orientation, load 9 bitmaps from &bitmaps[i].
+//   6. Compute bounding box: vertical extends height in caller's
+//      rect and width = top-button.width; horizontal vice versa.
+//   7. Initialise scroll state:
+//         this+0xa4 = (existing & 0xc0)   -- clear state nibbles
+//         this+0xa8 = 0   (min value)
+//         this+0xac = 0   (max value)
+//         this+0xb0 = 0   (current value)
+//         this+0xb4 = 1   (step -- 1 unit per button-click)
+//         this+0xb8 = 0x14 (page -- 20 units per track-click)
+//         this+0xbc = orientation flag (computed above)
+//         this+0xc0 = 0   (drag mode = idle)
+//         this+0x14 |= 0x38 (active+visible+dirty).
+//   8. Scheduler_RegisterEventSlot(this+0x68, slot=0, period=0,
+//      eventId=7) -- 'tick whenever active' timer for press-and-
+//      hold auto-repeat in drag modes 1/2/4/5.
+// 
+// Layout (size ~0xcc):
+//   +0x68         CDSUpdatedItem (timer for auto-repeat)
+//   +0x80..+0xa0  9 state bitmaps (see above)
+//   +0xa4 (u8)    packed visual state:
+//                   bits 0-1 = top-button state
+//                   bits 2-3 = thumb state
+//                   bits 4-5 = bottom-button state
+//                   bit 6/7  = reserved
+//                   each: 0=normal, 1=pressed, 2=disabled
+//   +0xa8 (s32)   min value
+//   +0xac (s32)   max value
+//   +0xb0 (s32)   current value
+//   +0xb4 (s32)   step  (1-button click delta)
+//   +0xb8 (s32)   page  (track-click delta)
+//   +0xbc (u8)    orientation (0=vertical, 1=horizontal)
+//   +0xbd (u8)    is-dragging flag (set on mouse-down)
+//   +0xc0 (s32)   drag mode:
+//                   0 = idle
+//                   1 = top/left arrow held
+//                   2 = above/before thumb (page-up)
+//                   3 = thumb (drag)
+//                   4 = below/after thumb (page-down)
+//                   5 = bottom/right arrow held
+//   +0xc4         drag start offset (mouse-inside-thumb delta)
+//   +0xc8         drag start mouse position
+// 
+// Thumb position formula:
+//   range_px = (track_len - top_btn_size - bot_btn_size - thumb_size)
+//   thumb_x  = ((current - min) * range_px) / (max - min)
+//             + top_btn_size + track_origin
 
 int * __thiscall
-CScrollBar::FUN_00408370
+CScrollBar::CScrollBar_BuildAt
           (CScrollBar *this,int param_1,int param_2,int param_3,int param_4,undefined4 *param_5)
 
 {
@@ -58881,7 +59251,71 @@ CScrollBar::FUN_00408370
 
 
 
-undefined4 * __thiscall CRadio::FUN_00408540(CRadio *this,undefined4 param_1,undefined4 param_2)
+// CRadio::BuildAt(this, x, y)
+// 
+// Placement constructor for the multi-option radio group (a
+// horizontal row of N labelled cells, exactly one of which is
+// lit at a time). Used by CSetupDlg for things like
+// Keyboard / Joystick / Network selection and the resolution
+// picker. The label list and option count are populated by a
+// later configuration call (a separate API stores at +0x6c /
+// +0x74); BuildAt only sets geometry and the cell-bitmap state.
+// 
+// Arguments:
+//   param_1 (s32) : screen X (top-left of first cell)
+//   param_2 (s32) : screen Y
+// 
+// Procedure:
+//   1. CDSChained::FUN_004032d0(this).
+//   2. Install 4 vftables at +0x00/+0x04/+0x10/+0x18.
+//   3. Zero this+0x6c/+0x70/+0x74/+0x7c/+0x84/+0x88;
+//      this+0x78 = 8   (cell padding / line height)
+//      this+0x80 = 4   (text-shape flag)
+//      this+0x84 = 2   (text-shape flag)
+//   4. Set bounding box: +0x20 = +0x28 = x, +0x24 = +0x2c = y.
+//      (Cell width adds in later when option count is known.)
+//   5. eh_vector_constructor over 5 cell-state bitmaps at
+//      this+0x94 (stride 4). Resource IDs come from DAT_004ae3f0
+//      (5 contiguous u32 IDs, ending just before DAT_004ae404).
+//   6. Load resource DAT_004ae404 (the radio font) into this+0x7c.
+//   7. this+0x68 = 0xff (no selection),
+//      this+0x69 = 0xff (no pressed-index),
+//      this+0x6a = 0xff (no hover-index),
+//      this+0x6b = 0   (is-pressed flag),
+//      this+0x8c = &DAT_004ae418 (default text-style block),
+//      this+0x14 |= 0x78  (view flags: active+visible+dirty+focusable),
+//      this+0x46 |= 1   (keyboard-focusable).
+// 
+// Layout (size ~0xa8+):
+//   +0x68 (u8)    selected option index    (0xff = none)
+//   +0x69 (u8)    pressed-on-down option   (0xff = none)
+//   +0x6a (u8)    hovered/up option        (0xff = none)
+//   +0x6b (u8)    is-pressed flag
+//   +0x6c         labels: wchar_t** array of N entries
+//   +0x70         per-label state-bits array
+//   +0x74 (u8)    option count N
+//   +0x7c         CDSFont* (label font)
+//   +0x80..+0x90  TextShaper layout state
+//   +0x8c         style block ptr (default DAT_004ae418)
+//   +0x90         tint colour (0xffffffff = none)
+//   +0x94..+0xa4  bitmap[5] for cell states:
+//       [0] unselected, neutral
+//       [1] unselected, hover/pressed
+//       [2] selected,   neutral
+//       [3] selected,   hover/pressed
+//       [4] focused-by-keyboard
+// 
+// Click path:
+//   OnMouseDown -> CDSView_AcquireKeyboardFocus; if a cell is
+//     under the cursor (+0x6a != 0xff): +0x69 = +0x6a (the
+//     candidate); +0x6b = 1 (pressed); play audio slot 0x0e
+//     (radio-cell click) via PlayBankSample.
+//   OnMouseUp   -> +0x6b = 0; if still hovering same cell:
+//     SetSelected(+0x69) -- which stores +0x68 = idx and posts
+//     Scheduler_PostMessage(parent+0x10, 0x400, 0xce, this, 0)
+//     (the value-changed notification, cmd 0xce).
+
+undefined4 * __thiscall CRadio::CRadio_BuildAt(CRadio *this,undefined4 param_1,undefined4 param_2)
 
 {
   int *piVar1;
@@ -58958,9 +59392,58 @@ undefined4 * __thiscall CRadio::FUN_00408540(CRadio *this,undefined4 param_1,und
 
 
 
+// CIcon::BuildAt(this, x, y, cmd, &resourceIdArray[3])
+// 
+// Text-less clickable icon. Smaller relative of CButton:
+// three state bitmaps (normal / hover / pressed), no font,
+// no label, and a HARD-CODED click sound (audio slot 0x14)
+// shared by every icon -- not a per-instance slot like CButton.
+// 
+// Arguments:
+//   param_1 (s32)  : screen X (left)
+//   param_2 (s32)  : screen Y (top)
+//   param_3 (u16)  : cmd word @ this+0x76; fired via Scheduler
+//                    to parent+0x10 (msg 0x100) on release.
+//   param_4 (u32*) : pointer to 3-entry array of resource IDs
+//                    for the bitmap states.
+// 
+// Procedure (mirrors CButton_BuildAt minus the text/style):
+//   1. CDSChained::FUN_004032d0 -- parent ctor.
+//   2. Install 4 vftables at +0x00, +0x04, +0x10, +0x18.
+//   3. eh_vector_constructor for 3 inner objects at this+0x68.
+//   4. Load resources[0..2] via g_pApp's pool, downcast through
+//      DAT_004b826c, store at this+0x68/0x6c/0x70.
+//   5. Set bounding box from first bitmap's width/height:
+//         this+0x20 = x
+//         this+0x24 = y
+//         this+0x28 = x + sprite_width
+//         this+0x2c = y + sprite_height
+//   6. this+0x14 |= 0x38   (view flags: active+visible+dirty).
+//   7. this+0x76 = cmd; this+0x74 = 0 (not pressed).
+// 
+// Layout (size ~0x78):
+//   +0x00..+0x18  four vftables
+//   +0x20..+0x2c  bounding box (l, t, r, b)
+//   +0x30..+0x3c  render rect (per-frame copy)
+//   +0x44         CDSView flags (bit 2 = disabled, bit 3 = hover)
+//   +0x68/+0x6c/+0x70  bitmap[normal/hover/pressed]
+//   +0x74 (u8)    pressed flag
+//   +0x76 (u16)   cmd word
+// 
+// Click path:
+//   OnMouseDown -> this+0x74 = 1; dirty + vtable[9].
+//   OnMouseUp   -> if still pressed AND vtable[7] (hit-test)
+//                  returns true: this+0x74 = 0; play audio
+//                  slot 0x14; Scheduler_PostMessage(parent+0x10,
+//                  0x100, cmd@+0x76, 0, 0).
+// 
+// Render selects bitmap by precedence pressed > hover > normal,
+// or forces alpha=0x80 + uses bitmap[0] when (flags & 4)
+// (disabled tint).
+
 undefined4 * __thiscall
-CIcon::FUN_004086e0(CIcon *this,undefined4 param_1,undefined4 param_2,undefined2 param_3,int param_4
-                   )
+CIcon::CIcon_BuildAt
+          (CIcon *this,undefined4 param_1,undefined4 param_2,undefined2 param_3,int param_4)
 
 {
   int *piVar1;
@@ -59015,8 +59498,73 @@ CIcon::FUN_004086e0(CIcon *this,undefined4 param_1,undefined4 param_2,undefined2
 
 
 
+// CButton::BuildAt(this, x, y, cmd, ?, ?, ?, ResourceIdArray)
+// 
+// Placement constructor for the generic dialog button. Called by
+// CExitDlg, CMsgDialog, CHelpDlg, CGameTypeDlg, etc. when laying
+// out their child views.
+// 
+// Arguments (from call-site analysis):
+//   param_1 (int)         : screen X (left edge)
+//   param_2 (ushort)      : cmd word stored at this+0x8c; fired via
+//                           Scheduler_PostMessage(parent+0x10, 0x100,
+//                           cmd, ...) when the button is clicked.
+//   param_3 (uchar)       : flag stored at this+0x8e (keyboard-focus
+//                           eligible if non-zero).
+//   param_4 (u32)         : extra state stored at this+0x94 (audio
+//                           slot index, 0xffffffff = no click sound).
+//   param_5/6 (u32)       : (unused in this overload)
+//   param_7 (u32*)        : pointer to 3-entry array of resource IDs
+//                           for the button bitmaps (normal/hover/
+//                           pressed). NULL -> uses DAT_004ae408
+//                           default (the standard dialog button).
+// 
+// Procedure:
+//   1. CDSChained::FUN_004032d0(this) -- chain-parent ctor
+//   2. Install 4 vftables at +0x00, +0x04, +0x10, +0x18 (primary,
+//      chain, event-handler, anim subobjects).
+//   3. eh_vector_constructor over 3 inner objects @ this+0x68
+//      (stride 4) -- one per button-state bitmap slot.
+//   4. Load 3 bitmaps via g_pApp's resource pool (this+0x68/0x6c/0x70):
+//      - param_7[0] = normal
+//      - param_7[1] = hover
+//      - param_7[2] = pressed
+//   5. Load font 0x100ae into this+0x74 (the in-game UI font).
+//   6. Initialise text/state fields:
+//      this+0x78 = 5         (font/style param)
+//      this+0x88 = 0xffffffff (no tint)
+//      this+0x80 = 0
+//      this+0x7c = 1         (text-shaping shape)
+//      this+0x84 = DAT_004ae418 (default text-shaping context)
+//   7. Geometry:
+//      this+0x20 = x
+//      this+0x24 = y
+//      this+0x28 = x + sprite_width
+//      this+0x2c = y + sprite_height
+//   8. CDSEventHandler init via FUN_0042d490(this+0x90, &param_1).
+//   9. Store cmd at this+0x8c, focus-eligible flag at this+0x8e,
+//      pressed flag at this+0x8f (= 0 initially).
+//  10. OR this+0x14 |= 0x239 (active|visible|drawable|...);
+//      this+0x46 |= 1 (keyboard-focusable).
+// 
+// Object size: ~0x98 bytes. Layout summary:
+//   +0x00..+0x18  four vftables (multi-interface)
+//   +0x20..+0x2c  bounding box (left, top, right, bottom)
+//   +0x30..+0x3c  on-screen render rect (set per frame)
+//   +0x44         CDSView flags
+//   +0x46         widget flags  (bit 0 = keyboard-focusable)
+//   +0x4c         parent CWindow/dialog pointer
+//   +0x68/+0x6c/+0x70   button bitmap[normal/hover/pressed]
+//   +0x74               font (resource 0x100ae)
+//   +0x78..+0x88        text-shaping/render state
+//   +0x8c (ushort)      cmd word
+//   +0x8e (uchar)       keyboard-focus-eligible flag
+//   +0x8f (uchar)       pressed flag (1 = currently held down)
+//   +0x90               text pointer (wchar_t*, default DAT_004ae414)
+//   +0x94 (s32)         click audio slot (-1 = no sound)
+
 undefined4 * __thiscall
-CButton::FUN_004087f0
+CButton::CButton_BuildAt
           (CButton *this,int param_1,undefined2 param_2,CButton param_3,undefined4 param_4,
           undefined4 param_5,undefined4 param_6,undefined4 *param_7)
 
@@ -59101,8 +59649,51 @@ CButton::FUN_004087f0
 
 
 
+// CScroller::BuildAt(this, left, top, right, bottom)
+// 
+// Base scrollable viewport. Creates two CScrollBars (one
+// horizontal at this+0x94, one vertical at this+0x90), wires them
+// as children of this view, and registers the per-frame tick that
+// updates scroll state.
+// 
+// This is the abstract container that CListViewer / CListBox /
+// CLevelList / CChatList / CSessionList all derive from. The
+// base class handles viewport offsets and scrollbar plumbing;
+// subclasses fill the viewport with their item-rendered content.
+// 
+// Procedure:
+//   1. CDSChained::FUN_004032d0(this).
+//   2. CDSUpdatedItem::FUN_0042f060(this+0x68) -- ticked subobject.
+//   3. Install 5 vftables (+0x00/+0x04/+0x10/+0x18/+0x68).
+//   4. Zero scroll state: +0x80 = +0x84 = +0x88 = +0x8c = 0.
+//   5. Geometry: this+0x20/0x24/0x28/0x2c = the four corners.
+//   6. Allocate horizontal scrollbar via FUN_00447c42(0xcc) ->
+//      CScrollBar_BuildAt(left, top, left+10, bottom, NULL) and
+//      stash at this+0x94. Its cmd word (+0x48) is set to 0xd.
+//   7. Allocate vertical scrollbar likewise (left+0, top+0, right,
+//      top+10) at this+0x90. Cmd word = 0xe.
+//   8. Adjust each scrollbar's track length (FUN_0042cc80) so the
+//      two bars don't overlap each other's button area (subtract
+//      6 + button size from each axis).
+//   9. Attach both scrollbars as children: _Globals::FUN_0042d0b0
+//      wires this->children chain.
+//  10. this+0x14 |= 0x23b (active+visible+dirty+focusable+
+//      container), this+0x46 |= 1 (focusable).
+//  11. Scheduler_RegisterEventSlot(this+0x68, 0, 200ms, 5) --
+//      periodic timer driving auto-scroll-during-drag.
+// 
+// Layout (extended by CListViewer / lists):
+//   +0x68    CDSUpdatedItem (200ms tick)
+//   +0x80    horizontal scroll value (px)
+//   +0x84    vertical scroll value (px)
+//   +0x88    horizontal content size (px)
+//   +0x8c    vertical content size (px)
+//   +0x90    vertical CScrollBar*
+//   +0x94    horizontal CScrollBar*
+//   +0x98    last-render scroll snapshot
+
 undefined4 * __thiscall
-CScroller::FUN_004089c0(CScroller *this,int param_1,int param_2,undefined4 param_3,int param_4)
+CScroller::CScroller_BuildAt(CScroller *this,int param_1,int param_2,undefined4 param_3,int param_4)
 
 {
   int iVar1;
@@ -59143,8 +59734,8 @@ CScroller::FUN_004089c0(CScroller *this,int param_1,int param_2,undefined4 param
     piVar6 = (int *)0x0;
   }
   else {
-    piVar6 = CScrollBar::FUN_00408370(pCVar5,param_1,param_2,param_1 + 10,param_4,(undefined4 *)0x0)
-    ;
+    piVar6 = CScrollBar::CScrollBar_BuildAt
+                       (pCVar5,param_1,param_2,param_1 + 10,param_4,(undefined4 *)0x0);
   }
   *(int **)(this + 0x94) = piVar6;
   iVar1 = *(int *)(this + 0x24);
@@ -59157,7 +59748,7 @@ CScroller::FUN_004089c0(CScroller *this,int param_1,int param_2,undefined4 param
     piVar6 = (int *)0x0;
   }
   else {
-    piVar6 = CScrollBar::FUN_00408370(pCVar5,iVar3,iVar1,iVar2,iVar1 + 10,(undefined4 *)0x0);
+    piVar6 = CScrollBar::CScrollBar_BuildAt(pCVar5,iVar3,iVar1,iVar2,iVar1 + 10,(undefined4 *)0x0);
   }
   this_00 = *(CBulanek **)(this + 0x94);
   *(int **)(this + 0x90) = piVar6;
@@ -59189,13 +59780,60 @@ CScroller::FUN_004089c0(CScroller *this,int param_1,int param_2,undefined4 param
 
 
 
+// CListViewer::BuildAt(this, l, t, r, b, colWidth, rowHeight,
+//                      flags)
+// 
+// Grid/list container. Extends CScroller with a column*row
+// item grid + per-row callback rendering. Used to display the
+// level chooser (CLevelList), the chat history (CChatList),
+// the session list (CSessionList), and the generic dropdown
+// list (CListBox).
+// 
+// Arguments after the rect:
+//   param_5 (u32) : column width  (stored at this+0xa0)
+//   param_6 (u32) : row height    (stored at this+0xa4)
+//   param_7 (u32) : flags         (stored at this+0x9c)
+//                   bit 0 set = column-major layout
+//                               (CLevelList grid)
+// 
+// Procedure:
+//   1. CScroller_BuildAt(this, l, t, r, b) -- base ctor.
+//   2. Install 5 vftables (overriding the CScroller ones).
+//   3. Init item array: +0xac = NULL, +0xb0 = 0 (capacity),
+//      +0xb4 = 0 (count), +0xb8 = +0xc8 = 8 (default per-page
+//      item count and scroll step).
+//   4. Store layout params: +0xa0 = colWidth, +0xa4 = rowHeight,
+//      +0x9c = flags.
+//   5. _Globals::FUN_00404390(this, &this+0x20) -- attach geometry
+//      hooks.
+// 
+// Layout (extends CScroller):
+//   +0x9c (u32)   flags (bit 0 = column-major)
+//   +0xa0 (s32)   column width (px)
+//   +0xa4 (s32)   row height   (px)
+//   +0xac         items[]  (T**)
+//   +0xb0 (s32)   capacity
+//   +0xb4 (s32)   count
+//   +0xb8 (s32)   default columns/page
+//   +0xbc..+0xc4  scroll-calc state
+//   +0xc8 (s32)   scroll step
+// 
+// HitTestItem (FUN_00405b30) maps a mouse coord to the item
+// under the cursor: column = mouseX/colWidth + scrollOffset/colWidth,
+// row = mouseY/rowHeight + scrollOffset/rowHeight, idx =
+// row*columns + column (axis order swapped if bit 0 of +0x9c).
+// 
+// The per-item draw hook is supplied by subclasses via a vtable
+// slot; the base only blits whichever cells the scrollbar values
+// expose.
+
 undefined4 * __thiscall
-CListViewer::FUN_00408c00
+CListViewer::CListViewer_BuildAt
           (CListViewer *this,int param_1,int param_2,undefined4 param_3,int param_4,
           undefined4 param_5,undefined4 param_6,undefined4 param_7)
 
 {
-  CScroller::FUN_004089c0((CScroller *)this,param_1,param_2,param_3,param_4);
+  CScroller::CScroller_BuildAt((CScroller *)this,param_1,param_2,param_3,param_4);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -59218,8 +59856,45 @@ CListViewer::FUN_00408c00
 
 
 
+// CListBox::BuildAt(this, l, t, w, h, ?, fontResId)
+// 
+// Flat single-column text list (dropdown body). Subclass of
+// CListViewer with column count fixed to 0xf (16) and the per-row
+// renderer specialised to a simple TextShaper call.
+// 
+// Procedure:
+//   1. CListViewer_BuildAt(this, l, t, w, h, ?, 0xf, ?) -- base
+//      ctor with column count = 0xf.
+//   2. Install 5 vftables.
+//   3. Init: +0xcc = NULL (font handle), +0xd4 = +0xd8 = 0.
+//   4. Load font (param_6) via g_pApp+0x70 -> this+0xcc.
+//   5. Init style state:
+//         this+0xd0 = 4   (TextShaper flag)
+//         this+0xd4 = 1
+//         this+0xd8 = 0
+//         this+0xdc = &DAT_004ae418 (default style block)
+//         this+0xe0 = 0xffffffff (no tint).
+// 
+// Layout (extends CListViewer, size 0xe4):
+//   +0xcc        CDSFont*  (label font)
+//   +0xd0 (u32)  TextShaper layout flag word
+//   +0xd4..+0xdc text-style state
+//   +0xdc        style block ptr (&DAT_004ae418)
+//   +0xe0 (u32)  tint colour (0xffffffff = none, 0x858585 = grey
+//                for disabled rows)
+// 
+// Per-row item struct (allocated by callers, stored in the
+// base items[]):
+//   +0x00..+0x08  refcount + chain links
+//   +0x0c (u8)    flags: bit 0 = enabled/selectable
+//   +0x10         wchar_t*  row label
+// 
+// CListBox_RenderItem (per-row callback) pads the row 2px left/
+// right, applies a grey tint if flag bit 0 is clear, and
+// shapes-and-renders the label via TextShaper.
+
 undefined4 * __thiscall
-CListBox::FUN_00408cc0
+CListBox::CListBox__CListBox_BuildAt
           (CListBox *this,int param_1,int param_2,undefined4 param_3,int param_4,undefined4 param_5,
           undefined4 param_6)
 
@@ -59234,8 +59909,8 @@ CListBox::FUN_00408cc0
   puStack_8 = &LAB_00474ec6;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CListViewer::FUN_00408c00((CListViewer *)this,param_1,param_2,param_3,param_4,param_5,0xf,param_6)
-  ;
+  ::CListViewer::CListViewer_BuildAt
+            ((CListViewer *)this,param_1,param_2,param_3,param_4,param_5,0xf,param_6);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -59261,7 +59936,7 @@ CListBox::FUN_00408cc0
 
 
 
-undefined4 * CListBox::FUN_00408df0(void)
+undefined4 * CListBox::CListBox__CListBox_Allocate(void)
 
 {
   undefined4 *puVar1;
@@ -59276,7 +59951,7 @@ undefined4 * CListBox::FUN_00408df0(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0xe4);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CListViewer::FUN_00407f50(puVar1);
+    ::CListViewer::CListViewer_ctor(puVar1);
     *puVar1 = vftable;
     puVar1[1] = vftable;
     puVar1[4] = vftable;
@@ -59316,7 +59991,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x460);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CLevelScript::CLevelScript__ctor(puVar1);
+    puVar1 = CLevelScript::ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -59326,7 +60001,7 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-void __thiscall CScoreItem::FUN_00408f50(CScoreItem *this,int *param_1)
+void __thiscall CScoreItem::Deserialize(CScoreItem *this,int *param_1)
 
 {
   _Globals::FUN_0042e140(this + 0xc,param_1);
@@ -59337,7 +60012,7 @@ void __thiscall CScoreItem::FUN_00408f50(CScoreItem *this,int *param_1)
 
 
 
-void __thiscall CScoreItem::FUN_00408f90(CScoreItem *this,int *param_1)
+void __thiscall CScoreItem::Serialize(CScoreItem *this,int *param_1)
 
 {
   _Globals::FUN_0042d440(this + 0xc,param_1);
@@ -59364,6 +60039,12 @@ void __fastcall _Globals::thunk_FUN_00434250(int param_1)
 
 
 
+// IDSStream slot 14 -- CDSGZipStream::CloseStream.
+// The IDSStream subobject lives at outer+0xc, so this-0xc recovers the
+// outer CDSGZipStream.  Calls _Globals::FUN_004354a0(outer) which
+// flushes the final page and releases the gzip state at outer+0x18,
+// then writes the closed-state sentinel 0x20 into state field this+4.
+
 void __fastcall CDSGZipStream::CloseStream(int param_1)
 
 {
@@ -59374,7 +60055,7 @@ void __fastcall CDSGZipStream::CloseStream(int param_1)
 
 
 
-void __thiscall CLevelScore::FUN_00409050(CLevelScore *this,int *param_1)
+void __thiscall CLevelScore::Deserialize(CLevelScore *this,int *param_1)
 
 {
   _Globals::FUN_0042e140(this + 0xc,param_1);
@@ -59424,7 +60105,7 @@ void __fastcall _Globals::FUN_004090c0(int param_1)
 
 
 
-void __thiscall CPoem::FUN_00409100(CPoem *this,int *param_1)
+void __thiscall CPoem::Deserialize(CPoem *this,int *param_1)
 
 {
   _Globals::FUN_0042e140(this + 4,param_1);
@@ -59488,6 +60169,12 @@ undefined * CDSEasyMemStream::FUN_004091f0(void)
 
 
 
+// IDSStream slot 14 -- CDSEasyMemStream::CloseStream.
+// The IDSStream subobject lives at outer+0xc, so this-0xc recovers the
+// outer CDSEasyMemStream.  Calls ReleaseBackingBuffer(outer) to free the
+// storage (this+0x1c / this+0x28), then writes the closed-state sentinel
+// 0x20 into the IDSStream state field at this+0x4.
+
 void __fastcall CDSEasyMemStream::CloseStream(int param_1)
 
 {
@@ -59498,6 +60185,10 @@ void __fastcall CDSEasyMemStream::CloseStream(int param_1)
 
 
 
+// IDSStream slot 7 -- CDSEasyMemStream::GetSize() : longlong.
+// Returns the logical size stored at this+0xc.  Result is the low 32
+// bits zero-extended into a longlong (high DWORD = 0).
+
 longlong __thiscall CDSEasyMemStream::GetSize(CDSEasyMemStream *this)
 
 {
@@ -59505,6 +60196,10 @@ longlong __thiscall CDSEasyMemStream::GetSize(CDSEasyMemStream *this)
 }
 
 
+
+// IDSStream slot 8 -- CDSEasyMemStream::TellPosition() : longlong.
+// Returns the read/write cursor stored at this+0x8.  Result is the low
+// 32 bits zero-extended into a longlong (high DWORD = 0).
 
 longlong __thiscall CDSEasyMemStream::TellPosition(CDSEasyMemStream *this)
 
@@ -59579,7 +60274,7 @@ undefined4 * __thiscall CDSEasyMemStream::FUN_004092f0(CDSEasyMemStream *this,by
 
 
 
-undefined * CLevelScore::FUN_00409310(void)
+undefined * CLevelScore::GetClassIdentifier(void)
 
 {
   return &DAT_004b34d4;
@@ -59587,16 +60282,16 @@ undefined * CLevelScore::FUN_00409310(void)
 
 
 
-void __thiscall CLevelScore::FUN_00409320(CLevelScore *this,byte param_1)
+void __thiscall CLevelScore::DeletingDestructorThunk_4(CLevelScore *this,byte param_1)
 
 {
-  FUN_00409a40(this + -4,param_1);
+  CLevelScore_scalar_deleting_dtor(this + -4,param_1);
   return;
 }
 
 
 
-void __fastcall CLevelScore::FUN_00409330(undefined4 *param_1)
+void __fastcall CLevelScore::CLevelScore_dtor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -59620,7 +60315,7 @@ void __fastcall CLevelScore::FUN_00409330(undefined4 *param_1)
 
 
 
-undefined * CScoreItem::FUN_004093a0(void)
+undefined * CScoreItem::GetClassIdentifier(void)
 
 {
   return &DAT_004b34c0;
@@ -59628,16 +60323,16 @@ undefined * CScoreItem::FUN_004093a0(void)
 
 
 
-void __thiscall CScoreItem::FUN_004093b0(CScoreItem *this,byte param_1)
+void __thiscall CScoreItem::DeletingDestructorThunk_4(CScoreItem *this,byte param_1)
 
 {
-  FUN_00409a90(this + -4,param_1);
+  ScalarDeletingDestructor(this + -4,param_1);
   return;
 }
 
 
 
-void __fastcall CScoreItem::FUN_004093c0(undefined4 *param_1)
+void __fastcall CScoreItem::Destructor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -59659,7 +60354,7 @@ void __fastcall CScoreItem::FUN_004093c0(undefined4 *param_1)
 
 
 
-undefined * CPoem::FUN_00409420(void)
+undefined * CPoem::GetClassIdentifier(void)
 
 {
   return &DAT_004b3450;
@@ -59667,19 +60362,19 @@ undefined * CPoem::FUN_00409420(void)
 
 
 
-void __thiscall CPoem::FUN_00409430(CPoem *this,byte param_1)
+void __thiscall CPoem::DeletingDestructorThunk_4(CPoem *this,byte param_1)
 
 {
-  FUN_00409af0(this + -0xc,param_1);
+  ScalarDeletingDestructor(this + -0xc,param_1);
   return;
 }
 
 
 
-void __thiscall CPoem::FUN_00409440(CPoem *this,byte param_1)
+void __thiscall CPoem::DeletingDestructorThunk_12(CPoem *this,byte param_1)
 
 {
-  FUN_00409af0(this + -0x14,param_1);
+  ScalarDeletingDestructor(this + -0x14,param_1);
   return;
 }
 
@@ -59694,16 +60389,16 @@ void __fastcall CDSFileStream::FUN_00409450(int param_1)
 
 
 
-void __thiscall CPoem::FUN_00409460(CPoem *this,byte param_1)
+void __thiscall CPoem::DeletingDestructorThunk_10(CPoem *this,byte param_1)
 
 {
-  FUN_00409af0(this + -4,param_1);
+  ScalarDeletingDestructor(this + -4,param_1);
   return;
 }
 
 
 
-undefined * CPoem::FUN_00409470(void)
+undefined * CPoem::GetResourceName(void)
 
 {
   return &DAT_004b7f04;
@@ -59711,7 +60406,7 @@ undefined * CPoem::FUN_00409470(void)
 
 
 
-undefined1 CPoem::FUN_00409480(void)
+undefined1 CPoem::AlwaysReturnsZero(void)
 
 {
   return 0;
@@ -59728,7 +60423,7 @@ void __fastcall CDSFileStream::FUN_00409490(int param_1)
 
 
 
-void __fastcall CPoem::FUN_004094a0(undefined4 *param_1)
+void __fastcall CPoem::Destructor(undefined4 *param_1)
 
 {
   undefined4 *puVar1;
@@ -59813,7 +60508,7 @@ void __fastcall _Globals::FUN_004095b0(int *param_1)
 
 
 
-void __fastcall CBulanci::FUN_00409620(int param_1)
+void __fastcall CBulanci::CLevelScore_InitializeDefaultScores(int param_1)
 
 {
   undefined4 *puVar1;
@@ -59843,7 +60538,7 @@ void __fastcall CBulanci::FUN_00409620(int param_1)
 
 
 
-void __thiscall CLevelScore::FUN_00409690(CLevelScore *this,void *param_1)
+void __thiscall CLevelScore::Serialize(CLevelScore *this,void *param_1)
 
 {
   int iVar1;
@@ -59891,7 +60586,7 @@ void CBulanci::FUN_004096d0
     uVar4 = 1;
     uVar3 = 0;
     _Globals::FUN_0042d490(&stack0xffffffd0,param_4);
-    piVar1 = CStaticText::FUN_00406ba0
+    piVar1 = CStaticText::CStaticText_BuildAt
                        (this,*param_3,param_3[1],param_3[2],param_3[3],uVar3,uVar4,uVar2,uVar5);
   }
   local_4 = 0xffffffff;
@@ -59935,7 +60630,7 @@ void __fastcall _Globals::FUN_004097f0(int param_1)
 
 
 
-void __thiscall CPoem::FUN_00409870(CPoem *this,void *param_1)
+void __thiscall CPoem::GetText(CPoem *this,void *param_1)
 
 {
   int iVar1;
@@ -60033,6 +60728,11 @@ void __thiscall CDSGZipStream::FUN_004099a0(CDSGZipStream *this,byte param_1)
 
 
 
+// IDSStream slot 13 -- CDSGZipStream::GetStreamName(wstring* out).
+// Delegates to the inner stream: dereferences this+0x14 (the
+// IDSStream* inner pointer) and invokes its slot 13 (vftable[0x34/4 = 13]).
+// Returns whatever the inner stream wrote into *out.
+
 undefined4 __thiscall CDSGZipStream::GetStreamName(CDSGZipStream *this,undefined4 param_1)
 
 {
@@ -60054,10 +60754,11 @@ undefined4 * __thiscall CDSGZipStream::FUN_004099d0(CDSGZipStream *this,byte par
 
 
 
-undefined4 * __thiscall CLevelScore::FUN_00409a40(CLevelScore *this,byte param_1)
+undefined4 * __thiscall
+CLevelScore::CLevelScore_scalar_deleting_dtor(CLevelScore *this,byte param_1)
 
 {
-  FUN_00409330((undefined4 *)this);
+  CLevelScore_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -60066,10 +60767,10 @@ undefined4 * __thiscall CLevelScore::FUN_00409a40(CLevelScore *this,byte param_1
 
 
 
-undefined4 * __thiscall CScoreItem::FUN_00409a90(CScoreItem *this,byte param_1)
+undefined4 * __thiscall CScoreItem::ScalarDeletingDestructor(CScoreItem *this,byte param_1)
 
 {
-  FUN_004093c0((undefined4 *)this);
+  Destructor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -60085,7 +60786,7 @@ undefined4 * __thiscall CScoreItem::FUN_00409a90(CScoreItem *this,byte param_1)
 // titles, u32 charCount + UTF-16LE chars). See
 // tools/bulanci_unpack/bulanci_unpack.py CLASS_POEM.
 
-undefined4 * CPoem__factory(void)
+undefined4 * CPoem::factory(void)
 
 {
   undefined4 *puVar1;
@@ -60094,10 +60795,10 @@ undefined4 * CPoem__factory(void)
   if (puVar1 != (undefined4 *)0x0) {
     puVar1[2] = 1;
     puVar1[4] = 0;
-    *puVar1 = CPoem::vftable;
-    puVar1[1] = CPoem::vftable;
-    puVar1[3] = CPoem::vftable;
-    puVar1[5] = CPoem::vftable;
+    *puVar1 = vftable;
+    puVar1[1] = vftable;
+    puVar1[3] = vftable;
+    puVar1[5] = vftable;
     puVar1[6] = 0;
     return puVar1;
   }
@@ -60106,10 +60807,10 @@ undefined4 * CPoem__factory(void)
 
 
 
-undefined4 * __thiscall CPoem::FUN_00409af0(CPoem *this,byte param_1)
+undefined4 * __thiscall CPoem::ScalarDeletingDestructor(CPoem *this,byte param_1)
 
 {
-  FUN_004094a0((undefined4 *)this);
+  Destructor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -60119,7 +60820,8 @@ undefined4 * __thiscall CPoem::FUN_00409af0(CPoem *this,byte param_1)
 
 
 undefined4 * __thiscall
-CBulanci::FUN_00409b10(CBulanci *this,int *param_1,undefined4 param_2,undefined4 param_3)
+CBulanci::CLevelScore_AddPlayerScore
+          (CBulanci *this,int *param_1,undefined4 param_2,undefined4 param_3)
 
 {
   CBulanci *this_00;
@@ -60130,7 +60832,7 @@ CBulanci::FUN_00409b10(CBulanci *this,int *param_1,undefined4 param_2,undefined4
   this_00 = this + 0x14;
   iVar1 = _Globals::FUN_0042f7c0((int)this_00);
   if (iVar1 == 0) {
-    FUN_00409620((int)this);
+    CLevelScore_InitializeDefaultScores((int)this);
   }
   puVar2 = (undefined4 *)_Globals::FUN_00447c42(0x1c);
   puVar3 = (undefined4 *)0x0;
@@ -60337,14 +61039,14 @@ void CBulanci::FUN_00409f60(int *param_1)
 {
   int iVar1;
   int iVar2;
-  int *this;
+  CDSScript *this;
   undefined4 *puVar3;
   short *psVar4;
   undefined4 uVar5;
   undefined4 *puVar6;
   undefined4 uStack_18;
   int local_14;
-  int *piStack_10;
+  CDSScript *pCStack_10;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 uStack_4;
@@ -60358,11 +61060,11 @@ void CBulanci::FUN_00409f60(int *param_1)
     iVar1 = iVar1 + -1;
     iVar2 = (**(code **)(*param_1 + 0x1c))(iVar1);
     if (*(int *)(iVar2 + 0xc) == 0x7ea) {
-      this = (int *)(**(code **)(*param_1 + 0x10))(*(undefined4 *)(iVar2 + 8),0);
+      this = (CDSScript *)(**(code **)(*param_1 + 0x10))(*(undefined4 *)(iVar2 + 8),0);
       uStack_4 = 0;
       uStack_18 = 1;
-      piStack_10 = this;
-      _Globals::CDSScript__CallExport(this,0,1,&uStack_18);
+      pCStack_10 = this;
+      CDSScript::CallExport(this,0,1,&uStack_18);
       puVar3 = (undefined4 *)_Globals::FUN_00447c42(0x14);
       puVar6 = (undefined4 *)0x0;
       if (puVar3 != (undefined4 *)0x0) {
@@ -60385,8 +61087,8 @@ void CBulanci::FUN_00409f60(int *param_1)
       _Globals::FUN_0042ea80(param_1);
       _Globals::FUN_00407e20((void *)(local_14 + 0x35),(int)puVar6,(undefined *)0x0,1);
       uStack_4 = 0xffffffff;
-      if (this != (int *)0x0) {
-        (**(code **)(*this + 8))();
+      if (this != (CDSScript *)0x0) {
+        (**(code **)(*(int *)this + 8))();
       }
     }
   }
@@ -60829,7 +61531,7 @@ void __fastcall CStartGame1::FUN_0040a8c0(int param_1)
   
   if ((*(char *)(*(int *)(param_1 + 0x8c) + 0x68) == '\0') &&
      (*(char *)(*(int *)(param_1 + 0x88) + 0x68) == '\0')) {
-    CRadio::FUN_00403cc0(*(CRadio **)(param_1 + 0x90),'\0');
+    CRadio::CRadio_SetSelected(*(CRadio **)(param_1 + 0x90),'\0');
     _Globals::FUN_0042d040(*(int **)(param_1 + 0x90));
     _Globals::FUN_0042d040(*(int **)(param_1 + 0xa0));
     return;
@@ -60845,7 +61547,7 @@ void __fastcall CStartGame1::FUN_0040a8c0(int param_1)
   }
   FUN_00403d20(*(CStartGame1 **)(param_1 + 0x90),2,!bVar1);
   if (((*(CRadio **)(param_1 + 0x90))[0x68] == (CRadio)0x2) && (bVar1)) {
-    CRadio::FUN_00403cc0(*(CRadio **)(param_1 + 0x90),'\x01');
+    CRadio::CRadio_SetSelected(*(CRadio **)(param_1 + 0x90),'\x01');
   }
   return;
 }
@@ -60899,7 +61601,7 @@ void __thiscall CRadio::FUN_0040aa00(CRadio *this,undefined1 *param_1)
 
 
 
-void __thiscall CColorSwitch::FUN_0040aa10(CColorSwitch *this,short param_1)
+void __thiscall CColorSwitch::CColorSwitch_OnEvent(CColorSwitch *this,short param_1)
 
 {
   if (param_1 == 0xd1) {
@@ -60912,7 +61614,7 @@ void __thiscall CColorSwitch::FUN_0040aa10(CColorSwitch *this,short param_1)
 
 
 
-void __thiscall CColorSwitch::FUN_0040aa40(CColorSwitch *this,char param_1)
+void __thiscall CColorSwitch::CColorSwitch_SetSelected(CColorSwitch *this,char param_1)
 
 {
   if (this[0x68] != (CColorSwitch)param_1) {
@@ -60924,10 +61626,10 @@ void __thiscall CColorSwitch::FUN_0040aa40(CColorSwitch *this,char param_1)
 
 
 
-void __thiscall CColorSwitch::FUN_0040aa60(CColorSwitch *this,char *param_1)
+void __thiscall CColorSwitch::CColorSwitch_SetSelectedFromPtr(CColorSwitch *this,char *param_1)
 
 {
-  FUN_0040aa40(this,*param_1);
+  CColorSwitch_SetSelected(this,*param_1);
   return;
 }
 
@@ -61020,7 +61722,7 @@ void __thiscall CBulanci::FUN_0040ab90(CBulanci *this,int param_1,int param_2)
 
 
 
-void __thiscall CBulanci::FUN_0040abc0(CBulanci *this,int param_1,int param_2)
+void __thiscall CBulanci::CLoadingLevel_SetProgress(CBulanci *this,int param_1,int param_2)
 
 {
   FUN_0040ab90(*(CBulanci **)(this + 0x70),param_1,param_2);
@@ -61029,7 +61731,7 @@ void __thiscall CBulanci::FUN_0040abc0(CBulanci *this,int param_1,int param_2)
 
 
 
-uint __thiscall CScore::FUN_0040abe0(CScore *this,char param_1,char param_2)
+uint __thiscall CScore::OnKeyPress(CScore *this,char param_1,char param_2)
 
 {
   undefined4 uVar1;
@@ -61080,7 +61782,7 @@ void __fastcall CPauseDlg::FUN_0040ac50(int param_1)
 
 
 
-void __thiscall CBulanci::FUN_0040aca0(CBulanci *this,uint param_1)
+void __thiscall CAdvertising::ArmDismissTimer(CAdvertising *this,uint param_1)
 
 {
   _Globals::Scheduler_RegisterEventSlot(this + 0x70,0,param_1,6);
@@ -61089,7 +61791,7 @@ void __thiscall CBulanci::FUN_0040aca0(CBulanci *this,uint param_1)
 
 
 
-undefined4 __fastcall CAdvertising::FUN_0040acc0(int param_1)
+undefined4 __fastcall CAdvertising::Dismiss(int param_1)
 
 {
   uint uVar1;
@@ -61146,7 +61848,7 @@ void __fastcall CBulAnim::CleanupBody(undefined4 *param_1)
 
 
 
-undefined * CProgressBar::FUN_0040ad80(void)
+undefined * CProgressBar::CProgressBar_GetTypeDescriptor(void)
 
 {
   return &DAT_004b3604;
@@ -61176,7 +61878,8 @@ undefined4 * __thiscall CDSView::FUN_0040ada0(CDSView *this,byte param_1)
 
 
 void __thiscall
-CSessionList::FUN_0040adc0(CSessionList *this,short param_1,undefined4 param_2,undefined4 param_3)
+CSessionList::CSessionList_OnEvent
+          (CSessionList *this,short param_1,undefined4 param_2,undefined4 param_3)
 
 {
   if (param_1 != 0xd0) {
@@ -61365,10 +62068,30 @@ void __fastcall CBulPicture::DrawSurface(int param_1)
 
 
 
-undefined4 * __fastcall CLevelList::FUN_0040b0c0(undefined4 *param_1)
+// CLevelList::ctor()
+// 
+// The level-chooser list shown beneath the Start menu shortcut
+// in CMenu (the right panel that appears after you click Start
+// or press 'S' / 'X' shortcuts). Subclass of CListBox.
+// 
+// Procedure:
+//   1. CListBox_BuildAt(this, x=0x1e=30, y=0x10e=270, w=0xe6=230,
+//      h=0x1b8=440, _, font=0xbe). Hard-coded rect -- no
+//      parameters; the level list lives at a fixed position.
+//   2. Override 5 vftables so the per-row text is rendered
+//      through CLevelList_RenderItem (slightly different padding
+//      than CListBox_RenderItem -- 5 px left pad vs 2 px, and a
+//      different default text fallback pointer
+//      PTR_DAT_004ae7a8 instead of PTR_DAT_004ae414).
+// 
+// Item source: populated at runtime by the level scanner
+// (see main_menu.md §8.6 -- scans `CGame+0x66 / +0x6e` array
+// of level Resource* and builds one row per available level).
+
+undefined4 * __fastcall CLevelList::CLevelList_ctor(undefined4 *param_1)
 
 {
-  CListBox::FUN_00408cc0((CListBox *)param_1,0x1e,0x10e,0xe6,0x1b8,0xbe,0);
+  CListBox::CListBox__CListBox_BuildAt((CListBox *)param_1,0x1e,0x10e,0xe6,0x1b8,0xbe,0);
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -61379,7 +62102,7 @@ undefined4 * __fastcall CLevelList::FUN_0040b0c0(undefined4 *param_1)
 
 
 
-undefined * CLevelList::FUN_0040b120(void)
+undefined * CLevelList::CLevelList_GetTypeDescriptor(void)
 
 {
   return &DAT_004b36b8;
@@ -61387,16 +62110,16 @@ undefined * CLevelList::FUN_0040b120(void)
 
 
 
-void __thiscall CListBox::FUN_0040b130(CListBox *this,byte param_1)
+void __thiscall CListBox::CListBox__FUN_0040b130(CListBox *this,byte param_1)
 
 {
-  FUN_00408350(this + -0x68,param_1);
+  CListBox__CListBox_vDtor(this + -0x68,param_1);
   return;
 }
 
 
 
-void __thiscall CGameCounter::FUN_0040b140(CGameCounter *this,short param_1,uint param_2)
+void __thiscall CGameCounter::OnEvent(CGameCounter *this,short param_1,uint param_2)
 
 {
   int *piVar1;
@@ -61429,7 +62152,30 @@ void __thiscall CGameCounter::FUN_0040b140(CGameCounter *this,short param_1,uint
 
 
 
-void __fastcall CProgressBar::FUN_0040b1f0(int param_1)
+// CProgressBar::Render(this)
+// 
+// Draws a black/white-framed horizontal bar with a grey/white
+// fill proportional to (value@+0x68 / total@+0x6c).
+// 
+//   1. Outline: FUN_00436530(rect@+0x30, fill=0x000000,
+//      border=0xffffff) -- 1px white frame on a black inside.
+//   2. If value != 0:
+//      fill_width = ((width - 2) * value) / total
+//      inner_rect = (x+1, y+1, x+1+fill_width, y+h-1)
+//      FUN_004365f0(inner_rect, fill=0xa0a0a0, border=0xffffff)
+//      -- grey fill with white inner highlight.
+// 
+// Layout (size ~0x70):
+//   +0x00..+0x18  4 vftables
+//   +0x20..+0x2c  bounding box
+//   +0x30..+0x3c  render rect
+//   +0x68 (u32)   current value
+//   +0x6c (u32)   total
+// 
+// Used by the level-load screen and CSetupDlg for music/SFX
+// volume bars (paired with the parent's value-tracking).
+
+void __fastcall CProgressBar::CProgressBar_Render(int param_1)
 
 {
   uint uVar1;
@@ -61583,29 +62329,29 @@ LAB_0040b48b:
 
 
 
-void __fastcall CAdvertising::FUN_0040b4b0(void *param_1)
+void __fastcall CAdvertising::OnTimerTick(void *param_1)
 
 {
-  FUN_0040acc0((int)param_1 + -0x70);
+  Dismiss((int)param_1 + -0x70);
   _Globals::FUN_0042f300(param_1,0);
   return;
 }
 
 
 
-void __fastcall CAdvertising::FUN_0040b4d0(int *param_1)
+void __fastcall CAdvertising::OnLButtonDown(int *param_1)
 
 {
-  CBulanci::CDSView_OnFocus(param_1);
+  CDSView::OnLButtonDown(param_1);
   if ((char)param_1[0x23] == '\0') {
-    FUN_0040acc0((int)param_1);
+    Dismiss((int)param_1);
   }
   return;
 }
 
 
 
-undefined4 __thiscall CAdvertising::FUN_0040b500(CAdvertising *this,char param_1,char param_2)
+undefined4 __thiscall CAdvertising::OnKeyDown(CAdvertising *this,char param_1,char param_2)
 
 {
   uint uVar1;
@@ -61620,7 +62366,7 @@ undefined4 __thiscall CAdvertising::FUN_0040b500(CAdvertising *this,char param_1
   if (this[0x8c] != (CAdvertising)0x0) {
     return (uint)uVar3 << 8;
   }
-  uVar2 = FUN_0040acc0((int)this);
+  uVar2 = Dismiss((int)this);
   return uVar2;
 }
 
@@ -61684,7 +62430,7 @@ undefined4 * __thiscall CDSChained::FUN_0040b560(CDSChained *this,undefined4 *pa
 
 
 
-undefined4 * __thiscall CListBoxItem::FUN_0040b640(CListBoxItem *this,int param_1)
+undefined4 * __thiscall CListBoxItem::CListBoxItem_ctor(CListBoxItem *this,int param_1)
 
 {
   void *local_c;
@@ -61744,7 +62490,7 @@ undefined * CMsgDialog::FUN_0040b760(void)
 
 
 
-undefined * CSessionItem::FUN_0040b770(void)
+undefined * CSessionItem::CSessionItem_GetTypeDescriptor(void)
 
 {
   return &DAT_004b3510;
@@ -61936,7 +62682,7 @@ void __fastcall CBulPicture::FUN_0040b8f0(undefined4 *param_1)
 
 
 
-undefined * CColorSwitch::FUN_0040b950(void)
+undefined * CColorSwitch::CColorSwitch_GetTypeDescriptor(void)
 
 {
   return &DAT_004b3640;
@@ -61944,34 +62690,34 @@ undefined * CColorSwitch::FUN_0040b950(void)
 
 
 
-void __thiscall CColorSwitch::FUN_0040b960(CColorSwitch *this,byte param_1)
+void __thiscall CColorSwitch::CColorSwitch_AdjustorThunk04_Dtor(CColorSwitch *this,byte param_1)
 
 {
-  FUN_0040ec80(this + -0x10,param_1);
+  CColorSwitch_vDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __thiscall CColorSwitch::FUN_0040b970(CColorSwitch *this,byte param_1)
+void __thiscall CColorSwitch::CColorSwitch_AdjustorThunk10_Dtor(CColorSwitch *this,byte param_1)
 
 {
-  FUN_0040ec80(this + -0x18,param_1);
+  CColorSwitch_vDtor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __thiscall CColorSwitch::FUN_0040b980(CColorSwitch *this,byte param_1)
+void __thiscall CColorSwitch::CColorSwitch_AdjustorThunk18_Dtor(CColorSwitch *this,byte param_1)
 
 {
-  FUN_0040ec80(this + -4,param_1);
+  CColorSwitch_vDtor(this + -4,param_1);
   return;
 }
 
 
 
-void __fastcall CColorSwitch::FUN_0040b990(undefined4 *param_1)
+void __fastcall CColorSwitch::CColorSwitch_dtor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -61993,7 +62739,7 @@ void __fastcall CColorSwitch::FUN_0040b990(undefined4 *param_1)
 
 
 
-undefined * CChatEdit::FUN_0040b9f0(void)
+undefined * CChatEdit::CChatEdit_GetTypeDescriptor(void)
 
 {
   return &DAT_004b35dc;
@@ -62004,16 +62750,16 @@ undefined * CChatEdit::FUN_0040b9f0(void)
 void __thiscall CEdit::FUN_0040ba00(CEdit *this,byte param_1)
 
 {
-  FUN_0040ba10(this + -0x10,param_1);
+  CEdit_vDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-undefined4 * __thiscall CEdit::FUN_0040ba10(CEdit *this,byte param_1)
+undefined4 * __thiscall CEdit::CEdit_vDtor(CEdit *this,byte param_1)
 
 {
-  FUN_00406050((undefined4 *)this);
+  CEdit_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -62044,7 +62790,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0xe4);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CLevelList::FUN_0040b0c0(puVar1);
+    puVar1 = CLevelList::CLevelList_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -62054,7 +62800,7 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __fastcall CWindow::FUN_0040baa0(undefined4 *param_1)
+undefined4 * __fastcall CWindow::CWindow_ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -62153,7 +62899,7 @@ void __fastcall _Globals::FUN_0040bb90(undefined4 *param_1)
 
 
 
-undefined * CKeybShow::FUN_0040bbf0(void)
+undefined * CKeybShow::CKeybShow_GetTypeDescriptor(void)
 
 {
   return &DAT_004b35b4;
@@ -62172,13 +62918,13 @@ undefined * CGameTypeDlg::FUN_0040bc00(void)
 void __thiscall CWindow::FUN_0040bc10(CWindow *this,byte param_1)
 
 {
-  FUN_0040f120(this + -0x18,param_1);
+  CWindow_vDtor(this + -0x18,param_1);
   return;
 }
 
 
 
-undefined4 * __fastcall CGameCounter::FUN_0040bc20(undefined4 *param_1)
+undefined4 * __fastcall CGameCounter::Constructor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -62203,7 +62949,7 @@ undefined4 * __fastcall CGameCounter::FUN_0040bc20(undefined4 *param_1)
 
 
 
-undefined * CGameCounter::FUN_0040bca0(void)
+undefined * CGameCounter::GetClassIdentifier(void)
 
 {
   return &DAT_004b35f0;
@@ -62211,28 +62957,28 @@ undefined * CGameCounter::FUN_0040bca0(void)
 
 
 
-void __thiscall CGameCounter::FUN_0040bcb0(CGameCounter *this,byte param_1)
+void __thiscall CGameCounter::DeletingDestructorThunk_10(CGameCounter *this,byte param_1)
 
 {
-  FUN_0040ef40(this + -0x10,param_1);
+  ScalarDeletingDestructor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __thiscall CGameCounter::FUN_0040bcc0(CGameCounter *this,byte param_1)
+void __thiscall CGameCounter::DeletingDestructorThunk_18(CGameCounter *this,byte param_1)
 
 {
-  FUN_0040ef40(this + -0x18,param_1);
+  ScalarDeletingDestructor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __thiscall CGameCounter::FUN_0040bcd0(CGameCounter *this,byte param_1)
+void __thiscall CGameCounter::DeletingDestructorThunk_4(CGameCounter *this,byte param_1)
 
 {
-  FUN_0040ef40(this + -4,param_1);
+  ScalarDeletingDestructor(this + -4,param_1);
   return;
 }
 
@@ -62258,7 +63004,7 @@ void __fastcall _Globals::FUN_0040bce0(undefined4 *param_1)
 
 
 
-undefined4 * CProgressBar::FUN_0040bd50(void)
+undefined4 * CProgressBar::CProgressBar_Allocate(void)
 
 {
   undefined4 *puVar1;
@@ -62288,7 +63034,7 @@ undefined4 * CProgressBar::FUN_0040bd50(void)
 
 
 
-undefined * CScore::FUN_0040bdd0(void)
+undefined * CScore::GetClassIdentifier(void)
 
 {
   return &DAT_004b362c;
@@ -62296,28 +63042,28 @@ undefined * CScore::FUN_0040bdd0(void)
 
 
 
-void __thiscall CScore::FUN_0040bde0(CScore *this,byte param_1)
+void __thiscall CScore::DeletingDestructorThunk_18(CScore *this,byte param_1)
 
 {
-  FUN_0040f070(this + -0x18,param_1);
+  ScalarDeletingDestructor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __thiscall CScore::FUN_0040bdf0(CScore *this,byte param_1)
+void __thiscall CScore::DeletingDestructorThunk_4(CScore *this,byte param_1)
 
 {
-  FUN_0040f070(this + -4,param_1);
+  ScalarDeletingDestructor(this + -4,param_1);
   return;
 }
 
 
 
-void __thiscall CScore::FUN_0040be00(CScore *this,byte param_1)
+void __thiscall CScore::DeletingDestructorThunk_10(CScore *this,byte param_1)
 
 {
-  FUN_0040f070(this + -0x10,param_1);
+  ScalarDeletingDestructor(this + -0x10,param_1);
   return;
 }
 
@@ -62334,13 +63080,13 @@ undefined * CPauseDlg::FUN_0040be10(void)
 void __thiscall CWindow::FUN_0040be20(CWindow *this,byte param_1)
 
 {
-  FUN_0040f120(this + -0x10,param_1);
+  CWindow_vDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-undefined * CVolume::FUN_0040be30(void)
+undefined * CVolume::CVolume_GetTypeDescriptor(void)
 
 {
   return &DAT_004b36a4;
@@ -62348,37 +63094,37 @@ undefined * CVolume::FUN_0040be30(void)
 
 
 
-void __thiscall CVolume::FUN_0040be40(CVolume *this,byte param_1)
+void __thiscall CVolume::CVolume_AdjustorThunk04_Dtor(CVolume *this,byte param_1)
 
 {
-  FUN_0040fc00(this + -0x18,param_1);
+  CVolume_vDtor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __thiscall CVolume::FUN_0040be50(CVolume *this,byte param_1)
+void __thiscall CVolume::CVolume_AdjustorThunk10_Dtor(CVolume *this,byte param_1)
 
 {
-  FUN_0040fc00(this + -4,param_1);
+  CVolume_vDtor(this + -4,param_1);
   return;
 }
 
 
 
-void __thiscall CVolume::FUN_0040be60(CVolume *this,byte param_1)
+void __thiscall CVolume::CVolume_AdjustorThunk18_Dtor(CVolume *this,byte param_1)
 
 {
-  FUN_0040fc00(this + -0x68,param_1);
+  CVolume_vDtor(this + -0x68,param_1);
   return;
 }
 
 
 
-void __thiscall CVolume::FUN_0040be70(CVolume *this,byte param_1)
+void __thiscall CVolume::CVolume_AdjustorThunk68_Dtor(CVolume *this,byte param_1)
 
 {
-  FUN_0040fc00(this + -0x10,param_1);
+  CVolume_vDtor(this + -0x10,param_1);
   return;
 }
 
@@ -62411,7 +63157,7 @@ undefined4 * __thiscall CMsgDialog::FUN_0040be80(CMsgDialog *this,int param_1,un
   ExceptionList = &local_c;
   this_03 = (int *)0x0;
   local_4 = 0;
-  CWindow::FUN_00405560((CWindow *)this,0,0,0,0,1);
+  CWindow::CWindow_BuildAt((CWindow *)this,0,0,0,0,1);
   param_2 = (undefined1 *)((uint)param_2 & 1);
   local_4._0_1_ = 1;
   *(undefined ***)this = vftable;
@@ -62425,7 +63171,7 @@ undefined4 * __thiscall CMsgDialog::FUN_0040be80(CMsgDialog *this,int param_1,un
     uVar9 = 2;
     uVar8 = 0;
     _Globals::FUN_0042d490(&stack0xffffffc8,&param_1);
-    this_03 = CStaticText::FUN_00406a50(this_00,0,0,uVar8,uVar9,uVar10);
+    this_03 = CStaticText::CStaticText_BuildAtAuto(this_00,0,0,uVar8,uVar9,uVar10);
   }
   iVar2 = this_03[0xb];
   iVar3 = this_03[9];
@@ -62453,7 +63199,7 @@ undefined4 * __thiscall CMsgDialog::FUN_0040be80(CMsgDialog *this,int param_1,un
               ((CBulanci *)&stack0xffffffc0,
                *(short **)(g_apCDSStaticTextsSingleton[2] + *(int *)(&DAT_004ae6f0 + iVar1) * 4));
     param_2 = &stack0xffffffb8;
-    this_02 = (CBulanek *)CButton::FUN_004087f0(this_01,0,0,CVar7,uVar6,uVar8,uVar9,puVar11);
+    this_02 = (CBulanek *)CButton::CButton_BuildAt(this_01,0,0,CVar7,uVar6,uVar8,uVar9,puVar11);
   }
   local_4 = CONCAT31(local_4._1_3_,1);
   CBulanek::FUN_0042cc80
@@ -62471,7 +63217,7 @@ undefined4 * __thiscall CMsgDialog::FUN_0040be80(CMsgDialog *this,int param_1,un
 
 
 
-undefined4 * __fastcall CTcpIpConfig::CTcpIpConfig_ctor(undefined4 *param_1)
+undefined4 * __fastcall CTcpIpConfig::Build(undefined4 *param_1)
 
 {
   CStaticText *this;
@@ -62492,7 +63238,7 @@ undefined4 * __fastcall CTcpIpConfig::CTcpIpConfig_ctor(undefined4 *param_1)
   puStack_8 = &LAB_004756e4;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::FUN_00405560((CWindow *)param_1,0,0,0x138,0xa0,1);
+  CWindow::CWindow_BuildAt((CWindow *)param_1,0,0,0x138,0xa0,1);
   local_4 = 0;
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -62510,7 +63256,7 @@ undefined4 * __fastcall CTcpIpConfig::CTcpIpConfig_ctor(undefined4 *param_1)
     uVar4 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x7c));
-    piVar1 = CStaticText::FUN_00406ba0(this,0x14,0x14,0x124,0x3c,uVar4,uVar5,uVar6,uVar7);
+    piVar1 = CStaticText::CStaticText_BuildAt(this,0x14,0x14,0x124,0x3c,uVar4,uVar5,uVar6,uVar7);
   }
   local_4._0_1_ = 0;
   _Globals::FUN_0042d0b0(param_1,piVar1,0);
@@ -62520,7 +63266,7 @@ undefined4 * __fastcall CTcpIpConfig::CTcpIpConfig_ctor(undefined4 *param_1)
     piVar1 = (int *)0x0;
   }
   else {
-    piVar1 = CEdit::FUN_00407760(this_00,0x14,0x46,0x124,0x3c,0x12,2,0,0x100af);
+    piVar1 = CEdit::CEdit_BuildAt(this_00,0x14,0x46,0x124,0x3c,0x12,2,0,0x100af);
   }
   local_4._0_1_ = 0;
   _Globals::FUN_0042d0b0(param_1,piVar1,0);
@@ -62537,7 +63283,7 @@ undefined4 * __fastcall CTcpIpConfig::CTcpIpConfig_ctor(undefined4 *param_1)
     CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
-    piVar1 = CButton::FUN_004087f0(pCVar2,0x49,0x73,CVar3,uVar4,uVar5,uVar7,puVar8);
+    piVar1 = CButton::CButton_BuildAt(pCVar2,0x49,0x73,CVar3,uVar4,uVar5,uVar7,puVar8);
   }
   local_4._0_1_ = 0;
   _Globals::FUN_0042d0b0(param_1,piVar1,0);
@@ -62554,7 +63300,7 @@ undefined4 * __fastcall CTcpIpConfig::CTcpIpConfig_ctor(undefined4 *param_1)
     CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    piVar1 = CButton::FUN_004087f0(pCVar2,0xa3,0x73,CVar3,uVar4,uVar5,uVar7,puVar8);
+    piVar1 = CButton::CButton_BuildAt(pCVar2,0xa3,0x73,CVar3,uVar4,uVar5,uVar7,puVar8);
   }
   local_4 = (uint)local_4._1_3_ << 8;
   _Globals::FUN_0042d0b0(param_1,piVar1,0);
@@ -62569,7 +63315,7 @@ undefined4 * __fastcall CTcpIpConfig::CTcpIpConfig_ctor(undefined4 *param_1)
 
 
 
-undefined * CTcpIpConfig::FUN_0040c2c0(void)
+undefined * CTcpIpConfig::GetClassMeta(void)
 
 {
   return &DAT_004b34e8;
@@ -62577,7 +63323,40 @@ undefined * CTcpIpConfig::FUN_0040c2c0(void)
 
 
 
-undefined4 * __fastcall CSessionList::FUN_0040c2d0(undefined4 *param_1)
+// CSessionList::BuildDialog(this)
+// 
+// Misleadingly-named class: this is *not* a list widget but the
+// full 'Choose a session' DIALOG (a subclass of CWindow) that
+// the network browser shows after a successful enumeration.
+// 
+// The actual list of sessions is one of this dialog's CHILDREN
+// (a CListBox at +0x1c). The remaining children:
+//   +0x1d : CStaticText 'Choose session:'
+//   +0x1e : CButton 'Join' -- cmd 0x8002, audio slot 0x14
+//   +0x1f : CButton 'Cancel' -- cmd 0x8003, audio slot 0x14
+// 
+// Procedure:
+//   1. CWindow::FUN_00405560(this, 0, 0, 0x14f=335, 0xf4=244, 1)
+//      -- the base dialog ctor.
+//   2. Install 4 vftables on the primary view.
+//   3. Build the CStaticText caption at (0x14=20, 0x14=20),
+//      loading text from g_apCDSStaticTextsSingleton[2][+0x80]
+//      ('Choose session:' or equivalent localised string).
+//   4. Build the CListBox at (0x14, 0x32, 0x13b, 0xb4) with
+//      row height 0x118 -- this is where individual sessions
+//      show up as CSessionItem rows.
+//   5. Build the 'Join' button (cmd 0x8002) at (0x53=83, 200).
+//   6. Build the 'Cancel' button (cmd 0x8003) at (0xad=173, 200).
+//   7. Attach all children via FUN_0042d0b0.
+//   8. Set 'Join' as the default-focused widget via FUN_0042d080.
+//   9. Resize bounding box: width = 300, x = 0; y left as-is.
+//  10. Flags +0x46 |= 8 (modal-eligible).
+// 
+// When the user picks a session and presses Join, the dialog
+// posts cmd 0x8002 to the parent (CGame), which extracts the
+// selected CSessionItem from the CListBox and connects.
+
+undefined4 * __fastcall CSessionList::CSessionList_BuildDialog(undefined4 *param_1)
 
 {
   CStaticText *this;
@@ -62597,7 +63376,7 @@ undefined4 * __fastcall CSessionList::FUN_0040c2d0(undefined4 *param_1)
   puStack_8 = &LAB_00475734;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::FUN_00405560((CWindow *)param_1,0,0,0x14f,0xf4,1);
+  CWindow::CWindow_BuildAt((CWindow *)param_1,0,0,0x14f,0xf4,1);
   local_4 = 0;
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -62614,7 +63393,7 @@ undefined4 * __fastcall CSessionList::FUN_0040c2d0(undefined4 *param_1)
     uVar4 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffcc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x80));
-    piVar1 = CStaticText::FUN_00406a50(this,0x14,0x14,uVar4,uVar5,uVar6);
+    piVar1 = CStaticText::CStaticText_BuildAtAuto(this,0x14,0x14,uVar4,uVar5,uVar6);
   }
   local_4._0_1_ = 0;
   param_1[0x1d] = piVar1;
@@ -62625,7 +63404,7 @@ undefined4 * __fastcall CSessionList::FUN_0040c2d0(undefined4 *param_1)
     piVar1 = (int *)0x0;
   }
   else {
-    piVar1 = CListBox::FUN_00408cc0(this_00,0x14,0x32,0x13b,0xb4,0x118,0);
+    piVar1 = CListBox::CListBox__CListBox_BuildAt(this_00,0x14,0x32,0x13b,0xb4,0x118,0);
   }
   local_4._0_1_ = 0;
   param_1[0x1c] = piVar1;
@@ -62643,7 +63422,7 @@ undefined4 * __fastcall CSessionList::FUN_0040c2d0(undefined4 *param_1)
     CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x84));
-    piVar1 = CButton::FUN_004087f0(pCVar2,0x53,200,CVar3,uVar4,uVar5,uVar6,puVar7);
+    piVar1 = CButton::CButton_BuildAt(pCVar2,0x53,200,CVar3,uVar4,uVar5,uVar6,puVar7);
   }
   local_4._0_1_ = 0;
   param_1[0x1e] = piVar1;
@@ -62661,7 +63440,7 @@ undefined4 * __fastcall CSessionList::FUN_0040c2d0(undefined4 *param_1)
     CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    piVar1 = CButton::FUN_004087f0(pCVar2,0xad,200,CVar3,uVar4,uVar5,uVar6,puVar7);
+    piVar1 = CButton::CButton_BuildAt(pCVar2,0xad,200,CVar3,uVar4,uVar5,uVar6,puVar7);
   }
   local_4 = (uint)local_4._1_3_ << 8;
   _Globals::FUN_0042d0b0(param_1,piVar1,0);
@@ -62677,7 +63456,7 @@ undefined4 * __fastcall CSessionList::FUN_0040c2d0(undefined4 *param_1)
 
 
 
-undefined * CSessionList::FUN_0040c530(void)
+undefined * CSessionList::CSessionList_GetTypeDescriptor(void)
 
 {
   return &DAT_004b34fc;
@@ -62688,7 +63467,7 @@ undefined * CSessionList::FUN_0040c530(void)
 void __thiscall CWindow::FUN_0040c540(CWindow *this,byte param_1)
 
 {
-  FUN_0040f120(this + -4,param_1);
+  CWindow_vDtor(this + -4,param_1);
   return;
 }
 
@@ -62822,7 +63601,7 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     uVar6 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x88));
-    piVar2 = CStaticText::FUN_00406a50(pCVar1,0x14,0x14,uVar6,uVar7,uVar9);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x14,uVar6,uVar7,uVar9);
   }
   local_4 = 0xffffffff;
   _Globals::FUN_0042d0b0(param_1,piVar2,0);
@@ -62832,7 +63611,7 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     puVar4 = (undefined4 *)0x0;
   }
   else {
-    puVar4 = CRadio::FUN_00408540(pCVar3,0x1e,0x2d);
+    puVar4 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0x2d);
   }
   param_1[0x22] = (int)puVar4;
   uVar6 = 0;
@@ -62858,7 +63637,7 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     uVar6 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x94));
-    piVar2 = CStaticText::FUN_00406a50(pCVar1,0x14,0x69,uVar6,uVar7,uVar9);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x69,uVar6,uVar7,uVar9);
   }
   local_4 = 0xffffffff;
   param_1[0x27] = (int)piVar2;
@@ -62869,7 +63648,7 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     puVar4 = (undefined4 *)0x0;
   }
   else {
-    puVar4 = CRadio::FUN_00408540(pCVar3,0x1e,0x82);
+    puVar4 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0x82);
   }
   param_1[0x23] = (int)puVar4;
   uVar6 = 0;
@@ -62905,7 +63684,7 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     uVar6 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa8));
-    piVar2 = CStaticText::FUN_00406a50(pCVar1,0x14,0xdf,uVar6,uVar7,uVar9);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0xdf,uVar6,uVar7,uVar9);
   }
   local_4 = 0xffffffff;
   param_1[0x28] = (int)piVar2;
@@ -62916,7 +63695,7 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     puVar4 = (undefined4 *)0x0;
   }
   else {
-    puVar4 = CRadio::FUN_00408540(pCVar3,0x1e,0xf8);
+    puVar4 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0xf8);
   }
   param_1[0x24] = (int)puVar4;
   uVar6 = 0;
@@ -62947,7 +63726,7 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     uVar6 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xac));
-    piVar2 = CStaticText::FUN_00406a50(pCVar1,0x14,0x145,uVar6,uVar7,uVar9);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x145,uVar6,uVar7,uVar9);
   }
   local_4 = 0xffffffff;
   param_1[0x26] = (int)piVar2;
@@ -62958,7 +63737,7 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     puVar4 = (undefined4 *)0x0;
   }
   else {
-    puVar4 = CRadio::FUN_00408540(pCVar3,0x1e,0x15e);
+    puVar4 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0x15e);
   }
   param_1[0x25] = (int)puVar4;
   uVar6 = 0;
@@ -62986,7 +63765,7 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     CVar5 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xc0));
-    piVar2 = CButton::FUN_004087f0(this,0x14,0x1c8,CVar5,uVar6,uVar7,uVar9,puVar4);
+    piVar2 = CButton::CButton_BuildAt(this,0x14,0x1c8,CVar5,uVar6,uVar7,uVar9,puVar4);
   }
   local_4 = 0xffffffff;
   _Globals::FUN_0042d0b0(param_1,piVar2,0);
@@ -63035,7 +63814,7 @@ void __thiscall CColorSet::FUN_0040ccc0(CColorSet *this,byte *param_1)
 
 
 
-void __fastcall CColorSwitch::FUN_0040ccd0(int param_1)
+void __fastcall CColorSwitch::CColorSwitch_Render(int param_1)
 
 {
   byte bVar1;
@@ -63088,7 +63867,7 @@ void __fastcall CColorSwitch::FUN_0040ccd0(int param_1)
 
 
 
-void __thiscall CColorSwitch::FUN_0040ce00(CColorSwitch *this,int *param_1)
+void __thiscall CColorSwitch::CColorSwitch_OnMouseClick(CColorSwitch *this,int *param_1)
 
 {
   int iVar1;
@@ -63099,19 +63878,52 @@ void __thiscall CColorSwitch::FUN_0040ce00(CColorSwitch *this,int *param_1)
   if (iVar2 < iVar1) {
     iVar1 = iVar2;
   }
-  FUN_0040aa40(this,(byte)iVar1 & (iVar1 < 0) - 1U);
+  CColorSwitch_SetSelected(this,(byte)iVar1 & (iVar1 < 0) - 1U);
   return;
 }
 
 
 
+// CChatEdit::BuildAt(this, &rect[4], gameOrViewMaybe,
+//                    chatListPtr, gamePtr)
+// 
+// Single-line chat composer. Subclass of CEdit specialised for
+// in-game / lobby chat input. Filters Enter to post the line
+// (or run the 'clearchat' debug command).
+// 
+// Procedure:
+//   1. CEdit_BuildAt(this, rect[0..3], maxLen=0x78=120 chars,
+//      flag=1, ..., font=0x100af).
+//   2. Install 5 vftables (overriding CEdit_OnChar in particular).
+//   3. Stash extra ptrs:
+//         this+0xb8 = param_2 (state/source context)
+//         this+0xbc = param_3 (parent CChatList* -- target for
+//                    'clearchat' wipe)
+//         this+0xc0 = param_4 (CGame* -- target for NetSendChat)
+// 
+// Layout (size 0xc4, extends CEdit):
+//   +0xb8        opt. host-state pointer (NULL/CGame view-state)
+//   +0xbc        sibling CChatList* (target for 'clearchat')
+//   +0xc0        CGame* (host)
+// 
+// OnChar override on Enter:
+//   - If buffer is empty -> ignore.
+//   - If buffer == L"clearchat" -> _Globals::FUN_00405c40
+//     (chatList clear) + dirty.
+//   - Otherwise -> CGame::NetSendChat(host, channel, buffer, NULL)
+//     where channel = (host+0x36) optionally offset by (state+0x68)
+//     if state pointer is set.
+//   - Always: clear the CEdit buffer via the validated assignment
+//     pipe and return 1 (handled).
+//   - All other characters: forward to CEdit's base OnChar.
+
 undefined4 * __thiscall
-CChatEdit::FUN_0040ce50
+CChatEdit::CChatEdit_BuildAt
           (CChatEdit *this,undefined4 *param_1,undefined4 param_2,undefined4 param_3,
           undefined4 param_4)
 
 {
-  CEdit::FUN_00407760((CEdit *)this,*param_1,param_1[1],param_1[2],param_1[3],0x78,1,0,0x100af);
+  CEdit::CEdit_BuildAt((CEdit *)this,*param_1,param_1[1],param_1[2],param_1[3],0x78,1,0,0x100af);
   *(undefined4 *)(this + 0xbc) = param_3;
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
@@ -63125,10 +63937,10 @@ CChatEdit::FUN_0040ce50
 
 
 
-char __thiscall CChatEdit::FUN_0040cee0(CChatEdit *this,undefined1 *param_1,undefined1 *param_2)
+char __thiscall CChatEdit::CChatEdit_OnChar(CChatEdit *this,undefined1 *param_1,undefined1 *param_2)
 
 {
-  CChatEdit CVar1;
+  CGame CVar1;
   char cVar2;
   int iVar3;
   LPCWSTR pWVar4;
@@ -63148,12 +63960,11 @@ char __thiscall CChatEdit::FUN_0040cee0(CChatEdit *this,undefined1 *param_1,unde
         (**(code **)(**(int **)(this + 0xbc) + 0x24))();
       }
       else {
-        CVar1 = (*(CChatEdit **)(this + 0xc0))[0x36];
+        CVar1 = (*(CGame **)(this + 0xc0))[0x36];
         if (*(int *)(this + 0xb8) != 0) {
-          CVar1 = (CChatEdit)((char)CVar1 + *(char *)(*(int *)(this + 0xb8) + 0x68));
+          CVar1 = (CGame)((char)CVar1 + *(char *)(*(int *)(this + 0xb8) + 0x68));
         }
-        CGame_NetSendChat_t06
-                  (*(CChatEdit **)(this + 0xc0),(byte)CVar1,(int *)(this + 0x98),(void *)0x0);
+        CGame::NetSendChat(*(CGame **)(this + 0xc0),(byte)CVar1,(int *)(this + 0x98),(void *)0x0);
       }
       param_2 = (undefined1 *)0x0;
       cVar2 = '\x01';
@@ -63176,11 +63987,38 @@ char __thiscall CChatEdit::FUN_0040cee0(CChatEdit *this,undefined1 *param_1,unde
 
 
 
+// CChatList::BuildAt(this, &rect[4], fontResId, ownerCallback)
+// 
+// In-game / lobby chat history widget. Subclass of CListBox with
+// an extra owner-callback slot (+0xe4) used to forward 'chat-line
+// submitted' events to the host game/session.
+// 
+// The widget itself is just a vertical scrolling text list with
+// auto-stick-to-bottom behaviour (new lines push the scroll
+// offset down so the latest message stays visible).
+// 
+// Procedure:
+//   1. CListBox_BuildAt(this, rect[0..3], font=param_2, _=8).
+//   2. Install 5 vftables.
+//   3. this+0xe4 = param_3 (owner callback).
+//   4. this+0x14 |= 0x200 (no-keyboard-focus flag -- the chat
+//      composer line is a separate CEdit that owns the focus).
+// 
+// Layout (size 0xe8, extends CListBox):
+//   +0xe4         owner callback (CDSEventHandler*)
+// 
+// Lines are appended via the inherited CListViewer_AddItem.
+// When a line is added, the auto-scroll logic in the base
+// (CScroller_OnTimerTick) detects that the viewport was already
+// at the bottom and updates the scroll offset to the new bottom
+// -- so the user sees fresh messages without manually scrolling.
+
 undefined4 * __thiscall
-CChatList::FUN_0040d010(CChatList *this,int *param_1,undefined4 param_2,undefined4 param_3)
+CChatList::CChatList_BuildAt(CChatList *this,int *param_1,undefined4 param_2,undefined4 param_3)
 
 {
-  CListBox::FUN_00408cc0((CListBox *)this,*param_1,param_1[1],param_1[2],param_1[3],param_2,8);
+  CListBox::CListBox__CListBox_BuildAt
+            ((CListBox *)this,*param_1,param_1[1],param_1[2],param_1[3],param_2,8);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -63193,7 +64031,7 @@ CChatList::FUN_0040d010(CChatList *this,int *param_1,undefined4 param_2,undefine
 
 
 
-undefined * CChatList::FUN_0040d090(void)
+undefined * CChatList::CChatList_GetTypeDescriptor(void)
 
 {
   return &DAT_004b3668;
@@ -63201,17 +64039,17 @@ undefined * CChatList::FUN_0040d090(void)
 
 
 
-void __thiscall CListBox::FUN_0040d0a0(CListBox *this,byte param_1)
+void __thiscall CListBox::CListBox__FUN_0040d0a0(CListBox *this,byte param_1)
 
 {
-  FUN_00408350(this + -4,param_1);
+  CListBox__CListBox_vDtor(this + -4,param_1);
   return;
 }
 
 
 
 void __thiscall
-CChatList::FUN_0040d0b0(CChatList *this,short param_1,int param_2,undefined4 *param_3)
+CChatList::CChatList_OnEvent(CChatList *this,short param_1,int param_2,undefined4 *param_3)
 
 {
   wchar_t wVar1;
@@ -63246,7 +64084,7 @@ CChatList::FUN_0040d0b0(CChatList *this,short param_1,int param_2,undefined4 *pa
     else {
       iVar7 = 0;
       _Globals::FUN_0042d490(&stack0xffffffdc,(int *)&param_3);
-      puVar3 = CListBoxItem::FUN_0040b640(pCVar2,iVar7);
+      puVar3 = CListBoxItem::CListBoxItem_ctor(pCVar2,iVar7);
     }
     local_4._0_1_ = 0;
     _Globals::FUN_00407710(this,puVar3,-1);
@@ -63278,7 +64116,7 @@ LAB_0040d1a0:
         else {
           iVar7 = 0;
           CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffdc,(short *)&DAT_00481560);
-          puVar3 = CListBoxItem::FUN_0040b640(pCVar2,iVar7);
+          puVar3 = CListBoxItem::CListBoxItem_ctor(pCVar2,iVar7);
         }
         local_4._0_1_ = 0;
         _Globals::FUN_00407710(this,puVar3,-1);
@@ -63290,7 +64128,7 @@ LAB_0040d1a0:
         else {
           iVar7 = 0;
           CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffdc,L"   Jaroslav Wagner");
-          puVar3 = CListBoxItem::FUN_0040b640(pCVar2,iVar7);
+          puVar3 = CListBoxItem::CListBoxItem_ctor(pCVar2,iVar7);
         }
         local_4._0_1_ = 0;
         _Globals::FUN_00407710(this,puVar3,-1);
@@ -63302,7 +64140,7 @@ LAB_0040d1a0:
         else {
           iVar7 = 0;
           CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffdc,(short *)&DAT_0048150c);
-          puVar3 = CListBoxItem::FUN_0040b640(pCVar2,iVar7);
+          puVar3 = CListBoxItem::CListBoxItem_ctor(pCVar2,iVar7);
         }
         local_4._0_1_ = 0;
         _Globals::FUN_00407710(this,puVar3,-1);
@@ -63314,7 +64152,7 @@ LAB_0040d1a0:
         else {
           iVar7 = 0;
           CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffdc,(short *)&DAT_004814e8);
-          puVar3 = CListBoxItem::FUN_0040b640(pCVar2,iVar7);
+          puVar3 = CListBoxItem::CListBoxItem_ctor(pCVar2,iVar7);
         }
         local_4._0_1_ = 0;
         _Globals::FUN_00407710(this,puVar3,-1);
@@ -63326,7 +64164,7 @@ LAB_0040d1a0:
         else {
           iVar7 = 0;
           CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffdc,(short *)&DAT_004814c4);
-          puVar3 = CListBoxItem::FUN_0040b640(pCVar2,iVar7);
+          puVar3 = CListBoxItem::CListBoxItem_ctor(pCVar2,iVar7);
         }
         local_4._0_1_ = 0;
         _Globals::FUN_00407710(this,puVar3,-1);
@@ -63417,7 +64255,7 @@ LAB_0040d461:
 
 
 
-void __thiscall CLevelList::FUN_0040d490(CLevelList *this,int *param_1,int param_2)
+void __thiscall CLevelList::CLevelList_RenderItem(CLevelList *this,int *param_1,int param_2)
 
 {
   LPCWSTR pWVar1;
@@ -63521,7 +64359,7 @@ void __fastcall CStartGame2::FUN_0040d570(void *param_1)
       uVar3 = 0;
       _Globals::FUN_0042d490(&stack0xffffffcc,&local_1c);
       local_10 = &stack0xffffffc4;
-      piVar2 = CStaticText::FUN_00406a50(this,0x79,0xd4,uVar3,uVar4,uVar5);
+      piVar2 = CStaticText::CStaticText_BuildAtAuto(this,0x79,0xd4,uVar3,uVar4,uVar5);
     }
     local_4 = (uint)local_4._1_3_ << 8;
     *(int **)((int)param_1 + 0xac) = piVar2;
@@ -63667,7 +64505,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
   puStack_8 = &LAB_004759bc;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::FUN_00405560((CWindow *)this,0,0,0x140,0xda,1);
+  CWindow::CWindow_BuildAt((CWindow *)this,0,0,0x140,0xda,1);
   *(ushort *)(this + 0x46) = *(ushort *)(this + 0x46) | 0x4c;
   local_4 = 0;
   *(undefined ***)this = CGameTypeDlg::vftable;
@@ -63685,7 +64523,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
     uVar8 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 200));
-    piVar2 = CStaticText::FUN_00406a50(pCVar1,0x14,0x14,uVar8,uVar9,uVar11);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x14,uVar8,uVar9,uVar11);
   }
   local_4._0_1_ = 0;
   _Globals::FUN_0042d0b0(this,piVar2,0);
@@ -63695,7 +64533,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
     puVar4 = (undefined4 *)0x0;
   }
   else {
-    puVar4 = CRadio::FUN_00408540(pCVar3,0x28,0x2d);
+    puVar4 = CRadio::CRadio_BuildAt(pCVar3,0x28,0x2d);
   }
   *(undefined4 **)(this + 0x70) = puVar4;
   uVar8 = 0;
@@ -63726,7 +64564,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
     uVar8 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1b0));
-    piVar2 = CStaticText::FUN_00406a50(pCVar1,0x9b,0x14,uVar8,uVar9,uVar11);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x9b,0x14,uVar8,uVar9,uVar11);
   }
   local_4._0_1_ = 0;
   _Globals::FUN_0042d0b0(this,piVar2,0);
@@ -63736,7 +64574,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
     puVar4 = (undefined4 *)0x0;
   }
   else {
-    puVar4 = CRadio::FUN_00408540(pCVar3,0xaf,0x2d);
+    puVar4 = CRadio::CRadio_BuildAt(pCVar3,0xaf,0x2d);
   }
   *(undefined4 **)(this + 0x74) = puVar4;
   uVar8 = 0;
@@ -63768,7 +64606,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
     uVar8 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xf4));
-    piVar2 = CStaticText::FUN_00406a50(pCVar1,0x14,0x76,uVar8,uVar9,uVar11);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x76,uVar8,uVar9,uVar11);
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x78) = piVar2;
@@ -63795,7 +64633,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
     uVar8 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xf8));
-    piVar2 = CStaticText::FUN_00406a50(pCVar1,0x14,0x76,uVar8,uVar9,uVar11);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x76,uVar8,uVar9,uVar11);
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x7c) = piVar2;
@@ -63822,7 +64660,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
     uVar8 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x178));
-    piVar2 = CStaticText::FUN_00406a50(pCVar1,0x14,0x76,uVar8,uVar9,uVar11);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x76,uVar8,uVar9,uVar11);
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x80) = piVar2;
@@ -63851,7 +64689,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
     CVar7 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
-    piVar2 = CButton::FUN_004087f0(pCVar6,0x37,0xa8,CVar7,uVar8,uVar9,uVar11,puVar4);
+    piVar2 = CButton::CButton_BuildAt(pCVar6,0x37,0xa8,CVar7,uVar8,uVar9,uVar11,puVar4);
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x90) = piVar2;
@@ -63869,7 +64707,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
     CVar7 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    piVar2 = CButton::FUN_004087f0(pCVar6,0xb4,0xa8,CVar7,uVar8,uVar9,uVar11,puVar4);
+    piVar2 = CButton::CButton_BuildAt(pCVar6,0xb4,0xa8,CVar7,uVar8,uVar9,uVar11,puVar4);
   }
   local_4 = (uint)local_4._1_3_ << 8;
   _Globals::FUN_0042d0b0(this,piVar2,0);
@@ -63879,7 +64717,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
 
 
 
-undefined4 * __fastcall CProgressBar::FUN_0040df70(undefined4 *param_1)
+undefined4 * __fastcall CProgressBar::CProgressBar_ctor(undefined4 *param_1)
 
 {
   CDSChained::FUN_0040b560((CDSChained *)param_1,(undefined4 *)&stack0x00000004);
@@ -63894,7 +64732,7 @@ undefined4 * __fastcall CProgressBar::FUN_0040df70(undefined4 *param_1)
 
 
 
-undefined4 * __fastcall CLoadingLevel::FUN_0040dfb0(undefined4 *param_1)
+undefined4 * __fastcall CLoadingLevel::CLoadingLevel_ctor(undefined4 *param_1)
 
 {
   CStaticText *this;
@@ -63911,7 +64749,7 @@ undefined4 * __fastcall CLoadingLevel::FUN_0040dfb0(undefined4 *param_1)
   puStack_8 = &LAB_004759fe;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::FUN_00405560((CWindow *)param_1,0,0,0xfa,0x4b,1);
+  CWindow::CWindow_BuildAt((CWindow *)param_1,0,0,0xfa,0x4b,1);
   local_4 = 0;
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -63928,7 +64766,7 @@ undefined4 * __fastcall CLoadingLevel::FUN_0040dfb0(undefined4 *param_1)
     uVar3 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffcc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x134));
-    piVar1 = CStaticText::FUN_00406a50(this,0x14,0x14,uVar3,uVar4,uVar5);
+    piVar1 = CStaticText::CStaticText_BuildAtAuto(this,0x14,0x14,uVar3,uVar4,uVar5);
   }
   local_4._0_1_ = 0;
   _Globals::FUN_0042d0b0(param_1,piVar1,0);
@@ -63938,7 +64776,7 @@ undefined4 * __fastcall CLoadingLevel::FUN_0040dfb0(undefined4 *param_1)
     piVar1 = (int *)0x0;
   }
   else {
-    piVar1 = CProgressBar::FUN_0040df70(puVar2);
+    piVar1 = CProgressBar::CProgressBar_ctor(puVar2);
   }
   local_4 = (uint)local_4._1_3_ << 8;
   param_1[0x1c] = piVar1;
@@ -63980,7 +64818,7 @@ void __fastcall _Globals::thunk_FUN_00401910(undefined4 *param_1)
 
 
 
-void __fastcall CScore::FUN_0040e120(undefined4 *param_1)
+void __fastcall CScore::Destructor(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -64010,10 +64848,11 @@ void __fastcall CScore::FUN_0040e120(undefined4 *param_1)
 
 
 
-undefined4 * __thiscall CVolume::FUN_0040e1b0(CVolume *this,int *param_1,undefined4 *param_2)
+undefined4 * __thiscall CVolume::CVolume_BuildAt(CVolume *this,int *param_1,undefined4 *param_2)
 
 {
-  CScrollBar::FUN_00408370((CScrollBar *)this,*param_1,param_1[1],param_1[2],param_1[3],param_2);
+  CScrollBar::CScrollBar_BuildAt
+            ((CScrollBar *)this,*param_1,param_1[1],param_1[2],param_1[3],param_2);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -64026,7 +64865,7 @@ undefined4 * __thiscall CVolume::FUN_0040e1b0(CVolume *this,int *param_1,undefin
 
 
 
-void __fastcall CVolume::FUN_0040e230(int param_1)
+void __fastcall CVolume::CVolume_StopAudioPreview(int param_1)
 
 {
   if (*(void **)(param_1 + 0xcc) != (void *)0x0) {
@@ -64041,11 +64880,11 @@ void __fastcall CVolume::FUN_0040e230(int param_1)
 
 
 
-void __thiscall CVolume::FUN_0040e270(CVolume *this,undefined4 param_1,byte param_2)
+void __thiscall CVolume::CVolume_OnMouseUp(CVolume *this,undefined4 param_1,byte param_2)
 
 {
-  FUN_0040e230((int)this);
-  CScrollBar::FUN_004074c0((CScrollBar *)this,param_1,param_2);
+  CVolume_StopAudioPreview((int)this);
+  CScrollBar::CScrollBar_OnMouseUp((CScrollBar *)this,param_1,param_2);
   return;
 }
 
@@ -64072,7 +64911,7 @@ undefined4 * __fastcall CSetupDlg::FUN_0040e290(undefined4 *param_1)
   puStack_8 = &LAB_00475a84;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::FUN_00405560((CWindow *)param_1,0,0,0x122,0x8c,1);
+  CWindow::CWindow_BuildAt((CWindow *)param_1,0,0,0x122,0x8c,1);
   local_4 = 0;
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -64089,7 +64928,7 @@ undefined4 * __fastcall CSetupDlg::FUN_0040e290(undefined4 *param_1)
     uVar4 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffbc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x170));
-    piVar1 = CStaticText::FUN_00406a50(this,0x19,0x14,uVar4,uVar5,uVar6);
+    piVar1 = CStaticText::CStaticText_BuildAtAuto(this,0x19,0x14,uVar4,uVar5,uVar6);
   }
   local_4._0_1_ = 0;
   param_1[0x1d] = piVar1;
@@ -64104,7 +64943,7 @@ undefined4 * __fastcall CSetupDlg::FUN_0040e290(undefined4 *param_1)
     local_1c[1] = 0x2a;
     local_1c[2] = 0x10e;
     local_1c[3] = 0x50;
-    piVar1 = CVolume::FUN_0040e1b0(this_00,local_1c,(undefined4 *)&DAT_004aea34);
+    piVar1 = CVolume::CVolume_BuildAt(this_00,local_1c,(undefined4 *)&DAT_004aea34);
   }
   local_4._0_1_ = 0;
   param_1[0x1c] = piVar1;
@@ -64123,7 +64962,7 @@ undefined4 * __fastcall CSetupDlg::FUN_0040e290(undefined4 *param_1)
     CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffb4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
-    piVar1 = CButton::FUN_004087f0
+    piVar1 = CButton::CButton_BuildAt
                        (pCVar2,0x37,(short)param_1[0xb] + -0x32,CVar3,uVar4,uVar5,uVar6,puVar7);
   }
   local_4._0_1_ = 0;
@@ -64141,7 +64980,7 @@ undefined4 * __fastcall CSetupDlg::FUN_0040e290(undefined4 *param_1)
     CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffb4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    piVar1 = CButton::FUN_004087f0
+    piVar1 = CButton::CButton_BuildAt
                        (pCVar2,0x9b,(short)param_1[0xb] + -0x32,CVar3,uVar4,uVar5,uVar6,puVar7);
   }
   local_4 = (uint)local_4._1_3_ << 8;
@@ -64233,7 +65072,7 @@ undefined4 * __fastcall CAdvertising::CAdvertising_ctor(undefined4 *param_1)
   puStack_8 = &LAB_00475aee;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::FUN_00405560((CWindow *)param_1,0,0,800,600,0);
+  CWindow::CWindow_BuildAt((CWindow *)param_1,0,0,800,600,0);
   local_4 = 0;
   CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1c));
   local_4._0_1_ = 1;
@@ -64269,7 +65108,7 @@ undefined4 * __fastcall CAdvertising::CAdvertising_ctor(undefined4 *param_1)
 
 
 
-undefined * CAdvertising::FUN_0040e710(void)
+undefined * CAdvertising::GetClassId(void)
 
 {
   return &DAT_004b36cc;
@@ -64277,37 +65116,37 @@ undefined * CAdvertising::FUN_0040e710(void)
 
 
 
-void __thiscall CAdvertising::FUN_0040e720(CAdvertising *this,byte param_1)
+void __thiscall CAdvertising::deleting_destructor_thunk_0x10(CAdvertising *this,byte param_1)
 
 {
-  FUN_0040fb70(this + -0x10,param_1);
+  deleting_destructor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __thiscall CAdvertising::FUN_0040e730(CAdvertising *this,byte param_1)
+void __thiscall CAdvertising::deleting_destructor_thunk_0x70(CAdvertising *this,byte param_1)
 
 {
-  FUN_0040fb70(this + -0x70,param_1);
+  deleting_destructor(this + -0x70,param_1);
   return;
 }
 
 
 
-void __thiscall CAdvertising::FUN_0040e740(CAdvertising *this,byte param_1)
+void __thiscall CAdvertising::deleting_destructor_thunk_0x18(CAdvertising *this,byte param_1)
 
 {
-  FUN_0040fb70(this + -0x18,param_1);
+  deleting_destructor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __thiscall CAdvertising::FUN_0040e750(CAdvertising *this,byte param_1)
+void __thiscall CAdvertising::deleting_destructor_thunk_0x4(CAdvertising *this,byte param_1)
 
 {
-  FUN_0040fb70(this + -4,param_1);
+  deleting_destructor(this + -4,param_1);
   return;
 }
 
@@ -64386,7 +65225,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x70);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CTcpIpConfig::CTcpIpConfig_ctor(puVar1);
+    puVar1 = CTcpIpConfig::Build(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -64396,7 +65235,50 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CSessionItem::FUN_0040e8b0(CSessionItem *this,int param_1)
+// CSessionItem::Initialize(this, sessionInfo)
+// 
+// Builds one row of the CSessionList dialog's session listbox
+// from a DirectPlay session-info record.
+// 
+// Arguments:
+//   param_1 : pointer to a struct returned by the DirectPlay
+//             enumeration callback. Layout:
+//               +0x08 (u32) host IP (network-order)
+//               +0x0c (u32) port
+//               +0x10 (u32) current player count
+//               +0x14 (u32) flags (locked/passworded?)
+//               +0x30        char* session name (MBCS, from the
+//                            DirectPlay 'DPSESSIONDESC2.lpszSessionNameA')
+// 
+// Procedure:
+//   1. MBCS -> UTF-16 conversion via
+//      _AtlGetThreadACPThunk_004afbfc + FUN_00401290 -- the
+//      resulting wchar_t* lands in a 256-byte stack buffer
+//      (local_10c) or a malloc'd extension.
+//   2. CBulanci::FUN_0042d510 wraps the wchar_t* into a
+//      reference-counted string handle.
+//   3. CListBoxItem_ctor(this, handle) initialises the inherited
+//      CListBoxItem fields (vtable + +0x08 chain links + +0x0c
+//      flags + +0x10 text smart-ptr).
+//   4. Free the stack buffer if it spilled to heap.
+//   5. Override CListBoxItem vftable so click-on-row events
+//      route to CSessionItem's handler instead of the generic
+//      'I am a list row' default.
+//   6. Stash session metadata at:
+//        +0x14 = host IP
+//        +0x18 = port
+//        +0x1c = player count
+//        +0x20 = flags
+// 
+// Layout (extends CListBoxItem, size ~0x24):
+//   +0x00         vftable (overridden)
+//   +0x04..+0x10  CListBoxItem fields (chain + flags + text)
+//   +0x14         host IP   (network-order)
+//   +0x18         port
+//   +0x1c         player count
+//   +0x20         flags
+
+undefined4 * __thiscall CSessionItem::CSessionItem_Initialize(CSessionItem *this,int param_1)
 
 {
   LPCSTR pCVar1;
@@ -64419,7 +65301,7 @@ undefined4 * __thiscall CSessionItem::FUN_0040e8b0(CSessionItem *this,int param_
   uStack_4 = 0;
   iVar3 = 0;
   CBulanci::FUN_0042d510((CBulanci *)&stack0xfffffed8,local_110);
-  CListBoxItem::FUN_0040b640((CListBoxItem *)this,iVar3);
+  CListBoxItem::CListBoxItem_ctor((CListBoxItem *)this,iVar3);
   if (local_110 != local_10c) {
     Runtime::MSVCRT::_free(local_110);
   }
@@ -64459,7 +65341,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x7c);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CSessionList::FUN_0040c2d0(puVar1);
+    puVar1 = CSessionList::CSessionList_BuildDialog(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -64593,7 +65475,7 @@ undefined4 * __thiscall CBulPicture::FUN_0040ebd0(CBulPicture *this,byte param_1
 
 
 
-undefined4 * CColorSwitch::FUN_0040ebf0(void)
+undefined4 * CColorSwitch::CColorSwitch_ctor(void)
 
 {
   undefined4 *puVar1;
@@ -64623,10 +65505,10 @@ undefined4 * CColorSwitch::FUN_0040ebf0(void)
 
 
 
-undefined4 * __thiscall CColorSwitch::FUN_0040ec80(CColorSwitch *this,byte param_1)
+undefined4 * __thiscall CColorSwitch::CColorSwitch_vDtor(CColorSwitch *this,byte param_1)
 
 {
-  FUN_0040b990((undefined4 *)this);
+  CColorSwitch_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -64635,7 +65517,7 @@ undefined4 * __thiscall CColorSwitch::FUN_0040ec80(CColorSwitch *this,byte param
 
 
 
-undefined4 * CChatEdit::FUN_0040eca0(void)
+undefined4 * CChatEdit::CChatEdit_Allocate(void)
 
 {
   undefined4 *puVar1;
@@ -64652,7 +65534,7 @@ undefined4 * CChatEdit::FUN_0040eca0(void)
   local_4 = 0;
   puVar2 = (undefined4 *)0x0;
   if (puVar1 != (undefined4 *)0x0) {
-    CEdit::FUN_00404d10(puVar1);
+    CEdit::CEdit_ctor(puVar1);
     *puVar1 = vftable;
     puVar1[1] = vftable;
     puVar1[4] = vftable;
@@ -64688,7 +65570,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0xc0);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CWindow::FUN_0040baa0(puVar1);
+    puVar1 = CWindow::CWindow_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -64710,7 +65592,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040ed90(CStartGame2 *this,byte param_1
 
 
 
-undefined4 * CKeybShow::FUN_0040edb0(void)
+undefined4 * CKeybShow::CKeybShow_Allocate(void)
 
 {
   undefined4 *puVar1;
@@ -64792,7 +65674,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x80);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CGameCounter::FUN_0040bc20(puVar1);
+    puVar1 = CGameCounter::Constructor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -64802,7 +65684,7 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CGameCounter::FUN_0040ef40(CGameCounter *this,byte param_1)
+undefined4 * __thiscall CGameCounter::ScalarDeletingDestructor(CGameCounter *this,byte param_1)
 
 {
   _Globals::FUN_0040bce0((undefined4 *)this);
@@ -64839,7 +65721,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x74);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CLoadingLevel::FUN_0040dfb0(puVar1);
+    puVar1 = CLoadingLevel::CLoadingLevel_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -64849,7 +65731,7 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * CScore::FUN_0040efd0(void)
+undefined4 * CScore::Create(void)
 
 {
   undefined4 *puVar1;
@@ -64880,10 +65762,10 @@ undefined4 * CScore::FUN_0040efd0(void)
 
 
 
-undefined4 * __thiscall CScore::FUN_0040f070(CScore *this,byte param_1)
+undefined4 * __thiscall CScore::ScalarDeletingDestructor(CScore *this,byte param_1)
 
 {
-  FUN_0040e120((undefined4 *)this);
+  Destructor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -64922,7 +65804,7 @@ undefined4 * CPauseDlg::FUN_0040f090(void)
 
 
 
-undefined4 * __thiscall CWindow::FUN_0040f120(CWindow *this,byte param_1)
+undefined4 * __thiscall CWindow::CWindow_vDtor(CWindow *this,byte param_1)
 
 {
   _Globals::FUN_00401910((undefined4 *)this);
@@ -64934,7 +65816,41 @@ undefined4 * __thiscall CWindow::FUN_0040f120(CWindow *this,byte param_1)
 
 
 
-undefined4 * CVolume::FUN_0040f140(void)
+// CVolume::Allocate()
+// 
+// Factory for the audio-preview slider. Subclass of CScrollBar --
+// shares the base track/thumb geometry and drag handling but
+// overrides OnMouseDown / OnMouseUp / dtor to play a short audio
+// preview sample while the user drags.
+// 
+// Procedure:
+//   1. malloc(0xd0) -- 4 bytes larger than the CScrollBar base
+//      (which ends around 0xcc) for the preview-audio handle.
+//   2. CScrollBar::FUN_00404790(p) -- base CScrollBar ctor.
+//   3. Overwrite 5 vftables: +0x00, +0x04, +0x10, +0x18, +0x68
+//      (CScrollBar uses the CDSUpdatedItem pattern so it has a
+//      timer subobject at +0x68).
+//   4. Initialise this+0xcc = NULL (no active preview).
+// 
+// Layout extends CScrollBar:
+//   +0x00..+0xcb  CScrollBar base (track, thumb, range, step,
+//                 value, drag state)
+//   +0xcc         CDSAudioPlayer* (preview-sample handle, refcounted)
+// 
+// Behaviour overrides:
+//   OnMouseDown : acquires keyboard focus; CScrollBar base
+//                 handles drag init; then PlayBankSample(slot 0x1e
+//                 = preview-tone) and stash handle at +0xcc.
+//                 Looping bit from DAT_004b3b94 == this comparison
+//                 lets the global music-volume widget (vs SFX-volume
+//                 widgets) get a sustained tone instead of a
+//                 one-shot.
+//   OnMouseUp   : StopAudioPreview (Release the handle at +0xcc),
+//                 then base CScrollBar OnMouseUp commits the new
+//                 value.
+//   dtor        : StopAudioPreview + base CScrollBar dtor.
+
+undefined4 * CVolume::CVolume_Allocate(void)
 
 {
   undefined4 *puVar1;
@@ -64949,7 +65865,7 @@ undefined4 * CVolume::FUN_0040f140(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0xd0);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CScrollBar::FUN_00404790(puVar1);
+    CScrollBar::CScrollBar_ctor(puVar1);
     *puVar1 = vftable;
     puVar1[1] = vftable;
     puVar1[4] = vftable;
@@ -65088,7 +66004,7 @@ void __cdecl _Globals::FUN_0040f380(int param_1,int param_2)
     puVar1 = (undefined4 *)0x0;
   }
   else {
-    puVar1 = CSessionItem::FUN_0040e8b0(this,param_1);
+    puVar1 = CSessionItem::CSessionItem_Initialize(this,param_1);
   }
   local_4 = 0xffffffff;
   FUN_00407710(*(void **)(param_2 + 0x70),puVar1,-1);
@@ -65109,7 +66025,7 @@ int * __fastcall CStartGame1::CStartGame1_ctor(int *param_1)
   puStack_8 = &LAB_00475f13;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::FUN_00405560((CWindow *)param_1,0xfa,0x3c,0x2f8,0x230,0);
+  CWindow::CWindow_BuildAt((CWindow *)param_1,0xfa,0x3c,0x2f8,0x230,0);
   local_4 = 0;
   CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1c));
   local_4 = CONCAT31(local_4._1_3_,1);
@@ -65351,7 +66267,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040f7d0(CStartGame2 *this,int param_1)
   ExceptionList = &local_c;
   local_1c = &stack0xffffffbc;
   local_14 = this;
-  CWindow::FUN_00405560((CWindow *)this,0,0,0x118,0xb4,1);
+  CWindow::CWindow_BuildAt((CWindow *)this,0,0,0x118,0xb4,1);
   local_4 = 0;
   *(undefined ***)this = CKeybShow::vftable;
   *(undefined ***)(this + 4) = CKeybShow::vftable;
@@ -65371,7 +66287,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040f7d0(CStartGame2 *this,int param_1)
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xe8));
     local_10 = &stack0xffffffbc;
-    piVar3 = CStaticText::FUN_00406a50(pCVar2,0x14,0x14,uVar10,uVar11,uVar12);
+    piVar3 = CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x14,uVar10,uVar11,uVar12);
   }
   local_4._0_1_ = 0;
   _Globals::FUN_0042d0b0(this,piVar3,0);
@@ -65428,7 +66344,8 @@ undefined4 * __thiscall CStartGame2::FUN_0040f7d0(CStartGame2 *this,int param_1)
     uVar10 = 0;
     _Globals::FUN_0042d490(&stack0xffffffc4,(int *)&local_1c);
     local_10 = &stack0xffffffbc;
-    this_00 = (CStartGame2 *)CStaticText::FUN_00406a50(pCVar2,0x9b,0x15,uVar10,uVar11,uVar12);
+    this_00 = (CStartGame2 *)
+              CStaticText::CStaticText_BuildAtAuto(pCVar2,0x9b,0x15,uVar10,uVar11,uVar12);
   }
   local_4._0_1_ = 2;
   FUN_00405440(this_00,2,3);
@@ -65448,7 +66365,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040f7d0(CStartGame2 *this,int param_1)
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffbc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
     local_10 = &stack0xffffffb4;
-    piVar3 = CButton::FUN_004087f0(this_01,100,0x8c,CVar9,uVar10,uVar11,uVar12,puVar13);
+    piVar3 = CButton::CButton_BuildAt(this_01,100,0x8c,CVar9,uVar10,uVar11,uVar12,puVar13);
   }
   local_4._0_1_ = 2;
   _Globals::FUN_0042d0b0(this,piVar3,0);
@@ -65463,7 +66380,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040f7d0(CStartGame2 *this,int param_1)
 
 
 
-void __fastcall CVolume::FUN_0040fa70(undefined4 *param_1)
+void __fastcall CVolume::CVolume_dtor(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -65481,7 +66398,7 @@ void __fastcall CVolume::FUN_0040fa70(undefined4 *param_1)
   param_1[6] = vftable;
   param_1[0x1a] = vftable;
   local_4 = 1;
-  FUN_0040e230((int)param_1);
+  CVolume_StopAudioPreview((int)param_1);
   local_4 = local_4 & 0xffffff00;
   if ((int *)param_1[0x33] != (int *)0x0) {
     (**(code **)(*(int *)param_1[0x33] + 8))(uVar1);
@@ -65494,13 +66411,13 @@ void __fastcall CVolume::FUN_0040fa70(undefined4 *param_1)
 
 
 
-void __thiscall CVolume::FUN_0040fb00(CVolume *this,int *param_1,short param_2)
+void __thiscall CVolume::CVolume_OnMouseDown(CVolume *this,int *param_1,short param_2)
 
 {
   int iVar1;
   
   _Globals::CDSView_AcquireKeyboardFocus((int *)this);
-  CScrollBar::FUN_00407460((CScrollBar *)this,param_1,param_2);
+  CScrollBar::CScrollBar_OnMouseDown((CScrollBar *)this,param_1,param_2);
   iVar1 = _Globals::FUN_00422430((undefined *)0x1,0,0x1e,0,0,'\x01');
   if (*(int **)(this + 0xcc) != (int *)0x0) {
     (**(code **)(**(int **)(this + 0xcc) + 8))();
@@ -65513,7 +66430,7 @@ void __thiscall CVolume::FUN_0040fb00(CVolume *this,int *param_1,short param_2)
 
 
 
-undefined4 * __thiscall CAdvertising::FUN_0040fb70(CAdvertising *this,byte param_1)
+undefined4 * __thiscall CAdvertising::deleting_destructor(CAdvertising *this,byte param_1)
 
 {
   _Globals::FUN_00401a10((undefined4 *)this);
@@ -65557,10 +66474,10 @@ int * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CVolume::FUN_0040fc00(CVolume *this,byte param_1)
+undefined4 * __thiscall CVolume::CVolume_vDtor(CVolume *this,byte param_1)
 
 {
-  FUN_0040fa70((undefined4 *)this);
+  CVolume_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -65649,7 +66566,7 @@ void __thiscall CStartGame2::FUN_0040fc20(CStartGame2 *this,ushort param_1)
 
 
 
-void __thiscall CBulanci::CAdvertising_LoadSplashImage(CBulanci *this,undefined4 param_1)
+void __thiscall CAdvertising::LoadSplashImage(CAdvertising *this,undefined4 param_1)
 
 {
   int iVar1;
@@ -65688,7 +66605,7 @@ void __thiscall CBulanci::CAdvertising_LoadSplashImage(CBulanci *this,undefined4
   }
   local_c = (void *)((uint)local_c._1_3_ << 8);
   _Globals::FUN_0042d0b0(this,piVar4,0);
-  FUN_0040aca0(this,unaff_retaddr);
+  ArmDismissTimer(this,unaff_retaddr);
   local_c = (void *)0xffffffff;
   if (piVar3 != (int *)0x0) {
     (**(code **)(*piVar3 + 8))();
@@ -65699,7 +66616,7 @@ void __thiscall CBulanci::CAdvertising_LoadSplashImage(CBulanci *this,undefined4
 
 
 
-undefined4 * CChatList::FUN_0040ff20(void)
+undefined4 * CChatList::CChatList_Allocate(void)
 
 {
   undefined4 *puVar1;
@@ -65714,7 +66631,7 @@ undefined4 * CChatList::FUN_0040ff20(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0xe8);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CListViewer::FUN_00407f50(puVar1);
+    CListViewer::CListViewer_ctor(puVar1);
     puVar1[0x33] = 0;
     puVar1[0x35] = 0;
     puVar1[0x36] = 0;
@@ -65779,8 +66696,57 @@ CMenu::FUN_0040ffd0(CMenu *this,undefined4 param_2,undefined4 param_3,CMenu para
 
 
 
+// CColorSwitch::BuildAt(this, x, y, palettePtr)
+// 
+// The player-colour swatch row in CStartGame2. Renders a
+// horizontal strip of N 7-pixel-wide cells; each cell shows one
+// entry from the supplied palette table. Click a cell to select
+// that colour (commit via SetSelected, which the parent picks up
+// as the value-changed signal).
+// 
+// Arguments:
+//   param_1 (s32) : screen X (top-left)
+//   param_2 (s32) : screen Y
+//   param_3       : palette-list pointer (stored at this+0x6c).
+//                   Layout:
+//                     +0x36 (u8)  base palette index
+//                     +0x37 (u8)  swatch count N
+//                     +inline     palette LUT consulted via
+//                                 _Globals::FUN_00412930(p, baseIdx + i)
+//                                 -> returns swatch atlas X-cell
+// 
+// Procedure:
+//   1. CDSChained::FUN_004032d0(this).
+//   2. Install 4 vftables at +0x00/+0x04/+0x10/+0x18.
+//   3. Load swatch atlas (resource 0x10014, the 6-px-wide colour
+//      cells laid out horizontally in one bitmap) into this+0x70.
+//   4. Geometry: width  = x + (N * 7) + 1   (7 px per cell + 1 px
+//                                             border),
+//                height = y + atlasHeight + 2 (1 px frame + 1 px
+//                                               slack).
+//   5. this+0x68 = 0xff (no selection),
+//      this+0x14 |= 0x210 (active + visible).
+// 
+// Layout (size ~0x74):
+//   +0x68 (u8)    selected swatch index (0xff = none)
+//   +0x6c         palette-list pointer
+//   +0x70         swatch atlas (resource 0x10014)
+// 
+// Click path:
+//   OnMouseClick -> idx = ((mouseX - this+0x30) / 7) clamped to
+//                   [0, N-1]; SetSelected(idx).
+//   SetSelected  -> stores idx at +0x68 and invalidates (no event
+//                   is posted from here; parent reads the field
+//                   via a separate getter when committing the
+//                   config).
+// 
+// Render draws each cell with a per-swatch X-offset into the
+// atlas (`paletteLUT(baseIdx + i) * 6`), and overlays a 2-px
+// white/grey selection frame around the selected swatch via
+// FUN_00436530(rect, 0xffffff, 0x909090).
+
 undefined4 * __thiscall
-CColorSwitch::FUN_004100d0
+CColorSwitch::CColorSwitch_BuildAt
           (CColorSwitch *this,undefined4 param_1,undefined4 param_2,undefined4 param_3)
 
 {
@@ -65916,7 +66882,7 @@ void __cdecl _Globals::FUN_004102d0(void *param_1,int param_2,int param_3,int pa
         local_28 = (CBulanek *)0x0;
       }
       else {
-        local_28 = (CBulanek *)CColorSwitch::FUN_004100d0(this,0,0,param_2);
+        local_28 = (CBulanek *)CColorSwitch::CColorSwitch_BuildAt(this,0,0,param_2);
       }
       local_4 = 0xffffffff;
       FUN_0042d0b0(param_1,(int *)local_28,0);
@@ -65935,7 +66901,7 @@ void __cdecl _Globals::FUN_004102d0(void *param_1,int param_2,int param_3,int pa
       uVar3 = 0;
       CBulanci::FUN_0042d510
                 ((CBulanci *)&stack0xffffffb8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xd4));
-      piVar1 = CStaticText::FUN_00406a50(this_00,param_3,param_4,uVar3,uVar4,uVar5);
+      piVar1 = CStaticText::CStaticText_BuildAtAuto(this_00,param_3,param_4,uVar3,uVar4,uVar5);
     }
     local_4 = 0xffffffff;
     FUN_0042d0b0(param_1,piVar1,0);
@@ -65949,7 +66915,7 @@ void __cdecl _Globals::FUN_004102d0(void *param_1,int param_2,int param_3,int pa
       local_14 = param_3 + 0x10e;
       local_1c = param_3 + 10;
       local_10 = param_4 + 0xa6;
-      piVar1 = CChatList::FUN_0040d010(this_01,&local_1c,0x122,param_2);
+      piVar1 = CChatList::CChatList_BuildAt(this_01,&local_1c,0x122,param_2);
     }
     local_4 = 0xffffffff;
     FUN_0042d0b0(param_1,piVar1,0);
@@ -65963,7 +66929,7 @@ void __cdecl _Globals::FUN_004102d0(void *param_1,int param_2,int param_3,int pa
       local_1c = param_3 + 10;
       local_10 = param_4 + 0xce;
       local_14 = iVar2;
-      piVar1 = CChatEdit::FUN_0040ce50(this_02,&local_1c,local_28,piVar1,param_2);
+      piVar1 = CChatEdit::CChatEdit_BuildAt(this_02,&local_1c,local_28,piVar1,param_2);
     }
     local_4 = 0xffffffff;
     FUN_0042d0b0(param_1,piVar1,0);
@@ -66047,7 +67013,7 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
   local_c = ExceptionList;
   ExceptionList = &local_c;
   local_410 = this;
-  CWindow::FUN_00405560((CWindow *)this,0xe6,0x32,0x2f8,0x230,0);
+  CWindow::CWindow_BuildAt((CWindow *)this,0xe6,0x32,0x2f8,0x230,0);
   local_4 = (void *)0x0;
   CDSUpdatedItem::FUN_0042f060((int)(this + 0x70));
   *(undefined4 *)(this + 0xac) = 0;
@@ -66159,8 +67125,8 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
         piVar8 = (int *)0x0;
       }
       else {
-        piVar8 = CEdit::FUN_00407760(this_03,uStack_42c + -0xc,0x8a,uStack_42c + 0x58,0x96,0x28,1,1,
-                                     0x100af);
+        piVar8 = CEdit::CEdit_BuildAt
+                           (this_03,uStack_42c + -0xc,0x8a,uStack_42c + 0x58,0x96,0x28,1,1,0x100af);
       }
       cVar22 = (char)(unaff_EBX >> 8);
       local_c._0_1_ = 3;
@@ -66184,7 +67150,7 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
           CBulanci::FUN_0042d510
                     ((CBulanci *)&stack0xfffffb98,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xc4)
                     );
-          piVar8 = CButton::FUN_004087f0
+          piVar8 = CButton::CButton_BuildAt
                              (pCVar10,uStack_42c + -3,0xaa,CVar15,uVar9,uVar16,uVar18,puVar14);
         }
         local_c._0_1_ = 3;
@@ -66210,7 +67176,7 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
       CVar15 = (CBulanci)0x0;
       CBulanci::FUN_0042d510
                 ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xcc));
-      piVar8 = CButton::FUN_004087f0(pCVar10,0x1f,0xd0,CVar15,uVar16,uVar18,uVar20,puVar14);
+      piVar8 = CButton::CButton_BuildAt(pCVar10,0x1f,0xd0,CVar15,uVar16,uVar18,uVar20,puVar14);
       goto LAB_00410a6a;
     }
   }
@@ -66223,7 +67189,7 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
       uVar16 = 0;
       CBulanci::FUN_0042d510
                 ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 200));
-      piVar8 = CStaticText::FUN_00406a50(pCVar11,0x14,0xd2,uVar16,uVar18,uVar20);
+      piVar8 = CStaticText::CStaticText_BuildAtAuto(pCVar11,0x14,0xd2,uVar16,uVar18,uVar20);
       goto LAB_00410a6a;
     }
   }
@@ -66244,7 +67210,7 @@ LAB_00410a6a:
     CVar15 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x15c));
-    piVar8 = CButton::FUN_004087f0(pCVar10,400,0xd2,CVar15,uVar16,uVar18,uVar20,puVar14);
+    piVar8 = CButton::CButton_BuildAt(pCVar10,400,0xd2,CVar15,uVar16,uVar18,uVar20,puVar14);
   }
   local_4._0_1_ = 1;
   _Globals::FUN_0042d0b0(this,piVar8,0);
@@ -66259,7 +67225,7 @@ LAB_00410a6a:
     uVar16 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xd0));
-    piVar8 = CStaticText::FUN_00406a50(pCVar11,0x14,0xf4,uVar16,uVar18,uVar20);
+    piVar8 = CStaticText::CStaticText_BuildAtAuto(pCVar11,0x14,0xf4,uVar16,uVar18,uVar20);
   }
   local_4._0_1_ = 1;
   _Globals::FUN_0042d0b0(this,piVar8,0);
@@ -66269,7 +67235,7 @@ LAB_00410a6a:
     puVar14 = (undefined4 *)0x0;
   }
   else {
-    puVar14 = CLevelList::FUN_0040b0c0(puVar14);
+    puVar14 = CLevelList::CLevelList_ctor(puVar14);
   }
   *(undefined4 **)(this + 0xb4) = puVar14;
   iVar12 = *(int *)(*(int *)(this + 0xa8) + 0xc4);
@@ -66303,7 +67269,7 @@ LAB_00410a6a:
     CVar15 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xd8));
-    piVar8 = CButton::FUN_004087f0(pCVar10,0x28,0x1d2,CVar15,uVar16,uVar18,uVar20,puVar14);
+    piVar8 = CButton::CButton_BuildAt(pCVar10,0x28,0x1d2,CVar15,uVar16,uVar18,uVar20,puVar14);
   }
   local_4._0_1_ = 1;
   *(int **)(this + 0xb8) = piVar8;
@@ -66322,7 +67288,7 @@ LAB_00410a6a:
       uVar16 = 0;
       CBulanci::FUN_0042d510
                 ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1a8));
-      piVar8 = CStaticText::FUN_00406a50(pCVar11,0x28,0x1ef,uVar16,uVar18,uVar20);
+      piVar8 = CStaticText::CStaticText_BuildAtAuto(pCVar11,0x28,0x1ef,uVar16,uVar18,uVar20);
     }
     local_4._0_1_ = 1;
     *(int **)(this + 0xb0) = piVar8;
@@ -66343,7 +67309,7 @@ LAB_00410a6a:
     CVar15 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    piVar8 = CButton::FUN_004087f0(pCVar10,0x8c,0x1d2,CVar15,uVar16,uVar18,uVar20,puVar14);
+    piVar8 = CButton::CButton_BuildAt(pCVar10,0x8c,0x1d2,CVar15,uVar16,uVar18,uVar20,puVar14);
   }
   local_4 = (void *)CONCAT31(local_4._1_3_,1);
   _Globals::FUN_0042d0b0(this,piVar8,0);
@@ -66501,7 +67467,7 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
   puStack_8 = &LAB_00476445;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::FUN_00405560((CWindow *)this,0,0,800,600,0);
+  CWindow::CWindow_BuildAt((CWindow *)this,0,0,800,600,0);
   *(undefined ***)this = CScore::vftable;
   *(undefined ***)(this + 4) = CScore::vftable;
   *(undefined ***)(this + 0x10) = CScore::vftable;
@@ -66522,7 +67488,7 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
   _qsort(local_42c,(uint)*(byte *)((int)param_1 + 0xd8),8,(_PtFuncCompare *)&LAB_0040abd0);
   local_434 = 0;
   if (*(char *)((int)param_1 + 0xd8) == '\x01') {
-    local_434 = FUN_00414280(param_1);
+    local_434 = CGame_GetOrCreateLevelScore(param_1);
   }
   piVar9 = *(int **)((int)g_pApp + 0x70);
   local_45c = (int *)0x0;
@@ -66634,7 +67600,7 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
         piVar9 = (int *)_Globals::FUN_00412910(param_1,bVar5);
         uVar19 = 0;
         _Globals::FUN_0042d490(&stack0xfffffb5c,piVar9);
-        piVar9 = CStaticText::FUN_00406ba0
+        piVar9 = CStaticText::CStaticText_BuildAt
                            (pCVar11,*(int *)(&DAT_004ae788 + uVar16 * 4),iVar6 + -0x1c,
                             (int)(pCStack_438 + *(int *)(&DAT_004ae788 + uVar16 * 4)),iVar6 + -10,
                             uVar19,uVar20,uVar10,uVar23);
@@ -66659,7 +67625,7 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
         uVar19 = 0;
         _Globals::FUN_0042d490(&stack0xfffffb5c,&iStack_458);
         pCVar7 = pCStack_438;
-        piVar9 = CStaticText::FUN_00406ba0
+        piVar9 = CStaticText::CStaticText_BuildAt
                            (pCVar11,*(int *)(&DAT_004ae788 + uVar16 * 4),0x1e5,
                             (int)(pCStack_438 + *(int *)(&DAT_004ae788 + uVar16 * 4)),500,uVar19,
                             uVar20,uVar22,uVar23);
@@ -66679,7 +67645,7 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
         uVar20 = 1;
         uVar19 = 0;
         _Globals::FUN_0042d490(&stack0xfffffb5c,&iStack_458);
-        piVar9 = CStaticText::FUN_00406ba0
+        piVar9 = CStaticText::CStaticText_BuildAt
                            (pCVar11,*(int *)(&DAT_004ae788 + uVar16 * 4),0x1d7,
                             (int)(pCVar7 + *(int *)(&DAT_004ae788 + uVar16 * 4)),0x1e6,uVar19,uVar20
                             ,uVar22,uVar23);
@@ -66715,13 +67681,13 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
             uVar19 = 0;
             FUN_0042d510((CBulanci *)&stack0xfffffb5c,(short *)&DAT_00481978);
             pCVar11 = (CStaticText *)
-                      CStaticText::FUN_00406ba0
+                      CStaticText::CStaticText_BuildAt
                                 (pCVar11,*(int *)(&DAT_004ae788 + uVar16 * 4) + -0xf,iVar6,
                                  (int)(pCVar7 + *(int *)(&DAT_004ae788 + uVar16 * 4) + -0xf),
                                  iVar6 + 0x12,uVar19,uVar20,uVar10,uVar23);
           }
           local_4._0_1_ = 0xb;
-          CStaticText::FUN_00403040(pCVar11,&iStack_44c,2);
+          CStaticText::CStaticText_SetStyle(pCVar11,&iStack_44c,2);
           pCVar11[0x94] = (CStaticText)0x1;
           _Globals::FUN_0042d0b0(this,(int *)pCVar11,0);
           pCVar11 = (CStaticText *)_Globals::FUN_00447c42(0x98);
@@ -66735,7 +67701,7 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
             uVar20 = 1;
             uVar19 = 0;
             _Globals::FUN_0042d490(&stack0xfffffb5c,(int *)&pCStack_43c);
-            piVar9 = CStaticText::FUN_00406ba0
+            piVar9 = CStaticText::CStaticText_BuildAt
                                (pCVar11,*(int *)(&DAT_004ae788 + uVar16 * 4) + 5,iVar6,
                                 (int)(pCVar7 + *(int *)(&DAT_004ae788 + uVar16 * 4) + 5),
                                 iVar6 + 0x12,uVar19,uVar20,uVar10,uVar23);
@@ -66798,7 +67764,7 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
         uVar19 = 0;
         FUN_0042d510((CBulanci *)&stack0xfffffb54,
                      *(short **)(g_apCDSStaticTextsSingleton[2] + *piVar12 * 4));
-        piVar13 = CStaticText::FUN_00406ba0
+        piVar13 = CStaticText::CStaticText_BuildAt
                             (pCVar11,uStack_454,local_450,iStack_44c,iStack_448,uVar19,uVar20,uVar16
                              ,uVar23);
       }
@@ -66899,7 +67865,7 @@ undefined4 * __fastcall CExitDlg::CExitDlg_ctor(undefined4 *param_1)
   puStack_8 = &LAB_004764ac;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::FUN_00405560((CWindow *)param_1,0xdd,0x18,0x2fa,0x239,0);
+  CWindow::CWindow_BuildAt((CWindow *)param_1,0xdd,0x18,0x2fa,0x239,0);
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -66954,7 +67920,7 @@ undefined4 * __fastcall CExitDlg::CExitDlg_ctor(undefined4 *param_1)
     uVar7 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x138));
-    piVar4 = CStaticText::FUN_00406a50(this,0x28,0x48,uVar7,uVar8,uVar9);
+    piVar4 = CStaticText::CStaticText_BuildAtAuto(this,0x28,0x48,uVar7,uVar8,uVar9);
   }
   local_4._0_1_ = 1;
   _Globals::FUN_0042d0b0(param_1,piVar4,0);
@@ -66971,7 +67937,7 @@ undefined4 * __fastcall CExitDlg::CExitDlg_ctor(undefined4 *param_1)
     CVar6 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffbc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x14c));
-    piVar4 = CButton::FUN_004087f0(this_00,0x31,0x1ec,CVar6,uVar7,uVar8,uVar9,puVar10);
+    piVar4 = CButton::CButton_BuildAt(this_00,0x31,0x1ec,CVar6,uVar7,uVar8,uVar9,puVar10);
   }
   local_4._0_1_ = 1;
   _Globals::FUN_0042d0b0(param_1,piVar4,0);
@@ -67014,7 +67980,7 @@ int * __thiscall CBulanci::FUN_00411df0(CBulanci *this,int param_1)
   puStack_8 = &LAB_0047650f;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::FUN_00405560((CWindow *)this,0,0,0x132,0x5a,1);
+  CWindow::CWindow_BuildAt((CWindow *)this,0,0,0x132,0x5a,1);
   local_4 = 0;
   *(undefined ***)this = CPauseDlg::vftable;
   *(undefined ***)(this + 4) = CPauseDlg::vftable;
@@ -67032,7 +67998,7 @@ int * __thiscall CBulanci::FUN_00411df0(CBulanci *this,int param_1)
     uVar6 = 2;
     uVar5 = 0;
     FUN_0042d510((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x150));
-    piVar1 = CStaticText::FUN_00406ba0(this_00,0,0xc,0x132,0x23,uVar5,uVar6,uVar7,uVar8);
+    piVar1 = CStaticText::CStaticText_BuildAt(this_00,0,0xc,0x132,0x23,uVar5,uVar6,uVar7,uVar8);
   }
   local_4 = (uint)local_4._1_3_ << 8;
   _Globals::FUN_0042d0b0(this,piVar1,0);
@@ -67053,7 +68019,7 @@ int * __thiscall CBulanci::FUN_00411df0(CBulanci *this,int param_1)
     uVar5 = 0xea;
     CVar4 = (CBulanci)0x0;
     FUN_0042d510((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x154));
-    piVar1 = CButton::FUN_004087f0(pCVar2,0xf,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
+    piVar1 = CButton::CButton_BuildAt(pCVar2,0xf,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x74) = piVar1;
@@ -67070,7 +68036,7 @@ int * __thiscall CBulanci::FUN_00411df0(CBulanci *this,int param_1)
     uVar5 = 0xeb;
     CVar4 = (CBulanci)0x0;
     FUN_0042d510((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x158));
-    piVar1 = CButton::FUN_004087f0(pCVar2,0xf,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
+    piVar1 = CButton::CButton_BuildAt(pCVar2,0xf,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x78) = piVar1;
@@ -67088,7 +68054,7 @@ int * __thiscall CBulanci::FUN_00411df0(CBulanci *this,int param_1)
     uVar5 = 0xec;
     CVar4 = (CBulanci)0x0;
     FUN_0042d510((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x15c));
-    piVar1 = CButton::FUN_004087f0(pCVar2,0x70,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
+    piVar1 = CButton::CButton_BuildAt(pCVar2,0x70,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
   }
   local_4._0_1_ = 0;
   _Globals::FUN_0042d0b0(this,piVar1,0);
@@ -67104,7 +68070,7 @@ int * __thiscall CBulanci::FUN_00411df0(CBulanci *this,int param_1)
     uVar5 = 0x8003;
     CVar4 = (CBulanci)0x0;
     FUN_0042d510((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x14c));
-    piVar1 = CButton::FUN_004087f0(pCVar2,0xd1,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
+    piVar1 = CButton::CButton_BuildAt(pCVar2,0xd1,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
   }
   local_4 = (uint)local_4._1_3_ << 8;
   _Globals::FUN_0042d0b0(this,piVar1,0);
@@ -67345,7 +68311,7 @@ void __fastcall _Globals::FUN_00412460(int param_1)
 
 
 
-undefined1 _Globals::FUN_00412490(byte param_1)
+undefined1 _Globals::GetMaxAmmoForKind(byte param_1)
 
 {
   return (&DAT_00481a60)[param_1];
@@ -67370,8 +68336,8 @@ void __thiscall _Globals::CGame_NetSendKick_t0a(void *this,uint param_1)
       param_1._0_3_ = CONCAT12(cVar1,CONCAT11(*(undefined1 *)((int)this + 0xdb),10));
       CDSDirectPlay_Send(*(void **)((int)this + 0x1dc),0,&param_1,(undefined *)0x3);
     }
-    CChatEdit::FUN_0042eff0
-              ((CChatEdit *)((int)this + 0x1c),0xe9,(uint)*(byte *)((int)this + 0xdb),uVar2 & 0xff,
+    CGame::BroadcastEvent
+              ((CGame *)((int)this + 0x1c),0xe9,(uint)*(byte *)((int)this + 0xdb),uVar2 & 0xff,
                (void *)0x0);
   }
   return;
@@ -67897,7 +68863,7 @@ CStartGame2::CGame_NetSendSetAvatar_t03(CStartGame2 *this,byte param_1,void *par
   
   bVar1 = param_1;
   uVar2 = (uint)param_1;
-  CChatEdit::FUN_0042eff0((CChatEdit *)(this + 0x1c),0xde,uVar2,0,param_2);
+  CGame::BroadcastEvent((CGame *)(this + 0x1c),0xde,uVar2,0,param_2);
   if ((*(void **)(this + 0x1dc) != (void *)0x0) && (param_3 != '\0')) {
     CStack00000006 = this[uVar2 * 0x23 + 0xdc];
     param_1 = 3;
@@ -67917,7 +68883,7 @@ CStartGame2::CGame_NetSendSlotCount_t04(CStartGame2 *this,void *param_1,char par
   CStartGame2 local_7;
   undefined4 local_6;
   
-  CChatEdit::FUN_0042eff0((CChatEdit *)(this + 0x1c),0xe0,0,0,param_1);
+  CGame::BroadcastEvent((CGame *)(this + 0x1c),0xe0,0,0,param_1);
   if ((*(void **)(this + 0x1dc) != (void *)0x0) && (param_2 != '\0')) {
     local_7 = this[0x19c];
     local_8 = 4;
@@ -67935,7 +68901,7 @@ CStartGame2::CGame_NetSendAdminByte_t64(CStartGame2 *this,void *param_1,char par
 {
   CStartGame2 CStack00000009;
   
-  CChatEdit::FUN_0042eff0((CChatEdit *)(this + 0x1c),0xf8,0,0,param_1);
+  CGame::BroadcastEvent((CGame *)(this + 0x1c),0xf8,0,0,param_1);
   if (((*(void **)(this + 0x1dc) != (void *)0x0) && (param_2 != '\0')) &&
      (this[0x86] != (CStartGame2)0x0)) {
     CStack00000009 = this[0x19d];
@@ -67952,7 +68918,7 @@ void __thiscall CGame::CGame_NetSendCountdown_t07(CGame *this,char param_1)
 {
   CGame CStack00000005;
   
-  CChatEdit::FUN_0042eff0((CChatEdit *)(this + 0x1c),0xe2,(uint)(byte)this[0x1e8],0,(void *)0x0);
+  BroadcastEvent(this + 0x1c,0xe2,(uint)(byte)this[0x1e8],0,(void *)0x0);
   if ((*(void **)(this + 0x1dc) != (void *)0x0) && (param_1 != '\0')) {
     CStack00000005 = this[0x1e8];
     param_1 = '\a';
@@ -68666,7 +69632,7 @@ CStartGame2::CGame_NetSendRename_t02(CStartGame2 *this,byte param_1,void *param_
   uint local_4;
   
   local_4 = DAT_004b0e44 ^ (uint)&local_1004;
-  CChatEdit::FUN_0042eff0((CChatEdit *)(this + 0x1c),0xdd,(uint)param_1,0,param_2);
+  CGame::BroadcastEvent((CGame *)(this + 0x1c),0xdd,(uint)param_1,0,param_2);
   this_00 = *(void **)(this + 0x1dc);
   if ((this_00 != (void *)0x0) && (param_3 != '\0')) {
     _Src = *(undefined **)(this + (uint)param_1 * 0x23 + 0xde);
@@ -68738,8 +69704,7 @@ void __thiscall CMenu::FUN_00413b20(CMenu *this,uint param_1)
 
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 
-void __thiscall
-CChatEdit::CGame_NetSendChat_t06(CChatEdit *this,byte param_1,int *param_2,void *param_3)
+void __thiscall CGame::NetSendChat(CGame *this,byte param_1,int *param_2,void *param_3)
 
 {
   void *this_00;
@@ -68751,7 +69716,7 @@ CChatEdit::CGame_NetSendChat_t06(CChatEdit *this,byte param_1,int *param_2,void 
   uint local_4;
   
   local_4 = DAT_004b0e44 ^ (uint)&local_1004;
-  FUN_0042eff0(this + 0x1c,0xe1,(uint)param_1,param_2,param_3);
+  BroadcastEvent(this + 0x1c,0xe1,(uint)param_1,param_2,param_3);
   this_00 = *(void **)(this + 0x1dc);
   if (this_00 != (void *)0x0) {
     _Src = (undefined *)*param_2;
@@ -68894,7 +69859,7 @@ void __fastcall CBulanci::CGame_StartGame(int *param_1)
     uStack_24 = 0;
     _Globals::CDSDirectPlay_Send((void *)param_1[0x77],0,&local_28,(undefined *)0x6);
   }
-  FUN_0041ff90(local_414,param_1);
+  CGaming_ctor(local_414,param_1);
   local_8._0_1_ = 1;
   local_17 = 0;
   local_16 = 0;
@@ -68917,7 +69882,7 @@ void __fastcall CBulanci::CGame_StartGame(int *param_1)
   _Globals::FUN_0042d0b0((void *)param_1[0x7b],local_a8,0);
   local_17 = 1;
   _Globals::CDSApp_FrameBody((int *)param_1[0x7b]);
-  FUN_0041d2e0(local_414);
+  CGaming_LoadLevelAssetAndMusic(local_414);
   uVar4 = local_1c;
   *(undefined1 *)(param_1 + 0xc) = 4;
   if (param_1[0x77] != 0) {
@@ -68974,7 +69939,7 @@ void __fastcall CBulanci::CGame_StartGame(int *param_1)
   local_8._0_1_ = 1;
   CDSView::FUN_0042cea0(local_a8);
   local_8 = (uint)local_8._1_3_ << 8;
-  CGaming::FUN_0041b850((undefined4 *)local_414);
+  CGaming::CGaming_dtor((undefined4 *)local_414);
   ExceptionList = local_10;
   return;
 }
@@ -69069,7 +70034,7 @@ void __thiscall CMenu::CMenu_PickSession(CMenu *this,undefined4 *param_1)
   local_14 = (undefined1 *)&uStack_a4;
   ExceptionList = &local_10;
   local_18 = this;
-  CSessionList::FUN_0040c2d0(local_94);
+  CSessionList::CSessionList_BuildDialog(local_94);
   local_8 = 0;
   _Globals::FUN_0042f330(this + 4,1,-1);
   local_8 = CONCAT31(local_8._1_3_,1);
@@ -69114,7 +70079,7 @@ void __thiscall _Globals::FUN_00414250(void *this,int *param_1)
 
 
 
-void __fastcall CBulanci::FUN_00414280(void *param_1)
+void __fastcall CBulanci::CGame_GetOrCreateLevelScore(void *param_1)
 
 {
   CBulanci *this;
@@ -69150,7 +70115,7 @@ void __fastcall CBulanci::FUN_00414280(void *param_1)
   uVar4 = *(undefined4 *)((int)param_1 + 0xfa);
   uVar2 = *(undefined4 *)((int)param_1 + 0xe6);
   piVar1 = (int *)_Globals::FUN_00412910(param_1,0);
-  FUN_00409b10(this,piVar1,uVar2,uVar4);
+  CLevelScore_AddPlayerScore(this,piVar1,uVar2,uVar4);
   return;
 }
 
@@ -69170,7 +70135,7 @@ void __thiscall CStartGame2::CGame_NetSendSetLevel_t05(CStartGame2 *this,void *p
   uint local_4;
   
   local_4 = DAT_004b0e44 ^ (uint)&local_b0;
-  CChatEdit::FUN_0042eff0((CChatEdit *)(this + 0x1c),0xdf,0,0,param_1);
+  CGame::BroadcastEvent((CGame *)(this + 0x1c),0xdf,0,0,param_1);
   if ((*(int *)(this + 0x1dc) != 0) && (param_2 != '\0')) {
     local_2c = 5;
     pWVar4 = *(LPCWSTR *)(this + 0xcc);
@@ -69810,7 +70775,7 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(void *param_1)
       local_4074 = (char *)0x0;
       local_4064._0_1_ = 3;
       local_4064._1_3_ = uVar2;
-      CTcpIpConfig::CTcpIpConfig_ctor((undefined4 *)local_4174);
+      CTcpIpConfig::Build((undefined4 *)local_4174);
       local_4064._0_1_ = 4;
       CMenu_DoModalChild(param_1,local_4174,'\0');
       CBulanci::FUN_0042c320(local_4174,(int)&local_4074);
@@ -70344,9 +71309,7 @@ LAB_00415741:
   case '\x06':
     _Globals::FUN_00401190(&local_4be4,(short *)((int)param_2 + 2));
     local_4 = 7;
-    CChatEdit::FUN_0042eff0
-              ((CChatEdit *)(this + 0x1c),0xe1,(uint)*(byte *)((int)param_2 + 1),&local_4be4,
-               (void *)0x0);
+    BroadcastEvent(this + 0x1c,0xe1,(uint)*(byte *)((int)param_2 + 1),&local_4be4,(void *)0x0);
     local_4 = 0xffffffff;
     if (local_4be4 != (CGame *)0x0) {
       _Globals::FUN_0042d2d0(local_4be4 + -0xc);
@@ -70365,16 +71328,14 @@ LAB_00415741:
     }
     break;
   case '\t':
-    CChatEdit::FUN_0042eff0
-              ((CChatEdit *)(this + 0x1c),0xe3,(uint)*(byte *)((int)param_2 + 1),
-               *(undefined4 *)((int)param_2 + 2),(void *)0x0);
+    BroadcastEvent(this + 0x1c,0xe3,(uint)*(byte *)((int)param_2 + 1),
+                   *(undefined4 *)((int)param_2 + 2),(void *)0x0);
     break;
   case '\n':
     if (this[0x30] == (CGame)0x6) {
       this[(uint)*(byte *)((int)param_2 + 1) * 0xd + 0x174] = *(CGame *)((int)param_2 + 2);
-      CChatEdit::FUN_0042eff0
-                ((CChatEdit *)(this + 0x1c),0xe9,(uint)*(byte *)((int)param_2 + 1),
-                 (uint)*(byte *)((int)param_2 + 2),(void *)0x0);
+      BroadcastEvent(this + 0x1c,0xe9,(uint)*(byte *)((int)param_2 + 1),
+                     (uint)*(byte *)((int)param_2 + 2),(void *)0x0);
     }
     break;
   case '\v':
@@ -71329,7 +72290,7 @@ void __thiscall CBulanci::FUN_00416a70(CBulanci *this,undefined4 param_1,undefin
 void __fastcall CLevelScript::FUN_00416a90(int param_1)
 
 {
-  _Globals::CDSScript__CallExport((void *)(param_1 + -0x440),6,1,&stack0x00000004);
+  CDSScript::CallExport((CDSScript *)(param_1 + -0x440),6,1,&stack0x00000004);
   return;
 }
 
@@ -71341,7 +72302,7 @@ undefined1 __cdecl _Globals::FUN_00416ae0(int param_1)
   undefined1 uVar1;
   undefined1 extraout_DL;
   
-  uVar1 = CDSScript__ReadSubExpr(param_1);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
   CBulanek::FUN_004168c0(*(CBulanek **)(param_1 + 0x458),uVar1);
   return extraout_DL;
 }
@@ -71353,7 +72314,7 @@ void __cdecl _Globals::FUN_00416b50(int param_1)
 {
   byte bVar1;
   
-  bVar1 = CDSScript__ReadSubExpr(param_1);
+  bVar1 = CDSScript::ReadSubExpr(param_1);
   CGaming::CGaming_GetObjectAtSlotSafe(*(CGaming **)(param_1 + 0x458),bVar1);
   return;
 }
@@ -71365,7 +72326,7 @@ undefined4 __cdecl _Globals::FUN_00416c90(int param_1)
 {
   uint uVar1;
   
-  uVar1 = CDSScript__ReadSubExpr(param_1);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
   CBulanek::Scheduler_FreeSlotIfLive((CBulanek *)(param_1 + 0x440),uVar1);
   return 0;
 }
@@ -71378,8 +72339,8 @@ uint __cdecl _Globals::FUN_00416cb0(int param_1)
   uint uVar1;
   uint uVar2;
   
-  uVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
   Scheduler_SetEventDelayMs((void *)(param_1 + 0x440),uVar1,uVar2);
   return uVar1;
 }
@@ -71392,14 +72353,14 @@ undefined4 __cdecl _Globals::FUN_00416ce0(undefined4 *param_1,int param_2)
   undefined4 uVar1;
   undefined4 uVar2;
   
-  uVar1 = CDSScript__ReadSubExpr(param_2);
-  uVar2 = CDSScript__ReadSubExpr(param_2);
+  uVar1 = CDSScript::ReadSubExpr(param_2);
+  uVar2 = CDSScript::ReadSubExpr(param_2);
   *param_1 = uVar2;
-  uVar2 = CDSScript__ReadSubExpr(param_2);
+  uVar2 = CDSScript::ReadSubExpr(param_2);
   param_1[1] = uVar2;
-  uVar2 = CDSScript__ReadSubExpr(param_2);
+  uVar2 = CDSScript::ReadSubExpr(param_2);
   param_1[2] = uVar2;
-  uVar2 = CDSScript__ReadSubExpr(param_2);
+  uVar2 = CDSScript::ReadSubExpr(param_2);
   param_1[3] = uVar2;
   return uVar1;
 }
@@ -71413,9 +72374,9 @@ void * __cdecl _Globals::FUN_00416e40(int param_1)
   int iVar1;
   int iVar2;
   
-  this = (CDSCollection *)CDSScript__ReadSubExpr(param_1);
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  iVar2 = CDSScript__ReadSubExpr(param_1);
+  this = (CDSCollection *)CDSScript::ReadSubExpr(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
   if (this != (CDSCollection *)0x0) {
     CDSCollection::FUN_00431000(this,iVar1,iVar2 != 0);
   }
@@ -71432,10 +72393,10 @@ void * __cdecl _Globals::FUN_00416e80(int param_1)
   int iVar2;
   int iVar3;
   
-  this = (void *)CDSScript__ReadSubExpr(param_1);
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  iVar2 = CDSScript__ReadSubExpr(param_1);
-  iVar3 = CDSScript__ReadSubExpr(param_1);
+  this = (void *)CDSScript::ReadSubExpr(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
+  iVar3 = CDSScript::ReadSubExpr(param_1);
   if (this == (void *)0x0) {
     return (void *)0x0;
   }
@@ -71886,7 +72847,7 @@ void __fastcall CBulanek::FUN_00417570(void *param_1)
   if ((*(byte *)((int)pvVar2 + 8) & 1) == 0) {
     _Globals::FUN_0042f300((void *)((int)param_1 + 0x88),0);
   }
-  uVar1 = _Globals::FUN_00412490(0);
+  uVar1 = _Globals::GetMaxAmmoForKind(0);
   uVar7 = 0;
   cVar6 = '\x01';
   *(undefined1 *)((int)param_1 + 0x11c) = uVar1;
@@ -72084,7 +73045,7 @@ void __fastcall CBulanek::FUN_00417910(void *param_1)
 
 
 
-void __cdecl _Globals::FUN_00417950(int param_1,byte param_2,int *param_3)
+void __cdecl _Globals::FUN_00417950(int param_1,uchar param_2,int *param_3)
 
 {
   int iVar1;
@@ -72111,10 +73072,10 @@ void __cdecl _Globals::FUN_00417950(int param_1,byte param_2,int *param_3)
 
 
 
-void __thiscall CWeapon::FUN_004179a0(CWeapon *this,int param_1)
+void __thiscall CWeapon::SetAmmo(CWeapon *this,int param_1)
 
 {
-  _Globals::FUN_00417950(param_1,(byte)this[100],(int *)(*(int *)(this + 0x54) + 0x20));
+  _Globals::FUN_00417950(param_1,(uchar)this[100],(int *)(*(int *)(this + 0x54) + 0x20));
   return;
 }
 
@@ -72140,8 +73101,7 @@ void __thiscall CBulanek::FUN_004179e0(CBulanek *this,byte param_1)
 
 
 
-void __thiscall
-CWeapon::FUN_00417a00(CWeapon *this,undefined4 param_1,undefined4 param_2,int param_3)
+void __thiscall CWeapon::FUN_00417a00(CWeapon *this,uint param_1,uint param_2,int param_3)
 
 {
   *(undefined4 *)(this + 0x58) = *(undefined4 *)(param_3 + 4);
@@ -72354,7 +73314,7 @@ void __thiscall _Globals::FUN_00417d20(void *this,uint param_1,undefined4 *param
     param_2[1] = param_2[1] | uVar1;
     if ((*(byte *)(param_2 + 6) & 1) != 0) {
       local_8 = *param_2;
-      CDSScript__CallExport(*(void **)((int)this + 0x344),7,2,&local_8);
+      CDSScript::CallExport(*(CDSScript **)((int)this + 0x344),7,2,&local_8);
       return;
     }
     FUN_004167e0((int)param_2,'\x01');
@@ -72363,7 +73323,7 @@ void __thiscall _Globals::FUN_00417d20(void *this,uint param_1,undefined4 *param
   param_2[1] = param_2[1] & ~uVar1;
   if ((*(byte *)(param_2 + 6) & 1) != 0) {
     local_8 = *param_2;
-    CDSScript__CallExport(*(void **)((int)this + 0x344),8,2,&local_8);
+    CDSScript::CallExport(*(CDSScript **)((int)this + 0x344),8,2,&local_8);
     return;
   }
   FUN_004167e0((int)param_2,'\0');
@@ -72639,7 +73599,7 @@ void __thiscall CBitmap::FUN_00418260(CBitmap *this,int param_1,ushort param_2)
   
   local_8 = (uint)*(byte *)(param_1 + 0x70);
   local_4 = (uint)param_2;
-  _Globals::CDSScript__CallExport(*(void **)(this + 0x344),3,2,&local_8);
+  CDSScript::CallExport(*(CDSScript **)(this + 0x344),3,2,&local_8);
   return;
 }
 
@@ -72655,7 +73615,7 @@ void __thiscall CGameView::FUN_00418290(CGameView *this,byte param_1,byte param_
   local_8 = (uint)param_2;
   local_c = (uint)param_1;
   local_4 = param_3 & 3;
-  _Globals::CDSScript__CallExport(*(void **)(this + 0x344),4,3,&local_c);
+  CDSScript::CallExport(*(CDSScript **)(this + 0x344),4,3,&local_c);
   return;
 }
 
@@ -72669,7 +73629,7 @@ void __thiscall CGameView::FUN_004182d0(CGameView *this,byte param_1,byte param_
   
   local_8 = (uint)param_1;
   local_4 = (uint)param_2;
-  _Globals::CDSScript__CallExport(*(void **)(this + 0x344),5,2,&local_8);
+  CDSScript::CallExport(*(CDSScript **)(this + 0x344),5,2,&local_8);
   return;
 }
 
@@ -72830,7 +73790,7 @@ void __thiscall CBulanek::FUN_004184a0(CBulanek *this,int *param_1)
 void __thiscall CGame::CGame_OnNetMsg_t15_FireOnNetCustom(CGame *this,undefined4 param_1)
 
 {
-  _Globals::CDSScript__CallExport(*(void **)(this + 0x344),9,1,&param_1);
+  CDSScript::CallExport(*(CDSScript **)(this + 0x344),9,1,&param_1);
   return;
 }
 
@@ -72842,7 +73802,7 @@ void __thiscall CGame::CGame_OnNetMsg_t15_FireOnNetCustom(CGame *this,undefined4
 // SpawnAtView, RegisterTimer, DefineTraceArea, ...) consumed by every
 // Class-2026 'Script' resource in the master pack.
 
-undefined4 * __fastcall CLevelScript::CLevelScript__ctor(undefined4 *param_1)
+undefined4 * __fastcall CLevelScript::ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -72853,7 +73813,7 @@ undefined4 * __fastcall CLevelScript::CLevelScript__ctor(undefined4 *param_1)
   puStack_8 = &LAB_00476c04;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSScript::CDSScript__ctor(param_1);
+  CDSScript::ctor(param_1);
   param_1[0x10d] = 1;
   param_1[0x10f] = 0;
   local_4._0_1_ = 1;
@@ -72867,7 +73827,7 @@ undefined4 * __fastcall CLevelScript::CLevelScript__ctor(undefined4 *param_1)
   param_1[0x110] = vftable;
   param_1[0x116] = 0;
   param_1[0x117] = 0;
-  _Globals::CDSScript__InstallOpcodeTable(param_1,0x2d,g_apfnCLevelScriptOpcodeExt,0x3a);
+  CDSScript::InstallOpcodeTable((CDSScript *)param_1,0x2d,g_apfnCLevelScriptOpcodeExt,0x3a);
   ExceptionList = local_c;
   return param_1;
 }
@@ -72977,8 +73937,8 @@ int __cdecl _Globals::FUN_00418770(int param_1)
   byte bVar1;
   int iVar2;
   
-  iVar2 = CDSScript__ReadSubExpr(param_1);
-  bVar1 = CDSScript__ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
+  bVar1 = CDSScript::ReadSubExpr(param_1);
   CGaming_RegisterObjectAtSlot(*(void **)(param_1 + 0x458),iVar2,bVar1);
   return iVar2;
 }
@@ -72994,11 +73954,11 @@ int __cdecl _Globals::FUN_004187a0(int param_1)
   undefined4 uVar4;
   undefined4 uVar5;
   
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
-  uVar3 = CDSScript__ReadSubExpr(param_1);
-  uVar4 = CDSScript__ReadSubExpr(param_1);
-  uVar5 = CDSScript__ReadSubExpr(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
+  uVar3 = CDSScript::ReadSubExpr(param_1);
+  uVar4 = CDSScript::ReadSubExpr(param_1);
+  uVar5 = CDSScript::ReadSubExpr(param_1);
   *(undefined4 *)(iVar1 + 0x74) = uVar2;
   *(undefined4 *)(iVar1 + 0x78) = uVar3;
   *(undefined4 *)(iVar1 + 0x80) = uVar5;
@@ -73026,10 +73986,10 @@ undefined4 * __cdecl _Globals::FUN_00418800(int param_1)
   puStack_8 = &LAB_00476c7b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  local_1c = CDSScript__ReadSubExpr(param_1);
-  local_18 = CDSScript__ReadSubExpr(param_1);
-  local_14 = CDSScript__ReadSubExpr(param_1);
-  local_10 = CDSScript__ReadSubExpr(param_1);
+  local_1c = CDSScript::ReadSubExpr(param_1);
+  local_18 = CDSScript::ReadSubExpr(param_1);
+  local_14 = CDSScript::ReadSubExpr(param_1);
+  local_10 = CDSScript::ReadSubExpr(param_1);
   this = (CObstacle *)FUN_00447c42(0x88);
   local_4 = 0;
   if (this != (CObstacle *)0x0) {
@@ -73050,9 +74010,9 @@ void * __cdecl _Globals::FUN_004188e0(int param_1)
   int iVar1;
   int iVar2;
   
-  this = (CBulanek *)CDSScript__ReadSubExpr(param_1);
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  iVar2 = CDSScript__ReadSubExpr(param_1);
+  this = (CBulanek *)CDSScript::ReadSubExpr(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
   if (this != (CBulanek *)0x0) {
     CBulanek::FUN_0042cc80(this,iVar1,iVar2);
   }
@@ -73066,9 +74026,9 @@ undefined4 __cdecl _Globals::FUN_00418920(int param_1)
 {
   undefined4 uVar1;
   
-  uVar1 = CDSScript__ReadSubExpr(param_1);
-  CDSScript__ReadSubExpr(param_1);
-  CDSScript__ReadSubExpr(param_1);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
   return uVar1;
 }
 
@@ -73080,8 +74040,8 @@ undefined4 __cdecl _Globals::FUN_00418950(int param_1)
   byte bVar1;
   int iVar2;
   
-  iVar2 = CDSScript__ReadSubExpr(param_1);
-  bVar1 = CDSScript__ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
+  bVar1 = CDSScript::ReadSubExpr(param_1);
   FUN_00418000(*(void **)(param_1 + 0x458),bVar1,iVar2);
   return 0;
 }
@@ -73094,7 +74054,7 @@ undefined4 __cdecl _Globals::FUN_004189e0(int param_1)
   uint uVar1;
   void *pvVar2;
   
-  uVar1 = CDSScript__ReadSubExpr(param_1);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
   pvVar2 = Scheduler_GetEventSlot((void *)(param_1 + 0x440),uVar1);
   return *(undefined4 *)((int)pvVar2 + 0x18);
 }
@@ -73108,9 +74068,9 @@ int __cdecl _Globals::FUN_00418ae0(int param_1)
   int iVar2;
   undefined4 uVar3;
   
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  iVar2 = CDSScript__ReadSubExpr(param_1);
-  uVar3 = CDSScript__ReadSubExpr(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
+  uVar3 = CDSScript::ReadSubExpr(param_1);
   if (iVar1 == 0) {
     return 0;
   }
@@ -73127,9 +74087,9 @@ void * __cdecl _Globals::FUN_00418b20(int param_1)
   int iVar1;
   undefined4 uVar2;
   
-  this = (void *)CDSScript__ReadSubExpr(param_1);
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
+  this = (void *)CDSScript::ReadSubExpr(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
   if (this == (void *)0x0) {
     return (void *)0x0;
   }
@@ -73156,7 +74116,7 @@ void __cdecl _Globals::FUN_00418b60(int param_1)
   local_10 = ExceptionList;
   ExceptionList = &local_10;
   local_8 = 0;
-  uVar2 = CDSScript__ReadI32(param_1);
+  uVar2 = CDSScript::ReadI32(param_1);
   CMenu::FUN_00413b20((CMenu *)((int)pvVar1 + 0x284),uVar2);
   ExceptionList = local_10;
   return;
@@ -75578,7 +76538,7 @@ void __thiscall CMina::FUN_0041b210(CMina *this,void *param_1)
 
 
 uint __thiscall
-CExplosion::FUN_0041b250
+CExplosion::DamageAtPoint
           (CExplosion *this,int *param_1,int param_2,int param_3,char param_4,byte param_5)
 
 {
@@ -75749,7 +76709,7 @@ void __thiscall CMina::FUN_0041b4a0(CMina *this,void *param_1)
 
 
 
-void __fastcall CGaming::FUN_0041b500(void *param_1)
+void __fastcall CGaming::CGaming_TickAmbientAnimations(void *param_1)
 
 {
   int iVar1;
@@ -75840,7 +76800,7 @@ void __thiscall CGaming::FUN_0041b620(CGaming *this,void *param_1)
 
 
 
-void __thiscall CBulanci::FUN_0041b6d0(CBulanci *this,int *param_1)
+void __thiscall CBulanci::CGaming_LoadBackgroundMusic(CBulanci *this,int *param_1)
 
 {
   undefined4 *puVar1;
@@ -75925,7 +76885,7 @@ void CBulanci::Catch_0041b821(void)
 
 
 
-void __fastcall CGaming::FUN_0041b850(undefined4 *param_1)
+void __fastcall CGaming::CGaming_dtor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -75941,8 +76901,8 @@ void __fastcall CGaming::FUN_0041b850(undefined4 *param_1)
   param_1[6] = vftable;
   param_1[0x1a] = vftable;
   local_4 = 0xd;
-  if ((void *)param_1[0xd1] != (void *)0x0) {
-    _Globals::CDSScript__CallExport((void *)param_1[0xd1],2,0,(void *)0x0);
+  if ((CDSScript *)param_1[0xd1] != (CDSScript *)0x0) {
+    CDSScript::CallExport((CDSScript *)param_1[0xd1],2,0,(void *)0x0);
   }
   FUN_0041a270((CGaming *)param_1,param_1 + 0xcc);
   FUN_0041a270((CGaming *)param_1,param_1 + 0xcb);
@@ -76051,8 +77011,8 @@ undefined4 __cdecl _Globals::FUN_0041bb00(int param_1)
   undefined4 uVar1;
   uint uVar2;
   
-  uVar1 = CDSScript__ReadI32(param_1);
-  uVar2 = CDSScript__ReadI32(param_1);
+  uVar1 = CDSScript::ReadI32(param_1);
+  uVar2 = CDSScript::ReadI32(param_1);
   FUN_0041ba60(*(void **)(param_1 + 0x458),uVar1,uVar2);
   return 0;
 }
@@ -76094,7 +77054,7 @@ undefined4 __cdecl _Globals::FUN_0041bb80(int param_1)
   local_8 = 0;
   local_4 = 0;
   uVar1 = FUN_00416ce0(&local_10,param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
   FUN_0041b420(*(void **)(param_1 + 0x458),uVar1,&local_10,uVar2 | 1,0);
   return 0;
 }
@@ -76332,7 +77292,7 @@ undefined4 * _Globals::CreateObject(void)
 undefined4 * __thiscall CGaming::FUN_0041bee0(CGaming *this,byte param_1)
 
 {
-  FUN_0041b850((undefined4 *)this);
+  CGaming_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -76341,7 +77301,7 @@ undefined4 * __thiscall CGaming::FUN_0041bee0(CGaming *this,byte param_1)
 
 
 
-void __fastcall CWeapon::FUN_0041bf00(int *param_1)
+void __fastcall CWeapon::Update(int *param_1)
 
 {
   int iVar1;
@@ -76371,7 +77331,7 @@ void __fastcall CWeapon::FUN_0041bf70(int param_1)
 
 {
   if (*(int **)(param_1 + 0x50) != (int *)0x0) {
-    FUN_0041bf00(*(int **)(param_1 + 0x50));
+    Update(*(int **)(param_1 + 0x50));
   }
   return;
 }
@@ -76485,7 +77445,7 @@ void __thiscall CGaming::FUN_0041c140(CGaming *this,char param_1)
     }
   }
   else {
-    _Globals::CDSScript__CallExport(*(void **)(this + 0x344),10,0,(void *)0x0);
+    CDSScript::CallExport(*(CDSScript **)(this + 0x344),10,0,(void *)0x0);
     if (*(void **)(this + 0x354) != (void *)0x0) {
       _Globals::FUN_0043a9d0(*(void **)(this + 0x354),1);
     }
@@ -76660,7 +77620,7 @@ undefined4 * __thiscall CMina::FUN_0041c530(CMina *this,byte param_1)
 
 
 
-void __fastcall CWeapon::FUN_0041c550(undefined4 *param_1)
+void __fastcall CWeapon::Destructor(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -76697,7 +77657,7 @@ void __fastcall CWeapon::FUN_0041c550(undefined4 *param_1)
 
 
 
-void __thiscall CWeapon::FUN_0041c600(CWeapon *this,undefined4 param_1,int *param_2)
+void __thiscall CWeapon::Init(CWeapon *this,undefined4 param_1,int *param_2)
 
 {
   _Globals::FUN_0041bf80(this + -4,param_2);
@@ -76861,7 +77821,7 @@ void __fastcall CBulanek::FUN_0041c860(void *param_1)
 
 
 undefined4 * __thiscall
-CTeleportPoint::FUN_0041c9a0
+CTeleportPoint::CTeleportPoint_Ctor
           (CTeleportPoint *this,int *param_1,undefined4 param_2,CTeleportPoint param_3)
 
 {
@@ -76931,7 +77891,7 @@ CTeleportPoint::FUN_0041c9a0
 
 
 
-undefined4 * __thiscall CWeapon::FUN_0041cb70(CWeapon *this,int param_1)
+undefined4 * __thiscall CMina::CMina_Ctor(CMina *this,int param_1)
 
 {
   int iVar1;
@@ -76952,18 +77912,18 @@ undefined4 * __thiscall CWeapon::FUN_0041cb70(CWeapon *this,int param_1)
   CAnim::FUN_00419870((undefined4 *)this);
   local_4 = (int *)0x0;
   CDSUpdatedItem::FUN_0042f060((int)(this + 0xf0));
-  *(undefined ***)this = CMina::vftable;
-  *(undefined ***)(this + 4) = CMina::vftable;
-  *(undefined ***)(this + 0x10) = CMina::vftable;
-  *(undefined ***)(this + 0x18) = CMina::vftable;
-  *(undefined ***)(this + 0x88) = CMina::vftable;
-  *(undefined ***)(this + 0x8c) = CMina::vftable;
-  *(undefined ***)(this + 0x98) = CMina::vftable;
-  *(undefined ***)(this + 0xf0) = CMina::vftable;
+  *(undefined ***)this = vftable;
+  *(undefined ***)(this + 4) = vftable;
+  *(undefined ***)(this + 0x10) = vftable;
+  *(undefined ***)(this + 0x18) = vftable;
+  *(undefined ***)(this + 0x88) = vftable;
+  *(undefined ***)(this + 0x8c) = vftable;
+  *(undefined ***)(this + 0x98) = vftable;
+  *(undefined ***)(this + 0xf0) = vftable;
   *(ushort *)(this + 0x14) = *(ushort *)(this + 0x14) | 0x200;
   *(int *)(this + 0x108) = param_1;
   *(undefined4 *)(this + 0x10c) = 0;
-  this[0x114] = (CWeapon)0x0;
+  this[0x114] = (CMina)0x0;
   *(undefined4 *)(this + 0x110) = *(undefined4 *)(param_1 + 0x84);
   iVar1 = *(int *)(&DAT_004827d4 + (uint)*(byte *)(param_1 + 0xd4) * 8);
   iVar2 = *(int *)(param_1 + 0x20);
@@ -76991,7 +77951,7 @@ undefined4 * __thiscall CWeapon::FUN_0041cb70(CWeapon *this,int param_1)
 
 
 
-undefined4 * __thiscall CMina::FUN_0041cce0(CMina *this,int param_1)
+undefined4 * __thiscall CMina::InitMine(CMina *this,int param_1)
 
 {
   int iVar1;
@@ -77050,7 +78010,7 @@ undefined4 * __thiscall CMina::FUN_0041cce0(CMina *this,int param_1)
 
 
 undefined4 * __thiscall
-CExplosion::FUN_0041ce30(CExplosion *this,undefined4 param_1,CExplosion param_2)
+CExplosion::CExplosion_Ctor(CExplosion *this,undefined4 param_1,CExplosion param_2)
 
 {
   CExplosion *pCVar1;
@@ -77223,7 +78183,7 @@ CBulanek::FUN_0041d090(CBulanek *this,int *param_1,int param_2,int param_3,char 
     piVar1 = (int *)0x0;
   }
   else {
-    piVar1 = CTeleportPoint::FUN_0041c9a0(pCVar2,param_1,this,1);
+    piVar1 = CTeleportPoint::CTeleportPoint_Ctor(pCVar2,param_1,this,1);
   }
   uStack_4 = 0xffffffff;
   _Globals::FUN_00407e20(this + 0x2f8,(int)piVar1,(undefined *)0x0,1);
@@ -77234,7 +78194,7 @@ CBulanek::FUN_0041d090(CBulanek *this,int *param_1,int param_2,int param_3,char 
     piVar1 = (int *)0x0;
   }
   else {
-    piVar1 = CTeleportPoint::FUN_0041c9a0(pCVar2,param_1,this,0);
+    piVar1 = CTeleportPoint::CTeleportPoint_Ctor(pCVar2,param_1,this,0);
   }
   uStack_4 = 0xffffffff;
   _Globals::FUN_00407e20(this + 0x2f8,(int)piVar1,(undefined *)0x0,1);
@@ -77295,7 +78255,7 @@ void __thiscall CGame::CGame_OnNetMsg_t13_PlaceSpecialPickup(CGame *this,int *pa
 
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 
-void __fastcall CBulanci::FUN_0041d2e0(void *param_1)
+void __fastcall CBulanci::CGaming_LoadLevelAssetAndMusic(void *param_1)
 
 {
   int *piVar1;
@@ -77352,7 +78312,7 @@ void __fastcall CBulanci::FUN_0041d2e0(void *param_1)
     }
     uVar4 = FUN_0042d330(pWVar3);
     if ((char)uVar4 == '\0') {
-      CLoadingLevel::FUN_0040dfb0((undefined4 *)local_40ac);
+      CLoadingLevel::CLoadingLevel_ctor((undefined4 *)local_40ac);
       local_4019 = 0;
       local_400c = CONCAT31(local_400c._1_3_,5);
       _Globals::FUN_0042d0b0(g_pApp,(int *)local_40ac,0);
@@ -77387,7 +78347,7 @@ void __fastcall CBulanci::FUN_0041d2e0(void *param_1)
         (**(code **)(*piVar1 + 0x18))(&local_4028,local_4008,uVar6);
         (**(code **)(*local_402c + 0x14))(local_4008,uVar6);
         uVar4 = uVar4 - uVar6;
-        FUN_0040abc0(local_40ac,piVar1[1] - uVar4,piVar1[1]);
+        CLoadingLevel_SetProgress(local_40ac,piVar1[1] - uVar4,piVar1[1]);
         FUN_0042be90(g_pApp);
         param_1 = local_4030;
       }
@@ -77397,7 +78357,7 @@ void __fastcall CBulanci::FUN_0041d2e0(void *param_1)
       local_400c = 6;
       local_4019 = 0;
       CMenu::FUN_0042d160(g_pApp,(int *)local_40ac);
-      FUN_0041b6d0(param_1,(int *)&local_4020);
+      CGaming_LoadBackgroundMusic(param_1,(int *)&local_4020);
       local_400c = CONCAT31(local_400c._1_3_,5);
       (**(code **)(*piVar1 + 8))();
       local_400c = 0;
@@ -77405,7 +78365,7 @@ void __fastcall CBulanci::FUN_0041d2e0(void *param_1)
     }
     else {
       local_400c = CONCAT31(local_400c._1_3_,2);
-      FUN_0041b6d0(param_1,(int *)&local_4020);
+      CGaming_LoadBackgroundMusic(param_1,(int *)&local_4020);
     }
     local_400c = 0xffffffff;
     if (local_4020 != (LPCWSTR)0x0) {
@@ -77468,7 +78428,7 @@ undefined4 CBulanci::Catch_0041d59d(void)
 
 
 
-void __thiscall CGaming::FUN_0041d5f0(CGaming *this,ushort param_1,int param_2)
+void __thiscall CGaming::CGaming_OnCmd(CGaming *this,ushort param_1,int param_2)
 
 {
   bool bVar1;
@@ -77536,9 +78496,9 @@ undefined4 * __cdecl _Globals::FUN_0041d6e0(int param_1)
   puStack_8 = &LAB_004776a3;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  uVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
-  uVar3 = CDSScript__ReadU8(param_1);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
+  uVar3 = CDSScript::ReadU8(param_1);
   this = (CAnim *)FUN_00447c42(0xf0);
   local_4 = 0;
   if (this == (CAnim *)0x0) {
@@ -77548,14 +78508,14 @@ undefined4 * __cdecl _Globals::FUN_0041d6e0(int param_1)
     local_14 = CAnim::FUN_00419940(this,uVar1,uVar2,(int *)0x0,0);
   }
   local_4 = 0xffffffff;
-  uVar4 = CDSScript__ReadU8(param_1);
+  uVar4 = CDSScript::ReadU8(param_1);
   uVar7 = uVar4 & 0xff;
   if ((char)uVar4 != '\0') {
     do {
       pvVar5 = g_pApp;
       bVar6 = (char)uVar7 - 1;
       uVar7 = (uint)bVar6;
-      uVar4 = CDSScript__ReadI32(param_1);
+      uVar4 = CDSScript::ReadI32(param_1);
       pvVar5 = (void *)CMenu::FUN_00413b20((CMenu *)((int)pvVar5 + 0x284),uVar4);
       piVar8 = (int *)0x0;
       if (pvVar5 != (void *)0x0) {
@@ -77594,10 +78554,10 @@ undefined4 * __cdecl _Globals::FUN_0041d820(int param_1)
   puStack_8 = &LAB_004776d3;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  uVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
   pvVar4 = g_pApp;
-  uVar3 = CDSScript__ReadI32(param_1);
+  uVar3 = CDSScript::ReadI32(param_1);
   pvVar4 = (void *)CMenu::FUN_00413b20((CMenu *)((int)pvVar4 + 0x284),uVar3);
   puVar6 = (undefined4 *)0x0;
   piVar5 = (int *)0x0;
@@ -77639,7 +78599,7 @@ undefined4 __cdecl _Globals::FUN_0041d8f0(int param_1)
   local_c = ExceptionList;
   uVar3 = DAT_004b0e44 ^ (uint)&stack0xffffffe8;
   ExceptionList = &local_c;
-  uVar4 = CDSScript__ReadI32(param_1);
+  uVar4 = CDSScript::ReadI32(param_1);
   pvVar5 = (void *)CMenu::FUN_00413b20((CMenu *)((int)pvVar5 + 0x284),uVar4);
   iVar6 = 0;
   if (pvVar5 != (void *)0x0) {
@@ -77674,8 +78634,8 @@ int __cdecl _Globals::FUN_0041d990(int param_1)
   puStack_8 = &LAB_00477728;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadI32(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadI32(param_1);
   if (iVar1 != 0) {
     this = *(void **)(iVar1 + 0x94);
     pvVar3 = (void *)CMenu::FUN_00413b20((CMenu *)((int)g_pApp + 0x284),uVar2);
@@ -77710,12 +78670,12 @@ undefined4 * __cdecl _Globals::FUN_0041da50(int param_1)
   puStack_8 = &LAB_0047775b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSScript__ReadSubExpr(param_1);
-  CDSScript__ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
   this = (CMina *)FUN_00447c42(0x118);
   local_4 = 0;
   if (this != (CMina *)0x0) {
-    puVar1 = CMina::FUN_0041cce0(this,*(int *)(param_1 + 0x458));
+    puVar1 = CMina::InitMine(this,*(int *)(param_1 + 0x458));
     ExceptionList = local_c;
     return puVar1;
   }
@@ -77728,7 +78688,7 @@ undefined4 * __cdecl _Globals::FUN_0041da50(int param_1)
 undefined4 * __thiscall CWeapon::FUN_0041dae0(CWeapon *this,byte param_1)
 
 {
-  FUN_0041c550((undefined4 *)this);
+  Destructor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -77869,7 +78829,8 @@ void __thiscall _Globals::FUN_0041dd70(void *this,int param_1,void *param_2)
     piVar2 = (int *)0x0;
     local_4 = 0;
     if (this_00 != (CExplosion *)0x0) {
-      piVar2 = CExplosion::FUN_0041ce30(this_00,(int)this + 0x20,*(undefined1 *)((int)this + 0xa5));
+      piVar2 = CExplosion::CExplosion_Ctor
+                         (this_00,(int)this + 0x20,*(undefined1 *)((int)this + 0xa5));
     }
     local_4 = 0xffffffff;
     CBulanek::FUN_0041a390(*(CBulanek **)(param_1 + 0x84),piVar2,'\x01');
@@ -77889,7 +78850,7 @@ void __thiscall _Globals::FUN_0041dd70(void *this,int param_1,void *param_2)
 
 
 
-uint __thiscall CShot::FUN_0041de60(CShot *this,int *param_1,int *param_2,undefined1 *param_3)
+uint __thiscall CShot::TraceCollision(CShot *this,int *param_1,int *param_2,undefined1 *param_3)
 
 {
   bool bVar1;
@@ -77937,7 +78898,7 @@ LAB_0041df54:
 
 
 
-void __thiscall CShot::FUN_0041df60(CShot *this,int *param_1)
+void __thiscall CShot::Update(CShot *this,int *param_1)
 
 {
   int *piVar1;
@@ -77956,7 +78917,7 @@ void __thiscall CShot::FUN_0041df60(CShot *this,int *param_1)
   local_4 = *(undefined4 *)(this + 0x2c);
   CGameView::FUN_00419010((CGameView *)this,param_1);
   if ((this[0xa6] == (CShot)0x0) || (1 < (byte)this[0xa6])) {
-    uVar2 = FUN_0041de60(this,piVar1,local_30 + 8,(undefined1 *)&param_1);
+    uVar2 = TraceCollision(this,piVar1,local_30 + 8,(undefined1 *)&param_1);
     if ((char)uVar2 != '\0') {
       this[0xa8] = (CShot)0x1;
     }
@@ -77976,7 +78937,7 @@ void __thiscall CShot::FUN_0041df60(CShot *this,int *param_1)
       if (((byte)this[0xa7] & bVar3) != 0) {
         FUN_00417b30(this,local_30 + 8,local_30,iVar4);
         FUN_00417b30(this,piVar1,local_30 + 4,iVar4);
-        uVar2 = FUN_0041de60(this,local_30 + 4,local_30,(undefined1 *)&param_1);
+        uVar2 = TraceCollision(this,local_30 + 4,local_30,(undefined1 *)&param_1);
         if ((char)uVar2 != '\0') {
           this[0xa7] = (CShot)((byte)this[0xa7] & ~bVar3);
         }
@@ -77994,7 +78955,7 @@ void __thiscall CShot::FUN_0041df60(CShot *this,int *param_1)
 
 
 
-undefined1 * __fastcall _Globals::FUN_0041e070(int *param_1)
+undefined1 * __fastcall _Globals::ExplodeMine(int *param_1)
 
 {
   undefined1 uVar1;
@@ -78028,7 +78989,7 @@ undefined1 * __fastcall _Globals::FUN_0041e070(int *param_1)
   }
   else {
     uStackY_28 = 0x41e108;
-    piVar2 = CExplosion::FUN_0041ce30(this,param_1 + 8,uVar1);
+    piVar2 = CExplosion::CExplosion_Ctor(this,param_1 + 8,uVar1);
   }
   local_4 = 0xffffffff;
   uStackY_28 = 0x41e122;
@@ -78041,7 +79002,7 @@ undefined1 * __fastcall _Globals::FUN_0041e070(int *param_1)
 
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 
-void __fastcall CExplosion::FUN_0041e140(void *param_1)
+void __fastcall CExplosion::ApplyAreaDamage(void *param_1)
 
 {
   int iVar1;
@@ -78081,7 +79042,7 @@ void __fastcall CExplosion::FUN_0041e140(void *param_1)
     local_1014 = local_101c + 4;
     local_1020 = (local_1030 + -4 + local_1028) / 2;
     local_1018 = local_1020 + 4;
-    FUN_0041b250(param_1,&local_1020,(int)local_1000,local_1004,'\x01',0);
+    DamageAtPoint(param_1,&local_1020,(int)local_1000,local_1004,'\x01',0);
     uVar4 = 8;
     do {
       iVar3 = *(int *)(&UNK_004828c0 + uVar4 * 8);
@@ -78099,14 +79060,14 @@ void __fastcall CExplosion::FUN_0041e140(void *param_1)
         local_1038 = local_1038 + iVar3;
         local_1034 = local_1034 + iVar1;
         iVar5 = iVar5 + -1;
-        uVar2 = FUN_0041b250(local_100c,&local_1040,(int)local_1000,local_1004,3 < iVar5,
-                             (byte)local_1008);
+        uVar2 = DamageAtPoint(local_100c,&local_1040,(int)local_1000,local_1004,3 < iVar5,
+                              (byte)local_1008);
         if ((char)uVar2 != '\0') break;
       } while (iVar5 != 0);
     } while (uVar4 != 0);
     for (iVar3 = FUN_0041a2f0(local_1010,&local_1030,(int)local_1000); iVar3 != 0;
         iVar3 = iVar3 + -1) {
-      _Globals::FUN_0041e070(*(int **)(local_1000 + iVar3 * 4 + -4));
+      _Globals::ExplodeMine(*(int **)(local_1000 + iVar3 * 4 + -4));
     }
   }
   return;
@@ -78203,7 +79164,7 @@ uint __cdecl _Globals::FUN_0041e3e0(int param_1)
   int iVar2;
   uint uVar3;
   
-  bVar1 = CDSScript__ReadSubExpr(param_1);
+  bVar1 = CDSScript::ReadSubExpr(param_1);
   this = (CBulanek *)CGaming::CGaming_GetObjectAtSlotSafe(*(CGaming **)(param_1 + 0x458),bVar1);
   if (this != (CBulanek *)0x0) {
     iVar2 = (*(code *)**(undefined4 **)this)();
@@ -78366,10 +79327,10 @@ LAB_0041e5e1:
   }
   *(undefined4 *)(this + 0x11c) = 0;
   *(undefined2 *)(this + 0x120) = 0;
-  CVar4 = (CGameView)_Globals::FUN_00412490(0);
+  CVar4 = (CGameView)_Globals::GetMaxAmmoForKind(0);
   this[0x11c] = CVar4;
   if (4 < param_2) {
-    CVar4 = (CGameView)_Globals::FUN_00412490(1);
+    CVar4 = (CGameView)_Globals::GetMaxAmmoForKind(1);
     this[0x11d] = CVar4;
   }
   *(undefined4 *)(this + 0x128) = 0;
@@ -78472,7 +79433,7 @@ LAB_0041e5e1:
 
 
 
-void __thiscall CBulanek::FUN_0041ea90(CBulanek *this,byte param_1)
+void __thiscall CBulanek::CBulanek_ApplyPickupEffect(CBulanek *this,byte param_1)
 
 {
   CBulanek CVar1;
@@ -78514,7 +79475,7 @@ void __thiscall CBulanek::FUN_0041ea90(CBulanek *this,byte param_1)
       param_1 = 0;
       pCVar4 = this + 0x11c;
       do {
-        CVar1 = (CBulanek)_Globals::FUN_00412490(param_1);
+        CVar1 = (CBulanek)_Globals::GetMaxAmmoForKind(param_1);
         param_1 = param_1 + 1;
         *pCVar4 = CVar1;
         pCVar4 = pCVar4 + 1;
@@ -78552,7 +79513,7 @@ void __thiscall _Globals::CGame_ApplyPickup(void *this,byte param_1,byte param_2
   if ((char)uVar4 == '\0') {
 LAB_0041ec73:
     if (param_1 == 2) {
-      bVar2 = FUN_00412490(2);
+      bVar2 = GetMaxAmmoForKind(2);
       bVar5 = *(char *)((int)this + 0x11e) + 1;
       if (bVar5 <= bVar2) {
         bVar2 = bVar5;
@@ -78569,12 +79530,12 @@ LAB_0041ec73:
     }
     CGame_NetSendPlayerEvent2_t14(*(void **)((int)this + 0xf4),*(undefined1 *)((int)this + 0x70));
   }
-  uVar1 = FUN_00412490(param_1);
+  uVar1 = GetMaxAmmoForKind(param_1);
   *(undefined1 *)(param_1 + 0x11c + (int)this) = uVar1;
 LAB_0041ec21:
   uVar4 = FUN_00416720((int)this);
   if ((char)uVar4 != '\0') {
-    CBulanek::FUN_0041ea90(this,param_1);
+    CBulanek::CBulanek_ApplyPickupEffect(this,param_1);
   }
   if ((param_1 == 1) && (*(int *)(*(int *)((int)this + 0x84) + 0x368) == 2)) {
     *(undefined1 *)((int)this + 0x16b) = 1;
@@ -78605,7 +79566,7 @@ void __fastcall CBulanek::FUN_0041eca0(void *param_1)
       }
     }
     if (bVar1 != bVar2) {
-      FUN_0041ea90(param_1,bVar2);
+      CBulanek_ApplyPickupEffect(param_1,bVar2);
     }
   }
   return;
@@ -78629,14 +79590,14 @@ void __fastcall CBulanek::FUN_0041ed10(void *param_1)
     } while (bVar1 != 0);
   }
   if (bVar1 != *(byte *)(*(int *)((int)param_1 + 0xf8) + 100)) {
-    FUN_0041ea90(param_1,bVar1);
+    CBulanek_ApplyPickupEffect(param_1,bVar1);
   }
   return;
 }
 
 
 
-void __fastcall _Globals::FUN_0041ed60(int param_1)
+void __fastcall _Globals::DetonatePlayerMines(int param_1)
 
 {
   int *piVar1;
@@ -78653,7 +79614,7 @@ void __fastcall _Globals::FUN_0041ed60(int param_1)
       iVar2 = (**(code **)*piVar1)();
       if ((*(int *)(iVar2 + 8) == 0x816) && (piVar1[0x42] == *(int *)(param_1 + 0x54))) {
         iVar5 = iVar5 + 1;
-        puVar3 = FUN_0041e070(piVar1);
+        puVar3 = ExplodeMine(piVar1);
         if ((char)puVar3 != '\0') {
           iVar4 = iVar4 + 1;
         }
@@ -78675,13 +79636,12 @@ void __fastcall _Globals::FUN_0041ed60(int param_1)
 
 
 int * __thiscall
-CGameView::FUN_0041edf0
-          (CGameView *this,int *param_1,void *param_2,byte param_3,CGameView param_4,byte param_5,
-          int param_6)
+CShot::CShot_Ctor(CShot *this,int *param_1,void *param_2,byte param_3,CShot param_4,byte param_5,
+                 int param_6)
 
 {
-  CGameView *pCVar1;
-  CGameView *this_00;
+  CShot *pCVar1;
+  CShot *this_00;
   undefined4 uVar2;
   int *piVar3;
   int iVar4;
@@ -78695,10 +79655,10 @@ CGameView::FUN_0041edf0
   local_c = ExceptionList;
   ExceptionList = &local_c;
   CDSChained::FUN_004032d0((undefined4 *)this);
-  *(undefined ***)this = vftable;
-  *(undefined ***)(this + 4) = vftable;
-  *(undefined ***)(this + 0x10) = vftable;
-  *(undefined ***)(this + 0x18) = vftable;
+  *(undefined ***)this = CGameView::vftable;
+  *(undefined ***)(this + 4) = CGameView::vftable;
+  *(undefined ***)(this + 0x10) = CGameView::vftable;
+  *(undefined ***)(this + 0x18) = CGameView::vftable;
   *(undefined4 *)(this + 0x74) = 0;
   *(undefined4 *)(this + 0x78) = 0;
   *(undefined4 *)(this + 0x7c) = 0;
@@ -78708,19 +79668,19 @@ CGameView::FUN_0041edf0
   local_4 = 0;
   CDSUpdatedItem::FUN_0042f060((int)this_00);
   local_4 = CONCAT31(local_4._1_3_,1);
-  *(undefined ***)this = CShot::vftable;
-  *(undefined ***)(this + 4) = CShot::vftable;
-  *(undefined ***)(this + 0x10) = CShot::vftable;
-  *(undefined ***)(this + 0x18) = CShot::vftable;
-  *(undefined ***)this_00 = CShot::vftable;
+  *(undefined ***)this = vftable;
+  *(undefined ***)(this + 4) = vftable;
+  *(undefined ***)(this + 0x10) = vftable;
+  *(undefined ***)(this + 0x18) = vftable;
+  *(undefined ***)this_00 = vftable;
   *(undefined4 *)(this + 0xac) = 0;
-  this[0xa4] = (CGameView)param_3;
-  this[0xa6] = (CGameView)param_5;
+  this[0xa4] = (CShot)param_3;
+  this[0xa6] = (CShot)param_5;
   this[0xa5] = param_4;
   if (3 < param_5) {
     param_5 = 3;
   }
-  uVar2 = FUN_00417f40(param_2,param_3,param_6,param_5);
+  uVar2 = CGameView::FUN_00417f40(param_2,param_3,param_6,param_5);
   *(undefined4 *)(this + 0xa0) = uVar2;
   *(int *)(this + 0x20) = *param_1;
   pCVar1 = this + 0x20;
@@ -78728,8 +79688,8 @@ CGameView::FUN_0041edf0
   iVar4 = *(int *)(*(int *)(this + 0xa0) + 4);
   *(int *)(this + 0x2c) = *(int *)(*(int *)(this + 0xa0) + 8) + *(int *)(this + 0x24);
   *(int *)(this + 0x28) = iVar4 + *(int *)pCVar1;
-  this[0xa8] = (CGameView)0x0;
-  this[0xa7] = (CGameView)0x1f;
+  this[0xa8] = (CShot)0x0;
+  this[0xa7] = (CShot)0x1f;
   _Globals::FUN_00418fe0(this,0xf);
   _Globals::Scheduler_RegisterEventSlot(this_00,0,0x32,6);
   local_1c[0] = 0;
@@ -78739,7 +79699,7 @@ CGameView::FUN_0041edf0
   piVar3 = _Globals::FUN_00418300(param_2,(undefined4 *)pCVar1,pCVar1,local_1c,'\x01','\x01');
   if (piVar3 != (int *)0x0) {
     _Globals::FUN_0041dd70(this,(int)piVar3,param_2);
-    this[0xa8] = (CGameView)0x1;
+    this[0xa8] = (CShot)0x1;
     _Globals::FUN_0042d040((int *)this);
     _Globals::FUN_0042f300(this_00,0);
   }
@@ -78753,12 +79713,11 @@ CGameView::FUN_0041edf0
 
 
 
-void __thiscall
-CMina::FUN_0041efb0(CMina *this,short param_1,undefined4 param_2,undefined4 *param_3)
+void __thiscall CMina::OnEvent(CMina *this,short param_1,undefined4 param_2,undefined4 *param_3)
 
 {
   if (param_1 == 0xf2) {
-    _Globals::FUN_0041e070((int *)this);
+    _Globals::ExplodeMine((int *)this);
   }
   else if (param_1 != 0xf3) {
     CGameView::FUN_0041acf0((CGameView *)this,param_1,param_2,param_3);
@@ -78769,11 +79728,11 @@ CMina::FUN_0041efb0(CMina *this,short param_1,undefined4 param_2,undefined4 *par
 
 
 
-void __thiscall CExplosion::FUN_0041efe0(CExplosion *this,undefined4 param_1,short param_2)
+void __thiscall CExplosion::OnEvent(CExplosion *this,undefined4 param_1,short param_2)
 
 {
   if (param_2 == 0) {
-    FUN_0041e140(this + -0x8c);
+    ApplyAreaDamage(this + -0x8c);
   }
   else if (param_2 == -1) {
     _Globals::FUN_004165b0((int)(this + -0x8c));
@@ -78813,14 +79772,14 @@ void __thiscall CGame::CGame_OnNetMsg_t14_PlayerPickedUpSpecial(CGame *this,byte
 
 
 
-void __thiscall CGaming::FUN_0041f050(CGaming *this,int param_1)
+void __thiscall CGaming::CGaming_OnSchedulerTimer(CGaming *this,int param_1)
 
 {
   int iVar1;
   
   if (param_1 == 0) {
     if (*(int *)(this + 0x2d4) == 0) {
-      FUN_0041b500(this + -0x68);
+      CGaming_TickAmbientAnimations(this + -0x68);
       return;
     }
     if (*(int *)(this + 0x2d4) == 1) {
@@ -78908,7 +79867,7 @@ void __thiscall CGame::FUN_0041f210(CGame *this,byte param_1,byte param_2)
   CBulanek *this_00;
   
   this_00 = (CBulanek *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,param_1);
-  CBulanek::FUN_0041ea90(this_00,param_2);
+  CBulanek::CBulanek_ApplyPickupEffect(this_00,param_2);
   return;
 }
 
@@ -78921,7 +79880,7 @@ _Globals::FUN_0041f230
 
 {
   byte bVar1;
-  CGameView *this_00;
+  CShot *this_00;
   int *piVar2;
   int iVar3;
   int iVar4;
@@ -78938,14 +79897,13 @@ _Globals::FUN_0041f230
   ExceptionList = &local_c;
   FUN_0042f390((void *)((int)this + 0x10),0x200,0xf4,0,0);
   if ((param_4 & 3) != 0) {
-    this_00 = (CGameView *)FUN_00447c42(0xb0);
+    this_00 = (CShot *)FUN_00447c42(0xb0);
     local_4 = (void *)0x0;
-    if (this_00 == (CGameView *)0x0) {
+    if (this_00 == (CShot *)0x0) {
       piVar2 = (int *)0x0;
     }
     else {
-      piVar2 = CGameView::FUN_0041edf0
-                         (this_00,param_1,this,param_2,param_3,(param_4 & 3) - 1,param_6);
+      piVar2 = CShot::CShot_Ctor(this_00,param_1,this,param_2,param_3,(param_4 & 3) - 1,param_6);
     }
     local_4 = (void *)0xffffffff;
     FUN_00407e20((void *)((int)this + 0x2c8),(int)piVar2,(undefined *)0x0,1);
@@ -79123,11 +80081,11 @@ undefined4 __cdecl _Globals::FUN_0041f610(int param_1)
   int local_8;
   undefined4 local_4;
   
-  local_8 = CDSScript__ReadSubExpr(param_1);
-  local_4 = CDSScript__ReadSubExpr(param_1);
-  bVar1 = CDSScript__ReadSubExpr(param_1);
-  bVar2 = CDSScript__ReadSubExpr(param_1);
-  bVar3 = CDSScript__ReadSubExpr(param_1);
+  local_8 = CDSScript::ReadSubExpr(param_1);
+  local_4 = CDSScript::ReadSubExpr(param_1);
+  bVar1 = CDSScript::ReadSubExpr(param_1);
+  bVar2 = CDSScript::ReadSubExpr(param_1);
+  bVar3 = CDSScript::ReadSubExpr(param_1);
   if (bVar2 == 0xff) {
     piVar5 = (int *)0x0;
     uVar6 = 0xff;
@@ -79157,12 +80115,12 @@ undefined4 __cdecl _Globals::FUN_0041f6a0(int param_1)
   int local_8;
   undefined4 local_4;
   
-  local_8 = CDSScript__ReadSubExpr(param_1);
-  local_4 = CDSScript__ReadSubExpr(param_1);
-  bVar1 = CDSScript__ReadSubExpr(param_1);
-  bVar2 = CDSScript__ReadSubExpr(param_1);
-  bVar3 = CDSScript__ReadSubExpr(param_1);
-  iVar4 = CDSScript__ReadSubExpr(param_1);
+  local_8 = CDSScript::ReadSubExpr(param_1);
+  local_4 = CDSScript::ReadSubExpr(param_1);
+  bVar1 = CDSScript::ReadSubExpr(param_1);
+  bVar2 = CDSScript::ReadSubExpr(param_1);
+  bVar3 = CDSScript::ReadSubExpr(param_1);
+  iVar4 = CDSScript::ReadSubExpr(param_1);
   if (bVar2 == 0xff) {
     piVar6 = (int *)0x0;
     uVar7 = 0xff;
@@ -79186,10 +80144,10 @@ undefined4 __cdecl _Globals::FUN_0041f730(int param_1)
   int iVar3;
   int iVar4;
   
-  puVar1 = (undefined4 *)CDSScript__ReadSubExpr(param_1);
-  iVar2 = CDSScript__ReadSubExpr(param_1);
-  iVar3 = CDSScript__ReadSubExpr(param_1);
-  iVar4 = CDSScript__ReadSubExpr(param_1);
+  puVar1 = (undefined4 *)CDSScript::ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
+  iVar3 = CDSScript::ReadSubExpr(param_1);
+  iVar4 = CDSScript::ReadSubExpr(param_1);
   FUN_0041f5d0(*(void **)(param_1 + 0x458),puVar1,iVar2,iVar3,iVar4);
   return 0;
 }
@@ -79222,7 +80180,7 @@ void __thiscall _Globals::FUN_0041f770(void *this,char param_1,byte param_2,int 
   if (param_1 == '\0') {
     if (3 < *(byte *)((int)this + 0x70)) {
       iVar1 = Runtime::MSVCRT::_rand();
-      CBulanek::FUN_0041ea90
+      CBulanek::CBulanek_ApplyPickupEffect
                 (this,(int)(iVar1 * 0x65 + (iVar1 * 0x65 >> 0x1f & 0x7fffU)) >> 0xf < 10);
     }
     FUN_0041a140(*(void **)((int)this + 0x84),this);
@@ -79256,7 +80214,7 @@ void __thiscall _Globals::FUN_0041f770(void *this,char param_1,byte param_2,int 
 
 
 
-void __thiscall CBulanek::FUN_0041f900(CBulanek *this,byte param_1,byte param_2)
+void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte param_2)
 
 {
   CBulanek CVar1;
@@ -79351,7 +80309,7 @@ void __thiscall CBulanek::FUN_0041f900(CBulanek *this,byte param_1,byte param_2)
   if (((*(int *)(this + 0x178) == 0) &&
       (uVar8 = _Globals::FUN_00416720((int)this), (char)uVar8 != '\0')) &&
      (*(char *)(*(int *)(this + 0xf8) + 100) != '\0')) {
-    FUN_0041ea90(this,0);
+    CBulanek_ApplyPickupEffect(this,0);
   }
   if (this[0x16b] != (CBulanek)0x0) {
     _Globals::CGaming_SpawnSpecialPickupIfAllowed(pCVar9,'\0');
@@ -79424,7 +80382,7 @@ void __thiscall CBulanek::FUN_0041fb90(CBulanek *this,int *param_1)
 
 
 
-void __fastcall CTeleportPoint::FUN_0041fca0(int *param_1)
+void __fastcall CTeleportPoint::TriggerTeleportFX(int *param_1)
 
 {
   if (1 < param_1[0x35]) {
@@ -79447,7 +80405,7 @@ void __fastcall _Globals::FUN_0041fce0(void *param_1)
   uint uVar2;
   char cVar3;
   uint uVar4;
-  CGameView *this;
+  CShot *this;
   int *piVar5;
   int local_14;
   int local_10;
@@ -79461,7 +80419,7 @@ void __fastcall _Globals::FUN_0041fce0(void *param_1)
   ExceptionList = &local_c;
   cVar3 = FUN_004173f0(*(void **)((int)param_1 + 0x54));
   if (cVar3 != '\0') {
-    CWeapon::FUN_004179a0(param_1,0x15);
+    CWeapon::SetAmmo(param_1,0x15);
     TM_Play((void *)((int)param_1 + 8),0);
     FUN_00417500(*(void **)((int)param_1 + 0x54));
     iVar1 = *(int *)((int)param_1 + 0x54);
@@ -79469,22 +80427,21 @@ void __fastcall _Globals::FUN_0041fce0(void *param_1)
     uVar4 = uVar2 & 0xff;
     local_14 = *(int *)(&DAT_00482928 + uVar4 * 8) + *(int *)(iVar1 + 0x20);
     local_10 = *(int *)(iVar1 + 0x24) + *(int *)(&DAT_0048292c + uVar4 * 8);
-    this = (CGameView *)FUN_00447c42(0xb0);
+    this = (CShot *)FUN_00447c42(0xb0);
     local_4 = 0;
-    if (this == (CGameView *)0x0) {
+    if (this == (CShot *)0x0) {
       piVar5 = (int *)0x0;
     }
     else {
-      piVar5 = CGameView::FUN_0041edf0
-                         (this,&local_14,*(void **)((int)param_1 + 0x58),(byte)uVar2,
-                          *(undefined1 *)(*(int *)((int)param_1 + 0x54) + 0x70),0,0);
+      piVar5 = CShot::CShot_Ctor(this,&local_14,*(void **)((int)param_1 + 0x58),(byte)uVar2,
+                                 *(undefined1 *)(*(int *)((int)param_1 + 0x54) + 0x70),0,0);
     }
     local_4 = 0xffffffff;
     CBulanek::FUN_0041a390(*(CBulanek **)((int)param_1 + 0x58),piVar5,'\x01');
     ExceptionList = local_c;
     return;
   }
-  CWeapon::FUN_004179a0(param_1,0x13);
+  CWeapon::SetAmmo(param_1,0x13);
   ExceptionList = local_c;
   return;
 }
@@ -79497,7 +80454,7 @@ void __fastcall _Globals::FUN_0041fdf0(void *param_1)
   int iVar1;
   uint uVar2;
   uint uVar3;
-  CGameView *this;
+  CShot *this;
   int *piVar4;
   int local_14;
   int local_10;
@@ -79509,7 +80466,7 @@ void __fastcall _Globals::FUN_0041fdf0(void *param_1)
   puStack_8 = &LAB_00477a1b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWeapon::FUN_004179a0(param_1,0xd);
+  CWeapon::SetAmmo(param_1,0xd);
   TM_Play((void *)((int)param_1 + 8),0);
   FUN_00417500(*(void **)((int)param_1 + 0x54));
   iVar1 = *(int *)((int)param_1 + 0x54);
@@ -79517,15 +80474,14 @@ void __fastcall _Globals::FUN_0041fdf0(void *param_1)
   uVar3 = uVar2 & 0xff;
   local_14 = *(int *)(&DAT_00482948 + uVar3 * 8) + *(int *)(iVar1 + 0x20);
   local_10 = *(int *)(iVar1 + 0x24) + *(int *)(&DAT_0048294c + uVar3 * 8);
-  this = (CGameView *)FUN_00447c42(0xb0);
+  this = (CShot *)FUN_00447c42(0xb0);
   local_4 = 0;
-  if (this == (CGameView *)0x0) {
+  if (this == (CShot *)0x0) {
     piVar4 = (int *)0x0;
   }
   else {
-    piVar4 = CGameView::FUN_0041edf0
-                       (this,&local_14,*(void **)((int)param_1 + 0x58),(byte)uVar2,
-                        *(undefined1 *)(*(int *)((int)param_1 + 0x54) + 0x70),1,0);
+    piVar4 = CShot::CShot_Ctor(this,&local_14,*(void **)((int)param_1 + 0x58),(byte)uVar2,
+                               *(undefined1 *)(*(int *)((int)param_1 + 0x54) + 0x70),1,0);
   }
   local_4 = 0xffffffff;
   CBulanek::FUN_0041a390(*(CBulanek **)((int)param_1 + 0x58),piVar4,'\x01');
@@ -79535,7 +80491,7 @@ void __fastcall _Globals::FUN_0041fdf0(void *param_1)
 
 
 
-void __thiscall CTeleportPoint::FUN_0041fed0(CTeleportPoint *this,undefined4 param_1,short param_2)
+void __thiscall CTeleportPoint::OnEvent(CTeleportPoint *this,undefined4 param_1,short param_2)
 
 {
   CBulanek *this_00;
@@ -79561,7 +80517,7 @@ void __thiscall CTeleportPoint::FUN_0041fed0(CTeleportPoint *this,undefined4 par
       iVar2 = *(int *)(this_00 + 0x20);
       this[-0x23] = (CTeleportPoint)0x0;
       CBulanek::FUN_0042cc80(this_00,iVar2 - unaff_ESI,iVar1 - unaff_EBX);
-      FUN_0041fca0(*(int **)(this + 100));
+      TriggerTeleportFX(*(int **)(this + 100));
     }
   }
   else if ((param_2 == -1) && (((byte)~*(byte *)(*(int *)(this + -8) + 0x44) >> 4 & 1) == 0)) {
@@ -79573,7 +80529,7 @@ void __thiscall CTeleportPoint::FUN_0041fed0(CTeleportPoint *this,undefined4 par
 
 
 
-undefined4 * __thiscall CBulanci::FUN_0041ff90(CBulanci *this,int *param_1)
+undefined4 * __thiscall CBulanci::CGaming_ctor(CBulanci *this,int *param_1)
 
 {
   void *pvVar1;
@@ -79716,7 +80672,7 @@ undefined4 * __thiscall CBulanci::FUN_0041ff90(CBulanci *this,int *param_1)
   *(int *)(this + 0x344) = iVar3;
   _Globals::FUN_00434250(iVar3 + 0x438);
   FUN_00416a70(*(CBulanci **)(this + 0x344),this,*(undefined4 *)(this + 0x84));
-  _Globals::CDSScript__CallExport(*(void **)(this + 0x344),1,0,(void *)0x0);
+  CDSScript::CallExport(*(CDSScript **)(this + 0x344),1,0,(void *)0x0);
   local_8 = CONCAT31(local_8._1_3_,0xf);
   if (*(int *)(this + 0x368) == 2) {
     _Globals::CGaming_SpawnSpecialPickupIfAllowed(this,'\x01');
@@ -79898,7 +80854,7 @@ void __fastcall _Globals::CBulanek_DispatchCurrentWeaponAction(void *param_1)
     FUN_00416780((int)param_1);
     return;
   case 3:
-    FUN_0041ed60((int)param_1);
+    DetonatePlayerMines((int)param_1);
     return;
   case 4:
     FUN_00417a20((int)param_1);
@@ -79914,7 +80870,7 @@ void __fastcall _Globals::CBulanek_DispatchCurrentWeaponAction(void *param_1)
 
 
 void __thiscall
-CGaming::FUN_004206a0(CGaming *this,undefined2 param_1,int *param_2,undefined4 param_3)
+CGaming::CGaming_OnCustomEvent(CGaming *this,undefined2 param_1,int *param_2,undefined4 param_3)
 
 {
   switch(param_1) {
@@ -80261,7 +81217,7 @@ CBulanek::FUN_00420d40(CBulanek *this,ushort param_1,undefined4 *param_2,undefin
               return;
             }
           }
-          FUN_0041f900(this,(byte)((uint)param_2 >> 8),(byte)CVar7);
+          CBulanek_OnDeath(this,(byte)((uint)param_2 >> 8),(byte)CVar7);
           return;
         }
         *param_3 = 0;
@@ -80359,7 +81315,7 @@ switchD_00420d73_caseD_2:
 
 
 
-void __thiscall CWeapon::FUN_004212b0(CWeapon *this,undefined4 param_1,ushort param_2)
+void __thiscall CWeapon::Fire(CWeapon *this,undefined4 param_1,ushort param_2)
 
 {
   CWeapon CVar1;
@@ -80367,10 +81323,10 @@ void __thiscall CWeapon::FUN_004212b0(CWeapon *this,undefined4 param_1,ushort pa
   void *pvVar3;
   bool bVar4;
   char cVar5;
-  CWeapon *this_00;
+  CMina *this_00;
   int *piVar6;
   uint uVar7;
-  CGameView *pCVar8;
+  CShot *pCVar8;
   uint uVar9;
   int iVar10;
   int extraout_ECX;
@@ -80386,13 +81342,13 @@ void __thiscall CWeapon::FUN_004212b0(CWeapon *this,undefined4 param_1,ushort pa
   ExceptionList = &local_c;
   bVar4 = false;
   if ((this[0x60] == (CWeapon)0x2) && (param_2 == 0)) {
-    this_00 = (CWeapon *)_Globals::FUN_00447c42(0x118);
+    this_00 = (CMina *)_Globals::FUN_00447c42(0x118);
     local_4 = 0;
-    if (this_00 == (CWeapon *)0x0) {
+    if (this_00 == (CMina *)0x0) {
       piVar6 = (int *)0x0;
     }
     else {
-      piVar6 = FUN_0041cb70(this_00,*(int *)(this + 0x50));
+      piVar6 = CMina::CMina_Ctor(this_00,*(int *)(this + 0x50));
     }
     local_4 = 0xffffffff;
     CBulanek::FUN_0041a390(*(CBulanek **)(this + 0x54),piVar6,'\x01');
@@ -80408,19 +81364,18 @@ void __thiscall CWeapon::FUN_004212b0(CWeapon *this,undefined4 param_1,ushort pa
     uVar7 = uVar9 & 0xff;
     local_14 = *(int *)(&DAT_004829d0 + uVar7 * 8) + *(int *)(iVar10 + 0x20);
     local_10 = *(int *)(iVar10 + 0x24) + *(int *)(&DAT_004829d4 + uVar7 * 8);
-    pCVar8 = (CGameView *)_Globals::FUN_00447c42(0xb0);
+    pCVar8 = (CShot *)_Globals::FUN_00447c42(0xb0);
     local_4 = 1;
-    if (pCVar8 == (CGameView *)0x0) {
+    if (pCVar8 == (CShot *)0x0) {
       piVar6 = (int *)0x0;
     }
     else {
-      piVar6 = CGameView::FUN_0041edf0
-                         (pCVar8,&local_14,*(void **)(this + 0x54),(byte)uVar9,
-                          *(undefined1 *)(*(int *)(this + 0x50) + 0x70),(char)param_2 + 3,0);
+      piVar6 = CShot::CShot_Ctor(pCVar8,&local_14,*(void **)(this + 0x54),(byte)uVar9,
+                                 *(undefined1 *)(*(int *)(this + 0x50) + 0x70),(char)param_2 + 3,0);
     }
     local_4 = 0xffffffff;
     CBulanek::FUN_0041a390(*(CBulanek **)(this + 0x54),piVar6,'\x01');
-    FUN_004179a0(this + -4,4 - (uint)(param_2 < 3));
+    SetAmmo(this + -4,4 - (uint)(param_2 < 3));
   }
   CVar1 = this[0x60];
   if ((CVar1 == (CWeapon)0x5) && (param_2 == 0)) {
@@ -80430,19 +81385,18 @@ void __thiscall CWeapon::FUN_004212b0(CWeapon *this,undefined4 param_1,ushort pa
     uVar7 = uVar9 & 0xff;
     local_14 = *(int *)(&DAT_004829b0 + uVar7 * 8) + *(int *)(iVar10 + 0x20);
     local_10 = *(int *)(iVar10 + 0x24) + *(int *)(&DAT_004829b4 + uVar7 * 8);
-    pCVar8 = (CGameView *)_Globals::FUN_00447c42(0xb0);
+    pCVar8 = (CShot *)_Globals::FUN_00447c42(0xb0);
     local_4 = 2;
-    if (pCVar8 == (CGameView *)0x0) {
+    if (pCVar8 == (CShot *)0x0) {
       piVar6 = (int *)0x0;
     }
     else {
-      piVar6 = CGameView::FUN_0041edf0
-                         (pCVar8,&local_14,*(void **)(this + 0x54),(byte)uVar9,
-                          *(undefined1 *)(*(int *)(this + 0x50) + 0x70),2,0);
+      piVar6 = CShot::CShot_Ctor(pCVar8,&local_14,*(void **)(this + 0x54),(byte)uVar9,
+                                 *(undefined1 *)(*(int *)(this + 0x50) + 0x70),2,0);
     }
     local_4 = 0xffffffff;
     CBulanek::FUN_0041a390(*(CBulanek **)(this + 0x54),piVar6,'\x01');
-    FUN_004179a0(this + -4,7);
+    SetAmmo(this + -4,7);
     ExceptionList = local_c;
     return;
   }
@@ -80492,13 +81446,13 @@ void __thiscall CDSApp::thunk_FUN_0042c7d0(CDSApp *this,ushort param_1)
 
 
 
-undefined4 __cdecl _Globals::CHelpHistoryScript__ext_op49_shared(int param_1)
+undefined4 __cdecl CHelpHistoryScript::ext_op49_shared(int param_1)
 
 {
   undefined4 uVar1;
   
-  uVar1 = CDSScript__ReadSubExpr(param_1);
-  CDSScript__ReadSubExpr(param_1);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
   return uVar1;
 }
 
@@ -80511,7 +81465,7 @@ undefined4 __cdecl _Globals::CHelpHistoryScript__ext_op49_shared(int param_1)
 // Wire format on disk = CDSScript header; see
 // tools/bulanci_unpack/bulanci_unpack.py kind='help_script'.
 
-undefined4 * __fastcall CHelpScript::CHelpScript__ctor(undefined4 *param_1)
+undefined4 * __fastcall CHelpScript::ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -80522,7 +81476,7 @@ undefined4 * __fastcall CHelpScript::CHelpScript__ctor(undefined4 *param_1)
   puStack_8 = &LAB_00477ba6;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSScript::CDSScript__ctor(param_1);
+  CDSScript::ctor(param_1);
   param_1[0x10d] = 1;
   param_1[0x10f] = 0;
   local_4 = 1;
@@ -80531,7 +81485,7 @@ undefined4 * __fastcall CHelpScript::CHelpScript__ctor(undefined4 *param_1)
   param_1[0x10c] = vftable;
   param_1[0x10e] = vftable;
   param_1[0x110] = 0;
-  _Globals::CDSScript__InstallOpcodeTable(param_1,0x2d,g_apfnCHelpScriptOpcodeExt,8);
+  CDSScript::InstallOpcodeTable((CDSScript *)param_1,0x2d,g_apfnCHelpScriptOpcodeExt,8);
   ExceptionList = local_c;
   return param_1;
 }
@@ -80621,7 +81575,7 @@ void __fastcall CHelpScript::FUN_004216f0(undefined4 *param_1)
 // WARNING: Function: __alloca_probe_16 replaced with injection: alloca_probe
 // WARNING: Unable to track spacebase fully for stack
 
-void __cdecl _Globals::CHelpHistoryScript__ext_op48_shared(int param_1)
+void __cdecl CHelpHistoryScript::ext_op48_shared(int param_1)
 
 {
   uint uVar1;
@@ -80635,9 +81589,9 @@ void __cdecl _Globals::CHelpHistoryScript__ext_op48_shared(int param_1)
   
   uVar1 = DAT_004b0e44 ^ (uint)&stack0xfffffffc;
   auStack_34[2] = 0x42176d;
-  this = (CStaticText *)CDSScript__ReadSubExpr(param_1);
+  this = (CStaticText *)CDSScript::ReadSubExpr(param_1);
   auStack_34[2] = 0x421779;
-  uVar2 = CDSScript__ReadU8(param_1);
+  uVar2 = CDSScript::ReadU8(param_1);
   uVar5 = uVar2 & 0xff;
   auStack_34[2] = 0x42178e;
   puVar4 = (undefined4 *)(&stack0xffffffd8 + uVar5 * -4);
@@ -80645,7 +81599,7 @@ void __cdecl _Globals::CHelpHistoryScript__ext_op48_shared(int param_1)
   if ((char)uVar2 != '\0') {
     do {
       auStack_34[2 - uVar5] = 0x4217ac;
-      uVar3 = CDSScript__ReadSubExpr(param_1);
+      uVar3 = CDSScript::ReadSubExpr(param_1);
       local_10 = local_10 - 1;
       *puVar4 = uVar3;
       puVar4 = puVar4 + 1;
@@ -80654,19 +81608,19 @@ void __cdecl _Globals::CHelpHistoryScript__ext_op48_shared(int param_1)
   auStack_34[2 - uVar5] = uVar5;
   auStack_34[1 - uVar5] = (uint)(&stack0xffffffd8 + uVar5 * -4);
   auStack_34[-uVar5] = 0x4217c6;
-  CStaticText::FUN_00403040(this,(void *)auStack_34[1 - uVar5],auStack_34[2 - uVar5]);
+  CStaticText::CStaticText_SetStyle(this,(void *)auStack_34[1 - uVar5],auStack_34[2 - uVar5]);
   Runtime::MSVCRT::__security_check_cookie(uVar1 ^ (uint)&stack0xfffffffc);
   return;
 }
 
 
 
-int * __cdecl CHelpHistoryScript__ext_op51_shared(int param_1)
+int * __cdecl CHelpHistoryScript::ext_op51_shared(int param_1)
 
 {
   int *piVar1;
   
-  piVar1 = (int *)_Globals::CDSScript__ReadSubExpr(param_1);
+  piVar1 = (int *)CDSScript::ReadSubExpr(param_1);
   _Globals::FUN_0042d0b0(*(void **)(param_1 + 0x440),piVar1,0);
   return piVar1;
 }
@@ -80713,7 +81667,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x444);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CHelpScript::CHelpScript__ctor(puVar1);
+    puVar1 = CHelpScript::ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -80776,7 +81730,7 @@ undefined4 * __thiscall CHelpScript::FUN_00421920(CHelpScript *this,byte param_1
 
 
 
-void __cdecl _Globals::CHelpScript__ext_op45(int param_1)
+void __cdecl CHelpScript::ext_op45(int param_1)
 
 {
   int iVar1;
@@ -80794,17 +81748,17 @@ void __cdecl _Globals::CHelpScript__ext_op45(int param_1)
   puStack_8 = &LAB_00477c3b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
-  psVar3 = (short *)CDSScript__ReadSubExpr(param_1);
-  uVar4 = CDSScript__ReadSubExpr(param_1);
-  this = (CStaticText *)FUN_00447c42(0x98);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
+  psVar3 = (short *)CDSScript::ReadSubExpr(param_1);
+  uVar4 = CDSScript::ReadSubExpr(param_1);
+  this = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4 = 0;
   if (this != (CStaticText *)0x0) {
-    uVar5 = CDSScript__ReadI32(param_1);
+    uVar5 = CDSScript::ReadI32(param_1);
     uVar6 = 0;
     CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffcc,psVar3);
-    CStaticText::FUN_00406a50(this,iVar1,uVar2,uVar6,uVar4,uVar5);
+    CStaticText::CStaticText_BuildAtAuto(this,iVar1,uVar2,uVar6,uVar4,uVar5);
   }
   ExceptionList = local_c;
   return;
@@ -80812,7 +81766,7 @@ void __cdecl _Globals::CHelpScript__ext_op45(int param_1)
 
 
 
-void __cdecl _Globals::CHelpScript__ext_op46(int param_1)
+void __cdecl CHelpScript::ext_op46(int param_1)
 
 {
   undefined4 uVar1;
@@ -80833,20 +81787,20 @@ void __cdecl _Globals::CHelpScript__ext_op46(int param_1)
   puStack_8 = &LAB_00477c6b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  uVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
-  iVar3 = CDSScript__ReadSubExpr(param_1);
-  uVar4 = CDSScript__ReadSubExpr(param_1);
-  psVar5 = (short *)CDSScript__ReadSubExpr(param_1);
-  uVar6 = CDSScript__ReadSubExpr(param_1);
-  uVar7 = CDSScript__ReadI32(param_1);
-  this = (CStaticText *)FUN_00447c42(0x98);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
+  iVar3 = CDSScript::ReadSubExpr(param_1);
+  uVar4 = CDSScript::ReadSubExpr(param_1);
+  psVar5 = (short *)CDSScript::ReadSubExpr(param_1);
+  uVar6 = CDSScript::ReadSubExpr(param_1);
+  uVar7 = CDSScript::ReadI32(param_1);
+  this = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4 = 0;
   if (this != (CStaticText *)0x0) {
-    uVar8 = CDSScript__ReadSubExpr(param_1);
+    uVar8 = CDSScript::ReadSubExpr(param_1);
     uVar9 = 0;
     CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffb4,psVar5);
-    CStaticText::FUN_00406ba0(this,uVar1,uVar2,iVar3,uVar4,uVar9,uVar6,uVar8,uVar7);
+    CStaticText::CStaticText_BuildAt(this,uVar1,uVar2,iVar3,uVar4,uVar9,uVar6,uVar8,uVar7);
   }
   ExceptionList = local_c;
   return;
@@ -80854,7 +81808,7 @@ void __cdecl _Globals::CHelpScript__ext_op46(int param_1)
 
 
 
-void __cdecl _Globals::CHelpScript__ext_op52(int param_1)
+void __cdecl CHelpScript::ext_op52(int param_1)
 
 {
   undefined2 uVar1;
@@ -80874,12 +81828,12 @@ void __cdecl _Globals::CHelpScript__ext_op52(int param_1)
   puStack_8 = &LAB_00477c9b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  iVar2 = CDSScript__ReadSubExpr(param_1);
-  uVar1 = CDSScript__ReadSubExpr(param_1);
-  psVar3 = (short *)CDSScript__ReadSubExpr(param_1);
-  uVar4 = CDSScript__ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
+  psVar3 = (short *)CDSScript::ReadSubExpr(param_1);
+  uVar4 = CDSScript::ReadSubExpr(param_1);
   uVar4 = uVar4 & 0xffff;
-  this = (CButton *)FUN_00447c42(0x98);
+  this = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4 = 0;
   if (this != (CButton *)0x0) {
     puVar8 = (undefined4 *)0x0;
@@ -80887,7 +81841,7 @@ void __cdecl _Globals::CHelpScript__ext_op52(int param_1)
     uVar6 = 0;
     CVar5 = (CBulanci)0x0;
     CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffc8,psVar3);
-    CButton::FUN_004087f0(this,iVar2,uVar1,CVar5,uVar4,uVar6,uVar7,puVar8);
+    CButton::CButton_BuildAt(this,iVar2,uVar1,CVar5,uVar4,uVar6,uVar7,puVar8);
   }
   ExceptionList = local_c;
   return;
@@ -80984,7 +81938,7 @@ void __thiscall CHelpDlg::FUN_00421c10(CHelpDlg *this,int param_1)
       *(undefined4 **)(this + 0x84) = puVar3;
       _Globals::FUN_00422620(*(void **)(this + 0x88),puVar3);
       param_1 = 1;
-      _Globals::CDSScript__CallExport(*(void **)(this + 0x88),0,1,&param_1);
+      CDSScript::CallExport(*(CDSScript **)(this + 0x88),0,1,&param_1);
       _Globals::FUN_0042d0b0(this,*(int **)(this + 0x84),*(int *)(this + 0x8c));
     }
     iVar5 = 4;
@@ -81051,7 +82005,7 @@ undefined4 * __fastcall CHelpDlg::FUN_00421e40(undefined4 *param_1)
   local_c = ExceptionList;
   ExceptionList = &local_c;
   iVar5 = 0;
-  CWindow::FUN_00405560((CWindow *)param_1,0xe7,0x24,0x2fa,0x239,0);
+  CWindow::CWindow_BuildAt((CWindow *)param_1,0xe7,0x24,0x2fa,0x239,0);
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -81081,7 +82035,7 @@ undefined4 * __fastcall CHelpDlg::FUN_00421e40(undefined4 *param_1)
     piVar4 = (int *)0x0;
   }
   else {
-    piVar4 = CIcon::FUN_004086e0(pCVar3,0x27,0x1e0,0xe5,0x482b28);
+    piVar4 = CIcon::CIcon_BuildAt(pCVar3,0x27,0x1e0,0xe5,0x482b28);
   }
   local_4._0_1_ = 2;
   param_1[0x23] = piVar4;
@@ -81092,7 +82046,7 @@ undefined4 * __fastcall CHelpDlg::FUN_00421e40(undefined4 *param_1)
     piVar4 = (int *)0x0;
   }
   else {
-    piVar4 = CIcon::FUN_004086e0(pCVar3,0x38,0x1e0,0xe6,0x482b1c);
+    piVar4 = CIcon::CIcon_BuildAt(pCVar3,0x38,0x1e0,0xe6,0x482b1c);
   }
   local_4._0_1_ = 2;
   param_1[0x24] = piVar4;
@@ -81103,7 +82057,7 @@ undefined4 * __fastcall CHelpDlg::FUN_00421e40(undefined4 *param_1)
     piVar4 = (int *)0x0;
   }
   else {
-    piVar4 = CIcon::FUN_004086e0(pCVar3,0x48,0x1e0,0xe7,0x482b10);
+    piVar4 = CIcon::CIcon_BuildAt(pCVar3,0x48,0x1e0,0xe7,0x482b10);
   }
   local_4._0_1_ = 2;
   param_1[0x25] = piVar4;
@@ -81114,7 +82068,7 @@ undefined4 * __fastcall CHelpDlg::FUN_00421e40(undefined4 *param_1)
     piVar4 = (int *)0x0;
   }
   else {
-    piVar4 = CIcon::FUN_004086e0(pCVar3,0x5b,0x1e0,0xe8,0x482b04);
+    piVar4 = CIcon::CIcon_BuildAt(pCVar3,0x5b,0x1e0,0xe8,0x482b04);
   }
   local_4 = CONCAT31(local_4._1_3_,2);
   param_1[0x26] = piVar4;
@@ -81197,7 +82151,7 @@ void __fastcall CHelpDlg::FUN_004220e0(undefined4 *param_1)
 
 
 
-undefined4 * __cdecl _Globals::CHelpScript__ext_op47(int param_1)
+undefined4 * __cdecl CHelpScript::ext_op47(int param_1)
 
 {
   int iVar1;
@@ -81220,19 +82174,19 @@ undefined4 * __cdecl _Globals::CHelpScript__ext_op47(int param_1)
   local_c = ExceptionList;
   uVar3 = DAT_004b0e44 ^ (uint)&stack0xffffffd8;
   ExceptionList = &local_c;
-  uVar4 = CDSScript__ReadSubExpr(param_1);
-  CDSScript__ReadSubExpr(param_1);
+  uVar4 = CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
   iVar1 = **(int **)((int)g_pApp + 0x70);
   uVar7 = 0;
-  uVar5 = CDSScript__ReadI32(param_1);
+  uVar5 = CDSScript::ReadI32(param_1);
   this = (void *)(**(code **)(iVar1 + 0x10))(uVar5,uVar7,uVar3);
   piStack_4 = (int *)0x0;
   if (this != (void *)0x0) {
-    piStack_4 = (int *)CheckedVirtualBaseCast(this,DAT_004b826c);
+    piStack_4 = (int *)_Globals::CheckedVirtualBaseCast(this,DAT_004b826c);
   }
   piVar2 = piStack_4;
   local_c = (void *)0x0;
-  this_00 = (CDSBitmap *)FUN_00447c42(0x78);
+  this_00 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
   local_c = (void *)CONCAT31(local_c._1_3_,1);
   if (this_00 == (CDSBitmap *)0x0) {
     puVar6 = (undefined4 *)0x0;
@@ -81369,6 +82323,35 @@ void __cdecl _Globals::FUN_004223e0(int param_1)
 
 
 
+// PlayBankSample(flags, AudioBankIndex* bank, slot, preDelay,
+//                eventTarget, looping)
+// 
+// Menu/UI helper that builds a short-lived CDSAudioPlayer playing
+// one sample from the global AudioBankIndex.
+// 
+//   flags:        oring of audio-player flags (usually 0x1)
+//   bank:         AudioBankIndex pointer; 0 => default to g_pApp+0x4c0
+//                 (resource 0x10004, partner bank 0x10152, 41 samples,
+//                 mono 16-bit @ 22050 Hz).
+//   slot:         index into bank->slots[] (i.e. &bank[0x18][idx*4]).
+//   preDelay:     reserved (always 0 at call sites).
+//   eventTarget:  IDSEventHandler* to receive event id 1 on playback
+//                 completion; pass 0 for a one-shot SFX with no
+//                 completion callback.
+//   looping:      passed as the 'param_5' bit2 flag inside FUN_0043a760;
+//                 callers always pass 1 to enable proper buffer
+//                 arming.
+// 
+// Known menu call sites (slot -> meaning):
+//   0x1b (Start)  : Cmd_Dispatch 0xc9 @ 0x00425baf, eventTarget=0
+//   0x18 (Hist)   : Cmd_Dispatch 0xca @ 0x00425b03, eventTarget=0
+//   0x19 (Quit)   : Cmd_Dispatch 0xcb @ 0x00425a3d, eventTarget=0
+//   0x1a (X exit) : DispatchHotkey  @ 0x00425340, eventTarget=this+0x10
+//   0x1c (F12)    : DispatchHotkey  @ 0x00425340, eventTarget=this+0x10
+// 
+// See main_menu.md §10 for the per-slot voice-cue mapping with WAVs
+// at ghidra_analysis/slot_0x1[8-c].wav.
+
 void __cdecl
 _Globals::FUN_00422430
           (undefined *param_1,int param_2,int param_3,int param_4,uint param_5,char param_6)
@@ -81479,7 +82462,7 @@ void __thiscall _Globals::FUN_00422620(void *this,undefined4 param_1)
 
 
 
-void __fastcall CMovieView::FUN_00422630(int param_1)
+void __fastcall CMovieView::StopPlayback(int param_1)
 
 {
   int iVar1;
@@ -81521,7 +82504,7 @@ CHistoryView::FUN_00422670(CHistoryView *this,short param_1,undefined4 param_2,u
 // Wire format on disk = CDSScript header; see
 // tools/bulanci_unpack/bulanci_unpack.py kind='history_script'.
 
-undefined4 * __fastcall CHistoryScript::CHistoryScript__ctor(undefined4 *param_1)
+undefined4 * __fastcall CHistoryScript::ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -81532,7 +82515,7 @@ undefined4 * __fastcall CHistoryScript::CHistoryScript__ctor(undefined4 *param_1
   puStack_8 = &LAB_00477ea6;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSScript::CDSScript__ctor(param_1);
+  CDSScript::ctor(param_1);
   param_1[0x10d] = 1;
   param_1[0x10f] = 0;
   local_4 = 1;
@@ -81541,7 +82524,7 @@ undefined4 * __fastcall CHistoryScript::CHistoryScript__ctor(undefined4 *param_1
   param_1[0x10c] = vftable;
   param_1[0x10e] = vftable;
   param_1[0x110] = 0;
-  _Globals::CDSScript__InstallOpcodeTable(param_1,0x2d,g_apfnCHistoryScriptOpcodeExt,8);
+  CDSScript::InstallOpcodeTable((CDSScript *)param_1,0x2d,g_apfnCHistoryScriptOpcodeExt,8);
   ExceptionList = local_c;
   return param_1;
 }
@@ -81617,27 +82600,27 @@ void __fastcall CHistoryScript::FUN_004227b0(undefined4 *param_1)
 
 
 
-int __cdecl _Globals::CHelpHistoryScript__ext_op50_shared(int param_1)
+int __cdecl CHelpHistoryScript::ext_op50_shared(int param_1)
 
 {
   int iVar1;
   undefined1 uVar2;
   int iVar3;
   
-  iVar3 = CDSScript__ReadSubExpr(param_1);
+  iVar3 = CDSScript::ReadSubExpr(param_1);
   iVar1 = *(int *)(iVar3 + 0x74);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
   *(undefined1 *)(iVar1 + 0x18) = uVar2;
   return iVar3;
 }
 
 
 
-void __thiscall CMovieView::FUN_00422840(CMovieView *this,char param_1)
+void __thiscall CMovieView::OnMovieStop(CMovieView *this,char param_1)
 
 {
   if (param_1 == '\0') {
-    FUN_00422630((int)this);
+    StopPlayback((int)this);
   }
   CBulanci::FUN_00438340();
   return;
@@ -81645,7 +82628,7 @@ void __thiscall CMovieView::FUN_00422840(CMovieView *this,char param_1)
 
 
 
-void __thiscall CMovieView::FUN_00422860(CMovieView *this,short param_1,int param_2)
+void __thiscall CMovieView::OnEvent(CMovieView *this,short param_1,int param_2)
 
 {
   if (param_1 == 1) {
@@ -81658,7 +82641,7 @@ void __thiscall CMovieView::FUN_00422860(CMovieView *this,short param_1,int para
   }
   if (param_1 == 0xf0) {
     if ((CMovieView *)param_2 != this) {
-      FUN_00422630((int)this);
+      StopPlayback((int)this);
       return;
     }
   }
@@ -81747,7 +82730,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x444);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CHistoryScript::CHistoryScript__ctor(puVar1);
+    puVar1 = CHistoryScript::ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -81757,7 +82740,7 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined * CMovieView::FUN_00422a20(void)
+undefined * CMovieView::GetClassTable(void)
 
 {
   return &DAT_004b3914;
@@ -81765,37 +82748,37 @@ undefined * CMovieView::FUN_00422a20(void)
 
 
 
-void __thiscall CMovieView::FUN_00422a30(CMovieView *this,byte param_1)
+void __thiscall CMovieView::ScalarDeletingDtor_Thunk_4(CMovieView *this,byte param_1)
 
 {
-  FUN_00422ee0(this + -4,param_1);
+  ScalarDeletingDtor(this + -4,param_1);
   return;
 }
 
 
 
-void __thiscall CMovieView::FUN_00422a40(CMovieView *this,byte param_1)
+void __thiscall CMovieView::ScalarDeletingDtor_Thunk_104(CMovieView *this,byte param_1)
 
 {
-  FUN_00422ee0(this + -0x68,param_1);
+  ScalarDeletingDtor(this + -0x68,param_1);
   return;
 }
 
 
 
-void __thiscall CMovieView::FUN_00422a50(CMovieView *this,byte param_1)
+void __thiscall CMovieView::ScalarDeletingDtor_Thunk_16(CMovieView *this,byte param_1)
 
 {
-  FUN_00422ee0(this + -0x10,param_1);
+  ScalarDeletingDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __thiscall CMovieView::FUN_00422a60(CMovieView *this,byte param_1)
+void __thiscall CMovieView::ScalarDeletingDtor_Thunk_24(CMovieView *this,byte param_1)
 
 {
-  FUN_00422ee0(this + -0x18,param_1);
+  ScalarDeletingDtor(this + -0x18,param_1);
   return;
 }
 
@@ -81844,7 +82827,7 @@ undefined4 * __thiscall CHistoryScript::FUN_00422ae0(CHistoryScript *this,byte p
 
 
 
-void __cdecl _Globals::CHistoryScript__ext_op45(int param_1)
+void __cdecl CHistoryScript::ext_op45(int param_1)
 
 {
   int iVar1;
@@ -81862,17 +82845,17 @@ void __cdecl _Globals::CHistoryScript__ext_op45(int param_1)
   puStack_8 = &LAB_00477f6b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
-  psVar3 = (short *)CDSScript__ReadSubExpr(param_1);
-  uVar4 = CDSScript__ReadSubExpr(param_1);
-  this = (CStaticText *)FUN_00447c42(0x98);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
+  psVar3 = (short *)CDSScript::ReadSubExpr(param_1);
+  uVar4 = CDSScript::ReadSubExpr(param_1);
+  this = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4 = 0;
   if (this != (CStaticText *)0x0) {
-    uVar5 = CDSScript__ReadI32(param_1);
+    uVar5 = CDSScript::ReadI32(param_1);
     uVar6 = 0;
     CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffcc,psVar3);
-    CStaticText::FUN_00406a50(this,iVar1,uVar2,uVar6,uVar4,uVar5);
+    CStaticText::CStaticText_BuildAtAuto(this,iVar1,uVar2,uVar6,uVar4,uVar5);
   }
   ExceptionList = local_c;
   return;
@@ -81880,7 +82863,7 @@ void __cdecl _Globals::CHistoryScript__ext_op45(int param_1)
 
 
 
-void __cdecl _Globals::CHistoryScript__ext_op46(int param_1)
+void __cdecl CHistoryScript::ext_op46(int param_1)
 
 {
   undefined4 uVar1;
@@ -81901,20 +82884,20 @@ void __cdecl _Globals::CHistoryScript__ext_op46(int param_1)
   puStack_8 = &LAB_00477f9b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  uVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
-  iVar3 = CDSScript__ReadSubExpr(param_1);
-  uVar4 = CDSScript__ReadSubExpr(param_1);
-  psVar5 = (short *)CDSScript__ReadSubExpr(param_1);
-  uVar6 = CDSScript__ReadSubExpr(param_1);
-  uVar7 = CDSScript__ReadI32(param_1);
-  this = (CStaticText *)FUN_00447c42(0x98);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
+  iVar3 = CDSScript::ReadSubExpr(param_1);
+  uVar4 = CDSScript::ReadSubExpr(param_1);
+  psVar5 = (short *)CDSScript::ReadSubExpr(param_1);
+  uVar6 = CDSScript::ReadSubExpr(param_1);
+  uVar7 = CDSScript::ReadI32(param_1);
+  this = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4 = 0;
   if (this != (CStaticText *)0x0) {
-    uVar8 = CDSScript__ReadSubExpr(param_1);
+    uVar8 = CDSScript::ReadSubExpr(param_1);
     uVar9 = 0;
     CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffb4,psVar5);
-    CStaticText::FUN_00406ba0(this,uVar1,uVar2,iVar3,uVar4,uVar9,uVar6,uVar8,uVar7);
+    CStaticText::CStaticText_BuildAt(this,uVar1,uVar2,iVar3,uVar4,uVar9,uVar6,uVar8,uVar7);
   }
   ExceptionList = local_c;
   return;
@@ -81922,7 +82905,7 @@ void __cdecl _Globals::CHistoryScript__ext_op46(int param_1)
 
 
 
-void __fastcall CMovieView::FUN_00422cb0(undefined4 *param_1)
+void __fastcall CMovieView::Cleanup(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -81956,12 +82939,12 @@ void __fastcall CMovieView::FUN_00422cb0(undefined4 *param_1)
 
 
 
-void __thiscall CMovieView::FUN_00422d50(CMovieView *this,undefined1 param_1)
+void __thiscall CMovieView::StartPlayback(CMovieView *this,undefined1 param_1)
 
 {
   int iVar1;
   undefined4 *puVar2;
-  CMovieView *this_00;
+  CDSAudioVideoPlayer *this_00;
   int *piVar3;
   int *piVar4;
   void *local_c;
@@ -81972,19 +82955,19 @@ void __thiscall CMovieView::FUN_00422d50(CMovieView *this,undefined1 param_1)
   puStack_8 = &LAB_00477ffb;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  FUN_00422630((int)this);
+  StopPlayback((int)this);
   CStartGame2::FUN_0042ec40((CStartGame2 *)(*(int *)(this + 0x4c) + 0x10),0x400,0xf0,this,0);
   puVar2 = (undefined4 *)_Globals::FUN_00447c42(0x50);
   local_4 = 0;
   if (puVar2 == (undefined4 *)0x0) {
-    this_00 = (CMovieView *)0x0;
+    this_00 = (CDSAudioVideoPlayer *)0x0;
   }
   else {
-    this_00 = (CMovieView *)CDSAudioVideoPlayer::FUN_0043bca0(puVar2);
+    this_00 = (CDSAudioVideoPlayer *)CDSAudioVideoPlayer::Constructor(puVar2);
   }
   iVar1 = *(int *)(this + 0x78);
   local_4 = 0xffffffff;
-  *(CMovieView **)(this + 0x80) = this_00;
+  *(CDSAudioVideoPlayer **)(this + 0x80) = this_00;
   if (iVar1 == 0) {
     piVar3 = (int *)0x0;
     piVar4 = (int *)0x0;
@@ -81993,16 +82976,16 @@ void __thiscall CMovieView::FUN_00422d50(CMovieView *this,undefined1 param_1)
     piVar3 = (int *)(iVar1 + 4);
     piVar4 = (int *)(iVar1 + 0x1c);
   }
-  FUN_0043bba0(this_00,piVar4,piVar3,(uint)(this + 0x10),(undefined *)0x2);
+  CDSAudioVideoPlayer::SetupTrack(this_00,piVar4,piVar3,(uint)(this + 0x10),(undefined *)0x2);
   _Globals::TM_SetCurrentSequence(this + 0x68,*(int **)(*(int *)(this + 0x80) + 0x38));
-  FUN_0043bbf0(*(CMovieView **)(this + 0x80),param_1);
+  CDSAudioVideoPlayer::Play(*(CDSAudioVideoPlayer **)(this + 0x80),param_1);
   ExceptionList = local_c;
   return;
 }
 
 
 
-undefined4 * CMovieView::FUN_00422e30(void)
+undefined4 * CMovieView::CreateObject(void)
 
 {
   undefined4 *puVar1;
@@ -82036,10 +83019,10 @@ undefined4 * CMovieView::FUN_00422e30(void)
 
 
 
-undefined4 * __thiscall CMovieView::FUN_00422ee0(CMovieView *this,byte param_1)
+undefined4 * __thiscall CMovieView::ScalarDeletingDtor(CMovieView *this,byte param_1)
 
 {
-  FUN_00422cb0((undefined4 *)this);
+  Cleanup((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -82137,7 +83120,7 @@ void __thiscall CHistoryDlg::FUN_00422f70(CHistoryDlg *this,int param_1)
       *(undefined4 **)(this + 0x84) = puVar3;
       _Globals::FUN_00422620(*(void **)(this + 0x88),puVar3);
       param_1 = 1;
-      _Globals::CDSScript__CallExport(*(void **)(this + 0x88),0,1,&param_1);
+      CDSScript::CallExport(*(CDSScript **)(this + 0x88),0,1,&param_1);
       _Globals::FUN_0042d0b0(this,*(int **)(this + 0x84),*(int *)(this + 0x8c));
     }
     iVar5 = 4;
@@ -82187,15 +83170,15 @@ void __thiscall CHistoryDlg::FUN_00423130(CHistoryDlg *this,ushort param_1)
 
 
 
-void __fastcall CMovieView::FUN_004231a0(void *param_1)
+void __fastcall CMovieView::TogglePlayback(void *param_1)
 
 {
   if (*(int *)((int)param_1 + 0x78) != 0) {
     if (*(int *)((int)param_1 + 0x80) != 0) {
-      FUN_00422630((int)param_1);
+      StopPlayback((int)param_1);
       return;
     }
-    FUN_00422d50(param_1,0);
+    StartPlayback(param_1,0);
   }
   return;
 }
@@ -82219,7 +83202,7 @@ undefined4 * __fastcall CHistoryDlg::CHistoryDlg_ctor(undefined4 *param_1)
   local_c = ExceptionList;
   ExceptionList = &local_c;
   iVar5 = 0;
-  CWindow::FUN_00405560((CWindow *)param_1,0xe7,0x24,0x2fa,0x239,0);
+  CWindow::CWindow_BuildAt((CWindow *)param_1,0xe7,0x24,0x2fa,0x239,0);
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -82249,7 +83232,7 @@ undefined4 * __fastcall CHistoryDlg::CHistoryDlg_ctor(undefined4 *param_1)
     piVar4 = (int *)0x0;
   }
   else {
-    piVar4 = CIcon::FUN_004086e0(pCVar3,0x27,0x1e0,0xe5,0x483390);
+    piVar4 = CIcon::CIcon_BuildAt(pCVar3,0x27,0x1e0,0xe5,0x483390);
   }
   local_4._0_1_ = 2;
   param_1[0x23] = piVar4;
@@ -82260,7 +83243,7 @@ undefined4 * __fastcall CHistoryDlg::CHistoryDlg_ctor(undefined4 *param_1)
     piVar4 = (int *)0x0;
   }
   else {
-    piVar4 = CIcon::FUN_004086e0(pCVar3,0x38,0x1e0,0xe6,0x483384);
+    piVar4 = CIcon::CIcon_BuildAt(pCVar3,0x38,0x1e0,0xe6,0x483384);
   }
   local_4._0_1_ = 2;
   param_1[0x24] = piVar4;
@@ -82271,7 +83254,7 @@ undefined4 * __fastcall CHistoryDlg::CHistoryDlg_ctor(undefined4 *param_1)
     piVar4 = (int *)0x0;
   }
   else {
-    piVar4 = CIcon::FUN_004086e0(pCVar3,0x48,0x1e0,0xe7,0x483378);
+    piVar4 = CIcon::CIcon_BuildAt(pCVar3,0x48,0x1e0,0xe7,0x483378);
   }
   local_4._0_1_ = 2;
   param_1[0x25] = piVar4;
@@ -82282,7 +83265,7 @@ undefined4 * __fastcall CHistoryDlg::CHistoryDlg_ctor(undefined4 *param_1)
     piVar4 = (int *)0x0;
   }
   else {
-    piVar4 = CIcon::FUN_004086e0(pCVar3,0x5b,0x1e0,0xe8,0x48336c);
+    piVar4 = CIcon::CIcon_BuildAt(pCVar3,0x5b,0x1e0,0xe8,0x48336c);
   }
   local_4 = CONCAT31(local_4._1_3_,2);
   param_1[0x26] = piVar4;
@@ -82364,7 +83347,7 @@ void __fastcall CHistoryDlg::FUN_00423470(undefined4 *param_1)
 
 
 
-undefined4 * __cdecl _Globals::CHistoryScript__ext_op47(int param_1)
+undefined4 * __cdecl CHistoryScript::ext_op47(int param_1)
 
 {
   int iVar1;
@@ -82387,19 +83370,19 @@ undefined4 * __cdecl _Globals::CHistoryScript__ext_op47(int param_1)
   local_c = ExceptionList;
   uVar3 = DAT_004b0e44 ^ (uint)&stack0xffffffd8;
   ExceptionList = &local_c;
-  uVar4 = CDSScript__ReadSubExpr(param_1);
-  CDSScript__ReadSubExpr(param_1);
+  uVar4 = CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
   iVar1 = **(int **)((int)g_pApp + 0x70);
   uVar7 = 0;
-  uVar5 = CDSScript__ReadI32(param_1);
+  uVar5 = CDSScript::ReadI32(param_1);
   this = (void *)(**(code **)(iVar1 + 0x10))(uVar5,uVar7,uVar3);
   piStack_4 = (int *)0x0;
   if (this != (void *)0x0) {
-    piStack_4 = (int *)CheckedVirtualBaseCast(this,DAT_004b826c);
+    piStack_4 = (int *)_Globals::CheckedVirtualBaseCast(this,DAT_004b826c);
   }
   piVar2 = piStack_4;
   local_c = (void *)0x0;
-  this_00 = (CDSBitmap *)FUN_00447c42(0x78);
+  this_00 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
   local_c = (void *)CONCAT31(local_c._1_3_,1);
   if (this_00 == (CDSBitmap *)0x0) {
     puVar6 = (undefined4 *)0x0;
@@ -82462,7 +83445,7 @@ undefined4 * __thiscall CHistoryDlg::FUN_00423680(CHistoryDlg *this,byte param_1
 
 
 void __thiscall
-CMovieView::FUN_004236a0
+CMovieView::Constructor
           (CMovieView *this,undefined4 param_1,undefined4 param_2,undefined4 param_3,
           undefined4 param_4,undefined4 param_5)
 
@@ -82505,7 +83488,7 @@ CMovieView::FUN_004236a0
   }
   *(undefined4 *)(this + 0x78) = uVar3;
   local_8 = 2;
-  FUN_004237b0();
+  InitTrackSequence();
   return;
 }
 
@@ -82526,7 +83509,7 @@ undefined * CMovieView::Catch_00423787(void)
 
 
 
-void CMovieView::FUN_004237b0(void)
+void CMovieView::InitTrackSequence(void)
 
 {
   void *this;
@@ -82553,7 +83536,7 @@ void CMovieView::FUN_004237b0(void)
 
 
 
-undefined4 __cdecl _Globals::CHistoryScript__ext_op52(int param_1)
+undefined4 __cdecl CHistoryScript::ext_op52(int param_1)
 
 {
   undefined4 uVar1;
@@ -82570,15 +83553,15 @@ undefined4 __cdecl _Globals::CHistoryScript__ext_op52(int param_1)
   puStack_8 = &LAB_0047820b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  uVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
-  uVar3 = CDSScript__ReadI32(param_1);
-  uVar4 = CDSScript__ReadSubExpr(param_1);
-  uVar5 = CDSScript__ReadSubExpr(param_1);
-  this = (CMovieView *)FUN_00447c42(0x84);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
+  uVar3 = CDSScript::ReadI32(param_1);
+  uVar4 = CDSScript::ReadSubExpr(param_1);
+  uVar5 = CDSScript::ReadSubExpr(param_1);
+  this = (CMovieView *)_Globals::FUN_00447c42(0x84);
   local_4 = 0;
   if (this != (CMovieView *)0x0) {
-    uVar1 = CMovieView::FUN_004236a0(this,uVar1,uVar2,uVar3,uVar4,uVar5);
+    uVar1 = CMovieView::Constructor(this,uVar1,uVar2,uVar3,uVar4,uVar5);
     ExceptionList = local_c;
     return uVar1;
   }
@@ -83192,7 +84175,7 @@ void __fastcall CMenu::FUN_00424080(void *param_1)
 
 
 
-void __fastcall CPoemScroller::CPoemScroller_Render(int param_1)
+void __fastcall CPoemScroller::Render(int param_1)
 
 {
   CPoemScroller *pCVar1;
@@ -83997,6 +84980,24 @@ void __fastcall CMenu::CMenu_dtor(undefined4 *param_1)
 
 
 
+// CMenu::OnEvent(this, eventId:ushort)
+// 
+// Receives scheduled events on CMenu's IDSEventHandler (this+0x10).
+// Only event id 1 is handled directly:
+// 
+//   1 (audio-finished from DispatchHotkey's CDSAudioPlayer):
+//      - FUN_0042c3c0(this, this+0xcc) -- writes stashed modal-
+//        exit code from DispatchHotkey into this+0x4a, *iff*
+//        this+0x44 & 0x10 is set. Triggers DoModal to unwind.
+//      - Releases the audio player at this+0xc4 and zeroes it.
+// 
+// Everything else falls through to CDSApp::OnEvent_Default
+// (FUN_0042c7d0). NOTE: command dispatch (msg 0x100) is NOT
+// handled here -- that uses a different vtable slot; see
+// CMenu_CmdDispatch @ 0x00425970.
+// 
+// See main_menu.md §2.6.1 for the full X-hotkey flow.
+
 void __thiscall CMenu::CMenu_OnEvent(CMenu *this,ushort param_1)
 
 {
@@ -84016,14 +85017,33 @@ void __thiscall CMenu::CMenu_OnEvent(CMenu *this,ushort param_1)
 
 // CMenu::OnKeyDown(this, scanCode, isDown) -- vftable[22].
 // 
-// Keyboard shortcut handler for the main menu. Returns 1 if handled.
-//   S (0x53) -> Button_Click(btn_start)
-//   H (0x48) -> Button_Click(btn_history)
-//   K (0x4b) -> Button_Click(btn_quit)     [Czech 'Konec']
-//   X (0x58) -> on keyDown, Scheduler_PostMessage(parent+0x10,
-//               0x100, 0x8004, 0, 0) -- triggers app exit via
-//               CMenu_CmdDispatch case 0x8004.
-// Falls through CDSView::FUN_0042c0c0 first (modal focus check).
+// Keyboard shortcut handler for the main menu. Returns 1 if handled,
+// else forwards to CDSView::FUN_0042c0c0 (child-focus filter) first.
+// 
+//   S (0x53) -> Button::Click(btn_start)
+//   H (0x48) -> Button::Click(btn_history)
+//   K (0x4b) -> Button::Click(btn_quit)   [Czech 'Konec']
+//   X (0x58) -> on keyDown only: Scheduler_PostMessage(this+0x10,
+//               0x100, 0x8004, 0, 0). Returns param_2 directly
+//               (1 on down, 0 on up).
+// 
+// Note on H/S/K: handlers do NOT gate on param_2, so Button::Click
+// is posted twice per keypress (down + up). Button::Click is
+// idempotent (returns early if btn->state != 0) so the duplicate
+// edge is harmless.
+// 
+// The X path is NOT equivalent to K despite both leading to quit:
+//  - S/H/K: synchronous, Button::Click -> Cmd_Dispatch(0xc9|0xca|0xcb)
+//    builds a sub-screen child view *immediately*.
+//  - X:     asynchronous, Cmd_Dispatch(0x8004) -> DispatchHotkey
+//    plays audio slot 0x1a, then exits the modal via the audio-
+//    completion event handler in CMenu::OnEvent(1). Depends on
+//    (a) slot 0x1a being populated, (b) DirectSound initialised,
+//    (c) CMenu's modal-exit flag (+0x44 & 0x10) being set when the
+//    audio completes. If any precondition fails the menu's three
+//    buttons hide unconditionally (DispatchHotkey side effect) but
+//    the modal never exits -> X visibly does nothing past that.
+//    See main_menu.md §2.6.1.
 
 char __thiscall CMenu::CMenu_OnKeyDown(CMenu *this,undefined1 param_1,char param_2)
 
@@ -84239,6 +85259,37 @@ void __thiscall CBulanci::CMenu_SetDayNightBg(CBulanci *this,char param_1)
 }
 
 
+
+// CMenu::DispatchHotkey(this, modalExitCode:ushort, audioSlot:int)
+// 
+// Audio-cued modal exit. Used by Cmd_Dispatch for the X (0x8004 ->
+// 0x80cb / slot 0x1a) and F12 (0x80ce -> 0x80c8 / slot 0x1c)
+// hotkeys -- the synchronous Button::Click path is bypassed.
+// 
+// Steps (unconditional unless noted):
+//   1. this+0xcc = modalExitCode    (stash; consumed in OnEvent(1))
+//   2. (only if this+0xc4 == 0, i.e. not already armed):
+//      a. FUN_00424010(this, 0)   -- enable Ruch background
+//      b. iVar1 = FUN_00422430(0x1, 0, audioSlot, 0, this+0x10, 1)
+//         -- builds a CDSAudioPlayer that plays the slot's sample
+//            and reports completion as event id 1 to this+0x10
+//      c. this+0xc4 = iVar1 + AddRef
+//      d. FUN_004223c0(this+0xc4, 0)  -- start playback
+//      e. Hide the three main-menu buttons at this+0xb0..0xbc
+//         (Start / History / Quit) via FUN_0042d080.
+// 
+// Completion path:
+//   CDSAudioPlayer fires event 1 -> CMenu::OnEvent(1) (FUN_00424f50)
+//   -> FUN_0042c3c0(this, this+0xcc) writes this+0x4a *iff*
+//   this+0x44 & 0x10 -> DoModal exits returning the stashed code.
+// 
+// For 0x80cb (X): sign-extends to int16 = -0x7f35, which CBulanci::
+// OnEvent::0xcc routes to app-shutdown.
+// 
+// Known failure modes: if audio slot is empty, DirectSound is
+// disabled, or the modal-eligible flag is clear, the chain stops
+// at step (2e) -- buttons are hidden but the menu never exits.
+// See main_menu.md §2.6.1.
 
 void __thiscall CMenu::CMenu_DispatchHotkey(CMenu *this,undefined2 param_1,int param_2)
 
@@ -84777,7 +85828,7 @@ LAB_00425c48:
 
 
 
-void __fastcall CPoemScroller::FUN_00425ca0(undefined4 *param_1)
+void __fastcall CPoemScroller::Destructor(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -84821,7 +85872,7 @@ void __fastcall CPoemScroller::FUN_00425ca0(undefined4 *param_1)
 
 
 
-undefined * CPoemScroller::FUN_00425da0(void)
+undefined * CPoemScroller::GetClassIdentifier(void)
 
 {
   return &DAT_004b3998;
@@ -84829,37 +85880,37 @@ undefined * CPoemScroller::FUN_00425da0(void)
 
 
 
-void __thiscall CPoemScroller::FUN_00425db0(CPoemScroller *this,byte param_1)
+void __thiscall CPoemScroller::DeletingDestructorThunk_10(CPoemScroller *this,byte param_1)
 
 {
-  FUN_004264e0(this + -4,param_1);
+  ScalarDeletingDestructor(this + -4,param_1);
   return;
 }
 
 
 
-void __thiscall CPoemScroller::FUN_00425dc0(CPoemScroller *this,byte param_1)
+void __thiscall CPoemScroller::DeletingDestructorThunk_1c(CPoemScroller *this,byte param_1)
 
 {
-  FUN_004264e0(this + -0x68,param_1);
+  ScalarDeletingDestructor(this + -0x68,param_1);
   return;
 }
 
 
 
-void __thiscall CPoemScroller::FUN_00425dd0(CPoemScroller *this,byte param_1)
+void __thiscall CPoemScroller::DeletingDestructorThunk_24(CPoemScroller *this,byte param_1)
 
 {
-  FUN_004264e0(this + -0x10,param_1);
+  ScalarDeletingDestructor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __thiscall CPoemScroller::FUN_00425de0(CPoemScroller *this,byte param_1)
+void __thiscall CPoemScroller::DeletingDestructorThunk_4(CPoemScroller *this,byte param_1)
 
 {
-  FUN_004264e0(this + -0x18,param_1);
+  ScalarDeletingDestructor(this + -0x18,param_1);
   return;
 }
 
@@ -84895,7 +85946,7 @@ void __thiscall CPoemScroller::FUN_00425de0(CPoemScroller *this,byte param_1)
 // 
 // See main_menu.md sec. 9.3.
 
-void __fastcall CPoemScroller::CPoemScroller_PickNextPoem(int param_1)
+void __fastcall CPoemScroller::PickNextPoem(int param_1)
 
 {
   size_t _Size;
@@ -85003,12 +86054,12 @@ void __fastcall CPoemScroller::CPoemScroller_PickNextPoem(int param_1)
 
 
 
-void __fastcall CPoemScroller::CPoemScroller_OnScrollTick(int param_1)
+void __fastcall CPoemScroller::OnScrollTick(int param_1)
 
 {
   *(int *)(param_1 + 0x44) = *(int *)(param_1 + 0x44) + -1;
   if (*(int *)(param_1 + 0x44) == *(int *)(param_1 + 0x48)) {
-    CPoemScroller_PickNextPoem(param_1 + -0x68);
+    PickNextPoem(param_1 + -0x68);
   }
   (**(code **)(*(int *)(param_1 + -0x68) + 0x24))(0,0);
   return;
@@ -85112,7 +86163,7 @@ undefined4 * __thiscall CGunMouse::FUN_004262a0(CGunMouse *this,byte param_1)
 
 
 
-undefined4 * __fastcall CPoemScroller::CPoemScroller_ctor(undefined4 *param_1)
+undefined4 * __fastcall CPoemScroller::Constructor(undefined4 *param_1)
 
 {
   int *piVar1;
@@ -85181,14 +86232,14 @@ undefined4 * __fastcall CPoemScroller::CPoemScroller_ctor(undefined4 *param_1)
   local_8 = 6;
   _Globals::Scheduler_RegisterEventSlot(param_1 + 0x1a,0,0x78,6);
   _Globals::Scheduler_SetEventLastFireMs(param_1 + 0x1a,0,g_dwElapsedMs + 3000);
-  CPoemScroller_PickNextPoem((int)param_1);
+  PickNextPoem((int)param_1);
   ExceptionList = local_10;
   return param_1;
 }
 
 
 
-void CPoemScroller::Catch_004264c5(void)
+void CPoemScroller::CatchExceptionHelper(void)
 
 {
   int unaff_EBP;
@@ -85200,10 +86251,10 @@ void CPoemScroller::Catch_004264c5(void)
 
 
 
-undefined4 * __thiscall CPoemScroller::FUN_004264e0(CPoemScroller *this,byte param_1)
+undefined4 * __thiscall CPoemScroller::ScalarDeletingDestructor(CPoemScroller *this,byte param_1)
 
 {
-  FUN_00425ca0((undefined4 *)this);
+  Destructor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -85266,7 +86317,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x128);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CPoemScroller::CPoemScroller_ctor(puVar1);
+    puVar1 = CPoemScroller::Constructor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -85534,7 +86585,7 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     piVar5 = (int *)0x0;
   }
   else {
-    piVar5 = CPoemScroller::CPoemScroller_ctor(puVar6);
+    piVar5 = CPoemScroller::Constructor(puVar6);
   }
   local_c._0_1_ = 9;
   _Globals::FUN_0042d0b0(this,piVar5,0);
@@ -85548,7 +86599,7 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     uVar10 = 1;
     uVar9 = 0;
     FUN_0042d510((CBulanci *)&stack0xffffffb8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x174));
-    piVar5 = CStaticText::FUN_00406a50(this_00,0xe6,0x23f,uVar9,uVar10,uVar11);
+    piVar5 = CStaticText::CStaticText_BuildAtAuto(this_00,0xe6,0x23f,uVar9,uVar10,uVar11);
   }
   local_c = (void *)CONCAT31(local_c._1_3_,9);
   _Globals::FUN_0042d0b0(this,piVar5,0);
@@ -85645,7 +86696,7 @@ void __thiscall _Globals::FUN_00426d70(void *this,undefined1 param_1,undefined1 
 
 
 
-void __thiscall CSpells::FUN_00426da0(CSpells *this,short param_1,undefined4 param_2)
+void __thiscall CSpells::OnEvent(CSpells *this,short param_1,undefined4 param_2)
 
 {
   byte bVar1;
@@ -85673,7 +86724,7 @@ void __thiscall CSpells::FUN_00426da0(CSpells *this,short param_1,undefined4 par
 
 
 
-void __fastcall CShotCounter::FUN_00426e10(int param_1)
+void __fastcall CShotCounter::Render(int param_1)
 
 {
   int *piVar1;
@@ -85763,7 +86814,8 @@ void __fastcall CShotCounter::FUN_00426e10(int param_1)
 
 
 
-void __thiscall CNumCounter::FUN_00427020(CNumCounter *this,int param_1,undefined1 *param_2)
+void __thiscall
+CNumCounter::CNumCounter_UpdateDigit(CNumCounter *this,int param_1,undefined1 *param_2)
 
 {
   int iVar1;
@@ -85791,7 +86843,7 @@ void __thiscall CNumCounter::FUN_00427020(CNumCounter *this,int param_1,undefine
 
 
 
-void __fastcall CNumCounter::FUN_004270a0(void *param_1)
+void __fastcall CNumCounter::CNumCounter_OnTimerTick(void *param_1)
 
 {
   CNumCounter *this;
@@ -85800,9 +86852,10 @@ void __fastcall CNumCounter::FUN_004270a0(void *param_1)
   undefined4 uStack_4;
   
   uStack_4 = (uint)param_1 & 0xffffff;
-  FUN_00427020((CNumCounter *)((int)param_1 + -0x68),0,(undefined1 *)((int)&uStack_4 + 3));
-  FUN_00427020(this,1,(undefined1 *)((int)&uStack_4 + 3));
-  FUN_00427020(this_00,2,(undefined1 *)((int)&uStack_4 + 3));
+  CNumCounter_UpdateDigit
+            ((CNumCounter *)((int)param_1 + -0x68),0,(undefined1 *)((int)&uStack_4 + 3));
+  CNumCounter_UpdateDigit(this,1,(undefined1 *)((int)&uStack_4 + 3));
+  CNumCounter_UpdateDigit(this_00,2,(undefined1 *)((int)&uStack_4 + 3));
   if (uStack_4._3_1_ == '\0') {
     _Globals::FUN_0042f300(param_1,0);
     return;
@@ -85856,7 +86909,7 @@ void __thiscall CBulanci::FUN_00427100(CBulanci *this,uint param_1,char param_2)
 
 
 
-undefined4 * __fastcall CShotCounter::FUN_00427210(undefined4 *param_1)
+undefined4 * __fastcall CShotCounter::Constructor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -85881,7 +86934,7 @@ undefined4 * __fastcall CShotCounter::FUN_00427210(undefined4 *param_1)
 
 
 
-undefined * CShotCounter::FUN_00427290(void)
+undefined * CShotCounter::GetClassIdentifier(void)
 
 {
   return &DAT_004b3a1c;
@@ -85889,34 +86942,34 @@ undefined * CShotCounter::FUN_00427290(void)
 
 
 
-void __thiscall CShotCounter::FUN_004272a0(CShotCounter *this,byte param_1)
+void __thiscall CShotCounter::DeletingDestructorThunk_10(CShotCounter *this,byte param_1)
 
 {
-  FUN_00427a60(this + -0x10,param_1);
+  ScalarDeletingDestructor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __thiscall CShotCounter::FUN_004272b0(CShotCounter *this,byte param_1)
+void __thiscall CShotCounter::DeletingDestructorThunk_18(CShotCounter *this,byte param_1)
 
 {
-  FUN_00427a60(this + -0x18,param_1);
+  ScalarDeletingDestructor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __thiscall CShotCounter::FUN_004272c0(CShotCounter *this,byte param_1)
+void __thiscall CShotCounter::DeletingDestructorThunk_4(CShotCounter *this,byte param_1)
 
 {
-  FUN_00427a60(this + -4,param_1);
+  ScalarDeletingDestructor(this + -4,param_1);
   return;
 }
 
 
 
-void __fastcall CShotCounter::FUN_004272d0(undefined4 *param_1)
+void __fastcall CShotCounter::Destructor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -85936,7 +86989,54 @@ void __fastcall CShotCounter::FUN_004272d0(undefined4 *param_1)
 
 
 
-undefined4 * __fastcall CNumCounter::FUN_00427340(undefined4 *param_1)
+// CNumCounter::ctor()
+// 
+// Basic constructor for the slot-machine-style three-digit
+// rolling counter. Used by score / time / count-down displays
+// (see CGaming / CGameView HUD overlays) and the round-end
+// statistics screen.
+// 
+// The widget owns three independent digit slots that animate
+// between 'current' values (+0x90..+0x98) and 'target' values
+// (+0x9c..+0xa4) by advancing one step per OnTimerTick call,
+// drawing the in-between vertical scroll using the strip atlas
+// at +0x80 (the digit-set sprite) and the cell template at
+// +0x84.
+// 
+// Procedure:
+//   1. CDSChained::FUN_004032d0(this) -- chain ctor.
+//   2. CDSUpdatedItem::FUN_0042f060(this+0x68) -- timer host.
+//   3. Install 5 vftables at +0x00, +0x04, +0x10, +0x18, +0x68
+//      (the same 5-vtable shape as CEdit: four view-side plus
+//      the timer-side).
+//   4. eh_vector_constructor over 2 inner sub-objects at
+//      this+0x80 (the digit strip CDSImage* + the cell template
+//      CDSImage*).
+// 
+// Layout (size approx 0xa8):
+//   +0x00..+0x18   four view vftables
+//   +0x68          CDSUpdatedItem (timer)
+//   +0x80          digit-strip bitmap (CDSImage* with vertical
+//                  column of N digit glyphs; width = +4 entry,
+//                  height = +8 entry which gives glyphCount when
+//                  divided by single-digit height; see Render)
+//   +0x84          cell template bitmap (single-cell frame)
+//   +0x88 (u8)     direction (0 = decrement, 1 = increment)
+//   +0x8c (s32)    highlight flag (negative -> red border)
+//   +0x90/+0x94/+0x98  current digit indices for slots 0/1/2
+//   +0x9c/+0xa0/+0xa4  target digit indices for slots 0/1/2
+// 
+// OnTimerTick advances each digit one step toward its target;
+// when all three reach the target, the timer is stopped via
+// _Globals::FUN_0042f300(this+0x68, 0). UpdateDigit handles the
+// wrap (0 -> N-1 in decrement mode, N-1 -> 0 in increment mode).
+// Render draws each digit with a scroll-offset blit so the
+// transition shows the strip rolling between glyphs, with a 2px
+// inter-digit gap. If +0x8c < 0, FUN_004365f0 paints a red
+// frame (0xff0000 / 0xaf0000) around the digit before its glyph
+// blit.
+
+undefined4 * __fastcall CNumCounter::CNumCounter_ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -85964,7 +87064,7 @@ undefined4 * __fastcall CNumCounter::FUN_00427340(undefined4 *param_1)
 
 
 
-undefined * CNumCounter::FUN_004273e0(void)
+undefined * CNumCounter::CNumCounter_GetTypeDescriptor(void)
 
 {
   return &DAT_004b3a44;
@@ -85972,43 +87072,43 @@ undefined * CNumCounter::FUN_004273e0(void)
 
 
 
-void __thiscall CNumCounter::FUN_004273f0(CNumCounter *this,byte param_1)
+void __thiscall CNumCounter::CNumCounter_AdjustorThunk04_Dtor(CNumCounter *this,byte param_1)
 
 {
-  FUN_00427af0(this + -0x18,param_1);
+  CNumCounter_vDtor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __thiscall CNumCounter::FUN_00427400(CNumCounter *this,byte param_1)
+void __thiscall CNumCounter::CNumCounter_AdjustorThunk10_Dtor(CNumCounter *this,byte param_1)
 
 {
-  FUN_00427af0(this + -4,param_1);
+  CNumCounter_vDtor(this + -4,param_1);
   return;
 }
 
 
 
-void __thiscall CNumCounter::FUN_00427410(CNumCounter *this,byte param_1)
+void __thiscall CNumCounter::CNumCounter_AdjustorThunk18_Dtor(CNumCounter *this,byte param_1)
 
 {
-  FUN_00427af0(this + -0x68,param_1);
+  CNumCounter_vDtor(this + -0x68,param_1);
   return;
 }
 
 
 
-void __thiscall CNumCounter::FUN_00427420(CNumCounter *this,byte param_1)
+void __thiscall CNumCounter::CNumCounter_AdjustorThunk68_Dtor(CNumCounter *this,byte param_1)
 
 {
-  FUN_00427af0(this + -0x10,param_1);
+  CNumCounter_vDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __fastcall CNumCounter::FUN_00427430(undefined4 *param_1)
+void __fastcall CNumCounter::CNumCounter_dtor(undefined4 *param_1)
 
 {
   undefined4 *puVar1;
@@ -86082,7 +87182,7 @@ undefined4 * __thiscall CDSBitmap::FUN_004274f0(CDSBitmap *this,byte param_1)
 
 
 
-undefined4 * __fastcall CPanel::FUN_00427510(undefined4 *param_1)
+undefined4 * __fastcall CPanel::CPanel_ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -86107,7 +87207,7 @@ undefined4 * __fastcall CPanel::FUN_00427510(undefined4 *param_1)
 
 
 
-undefined * CPanel::FUN_00427590(void)
+undefined * CPanel::CPanel_GetTypeDescriptor(void)
 
 {
   return &DAT_004b3a08;
@@ -86115,34 +87215,34 @@ undefined * CPanel::FUN_00427590(void)
 
 
 
-void __thiscall CPanel::FUN_004275a0(CPanel *this,byte param_1)
+void __thiscall CPanel::CPanel_AdjustorThunk04_Dtor(CPanel *this,byte param_1)
 
 {
-  FUN_00427c10(this + -0x10,param_1);
+  CPanel_vDtor(this + -0x10,param_1);
   return;
 }
 
 
 
-void __thiscall CPanel::FUN_004275b0(CPanel *this,byte param_1)
+void __thiscall CPanel::CPanel_AdjustorThunk10_Dtor(CPanel *this,byte param_1)
 
 {
-  FUN_00427c10(this + -0x18,param_1);
+  CPanel_vDtor(this + -0x18,param_1);
   return;
 }
 
 
 
-void __thiscall CPanel::FUN_004275c0(CPanel *this,byte param_1)
+void __thiscall CPanel::CPanel_AdjustorThunk18_Dtor(CPanel *this,byte param_1)
 
 {
-  FUN_00427c10(this + -4,param_1);
+  CPanel_vDtor(this + -4,param_1);
   return;
 }
 
 
 
-void __fastcall CPanel::FUN_004275d0(undefined4 *param_1)
+void __fastcall CPanel::CPanel_dtor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -86221,7 +87321,7 @@ void __thiscall _Globals::FUN_00427710(void *this,int *param_1)
 
 
 
-void __fastcall CNumCounter::FUN_00427740(int param_1)
+void __fastcall CNumCounter::CNumCounter_Render(int param_1)
 
 {
   int iVar1;
@@ -86292,7 +87392,7 @@ void __fastcall CNumCounter::FUN_00427740(int param_1)
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-void __fastcall CSpells::FUN_004278c0(int param_1)
+void __fastcall CSpells::Draw(int param_1)
 
 {
   void *pvVar1;
@@ -86371,7 +87471,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x7c);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CShotCounter::FUN_00427210(puVar1);
+    puVar1 = CShotCounter::Constructor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -86381,10 +87481,10 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CShotCounter::FUN_00427a60(CShotCounter *this,byte param_1)
+undefined4 * __thiscall CShotCounter::ScalarDeletingDestructor(CShotCounter *this,byte param_1)
 
 {
-  FUN_004272d0((undefined4 *)this);
+  Destructor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -86415,7 +87515,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0xa8);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CNumCounter::FUN_00427340(puVar1);
+    puVar1 = CNumCounter::CNumCounter_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -86425,10 +87525,10 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CNumCounter::FUN_00427af0(CNumCounter *this,byte param_1)
+undefined4 * __thiscall CNumCounter::CNumCounter_vDtor(CNumCounter *this,byte param_1)
 
 {
-  FUN_00427430((undefined4 *)this);
+  CNumCounter_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -86491,7 +87591,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0xfc);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CPanel::FUN_00427510(puVar1);
+    puVar1 = CPanel::CPanel_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -86501,10 +87601,10 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-undefined4 * __thiscall CPanel::FUN_00427c10(CPanel *this,byte param_1)
+undefined4 * __thiscall CPanel::CPanel_vDtor(CPanel *this,byte param_1)
 
 {
-  FUN_004275d0((undefined4 *)this);
+  CPanel_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -86566,7 +87666,7 @@ void __thiscall _Globals::FUN_00427c90(void *this,void *param_1)
       }
     }
     piVar2 = *(int **)(iVar1 + 0x6c);
-    uVar4 = FUN_00412490(unaff_BL);
+    uVar4 = GetMaxAmmoForKind(unaff_BL);
     uVar5 = FUN_004173f0(param_1);
     FUN_00427c30(*(void **)((int)this + uVar6 * 4 + 0x78),piVar2,uVar5,uVar4);
   }
@@ -86873,7 +87973,7 @@ undefined4 * __thiscall CBulanci::FUN_004280f0(CBulanci *this,undefined4 param_1
         piVar4 = (int *)_Globals::FUN_00412910(*(void **)(this + 0x68),(byte)SUB41(uVar17,0));
         uVar13 = 0;
         _Globals::FUN_0042d490(&stack0xffffff84,piVar4);
-        piVar4 = CStaticText::FUN_00406ba0
+        piVar4 = CStaticText::CStaticText_BuildAt
                            (pCVar6,iVar5 + 4,9,iVar5 + 0x5c,0x16,uVar13,uVar14,uVar15,uVar16);
       }
       *(int **)(this + uVar12 * 4 + 0xcc) = piVar4;
@@ -86939,13 +88039,14 @@ undefined4 * __thiscall CBulanci::FUN_004280f0(CBulanci *this,undefined4 param_1
         uVar13 = 0;
         FUN_0042d510((CBulanci *)&stack0xffffff84,
                      *(short **)(g_apCDSStaticTextsSingleton[2] + 0x168));
-        piVar10 = CStaticText::FUN_00406ba0
+        piVar10 = CStaticText::CStaticText_BuildAt
                             (pCVar6,*piVar4,*(undefined4 *)(iVar5 + 0x24),*(int *)(iVar5 + 0x28),
                              *(undefined4 *)(iVar5 + 0x2c),uVar13,uVar14,uVar17,uVar16);
       }
       *(int **)(this + uVar12 * 4 + 0xdc) = piVar10;
       _Globals::FUN_0042d0b0(this,piVar10,0);
-      CStaticText::FUN_00403040(*(CStaticText **)(this + uVar12 * 4 + 0xdc),&DAT_004b39fc,2);
+      CStaticText::CStaticText_SetStyle(*(CStaticText **)(this + uVar12 * 4 + 0xdc),&DAT_004b39fc,2)
+      ;
       *(undefined1 *)(*(int *)(this + uVar12 * 4 + 0xdc) + 0x94) = 1;
       _Globals::FUN_0042d040(*(int **)(this + uVar12 * 4 + 0xdc));
       pCVar8 = (CBulanci *)_Globals::FUN_00447c42(0x7c);
@@ -87001,11 +88102,12 @@ undefined4 * __thiscall CBulanci::FUN_004280f0(CBulanci *this,undefined4 param_1
     uVar14 = 1;
     uVar13 = 0;
     _Globals::FUN_0042d490(&stack0xffffff84,(int *)&stack0xffffffb8);
-    piVar4 = CStaticText::FUN_00406ba0(pCVar6,0x166,0x2d,0x1bc,0x5f,uVar13,uVar14,uVar17,uVar16);
+    piVar4 = CStaticText::CStaticText_BuildAt
+                       (pCVar6,0x166,0x2d,0x1bc,0x5f,uVar13,uVar14,uVar17,uVar16);
   }
   *(int **)(this + 0xb8) = piVar4;
   _Globals::FUN_0042d0b0(this,piVar4,0);
-  CStaticText::FUN_00403040(*(CStaticText **)(this + 0xb8),&DAT_004b39ec,4);
+  CStaticText::CStaticText_SetStyle(*(CStaticText **)(this + 0xb8),&DAT_004b39ec,4);
   *(ushort *)(this + 0x14) = *(ushort *)(this + 0x14) | 0x600;
   if (iVar5 != 0) {
     _Globals::FUN_0042d2d0((void *)(iVar5 + -0xc));
@@ -87108,6 +88210,14 @@ uint ATL::_AtlGetThreadACPThunk(void)
 }
 
 
+
+// IDSStream slot 14 -- CDSQueueStream::CloseStream.
+// The IDSStream subobject lives at outer+0x4 (CDSQueueStream is the
+// outlier here -- every other stream class uses outer+0xc).  So
+// this-0x4 recovers the outer CDSQueueStream pointer.
+// Calls _Globals::FUN_0043be90(outer) which releases the CDSMemQueue
+// at outer+0x10, then writes the closed-state sentinel 0x20 into the
+// IDSStream state field at this+0x4.
 
 void __fastcall CDSQueueStream::CloseStream(int param_1)
 
@@ -91104,7 +92214,7 @@ void __thiscall CBulanci::CDSView_ComputeAnchoredRect(CBulanci *this,int *param_
 
 
 
-uint __thiscall CWindow::FUN_0042c660(CWindow *this,char param_1)
+uint __thiscall CWindow::CWindow_FindNextFocusable(CWindow *this,char param_1)
 
 {
   uint uVar1;
@@ -91518,13 +92628,13 @@ void __thiscall CBulanek::FUN_0042cc80(CBulanek *this,int param_1,int param_2)
 
 
 
-byte __thiscall CWindow::FUN_0042ccd0(CWindow *this,char param_1)
+byte __thiscall CWindow::CWindow_FocusSibling(CWindow *this,char param_1)
 
 {
   byte bVar1;
   int *piVar2;
   
-  piVar2 = (int *)FUN_0042c660(this,param_1);
+  piVar2 = (int *)CWindow_FindNextFocusable(this,param_1);
   if (piVar2 != (int *)0x0) {
     bVar1 = _Globals::CDSView_AcquireKeyboardFocus(piVar2);
     return bVar1;
@@ -91662,7 +92772,7 @@ void __fastcall CDSView::FUN_0042cea0(undefined4 *param_1)
 
 
 
-void __fastcall CBulanci::CDSView_OnFocus(int *param_1)
+void __fastcall CDSView::OnLButtonDown(int *param_1)
 
 {
   _Globals::CDSView_AcquireKeyboardFocus(param_1);
@@ -93667,7 +94777,7 @@ void __thiscall _Globals::FUN_0042ee40(void *this,int param_1)
 // g_apCDSStaticTextsSingleton @ 0x004afbb4. See
 // tools/bulanci_unpack/ghidra_analysis/static_texts.md.
 
-undefined4 * CDSStaticTexts__factory(void)
+undefined4 * CDSStaticTexts::factory(void)
 
 {
   undefined4 *puVar1;
@@ -93676,8 +94786,8 @@ undefined4 * CDSStaticTexts__factory(void)
   if (puVar1 != (undefined4 *)0x0) {
     puVar1[2] = 0;
     puVar1[3] = 0;
-    *puVar1 = CDSStaticTexts::g_apfnCDSStaticTextsVftable;
-    puVar1[1] = CDSStaticTexts::g_apfnCDSStaticTextsIDSTextsVftable;
+    *puVar1 = g_apfnCDSStaticTextsVftable;
+    puVar1[1] = g_apfnCDSStaticTextsIDSTextsVftable;
     return puVar1;
   }
   return (undefined4 *)0x0;
@@ -93737,8 +94847,8 @@ undefined4 __cdecl _Globals::InitializeByClassId(LPCWSTR param_1,undefined4 para
 
 
 void __thiscall
-CChatEdit::FUN_0042eff0
-          (CChatEdit *this,undefined2 param_1,undefined4 param_2,undefined4 param_3,void *param_4)
+CGame::BroadcastEvent
+          (CGame *this,undefined2 param_1,undefined4 param_2,undefined4 param_3,void *param_4)
 
 {
   int iVar1;
@@ -94839,6 +95949,11 @@ void __thiscall CDSCollection::FUN_0042ff20(CDSCollection *this,undefined4 *para
 
 
 
+// IDSStream slot 6 -- CDSFilterStream::FlushStream.
+// Direct passthrough: invokes inner stream slot 6 (vftable[0x18/4 = 6])
+// at this+0x24.  No local bookkeeping; the jump-thunk form is why
+// Ghidra reports the jumptable-recovery warning.
+
 void __fastcall CDSFilterStream::FlushStream(int param_1)
 
 {
@@ -94851,6 +95966,14 @@ void __fastcall CDSFilterStream::FlushStream(int param_1)
 
 
 // WARNING: Removing unreachable block (ram,0x0042ffc4)
+// IDSStream slot 7 -- CDSFilterStream::GetSize : longlong.
+// Calls inner->GetSize (vftable[0x1c/4 = 7]) at this+0x24, getting the
+// absolute end of the inner stream.
+// If bounded (this+0x20 >= 0) AND the local cap (this+0x1c) is
+// tighter than the inner size, replaces lVar1 with the cap.
+// Returns lVar1 - base_offset, where base_offset = (this+0x14, this+0x18)
+// is the 64-bit translation between local and inner coordinates.
+// (Filter streams expose a [base, base+size) window of the inner stream.)
 
 undefined8 __fastcall CDSFilterStream::GetSize(int param_1)
 
@@ -94924,6 +96047,11 @@ undefined * CDSFilterStream::FUN_00430080(void)
 
 
 
+// IDSStream slot 8 -- CDSFilterStream::TellPosition : longlong.
+// Returns (this+0xc/+0x10) - (this+0x14/+0x18) as a 64-bit subtraction --
+// the local cursor minus the window base.  The borrow is handled via
+// the unsigned-less-than comparison on the low DWORDs.
+
 undefined8 __fastcall CDSFilterStream::TellPosition(int param_1)
 
 {
@@ -94960,6 +96088,11 @@ void __thiscall CDSFilterStream::FUN_004300c0(CDSFilterStream *this,byte param_1
 }
 
 
+
+// IDSStream slot 13 -- CDSFilterStream::GetStreamName(wstring* out).
+// Delegates to inner stream slot 13 (vftable[0x34/4]) at this+0x24.
+// Filter streams don't have an identity of their own; they expose the
+// wrapped stream's name.
 
 undefined4 __thiscall CDSFilterStream::GetStreamName(CDSFilterStream *this,undefined4 param_1)
 
@@ -95161,6 +96294,15 @@ void __fastcall CDSFilterStream::FUN_00430400(int param_1)
 
 
 
+// IDSStream slot 4 -- CDSFilterStream::ReadBytes(buf, count).
+// Filter-stream cursor at this+0xc/+0x10 (64-bit), size cap at
+// this+0x1c (also 64-bit), upper-bound flag at this+0x20 (-1 = open-ended).
+// Inner IDSStream* at this+0x24.
+// If bounded (this+0x20 >= 0) AND cursor + count would exceed cap,
+// throws errno 1 (Win32 code 0x26 = ERROR_HANDLE_EOF).
+// Delegates the actual read to inner via vftable[0x10/4 = slot 4],
+// then advances the 64-bit local cursor by `count`.
+
 void __thiscall CDSFilterStream::ReadBytes(CDSFilterStream *this,undefined4 param_1,uint param_2)
 
 {
@@ -95190,6 +96332,12 @@ void __thiscall CDSFilterStream::ReadBytes(CDSFilterStream *this,undefined4 para
 }
 
 
+
+// IDSStream slot 5 -- CDSFilterStream::WriteBytes(buf, count).
+// Mirror of ReadBytes: bounded check via this+0x20/+0x1c, delegates to
+// inner stream slot 5 (vftable[0x14/4]) at this+0x24, advances 64-bit
+// local cursor.  Throws errno 2 (win32 0x26) when bounded and the
+// write would overflow the cap.
 
 void __thiscall CDSFilterStream::WriteBytes(CDSFilterStream *this,undefined4 param_1,uint param_2)
 
@@ -95222,6 +96370,15 @@ void __thiscall CDSFilterStream::WriteBytes(CDSFilterStream *this,undefined4 par
 
 
 // WARNING: Removing unreachable block (ram,0x0043058d)
+// IDSStream slot 10 -- CDSFilterStream::SeekPosition(off_lo, off_hi, origin).
+// origin 0 (absolute): target = window_base (this+0x14/+0x18) + off.
+// origin 1 (relative): target = local_cursor (this+0xc/+0x10) + off.
+// origin 2 (end-relative): target = inner.GetSize() - off (via vtable +0x1c).
+// The target is the position in inner-stream coordinates.
+// Guards: target >= window_base (else errno 3 with win32 0x83 = ERROR_BAD_LENGTH).
+// Guards: target <= cap (this+0x1c) when bounded (else errno 3 with win32 0x26).
+// Forwards to inner->Seek (vftable[0x28/4 = slot 10]) with absolute origin,
+// then mirrors the new position into the local cursor at this+0xc/+0x10.
 
 void __thiscall
 CDSFilterStream::SeekPosition(CDSFilterStream *this,uint param_1,int param_2,int param_3)
@@ -95263,6 +96420,11 @@ CDSFilterStream::SeekPosition(CDSFilterStream *this,uint param_1,int param_2,int
 
 
 
+// IDSStream slot 11 -- CDSFilterStream::LockRegion(off_lo, off_hi, len_lo, len_hi).
+// Guards: off >= window_base (this+0x14/+0x18) -- else errno 5 (win32 0xa7 = ERROR_LOCK_VIOLATION).
+// Guards: off+len <= cap (this+0x1c) when bounded.
+// Forwards to inner->Lock (vftable[0x2c/4 = slot 11]) at this+0x24.
+
 void __thiscall
 CDSFilterStream::LockRegion(CDSFilterStream *this,uint param_1,int param_2,uint param_3,int param_4)
 
@@ -95288,6 +96450,11 @@ LAB_0043061a:
 }
 
 
+
+// IDSStream slot 12 -- CDSFilterStream::UnlockRegion(off_lo, off_hi, len_lo, len_hi).
+// Mirror of LockRegion: same bounds guards, throws errno 6 (win32
+// 0x9e = ERROR_LOCK_FAILED) on violation.
+// Forwards to inner->Unlock (vftable[0x30/4 = slot 12]) at this+0x24.
 
 void __thiscall
 CDSFilterStream::UnlockRegion
@@ -95384,6 +96551,13 @@ void __thiscall CDSEasyMemStream::FUN_004306e0(CDSEasyMemStream *this,int param_
 
 
 
+// IDSStream slot 4 -- CDSEasyMemStream::ReadBytes(buf, count).
+// Reads from backing buffer at this+0x1c. Zero-length is a no-op.
+// Null buffer -> ThrowStreamErrorNoReturn(errno=8).
+// Read past size -> ThrowStreamErrorNoReturn(errno=1).
+// Supports ring-buffer mode via head offset at this+0x18 (when nonzero,
+// wraps around using capacity at this+0x10). Advances cursor at this+0x8.
+
 void __thiscall CDSEasyMemStream::ReadBytes(CDSEasyMemStream *this,void *param_1,size_t param_2)
 
 {
@@ -95429,6 +96603,13 @@ void __thiscall CDSEasyMemStream::ReadBytes(CDSEasyMemStream *this,void *param_1
 }
 
 
+
+// IDSStream slot 5 -- CDSEasyMemStream::WriteBytes(buf, count).
+// Writes into backing buffer at this+0x1c. Zero-length is a no-op.
+// Null buffer -> ThrowStreamErrorNoReturn(errno=8).
+// Grows the buffer to (cursor+count) via FUN_004306e0 (EnsureCapacity).
+// Supports ring-buffer mode via head at this+0x18 / capacity at this+0x10.
+// Advances cursor at this+0x8 and bumps logical size at this+0xc.
 
 void __thiscall CDSEasyMemStream::WriteBytes(CDSEasyMemStream *this,void *param_1,size_t param_2)
 
@@ -95476,6 +96657,13 @@ LAB_0043096b:
 
 
 
+// IDSStream slot 10 -- CDSEasyMemStream::SeekPosition(off, _, origin).
+// Null buffer -> ThrowStreamErrorNoReturn(errno=8).
+// origin 0 = absolute, 1 = relative-from-cursor, 2 = end-relative
+// (target = size - off, with off treated as positive distance back).
+// Result must satisfy 0 <= target <= size, else ThrowStreamErrorNoReturn(errno=3).
+// Updates cursor at this+0x8.
+
 void __thiscall
 CDSEasyMemStream::SeekPosition(CDSEasyMemStream *this,int param_1,undefined4 param_2,int param_3)
 
@@ -95510,6 +96698,13 @@ CDSEasyMemStream::SeekPosition(CDSEasyMemStream *this,int param_1,undefined4 par
 
 
 
+// IDSStream slot 9 -- CDSEasyMemStream::SetStreamSize(sizeLo, sizeHi).
+// Null buffer (this+0x1c == 0) -> ThrowStreamErrorNoReturn(errno=8).
+// (sizeLo & sizeHi) == 0xFFFFFFFF is the 'truncate to current cursor'
+// signal: replaces sizeLo with this+0x8 (cursor) before resizing.
+// Grows/keeps backing buffer via FUN_004306e0, then writes new size
+// at this+0xc.  If cursor (this+0x8) exceeds the new size, clamps cursor.
+
 void __thiscall CDSEasyMemStream::SetStreamSize(CDSEasyMemStream *this,uint param_1,uint param_2)
 
 {
@@ -95530,6 +96725,10 @@ void __thiscall CDSEasyMemStream::SetStreamSize(CDSEasyMemStream *this,uint para
 }
 
 
+
+// IDSStream slot 13 -- CDSEasyMemStream::GetStreamName(wstring* out).
+// Nulls *out then assigns it the literal wide string L"EasyMemoryStream"
+// via CBulanci::FUN_0042d510 (the project-wide wstring assign helper).
 
 undefined4 * CDSEasyMemStream::GetStreamName(undefined4 *param_1)
 
@@ -95625,6 +96824,13 @@ void __fastcall CDSFilterStream::FUN_00430b90(undefined4 *param_1)
 
 
 
+// IDSStream slot 14 -- CDSFilterStream::CloseStream.
+// The IDSStream subobject lives at outer+0xc, so this-0xc recovers the
+// outer CDSFilterStream.  Calls FUN_00430400(outer) which releases the
+// local bookkeeping (and on bounded streams optionally invokes the
+// inner Close), then writes the closed-state sentinel 0x20 into the
+// state field at this+0x4.
+
 void __fastcall CDSFilterStream::CloseStream(int param_1)
 
 {
@@ -95680,6 +96886,15 @@ CDSFilterStream::FUN_00430ca0
 
 
 
+// IDSStream slot 9 -- CDSFilterStream::SetStreamSize(sizeLo, sizeHi).
+// Bounded filter streams (this+0x20 >= 0) cannot resize: throws via
+// RaiseUnsupportedOperation(this, 4) (CDSStreamException errno 4).
+// Unbounded streams accept the call.  If (sizeLo & sizeHi) == -1,
+// means 'truncate to current cursor': replaces size with
+// (this+0xc/+0x10) - (this+0x14/+0x18) (cursor minus window base).
+// Forwards the resulting target to inner->SetSize (vftable[0x24/4 = 9])
+// adjusted back into the inner's coordinate space.
+
 void __thiscall CDSFilterStream::SetStreamSize(CDSFilterStream *this,uint param_1,uint param_2)
 
 {
@@ -95725,6 +96940,12 @@ CDSEasyMemStream::FUN_00430d60(CDSEasyMemStream *this,undefined *param_1,undefin
 
 
 
+// IDSStream slot 11 -- CDSEasyMemStream::LockRegion.
+// Memory streams do not support locking.  Forwards to
+// CDSFilterStream::RaiseUnsupportedOperation(this, 5) which throws a
+// CDSStreamException with errno 5.  MSVC emits an `int 3` after the
+// noreturn call to silence the missing-return diagnostic.
+
 void __fastcall CDSEasyMemStream::LockRegion(void *param_1)
 
 {
@@ -95737,6 +96958,11 @@ void __fastcall CDSEasyMemStream::LockRegion(void *param_1)
 }
 
 
+
+// IDSStream slot 12 -- CDSEasyMemStream::UnlockRegion.
+// Forwards to CDSFilterStream::RaiseUnsupportedOperation(this, 6) which
+// throws a CDSStreamException with errno 6.  Trailing `int 3` after the
+// noreturn call (see LockRegion at 0x00430db0).
 
 void __fastcall CDSEasyMemStream::UnlockRegion(void *param_1)
 
@@ -100187,15 +101413,15 @@ _Globals::FUN_00434e30(undefined4 param_1,int param_2,undefined4 *param_3,undefi
   local_18 = 0;
   local_14 = 0;
   local_10 = 0;
-  uVar1 = zlib__inflateInit_((int)&local_38,"1.1.3",0x38);
+  uVar1 = zlib::inflateInit_((int)&local_38,"1.1.3",0x38);
   if (uVar1 == 0) {
-    uVar1 = zlib__inflate(&local_38,4);
+    uVar1 = zlib::inflate(&local_38,4);
     if (uVar1 == 1) {
       *param_3 = local_24;
-      uVar1 = zlib__inflateEnd((int)&local_38);
+      uVar1 = zlib::inflateEnd((int)&local_38);
       return uVar1;
     }
-    zlib__inflateEnd((int)&local_38);
+    zlib::inflateEnd((int)&local_38);
     if (uVar1 == 0) {
       return 0xfffffffb;
     }
@@ -100226,15 +101452,15 @@ _Globals::FUN_00434ee0(undefined4 param_1,int param_2,undefined4 *param_3,undefi
   local_18 = 0;
   local_14 = 0;
   local_10 = 0;
-  uVar1 = zlib__deflateInit_((int)&local_38,9,"1.1.3",0x38);
+  uVar1 = zlib::deflateInit_((int)&local_38,9,"1.1.3",0x38);
   if (uVar1 == 0) {
-    uVar1 = zlib__deflate(&local_38,4);
+    uVar1 = zlib::deflate(&local_38,4);
     if (uVar1 == 1) {
       *param_3 = local_24;
-      uVar1 = zlib__deflateEnd((int)&local_38);
+      uVar1 = zlib::deflateEnd((int)&local_38);
       return uVar1;
     }
-    zlib__deflateEnd((int)&local_38);
+    zlib::deflateEnd((int)&local_38);
     if (uVar1 == 0) {
       return 0xfffffffb;
     }
@@ -100243,6 +101469,11 @@ _Globals::FUN_00434ee0(undefined4 param_1,int param_2,undefined4 *param_3,undefi
 }
 
 
+
+// IDSStream slot 12 -- UnlockRegion (shared no-op-throw thunk).
+// Mirror of 0x0043bff0: shared between CDSGZipStream and
+// CDSQueueStream.  Calls CDSFilterStream::RaiseUnsupportedOperation(
+// this, 6) -> CDSStreamException errno 6.
 
 void __fastcall CDSGZipStream::FUN_00434f90(void *param_1)
 
@@ -100416,6 +101647,16 @@ void __fastcall _Globals::FUN_00435140(int param_1)
 
 
 
+// IDSStream slot 4 -- CDSGZipStream::ReadBytes(buf, count).
+// Null state (this+0x18 = CDSGZipStreamData*) -> errno 8.
+// Guards against reading past total decompressed size (held as 64-bit
+// at data+0x10..0x17): position (this+0x34/+0x38) + cursor (this+0x28)
+// + count must not exceed size, else errno 1.
+// Reads in chunks of up to 0x8000 (32 KiB).  When the current page is
+// full (cursor == 0x8000), calls _Globals::FUN_00435050 to load the
+// next compressed page (advancing absolute position by 0x8000).
+// The page buffer lives at this+0x1c, page cursor at this+0x28.
+
 void __thiscall CDSGZipStream::ReadBytes(CDSGZipStream *this,void *param_1,uint param_2)
 
 {
@@ -100458,6 +101699,14 @@ void __thiscall CDSGZipStream::ReadBytes(CDSGZipStream *this,void *param_1,uint 
 
 
 
+// IDSStream slot 5 -- CDSGZipStream::WriteBytes(buf, count).
+// Null state (this+0x18) -> errno 8.
+// Writes in chunks of up to 0x8000.  When page-tail length
+// (this+0x2c) reaches 0x8000, calls _Globals::FUN_00435140 to flush
+// the full page to the inner stream.  Updates page buffer at
+// this+0x1c, page cursor at this+0x28, page-tail length at this+0x2c,
+// and bumps the 64-bit total size stored at state+0x10/+0x14.
+
 void __thiscall CDSGZipStream::WriteBytes(CDSGZipStream *this,void *param_1,uint param_2)
 
 {
@@ -100497,6 +101746,11 @@ void __thiscall CDSGZipStream::WriteBytes(CDSGZipStream *this,void *param_1,uint
 
 
 
+// IDSStream slot 7 -- CDSGZipStream::GetSize() : longlong.
+// Null state -> errno 8.
+// Returns the 64-bit total decompressed size stored at
+// state+0x10..0x17 (data+0x10 is the low DWORD, +0x14 the high).
+
 undefined8 __fastcall CDSGZipStream::GetSize(uint param_1)
 
 {
@@ -100508,6 +101762,13 @@ undefined8 __fastcall CDSGZipStream::GetSize(uint param_1)
 }
 
 
+
+// IDSStream slot 8 -- CDSGZipStream::TellPosition() : longlong.
+// Null state -> errno 8.
+// Returns the absolute byte position as (page_position64 + page_cursor)
+// where page_position64 = this+0x34/+0x38 (low/high) and page_cursor =
+// this+0x28.  Carries the add through CARRY4 to assemble the 64-bit
+// result.
 
 undefined8 __fastcall CDSGZipStream::TellPosition(uint param_1)
 
@@ -100522,6 +101783,17 @@ undefined8 __fastcall CDSGZipStream::TellPosition(uint param_1)
 }
 
 
+
+// IDSStream slot 10 -- CDSGZipStream::SeekPosition(off_lo, off_hi, origin).
+// Requires read mode (state field this+4 == 1) AND non-null state
+// (this+0x18), else errno 3.
+// origin 0 = absolute, 1 = relative (off += current 64-bit position),
+// origin 2 = end-relative (target = totalSize - off; 64-bit subtraction
+// with CARRY4 -> bVar3 borrow).
+// Must satisfy target >= 0 AND target <= totalSize (the 64-bit pair
+// at state+0x10/+0x14), else errno 3.
+// Delegates to _Globals::FUN_00435050 which seeks the inner stream
+// and reloads the page buffer.
 
 void __thiscall
 CDSGZipStream::SeekPosition(CDSGZipStream *this,uint param_1,uint param_2,int param_3)
@@ -101710,7 +102982,7 @@ CPoemScroller::BlitDispatch
     return;
   }
   piVar3 = (int *)FUN_00433280((CPoemScroller *)&local_10,(int *)(this + 0x24));
-  uVar4 = FUN_004032a0(piVar3);
+  uVar4 = DeletingDestructorThunk_18(piVar3);
   if ((char)uVar4 != '\0') {
     return;
   }
@@ -101719,7 +102991,7 @@ CPoemScroller::BlitDispatch
   local_18 = local_18 + iVar9;
   local_14 = local_14 + iVar8;
   piVar3 = (int *)FUN_00433280((CPoemScroller *)&local_20,&local_10);
-  uVar4 = FUN_004032a0(piVar3);
+  uVar4 = DeletingDestructorThunk_18(piVar3);
   if ((char)uVar4 != '\0') {
     return;
   }
@@ -103108,12 +104380,11 @@ void __thiscall _Globals::FUN_004382f0(void *this,int param_1,undefined4 param_2
 // Called twice per script: once by CDSScript::ctor for the 45 base
 // opcodes, once by the subclass ctor for the 8 or 58 extension opcodes.
 
-void __thiscall
-_Globals::CDSScript__InstallOpcodeTable(void *this,int param_1,void *param_2,int param_3)
+void __thiscall CDSScript::InstallOpcodeTable(CDSScript *this,int param_1,void *param_2,int param_3)
 
 {
-  Runtime::MSVCRT::_memcpy((void *)((int)this + param_1 * 4 + 0x2c),param_2,param_3 * 4);
-  *(int *)((int)this + 0x28) = *(int *)((int)this + 0x28) + param_3;
+  Runtime::MSVCRT::_memcpy(this + param_1 * 4 + 0x2c,param_2,param_3 * 4);
+  *(int *)(this + 0x28) = *(int *)(this + 0x28) + param_3;
   return;
 }
 
@@ -103127,7 +104398,7 @@ void CBulanci::FUN_00438340(void)
 
 
 
-undefined4 __fastcall _Globals::CDSScript__ReadI32(int param_1)
+undefined4 __fastcall CDSScript::ReadI32(int param_1)
 
 {
   undefined4 uVar1;
@@ -103139,7 +104410,7 @@ undefined4 __fastcall _Globals::CDSScript__ReadI32(int param_1)
 
 
 
-undefined2 __fastcall _Globals::CDSScript__ReadU16(int param_1)
+undefined2 __fastcall CDSScript::ReadU16(int param_1)
 
 {
   undefined2 uVar1;
@@ -103151,7 +104422,7 @@ undefined2 __fastcall _Globals::CDSScript__ReadU16(int param_1)
 
 
 
-undefined4 __fastcall _Globals::CDSScript__ReadU8(int param_1)
+undefined4 __fastcall CDSScript::ReadU8(int param_1)
 
 {
   int iVar1;
@@ -103169,7 +104440,7 @@ undefined4 __fastcall _Globals::CDSScript__ReadU8(int param_1)
 // CHistoryScript / CHelpScript) appends its own extension table after this
 // returns.
 
-undefined4 * __fastcall CDSScript::CDSScript__ctor(undefined4 *param_1)
+undefined4 * __fastcall CDSScript::ctor(undefined4 *param_1)
 
 {
   *param_1 = vftable;
@@ -103184,7 +104455,7 @@ undefined4 * __fastcall CDSScript::CDSScript__ctor(undefined4 *param_1)
   param_1[7] = 0;
   param_1[8] = 0;
   param_1[6] = 0;
-  _Globals::CDSScript__InstallOpcodeTable(param_1,0,g_apfnCDSScriptBaseOpcodes,0x2d);
+  InstallOpcodeTable((CDSScript *)param_1,0,g_apfnCDSScriptBaseOpcodes,0x2d);
   return param_1;
 }
 
@@ -103242,7 +104513,7 @@ void __cdecl _Globals::FUN_004384a0(void *param_1)
 {
   uint uVar1;
   
-  uVar1 = CDSScript__ReadU8((int)param_1);
+  uVar1 = CDSScript::ReadU8((int)param_1);
   FUN_004382e0(param_1,uVar1 & 0xff);
   return;
 }
@@ -103254,12 +104525,12 @@ void __cdecl _Globals::FUN_004384a0(void *param_1)
 // value. Recursive entry point for every opcode marked 'sub' in the
 // argument-spec tables (script_dispatch_table.md).
 
-void __fastcall _Globals::CDSScript__ReadSubExpr(int param_1)
+void __fastcall CDSScript::ReadSubExpr(int param_1)
 
 {
   uint uVar1;
   
-  uVar1 = CDSScript__ReadU8(param_1);
+  uVar1 = ReadU8(param_1);
   (**(code **)(param_1 + 0x2c + (uVar1 & 0xff) * 4))(param_1);
   return;
 }
@@ -103272,8 +104543,8 @@ undefined2 __cdecl _Globals::FUN_004388a0(int param_1)
   int iVar1;
   int iVar2;
   
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  iVar2 = CDSScript__ReadSubExpr(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
   return *(undefined2 *)(iVar1 + iVar2 * 2);
 }
 
@@ -103285,8 +104556,8 @@ uint __cdecl _Globals::FUN_00438900(int param_1)
   uint uVar1;
   uint uVar2;
   
-  uVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
   return uVar2 & uVar1;
 }
 
@@ -103298,8 +104569,8 @@ uint __cdecl _Globals::FUN_00438920(int param_1)
   uint uVar1;
   uint uVar2;
   
-  uVar1 = CDSScript__ReadSubExpr(param_1);
-  uVar2 = CDSScript__ReadSubExpr(param_1);
+  uVar1 = CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
   return uVar2 | uVar1;
 }
 
@@ -103320,11 +104591,11 @@ undefined4 * __cdecl _Globals::FUN_00438960(int param_1)
   puStack_8 = &LAB_0047a57b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  puVar1 = (undefined *)CDSScript__ReadSubExpr(param_1);
+  puVar1 = (undefined *)CDSScript::ReadSubExpr(param_1);
   this = (CDSEasyMemStream *)FUN_00447c42(0x2c);
   local_4 = 0;
   if (this != (CDSEasyMemStream *)0x0) {
-    uVar2 = CDSScript__ReadSubExpr(param_1);
+    uVar2 = CDSScript::ReadSubExpr(param_1);
     puVar3 = CDSEasyMemStream::FUN_00409170(this,puVar1,uVar2);
     if (puVar3 != (undefined4 *)0x0) {
       ExceptionList = local_c;
@@ -103367,7 +104638,7 @@ void __thiscall _Globals::FUN_00438b30(void *this,undefined4 param_1,int param_2
   *(undefined4 *)((int)this + 8) = param_1;
   local_1c = this;
   local_18 = local_44;
-  local_30 = CDSScript__ReadU8((int)this);
+  local_30 = CDSScript::ReadU8((int)this);
   local_30 = local_30 & 0xff;
   puVar1 = (uint *)0x0;
   local_2c = param_2;
@@ -103386,7 +104657,7 @@ void __thiscall _Globals::FUN_00438b30(void *this,undefined4 param_1,int param_2
   local_8 = 0;
   *(undefined1 *)((int)this + 0x24) = 0;
   while (*(char *)((int)this + 0x24) == '\0') {
-    CDSScript__ReadSubExpr((int)this);
+    CDSScript::ReadSubExpr((int)this);
   }
   *(undefined4 *)((int)this + 0x42c) = local_20;
   *(undefined4 *)((int)this + 8) = local_34;
@@ -103416,15 +104687,14 @@ void _Globals::Catch_00438bef(void)
 // OnSlotPlaced/OnSlotDisplaced/OnTimer/OnEnter/OnLeave/OnNetCustom/OnGameStart
 // (slots 1..10). See tools/bulanci_unpack/ghidra_analysis/script_lifecycle.md.
 
-undefined4 __thiscall
-_Globals::CDSScript__CallExport(void *this,int param_1,int param_2,void *param_3)
+undefined4 __thiscall CDSScript::CallExport(CDSScript *this,int param_1,int param_2,void *param_3)
 
 {
   undefined4 uVar1;
   
-  if ((-1 < param_1) && (param_1 < *(int *)((int)this + 0x1c))) {
-    uVar1 = FUN_00438b30(this,*(undefined4 *)(*(int *)((int)this + 0x20) + param_1 * 4),param_2,
-                         param_3);
+  if ((-1 < param_1) && (param_1 < *(int *)(this + 0x1c))) {
+    uVar1 = _Globals::FUN_00438b30
+                      (this,*(undefined4 *)(*(int *)(this + 0x20) + param_1 * 4),param_2,param_3);
     return uVar1;
   }
   return 0;
@@ -103451,8 +104721,8 @@ int __cdecl _Globals::FUN_00438cb0(int param_1)
   int iVar2;
   int iVar3;
   
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  iVar2 = CDSScript__ReadSubExpr(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
   iVar3 = Runtime::MSVCRT::_rand();
   iVar3 = iVar3 * ((iVar2 - iVar1) + 1);
   return ((int)(iVar3 + (iVar3 >> 0x1f & 0x7fffU)) >> 0xf) + iVar1;
@@ -103466,8 +104736,8 @@ int __cdecl _Globals::FUN_00438cf0(int param_1)
   int iVar1;
   int iVar2;
   
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  iVar2 = CDSScript__ReadSubExpr(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
   return iVar2 + iVar1;
 }
 
@@ -103479,8 +104749,8 @@ int __cdecl _Globals::FUN_00438d30(int param_1)
   int iVar1;
   int iVar2;
   
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  iVar2 = CDSScript__ReadSubExpr(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
   return iVar2 * iVar1;
 }
 
@@ -103492,8 +104762,8 @@ int __cdecl _Globals::FUN_00438d50(int param_1)
   int iVar1;
   int iVar2;
   
-  iVar1 = CDSScript__ReadSubExpr(param_1);
-  iVar2 = CDSScript__ReadSubExpr(param_1);
+  iVar1 = CDSScript::ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
   return iVar1 / iVar2;
 }
 
@@ -106420,16 +107690,17 @@ void __thiscall CDSWavStream::FUN_0043bb50(CDSWavStream *this,int *param_1)
 
 
 void __thiscall
-CMovieView::FUN_0043bba0(CMovieView *this,int *param_1,int *param_2,uint param_3,undefined *param_4)
+CDSAudioVideoPlayer::SetupTrack
+          (CDSAudioVideoPlayer *this,int *param_1,int *param_2,uint param_3,undefined *param_4)
 
 {
-  CMovieView *this_00;
+  CDSAudioVideoPlayer *this_00;
   
   _Globals::FUN_0043a760(*(void **)(this + 4),param_1,0,param_3,param_4);
   this_00 = this + 8;
   _Globals::AddTrackSource(this_00,param_2);
-  this[0x3d] = (CMovieView)0x1;
-  *(CMovieView **)(*(int *)(this + 4) + 0x10) = this_00;
+  this[0x3d] = (CDSAudioVideoPlayer)0x1;
+  *(CDSAudioVideoPlayer **)(*(int *)(this + 4) + 0x10) = this_00;
   _Globals::SetCurrentTrack(this_00,0,'\x01');
   _Globals::TM_AdvanceFrame((int)this_00);
   return;
@@ -106437,7 +107708,7 @@ CMovieView::FUN_0043bba0(CMovieView *this,int *param_1,int *param_2,uint param_3
 
 
 
-void __thiscall CMovieView::FUN_0043bbf0(CMovieView *this,undefined1 param_1)
+void __thiscall CDSAudioVideoPlayer::Play(CDSAudioVideoPlayer *this,undefined1 param_1)
 
 {
   _Globals::FUN_0043a9d0(*(void **)(this + 4),param_1);
@@ -106491,7 +107762,7 @@ undefined * CDSAudioVideoPlayer::FUN_0043bc90(void)
 
 
 
-undefined4 * __fastcall CDSAudioVideoPlayer::FUN_0043bca0(undefined4 *param_1)
+undefined4 * __fastcall CDSAudioVideoPlayer::Constructor(undefined4 *param_1)
 
 {
   uint uVar1;
@@ -106568,7 +107839,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x50);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CDSAudioVideoPlayer::FUN_0043bca0(puVar1);
+    puVar1 = CDSAudioVideoPlayer::Constructor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -106632,6 +107903,15 @@ void __fastcall _Globals::FUN_0043be90(int param_1)
 
 
 
+// IDSStream slot 7 -- CDSQueueStream::GetSize : longlong.
+// Null queue (this+0x10) -> errno 8.  Falls through with no explicit
+// return value -- the calling convention leaves EAX:EDX uninitialised,
+// so callers treat the return as 'unknown size' (queue streams are not
+// seekable in size).  Ghidra renders this as `void` because the
+// function has no STR instruction; the IDSStream contract expects
+// longlong so the caller's EAX:EDX is the size field at this+0x18
+// (set by the caller via SetSize).
+
 void __fastcall CDSQueueStream::GetSize(uint param_1)
 
 {
@@ -106644,6 +107924,12 @@ void __fastcall CDSQueueStream::GetSize(uint param_1)
 
 
 
+// IDSStream slot 8 -- CDSQueueStream::TellPosition : longlong.
+// Null queue -> errno 8.  Like GetSize, leaves EAX:EDX uninitialised.
+// IDSStream callers reading this expect the local cursor at this+0x1c
+// to have been stashed in EAX before the call (matched MSVC8 leaks the
+// fast-call path's argument register through to the result).
+
 void __fastcall CDSQueueStream::TellPosition(uint param_1)
 
 {
@@ -106655,6 +107941,15 @@ void __fastcall CDSQueueStream::TellPosition(uint param_1)
 }
 
 
+
+// IDSStream slot 9 -- CDSQueueStream::SetStreamSize(sizeLo, sizeHi).
+// Null queue -> errno 8.
+// (sizeLo & sizeHi) == -1 means 'truncate to cursor': replaces sizeLo
+// with the local cursor (this+0x1c).
+// Guards: queue.head (queue+0x4) + sizeLo must fit inside queue.capacity
+// (queue+0x10), else errno 4.
+// Writes the new size at this+0x18, then clamps cursor at this+0x1c
+// if it exceeded the new size.
 
 void __thiscall CDSQueueStream::SetStreamSize(CDSQueueStream *this,uint param_1,uint param_2)
 
@@ -106680,6 +107975,14 @@ void __thiscall CDSQueueStream::SetStreamSize(CDSQueueStream *this,uint param_1,
 }
 
 
+
+// IDSStream slot 10 -- CDSQueueStream::SeekPosition(off, _, origin).
+// Null queue -> errno 8.
+// origin 0 (default): absolute (off remains).
+// origin 1 (relative): target = cursor (this+0x1c) + off.
+// origin 2 (end-relative): target = used (this+0x18) - off.
+// Must satisfy 0 <= target <= used, else errno 3.
+// Updates the local cursor at this+0x1c.
 
 void __thiscall
 CDSQueueStream::SeekPosition(CDSQueueStream *this,int param_1,undefined4 param_2,int param_3)
@@ -106707,6 +108010,17 @@ CDSQueueStream::SeekPosition(CDSQueueStream *this,int param_1,undefined4 param_2
 
 
 
+// IDSStream slot 11 -- LockRegion (shared no-op-throw thunk).
+// Used by CDSGZipStream and CDSQueueStream (and by extension every
+// class that derives from CDSFilterStream and doesn't override Lock).
+// Forwards to CDSFilterStream::RaiseUnsupportedOperation(this, 5) which
+// throws CDSStreamException errno 5.
+// 
+// Ghidra mis-attributes this to CDSGZipStream because it's the first
+// stream class in the linker order whose vftable references it; in the
+// IDSStream contract the symbol belongs to whichever vftable points to
+// it (vftable[0x2c/4 = slot 11]).
+
 void __fastcall CDSGZipStream::FUN_0043bff0(void *param_1)
 
 {
@@ -106715,6 +108029,20 @@ void __fastcall CDSGZipStream::FUN_0043bff0(void *param_1)
 }
 
 
+
+// IDSStream slot 4 -- CDSQueueStream::ReadBytes(buf, count).
+// CDSQueueStream puts the IDSStream subobject at outer+0x4 (not the
+// common +0xc), so the null-guard idiom here is `(this != 4)` instead
+// of `(this != 0xc)` -- watch for this when matching by eye.
+// 
+// CDSMemQueue* lives at this+0x10; its capacity is queue+0xc, head
+// offset is queue+0x4, base pointer is queue+0x1c.  Local read cursor
+// in BYTES is at this+0x1c, total used bytes at this+0x18.
+// 
+// Null queue -> errno 8.  cursor + count > used -> errno 1.
+// Reads wrap around the ring: computes (head + base + cursor) then
+// subtracts capacity if it exceeds it, then copies `min(count, capacity
+// - ring_off)` per iteration via Runtime::MSVCRT::_memcpy.
 
 void __thiscall CDSQueueStream::ReadBytes(CDSQueueStream *this,void *param_1,void *param_2)
 
@@ -106769,6 +108097,14 @@ void __thiscall CDSQueueStream::ReadBytes(CDSQueueStream *this,void *param_1,voi
 
 
 
+// IDSStream slot 5 -- CDSQueueStream::WriteBytes(buf, count).
+// Mirror of ReadBytes (same ring-buffer math, same wrap logic).
+// Uses the same CDSMemQueue* at this+0x10 and the same cursor/used
+// fields at this+0x1c / this+0x18.
+// Null queue -> errno 8.  cursor + count > used -> errno 2.
+// WriteBytes does NOT bump `used` -- that's a queue invariant kept by
+// the queue producer (out-of-band of this slot).
+
 void __thiscall CDSQueueStream::WriteBytes(CDSQueueStream *this,void *param_1,void *param_2)
 
 {
@@ -106821,6 +108157,10 @@ void __thiscall CDSQueueStream::WriteBytes(CDSQueueStream *this,void *param_1,vo
 }
 
 
+
+// IDSStream slot 13 -- CDSQueueStream::GetStreamName(wstring* out).
+// Nulls *out then writes the literal wide string L"QueueStream" via
+// CBulanci::FUN_0042d510 (the project-wide wstring assign helper).
 
 undefined4 * CDSQueueStream::GetStreamName(undefined4 *param_1)
 
@@ -116005,7 +117345,7 @@ void __fastcall CDSMpx::ResetDecoderState(int param_1)
 {
   FUN_004567b0((int *)(param_1 + 4));
   mad_frame_init((uint *)(param_1 + 0x44));
-  InitSynthState(param_1 + 0x2478);
+  mad_synth_init((int *)(param_1 + 0x2478));
   FUN_00456820((int *)(param_1 + 4),param_1 + 0x58bc,0);
   return;
 }
@@ -116015,7 +117355,7 @@ void __fastcall CDSMpx::ResetDecoderState(int param_1)
 void __fastcall _Globals::FUN_00446620(int param_1)
 
 {
-  FUN_00458f20(param_1 + 0x44);
+  mad_frame_finish((int *)(param_1 + 0x44));
   FUN_00456800(param_1 + 4);
   return;
 }
@@ -116394,6 +117734,11 @@ void __fastcall CDSSafeStream::FUN_00446c00(void *param_1)
 
 
 
+// IDSStream slot 6 -- CDSGZipStream::FlushStream.
+// Forwards to CDSFilterStream::RaiseUnsupportedOperation(this, 7) --
+// flushing a gzip stream mid-page isn't supported (the encoder is
+// page-oriented), so it throws CDSStreamException errno 7.
+
 void __fastcall CDSGZipStream::FlushStream(void *param_1)
 
 {
@@ -116402,6 +117747,11 @@ void __fastcall CDSGZipStream::FlushStream(void *param_1)
 }
 
 
+
+// IDSStream slot 9 -- CDSGZipStream::SetStreamSize.
+// Forwards to CDSFilterStream::RaiseUnsupportedOperation(this, 4) --
+// you cannot truncate or extend a gzip stream after the fact; throws
+// CDSStreamException errno 4.
 
 void __fastcall CDSGZipStream::SetStreamSize(void *param_1)
 
@@ -133614,33 +134964,33 @@ undefined4 __cdecl CDSMpx::mad_stream_sync(int param_1)
 
 
 
-void __cdecl CDSMpx::FUN_004568b0(int param_1)
+void __cdecl CDSMpx::mad_synth_mute(int *synth)
 
 {
-  undefined4 *puVar1;
+  int *piVar1;
   int iVar2;
   int iVar3;
   int iVar4;
-  undefined4 *puVar5;
+  int *piVar5;
   
-  puVar5 = (undefined4 *)(param_1 + 0x400);
+  piVar5 = synth + 0x100;
   iVar3 = 2;
   do {
     iVar4 = 0x10;
-    puVar1 = puVar5;
+    piVar1 = piVar5;
     do {
       iVar2 = 8;
       do {
-        puVar1[0x80] = 0;
-        *puVar1 = 0;
-        puVar1[-0x80] = 0;
-        puVar1[-0x100] = 0;
-        puVar1 = puVar1 + 1;
+        piVar1[0x80] = 0;
+        *piVar1 = 0;
+        piVar1[-0x80] = 0;
+        piVar1[-0x100] = 0;
+        piVar1 = piVar1 + 1;
         iVar2 = iVar2 + -1;
       } while (iVar2 != 0);
       iVar4 = iVar4 + -1;
     } while (iVar4 != 0);
-    puVar5 = puVar5 + 0x200;
+    piVar5 = piVar5 + 0x200;
     iVar3 = iVar3 + -1;
   } while (iVar3 != 0);
   return;
@@ -134591,14 +135941,14 @@ void __cdecl CDSMpx::DispatchLayerDecoder(int param_1,int *param_2)
 
 
 
-void __cdecl CDSMpx::InitSynthState(int param_1)
+void __cdecl CDSMpx::mad_synth_init(int *synth)
 
 {
-  FUN_004568b0(param_1);
-  *(undefined4 *)(param_1 + 0x1000) = 0;
-  *(undefined4 *)(param_1 + 0x1004) = 0;
-  *(undefined2 *)(param_1 + 0x1008) = 0;
-  *(undefined2 *)(param_1 + 0x100a) = 0;
+  mad_synth_mute(synth);
+  synth[0x400] = 0;
+  synth[0x401] = 0;
+  *(undefined2 *)(synth + 0x402) = 0;
+  *(undefined2 *)((int)synth + 0x100a) = 0;
   return;
 }
 
@@ -134624,12 +135974,12 @@ void __cdecl CDSMpx::mad_header_init(uint *param_1)
 
 
 
-void __cdecl _Globals::FUN_00458f20(int param_1)
+void __cdecl _Globals::mad_frame_finish(int *frame)
 
 {
-  if (*(void **)(param_1 + 0x2430) != (void *)0x0) {
-    Runtime::MSVCRT::_free(*(void **)(param_1 + 0x2430));
-    *(undefined4 *)(param_1 + 0x2430) = 0;
+  if ((void *)frame[0x90c] != (void *)0x0) {
+    Runtime::MSVCRT::_free((void *)frame[0x90c]);
+    frame[0x90c] = 0;
   }
   return;
 }
@@ -137039,7 +138389,7 @@ LAB_0045be08:
 // Feeds 32-band synthesis (PolyphaseSynthDct32) via the same per-channel
 // scratch as L1 / L2 (this+0x3484 / this+0x4684).
 
-void __cdecl CDSMpx__mad_layer_III(int param_1,int param_2)
+void __cdecl CDSMpx::mad_layer_III(int param_1,int param_2)
 
 {
   int *piVar1;
@@ -137092,15 +138442,15 @@ LAB_0045c14c:
     iVar5 = (uint)(local_10c != 1) * 8 + 9;
   }
   piVar1 = (int *)(param_1 + 0x1c);
-  iVar3 = CDSMpx::mad_bit_nextbyte(piVar1);
+  iVar3 = mad_bit_nextbyte(piVar1);
   if (*(int *)(param_1 + 0x18) - iVar3 < iVar5) {
     *(undefined4 *)(param_1 + 0x3c) = 0x231;
     *(undefined4 *)(param_1 + 0x34) = 0;
   }
   else {
     if ((*(byte *)(param_2 + 0x1c) & 0x10) != 0) {
-      uVar4 = CDSMpx::mad_bit_crc(*piVar1,*(undefined4 *)(param_1 + 0x20),iVar5 * 8,
-                                  *(ushort *)(param_2 + 0x18));
+      uVar4 = mad_bit_crc(*piVar1,*(undefined4 *)(param_1 + 0x20),iVar5 * 8,
+                          *(ushort *)(param_2 + 0x18));
       *(short *)(param_2 + 0x18) = (short)uVar4;
       if (((short)uVar4 != *(short *)(param_2 + 0x1a)) && ((*(byte *)(param_2 + 0x2c) & 1) == 0)) {
         *(undefined4 *)(param_1 + 0x3c) = 0x201;
@@ -137115,15 +138465,15 @@ LAB_0045c14c:
     }
     *(uint *)(param_2 + 0x1c) = *(uint *)(param_2 + 0x1c) | local_120;
     *(uint *)(param_2 + 0x20) = *(uint *)(param_2 + 0x20) | local_f4;
-    CDSMpx::mad_bit_init(local_104,*(uint *)(param_1 + 0x18));
-    uVar6 = CDSMpx::mad_bit_read((int *)local_104,0x20);
+    mad_bit_init(local_104,*(uint *)(param_1 + 0x18));
+    uVar6 = mad_bit_read((int *)local_104,0x20);
     if ((uVar6 & 0xffe60000) == 0xffe20000) {
       if ((uVar6 & 0x10000) == 0) {
-        CDSMpx::mad_bit_skip((int *)local_104,0x10);
+        mad_bit_skip((int *)local_104,0x10);
       }
-      local_118 = CDSMpx::mad_bit_read((int *)local_104,(uVar6 & 0x80000 | 0x400000) >> 0x13);
+      local_118 = mad_bit_read((int *)local_104,(uVar6 & 0x80000 | 0x400000) >> 0x13);
     }
-    iVar5 = CDSMpx::mad_bit_nextbyte(piVar1);
+    iVar5 = mad_bit_nextbyte(piVar1);
     uVar6 = local_f8;
     local_120 = *(int *)(param_1 + 0x18) - iVar5;
     if (local_f8 + local_120 < local_118) {
@@ -137144,12 +138494,11 @@ LAB_0045c14c:
       }
     }
     else {
-      CDSMpx::mad_bit_init
-                (&local_114,(*(uint *)(param_1 + 0x34) - local_f8) + *(int *)(param_1 + 0x30));
+      mad_bit_init(&local_114,(*(uint *)(param_1 + 0x34) - local_f8) + *(int *)(param_1 + 0x30));
       if (uVar6 < uVar8) {
         uVar7 = uVar8 - uVar6;
         _Size = uVar7;
-        pvVar2 = (void *)CDSMpx::mad_bit_nextbyte((int *)(param_1 + 0x1c));
+        pvVar2 = (void *)mad_bit_nextbyte((int *)(param_1 + 0x1c));
         Runtime::MSVCRT::_memcpy
                   ((void *)(*(int *)(param_1 + 0x34) + *(int *)(param_1 + 0x30)),pvVar2,_Size);
         *(int *)(param_1 + 0x34) = *(int *)(param_1 + 0x34) + uVar7;
@@ -137231,7 +138580,7 @@ uint CDSMpx::mad_layer_I_sample(void)
 // samples per subband, 32 subbands. Optional CRC check after allocation
 // decode.
 
-void __cdecl CDSMpx__mad_layer_I(int param_1,int param_2)
+void __cdecl CDSMpx::mad_layer_I(int param_1,int param_2)
 
 {
   char cVar1;
@@ -137272,8 +138621,8 @@ void __cdecl CDSMpx__mad_layer_I(int param_1,int param_2)
   uVar3 = local_a4;
   local_98 = uVar6;
   if ((*(byte *)(param_2 + 0x1c) & 0x10) != 0) {
-    uVar2 = CDSMpx::mad_bit_crc(*(undefined4 *)(param_1 + 0x1c),*(undefined4 *)(param_1 + 0x20),
-                                uVar12 * local_a4 * 4 + 0x80,*(ushort *)(param_2 + 0x18));
+    uVar2 = mad_bit_crc(*(undefined4 *)(param_1 + 0x1c),*(undefined4 *)(param_1 + 0x20),
+                        uVar12 * local_a4 * 4 + 0x80,*(ushort *)(param_2 + 0x18));
     *(short *)(param_2 + 0x18) = (short)uVar2;
     if (((short)uVar2 != *(short *)(param_2 + 0x1a)) && ((*(byte *)(param_2 + 0x2c) & 1) == 0)) {
       *(undefined4 *)(param_1 + 0x3c) = 0x201;
@@ -137288,7 +138637,7 @@ void __cdecl CDSMpx__mad_layer_I(int param_1,int param_2)
         piVar8 = (int *)(local_a0 + 0x1c);
         pcVar11 = local_84 + local_94;
         do {
-          uVar3 = CDSMpx::mad_bit_read(piVar8,4);
+          uVar3 = mad_bit_read(piVar8,4);
           if (uVar3 == 0xf) {
             *(undefined4 *)(local_a0 + 0x3c) = 0x211;
             goto LAB_0045c7ae;
@@ -137311,7 +138660,7 @@ void __cdecl CDSMpx__mad_layer_I(int param_1,int param_2)
   }
   if (uVar3 < 0x20) {
     do {
-      uVar12 = CDSMpx::mad_bit_read((int *)(param_1 + 0x1c),4);
+      uVar12 = mad_bit_read((int *)(param_1 + 0x1c),4);
       if (uVar12 == 0xf) {
         *(undefined4 *)(param_1 + 0x3c) = 0x211;
         goto LAB_0045c7ae;
@@ -137333,7 +138682,7 @@ void __cdecl CDSMpx__mad_layer_I(int param_1,int param_2)
   do {
     for (; uVar12 != 0; uVar12 = uVar12 - 1) {
       if (local_84[uVar3] != '\0') {
-        uVar4 = CDSMpx::mad_bit_read((int *)(local_a0 + 0x1c),6);
+        uVar4 = mad_bit_read((int *)(local_a0 + 0x1c),6);
         abStack_44[uVar3] = (byte)uVar4;
       }
       uVar3 = uVar3 + 0x20;
@@ -137361,7 +138710,7 @@ void __cdecl CDSMpx__mad_layer_I(int param_1,int param_2)
             }
             else {
               local_90 = g_anMadSfTable[abStack_44[uVar4]];
-              local_8c = CDSMpx::mad_layer_I_sample();
+              local_8c = mad_layer_I_sample();
               uVar6 = (uint)((longlong)(int)local_8c * (longlong)(int)local_90) >> 0x1c |
                       (int)((ulonglong)((longlong)(int)local_8c * (longlong)(int)local_90) >> 0x20)
                       << 4;
@@ -137393,7 +138742,7 @@ void __cdecl CDSMpx__mad_layer_I(int param_1,int param_2)
         }
       }
       else {
-        local_90 = CDSMpx::mad_layer_I_sample();
+        local_90 = mad_layer_I_sample();
         uVar6 = local_98;
         if (local_98 != 0) {
           pbVar7 = abStack_44 + uVar12;
@@ -137487,7 +138836,7 @@ void __cdecl CDSMpx::mad_layer_II_samples(uint *param_1)
 //      and store as Q1.31 in the subband-window scratch.
 //   6. Zero-pad subbands above the active count to 32.
 
-void __cdecl CDSMpx__mad_layer_II(char *param_1,int param_2)
+void __cdecl CDSMpx::mad_layer_II(char *param_1,int param_2)
 
 {
   byte bVar1;
@@ -137588,7 +138937,7 @@ LAB_0045c971:
       pbVar14 = local_144 + local_1a0;
       uVar15 = *(ushort *)(&DAT_0049c3fc + (uint)pbVar14[local_198] * 4);
       for (iVar10 = local_19c; iVar10 != 0; iVar10 = iVar10 + -1) {
-        uVar4 = CDSMpx::mad_bit_read(piVar11,(uint)uVar15);
+        uVar4 = mad_bit_read(piVar11,(uint)uVar15);
         *pbVar14 = (byte)uVar4;
         pbVar14 = pbVar14 + 0x20;
       }
@@ -137599,9 +138948,8 @@ LAB_0045c971:
     iVar10 = (int)local_184 - (int)local_124;
     uVar4 = local_18c;
     do {
-      uVar3 = CDSMpx::mad_bit_read
-                        (piVar11,(uint)*(ushort *)
-                                        (&DAT_0049c3fc + (uint)(local_124 + uVar4)[iVar10] * 4));
+      uVar3 = mad_bit_read(piVar11,(uint)*(ushort *)
+                                          (&DAT_0049c3fc + (uint)(local_124 + uVar4)[iVar10] * 4));
       uVar13 = uVar4 + 1;
       local_124[uVar4] = (byte)uVar3;
       local_144[uVar4] = (byte)uVar3;
@@ -137615,7 +138963,7 @@ LAB_0045c971:
     do {
       for (; iVar10 != 0; iVar10 = iVar10 + -1) {
         if (local_144[uVar4] != 0) {
-          uVar13 = CDSMpx::mad_bit_read(piVar11,2);
+          uVar13 = mad_bit_read(piVar11,2);
           abStack_44[uVar4] = (byte)uVar13;
         }
         uVar4 = uVar4 + 0x20;
@@ -137628,8 +138976,8 @@ LAB_0045c971:
   iVar10 = local_17c;
   if ((*(byte *)(local_17c + 0x1c) & 0x10) != 0) {
     uVar15 = *(ushort *)(local_17c + 0x18);
-    uVar4 = CDSMpx::mad_bit_length(&local_16c,piVar11);
-    uVar5 = CDSMpx::mad_bit_crc(local_16c,local_168,uVar4,uVar15);
+    uVar4 = mad_bit_length(&local_16c,piVar11);
+    uVar5 = mad_bit_crc(local_16c,local_168,uVar4,uVar15);
     *(short *)(iVar10 + 0x18) = (short)uVar5;
     if (((short)uVar5 != *(short *)(iVar10 + 0x1a)) && ((*(byte *)(iVar10 + 0x2c) & 1) == 0)) {
       local_170[0x3c] = '\x01';
@@ -137649,17 +138997,17 @@ LAB_0045c971:
         uVar3 = local_1a0;
         do {
           if (local_144[uVar3] != 0) {
-            uVar13 = CDSMpx::mad_bit_read(local_178,6);
+            uVar13 = mad_bit_read(local_178,6);
             bVar1 = abStack_44[uVar3];
             bVar2 = (byte)uVar13;
             abStack_105[uVar4 + 1] = bVar2;
             switch((uint)bVar1) {
             case 0:
-              uVar13 = CDSMpx::mad_bit_read(local_178,6);
+              uVar13 = mad_bit_read(local_178,6);
               abStack_105[uVar4 + 2] = (byte)uVar13;
             case 1:
             case 3:
-              uVar13 = CDSMpx::mad_bit_read(local_178,6);
+              uVar13 = mad_bit_read(local_178,6);
               bVar2 = (byte)uVar13;
               break;
             case 2:
@@ -137712,7 +139060,7 @@ switchD_0045cb8c_default:
               } while (iVar10 != 0);
             }
             else {
-              CDSMpx::mad_layer_II_samples(local_150);
+              mad_layer_II_samples(local_150);
               uVar4 = 0;
               bVar1 = abStack_105[(local_190 >> 2) + local_160 + 1];
               puVar6 = puVar12;
@@ -137765,7 +139113,7 @@ switchD_0045cb8c_default:
         }
         else {
           local_1a0 = uVar4;
-          CDSMpx::mad_layer_II_samples(local_150);
+          mad_layer_II_samples(local_150);
           if (local_19c != 0) {
             pbVar14 = abStack_105 + (local_190 >> 2) + local_188 + 1;
             puVar12 = (uint *)(local_17c + 0x30 + (local_174 + uVar4) * 4);
@@ -145521,6 +146869,14 @@ void __cdecl _Globals::FUN_00467340(int *param_1)
 
 
 
+// Shared no-op thunk used as IDSStream slot 6 (Flush) by
+// CDSEasyMemStream and CDSQueueStream.  Ghidra attributes the symbol
+// to CDSApp::CDSApp_PreCreateHook because that's the first class whose
+// vftable references it; in reality this is just `return;` and the
+// linker dedupes every class-method body that's identical to it.
+// 
+// Memory and queue streams don't buffer anything, so Flush is a no-op.
+
 void __thiscall CDSApp::CDSApp_PreCreateHook(CDSApp *this)
 
 {
@@ -149380,7 +150736,7 @@ void __cdecl _Globals::FUN_0046e320(int param_1)
 
 
 
-undefined4 __cdecl _Globals::zlib__inflateReset(int param_1)
+undefined4 __cdecl zlib::inflateReset(int param_1)
 
 {
   uint *puVar1;
@@ -149390,7 +150746,7 @@ undefined4 __cdecl _Globals::zlib__inflateReset(int param_1)
     *(undefined4 *)(param_1 + 8) = 0;
     *(undefined4 *)(param_1 + 0x18) = 0;
     *puVar1 = -(uint)(puVar1[3] != 0) & 7;
-    zlib__inflate_blocks_reset(*(int **)(*(int *)(param_1 + 0x1c) + 0x14),param_1,(int *)0x0);
+    inflate_blocks_reset(*(int **)(*(int *)(param_1 + 0x1c) + 0x14),param_1,(int *)0x0);
     return 0;
   }
   return 0xfffffffe;
@@ -149398,7 +150754,7 @@ undefined4 __cdecl _Globals::zlib__inflateReset(int param_1)
 
 
 
-undefined4 __cdecl _Globals::zlib__inflateEnd(int param_1)
+undefined4 __cdecl zlib::inflateEnd(int param_1)
 
 {
   int *piVar1;
@@ -149406,7 +150762,7 @@ undefined4 __cdecl _Globals::zlib__inflateEnd(int param_1)
   if (((param_1 != 0) && (*(int *)(param_1 + 0x1c) != 0)) && (*(int *)(param_1 + 0x24) != 0)) {
     piVar1 = *(int **)(*(int *)(param_1 + 0x1c) + 0x14);
     if (piVar1 != (int *)0x0) {
-      zlib__inflate_blocks_free(piVar1,param_1);
+      inflate_blocks_free(piVar1,param_1);
     }
     (**(code **)(param_1 + 0x24))(*(undefined4 *)(param_1 + 0x28),*(undefined4 *)(param_1 + 0x1c));
     *(undefined4 *)(param_1 + 0x1c) = 0;
@@ -149417,7 +150773,7 @@ undefined4 __cdecl _Globals::zlib__inflateEnd(int param_1)
 
 
 
-undefined4 __cdecl _Globals::zlib__inflateInit2_(int param_1,int param_2,char *param_3,int param_4)
+undefined4 __cdecl zlib::inflateInit2_(int param_1,int param_2,char *param_3,int param_4)
 
 {
   int iVar1;
@@ -149431,7 +150787,7 @@ undefined4 __cdecl _Globals::zlib__inflateInit2_(int param_1,int param_2,char *p
   }
   *(undefined4 *)(param_1 + 0x18) = 0;
   if (*(int *)(param_1 + 0x20) == 0) {
-    *(code **)(param_1 + 0x20) = zlib__zcalloc;
+    *(code **)(param_1 + 0x20) = zcalloc;
     *(undefined4 *)(param_1 + 0x28) = 0;
   }
   if (*(int *)(param_1 + 0x24) == 0) {
@@ -149447,35 +150803,36 @@ undefined4 __cdecl _Globals::zlib__inflateInit2_(int param_1,int param_2,char *p
       *(undefined4 *)(*(int *)(param_1 + 0x1c) + 0xc) = 1;
     }
     if (7 < param_2 - 8U) {
-      zlib__inflateEnd(param_1);
+      inflateEnd(param_1);
       return 0xfffffffe;
     }
     *(int *)(*(int *)(param_1 + 0x1c) + 0x10) = param_2;
-    piVar2 = zlib__inflate_blocks_new
-                       (param_1,~-(uint)(*(int *)(*(int *)(param_1 + 0x1c) + 0xc) != 0) & 0x471120,
-                        1 << ((byte)param_2 & 0x1f));
+    piVar2 = inflate_blocks_new(param_1,~-(uint)(*(int *)(*(int *)(param_1 + 0x1c) + 0xc) != 0) &
+                                        0x471120,1 << ((byte)param_2 & 0x1f));
     *(int **)(*(int *)(param_1 + 0x1c) + 0x14) = piVar2;
     if (*(int *)(*(int *)(param_1 + 0x1c) + 0x14) != 0) {
-      zlib__inflateReset(param_1);
+      inflateReset(param_1);
       return 0;
     }
-    zlib__inflateEnd(param_1);
+    inflateEnd(param_1);
   }
   return 0xfffffffc;
 }
 
 
 
-void __cdecl _Globals::zlib__inflateInit_(int param_1,char *param_2,int param_3)
+uint __cdecl zlib::inflateInit_(int z,char *version,int stream_size)
 
 {
-  zlib__inflateInit2_(param_1,0xf,param_2,param_3);
-  return;
+  uint uVar1;
+  
+  uVar1 = inflateInit2_(z,0xf,version,stream_size);
+  return uVar1;
 }
 
 
 
-uint __cdecl _Globals::zlib__inflate(int *param_1,int param_2)
+uint __cdecl zlib::inflate(int *strm,int flush)
 
 {
   byte bVar1;
@@ -149485,27 +150842,27 @@ uint __cdecl _Globals::zlib__inflate(int *param_1,int param_2)
   uint uVar5;
   uint uVar6;
   
-  if (((param_1 == (int *)0x0) || ((uint *)param_1[7] == (uint *)0x0)) || (*param_1 == 0)) {
+  if (((strm == (int *)0x0) || ((uint *)strm[7] == (uint *)0x0)) || (*strm == 0)) {
     return 0xfffffffe;
   }
-  uVar4 = *(uint *)param_1[7];
+  uVar4 = *(uint *)strm[7];
   uVar6 = 0xfffffffb;
-  uVar5 = (param_2 != 4) - 1 & 0xfffffffb;
+  uVar5 = (flush != 4) - 1 & 0xfffffffb;
   if (0xd < uVar4) {
     return 0xfffffffe;
   }
   do {
     switch((&switchD_0046efc4::switchdataD_0046f324)[uVar4]) {
     case (undefined *)0x46efcb:
-      if (param_1[1] == 0) {
+      if (strm[1] == 0) {
         return uVar6;
       }
-      param_1[2] = param_1[2] + 1;
-      param_1[1] = param_1[1] + -1;
-      *(uint *)(param_1[7] + 4) = (uint)*(byte *)*param_1;
-      puVar3 = (undefined4 *)param_1[7];
+      strm[2] = strm[2] + 1;
+      strm[1] = strm[1] + -1;
+      *(uint *)(strm[7] + 4) = (uint)*(byte *)*strm;
+      puVar3 = (undefined4 *)strm[7];
       uVar2 = puVar3[1];
-      *param_1 = *param_1 + 1;
+      *strm = *strm + 1;
       if (((byte)uVar2 & 0xf) == 8) {
         if (((uint)puVar3[1] >> 4) + 8 <= (uint)puVar3[4]) {
           *puVar3 = 1;
@@ -149513,30 +150870,30 @@ uint __cdecl _Globals::zlib__inflate(int *param_1,int param_2)
           goto switchD_0046efc4_caseD_46f036;
         }
         *puVar3 = 0xd;
-        param_1[6] = (int)"invalid window size";
+        strm[6] = (int)"invalid window size";
       }
       else {
         *puVar3 = 0xd;
-        param_1[6] = (int)"unknown compression method";
+        strm[6] = (int)"unknown compression method";
       }
       goto LAB_0046f1df;
     case (undefined *)0x46f036:
 switchD_0046efc4_caseD_46f036:
-      if (param_1[1] == 0) {
+      if (strm[1] == 0) {
         return uVar6;
       }
-      param_1[2] = param_1[2] + 1;
-      puVar3 = (undefined4 *)param_1[7];
-      param_1[1] = param_1[1] + -1;
-      bVar1 = *(byte *)*param_1;
-      *param_1 = (int)((byte *)*param_1 + 1);
+      strm[2] = strm[2] + 1;
+      puVar3 = (undefined4 *)strm[7];
+      strm[1] = strm[1] + -1;
+      bVar1 = *(byte *)*strm;
+      *strm = (int)((byte *)*strm + 1);
       if ((puVar3[1] * 0x100 + (uint)bVar1) % 0x1f != 0) {
         *puVar3 = 0xd;
-        param_1[6] = (int)"incorrect header check";
+        strm[6] = (int)"incorrect header check";
         goto LAB_0046f1df;
       }
       if ((bVar1 & 0x20) != 0) {
-        *(undefined4 *)param_1[7] = 2;
+        *(undefined4 *)strm[7] = 2;
         uVar6 = uVar5;
         goto switchD_0046efc4_caseD_46f20a;
       }
@@ -149544,10 +150901,10 @@ switchD_0046efc4_caseD_46f036:
       uVar6 = uVar5;
       break;
     case (undefined *)0x46f09d:
-      uVar4 = zlib__inflate_blocks(*(uint **)(param_1[7] + 0x14),param_1,uVar6);
+      uVar4 = inflate_blocks(*(uint **)(strm[7] + 0x14),strm,uVar6);
       if (uVar4 == 0xfffffffd) {
-        *(undefined4 *)param_1[7] = 0xd;
-        *(undefined4 *)(param_1[7] + 4) = 0;
+        *(undefined4 *)strm[7] = 0xd;
+        *(undefined4 *)(strm[7] + 4) = 0;
         uVar6 = 0xfffffffd;
       }
       else {
@@ -149557,9 +150914,8 @@ switchD_0046efc4_caseD_46f036:
         if (uVar4 != 1) {
           return uVar4;
         }
-        zlib__inflate_blocks_reset
-                  (*(int **)(param_1[7] + 0x14),(int)param_1,(int *)(param_1[7] + 4));
-        puVar3 = (undefined4 *)param_1[7];
+        inflate_blocks_reset(*(int **)(strm[7] + 0x14),(int)strm,(int *)(strm[7] + 4));
+        puVar3 = (undefined4 *)strm[7];
         if (puVar3[3] == 0) {
           *puVar3 = 8;
           uVar6 = uVar5;
@@ -149571,53 +150927,53 @@ switchD_0046efc4_caseD_46f036:
       break;
     case (undefined *)0x46f10b:
 switchD_0046efc4_caseD_46f10b:
-      if (param_1[1] == 0) {
+      if (strm[1] == 0) {
         return uVar6;
       }
-      param_1[2] = param_1[2] + 1;
-      param_1[1] = param_1[1] + -1;
-      *(uint *)(param_1[7] + 8) = (uint)*(byte *)*param_1 << 0x18;
-      *param_1 = *param_1 + 1;
-      *(undefined4 *)param_1[7] = 9;
+      strm[2] = strm[2] + 1;
+      strm[1] = strm[1] + -1;
+      *(uint *)(strm[7] + 8) = (uint)*(byte *)*strm << 0x18;
+      *strm = *strm + 1;
+      *(undefined4 *)strm[7] = 9;
       uVar6 = uVar5;
     case (undefined *)0x46f13c:
-      if (param_1[1] == 0) {
+      if (strm[1] == 0) {
         return uVar6;
       }
-      param_1[2] = param_1[2] + 1;
-      param_1[1] = param_1[1] + -1;
-      *(int *)(param_1[7] + 8) = *(int *)(param_1[7] + 8) + (uint)*(byte *)*param_1 * 0x10000;
-      *param_1 = *param_1 + 1;
-      *(undefined4 *)param_1[7] = 10;
+      strm[2] = strm[2] + 1;
+      strm[1] = strm[1] + -1;
+      *(int *)(strm[7] + 8) = *(int *)(strm[7] + 8) + (uint)*(byte *)*strm * 0x10000;
+      *strm = *strm + 1;
+      *(undefined4 *)strm[7] = 10;
       uVar6 = uVar5;
 switchD_0046efc4_caseD_46f16d:
-      if (param_1[1] == 0) {
+      if (strm[1] == 0) {
         return uVar6;
       }
-      param_1[2] = param_1[2] + 1;
-      param_1[1] = param_1[1] + -1;
-      *(int *)(param_1[7] + 8) = *(int *)(param_1[7] + 8) + (uint)*(byte *)*param_1 * 0x100;
-      *param_1 = *param_1 + 1;
-      *(undefined4 *)param_1[7] = 0xb;
+      strm[2] = strm[2] + 1;
+      strm[1] = strm[1] + -1;
+      *(int *)(strm[7] + 8) = *(int *)(strm[7] + 8) + (uint)*(byte *)*strm * 0x100;
+      *strm = *strm + 1;
+      *(undefined4 *)strm[7] = 0xb;
       uVar6 = uVar5;
 switchD_0046efc4_caseD_46f19e:
-      if (param_1[1] == 0) {
+      if (strm[1] == 0) {
         return uVar6;
       }
-      param_1[2] = param_1[2] + 1;
-      param_1[1] = param_1[1] + -1;
-      *(int *)(param_1[7] + 8) = *(int *)(param_1[7] + 8) + (uint)*(byte *)*param_1;
-      puVar3 = (undefined4 *)param_1[7];
-      *param_1 = *param_1 + 1;
+      strm[2] = strm[2] + 1;
+      strm[1] = strm[1] + -1;
+      *(int *)(strm[7] + 8) = *(int *)(strm[7] + 8) + (uint)*(byte *)*strm;
+      puVar3 = (undefined4 *)strm[7];
+      *strm = *strm + 1;
       if (puVar3[1] == puVar3[2]) {
-        *(undefined4 *)param_1[7] = 0xc;
+        *(undefined4 *)strm[7] = 0xc;
 switchD_0046efc4_caseD_46f309:
         return 1;
       }
       *puVar3 = 0xd;
-      param_1[6] = (int)"incorrect data check";
+      strm[6] = (int)"incorrect data check";
 LAB_0046f1df:
-      *(undefined4 *)(param_1[7] + 4) = 5;
+      *(undefined4 *)(strm[7] + 4) = 5;
       uVar6 = uVar5;
       break;
     case (undefined *)0x46f16d:
@@ -149626,39 +150982,39 @@ LAB_0046f1df:
       goto switchD_0046efc4_caseD_46f19e;
     case (undefined *)0x46f20a:
 switchD_0046efc4_caseD_46f20a:
-      if (param_1[1] == 0) {
+      if (strm[1] == 0) {
         return uVar6;
       }
-      param_1[2] = param_1[2] + 1;
-      param_1[1] = param_1[1] + -1;
-      *(uint *)(param_1[7] + 8) = (uint)*(byte *)*param_1 << 0x18;
-      *param_1 = *param_1 + 1;
-      *(undefined4 *)param_1[7] = 3;
+      strm[2] = strm[2] + 1;
+      strm[1] = strm[1] + -1;
+      *(uint *)(strm[7] + 8) = (uint)*(byte *)*strm << 0x18;
+      *strm = *strm + 1;
+      *(undefined4 *)strm[7] = 3;
       uVar6 = uVar5;
     case (undefined *)0x46f23b:
-      if (param_1[1] != 0) {
-        param_1[2] = param_1[2] + 1;
-        param_1[1] = param_1[1] + -1;
-        *(int *)(param_1[7] + 8) = *(int *)(param_1[7] + 8) + (uint)*(byte *)*param_1 * 0x10000;
-        *param_1 = *param_1 + 1;
-        *(undefined4 *)param_1[7] = 4;
+      if (strm[1] != 0) {
+        strm[2] = strm[2] + 1;
+        strm[1] = strm[1] + -1;
+        *(int *)(strm[7] + 8) = *(int *)(strm[7] + 8) + (uint)*(byte *)*strm * 0x10000;
+        *strm = *strm + 1;
+        *(undefined4 *)strm[7] = 4;
         uVar6 = uVar5;
 switchD_0046efc4_caseD_46f26c:
-        if (param_1[1] != 0) {
-          param_1[2] = param_1[2] + 1;
-          param_1[1] = param_1[1] + -1;
-          *(int *)(param_1[7] + 8) = *(int *)(param_1[7] + 8) + (uint)*(byte *)*param_1 * 0x100;
-          *param_1 = *param_1 + 1;
-          *(undefined4 *)param_1[7] = 5;
+        if (strm[1] != 0) {
+          strm[2] = strm[2] + 1;
+          strm[1] = strm[1] + -1;
+          *(int *)(strm[7] + 8) = *(int *)(strm[7] + 8) + (uint)*(byte *)*strm * 0x100;
+          *strm = *strm + 1;
+          *(undefined4 *)strm[7] = 5;
           uVar6 = uVar5;
 switchD_0046efc4_caseD_46f29d:
-          if (param_1[1] != 0) {
-            param_1[2] = param_1[2] + 1;
-            param_1[1] = param_1[1] + -1;
-            *(int *)(param_1[7] + 8) = *(int *)(param_1[7] + 8) + (uint)*(byte *)*param_1;
-            *param_1 = *param_1 + 1;
-            param_1[0xc] = ((undefined4 *)param_1[7])[2];
-            *(undefined4 *)param_1[7] = 6;
+          if (strm[1] != 0) {
+            strm[2] = strm[2] + 1;
+            strm[1] = strm[1] + -1;
+            *(int *)(strm[7] + 8) = *(int *)(strm[7] + 8) + (uint)*(byte *)*strm;
+            *strm = *strm + 1;
+            strm[0xc] = ((undefined4 *)strm[7])[2];
+            *(undefined4 *)strm[7] = 6;
             return 2;
           }
         }
@@ -149669,16 +151025,16 @@ switchD_0046efc4_caseD_46f29d:
     case (undefined *)0x46f29d:
       goto switchD_0046efc4_caseD_46f29d;
     case (undefined *)0x46f2d5:
-      *(undefined4 *)param_1[7] = 0xd;
-      param_1[6] = (int)"need dictionary";
-      *(undefined4 *)(param_1[7] + 4) = 0;
+      *(undefined4 *)strm[7] = 0xd;
+      strm[6] = (int)"need dictionary";
+      *(undefined4 *)(strm[7] + 4) = 0;
       return 0xfffffffe;
     case (undefined *)0x46f309:
       goto switchD_0046efc4_caseD_46f309;
     case (undefined *)0x46f313:
       return 0xfffffffd;
     }
-    uVar4 = *(uint *)param_1[7];
+    uVar4 = *(uint *)strm[7];
     if (0xd < uVar4) {
       return 0xfffffffe;
     }
@@ -149733,29 +151089,29 @@ void _Globals::FUN_0046f390(void)
 
 
 
-uint __cdecl _Globals::zlib__deflate(int *param_1,uint param_2)
+uint __cdecl zlib::deflate(int *strm,uint flush)
 
 {
   undefined4 *puVar1;
   uint uVar2;
   int iVar3;
   
-  if (((param_1 == (int *)0x0) || (puVar1 = (undefined4 *)param_1[7], puVar1 == (undefined4 *)0x0))
-     || (4 < param_2)) {
+  if (((strm == (int *)0x0) || (puVar1 = (undefined4 *)strm[7], puVar1 == (undefined4 *)0x0)) ||
+     (4 < flush)) {
     return 0xfffffffe;
   }
-  if (((param_1[3] == 0) || ((*param_1 == 0 && (param_1[1] != 0)))) ||
-     ((puVar1[1] == 0x29a && (param_2 != 4)))) {
-    param_1[6] = (int)PTR_s_stream_error_004b2148;
+  if (((strm[3] == 0) || ((*strm == 0 && (strm[1] != 0)))) || ((puVar1[1] == 0x29a && (flush != 4)))
+     ) {
+    strm[6] = (int)PTR_s_stream_error_004b2148;
     return 0xfffffffe;
   }
-  if (param_1[4] == 0) {
-    param_1[6] = (int)PTR_s_buffer_error_004b2154;
+  if (strm[4] == 0) {
+    strm[6] = (int)PTR_s_buffer_error_004b2154;
     return 0xfffffffb;
   }
   iVar3 = puVar1[8];
-  *puVar1 = param_1;
-  puVar1[8] = param_2;
+  *puVar1 = strm;
+  puVar1[8] = flush;
   if (puVar1[1] == 0x2a) {
     uVar2 = puVar1[0x1f] + -1 >> 1;
     if (3 < uVar2) {
@@ -149766,61 +151122,61 @@ uint __cdecl _Globals::zlib__deflate(int *param_1,uint param_2)
       uVar2 = uVar2 | 0x20;
     }
     puVar1[1] = 0x71;
-    FUN_0046f360((uVar2 / 0x1f + 1) * 0x1f);
+    _Globals::FUN_0046f360((uVar2 / 0x1f + 1) * 0x1f);
     if (puVar1[0x19] != 0) {
-      FUN_0046f360((uint)*(ushort *)((int)param_1 + 0x32));
-      FUN_0046f360((uint)*(ushort *)(param_1 + 0xc));
+      _Globals::FUN_0046f360((uint)*(ushort *)((int)strm + 0x32));
+      _Globals::FUN_0046f360((uint)*(ushort *)(strm + 0xc));
     }
-    param_1[0xc] = 1;
+    strm[0xc] = 1;
   }
   if (puVar1[5] == 0) {
-    if (((param_1[1] == 0) && ((int)param_2 <= iVar3)) && (param_2 != 4)) {
-      param_1[6] = (int)PTR_s_buffer_error_004b2154;
+    if (((strm[1] == 0) && ((int)flush <= iVar3)) && (flush != 4)) {
+      strm[6] = (int)PTR_s_buffer_error_004b2154;
       return 0xfffffffb;
     }
 LAB_0046f511:
     if (puVar1[1] == 0x29a) {
-      if (param_1[1] != 0) {
-        param_1[6] = (int)PTR_s_buffer_error_004b2154;
+      if (strm[1] != 0) {
+        strm[6] = (int)PTR_s_buffer_error_004b2154;
         return 0xfffffffb;
       }
 LAB_0046f53a:
-      if ((puVar1[0x1b] != 0) || ((param_2 != 0 && (puVar1[1] != 0x29a)))) goto LAB_0046f553;
+      if ((puVar1[0x1b] != 0) || ((flush != 0 && (puVar1[1] != 0x29a)))) goto LAB_0046f553;
     }
     else {
-      if (param_1[1] == 0) goto LAB_0046f53a;
+      if (strm[1] == 0) goto LAB_0046f53a;
 LAB_0046f553:
-      iVar3 = (*(code *)(&PTR_FUN_0049e0e8)[puVar1[0x1f] * 3])(puVar1,param_2);
+      iVar3 = (*(code *)(&PTR_FUN_0049e0e8)[puVar1[0x1f] * 3])(puVar1,flush);
       if ((iVar3 == 2) || (iVar3 == 3)) {
         puVar1[1] = 0x29a;
       }
       if ((iVar3 == 0) || (iVar3 == 2)) {
-        if (param_1[4] != 0) {
+        if (strm[4] != 0) {
           return 0;
         }
         puVar1[8] = 0xffffffff;
         return 0;
       }
       if (iVar3 == 1) {
-        if (param_2 == 1) {
-          FUN_00472910((int)puVar1);
+        if (flush == 1) {
+          _Globals::FUN_00472910((int)puVar1);
         }
         else {
-          FUN_00472870((int)puVar1,(undefined1 *)0x0,0,0);
-          if (param_2 == 3) {
+          _Globals::FUN_00472870((int)puVar1,(undefined1 *)0x0,0,0);
+          if (flush == 3) {
             *(undefined2 *)(puVar1[0xf] + -2 + puVar1[0x11] * 2) = 0;
             Runtime::MSVCRT::_memset((void *)puVar1[0xf],0,puVar1[0x11] * 2 - 2);
           }
         }
-        FUN_0046f390();
-        if (param_1[4] == 0) goto LAB_0046f4e1;
+        _Globals::FUN_0046f390();
+        if (strm[4] == 0) goto LAB_0046f4e1;
       }
     }
-    if (param_2 == 4) {
+    if (flush == 4) {
       if (puVar1[6] == 0) {
-        FUN_0046f360((uint)*(ushort *)((int)param_1 + 0x32));
-        FUN_0046f360((uint)*(ushort *)(param_1 + 0xc));
-        FUN_0046f390();
+        _Globals::FUN_0046f360((uint)*(ushort *)((int)strm + 0x32));
+        _Globals::FUN_0046f360((uint)*(ushort *)(strm + 0xc));
+        _Globals::FUN_0046f390();
         puVar1[6] = 0xffffffff;
         return (uint)(puVar1[5] == 0);
       }
@@ -149828,8 +151184,8 @@ LAB_0046f553:
     }
   }
   else {
-    FUN_0046f390();
-    if (param_1[4] != 0) goto LAB_0046f511;
+    _Globals::FUN_0046f390();
+    if (strm[4] != 0) goto LAB_0046f511;
 LAB_0046f4e1:
     puVar1[8] = 0xffffffff;
   }
@@ -149838,13 +151194,13 @@ LAB_0046f4e1:
 
 
 
-uint __cdecl _Globals::zlib__deflateEnd(int param_1)
+uint __cdecl zlib::deflateEnd(int strm)
 
 {
   int iVar1;
   int iVar2;
   
-  if ((param_1 == 0) || (iVar1 = *(int *)(param_1 + 0x1c), iVar1 == 0)) {
+  if ((strm == 0) || (iVar1 = *(int *)(strm + 0x1c), iVar1 == 0)) {
     return 0xfffffffe;
   }
   iVar2 = *(int *)(iVar1 + 4);
@@ -149852,22 +151208,22 @@ uint __cdecl _Globals::zlib__deflateEnd(int param_1)
     return 0xfffffffe;
   }
   if (*(int *)(iVar1 + 8) != 0) {
-    (**(code **)(param_1 + 0x24))(*(undefined4 *)(param_1 + 0x28),*(int *)(iVar1 + 8));
+    (**(code **)(strm + 0x24))(*(undefined4 *)(strm + 0x28),*(int *)(iVar1 + 8));
   }
-  iVar1 = *(int *)(*(int *)(param_1 + 0x1c) + 0x3c);
+  iVar1 = *(int *)(*(int *)(strm + 0x1c) + 0x3c);
   if (iVar1 != 0) {
-    (**(code **)(param_1 + 0x24))(*(undefined4 *)(param_1 + 0x28),iVar1);
+    (**(code **)(strm + 0x24))(*(undefined4 *)(strm + 0x28),iVar1);
   }
-  iVar1 = *(int *)(*(int *)(param_1 + 0x1c) + 0x38);
+  iVar1 = *(int *)(*(int *)(strm + 0x1c) + 0x38);
   if (iVar1 != 0) {
-    (**(code **)(param_1 + 0x24))(*(undefined4 *)(param_1 + 0x28),iVar1);
+    (**(code **)(strm + 0x24))(*(undefined4 *)(strm + 0x28),iVar1);
   }
-  iVar1 = *(int *)(*(int *)(param_1 + 0x1c) + 0x30);
+  iVar1 = *(int *)(*(int *)(strm + 0x1c) + 0x30);
   if (iVar1 != 0) {
-    (**(code **)(param_1 + 0x24))(*(undefined4 *)(param_1 + 0x28),iVar1);
+    (**(code **)(strm + 0x24))(*(undefined4 *)(strm + 0x28),iVar1);
   }
-  (**(code **)(param_1 + 0x24))(*(undefined4 *)(param_1 + 0x28),*(undefined4 *)(param_1 + 0x1c));
-  *(undefined4 *)(param_1 + 0x1c) = 0;
+  (**(code **)(strm + 0x24))(*(undefined4 *)(strm + 0x28),*(undefined4 *)(strm + 0x1c));
+  *(undefined4 *)(strm + 0x1c) = 0;
   return (iVar2 != 0x71) - 1 & 0xfffffffd;
 }
 
@@ -150498,9 +151854,8 @@ undefined4 __cdecl _Globals::FUN_00470250(int param_1)
 
 
 undefined4 __cdecl
-_Globals::zlib__deflateInit2_
-          (int param_1,uint param_2,int param_3,int param_4,int param_5,uint param_6,char *param_7,
-          int param_8)
+zlib::deflateInit2_(int param_1,uint param_2,int param_3,int param_4,int param_5,uint param_6,
+                   char *param_7,int param_8)
 
 {
   uint uVar1;
@@ -150519,7 +151874,7 @@ _Globals::zlib__deflateInit2_
   }
   *(undefined4 *)(param_1 + 0x18) = 0;
   if (*(int *)(param_1 + 0x20) == 0) {
-    *(code **)(param_1 + 0x20) = zlib__zcalloc;
+    *(code **)(param_1 + 0x20) = zcalloc;
     *(undefined4 *)(param_1 + 0x28) = 0;
   }
   if (*(int *)(param_1 + 0x24) == 0) {
@@ -150566,11 +151921,11 @@ _Globals::zlib__deflateInit2_
         piVar2[0x1f] = param_2;
         piVar2[0x20] = param_6;
         *(undefined1 *)((int)piVar2 + 0x1d) = 8;
-        uVar4 = FUN_00470250(param_1);
+        uVar4 = _Globals::FUN_00470250(param_1);
         return uVar4;
       }
       *(undefined **)(param_1 + 0x18) = PTR_s_insufficient_memory_004b2150;
-      zlib__deflateEnd(param_1);
+      deflateEnd(param_1);
     }
     return 0xfffffffc;
   }
@@ -150579,16 +151934,18 @@ _Globals::zlib__deflateInit2_
 
 
 
-void __cdecl _Globals::zlib__deflateInit_(int param_1,uint param_2,char *param_3,int param_4)
+uint __cdecl zlib::deflateInit_(int z,uint level,char *version,int stream_size)
 
 {
-  zlib__deflateInit2_(param_1,param_2,8,0xf,8,0,param_3,param_4);
-  return;
+  uint uVar1;
+  
+  uVar1 = deflateInit2_(z,level,8,0xf,8,0,version,stream_size);
+  return uVar1;
 }
 
 
 
-void __cdecl _Globals::zlib__inflate_blocks_reset(int *param_1,int param_2,int *param_3)
+void __cdecl zlib::inflate_blocks_reset(int *param_1,int param_2,int *param_3)
 
 {
   int iVar1;
@@ -150600,7 +151957,7 @@ void __cdecl _Globals::zlib__inflate_blocks_reset(int *param_1,int param_2,int *
     (**(code **)(param_2 + 0x24))(*(undefined4 *)(param_2 + 0x28),param_1[3]);
   }
   if (*param_1 == 6) {
-    zlib__inflate_codes_free(param_1[1],param_2);
+    inflate_codes_free(param_1[1],param_2);
   }
   param_1[0xd] = param_1[10];
   param_1[0xc] = param_1[10];
@@ -150617,7 +151974,7 @@ void __cdecl _Globals::zlib__inflate_blocks_reset(int *param_1,int param_2,int *
 
 
 
-int * __cdecl _Globals::zlib__inflate_blocks_new(int param_1,int param_2,int param_3)
+int * __cdecl zlib::inflate_blocks_new(int param_1,int param_2,int param_3)
 
 {
   int *piVar1;
@@ -150638,7 +151995,7 @@ int * __cdecl _Globals::zlib__inflate_blocks_new(int param_1,int param_2,int par
       piVar1[0xb] = iVar2 + param_3;
       piVar1[0xe] = param_2;
       *piVar1 = 0;
-      zlib__inflate_blocks_reset(piVar1,param_1,(int *)0x0);
+      inflate_blocks_reset(piVar1,param_1,(int *)0x0);
       return piVar1;
     }
     (**(code **)(param_1 + 0x24))(*(undefined4 *)(param_1 + 0x28),piVar1);
@@ -150648,23 +152005,23 @@ int * __cdecl _Globals::zlib__inflate_blocks_new(int param_1,int param_2,int par
 
 
 
-void __cdecl _Globals::zlib__inflate_blocks(uint *param_1,int *param_2,int param_3)
+void __cdecl zlib::inflate_blocks(uint *param_1,int *param_2,int param_3)
 
 {
   byte bVar1;
   uint *puVar2;
   uint *puVar3;
   uint *puVar4;
+  int *z;
   int *piVar5;
   int *piVar6;
-  int *piVar7;
-  uint uVar8;
-  undefined4 uVar9;
-  int iVar10;
-  byte bVar11;
-  uint uVar12;
+  uint uVar7;
+  undefined4 uVar8;
+  int iVar9;
+  byte bVar10;
+  uint uVar11;
   byte *_Src;
-  uint uVar13;
+  uint uVar12;
   uint local_30;
   size_t local_2c;
   uint local_28;
@@ -150678,136 +152035,136 @@ void __cdecl _Globals::zlib__inflate_blocks(uint *param_1,int *param_2,int param
   uint local_8;
   uint local_4;
   
-  piVar5 = param_2;
+  z = param_2;
   puVar4 = param_1;
   local_30 = param_2[1];
   _Src = (byte *)*param_2;
   puVar2 = (uint *)param_1[0xd];
   puVar3 = param_1 + 8;
-  uVar13 = param_1[7];
+  uVar12 = param_1[7];
   if (puVar2 < (uint *)param_1[0xc]) {
     local_28 = (int)param_1[0xc] + (-1 - (int)puVar2);
   }
   else {
     local_28 = param_1[0xb] - (int)puVar2;
   }
-  uVar12 = *param_1;
+  uVar11 = *param_1;
   param_1 = puVar2;
-  piVar7 = (int *)*puVar3;
   piVar6 = (int *)*puVar3;
+  piVar5 = (int *)*puVar3;
   do {
-    param_2 = piVar6;
-    if (9 < uVar12) {
+    param_2 = piVar5;
+    if (9 < uVar11) {
       param_3 = -2;
 LAB_00470675:
       puVar4[8] = (uint)param_2;
-      puVar4[7] = uVar13;
-      piVar5[1] = local_30;
+      puVar4[7] = uVar12;
+      z[1] = local_30;
 LAB_00470686:
-      piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
+      z[2] = (int)(_Src + (z[2] - *z));
 LAB_0047068d:
-      *piVar5 = (int)_Src;
+      *z = (int)_Src;
       puVar4[0xd] = (uint)param_1;
-      FUN_00473af0((int)puVar4,piVar5,param_3);
+      _Globals::FUN_00473af0((int)puVar4,z,param_3);
       return;
     }
-    switch((&switchD_004706b4::switchdataD_0047109c)[uVar12]) {
+    switch((&switchD_004706b4::switchdataD_0047109c)[uVar11]) {
     case (undefined *)0x4706bb:
-      for (; piVar6 = piVar7, uVar13 < 3; uVar13 = uVar13 + 8) {
+      for (; piVar5 = piVar6, uVar12 < 3; uVar12 = uVar12 + 8) {
         if (local_30 == 0) {
           puVar4[8] = (uint)param_2;
-          puVar4[7] = uVar13;
-          piVar5[1] = 0;
+          puVar4[7] = uVar12;
+          z[1] = 0;
           goto LAB_00470686;
         }
         bVar1 = *_Src;
         local_30 = local_30 - 1;
         _Src = _Src + 1;
         param_3 = 0;
-        param_2 = (int *)((uint)piVar6 | (uint)bVar1 << ((byte)uVar13 & 0x1f));
-        piVar7 = param_2;
+        param_2 = (int *)((uint)piVar5 | (uint)bVar1 << ((byte)uVar12 & 0x1f));
+        piVar6 = param_2;
       }
-      puVar4[6] = (uint)piVar6 & 1;
-      switch(((uint)piVar6 & 7) >> 1) {
+      puVar4[6] = (uint)piVar5 & 1;
+      switch(((uint)piVar5 & 7) >> 1) {
       case 0:
-        uVar12 = uVar13 - 3 & 7;
-        piVar6 = (int *)(((uint)piVar6 >> 3) >> (sbyte)uVar12);
-        uVar13 = (uVar13 - 3) - uVar12;
+        uVar11 = uVar12 - 3 & 7;
+        piVar5 = (int *)(((uint)piVar5 >> 3) >> (sbyte)uVar11);
+        uVar12 = (uVar12 - 3) - uVar11;
         *puVar4 = 1;
-        param_2 = piVar6;
+        param_2 = piVar5;
         break;
       case 1:
-        FUN_00473ac0(&local_14,&local_18,&local_1c,&local_20);
-        uVar12 = FUN_00472cf0((char)local_14,(char)local_18,local_1c,local_20,(int)piVar5);
-        puVar4[1] = uVar12;
-        if (uVar12 == 0) {
+        _Globals::FUN_00473ac0(&local_14,&local_18,&local_1c,&local_20);
+        uVar11 = _Globals::FUN_00472cf0((char)local_14,(char)local_18,local_1c,local_20,(int)z);
+        puVar4[1] = uVar11;
+        if (uVar11 == 0) {
           puVar4[8] = (uint)param_2;
-          puVar4[7] = uVar13;
-          piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
-          piVar5[1] = local_30;
-          *piVar5 = (int)_Src;
+          puVar4[7] = uVar12;
+          z[2] = (int)(_Src + (z[2] - *z));
+          z[1] = local_30;
+          *z = (int)_Src;
           puVar4[0xd] = (uint)param_1;
-          FUN_00473af0((int)puVar4,piVar5,-4);
+          _Globals::FUN_00473af0((int)puVar4,z,-4);
           return;
         }
-        piVar6 = (int *)((uint)param_2 >> 3);
-        uVar13 = uVar13 - 3;
+        piVar5 = (int *)((uint)param_2 >> 3);
+        uVar12 = uVar12 - 3;
         *puVar4 = 6;
-        param_2 = piVar6;
+        param_2 = piVar5;
         break;
       case 2:
-        piVar6 = (int *)((uint)piVar6 >> 3);
-        uVar13 = uVar13 - 3;
+        piVar5 = (int *)((uint)piVar5 >> 3);
+        uVar12 = uVar12 - 3;
         *puVar4 = 3;
-        param_2 = piVar6;
+        param_2 = piVar5;
         break;
       case 3:
         *puVar4 = 9;
-        piVar6 = (int *)((uint)param_2 >> 3);
-        piVar5[6] = (int)"invalid block type";
-        uVar13 = uVar13 - 3;
+        piVar5 = (int *)((uint)param_2 >> 3);
+        z[6] = (int)"invalid block type";
+        uVar12 = uVar12 - 3;
         goto LAB_00470df9;
       }
       break;
     case (undefined *)0x470798:
-      for (; uVar13 < 0x20; uVar13 = uVar13 + 8) {
+      for (; uVar12 < 0x20; uVar12 = uVar12 + 8) {
         if (local_30 == 0) {
 LAB_00470e2a:
           puVar4[8] = (uint)param_2;
-          puVar4[7] = uVar13;
-          piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
-          piVar5[1] = 0;
-          *piVar5 = (int)_Src;
+          puVar4[7] = uVar12;
+          z[2] = (int)(_Src + (z[2] - *z));
+          z[1] = 0;
+          *z = (int)_Src;
           puVar4[0xd] = (uint)param_1;
-          FUN_00473af0((int)puVar4,piVar5,param_3);
+          _Globals::FUN_00473af0((int)puVar4,z,param_3);
           return;
         }
         bVar1 = *_Src;
         local_30 = local_30 - 1;
         _Src = _Src + 1;
         param_3 = 0;
-        piVar7 = (int *)((uint)piVar7 | (uint)bVar1 << ((byte)uVar13 & 0x1f));
-        param_2 = piVar7;
+        piVar6 = (int *)((uint)piVar6 | (uint)bVar1 << ((byte)uVar12 & 0x1f));
+        param_2 = piVar6;
       }
-      uVar12 = (uint)piVar7 & 0xffff;
-      if (~(uint)piVar7 >> 0x10 != uVar12) {
+      uVar11 = (uint)piVar6 & 0xffff;
+      if (~(uint)piVar6 >> 0x10 != uVar11) {
         *puVar4 = 9;
-        piVar5[6] = (int)"invalid stored block lengths";
+        z[6] = (int)"invalid stored block lengths";
 LAB_00470e6f:
         puVar4[8] = (uint)param_2;
-        puVar4[7] = uVar13;
-        piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
-        piVar5[1] = local_30;
-        *piVar5 = (int)_Src;
+        puVar4[7] = uVar12;
+        z[2] = (int)(_Src + (z[2] - *z));
+        z[1] = local_30;
+        *z = (int)_Src;
         puVar4[0xd] = (uint)param_1;
-        FUN_00473af0((int)puVar4,piVar5,-3);
+        _Globals::FUN_00473af0((int)puVar4,z,-3);
         return;
       }
-      piVar6 = (int *)0x0;
-      uVar13 = 0;
-      puVar4[1] = uVar12;
+      piVar5 = (int *)0x0;
+      uVar12 = 0;
+      puVar4[1] = uVar11;
       param_2 = (int *)0x0;
-      if (uVar12 == 0) {
+      if (uVar11 == 0) {
         *puVar4 = -(uint)(puVar4[6] != 0) & 7;
       }
       else {
@@ -150818,10 +152175,10 @@ LAB_00470e6f:
       if (local_30 == 0) {
 LAB_00470ea4:
         puVar4[8] = (uint)param_2;
-        puVar4[7] = uVar13;
-        piVar5[1] = 0;
-        piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
-        *piVar5 = (int)_Src;
+        puVar4[7] = uVar12;
+        z[1] = 0;
+        z[2] = (int)(_Src + (z[2] - *z));
+        *z = (int)_Src;
         puVar4[0xd] = (uint)param_1;
         goto LAB_00470ec9;
       }
@@ -150842,7 +152199,7 @@ LAB_00470ea4:
           }
         }
         puVar4[0xd] = (uint)param_1;
-        param_3 = FUN_00473af0((int)puVar4,piVar5,param_3);
+        param_3 = _Globals::FUN_00473af0((int)puVar4,z,param_3);
         puVar3 = (uint *)puVar4[0xc];
         param_1 = (uint *)puVar4[0xd];
         if (param_1 < puVar3) {
@@ -150864,9 +152221,9 @@ LAB_00470ea4:
           }
         }
         if (local_28 == 0) {
-          puVar4[8] = (uint)piVar6;
-          puVar4[7] = uVar13;
-          piVar5[1] = local_30;
+          puVar4[8] = (uint)piVar5;
+          puVar4[7] = uVar12;
+          z[1] = local_30;
           goto LAB_00470686;
         }
       }
@@ -150891,30 +152248,30 @@ LAB_004708c7:
       }
       break;
     case (undefined *)0x47092f:
-      for (; uVar13 < 0xe; uVar13 = uVar13 + 8) {
+      for (; uVar12 < 0xe; uVar12 = uVar12 + 8) {
         if (local_30 == 0) goto LAB_00470ea4;
         bVar1 = *_Src;
         local_30 = local_30 - 1;
         _Src = _Src + 1;
         param_3 = 0;
-        piVar7 = (int *)((uint)piVar7 | (uint)bVar1 << ((byte)uVar13 & 0x1f));
-        param_2 = piVar7;
+        piVar6 = (int *)((uint)piVar6 | (uint)bVar1 << ((byte)uVar12 & 0x1f));
+        param_2 = piVar6;
       }
-      puVar4[1] = (uint)piVar7 & 0x3fff;
-      if ((0x1d < ((uint)piVar7 & 0x1f)) ||
-         (uVar12 = ((uint)piVar7 & 0x3fff) >> 5 & 0x1f, 0x1d < uVar12)) {
+      puVar4[1] = (uint)piVar6 & 0x3fff;
+      if ((0x1d < ((uint)piVar6 & 0x1f)) ||
+         (uVar11 = ((uint)piVar6 & 0x3fff) >> 5 & 0x1f, 0x1d < uVar11)) {
         *puVar4 = 9;
-        piVar5[6] = (int)"too many length or distance symbols";
+        z[6] = (int)"too many length or distance symbols";
         goto LAB_00470e6f;
       }
-      uVar12 = (*(code *)piVar5[8])(piVar5[10],uVar12 + 0x102 + ((uint)piVar7 & 0x1f),4);
-      puVar4[3] = uVar12;
-      if (uVar12 != 0) {
-        piVar7 = (int *)((uint)param_2 >> 0xe);
-        uVar13 = uVar13 - 0xe;
+      uVar11 = (*(code *)z[8])(z[10],uVar11 + 0x102 + ((uint)piVar6 & 0x1f),4);
+      puVar4[3] = uVar11;
+      if (uVar11 != 0) {
+        piVar6 = (int *)((uint)param_2 >> 0xe);
+        uVar12 = uVar12 - 0xe;
         puVar4[2] = 0;
         *puVar4 = 4;
-        param_2 = piVar7;
+        param_2 = piVar6;
         goto switchD_004706b4_caseD_4709c4;
       }
       param_3 = -4;
@@ -150923,69 +152280,70 @@ LAB_004708c7:
 switchD_004706b4_caseD_4709c4:
       if (puVar4[2] < (puVar4[1] >> 10) + 4) {
         do {
-          for (; uVar13 < 3; uVar13 = uVar13 + 8) {
+          for (; uVar12 < 3; uVar12 = uVar12 + 8) {
             if (local_30 == 0) goto LAB_00470ea4;
             bVar1 = *_Src;
             local_30 = local_30 - 1;
             _Src = _Src + 1;
             param_3 = 0;
-            param_2 = (int *)((uint)piVar7 | (uint)bVar1 << ((byte)uVar13 & 0x1f));
-            piVar7 = param_2;
+            param_2 = (int *)((uint)piVar6 | (uint)bVar1 << ((byte)uVar12 & 0x1f));
+            piVar6 = param_2;
           }
-          *(uint *)(puVar4[3] + *(int *)(&DAT_0049e158 + puVar4[2] * 4) * 4) = (uint)piVar7 & 7;
+          *(uint *)(puVar4[3] + *(int *)(&DAT_0049e158 + puVar4[2] * 4) * 4) = (uint)piVar6 & 7;
           puVar4[2] = puVar4[2] + 1;
           param_2 = (int *)((uint)param_2 >> 3);
-          uVar13 = uVar13 - 3;
-          piVar7 = param_2;
+          uVar12 = uVar12 - 3;
+          piVar6 = param_2;
         } while (puVar4[2] < (puVar4[1] >> 10) + 4);
       }
-      uVar12 = puVar4[2];
-      while (uVar12 < 0x13) {
+      uVar11 = puVar4[2];
+      while (uVar11 < 0x13) {
         *(undefined4 *)(puVar4[3] + *(int *)(&DAT_0049e158 + puVar4[2] * 4) * 4) = 0;
         puVar4[2] = puVar4[2] + 1;
-        uVar12 = puVar4[2];
+        uVar11 = puVar4[2];
       }
       puVar4[4] = 7;
-      iVar10 = FUN_004738a0((void *)puVar4[3],(int *)(puVar4 + 4),puVar4 + 5,puVar4[9],(int)piVar5);
-      if (iVar10 != 0) {
-        (*(code *)piVar5[9])(piVar5[10],puVar4[3]);
-        if (iVar10 == -3) {
+      iVar9 = _Globals::FUN_004738a0
+                        ((void *)puVar4[3],(int *)(puVar4 + 4),puVar4 + 5,puVar4[9],(int)z);
+      if (iVar9 != 0) {
+        (*(code *)z[9])(z[10],puVar4[3]);
+        if (iVar9 == -3) {
           *puVar4 = 9;
         }
         puVar4[8] = (uint)param_2;
-        puVar4[7] = uVar13;
-        piVar5[1] = local_30;
-        param_3 = iVar10;
+        puVar4[7] = uVar12;
+        z[1] = local_30;
+        param_3 = iVar9;
         goto LAB_00470686;
       }
       puVar4[2] = 0;
       *puVar4 = 5;
-      piVar7 = param_2;
+      piVar6 = param_2;
 switchD_004706b4_caseD_470aa5:
       if (puVar4[2] < (puVar4[1] >> 5 & 0x1f) + 0x102 + (puVar4[1] & 0x1f)) {
         do {
-          uVar12 = puVar4[4];
-          if (uVar13 < uVar12) {
+          uVar11 = puVar4[4];
+          if (uVar12 < uVar11) {
             do {
               if (local_30 == 0) goto LAB_00470ea4;
               bVar1 = *_Src;
               local_30 = local_30 - 1;
-              bVar11 = (byte)uVar13;
-              uVar12 = puVar4[4];
-              uVar13 = uVar13 + 8;
+              bVar10 = (byte)uVar12;
+              uVar11 = puVar4[4];
+              uVar12 = uVar12 + 8;
               _Src = _Src + 1;
-              piVar7 = (int *)((uint)piVar7 | (uint)bVar1 << (bVar11 & 0x1f));
+              piVar6 = (int *)((uint)piVar6 | (uint)bVar1 << (bVar10 & 0x1f));
               param_3 = 0;
-              param_2 = piVar7;
-            } while (uVar13 < uVar12);
+              param_2 = piVar6;
+            } while (uVar12 < uVar11);
           }
-          iVar10 = puVar4[5] + (*(uint *)(&DAT_004b32a8 + uVar12 * 4) & (uint)piVar7) * 8;
-          bVar1 = *(byte *)(iVar10 + 1);
-          uVar12 = (uint)bVar1;
-          local_c = *(uint *)(iVar10 + 4);
+          iVar9 = puVar4[5] + (*(uint *)(&DAT_004b32a8 + uVar11 * 4) & (uint)piVar6) * 8;
+          bVar1 = *(byte *)(iVar9 + 1);
+          uVar11 = (uint)bVar1;
+          local_c = *(uint *)(iVar9 + 4);
           if (local_c < 0x10) {
-            param_2 = (int *)((uint)piVar7 >> (bVar1 & 0x1f));
-            uVar13 = uVar13 - uVar12;
+            param_2 = (int *)((uint)piVar6 >> (bVar1 & 0x1f));
+            uVar12 = uVar12 - uVar11;
             *(uint *)(puVar4[3] + puVar4[2] * 4) = local_c;
             puVar4[2] = puVar4[2] + 1;
           }
@@ -150997,104 +152355,105 @@ switchD_004706b4_caseD_470aa5:
               local_24 = local_c - 0xe;
             }
             local_28 = (uint)(local_c == 0x12) * 8 + 3;
-            local_10 = uVar12 + local_24;
-            for (; uVar13 < local_10; uVar13 = uVar13 + 8) {
+            local_10 = uVar11 + local_24;
+            for (; uVar12 < local_10; uVar12 = uVar12 + 8) {
               if (local_30 == 0) goto LAB_00470e2a;
-              bVar11 = *_Src;
+              bVar10 = *_Src;
               local_30 = local_30 - 1;
               _Src = _Src + 1;
               param_3 = 0;
-              piVar7 = (int *)((uint)piVar7 | (uint)bVar11 << ((byte)uVar13 & 0x1f));
-              param_2 = piVar7;
+              piVar6 = (int *)((uint)piVar6 | (uint)bVar10 << ((byte)uVar12 & 0x1f));
+              param_2 = piVar6;
             }
-            uVar8 = (uint)piVar7 >> (bVar1 & 0x1f);
-            local_28 = local_28 + (*(uint *)(&DAT_004b32a8 + local_24 * 4) & uVar8);
-            param_2 = (int *)(uVar8 >> ((byte)local_24 & 0x1f));
-            uVar13 = uVar13 - (local_24 + uVar12);
-            uVar12 = puVar4[2];
-            if ((puVar4[1] >> 5 & 0x1f) + 0x102 + (puVar4[1] & 0x1f) < local_28 + uVar12) {
+            uVar7 = (uint)piVar6 >> (bVar1 & 0x1f);
+            local_28 = local_28 + (*(uint *)(&DAT_004b32a8 + local_24 * 4) & uVar7);
+            param_2 = (int *)(uVar7 >> ((byte)local_24 & 0x1f));
+            uVar12 = uVar12 - (local_24 + uVar11);
+            uVar11 = puVar4[2];
+            if ((puVar4[1] >> 5 & 0x1f) + 0x102 + (puVar4[1] & 0x1f) < local_28 + uVar11) {
 LAB_00470f48:
-              (*(code *)piVar5[9])(piVar5[10],puVar4[3]);
+              (*(code *)z[9])(z[10],puVar4[3]);
               *puVar4 = 9;
-              piVar5[6] = (int)"invalid bit length repeat";
+              z[6] = (int)"invalid bit length repeat";
               puVar4[8] = (uint)param_2;
-              puVar4[7] = uVar13;
-              piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
-              piVar5[1] = local_30;
-              *piVar5 = (int)_Src;
+              puVar4[7] = uVar12;
+              z[2] = (int)(_Src + (z[2] - *z));
+              z[1] = local_30;
+              *z = (int)_Src;
               puVar4[0xd] = (uint)param_1;
-              FUN_00473af0((int)puVar4,piVar5,-3);
+              _Globals::FUN_00473af0((int)puVar4,z,-3);
               return;
             }
             if (local_c == 0x10) {
-              if (uVar12 == 0) goto LAB_00470f48;
-              uVar9 = *(undefined4 *)((puVar4[3] - 4) + uVar12 * 4);
+              if (uVar11 == 0) goto LAB_00470f48;
+              uVar8 = *(undefined4 *)((puVar4[3] - 4) + uVar11 * 4);
             }
             else {
-              uVar9 = 0;
+              uVar8 = 0;
             }
             do {
-              *(undefined4 *)(puVar4[3] + uVar12 * 4) = uVar9;
-              uVar12 = uVar12 + 1;
+              *(undefined4 *)(puVar4[3] + uVar11 * 4) = uVar8;
+              uVar11 = uVar11 + 1;
               local_28 = local_28 - 1;
             } while (local_28 != 0);
-            puVar4[2] = uVar12;
+            puVar4[2] = uVar11;
             local_28 = 0;
           }
-          piVar7 = param_2;
+          piVar6 = param_2;
         } while (puVar4[2] < (puVar4[1] >> 5 & 0x1f) + 0x102 + (puVar4[1] & 0x1f));
       }
       puVar4[5] = 0;
       local_28 = 9;
       local_24 = 6;
-      iVar10 = FUN_00473940((puVar4[1] & 0x1f) + 0x101,(puVar4[1] >> 5 & 0x1f) + 1,(void *)puVar4[3]
-                            ,(int *)&local_28,&local_24,&local_4,&local_8,puVar4[9],(int)piVar5);
-      (*(code *)piVar5[9])(piVar5[10],puVar4[3]);
-      if (iVar10 != 0) {
-        if (iVar10 == -3) {
+      iVar9 = _Globals::FUN_00473940
+                        ((puVar4[1] & 0x1f) + 0x101,(puVar4[1] >> 5 & 0x1f) + 1,(void *)puVar4[3],
+                         (int *)&local_28,&local_24,&local_4,&local_8,puVar4[9],(int)z);
+      (*(code *)z[9])(z[10],puVar4[3]);
+      if (iVar9 != 0) {
+        if (iVar9 == -3) {
           *puVar4 = 9;
         }
         puVar4[8] = (uint)param_2;
-        puVar4[7] = uVar13;
-        piVar5[1] = local_30;
-        piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
-        *piVar5 = (int)_Src;
+        puVar4[7] = uVar12;
+        z[1] = local_30;
+        z[2] = (int)(_Src + (z[2] - *z));
+        *z = (int)_Src;
         puVar4[0xd] = (uint)param_1;
-        FUN_00473af0((int)puVar4,piVar5,iVar10);
+        _Globals::FUN_00473af0((int)puVar4,z,iVar9);
         return;
       }
-      uVar12 = FUN_00472cf0((char)local_28,(char)local_24,local_4,local_8,(int)piVar5);
-      if (uVar12 == 0) {
+      uVar11 = _Globals::FUN_00472cf0((char)local_28,(char)local_24,local_4,local_8,(int)z);
+      if (uVar11 == 0) {
         puVar4[8] = (uint)param_2;
-        puVar4[7] = uVar13;
-        piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
-        piVar5[1] = local_30;
-        *piVar5 = (int)_Src;
+        puVar4[7] = uVar12;
+        z[2] = (int)(_Src + (z[2] - *z));
+        z[1] = local_30;
+        *z = (int)_Src;
         puVar4[0xd] = (uint)param_1;
-        FUN_00473af0((int)puVar4,piVar5,-4);
+        _Globals::FUN_00473af0((int)puVar4,z,-4);
         return;
       }
-      puVar4[1] = uVar12;
+      puVar4[1] = uVar11;
       *puVar4 = 6;
 switchD_004706b4_caseD_470cef:
       puVar4[8] = (uint)param_2;
-      puVar4[7] = uVar13;
-      piVar5[1] = local_30;
-      piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
-      *piVar5 = (int)_Src;
+      puVar4[7] = uVar12;
+      z[1] = local_30;
+      z[2] = (int)(_Src + (z[2] - *z));
+      *z = (int)_Src;
       puVar4[0xd] = (uint)param_1;
-      param_3 = FUN_00472d30((uint)puVar4,piVar5,param_3);
+      param_3 = _Globals::FUN_00472d30((uint)puVar4,z,param_3);
       if (param_3 != 1) {
 LAB_00470ec9:
-        FUN_00473af0((int)puVar4,piVar5,param_3);
+        _Globals::FUN_00473af0((int)puVar4,z,param_3);
         return;
       }
       param_3 = 0;
-      zlib__inflate_codes_free(puVar4[1],(int)piVar5);
-      local_30 = piVar5[1];
-      piVar6 = (int *)puVar4[8];
-      _Src = (byte *)*piVar5;
-      uVar13 = puVar4[7];
+      inflate_codes_free(puVar4[1],(int)z);
+      local_30 = z[1];
+      piVar5 = (int *)puVar4[8];
+      _Src = (byte *)*z;
+      uVar12 = puVar4[7];
       param_1 = (uint *)puVar4[0xd];
       if (param_1 < (uint *)puVar4[0xc]) {
         local_28 = (int)puVar4[0xc] + (-1 - (int)param_1);
@@ -151102,29 +152461,29 @@ LAB_00470ec9:
       else {
         local_28 = puVar4[0xb] - (int)param_1;
       }
-      param_2 = piVar6;
+      param_2 = piVar5;
       if (puVar4[6] != 0) {
         *puVar4 = 7;
 switchD_004706b4_caseD_471017:
         puVar4[0xd] = (uint)param_1;
-        param_3 = FUN_00473af0((int)puVar4,piVar5,param_3);
+        param_3 = _Globals::FUN_00473af0((int)puVar4,z,param_3);
         param_1 = (uint *)puVar4[0xd];
         if ((uint *)puVar4[0xc] == param_1) {
           *puVar4 = 8;
 switchD_004706b4_caseD_47105d:
           puVar4[8] = (uint)param_2;
-          puVar4[7] = uVar13;
-          piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
-          piVar5[1] = local_30;
-          *piVar5 = (int)_Src;
+          puVar4[7] = uVar12;
+          z[2] = (int)(_Src + (z[2] - *z));
+          z[1] = local_30;
+          *z = (int)_Src;
           puVar4[0xd] = (uint)param_1;
-          FUN_00473af0((int)puVar4,piVar5,1);
+          _Globals::FUN_00473af0((int)puVar4,z,1);
           return;
         }
         puVar4[8] = (uint)param_2;
-        puVar4[7] = uVar13;
-        piVar5[1] = local_30;
-        piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
+        puVar4[7] = uVar12;
+        z[1] = local_30;
+        z[2] = (int)(_Src + (z[2] - *z));
         goto LAB_0047068d;
       }
       *puVar4 = 0;
@@ -151139,27 +152498,27 @@ switchD_004706b4_caseD_47105d:
       goto switchD_004706b4_caseD_47105d;
     case (undefined *)0x471092:
 LAB_00470df9:
-      puVar4[8] = (uint)piVar6;
-      puVar4[7] = uVar13;
-      piVar5[2] = (int)(_Src + (piVar5[2] - *piVar5));
-      piVar5[1] = local_30;
-      *piVar5 = (int)_Src;
+      puVar4[8] = (uint)piVar5;
+      puVar4[7] = uVar12;
+      z[2] = (int)(_Src + (z[2] - *z));
+      z[1] = local_30;
+      *z = (int)_Src;
       puVar4[0xd] = (uint)param_1;
-      FUN_00473af0((int)puVar4,piVar5,-3);
+      _Globals::FUN_00473af0((int)puVar4,z,-3);
       return;
     }
-    uVar12 = *puVar4;
-    piVar7 = piVar6;
-    piVar6 = param_2;
+    uVar11 = *puVar4;
+    piVar6 = piVar5;
+    piVar5 = param_2;
   } while( true );
 }
 
 
 
-undefined4 __cdecl _Globals::zlib__inflate_blocks_free(int *param_1,int param_2)
+undefined4 __cdecl zlib::inflate_blocks_free(int *param_1,int param_2)
 
 {
-  zlib__inflate_blocks_reset(param_1,param_2,(int *)0x0);
+  inflate_blocks_reset(param_1,param_2,(int *)0x0);
   (**(code **)(param_2 + 0x24))(*(undefined4 *)(param_2 + 0x28),param_1[10]);
   (**(code **)(param_2 + 0x24))(*(undefined4 *)(param_2 + 0x28),param_1[9]);
   (**(code **)(param_2 + 0x24))(*(undefined4 *)(param_2 + 0x28),param_1);
@@ -151241,16 +152600,18 @@ uint __cdecl _Globals::FUN_00471120(uint param_1,byte *param_2,uint param_3)
 
 
 
-void __cdecl _Globals::zlib__zcalloc(undefined4 param_1,size_t param_2,size_t param_3)
+int * __cdecl zlib::zcalloc(uint opaque,size_t items,size_t size)
 
 {
-  Runtime::MSVCRT::_calloc(param_2,param_3);
-  return;
+  int *piVar1;
+  
+  piVar1 = Runtime::MSVCRT::_calloc(items,size);
+  return piVar1;
 }
 
 
 
-void __fastcall _Globals::zlib__init_block(undefined4 param_1,int param_2)
+void __fastcall zlib::init_block(undefined4 param_1,int param_2)
 
 {
   undefined2 *puVar1;
@@ -152210,7 +153571,7 @@ void __cdecl _Globals::FUN_004724b0(int param_1)
   *(undefined2 *)(param_1 + 0x16b0) = 0;
   *(undefined4 *)(param_1 + 0x16b4) = 0;
   *(undefined4 *)(param_1 + 0x16ac) = 8;
-  zlib__init_block(param_1 + 0x980,param_1);
+  zlib::init_block(param_1 + 0x980,param_1);
   return;
 }
 
@@ -152584,7 +153945,7 @@ LAB_00472b70:
     FUN_00472870(param_1,param_2,param_3,param_4);
     uVar5 = extraout_ECX;
   }
-  zlib__init_block(uVar5,param_1);
+  zlib::init_block(uVar5,param_1);
   if (param_4 == 0) {
     return;
   }
@@ -152954,10 +154315,10 @@ LAB_004732b6:
 
 
 
-void __cdecl _Globals::zlib__inflate_codes_free(undefined4 param_1,int param_2)
+void __cdecl zlib::inflate_codes_free(uint c,int z)
 
 {
-  (**(code **)(param_2 + 0x24))(*(undefined4 *)(param_2 + 0x28),param_1);
+  (**(code **)(z + 0x24))(*(undefined4 *)(z + 0x28),c);
   return;
 }
 
@@ -153806,7 +155167,7 @@ void _Globals::Unwind_00474190(void)
 {
   int unaff_EBP;
   
-  CScore::FUN_0040e120((undefined4 *)(unaff_EBP + -0x90));
+  CScore::Destructor((undefined4 *)(unaff_EBP + -0x90));
   return;
 }
 
@@ -154852,7 +156213,7 @@ void _Globals::Unwind_00474cb0(void)
 {
   int unaff_EBP;
   
-  CListViewer::FUN_00408020(*(undefined4 **)(unaff_EBP + -0x10));
+  CListViewer::CListViewer_dtor(*(undefined4 **)(unaff_EBP + -0x10));
   return;
 }
 
@@ -155072,7 +156433,7 @@ void _Globals::Unwind_00474eb0(void)
 {
   int unaff_EBP;
   
-  CListViewer::FUN_00408020(*(undefined4 **)(unaff_EBP + -0x10));
+  CListViewer::CListViewer_dtor(*(undefined4 **)(unaff_EBP + -0x10));
   return;
 }
 
@@ -157753,7 +159114,7 @@ void _Globals::Unwind_004766b0(void)
 {
   int unaff_EBP;
   
-  CGaming::FUN_0041b850((undefined4 *)(unaff_EBP + -0x410));
+  CGaming::CGaming_dtor((undefined4 *)(unaff_EBP + -0x410));
   return;
 }
 
