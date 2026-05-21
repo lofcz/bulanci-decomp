@@ -1,0 +1,14 @@
+[package]
+name = "bulanci_core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+mlua = { version = "0.9", features = ["lua54", "vendored", "serialize"] }
+serde = { version = "1.0", features = ["derive"] }
+postcard = { version = "1.0", features = ["alloc"] }
+zstd = "0.13"
+anyhow = "1.0"
+
+[build-dependencies]
+zstd = "0.13"

@@ -1,15 +1,15 @@
 {
   "measures": {
-    "fuzzy_match_percent": 4.4424896,
-    "total_code": "415706",
-    "matched_code": "1170",
-    "matched_code_percent": 0.28144893,
+    "fuzzy_match_percent": 4.4076886,
+    "total_code": "422610",
+    "matched_code": "1438",
+    "matched_code_percent": 0.34026644,
     "matched_data_percent": 100.0,
-    "total_functions": 3952,
-    "matched_functions": 168,
-    "matched_functions_percent": 4.2510123,
+    "total_functions": 3982,
+    "matched_functions": 187,
+    "matched_functions_percent": 4.6961327,
     "complete_data_percent": 100.0,
-    "total_units": 137
+    "total_units": 140
   },
   "units": [
     {
@@ -725,14 +725,14 @@
     {
       "name": "bulanci/CBulanci",
       "measures": {
-        "fuzzy_match_percent": 2.2632473,
+        "fuzzy_match_percent": 2.2715404,
         "total_code": "32557",
-        "matched_code": "18",
-        "matched_code_percent": 0.05528765,
+        "matched_code": "27",
+        "matched_code_percent": 0.082931474,
         "matched_data_percent": 100.0,
         "total_functions": 165,
-        "matched_functions": 3,
-        "matched_functions_percent": 1.8181818,
+        "matched_functions": 4,
+        "matched_functions_percent": 2.4242423,
         "complete_data_percent": 100.0,
         "total_units": 1
       },
@@ -740,7 +740,7 @@
         {
           "name": ".text",
           "size": "32557",
-          "fuzzy_match_percent": 2.2632473,
+          "fuzzy_match_percent": 2.2715404,
           "metadata": {}
         }
       ],
@@ -846,7 +846,7 @@
         {
           "name": "CBulanci::FUN_00402840",
           "size": "9",
-          "fuzzy_match_percent": 70.0,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "2963"
         },
@@ -1145,7 +1145,7 @@
           "address": "12952"
         },
         {
-          "name": "CBulanci::FUN_00416770",
+          "name": "CBulanci::CDSView_OnMouseDummy",
           "size": "3",
           "metadata": {},
           "address": "13129"
@@ -1228,7 +1228,7 @@
           "address": "15835"
         },
         {
-          "name": "CBulanci::FUN_00422550",
+          "name": "CBulanci::CDSAudioPlayer_CreateFromResource",
           "size": "172",
           "fuzzy_match_percent": 3.3333333,
           "metadata": {},
@@ -1256,7 +1256,7 @@
           "address": "16162"
         },
         {
-          "name": "CBulanci::CMenu_LoadInfoOverlayBg",
+          "name": "CBulanci::CMenu_LoadBackgroundMusic",
           "size": "73",
           "fuzzy_match_percent": 5.0,
           "metadata": {},
@@ -1480,21 +1480,21 @@
           "address": "24456"
         },
         {
-          "name": "CBulanci::FUN_0042c2e0",
+          "name": "CBulanci::CDSView_GetDataSize",
           "size": "56",
           "fuzzy_match_percent": 5.0,
           "metadata": {},
           "address": "24483"
         },
         {
-          "name": "CBulanci::FUN_0042c320",
+          "name": "CBulanci::CDSView_SaveData",
           "size": "68",
           "fuzzy_match_percent": 4.6666665,
           "metadata": {},
           "address": "24539"
         },
         {
-          "name": "CBulanci::FUN_0042c370",
+          "name": "CBulanci::CDSView_LoadData",
           "size": "68",
           "fuzzy_match_percent": 4.6666665,
           "metadata": {},
@@ -1718,7 +1718,7 @@
           "address": "28861"
         },
         {
-          "name": "CBulanci::FUN_0042f3e0",
+          "name": "CBulanci::CDSEventHandler_EnqueueEvent",
           "size": "36",
           "fuzzy_match_percent": 19.0,
           "metadata": {},
@@ -1907,14 +1907,14 @@
     {
       "name": "bulanci/CBulanek",
       "measures": {
-        "fuzzy_match_percent": 3.1962874,
+        "fuzzy_match_percent": 3.270346,
         "total_code": "9362",
-        "matched_code": "6",
-        "matched_code_percent": 0.064088866,
+        "matched_code": "19",
+        "matched_code_percent": 0.2029481,
         "matched_data_percent": 100.0,
         "total_functions": 67,
-        "matched_functions": 1,
-        "matched_functions_percent": 1.4925373,
+        "matched_functions": 2,
+        "matched_functions_percent": 2.9850745,
         "complete_data_percent": 100.0,
         "total_units": 1
       },
@@ -1922,7 +1922,7 @@
         {
           "name": ".text",
           "size": "9362",
-          "fuzzy_match_percent": 3.1962874,
+          "fuzzy_match_percent": 3.270346,
           "metadata": {}
         }
       ],
@@ -2007,7 +2007,7 @@
         {
           "name": "CBulanek::FUN_004168c0",
           "size": "13",
-          "fuzzy_match_percent": 46.666668,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "449"
         },
@@ -2089,7 +2089,7 @@
           "address": "1799"
         },
         {
-          "name": "CBulanek::FUN_00417e40",
+          "name": "CBulanek::CGaming_IsPlayerSlotOccupied",
           "size": "54",
           "fuzzy_match_percent": 10.526316,
           "metadata": {},
@@ -2152,7 +2152,7 @@
           "address": "2566"
         },
         {
-          "name": "CBulanek::FUN_004192b0",
+          "name": "CBulanek::CBulanek_CheckSlotCollision",
           "size": "412",
           "fuzzy_match_percent": 1.4651163,
           "metadata": {},
@@ -3036,7 +3036,7 @@
     {
       "name": "bulanci/CDSApp",
       "measures": {
-        "fuzzy_match_percent": 4.021479,
+        "fuzzy_match_percent": 3.8558943,
         "total_code": "2590",
         "matched_code": "12",
         "matched_code_percent": 0.46332046,
@@ -3051,7 +3051,7 @@
         {
           "name": ".text",
           "size": "2590",
-          "fuzzy_match_percent": 4.021479,
+          "fuzzy_match_percent": 3.8558943,
           "metadata": {}
         }
       ],
@@ -3175,9 +3175,8 @@
           "address": "1593"
         },
         {
-          "name": "CDSApp::FUN_0042ccf0",
+          "name": "CDSApp::CDSView_RenderChildren_0042ccf0",
           "size": "320",
-          "fuzzy_match_percent": 1.3402061,
           "metadata": {},
           "address": "1613"
         },
@@ -3942,7 +3941,7 @@
           "address": "0"
         },
         {
-          "name": "CDSChained::FUN_004032d0",
+          "name": "CDSChained::CDSChained_ctor",
           "size": "186",
           "fuzzy_match_percent": 2.4074075,
           "metadata": {},
@@ -4968,14 +4967,14 @@
     {
       "name": "bulanci/CDSFileStream",
       "measures": {
-        "fuzzy_match_percent": 32.390427,
+        "fuzzy_match_percent": 37.634144,
         "total_code": "1727",
-        "matched_code": "24",
-        "matched_code_percent": 1.3896931,
+        "matched_code": "63",
+        "matched_code_percent": 3.6479445,
         "matched_data_percent": 100.0,
         "total_functions": 30,
-        "matched_functions": 4,
-        "matched_functions_percent": 13.333334,
+        "matched_functions": 5,
+        "matched_functions_percent": 16.666668,
         "complete_data_percent": 100.0,
         "total_units": 1
       },
@@ -4983,7 +4982,7 @@
         {
           "name": ".text",
           "size": "1727",
-          "fuzzy_match_percent": 32.390427,
+          "fuzzy_match_percent": 37.634144,
           "metadata": {}
         }
       ],
@@ -5124,63 +5123,63 @@
         {
           "name": "CDSFileStream::ReadBytes",
           "size": "97",
-          "fuzzy_match_percent": 64.76923,
+          "fuzzy_match_percent": 79.76923,
           "metadata": {},
           "address": "555"
         },
         {
           "name": "CDSFileStream::WriteBytes",
           "size": "78",
-          "fuzzy_match_percent": 69.741936,
+          "fuzzy_match_percent": 91.09677,
           "metadata": {},
           "address": "652"
         },
         {
           "name": "CDSFileStream::LockRegion",
           "size": "71",
-          "fuzzy_match_percent": 64.62069,
+          "fuzzy_match_percent": 78.586205,
           "metadata": {},
           "address": "730"
         },
         {
           "name": "CDSFileStream::UnlockRegion",
           "size": "71",
-          "fuzzy_match_percent": 64.62069,
+          "fuzzy_match_percent": 78.586205,
           "metadata": {},
           "address": "801"
         },
         {
           "name": "CDSFileStream::SeekPosition",
           "size": "115",
-          "fuzzy_match_percent": 56.488373,
+          "fuzzy_match_percent": 59.511627,
           "metadata": {},
           "address": "872"
         },
         {
           "name": "CDSFileStream::SetStreamSize",
           "size": "120",
-          "fuzzy_match_percent": 74.96296,
+          "fuzzy_match_percent": 82.46296,
           "metadata": {},
           "address": "987"
         },
         {
           "name": "CDSFileStream::GetSize",
           "size": "81",
-          "fuzzy_match_percent": 47.083332,
+          "fuzzy_match_percent": 57.77778,
           "metadata": {},
           "address": "1107"
         },
         {
           "name": "CDSFileStream::TellPosition",
           "size": "93",
-          "fuzzy_match_percent": 47.35,
+          "fuzzy_match_percent": 57.125,
           "metadata": {},
           "address": "1188"
         },
         {
           "name": "CDSFileStream::FlushStream",
           "size": "39",
-          "fuzzy_match_percent": 76.17647,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "1281"
         },
@@ -6139,14 +6138,14 @@
     {
       "name": "bulanci/CDSJpegImage",
       "measures": {
-        "fuzzy_match_percent": 15.987246,
+        "fuzzy_match_percent": 15.999419,
         "total_code": "7393",
-        "matched_code": "62",
-        "matched_code_percent": 0.8386311,
+        "matched_code": "65",
+        "matched_code_percent": 0.87921005,
         "matched_data_percent": 100.0,
         "total_functions": 40,
-        "matched_functions": 2,
-        "matched_functions_percent": 5.0,
+        "matched_functions": 3,
+        "matched_functions_percent": 7.5000005,
         "complete_data_percent": 100.0,
         "total_units": 1
       },
@@ -6154,7 +6153,7 @@
         {
           "name": ".text",
           "size": "7393",
-          "fuzzy_match_percent": 15.987246,
+          "fuzzy_match_percent": 15.999419,
           "metadata": {}
         }
       ],
@@ -6183,7 +6182,7 @@
         {
           "name": "CDSJpegImage::FUN_00431d60",
           "size": "3",
-          "fuzzy_match_percent": 70.0,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "111"
         },
@@ -9272,14 +9271,14 @@
     {
       "name": "bulanci/CEdit",
       "measures": {
-        "fuzzy_match_percent": 3.730694,
+        "fuzzy_match_percent": 3.794592,
         "total_code": "2817",
-        "matched_code": "6",
-        "matched_code_percent": 0.21299255,
+        "matched_code": "12",
+        "matched_code_percent": 0.4259851,
         "matched_data_percent": 100.0,
         "total_functions": 22,
-        "matched_functions": 1,
-        "matched_functions_percent": 4.5454545,
+        "matched_functions": 2,
+        "matched_functions_percent": 9.090909,
         "complete_data_percent": 100.0,
         "total_units": 1
       },
@@ -9287,7 +9286,7 @@
         {
           "name": ".text",
           "size": "2817",
-          "fuzzy_match_percent": 3.730694,
+          "fuzzy_match_percent": 3.794592,
           "metadata": {}
         }
       ],
@@ -9300,16 +9299,16 @@
           "address": "0"
         },
         {
-          "name": "CEdit::CEdit_CopyText",
+          "name": "CEdit::CEdit_SaveData",
           "size": "19",
           "fuzzy_match_percent": 28.0,
           "metadata": {},
           "address": "28"
         },
         {
-          "name": "CEdit::CEdit_IsEditMarker",
+          "name": "CEdit::CEdit_GetDataSize",
           "size": "6",
-          "fuzzy_match_percent": 70.0,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "47"
         },
@@ -9426,7 +9425,7 @@
           "address": "2264"
         },
         {
-          "name": "CEdit::CEdit_Invalidate",
+          "name": "CEdit::CEdit_LoadData",
           "size": "41",
           "fuzzy_match_percent": 8.75,
           "metadata": {},
@@ -10082,14 +10081,14 @@
     {
       "name": "bulanci/CGameView",
       "measures": {
-        "fuzzy_match_percent": 2.713415,
+        "fuzzy_match_percent": 2.9527066,
         "total_code": "2786",
-        "matched_code": "13",
-        "matched_code_percent": 0.46661884,
+        "matched_code": "23",
+        "matched_code_percent": 0.8255564,
         "matched_data_percent": 100.0,
         "total_functions": 14,
-        "matched_functions": 2,
-        "matched_functions_percent": 14.285715,
+        "matched_functions": 3,
+        "matched_functions_percent": 21.428572,
         "complete_data_percent": 100.0,
         "total_units": 1
       },
@@ -10097,7 +10096,7 @@
         {
           "name": ".text",
           "size": "2786",
-          "fuzzy_match_percent": 2.713415,
+          "fuzzy_match_percent": 2.9527066,
           "metadata": {}
         }
       ],
@@ -10196,7 +10195,7 @@
         {
           "name": "CGameView::TM_SetFrameDelayOverrideMs",
           "size": "10",
-          "fuzzy_match_percent": 33.333332,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "2776"
         }
@@ -10322,14 +10321,14 @@
           "address": "843"
         },
         {
-          "name": "CGaming::FUN_00419ca0",
+          "name": "CGaming::CGaming_UnregisterAndRemoveObject",
           "size": "116",
           "fuzzy_match_percent": 5.135135,
           "metadata": {},
           "address": "884"
         },
         {
-          "name": "CGaming::FUN_00419d20",
+          "name": "CGaming::CGaming_ClearAllEntities",
           "size": "64",
           "fuzzy_match_percent": 3.2,
           "metadata": {},
@@ -10350,7 +10349,7 @@
           "address": "1132"
         },
         {
-          "name": "CGaming::FUN_0041a2a0",
+          "name": "CGaming::CGaming_CleanupInactiveBullets",
           "size": "76",
           "fuzzy_match_percent": 2.5,
           "metadata": {},
@@ -10448,7 +10447,7 @@
           "address": "2700"
         },
         {
-          "name": "CGaming::FUN_0041c140",
+          "name": "CGaming::CGaming_OnResumeOrStartGame",
           "size": "324",
           "fuzzy_match_percent": 1.4,
           "metadata": {},
@@ -10744,6 +10743,60 @@
           "fuzzy_match_percent": 12.727273,
           "metadata": {},
           "address": "1343"
+        }
+      ],
+      "metadata": {
+        "progress_categories": [
+          "Game code"
+        ]
+      }
+    },
+    {
+      "name": "bulanci/CHelpHistoryScript",
+      "measures": {
+        "fuzzy_match_percent": 6.199732,
+        "total_code": "236",
+        "matched_data_percent": 100.0,
+        "total_functions": 4,
+        "complete_data_percent": 100.0,
+        "total_units": 1
+      },
+      "sections": [
+        {
+          "name": ".text",
+          "size": "236",
+          "fuzzy_match_percent": 6.199732,
+          "metadata": {}
+        }
+      ],
+      "functions": [
+        {
+          "name": "CHelpHistoryScript::ext_op49_shared",
+          "size": "27",
+          "fuzzy_match_percent": 11.666667,
+          "metadata": {},
+          "address": "0"
+        },
+        {
+          "name": "CHelpHistoryScript::ext_op48_shared",
+          "size": "140",
+          "fuzzy_match_percent": 3.5849056,
+          "metadata": {},
+          "address": "27"
+        },
+        {
+          "name": "CHelpHistoryScript::ext_op51_shared",
+          "size": "34",
+          "fuzzy_match_percent": 10.0,
+          "metadata": {},
+          "address": "167"
+        },
+        {
+          "name": "CHelpHistoryScript::ext_op50_shared",
+          "size": "35",
+          "fuzzy_match_percent": 8.75,
+          "metadata": {},
+          "address": "201"
         }
       ],
       "metadata": {
@@ -11627,6 +11680,106 @@
           "fuzzy_match_percent": 1.7073171,
           "metadata": {},
           "address": "526"
+        }
+      ],
+      "metadata": {
+        "progress_categories": [
+          "Game code"
+        ]
+      }
+    },
+    {
+      "name": "bulanci/CListBox",
+      "measures": {
+        "fuzzy_match_percent": 6.0562286,
+        "total_code": "794",
+        "matched_code": "6",
+        "matched_code_percent": 0.7556675,
+        "matched_data_percent": 100.0,
+        "total_functions": 10,
+        "matched_functions": 1,
+        "matched_functions_percent": 10.0,
+        "complete_data_percent": 100.0,
+        "total_units": 1
+      },
+      "sections": [
+        {
+          "name": ".text",
+          "size": "794",
+          "fuzzy_match_percent": 6.0562286,
+          "metadata": {}
+        }
+      ],
+      "functions": [
+        {
+          "name": "CListBox::CListBox::CListBox_RenderItem",
+          "size": "141",
+          "fuzzy_match_percent": 4.418605,
+          "metadata": {},
+          "address": "0"
+        },
+        {
+          "name": "CListBox::CListBox::CListBox_dtor",
+          "size": "131",
+          "fuzzy_match_percent": 3.8235295,
+          "metadata": {},
+          "address": "141"
+        },
+        {
+          "name": "CListBox::CListBox::CListBox_GetTypeDescriptor",
+          "size": "6",
+          "fuzzy_match_percent": 100.0,
+          "metadata": {},
+          "address": "272"
+        },
+        {
+          "name": "CListBox::CListBox::FUN_004082a0",
+          "size": "8",
+          "fuzzy_match_percent": 40.0,
+          "metadata": {},
+          "address": "278"
+        },
+        {
+          "name": "CListBox::CListBox::FUN_004082b0",
+          "size": "8",
+          "fuzzy_match_percent": 40.0,
+          "metadata": {},
+          "address": "286"
+        },
+        {
+          "name": "CListBox::CListBox::CListBox_vDtor",
+          "size": "30",
+          "fuzzy_match_percent": 12.727273,
+          "metadata": {},
+          "address": "294"
+        },
+        {
+          "name": "CListBox::CListBox::CListBox_BuildAt",
+          "size": "291",
+          "fuzzy_match_percent": 2.5657895,
+          "metadata": {},
+          "address": "324"
+        },
+        {
+          "name": "CListBox::CListBox::CListBox_Allocate",
+          "size": "163",
+          "fuzzy_match_percent": 4.1489363,
+          "metadata": {},
+          "address": "615"
+        },
+        {
+          "name": "CListBox::CListBox::FUN_0040b130",
+          "size": "8",
+          "fuzzy_match_percent": 40.0,
+          "metadata": {},
+          "address": "778"
+        },
+        {
+          "name": "CListBox::CListBox::FUN_0040d0a0",
+          "size": "8",
+          "fuzzy_match_percent": 40.0,
+          "metadata": {},
+          "address": "786"
         }
       ],
       "metadata": {
@@ -12753,14 +12906,14 @@
     {
       "name": "bulanci/CNumEdit",
       "measures": {
-        "fuzzy_match_percent": 3.888972,
+        "fuzzy_match_percent": 4.333771,
         "total_code": "2192",
-        "matched_code": "6",
-        "matched_code_percent": 0.27372262,
+        "matched_code": "21",
+        "matched_code_percent": 0.95802915,
         "matched_data_percent": 100.0,
         "total_functions": 16,
-        "matched_functions": 1,
-        "matched_functions_percent": 6.25,
+        "matched_functions": 2,
+        "matched_functions_percent": 12.5,
         "complete_data_percent": 100.0,
         "total_units": 1
       },
@@ -12768,7 +12921,7 @@
         {
           "name": ".text",
           "size": "2192",
-          "fuzzy_match_percent": 3.888972,
+          "fuzzy_match_percent": 4.333771,
           "metadata": {}
         }
       ],
@@ -12776,7 +12929,7 @@
         {
           "name": "CNumEdit::CNumEdit_GetValue",
           "size": "15",
-          "fuzzy_match_percent": 35.0,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "0"
         },
@@ -13344,7 +13497,7 @@
           "address": "2332"
         },
         {
-          "name": "CPoemScroller::FUN_00433280",
+          "name": "CPoemScroller::rect_Intersect",
           "size": "72",
           "fuzzy_match_percent": 4.6666665,
           "metadata": {},
@@ -13586,14 +13739,14 @@
     {
       "name": "bulanci/CRadio",
       "measures": {
-        "fuzzy_match_percent": 4.161959,
+        "fuzzy_match_percent": 4.748756,
         "total_code": "1636",
-        "matched_code": "6",
-        "matched_code_percent": 0.36674818,
+        "matched_code": "24",
+        "matched_code_percent": 1.4669927,
         "matched_data_percent": 100.0,
         "total_functions": 16,
-        "matched_functions": 1,
-        "matched_functions_percent": 6.25,
+        "matched_functions": 3,
+        "matched_functions_percent": 18.75,
         "complete_data_percent": 100.0,
         "total_units": 1
       },
@@ -13601,7 +13754,7 @@
         {
           "name": ".text",
           "size": "1636",
-          "fuzzy_match_percent": 4.161959,
+          "fuzzy_match_percent": 4.748756,
           "metadata": {}
         }
       ],
@@ -13614,9 +13767,9 @@
           "address": "0"
         },
         {
-          "name": "CRadio::CRadio_IsRadioMarker",
+          "name": "CRadio::CRadio_GetDataSize",
           "size": "6",
-          "fuzzy_match_percent": 70.0,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "89"
         },
@@ -13642,7 +13795,7 @@
           "address": "615"
         },
         {
-          "name": "CRadio::CRadio_SetSelectedFromPtr",
+          "name": "CRadio::CRadio_LoadData",
           "size": "16",
           "fuzzy_match_percent": 20.0,
           "metadata": {},
@@ -13712,9 +13865,9 @@
           "address": "1215"
         },
         {
-          "name": "CRadio::FUN_0040aa00",
+          "name": "CRadio::CRadio_SaveData",
           "size": "12",
-          "fuzzy_match_percent": 35.0,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "1624"
         }
@@ -15438,7 +15591,7 @@
     {
       "name": "bulanci/CTcpIpConfig",
       "measures": {
-        "fuzzy_match_percent": 43.528385,
+        "fuzzy_match_percent": 0.9852217,
         "total_code": "609",
         "matched_code": "6",
         "matched_code_percent": 0.9852217,
@@ -15453,15 +15606,14 @@
         {
           "name": ".text",
           "size": "609",
-          "fuzzy_match_percent": 43.528385,
+          "fuzzy_match_percent": 0.9852217,
           "metadata": {}
         }
       ],
       "functions": [
         {
-          "name": "CTcpIpConfig::Build",
+          "name": "CTcpIpConfig::CTcpIpConfig",
           "size": "603",
-          "fuzzy_match_percent": 42.96648,
           "metadata": {},
           "address": "0"
         },
@@ -17599,14 +17751,14 @@
     {
       "name": "bulanci/_Globals",
       "measures": {
-        "fuzzy_match_percent": 4.520446,
+        "fuzzy_match_percent": 4.5324874,
         "total_code": "176058",
-        "matched_code": "21",
-        "matched_code_percent": 0.011927888,
+        "matched_code": "66",
+        "matched_code_percent": 0.037487645,
         "matched_data_percent": 100.0,
         "total_functions": 1985,
-        "matched_functions": 3,
-        "matched_functions_percent": 0.15113351,
+        "matched_functions": 8,
+        "matched_functions_percent": 0.40302268,
         "complete_data_percent": 100.0,
         "total_units": 1
       },
@@ -17614,7 +17766,7 @@
         {
           "name": ".text",
           "size": "176058",
-          "fuzzy_match_percent": 4.520446,
+          "fuzzy_match_percent": 4.5324874,
           "metadata": {}
         }
       ],
@@ -18768,7 +18920,7 @@
           "address": "14350"
         },
         {
-          "name": "_Globals::FUN_00417e80",
+          "name": "_Globals::CGaming_OnSlotPlacementEvent",
           "size": "181",
           "fuzzy_match_percent": 2.121212,
           "metadata": {},
@@ -18929,14 +19081,14 @@
           "address": "16886"
         },
         {
-          "name": "_Globals::FUN_0041a0f0",
+          "name": "_Globals::CGaming_TryGetPlayerCoords",
           "size": "75",
           "fuzzy_match_percent": 4.516129,
           "metadata": {},
           "address": "17024"
         },
         {
-          "name": "_Globals::FUN_0041a140",
+          "name": "_Globals::CGaming_RespawnPlayerAtSafeLocation",
           "size": "294",
           "fuzzy_match_percent": 1.8811882,
           "metadata": {},
@@ -19160,7 +19312,7 @@
           "address": "21443"
         },
         {
-          "name": "_Globals::FUN_0041f0c0",
+          "name": "_Globals::CGaming_TickPlayerCollisions",
           "size": "264",
           "fuzzy_match_percent": 1.5217391,
           "metadata": {},
@@ -19174,21 +19326,21 @@
           "address": "21842"
         },
         {
-          "name": "_Globals::FUN_0041f230",
+          "name": "_Globals::CGaming_SpawnBulletAndPlaySound",
           "size": "279",
           "fuzzy_match_percent": 2.0212767,
           "metadata": {},
           "address": "21901"
         },
         {
-          "name": "_Globals::FUN_0041f350",
+          "name": "_Globals::CGaming_ProcessRoundStateAndScoring",
           "size": "422",
           "fuzzy_match_percent": 1.532258,
           "metadata": {},
           "address": "22180"
         },
         {
-          "name": "_Globals::FUN_0041f500",
+          "name": "_Globals::CGaming_SpawnAndInitializePlayer",
           "size": "203",
           "fuzzy_match_percent": 2.7142856,
           "metadata": {},
@@ -19300,7 +19452,7 @@
           "address": "24589"
         },
         {
-          "name": "_Globals::FUN_00422310",
+          "name": "_Globals::CDSAudioPlayer_Create",
           "size": "164",
           "fuzzy_match_percent": 3.220339,
           "metadata": {},
@@ -19337,7 +19489,7 @@
         {
           "name": "_Globals::FUN_00422620",
           "size": "13",
-          "fuzzy_match_percent": 46.666668,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "25078"
         },
@@ -19370,7 +19522,7 @@
           "address": "25397"
         },
         {
-          "name": "_Globals::FUN_00424010",
+          "name": "_Globals::CMenu_EnableBackgroundState",
           "size": "104",
           "fuzzy_match_percent": 4.117647,
           "metadata": {},
@@ -20161,35 +20313,35 @@
           "address": "35976"
         },
         {
-          "name": "_Globals::FUN_0042ecf0",
+          "name": "_Globals::CDSQueue_Push",
           "size": "120",
           "fuzzy_match_percent": 4.5238094,
           "metadata": {},
           "address": "36013"
         },
         {
-          "name": "_Globals::FUN_0042ed70",
+          "name": "_Globals::CDSQueue_PopDiscard",
           "size": "38",
           "fuzzy_match_percent": 9.285714,
           "metadata": {},
           "address": "36133"
         },
         {
-          "name": "_Globals::FUN_0042eda0",
+          "name": "_Globals::CDSQueue_PopCopy",
           "size": "128",
           "fuzzy_match_percent": 4.5238094,
           "metadata": {},
           "address": "36171"
         },
         {
-          "name": "_Globals::FUN_0042ee20",
+          "name": "_Globals::CDSQueue_Peek",
           "size": "27",
           "fuzzy_match_percent": 14.0,
           "metadata": {},
           "address": "36299"
         },
         {
-          "name": "_Globals::FUN_0042ee40",
+          "name": "_Globals::CDSQueue_SetCapacity",
           "size": "102",
           "fuzzy_match_percent": 3.2558138,
           "metadata": {},
@@ -20273,7 +20425,7 @@
           "address": "37234"
         },
         {
-          "name": "_Globals::FUN_0042f5c0",
+          "name": "_Globals::CDSQueue_Init",
           "size": "38",
           "fuzzy_match_percent": 13.571428,
           "metadata": {},
@@ -20294,7 +20446,7 @@
           "address": "37357"
         },
         {
-          "name": "_Globals::FUN_0042f640",
+          "name": "_Globals::CDSEventHandler_ctor",
           "size": "80",
           "fuzzy_match_percent": 4.6666665,
           "metadata": {},
@@ -20940,7 +21092,7 @@
         {
           "name": "_Globals::FUN_004382d0",
           "size": "10",
-          "fuzzy_match_percent": 46.666668,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "45826"
         },
@@ -21122,7 +21274,7 @@
         {
           "name": "_Globals::FUN_00439710",
           "size": "10",
-          "fuzzy_match_percent": 46.666668,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "47513"
         },
@@ -21316,14 +21468,14 @@
           "address": "49894"
         },
         {
-          "name": "_Globals::FUN_0043a760",
+          "name": "_Globals::CDSAudioPlayer_Init",
           "size": "624",
           "fuzzy_match_percent": 0.90047395,
           "metadata": {},
           "address": "49967"
         },
         {
-          "name": "_Globals::FUN_0043a9d0",
+          "name": "_Globals::CDSAudioPlayer_Play",
           "size": "147",
           "fuzzy_match_percent": 2.3333333,
           "metadata": {},
@@ -22452,7 +22604,7 @@
         {
           "name": "_Globals::FUN_0044ab59",
           "size": "6",
-          "fuzzy_match_percent": 70.0,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "87104"
         },
@@ -22690,7 +22842,7 @@
         {
           "name": "_Globals::FUN_00452fb7",
           "size": "6",
-          "fuzzy_match_percent": 70.0,
+          "fuzzy_match_percent": 100.0,
           "metadata": {},
           "address": "91551"
         },
@@ -31750,6 +31902,148 @@
           "Game code"
         ]
       }
+    },
+    {
+      "name": "bulanci/zlib",
+      "measures": {
+        "fuzzy_match_percent": 3.5782588,
+        "total_code": "5874",
+        "matched_code": "104",
+        "matched_code_percent": 1.770514,
+        "matched_data_percent": 100.0,
+        "total_functions": 16,
+        "matched_functions": 4,
+        "matched_functions_percent": 25.0,
+        "complete_data_percent": 100.0,
+        "total_units": 1
+      },
+      "sections": [
+        {
+          "name": ".text",
+          "size": "5874",
+          "fuzzy_match_percent": 3.5782588,
+          "metadata": {}
+        }
+      ],
+      "functions": [
+        {
+          "name": "zlib::inflateReset",
+          "size": "66",
+          "fuzzy_match_percent": 7.142857,
+          "metadata": {},
+          "address": "0"
+        },
+        {
+          "name": "zlib::inflateEnd",
+          "size": "73",
+          "fuzzy_match_percent": 15.266666,
+          "metadata": {},
+          "address": "66"
+        },
+        {
+          "name": "zlib::inflateInit2",
+          "size": "248",
+          "fuzzy_match_percent": 6.755814,
+          "metadata": {},
+          "address": "139"
+        },
+        {
+          "name": "zlib::inflateInit",
+          "size": "26",
+          "fuzzy_match_percent": 100.0,
+          "metadata": {},
+          "address": "387"
+        },
+        {
+          "name": "zlib::inflate",
+          "size": "932",
+          "fuzzy_match_percent": 1.3724138,
+          "metadata": {},
+          "address": "413"
+        },
+        {
+          "name": "zlib::deflate",
+          "size": "631",
+          "fuzzy_match_percent": 2.4190476,
+          "metadata": {},
+          "address": "1345"
+        },
+        {
+          "name": "zlib::deflateEnd",
+          "size": "190",
+          "fuzzy_match_percent": 5.246753,
+          "metadata": {},
+          "address": "1976"
+        },
+        {
+          "name": "zlib::deflateInit2",
+          "size": "506",
+          "fuzzy_match_percent": 2.4642856,
+          "metadata": {},
+          "address": "2166"
+        },
+        {
+          "name": "zlib::deflateInit",
+          "size": "37",
+          "fuzzy_match_percent": 100.0,
+          "metadata": {},
+          "address": "2672"
+        },
+        {
+          "name": "zlib::inflate_blocks_reset",
+          "size": "125",
+          "fuzzy_match_percent": 2.9787233,
+          "metadata": {},
+          "address": "2709"
+        },
+        {
+          "name": "zlib::inflate_blocks_new",
+          "size": "167",
+          "fuzzy_match_percent": 2.5974026,
+          "metadata": {},
+          "address": "2834"
+        },
+        {
+          "name": "zlib::inflate_blocks",
+          "size": "2659",
+          "fuzzy_match_percent": 0.22144522,
+          "metadata": {},
+          "address": "3001"
+        },
+        {
+          "name": "zlib::inflate_blocks_free",
+          "size": "63",
+          "fuzzy_match_percent": 6.6666665,
+          "metadata": {},
+          "address": "5660"
+        },
+        {
+          "name": "zlib::zcalloc",
+          "size": "19",
+          "fuzzy_match_percent": 100.0,
+          "metadata": {},
+          "address": "5723"
+        },
+        {
+          "name": "zlib::init_block",
+          "size": "110",
+          "fuzzy_match_percent": 4.4827585,
+          "metadata": {},
+          "address": "5742"
+        },
+        {
+          "name": "zlib::inflate_codes_free",
+          "size": "22",
+          "fuzzy_match_percent": 100.0,
+          "metadata": {},
+          "address": "5852"
+        }
+      ],
+      "metadata": {
+        "progress_categories": [
+          "Game code"
+        ]
+      }
     }
   ],
   "version": 2,
@@ -31758,16 +32052,16 @@
       "id": "Game code",
       "name": "Game code",
       "measures": {
-        "fuzzy_match_percent": 4.4424896,
-        "total_code": "415706",
-        "matched_code": "1170",
-        "matched_code_percent": 0.28144893,
+        "fuzzy_match_percent": 4.4076886,
+        "total_code": "422610",
+        "matched_code": "1438",
+        "matched_code_percent": 0.34026644,
         "matched_data_percent": 100.0,
-        "total_functions": 3952,
-        "matched_functions": 168,
-        "matched_functions_percent": 4.2510123,
+        "total_functions": 3982,
+        "matched_functions": 187,
+        "matched_functions_percent": 4.6961327,
         "complete_data_percent": 100.0,
-        "total_units": 137
+        "total_units": 140
       }
     }
   ]

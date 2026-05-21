@@ -24,10 +24,10 @@ public:
 	/* 416630 */ uint FUN_00416630(int param_1);
 	// !DECL 0x00416630 END
 	// !DECL 0x00416690 BEGIN
-	/* 416690 */ uint FUN_00416690(int param_1);
+	/* 416690 */ uint CBulanek_GetDelayedQuipSlot(int param_1);
 	// !DECL 0x00416690 END
 	// !DECL 0x004166b0 BEGIN
-	/* 4166B0 */ uint FUN_004166b0(int param_1);
+	/* 4166B0 */ uint CBulanek_GetHitQuipSlot(int param_1);
 	// !DECL 0x004166b0 END
 	// !DECL 0x004166d0 BEGIN
 	/* 4166D0 */ uchar FUN_004166d0(int* param_1);
@@ -54,7 +54,7 @@ public:
 	/* 417460 */ uchar FUN_00417460(int* param_1, int* param_2, int param_3);
 	// !DECL 0x00417460 END
 	// !DECL 0x00417570 BEGIN
-	/* 417570 */ uchar FUN_00417570(void* param_1);
+	/* 417570 */ uchar CBulanek_ResetAmmoAndPlayReload(void* param_1);
 	// !DECL 0x00417570 END
 	// !DECL 0x004175f0 BEGIN
 	/* 4175F0 */ uchar FUN_004175f0(int* param_1);
@@ -150,7 +150,7 @@ public:
 	/* 41D090 */ uint FUN_0041d090(int* param_1, int param_2, int param_3, char param_4);
 	// !DECL 0x0041d090 END
 	// !DECL 0x0041db00 BEGIN
-	/* 41DB00 */ uint FUN_0041db00(int param_1, int param_2, char param_3);
+	/* 41DB00 */ uint CBulanek_OnTakeDamage(int param_1, int param_2, char param_3);
 	// !DECL 0x0041db00 END
 	// !DECL 0x0041ea90 BEGIN
 	/* 41EA90 */ uchar CBulanek_ApplyPickupEffect(uchar param_1);
@@ -177,7 +177,7 @@ public:
 	/* 420B30 */ uchar FUN_00420b30(uint param_1);
 	// !DECL 0x00420b30 END
 	// !DECL 0x00420d40 BEGIN
-	/* 420D40 */ uchar FUN_00420d40(ushort param_1, uint* param_2, uint* param_3);
+	/* 420D40 */ uchar CBulanek_OnEvent(ushort param_1, uint* param_2, uint* param_3);
 	// !DECL 0x00420d40 END
 	// !DECL 0x00422470 BEGIN
 	/* 422470 */ static uchar FUN_00422470(int* param_1);
@@ -188,9 +188,6 @@ public:
 	// !DECL 0x0042c190 BEGIN
 	/* 42C190 */ uchar FUN_0042c190(int param_1);
 	// !DECL 0x0042c190 END
-	// !DECL 0x0042cc80 BEGIN
-	/* 42CC80 */ uchar FUN_0042cc80(int param_1, int param_2);
-	// !DECL 0x0042cc80 END
 	// !DECL 0x0042eac0 BEGIN
 	/* 42EAC0 */ void Scheduler_FreeSlotIfLive(uint param_1);
 	// !DECL 0x0042eac0 END

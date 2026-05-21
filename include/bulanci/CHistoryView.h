@@ -6,7 +6,7 @@
 class CHistoryView {
 public:
 	// !DECL 0x00422670 BEGIN
-	/* 422670 */ uchar FUN_00422670(short param_1, uint param_2, uint param_3);
+	/* 422670 */ uchar CHistoryView_OnEvent(short param_1, uint param_2, uint param_3);
 	// !DECL 0x00422670 END
 	// !DECL 0x00422a70 BEGIN
 	/* 422A70 */ uint* FUN_00422a70(uint* param_1);

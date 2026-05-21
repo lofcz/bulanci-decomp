@@ -22,7 +22,11 @@ inline HANDLE FileHandle(CDSFileStream* self) {
 }
 
 inline int* SelfOrNull(CDSFileStream* self) {
-    return reinterpret_cast<int*>(self);
+    /* MSVC8 /O2 emits this as `lea eax,[esi-0xc]; neg; sbb; and eax,esi` --
+     * a branchless `(self != 0xc) ? self : 0`.  The `char*` arithmetic
+     * coaxes the LEA encoding over the longer mov+sub form. */
+    char* adjusted = reinterpret_cast<char*>(self) - 0xc;
+    return adjusted ? reinterpret_cast<int*>(self) : 0;
 }
 // !PROLOGUE END
 
@@ -169,11 +173,15 @@ void CDSFileStream::ReadBytes(void* param_1, DWORD param_2) {
  * RaiseStreamException(errno=2, ctx).
  */
 void CDSFileStream::WriteBytes(void* param_1, DWORD param_2) {
-    DWORD nBytesToWrite = param_2;
-    DWORD nBytesWritten = 0;
     if (param_2 != 0) {
-        BOOL ok = WriteFile(FileHandle(this), param_1, nBytesToWrite, &nBytesWritten, NULL);
-        if (ok == 0 || nBytesWritten != nBytesToWrite) {
+        DWORD nBytesToWrite = param_2;
+        /* MSVC8 reuses param_2's incoming stack slot as nBytesWritten:
+         * writing through &param_2 makes the slot escape, and the explicit
+         * `param_2 = 0` right before the call matches the target's
+         * `mov [esp+0x24], 0` placed AFTER all WriteFile args are pushed. */
+        param_2 = 0;
+        BOOL ok = WriteFile(FileHandle(this), param_1, nBytesToWrite, &param_2, NULL);
+        if (ok == 0 || param_2 != nBytesToWrite) {
             /* RaiseStreamException(2, SelfOrNull(this)) */
             reinterpret_cast<_Globals*>(SelfOrNull(this))->RaiseStreamException(2, SelfOrNull(this));
         }

@@ -48,7 +48,7 @@ CLASS_BITMAP_SPECIAL = 28
 CLASS_AUDIO_BANK = 43            # CDSAudioBank PCM data blob
 CLASS_MP3 = 48
 CLASS_BITMAP_SPRITE = 52         # CDSBitmap animation/sprite atlas
-CLASS_MOUSE_CURSOR = 54          # CDSImageMouse / CDSMouse cursor data
+CLASS_FONT = 54                  # CDSFont pre-rendered font metadata + glyph sheet
 CLASS_DSM_INNER = 58             # embedded sub-archive (BULANCI.TMP)
 CLASS_AUDIO_BANK_INDEX = 67      # CDSAudioBankSample index into ClassID 43
 CLASS_BITMAP_JPEG_ANIM = 76      # animated/JPEG sprite (mixed header + JPEG)
@@ -71,7 +71,7 @@ CLASS_NAMES = {
     CLASS_AUDIO_BANK: "AudioBank",
     CLASS_MP3: "Mp3",
     CLASS_BITMAP_SPRITE: "BitmapSprite",
-    CLASS_MOUSE_CURSOR: "MouseCursor",
+    CLASS_FONT: "Font",
     CLASS_DSM_INNER: "DsmInner",
     CLASS_AUDIO_BANK_INDEX: "AudioBankIndex",
     CLASS_BITMAP_JPEG_ANIM: "BitmapJpegAnim",
@@ -2300,6 +2300,115 @@ def _save_bitmap_sprite(
     return meta
 
 
+def _summarise_motion_path(
+    per_frame: list[dict],
+    ring_frame_index: Optional[int],
+    frames_stored: int,
+) -> dict:
+    """Roll up the per-frame ``move`` deltas (FLX opcode 0x0A, fed to
+    :func:`CDSFlxFile::NotifyMove` @ ``0x00436e80``) into a single
+    summary block consumers can use without re-walking the per-frame
+    array.
+
+    The CGunMouse idle paths (BitmapSprite resources ``65801``,
+    ``65802``, ``65803``) are the marquee users of opcode 0x0A — the
+    cursor's "inertia" is in fact a sequence of these (Δx, Δy) deltas
+    looped back to (0, 0) by a closing ring frame. Surfacing the
+    cumulative trajectory makes it trivial for the client to validate
+    closure, render the path for debugging, and embed the table as a
+    Rust ``const`` without re-doing the arithmetic.
+
+    Returned shape::
+
+        {
+            "enabled": bool,                  # True if any frame moves
+            "frameCountWithMove": int,
+            "framesWithMove": [<frame index>, ...],
+            "perFrameAbsolutePosition": [
+                {"index": int, "dx": int, "dy": int, "x": int, "y": int},
+                ...
+            ],
+            "netDelta": [sum_dx, sum_dy],     # both must be 0 for a loop
+            "closedLoop": bool,
+            "boundingBox": {"minX","minY","maxX","maxY"},
+            "totalManhattanLength": int,      # sum |dx| + |dy|
+            "ringFrameIncluded": bool,        # True if ring contributes
+        }
+
+    The cumulative trajectory walks **all** stored frames (atlas frames
+    + ring frame, if present) in playback order. Frames without a
+    ``move`` op contribute (0, 0) — that matches the engine, where
+    ``NotifyMove`` is only fired when opcode 0x0A is present and the
+    consumer's accumulator otherwise stays put. The starting position
+    is always (0, 0): the deltas are relative, not absolute.
+    """
+    enabled = any("move" in slot for slot in per_frame)
+    perf: list[dict] = []
+    x = 0
+    y = 0
+    sum_dx = 0
+    sum_dy = 0
+    min_x = 0
+    min_y = 0
+    max_x = 0
+    max_y = 0
+    manhattan = 0
+    frames_with_move: list[int] = []
+    ring_contributes = False
+    # Iterate every stored frame (including the ring frame) so the
+    # path closes back to start exactly the way the runtime sees it.
+    # ``per_frame`` is indexed by stored-frame index so we can read
+    # it directly without juggling atlas vs. ring partitions.
+    for fi in range(frames_stored):
+        slot = per_frame[fi] if fi < len(per_frame) else {}
+        mv = slot.get("move")
+        if mv is not None:
+            dx, dy = int(mv[0]), int(mv[1])
+            frames_with_move.append(fi)
+            if ring_frame_index is not None and fi == ring_frame_index:
+                ring_contributes = True
+        else:
+            dx, dy = 0, 0
+        x += dx
+        y += dy
+        sum_dx += dx
+        sum_dy += dy
+        manhattan += abs(dx) + abs(dy)
+        if x < min_x:
+            min_x = x
+        if y < min_y:
+            min_y = y
+        if x > max_x:
+            max_x = x
+        if y > max_y:
+            max_y = y
+        perf.append(
+            {
+                "index": fi,
+                "dx": dx,
+                "dy": dy,
+                "x": x,
+                "y": y,
+            }
+        )
+    return {
+        "enabled": enabled,
+        "frameCountWithMove": len(frames_with_move),
+        "framesWithMove": frames_with_move,
+        "perFrameAbsolutePosition": perf,
+        "netDelta": [sum_dx, sum_dy],
+        "closedLoop": enabled and sum_dx == 0 and sum_dy == 0,
+        "boundingBox": {
+            "minX": min_x,
+            "minY": min_y,
+            "maxX": max_x,
+            "maxY": max_y,
+        },
+        "totalManhattanLength": manhattan,
+        "ringFrameIncluded": ring_contributes,
+    }
+
+
 def _decode_bitmap_sprite_frames(
     raw: bytes,
     frames: list[dict],
@@ -2802,6 +2911,9 @@ def _decode_bitmap_sprite_frames(
         # primary ``frames`` array describes only what the atlas
         # actually shows.
         atlas_frames = per_frame[:atlas_count]
+        motion_path = _summarise_motion_path(
+            per_frame, ring_frame_index, len(snapshots)
+        )
         atlas_meta = {
             "atlas": atlas_path.name,
             "gif": gif_path.name if gif_path is not None else None,
@@ -2813,6 +2925,7 @@ def _decode_bitmap_sprite_frames(
             "transparencySource": transparency_source,
             "maskPlanePresent": mask_was_written,
             "timing": timing_block,
+            "motionPath": motion_path,
             "frames": atlas_frames,
         }
         if palette_source == "inherited" and inherited_palette_source_id is not None:
@@ -2942,12 +3055,36 @@ def _resolve_bg_key_indices(
        engine would have relied on the destination-side chroma key
        anyway.
     """
+    # Sanity-checked explicit path. Opcode 0x0D writes a single palette
+    # index to consumer +0x18, which the engine's color-key blit kernels
+    # compare against the source pixel value byte-for-byte
+    # (``BlitChromaKey`` @ 0x0043f470 etc.). Some sprites — the CGunMouse
+    # idle-twitch tracks 65801/65802/65803 are the canonical example —
+    # write an opcode-0x0D index whose palette slot was never initialised
+    # by an opcode-0x09 palette write, so it stays at the default
+    # ``(255, 255, 255)`` from ``palette = bytearray([0xFF] * 1024)``.
+    # The sprite's real BG ends up encoded at a *different* palette index
+    # (palette[0] = (0, 0, 0) for the dot tracks), and a strict RGB
+    # sibling lookup against palette[explicit_index] resolves to a set
+    # that no pixel in the sprite ever references — the chroma key
+    # rewrite becomes a no-op and the BG renders opaque.
+    #
+    # We accept the explicit path only when its sibling set actually
+    # matches at least one painted pixel; otherwise we fall through to
+    # the perimeter-vote heuristic (which finds palette[0] = BLACK for
+    # the dot sprites).
     if explicit_index is not None and 0 <= explicit_index < 256:
         n = explicit_index
         rgb = (palette[n * 4 + 0], palette[n * 4 + 1], palette[n * 4 + 2])
         siblings = _palette_siblings_of(palette, rgb)
         siblings.add(n)
-        return siblings, "explicit"
+        explicit_hits_pixels = any(
+            (p in siblings) for snap in snapshots for p in snap
+        )
+        if explicit_hits_pixels:
+            return siblings, "explicit"
+        # Fall through to perimeter vote below. The explicit index is
+        # noted in the result via ``transparentIndex`` already.
 
     if not snapshots or bitmap_w < 3 or bitmap_h < 3:
         return set(), "none"
@@ -3216,35 +3353,173 @@ def _redecode_for_atlas(
     return color_snapshots, mask_snapshots, palette_snapshots, mask_inited
 
 
-def _save_mouse_cursor(raw: bytes, base: Path) -> dict:
-    """ClassID 54 - CDSImageMouse cursor data.
+_FONT_GLYPH_ENCODING = "cp1250"
+"""Code page the CDSFont glyph table is indexed by.
 
-    Format (recovered empirically):
-        u32 totalSize
-        u32 frameCount   # observed 16
-        u32 reserved
-        u32 pixelBytes?  # observed 429 for 8KB cursor
-        u32 transparent  # 0xFFFFFFFF
-        u32 dataLen      # observed 1279
-        u32 reserved
-        u32 colorKey     # 0xFFFF0000
-        byte[...]        # BGR triplet table then pixel data
+The engine renders Unicode (UTF-16-LE) poem/menu strings by mapping each
+code point to its Windows-1250 byte and using that byte as the glyph
+index. Empirical confirmation: the Czech poems at resources 65541..65553
+roundtrip cleanly through ``str.encode('cp1250')`` and the glyph slot at
+e.g. byte 0xEC (= ``ě``) holds a visibly correct caret-e glyph in the
+extracted font sheet. CP-1250 (Central European) is the natural code
+page for the Czech publisher's Win32 build.
+
+Byte positions 0x81, 0x83, 0x88, 0x90, 0x98 are unassigned in CP-1250 and
+therefore have ``unicodeChar = None`` in the manifest (glyphs at those
+slots are unreachable from text input but are still extracted so the
+sheet round-trips byte-for-byte).
+"""
+
+
+def _cp1250_char_for_glyph_index(i: int) -> Optional[str]:
+    """Return the Unicode character that the engine renders via glyph
+    slot ``i``, or ``None`` if the slot is unreachable from text input.
+
+    * 0x00..0x1F (control chars) and 0x7F (DEL) → ``None`` even though
+      a handful of master-pack fonts ship non-empty glyphs in those
+      slots (likely UI icons or unused placeholders). The text path
+      can't reach them via a normal CP-1250 byte.
+    * 0x20..0x7E (printable ASCII) → ``chr(i)``.
+    * 0x80..0xFF → decoded via the ``cp1250`` codec; slots that map to
+      ``\\ufffd`` (Python's REPLACEMENT CHARACTER) are unassigned in
+      CP-1250 and reported as ``None``.
+    """
+    if i < 0x20 or i == 0x7F:
+        return None
+    if 0x20 <= i <= 0x7E:
+        return chr(i)
+    try:
+        ch = bytes([i]).decode(_FONT_GLYPH_ENCODING, errors="replace")
+    except Exception:
+        return None
+    if not ch or ch == "\ufffd":
+        return None
+    return ch
+
+
+def _save_font(raw: bytes, base: Path) -> dict:
+    """ClassID 54 - CDSFont pre-rendered font.
+
+    Format:
+        - Embedded CDSImage (ClassID 28 BitmapSpecial style) at offset 0.
+        - 8 bytes: default character width (int32), line height (int32).
+        - 1280 bytes: character metrics table of 256 entries * 5 bytes each.
+          Each entry: offset_x (uint16), width (uint8), offset_y (uint8), height (uint8).
+
+    The 256-entry glyph table is indexed by a Windows-1250 byte (see
+    :data:`_FONT_GLYPH_ENCODING`). The manifest surfaces three pieces of
+    information consumers need to actually render strings:
+
+    * ``encoding``       — the canonical name of the lookup code page.
+    * ``characters[i].unicodeChar`` — the Unicode character that maps to
+      glyph slot ``i`` (replaces the old ASCII-only ``char`` field).
+    * ``unicodeToGlyph`` — a compact ``{ "<codepoint hex>": <index> }``
+      lookup so consumers don't have to embed a CP-1250 table.
     """
     meta: dict = {"friendlyFile": None}
-    if len(raw) < 32:
-        meta["warning"] = "MouseCursor: too short"
+    if len(raw) < 26:
+        meta["warning"] = "Font: too short for CDSImage header"
         return meta
-    fields = struct.unpack_from("<8I", raw, 0)
-    meta["cursor"] = {
-        "totalSize": fields[0],
-        "frameCount": fields[1],
-        "reserved0": fields[2],
-        "pixelBytes": fields[3],
-        "transparent": f"0x{fields[4]:08X}",
-        "dataLen": fields[5],
-        "reserved1": fields[6],
-        "colorKey": f"0x{fields[7]:08X}",
+
+    # Parse the CDSImage header to compute its exact size on disk
+    width, height, marker5, stride = struct.unpack_from("<iiii", raw, 0)
+    palette_count_field = struct.unpack_from("<i", raw, 21)[0]
+    pad_b = raw[25]
+
+    if marker5 in (0, 1, 2, 3):
+        pal_bytes = palette_count_field * 4
+    else:
+        pal_bytes = 0
+
+    packed_payload = height * stride
+    unpacked_payload = width * height if pad_b else 0
+    image_size = 26 + pal_bytes + packed_payload + unpacked_payload
+
+    if len(raw) < image_size + 8 + 1280:
+        meta["warning"] = f"Font: file too short ({len(raw)} bytes vs expected at least {image_size + 8 + 1280})"
+        return meta
+
+    # Slice the image portion and extract it as a standard BitmapSpecial image
+    image_raw = raw[:image_size]
+    try:
+        # Call _save_special to decode and save the glyph sheet PNG
+        image_meta = _save_special(image_raw, base)
+        if "warning" in image_meta:
+            meta["warning"] = f"Font image decode warning: {image_meta['warning']}"
+        meta["friendlyFile"] = image_meta.get("friendlyFile")
+    except Exception as exc:
+        meta["warning"] = f"Font image decode failed: {exc}"
+        image_meta = {}
+
+    # Parse the 8 bytes of extra header
+    extra_off = image_size
+    default_width, line_height = struct.unpack_from("<ii", raw, extra_off)
+
+    # Parse the 1280 bytes of character metrics table. ``char`` stays
+    # ASCII-only for backwards compatibility; ``unicodeChar`` carries
+    # the engine-authoritative CP-1250 mapping for the full 0..255
+    # range, and ``unicodeCodepoint`` mirrors it as an integer so
+    # consumers can pick whichever shape is easier to consume.
+    table_off = extra_off + 8
+    chars = []
+    unicode_to_glyph: dict[str, int] = {}
+    glyphs_with_pixels = 0
+    for i in range(256):
+        offset_x, char_width, offset_y, char_height = struct.unpack_from(
+            "<HBBB", raw, table_off + i * 5
+        )
+        ascii_char = chr(i) if 32 <= i < 127 else None
+        unicode_char = _cp1250_char_for_glyph_index(i)
+        entry = {
+            "index": i,
+            "char": ascii_char,
+            "unicodeChar": unicode_char,
+            "unicodeCodepoint": ord(unicode_char) if unicode_char else None,
+            "offsetX": offset_x,
+            "width": char_width,
+            "offsetY": offset_y,
+            "height": char_height,
+        }
+        chars.append(entry)
+        if char_width > 0 and char_height > 0:
+            glyphs_with_pixels += 1
+        if unicode_char is not None and char_width > 0:
+            # Only register reachable glyphs in the reverse lookup —
+            # empty/zero-width slots (e.g. line breaks) shouldn't show
+            # up as renderable mappings.
+            unicode_to_glyph[f"U+{ord(unicode_char):04X}"] = i
+
+    # Save the parsed font metadata to a JSON file
+    meta["font"] = {
+        "width": width,
+        "height": height,
+        "marker": marker5,
+        "stride": stride,
+        "defaultWidth": default_width,
+        "lineHeight": line_height,
+        "encoding": _FONT_GLYPH_ENCODING,
+        "encodingNote": (
+            "Glyph table is indexed by Windows-1250 byte. The engine "
+            "maps each input Unicode code point through cp1250 before "
+            "looking up characters[byte]. Slots without a CP-1250 "
+            "byte (e.g. control codes, unassigned positions) carry "
+            "unicodeChar = null."
+        ),
+        "image": image_meta.get("special", {}),
+        "characters": chars,
+        "unicodeToGlyph": unicode_to_glyph,
+        "glyphsWithPixels": glyphs_with_pixels,
+        "reachableGlyphCount": len(unicode_to_glyph),
     }
+
+    out_json = base.with_suffix(".font.json")
+    try:
+        out_json.write_text(json.dumps(meta["font"], indent=2), encoding="utf-8")
+        if not meta["friendlyFile"]:
+            meta["friendlyFile"] = out_json.name
+    except Exception as exc:
+        meta["warning"] = f"Font JSON write failed: {exc}"
+
     return meta
 
 
@@ -3380,7 +3655,7 @@ _EXTRACTORS = {
     CLASS_AUDIO_BANK: _save_audio_bank,
     CLASS_MP3: _save_mp3,
     CLASS_BITMAP_SPRITE: _save_bitmap_sprite,
-    CLASS_MOUSE_CURSOR: _save_mouse_cursor,
+    CLASS_FONT: _save_font,
     CLASS_DSM_INNER: _save_dsm_inner,
     CLASS_AUDIO_BANK_INDEX: _save_audio_bank_index,
     CLASS_BITMAP_JPEG_ANIM: _save_bitmap_jpeg_anim,
@@ -3597,7 +3872,51 @@ def _read_bytes(path: str) -> bytes:
     return Path(path).read_bytes()
 
 
+def _prepare_output_dir(output: Path, clean: bool) -> None:
+    """Make sure ``output`` exists and (optionally) starts empty.
+
+    The unpacker writes only ``res_*`` resource files, ``_manifest.json``,
+    ``_raw.bin``, and class-specific subdirs (e.g. an embedded
+    BitmapJpegAnim WAV). When the user re-runs the unpacker with a
+    newer decoder table, stale artifacts from the previous run are
+    NOT overwritten — different decoders pick different suffixes,
+    name resources by their (now corrected) class name, or emit
+    different sidecar files. Result: the output directory keeps a
+    long tail of orphaned files (e.g. ``res_*_54_MouseCursor.bin``
+    left over from when class 54 was misidentified as ``MouseCursor``
+    instead of ``Font``).
+
+    The default behaviour is therefore to wipe ``output`` first so
+    every run produces a clean, self-consistent snapshot of what the
+    *current* unpacker decodes. Pass ``clean=False`` to keep the
+    existing files in place (useful for incremental debug iteration
+    where regenerating every JPEG is wasteful).
+
+    Safety rails: we never touch ``output`` if it equals ``/`` or the
+    current working directory, and we refuse to wipe anything that
+    resolves to a file (i.e. not an existing directory). All other
+    failure modes fall through to ``shutil.rmtree`` which will raise
+    a clear ``OSError`` the user can act on.
+    """
+    output = output.resolve()
+    cwd = Path.cwd().resolve()
+    if clean and output.exists():
+        if output == cwd or output.parent == output:
+            raise ValueError(
+                f"refusing to clean output directory {output} "
+                f"(equals cwd or filesystem root)"
+            )
+        if not output.is_dir():
+            raise ValueError(
+                f"output path {output} exists but is not a directory; "
+                f"refusing to clean."
+            )
+        shutil.rmtree(output)
+    output.mkdir(parents=True, exist_ok=True)
+
+
 def cmd_overlay(args: argparse.Namespace) -> Manifest:
+    _prepare_output_dir(Path(args.output), getattr(args, "clean", True))
     buf = _read_bytes(args.input)
     start = find_pe_overlay_start(buf)
     print(
@@ -3608,6 +3927,7 @@ def cmd_overlay(args: argparse.Namespace) -> Manifest:
 
 
 def cmd_eap(args: argparse.Namespace) -> Manifest:
+    _prepare_output_dir(Path(args.output), getattr(args, "clean", True))
     buf = _read_bytes(args.input)
     # If a sibling .eapres exists, harvest its resource names so the
     # manifest entries get the editor's human-readable labels.
@@ -3624,6 +3944,7 @@ def cmd_eap(args: argparse.Namespace) -> Manifest:
 
 
 def cmd_eapres(args: argparse.Namespace) -> Manifest:
+    _prepare_output_dir(Path(args.output), getattr(args, "clean", True))
     buf = _read_bytes(args.input)
     return unpack(buf, 0, Path(args.output), source=args.input, source_type="eapres")
 
@@ -3638,6 +3959,7 @@ def cmd_auto(args: argparse.Namespace) -> Manifest:
     if name.endswith(".eap"):
         return cmd_eap(args)
     # Last resort: assume the file IS a container starting at offset 0.
+    _prepare_output_dir(Path(args.output), getattr(args, "clean", True))
     buf = _read_bytes(args.input)
     return unpack(buf, 0, Path(args.output), source=args.input, source_type="auto")
 
@@ -3673,7 +3995,17 @@ def cmd_all(args: argparse.Namespace) -> int:
     if not input_dir.is_dir():
         print(f"ERROR: not a directory: {input_dir}", file=sys.stderr)
         return 2
-    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # In ``--clean`` mode we wipe the entire root output directory
+    # before we start, so any orphan files from a previous run
+    # (loose ``res_*.bin`` left over from an early manual
+    # ``cmd overlay -o unpacked`` invocation, or a top-level
+    # ``_manifest.json`` / ``_raw.bin`` snapshot) don't survive into
+    # the new run. The per-target subdirs are then recreated by the
+    # individual ``cmd_*`` callees, also under ``--clean`` semantics,
+    # so the final tree is guaranteed to be a self-consistent
+    # snapshot of what the current decoders produce.
+    _prepare_output_dir(output_dir, args.clean)
 
     # (input_path, mode, output_subdir)
     plan: List[Tuple[Path, str, Path]] = []
@@ -3702,7 +4034,7 @@ def cmd_all(args: argparse.Namespace) -> int:
     print(f"== Bulanci batch unpack ==")
     print(f"  input dir   : {input_dir}")
     print(f"  output dir  : {output_dir}")
-    print(f"  clean mode  : {'wipe target subdirs first' if args.clean else 'overwrite in place'}")
+    print(f"  clean mode  : {'wipe output root + target subdirs first' if args.clean else 'overwrite in place'}")
     print(f"  to process  : {len(plan)} file(s)")
     for src, mode, dest in plan:
         print(f"     {mode:7s} {src.name:<32s} -> {dest.name}/")
@@ -3716,9 +4048,15 @@ def cmd_all(args: argparse.Namespace) -> int:
     for src, mode, dest in plan:
         print()
         print(f"--- [{mode}] {src.name} -> {dest} ---")
-        if args.clean and dest.exists():
-            shutil.rmtree(dest)
-        sub_args = argparse.Namespace(input=str(src), output=str(dest))
+        # Each callee runs ``_prepare_output_dir`` on its own subdir
+        # so the per-target tree is guaranteed clean (the root-level
+        # wipe above already covers the case where ``dest`` didn't
+        # exist at all). Forward the same ``--clean`` flag so a
+        # ``--no-clean`` batch run preserves existing subdir contents
+        # for incremental iteration.
+        sub_args = argparse.Namespace(
+            input=str(src), output=str(dest), clean=args.clean
+        )
         try:
             if mode == "overlay":
                 mf = cmd_overlay(sub_args)
@@ -3808,9 +4146,30 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
     sub = parser.add_subparsers(dest="cmd", required=True)
 
+    def _add_clean_flag(p: argparse.ArgumentParser) -> None:
+        # Default to ``--clean`` so the output directory is a true
+        # snapshot of what the current decoders produce. ``--no-clean``
+        # opts into incremental iteration (overwrite-in-place) for the
+        # cases where wiping a 1+ GB extraction tree just to add one
+        # missing JSON is wasteful.
+        p.add_argument(
+            "--clean",
+            dest="clean",
+            action="store_true",
+            default=True,
+            help="Wipe the output directory before unpacking (default).",
+        )
+        p.add_argument(
+            "--no-clean",
+            dest="clean",
+            action="store_false",
+            help="Keep existing files in the output directory (overwrite in place).",
+        )
+
     p_overlay = sub.add_parser("overlay", help="Unpack the PE overlay of bulanci.exe")
     p_overlay.add_argument("input", help="Path to bulanci.exe")
     p_overlay.add_argument("-o", "--output", required=True, help="Output directory")
+    _add_clean_flag(p_overlay)
     p_overlay.set_defaults(func=cmd_overlay)
 
     p_eap = sub.add_parser("eap", help="Unpack a compiled .eap level bundle")
@@ -3821,16 +4180,19 @@ def main(argv: Optional[List[str]] = None) -> int:
         help="Path to the matching .eapres for resource-name resolution "
         "(defaults to the sibling file with the same basename)",
     )
+    _add_clean_flag(p_eap)
     p_eap.set_defaults(func=cmd_eap)
 
     p_eapres = sub.add_parser("eapres", help="Decompress a .eapres editor-level XML")
     p_eapres.add_argument("input")
     p_eapres.add_argument("-o", "--output", required=True)
+    _add_clean_flag(p_eapres)
     p_eapres.set_defaults(func=cmd_eapres)
 
     p_auto = sub.add_parser("auto", help="Auto-detect source type from file extension")
     p_auto.add_argument("input")
     p_auto.add_argument("-o", "--output", required=True)
+    _add_clean_flag(p_auto)
     p_auto.set_defaults(func=cmd_auto)
 
     p_all = sub.add_parser(

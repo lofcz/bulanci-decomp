@@ -1,0 +1,958 @@
+{
+  "atlas": "res_0000065787_52_BitmapSprite.atlas.png",
+  "gif": "res_0000065787_52_BitmapSprite.atlas.gif",
+  "frameWidth": 202,
+  "frameHeight": 241,
+  "frameCount": 69,
+  "framesStored": 69,
+  "paletteSource": "inline",
+  "transparencySource": "perimeter",
+  "maskPlanePresent": false,
+  "timing": {
+    "engineClockUnit": "ms",
+    "engineClockSource": "timeGetTime() polled by CDSApp_UpdateClock @ 0x0042e790; CDSObject scheduler fires events when g_dwElapsedMs >= lastFire + delay (see anim_runtime.md).",
+    "speedFormulaMs": {
+      "formula": "round(4725.0 / speed)",
+      "neutralSpeed": 100,
+      "numerator": 47.25,
+      "denominatorReference": 100.0,
+      "applies": "When the spawner passes speed != 100 to the construction site (e.g. CBulanek::FUN_0041e4b0). At speed == 100 the formula is skipped and trackMgr+0x44 stays at -1, leaving the sequence-default cadence in effect."
+    },
+    "sequenceDefaultCadenceMs": {
+      "formula": "delay_per_frame = ((f+1)*seq[0x10])/seq[0x14] - (f*seq[0x10])/seq[0x14]",
+      "totalDurationMs": null,
+      "note": "seq[0x14] = the sequence's frame count (see top-level 'frameCount'). seq[0x10] = total clip duration in ms, set by the resource-pool wrapper at load time and NOT present in any natural alignment of the on-disk BitmapSprite header. Pinning it requires further Ghidra work on the resource-pool side."
+    },
+    "flxOpcode0x0c": {
+      "purpose": "side-channel notification",
+      "description": "u16 broadcast via BroadcastFrameTimeHint @ 0x00436ef0 to the consumer's per-instance subscriber list (slot 4). Does NOT drive frameDelayOverrideMs. Listener semantics not yet pinned; the master pack's values (mostly 0/1) are too small to be ms delays.",
+      "explicitDurationFrames": 0,
+      "firstFrameWithOpcode": null,
+      "anyPresent": false
+    }
+  },
+  "motionPath": {
+    "enabled": false,
+    "frameCountWithMove": 0,
+    "framesWithMove": [],
+    "perFrameAbsolutePosition": [
+      {
+        "index": 0,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 1,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 2,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 3,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 4,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 5,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 6,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 7,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 8,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 9,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 10,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 11,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 12,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 13,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 14,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 15,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 16,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 17,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 18,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 19,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 20,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 21,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 22,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 23,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 24,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 25,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 26,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 27,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 28,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 29,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 30,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 31,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 32,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 33,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 34,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 35,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 36,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 37,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 38,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 39,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 40,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 41,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 42,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 43,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 44,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 45,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 46,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 47,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 48,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 49,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 50,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 51,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 52,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 53,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 54,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 55,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 56,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 57,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 58,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 59,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 60,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 61,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 62,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 63,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 64,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 65,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 66,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 67,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 68,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "netDelta": [
+      0,
+      0
+    ],
+    "closedLoop": false,
+    "boundingBox": {
+      "minX": 0,
+      "minY": 0,
+      "maxX": 0,
+      "maxY": 0
+    },
+    "totalManhattanLength": 0,
+    "ringFrameIncluded": false
+  },
+  "frames": [
+    {
+      "index": 0,
+      "ops": [
+        "rle",
+        "palette"
+      ]
+    },
+    {
+      "index": 1,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 2,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 3,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 4,
+      "ops": [
+        "reuse"
+      ]
+    },
+    {
+      "index": 5,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 6,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 7,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 8,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 9,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 10,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 11,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 12,
+      "ops": [
+        "delta",
+        "palette"
+      ]
+    },
+    {
+      "index": 13,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 14,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 15,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 16,
+      "ops": [
+        "rle"
+      ]
+    },
+    {
+      "index": 17,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 18,
+      "ops": [
+        "delta",
+        "palette"
+      ]
+    },
+    {
+      "index": 19,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 20,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 21,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 22,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 23,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 24,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 25,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 26,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 27,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 28,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 29,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 30,
+      "ops": [
+        "delta",
+        "palette"
+      ]
+    },
+    {
+      "index": 31,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 32,
+      "ops": [
+        "delta",
+        "palette"
+      ]
+    },
+    {
+      "index": 33,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 34,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 35,
+      "ops": [
+        "rle"
+      ]
+    },
+    {
+      "index": 36,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 37,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 38,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 39,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 40,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 41,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 42,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 43,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 44,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 45,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 46,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 47,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 48,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 49,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 50,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 51,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 52,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 53,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 54,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 55,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 56,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 57,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 58,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 59,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 60,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 61,
+      "ops": [
+        "delta"
+      ]
+    },
+    {
+      "index": 62,
+      "ops": [
+        "reuse"
+      ]
+    },
+    {
+      "index": 63,
+      "ops": [
+        "reuse"
+      ]
+    },
+    {
+      "index": 64,
+      "ops": [
+        "reuse"
+      ]
+    },
+    {
+      "index": 65,
+      "ops": [
+        "reuse"
+      ]
+    },
+    {
+      "index": 66,
+      "ops": [
+        "reuse"
+      ]
+    },
+    {
+      "index": 67,
+      "ops": [
+        "reuse"
+      ]
+    },
+    {
+      "index": 68,
+      "ops": [
+        "reuse"
+      ]
+    }
+  ]
+}

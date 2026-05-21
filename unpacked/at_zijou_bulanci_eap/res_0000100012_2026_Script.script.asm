@@ -1,0 +1,165 @@
+
+fn export#0 @ 0x0064  ; GetInfo(language)  -- writes globals 0/1/2 = name/type/GUID for the level/help/history picker
+  ; varCount=0
+    @0x0065  SetGlobalVar(1, IntConst(1000))
+    @0x006c  SetGlobalVar(2, StrConst("40DB7B80-6F82-47CA-BC44-081F407013DE"))
+    @0x00b9  SetGlobalVar(0, StrConst("Ať žijou Bulánci!"))
+    @0x00e0  Return(IntConst(0))
+
+fn export#1 @ 0x00e6  ; OnInit()  -- fires once during CBulanci construction; level scene setup happens here
+  ; varCount=0
+    @0x00e7  SetGlobalVar(3, IntConst(0))
+    @0x00ee  IfEqual(IsNet(), IntConst(0), 265)
+    @0x00f9  SetGlobalVar(3, StrmCreateMem(IntConst(4096), IntConst(4096)))
+    @0x0106  SetCommStrm(GetGlobalVar(3))
+    @0x0109  LoadPreface(100001)
+    @0x010e  SetMusic(100003, 0)
+    @0x0117  SetInsertMode(IntConst(0))
+    @0x011d  InsertView(CreateImage(IntConst(0), IntConst(0), 100002))
+    @0x012d  InsertView(CreateObstacle(IntConst(74), IntConst(0), IntConst(85), IntConst(29)))
+    @0x0143  InsertView(CreateImage(IntConst(7), IntConst(46), 100011))
+    @0x0153  InsertView(CreateImage(IntConst(51), IntConst(8), 100011))
+    @0x0163  InsertView(CreateImage(IntConst(49), IntConst(44), 100011))
+    @0x0173  InsertView(CreateImage(IntConst(4), IntConst(8), 100011))
+    @0x0183  InsertView(CreateImage(IntConst(0), IntConst(29), 100011))
+    @0x0193  InsertView(CreateImage(IntConst(58), IntConst(26), 100011))
+    @0x01a3  InsertView(CreateImage(IntConst(28), IntConst(51), 100011))
+    @0x01b3  InsertView(CreateImage(IntConst(28), IntConst(0), 100011))
+    @0x01c3  InsertView(CreateObstacle(IntConst(165), IntConst(347), IntConst(196), IntConst(355)))
+    @0x01d9  InsertView(CreateObstacle(IntConst(126), IntConst(346), IntConst(166), IntConst(371)))
+    @0x01ef  InsertView(CreateObstacle(IntConst(66), IntConst(485), IntConst(104), IntConst(515)))
+    @0x0205  InsertView(CreateObstacle(IntConst(161), IntConst(308), IntConst(181), IntConst(317)))
+    @0x021b  InsertView(CreateObstacle(IntConst(134), IntConst(302), IntConst(164), IntConst(316)))
+    @0x0231  InsertView(CreateObstacle(IntConst(106), IntConst(299), IntConst(137), IntConst(316)))
+    @0x0247  InsertView(CreateObstacle(IntConst(100), IntConst(336), IntConst(111), IntConst(345)))
+    @0x025d  InsertView(CreateObstacle(IntConst(93), IntConst(316), IntConst(116), IntConst(337)))
+    @0x0273  InsertView(CreateObstacle(IntConst(110), IntConst(315), IntConst(201), IntConst(349)))
+    @0x0289  InsertView(CreateImage(IntConst(125), IntConst(337), 100005))
+    @0x0299  InsertView(CreateObstacle(IntConst(680), IntConst(174), IntConst(715), IntConst(198)))
+    @0x02af  InsertView(CreateObstacle(IntConst(668), IntConst(188), IntConst(701), IntConst(198)))
+    @0x02c5  InsertView(CreateObstacle(IntConst(654), IntConst(202), IntConst(671), IntConst(237)))
+    @0x02db  InsertView(CreateObstacle(IntConst(720), IntConst(230), IntConst(738), IntConst(267)))
+    @0x02f1  InsertView(CreateObstacle(IntConst(669), IntConst(194), IntConst(720), IntConst(277)))
+    @0x0307  InsertView(CreateObstacle(IntConst(735), IntConst(140), IntConst(752), IntConst(170)))
+    @0x031d  InsertView(CreateObstacle(IntConst(736), IntConst(129), IntConst(769), IntConst(143)))
+    @0x0333  InsertView(CreateObstacle(IntConst(689), IntConst(77), IntConst(736), IntConst(177)))
+    @0x0349  InsertView(CreateObstacle(IntConst(735), IntConst(60), IntConst(800), IntConst(133)))
+    @0x035f  InsertView(CreateObstacle(IntConst(359), IntConst(273), IntConst(376), IntConst(289)))
+    @0x0375  InsertView(CreateObstacle(IntConst(408), IntConst(273), IntConst(417), IntConst(282)))
+    @0x038b  InsertView(CreateObstacle(IntConst(374), IntConst(271), IntConst(409), IntConst(290)))
+    @0x03a1  InsertView(CreateObstacle(IntConst(397), IntConst(210), IntConst(413), IntConst(223)))
+    @0x03b7  InsertView(CreateObstacle(IntConst(356), IntConst(211), IntConst(369), IntConst(221)))
+    @0x03cd  InsertView(CreateObstacle(IntConst(367), IntConst(206), IntConst(401), IntConst(222)))
+    @0x03e3  InsertView(CreateObstacle(IntConst(323), IntConst(225), IntConst(342), IntConst(230)))
+    @0x03f9  InsertView(CreateObstacle(IntConst(320), IntConst(251), IntConst(345), IntConst(266)))
+    @0x040f  InsertView(CreateObstacle(IntConst(309), IntConst(234), IntConst(317), IntConst(253)))
+    @0x0425  InsertView(CreateObstacle(IntConst(316), IntConst(230), IntConst(341), IntConst(258)))
+    @0x043b  InsertView(CreateObstacle(IntConst(338), IntConst(221), IntConst(419), IntConst(273)))
+    @0x0451  InsertView(CreateObstacle(IntConst(238), IntConst(138), IntConst(269), IntConst(145)))
+    @0x0467  InsertView(CreateObstacle(IntConst(221), IntConst(163), IntConst(229), IntConst(170)))
+    @0x047d  InsertView(CreateObstacle(IntConst(220), IntConst(147), IntConst(228), IntConst(161)))
+    @0x0493  InsertView(CreateObstacle(IntConst(277), IntConst(147), IntConst(287), IntConst(169)))
+    @0x04a9  InsertView(CreateObstacle(IntConst(228), IntConst(143), IntConst(279), IntConst(180)))
+    @0x04bf  InsertView(CreateObstacle(IntConst(394), IntConst(420), IntConst(408), IntConst(430)))
+    @0x04d5  InsertView(CreateObstacle(IntConst(363), IntConst(421), IntConst(382), IntConst(436)))
+    @0x04eb  InsertView(CreateObstacle(IntConst(457), IntConst(368), IntConst(470), IntConst(384)))
+    @0x0501  InsertView(CreateObstacle(IntConst(418), IntConst(355), IntConst(454), IntConst(361)))
+    @0x0517  InsertView(CreateObstacle(IntConst(416), IntConst(360), IntConst(462), IntConst(371)))
+    @0x052d  InsertView(CreateObstacle(IntConst(408), IntConst(370), IntConst(460), IntConst(392)))
+    @0x0543  InsertView(CreateObstacle(IntConst(351), IntConst(403), IntConst(361), IntConst(412)))
+    @0x0559  InsertView(CreateObstacle(IntConst(344), IntConst(386), IntConst(360), IntConst(404)))
+    @0x056f  InsertView(CreateObstacle(IntConst(359), IntConst(378), IntConst(408), IntConst(425)))
+    @0x0585  InsertView(CreateObstacle(IntConst(600), IntConst(140), IntConst(608), IntConst(147)))
+    @0x059b  InsertView(CreateObstacle(IntConst(497), IntConst(102), IntConst(502), IntConst(135)))
+    @0x05b1  InsertView(CreateObstacle(IntConst(600), IntConst(104), IntConst(609), IntConst(114)))
+    @0x05c7  InsertView(CreateObstacle(IntConst(601), IntConst(113), IntConst(611), IntConst(141)))
+    @0x05dd  InsertView(CreateObstacle(IntConst(588), IntConst(145), IntConst(599), IntConst(155)))
+    @0x05f3  InsertView(CreateObstacle(IntConst(537), IntConst(154), IntConst(580), IntConst(164)))
+    @0x0609  InsertView(CreateObstacle(IntConst(573), IntConst(157), IntConst(586), IntConst(166)))
+    @0x061f  InsertView(CreateObstacle(IntConst(505), IntConst(87), IntConst(513), IntConst(97)))
+    @0x0635  InsertView(CreateObstacle(IntConst(542), IntConst(161), IntConst(575), IntConst(171)))
+    @0x064b  InsertView(CreateObstacle(IntConst(588), IntConst(98), IntConst(602), IntConst(147)))
+    @0x0661  InsertView(CreateObstacle(IntConst(501), IntConst(94), IntConst(514), IntConst(143)))
+    @0x0677  InsertView(CreateObstacle(IntConst(513), IntConst(85), IntConst(591), IntConst(159)))
+    @0x068d  InsertView(CreateObstacle(IntConst(152), IntConst(44), IntConst(182), IntConst(52)))
+    @0x06a3  InsertView(CreateObstacle(IntConst(109), IntConst(42), IntConst(150), IntConst(80)))
+    @0x06b9  InsertView(CreateObstacle(IntConst(81), IntConst(0), IntConst(191), IntConst(46)))
+    @0x06cf  SetInsertMode(IntConst(2))
+    @0x06d5  InsertView(CreateImage(IntConst(553), IntConst(240), 100010))
+    @0x06e5  SetInsertMode(IntConst(1))
+    @0x06eb  InsertView(SetOrderAxis(CreateImage(IntConst(108), IntConst(45), 100005), IntConst(0)))
+    @0x0701  InsertView(SetOrderAxis(CreateImage(IntConst(76), IntConst(0), 100004), IntConst(0)))
+    @0x0717  InsertView(SetOrderAxis(CreateImage(IntConst(495), IntConst(74), 100006), IntConst(0)))
+    @0x072d  InsertView(SetOrderAxis(CreateImage(IntConst(668), IntConst(206), 100009), IntConst(0)))
+    @0x0743  InsertView(SetOrderAxis(CreateImage(IntConst(650), IntConst(170), 100009), IntConst(0)))
+    @0x0759  InsertView(SetOrderAxis(CreateImage(IntConst(730), IntConst(69), 100009), IntConst(0)))
+    @0x076f  InsertView(SetOrderAxis(CreateImage(IntConst(680), IntConst(110), 100009), IntConst(0)))
+    @0x0785  InsertView(SetOrderAxis(CreateImage(IntConst(685), IntConst(53), 100009), IntConst(0)))
+    @0x079b  InsertView(SetOrderAxis(CreateImage(IntConst(730), IntConst(33), 100009), IntConst(0)))
+    @0x07b1  InsertView(SetOrderAxis(CreateImage(IntConst(341), IntConst(343), 100007), IntConst(0)))
+    @0x07c7  InsertView(SetOrderAxis(CreateImage(IntConst(64), IntConst(479), 100005), IntConst(0)))
+    @0x07dd  InsertView(SetOrderAxis(CreateImage(IntConst(132), IntConst(294), 100005), IntConst(0)))
+    @0x07f3  InsertView(SetOrderAxis(CreateImage(IntConst(91), IntConst(303), 100004), IntConst(0)))
+    @0x0809  InsertView(SetOrderAxis(CreateImage(IntConst(103), IntConst(287), 100005), IntConst(0)))
+    @0x081f  InsertView(SetOrderAxis(CreateImage(IntConst(348), IntConst(237), 100008), IntConst(0)))
+    @0x0835  InsertView(SetOrderAxis(CreateImage(IntConst(304), IntConst(214), 100008), IntConst(0)))
+    @0x084b  InsertView(SetOrderAxis(CreateImage(IntConst(348), IntConst(194), 100008), IntConst(0)))
+    @0x0861  InsertView(SetOrderAxis(CreateImage(IntConst(216), IntConst(126), 100008), IntConst(0)))
+    @0x0877  SetInsertMode(IntConst(0))
+    @0x087d  IfEqual(IsServer(), IntConst(0), 2246)
+    @0x0888  DefineTraceArea(IntConst(0), IntConst(725), IntConst(450), IntConst(805), IntConst(520), IntConst(14))
+    @0x08a7  DefineTraceArea(IntConst(1), IntConst(-5), IntConst(-5), IntConst(75), IntConst(65), IntConst(14))
+    @0x08c6  InsertBulanci()
+    @0x08c7  Return(IntConst(0))
+
+fn export#2 @ 0x08cd  ; OnDeinit()  -- fires once during CGaming destruction; resource teardown
+  ; varCount=0
+    @0x08ce  IfEqual(GetGlobalVar(3), IntConst(0), 2271)
+    @0x08da  SetGlobalVar(3, StrmDestroy(GetGlobalVar(3)))
+    @0x08df  Return(IntConst(0))
+
+fn export#3 @ 0x08e5  ; OnBitmapEvt(slot, evt)  -- fires when a CBitmap sub-view emits an event (animation frame end, click/hit). slot = view.@0x70 = its CGaming slot, evt = the event code
+  ; varCount=0
+    @0x08e6  Return(IntConst(0))
+
+fn export#4 @ 0x08ec  ; OnSlotPlaced(slot, msgHi, msgLoBits)  -- fires when CExplosion / net-msg-0x0f spawns or moves a slot via `FUN_00417e80` and msg 0xd7 reaches it. slot = destination slot, msgHi/msgLo = the upper/lower halves of the spawn parameter
+  ; varCount=0
+    @0x08ed  Return(IntConst(0))
+
+fn export#5 @ 0x08f3  ; OnSlotDisplaced(slot, byParam)  -- companion to OnSlotPlaced: fires on a *second* slot when its occupant gets displaced by a OnSlotPlaced event (msg 0xd8). slot = the displaced slot, byParam = the slot that displaced it
+  ; varCount=0
+    @0x08f4  Return(IntConst(0))
+
+fn export#6 @ 0x08fa  ; OnTimer(slotId)  -- fires when a `RegisterTimer(slotId, delay, flags)` countdown (opcodes 68..72; timer table at `this+0x440`) expires; the slot id passed back is the same slotId originally registered
+  ; varCount=0
+    @0x08fb  Return(IntConst(0))
+
+fn export#7 @ 0x0901  ; OnEnter(traceId, entitySlot)  -- fires when a player/entity *enters* a `DefineTraceArea` rectangle. traceId = the first arg passed to DefineTraceArea, entitySlot = the 0..3 player slot (or 0x88-N for slots 4..7) that crossed the boundary
+  ; varCount=0
+    @0x0902  Switch(GetLocalVar(0); 0=>0x916, 1=>0x92d)
+    @0x0916  Call(fn@0x0, GetLocalVar(1), IntConst(9), IntConst(11))
+    @0x0928  Goto(2372)
+    @0x092d  Call(fn@0x0, GetLocalVar(1), IntConst(739), IntConst(466))
+    @0x093f  Goto(2372)
+    @0x0944  Return(IntConst(0))
+
+fn export#8 @ 0x094a  ; OnLeave(traceId, entitySlot)  -- fires when a player/entity *leaves* a `DefineTraceArea` rectangle (symmetric to OnEnter, same argument shape)
+  ; varCount=0
+    @0x094b  Switch(GetLocalVar(0); 0=>0x95f, 1=>0x964)
+    @0x095f  Goto(2409)
+    @0x0964  Goto(2409)
+    @0x0969  Return(IntConst(0))
+
+fn export#9 @ 0x096f  ; OnNetCustom(streamHandle)  -- fires from `CGame::ProcessNetMessage` case 0x15 with a stream handle. Scripts typically `StrmRead(handle, 1)` the leading opcode byte and switch on it to dispatch their own RPC sub-protocol
+  ; varCount=4
+    @0x0970  SetLocalVar(0, StrmRead(GetLocalVar(4), IntConst(1)))
+    @0x097a  IfNotEqual(GetLocalVar(0), IntConst(1), 2480)
+    @0x0986  SetLocalVar(3, StrmRead(GetLocalVar(4), IntConst(1)))
+    @0x0990  SetLocalVar(1, StrmRead(GetLocalVar(4), IntConst(4)))
+    @0x099a  SetLocalVar(2, StrmRead(GetLocalVar(4), IntConst(4)))
+    @0x09a4  TeleportPlayerTo(GetLocalVar(3), GetLocalVar(1), GetLocalVar(2), IntConst(1))
+    @0x09b0  Return(IntConst(0))
+
+fn export#10 @ 0x09b6  ; OnGameStart()  -- fires from `CGaming::FUN_0041c140(true)` whenever the level transitions from paused/loaded to running (level start, post-pause resume). Music is started and engine-side timer slots 1/2 are armed right after this returns
+  ; varCount=0
+    @0x09b7  Return(IntConst(0))

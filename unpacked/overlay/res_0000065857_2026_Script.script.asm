@@ -1,0 +1,155 @@
+
+fn export#0 @ 0x0000  ; GetInfo(language)  -- writes globals 0/1/2 = name/type/GUID for the level/help/history picker
+  ; varCount=0
+    @0x0001  SetGlobalVar(1, IntConst(3))
+    @0x0008  SetGlobalVar(2, StrConst("C48AEB13-1BE6-41e1-A50E-7BBA39E43188"))
+    @0x0055  IfEqual(GetLocalVar(0), IntConst(1), 130)
+    @0x0061  SetGlobalVar(0, StrConst("Steel works"))
+    @0x007c  Return(IntConst(0))
+    @0x0082  SetGlobalVar(0, StrConst("Noční směna"))
+    @0x009d  Return(IntConst(0))
+
+fn export#1 @ 0x00a3  ; OnInit()  -- fires once during CBulanci construction; level scene setup happens here
+  ; varCount=0
+    @0x00a4  SetGlobalVar(3, IntConst(0))
+    @0x00ab  IfEqual(IsNet(), IntConst(0), 198)
+    @0x00b6  SetGlobalVar(3, StrmCreateMem(IntConst(1024), IntConst(1024)))
+    @0x00c3  SetCommStrm(GetGlobalVar(3))
+    @0x00c6  IfEqual(IsServer(), IntConst(0), 225)
+    @0x00d1  RegisterTimer(IntConst(0), IntConst(0), IntConst(7))
+    @0x00e1  LoadPreface(65624)
+    @0x00e6  SetMusic(65863, 65538)
+    @0x00ef  SetInsertMode(IntConst(0))
+    @0x00f5  InsertView(CreateImage(IntConst(0), IntConst(0), 65623))
+    @0x0105  InsertView(CreateAnim(IntConst(701), IntConst(180), delay=3, frames=[65780]))
+    @0x0117  SetInsertMode(IntConst(1))
+    @0x011d  InsertView(SetOrderAxis(CreateImage(IntConst(129), IntConst(99), 65622), IntConst(-110)))
+    @0x0133  SetInsertMode(IntConst(2))
+    @0x0139  InsertView(CreateImage(IntConst(0), IntConst(0), 65621))
+    @0x0149  InsertView(CreateImage(IntConst(736), IntConst(323), 65626))
+    @0x0159  InsertView(CreateImage(IntConst(551), IntConst(425), 65620))
+    @0x0169  InsertView(CreateImage(IntConst(713), IntConst(0), 65625))
+    @0x0179  InsertView(BindToSlot(CreateAnim(IntConst(538), IntConst(-347), delay=0, frames=[65781]), IntConst(6)))
+    @0x0191  InsertView(CreateObstacle(IntConst(685), IntConst(148), IntConst(799), IntConst(245)))
+    @0x01a7  InsertView(CreateObstacle(IntConst(695), IntConst(254), IntConst(799), IntConst(362)))
+    @0x01bd  InsertView(CreateObstacle(IntConst(0), IntConst(0), IntConst(27), IntConst(23)))
+    @0x01d3  InsertView(CreateObstacle(IntConst(0), IntConst(496), IntConst(447), IntConst(515)))
+    @0x01e9  InsertView(CreateObstacle(IntConst(524), IntConst(507), IntConst(799), IntConst(515)))
+    @0x01ff  InsertView(CreateObstacle(IntConst(641), IntConst(0), IntConst(743), IntConst(60)))
+    @0x0215  InsertView(CreateObstacle(IntConst(623), IntConst(475), IntConst(724), IntConst(515)))
+    @0x022b  InsertView(BindToSlot(CreateObstacle(IntConst(136), IntConst(17), IntConst(168), IntConst(27)), IntConst(10)))
+    @0x0247  InsertView(BindToSlot(CreateObstacle(IntConst(579), IntConst(20), IntConst(610), IntConst(30)), IntConst(11)))
+    @0x0263  InsertView(BindToSlot(CreateObstacle(IntConst(447), IntConst(450), IntConst(477), IntConst(460)), IntConst(12)))
+    @0x027f  InsertView(BindToSlot(CreateObstacle(IntConst(494), IntConst(450), IntConst(524), IntConst(460)), IntConst(13)))
+    @0x029b  InsertView(BindToSlot(CreateObstacle(IntConst(26), IntConst(390), IntConst(36), IntConst(431)), IntConst(14)))
+    @0x02b7  InsertView(CreateObstacle(IntConst(136), IntConst(0), IntConst(168), IntConst(17)))
+    @0x02cd  InsertView(CreateObstacle(IntConst(579), IntConst(0), IntConst(610), IntConst(20)))
+    @0x02e3  InsertView(CreateObstacle(IntConst(447), IntConst(460), IntConst(524), IntConst(515)))
+    @0x02f9  InsertView(CreateObstacle(IntConst(0), IntConst(390), IntConst(26), IntConst(431)))
+    @0x030f  InsertView(CreateObstacle(IntConst(232), IntConst(148), IntConst(410), IntConst(220)))
+    @0x0325  InsertView(CreateObstacle(IntConst(200), IntConst(190), IntConst(232), IntConst(220)))
+    @0x033b  InsertView(CreateObstacle(IntConst(127), IntConst(220), IntConst(367), IntConst(296)))
+    @0x0351  InsertView(CreateObstacle(IntConst(162), IntConst(296), IntConst(320), IntConst(342)))
+    @0x0367  InsertView(CreateObstacle(IntConst(220), IntConst(240), IntConst(300), IntConst(370)))
+    @0x037d  InsertView(CreateObstacle(IntConst(320), IntConst(296), IntConst(342), IntConst(315)))
+    @0x0393  InsertView(CreateObstacle(IntConst(367), IntConst(232), IntConst(390), IntConst(256)))
+    @0x03a9  InsertBulanci()
+    @0x03aa  Return(IntConst(0))
+
+fn export#2 @ 0x03b0  ; OnDeinit()  -- fires once during CGaming destruction; resource teardown
+  ; varCount=0
+    @0x03b1  IfEqual(GetGlobalVar(3), IntConst(0), 962)
+    @0x03bd  SetGlobalVar(3, StrmDestroy(GetGlobalVar(3)))
+    @0x03c2  Return(IntConst(0))
+
+fn export#3 @ 0x03d5  ; OnBitmapEvt(slot, evt)  -- fires when a CBitmap sub-view emits an event (animation frame end, click/hit). slot = view.@0x70 = its CGaming slot, evt = the event code
+  ; varCount=0
+    @0x03d6  IfNotEqual(GetLocalVar(0), IntConst(6), 1047)
+    @0x03e2  IfEqual(GetLocalVar(1), IntConst(0), 1018)
+    @0x03ee  Call(fn@0x565, )
+    @0x03f4  Return(IntConst(0))
+    @0x03fa  AnimResume(GetSlot(IntConst(6)))
+    @0x0401  IfEqual(IsServer(), IntConst(0), 1047)
+    @0x040c  TimerSetData(IntConst(0), IntConst(10000))
+    @0x0417  Return(IntConst(0))
+
+fn export#4 @ 0x041d  ; OnSlotPlaced(slot, msgHi, msgLoBits)  -- fires when CExplosion / net-msg-0x0f spawns or moves a slot via `FUN_00417e80` and msg 0xd7 reaches it. slot = destination slot, msgHi/msgLo = the upper/lower halves of the spawn parameter
+  ; varCount=0
+    @0x041e  Switch(GetLocalVar(0); 10=>0x450, 11=>0x46c, 12=>0x488, 13=>0x4a4, 14=>0x4c0)
+    @0x044a  Return(IntConst(0))
+    @0x0450  Call(fn@0x59a, IntConst(3), GetLocalVar(1), GetLocalVar(2), IntConst(2), GetLocalVar(0))
+    @0x0466  Return(IntConst(0))
+    @0x046c  Call(fn@0x59a, IntConst(4), GetLocalVar(1), GetLocalVar(2), IntConst(2), GetLocalVar(0))
+    @0x0482  Return(IntConst(0))
+    @0x0488  Call(fn@0x59a, IntConst(2), GetLocalVar(1), GetLocalVar(2), IntConst(3), GetLocalVar(0))
+    @0x049e  Return(IntConst(0))
+    @0x04a4  Call(fn@0x59a, IntConst(0), GetLocalVar(1), GetLocalVar(2), IntConst(3), GetLocalVar(0))
+    @0x04ba  Return(IntConst(0))
+    @0x04c0  Call(fn@0x59a, IntConst(1), GetLocalVar(1), GetLocalVar(2), IntConst(0), GetLocalVar(0))
+    @0x04d6  Return(IntConst(0))
+
+fn export#5 @ 0x04dc  ; OnSlotDisplaced(slot, byParam)  -- companion to OnSlotPlaced: fires on a *second* slot when its occupant gets displaced by a OnSlotPlaced event (msg 0xd8). slot = the displaced slot, byParam = the slot that displaced it
+  ; varCount=0
+    @0x04dd  Return(IntConst(0))
+
+fn export#6 @ 0x04e3  ; OnTimer(slotId)  -- fires when a `RegisterTimer(slotId, delay, flags)` countdown (opcodes 68..72; timer table at `this+0x440`) expires; the slot id passed back is the same slotId originally registered
+  ; varCount=0
+    @0x04e4  IfEqual(IsServer(), IntConst(0), 1296)
+    @0x04ef  IfNotEqual(GetLocalVar(0), IntConst(0), 1287)
+    @0x04fb  Call(fn@0x6f6, )
+    @0x0501  Return(IntConst(0))
+    @0x0507  Call(fn@0x63e, MapGet(GetLocalVar(0)))
+    @0x0510  Return(IntConst(0))
+
+fn export#7 @ 0x0516  ; OnEnter(traceId, entitySlot)  -- fires when a player/entity *enters* a `DefineTraceArea` rectangle. traceId = the first arg passed to DefineTraceArea, entitySlot = the 0..3 player slot (or 0x88-N for slots 4..7) that crossed the boundary
+  ; varCount=0
+    @0x0517  Return(IntConst(0))
+
+fn export#8 @ 0x051d  ; OnLeave(traceId, entitySlot)  -- fires when a player/entity *leaves* a `DefineTraceArea` rectangle (symmetric to OnEnter, same argument shape)
+  ; varCount=0
+    @0x051e  Return(IntConst(0))
+
+fn export#9 @ 0x0524  ; OnNetCustom(streamHandle)  -- fires from `CGame::ProcessNetMessage` case 0x15 with a stream handle. Scripts typically `StrmRead(handle, 1)` the leading opcode byte and switch on it to dispatch their own RPC sub-protocol
+  ; varCount=0
+    @0x0525  Switch(StrmRead(GetGlobalVar(3), IntConst(1)); 0=>0x545, 1=>0x551)
+    @0x053f  Return(IntConst(0))
+    @0x0545  Call(fn@0x6f6, )
+    @0x054b  Return(IntConst(0))
+    @0x0551  Call(fn@0x63e, StrmRead(GetGlobalVar(3), IntConst(2)))
+    @0x055f  Return(IntConst(0))
+    @0x0565  IntConst(18962)
+    @0x056a  IntConst(93585408)
+    @0x056f  IntConst(18432)
+    @0x0574  IntConst(100925440)
+    @0x0579  Rand(IntConst(0), IntConst(6))
+    @0x0584  IntConst(5000)
+    @0x0589  IntConst(30000)
+    @0x058e  TimerStop(IntConst(0))
+    @0x0594  Return(IntConst(0))
+    @0x059a  IntConst(50463511)
+    @0x059f  GetLocalVar(211)
+    @0x05a1  Sub(IntConst(16793856), IntConst(67305472))
+    @0x05ac  IfEqual(IsServer(), IntConst(0), 1491)
+    @0x05b7  MapSet(RegisterTimer(IntConst(-1), IntConst(2000), IntConst(2)), Add(GetLocalVar(0), ShiftLeft(GetLocalVar(1), IntConst(8))))
+    @0x05d3  Return(IntConst(0))
+    @0x05d9  Rand(SetLocalVar(0, ShiftRight(GetLocalVar(4), IntConst(8))), SpawnEnemyAt(GetLocalVar(1), GetLocalVar(2), GetLocalVar(3), GetLocalVar(0), IntConst(1)))
+    @0x05f2  SpawnAtView(IntConst(2), Add(GetLocalVar(0), IntConst(10)))
+    @0x0600  IfEqual(IsServer(), IntConst(0), 1592)
+    @0x060b  IfEqual(IsNet(), IntConst(0), 1592)
+    @0x0616  StrmSetSize(GetGlobalVar(3), IntConst(0))
+    @0x061e  StrmWrite(GetGlobalVar(3), IntConst(1), IntConst(1))
+    @0x062b  StrmWrite(GetGlobalVar(3), GetLocalVar(4), IntConst(2))
+    @0x0635  StrmSend(GetGlobalVar(3))
+    @0x0638  Return(IntConst(0))
+    @0x063e  IntConst(205080)
+    @0x0643  IntConst(255)
+    @0x0648  Add(Rand(IntConst(109379584), IntConst(512)), IntConst(1697))
+    @0x0659  GetLocalVar(0)
+    @0x065b  IntConst(441600)
+    @0x0660  IntConst(4)
+    ; (227 byte(s) of unreachable tail/inline helper starting with op=217)
+
+fn export#10 @ 0x03c8  ; OnGameStart()  -- fires from `CGaming::FUN_0041c140(true)` whenever the level transitions from paused/loaded to running (level start, post-pause resume). Music is started and engine-side timer slots 1/2 are armed right after this returns
+  ; varCount=0
+    @0x03c9  Call(fn@0x565, )
+    @0x03cf  Return(IntConst(0))

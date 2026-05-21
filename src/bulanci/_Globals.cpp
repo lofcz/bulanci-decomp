@@ -708,7 +708,7 @@ uchar _Globals::FUN_00416640(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00416670 BEGIN
 /* 416670-416690 00020 */
-uint _Globals::FUN_00416670(int param_1) { STUB_BODY(); return 0; }
+uint _Globals::CBulanek_GetSpawnQuipSlot(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416670 END
 
 // !FUNC 0x00416720 BEGIN
@@ -798,12 +798,12 @@ uchar _Globals::FUN_00417500(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00417950 BEGIN
 /* 417950-417995 00045 */
-void _Globals::FUN_00417950(int param_1, uchar param_2, int* param_3) { STUB_BODY(); }
+void _Globals::TriggerSoundEffect(int param_1, uchar param_2, int* param_3) { STUB_BODY(); }
 // !FUNC 0x00417950 END
 
 // !FUNC 0x004179c0 BEGIN
 /* 4179C0-4179DE 0001E */
-uchar _Globals::FUN_004179c0(uchar param_1, int* param_2) { STUB_BODY(); return 0; }
+uchar _Globals::CBulanek_PlayItemPickupSound(uchar param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004179c0 END
 
 // !FUNC 0x00417a20 BEGIN
@@ -838,7 +838,7 @@ uchar _Globals::CGaming_RegisterObjectAtSlot(int param_1, uchar param_2) { STUB_
 
 // !FUNC 0x00418000 BEGIN
 /* 418000-4180B3 000B3 */
-uchar _Globals::FUN_00418000(uchar param_1, int param_2) { STUB_BODY(); return 0; }
+uchar _Globals::TriggerLevelScriptSound(uchar param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00418000 END
 
 // !FUNC 0x00418300 BEGIN
@@ -928,7 +928,7 @@ uchar _Globals::FUN_004195f0(uint param_1, int* param_2, int* param_3, int* para
 
 // !FUNC 0x00419d60 BEGIN
 /* 419D60-419E3A 000DA */
-uchar _Globals::FUN_00419d60(short param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
+uchar _Globals::CGaming_OnTimerCountdown(short param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00419d60 END
 
 // !FUNC 0x00419e90 BEGIN
@@ -938,7 +938,7 @@ uchar _Globals::FUN_00419e90(uint* param_1, uint param_2, int* param_3, char par
 
 // !FUNC 0x0041a020 BEGIN
 /* 41A020-41A0AA 0008A */
-uchar _Globals::FUN_0041a020(void* param_1, int* param_2, uint param_3) { STUB_BODY(); return 0; }
+uchar _Globals::CGaming_OnPlayerCollectItem(void* param_1, int* param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a020 END
 
 // !FUNC 0x0041a0f0 BEGIN
@@ -988,12 +988,12 @@ uint* _Globals::FUN_0041b420(uint param_1, uint* param_2, uint param_3, int para
 
 // !FUNC 0x0041ba60 BEGIN
 /* 41BA60-41BAA6 00046 */
-uchar _Globals::FUN_0041ba60(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar _Globals::CGaming_SetMusicAndSoundBank(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041ba60 END
 
 // !FUNC 0x0041bb00 BEGIN
 /* 41BB00-41BB28 00028 */
-uint _Globals::FUN_0041bb00(int param_1) { STUB_BODY(); return 0; }
+uint _Globals::CLevelScript_SetMusic(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bb00 END
 
 // !FUNC 0x0041bb30 BEGIN
@@ -1123,7 +1123,7 @@ uchar _Globals::CGaming_SpawnBulletAndPlaySound(int* param_1, uchar param_2, uch
 
 // !FUNC 0x0041f350 BEGIN
 /* 41F350-41F4FC 001AC */
-uchar _Globals::CGaming_ProcessRoundStateAndScoring(int* param_1) { STUB_BODY(); return 0; }
+uchar _Globals::CGaming_TickRoundStateAndScoring(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f350 END
 
 // !FUNC 0x0041f500 BEGIN
@@ -1153,7 +1153,7 @@ uint _Globals::FUN_0041f730(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041f770 BEGIN
 /* 41F770-41F8F2 00182 */
-uchar _Globals::FUN_0041f770(char param_1, uchar param_2, int* param_3) { STUB_BODY(); return 0; }
+uchar _Globals::CGaming_RespawnPlayer(char param_1, uchar param_2, int* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f770 END
 
 // !FUNC 0x0041fce0 BEGIN
@@ -1223,7 +1223,7 @@ uchar _Globals::FUN_004223e0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00422430 BEGIN
 /* 422430-42246B 0003B */
-uchar _Globals::FUN_00422430(uchar* param_1, int param_2, int param_3, int param_4, uint param_5, char param_6) { STUB_BODY(); return 0; }
+uchar _Globals::TriggerBankSample(uchar* param_1, int param_2, int param_3, int param_4, uint param_5, char param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x00422430 END
 
 // !FUNC 0x00422500 BEGIN
@@ -1233,7 +1233,10 @@ int _Globals::FUN_00422500(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00422620 BEGIN
 /* 422620-42262D 0000D */
-uchar _Globals::FUN_00422620(uint param_1) { STUB_BODY(); return 0; }
+uchar _Globals::FUN_00422620(uint param_1) {
+    *reinterpret_cast<uint*>(reinterpret_cast<char*>(this) + 0x440) = param_1;
+    return static_cast<uchar>(param_1);
+}
 // !FUNC 0x00422620 END
 
 // !FUNC 0x004229b0 BEGIN
@@ -1313,7 +1316,7 @@ uchar _Globals::FUN_004254f0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00426500 BEGIN
 /* 426500-426567 00067 */
-uint* _Globals::CreateObject_00426500() { STUB_BODY(); return 0; }
+uint* _Globals::CGunMouse_CreateObject() { STUB_BODY(); return 0; }
 // !FUNC 0x00426500 END
 
 // !FUNC 0x00426570 BEGIN
@@ -1536,10 +1539,6 @@ uchar _Globals::CDSApp_PumpTick(int* param_1) { STUB_BODY(); return 0; }
 uchar _Globals::CDSView_SetModalEligible(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042bed0 END
 
-// !FUNC 0x0042bfc0 BEGIN
-/* 42BFC0-42BFF6 00036 */
-uchar _Globals::FUN_0042bfc0(void* param_1, int param_2) { STUB_BODY(); return 0; }
-// !FUNC 0x0042bfc0 END
 
 // !FUNC 0x0042c120 BEGIN
 /* 42C120-42C138 00018 */
@@ -1566,10 +1565,6 @@ uchar _Globals::FUN_0042c230(int* param_1) { STUB_BODY(); return 0; }
 uchar _Globals::CDSView_SetActive(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042c290 END
 
-// !FUNC 0x0042c3c0 BEGIN
-/* 42C3C0-42C3D2 00012 */
-uchar _Globals::FUN_0042c3c0(ushort param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0042c3c0 END
 
 // !FUNC 0x0042c6c0 BEGIN
 /* 42C6C0-42C6F7 00037 */
@@ -1606,10 +1601,6 @@ uchar _Globals::CDSView_AcquireKeyboardFocus(int* param_1) { STUB_BODY(); return
 uchar _Globals::FUN_0042c960(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042c960 END
 
-// !FUNC 0x0042c990 BEGIN
-/* 42C990-42C9E2 00052 */
-uchar _Globals::FUN_0042c990(int* param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0042c990 END
 
 // !FUNC 0x0042c9f0 BEGIN
 /* 42C9F0-42CA22 00032 */
@@ -1641,20 +1632,12 @@ uchar _Globals::FUN_0042cfa0(int* param_1) { STUB_BODY(); return 0; }
 uchar _Globals::FUN_0042cff0(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042cff0 END
 
-// !FUNC 0x0042d040 BEGIN
-/* 42D040-42D075 00035 */
-uchar _Globals::FUN_0042d040(int* param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0042d040 END
 
 // !FUNC 0x0042d080 BEGIN
 /* 42D080-42D0B0 00030 */
 ushort _Globals::FUN_0042d080(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042d080 END
 
-// !FUNC 0x0042d0b0 BEGIN
-/* 42D0B0-42D156 000A6 */
-uchar _Globals::FUN_0042d0b0(int* param_1, int param_2) { STUB_BODY(); return 0; }
-// !FUNC 0x0042d0b0 END
 
 // !FUNC 0x0042d1a0 BEGIN
 /* 42D1A0-42D2CA 0012A */
@@ -1881,10 +1864,6 @@ uchar _Globals::FUN_0042f300(uint param_1) { STUB_BODY(); return 0; }
 uchar _Globals::FUN_0042f330(uint param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0042f330 END
 
-// !FUNC 0x0042f390 BEGIN
-/* 42F390-42F3DD 0004D */
-uint _Globals::FUN_0042f390(ushort param_1, ushort param_2, uint param_3, uint param_4) { STUB_BODY(); return 0; }
-// !FUNC 0x0042f390 END
 
 // !FUNC 0x0042f410 BEGIN
 /* 42F410-42F45A 0004A */
@@ -1896,10 +1875,6 @@ uint _Globals::CDSApp_PollEventQueue() { STUB_BODY(); return 0; }
 uchar _Globals::CDSApp_DispatchOneEvent() { STUB_BODY(); return 0; }
 // !FUNC 0x0042f460 END
 
-// !FUNC 0x0042f590 BEGIN
-/* 42F590-42F5B5 00025 */
-uint _Globals::FUN_0042f590(void* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
-// !FUNC 0x0042f590 END
 
 // !FUNC 0x0042f5c0 BEGIN
 /* 42F5C0-42F5E6 00026 */
@@ -2123,10 +2098,6 @@ uchar* _Globals::Catch_00431ab4() { STUB_BODY(); return 0; }
 uchar _Globals::FUN_00431ae8() { STUB_BODY(); return 0; }
 // !FUNC 0x00431ae8 END
 
-// !FUNC 0x00431b70 BEGIN
-/* 431B70-431CA9 00139 */
-uchar _Globals::FUN_00431b70(int* param_1, uint param_2, void* param_3) { STUB_BODY(); return 0; }
-// !FUNC 0x00431b70 END
 
 // !FUNC 0x00431ca9 BEGIN
 /* 431CA9-431CBE 00015 */
@@ -2377,10 +2348,6 @@ uchar _Globals::FUN_00436750(int param_1) { STUB_BODY(); return 0; }
 uchar _Globals::FUN_00436d20(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00436d20 END
 
-// !FUNC 0x00436d50 BEGIN
-/* 436D50-436D87 00037 */
-uchar _Globals::FUN_00436d50(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00436d50 END
 
 // !FUNC 0x00436d90 BEGIN
 /* 436D90-436E0A 0007A */
@@ -2402,10 +2369,6 @@ void _Globals::BroadcastFrameTimeHint(uint param_1) { STUB_BODY(); }
 uchar _Globals::FUN_00436f20(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00436f20 END
 
-// !FUNC 0x00436f40 BEGIN
-/* 436F40-436FEE 000AE */
-uchar _Globals::FUN_00436f40(int param_1, uint param_2, int param_3, char param_4, int param_5) { STUB_BODY(); return 0; }
-// !FUNC 0x00436f40 END
 
 // !FUNC 0x00437030 BEGIN
 /* 437030-437079 00049 */
@@ -2422,19 +2385,9 @@ uchar _Globals::NotifyDirtyAll(void* param_1) { STUB_BODY(); return 0; }
 uchar _Globals::FUN_004370b0(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004370b0 END
 
-// !FUNC 0x00437330 BEGIN
-/* 437330-43736F 0003F */
-uint _Globals::FUN_00437330(uchar param_1, uchar* param_2) { STUB_BODY(); return 0; }
-// !FUNC 0x00437330 END
-
-// !FUNC 0x00437370 BEGIN
-/* 437370-43743F 000CF */
-uchar _Globals::FUN_00437370(uchar param_1, void* param_2, int* param_3, int param_4, uchar* param_5, uint* param_6) { STUB_BODY(); return 0; }
-// !FUNC 0x00437370 END
-
 // !FUNC 0x00437440 BEGIN
 /* 437440-437502 000C2 */
-uchar _Globals::FUN_00437440(int param_1, int param_2) { STUB_BODY(); return 0; }
+uchar _Globals::WideCharToMultiByte_Wrapper(LPCWSTR param_1, UINT param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00437440 END
 
 // !FUNC 0x004375e0 BEGIN
@@ -2464,7 +2417,10 @@ uchar _Globals::FUN_00437ed0(uint param_1, uint param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x004382d0 BEGIN
 /* 4382D0-4382DA 0000A */
-uchar _Globals::FUN_004382d0(uint param_1) { STUB_BODY(); return 0; }
+uchar _Globals::FUN_004382d0(uint param_1) {
+    *reinterpret_cast<uint*>(reinterpret_cast<char*>(this) + 0x8) = param_1;
+    return static_cast<uchar>(param_1);
+}
 // !FUNC 0x004382d0 END
 
 // !FUNC 0x004382e0 BEGIN
@@ -2557,10 +2513,6 @@ uchar _Globals::TM_RenderFrame(char param_1) { STUB_BODY(); return 0; }
 uchar _Globals::TM_TickBlit(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00439080 END
 
-// !FUNC 0x00439100 BEGIN
-/* 439100-4391CE 000CE */
-uchar _Globals::TM_SetCurrentSequence(int* param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00439100 END
 
 // !FUNC 0x004391e0 BEGIN
 /* 4391E0-43926D 0008D */
@@ -2594,7 +2546,10 @@ uint* _Globals::CreateObject_00439680() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00439710 BEGIN
 /* 439710-43971A 0000A */
-uchar _Globals::FUN_00439710(uint param_1) { STUB_BODY(); return 0; }
+uchar _Globals::FUN_00439710(uint param_1) {
+    *reinterpret_cast<uint*>(reinterpret_cast<char*>(this) + 0x3c) = param_1;
+    return static_cast<uchar>(param_1);
+}
 // !FUNC 0x00439710 END
 
 // !FUNC 0x00439730 BEGIN
@@ -2704,7 +2659,7 @@ uchar _Globals::FUN_0043a060(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043a0d0 BEGIN
 /* 43A0D0-43A0E4 00014 */
-uchar _Globals::FUN_0043a0d0(uint param_1) { STUB_BODY(); return 0; }
+uchar _Globals::CDSAudioPlayer_SetVolumePercent(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043a0d0 END
 
 // !FUNC 0x0043a0f0 BEGIN
@@ -2719,7 +2674,7 @@ bool _Globals::FUN_0043a1f0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043a4a0 BEGIN
 /* 43A4A0-43A4EA 0004A */
-uchar _Globals::FUN_0043a4a0(uchar param_1) { STUB_BODY(); return 0; }
+uchar _Globals::CDSAudioPlayer_Stop(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043a4a0 END
 
 // !FUNC 0x0043a590 BEGIN
@@ -2957,10 +2912,6 @@ uchar _Globals::FUN_0043de00(int* param_1, int* param_2, int param_3, int param_
 uchar _Globals::FUN_0043dec0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x0043dec0 END
 
-// !FUNC 0x0043df90 BEGIN
-/* 43DF90-43E032 000A2 */
-uchar _Globals::FUN_0043df90(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6) { STUB_BODY(); return 0; }
-// !FUNC 0x0043df90 END
 
 // !FUNC 0x0043e040 BEGIN
 /* 43E040-43E0E7 000A7 */
@@ -3174,7 +3125,7 @@ uchar _Globals::FUN_00440c10(int* param_1, int* param_2, int param_3, int param_
 
 // !FUNC 0x00440db0 BEGIN
 /* 440DB0-440F1B 0016B */
-uchar _Globals::FUN_00440db0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9) { STUB_BODY(); return 0; }
+uchar _Globals::BlitChromaKey_BGR24_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9) { STUB_BODY(); return 0; }
 // !FUNC 0x00440db0 END
 
 // !FUNC 0x00440f20 BEGIN
@@ -3544,7 +3495,9 @@ uchar _Globals::FUN_0044ab44(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044ab59 BEGIN
 /* 44AB59-44AB5F 00006 */
-uint _Globals::FUN_0044ab59() { STUB_BODY(); return 0; }
+uint _Globals::FUN_0044ab59() {
+    return *reinterpret_cast<uint*>(&DAT_004b1158);
+}
 // !FUNC 0x0044ab59 END
 
 // !FUNC 0x0044ac8a BEGIN
@@ -3714,7 +3667,9 @@ uchar _Globals::FUN_00452f0b() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00452fb7 BEGIN
 /* 452FB7-452FBD 00006 */
-uchar** _Globals::FUN_00452fb7() { STUB_BODY(); return 0; }
+uchar** _Globals::FUN_00452fb7() {
+    return reinterpret_cast<uchar**>(&PTR_DAT_004b1d60);
+}
 // !FUNC 0x00452fb7 END
 
 // !FUNC 0x00453c4c BEGIN
@@ -10019,4 +9974,14 @@ uchar _Globals::Unwind_0047afb0() { STUB_BODY(); return 0; }
 /* 47AFF0-47B015 00025 */
 uchar _Globals::CBulanci_RegisterAppDescriptor() { STUB_BODY(); return 0; }
 // !FUNC 0x0047aff0 END
+
+// !FUNC 0x0042f590 BEGIN
+/* 42F590-42F5B5 00025 */
+uint _Globals::CDSView_PostMessage(void* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
+// !FUNC 0x0042f590 END
+
+// !FUNC 0x0043df90 BEGIN
+/* 43DF90-43E032 000A2 */
+uchar _Globals::BlitOpaque_BGR24_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6) { STUB_BODY(); return 0; }
+// !FUNC 0x0043df90 END
 

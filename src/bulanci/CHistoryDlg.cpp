@@ -2,12 +2,12 @@
 
 // !FUNC 0x00422f70 BEGIN
 /* 422F70-423125 001B5 */
-uchar CHistoryDlg::FUN_00422f70(int param_1) { STUB_BODY(); return 0; }
+uchar CHistoryDlg::CHistoryDlg_LoadHistoryPage(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00422f70 END
 
 // !FUNC 0x00423130 BEGIN
 /* 423130-42318E 0005E */
-uchar CHistoryDlg::FUN_00423130(ushort param_1) { STUB_BODY(); return 0; }
+uchar CHistoryDlg::CHistoryDlg_OnEvent(ushort param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423130 END
 
 // !FUNC 0x004231d0 BEGIN

@@ -7,7 +7,7 @@ uchar CRadio::CRadio_OnMouseDown(uint param_1, short param_2) { STUB_BODY(); ret
 
 // !FUNC 0x00403010 BEGIN
 /* 403010-403016 00006 */
-uint CRadio::CRadio_GetDataSize() { STUB_BODY(); return 0; }
+uint CRadio::CRadio_GetDataSize() { return 1; }
 // !FUNC 0x00403010 END
 
 // !FUNC 0x00403020 BEGIN
@@ -79,6 +79,10 @@ uint* CRadio::CRadio_BuildAt(uint param_1, uint param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x0040aa00 BEGIN
 /* 40AA00-40AA0C 0000C */
-uchar CRadio::CRadio_SaveData(uchar* param_1) { STUB_BODY(); return 0; }
+uchar CRadio::CRadio_SaveData(uchar* param_1) {
+    uchar val = *(reinterpret_cast<uchar*>(this) + 0x68);
+    *param_1 = val;
+    return val;
+}
 // !FUNC 0x0040aa00 END
 

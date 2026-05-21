@@ -5,9 +5,6 @@
 
 class ODSImage {
 public:
-	// !DECL 0x00418c00 BEGIN
-	/* 418C00 */ void* FUN_00418c00(int* param_1);
-	// !DECL 0x00418c00 END
 	// !DECL 0x00418ef0 BEGIN
 	/* 418EF0 */ uint* FUN_00418ef0(uint* param_1);
 	// !DECL 0x00418ef0 END
@@ -23,11 +20,16 @@ public:
 	// !DECL 0x004253d0 BEGIN
 	/* 4253D0 */ uint FUN_004253d0(int param_1);
 	// !DECL 0x004253d0 END
+
 	// !DECL 0x00426060 BEGIN
-	/* 426060 */ uint* FUN_00426060(uint* param_1);
+	/* 426060 */ uint* CGunMouse_ctor(uint* param_1);
 	// !DECL 0x00426060 END
+
+	// !DECL 0x00418c00 BEGIN
+	/* 418C00 */ void* ODSImage_ctor(int* param_1);
+	// !DECL 0x00418c00 END
 	// !DECL 0x00439050 BEGIN
-	/* 439050 */ uchar FUN_00439050(void* param_1);
+	/* 439050 */ uchar SetOwner(void* param_1);
 	// !DECL 0x00439050 END
 };
 

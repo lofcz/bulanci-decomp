@@ -1,0 +1,117 @@
+{
+  "source": "orig\\Bludiste.eap",
+  "source_type": "eap",
+  "container_start": 0,
+  "container_total_bytes": 782617,
+  "container_dir_off": 782491,
+  "container_chunks": 25,
+  "container_uncompressed_size": 798487,
+  "payload_kind": "eap-bundle",
+  "eap_count": 6,
+  "eap_format_tag": 8,
+  "resources": [
+    {
+      "id": 100000,
+      "classId": 94,
+      "className": "Sign",
+      "position": 0,
+      "size": 43,
+      "rawFile": "res_0000100000_94_Sign.bin",
+      "friendlyFile": "res_0000100000_94_Sign.sign.json",
+      "sign": {
+        "date": "2006-09-08",
+        "content": "Bludiště",
+        "copyright": "Carl114"
+      }
+    },
+    {
+      "id": 100001,
+      "classId": 21,
+      "className": "BitmapJPEG",
+      "position": 47,
+      "size": 35784,
+      "rawFile": "res_0000100001_21_BitmapJPEG.bin",
+      "friendlyFile": "res_0000100001_21_BitmapJPEG.jpg"
+    },
+    {
+      "id": 100002,
+      "classId": 21,
+      "className": "BitmapJPEG",
+      "position": 35835,
+      "size": 109435,
+      "rawFile": "res_0000100002_21_BitmapJPEG.bin",
+      "friendlyFile": "res_0000100002_21_BitmapJPEG.jpg"
+    },
+    {
+      "id": 100003,
+      "classId": 48,
+      "className": "Mp3",
+      "position": 145274,
+      "size": 643801,
+      "rawFile": "res_0000100003_48_Mp3.bin",
+      "friendlyFile": "res_0000100003_48_Mp3.mp3",
+      "audio": {
+        "dataLen": 643785,
+        "reportedSize": 7091712,
+        "channels": 2,
+        "bits": 16,
+        "freq": 44100
+      }
+    },
+    {
+      "id": 100004,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 789079,
+      "size": 4118,
+      "rawFile": "res_0000100004_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100004_28_BitmapSpecial.png",
+      "special": {
+        "width": 43,
+        "height": 31,
+        "marker5": 5,
+        "stride": 132,
+        "transparentRGB": "0x0000FF00",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 4092,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100005,
+      "classId": 2026,
+      "className": "Script",
+      "position": 793201,
+      "size": 5130,
+      "rawFile": "res_0000100005_2026_Script.bin",
+      "friendlyFile": "res_0000100005_2026_Script.script.asm",
+      "script": {
+        "kind": "level_script",
+        "codeLen": 5074,
+        "nExports": 11,
+        "nVars": 4,
+        "entryPoints": [
+          100,
+          212,
+          1016,
+          1040,
+          1047,
+          1054,
+          1061,
+          4668,
+          4868,
+          4996,
+          5067
+        ]
+      }
+    }
+  ],
+  "unknown_class_ids": [],
+  "notes": [
+    "format tag = 8 (editor-compiled .eap)",
+    "Parsed 6 .eap resources; data section begins at payload offset 152"
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "source": "orig\\autobusy.eap",
+  "source_type": "eap",
+  "container_start": 0,
+  "container_total_bytes": 3537181,
+  "container_dir_off": 3536726,
+  "container_chunks": 115,
+  "container_uncompressed_size": 3736299,
+  "payload_kind": "eap-bundle",
+  "eap_count": 8,
+  "eap_format_tag": 8,
+  "resources": [
+    {
+      "id": 100000,
+      "classId": 94,
+      "className": "Sign",
+      "position": 0,
+      "size": 31,
+      "rawFile": "res_0000100000_94_Sign.bin",
+      "friendlyFile": "res_0000100000_94_Sign.sign.json",
+      "sign": {
+        "date": "2009-05-30",
+        "content": "Autobusy",
+        "copyright": "J"
+      }
+    },
+    {
+      "id": 100001,
+      "classId": 21,
+      "className": "BitmapJPEG",
+      "position": 35,
+      "size": 61438,
+      "rawFile": "res_0000100001_21_BitmapJPEG.bin",
+      "friendlyFile": "res_0000100001_21_BitmapJPEG.jpg"
+    },
+    {
+      "id": 100002,
+      "classId": 21,
+      "className": "BitmapJPEG",
+      "position": 61477,
+      "size": 52047,
+      "rawFile": "res_0000100002_21_BitmapJPEG.bin",
+      "friendlyFile": "res_0000100002_21_BitmapJPEG.jpg"
+    },
+    {
+      "id": 100003,
+      "classId": 48,
+      "className": "Mp3",
+      "position": 113528,
+      "size": 3257090,
+      "rawFile": "res_0000100003_48_Mp3.bin",
+      "friendlyFile": "res_0000100003_48_Mp3.mp3",
+      "audio": {
+        "dataLen": 3257074,
+        "reportedSize": 23938560,
+        "channels": 2,
+        "bits": 16,
+        "freq": 44100
+      }
+    },
+    {
+      "id": 100004,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 3370622,
+      "size": 108362,
+      "rawFile": "res_0000100004_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100004_28_BitmapSpecial.png",
+      "special": {
+        "width": 325,
+        "height": 111,
+        "marker5": 5,
+        "stride": 976,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 108336,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100005,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 3478988,
+      "size": 105098,
+      "rawFile": "res_0000100005_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100005_28_BitmapSpecial.png",
+      "special": {
+        "width": 265,
+        "height": 132,
+        "marker5": 5,
+        "stride": 796,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 105072,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100006,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 3584090,
+      "size": 150638,
+      "rawFile": "res_0000100006_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100006_28_BitmapSpecial.png",
+      "special": {
+        "width": 308,
+        "height": 163,
+        "marker5": 5,
+        "stride": 924,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 150612,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100007,
+      "classId": 2026,
+      "className": "Script",
+      "position": 3734732,
+      "size": 1363,
+      "rawFile": "res_0000100007_2026_Script.bin",
+      "friendlyFile": "res_0000100007_2026_Script.script.asm",
+      "script": {
+        "kind": "level_script",
+        "codeLen": 1307,
+        "nExports": 11,
+        "nVars": 4,
+        "entryPoints": [
+          100,
+          212,
+          1067,
+          1091,
+          1098,
+          1105,
+          1112,
+          1119,
+          1192,
+          1229,
+          1300
+        ]
+      }
+    }
+  ],
+  "unknown_class_ids": [],
+  "notes": [
+    "format tag = 8 (editor-compiled .eap)",
+    "Parsed 8 .eap resources; data section begins at payload offset 200"
+  ]
+}

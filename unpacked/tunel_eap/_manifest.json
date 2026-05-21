@@ -1,0 +1,183 @@
+{
+  "source": "orig\\tunel.eap",
+  "source_type": "eap",
+  "container_start": 0,
+  "container_total_bytes": 456259,
+  "container_dir_off": 456084,
+  "container_chunks": 41,
+  "container_uncompressed_size": 1329434,
+  "payload_kind": "eap-bundle",
+  "eap_count": 9,
+  "eap_format_tag": 8,
+  "resources": [
+    {
+      "id": 100000,
+      "classId": 94,
+      "className": "Sign",
+      "position": 0,
+      "size": 35,
+      "rawFile": "res_0000100000_94_Sign.bin",
+      "friendlyFile": "res_0000100000_94_Sign.sign.json",
+      "sign": {
+        "date": "2006-11-02",
+        "content": "Tunel",
+        "copyright": "SnoPPi"
+      }
+    },
+    {
+      "id": 100001,
+      "classId": 21,
+      "className": "BitmapJPEG",
+      "position": 39,
+      "size": 51084,
+      "rawFile": "res_0000100001_21_BitmapJPEG.bin",
+      "friendlyFile": "res_0000100001_21_BitmapJPEG.jpg"
+    },
+    {
+      "id": 100002,
+      "classId": 21,
+      "className": "BitmapJPEG",
+      "position": 51127,
+      "size": 48730,
+      "rawFile": "res_0000100002_21_BitmapJPEG.bin",
+      "friendlyFile": "res_0000100002_21_BitmapJPEG.jpg"
+    },
+    {
+      "id": 100003,
+      "classId": 48,
+      "className": "Mp3",
+      "position": 99861,
+      "size": 41394,
+      "rawFile": "res_0000100003_48_Mp3.bin",
+      "friendlyFile": "res_0000100003_48_Mp3.mp3",
+      "audio": {
+        "dataLen": 41378,
+        "reportedSize": 299520,
+        "channels": 2,
+        "bits": 16,
+        "freq": 44100
+      }
+    },
+    {
+      "id": 100004,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 141259,
+      "size": 693626,
+      "rawFile": "res_0000100004_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100004_28_BitmapSpecial.png",
+      "special": {
+        "width": 799,
+        "height": 289,
+        "marker5": 5,
+        "stride": 2400,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 693600,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100005,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 834889,
+      "size": 120026,
+      "rawFile": "res_0000100005_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100005_28_BitmapSpecial.png",
+      "special": {
+        "width": 799,
+        "height": 50,
+        "marker5": 5,
+        "stride": 2400,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 120000,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100006,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 954919,
+      "size": 262874,
+      "rawFile": "res_0000100006_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100006_28_BitmapSpecial.png",
+      "special": {
+        "width": 295,
+        "height": 296,
+        "marker5": 5,
+        "stride": 888,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 262848,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100007,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 1217797,
+      "size": 110866,
+      "rawFile": "res_0000100007_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100007_28_BitmapSpecial.png",
+      "special": {
+        "width": 217,
+        "height": 170,
+        "marker5": 5,
+        "stride": 652,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 110840,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100008,
+      "classId": 2026,
+      "className": "Script",
+      "position": 1328667,
+      "size": 539,
+      "rawFile": "res_0000100008_2026_Script.bin",
+      "friendlyFile": "res_0000100008_2026_Script.script.asm",
+      "script": {
+        "kind": "level_script",
+        "codeLen": 483,
+        "nExports": 11,
+        "nVars": 3,
+        "entryPoints": [
+          0,
+          106,
+          420,
+          427,
+          434,
+          441,
+          448,
+          455,
+          462,
+          469,
+          476
+        ]
+      }
+    }
+  ],
+  "unknown_class_ids": [],
+  "notes": [
+    "format tag = 8 (editor-compiled .eap)",
+    "Parsed 9 .eap resources; data section begins at payload offset 224"
+  ]
+}

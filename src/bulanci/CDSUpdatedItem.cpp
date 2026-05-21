@@ -9,7 +9,7 @@ uchar* CDSUpdatedItem::FUN_0042ea70() {
 
 // !FUNC 0x0042f060 BEGIN
 /* 42F060-42F13C 000DC */
-int CDSUpdatedItem::FUN_0042f060(int param_1) { STUB_BODY(); return 0; }
+int CDSUpdatedItem::CDSUpdatedItem_ctor(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042f060 END
 
 // !FUNC 0x004312c0 BEGIN

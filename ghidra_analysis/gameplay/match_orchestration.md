@@ -107,7 +107,7 @@ The round terminates when a player quits or time/scores run out. The active view
 1. **Modal Exit Code Setup**: The command ID (e.g., `0x80cc`, `0x80cd`) is saved as the view exit code.
 2. **Network Broadcast**: The host or client transmits net message `0x0B` (round end result packet) via `CGame_NetSendRoundResult_t0b @ 0x00413180`.
 3. **Transition Screens**:
-   * It spins up the scrolling credit/poem transition widget (`CPoemScroller` via `_Globals::FUN_00422430`).
+   * It spins up the scrolling credit/poem transition widget (`CPoemScroller` and plays transition audio via `_Globals::TriggerBankSample`).
    * It increments an orchestration wait-counter (`this+0x338`).
    * It blocks the modal exit by continuing to pump `CDSApp_PumpTick` in a `while` loop until `OnCustomEvent` (`0x004206a0` case 1) receives notification that the screen finished scroll-fading (reducing the wait-counter back to `0`).
 4. **Script Deinitialization**: Upon modal loop break, `CGaming` is torn down, and `CGaming_dtor @ 0x0041b850` triggers level script export #2 (`OnDeinit`).

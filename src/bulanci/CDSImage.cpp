@@ -59,15 +59,7 @@ uchar CDSImage::FUN_004322f0(int param_1) { STUB_BODY(); return 0; }
 uchar CDSImage::FUN_00432320(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00432320 END
 
-// !FUNC 0x00435fe0 BEGIN
-/* 435FE0-43601F 0003F */
-int CDSImage::FUN_00435fe0(char param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00435fe0 END
 
-// !FUNC 0x004362f0 BEGIN
-/* 4362F0-43630E 0001E */
-int CDSImage::FUN_004362f0(void* param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x004362f0 END
 
 // !FUNC 0x00436c60 BEGIN
 /* 436C60-436D1E 000BE */
@@ -103,4 +95,14 @@ uchar CDSImage::FUN_00437550(int param_1) { STUB_BODY(); return 0; }
 /* 4375C0-4375DE 0001E */
 uint* CDSImage::FUN_004375c0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004375c0 END
+
+// !FUNC 0x00435fe0 BEGIN
+/* 435FE0-43601F 0003F */
+int CDSImage::ComputeBufferSize(char param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00435fe0 END
+
+// !FUNC 0x004362f0 BEGIN
+/* 4362F0-43630E 0001E */
+int CDSImage::ComputeAllocationSize(void* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004362f0 END
 

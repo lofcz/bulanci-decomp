@@ -25,7 +25,7 @@ CTcpIpConfig::CTcpIpConfig() : CWindow(0, 0, 0x138, 0xa0, 1) {
             1, 5, 0x100ae
         );
     }
-    reinterpret_cast<_Globals*>(this)->FUN_0042d0b0(reinterpret_cast<int*>(staticText), 0);
+    reinterpret_cast<_Globals*>(this)->AddChild(reinterpret_cast<int*>(staticText), 0);
 
     CEdit* edit = reinterpret_cast<CEdit*>(_Globals::FUN_00447c42(0xb8));
     if (edit != 0) {
@@ -34,7 +34,7 @@ CTcpIpConfig::CTcpIpConfig() : CWindow(0, 0, 0x138, 0xa0, 1) {
             0x12, 2, 0, 0x100af
         );
     }
-    reinterpret_cast<_Globals*>(this)->FUN_0042d0b0(reinterpret_cast<int*>(edit), 0);
+    reinterpret_cast<_Globals*>(this)->AddChild(reinterpret_cast<int*>(edit), 0);
 
     CButton* okBtn = reinterpret_cast<CButton*>(_Globals::FUN_00447c42(0x98));
     if (okBtn != 0) {
@@ -45,7 +45,7 @@ CTcpIpConfig::CTcpIpConfig() : CWindow(0, 0, 0x138, 0xa0, 1) {
             0x8002, 1, 0x14, 0
         );
     }
-    reinterpret_cast<_Globals*>(this)->FUN_0042d0b0(reinterpret_cast<int*>(okBtn), 0);
+    reinterpret_cast<_Globals*>(this)->AddChild(reinterpret_cast<int*>(okBtn), 0);
 
     CButton* cancelBtn = reinterpret_cast<CButton*>(_Globals::FUN_00447c42(0x98));
     if (cancelBtn != 0) {
@@ -56,7 +56,7 @@ CTcpIpConfig::CTcpIpConfig() : CWindow(0, 0, 0x138, 0xa0, 1) {
             0x8003, 0, 0x14, 0
         );
     }
-    reinterpret_cast<_Globals*>(this)->FUN_0042d0b0(reinterpret_cast<int*>(cancelBtn), 0);
+    reinterpret_cast<_Globals*>(this)->AddChild(reinterpret_cast<int*>(cancelBtn), 0);
 
     int height = param_1[11] - param_1[9];
     int width = param_1[10] - param_1[8];

@@ -122,7 +122,7 @@ uchar* CDSJpegImage::FUN_00431d50() {
 
 // !FUNC 0x00431d60 BEGIN
 /* 431D60-431D63 00003 */
-uchar CDSJpegImage::FUN_00431d60() { STUB_BODY(); return 0; }
+uchar CDSJpegImage::FUN_00431d60() { return 1; }
 // !FUNC 0x00431d60 END
 
 // !FUNC 0x00431d70 BEGIN

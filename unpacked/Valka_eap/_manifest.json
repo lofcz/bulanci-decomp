@@ -1,0 +1,249 @@
+{
+  "source": "orig\\Valka.eap",
+  "source_type": "eap",
+  "container_start": 0,
+  "container_total_bytes": 1558195,
+  "container_dir_off": 1557872,
+  "container_chunks": 84,
+  "container_uncompressed_size": 2748218,
+  "payload_kind": "eap-bundle",
+  "eap_count": 12,
+  "eap_format_tag": 8,
+  "resources": [
+    {
+      "id": 100000,
+      "classId": 94,
+      "className": "Sign",
+      "position": 0,
+      "size": 31,
+      "rawFile": "res_0000100000_94_Sign.bin",
+      "friendlyFile": "res_0000100000_94_Sign.sign.json",
+      "sign": {
+        "date": "2006-11-06",
+        "content": "Válka",
+        "copyright": "Hoky"
+      }
+    },
+    {
+      "id": 100001,
+      "classId": 22,
+      "className": "BitmapBMP",
+      "position": 35,
+      "size": 1920054,
+      "rawFile": "res_0000100001_22_BitmapBMP.bin",
+      "friendlyFile": "res_0000100001_22_BitmapBMP.bmp"
+    },
+    {
+      "id": 100002,
+      "classId": 21,
+      "className": "BitmapJPEG",
+      "position": 1920093,
+      "size": 111939,
+      "rawFile": "res_0000100002_21_BitmapJPEG.bin",
+      "friendlyFile": "res_0000100002_21_BitmapJPEG.jpg"
+    },
+    {
+      "id": 100003,
+      "classId": 48,
+      "className": "Mp3",
+      "position": 2032036,
+      "size": 54349,
+      "rawFile": "res_0000100003_48_Mp3.bin",
+      "friendlyFile": "res_0000100003_48_Mp3.mp3",
+      "audio": {
+        "dataLen": 54333,
+        "reportedSize": 594432,
+        "channels": 2,
+        "bits": 16,
+        "freq": 44100
+      }
+    },
+    {
+      "id": 100004,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 2086389,
+      "size": 171322,
+      "rawFile": "res_0000100004_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100004_28_BitmapSpecial.png",
+      "special": {
+        "width": 269,
+        "height": 212,
+        "marker5": 5,
+        "stride": 808,
+        "transparentRGB": "0x000000FF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 171296,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100005,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 2257715,
+      "size": 53570,
+      "rawFile": "res_0000100005_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100005_28_BitmapSpecial.png",
+      "special": {
+        "width": 129,
+        "height": 138,
+        "marker5": 5,
+        "stride": 388,
+        "transparentRGB": "0x000000FF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 53544,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100006,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 2311289,
+      "size": 18326,
+      "rawFile": "res_0000100006_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100006_28_BitmapSpecial.png",
+      "special": {
+        "width": 100,
+        "height": 61,
+        "marker5": 5,
+        "stride": 300,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 18300,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100007,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 2329619,
+      "size": 345706,
+      "rawFile": "res_0000100007_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100007_28_BitmapSpecial.png",
+      "special": {
+        "width": 397,
+        "height": 290,
+        "marker5": 5,
+        "stride": 1192,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 345680,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100008,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 2675329,
+      "size": 15146,
+      "rawFile": "res_0000100008_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100008_28_BitmapSpecial.png",
+      "special": {
+        "width": 72,
+        "height": 70,
+        "marker5": 5,
+        "stride": 216,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 15120,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100009,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 2690479,
+      "size": 8026,
+      "rawFile": "res_0000100009_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100009_28_BitmapSpecial.png",
+      "special": {
+        "width": 66,
+        "height": 40,
+        "marker5": 5,
+        "stride": 200,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 8000,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100010,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 2698509,
+      "size": 47786,
+      "rawFile": "res_0000100010_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100010_28_BitmapSpecial.png",
+      "special": {
+        "width": 265,
+        "height": 60,
+        "marker5": 5,
+        "stride": 796,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 47760,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100011,
+      "classId": 2026,
+      "className": "Script",
+      "position": 2746299,
+      "size": 1619,
+      "rawFile": "res_0000100011_2026_Script.bin",
+      "friendlyFile": "res_0000100011_2026_Script.script.asm",
+      "script": {
+        "kind": "level_script",
+        "codeLen": 1563,
+        "nExports": 11,
+        "nVars": 4,
+        "entryPoints": [
+          100,
+          206,
+          1135,
+          1159,
+          1166,
+          1173,
+          1180,
+          1341,
+          1435,
+          1485,
+          1556
+        ]
+      }
+    }
+  ],
+  "unknown_class_ids": [],
+  "notes": [
+    "format tag = 8 (editor-compiled .eap)",
+    "Parsed 12 .eap resources; data section begins at payload offset 296"
+  ]
+}

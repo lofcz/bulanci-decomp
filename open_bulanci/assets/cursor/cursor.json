@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "idleTracks": [
+    {
+      "atlas": "cursor_idle_a"
+    },
+    {
+      "atlas": "cursor_idle_b"
+    },
+    {
+      "atlas": "cursor_idle_c"
+    }
+  ]
+}

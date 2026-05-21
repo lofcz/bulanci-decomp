@@ -72,6 +72,8 @@ uint* CGameView::FUN_0041e4b0(uchar* param_1, uchar param_2, void* param_3, int 
 
 // !FUNC 0x00439720 BEGIN
 /* 439720-43972A 0000A */
-void CGameView::TM_SetFrameDelayOverrideMs(int param_1) { STUB_BODY(); }
+void CGameView::TM_SetFrameDelayOverrideMs(int param_1) {
+    *reinterpret_cast<int*>(reinterpret_cast<char*>(this) + 0x44) = param_1;
+}
 // !FUNC 0x00439720 END
 

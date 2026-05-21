@@ -124,7 +124,7 @@ uchar CMenu::CMenu_SetButtonsHidden(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00424080 BEGIN
 /* 424080-4240F0 00070 */
-uchar CMenu::FUN_00424080(void* param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_OnMusicFadeTick(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00424080 END
 
 // !FUNC 0x00424520 BEGIN

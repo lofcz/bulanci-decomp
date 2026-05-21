@@ -3,10 +3,6 @@ bulanci.gpr
 bulanci.lock
 bulanci.lock~
 
-# Extracted assets produced by tools/bulanci_unpack - derived from bulanci.exe
-# and the .eap/.eapres sources; do not commit.
-/unpacked/
-
 # Python caches
 __pycache__/
 *.pyc
@@ -32,6 +28,9 @@ progress/
 tools/*
 !tools/bulanci_unpack/
 !tools/.gitkeep
+# Frida instrumentation scripts (small, hand-written; not third-party)
+!tools/frida/
+!tools/frida/*
 # Track only the per-toolchain README so vendoring instructions are visible
 # without pulling the actual binaries into the repo.
 !tools/msvc8/
@@ -64,6 +63,12 @@ tools/ninja/*
 # Agent coordinator state (claims, locks, transient bundles)
 /state/
 
+# Per-agent git worktrees managed by scripts/worktree.py.  Each worktree
+# is an isolated checkout on its own `agent/<id>` branch; the directory
+# tree itself must NEVER be staged on `main` (or any other worktree
+# would inherit it).
+/worktrees/
+
 # Editor scratch
 .tmp_*
 *.swp
@@ -78,3 +83,11 @@ tools/ninja/*
 # tools/bulanci_unpack/ghidra_analysis/README.md.
 tools/bulanci_unpack/ghidra_analysis/_scratch_*
 /ref
+/target/debug
+target/CACHEDIR.TAG
+target/.rustc_info.json
+/open_bulanci/target
+
+# Frida trace captures (large per-run JSONL dumps).
+/trace.jsonl
+/trace*.jsonl

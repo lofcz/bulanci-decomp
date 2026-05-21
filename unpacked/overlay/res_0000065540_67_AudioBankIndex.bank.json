@@ -1,0 +1,213 @@
+{
+  "bankResourceID": 65874,
+  "reserved": 0,
+  "sampleCount": 41,
+  "totalBankBytes": 1551084,
+  "samples": [
+    {
+      "index": 0,
+      "offsetInBank": 0,
+      "byteLen": 15904
+    },
+    {
+      "index": 1,
+      "offsetInBank": 15904,
+      "byteLen": 13408
+    },
+    {
+      "index": 2,
+      "offsetInBank": 29312,
+      "byteLen": 29376
+    },
+    {
+      "index": 3,
+      "offsetInBank": 58688,
+      "byteLen": 46464
+    },
+    {
+      "index": 4,
+      "offsetInBank": 105152,
+      "byteLen": 17388
+    },
+    {
+      "index": 5,
+      "offsetInBank": 122540,
+      "byteLen": 44520
+    },
+    {
+      "index": 6,
+      "offsetInBank": 167060,
+      "byteLen": 21248
+    },
+    {
+      "index": 7,
+      "offsetInBank": 188308,
+      "byteLen": 21272
+    },
+    {
+      "index": 8,
+      "offsetInBank": 209580,
+      "byteLen": 22270
+    },
+    {
+      "index": 9,
+      "offsetInBank": 231850,
+      "byteLen": 19712
+    },
+    {
+      "index": 10,
+      "offsetInBank": 251562,
+      "byteLen": 35598
+    },
+    {
+      "index": 11,
+      "offsetInBank": 287160,
+      "byteLen": 13584
+    },
+    {
+      "index": 12,
+      "offsetInBank": 300744,
+      "byteLen": 17272
+    },
+    {
+      "index": 13,
+      "offsetInBank": 318016,
+      "byteLen": 39104
+    },
+    {
+      "index": 14,
+      "offsetInBank": 357120,
+      "byteLen": 9204
+    },
+    {
+      "index": 15,
+      "offsetInBank": 366324,
+      "byteLen": 25136
+    },
+    {
+      "index": 16,
+      "offsetInBank": 391460,
+      "byteLen": 25704
+    },
+    {
+      "index": 17,
+      "offsetInBank": 417164,
+      "byteLen": 31814
+    },
+    {
+      "index": 18,
+      "offsetInBank": 448978,
+      "byteLen": 12182
+    },
+    {
+      "index": 19,
+      "offsetInBank": 461160,
+      "byteLen": 3584
+    },
+    {
+      "index": 20,
+      "offsetInBank": 464744,
+      "byteLen": 15550
+    },
+    {
+      "index": 21,
+      "offsetInBank": 480294,
+      "byteLen": 8812
+    },
+    {
+      "index": 22,
+      "offsetInBank": 489106,
+      "byteLen": 7006
+    },
+    {
+      "index": 23,
+      "offsetInBank": 496112,
+      "byteLen": 8936
+    },
+    {
+      "index": 24,
+      "offsetInBank": 505048,
+      "byteLen": 75586
+    },
+    {
+      "index": 25,
+      "offsetInBank": 580634,
+      "byteLen": 72558
+    },
+    {
+      "index": 26,
+      "offsetInBank": 653192,
+      "byteLen": 91844
+    },
+    {
+      "index": 27,
+      "offsetInBank": 745036,
+      "byteLen": 85752
+    },
+    {
+      "index": 28,
+      "offsetInBank": 830788,
+      "byteLen": 73214
+    },
+    {
+      "index": 29,
+      "offsetInBank": 904002,
+      "byteLen": 131850
+    },
+    {
+      "index": 30,
+      "offsetInBank": 1035852,
+      "byteLen": 64768
+    },
+    {
+      "index": 31,
+      "offsetInBank": 1100620,
+      "byteLen": 44134
+    },
+    {
+      "index": 32,
+      "offsetInBank": 1144754,
+      "byteLen": 19422
+    },
+    {
+      "index": 33,
+      "offsetInBank": 1164176,
+      "byteLen": 45694
+    },
+    {
+      "index": 34,
+      "offsetInBank": 1209870,
+      "byteLen": 34430
+    },
+    {
+      "index": 35,
+      "offsetInBank": 1244300,
+      "byteLen": 41954
+    },
+    {
+      "index": 36,
+      "offsetInBank": 1286254,
+      "byteLen": 3846
+    },
+    {
+      "index": 37,
+      "offsetInBank": 1290100,
+      "byteLen": 79360
+    },
+    {
+      "index": 38,
+      "offsetInBank": 1369460,
+      "byteLen": 65916
+    },
+    {
+      "index": 39,
+      "offsetInBank": 1435376,
+      "byteLen": 58622
+    },
+    {
+      "index": 40,
+      "offsetInBank": 1493998,
+      "byteLen": 57086
+    }
+  ]
+}

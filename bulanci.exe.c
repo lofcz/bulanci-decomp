@@ -745,6 +745,11 @@ typedef struct CDSStreamException CDSStreamException, *PCDSStreamException;
 struct CDSStreamException { // PlaceHolder Class Structure
 };
 
+typedef struct CTcpIpConfig CTcpIpConfig, *PCTcpIpConfig;
+
+struct CTcpIpConfig { // PlaceHolder Class Structure
+};
+
 typedef struct CListBox CListBox, *PCListBox;
 
 struct CListBox { // PlaceHolder Class Structure
@@ -50626,7 +50631,6 @@ undefined DAT_004b367c;
 undefined DAT_004b36a4;
 undefined LAB_00475686;
 undefined DAT_004ae6f0;
-undefined DAT_004ae6f8;
 pointer[4] g_apCDSStaticTextsSingleton;
 undefined LAB_004756e4;
 undefined DAT_004b34e8;
@@ -50696,7 +50700,6 @@ undefined LAB_004761bc;
 int DAT_004b8370;
 undefined LAB_004762c5;
 undefined4 DAT_00481968;
-undefined DAT_004aeaa8;
 undefined LAB_0047632c;
 undefined LAB_0040abd0;
 undefined LAB_00476445;
@@ -50873,8 +50876,8 @@ undefined LAB_00477b26;
 undefined4 DAT_00482968;
 char DAT_004b372c;
 undefined LAB_00477b71;
-undefined DAT_004829b0;
-undefined DAT_004829b4;
+undefined LAB_004829ae+2;
+undefined LAB_004829ae+6;
 undefined DAT_004829d0;
 undefined DAT_004829d4;
 undefined LAB_00477ba6;
@@ -50952,7 +50955,7 @@ undefined DAT_004b3998;
 undefined *PTR_DAT_004af840;
 undefined LAB_0047870b;
 undefined LAB_004787aa;
-undefined4 DAT_004af900;
+dword[3] g_dwCGunMouseTrackSources;
 undefined LAB_00478833;
 undefined LAB_0047885b;
 undefined LAB_0047888b;
@@ -52706,7 +52709,7 @@ int _Globals::FUN_00401a70(int *param_1)
     else {
       pvVar3 = (void *)((int)g_pModalFocus + 0x10);
     }
-    FUN_0042f590(pvVar3,0x100,0x8004,0,0);
+    CDSView_PostMessage(pvVar3,0x100,0x8004,0,0);
   }
   return iVar4;
 }
@@ -52733,7 +52736,7 @@ void __fastcall CMenu::FUN_00401af0(int param_1)
   else {
     pvVar1 = (void *)(*(int *)(param_1 + 0x280) + 0x10);
   }
-  _Globals::FUN_0042f590(pvVar1,0x100,0x80ce,0,0);
+  _Globals::CDSView_PostMessage(pvVar1,0x100,0x80ce,0,0);
   local_8 = 0xffffffff;
   FUN_00401bb4();
   return;
@@ -52759,7 +52762,7 @@ undefined * CMenu::Catch_00401b70(void)
     else {
       pvVar3 = (void *)(iVar1 + 0x10);
     }
-    _Globals::FUN_0042f590(pvVar3,0x100,0xc9,0,0);
+    _Globals::CDSView_PostMessage(pvVar3,0x100,0xc9,0,0);
   }
   return &DAT_00401bb1;
 }
@@ -52830,7 +52833,7 @@ bool CBulanci::FUN_00401c59(void)
     else {
       pvVar2 = (void *)((int)g_pModalFocus + 0x10);
     }
-    _Globals::FUN_0042f590(pvVar2,0x100,0x8004,0,0);
+    _Globals::CDSView_PostMessage(pvVar2,0x100,0x8004,0,0);
   }
   if ((*(char *)((int)unaff_ESI + 0x2e6) == '\0') &&
      (*(char *)((int)unaff_ESI + 0x2e7) == *(char *)((int)unaff_ESI + 0x2e8))) {
@@ -53163,7 +53166,7 @@ void __fastcall CBulanci::CBulanci_InitResourceBank(int param_1)
     puVar4 = (undefined4 *)0x0;
   }
   else {
-    puVar4 = ODSImage::FUN_00426060(local_2014);
+    puVar4 = ODSImage::CGunMouse_ctor(local_2014);
   }
   uStack_4 = 0xffffffff;
   FUN_0042f4b0(1,puVar4,uVar1,unaff_EDI);
@@ -53196,7 +53199,7 @@ void __thiscall _Globals::FUN_00402290(void *this,int param_1)
   CSetupDlg::FUN_0040e290((undefined4 *)local_84);
   local_4 = 0;
   FUN_0040e590(local_84,*(int *)((int)this + 0x2fe));
-  CBulanek::FUN_0042cc80
+  CBulanek::CDSView__SetPosition
             (local_84,(((*(int *)(param_1 + 0x28) - local_5c) - *(int *)(param_1 + 0x20)) + local_64
                       ) / 2,
              (((*(int *)(param_1 + 0x2c) - *(int *)(param_1 + 0x24)) - local_58) + local_60) / 2);
@@ -53212,7 +53215,7 @@ void __thiscall _Globals::FUN_00402290(void *this,int param_1)
   case 0x8004:
   case 0x80cc:
   case 0x80cd:
-    FUN_0042f390((void *)(param_1 + 0x10),0x100,uVar1,0,0);
+    CDSView__PostMessage((void *)(param_1 + 0x10),0x100,uVar1,0,0);
   }
   local_4 = 0xffffffff;
   FUN_00401910((undefined4 *)local_84);
@@ -53273,7 +53276,7 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort param_1,undefi
         _Globals::CDSView_DoModal(local_9c,this);
         local_4 = 0xffffffff;
         _Globals::FUN_00401a10((undefined4 *)local_9c);
-        _Globals::FUN_0042f390(this + 0x10,0x100,0xcc,0,1);
+        _Globals::CDSView__PostMessage(this + 0x10,0x100,0xcc,0,1);
         ExceptionList = local_c;
         return;
       }
@@ -53292,7 +53295,7 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort param_1,undefi
     else {
       pCVar4 = this + 0x10;
     }
-    _Globals::FUN_0042f590(pCVar4,0x100,0xcc,0,0);
+    _Globals::CDSView_PostMessage(pCVar4,0x100,0xcc,0,0);
     ExceptionList = local_c;
     return;
   }
@@ -53316,7 +53319,7 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort param_1,undefi
   *(undefined4 *)(this + 0x4ac) = 0;
   if (sVar2 != -0x7ffc) {
     if (sVar2 == -0x7f38) {
-      _Globals::FUN_0042f590(this + 0x10,0x100,0xcd,0,0);
+      _Globals::CDSView_PostMessage(this + 0x10,0x100,0xcd,0,0);
       ExceptionList = local_c;
       return;
     }
@@ -53325,7 +53328,7 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort param_1,undefi
       return;
     }
   }
-  _Globals::FUN_0042c3c0(this,0x8004);
+  _Globals::CDSView__EndModal(this,0x8004);
   ExceptionList = local_c;
   return;
 }
@@ -53654,7 +53657,7 @@ void __fastcall CBulanci::CBulanci_OnCreate(int *param_1)
   }
   param_1[0x130] = iVar3;
   FUN_0042a330((CBulanci *)param_1,(int *)0x320,600,6,(int *)0x1);
-  _Globals::FUN_0042f590(param_1 + 4,0x100,0xf7,0,0);
+  _Globals::CDSView_PostMessage(param_1 + 4,0x100,0xf7,0,0);
   return;
 }
 
@@ -53882,7 +53885,7 @@ void __thiscall CRadio::CRadio_OnMouseDown(CRadio *this,undefined4 param_1,short
     (**(code **)(*(int *)this + 0x24))(0,0);
     uVar3 = 0;
     this[0x6b] = (CRadio)0x1;
-    piVar2 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,0xe,0,0,'\x01');
+    piVar2 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0xe,0,0,'\x01');
     _Globals::FUN_004223c0(piVar2,uVar3);
   }
   return;
@@ -53890,7 +53893,7 @@ void __thiscall CRadio::CRadio_OnMouseDown(CRadio *this,undefined4 param_1,short
 
 
 
-undefined4 CRadio::CRadio_IsRadioMarker(void)
+undefined4 CRadio::CRadio_GetDataSize(void)
 
 {
   return 1;
@@ -53950,7 +53953,8 @@ void __fastcall CButton::CButton_PlayClickSound(int param_1)
   
   if (*(int *)(param_1 + 0x94) != -1) {
     uVar2 = 0;
-    piVar1 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,*(int *)(param_1 + 0x94),0,0,'\x01');
+    piVar1 = (int *)_Globals::TriggerBankSample
+                              ((undefined *)0x1,0,*(int *)(param_1 + 0x94),0,0,'\x01');
     _Globals::FUN_004223c0(piVar1,uVar2);
   }
   return;
@@ -53998,7 +54002,7 @@ void __fastcall CEdit::CEdit_GetTextLength(int param_1)
 
 
 
-void __thiscall CEdit::CEdit_CopyText(CEdit *this,void *param_1)
+void __thiscall CEdit::CEdit_SaveData(CEdit *this,void *param_1)
 
 {
   _Globals::FUN_0042d490(param_1,(int *)(this + 0x98));
@@ -54007,7 +54011,7 @@ void __thiscall CEdit::CEdit_CopyText(CEdit *this,void *param_1)
 
 
 
-undefined4 CEdit::CEdit_IsEditMarker(void)
+undefined4 CEdit::CEdit_GetDataSize(void)
 
 {
   return 4;
@@ -54122,7 +54126,7 @@ undefined * CDSChained::FUN_004032c0(void)
 
 
 
-undefined4 * __fastcall CDSChained::FUN_004032d0(undefined4 *param_1)
+undefined4 * __fastcall CDSChained::CDSChained_ctor(undefined4 *param_1)
 
 {
   void *local_c;
@@ -54137,7 +54141,7 @@ undefined4 * __fastcall CDSChained::FUN_004032d0(undefined4 *param_1)
   param_1[2] = 0;
   param_1[3] = 0;
   local_4 = 0;
-  _Globals::FUN_0042f640((int)(param_1 + 4));
+  _Globals::CDSEventHandler_ctor((int)(param_1 + 4));
   param_1[7] = 0;
   *param_1 = CDSView::vftable;
   param_1[1] = CDSView::vftable;
@@ -54202,9 +54206,9 @@ undefined4 * __fastcall CScroller::CScroller_ctor(undefined4 *param_1)
   puStack_8 = &LAB_004744c8;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1a));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x1a));
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -54680,7 +54684,7 @@ void __thiscall CRadio::CRadio_SetSelected(CRadio *this,char param_1)
 
 
 
-void __thiscall CRadio::CRadio_SetSelectedFromPtr(CRadio *this,char *param_1)
+void __thiscall CRadio::CRadio_LoadData(CRadio *this,char *param_1)
 
 {
   CRadio_SetSelected(this,*param_1);
@@ -54729,10 +54733,10 @@ uint __thiscall CWindow::FUN_00403d60(CWindow *this,char param_1,char param_2)
   }
   else if ((param_1 == '\x1b') && (param_2 == '\0')) {
     if (this == (CWindow *)0x0) {
-      uVar2 = _Globals::FUN_0042f590((void *)0x0,0x100,0x8003,0,0);
+      uVar2 = _Globals::CDSView_PostMessage((void *)0x0,0x100,0x8003,0,0);
       return CONCAT31((int3)(uVar2 >> 8),1);
     }
-    uVar2 = _Globals::FUN_0042f590(this + 0x10,0x100,0x8003,0,0);
+    uVar2 = _Globals::CDSView_PostMessage(this + 0x10,0x100,0x8003,0,0);
     return CONCAT31((int3)(uVar2 >> 8),1);
   }
   uVar2 = CDSView::FUN_0042c0c0((int)this);
@@ -54754,7 +54758,7 @@ uint __thiscall CWindow::FUN_00403d60(CWindow *this,char param_1,char param_2)
   else {
     pCVar3 = this + 0x10;
   }
-  uVar2 = _Globals::FUN_0042f590(pCVar3,0x400,6,0,0);
+  uVar2 = _Globals::CDSView_PostMessage(pCVar3,0x400,6,0,0);
 LAB_00403e2a:
   return CONCAT31((int3)(uVar2 >> 8),1);
 }
@@ -54810,7 +54814,7 @@ void __thiscall CIcon::CIcon_OnMouseUp(CIcon *this,undefined4 param_1,byte param
     cVar1 = (**(code **)(*(int *)this + 0x1c))(unaff_ESI);
     if (cVar1 != '\0') {
       uVar4 = 0;
-      piVar2 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,0x14,0,0,'\x01');
+      piVar2 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x14,0,0,'\x01');
       _Globals::FUN_004223c0(piVar2,uVar4);
       if (*(int *)(this + 0x4c) == 0) {
         pvVar3 = (void *)0x0;
@@ -54818,7 +54822,7 @@ void __thiscall CIcon::CIcon_OnMouseUp(CIcon *this,undefined4 param_1,byte param
       else {
         pvVar3 = (void *)(*(int *)(this + 0x4c) + 0x10);
       }
-      _Globals::FUN_0042f590(pvVar3,0x100,*(undefined2 *)(this + 0x76),0,0);
+      _Globals::CDSView_PostMessage(pvVar3,0x100,*(undefined2 *)(this + 0x76),0,0);
     }
   }
   return;
@@ -54845,7 +54849,7 @@ void __thiscall CButton::CButton_OnMouseUp(CButton *this,undefined4 param_1,byte
       else {
         pvVar2 = (void *)(*(int *)(this + 0x4c) + 0x10);
       }
-      _Globals::FUN_0042f590(pvVar2,0x100,*(undefined2 *)(this + 0x8c),0,0);
+      _Globals::CDSView_PostMessage(pvVar2,0x100,*(undefined2 *)(this + 0x8c),0,0);
     }
   }
   return;
@@ -54903,7 +54907,7 @@ uint __thiscall CButton::CButton_OnKeyDown(CButton *this,byte param_1,char param
       else {
         pvVar1 = (void *)(*(int *)(this + 0x4c) + 0x10);
       }
-      _Globals::FUN_0042f590(pvVar1,0x100,*(undefined2 *)(this + 0x8c),0,0);
+      _Globals::CDSView_PostMessage(pvVar1,0x100,*(undefined2 *)(this + 0x8c),0,0);
       uVar2 = CButton_PlayClickSound((int)this);
       return CONCAT31((int3)((uint)uVar2 >> 8),1);
     case 0x25:
@@ -54934,7 +54938,7 @@ void __thiscall CButton::CButton_OnFocusReceived(CButton *this,short param_1)
     else {
       pvVar1 = (void *)(*(int *)(this + 0x4c) + 0x10);
     }
-    _Globals::FUN_0042f590(pvVar1,0x100,*(undefined2 *)(this + 0x8c),0,0);
+    _Globals::CDSView_PostMessage(pvVar1,0x100,*(undefined2 *)(this + 0x8c),0,0);
     CButton_PlayClickSound((int)this);
   }
   return;
@@ -55218,7 +55222,7 @@ void __thiscall CListViewer::FUN_004044f0(CListViewer *this,int *param_1,int *pa
 void __thiscall CEdit::CEdit_MeasureCharWidth(CEdit *this,byte param_1)
 
 {
-  _Globals::FUN_00437330(*(void **)(this + 0x80),param_1,(byte *)(this + 0x84));
+  _Globals::CDSFont__GetCharWidth(*(void **)(this + 0x80),param_1,(byte *)(this + 0x84));
   return;
 }
 
@@ -55351,7 +55355,7 @@ undefined4 __thiscall _Globals::FUN_00404730(void *this,int *param_1)
   local_c = *(undefined4 *)((int)this + 4);
   local_8 = *(undefined4 *)((int)this + 8);
   local_4 = *(undefined4 *)((int)this + 0xc);
-  piVar1 = (int *)CPoemScroller::FUN_00433280((CPoemScroller *)&local_10,param_1);
+  piVar1 = (int *)CPoemScroller::rect_Intersect((CPoemScroller *)&local_10,param_1);
   if ((*piVar1 < piVar1[2]) && (piVar1[1] < piVar1[3])) {
     return 1;
   }
@@ -55371,9 +55375,9 @@ undefined4 * __fastcall CScrollBar::CScrollBar_ctor(undefined4 *param_1)
   puStack_8 = &LAB_00474503;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1a));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x1a));
   local_4 = CONCAT31(local_4._1_3_,1);
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -55464,7 +55468,7 @@ void __fastcall _Globals::FUN_00404890(undefined4 *param_1)
 undefined4 * __fastcall CStaticText::CStaticText_ctor(undefined4 *param_1)
 
 {
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -55554,7 +55558,7 @@ undefined4 * __fastcall CIcon::CIcon_ctor(undefined4 *param_1)
   puStack_8 = &LAB_00474578;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_4 = 0;
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -55634,7 +55638,7 @@ undefined4 * __fastcall CButton::CButton_ctor(undefined4 *param_1)
   puStack_8 = &LAB_004745d8;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_4 = 0;
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -55769,9 +55773,9 @@ undefined4 * __fastcall CEdit::CEdit_ctor(undefined4 *param_1)
   puStack_8 = &LAB_00474668;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1a));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x1a));
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -55843,7 +55847,7 @@ undefined4 * CBlackView::CreateObject(void)
   local_4 = 0;
   puVar2 = (undefined4 *)0x0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     *puVar1 = vftable;
     puVar1[1] = vftable;
     puVar1[4] = vftable;
@@ -56021,10 +56025,10 @@ void __thiscall _Globals::FUN_004051d0(void *this,int param_1,int param_2)
     *(int *)((int)this + 0xb0) = param_2;
     (**(code **)(*(int *)this + 0x24))(0,0);
     if (*(int *)((int)this + 0xa8) < *(int *)((int)this + 0xac)) {
-      FUN_0042c990(this);
+      CDSView__Show(this);
       return;
     }
-    FUN_0042d040(this);
+    CDSView__Hide(this);
   }
   return;
 }
@@ -56271,7 +56275,7 @@ CWindow::CWindow_BuildAt
           ,CWindow param_5)
 
 {
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -56303,7 +56307,7 @@ void __fastcall CWindow::CWindow_Render(int param_1)
   if (*(char *)(param_1 + 0x68) != '\0') {
     CPoemScroller::BlitStatic(pvVar1,(int *)(param_1 + 0x30),0xbfbfbf,0);
   }
-  CDSApp::FUN_0042ccf0(param_1);
+  CDSApp::CDSView_RenderChildren(param_1);
   return;
 }
 
@@ -56454,7 +56458,7 @@ void __fastcall CScroller::FUN_004057c0(int *param_1)
   undefined4 local_8;
   undefined4 local_4;
   
-  CDSApp::FUN_0042ccf0((int)param_1);
+  CDSApp::CDSView_RenderChildren((int)param_1);
   if (g_pApp == (void *)0xffffff84) {
     pvVar2 = (void *)0x0;
   }
@@ -56478,19 +56482,19 @@ void __fastcall CScroller::FUN_004057c0(int *param_1)
   local_c = *(undefined4 *)((int)pvVar2 + 0x28);
   local_8 = *(undefined4 *)((int)pvVar2 + 0x2c);
   local_4 = *(undefined4 *)((int)pvVar2 + 0x30);
-  CPoemScroller::FUN_00433280((CPoemScroller *)&local_30,&local_10);
+  CPoemScroller::rect_Intersect((CPoemScroller *)&local_30,&local_10);
   if ((local_30 < local_28) && (local_2c < local_24)) {
     *(undefined4 *)this = 0;
     *(undefined4 *)((int)pvVar2 + 0x28) = 0;
     *(undefined4 *)((int)pvVar2 + 0x2c) = *(undefined4 *)((int)pvVar2 + 4);
     *(undefined4 *)((int)pvVar2 + 0x30) = *(undefined4 *)((int)pvVar2 + 8);
-    CPoemScroller::FUN_00433280(this,&local_30);
+    CPoemScroller::rect_Intersect(this,&local_30);
     (**(code **)(*param_1 + 0x70))(&local_20);
     *(undefined4 *)this = 0;
     *(undefined4 *)((int)pvVar2 + 0x28) = 0;
     *(undefined4 *)((int)pvVar2 + 0x30) = *(undefined4 *)((int)pvVar2 + 8);
     *(undefined4 *)((int)pvVar2 + 0x2c) = *(undefined4 *)((int)pvVar2 + 4);
-    CPoemScroller::FUN_00433280(this,&local_14);
+    CPoemScroller::rect_Intersect(this,&local_14);
   }
   return;
 }
@@ -56563,7 +56567,7 @@ void __thiscall CScroller::FUN_00405970(CScroller *this,int *param_1)
   if (bVar6) {
     iVar7 = iVar7 - uVar11;
   }
-  CBulanci::FUN_0042cbf0(*(CBulanci **)(this + 0x90),iVar7 + -6,uVar11);
+  CBulanci::CDSView__SetSize(*(CBulanci **)(this + 0x90),iVar7 + -6,uVar11);
   if (bVar6) {
     iVar10 = *(int *)(this + 0x8c) - (((iVar3 - (-(uint)bVar5 & uVar11)) - iVar2) + -6);
   }
@@ -56574,7 +56578,7 @@ void __thiscall CScroller::FUN_00405970(CScroller *this,int *param_1)
   if (bVar5) {
     iVar8 = iVar8 - uVar11;
   }
-  CBulanci::FUN_0042cbf0(*(CBulanci **)(this + 0x94),uVar11,iVar8 + -6);
+  CBulanci::CDSView__SetSize(*(CBulanci **)(this + 0x94),uVar11,iVar8 + -6);
   uVar4 = *(undefined4 *)(*(int *)(this + 0x94) + 0xb0);
   *(undefined4 *)(this + 0x80) = *(undefined4 *)(*(int *)(this + 0x90) + 0xb0);
   *(undefined4 *)(this + 0x84) = uVar4;
@@ -57183,7 +57187,7 @@ undefined4 * CWindow::CWindow_dtor(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x70);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     *puVar1 = vftable;
     puVar1[1] = vftable;
     puVar1[4] = vftable;
@@ -57521,7 +57525,7 @@ CStaticText::CStaticText_BuildAtAuto
   uVar1 = DAT_004b0e44 ^ (uint)&stack0xffffffe0;
   ExceptionList = &local_c;
   local_4 = 0;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -57612,10 +57616,10 @@ CStaticText::CStaticText_BuildAtAuto
 // Calls CStaticText_SetStyle(this, &DAT_004ae418, 4) to seed the
 // style block.
 
-undefined4 * __thiscall
+uint * __thiscall
 CStaticText::CStaticText_BuildAt
           (CStaticText *this,undefined4 param_1,undefined4 param_2,int param_3,undefined4 param_4,
-          undefined4 param_5,undefined4 param_6,uint param_7,undefined4 param_8)
+          undefined4 param_6,undefined4 param_7,uint param_8,undefined4 param_9)
 
 {
   uint uVar1;
@@ -57631,7 +57635,7 @@ CStaticText::CStaticText_BuildAt
   uVar1 = DAT_004b0e44 ^ (uint)&stack0xffffffe0;
   ExceptionList = &local_c;
   local_4 = 0;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -57642,14 +57646,14 @@ CStaticText::CStaticText_BuildAt
   *(undefined4 *)(this + 0x88) = 0xffffffff;
   *(undefined4 *)(this + 0x8c) = 0xffffffff;
   *(undefined4 *)(this + 0x90) = 0xffffffff;
-  *(uint *)(this + 0x6c) = param_7 & 0xffffffef;
+  *(uint *)(this + 0x6c) = param_8 & 0xffffffef;
   *(CStaticText **)(this + 0x78) = this + 0x84;
   *(undefined4 *)(this + 0x7c) = 0xffffffff;
   local_4 = CONCAT31(local_4._1_3_,3);
-  *(undefined4 *)(this + 0x70) = param_6;
+  *(undefined4 *)(this + 0x70) = param_7;
   *(undefined4 *)(this + 0x74) = 0;
-  _Globals::FUN_0042d490(this + 0x80,&param_5);
-  uVar2 = (**(code **)(**(int **)((int)g_pApp + 0x70) + 0x10))(param_8,0,uVar1);
+  _Globals::FUN_0042d490(this + 0x80,&param_6);
+  uVar2 = (**(code **)(**(int **)((int)g_pApp + 0x70) + 0x10))(param_9,0,uVar1);
   if (*(int **)(this + 0x68) != (int *)0x0) {
     (**(code **)(**(int **)(this + 0x68) + 8))();
   }
@@ -57665,7 +57669,7 @@ CStaticText::CStaticText_BuildAt
     _Globals::FUN_0042d2d0((void *)(param_3 + -0xc));
   }
   ExceptionList = unaff_EBX;
-  return (undefined4 *)this;
+  return (uint *)this;
 }
 
 
@@ -57744,13 +57748,13 @@ void __thiscall CListViewer::FUN_00406d00(CListViewer *this,int *param_1)
     local_1c = local_2c;
     local_18 = local_28;
     local_14 = local_24;
-    CPoemScroller::FUN_00433280((CPoemScroller *)&local_20,&local_10);
+    CPoemScroller::rect_Intersect((CPoemScroller *)&local_20,&local_10);
     if ((local_20 < local_18) && (local_1c < local_14)) {
       *(undefined4 *)this_00 = 0;
       *(undefined4 *)(this_01 + 0x28) = 0;
       *(undefined4 *)(this_01 + 0x2c) = *(undefined4 *)(this_01 + 4);
       *(undefined4 *)(this_01 + 0x30) = *(undefined4 *)(this_01 + 8);
-      CPoemScroller::FUN_00433280(this_00,&local_20);
+      CPoemScroller::rect_Intersect(this_00,&local_20);
       (**(code **)(*(int *)this + 0x74))(&local_30,iVar1);
     }
   }
@@ -57758,7 +57762,7 @@ void __thiscall CListViewer::FUN_00406d00(CListViewer *this,int *param_1)
   *(undefined4 *)(this_01 + 0x28) = 0;
   *(undefined4 *)(this_01 + 0x30) = *(undefined4 *)(this_01 + 8);
   *(undefined4 *)(this_01 + 0x2c) = *(undefined4 *)(this_01 + 4);
-  CPoemScroller::FUN_00433280(this_00,&local_10);
+  CPoemScroller::rect_Intersect(this_00,&local_10);
   return;
 }
 
@@ -58013,7 +58017,7 @@ undefined4 * __fastcall CRadio::CRadio_ctor(undefined4 *param_1)
   puStack_8 = &LAB_00474aae;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -58258,7 +58262,7 @@ void __thiscall _Globals::FUN_004075f0(void *this,LPCWSTR param_1,undefined4 par
   if (iVar5 < iVar4) {
     iVar5 = iVar4;
   }
-  CBulanci::FUN_0042cbf0(this,iVar5,iVar3);
+  CBulanci::CDSView__SetSize(this,iVar5,iVar3);
   this_00 = (undefined4 *)FUN_00447c42(8);
   if (this_00 == (undefined4 *)0x0) {
     this_00 = (undefined4 *)0x0;
@@ -58398,10 +58402,10 @@ CEdit::CEdit_BuildAt
   local_c = ExceptionList;
   uVar2 = DAT_004b0e44 ^ (uint)&stack0xffffffe0;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   this_00 = this + 0x68;
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)this_00);
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)this_00);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -58669,7 +58673,7 @@ LAB_00407cda:
 
 
 
-void __thiscall CEdit::CEdit_Invalidate(CEdit *this,int *param_1)
+void __thiscall CEdit::CEdit_LoadData(CEdit *this,int *param_1)
 
 {
   LPCWSTR pWVar1;
@@ -59189,9 +59193,9 @@ CScrollBar::CScrollBar_BuildAt
   local_c = ExceptionList;
   uVar2 = DAT_004b0e44 ^ (uint)&stack0xffffffd8;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(this + 0x68));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(this + 0x68));
   pCVar4 = this + 0x80;
   local_4._0_1_ = 1;
   *(undefined ***)this = vftable;
@@ -59242,7 +59246,7 @@ CScrollBar::CScrollBar_BuildAt
   *(undefined4 *)(this + 0xb4) = 1;
   *(undefined4 *)(this + 0xb8) = 0x14;
   *(undefined4 *)(this + 0xc0) = 0;
-  _Globals::FUN_0042d040((int *)this);
+  _Globals::CDSView__Hide((int *)this);
   *(ushort *)(this + 0x14) = *(ushort *)(this + 0x14) | 0x38;
   _Globals::Scheduler_RegisterEventSlot(this + 0x68,0,0,7);
   ExceptionList = local_c;
@@ -59334,7 +59338,7 @@ undefined4 * __thiscall CRadio::CRadio_BuildAt(CRadio *this,undefined4 param_1,u
   local_c = ExceptionList;
   uVar2 = DAT_004b0e44 ^ (uint)&stack0xffffffdc;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -59460,7 +59464,7 @@ CIcon::CIcon_BuildAt
   local_c = ExceptionList;
   uVar2 = DAT_004b0e44 ^ (uint)&stack0xffffffe0;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   iVar4 = 0;
   local_4 = 0;
   *(undefined ***)this = vftable;
@@ -59563,10 +59567,10 @@ CIcon::CIcon_BuildAt
 //   +0x90               text pointer (wchar_t*, default DAT_004ae414)
 //   +0x94 (s32)         click audio slot (-1 = no sound)
 
-undefined4 * __thiscall
+uint * __thiscall
 CButton::CButton_BuildAt
-          (CButton *this,int param_1,undefined2 param_2,CButton param_3,undefined4 param_4,
-          undefined4 param_5,undefined4 param_6,undefined4 *param_7)
+          (CButton *this,int param_1,undefined2 param_2,CButton param_4,undefined4 param_5,
+          undefined4 param_6,undefined4 param_7,undefined4 *param_8)
 
 {
   int *piVar1;
@@ -59587,7 +59591,7 @@ CButton::CButton_BuildAt
   ExceptionList = &local_c;
   iVar6 = 0;
   local_4 = 0;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   pCVar5 = this + 0x68;
   local_4._0_1_ = 1;
   *(undefined ***)this = vftable;
@@ -59602,11 +59606,11 @@ CButton::CButton_BuildAt
   *(undefined4 *)(this + 0x90) = 0;
   piVar1 = *(int **)((int)g_pApp + 0x70);
   local_4 = CONCAT31(local_4._1_3_,4);
-  if (param_7 == (undefined4 *)0x0) {
-    param_7 = &DAT_004ae408;
+  if (param_8 == (undefined4 *)0x0) {
+    param_8 = &DAT_004ae408;
   }
   do {
-    this_00 = (void *)(**(code **)(*piVar1 + 0x10))(param_7[iVar6],0,uVar2);
+    this_00 = (void *)(**(code **)(*piVar1 + 0x10))(param_8[iVar6],0,uVar2);
     if (*(int **)pCVar5 != (int *)0x0) {
       (**(code **)(**(int **)pCVar5 + 8))();
     }
@@ -59633,9 +59637,9 @@ CButton::CButton_BuildAt
   *(int *)(this + 0x2c) = *(int *)(this + 0x24) + *(int *)(*(int *)(this + 0x68) + 8);
   *(int *)(this + 0x28) = *(int *)(this + 0x20) + iVar6;
   _Globals::FUN_0042d490(this + 0x90,&param_1);
-  *(undefined4 *)(this + 0x94) = param_4;
+  *(undefined4 *)(this + 0x94) = param_5;
   *(undefined2 *)(this + 0x8c) = param_2;
-  this[0x8e] = param_3;
+  this[0x8e] = param_4;
   this[0x8f] = (CButton)0x0;
   *(ushort *)(this + 0x14) = *(ushort *)(this + 0x14) | 0x239;
   *(ushort *)(this + 0x46) = *(ushort *)(this + 0x46) | 1;
@@ -59644,7 +59648,7 @@ CButton::CButton_BuildAt
     _Globals::FUN_0042d2d0((void *)(param_1 + -0xc));
   }
   ExceptionList = this_00;
-  return (undefined4 *)this;
+  return (uint *)this;
 }
 
 
@@ -59711,9 +59715,9 @@ CScroller::CScroller_BuildAt(CScroller *this,int param_1,int param_2,undefined4 
   puStack_8 = &LAB_00474e89;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(this + 0x68));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(this + 0x68));
   *(undefined ***)(this + 0x68) = vftable;
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
@@ -59757,17 +59761,17 @@ CScroller::CScroller_BuildAt(CScroller *this,int param_1,int param_2,undefined4 
   iVar3 = piVar6[0xb];
   iVar4 = piVar6[9];
   local_4 = CONCAT31(local_4._1_3_,1);
-  CBulanek::FUN_0042cc80
+  CBulanek::CDSView__SetPosition
             (this_00,((*(int *)(this + 0x28) - *(int *)(this + 0x20)) - (iVar1 - iVar2)) + -3,3);
   FUN_0042cbb0(*(CScroller **)(this + 0x94),0,-6 - (iVar3 - iVar4));
   *(undefined2 *)(*(int *)(this + 0x94) + 0x48) = 0xd;
-  CBulanek::FUN_0042cc80
+  CBulanek::CDSView__SetPosition
             (*(CBulanek **)(this + 0x90),3,
              ((*(int *)(this + 0x2c) - *(int *)(this + 0x24)) - (iVar3 - iVar4)) + -3);
   FUN_0042cbb0(*(CScroller **)(this + 0x90),-6 - (iVar1 - iVar2),0);
   *(undefined2 *)(*(int *)(this + 0x90) + 0x48) = 0xe;
-  _Globals::FUN_0042d0b0(this,*(int **)(this + 0x94),0);
-  _Globals::FUN_0042d0b0(this,*(int **)(this + 0x90),0);
+  _Globals::CDSView__AddChild(this,*(int **)(this + 0x94),0);
+  _Globals::CDSView__AddChild(this,*(int **)(this + 0x90),0);
   *(undefined4 *)(this + 0x80) = 0;
   *(undefined4 *)(this + 0x84) = 0;
   *(ushort *)(this + 0x14) = *(ushort *)(this + 0x14) | 0x23b;
@@ -60556,12 +60560,10 @@ void CBulanci::FUN_004096d0
                (void *param_1,int *param_2,int *param_3,int *param_4,char param_5,char param_6)
 
 {
-  CStaticText *this;
-  int *piVar1;
-  uint uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
+  CStaticText *pCVar1;
+  uint *puVar2;
+  undefined4 local_30;
+  undefined4 uStack_2c;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -60570,30 +60572,25 @@ void CBulanci::FUN_004096d0
   puStack_8 = &LAB_004750fb;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  uVar2 = 4;
-  if (param_6 != '\0') {
-    uVar2 = 5;
-  }
   *param_3 = *param_2 + 0x14a;
   param_3[2] = param_2[1] + 0x14a;
-  this = (CStaticText *)_Globals::FUN_00447c42(0x98);
+  pCVar1 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4 = 0;
-  if (this == (CStaticText *)0x0) {
-    piVar1 = (int *)0x0;
+  if (pCVar1 == (CStaticText *)0x0) {
+    puVar2 = (uint *)0x0;
   }
   else {
-    uVar5 = 0x100af;
-    uVar4 = 1;
-    uVar3 = 0;
-    _Globals::FUN_0042d490(&stack0xffffffd0,param_4);
-    piVar1 = CStaticText::CStaticText_BuildAt
-                       (this,*param_3,param_3[1],param_3[2],param_3[3],uVar3,uVar4,uVar2,uVar5);
+    uStack_2c = 1;
+    local_30 = 0;
+    _Globals::FUN_0042d490(&local_30,param_4);
+    puVar2 = CStaticText::CStaticText_BuildAt(pCVar1);
   }
   local_4 = 0xffffffff;
   if (param_5 != '\0') {
-    *(undefined1 *)(piVar1 + 0x25) = 1;
+    *(undefined1 *)(puVar2 + 0x25) = 1;
   }
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  uStack_2c = 0x4097af;
+  _Globals::CDSView__AddChild(param_1,(int *)puVar2,0);
   ExceptionList = local_c;
   return;
 }
@@ -61513,12 +61510,12 @@ void __fastcall CStartGame1::CStartGame1_ApplyHostJoinVisibility(int param_1)
   if (((bVar1 != 0) || (*(char *)(*(int *)(param_1 + 0x88) + 0x68) != '\0')) &&
      ((*(byte *)(*(int *)(param_1 + 0x90) + 0x68) < bVar1 ||
       (*(char *)(*(int *)(param_1 + 0x88) + 0x68) == '\x01')))) {
-    _Globals::FUN_0042c990(*(int **)(param_1 + 0x94));
-    _Globals::FUN_0042c990(*(int **)(param_1 + 0x98));
+    _Globals::CDSView__Show(*(int **)(param_1 + 0x94));
+    _Globals::CDSView__Show(*(int **)(param_1 + 0x98));
     return;
   }
-  _Globals::FUN_0042d040(*(int **)(param_1 + 0x94));
-  _Globals::FUN_0042d040(*(int **)(param_1 + 0x98));
+  _Globals::CDSView__Hide(*(int **)(param_1 + 0x94));
+  _Globals::CDSView__Hide(*(int **)(param_1 + 0x98));
   return;
 }
 
@@ -61532,12 +61529,12 @@ void __fastcall CStartGame1::FUN_0040a8c0(int param_1)
   if ((*(char *)(*(int *)(param_1 + 0x8c) + 0x68) == '\0') &&
      (*(char *)(*(int *)(param_1 + 0x88) + 0x68) == '\0')) {
     CRadio::CRadio_SetSelected(*(CRadio **)(param_1 + 0x90),'\0');
-    _Globals::FUN_0042d040(*(int **)(param_1 + 0x90));
-    _Globals::FUN_0042d040(*(int **)(param_1 + 0xa0));
+    _Globals::CDSView__Hide(*(int **)(param_1 + 0x90));
+    _Globals::CDSView__Hide(*(int **)(param_1 + 0xa0));
     return;
   }
-  _Globals::FUN_0042c990(*(int **)(param_1 + 0x90));
-  _Globals::FUN_0042c990(*(int **)(param_1 + 0xa0));
+  _Globals::CDSView__Show(*(int **)(param_1 + 0x90));
+  _Globals::CDSView__Show(*(int **)(param_1 + 0xa0));
   if ((*(char *)(*(int *)(param_1 + 0x8c) + 0x68) == '\x01') &&
      (*(char *)(*(int *)(param_1 + 0x88) + 0x68) == '\0')) {
     bVar1 = true;
@@ -61558,14 +61555,14 @@ void __thiscall CStartGame1::CStartGame1_ApplyJoinModeVisibility(CStartGame1 *th
 
 {
   if (param_1 == '\0') {
-    _Globals::FUN_0042c990(*(int **)(this + 0x8c));
-    _Globals::FUN_0042c990(*(int **)(this + 0x9c));
+    _Globals::CDSView__Show(*(int **)(this + 0x8c));
+    _Globals::CDSView__Show(*(int **)(this + 0x9c));
     FUN_0040a8c0((int)this);
     CStartGame1_ApplyHostJoinVisibility((int)this);
     return;
   }
-  _Globals::FUN_0042d040(*(int **)(this + 0x9c));
-  _Globals::FUN_0042d040(*(int **)(this + 0x8c));
+  _Globals::CDSView__Hide(*(int **)(this + 0x9c));
+  _Globals::CDSView__Hide(*(int **)(this + 0x8c));
   FUN_0040a8c0((int)this);
   CStartGame1_ApplyHostJoinVisibility((int)this);
   return;
@@ -61592,7 +61589,7 @@ void __fastcall CStartGame1::FUN_0040a9f0(int param_1)
 
 
 
-void __thiscall CRadio::FUN_0040aa00(CRadio *this,undefined1 *param_1)
+void __thiscall CRadio::CRadio_SaveData(CRadio *this,undefined1 *param_1)
 
 {
   *param_1 = this[0x68];
@@ -61689,14 +61686,14 @@ CGameTypeDlg::FUN_0040ab00(CGameTypeDlg *this,short param_1,int param_2,undefine
       pCVar3 = this + 0x84;
       iVar2 = 3;
       do {
-        _Globals::FUN_0042d040(*(int **)(pCVar3 + -0xc));
-        _Globals::FUN_0042d040(*(int **)pCVar3);
+        _Globals::CDSView__Hide(*(int **)(pCVar3 + -0xc));
+        _Globals::CDSView__Hide(*(int **)pCVar3);
         pCVar3 = pCVar3 + 4;
         iVar2 = iVar2 + -1;
       } while (iVar2 != 0);
       bVar1 = *(byte *)(param_2 + 0x68);
-      _Globals::FUN_0042c990(*(int **)(this + (uint)bVar1 * 4 + 0x78));
-      _Globals::FUN_0042c990(*(int **)(this + (uint)bVar1 * 4 + 0x84));
+      _Globals::CDSView__Show(*(int **)(this + (uint)bVar1 * 4 + 0x78));
+      _Globals::CDSView__Show(*(int **)(this + (uint)bVar1 * 4 + 0x84));
       FUN_0040aad0((int *)this);
     }
   }
@@ -61738,7 +61735,7 @@ uint __thiscall CScore::OnKeyPress(CScore *this,char param_1,char param_2)
   uint uVar2;
   
   if ((param_2 == '\0') && ((param_1 == '\x1b' || (param_1 == '\r')))) {
-    uVar1 = _Globals::FUN_0042c3c0(this,0x8003);
+    uVar1 = _Globals::CDSView__EndModal(this,0x8003);
     return CONCAT31((int3)((uint)uVar1 >> 8),1);
   }
   uVar2 = CWindow::FUN_00403d60((CWindow *)this,param_1,param_2);
@@ -61796,7 +61793,7 @@ undefined4 __fastcall CAdvertising::Dismiss(int param_1)
 {
   uint uVar1;
   
-  uVar1 = _Globals::FUN_0042f390((void *)(param_1 + 0x10),0x100,0x8003,0,0);
+  uVar1 = _Globals::CDSView__PostMessage((void *)(param_1 + 0x10),0x100,0x8003,0,0);
   return CONCAT31((int3)(uVar1 >> 8),1);
 }
 
@@ -61904,11 +61901,11 @@ void __fastcall CStartGame1::FUN_0040ae00(int param_1)
   piVar1 = *(int **)(param_1 + 0x34);
   if (piVar1 != (int *)0x0) {
     if ((*(byte *)(piVar1 + 0x11) & 1) != 0) {
-      _Globals::FUN_0042d040(piVar1);
+      _Globals::CDSView__Hide(piVar1);
       return;
     }
     if (g_pModalFocus == *(void **)(param_1 + -0x24)) {
-      _Globals::FUN_0042c990(piVar1);
+      _Globals::CDSView__Show(piVar1);
     }
   }
   return;
@@ -61955,7 +61952,7 @@ void __thiscall CStartGame1::CStartGame1_OnEvent(CStartGame1 *this,ushort param_
     else {
       pvVar1 = (void *)(*(int *)(this + 0x4c) + 0x10);
     }
-    _Globals::FUN_0042f590(pvVar1,0x100,0xcf,0,0);
+    _Globals::CDSView_PostMessage(pvVar1,0x100,0xcf,0,0);
     return;
   }
   CDSApp::FUN_0042c7d0((CDSApp *)this,param_1);
@@ -62131,20 +62128,20 @@ void __thiscall CGameCounter::OnEvent(CGameCounter *this,short param_1,uint para
     return;
   }
   if (param_2 == 4) {
-    _Globals::FUN_0042f390(this + 0x10,0x100,0x8002,0,0);
+    _Globals::CDSView__PostMessage(this + 0x10,0x100,0x8002,0,0);
     return;
   }
   if (param_2 < 3) {
-    _Globals::TM_SetCurrentSequence
+    _Globals::ODSImage__SetImage
               ((void *)(*(int *)(this + param_2 * 4 + 0x70) + 0x68),*(int **)(this + 0x68));
     iVar2 = 0x12;
   }
   else {
-    _Globals::TM_SetCurrentSequence((void *)(*(int *)(this + 0x7c) + 0x68),*(int **)(this + 0x6c));
+    _Globals::ODSImage__SetImage((void *)(*(int *)(this + 0x7c) + 0x68),*(int **)(this + 0x6c));
     iVar2 = 0x11;
   }
   uVar3 = 0;
-  piVar1 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,iVar2,0,0,'\x01');
+  piVar1 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,iVar2,0,0,'\x01');
   _Globals::FUN_004223c0(piVar1,uVar3);
   (**(code **)(**(int **)(this + param_2 * 4 + 0x70) + 0x24))(0,0);
   return;
@@ -62220,7 +62217,7 @@ void __thiscall CExitDlg::FUN_0040b290(CExitDlg *this,ushort param_1)
     if (*(int *)(this + 0x70) != 0) {
       FUN_004390d0((CExitDlg *)(*(int *)(this + 0x70) + 0x98),'\0');
     }
-    _Globals::FUN_0042f390((void *)(*(int *)(this + 0x4c) + 0x10),0x100,0x8004,0,0);
+    _Globals::CDSView__PostMessage((void *)(*(int *)(this + 0x4c) + 0x10),0x100,0x8004,0,0);
     return;
   }
   CDSApp::FUN_0042c7d0((CDSApp *)this,param_1);
@@ -62245,19 +62242,19 @@ void __thiscall CPauseDlg::FUN_0040b2f0(CPauseDlg *this,short param_1,char param
   if (param_2 != *(char *)(*(int *)(this + 0x70) + 0xdb)) goto LAB_0040b375;
   bVar5 = ((byte)this[0x44] & 1) == 0;
   if (bVar5) {
-    _Globals::FUN_0042c990((int *)this);
+    _Globals::CDSView__Show((int *)this);
   }
   if (param_3 == 0) {
-    _Globals::FUN_0042c990(*(int **)(this + 0x74));
-    _Globals::FUN_0042d040(*(int **)(this + 0x78));
+    _Globals::CDSView__Show(*(int **)(this + 0x74));
+    _Globals::CDSView__Hide(*(int **)(this + 0x78));
     if ((*(byte *)(*(int *)(this + 0x78) + 0x44) & 2) != 0) {
       piVar2 = *(int **)(this + 0x74);
       goto LAB_0040b365;
     }
   }
   else {
-    _Globals::FUN_0042d040(*(int **)(this + 0x74));
-    _Globals::FUN_0042c990(*(int **)(this + 0x78));
+    _Globals::CDSView__Hide(*(int **)(this + 0x74));
+    _Globals::CDSView__Show(*(int **)(this + 0x78));
     if ((*(byte *)(*(int *)(this + 0x74) + 0x44) & 2) != 0) {
       piVar2 = *(int **)(this + 0x78);
 LAB_0040b365:
@@ -62265,7 +62262,7 @@ LAB_0040b365:
     }
   }
   if (bVar5) {
-    _Globals::FUN_0042d040((int *)this);
+    _Globals::CDSView__Hide((int *)this);
   }
 LAB_0040b375:
   bVar3 = *(byte *)(*(int *)(this + 0x70) + 0xda);
@@ -62279,12 +62276,12 @@ LAB_0040b375:
   }
   if (param_3 == 0) {
     if (iVar4 == 0) {
-      _Globals::FUN_0042f390(this + 0x10,0x100,0x80ca,0,0);
+      _Globals::CDSView__PostMessage(this + 0x10,0x100,0x80ca,0,0);
       return;
     }
   }
   else if (iVar4 == 1) {
-    _Globals::FUN_0042f390((void *)(*(int *)(this + 0x4c) + 0x10),0x100,0xed,0,0);
+    _Globals::CDSView__PostMessage((void *)(*(int *)(this + 0x4c) + 0x10),0x100,0xed,0,0);
   }
   return;
 }
@@ -62321,7 +62318,7 @@ void __thiscall CPauseDlg::FUN_0040b410(CPauseDlg *this,ushort param_1)
     uVar2 = 0;
     uVar1 = param_1;
   }
-  _Globals::FUN_0042f390((void *)(*(int *)(this + 0x4c) + 0x10),0x100,uVar1,uVar2,0);
+  _Globals::CDSView__PostMessage((void *)(*(int *)(this + 0x4c) + 0x10),0x100,uVar1,uVar2,0);
 LAB_0040b48b:
   CDSApp::FUN_0042c7d0((CDSApp *)this,param_1);
   return;
@@ -62399,7 +62396,7 @@ undefined4 * __thiscall CDSChained::FUN_0040b560(CDSChained *this,undefined4 *pa
   *(undefined4 *)(this + 8) = 0;
   *(undefined4 *)(this + 0xc) = 0;
   local_4 = 0;
-  _Globals::FUN_0042f640((int)(this + 0x10));
+  _Globals::CDSEventHandler_ctor((int)(this + 0x10));
   *(undefined4 *)(this + 0x1c) = 0;
   *(undefined ***)this = CDSView::vftable;
   *(undefined ***)(this + 4) = CDSView::vftable;
@@ -62811,14 +62808,14 @@ undefined4 * __fastcall CWindow::CWindow_ctor(undefined4 *param_1)
   puStack_8 = &LAB_00475578;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
   param_1[6] = vftable;
   param_1[0x1b] = 0;
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1c));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x1c));
   *param_1 = CStartGame2::vftable;
   param_1[1] = CStartGame2::vftable;
   param_1[4] = CStartGame2::vftable;
@@ -62935,7 +62932,7 @@ undefined4 * __fastcall CGameCounter::Constructor(undefined4 *param_1)
   puStack_8 = &LAB_004755d8;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_4 = 0;
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -63021,7 +63018,7 @@ undefined4 * CProgressBar::CProgressBar_Allocate(void)
   local_4 = 0;
   puVar2 = (undefined4 *)0x0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     *puVar1 = vftable;
     puVar1[1] = vftable;
     puVar1[4] = vftable;
@@ -63139,15 +63136,13 @@ undefined4 * __thiscall CMsgDialog::FUN_0040be80(CMsgDialog *this,int param_1,un
   int iVar4;
   int iVar5;
   CStaticText *this_00;
-  CButton *this_01;
-  CBulanek *this_02;
-  uint uVar6;
-  int *this_03;
-  CBulanci CVar7;
+  CButton *pCVar6;
+  CBulanek *this_01;
+  int *this_02;
+  undefined4 local_48;
+  undefined4 uVar7;
   undefined4 uVar8;
   undefined4 uVar9;
-  undefined4 uVar10;
-  undefined4 *puVar11;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -63155,7 +63150,7 @@ undefined4 * __thiscall CMsgDialog::FUN_0040be80(CMsgDialog *this,int param_1,un
   puStack_8 = &LAB_00475686;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  this_03 = (int *)0x0;
+  this_02 = (int *)0x0;
   local_4 = 0;
   CWindow::CWindow_BuildAt((CWindow *)this,0,0,0,0,1);
   param_2 = (undefined1 *)((uint)param_2 & 1);
@@ -63167,45 +63162,42 @@ undefined4 * __thiscall CMsgDialog::FUN_0040be80(CMsgDialog *this,int param_1,un
   this_00 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 2;
   if (this_00 != (CStaticText *)0x0) {
-    uVar10 = 0x100ae;
-    uVar9 = 2;
-    uVar8 = 0;
+    uVar9 = 0x100ae;
+    uVar8 = 2;
+    uVar7 = 0;
     _Globals::FUN_0042d490(&stack0xffffffc8,&param_1);
-    this_03 = CStaticText::CStaticText_BuildAtAuto(this_00,0,0,uVar8,uVar9,uVar10);
+    this_02 = CStaticText::CStaticText_BuildAtAuto(this_00,0,0,uVar7,uVar8,uVar9);
   }
-  iVar2 = this_03[0xb];
-  iVar3 = this_03[9];
-  iVar4 = this_03[10];
-  iVar5 = this_03[8];
+  iVar2 = this_02[0xb];
+  iVar3 = this_02[9];
+  iVar4 = this_02[10];
+  iVar5 = this_02[8];
   *(int *)(this + 0x28) = *(int *)(this + 0x20) + (iVar4 - iVar5) + 0x3c;
   local_4._0_1_ = 1;
   *(int *)(this + 0x2c) = *(int *)(this + 0x24) + (iVar2 - iVar3) + 0x3c;
-  _Globals::FUN_0042cc30(this_03,0x1e,10);
-  _Globals::FUN_0042d0b0(this,this_03,0);
-  this_01 = (CButton *)_Globals::FUN_00447c42(0x98);
+  _Globals::FUN_0042cc30(this_02,0x1e,10);
+  _Globals::CDSView__AddChild(this,this_02,0);
+  pCVar6 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 3;
-  if (this_01 == (CButton *)0x0) {
-    this_02 = (CBulanek *)0x0;
+  if (pCVar6 == (CButton *)0x0) {
+    this_01 = (CBulanek *)0x0;
   }
   else {
-    uVar6 = (uint)*(ushort *)(&DAT_004ae6f8 + (int)param_2 * 2);
     iVar1 = (int)param_2 * 4;
-    puVar11 = (undefined4 *)0x0;
-    uVar9 = 0x14;
-    uVar8 = 1;
     param_2 = &stack0xffffffc0;
-    CVar7 = (CBulanci)0x0;
+    local_48 = 0x40bfcd;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc0,
                *(short **)(g_apCDSStaticTextsSingleton[2] + *(int *)(&DAT_004ae6f0 + iVar1) * 4));
-    param_2 = &stack0xffffffb8;
-    this_02 = (CBulanek *)CButton::CButton_BuildAt(this_01,0,0,CVar7,uVar6,uVar8,uVar9,puVar11);
+    param_2 = (undefined1 *)&local_48;
+    local_48 = 0;
+    this_01 = (CBulanek *)CButton::CButton_BuildAt(pCVar6);
   }
   local_4 = CONCAT31(local_4._1_3_,1);
-  CBulanek::FUN_0042cc80
-            (this_02,(((iVar4 - iVar5) - (*(int *)(this_02 + 0x28) - *(int *)(this_02 + 0x20))) +
+  CBulanek::CDSView__SetPosition
+            (this_01,(((iVar4 - iVar5) - (*(int *)(this_01 + 0x28) - *(int *)(this_01 + 0x20))) +
                      0x3c) / 2,(iVar2 - iVar3) + 0x14);
-  _Globals::FUN_0042d0b0(this,(int *)this_02,0);
+  _Globals::CDSView__AddChild(this,(int *)this_01,0);
   *(ushort *)(this + 0x46) = *(ushort *)(this + 0x46) | 0xc;
   local_4 = 0xffffffff;
   if (param_1 != 0) {
@@ -63217,19 +63209,14 @@ undefined4 * __thiscall CMsgDialog::FUN_0040be80(CMsgDialog *this,int param_1,un
 
 
 
-undefined4 * __fastcall CTcpIpConfig::Build(undefined4 *param_1)
+void __thiscall CTcpIpConfig::CTcpIpConfig(CTcpIpConfig *this)
 
 {
-  CStaticText *this;
-  int *piVar1;
+  CStaticText *pCVar1;
+  uint *puVar2;
   CEdit *this_00;
-  CButton *pCVar2;
-  CBulanci CVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  uint uVar6;
-  undefined4 uVar7;
-  undefined4 *puVar8;
+  int *piVar3;
+  CButton *pCVar4;
   void *local_c;
   undefined1 *puStack_8;
   int local_4;
@@ -63238,79 +63225,65 @@ undefined4 * __fastcall CTcpIpConfig::Build(undefined4 *param_1)
   puStack_8 = &LAB_004756e4;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::CWindow_BuildAt((CWindow *)param_1,0,0,0x138,0xa0,1);
+  CWindow::CWindow_BuildAt((CWindow *)this,0,0,0x138,0xa0,1);
   local_4 = 0;
-  *param_1 = vftable;
-  param_1[1] = vftable;
-  param_1[4] = vftable;
-  param_1[6] = vftable;
-  this = (CStaticText *)_Globals::FUN_00447c42(0x98);
+  *(undefined ***)this = vftable;
+  *(undefined ***)(this + 4) = vftable;
+  *(undefined ***)(this + 0x10) = vftable;
+  *(undefined ***)(this + 0x18) = vftable;
+  pCVar1 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 1;
-  if (this == (CStaticText *)0x0) {
-    piVar1 = (int *)0x0;
+  if (pCVar1 == (CStaticText *)0x0) {
+    puVar2 = (uint *)0x0;
   }
   else {
-    uVar7 = 0x100ae;
-    uVar6 = 5;
-    uVar5 = 1;
-    uVar4 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x7c));
-    piVar1 = CStaticText::CStaticText_BuildAt(this,0x14,0x14,0x124,0x3c,uVar4,uVar5,uVar6,uVar7);
+    puVar2 = CStaticText::CStaticText_BuildAt(pCVar1);
   }
   local_4._0_1_ = 0;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  _Globals::CDSView__AddChild(this,(int *)puVar2,0);
   this_00 = (CEdit *)_Globals::FUN_00447c42(0xb8);
   local_4._0_1_ = 2;
   if (this_00 == (CEdit *)0x0) {
-    piVar1 = (int *)0x0;
+    piVar3 = (int *)0x0;
   }
   else {
-    piVar1 = CEdit::CEdit_BuildAt(this_00,0x14,0x46,0x124,0x3c,0x12,2,0,0x100af);
+    piVar3 = CEdit::CEdit_BuildAt(this_00,0x14,0x46,0x124,0x3c,0x12,2,0,0x100af);
   }
   local_4._0_1_ = 0;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
-  pCVar2 = (CButton *)_Globals::FUN_00447c42(0x98);
+  _Globals::CDSView__AddChild(this,piVar3,0);
+  pCVar4 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 3;
-  if (pCVar2 == (CButton *)0x0) {
-    piVar1 = (int *)0x0;
+  if (pCVar4 == (CButton *)0x0) {
+    puVar2 = (uint *)0x0;
   }
   else {
-    puVar8 = (undefined4 *)0x0;
-    uVar7 = 0x14;
-    uVar5 = 1;
-    uVar4 = 0x8002;
-    CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
-    piVar1 = CButton::CButton_BuildAt(pCVar2,0x49,0x73,CVar3,uVar4,uVar5,uVar7,puVar8);
+    puVar2 = CButton::CButton_BuildAt(pCVar4);
   }
   local_4._0_1_ = 0;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
-  pCVar2 = (CButton *)_Globals::FUN_00447c42(0x98);
+  _Globals::CDSView__AddChild(this,(int *)puVar2,0);
+  pCVar4 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 4;
-  if (pCVar2 == (CButton *)0x0) {
-    piVar1 = (int *)0x0;
+  if (pCVar4 == (CButton *)0x0) {
+    puVar2 = (uint *)0x0;
   }
   else {
-    puVar8 = (undefined4 *)0x0;
-    uVar7 = 0x14;
-    uVar5 = 0;
-    uVar4 = 0x8003;
-    CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    piVar1 = CButton::CButton_BuildAt(pCVar2,0xa3,0x73,CVar3,uVar4,uVar5,uVar7,puVar8);
+    puVar2 = CButton::CButton_BuildAt(pCVar4);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
-  param_1[0xb] = param_1[0xb] - param_1[9];
-  param_1[10] = (param_1[10] - param_1[8]) + 300;
-  param_1[8] = 300;
-  param_1[9] = 0;
-  *(ushort *)((int)param_1 + 0x46) = *(ushort *)((int)param_1 + 0x46) | 8;
+  _Globals::CDSView__AddChild(this,(int *)puVar2,0);
+  *(int *)(this + 0x2c) = *(int *)(this + 0x2c) - *(int *)(this + 0x24);
+  *(int *)(this + 0x28) = (*(int *)(this + 0x28) - *(int *)(this + 0x20)) + 300;
+  *(undefined4 *)(this + 0x20) = 300;
+  *(undefined4 *)(this + 0x24) = 0;
+  *(ushort *)(this + 0x46) = *(ushort *)(this + 0x46) | 8;
   ExceptionList = local_c;
-  return param_1;
+  return;
 }
 
 
@@ -63363,11 +63336,10 @@ undefined4 * __fastcall CSessionList::CSessionList_BuildDialog(undefined4 *param
   int *piVar1;
   CListBox *this_00;
   CButton *pCVar2;
-  CBulanci CVar3;
+  uint *puVar3;
   undefined4 uVar4;
   undefined4 uVar5;
   undefined4 uVar6;
-  undefined4 *puVar7;
   void *local_c;
   undefined1 *puStack_8;
   int local_4;
@@ -63397,7 +63369,7 @@ undefined4 * __fastcall CSessionList::CSessionList_BuildDialog(undefined4 *param
   }
   local_4._0_1_ = 0;
   param_1[0x1d] = piVar1;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  _Globals::CDSView__AddChild(param_1,piVar1,0);
   this_00 = (CListBox *)_Globals::FUN_00447c42(0xe4);
   local_4._0_1_ = 2;
   if (this_00 == (CListBox *)0x0) {
@@ -63408,42 +63380,32 @@ undefined4 * __fastcall CSessionList::CSessionList_BuildDialog(undefined4 *param
   }
   local_4._0_1_ = 0;
   param_1[0x1c] = piVar1;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  _Globals::CDSView__AddChild(param_1,piVar1,0);
   pCVar2 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 3;
   if (pCVar2 == (CButton *)0x0) {
-    piVar1 = (int *)0x0;
+    puVar3 = (uint *)0x0;
   }
   else {
-    puVar7 = (undefined4 *)0x0;
-    uVar6 = 0x14;
-    uVar5 = 1;
-    uVar4 = 0x8002;
-    CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x84));
-    piVar1 = CButton::CButton_BuildAt(pCVar2,0x53,200,CVar3,uVar4,uVar5,uVar6,puVar7);
+    puVar3 = CButton::CButton_BuildAt(pCVar2);
   }
   local_4._0_1_ = 0;
-  param_1[0x1e] = piVar1;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  param_1[0x1e] = puVar3;
+  _Globals::CDSView__AddChild(param_1,(int *)puVar3,0);
   pCVar2 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 4;
   if (pCVar2 == (CButton *)0x0) {
-    piVar1 = (int *)0x0;
+    puVar3 = (uint *)0x0;
   }
   else {
-    puVar7 = (undefined4 *)0x0;
-    uVar6 = 0x14;
-    uVar5 = 0;
-    uVar4 = 0x8003;
-    CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    piVar1 = CButton::CButton_BuildAt(pCVar2,0xad,200,CVar3,uVar4,uVar5,uVar6,puVar7);
+    puVar3 = CButton::CButton_BuildAt(pCVar2);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  _Globals::CDSView__AddChild(param_1,(int *)puVar3,0);
   _Globals::FUN_0042d080((int *)param_1[0x1e]);
   param_1[0xb] = param_1[0xb] - param_1[9];
   param_1[10] = (param_1[10] - param_1[8]) + 300;
@@ -63574,13 +63536,13 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
   int *piVar2;
   CRadio *pCVar3;
   undefined4 *puVar4;
-  CButton *this;
+  CButton *pCVar5;
+  uint *puVar6;
   char unaff_retaddr;
-  CBulanci CVar5;
-  undefined4 uVar6;
   undefined4 uVar7;
-  LPCWSTR pWVar8;
-  undefined4 uVar9;
+  undefined4 uVar8;
+  LPCWSTR pWVar9;
+  undefined4 uVar10;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -63596,15 +63558,15 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     piVar2 = (int *)0x0;
   }
   else {
-    uVar9 = 0x100ae;
-    uVar7 = 2;
-    uVar6 = 0;
+    uVar10 = 0x100ae;
+    uVar8 = 2;
+    uVar7 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x88));
-    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x14,uVar6,uVar7,uVar9);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x14,uVar7,uVar8,uVar10);
   }
   local_4 = 0xffffffff;
-  _Globals::FUN_0042d0b0(param_1,piVar2,0);
+  _Globals::CDSView__AddChild(param_1,piVar2,0);
   pCVar3 = (CRadio *)_Globals::FUN_00447c42(0xa8);
   local_4 = 1;
   if (pCVar3 == (CRadio *)0x0) {
@@ -63614,34 +63576,34 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     puVar4 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0x2d);
   }
   param_1[0x22] = (int)puVar4;
-  uVar6 = 0;
+  uVar7 = 0;
   local_4 = 0xffffffff;
-  pWVar8 = (LPCWSTR)0x0;
+  pWVar9 = (LPCWSTR)0x0;
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x8c));
-  _Globals::FUN_004075f0((void *)param_1[0x22],pWVar8,uVar6);
-  uVar6 = 0;
-  pWVar8 = (LPCWSTR)0x0;
+  _Globals::FUN_004075f0((void *)param_1[0x22],pWVar9,uVar7);
+  uVar7 = 0;
+  pWVar9 = (LPCWSTR)0x0;
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x90));
-  _Globals::FUN_004075f0((void *)param_1[0x22],pWVar8,uVar6);
-  _Globals::FUN_0042d0b0(param_1,(int *)param_1[0x22],0);
+  _Globals::FUN_004075f0((void *)param_1[0x22],pWVar9,uVar7);
+  _Globals::CDSView__AddChild(param_1,(int *)param_1[0x22],0);
   pCVar1 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4 = 2;
   if (pCVar1 == (CStaticText *)0x0) {
     piVar2 = (int *)0x0;
   }
   else {
-    uVar9 = 0x100ae;
-    uVar7 = 2;
-    uVar6 = 0;
+    uVar10 = 0x100ae;
+    uVar8 = 2;
+    uVar7 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x94));
-    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x69,uVar6,uVar7,uVar9);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x69,uVar7,uVar8,uVar10);
   }
   local_4 = 0xffffffff;
   param_1[0x27] = (int)piVar2;
-  _Globals::FUN_0042d0b0(param_1,piVar2,0);
+  _Globals::CDSView__AddChild(param_1,piVar2,0);
   pCVar3 = (CRadio *)_Globals::FUN_00447c42(0xa8);
   local_4 = 3;
   if (pCVar3 == (CRadio *)0x0) {
@@ -63651,44 +63613,44 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     puVar4 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0x82);
   }
   param_1[0x23] = (int)puVar4;
-  uVar6 = 0;
+  uVar7 = 0;
   local_4 = 0xffffffff;
-  pWVar8 = (LPCWSTR)0x0;
+  pWVar9 = (LPCWSTR)0x0;
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1ac));
-  _Globals::FUN_004075f0((void *)param_1[0x23],pWVar8,uVar6);
-  uVar6 = 0;
-  pWVar8 = (LPCWSTR)0x0;
+  _Globals::FUN_004075f0((void *)param_1[0x23],pWVar9,uVar7);
+  uVar7 = 0;
+  pWVar9 = (LPCWSTR)0x0;
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x9c));
-  _Globals::FUN_004075f0((void *)param_1[0x23],pWVar8,uVar6);
-  uVar6 = 0;
-  pWVar8 = (LPCWSTR)0x0;
+  _Globals::FUN_004075f0((void *)param_1[0x23],pWVar9,uVar7);
+  uVar7 = 0;
+  pWVar9 = (LPCWSTR)0x0;
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa0));
-  _Globals::FUN_004075f0((void *)param_1[0x23],pWVar8,uVar6);
-  uVar6 = 0;
-  pWVar8 = (LPCWSTR)0x0;
+  _Globals::FUN_004075f0((void *)param_1[0x23],pWVar9,uVar7);
+  uVar7 = 0;
+  pWVar9 = (LPCWSTR)0x0;
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa4));
-  _Globals::FUN_004075f0((void *)param_1[0x23],pWVar8,uVar6);
-  _Globals::FUN_0042d0b0(param_1,(int *)param_1[0x23],0);
+  _Globals::FUN_004075f0((void *)param_1[0x23],pWVar9,uVar7);
+  _Globals::CDSView__AddChild(param_1,(int *)param_1[0x23],0);
   pCVar1 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4 = 4;
   if (pCVar1 == (CStaticText *)0x0) {
     piVar2 = (int *)0x0;
   }
   else {
-    uVar9 = 0x100ae;
-    uVar7 = 2;
-    uVar6 = 0;
+    uVar10 = 0x100ae;
+    uVar8 = 2;
+    uVar7 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa8));
-    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0xdf,uVar6,uVar7,uVar9);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0xdf,uVar7,uVar8,uVar10);
   }
   local_4 = 0xffffffff;
   param_1[0x28] = (int)piVar2;
-  _Globals::FUN_0042d0b0(param_1,piVar2,0);
+  _Globals::CDSView__AddChild(param_1,piVar2,0);
   pCVar3 = (CRadio *)_Globals::FUN_00447c42(0xa8);
   local_4 = 5;
   if (pCVar3 == (CRadio *)0x0) {
@@ -63698,39 +63660,39 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     puVar4 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0xf8);
   }
   param_1[0x24] = (int)puVar4;
-  uVar6 = 0;
+  uVar7 = 0;
   local_4 = 0xffffffff;
-  pWVar8 = (LPCWSTR)0x0;
+  pWVar9 = (LPCWSTR)0x0;
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x98));
-  _Globals::FUN_004075f0((void *)param_1[0x24],pWVar8,uVar6);
-  uVar6 = 0;
-  pWVar8 = (LPCWSTR)0x0;
+  _Globals::FUN_004075f0((void *)param_1[0x24],pWVar9,uVar7);
+  uVar7 = 0;
+  pWVar9 = (LPCWSTR)0x0;
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x9c));
-  _Globals::FUN_004075f0((void *)param_1[0x24],pWVar8,uVar6);
-  uVar6 = 0;
-  pWVar8 = (LPCWSTR)0x0;
+  _Globals::FUN_004075f0((void *)param_1[0x24],pWVar9,uVar7);
+  uVar7 = 0;
+  pWVar9 = (LPCWSTR)0x0;
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa0));
-  _Globals::FUN_004075f0((void *)param_1[0x24],pWVar8,uVar6);
-  _Globals::FUN_0042d0b0(param_1,(int *)param_1[0x24],0);
+  _Globals::FUN_004075f0((void *)param_1[0x24],pWVar9,uVar7);
+  _Globals::CDSView__AddChild(param_1,(int *)param_1[0x24],0);
   pCVar1 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4 = 6;
   if (pCVar1 == (CStaticText *)0x0) {
     piVar2 = (int *)0x0;
   }
   else {
-    uVar9 = 0x100ae;
-    uVar7 = 2;
-    uVar6 = 0;
+    uVar10 = 0x100ae;
+    uVar8 = 2;
+    uVar7 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xac));
-    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x145,uVar6,uVar7,uVar9);
+    piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x145,uVar7,uVar8,uVar10);
   }
   local_4 = 0xffffffff;
   param_1[0x26] = (int)piVar2;
-  _Globals::FUN_0042d0b0(param_1,piVar2,0);
+  _Globals::CDSView__AddChild(param_1,piVar2,0);
   pCVar3 = (CRadio *)_Globals::FUN_00447c42(0xa8);
   local_4 = 7;
   if (pCVar3 == (CRadio *)0x0) {
@@ -63740,42 +63702,37 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     puVar4 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0x15e);
   }
   param_1[0x25] = (int)puVar4;
-  uVar6 = 0;
+  uVar7 = 0;
   local_4 = 0xffffffff;
-  pWVar8 = (LPCWSTR)0x0;
+  pWVar9 = (LPCWSTR)0x0;
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xb0));
-  _Globals::FUN_004075f0((void *)param_1[0x25],pWVar8,uVar6);
-  uVar6 = 0;
-  pWVar8 = (LPCWSTR)0x0;
+  _Globals::FUN_004075f0((void *)param_1[0x25],pWVar9,uVar7);
+  uVar7 = 0;
+  pWVar9 = (LPCWSTR)0x0;
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xb4));
-  _Globals::FUN_004075f0((void *)param_1[0x25],pWVar8,uVar6);
-  _Globals::FUN_0042d0b0(param_1,(int *)param_1[0x25],0);
-  this = (CButton *)_Globals::FUN_00447c42(0x98);
+  _Globals::FUN_004075f0((void *)param_1[0x25],pWVar9,uVar7);
+  _Globals::CDSView__AddChild(param_1,(int *)param_1[0x25],0);
+  pCVar5 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4 = 8;
-  if (this == (CButton *)0x0) {
-    piVar2 = (int *)0x0;
+  if (pCVar5 == (CButton *)0x0) {
+    puVar6 = (uint *)0x0;
   }
   else {
-    puVar4 = (undefined4 *)0x0;
-    uVar9 = 0x14;
-    uVar7 = 1;
-    uVar6 = 0xcf;
-    CVar5 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xc0));
-    piVar2 = CButton::CButton_BuildAt(this,0x14,0x1c8,CVar5,uVar6,uVar7,uVar9,puVar4);
+    puVar6 = CButton::CButton_BuildAt(pCVar5);
   }
   local_4 = 0xffffffff;
-  _Globals::FUN_0042d0b0(param_1,piVar2,0);
+  _Globals::CDSView__AddChild(param_1,(int *)puVar6,0);
   param_1[0x29] = 0;
   FUN_00401280();
   (**(code **)(*param_1 + 0x14))();
   if (unaff_retaddr != '\0') {
     (**(code **)(*param_1 + 0x24))();
   }
-  ExceptionList = this;
+  ExceptionList = pCVar5;
   return;
 }
 
@@ -64306,11 +64263,11 @@ void __fastcall CStartGame2::FUN_0040d520(int param_1)
     piVar1 = *(int **)(param_1 + 0x40);
     if ((*(byte *)(piVar1 + 0x11) & 1) != 0) {
       local_c = 0x40d561;
-      _Globals::FUN_0042d040(piVar1);
+      _Globals::CDSView__Hide(piVar1);
       return;
     }
     local_c = 0x40d56b;
-    _Globals::FUN_0042c990(piVar1);
+    _Globals::CDSView__Show(piVar1);
   }
   return;
 }
@@ -64363,7 +64320,7 @@ void __fastcall CStartGame2::FUN_0040d570(void *param_1)
     }
     local_4 = (uint)local_4._1_3_ << 8;
     *(int **)((int)param_1 + 0xac) = piVar2;
-    _Globals::FUN_0042d0b0(param_1,piVar2,0);
+    _Globals::CDSView__AddChild(param_1,piVar2,0);
   }
   else {
     local_10 = &stack0xffffffd4;
@@ -64492,7 +64449,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
   undefined4 *puVar4;
   CStartGame2 *pCVar5;
   CButton *pCVar6;
-  CBulanci CVar7;
+  uint *puVar7;
   undefined4 uVar8;
   undefined4 uVar9;
   LPCWSTR pWVar10;
@@ -64526,7 +64483,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
     piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x14,uVar8,uVar9,uVar11);
   }
   local_4._0_1_ = 0;
-  _Globals::FUN_0042d0b0(this,piVar2,0);
+  _Globals::CDSView__AddChild(this,piVar2,0);
   pCVar3 = (CRadio *)_Globals::FUN_00447c42(0xa8);
   local_4._0_1_ = 2;
   if (pCVar3 == (CRadio *)0x0) {
@@ -64552,7 +64509,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffcc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x17c));
   _Globals::FUN_004075f0(*(void **)(this + 0x70),pWVar10,uVar8);
-  _Globals::FUN_0042d0b0(this,*(int **)(this + 0x70),0);
+  _Globals::CDSView__AddChild(this,*(int **)(this + 0x70),0);
   pCVar1 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 3;
   if (pCVar1 == (CStaticText *)0x0) {
@@ -64567,7 +64524,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
     piVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x9b,0x14,uVar8,uVar9,uVar11);
   }
   local_4._0_1_ = 0;
-  _Globals::FUN_0042d0b0(this,piVar2,0);
+  _Globals::CDSView__AddChild(this,piVar2,0);
   pCVar3 = (CRadio *)_Globals::FUN_00447c42(0xa8);
   local_4._0_1_ = 4;
   if (pCVar3 == (CRadio *)0x0) {
@@ -64588,13 +64545,13 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
   CBulanci::FUN_0042d510
             ((CBulanci *)&stack0xffffffcc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1b8));
   _Globals::FUN_004075f0(*(void **)(this + 0x74),pWVar10,uVar8);
-  _Globals::FUN_0042d0b0(this,*(int **)(this + 0x74),0);
+  _Globals::CDSView__AddChild(this,*(int **)(this + 0x74),0);
   if (*(char *)(param_1 + 0x86) == '\0') {
     _Globals::FUN_0042d080(piVar2);
     _Globals::FUN_0042d080(*(int **)(this + 0x74));
   }
-  _Globals::FUN_0042d040(*(int **)(this + 0x74));
-  _Globals::FUN_0042d040(piVar2);
+  _Globals::CDSView__Hide(*(int **)(this + 0x74));
+  _Globals::CDSView__Hide(piVar2);
   pCVar1 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 5;
   if (pCVar1 == (CStaticText *)0x0) {
@@ -64610,7 +64567,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x78) = piVar2;
-  _Globals::FUN_0042d0b0(this,piVar2,0);
+  _Globals::CDSView__AddChild(this,piVar2,0);
   pCVar5 = (CStartGame2 *)_Globals::FUN_00447c42(0xc4);
   local_4._0_1_ = 6;
   if (pCVar5 == (CStartGame2 *)0x0) {
@@ -64621,7 +64578,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x84) = piVar2;
-  _Globals::FUN_0042d0b0(this,piVar2,0);
+  _Globals::CDSView__AddChild(this,piVar2,0);
   pCVar1 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 7;
   if (pCVar1 == (CStaticText *)0x0) {
@@ -64637,7 +64594,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x7c) = piVar2;
-  _Globals::FUN_0042d0b0(this,piVar2,0);
+  _Globals::CDSView__AddChild(this,piVar2,0);
   pCVar5 = (CStartGame2 *)_Globals::FUN_00447c42(0xc4);
   local_4._0_1_ = 8;
   if (pCVar5 == (CStartGame2 *)0x0) {
@@ -64648,7 +64605,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x88) = piVar2;
-  _Globals::FUN_0042d0b0(this,piVar2,0);
+  _Globals::CDSView__AddChild(this,piVar2,0);
   pCVar1 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 9;
   if (pCVar1 == (CStaticText *)0x0) {
@@ -64664,7 +64621,7 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x80) = piVar2;
-  _Globals::FUN_0042d0b0(this,piVar2,0);
+  _Globals::CDSView__AddChild(this,piVar2,0);
   pCVar5 = (CStartGame2 *)_Globals::FUN_00447c42(0xc4);
   local_4._0_1_ = 10;
   if (pCVar5 == (CStartGame2 *)0x0) {
@@ -64675,42 +64632,32 @@ undefined4 * __thiscall CStartGame2::FUN_0040d930(CStartGame2 *this,int param_1)
   }
   local_4._0_1_ = 0;
   *(int **)(this + 0x8c) = piVar2;
-  _Globals::FUN_0042d0b0(this,piVar2,0);
+  _Globals::CDSView__AddChild(this,piVar2,0);
   pCVar6 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 0xb;
   if (pCVar6 == (CButton *)0x0) {
-    piVar2 = (int *)0x0;
+    puVar7 = (uint *)0x0;
   }
   else {
-    puVar4 = (undefined4 *)0x0;
-    uVar11 = 0x14;
-    uVar9 = 1;
-    uVar8 = 0x8002;
-    CVar7 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
-    piVar2 = CButton::CButton_BuildAt(pCVar6,0x37,0xa8,CVar7,uVar8,uVar9,uVar11,puVar4);
+    puVar7 = CButton::CButton_BuildAt(pCVar6);
   }
   local_4._0_1_ = 0;
-  *(int **)(this + 0x90) = piVar2;
-  _Globals::FUN_0042d0b0(this,piVar2,0);
+  *(uint **)(this + 0x90) = puVar7;
+  _Globals::CDSView__AddChild(this,(int *)puVar7,0);
   pCVar6 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 0xc;
   if (pCVar6 == (CButton *)0x0) {
-    piVar2 = (int *)0x0;
+    puVar7 = (uint *)0x0;
   }
   else {
-    puVar4 = (undefined4 *)0x0;
-    uVar11 = 0x14;
-    uVar9 = 0;
-    uVar8 = 0x8003;
-    CVar7 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    piVar2 = CButton::CButton_BuildAt(pCVar6,0xb4,0xa8,CVar7,uVar8,uVar9,uVar11,puVar4);
+    puVar7 = CButton::CButton_BuildAt(pCVar6);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::FUN_0042d0b0(this,piVar2,0);
+  _Globals::CDSView__AddChild(this,(int *)puVar7,0);
   ExceptionList = local_c;
   return (undefined4 *)this;
 }
@@ -64769,7 +64716,7 @@ undefined4 * __fastcall CLoadingLevel::CLoadingLevel_ctor(undefined4 *param_1)
     piVar1 = CStaticText::CStaticText_BuildAtAuto(this,0x14,0x14,uVar3,uVar4,uVar5);
   }
   local_4._0_1_ = 0;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  _Globals::CDSView__AddChild(param_1,piVar1,0);
   puVar2 = (undefined4 *)_Globals::FUN_00447c42(0x70);
   local_4._0_1_ = 2;
   if (puVar2 == (undefined4 *)0x0) {
@@ -64780,7 +64727,7 @@ undefined4 * __fastcall CLoadingLevel::CLoadingLevel_ctor(undefined4 *param_1)
   }
   local_4 = (uint)local_4._1_3_ << 8;
   param_1[0x1c] = piVar1;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  _Globals::CDSView__AddChild(param_1,piVar1,0);
   *(ushort *)((int)param_1 + 0x46) = *(ushort *)((int)param_1 + 0x46) | 0xc;
   ExceptionList = local_c;
   return param_1;
@@ -64835,7 +64782,7 @@ void __fastcall CScore::Destructor(undefined4 *param_1)
   param_1[4] = vftable;
   param_1[6] = vftable;
   local_4 = 1;
-  _Globals::FUN_0043a4a0((void *)param_1[0x1c],1);
+  _Globals::CDSAudioPlayer_Stop((void *)param_1[0x1c],1);
   local_4 = local_4 & 0xffffff00;
   if ((int *)param_1[0x1c] != (int *)0x0) {
     (**(code **)(*(int *)param_1[0x1c] + 8))(uVar1);
@@ -64869,7 +64816,7 @@ void __fastcall CVolume::CVolume_StopAudioPreview(int param_1)
 
 {
   if (*(void **)(param_1 + 0xcc) != (void *)0x0) {
-    _Globals::FUN_0043a4a0(*(void **)(param_1 + 0xcc),1);
+    _Globals::CDSAudioPlayer_Stop(*(void **)(param_1 + 0xcc),1);
     if (*(int **)(param_1 + 0xcc) != (int *)0x0) {
       (**(code **)(**(int **)(param_1 + 0xcc) + 8))();
     }
@@ -64897,11 +64844,10 @@ undefined4 * __fastcall CSetupDlg::FUN_0040e290(undefined4 *param_1)
   int *piVar1;
   CVolume *this_00;
   CButton *pCVar2;
-  CBulanci CVar3;
+  uint *puVar3;
   undefined4 uVar4;
   undefined4 uVar5;
   undefined4 uVar6;
-  undefined4 *puVar7;
   int local_1c [4];
   void *local_c;
   undefined1 *puStack_8;
@@ -64932,7 +64878,7 @@ undefined4 * __fastcall CSetupDlg::FUN_0040e290(undefined4 *param_1)
   }
   local_4._0_1_ = 0;
   param_1[0x1d] = piVar1;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  _Globals::CDSView__AddChild(param_1,piVar1,0);
   this_00 = (CVolume *)_Globals::FUN_00447c42(0xd0);
   local_4._0_1_ = 2;
   if (this_00 == (CVolume *)0x0) {
@@ -64947,44 +64893,32 @@ undefined4 * __fastcall CSetupDlg::FUN_0040e290(undefined4 *param_1)
   }
   local_4._0_1_ = 0;
   param_1[0x1c] = piVar1;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  _Globals::CDSView__AddChild(param_1,piVar1,0);
   _Globals::FUN_004051d0((void *)param_1[0x1c],-0x32,0x32);
   pCVar2 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 3;
   if (pCVar2 == (CButton *)0x0) {
-    piVar1 = (int *)0x0;
+    puVar3 = (uint *)0x0;
   }
   else {
-    puVar7 = (undefined4 *)0x0;
-    uVar6 = 0x14;
-    uVar5 = 1;
-    uVar4 = 0x8002;
-    CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffb4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
-    piVar1 = CButton::CButton_BuildAt
-                       (pCVar2,0x37,(short)param_1[0xb] + -0x32,CVar3,uVar4,uVar5,uVar6,puVar7);
+    puVar3 = CButton::CButton_BuildAt(pCVar2);
   }
   local_4._0_1_ = 0;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  _Globals::CDSView__AddChild(param_1,(int *)puVar3,0);
   pCVar2 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 4;
   if (pCVar2 == (CButton *)0x0) {
-    piVar1 = (int *)0x0;
+    puVar3 = (uint *)0x0;
   }
   else {
-    puVar7 = (undefined4 *)0x0;
-    uVar6 = 0x14;
-    uVar5 = 0;
-    uVar4 = 0x8003;
-    CVar3 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffb4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    piVar1 = CButton::CButton_BuildAt
-                       (pCVar2,0x9b,(short)param_1[0xb] + -0x32,CVar3,uVar4,uVar5,uVar6,puVar7);
+    puVar3 = CButton::CButton_BuildAt(pCVar2);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::FUN_0042d0b0(param_1,piVar1,0);
+  _Globals::CDSView__AddChild(param_1,(int *)puVar3,0);
   ExceptionList = local_c;
   return param_1;
 }
@@ -65074,7 +65008,7 @@ undefined4 * __fastcall CAdvertising::CAdvertising_ctor(undefined4 *param_1)
   ExceptionList = &local_c;
   CWindow::CWindow_BuildAt((CWindow *)param_1,0,0,800,600,0);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1c));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x1c));
   local_4._0_1_ = 1;
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -65099,7 +65033,7 @@ undefined4 * __fastcall CAdvertising::CAdvertising_ctor(undefined4 *param_1)
     *(undefined4 *)(this + 0x68) = 0xffffff;
   }
   local_4 = CONCAT31(local_4._1_3_,1);
-  _Globals::FUN_0042d0b0(param_1,(int *)this,0);
+  _Globals::CDSView__AddChild(param_1,(int *)this,0);
   *(ushort *)(param_1 + 5) = *(ushort *)(param_1 + 5) | 0x111;
   *(undefined1 *)(param_1 + 0x23) = 0;
   ExceptionList = local_c;
@@ -65185,7 +65119,7 @@ undefined4 * CMsgDialog::FUN_0040e780(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x70);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     puVar1[0x1b] = 0;
     *puVar1 = vftable;
     puVar1[1] = vftable;
@@ -65213,7 +65147,8 @@ undefined4 * CMsgDialog::FUN_0040e780(void)
 undefined4 * _Globals::CreateObject(void)
 
 {
-  undefined4 *puVar1;
+  CTcpIpConfig *this;
+  undefined4 *extraout_EAX;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -65222,12 +65157,12 @@ undefined4 * _Globals::CreateObject(void)
   puStack_8 = &LAB_00475b4b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  puVar1 = (undefined4 *)FUN_00447c42(0x70);
+  this = (CTcpIpConfig *)FUN_00447c42(0x70);
   local_4 = 0;
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CTcpIpConfig::Build(puVar1);
+  if (this != (CTcpIpConfig *)0x0) {
+    CTcpIpConfig::CTcpIpConfig(this);
     ExceptionList = local_c;
-    return puVar1;
+    return extraout_EAX;
   }
   ExceptionList = local_c;
   return (undefined4 *)0x0;
@@ -65366,7 +65301,7 @@ undefined4 * CColorSet::FUN_0040e9f0(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x70);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     *puVar1 = vftable;
     puVar1[1] = vftable;
     puVar1[4] = vftable;
@@ -65443,7 +65378,7 @@ undefined4 * CBulPicture::CBulPicture_Create(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x470);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     *puVar1 = vftable;
     puVar1[1] = vftable;
     puVar1[4] = vftable;
@@ -65490,7 +65425,7 @@ undefined4 * CColorSwitch::CColorSwitch_ctor(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x74);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     *puVar1 = vftable;
     puVar1[1] = vftable;
     puVar1[4] = vftable;
@@ -65607,7 +65542,7 @@ undefined4 * CKeybShow::CKeybShow_Allocate(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x70);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     puVar1[0x1b] = 0;
     *puVar1 = vftable;
     puVar1[1] = vftable;
@@ -65637,7 +65572,7 @@ undefined4 * CGameTypeDlg::FUN_0040ee40(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x94);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     puVar1[0x1b] = 0;
     *puVar1 = vftable;
     puVar1[1] = vftable;
@@ -65746,7 +65681,7 @@ undefined4 * CScore::Create(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x74);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     puVar1[0x1b] = 0;
     *puVar1 = vftable;
     puVar1[1] = vftable;
@@ -65789,7 +65724,7 @@ undefined4 * CPauseDlg::FUN_0040f090(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x7c);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     puVar1[0x1b] = 0;
     *puVar1 = vftable;
     puVar1[1] = vftable;
@@ -66027,7 +65962,7 @@ int * __fastcall CStartGame1::CStartGame1_ctor(int *param_1)
   ExceptionList = &local_c;
   CWindow::CWindow_BuildAt((CWindow *)param_1,0xfa,0x3c,0x2f8,0x230,0);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1c));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x1c));
   local_4 = CONCAT31(local_4._1_3_,1);
   *param_1 = (int)vftable;
   param_1[1] = (int)vftable;
@@ -66203,7 +66138,7 @@ undefined4 __thiscall CStartGame2::FUN_0040f610(CStartGame2 *this,int param_1)
               _Globals::FUN_0042d490(&stack0xffffffd4,&param_1);
               uVar5 = _Globals::FUN_0040f2c0(iVar3);
               if ((short)uVar5 == -0x7ffc) {
-                _Globals::FUN_0042f390(this + 0x10,0x100,0x8004,0,0);
+                _Globals::CDSView__PostMessage(this + 0x10,0x100,0x8004,0,0);
               }
               _Globals::CDSView_AcquireKeyboardFocus(*(int **)(this + (uint)local_18 * 4 + 0x88));
               local_4 = local_4 & 0xffffff00;
@@ -66244,15 +66179,15 @@ undefined4 * __thiscall CStartGame2::FUN_0040f7d0(CStartGame2 *this,int param_1)
   wchar_t *pwVar4;
   short *psVar5;
   CStartGame2 *this_00;
-  CButton *this_01;
-  int *piVar6;
-  size_t sVar7;
-  int iVar8;
-  CBulanci CVar9;
-  undefined4 uVar10;
+  CButton *pCVar6;
+  uint *puVar7;
+  int *piVar8;
+  size_t sVar9;
+  int iVar10;
+  undefined4 local_4c;
   undefined4 uVar11;
   undefined4 uVar12;
-  undefined4 *puVar13;
+  undefined4 uVar13;
   undefined1 *local_1c;
   CStaticText *local_18;
   CStartGame2 *local_14;
@@ -66280,43 +66215,43 @@ undefined4 * __thiscall CStartGame2::FUN_0040f7d0(CStartGame2 *this,int param_1)
     piVar3 = (int *)0x0;
   }
   else {
-    uVar12 = 0x100ae;
-    uVar11 = 2;
+    uVar13 = 0x100ae;
+    uVar12 = 2;
     local_10 = &stack0xffffffc4;
-    uVar10 = 0;
+    uVar11 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xe8));
     local_10 = &stack0xffffffbc;
-    piVar3 = CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x14,uVar10,uVar11,uVar12);
+    piVar3 = CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x14,uVar11,uVar12,uVar13);
   }
   local_4._0_1_ = 0;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
+  _Globals::CDSView__AddChild(this,piVar3,0);
   local_1c = (undefined1 *)0x0;
   local_4._0_1_ = 2;
-  iVar8 = 0;
+  iVar10 = 0;
   do {
-    piVar3 = FUN_004224a0(&local_18,*(byte *)(param_1 + iVar8));
+    piVar3 = FUN_004224a0(&local_18,*(byte *)(param_1 + iVar10));
     local_4._0_1_ = 3;
     if (local_1c == (undefined1 *)0x0) {
-      piVar6 = (int *)0x0;
+      piVar8 = (int *)0x0;
     }
     else {
-      piVar6 = *(int **)(local_1c + -0xc);
+      piVar8 = *(int **)(local_1c + -0xc);
     }
     pwVar4 = (wchar_t *)*piVar3;
     if (pwVar4 == (wchar_t *)0x0) {
-      sVar7 = 0;
+      sVar9 = 0;
       pwVar4 = (wchar_t *)PTR_DAT_004ae7a8;
     }
     else {
-      sVar7 = *(size_t *)(pwVar4 + -6);
+      sVar9 = *(size_t *)(pwVar4 + -6);
     }
-    _Globals::FUN_0042d5a0((int *)&local_1c,piVar6,0,pwVar4,sVar7);
+    _Globals::FUN_0042d5a0((int *)&local_1c,piVar8,0,pwVar4,sVar9);
     local_4._0_1_ = 2;
     if (local_18 != (CStaticText *)0x0) {
       _Globals::FUN_0042d2d0(local_18 + -0xc);
     }
-    if (iVar8 < 5) {
+    if (iVar10 < 5) {
       if (local_1c == (undefined1 *)0x0) {
         piVar3 = (int *)0x0;
       }
@@ -66330,45 +66265,42 @@ undefined4 * __thiscall CStartGame2::FUN_0040f7d0(CStartGame2 *this,int param_1)
       } while (*psVar5 != 0);
       _Globals::FUN_0042d5a0((int *)&local_1c,piVar3,0,L"\n",(int)(psVar5 + -0x240cb2) >> 1);
     }
-    iVar8 = iVar8 + 1;
-  } while (iVar8 < 6);
+    iVar10 = iVar10 + 1;
+  } while (iVar10 < 6);
   pCVar2 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 4;
   if (pCVar2 == (CStaticText *)0x0) {
     this_00 = (CStartGame2 *)0x0;
   }
   else {
-    uVar12 = 0x100af;
-    uVar11 = 2;
+    uVar13 = 0x100af;
+    uVar12 = 2;
     local_10 = &stack0xffffffc4;
-    uVar10 = 0;
+    uVar11 = 0;
     _Globals::FUN_0042d490(&stack0xffffffc4,(int *)&local_1c);
     local_10 = &stack0xffffffbc;
     this_00 = (CStartGame2 *)
-              CStaticText::CStaticText_BuildAtAuto(pCVar2,0x9b,0x15,uVar10,uVar11,uVar12);
+              CStaticText::CStaticText_BuildAtAuto(pCVar2,0x9b,0x15,uVar11,uVar12,uVar13);
   }
   local_4._0_1_ = 2;
   FUN_00405440(this_00,2,3);
-  _Globals::FUN_0042d0b0(this,(int *)this_00,0);
-  this_01 = (CButton *)_Globals::FUN_00447c42(0x98);
+  _Globals::CDSView__AddChild(this,(int *)this_00,0);
+  pCVar6 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 5;
-  if (this_01 == (CButton *)0x0) {
-    piVar3 = (int *)0x0;
+  if (pCVar6 == (CButton *)0x0) {
+    puVar7 = (uint *)0x0;
   }
   else {
-    puVar13 = (undefined4 *)0x0;
-    uVar12 = 0x14;
-    uVar11 = 1;
-    uVar10 = 0x8002;
     local_10 = &stack0xffffffbc;
-    CVar9 = (CBulanci)0x0;
+    local_4c = 0x40fa10;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffbc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
-    local_10 = &stack0xffffffb4;
-    piVar3 = CButton::CButton_BuildAt(this_01,100,0x8c,CVar9,uVar10,uVar11,uVar12,puVar13);
+    local_10 = (undefined1 *)&local_4c;
+    local_4c = 100;
+    puVar7 = CButton::CButton_BuildAt(pCVar6);
   }
   local_4._0_1_ = 2;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
+  _Globals::CDSView__AddChild(this,(int *)puVar7,0);
   *(ushort *)(this + 0x46) = *(ushort *)(this + 0x46) | 0xc;
   local_4 = (uint)local_4._1_3_ << 8;
   if (local_1c != (undefined1 *)0x0) {
@@ -66418,7 +66350,7 @@ void __thiscall CVolume::CVolume_OnMouseDown(CVolume *this,int *param_1,short pa
   
   _Globals::CDSView_AcquireKeyboardFocus((int *)this);
   CScrollBar::CScrollBar_OnMouseDown((CScrollBar *)this,param_1,param_2);
-  iVar1 = _Globals::FUN_00422430((undefined *)0x1,0,0x1e,0,0,'\x01');
+  iVar1 = _Globals::TriggerBankSample((undefined *)0x1,0,0x1e,0,0,'\x01');
   if (*(int **)(this + 0xcc) != (int *)0x0) {
     (**(code **)(**(int **)(this + 0xcc) + 8))();
   }
@@ -66528,10 +66460,10 @@ void __thiscall CStartGame2::FUN_0040fc20(CStartGame2 *this,ushort param_1)
     local_118 = *(undefined4 *)(iVar2 + 0x1a4);
     local_114 = *(undefined2 *)(iVar2 + 0x1a8);
     local_4 = 0;
-    CBulanci::FUN_0042c370((CBulanci *)local_110,(int)local_120);
+    CBulanci::CDSView_LoadData((CBulanci *)local_110,(int)local_120);
     sVar1 = _Globals::CDSView_DoModal(local_110,this);
     if (sVar1 == -0x7ffe) {
-      CBulanci::FUN_0042c320((CBulanci *)local_110,(int)local_120);
+      CBulanci::CDSView_SaveData((CBulanci *)local_110,(int)local_120);
       FUN_00412ed0(*(CStartGame2 **)(this + 0xa8),local_120[0],
                    *(int *)(local_120 + ((uint)local_120 & 0xff) * 4 + 2),(void *)0x0);
       if ((*(CStartGame2 **)(this + 0xa8))[0x86] != (CStartGame2)0x0) {
@@ -66539,7 +66471,7 @@ void __thiscall CStartGame2::FUN_0040fc20(CStartGame2 *this,ushort param_1)
       }
     }
     else if (sVar1 == -0x7ffc) {
-      _Globals::FUN_0042c3c0(this,0x8004);
+      _Globals::CDSView__EndModal(this,0x8004);
     }
     local_4 = 0xffffffff;
     _Globals::FUN_00401910((undefined4 *)local_110);
@@ -66556,7 +66488,7 @@ void __thiscall CStartGame2::FUN_0040fc20(CStartGame2 *this,ushort param_1)
   local_4 = 1;
   sVar1 = _Globals::CDSView_DoModal(local_7c,this);
   if (sVar1 == -0x7ffc) {
-    _Globals::FUN_0042c3c0(this,0x8004);
+    _Globals::CDSView__EndModal(this,0x8004);
   }
   local_4 = 0xffffffff;
   _Globals::FUN_00401910((undefined4 *)local_7c);
@@ -66601,10 +66533,10 @@ void __thiscall CAdvertising::LoadSplashImage(CAdvertising *this,undefined4 para
     piVar4 = (int *)0x0;
   }
   else {
-    piVar4 = CDSBitmap::FUN_004393d0(this_01,(800 - iVar1) / 2,(600 - iVar2) / 2,piVar3);
+    piVar4 = CDSBitmap::CDSBitmap_ctor(this_01,(800 - iVar1) / 2,(600 - iVar2) / 2,piVar3);
   }
   local_c = (void *)((uint)local_c._1_3_ << 8);
-  _Globals::FUN_0042d0b0(this,piVar4,0);
+  _Globals::CDSView__AddChild(this,piVar4,0);
   ArmDismissTimer(this,unaff_retaddr);
   local_c = (void *)0xffffffff;
   if (piVar3 != (int *)0x0) {
@@ -66666,7 +66598,7 @@ CMenu::FUN_0040ffd0(CMenu *this,undefined4 param_2,undefined4 param_3,CMenu para
   local_c = ExceptionList;
   uVar1 = DAT_004b0e44 ^ (uint)&stack0xffffffe8;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(undefined ***)this = CColorSet::vftable;
   *(undefined ***)(this + 4) = CColorSet::vftable;
   *(undefined ***)(this + 0x10) = CColorSet::vftable;
@@ -66764,7 +66696,7 @@ CColorSwitch::CColorSwitch_BuildAt
   local_c = ExceptionList;
   uVar1 = DAT_004b0e44 ^ (uint)&stack0xffffffe8;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -66813,7 +66745,7 @@ CBulanci::FUN_004101d0
   local_c = ExceptionList;
   uVar1 = DAT_004b0e44 ^ (uint)&stack0xffffffe8;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(undefined ***)this = CBulPicture::vftable;
   *(undefined ***)(this + 4) = CBulPicture::vftable;
   *(undefined ***)(this + 0x10) = CBulPicture::vftable;
@@ -66885,9 +66817,9 @@ void __cdecl _Globals::FUN_004102d0(void *param_1,int param_2,int param_3,int pa
         local_28 = (CBulanek *)CColorSwitch::CColorSwitch_BuildAt(this,0,0,param_2);
       }
       local_4 = 0xffffffff;
-      FUN_0042d0b0(param_1,(int *)local_28,0);
+      CDSView__AddChild(param_1,(int *)local_28,0);
       iVar2 = iVar2 - (*(int *)(local_28 + 0x28) - *(int *)(local_28 + 0x20));
-      CBulanek::FUN_0042cc80(local_28,iVar2,param_4 + 0xb2);
+      CBulanek::CDSView__SetPosition(local_28,iVar2,param_4 + 0xb2);
       iVar2 = iVar2 + -3;
     }
     this_00 = (CStaticText *)FUN_00447c42(0x98);
@@ -66904,7 +66836,7 @@ void __cdecl _Globals::FUN_004102d0(void *param_1,int param_2,int param_3,int pa
       piVar1 = CStaticText::CStaticText_BuildAtAuto(this_00,param_3,param_4,uVar3,uVar4,uVar5);
     }
     local_4 = 0xffffffff;
-    FUN_0042d0b0(param_1,piVar1,0);
+    CDSView__AddChild(param_1,piVar1,0);
     this_01 = (CChatList *)FUN_00447c42(0xe8);
     local_4 = 2;
     if (this_01 == (CChatList *)0x0) {
@@ -66918,7 +66850,7 @@ void __cdecl _Globals::FUN_004102d0(void *param_1,int param_2,int param_3,int pa
       piVar1 = CChatList::CChatList_BuildAt(this_01,&local_1c,0x122,param_2);
     }
     local_4 = 0xffffffff;
-    FUN_0042d0b0(param_1,piVar1,0);
+    CDSView__AddChild(param_1,piVar1,0);
     this_02 = (CChatEdit *)FUN_00447c42(0xc4);
     local_4 = 3;
     if (this_02 == (CChatEdit *)0x0) {
@@ -66932,7 +66864,7 @@ void __cdecl _Globals::FUN_004102d0(void *param_1,int param_2,int param_3,int pa
       piVar1 = CChatEdit::CChatEdit_BuildAt(this_02,&local_1c,local_28,piVar1,param_2);
     }
     local_4 = 0xffffffff;
-    FUN_0042d0b0(param_1,piVar1,0);
+    CDSView__AddChild(param_1,piVar1,0);
   }
   ExceptionList = local_c;
   return;
@@ -66969,11 +66901,11 @@ void __cdecl _Globals::FUN_004102d0(void *param_1,int param_2,int param_3,int pa
 undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
 
 {
-  byte bVar1;
+  CMenu CVar1;
   CMenu CVar2;
   byte bVar3;
   bool bVar4;
-  byte bVar5;
+  CMenu CVar5;
   CMenu *this_00;
   int *piVar6;
   void *pvVar7;
@@ -66983,22 +66915,21 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
   uint uVar9;
   CEdit *this_03;
   CButton *pCVar10;
-  CStaticText *pCVar11;
-  int iVar12;
-  uint unaff_EBX;
-  CMenu *pCVar13;
-  undefined4 *puVar14;
-  CBulanci CVar15;
-  undefined4 uVar16;
-  int iVar17;
+  uint *puVar11;
+  CStaticText *pCVar12;
+  int iVar13;
+  undefined4 unaff_EBX;
+  CMenu *pCVar14;
+  undefined4 *puVar15;
+  int iVar16;
+  int **ppiVar17;
   undefined4 uVar18;
-  int **ppiVar19;
+  undefined4 uVar19;
   undefined4 uVar20;
   int iVar21;
   char cVar22;
   CDSAnim CStack_430;
   undefined4 uStack_42c;
-  uint local_428;
   undefined4 *local_424;
   int *local_420;
   int *local_414;
@@ -67015,7 +66946,7 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
   local_410 = this;
   CWindow::CWindow_BuildAt((CWindow *)this,0xe6,0x32,0x2f8,0x230,0);
   local_4 = (void *)0x0;
-  CDSUpdatedItem::FUN_0042f060((int)(this + 0x70));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(this + 0x70));
   *(undefined4 *)(this + 0xac) = 0;
   *(int *)(this + 0xa8) = param_1;
   *(undefined ***)this = CStartGame2::vftable;
@@ -67023,26 +66954,26 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
   *(undefined ***)(this + 0x10) = CStartGame2::vftable;
   *(undefined ***)(this + 0x18) = CStartGame2::vftable;
   *(undefined ***)(this + 0x70) = CStartGame2::vftable;
-  bVar1 = *(byte *)(param_1 + 0xd8);
+  CVar1 = *(CMenu *)(param_1 + 0xd8);
   CVar2 = *(CMenu *)(param_1 + 0x36);
   bVar3 = *(byte *)(param_1 + 0x37);
   *(ushort *)(this + 0x46) = *(ushort *)(this + 0x46) | 0x40;
   local_414 = *(int **)((int)g_pApp + 0x70);
   uStack_42c = CONCAT13(bVar3,(undefined3)uStack_42c);
   local_4 = (void *)CONCAT31(local_4._1_3_,1);
-  puVar14 = local_40c;
-  for (iVar12 = 0x100; iVar12 != 0; iVar12 = iVar12 + -1) {
-    *puVar14 = 0xffffffff;
-    puVar14 = puVar14 + 1;
+  puVar15 = local_40c;
+  for (iVar13 = 0x100; iVar13 != 0; iVar13 = iVar13 + -1) {
+    *puVar15 = 0xffffffff;
+    puVar15 = puVar15 + 1;
   }
-  local_428 = local_428 & 0xffffff00;
-  if (bVar1 != 0) {
-    pCVar13 = this + 0x88;
+  CVar5 = (CMenu)0x0;
+  if (CVar1 != (CMenu)0x0) {
+    pCVar14 = this + 0x88;
     local_420 = (int *)0x0;
     local_424 = (undefined4 *)0x22;
     do {
       piVar8 = local_414;
-      if (((byte)local_428._0_1_ < (byte)CVar2) ||
+      if (((byte)CVar5 < (byte)CVar2) ||
          (bVar4 = true, (int)((uint)bVar3 + (uint)(byte)CVar2) <= (int)local_420)) {
         bVar4 = false;
       }
@@ -67052,14 +66983,14 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
         piVar6 = (int *)0x0;
       }
       else {
-        piVar6 = FUN_0040ffd0(this_00,(int)local_424 + -3,10,local_428._0_1_);
+        piVar6 = FUN_0040ffd0(this_00,(int)local_424 + -3,10,CVar5);
       }
       local_4 = (void *)CONCAT31(local_4._1_3_,1);
-      *(int **)(pCVar13 + 0x10) = piVar6;
+      *(int **)(pCVar14 + 0x10) = piVar6;
       if (!bVar4) {
         _Globals::FUN_0042d080(piVar6);
       }
-      _Globals::FUN_0042d0b0(this,*(int **)(pCVar13 + 0x10),0);
+      _Globals::CDSView__AddChild(this,*(int **)(pCVar14 + 0x10),0);
       pvVar7 = (void *)(**(code **)(*piVar8 + 0x10))();
       local_420 = (int *)0x0;
       if (pvVar7 != (void *)0x0) {
@@ -67076,7 +67007,7 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
         piVar8 = CGameView::FUN_004191a0(this_01,local_424,0x35,local_420);
       }
       local_c._0_1_ = 3;
-      _Globals::FUN_0042d0b0(this,piVar8,0);
+      _Globals::CDSView__AddChild(this,piVar8,0);
       this_02 = (CDSAnim *)_Globals::FUN_00447c42(0xd4);
       local_c._0_1_ = 5;
       if (this_02 == (CDSAnim *)0x0) {
@@ -67095,10 +67026,10 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
         *(ushort *)(this_02 + 0x14) = *(ushort *)(this_02 + 0x14) | 0x200;
       }
       local_c._0_1_ = 3;
-      _Globals::FUN_0042d0b0(this,(int *)this_02,0);
-      puVar14 = &DAT_00481968;
+      _Globals::CDSView__AddChild(this,(int *)this_02,0);
+      puVar15 = &DAT_00481968;
       do {
-        pvVar7 = (void *)(**(code **)(*(int *)pCVar13 + 0x10))();
+        pvVar7 = (void *)(**(code **)(*(int *)pCVar14 + 0x10))();
         piVar8 = (int *)0x0;
         if (pvVar7 != (void *)0x0) {
           piVar8 = (int *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b8370);
@@ -67109,16 +67040,16 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
         if (piVar8 != (int *)0x0) {
           (**(code **)(*piVar8 + 8))();
         }
-        puVar14 = puVar14 + 1;
-      } while ((int)puVar14 < 0x481978);
+        puVar15 = puVar15 + 1;
+      } while ((int)puVar15 < 0x481978);
       uVar9 = _Globals::FUN_00412930(local_4,(byte)CStack_430);
       _Globals::FUN_00413c50(&local_414,uVar9 & 0xff);
-      ppiVar19 = &local_414;
-      iVar17 = 1;
-      iVar12 = Runtime::MSVCRT::_rand();
+      ppiVar17 = &local_414;
+      iVar16 = 1;
+      iVar13 = Runtime::MSVCRT::_rand();
       _Globals::TM_SetTrack
-                (this_02 + 0x78,(int)(iVar12 * 4 + (iVar12 * 4 >> 0x1f & 0x7fffU)) >> 0xf,iVar17,
-                 ppiVar19);
+                (this_02 + 0x78,(int)(iVar13 * 4 + (iVar13 * 4 >> 0x1f & 0x7fffU)) >> 0xf,iVar16,
+                 ppiVar17);
       this_03 = (CEdit *)_Globals::FUN_00447c42(0xb8);
       local_c._0_1_ = 7;
       if (this_03 == (CEdit *)0x0) {
@@ -67128,130 +67059,113 @@ undefined4 * __thiscall CMenu::CStartGame2_ctor(CMenu *this,int param_1)
         piVar8 = CEdit::CEdit_BuildAt
                            (this_03,uStack_42c + -0xc,0x8a,uStack_42c + 0x58,0x96,0x28,1,1,0x100af);
       }
-      cVar22 = (char)(unaff_EBX >> 8);
+      cVar22 = (char)((uint)unaff_EBX >> 8);
       local_c._0_1_ = 3;
       *local_424 = piVar8;
       if (cVar22 == '\0') {
         _Globals::FUN_0042d080(piVar8);
       }
-      _Globals::FUN_0042d0b0(this,(int *)*local_424,0);
+      _Globals::CDSView__AddChild(this,(int *)*local_424,0);
       if (cVar22 != '\0') {
         pCVar10 = (CButton *)_Globals::FUN_00447c42(0x98);
         local_c._0_1_ = 8;
         if (pCVar10 == (CButton *)0x0) {
-          piVar8 = (int *)0x0;
+          puVar11 = (uint *)0x0;
         }
         else {
-          puVar14 = (undefined4 *)0x0;
-          uVar9 = (uint)*(ushort *)(&DAT_004aeaa8 + (local_428 - (unaff_EBX >> 0x18)) * 2);
-          uVar18 = 0x14;
-          uVar16 = 0;
-          CVar15 = (CBulanci)0x0;
           CBulanci::FUN_0042d510
                     ((CBulanci *)&stack0xfffffb98,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xc4)
                     );
-          piVar8 = CButton::CButton_BuildAt
-                             (pCVar10,uStack_42c + -3,0xaa,CVar15,uVar9,uVar16,uVar18,puVar14);
+          puVar11 = CButton::CButton_BuildAt(pCVar10);
         }
         local_c._0_1_ = 3;
-        _Globals::FUN_0042d0b0(this,piVar8,0);
+        _Globals::CDSView__AddChild(this,(int *)puVar11,0);
       }
       local_c = (void *)CONCAT31(local_c._1_3_,1);
       (**(code **)(*local_420 + 8))();
       local_420 = (int *)((int)local_420 + 1);
-      pCVar13 = pCVar13 + 4;
-      bVar5 = (char)local_428._0_1_ + 1;
+      pCVar14 = pCVar14 + 4;
+      CVar5 = (CMenu)((char)CVar5 + '\x01');
       local_424 = (undefined4 *)(uStack_42c + 0x82);
-      local_428 = CONCAT31(local_428._1_3_,bVar5);
-    } while (bVar5 < bVar1);
+    } while ((byte)CVar5 < (byte)CVar1);
   }
-  if ((*(char *)(*(int *)(this + 0xa8) + 0x36) == '\0') && (1 < bVar1)) {
+  if ((*(char *)(*(int *)(this + 0xa8) + 0x36) == '\0') && (1 < (byte)CVar1)) {
     pCVar10 = (CButton *)_Globals::FUN_00447c42(0x98);
     local_4 = (void *)CONCAT31(local_4._1_3_,9);
     if (pCVar10 != (CButton *)0x0) {
-      puVar14 = (undefined4 *)0x0;
-      uVar20 = 0x14;
-      uVar18 = 0;
-      uVar16 = 0xda;
-      CVar15 = (CBulanci)0x0;
       CBulanci::FUN_0042d510
                 ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xcc));
-      piVar8 = CButton::CButton_BuildAt(pCVar10,0x1f,0xd0,CVar15,uVar16,uVar18,uVar20,puVar14);
+      puVar11 = CButton::CButton_BuildAt(pCVar10);
       goto LAB_00410a6a;
     }
   }
   else {
-    pCVar11 = (CStaticText *)_Globals::FUN_00447c42(0x98);
+    pCVar12 = (CStaticText *)_Globals::FUN_00447c42(0x98);
     local_4 = (void *)CONCAT31(local_4._1_3_,10);
-    if (pCVar11 != (CStaticText *)0x0) {
+    if (pCVar12 != (CStaticText *)0x0) {
       uVar20 = 0x100ae;
-      uVar18 = 2;
-      uVar16 = 0;
+      uVar19 = 2;
+      uVar18 = 0;
       CBulanci::FUN_0042d510
                 ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 200));
-      piVar8 = CStaticText::CStaticText_BuildAtAuto(pCVar11,0x14,0xd2,uVar16,uVar18,uVar20);
+      puVar11 = CStaticText::CStaticText_BuildAtAuto(pCVar12,0x14,0xd2,uVar18,uVar19,uVar20);
       goto LAB_00410a6a;
     }
   }
-  piVar8 = (int *)0x0;
+  puVar11 = (uint *)0x0;
 LAB_00410a6a:
   local_4._0_1_ = 1;
-  _Globals::FUN_0042d0b0(this,piVar8,0);
+  _Globals::CDSView__AddChild(this,(int *)puVar11,0);
   pCVar10 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 0xb;
   if (pCVar10 == (CButton *)0x0) {
-    piVar8 = (int *)0x0;
+    puVar11 = (uint *)0x0;
   }
   else {
-    puVar14 = (undefined4 *)0x0;
-    uVar20 = 0x14;
-    uVar18 = 0;
-    uVar16 = 0xec;
-    CVar15 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x15c));
-    piVar8 = CButton::CButton_BuildAt(pCVar10,400,0xd2,CVar15,uVar16,uVar18,uVar20,puVar14);
+    puVar11 = CButton::CButton_BuildAt(pCVar10);
   }
   local_4._0_1_ = 1;
-  _Globals::FUN_0042d0b0(this,piVar8,0);
-  pCVar11 = (CStaticText *)_Globals::FUN_00447c42(0x98);
+  _Globals::CDSView__AddChild(this,(int *)puVar11,0);
+  pCVar12 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 0xc;
-  if (pCVar11 == (CStaticText *)0x0) {
+  if (pCVar12 == (CStaticText *)0x0) {
     piVar8 = (int *)0x0;
   }
   else {
     uVar20 = 0x100ae;
-    uVar18 = 2;
-    uVar16 = 0;
+    uVar19 = 2;
+    uVar18 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xd0));
-    piVar8 = CStaticText::CStaticText_BuildAtAuto(pCVar11,0x14,0xf4,uVar16,uVar18,uVar20);
+    piVar8 = CStaticText::CStaticText_BuildAtAuto(pCVar12,0x14,0xf4,uVar18,uVar19,uVar20);
   }
   local_4._0_1_ = 1;
-  _Globals::FUN_0042d0b0(this,piVar8,0);
-  puVar14 = (undefined4 *)_Globals::FUN_00447c42(0xe4);
+  _Globals::CDSView__AddChild(this,piVar8,0);
+  puVar15 = (undefined4 *)_Globals::FUN_00447c42(0xe4);
   local_4._0_1_ = 0xd;
-  if (puVar14 == (undefined4 *)0x0) {
-    puVar14 = (undefined4 *)0x0;
+  if (puVar15 == (undefined4 *)0x0) {
+    puVar15 = (undefined4 *)0x0;
   }
   else {
-    puVar14 = CLevelList::CLevelList_ctor(puVar14);
+    puVar15 = CLevelList::CLevelList_ctor(puVar15);
   }
-  *(undefined4 **)(this + 0xb4) = puVar14;
-  iVar12 = *(int *)(*(int *)(this + 0xa8) + 0xc4);
-  iVar17 = 0;
+  *(undefined4 **)(this + 0xb4) = puVar15;
+  iVar13 = *(int *)(*(int *)(this + 0xa8) + 0xc4);
+  iVar16 = 0;
   local_4 = (void *)CONCAT31(local_4._1_3_,1);
-  if (0 < iVar12) {
+  if (0 < iVar13) {
     do {
       pvVar7 = *(void **)(this + 0xa8);
       iVar21 = 0;
-      _Globals::FUN_0042d490(&stack0xfffffbb0,(int *)(*(int *)((int)pvVar7 + 0xbc) + iVar17 * 4));
+      _Globals::FUN_0042d490(&stack0xfffffbb0,(int *)(*(int *)((int)pvVar7 + 0xbc) + iVar16 * 4));
       iVar21 = _Globals::FUN_00413560(pvVar7,iVar21);
       FUN_0040d360(*(CMenu **)(this + 0xb4),iVar21);
-      iVar17 = iVar17 + 1;
-    } while (iVar17 < iVar12);
+      iVar16 = iVar16 + 1;
+    } while (iVar16 < iVar13);
   }
-  _Globals::FUN_0042d0b0(this,*(int **)(this + 0xb4),0);
+  _Globals::CDSView__AddChild(this,*(int **)(this + 0xb4),0);
   if (*(char *)(*(int *)(this + 0xa8) + 0x36) != '\0') {
     _Globals::FUN_0042d080(*(int **)(this + 0xb4));
   }
@@ -67259,60 +67173,50 @@ LAB_00410a6a:
   pCVar10 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 0xe;
   if (pCVar10 == (CButton *)0x0) {
-    piVar8 = (int *)0x0;
+    puVar11 = (uint *)0x0;
   }
   else {
-    puVar14 = (undefined4 *)0x0;
-    uVar20 = 0xffffffff;
-    uVar18 = 1;
-    uVar16 = 0x8002;
-    CVar15 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xd8));
-    piVar8 = CButton::CButton_BuildAt(pCVar10,0x28,0x1d2,CVar15,uVar16,uVar18,uVar20,puVar14);
+    puVar11 = CButton::CButton_BuildAt(pCVar10);
   }
   local_4._0_1_ = 1;
-  *(int **)(this + 0xb8) = piVar8;
-  _Globals::FUN_0042d0b0(this,piVar8,0);
+  *(uint **)(this + 0xb8) = puVar11;
+  _Globals::CDSView__AddChild(this,(int *)puVar11,0);
   *(undefined4 *)(this + 0xb0) = 0;
   if (*(char *)(*(int *)(this + 0xa8) + 0x36) != '\0') {
     _Globals::FUN_0042d080(*(int **)(this + 0xb8));
-    pCVar11 = (CStaticText *)_Globals::FUN_00447c42(0x98);
+    pCVar12 = (CStaticText *)_Globals::FUN_00447c42(0x98);
     local_4._0_1_ = 0xf;
-    if (pCVar11 == (CStaticText *)0x0) {
+    if (pCVar12 == (CStaticText *)0x0) {
       piVar8 = (int *)0x0;
     }
     else {
       uVar20 = 0x100af;
-      uVar18 = 2;
-      uVar16 = 0;
+      uVar19 = 2;
+      uVar18 = 0;
       CBulanci::FUN_0042d510
                 ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1a8));
-      piVar8 = CStaticText::CStaticText_BuildAtAuto(pCVar11,0x28,0x1ef,uVar16,uVar18,uVar20);
+      piVar8 = CStaticText::CStaticText_BuildAtAuto(pCVar12,0x28,0x1ef,uVar18,uVar19,uVar20);
     }
     local_4._0_1_ = 1;
     *(int **)(this + 0xb0) = piVar8;
-    _Globals::FUN_0042d0b0(this,piVar8,0);
-    _Globals::FUN_0042d040(*(int **)(this + 0xb0));
+    _Globals::CDSView__AddChild(this,piVar8,0);
+    _Globals::CDSView__Hide(*(int **)(this + 0xb0));
     _Globals::Scheduler_RegisterEventSlot(this + 0x70,0,500,7);
   }
   pCVar10 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 0x10;
   if (pCVar10 == (CButton *)0x0) {
-    piVar8 = (int *)0x0;
+    puVar11 = (uint *)0x0;
   }
   else {
-    puVar14 = (undefined4 *)0x0;
-    uVar20 = 0x14;
-    uVar18 = 0;
-    uVar16 = 0x8003;
-    CVar15 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    piVar8 = CButton::CButton_BuildAt(pCVar10,0x8c,0x1d2,CVar15,uVar16,uVar18,uVar20,puVar14);
+    puVar11 = CButton::CButton_BuildAt(pCVar10);
   }
   local_4 = (void *)CONCAT31(local_4._1_3_,1);
-  _Globals::FUN_0042d0b0(this,piVar8,0);
+  _Globals::CDSView__AddChild(this,(int *)puVar11,0);
   this[0xbd] = (CMenu)0x0;
   this[0xbc] = (CMenu)0x0;
   ExceptionList = local_c;
@@ -67342,7 +67246,7 @@ int * __fastcall CBulanci::FUN_00410e20(int *param_1)
   local_c = ExceptionList;
   uVar1 = DAT_004b0e44 ^ (uint)&stack0xffffffd8;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   piVar5 = param_1 + 0x1a;
   local_4 = 0;
   *param_1 = (int)CGameCounter::vftable;
@@ -67380,9 +67284,9 @@ int * __fastcall CBulanci::FUN_00410e20(int *param_1)
     piVar5 = (int *)0x0;
   }
   else {
-    piVar5 = CDSBitmap::FUN_004393d0(pCVar4,0,0,param_1);
+    piVar5 = CDSBitmap::CDSBitmap_ctor(pCVar4,0,0,param_1);
   }
-  _Globals::FUN_0042d0b0(param_1,piVar5,0);
+  _Globals::CDSView__AddChild(param_1,piVar5,0);
   iVar7 = 0x205;
   piVar5 = param_1 + 0x1c;
   iVar3 = 4;
@@ -67392,10 +67296,10 @@ int * __fastcall CBulanci::FUN_00410e20(int *param_1)
       piVar6 = (int *)0x0;
     }
     else {
-      piVar6 = CDSBitmap::FUN_004393d0(pCVar4,iVar7,0x219,piVar8);
+      piVar6 = CDSBitmap::CDSBitmap_ctor(pCVar4,iVar7,0x219,piVar8);
     }
     *piVar5 = (int)piVar6;
-    _Globals::FUN_0042d0b0(param_1,piVar6,0);
+    _Globals::CDSView__AddChild(param_1,piVar6,0);
     iVar7 = iVar7 + 0x46;
     piVar5 = piVar5 + 1;
     iVar3 = iVar3 + -1;
@@ -67429,19 +67333,16 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
   CDSAnim *this_00;
   uint uVar10;
   CStaticText *pCVar11;
-  int *piVar12;
+  uint *puVar12;
   int *piVar13;
   CBulanci *this_01;
-  CBulanci *pCVar14;
-  byte bVar15;
-  uint uVar16;
-  undefined4 *puVar17;
-  int *piVar18;
-  undefined4 uVar19;
-  undefined4 uVar20;
-  int iVar21;
-  uint uVar22;
-  undefined4 uVar23;
+  undefined4 uVar14;
+  CBulanci *pCVar15;
+  byte bVar16;
+  uint uVar17;
+  undefined4 *puVar18;
+  int *piVar19;
+  int iVar20;
   undefined4 uStack_480;
   int iStack_474;
   int *piStack_464;
@@ -67473,17 +67374,17 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
   *(undefined ***)(this + 0x10) = CScore::vftable;
   *(undefined ***)(this + 0x18) = CScore::vftable;
   *(undefined4 *)(this + 0x70) = 0;
-  bVar15 = *(byte *)((int)param_1 + 0xd8);
+  bVar16 = *(byte *)((int)param_1 + 0xd8);
   local_4 = (void *)0x1;
-  if (bVar15 != 0) {
-    piVar9 = aiStack_428 + (uint)bVar15 * 2;
+  if (bVar16 != 0) {
+    piVar9 = aiStack_428 + (uint)bVar16 * 2;
     do {
-      bVar15 = bVar15 - 1;
-      *(byte *)(piVar9 + -3) = bVar15;
-      iVar6 = FUN_004126e0(param_1,bVar15);
+      bVar16 = bVar16 - 1;
+      *(byte *)(piVar9 + -3) = bVar16;
+      iVar6 = FUN_004126e0(param_1,bVar16);
       piVar9[-2] = iVar6;
       piVar9 = piVar9 + -2;
-    } while (bVar15 != 0);
+    } while (bVar16 != 0);
   }
   _qsort(local_42c,(uint)*(byte *)((int)param_1 + 0xd8),8,(_PtFuncCompare *)&LAB_0040abd0);
   local_434 = 0;
@@ -67504,22 +67405,22 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
     if (pvVar8 != (void *)0x0) {
       local_45c = (int *)_Globals::CheckedVirtualBaseCast(pvVar8,DAT_004b826c);
     }
-    piVar9 = CDSBitmap::FUN_004393d0(pCVar7,0,0,local_45c);
+    piVar9 = CDSBitmap::CDSBitmap_ctor(pCVar7,0,0,local_45c);
   }
   local_4 = (void *)CONCAT31(local_4._1_3_,2);
-  _Globals::FUN_0042d0b0(this,piVar9,0);
-  bVar15 = *(byte *)((int)param_1 + 0xd8);
+  _Globals::CDSView__AddChild(this,piVar9,0);
+  bVar16 = *(byte *)((int)param_1 + 0xd8);
   iStack_474 = 0;
-  puVar17 = auStack_40c;
+  puVar18 = auStack_40c;
   for (iVar6 = 0x100; iVar6 != 0; iVar6 = iVar6 + -1) {
-    *puVar17 = 0xffffffff;
-    puVar17 = puVar17 + 1;
+    *puVar18 = 0xffffffff;
+    puVar18 = puVar18 + 1;
   }
   uStack_480 = (CBulanci *)(uint)(uint3)uStack_480;
-  if (bVar15 != 0) {
+  if (bVar16 != 0) {
     do {
-      uVar16 = (uint)uStack_480._3_1_;
-      uStack_454 = CONCAT31(uStack_454._1_3_,local_42c[uVar16 * 8]);
+      uVar17 = (uint)uStack_480._3_1_;
+      uStack_454 = CONCAT31(uStack_454._1_3_,local_42c[uVar17 * 8]);
       pCVar7 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
       local_4._0_1_ = 4;
       if (pCVar7 == (CDSBitmap *)0x0) {
@@ -67533,11 +67434,11 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
         if (pvVar8 != (void *)0x0) {
           local_45c = (int *)_Globals::CheckedVirtualBaseCast(pvVar8,DAT_004b826c);
         }
-        piVar9 = CDSBitmap::FUN_004393d0
-                           (pCVar7,*(undefined4 *)(&DAT_004ae788 + uVar16 * 4),0xe5,local_45c);
+        piVar9 = CDSBitmap::CDSBitmap_ctor
+                           (pCVar7,*(undefined4 *)(&DAT_004ae788 + uVar17 * 4),0xe5,local_45c);
       }
       local_4._0_1_ = 2;
-      _Globals::FUN_0042d0b0(this,piVar9,0);
+      _Globals::CDSView__AddChild(this,piVar9,0);
       if (uStack_480._3_1_ == 0) {
         pCStack_438 = (CDSBitmap *)local_45c[1];
       }
@@ -67548,27 +67449,27 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
       }
       else {
         piVar9 = CDSAnim::ParameterizedCtor
-                           (this_00,*(int *)(&DAT_004ae788 + uVar16 * 4) + 0x21,
+                           (this_00,*(int *)(&DAT_004ae788 + uVar17 * 4) + 0x21,
                             *(undefined4 *)(&DAT_004ae798 + iStack_474 * 4),(int *)0x0,0);
       }
       local_4._0_1_ = 2;
-      _Globals::FUN_0042d0b0(this,piVar9,0);
-      piVar12 = local_450;
+      _Globals::CDSView__AddChild(this,piVar9,0);
+      piVar13 = local_450;
       if ((*(char *)((int)param_1 + 0xd8) == '\x01') && (local_434 == 0)) {
         iStack_474 = 3;
       }
       piStack_464 = (int *)0x4;
       do {
-        pvVar8 = (void *)(**(code **)(*piVar12 + 0x10))();
-        piVar18 = (int *)0x0;
+        pvVar8 = (void *)(**(code **)(*piVar13 + 0x10))();
+        piVar19 = (int *)0x0;
         if (pvVar8 != (void *)0x0) {
-          piVar18 = (int *)_Globals::CheckedVirtualBaseCast(pvVar8,DAT_004b8370);
+          piVar19 = (int *)_Globals::CheckedVirtualBaseCast(pvVar8,DAT_004b8370);
         }
         local_4._0_1_ = 6;
-        _Globals::TM_BindSequence(piVar9 + 0x1e,piVar18);
+        _Globals::TM_BindSequence(piVar9 + 0x1e,piVar19);
         local_4._0_1_ = 2;
-        if (piVar18 != (int *)0x0) {
-          (**(code **)(*piVar18 + 8))();
+        if (piVar19 != (int *)0x0) {
+          (**(code **)(*piVar19 + 8))();
         }
         piStack_464 = (int *)((int)piStack_464 + -1);
       } while (piStack_464 != (int *)0x0);
@@ -67578,90 +67479,65 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
       bVar5 = (byte)uStack_454;
       uVar10 = _Globals::FUN_00412930(param_1,bVar5);
       _Globals::FUN_00413c50(auStack_40c,uVar10 & 0xff);
-      puVar17 = auStack_40c;
-      iVar21 = 1;
+      puVar18 = auStack_40c;
+      iVar20 = 1;
       iVar6 = Runtime::MSVCRT::_rand();
       _Globals::TM_SetTrack
-                (piVar9 + 0x1e,(int)(iVar6 * 4 + (iVar6 * 4 >> 0x1f & 0x7fffU)) >> 0xf,iVar21,
-                 puVar17);
-      iVar6 = *(int *)(&DAT_004ae798 + iStack_474 * 4);
-      if ((uVar16 + 1 < (uint)bVar15) && (aiStack_428[uVar16 * 2 + 2] < aiStack_428[uVar16 * 2])) {
+                (piVar9 + 0x1e,(int)(iVar6 * 4 + (iVar6 * 4 >> 0x1f & 0x7fffU)) >> 0xf,iVar20,
+                 puVar18);
+      if ((uVar17 + 1 < (uint)bVar16) && (aiStack_428[uVar17 * 2 + 2] < aiStack_428[uVar17 * 2])) {
         iStack_474 = iStack_474 + 1;
       }
       pCVar11 = (CStaticText *)_Globals::FUN_00447c42(0x98);
       local_4._0_1_ = 7;
       if (pCVar11 == (CStaticText *)0x0) {
-        piVar9 = (int *)0x0;
+        puVar12 = (uint *)0x0;
       }
       else {
-        uVar23 = 0x100af;
-        uVar10 = 5;
-        uVar20 = 1;
         piVar9 = (int *)_Globals::FUN_00412910(param_1,bVar5);
-        uVar19 = 0;
         _Globals::FUN_0042d490(&stack0xfffffb5c,piVar9);
-        piVar9 = CStaticText::CStaticText_BuildAt
-                           (pCVar11,*(int *)(&DAT_004ae788 + uVar16 * 4),iVar6 + -0x1c,
-                            (int)(pCStack_438 + *(int *)(&DAT_004ae788 + uVar16 * 4)),iVar6 + -10,
-                            uVar19,uVar20,uVar10,uVar23);
+        puVar12 = CStaticText::CStaticText_BuildAt(pCVar11);
       }
       local_4._0_1_ = 2;
-      *(undefined1 *)(piVar9 + 0x25) = 1;
-      _Globals::FUN_0042d0b0(this,piVar9,0);
+      *(undefined1 *)(puVar12 + 0x25) = 1;
+      _Globals::CDSView__AddChild(this,(int *)puVar12,0);
       iStack_458 = 0;
-      uVar10 = uStack_454 & 0xff;
+      uVar17 = uStack_454 & 0xff;
       local_4._0_1_ = 8;
       _Globals::FUN_0042d770(&iStack_458,*(wchar_t **)(g_apCDSStaticTextsSingleton[2] + 0x184));
       pCVar11 = (CStaticText *)_Globals::FUN_00447c42(0x98);
       local_4._0_1_ = 9;
       if (pCVar11 == (CStaticText *)0x0) {
-        piVar9 = (int *)0x0;
-        pCVar7 = pCStack_438;
+        puVar12 = (uint *)0x0;
       }
       else {
-        uVar23 = 0x100af;
-        uVar22 = 5;
-        uVar20 = 1;
-        uVar19 = 0;
         _Globals::FUN_0042d490(&stack0xfffffb5c,&iStack_458);
-        pCVar7 = pCStack_438;
-        piVar9 = CStaticText::CStaticText_BuildAt
-                           (pCVar11,*(int *)(&DAT_004ae788 + uVar16 * 4),0x1e5,
-                            (int)(pCStack_438 + *(int *)(&DAT_004ae788 + uVar16 * 4)),500,uVar19,
-                            uVar20,uVar22,uVar23);
+        puVar12 = CStaticText::CStaticText_BuildAt(pCVar11);
       }
       local_4._0_1_ = 8;
-      *(undefined1 *)(piVar9 + 0x25) = 1;
-      _Globals::FUN_0042d0b0(this,piVar9,0);
+      *(undefined1 *)(puVar12 + 0x25) = 1;
+      _Globals::CDSView__AddChild(this,(int *)puVar12,0);
       _Globals::FUN_0042d770(&iStack_458,*(wchar_t **)(g_apCDSStaticTextsSingleton[2] + 0x16c));
       pCVar11 = (CStaticText *)_Globals::FUN_00447c42(0x98);
       local_4._0_1_ = 10;
       if (pCVar11 == (CStaticText *)0x0) {
-        piVar9 = (int *)0x0;
+        puVar12 = (uint *)0x0;
       }
       else {
-        uVar23 = 0x100af;
-        uVar22 = 5;
-        uVar20 = 1;
-        uVar19 = 0;
         _Globals::FUN_0042d490(&stack0xfffffb5c,&iStack_458);
-        piVar9 = CStaticText::CStaticText_BuildAt
-                           (pCVar11,*(int *)(&DAT_004ae788 + uVar16 * 4),0x1d7,
-                            (int)(pCVar7 + *(int *)(&DAT_004ae788 + uVar16 * 4)),0x1e6,uVar19,uVar20
-                            ,uVar22,uVar23);
+        puVar12 = CStaticText::CStaticText_BuildAt(pCVar11);
       }
       local_4._0_1_ = 8;
-      *(undefined1 *)(piVar9 + 0x25) = 1;
-      _Globals::FUN_0042d0b0(this,piVar9,0);
-      piStack_464 = (int *)((int)param_1 + uVar10 * 0x23 + 0xea);
+      *(undefined1 *)(puVar12 + 0x25) = 1;
+      _Globals::CDSView__AddChild(this,(int *)puVar12,0);
+      piStack_464 = (int *)((int)param_1 + uVar17 * 0x23 + 0xea);
       iStack_44c = 0;
       iStack_448 = 0;
-      iVar6 = 0x1c4;
       bVar5 = 0;
       do {
         if (0 < *piStack_464) {
-          uVar10 = _Globals::FUN_00412930(param_1,bVar5);
-          piVar9 = (int *)_Globals::FUN_00413200(&uStack_430,uVar10 & 0xff);
+          uVar17 = _Globals::FUN_00412930(param_1,bVar5);
+          piVar9 = (int *)_Globals::FUN_00413200(&uStack_430,uVar17 & 0xff);
           iStack_448 = *piVar9;
           if (iStack_448 == 0x5f5f5f) {
             iStack_448 = 0x2f2f2f;
@@ -67675,41 +67551,25 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
             pCVar11 = (CStaticText *)0x0;
           }
           else {
-            uVar23 = 0x100af;
-            uVar10 = 5;
-            uVar20 = 1;
-            uVar19 = 0;
             FUN_0042d510((CBulanci *)&stack0xfffffb5c,(short *)&DAT_00481978);
-            pCVar11 = (CStaticText *)
-                      CStaticText::CStaticText_BuildAt
-                                (pCVar11,*(int *)(&DAT_004ae788 + uVar16 * 4) + -0xf,iVar6,
-                                 (int)(pCVar7 + *(int *)(&DAT_004ae788 + uVar16 * 4) + -0xf),
-                                 iVar6 + 0x12,uVar19,uVar20,uVar10,uVar23);
+            pCVar11 = (CStaticText *)CStaticText::CStaticText_BuildAt(pCVar11);
           }
           local_4._0_1_ = 0xb;
           CStaticText::CStaticText_SetStyle(pCVar11,&iStack_44c,2);
           pCVar11[0x94] = (CStaticText)0x1;
-          _Globals::FUN_0042d0b0(this,(int *)pCVar11,0);
+          _Globals::CDSView__AddChild(this,(int *)pCVar11,0);
           pCVar11 = (CStaticText *)_Globals::FUN_00447c42(0x98);
           local_4._0_1_ = 0xd;
           if (pCVar11 == (CStaticText *)0x0) {
-            piVar9 = (int *)0x0;
+            puVar12 = (uint *)0x0;
           }
           else {
-            uVar23 = 0x100af;
-            uVar10 = 5;
-            uVar20 = 1;
-            uVar19 = 0;
             _Globals::FUN_0042d490(&stack0xfffffb5c,(int *)&pCStack_43c);
-            piVar9 = CStaticText::CStaticText_BuildAt
-                               (pCVar11,*(int *)(&DAT_004ae788 + uVar16 * 4) + 5,iVar6,
-                                (int)(pCVar7 + *(int *)(&DAT_004ae788 + uVar16 * 4) + 5),
-                                iVar6 + 0x12,uVar19,uVar20,uVar10,uVar23);
+            puVar12 = CStaticText::CStaticText_BuildAt(pCVar11);
           }
           local_4._0_1_ = 0xb;
-          *(undefined1 *)(piVar9 + 0x25) = 1;
-          _Globals::FUN_0042d0b0(this,piVar9,0);
-          iVar6 = iVar6 + -0xe;
+          *(undefined1 *)(puVar12 + 0x25) = 1;
+          _Globals::CDSView__AddChild(this,(int *)puVar12,0);
           local_4._0_1_ = 8;
           if (pCStack_43c != (CBulanci *)0x0) {
             _Globals::FUN_0042d2d0(pCStack_43c + -0xc);
@@ -67724,7 +67584,7 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
       }
       bVar5 = uStack_480._3_1_ + 1;
       uStack_480 = (CBulanci *)CONCAT13(bVar5,(uint3)uStack_480);
-    } while (bVar5 < bVar15);
+    } while (bVar5 < bVar16);
   }
   if (*(char *)((int)param_1 + 0xd8) == '\x01') {
     pvVar8 = (void *)(**(code **)(*local_450 + 0x10))();
@@ -67737,45 +67597,39 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
     pCStack_438 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
     local_c._0_1_ = 0xf;
     if (pCStack_438 == (CDSBitmap *)0x0) {
-      piVar12 = (int *)0x0;
+      piVar13 = (int *)0x0;
     }
     else {
-      piVar12 = CDSBitmap::FUN_004393d0(pCStack_438,0x14a,0xbe,piVar9);
+      piVar13 = CDSBitmap::CDSBitmap_ctor(pCStack_438,0x14a,0xbe,piVar9);
     }
     local_c = (void *)CONCAT31(local_c._1_3_,0xe);
-    _Globals::FUN_0042d0b0(uStack_480,piVar12,0);
+    _Globals::CDSView__AddChild(uStack_480,piVar13,0);
     local_450 = (int *)0xbf;
     iStack_448 = 0xd6;
-    piVar12 = &DAT_004aead8;
-    piVar18 = &DAT_004aeab4;
+    piVar13 = &DAT_004aead8;
+    piVar19 = &DAT_004aeab4;
     do {
-      uStack_454 = piVar18[-1] + 0x14a;
-      iStack_44c = *piVar18 + 0x14a;
+      uStack_454 = piVar19[-1] + 0x14a;
+      iStack_44c = *piVar19 + 0x14a;
       pCVar11 = (CStaticText *)_Globals::FUN_00447c42(0x98);
       local_c._0_1_ = 0x10;
       pCStack_438 = (CDSBitmap *)pCVar11;
       if (pCVar11 == (CStaticText *)0x0) {
-        piVar13 = (int *)0x0;
+        puVar12 = (uint *)0x0;
       }
       else {
-        uVar23 = 0x100af;
-        uVar16 = 5;
-        uVar20 = 1;
-        uVar19 = 0;
         FUN_0042d510((CBulanci *)&stack0xfffffb54,
-                     *(short **)(g_apCDSStaticTextsSingleton[2] + *piVar12 * 4));
-        piVar13 = CStaticText::CStaticText_BuildAt
-                            (pCVar11,uStack_454,local_450,iStack_44c,iStack_448,uVar19,uVar20,uVar16
-                             ,uVar23);
+                     *(short **)(g_apCDSStaticTextsSingleton[2] + *piVar13 * 4));
+        puVar12 = CStaticText::CStaticText_BuildAt(pCVar11);
       }
       local_c = (void *)CONCAT31(local_c._1_3_,0xe);
-      *(undefined1 *)(piVar13 + 0x25) = 1;
-      _Globals::FUN_0042d0b0(uStack_480,piVar13,0);
-      piVar18 = piVar18 + 2;
-      piVar12 = piVar12 + 1;
-    } while ((int)piVar18 < 0x4aeadc);
-    uVar16 = FUN_00413940(local_4);
-    this_01 = (CBulanci *)_Globals::FUN_0042f7c0(uVar16 + 0x14);
+      *(undefined1 *)(puVar12 + 0x25) = 1;
+      _Globals::CDSView__AddChild(uStack_480,(int *)puVar12,0);
+      piVar19 = piVar19 + 2;
+      piVar13 = piVar13 + 1;
+    } while ((int)piVar19 < 0x4aeadc);
+    uVar17 = FUN_00413940(local_4);
+    this_01 = (CBulanci *)_Globals::FUN_0042f7c0(uVar17 + 0x14);
     cVar4 = '\0';
     iStack_474 = 1;
     bVar3 = false;
@@ -67783,8 +67637,8 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
       local_450 = (int *)((int)local_450 + 0x1a);
       iStack_448 = iStack_448 + 0x1a;
       if (pCStack_43c != (CBulanci *)0x0) {
-        uVar19 = FUN_00409080(pCStack_43c,(int)this_01);
-        if (((char)uVar19 == '\0') || (bVar3)) {
+        uVar14 = FUN_00409080(pCStack_43c,(int)this_01);
+        if (((char)uVar14 == '\0') || (bVar3)) {
           cVar4 = '\0';
         }
         else {
@@ -67793,12 +67647,12 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
         }
       }
       FUN_00409bc0(this_01,uStack_480,&DAT_004aeab0,(int *)&uStack_454,iStack_474,cVar4);
-      pCVar14 = (CBulanci *)_Globals::FUN_0042f920(uVar16 + 0x14);
-      if ((pCVar14 == (CBulanci *)0x0) ||
-         (pCVar1 = this_01 + 0x18, pCVar2 = this_01 + 0x14, this_01 = pCVar14,
-         *(int *)pCVar1 - *(int *)pCVar2 != *(int *)(pCVar14 + 0x18) - *(int *)(pCVar14 + 0x14))) {
+      pCVar15 = (CBulanci *)_Globals::FUN_0042f920(uVar17 + 0x14);
+      if ((pCVar15 == (CBulanci *)0x0) ||
+         (pCVar1 = this_01 + 0x18, pCVar2 = this_01 + 0x14, this_01 = pCVar15,
+         *(int *)pCVar1 - *(int *)pCVar2 != *(int *)(pCVar15 + 0x18) - *(int *)(pCVar15 + 0x14))) {
         iStack_474 = iStack_474 + 1;
-        this_01 = pCVar14;
+        this_01 = pCVar15;
       }
     }
     local_c._1_3_ = (undefined3)((uint)local_c >> 8);
@@ -67815,19 +67669,19 @@ undefined4 * __thiscall CBulanci::FUN_00411010(CBulanci *this,void *param_1)
   pCStack_438 = (CDSBitmap *)_Globals::FUN_00447c42(0xf0);
   local_c._0_1_ = 0x12;
   if (pCStack_438 == (CDSBitmap *)0x0) {
-    piVar12 = (int *)0x0;
+    piVar13 = (int *)0x0;
   }
   else {
-    piVar12 = CAnim::FUN_00419940((CAnim *)pCStack_438,0x78,0x32,piVar9,1);
+    piVar13 = CAnim::FUN_00419940((CAnim *)pCStack_438,0x78,0x32,piVar9,1);
   }
   local_c = (void *)CONCAT31(local_c._1_3_,0x11);
-  _Globals::FUN_0042d0b0(this,piVar12,0);
-  pvVar8 = (void *)_Globals::FUN_00422430((undefined *)0x2,0,0x1d,0,0,'\x01');
+  _Globals::CDSView__AddChild(this,piVar13,0);
+  pvVar8 = (void *)_Globals::TriggerBankSample((undefined *)0x2,0,0x1d,0,0,'\x01');
   if (*(int **)(this + 0x70) != (int *)0x0) {
     (**(code **)(**(int **)(this + 0x70) + 8))();
   }
   *(void **)(this + 0x70) = pvVar8;
-  _Globals::FUN_0043a9d0(pvVar8,0);
+  _Globals::CDSAudioPlayer_Play(pvVar8,0);
   local_c._0_1_ = 2;
   if (piVar9 != (int *)0x0) {
     (**(code **)(*piVar9 + 8))();
@@ -67850,13 +67704,12 @@ undefined4 * __fastcall CExitDlg::CExitDlg_ctor(undefined4 *param_1)
   int *piVar3;
   int *piVar4;
   CStaticText *this;
-  CButton *this_00;
-  int *piVar5;
-  CBulanci CVar6;
-  undefined4 uVar7;
+  CButton *pCVar5;
+  uint *puVar6;
+  int *piVar7;
   undefined4 uVar8;
   undefined4 uVar9;
-  undefined4 *puVar10;
+  undefined4 uVar10;
   void *local_c;
   undefined1 *puStack_8;
   int local_4;
@@ -67871,7 +67724,7 @@ undefined4 * __fastcall CExitDlg::CExitDlg_ctor(undefined4 *param_1)
   param_1[4] = vftable;
   param_1[6] = vftable;
   piVar4 = *(int **)((int)g_pApp + 0x70);
-  piVar5 = (int *)0x0;
+  piVar7 = (int *)0x0;
   param_1[0x1c] = 0;
   param_1[0x1d] = 0;
   param_1[0x1e] = 0;
@@ -67885,16 +67738,16 @@ undefined4 * __fastcall CExitDlg::CExitDlg_ctor(undefined4 *param_1)
   else {
     pvVar2 = (void *)(**(code **)(*piVar4 + 0x10))();
     if (pvVar2 != (void *)0x0) {
-      piVar5 = (int *)_Globals::CheckedVirtualBaseCast(pvVar2,DAT_004b8370);
+      piVar7 = (int *)_Globals::CheckedVirtualBaseCast(pvVar2,DAT_004b8370);
     }
-    piVar3 = CAnim::FUN_00419940(pCVar1,0xc2,0x16,piVar5,3);
+    piVar3 = CAnim::FUN_00419940(pCVar1,0xc2,0x16,piVar7,3);
   }
   local_4 = CONCAT31(local_4._1_3_,1);
-  _Globals::FUN_0042d0b0(param_1,piVar3,0);
-  if (piVar5 != (int *)0x0) {
-    (**(code **)(*piVar5 + 8))();
+  _Globals::CDSView__AddChild(param_1,piVar3,0);
+  if (piVar7 != (int *)0x0) {
+    (**(code **)(*piVar7 + 8))();
   }
-  piVar5 = (int *)0x0;
+  piVar7 = (int *)0x0;
   pCVar1 = (CAnim *)_Globals::FUN_00447c42(0xf0);
   local_4._0_1_ = 3;
   if (pCVar1 == (CAnim *)0x0) {
@@ -67903,47 +67756,42 @@ undefined4 * __fastcall CExitDlg::CExitDlg_ctor(undefined4 *param_1)
   else {
     pvVar2 = (void *)(**(code **)(*piVar4 + 0x10))();
     if (pvVar2 != (void *)0x0) {
-      piVar5 = (int *)_Globals::CheckedVirtualBaseCast(pvVar2,DAT_004b8370);
+      piVar7 = (int *)_Globals::CheckedVirtualBaseCast(pvVar2,DAT_004b8370);
     }
-    piVar4 = CAnim::FUN_00419940(pCVar1,0x139,0x11a,piVar5,3);
+    piVar4 = CAnim::FUN_00419940(pCVar1,0x139,0x11a,piVar7,3);
   }
   local_4._0_1_ = 1;
-  _Globals::FUN_0042d0b0(param_1,piVar4,0);
+  _Globals::CDSView__AddChild(param_1,piVar4,0);
   this = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 4;
   if (this == (CStaticText *)0x0) {
     piVar4 = (int *)0x0;
   }
   else {
-    uVar9 = 0x100af;
-    uVar8 = 2;
-    uVar7 = 0;
+    uVar10 = 0x100af;
+    uVar9 = 2;
+    uVar8 = 0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x138));
-    piVar4 = CStaticText::CStaticText_BuildAtAuto(this,0x28,0x48,uVar7,uVar8,uVar9);
+    piVar4 = CStaticText::CStaticText_BuildAtAuto(this,0x28,0x48,uVar8,uVar9,uVar10);
   }
   local_4._0_1_ = 1;
-  _Globals::FUN_0042d0b0(param_1,piVar4,0);
-  this_00 = (CButton *)_Globals::FUN_00447c42(0x98);
+  _Globals::CDSView__AddChild(param_1,piVar4,0);
+  pCVar5 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 5;
-  if (this_00 == (CButton *)0x0) {
-    piVar4 = (int *)0x0;
+  if (pCVar5 == (CButton *)0x0) {
+    puVar6 = (uint *)0x0;
   }
   else {
-    puVar10 = (undefined4 *)0x0;
-    uVar9 = 0xffffffff;
-    uVar8 = 1;
-    uVar7 = 0x8004;
-    CVar6 = (CBulanci)0x0;
     CBulanci::FUN_0042d510
               ((CBulanci *)&stack0xffffffbc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x14c));
-    piVar4 = CButton::CButton_BuildAt(this_00,0x31,0x1ec,CVar6,uVar7,uVar8,uVar9,puVar10);
+    puVar6 = CButton::CButton_BuildAt(pCVar5);
   }
   local_4._0_1_ = 1;
-  _Globals::FUN_0042d0b0(param_1,piVar4,0);
+  _Globals::CDSView__AddChild(param_1,(int *)puVar6,0);
   local_4 = (uint)local_4._1_3_ << 8;
-  if (piVar5 != (int *)0x0) {
-    (**(code **)(*piVar5 + 8))();
+  if (piVar7 != (int *)0x0) {
+    (**(code **)(*piVar7 + 8))();
   }
   ExceptionList = local_c;
   return param_1;
@@ -67962,16 +67810,9 @@ undefined * CExitDlg::FUN_00411de0(void)
 int * __thiscall CBulanci::FUN_00411df0(CBulanci *this,int param_1)
 
 {
-  CStaticText *this_00;
-  int *piVar1;
-  CButton *pCVar2;
-  short sVar3;
-  CBulanci CVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  uint uVar7;
-  undefined4 uVar8;
-  undefined4 *puVar9;
+  CStaticText *pCVar1;
+  uint *puVar2;
+  CButton *pCVar3;
   void *local_c;
   undefined1 *puStack_8;
   int local_4;
@@ -67987,96 +67828,71 @@ int * __thiscall CBulanci::FUN_00411df0(CBulanci *this,int param_1)
   *(undefined ***)(this + 0x10) = CPauseDlg::vftable;
   *(undefined ***)(this + 0x18) = CPauseDlg::vftable;
   *(int *)(this + 0x70) = param_1;
-  this_00 = (CStaticText *)_Globals::FUN_00447c42(0x98);
+  pCVar1 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 1;
-  if (this_00 == (CStaticText *)0x0) {
-    piVar1 = (int *)0x0;
+  if (pCVar1 == (CStaticText *)0x0) {
+    puVar2 = (uint *)0x0;
   }
   else {
-    uVar8 = 0x100ae;
-    uVar7 = 5;
-    uVar6 = 2;
-    uVar5 = 0;
     FUN_0042d510((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x150));
-    piVar1 = CStaticText::CStaticText_BuildAt(this_00,0,0xc,0x132,0x23,uVar5,uVar6,uVar7,uVar8);
+    puVar2 = CStaticText::CStaticText_BuildAt(pCVar1);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::FUN_0042d0b0(this,piVar1,0);
+  _Globals::CDSView__AddChild(this,(int *)puVar2,0);
   if (*(int *)(*(int *)(this + 0x70) + 0x1dc) != 0) {
     *(int *)(this + 0x2c) = *(int *)(this + 0x2c) + 200;
     _Globals::FUN_004102d0(this,*(int *)(this + 0x70),0xf,0x28);
   }
-  sVar3 = (short)*(undefined4 *)(this + 0x2c) + -0x28;
-  pCVar2 = (CButton *)_Globals::FUN_00447c42(0x98);
+  pCVar3 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 2;
-  if (pCVar2 == (CButton *)0x0) {
-    piVar1 = (int *)0x0;
+  if (pCVar3 == (CButton *)0x0) {
+    puVar2 = (uint *)0x0;
   }
   else {
-    puVar9 = (undefined4 *)0x0;
-    uVar8 = 0x14;
-    uVar6 = 1;
-    uVar5 = 0xea;
-    CVar4 = (CBulanci)0x0;
     FUN_0042d510((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x154));
-    piVar1 = CButton::CButton_BuildAt(pCVar2,0xf,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
+    puVar2 = CButton::CButton_BuildAt(pCVar3);
   }
   local_4._0_1_ = 0;
-  *(int **)(this + 0x74) = piVar1;
-  _Globals::FUN_0042d0b0(this,piVar1,0);
-  pCVar2 = (CButton *)_Globals::FUN_00447c42(0x98);
+  *(uint **)(this + 0x74) = puVar2;
+  _Globals::CDSView__AddChild(this,(int *)puVar2,0);
+  pCVar3 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 3;
-  if (pCVar2 == (CButton *)0x0) {
-    piVar1 = (int *)0x0;
+  if (pCVar3 == (CButton *)0x0) {
+    puVar2 = (uint *)0x0;
   }
   else {
-    puVar9 = (undefined4 *)0x0;
-    uVar8 = 0x14;
-    uVar6 = 1;
-    uVar5 = 0xeb;
-    CVar4 = (CBulanci)0x0;
     FUN_0042d510((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x158));
-    piVar1 = CButton::CButton_BuildAt(pCVar2,0xf,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
+    puVar2 = CButton::CButton_BuildAt(pCVar3);
   }
   local_4._0_1_ = 0;
-  *(int **)(this + 0x78) = piVar1;
-  _Globals::FUN_0042d0b0(this,piVar1,0);
-  _Globals::FUN_0042d040(*(int **)(this + 0x78));
-  pCVar2 = (CButton *)_Globals::FUN_00447c42(0x98);
+  *(uint **)(this + 0x78) = puVar2;
+  _Globals::CDSView__AddChild(this,(int *)puVar2,0);
+  _Globals::CDSView__Hide(*(int **)(this + 0x78));
+  pCVar3 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 4;
-  if (pCVar2 == (CButton *)0x0) {
-    piVar1 = (int *)0x0;
+  if (pCVar3 == (CButton *)0x0) {
+    puVar2 = (uint *)0x0;
   }
   else {
-    puVar9 = (undefined4 *)0x0;
-    uVar8 = 0x14;
-    uVar6 = 0;
-    uVar5 = 0xec;
-    CVar4 = (CBulanci)0x0;
     FUN_0042d510((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x15c));
-    piVar1 = CButton::CButton_BuildAt(pCVar2,0x70,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
+    puVar2 = CButton::CButton_BuildAt(pCVar3);
   }
   local_4._0_1_ = 0;
-  _Globals::FUN_0042d0b0(this,piVar1,0);
-  pCVar2 = (CButton *)_Globals::FUN_00447c42(0x98);
+  _Globals::CDSView__AddChild(this,(int *)puVar2,0);
+  pCVar3 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4._0_1_ = 5;
-  if (pCVar2 == (CButton *)0x0) {
-    piVar1 = (int *)0x0;
+  if (pCVar3 == (CButton *)0x0) {
+    puVar2 = (uint *)0x0;
   }
   else {
-    puVar9 = (undefined4 *)0x0;
-    uVar8 = 0x14;
-    uVar6 = 0;
-    uVar5 = 0x8003;
-    CVar4 = (CBulanci)0x0;
     FUN_0042d510((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x14c));
-    piVar1 = CButton::CButton_BuildAt(pCVar2,0xd1,sVar3,CVar4,uVar5,uVar6,uVar8,puVar9);
+    puVar2 = CButton::CButton_BuildAt(pCVar3);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::FUN_0042d0b0(this,piVar1,0);
+  _Globals::CDSView__AddChild(this,(int *)puVar2,0);
   _Globals::CDSView_AcquireKeyboardFocus(*(int **)(this + 0x74));
   *(ushort *)(this + 0x46) = *(ushort *)(this + 0x46) | 0x2c;
-  _Globals::FUN_0042d040((int *)this);
+  _Globals::CDSView__Hide((int *)this);
   ExceptionList = local_c;
   return (int *)this;
 }
@@ -68660,7 +68476,7 @@ void __fastcall CGaming::FUN_004129c0(int param_1)
   
   *(undefined2 *)(param_1 + 0x20e) = *(undefined2 *)(param_1 + 0x8d);
   _Globals::FUN_0042f330((void *)(param_1 + 4),4,-1);
-  _Globals::FUN_00419d60
+  _Globals::CGaming_OnTimerCountdown
             (*(void **)(param_1 + 500),*(short *)(param_1 + 0x20e),unaff_ESI,unaff_retaddr);
   return;
 }
@@ -69879,7 +69695,7 @@ void __fastcall CBulanci::CGame_StartGame(int *param_1)
   }
   local_8 = CONCAT31(local_8._1_3_,3);
   param_1[0x82] = (int)puVar5;
-  _Globals::FUN_0042d0b0((void *)param_1[0x7b],local_a8,0);
+  _Globals::CDSView__AddChild((void *)param_1[0x7b],local_a8,0);
   local_17 = 1;
   _Globals::CDSApp_FrameBody((int *)param_1[0x7b]);
   CGaming_LoadLevelAssetAndMusic(local_414);
@@ -70524,7 +70340,7 @@ undefined4 * __fastcall CDSObject::FUN_00414a80(undefined4 *param_1)
   *param_1 = vftable;
   this = param_1 + 1;
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)this);
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)this);
   param_1[8] = 0;
   param_1[9] = 0;
   param_1[10] = 0;
@@ -70709,7 +70525,7 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(void *param_1)
   undefined4 *puVar13;
   undefined1 *puVar14;
   uint uStack_4184;
-  CBulanci local_4174 [112];
+  CTcpIpConfig local_4174 [112];
   undefined4 *local_4104;
   undefined4 local_4100 [32];
   void *local_4080;
@@ -70775,10 +70591,10 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(void *param_1)
       local_4074 = (char *)0x0;
       local_4064._0_1_ = 3;
       local_4064._1_3_ = uVar2;
-      CTcpIpConfig::Build((undefined4 *)local_4174);
+      CTcpIpConfig::CTcpIpConfig(local_4174);
       local_4064._0_1_ = 4;
       CMenu_DoModalChild(param_1,local_4174,'\0');
-      CBulanci::FUN_0042c320(local_4174,(int)&local_4074);
+      CBulanci::CDSView_SaveData((CBulanci *)local_4174,(int)&local_4074);
       pcVar6 = local_4074;
       if (local_4074 == (char *)0x0) {
         pcVar6 = PTR_DAT_004aef20;
@@ -71180,7 +70996,7 @@ LAB_00415626:
       else {
         pvVar7 = (void *)(*(int *)(this + 500) + 0x10);
       }
-      _Globals::FUN_0042f590(pvVar7,0x100,0x8002,0,0);
+      _Globals::CDSView_PostMessage(pvVar7,0x100,0x8002,0,0);
     }
     break;
   case '\x01':
@@ -71268,7 +71084,7 @@ LAB_00415741:
       else {
         pvVar7 = (void *)(*(int *)(this + 500) + 0x10);
       }
-      _Globals::FUN_0042f590(pvVar7,0x100,0x8002,0,0);
+      _Globals::CDSView_PostMessage(pvVar7,0x100,0x8002,0,0);
       pvVar7 = _Globals::Scheduler_GetEventSlot(this + 4,0);
       if ((*(byte *)((int)pvVar7 + 8) & 1) == 0) {
         _Globals::FUN_0042f300(this + 4,0);
@@ -71324,7 +71140,7 @@ LAB_00415741:
     iVar16 = *(int *)(this + 500);
     if ((iVar16 != 0) && (bVar3 = _Globals::FUN_004125f0(this,*(char *)((int)param_2 + 2)), bVar3))
     {
-      _Globals::FUN_0042f390((void *)(iVar16 + 0x10),0x100,0x8002,0,0);
+      _Globals::CDSView__PostMessage((void *)(iVar16 + 0x10),0x100,0x8002,0,0);
     }
     break;
   case '\t':
@@ -71340,7 +71156,7 @@ LAB_00415741:
     break;
   case '\v':
     if (this[0x30] == (CGame)0x6) {
-      _Globals::FUN_0042f390
+      _Globals::CDSView__PostMessage
                 ((void *)((int)g_pModalFocus + 0x10),0x100,
                  -0x7f33 - (ushort)(*(char *)((int)param_2 + 1) != '\0'),0,0);
     }
@@ -71367,7 +71183,7 @@ LAB_00415741:
     if (this[0x30] == (CGame)0x6) {
       local_4be4 = (CGame *)(int)(short)param_2[1];
       local_4be0 = (int)*(short *)((int)param_2 + 6);
-      _Globals::FUN_00417e80
+      _Globals::CGaming_OnSlotPlacementEvent
                 (*(void **)(this + 500),*(byte *)((int)param_2 + 1),*(byte *)((int)param_2 + 2),
                  *(undefined1 *)((int)param_2 + 3),(int *)&local_4be4,'\0');
     }
@@ -71389,7 +71205,7 @@ LAB_00415741:
     if (this[0x30] == (CGame)0x6) {
       sVar2 = *(short *)((int)param_2 + 1);
       *(short *)(this + 0x20e) = sVar2;
-      _Globals::FUN_00419d60(*(void **)(this + 500),sVar2,uVar4,unaff_EDI);
+      _Globals::CGaming_OnTimerCountdown(*(void **)(this + 500),sVar2,uVar4,unaff_EDI);
     }
     break;
   case '\x13':
@@ -71687,7 +71503,7 @@ LAB_004162bd:
     break;
   case 4:
     local_14 = &stack0xffffffac;
-    _Globals::FUN_00419d60
+    _Globals::CGaming_OnTimerCountdown
               (*(void **)(this + 0x1f0),*(short *)(this + 0x20a) + -1,local_18,unaff_EDI);
     break;
   case 6:
@@ -71756,7 +71572,7 @@ undefined4 CGame::Catch_00416407(void)
   else {
     pvVar2 = (void *)(*(int *)(iVar1 + 0x1f0) + 0x10);
   }
-  _Globals::FUN_0042f590(pvVar2,0x100,0x80c9,0,0);
+  _Globals::CDSView_PostMessage(pvVar2,0x100,0x80c9,0,0);
   return 0x4162e9;
 }
 
@@ -71858,7 +71674,7 @@ void __fastcall _Globals::FUN_00416590(int param_1)
 void __fastcall _Globals::FUN_004165b0(int param_1)
 
 {
-  FUN_0042f390((void *)(param_1 + 0x10),0x200,0xf9,0,0);
+  CDSView__PostMessage((void *)(param_1 + 0x10),0x200,0xf9,0,0);
   return;
 }
 
@@ -71869,7 +71685,7 @@ void __fastcall _Globals::FUN_004165d0(int param_1)
 {
   if (*(char *)(param_1 + 0x16a) != '\0') {
     if (*(int *)(param_1 + 0x84) != 0) {
-      FUN_0042f390((void *)(*(int *)(param_1 + 0x84) + 0x10),0x200,0xf5,param_1,0);
+      CDSView__PostMessage((void *)(*(int *)(param_1 + 0x84) + 0x10),0x200,0xf5,param_1,0);
     }
     *(undefined1 *)(param_1 + 0x16a) = 0;
   }
@@ -71914,7 +71730,7 @@ void __fastcall CDeath::FUN_00416650(int param_1)
 
 
 
-undefined4 __fastcall _Globals::FUN_00416670(int param_1)
+undefined4 __fastcall _Globals::CBulanek_GetSpawnQuipSlot(int param_1)
 
 {
   if ((0x1f < *(byte *)(param_1 + 0x70)) && (*(byte *)(param_1 + 0x70) < 0x24)) {
@@ -71925,7 +71741,7 @@ undefined4 __fastcall _Globals::FUN_00416670(int param_1)
 
 
 
-undefined4 __fastcall CBulanek::FUN_00416690(int param_1)
+undefined4 __fastcall CBulanek::CBulanek_GetDelayedQuipSlot(int param_1)
 
 {
   if ((0x1f < *(byte *)(param_1 + 0x70)) && (*(byte *)(param_1 + 0x70) < 0x24)) {
@@ -71936,7 +71752,7 @@ undefined4 __fastcall CBulanek::FUN_00416690(int param_1)
 
 
 
-undefined4 __fastcall CBulanek::FUN_004166b0(int param_1)
+undefined4 __fastcall CBulanek::CBulanek_GetHitQuipSlot(int param_1)
 
 {
   if ((0x1f < *(byte *)(param_1 + 0x70)) && (*(byte *)(param_1 + 0x70) < 0x24)) {
@@ -71994,7 +71810,7 @@ void __fastcall CWeapon::FUN_00416750(int *param_1)
 
 
 
-void CBulanci::FUN_00416770(void)
+void CBulanci::CDSView_OnMouseDummy(void)
 
 {
   return;
@@ -72024,7 +71840,7 @@ void __thiscall CMina::FUN_00416790(CMina *this,char param_1)
 
 
 
-void __fastcall CDSApp::thunk_FUN_0042ccf0(int param_1)
+void __fastcall CDSApp::CDSView_RenderChildren(int param_1)
 
 {
   CPoemScroller *this;
@@ -72058,13 +71874,13 @@ void __fastcall CDSApp::thunk_FUN_0042ccf0(int param_1)
     iStack_4 = DAT_004b3ba8;
     do {
       if ((*(byte *)(piVar1 + 0x11) & 0x80) != 0) {
-        CPoemScroller::FUN_00433280((CPoemScroller *)&DAT_004b3b9c,piVar1 + 0xc);
+        CPoemScroller::rect_Intersect((CPoemScroller *)&DAT_004b3b9c,piVar1 + 0xc);
         if ((DAT_004b3b9c < DAT_004b3ba4) && (DAT_004b3ba0 < DAT_004b3ba8)) {
           *(undefined4 *)this = 0;
           *(undefined4 *)(iVar2 + 0x28) = 0;
           *(undefined4 *)(iVar2 + 0x2c) = *(undefined4 *)(iVar2 + 4);
           *(undefined4 *)(iVar2 + 0x30) = *(undefined4 *)(iVar2 + 8);
-          CPoemScroller::FUN_00433280(this,&DAT_004b3b9c);
+          CPoemScroller::rect_Intersect(this,&DAT_004b3b9c);
           (**(code **)(*piVar1 + 0x38))();
         }
         DAT_004b3b9c = iStack_10;
@@ -72079,7 +71895,7 @@ void __fastcall CDSApp::thunk_FUN_0042ccf0(int param_1)
     *(undefined4 *)(iVar2 + 0x28) = 0;
     *(undefined4 *)(iVar2 + 0x2c) = *(undefined4 *)(iVar2 + 4);
     *(undefined4 *)(iVar2 + 0x30) = *(undefined4 *)(iVar2 + 8);
-    CPoemScroller::FUN_00433280(this,&iStack_20);
+    CPoemScroller::rect_Intersect(this,&iStack_20);
   }
   return;
 }
@@ -72193,7 +72009,7 @@ void __fastcall CGaming::FUN_004168f0(int param_1)
       return;
     }
   }
-  _Globals::FUN_0042f390((void *)(param_1 + 0x10),0x200,0xf6,iVar1,0);
+  _Globals::CDSView__PostMessage((void *)(param_1 + 0x10),0x200,0xf6,iVar1,0);
   return;
 }
 
@@ -72436,7 +72252,7 @@ undefined4 * __fastcall CObstacle::FUN_00416f60(undefined4 *param_1)
 {
   undefined4 extraout_EDX;
   
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   param_1[0x1d] = 0;
   param_1[0x1e] = 0;
   param_1[0x1f] = 0;
@@ -72468,7 +72284,7 @@ undefined4 * __thiscall CObstacle::FUN_00416fc0(CObstacle *this,undefined4 *para
 {
   undefined4 extraout_EDX;
   
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(undefined4 *)(this + 0x74) = 0;
   *(undefined4 *)(this + 0x78) = 0;
   *(undefined4 *)(this + 0x7c) = 0;
@@ -72504,7 +72320,7 @@ undefined4 * __fastcall CGameView::FUN_00417030(undefined4 *param_1)
   puStack_8 = &LAB_00476b28;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -72515,7 +72331,7 @@ undefined4 * __fastcall CGameView::FUN_00417030(undefined4 *param_1)
   param_1[0x20] = 0;
   _Globals::FUN_00416590((int)param_1);
   local_4 = extraout_EDX;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x22));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x22));
   *param_1 = CShot::vftable;
   param_1[1] = CShot::vftable;
   param_1[4] = CShot::vftable;
@@ -72832,7 +72648,7 @@ void __fastcall _Globals::FUN_00417500(void *param_1)
 
 
 
-void __fastcall CBulanek::FUN_00417570(void *param_1)
+void __fastcall CBulanek::CBulanek_ResetAmmoAndPlayReload(void *param_1)
 
 {
   undefined1 uVar1;
@@ -72853,7 +72669,7 @@ void __fastcall CBulanek::FUN_00417570(void *param_1)
   *(undefined1 *)((int)param_1 + 0x11c) = uVar1;
   uVar5 = 0;
   iVar3 = _Globals::FUN_00422500((int *)((int)param_1 + 0x20));
-  piVar4 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,0x10,iVar3,uVar5,cVar6);
+  piVar4 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x10,iVar3,uVar5,cVar6);
   _Globals::FUN_004223c0(piVar4,uVar7);
   if (*(char *)(*(int *)((int)param_1 + 0xf8) + 100) == '\0') {
     FUN_00416700(param_1);
@@ -73036,16 +72852,16 @@ void __fastcall CBulanek::FUN_00417910(void *param_1)
 {
   _Globals::TM_PauseAndStampClock((int)param_1 + 0xa8);
   if (1 < *(int *)((int)param_1 + 0xd4)) {
-    FUN_0042cc80(param_1,*(int *)((int)param_1 + 0xa4),*(int *)((int)param_1 + 0x24));
+    CDSView__SetPosition(param_1,*(int *)((int)param_1 + 0xa4),*(int *)((int)param_1 + 0x24));
     return;
   }
-  FUN_0042cc80(param_1,*(int *)((int)param_1 + 0x20),*(int *)((int)param_1 + 0xa4));
+  CDSView__SetPosition(param_1,*(int *)((int)param_1 + 0x20),*(int *)((int)param_1 + 0xa4));
   return;
 }
 
 
 
-void __cdecl _Globals::FUN_00417950(int param_1,uchar param_2,int *param_3)
+void __cdecl _Globals::TriggerSoundEffect(int param_1,uchar param_2,int *param_3)
 
 {
   int iVar1;
@@ -73064,7 +72880,7 @@ void __cdecl _Globals::FUN_00417950(int param_1,uchar param_2,int *param_3)
       iVar3 = DAT_004b3730;
     }
     iVar1 = FUN_00422500(param_3);
-    piVar2 = (int *)FUN_00422430((undefined *)0x1,iVar3,param_1,iVar1,uVar4,cVar5);
+    piVar2 = (int *)TriggerBankSample((undefined *)0x1,iVar3,param_1,iVar1,uVar4,cVar5);
     FUN_004223c0(piVar2,uVar6);
   }
   return;
@@ -73075,16 +72891,16 @@ void __cdecl _Globals::FUN_00417950(int param_1,uchar param_2,int *param_3)
 void __thiscall CWeapon::SetAmmo(CWeapon *this,int param_1)
 
 {
-  _Globals::FUN_00417950(param_1,(uchar)this[100],(int *)(*(int *)(this + 0x54) + 0x20));
+  _Globals::TriggerSoundEffect(param_1,(uchar)this[100],(int *)(*(int *)(this + 0x54) + 0x20));
   return;
 }
 
 
 
-void __cdecl _Globals::FUN_004179c0(byte param_1,int *param_2)
+void __cdecl _Globals::CBulanek_PlayItemPickupSound(byte param_1,int *param_2)
 
 {
-  FUN_00417950(*(int *)(&DAT_00481d38 + (uint)param_1 * 4),param_1,param_2);
+  TriggerSoundEffect(*(int *)(&DAT_00481d38 + (uint)param_1 * 4),param_1,param_2);
   return;
 }
 
@@ -73150,12 +72966,12 @@ void __fastcall CDeath::FUN_00417a90(int param_1)
   uint uVar2;
   
   if (((byte)~*(byte *)(*(int *)(param_1 + -8) + 0x44) >> 4 & 1) == 0) {
-    _Globals::FUN_0042d040((int *)(param_1 + -0x8c));
+    _Globals::CDSView__Hide((int *)(param_1 + -0x8c));
     uVar2 = _Globals::FUN_00416720(*(int *)(param_1 + 100));
     if ((char)uVar2 != '\0') {
       cVar1 = FUN_00416650(*(int *)(param_1 + 100));
       if (cVar1 == '\0') {
-        _Globals::FUN_0042f390
+        _Globals::CDSView__PostMessage
                   ((void *)(*(int *)(param_1 + -8) + 0x10),0x200,0xf6,*(undefined4 *)(param_1 + 100)
                    ,0);
       }
@@ -73181,7 +72997,7 @@ void __fastcall CDeath2::FUN_00417b10(int param_1)
 
 {
   if (((byte)~*(byte *)(*(int *)(param_1 + -8) + 0x44) >> 4 & 1) == 0) {
-    _Globals::FUN_0042d040((int *)(param_1 + -0x8c));
+    _Globals::CDSView__Hide((int *)(param_1 + -0x8c));
   }
   return;
 }
@@ -73356,7 +73172,7 @@ _Globals::FUN_00417dd0(void *this,uint param_1,char param_2,undefined4 *param_3,
 
 
 
-bool __thiscall CBulanek::FUN_00417e40(CBulanek *this,byte param_1)
+bool __thiscall CBulanek::CGaming_IsPlayerSlotOccupied(CBulanek *this,byte param_1)
 
 {
   int iVar1;
@@ -73372,7 +73188,7 @@ bool __thiscall CBulanek::FUN_00417e40(CBulanek *this,byte param_1)
 
 
 void __thiscall
-_Globals::FUN_00417e80
+_Globals::CGaming_OnSlotPlacementEvent
           (void *this,byte param_1,byte param_2,undefined1 param_3,int *param_4,char param_5)
 
 {
@@ -73384,7 +73200,7 @@ _Globals::FUN_00417e80
   
   piVar1 = param_4;
   if (param_5 != '\0') {
-    bVar2 = CBulanek::FUN_00417e40(this,param_1);
+    bVar2 = CBulanek::CGaming_IsPlayerSlotOccupied(this,param_1);
     if (bVar2) {
       CGame_NetSendShotSpawn_t0f
                 (*(void **)((int)this + 0x84),param_1,param_2,param_3,(undefined2 *)piVar1);
@@ -73392,12 +73208,12 @@ _Globals::FUN_00417e80
   }
   param_4 = (int *)0x1;
   if (param_1 != 0xff) {
-    bVar2 = CBulanek::FUN_00417e40(this,param_1);
+    bVar2 = CBulanek::CGaming_IsPlayerSlotOccupied(this,param_1);
     if ((bVar2) && (param_5 == '\0')) {
       iVar4 = piVar1[1];
       iVar3 = *piVar1;
       this_00 = (CBulanek *)CGaming_GetObjectAtSlotUnchecked(this,param_1);
-      CBulanek::FUN_0042cc80(this_00,iVar3,iVar4);
+      CBulanek::CDSView__SetPosition(this_00,iVar3,iVar4);
     }
     CBulanek::FUN_00416830(this,param_1,0xd7,(uint)CONCAT11(param_2,param_3),&param_4);
   }
@@ -73432,7 +73248,7 @@ undefined4 __thiscall CBulanek::FUN_00417f80(CBulanek *this,byte param_1)
   int iVar2;
   undefined4 uVar3;
   
-  bVar1 = FUN_00417e40(this,param_1);
+  bVar1 = CGaming_IsPlayerSlotOccupied(this,param_1);
   if (bVar1) {
     iVar2 = _Globals::CGaming_GetObjectAtSlotUnchecked(this,param_1);
     uVar3 = FUN_00416630(iVar2);
@@ -73461,7 +73277,7 @@ void __thiscall _Globals::CGaming_RegisterObjectAtSlot(void *this,int param_1,by
 
 
 
-void __thiscall _Globals::FUN_00418000(void *this,byte param_1,int param_2)
+void __thiscall _Globals::TriggerLevelScriptSound(void *this,byte param_1,int param_2)
 
 {
   int *piVar1;
@@ -73504,7 +73320,7 @@ void __thiscall _Globals::FUN_00418000(void *this,byte param_1,int param_2)
     uVar4 = 0;
     iVar3 = FUN_00422500(&local_10);
   }
-  piVar1 = (int *)FUN_00422430((undefined *)0x1,iVar2,param_2,iVar3,uVar4,cVar5);
+  piVar1 = (int *)TriggerBankSample((undefined *)0x1,iVar2,param_2,iVar3,uVar4,cVar5);
   FUN_004223c0(piVar1,uVar6);
   return;
 }
@@ -73517,7 +73333,7 @@ void __thiscall CGame::FUN_004180c0(CGame *this,byte param_1)
   void *pvVar1;
   
   pvVar1 = (void *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,param_1);
-  CBulanek::FUN_00417570(pvVar1);
+  CBulanek::CBulanek_ResetAmmoAndPlayReload(pvVar1);
   return;
 }
 
@@ -73577,7 +73393,7 @@ void __thiscall CBulanek::FUN_004180e0(CBulanek *this,int param_1)
       _Globals::FUN_0042d770(&param_1,L"\x01 %s \n\x01 %d ");
       _Globals::FUN_00427710(*(void **)(this + 800),&param_1);
       if ((*(char *)(*(int *)(this + 0x84) + 0x36) == '\0') && (iVar7 == local_10)) {
-        _Globals::FUN_0042f390(this + 0x10,0x100,0x80cc,1,0);
+        _Globals::CDSView__PostMessage(this + 0x10,0x100,0x80cc,1,0);
       }
       local_4 = 0xffffffff;
       if (param_1 != 0) {
@@ -73659,7 +73475,7 @@ _Globals::FUN_00418300
       uStack_c = param_1[1];
       uStack_8 = param_1[2];
       uStack_4 = param_1[3];
-      piVar2 = (int *)CPoemScroller::FUN_00433280((CPoemScroller *)&uStack_10,param_3);
+      piVar2 = (int *)CPoemScroller::rect_Intersect((CPoemScroller *)&uStack_10,param_3);
       if ((((*piVar2 < piVar2[2]) && (piVar2[1] < piVar2[3])) &&
           ((param_4 != '\0' || (uVar3 = FUN_00404730(param_2,param_3), (char)uVar3 == '\0')))) &&
          ((param_5 == '\0' || (*(char *)((int)piVar1 + 0x6a) == '\0')))) {
@@ -73702,7 +73518,7 @@ CExplosion::FUN_004183d0(CExplosion *this,undefined4 *param_1,int param_2,char p
         uStack_10 = *param_1;
         uStack_8 = param_1[2];
         uStack_4 = param_1[3];
-        piVar2 = (int *)CPoemScroller::FUN_00433280((CPoemScroller *)&uStack_10,local_20);
+        piVar2 = (int *)CPoemScroller::rect_Intersect((CPoemScroller *)&uStack_10,local_20);
         if (((*piVar2 < piVar2[2]) && (piVar2[1] < piVar2[3])) &&
            ((param_3 == '\0' || (*(char *)((int)piVar1 + 0x6a) == '\0')))) {
           *(int **)(param_2 + iVar3 * 4) = piVar1;
@@ -73818,7 +73634,7 @@ undefined4 * __fastcall CLevelScript::ctor(undefined4 *param_1)
   param_1[0x10f] = 0;
   local_4._0_1_ = 1;
   local_4._1_3_ = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x110));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x110));
   local_4 = CONCAT31(local_4._1_3_,2);
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -74014,7 +73830,7 @@ void * __cdecl _Globals::FUN_004188e0(int param_1)
   iVar1 = CDSScript::ReadSubExpr(param_1);
   iVar2 = CDSScript::ReadSubExpr(param_1);
   if (this != (CBulanek *)0x0) {
-    CBulanek::FUN_0042cc80(this,iVar1,iVar2);
+    CBulanek::CDSView__SetPosition(this,iVar1,iVar2);
   }
   return this;
 }
@@ -74042,7 +73858,7 @@ undefined4 __cdecl _Globals::FUN_00418950(int param_1)
   
   iVar2 = CDSScript::ReadSubExpr(param_1);
   bVar1 = CDSScript::ReadSubExpr(param_1);
-  FUN_00418000(*(void **)(param_1 + 0x458),bVar1,iVar2);
+  TriggerLevelScriptSound(*(void **)(param_1 + 0x458),bVar1,iVar2);
   return 0;
 }
 
@@ -74150,7 +73966,7 @@ void __fastcall CLevelScript::FUN_00418bf0(int param_1)
 
 
 
-void * __thiscall ODSImage::FUN_00418c00(ODSImage *this,int *param_1)
+void * __thiscall ODSImage::ODSImage_ctor(ODSImage *this,int *param_1)
 
 {
   void *local_c;
@@ -74164,7 +73980,7 @@ void * __thiscall ODSImage::FUN_00418c00(ODSImage *this,int *param_1)
   *(undefined4 *)(this + 8) = 0;
   *(undefined4 *)(this + 0xc) = 0;
   local_4 = 0;
-  _Globals::TM_SetCurrentSequence(this,param_1);
+  _Globals::ODSImage__SetImage(this,param_1);
   ExceptionList = local_c;
   return this;
 }
@@ -74186,7 +74002,7 @@ undefined4 * CGameView::FUN_00418c60(void)
   puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x88);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    CDSChained::FUN_004032d0(puVar1);
+    CDSChained::CDSChained_ctor(puVar1);
     *puVar1 = vftable;
     puVar1[1] = vftable;
     puVar1[4] = vftable;
@@ -74248,7 +74064,7 @@ undefined4 * __fastcall CGameView::FUN_00418d70(undefined4 *param_1)
   puStack_8 = &LAB_00476d66;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -74259,7 +74075,7 @@ undefined4 * __fastcall CGameView::FUN_00418d70(undefined4 *param_1)
   param_1[0x20] = 0;
   _Globals::FUN_00416590((int)param_1);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x22));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x22));
   param_1[0x28] = ODSImage::vftable;
   local_4 = CONCAT31(local_4._1_3_,1);
   *param_1 = CBulanek::vftable;
@@ -74456,7 +74272,7 @@ undefined4 * __fastcall ODSImage::FUN_00419070(undefined4 *param_1)
   puStack_8 = &LAB_00476e06;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   param_1[0x1d] = 0;
   param_1[0x1e] = 0;
   param_1[0x1f] = 0;
@@ -74472,7 +74288,7 @@ undefined4 * __fastcall ODSImage::FUN_00419070(undefined4 *param_1)
   param_1[6] = CBitmap::vftable;
   *(undefined ***)(param_1 + 0x22) = CBitmap::vftable;
   param_1[0x23] = CBitmap::vftable;
-  FUN_00439050((ODSImage *)(param_1 + 0x22),param_1);
+  SetOwner((ODSImage *)(param_1 + 0x22),param_1);
   ExceptionList = local_c;
   return param_1;
 }
@@ -74558,7 +74374,7 @@ CGameView::FUN_004191a0(CGameView *this,undefined4 param_1,undefined4 param_2,in
   puStack_8 = &LAB_00476e46;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -74570,7 +74386,7 @@ CGameView::FUN_004191a0(CGameView *this,undefined4 param_1,undefined4 param_2,in
   _Globals::FUN_00416590((int)this);
   this_00 = (ODSImage *)(this + 0x88);
   local_4 = extraout_EDX;
-  ODSImage::FUN_00418c00(this_00,param_3);
+  ODSImage::ODSImage_ctor(this_00,param_3);
   *(undefined ***)this = CBitmap::vftable;
   *(undefined ***)(this + 4) = CBitmap::vftable;
   *(undefined ***)(this + 0x10) = CBitmap::vftable;
@@ -74580,7 +74396,7 @@ CGameView::FUN_004191a0(CGameView *this,undefined4 param_1,undefined4 param_2,in
   *(undefined4 *)(this + 0x20) = param_1;
   local_4 = CONCAT31(local_4._1_3_,1);
   *(undefined4 *)(this + 0x24) = param_2;
-  ODSImage::FUN_00439050(this_00,this);
+  ODSImage::SetOwner(this_00,this);
   ExceptionList = local_c;
   return (undefined4 *)this;
 }
@@ -74605,7 +74421,7 @@ void __thiscall CBitmap::FUN_00419280(CBitmap *this,undefined4 param_1,ushort pa
 
 // WARNING: Removing unreachable block (ram,0x0041943e)
 
-uint __thiscall CBulanek::FUN_004192b0(CBulanek *this,byte param_1)
+uint __thiscall CBulanek::CBulanek_CheckSlotCollision(CBulanek *this,byte param_1)
 
 {
   int *piVar1;
@@ -74713,7 +74529,7 @@ uint __thiscall CBulanek::FUN_004194b0(CBulanek *this,uint param_1,undefined4 pa
     }
     uVar3 = 1 << (bVar2 & 0x1f);
     if ((param_1 & uVar3) != 0) {
-      uVar1 = FUN_004192b0(this,bVar2);
+      uVar1 = CBulanek_CheckSlotCollision(this,bVar2);
       if ((char)uVar1 != '\0') {
         return CONCAT31((int3)(uVar1 >> 8),1);
       }
@@ -74740,7 +74556,7 @@ uint CBulanek::FUN_004194c7(undefined4 param_1,undefined4 param_2,uint param_3)
     }
     uVar2 = 1 << (bVar1 & 0x1f);
     if ((param_3 & uVar2) != 0) {
-      in_EAX = FUN_004192b0(unaff_EBP,bVar1);
+      in_EAX = CBulanek_CheckSlotCollision(unaff_EBP,bVar1);
       if ((char)in_EAX != '\0') {
         return CONCAT31((int3)(in_EAX >> 8),1);
       }
@@ -74897,7 +74713,7 @@ _Globals::FUN_004195f0(void *this,undefined4 param_1,int *param_2,int *param_3,i
     param_2[2] = param_2[2] + iVar6;
     bVar1 = *(byte *)((int)this + 0x70);
     if ((((0x1f < bVar1) && (bVar1 < 0x24)) || ((0x23 < bVar1 && (bVar1 < 0x28)))) && (bVar8)) {
-      FUN_0042f390((void *)((int)this + 0x10),0x200,0x102,0,0);
+      CDSView__PostMessage((void *)((int)this + 0x10),0x200,0x102,0,0);
     }
   }
   return;
@@ -75189,14 +75005,14 @@ LAB_00419c4d:
   (**(code **)(*(int *)((int)param_1 + -0x88) + 0x20))(&local_10);
   if (*(char *)((int)param_1 + 0x20) != '\0') {
     _Globals::FUN_0042f300(param_1,0);
-    _Globals::FUN_0042d040((int *)((int)param_1 + -0x88));
+    _Globals::CDSView__Hide((int *)((int)param_1 + -0x88));
   }
   return;
 }
 
 
 
-void __thiscall CGaming::FUN_00419ca0(CGaming *this,int *param_1)
+void __thiscall CGaming::CGaming_UnregisterAndRemoveObject(CGaming *this,int *param_1)
 
 {
   uint uVar1;
@@ -75224,14 +75040,14 @@ void __thiscall CGaming::FUN_00419ca0(CGaming *this,int *param_1)
 
 
 
-void __fastcall CGaming::FUN_00419d20(void *param_1)
+void __fastcall CGaming::CGaming_ClearAllEntities(void *param_1)
 
 {
   int *piVar1;
   
   piVar1 = (int *)_Globals::FUN_0042f7c0(*(int *)((int)param_1 + 0x31c) + 0x54);
   while (piVar1 != (int *)0x0) {
-    FUN_00419ca0(param_1,piVar1);
+    CGaming_UnregisterAndRemoveObject(param_1,piVar1);
     (**(code **)(*piVar1 + 8))();
     piVar1 = (int *)_Globals::FUN_0042f7c0(*(int *)((int)param_1 + 0x31c) + 0x54);
   }
@@ -75240,7 +75056,8 @@ void __fastcall CGaming::FUN_00419d20(void *param_1)
 
 
 
-void __thiscall _Globals::FUN_00419d60(void *this,short param_1,undefined4 param_2,int param_3)
+void __thiscall
+_Globals::CGaming_OnTimerCountdown(void *this,short param_1,undefined4 param_2,int param_3)
 
 {
   int *piVar1;
@@ -75255,7 +75072,7 @@ void __thiscall _Globals::FUN_00419d60(void *this,short param_1,undefined4 param
   ExceptionList = &local_c;
   if ((ushort)(param_1 - 1U) < 5) {
     uVar2 = 0;
-    piVar1 = (int *)FUN_00422430((undefined *)0x1,0,0x12,0,0,'\x01');
+    piVar1 = (int *)TriggerBankSample((undefined *)0x1,0,0x12,0,0,'\x01');
     FUN_004223c0(piVar1,uVar2);
   }
   param_3 = 0;
@@ -75266,7 +75083,7 @@ void __thiscall _Globals::FUN_00419d60(void *this,short param_1,undefined4 param
   if (*(char *)((int)*(void **)((int)this + 0x84) + 0x36) == '\0') {
     CGame_NetSendRoundTimer_t12(*(void **)((int)this + 0x84),param_1);
     if (param_1 == 0) {
-      FUN_0042f390((void *)((int)this + 0x10),0x100,0x80cc,1,0);
+      CDSView__PostMessage((void *)((int)this + 0x10),0x100,0x80cc,1,0);
     }
   }
   if (param_3 != 0) {
@@ -75281,10 +75098,10 @@ void __thiscall _Globals::FUN_00419d60(void *this,short param_1,undefined4 param
 void __fastcall CGaming::FUN_00419e40(void *param_1)
 
 {
-  FUN_00419ca0(param_1,*(int **)((int)param_1 + 0x324));
-  FUN_00419ca0(param_1,*(int **)((int)param_1 + 0x328));
-  FUN_00419ca0(param_1,*(int **)((int)param_1 + 0x32c));
-  FUN_00419ca0(param_1,*(int **)((int)param_1 + 0x330));
+  CGaming_UnregisterAndRemoveObject(param_1,*(int **)((int)param_1 + 0x324));
+  CGaming_UnregisterAndRemoveObject(param_1,*(int **)((int)param_1 + 0x328));
+  CGaming_UnregisterAndRemoveObject(param_1,*(int **)((int)param_1 + 0x32c));
+  CGaming_UnregisterAndRemoveObject(param_1,*(int **)((int)param_1 + 0x330));
   CBulanci::FUN_00417c80(param_1,0);
   return;
 }
@@ -75373,7 +75190,8 @@ void __fastcall CMina::FUN_00419fd0(void *param_1)
 
 
 
-void __thiscall _Globals::FUN_0041a020(void *this,void *param_1,int *param_2,undefined4 param_3)
+void __thiscall
+_Globals::CGaming_OnPlayerCollectItem(void *this,void *param_1,int *param_2,undefined4 param_3)
 
 {
   int iVar1;
@@ -75383,7 +75201,7 @@ void __thiscall _Globals::FUN_0041a020(void *this,void *param_1,int *param_2,und
   char cVar5;
   undefined1 uVar6;
   
-  CGaming::FUN_00419ca0(this,param_2);
+  CGaming::CGaming_UnregisterAndRemoveObject(this,param_2);
   FUN_00416610(param_1,param_3);
   iVar3 = 0x22;
   if (*(char *)((int)param_1 + 0x70) == '\0') {
@@ -75405,7 +75223,7 @@ void __thiscall _Globals::FUN_0041a020(void *this,void *param_1,int *param_2,und
   cVar5 = '\x01';
   uVar4 = 0;
   iVar1 = FUN_00422500((int *)((int)param_1 + 0x20));
-  piVar2 = (int *)FUN_00422430((undefined *)0x1,0,iVar3,iVar1,uVar4,cVar5);
+  piVar2 = (int *)TriggerBankSample((undefined *)0x1,0,iVar3,iVar1,uVar4,cVar5);
   FUN_004223c0(piVar2,uVar6);
   CBulanci::FUN_00417c80(this,0);
   return;
@@ -75422,7 +75240,7 @@ void __thiscall CGame::CGame_DestroyObjectAtSlot(CGame *this,byte param_1)
   if ((param_1 != 0xff) &&
      (piVar1 = (int *)CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)this,param_1),
      piVar1 != (int *)0x0)) {
-    CGaming::FUN_00419ca0(this_00,piVar1);
+    CGaming::CGaming_UnregisterAndRemoveObject(this_00,piVar1);
     (**(code **)(*piVar1 + 8))();
   }
   return;
@@ -75430,7 +75248,7 @@ void __thiscall CGame::CGame_DestroyObjectAtSlot(CGame *this,byte param_1)
 
 
 
-uint __thiscall _Globals::FUN_0041a0f0(void *this,byte param_1,undefined4 *param_2)
+uint __thiscall _Globals::CGaming_TryGetPlayerCoords(void *this,byte param_1,undefined4 *param_2)
 
 {
   bool bVar1;
@@ -75439,7 +75257,7 @@ uint __thiscall _Globals::FUN_0041a0f0(void *this,byte param_1,undefined4 *param
   uint uVar4;
   undefined4 uVar2;
   
-  bVar1 = CBulanek::FUN_00417e40(this,param_1);
+  bVar1 = CBulanek::CGaming_IsPlayerSlotOccupied(this,param_1);
   uVar2 = CONCAT31(extraout_var,bVar1);
   if (bVar1) {
     iVar3 = CGaming_GetObjectAtSlotUnchecked(this,param_1);
@@ -75457,7 +75275,7 @@ uint __thiscall _Globals::FUN_0041a0f0(void *this,byte param_1,undefined4 *param
 
 
 
-void __thiscall _Globals::FUN_0041a140(void *this,int *param_1)
+void __thiscall _Globals::CGaming_RespawnPlayerAtSafeLocation(void *this,int *param_1)
 
 {
   int iVar1;
@@ -75510,10 +75328,10 @@ void __thiscall _Globals::FUN_0041a140(void *this,int *param_1)
   if (*(char *)((int)param_1 + 0x69) != '\0') {
     local_10 = param_1[8] + (iStack_20 - local_30);
     local_c = param_1[9] + (iStack_1c - local_2c);
-    CBulanek::FUN_0042cc80((CBulanek *)param_1,local_10,local_c);
+    CBulanek::CDSView__SetPosition((CBulanek *)param_1,local_10,local_c);
     return;
   }
-  CBulanek::FUN_0042cc80((CBulanek *)param_1,iStack_20,iStack_1c);
+  CBulanek::CDSView__SetPosition((CBulanek *)param_1,iStack_20,iStack_1c);
   return;
 }
 
@@ -75523,7 +75341,7 @@ void __thiscall CGaming::FUN_0041a270(CGaming *this,undefined4 *param_1)
 
 {
   if ((int *)*param_1 != (int *)0x0) {
-    FUN_00419ca0(this,(int *)*param_1);
+    CGaming_UnregisterAndRemoveObject(this,(int *)*param_1);
     (**(code **)(*(int *)*param_1 + 8))();
     *param_1 = 0;
   }
@@ -75532,7 +75350,7 @@ void __thiscall CGaming::FUN_0041a270(CGaming *this,undefined4 *param_1)
 
 
 
-void __fastcall CGaming::FUN_0041a2a0(void *param_1)
+void __fastcall CGaming::CGaming_CleanupInactiveBullets(void *param_1)
 
 {
   int *piVar1;
@@ -75545,7 +75363,7 @@ void __fastcall CGaming::FUN_0041a2a0(void *param_1)
       iVar2 = iVar2 + -1;
       if ((char)piVar1[0x2a] != '\0') {
         _Globals::FUN_004046c0((int *)((int)param_1 + 0x2c8),iVar2,1);
-        FUN_00419ca0(param_1,piVar1);
+        CGaming_UnregisterAndRemoveObject(param_1,piVar1);
         (**(code **)(*piVar1 + 8))();
       }
     } while (iVar2 != 0);
@@ -75577,7 +75395,7 @@ int __thiscall CExplosion::FUN_0041a2f0(CExplosion *this,int *param_1,int param_
         uStack_c = puVar1[9];
         uStack_8 = puVar1[10];
         uStack_4 = puVar1[0xb];
-        piVar3 = (int *)CPoemScroller::FUN_00433280((CPoemScroller *)&uStack_10,param_1);
+        piVar3 = (int *)CPoemScroller::rect_Intersect((CPoemScroller *)&uStack_10,param_1);
         if ((*piVar3 < piVar3[2]) && (piVar3[1] < piVar3[3])) {
           *(undefined4 **)(param_2 + iVar4 * 4) = puVar1;
           iVar4 = iVar4 + 1;
@@ -75604,11 +75422,11 @@ void __thiscall CBulanek::FUN_0041a390(CBulanek *this,int *param_1,char param_2)
   param_1[0x21] = (int)this;
   CVar1 = this[0x341];
   if (CVar1 == (CBulanek)0x0) {
-    _Globals::FUN_0042d0b0(*(void **)(this + 0x31c),param_1,*(int *)(this + 0x348));
+    _Globals::CDSView__AddChild(*(void **)(this + 0x31c),param_1,*(int *)(this + 0x348));
   }
   else {
     if (CVar1 == (CBulanek)0x1) {
-      _Globals::FUN_0042d0b0(*(void **)(this + 0x31c),param_1,*(int *)(this + 0x34c));
+      _Globals::CDSView__AddChild(*(void **)(this + 0x31c),param_1,*(int *)(this + 0x34c));
       if ((*(int *)(this + 0x348) == 0) || (*(char *)(*(int *)(this + 0x348) + 0x68) == '\0')) {
         *(int **)(this + 0x348) = param_1;
       }
@@ -75616,7 +75434,7 @@ void __thiscall CBulanek::FUN_0041a390(CBulanek *this,int *param_1,char param_2)
       return;
     }
     if (CVar1 == (CBulanek)0x2) {
-      _Globals::FUN_0042d0b0(*(void **)(this + 0x31c),param_1,0);
+      _Globals::CDSView__AddChild(*(void **)(this + 0x31c),param_1,0);
       if (*(int *)(this + 0x34c) == 0) {
         *(int **)(this + 0x34c) = param_1;
       }
@@ -76016,7 +75834,7 @@ undefined4 * __fastcall CMina::FUN_0041a990(undefined4 *param_1)
   ExceptionList = &local_c;
   CAnim::FUN_00419870(param_1);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x3c));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x3c));
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -76185,9 +76003,9 @@ undefined4 * __fastcall CGaming::FUN_0041ab70(undefined4 *param_1)
   puStack_8 = &LAB_004770b1;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1a));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x1a));
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -76286,7 +76104,7 @@ CGameView::FUN_0041acf0(CGameView *this,short param_1,undefined4 param_2,undefin
       CBulanci::CDSView_EmptyHook27();
       return;
     }
-    CGaming::FUN_00419ca0(*(CGaming **)(this + 0x84),(int *)this);
+    CGaming::CGaming_UnregisterAndRemoveObject(*(CGaming **)(this + 0x84),(int *)this);
     (**(code **)(*(int *)this + 8))();
     return;
   }
@@ -76578,12 +76396,12 @@ CExplosion::DamageAtPoint
     iStack_20 = *param_1;
     iStack_18 = param_1[2];
     iStack_14 = param_1[3];
-    in_EAX = (int *)CPoemScroller::FUN_00433280((CPoemScroller *)&iStack_20,&local_10);
+    in_EAX = (int *)CPoemScroller::rect_Intersect((CPoemScroller *)&iStack_20,&local_10);
   } while ((in_EAX[2] <= *in_EAX) || (in_EAX[3] <= in_EAX[1]));
   this_00 = *(CGaming **)(this + 0x84);
   iStack_20 = 0;
   iStack_1c = 0;
-  uVar3 = _Globals::FUN_0041a0f0(this_00,bVar1,&iStack_20);
+  uVar3 = _Globals::CGaming_TryGetPlayerCoords(this_00,bVar1,&iStack_20);
   if ((char)uVar3 != '\0') {
     if (param_4 != '\0') {
       param_5 = param_5 | 0x80;
@@ -76594,7 +76412,8 @@ LAB_0041b2e2:
       return (uint)in_EAX & 0xffffff00;
     }
     while( true ) {
-      _Globals::FUN_00417e80(this_00,bVar1,(byte)this[0xf0],param_5,&iStack_20,'\x01');
+      _Globals::CGaming_OnSlotPlacementEvent
+                (this_00,bVar1,(byte)this[0xf0],param_5,&iStack_20,'\x01');
       uVar3 = CGaming::CGaming_GetObjectAtSlotSafe(this_00,bVar1);
       iVar4 = iVar4 + 1;
       *(uint *)(param_2 + param_3 * 4) = uVar3;
@@ -76613,7 +76432,7 @@ void __thiscall CBulanci::FUN_0041b390(CBulanci *this,int *param_1)
 
 {
   CBulanek::FUN_0041a390((CBulanek *)this,param_1,'\x01');
-  _Globals::FUN_0041a140(this,param_1);
+  _Globals::CGaming_RespawnPlayerAtSafeLocation(this,param_1);
   return;
 }
 
@@ -76634,7 +76453,7 @@ void __thiscall CGaming::FUN_0041b3b0(CGaming *this,int param_1)
       iVar3 = iVar3 + -1;
       if (piVar1[0x3c] == param_1) {
         _Globals::FUN_004046c0(this + 0x2f8,iVar3,1);
-        FUN_00419ca0(this,piVar1);
+        CGaming_UnregisterAndRemoveObject(this,piVar1);
         (**(code **)(*piVar1 + 8))();
         iVar2 = iVar2 + 1;
         if (iVar2 == 2) {
@@ -76857,7 +76676,7 @@ void __thiscall CBulanci::CGaming_LoadBackgroundMusic(CBulanci *this,int *param_
     (**(code **)(**(int **)(this + 0x354) + 8))();
   }
   *(void **)(this + 0x354) = this_00;
-  _Globals::FUN_0043a760(this_00,*(int **)(this + 0x35c),0,0,(undefined *)0x2);
+  _Globals::CDSAudioPlayer_Init(this_00,*(int **)(this + 0x35c),0,0,(undefined *)0x2);
   local_8._0_1_ = 1;
   (**(code **)(*piVar3 + 8))();
   local_8 = (uint)local_8._1_3_ << 8;
@@ -76908,7 +76727,7 @@ void __fastcall CGaming::CGaming_dtor(undefined4 *param_1)
   FUN_0041a270((CGaming *)param_1,param_1 + 0xcb);
   FUN_0041a270((CGaming *)param_1,param_1 + 0xca);
   FUN_0041a270((CGaming *)param_1,param_1 + 0xc9);
-  FUN_00419d20(param_1);
+  CGaming_ClearAllEntities(param_1);
   _Globals::FUN_00417ce0((int)param_1);
   _Globals::FUN_0043a590();
   if (DAT_004b3730 != (int *)0x0) {
@@ -76967,7 +76786,7 @@ void __fastcall CGaming::CGaming_dtor(undefined4 *param_1)
 
 
 
-void __thiscall _Globals::FUN_0041ba60(void *this,undefined4 param_1,uint param_2)
+void __thiscall _Globals::CGaming_SetMusicAndSoundBank(void *this,undefined4 param_1,uint param_2)
 
 {
   undefined4 uVar1;
@@ -77005,7 +76824,7 @@ void __thiscall CGaming::FUN_0041bab0(CGaming *this,void *param_1)
 
 
 
-undefined4 __cdecl _Globals::FUN_0041bb00(int param_1)
+undefined4 __cdecl _Globals::CLevelScript_SetMusic(int param_1)
 
 {
   undefined4 uVar1;
@@ -77013,7 +76832,7 @@ undefined4 __cdecl _Globals::FUN_0041bb00(int param_1)
   
   uVar1 = CDSScript::ReadI32(param_1);
   uVar2 = CDSScript::ReadI32(param_1);
-  FUN_0041ba60(*(void **)(param_1 + 0x458),uVar1,uVar2);
+  CGaming_SetMusicAndSoundBank(*(void **)(param_1 + 0x458),uVar1,uVar2);
   return 0;
 }
 
@@ -77425,7 +77244,7 @@ void __fastcall CMina::FUN_0041c0d0(int param_1)
 
 
 
-void __thiscall CGaming::FUN_0041c140(CGaming *this,char param_1)
+void __thiscall CGaming::CGaming_OnResumeOrStartGame(CGaming *this,char param_1)
 
 {
   void *this_00;
@@ -77440,14 +77259,14 @@ void __thiscall CGaming::FUN_0041c140(CGaming *this,char param_1)
   CBulanci::FUN_00438340();
   if (param_1 == '\0') {
     if (*(void **)(this + 0x354) != (void *)0x0) {
-      _Globals::FUN_0043a4a0(*(void **)(this + 0x354),1);
+      _Globals::CDSAudioPlayer_Stop(*(void **)(this + 0x354),1);
       return;
     }
   }
   else {
     CDSScript::CallExport(*(CDSScript **)(this + 0x344),10,0,(void *)0x0);
     if (*(void **)(this + 0x354) != (void *)0x0) {
-      _Globals::FUN_0043a9d0(*(void **)(this + 0x354),1);
+      _Globals::CDSAudioPlayer_Play(*(void **)(this + 0x354),1);
     }
     iVar2 = *(int *)(this + 0x84);
     if ((*(char *)(iVar2 + 0x36) == '\0') && (*(char *)(iVar2 + 0x19c) == '\x01')) {
@@ -77566,15 +77385,15 @@ void __fastcall CGaming::FUN_0041c290(void *param_1)
       this = (void *)piVar2[1];
       piVar2 = (int *)((int)this + 8);
       *piVar2 = *piVar2 + 1;
-      _Globals::FUN_0043a4a0(this,0);
+      _Globals::CDSAudioPlayer_Stop(this,0);
       dStack_128 = g_dwElapsedMs;
     }
   }
   *(undefined4 *)((int)g_pApp + 0x4ac) = 1;
   _Globals::FUN_0042c700();
-  _Globals::FUN_0043a9d0(*(void **)((int)param_1 + 0x358),1);
+  _Globals::CDSAudioPlayer_Play(*(void **)((int)param_1 + 0x358),1);
   _Globals::CDSView_DoModal(*(void **)((int)param_1 + 0x334),(void *)0x0);
-  _Globals::FUN_0043a4a0(*(void **)((int)param_1 + 0x358),1);
+  _Globals::CDSAudioPlayer_Stop(*(void **)((int)param_1 + 0x358),1);
   *(undefined4 *)((int)g_pApp + 0x4ac) = 0;
   _Globals::FUN_0042c700();
   iVar3 = local_130;
@@ -77911,7 +77730,7 @@ undefined4 * __thiscall CMina::CMina_Ctor(CMina *this,int param_1)
   ExceptionList = &local_c;
   CAnim::FUN_00419870((undefined4 *)this);
   local_4 = (int *)0x0;
-  CDSUpdatedItem::FUN_0042f060((int)(this + 0xf0));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(this + 0xf0));
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -77971,7 +77790,7 @@ undefined4 * __thiscall CMina::InitMine(CMina *this,int param_1)
   ExceptionList = &local_c;
   CAnim::FUN_00419870((undefined4 *)this);
   local_4 = (int *)0x0;
-  CDSUpdatedItem::FUN_0042f060((int)(this + 0xf0));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(this + 0xf0));
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -78069,7 +77888,7 @@ CExplosion::CExplosion_Ctor(CExplosion *this,undefined4 param_1,CExplosion param
   cVar8 = '\x01';
   uVar2 = 0;
   iVar4 = _Globals::FUN_00422500((int *)pCVar1);
-  piVar5 = (int *)_Globals::FUN_00422430((undefined *)0x1,iVar3,1,iVar4,uVar2,cVar8);
+  piVar5 = (int *)_Globals::TriggerBankSample((undefined *)0x1,iVar3,1,iVar4,uVar2,cVar8);
   _Globals::FUN_004223c0(piVar5,uVar9);
   _Globals::FUN_00418fe0(this,0);
   local_4 = (int *)((uint)local_4 & 0xffffff00);
@@ -78200,7 +78019,7 @@ CBulanek::FUN_0041d090(CBulanek *this,int *param_1,int param_2,int param_3,char 
   _Globals::FUN_00407e20(this + 0x2f8,(int)piVar1,(undefined *)0x0,1);
   FUN_0041a390(this,piVar1,-1);
   if (param_2 == -1) {
-    uVar3 = _Globals::FUN_0041a140(this,piVar1);
+    uVar3 = _Globals::CGaming_RespawnPlayerAtSafeLocation(this,piVar1);
   }
   else {
     (**(code **)(*piVar1 + 0x70))(&local_3c);
@@ -78237,7 +78056,7 @@ CGame::CGame_OnNetMsg_t18_PlaceWorldPickup(CGame *this,uint param_1,undefined4 p
   
   CGame_DestroyObjectAtSlot(this,(byte)param_2);
   this_00 = (CBulanek *)_Globals::CGame_SpawnPickupObject(this,param_1,param_2);
-  CBulanek::FUN_0042cc80(this_00,*param_3,param_3[1]);
+  CBulanek::CDSView__SetPosition(this_00,*param_3,param_3[1]);
   CBulanek::FUN_0041a390((CBulanek *)this,(int *)this_00,'\x01');
   return;
 }
@@ -78315,7 +78134,7 @@ void __fastcall CBulanci::CGaming_LoadLevelAssetAndMusic(void *param_1)
       CLoadingLevel::CLoadingLevel_ctor((undefined4 *)local_40ac);
       local_4019 = 0;
       local_400c = CONCAT31(local_400c._1_3_,5);
-      _Globals::FUN_0042d0b0(g_pApp,(int *)local_40ac,0);
+      _Globals::CDSView__AddChild(g_pApp,(int *)local_40ac,0);
       local_4019 = 1;
       _Globals::CDSApp_FrameBody(g_pApp);
       this = (void *)CMenu::FUN_00413b20((CMenu *)((int)g_pApp + 0x284),
@@ -78455,14 +78274,15 @@ void __thiscall CGaming::CGaming_OnCmd(CGaming *this,ushort param_1,int param_2)
       CGame_NetSendRoundResult_t0b(*(CGaming **)(this + 0x84),cVar3,param_1);
       *(int *)(this + 0x338) = *(int *)(this + 0x338) + 1;
       uVar4 = 0;
-      piVar2 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,0x11,0,(uint)(this + 0x10),'\x01');
+      piVar2 = (int *)_Globals::TriggerBankSample
+                                ((undefined *)0x1,0,0x11,0,(uint)(this + 0x10),'\x01');
       _Globals::FUN_004223c0(piVar2,uVar4);
       bVar1 = FUN_004168e0((int)this);
       while (!bVar1) {
         _Globals::CDSApp_PumpTick(g_pApp);
         bVar1 = FUN_004168e0((int)this);
       }
-      _Globals::FUN_0042c3c0(this,*(undefined2 *)(this + 0x364));
+      _Globals::CDSView__EndModal(this,*(undefined2 *)(this + 0x364));
       return;
     }
     if (param_1 == 0x8004) {
@@ -78697,7 +78517,7 @@ undefined4 * __thiscall CWeapon::FUN_0041dae0(CWeapon *this,byte param_1)
 
 
 
-uint __thiscall CBulanek::FUN_0041db00(CBulanek *this,int param_1,int param_2,char param_3)
+uint __thiscall CBulanek::CBulanek_OnTakeDamage(CBulanek *this,int param_1,int param_2,char param_3)
 
 {
   CBulanek *this_00;
@@ -78721,7 +78541,7 @@ uint __thiscall CBulanek::FUN_0041db00(CBulanek *this,int param_1,int param_2,ch
       cVar6 = '\x01';
       uVar5 = 0;
       iVar3 = _Globals::FUN_00422500((int *)(this + 0x20));
-      piVar4 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,0x24,iVar3,uVar5,cVar6);
+      piVar4 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x24,iVar3,uVar5,cVar6);
       _Globals::FUN_004223c0(piVar4,uVar7);
       uVar2 = FUN_00416490((int)this);
       if ((char)uVar2 != '\0') {
@@ -78839,10 +78659,11 @@ void __thiscall _Globals::FUN_0041dd70(void *this,int param_1,void *param_2)
   }
   local_14[0] = 0;
   local_14[1] = 0;
-  uVar3 = FUN_0041a0f0(param_2,bVar1,local_14);
+  uVar3 = CGaming_TryGetPlayerCoords(param_2,bVar1,local_14);
   if ((char)uVar3 != '\0') {
-    FUN_00417e80(param_2,bVar1,*(byte *)((int)this + 0xa5),*(undefined1 *)((int)this + 0xa4),
-                 local_14,'\x01');
+    CGaming_OnSlotPlacementEvent
+              (param_2,bVar1,*(byte *)((int)this + 0xa5),*(undefined1 *)((int)this + 0xa4),local_14,
+               '\x01');
   }
   ExceptionList = local_c;
   return;
@@ -78976,7 +78797,7 @@ undefined1 * __fastcall _Globals::ExplodeMine(int *param_1)
   }
   ExceptionList = &local_c;
   *(undefined1 *)(param_1 + 0x45) = 0;
-  FUN_0042d040(param_1);
+  CDSView__Hide(param_1);
   FUN_004165b0((int)param_1);
   uVar1 = 0xff;
   if (param_1[0x42] != 0) {
@@ -79169,8 +78990,36 @@ uint __cdecl _Globals::FUN_0041e3e0(int param_1)
   if (this != (CBulanek *)0x0) {
     iVar2 = (*(code *)**(undefined4 **)this)();
     if (*(int *)(iVar2 + 8) == 0x7ec) {
-      uVar3 = CBulanek::FUN_0041db00(this,-1,-1,'\0');
+      uVar3 = CBulanek::CBulanek_OnTakeDamage(this,-1,-1,'\0');
       return uVar3 & 0xff;
+    }
+  }
+  return 0;
+}
+
+
+
+uint __cdecl FUN_0041e430(int param_1)
+
+{
+  byte bVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  CBulanek *this;
+  int iVar5;
+  uint uVar6;
+  
+  bVar1 = CDSScript::ReadSubExpr(param_1);
+  iVar2 = CDSScript::ReadSubExpr(param_1);
+  iVar3 = CDSScript::ReadSubExpr(param_1);
+  iVar4 = CDSScript::ReadSubExpr(param_1);
+  this = (CBulanek *)CGaming::CGaming_GetObjectAtSlotSafe(*(CGaming **)(param_1 + 0x458),bVar1);
+  if (this != (CBulanek *)0x0) {
+    iVar5 = (*(code *)**(undefined4 **)this)();
+    if (*(int *)(iVar5 + 8) == 0x7ec) {
+      uVar6 = CBulanek::CBulanek_OnTakeDamage(this,iVar2,iVar3,iVar4 != 0);
+      return uVar6 & 0xff;
     }
   }
   return 0;
@@ -79210,7 +79059,7 @@ CGameView::FUN_0041e4b0
   local_c = ExceptionList;
   ExceptionList = &local_c;
   local_10 = this;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -79221,7 +79070,7 @@ CGameView::FUN_0041e4b0
   *(undefined4 *)(this + 0x80) = 0;
   _Globals::FUN_00416590((int)this);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(this + 0x88));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(this + 0x88));
   *(undefined ***)(this + 0xa0) = ODSImage::vftable;
   local_4._0_1_ = 1;
   *(undefined ***)this = CBulanek::vftable;
@@ -79505,7 +79354,7 @@ void __thiscall _Globals::CGame_ApplyPickup(void *this,byte param_1,byte param_2
       if (param_1 == 0xff) {
         param_1 = *(byte *)(piVar3 + 7);
       }
-      CGaming::FUN_00419ca0(this_00,piVar3);
+      CGaming::CGaming_UnregisterAndRemoveObject(this_00,piVar3);
       (**(code **)(*piVar3 + 8))();
     }
   }
@@ -79540,7 +79389,7 @@ LAB_0041ec21:
   if ((param_1 == 1) && (*(int *)(*(int *)((int)this + 0x84) + 0x368) == 2)) {
     *(undefined1 *)((int)this + 0x16b) = 1;
   }
-  FUN_004179c0(param_1,(int *)((int)this + 0x20));
+  CBulanek_PlayItemPickupSound(param_1,(int *)((int)this + 0x20));
   return;
 }
 
@@ -79654,7 +79503,7 @@ CShot::CShot_Ctor(CShot *this,int *param_1,void *param_2,byte param_3,CShot para
   puStack_8 = &LAB_004778e6;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(undefined ***)this = CGameView::vftable;
   *(undefined ***)(this + 4) = CGameView::vftable;
   *(undefined ***)(this + 0x10) = CGameView::vftable;
@@ -79666,7 +79515,7 @@ CShot::CShot_Ctor(CShot *this,int *param_1,void *param_2,byte param_3,CShot para
   _Globals::FUN_00416590((int)this);
   this_00 = this + 0x88;
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)this_00);
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)this_00);
   local_4 = CONCAT31(local_4._1_3_,1);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
@@ -79700,7 +79549,7 @@ CShot::CShot_Ctor(CShot *this,int *param_1,void *param_2,byte param_3,CShot para
   if (piVar3 != (int *)0x0) {
     _Globals::FUN_0041dd70(this,(int)piVar3,param_2);
     this[0xa8] = (CShot)0x1;
-    _Globals::FUN_0042d040((int *)this);
+    _Globals::CDSView__Hide((int *)this);
     _Globals::FUN_0042f300(this_00,0);
   }
   if (2 < (byte)this[0xa6]) {
@@ -79802,7 +79651,7 @@ void __thiscall CGaming::CGaming_OnSchedulerTimer(CGaming *this,int param_1)
 
 
 
-void __thiscall _Globals::FUN_0041f0c0(void *this,int *param_1)
+void __thiscall _Globals::CGaming_TickPlayerCollisions(void *this,int *param_1)
 
 {
   uint uVar1;
@@ -79825,19 +79674,19 @@ void __thiscall _Globals::FUN_0041f0c0(void *this,int *param_1)
     if (*(char *)(*(int *)((int)this + 0x84) + 0xd8) == '\x01') {
       uVar1 = FUN_00419530(param_1,*(uint *)((int)this + 0x324));
       if ((char)uVar1 != '\0') {
-        FUN_0041a020(this,param_1,*(int **)((int)this + 0x324),0);
+        CGaming_OnPlayerCollectItem(this,param_1,*(int **)((int)this + 0x324),0);
       }
       uVar1 = FUN_00419530(param_1,*(uint *)((int)this + 0x330));
       if ((char)uVar1 != '\0') {
-        FUN_0041a020(this,param_1,*(int **)((int)this + 0x330),3);
+        CGaming_OnPlayerCollectItem(this,param_1,*(int **)((int)this + 0x330),3);
       }
       uVar1 = FUN_00419530(param_1,*(uint *)((int)this + 0x328));
       if ((char)uVar1 != '\0') {
-        FUN_0041a020(this,param_1,*(int **)((int)this + 0x328),1);
+        CGaming_OnPlayerCollectItem(this,param_1,*(int **)((int)this + 0x328),1);
       }
       uVar1 = FUN_00419530(param_1,*(uint *)((int)this + 0x32c));
       if ((char)uVar1 != '\0') {
-        FUN_0041a020(this,param_1,*(int **)((int)this + 0x32c),2);
+        CGaming_OnPlayerCollectItem(this,param_1,*(int **)((int)this + 0x32c),2);
       }
     }
   }
@@ -79874,7 +79723,7 @@ void __thiscall CGame::FUN_0041f210(CGame *this,byte param_1,byte param_2)
 
 
 void __thiscall
-_Globals::FUN_0041f230
+_Globals::CGaming_SpawnBulletAndPlaySound
           (void *this,int *param_1,byte param_2,undefined1 param_3,byte param_4,int *param_5,
           int param_6)
 
@@ -79895,7 +79744,7 @@ _Globals::FUN_0041f230
   puStack_8 = &LAB_0047791b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  FUN_0042f390((void *)((int)this + 0x10),0x200,0xf4,0,0);
+  CDSView__PostMessage((void *)((int)this + 0x10),0x200,0xf4,0,0);
   if ((param_4 & 3) != 0) {
     this_00 = (CShot *)FUN_00447c42(0xb0);
     local_4 = (void *)0x0;
@@ -79927,7 +79776,7 @@ _Globals::FUN_0041f230
   cVar6 = '\x01';
   uVar5 = 0;
   iVar3 = FUN_00422500(param_5);
-  piVar2 = (int *)FUN_00422430((undefined *)0x1,0,iVar4,iVar3,uVar5,cVar6);
+  piVar2 = (int *)TriggerBankSample((undefined *)0x1,0,iVar4,iVar3,uVar5,cVar6);
   FUN_004223c0(piVar2,uVar7);
   ExceptionList = local_4;
   return;
@@ -79935,7 +79784,7 @@ _Globals::FUN_0041f230
 
 
 
-void __thiscall _Globals::FUN_0041f350(void *this,int *param_1)
+void __thiscall _Globals::CGaming_TickRoundStateAndScoring(void *this,int *param_1)
 
 {
   int iVar1;
@@ -79957,7 +79806,7 @@ void __thiscall _Globals::FUN_0041f350(void *this,int *param_1)
   puStack_8 = &LAB_00477948;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  FUN_0041f0c0(this,param_1);
+  CGaming_TickPlayerCollisions(this,param_1);
   bVar4 = *(byte *)(param_1 + 0x1c);
   FUN_004128a0(*(void **)((int)this + 0x84),bVar4,param_1[0x4f]);
   cVar2 = FUN_00412660(*(void **)((int)this + 0x84),&local_14);
@@ -80000,7 +79849,7 @@ void __thiscall _Globals::FUN_0041f350(void *this,int *param_1)
     }
     if ((*(char *)(*(int *)((int)this + 0x84) + 0x36) == '\0') &&
        ((uint)*(byte *)(*(int *)((int)this + 0x84) + 0xd8) <= (int)param_1 + 1U)) {
-      FUN_0042f390((void *)((int)this + 0x10),0x100,0x80cc,1,0);
+      CDSView__PostMessage((void *)((int)this + 0x10),0x100,0x80cc,1,0);
     }
   }
   ExceptionList = local_c;
@@ -80010,7 +79859,7 @@ void __thiscall _Globals::FUN_0041f350(void *this,int *param_1)
 
 
 void __thiscall
-_Globals::FUN_0041f500
+_Globals::CGaming_SpawnAndInitializePlayer
           (void *this,byte param_1,undefined4 *param_2,int param_3,int param_4,int param_5)
 
 {
@@ -80041,7 +79890,7 @@ _Globals::FUN_0041f500
   local_4 = 0xffffffff;
   CBulanek::FUN_0041a390(this,(int *)this_01,-1);
   CGaming_RegisterObjectAtSlot(this,(int)this_01,param_1);
-  FUN_0041a140(this_02,(int *)this_01);
+  CGaming_RespawnPlayerAtSafeLocation(this_02,(int *)this_01);
   cVar2 = '\0';
   iVar1 = Runtime::MSVCRT::_rand();
   CBulanek::FUN_004197b0(this_01,(int)(iVar1 * 4 + (iVar1 * 4 >> 0x1f & 0x7fffU)) >> 0xf,cVar2);
@@ -80061,7 +79910,7 @@ _Globals::FUN_0041f5d0(void *this,undefined4 *param_1,int param_2,int param_3,in
   iVar1 = FUN_00416970((int)this);
   if (iVar1 < 4) {
     CBulanek::FUN_004168c0(this,1);
-    FUN_0041f500(this,extraout_DL + 0x24,param_1,param_2,param_3,param_4);
+    CGaming_SpawnAndInitializePlayer(this,extraout_DL + 0x24,param_1,param_2,param_3,param_4);
   }
   return;
 }
@@ -80095,7 +79944,7 @@ undefined4 __cdecl _Globals::FUN_0041f610(int param_1)
     piVar5 = (int *)(iVar4 + 0x20);
     uVar6 = extraout_DL;
   }
-  FUN_0041f230(*(void **)(param_1 + 0x458),&local_8,bVar1,uVar6,bVar3,piVar5,0);
+  CGaming_SpawnBulletAndPlaySound(*(void **)(param_1 + 0x458),&local_8,bVar1,uVar6,bVar3,piVar5,0);
   return 0;
 }
 
@@ -80130,7 +79979,8 @@ undefined4 __cdecl _Globals::FUN_0041f6a0(int param_1)
     piVar6 = (int *)(iVar5 + 0x20);
     uVar7 = extraout_DL;
   }
-  FUN_0041f230(*(void **)(param_1 + 0x458),&local_8,bVar1,uVar7,bVar3,piVar6,iVar4);
+  CGaming_SpawnBulletAndPlaySound
+            (*(void **)(param_1 + 0x458),&local_8,bVar1,uVar7,bVar3,piVar6,iVar4);
   return 0;
 }
 
@@ -80154,7 +80004,7 @@ undefined4 __cdecl _Globals::FUN_0041f730(int param_1)
 
 
 
-void __thiscall _Globals::FUN_0041f770(void *this,char param_1,byte param_2,int *param_3)
+void __thiscall _Globals::CGaming_RespawnPlayer(void *this,char param_1,byte param_2,int *param_3)
 
 {
   int iVar1;
@@ -80166,16 +80016,18 @@ void __thiscall _Globals::FUN_0041f770(void *this,char param_1,byte param_2,int 
   undefined1 uVar7;
   
   if (*(int **)((int)this + 0xfc) != (int *)0x0) {
-    CGaming::FUN_00419ca0(*(CGaming **)((int)this + 0x84),*(int **)((int)this + 0xfc));
+    CGaming::CGaming_UnregisterAndRemoveObject
+              (*(CGaming **)((int)this + 0x84),*(int **)((int)this + 0xfc));
     (**(code **)(**(int **)((int)this + 0xfc) + 8))();
     *(undefined4 *)((int)this + 0xfc) = 0;
   }
   if (*(int **)((int)this + 0x100) != (int *)0x0) {
-    CGaming::FUN_00419ca0(*(CGaming **)((int)this + 0x84),*(int **)((int)this + 0x100));
+    CGaming::CGaming_UnregisterAndRemoveObject
+              (*(CGaming **)((int)this + 0x84),*(int **)((int)this + 0x100));
     (**(code **)(**(int **)((int)this + 0x100) + 8))();
     *(undefined4 *)((int)this + 0x100) = 0;
   }
-  FUN_0042c990(this);
+  CDSView__Show(this);
   *(undefined1 *)((int)this + 0x69) = 1;
   if (param_1 == '\0') {
     if (3 < *(byte *)((int)this + 0x70)) {
@@ -80183,7 +80035,7 @@ void __thiscall _Globals::FUN_0041f770(void *this,char param_1,byte param_2,int 
       CBulanek::CBulanek_ApplyPickupEffect
                 (this,(int)(iVar1 * 0x65 + (iVar1 * 0x65 >> 0x1f & 0x7fffU)) >> 0xf < 10);
     }
-    FUN_0041a140(*(void **)((int)this + 0x84),this);
+    CGaming_RespawnPlayerAtSafeLocation(*(void **)((int)this + 0x84),this);
     CBulanek::FUN_004197b0(this,(uint)param_2,'\0');
     CGame_NetSendHit_t10
               (*(void **)((int)this + 0xf4),*(undefined1 *)((int)this + 0x70),param_2,
@@ -80191,15 +80043,15 @@ void __thiscall _Globals::FUN_0041f770(void *this,char param_1,byte param_2,int 
     FUN_00417260((int)this);
   }
   else {
-    CBulanek::FUN_0042cc80(this,*param_3,param_3[1]);
+    CBulanek::CDSView__SetPosition(this,*param_3,param_3[1]);
     CBulanek::FUN_004197b0(this,(uint)param_2,'\0');
   }
   uVar7 = 0;
   cVar6 = '\x01';
   uVar5 = 0;
   iVar1 = FUN_00422500((int *)((int)this + 0x20));
-  iVar2 = FUN_00416670((int)this);
-  piVar3 = (int *)FUN_00422430((undefined *)0x1,0,iVar2,iVar1,uVar5,cVar6);
+  iVar2 = CBulanek_GetSpawnQuipSlot((int)this);
+  piVar3 = (int *)TriggerBankSample((undefined *)0x1,0,iVar2,iVar1,uVar5,cVar6);
   FUN_004223c0(piVar3,uVar7);
   if ((0x1f < *(byte *)((int)this + 0x70)) && (*(byte *)((int)this + 0x70) < 0x24)) {
     *(undefined4 *)((int)this + 0x140) = 0;
@@ -80252,7 +80104,7 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
       _Globals::FUN_0042f300(pCVar9,5);
     }
   }
-  _Globals::FUN_0042d040((int *)this);
+  _Globals::CDSView__Hide((int *)this);
   pCVar9 = *(CBulanek **)(this + 0x84);
   this[0x69] = (CBulanek)0x0;
   this[0x144] = (CBulanek)param_1;
@@ -80271,7 +80123,8 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
     cVar2 = '\x01';
     pCVar11 = this + 0x10;
     iVar5 = _Globals::FUN_00422500((int *)(this + 0x20));
-    piVar6 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,iVar10,iVar5,(uint)pCVar11,cVar2);
+    piVar6 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,iVar10,iVar5,(uint)pCVar11,cVar2)
+    ;
     *(int **)(this + 0x16c) = piVar6;
     _Globals::FUN_004223c0(piVar6,0);
   }
@@ -80322,7 +80175,7 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
     cVar2 = cVar2 + -1;
     pCVar9 = pCVar9 + -1;
   } while (cVar2 != '\0');
-  _Globals::FUN_0041f350(*(void **)(this + 0x84),(int *)this);
+  _Globals::CGaming_TickRoundStateAndScoring(*(void **)(this + 0x84),(int *)this);
   ExceptionList = local_4;
   return;
 }
@@ -80341,7 +80194,7 @@ void __thiscall CBulanek::FUN_0041fb90(CBulanek *this,int *param_1)
   
   CBulanci::CDSView_SetRect((CBulanci *)this,param_1);
   if (*(void **)(this + 0x84) != (void *)0x0) {
-    _Globals::FUN_0041f0c0(*(void **)(this + 0x84),(int *)this);
+    _Globals::CGaming_TickPlayerCollisions(*(void **)(this + 0x84),(int *)this);
   }
   if (*(int *)(this + 0x178) != 0) {
     local_10 = 0;
@@ -80391,7 +80244,7 @@ void __fastcall CTeleportPoint::TriggerTeleportFX(int *param_1)
   }
   if (param_1[0x29] != param_1[9]) {
     param_1[0x29] = param_1[9];
-    _Globals::FUN_0041f0c0((void *)param_1[0x21],param_1);
+    _Globals::CGaming_TickPlayerCollisions((void *)param_1[0x21],param_1);
   }
   return;
 }
@@ -80516,7 +80369,7 @@ void __thiscall CTeleportPoint::OnEvent(CTeleportPoint *this,undefined4 param_1,
       iVar1 = *(int *)(this_00 + 0x24);
       iVar2 = *(int *)(this_00 + 0x20);
       this[-0x23] = (CTeleportPoint)0x0;
-      CBulanek::FUN_0042cc80(this_00,iVar2 - unaff_ESI,iVar1 - unaff_EBX);
+      CBulanek::CDSView__SetPosition(this_00,iVar2 - unaff_ESI,iVar1 - unaff_EBX);
       TriggerTeleportFX(*(int **)(this + 100));
     }
   }
@@ -80560,9 +80413,9 @@ undefined4 * __thiscall CBulanci::CGaming_ctor(CBulanci *this,int *param_1)
   local_14 = (undefined1 *)&uStack_40;
   ExceptionList = &local_10;
   local_20 = this;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   local_8 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(this + 0x68));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(this + 0x68));
   *(undefined ***)this = CGaming::vftable;
   *(undefined ***)(this + 4) = CGaming::vftable;
   *(undefined ***)(this + 0x10) = CGaming::vftable;
@@ -80615,7 +80468,7 @@ undefined4 * __thiscall CBulanci::CGaming_ctor(CBulanci *this,int *param_1)
   }
   piVar7 = *(int **)((int)g_pApp + 0x70);
   *(undefined4 *)(this + 0x338) = 0;
-  pvVar1 = FUN_00422550((undefined *)0x2,0x1014b,0,0,'\0');
+  pvVar1 = CDSAudioPlayer_CreateFromResource((undefined *)0x2,0x1014b,0,0,'\0');
   if (*(int **)(this + 0x358) != (int *)0x0) {
     (**(code **)(**(int **)(this + 0x358) + 8))();
   }
@@ -80685,7 +80538,7 @@ undefined4 * __thiscall CBulanci::CGaming_ctor(CBulanci *this,int *param_1)
     _Globals::Scheduler_RegisterEventSlot(this + 0x68,0,0,6);
     FUN_00417c80(this,0);
   }
-  _Globals::FUN_0042d0b0(this,*(int **)(this + 0x31c),0);
+  _Globals::CDSView__AddChild(this,*(int **)(this + 0x31c),0);
   pCVar6 = (CBulanci *)_Globals::FUN_00447c42(0xfc);
   local_8._0_1_ = 0x10;
   if (pCVar6 == (CBulanci *)0x0) {
@@ -80696,7 +80549,7 @@ undefined4 * __thiscall CBulanci::CGaming_ctor(CBulanci *this,int *param_1)
   }
   local_8 = CONCAT31(local_8._1_3_,0xf);
   *(int **)(this + 800) = piVar7;
-  _Globals::FUN_0042d0b0(this,piVar7,0);
+  _Globals::CDSView__AddChild(this,piVar7,0);
   param_1 = (int *)0x0;
   while ((byte)param_1 < *(byte *)(*(int *)(this + 0x84) + 0xd8)) {
     pvVar1 = (void *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,(byte)param_1);
@@ -80714,7 +80567,7 @@ undefined4 * __thiscall CBulanci::CGaming_ctor(CBulanci *this,int *param_1)
   }
   local_8 = CONCAT31(local_8._1_3_,0xd);
   *(int **)(this + 0x334) = piVar7;
-  _Globals::FUN_0042d0b0(this,piVar7,0);
+  _Globals::CDSView__AddChild(this,piVar7,0);
   ExceptionList = local_10;
   return (undefined4 *)this;
 }
@@ -80744,7 +80597,7 @@ void __thiscall CGaming::FUN_00420480(CGaming *this,int *param_1)
   
   piVar2 = (int *)0x0;
   iVar1 = Runtime::MSVCRT::_rand();
-  _Globals::FUN_0041f770
+  _Globals::CGaming_RespawnPlayer
             (param_1,'\0',(byte)((int)(iVar1 * 4 + (iVar1 * 4 >> 0x1f & 0x7fffU)) >> 0xf),piVar2);
   FUN_0041b5a0(this,param_1);
   if (((DAT_004b372c == '\0') && (0x1f < *(byte *)(param_1 + 0x1c))) &&
@@ -80772,7 +80625,7 @@ void __thiscall CGame::FUN_00420510(CGame *this,byte param_1,byte param_2,int *p
   
   cVar1 = '\x01';
   this_00 = (void *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,param_1);
-  _Globals::FUN_0041f770(this_00,cVar1,param_2,param_3);
+  _Globals::CGaming_RespawnPlayer(this_00,cVar1,param_2,param_3);
   return;
 }
 
@@ -80781,7 +80634,7 @@ void __thiscall CGame::FUN_00420510(CGame *this,byte param_1,byte param_2,int *p
 void __thiscall _Globals::FUN_00420530(void *this,byte param_1)
 
 {
-  FUN_0041f500(this,param_1,(undefined4 *)0xffffffff,1,100,0);
+  CGaming_SpawnAndInitializePlayer(this,param_1,(undefined4 *)0xffffffff,1,100,0);
   return;
 }
 
@@ -80800,9 +80653,9 @@ void __fastcall _Globals::FUN_00420550(void *param_1)
     FUN_00420530(param_1,(char)iVar2 + 0x20);
     if (0 < iVar2) {
       piVar1 = (int *)*puVar3;
-      FUN_0042d040(piVar1);
+      CDSView__Hide(piVar1);
       *(undefined1 *)((int)piVar1 + 0x69) = 0;
-      FUN_0041f350(param_1,piVar1);
+      CGaming_TickRoundStateAndScoring(param_1,piVar1);
     }
     iVar2 = iVar2 + 1;
     puVar3 = puVar3 + 1;
@@ -80890,7 +80743,7 @@ CGaming::CGaming_OnCustomEvent(CGaming *this,undefined2 param_1,int *param_2,und
   case 0xe9:
     break;
   case 0xf4:
-    FUN_0041a2a0(this);
+    CGaming_CleanupInactiveBullets(this);
     return;
   case 0xf5:
     FUN_0041b3b0(this,(int)param_2);
@@ -80996,7 +80849,7 @@ void __thiscall CGame::FUN_004209f0(CGame *this,byte param_1,byte param_2,int *p
   
   this_00 = (CBulanek *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,param_1);
   if (param_2 < 4) {
-    CBulanek::FUN_0042cc80(this_00,*param_3,param_3[1]);
+    CBulanek::CDSView__SetPosition(this_00,*param_3,param_3[1]);
     CBulanek::FUN_00420910(this_00,(uint)param_2,'\x01');
     return;
   }
@@ -81006,7 +80859,7 @@ void __thiscall CGame::FUN_004209f0(CGame *this,byte param_1,byte param_2,int *p
   else {
     CBulanek::FUN_004197b0(this_00,param_2 - 8,'\0');
   }
-  CBulanek::FUN_0042cc80(this_00,*param_3,param_3[1]);
+  CBulanek::CDSView__SetPosition(this_00,*param_3,param_3[1]);
   return;
 }
 
@@ -81072,7 +80925,7 @@ void __thiscall CBulanek::FUN_00420b30(CBulanek *this,undefined4 param_1)
       _Globals::FUN_0042f300(this,0);
       uVar4 = _Globals::FUN_00416720((int)(this + -0x88));
       if ((char)uVar4 != '\0') {
-        FUN_00417570(this + -0x88);
+        CBulanek_ResetAmmoAndPlayReload(this + -0x88);
         CGame_NetSendPlayerDie_t11(*(CBulanek **)(this + 0x6c),this[-0x18]);
         return;
       }
@@ -81088,7 +80941,7 @@ void __thiscall CBulanek::FUN_00420b30(CBulanek *this,undefined4 param_1)
   case 2:
     pvVar2 = _Globals::Scheduler_GetEventSlot((void *)(*(int *)(this + 0x70) + 0xc),0);
     if ((*(byte *)((int)pvVar2 + 8) & 1) != 0) {
-      FUN_0041db00(this + -0x88,-1,-1,'\0');
+      CBulanek_OnTakeDamage(this + -0x88,-1,-1,'\0');
       return;
     }
     break;
@@ -81140,7 +80993,7 @@ void __thiscall CBulanek::FUN_00420b30(CBulanek *this,undefined4 param_1)
 
 
 void __thiscall
-CBulanek::FUN_00420d40(CBulanek *this,ushort param_1,undefined4 *param_2,undefined4 *param_3)
+CBulanek::CBulanek_OnEvent(CBulanek *this,ushort param_1,undefined4 *param_2,undefined4 *param_3)
 
 {
   bool bVar1;
@@ -81185,8 +81038,9 @@ CBulanek::FUN_00420d40(CBulanek *this,ushort param_1,undefined4 *param_2,undefin
           pCVar8 = this + 0x10;
           *(undefined4 *)(this + 0x16c) = 0;
           iVar3 = _Globals::FUN_00422500((int *)(this + 0x20));
-          iVar4 = FUN_00416690((int)this);
-          piVar5 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,iVar4,iVar3,(uint)pCVar8,cVar9);
+          iVar4 = CBulanek_GetDelayedQuipSlot((int)this);
+          piVar5 = (int *)_Globals::TriggerBankSample
+                                    ((undefined *)0x1,0,iVar4,iVar3,(uint)pCVar8,cVar9);
           *(int **)(this + 0x174) = piVar5;
           _Globals::FUN_004223c0(piVar5,0);
           return;
@@ -81223,7 +81077,7 @@ CBulanek::FUN_00420d40(CBulanek *this,ushort param_1,undefined4 *param_2,undefin
         *param_3 = 0;
         return;
       case 0xd8:
-        bVar1 = FUN_00417e40(*(CBulanek **)(this + 0x84),(byte)CVar7);
+        bVar1 = CGaming_IsPlayerSlotOccupied(*(CBulanek **)(this + 0x84),(byte)CVar7);
         if (bVar1) {
           *(int *)(this + 0x128) = *(int *)(this + 0x128) + 1;
           if ((byte)CVar7 < 4) {
@@ -81241,8 +81095,9 @@ CBulanek::FUN_00420d40(CBulanek *this,ushort param_1,undefined4 *param_2,undefin
           cVar9 = '\x01';
           pCVar8 = this + 0x10;
           iVar3 = _Globals::FUN_00422500((int *)(this + 0x20));
-          iVar4 = FUN_004166b0((int)this);
-          piVar5 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,iVar4,iVar3,(uint)pCVar8,cVar9);
+          iVar4 = CBulanek_GetHitQuipSlot((int)this);
+          piVar5 = (int *)_Globals::TriggerBankSample
+                                    ((undefined *)0x1,0,iVar4,iVar3,(uint)pCVar8,cVar9);
           *(int **)(this + 0x170) = piVar5;
           _Globals::FUN_004223c0(piVar5,0);
           return;
@@ -81354,7 +81209,7 @@ void __thiscall CWeapon::Fire(CWeapon *this,undefined4 param_1,ushort param_2)
     CBulanek::FUN_0041a390(*(CBulanek **)(this + 0x54),piVar6,'\x01');
     _Globals::FUN_00417500(*(void **)(this + 0x50));
     if (3 < (byte)(*(CBulanek **)(this + 0x50))[0x70]) {
-      CBulanek::FUN_0041db00(*(CBulanek **)(this + 0x50),-1,-1,'\0');
+      CBulanek::CBulanek_OnTakeDamage(*(CBulanek **)(this + 0x50),-1,-1,'\0');
       bVar4 = true;
     }
   }
@@ -81383,8 +81238,8 @@ void __thiscall CWeapon::Fire(CWeapon *this,undefined4 param_1,ushort param_2)
     iVar10 = *(int *)(this + 0x50);
     uVar9 = *(uint *)(iVar10 + 0xd4);
     uVar7 = uVar9 & 0xff;
-    local_14 = *(int *)(&DAT_004829b0 + uVar7 * 8) + *(int *)(iVar10 + 0x20);
-    local_10 = *(int *)(iVar10 + 0x24) + *(int *)(&DAT_004829b4 + uVar7 * 8);
+    local_14 = *(int *)(&LAB_004829ae_2 + uVar7 * 8) + *(int *)(iVar10 + 0x20);
+    local_10 = *(int *)(iVar10 + 0x24) + *(int *)(&LAB_004829ae_6 + uVar7 * 8);
     pCVar8 = (CShot *)_Globals::FUN_00447c42(0xb0);
     local_4 = 2;
     if (pCVar8 == (CShot *)0x0) {
@@ -81406,7 +81261,7 @@ void __thiscall CWeapon::Fire(CWeapon *this,undefined4 param_1,ushort param_2)
       if ((cVar5 == '\0') && (((byte)~*(byte *)(*(int *)(this + 0x54) + 0x44) >> 4 & 1) == 0)) {
         uVar9 = _Globals::FUN_00416720(extraout_ECX);
         if ((char)uVar9 != '\0') {
-          _Globals::FUN_0042f390
+          _Globals::CDSView__PostMessage
                     ((void *)(*(int *)(this + 0x50) + 0x10),0x200,0xd9,(uint)(byte)this[0x60],0);
         }
         if (*(char *)(*(int *)(this + 0x50) + 0x16b) != '\0') {
@@ -81425,7 +81280,7 @@ void __thiscall CWeapon::Fire(CWeapon *this,undefined4 param_1,ushort param_2)
       }
       iVar10 = _Globals::FUN_0040ace0(0,99);
       if (iVar10 < 0x28) {
-        CBulanek::FUN_0041db00(*(CBulanek **)(this + 0x50),-1,-1,'\0');
+        CBulanek::CBulanek_OnTakeDamage(*(CBulanek **)(this + 0x50),-1,-1,'\0');
       }
     }
   }
@@ -81439,7 +81294,7 @@ void __thiscall CDSApp::thunk_FUN_0042c7d0(CDSApp *this,ushort param_1)
 
 {
   if ((param_1 & 0x8000) != 0) {
-    _Globals::FUN_0042c3c0(this,param_1);
+    _Globals::CDSView__EndModal(this,param_1);
   }
   return;
 }
@@ -81621,7 +81476,7 @@ int * __cdecl CHelpHistoryScript::ext_op51_shared(int param_1)
   int *piVar1;
   
   piVar1 = (int *)CDSScript::ReadSubExpr(param_1);
-  _Globals::FUN_0042d0b0(*(void **)(param_1 + 0x440),piVar1,0);
+  _Globals::CDSView__AddChild(*(void **)(param_1 + 0x440),piVar1,0);
   return piVar1;
 }
 
@@ -81769,16 +81624,12 @@ void __cdecl CHelpScript::ext_op45(int param_1)
 void __cdecl CHelpScript::ext_op46(int param_1)
 
 {
-  undefined4 uVar1;
+  short *psVar1;
   undefined4 uVar2;
-  int iVar3;
-  undefined4 uVar4;
-  short *psVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  CStaticText *this;
-  uint uVar8;
-  undefined4 uVar9;
+  CStaticText *pCVar3;
+  undefined4 local_4c;
+  undefined4 uStack_48;
+  undefined4 uStack_44;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -81787,20 +81638,23 @@ void __cdecl CHelpScript::ext_op46(int param_1)
   puStack_8 = &LAB_00477c6b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  uVar1 = CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
+  psVar1 = (short *)CDSScript::ReadSubExpr(param_1);
   uVar2 = CDSScript::ReadSubExpr(param_1);
-  iVar3 = CDSScript::ReadSubExpr(param_1);
-  uVar4 = CDSScript::ReadSubExpr(param_1);
-  psVar5 = (short *)CDSScript::ReadSubExpr(param_1);
-  uVar6 = CDSScript::ReadSubExpr(param_1);
-  uVar7 = CDSScript::ReadI32(param_1);
-  this = (CStaticText *)_Globals::FUN_00447c42(0x98);
+  CDSScript::ReadI32(param_1);
+  uStack_44 = 0x421a7e;
+  pCVar3 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4 = 0;
-  if (this != (CStaticText *)0x0) {
-    uVar8 = CDSScript::ReadSubExpr(param_1);
-    uVar9 = 0;
-    CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffb4,psVar5);
-    CStaticText::CStaticText_BuildAt(this,uVar1,uVar2,iVar3,uVar4,uVar9,uVar6,uVar8,uVar7);
+  if (pCVar3 != (CStaticText *)0x0) {
+    uStack_44 = 0x421a9d;
+    uStack_44 = CDSScript::ReadSubExpr(param_1);
+    local_4c = 0;
+    uStack_48 = uVar2;
+    CBulanci::FUN_0042d510((CBulanci *)&local_4c,psVar1);
+    CStaticText::CStaticText_BuildAt(pCVar3);
   }
   ExceptionList = local_c;
   return;
@@ -81811,15 +81665,13 @@ void __cdecl CHelpScript::ext_op46(int param_1)
 void __cdecl CHelpScript::ext_op52(int param_1)
 
 {
-  undefined2 uVar1;
-  int iVar2;
-  short *psVar3;
-  uint uVar4;
-  CButton *this;
-  CBulanci CVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 *puVar8;
+  short *psVar1;
+  uint uVar2;
+  CButton *pCVar3;
+  undefined4 local_38;
+  uint uStack_34;
+  undefined4 uStack_30;
+  undefined4 uStack_2c;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -81828,20 +81680,20 @@ void __cdecl CHelpScript::ext_op52(int param_1)
   puStack_8 = &LAB_00477c9b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  iVar2 = CDSScript::ReadSubExpr(param_1);
-  uVar1 = CDSScript::ReadSubExpr(param_1);
-  psVar3 = (short *)CDSScript::ReadSubExpr(param_1);
-  uVar4 = CDSScript::ReadSubExpr(param_1);
-  uVar4 = uVar4 & 0xffff;
-  this = (CButton *)_Globals::FUN_00447c42(0x98);
+  CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
+  psVar1 = (short *)CDSScript::ReadSubExpr(param_1);
+  uVar2 = CDSScript::ReadSubExpr(param_1);
+  uStack_2c = 0x421b4c;
+  pCVar3 = (CButton *)_Globals::FUN_00447c42(0x98);
   local_4 = 0;
-  if (this != (CButton *)0x0) {
-    puVar8 = (undefined4 *)0x0;
-    uVar7 = 0x14;
-    uVar6 = 0;
-    CVar5 = (CBulanci)0x0;
-    CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffc8,psVar3);
-    CButton::CButton_BuildAt(this,iVar2,uVar1,CVar5,uVar4,uVar6,uVar7,puVar8);
+  if (pCVar3 != (CButton *)0x0) {
+    uStack_2c = 0x14;
+    uStack_30 = 0;
+    local_38 = 0;
+    uStack_34 = uVar2 & 0xffff;
+    CBulanci::FUN_0042d510((CBulanci *)&local_38,psVar1);
+    CButton::CButton_BuildAt(pCVar3);
   }
   ExceptionList = local_c;
   return;
@@ -81939,7 +81791,7 @@ void __thiscall CHelpDlg::FUN_00421c10(CHelpDlg *this,int param_1)
       _Globals::FUN_00422620(*(void **)(this + 0x88),puVar3);
       param_1 = 1;
       CDSScript::CallExport(*(CDSScript **)(this + 0x88),0,1,&param_1);
-      _Globals::FUN_0042d0b0(this,*(int **)(this + 0x84),*(int *)(this + 0x8c));
+      _Globals::CDSView__AddChild(this,*(int **)(this + 0x84),*(int *)(this + 0x8c));
     }
     iVar5 = 4;
     pCVar4 = this + 0x9c;
@@ -82039,7 +81891,7 @@ undefined4 * __fastcall CHelpDlg::FUN_00421e40(undefined4 *param_1)
   }
   local_4._0_1_ = 2;
   param_1[0x23] = piVar4;
-  _Globals::FUN_0042d0b0(param_1,piVar4,0);
+  _Globals::CDSView__AddChild(param_1,piVar4,0);
   pCVar3 = (CIcon *)_Globals::FUN_00447c42(0x78);
   local_4._0_1_ = 4;
   if (pCVar3 == (CIcon *)0x0) {
@@ -82050,7 +81902,7 @@ undefined4 * __fastcall CHelpDlg::FUN_00421e40(undefined4 *param_1)
   }
   local_4._0_1_ = 2;
   param_1[0x24] = piVar4;
-  _Globals::FUN_0042d0b0(param_1,piVar4,0);
+  _Globals::CDSView__AddChild(param_1,piVar4,0);
   pCVar3 = (CIcon *)_Globals::FUN_00447c42(0x78);
   local_4._0_1_ = 5;
   if (pCVar3 == (CIcon *)0x0) {
@@ -82061,7 +81913,7 @@ undefined4 * __fastcall CHelpDlg::FUN_00421e40(undefined4 *param_1)
   }
   local_4._0_1_ = 2;
   param_1[0x25] = piVar4;
-  _Globals::FUN_0042d0b0(param_1,piVar4,0);
+  _Globals::CDSView__AddChild(param_1,piVar4,0);
   pCVar3 = (CIcon *)_Globals::FUN_00447c42(0x78);
   local_4._0_1_ = 6;
   if (pCVar3 == (CIcon *)0x0) {
@@ -82072,7 +81924,7 @@ undefined4 * __fastcall CHelpDlg::FUN_00421e40(undefined4 *param_1)
   }
   local_4 = CONCAT31(local_4._1_3_,2);
   param_1[0x26] = piVar4;
-  _Globals::FUN_0042d0b0(param_1,piVar4,0);
+  _Globals::CDSView__AddChild(param_1,piVar4,0);
   FUN_00421c10((CHelpDlg *)param_1,0);
   ExceptionList = local_c;
   return param_1;
@@ -82192,7 +82044,7 @@ undefined4 * __cdecl CHelpScript::ext_op47(int param_1)
     puVar6 = (undefined4 *)0x0;
   }
   else {
-    puVar6 = CDSBitmap::FUN_004393d0(this_00,uVar4,uStack_18,piVar2);
+    puVar6 = CDSBitmap::CDSBitmap_ctor(this_00,uVar4,uStack_18,piVar2);
   }
   local_c = (void *)0xffffffff;
   if (piVar2 != (int *)0x0) {
@@ -82249,7 +82101,8 @@ undefined4 * __thiscall CHelpDlg::FUN_004222f0(CHelpDlg *this,byte param_1)
 
 
 void * __cdecl
-_Globals::FUN_00422310(undefined *param_1,int *param_2,int param_3,uint param_4,char param_5)
+_Globals::CDSAudioPlayer_Create
+          (undefined *param_1,int *param_2,int param_3,uint param_4,char param_5)
 
 {
   undefined4 *puVar1;
@@ -82277,7 +82130,7 @@ _Globals::FUN_00422310(undefined *param_1,int *param_2,int param_3,uint param_4,
     this = (void *)CDSAudioPlayer::FUN_0043a4f0(puVar1);
   }
   local_4 = 0xffffffff;
-  FUN_0043a760(this,param_2,uVar2,param_4,param_1);
+  CDSAudioPlayer_Init(this,param_2,uVar2,param_4,param_1);
   if (param_3 != 0) {
     FUN_0043a030(this,param_3);
   }
@@ -82290,7 +82143,7 @@ _Globals::FUN_00422310(undefined *param_1,int *param_2,int param_3,uint param_4,
 void _Globals::FUN_004223c0(int *param_1,undefined1 param_2)
 
 {
-  FUN_0043a9d0(param_1,param_2);
+  CDSAudioPlayer_Play(param_1,param_2);
                     // WARNING: Could not recover jumptable at 0x004223d9. Too many branches
                     // WARNING: Treating indirect jump as call
   (**(code **)(*param_1 + 8))();
@@ -82353,14 +82206,15 @@ void __cdecl _Globals::FUN_004223e0(int param_1)
 // at ghidra_analysis/slot_0x1[8-c].wav.
 
 void __cdecl
-_Globals::FUN_00422430
+_Globals::TriggerBankSample
           (undefined *param_1,int param_2,int param_3,int param_4,uint param_5,char param_6)
 
 {
   if (param_2 == 0) {
     param_2 = *(int *)((int)g_pApp + 0x4c0);
   }
-  FUN_00422310(param_1,*(int **)(*(int *)(param_2 + 0x18) + param_3 * 4),param_4,param_5,param_6);
+  CDSAudioPlayer_Create
+            (param_1,*(int **)(*(int *)(param_2 + 0x18) + param_3 * 4),param_4,param_5,param_6);
   return;
 }
 
@@ -82371,7 +82225,7 @@ void __cdecl CBulanek::FUN_00422470(int *param_1)
 {
   if (*param_1 != 0) {
     *(undefined4 *)(*param_1 + 0x18) = 0;
-    _Globals::FUN_0043a4a0((void *)*param_1,1);
+    _Globals::CDSAudioPlayer_Stop((void *)*param_1,1);
     *param_1 = 0;
   }
   return;
@@ -82422,7 +82276,8 @@ int __cdecl _Globals::FUN_00422500(int *param_1)
 
 
 void * __cdecl
-CBulanci::FUN_00422550(undefined *param_1,uint param_2,int param_3,uint param_4,char param_5)
+CBulanci::CDSAudioPlayer_CreateFromResource
+          (undefined *param_1,uint param_2,int param_3,uint param_4,char param_5)
 
 {
   uint uVar1;
@@ -82444,7 +82299,7 @@ CBulanci::FUN_00422550(undefined *param_1,uint param_2,int param_3,uint param_4,
   }
   local_4 = 0;
   (**(code **)(*piVar3 + 0x10))(uVar1);
-  pvVar2 = _Globals::FUN_00422310(param_1,piVar3,param_3,param_4,param_5);
+  pvVar2 = _Globals::CDSAudioPlayer_Create(param_1,piVar3,param_3,param_4,param_5);
   local_4 = 0xffffffff;
   (**(code **)(*piVar3 + 8))();
   ExceptionList = local_c;
@@ -82481,16 +82336,17 @@ void __fastcall CMovieView::StopPlayback(int param_1)
 
 
 void __thiscall
-CHistoryView::FUN_00422670(CHistoryView *this,short param_1,undefined4 param_2,undefined4 param_3)
+CHistoryView::CHistoryView_OnEvent
+          (CHistoryView *this,short param_1,undefined4 param_2,undefined4 param_3)
 
 {
   CBulanci::FUN_0042c770((CBulanci *)this,param_1,param_2,param_3);
   if (param_1 == 0xf0) {
-    _Globals::FUN_00424010(*(void **)(*(int *)(this + 0x4c) + 0x4c),'\0');
+    _Globals::CMenu_EnableBackgroundState(*(void **)(*(int *)(this + 0x4c) + 0x4c),'\0');
     return;
   }
   if (param_1 == 0xf1) {
-    _Globals::FUN_00424010(*(void **)(*(int *)(this + 0x4c) + 0x4c),'\x01');
+    _Globals::CMenu_EnableBackgroundState(*(void **)(*(int *)(this + 0x4c) + 0x4c),'\x01');
   }
   return;
 }
@@ -82632,7 +82488,7 @@ void __thiscall CMovieView::OnEvent(CMovieView *this,short param_1,int param_2)
 
 {
   if (param_1 == 1) {
-    _Globals::TM_SetCurrentSequence(this + 0x68,*(int **)(this + 0x7c));
+    _Globals::ODSImage__SetImage(this + 0x68,*(int **)(this + 0x7c));
     _Globals::FUN_0043bc00(*(int *)(this + 0x80));
     (**(code **)(**(int **)(this + 0x80) + 8))();
     *(undefined4 *)(this + 0x80) = 0;
@@ -82664,7 +82520,7 @@ undefined4 * __fastcall ODSImage::FUN_004228f0(undefined4 *param_1)
   puStack_8 = &LAB_00477f13;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   param_1[0x1b] = vftable;
   param_1[0x1c] = 0;
   param_1[0x1d] = 0;
@@ -82675,7 +82531,7 @@ undefined4 * __fastcall ODSImage::FUN_004228f0(undefined4 *param_1)
   param_1[6] = CDSBitmap::vftable;
   *(undefined ***)(param_1 + 0x1a) = CDSBitmap::vftable;
   param_1[0x1b] = CDSBitmap::vftable;
-  FUN_00439050((ODSImage *)(param_1 + 0x1a),param_1);
+  SetOwner((ODSImage *)(param_1 + 0x1a),param_1);
   ExceptionList = local_c;
   return param_1;
 }
@@ -82866,16 +82722,12 @@ void __cdecl CHistoryScript::ext_op45(int param_1)
 void __cdecl CHistoryScript::ext_op46(int param_1)
 
 {
-  undefined4 uVar1;
+  short *psVar1;
   undefined4 uVar2;
-  int iVar3;
-  undefined4 uVar4;
-  short *psVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  CStaticText *this;
-  uint uVar8;
-  undefined4 uVar9;
+  CStaticText *pCVar3;
+  undefined4 local_4c;
+  undefined4 uStack_48;
+  undefined4 uStack_44;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -82884,20 +82736,23 @@ void __cdecl CHistoryScript::ext_op46(int param_1)
   puStack_8 = &LAB_00477f9b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  uVar1 = CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
+  CDSScript::ReadSubExpr(param_1);
+  psVar1 = (short *)CDSScript::ReadSubExpr(param_1);
   uVar2 = CDSScript::ReadSubExpr(param_1);
-  iVar3 = CDSScript::ReadSubExpr(param_1);
-  uVar4 = CDSScript::ReadSubExpr(param_1);
-  psVar5 = (short *)CDSScript::ReadSubExpr(param_1);
-  uVar6 = CDSScript::ReadSubExpr(param_1);
-  uVar7 = CDSScript::ReadI32(param_1);
-  this = (CStaticText *)_Globals::FUN_00447c42(0x98);
+  CDSScript::ReadI32(param_1);
+  uStack_44 = 0x422c3e;
+  pCVar3 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_4 = 0;
-  if (this != (CStaticText *)0x0) {
-    uVar8 = CDSScript::ReadSubExpr(param_1);
-    uVar9 = 0;
-    CBulanci::FUN_0042d510((CBulanci *)&stack0xffffffb4,psVar5);
-    CStaticText::CStaticText_BuildAt(this,uVar1,uVar2,iVar3,uVar4,uVar9,uVar6,uVar8,uVar7);
+  if (pCVar3 != (CStaticText *)0x0) {
+    uStack_44 = 0x422c5d;
+    uStack_44 = CDSScript::ReadSubExpr(param_1);
+    local_4c = 0;
+    uStack_48 = uVar2;
+    CBulanci::FUN_0042d510((CBulanci *)&local_4c,psVar1);
+    CStaticText::CStaticText_BuildAt(pCVar3);
   }
   ExceptionList = local_c;
   return;
@@ -82977,7 +82832,7 @@ void __thiscall CMovieView::StartPlayback(CMovieView *this,undefined1 param_1)
     piVar4 = (int *)(iVar1 + 0x1c);
   }
   CDSAudioVideoPlayer::SetupTrack(this_00,piVar4,piVar3,(uint)(this + 0x10),(undefined *)0x2);
-  _Globals::TM_SetCurrentSequence(this + 0x68,*(int **)(*(int *)(this + 0x80) + 0x38));
+  _Globals::ODSImage__SetImage(this + 0x68,*(int **)(*(int *)(this + 0x80) + 0x38));
   CDSAudioVideoPlayer::Play(*(CDSAudioVideoPlayer **)(this + 0x80),param_1);
   ExceptionList = local_c;
   return;
@@ -83066,7 +82921,7 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-void __thiscall CHistoryDlg::FUN_00422f70(CHistoryDlg *this,int param_1)
+void __thiscall CHistoryDlg::CHistoryDlg_LoadHistoryPage(CHistoryDlg *this,int param_1)
 
 {
   CHistoryDlg *pCVar1;
@@ -83121,7 +82976,7 @@ void __thiscall CHistoryDlg::FUN_00422f70(CHistoryDlg *this,int param_1)
       _Globals::FUN_00422620(*(void **)(this + 0x88),puVar3);
       param_1 = 1;
       CDSScript::CallExport(*(CDSScript **)(this + 0x88),0,1,&param_1);
-      _Globals::FUN_0042d0b0(this,*(int **)(this + 0x84),*(int *)(this + 0x8c));
+      _Globals::CDSView__AddChild(this,*(int **)(this + 0x84),*(int *)(this + 0x8c));
     }
     iVar5 = 4;
     pCVar4 = this + 0x9c;
@@ -83146,21 +83001,21 @@ void __thiscall CHistoryDlg::FUN_00422f70(CHistoryDlg *this,int param_1)
 
 
 
-void __thiscall CHistoryDlg::FUN_00423130(CHistoryDlg *this,ushort param_1)
+void __thiscall CHistoryDlg::CHistoryDlg_OnEvent(CHistoryDlg *this,ushort param_1)
 
 {
   switch(param_1) {
   case 0xe5:
-    FUN_00422f70(this,0);
+    CHistoryDlg_LoadHistoryPage(this,0);
     return;
   case 0xe6:
-    FUN_00422f70(this,*(int *)(this + 0x80) + -1);
+    CHistoryDlg_LoadHistoryPage(this,*(int *)(this + 0x80) + -1);
     return;
   case 0xe7:
-    FUN_00422f70(this,*(int *)(this + 0x80) + 1);
+    CHistoryDlg_LoadHistoryPage(this,*(int *)(this + 0x80) + 1);
     return;
   case 0xe8:
-    FUN_00422f70(this,*(int *)(this + 0x78) + -1);
+    CHistoryDlg_LoadHistoryPage(this,*(int *)(this + 0x78) + -1);
     return;
   default:
     CDSApp::FUN_0042c7d0((CDSApp *)this,param_1);
@@ -83236,7 +83091,7 @@ undefined4 * __fastcall CHistoryDlg::CHistoryDlg_ctor(undefined4 *param_1)
   }
   local_4._0_1_ = 2;
   param_1[0x23] = piVar4;
-  _Globals::FUN_0042d0b0(param_1,piVar4,0);
+  _Globals::CDSView__AddChild(param_1,piVar4,0);
   pCVar3 = (CIcon *)_Globals::FUN_00447c42(0x78);
   local_4._0_1_ = 4;
   if (pCVar3 == (CIcon *)0x0) {
@@ -83247,7 +83102,7 @@ undefined4 * __fastcall CHistoryDlg::CHistoryDlg_ctor(undefined4 *param_1)
   }
   local_4._0_1_ = 2;
   param_1[0x24] = piVar4;
-  _Globals::FUN_0042d0b0(param_1,piVar4,0);
+  _Globals::CDSView__AddChild(param_1,piVar4,0);
   pCVar3 = (CIcon *)_Globals::FUN_00447c42(0x78);
   local_4._0_1_ = 5;
   if (pCVar3 == (CIcon *)0x0) {
@@ -83258,7 +83113,7 @@ undefined4 * __fastcall CHistoryDlg::CHistoryDlg_ctor(undefined4 *param_1)
   }
   local_4._0_1_ = 2;
   param_1[0x25] = piVar4;
-  _Globals::FUN_0042d0b0(param_1,piVar4,0);
+  _Globals::CDSView__AddChild(param_1,piVar4,0);
   pCVar3 = (CIcon *)_Globals::FUN_00447c42(0x78);
   local_4._0_1_ = 6;
   if (pCVar3 == (CIcon *)0x0) {
@@ -83269,7 +83124,7 @@ undefined4 * __fastcall CHistoryDlg::CHistoryDlg_ctor(undefined4 *param_1)
   }
   local_4 = CONCAT31(local_4._1_3_,2);
   param_1[0x26] = piVar4;
-  _Globals::FUN_0042d0b0(param_1,piVar4,0);
+  _Globals::CDSView__AddChild(param_1,piVar4,0);
   ExceptionList = local_c;
   return param_1;
 }
@@ -83388,7 +83243,7 @@ undefined4 * __cdecl CHistoryScript::ext_op47(int param_1)
     puVar6 = (undefined4 *)0x0;
   }
   else {
-    puVar6 = CDSBitmap::FUN_004393d0(this_00,uVar4,uStack_18,piVar2);
+    puVar6 = CDSBitmap::CDSBitmap_ctor(this_00,uVar4,uStack_18,piVar2);
   }
   local_c = (void *)0xffffffff;
   if (piVar2 != (int *)0x0) {
@@ -83462,7 +83317,7 @@ CMovieView::Constructor
   puStack_c = &LAB_004781de;
   local_10 = ExceptionList;
   ExceptionList = &local_10;
-  CDSBitmap::FUN_004393d0((CDSBitmap *)this,param_1,param_2,(int *)0x0);
+  CDSBitmap::CDSBitmap_ctor((CDSBitmap *)this,param_1,param_2,(int *)0x0);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -83528,7 +83383,7 @@ void CMovieView::InitTrackSequence(void)
       *(int *)(unaff_ESI + 0x7c) = iVar1;
     }
   }
-  _Globals::TM_SetCurrentSequence((void *)(unaff_ESI + 0x68),*(int **)(unaff_ESI + 0x7c));
+  _Globals::ODSImage__SetImage((void *)(unaff_ESI + 0x68),*(int **)(unaff_ESI + 0x7c));
   *(ushort *)(unaff_ESI + 0x14) = *(ushort *)(unaff_ESI + 0x14) | 0x278;
   ExceptionList = *(void **)(unaff_EBP + -0xc);
   return;
@@ -83571,7 +83426,7 @@ undefined4 __cdecl CHistoryScript::ext_op52(int param_1)
 
 
 
-void __fastcall CGunMouse::FUN_004238e0(int param_1)
+void __fastcall CGunMouse::CGunMouse_Deactivate(int param_1)
 
 {
   *(undefined1 *)(param_1 + 0x205) = 0;
@@ -83581,7 +83436,38 @@ void __fastcall CGunMouse::FUN_004238e0(int param_1)
 
 
 
-void __thiscall CGunMouse::FUN_00423900(CGunMouse *this,undefined4 param_1,int *param_2)
+// CGunMouse::OnMouseMove — NotifyMove observer.
+// 
+// Receives one (Dx, Dy) per BitmapSprite tick from the active track
+// (opcode 0x0A in DecodeFrame, broadcast via CDSFlxFile::NotifyMove
+// @ 0x00436e80). Accumulates into m_dotBaseOffset*, with a two-branch
+// rule keyed on m_inFrameNotifyMoveFlag (+0x204 of CGunMouse):
+// 
+//     if (flag != 0) {                         // continued frame
+//         m_dotBaseOffsetX += dx;
+//         m_dotBaseOffsetY += dy;
+//         flag = 1;
+//     } else {                                  // first event this frame
+//         m_dotBaseOffsetX = m_dotOffsetX + dx;
+//         m_dotBaseOffsetY = m_dotOffsetY + dy;
+//         flag = 1;
+//     }
+// 
+// The flag is cleared by CGunMouse::Erase at the start of each frame
+// after promoting m_dotBaseOffset* -> m_dotOffset*. Combined effect:
+//   * m_dotOffset* = snapshot of the offset at start-of-frame (used by Draw)
+//   * m_dotBaseOffset* = accumulator updated by all NotifyMoves
+//                        received during the frame, promoted next frame.
+// 
+// This is purely the sprite-driven 'idle drift' — NOT a real OS mouse
+// handler. The OS mouse path lives in CDSApp_MouseQueue @ 0x0042a5c0,
+// which writes g_pApp+0xf0/+0xf4 (read by CGunMouse::Draw).
+// 
+// `this` points into CGunMouse + 0xc (the observer sub-object embedded
+// in the class), so the offsets above are observer-local (subtract 0xc
+// to get the CGunMouse-relative offsets quoted in red_menu_cursor.md).
+
+void __thiscall CGunMouse::CGunMouse_OnMouseMove(CGunMouse *this,undefined4 param_1,int *param_2)
 
 {
   int iVar1;
@@ -83618,7 +83504,7 @@ void __fastcall CSwitch::FUN_00423950(undefined4 *param_1)
   param_1[0x1a] = vftable;
   param_1[0x1b] = vftable;
   local_4 = 1;
-  _Globals::TM_SetCurrentSequence(param_1 + 0x1a,(int *)0x0);
+  _Globals::ODSImage__SetImage(param_1 + 0x1a,(int *)0x0);
   local_4 = local_4 & 0xffffff00;
   CDSVideoPlayer::TM_Destructor(param_1 + 0x1f);
   local_4 = 0xffffffff;
@@ -83656,8 +83542,8 @@ void __thiscall CMenu::CMenu_CloseCurrentSubScreen(CMenu *this,char param_1)
   int iVar3;
   
   if (((param_1 != '\0') && (iVar1 = *(int *)(this + 0x80), -1 < iVar1)) && (iVar1 < 6)) {
-    _Globals::FUN_0042c990(*(int **)(this + iVar1 * 8 + 0x90));
-    _Globals::FUN_0042d040(*(int **)(this + *(int *)(this + 0x80) * 8 + 0x94));
+    _Globals::CDSView__Show(*(int **)(this + iVar1 * 8 + 0x90));
+    _Globals::CDSView__Hide(*(int **)(this + *(int *)(this + 0x80) * 8 + 0x94));
   }
   piVar2 = *(int **)(this + 0x84);
   if (piVar2 != (int *)0x0) {
@@ -83681,7 +83567,17 @@ void __thiscall CMenu::CMenu_CloseCurrentSubScreen(CMenu *this,char param_1)
 
 
 
-void __fastcall CGunMouse::FUN_00423ac0(int param_1)
+// CGunMouse::CoordRing_Clear — drop every queued sample.
+// 
+// Sets size to 0 (head and capacity are left untouched, so the next
+// Push starts overwriting from the current head index forward). This
+// is what guarantees the dot stays hidden for a fresh 30-tick warm-up
+// after every Activate — m_dotReady can't go back to 1 until 30 more
+// Pushes have landed and brought size back to capacity.
+// 
+// Called from CGunMouse::Activate @ 0x00423b50.
+
+void __fastcall CGunMouse::CGunMouse_CoordRing_Clear(int param_1)
 
 {
   *(undefined4 *)(param_1 + 8) = 0;
@@ -83755,7 +83651,7 @@ undefined4 * __thiscall CSwitch::FUN_00423b30(CSwitch *this,byte param_1)
 
 
 
-void __fastcall CGunMouse::FUN_00423b50(int param_1)
+void __fastcall CGunMouse::CGunMouse_Activate(int param_1)
 
 {
   *(undefined4 *)(param_1 + 0x1a0) = 2;
@@ -83767,13 +83663,13 @@ void __fastcall CGunMouse::FUN_00423b50(int param_1)
   _Globals::TM_Play((void *)(param_1 + 0x1b0),0);
   *(undefined1 *)(param_1 + 0x205) = 1;
   *(undefined1 *)(param_1 + 0x206) = 0;
-  FUN_00423ac0(param_1 + 0x208);
+  CGunMouse_CoordRing_Clear(param_1 + 0x208);
   return;
 }
 
 
 
-void __thiscall CGunMouse::FUN_00423bd0(CGunMouse *this,undefined4 param_1,short param_2)
+void __thiscall CGunMouse::CGunMouse_OnAnimTick(CGunMouse *this,undefined4 param_1,short param_2)
 
 {
   int iVar1;
@@ -83811,10 +83707,10 @@ int * __fastcall CRuch::CRuch_ctor(int *param_1)
   puStack_8 = &LAB_00478273;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   this = param_1 + 0x1a;
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)this);
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)this);
   *param_1 = (int)vftable;
   param_1[1] = (int)vftable;
   param_1[4] = (int)vftable;
@@ -83832,7 +83728,7 @@ int * __fastcall CRuch::CRuch_ctor(int *param_1)
   param_1[9] = 0;
   param_1[10] = iVar5 + 1;
   param_1[0xb] = iVar1 - iVar3;
-  _Globals::FUN_0042d040(param_1);
+  _Globals::CDSView__Hide(param_1);
   uVar6 = 6;
   iVar5 = Runtime::MSVCRT::_rand();
   _Globals::Scheduler_RegisterEventSlot
@@ -83964,19 +83860,19 @@ void __fastcall CRuch::CRuch_OnScheduledTick(void *param_1)
     iVar2 = Runtime::MSVCRT::_rand();
     _Globals::Scheduler_SetEventDelayMs
               (param_1,0,(int)(iVar2 * 0xfa1 + (iVar2 * 0xfa1 >> 0x1f & 0x7fffU)) >> 0xf);
-    _Globals::FUN_0042d040((int *)((int)param_1 + -0x68));
+    _Globals::CDSView__Hide((int *)((int)param_1 + -0x68));
     iVar2 = *(int *)((int)g_pApp + 0x28);
     iVar1 = *(int *)((int)g_pApp + 0x20);
     iVar4 = 0;
     iVar3 = Runtime::MSVCRT::_rand();
     iVar3 = iVar3 * (iVar2 - iVar1);
-    CBulanek::FUN_0042cc80
+    CBulanek::CDSView__SetPosition
               ((CBulanek *)((int)param_1 + -0x68),(int)(iVar3 + (iVar3 >> 0x1f & 0x7fffU)) >> 0xf,
                iVar4);
     return;
   }
   _Globals::Scheduler_SetEventDelayMs(param_1,0,100);
-  _Globals::FUN_0042c990((int *)((int)param_1 + -0x68));
+  _Globals::CDSView__Show((int *)((int)param_1 + -0x68));
   return;
 }
 
@@ -84021,7 +83917,7 @@ void __thiscall CBulanci::CRuch_EnableDisable(CBulanci *this,char param_1)
   void *pvVar1;
   
   if (param_1 == '\0') {
-    _Globals::FUN_0042d040((int *)this);
+    _Globals::CDSView__Hide((int *)this);
     pvVar1 = _Globals::Scheduler_GetEventSlot(this + 0x68,0);
     if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
       _Globals::FUN_0042f300(this + 0x68,0);
@@ -84066,7 +83962,7 @@ void __fastcall _Globals::CSwitch_PlayHoverTrack(int param_1)
     SetCurrentTrack((void *)(param_1 + 0x7c),0,'\x01');
     TM_Play((void *)(param_1 + 0x7c),0);
     uVar3 = 0;
-    piVar2 = (int *)FUN_00422430((undefined *)0x1,0,0,0,0,'\x01');
+    piVar2 = (int *)TriggerBankSample((undefined *)0x1,0,0,0,0,'\x01');
     FUN_004223c0(piVar2,uVar3);
   }
   return;
@@ -84117,7 +84013,7 @@ void __thiscall CMenu::CMenu_SetButtonsHidden(CMenu *this,char param_1)
 
 
 
-void __thiscall _Globals::FUN_00424010(void *this,char param_1)
+void __thiscall _Globals::CMenu_EnableBackgroundState(void *this,char param_1)
 
 {
   void *pvVar1;
@@ -84125,7 +84021,7 @@ void __thiscall _Globals::FUN_00424010(void *this,char param_1)
   if (*(char *)((int)this + 0xe2) != param_1) {
     *(char *)((int)this + 0xe2) = param_1;
     if ((param_1 != '\0') && (*(char *)(*(int *)((int)this + 0xc0) + 0x22) == '\0')) {
-      FUN_0043a9d0(*(void **)((int)this + 0xc0),1);
+      CDSAudioPlayer_Play(*(void **)((int)this + 0xc0),1);
     }
     pvVar1 = Scheduler_GetEventSlot((void *)((int)this + 0x68),0);
     if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
@@ -84140,7 +84036,7 @@ void __thiscall _Globals::FUN_00424010(void *this,char param_1)
 
 
 
-void __fastcall CMenu::FUN_00424080(void *param_1)
+void __fastcall CMenu::CMenu_OnMusicFadeTick(void *param_1)
 
 {
   void *this;
@@ -84152,10 +84048,10 @@ void __fastcall CMenu::FUN_00424080(void *param_1)
     if (iVar1 < 0x46) {
       iVar1 = 0x46;
     }
-    _Globals::FUN_0043a0d0(this,iVar1);
+    _Globals::CDSAudioPlayer_SetVolumePercent(this,iVar1);
     if (iVar1 == 0x46) {
       _Globals::FUN_0042f300(param_1,0);
-      _Globals::FUN_0043a4a0(*(void **)((int)param_1 + 0x58),1);
+      _Globals::CDSAudioPlayer_Stop(*(void **)((int)param_1 + 0x58),1);
     }
   }
   else {
@@ -84163,7 +84059,7 @@ void __fastcall CMenu::FUN_00424080(void *param_1)
     if (100 < iVar1) {
       iVar1 = 100;
     }
-    _Globals::FUN_0043a0d0(this,iVar1);
+    _Globals::CDSAudioPlayer_SetVolumePercent(this,iVar1);
     if (iVar1 == 100) {
       _Globals::FUN_0042f300(param_1,0);
       CBulanci::CMenu_EnableAllRuch((CBulanci *)((int)param_1 + -0x68),'\x01');
@@ -84265,7 +84161,24 @@ void __fastcall CPoemScroller::Render(int param_1)
 
 
 
-uint __thiscall CGunMouse::FUN_00424370(CGunMouse *this,undefined4 *param_1)
+// CGunMouse::CoordRing_Push — enqueue one (i32, i32) sample.
+// 
+// `this` points at the CGunMouse coord ring (CGunMouse + 0x208).
+// Ring layout (offsets from `this`):
+//    +0x00  data         pointer to the (i32, i32) backing array
+//    +0x04  capacity     fixed at 30 by CGunMouse_CoordRing_Reserve
+//    +0x08  size         number of valid entries (0..=30)
+//    +0x0c  head         index of the oldest entry (read by Pop)
+// 
+// If size < capacity, writes *param_1 + *(param_1+1) at
+//   data[(head + size) % capacity]
+// then increments size and returns 1. If size == capacity the call
+// is a no-op returning 0 (this is what CGunMouse::Draw relies on —
+// the ring silently caps at 30; only Pop drains it).
+// 
+// Called exclusively from CGunMouse::Draw @ 0x00424610.
+
+uint __thiscall CGunMouse::CGunMouse_CoordRing_Push(CGunMouse *this,undefined4 *param_1)
 
 {
   undefined4 *puVar1;
@@ -84290,7 +84203,24 @@ uint __thiscall CGunMouse::FUN_00424370(CGunMouse *this,undefined4 *param_1)
 
 
 
-uint __thiscall CGunMouse::FUN_004243b0(CGunMouse *this,undefined4 *param_1)
+// CGunMouse::CoordRing_Pop — dequeue the oldest (i32, i32) sample.
+// 
+// `this` points at the CGunMouse coord ring (CGunMouse + 0x208). See
+// CGunMouse_CoordRing_Push for the layout.
+// 
+// If size != 0, reads data[head] into (*param_1, *(param_1+1)),
+// advances head (wrapping at capacity), decrements size, and returns 1.
+// Returns 0 if the ring is empty.
+// 
+// Called exclusively from CGunMouse::Draw, guarded by `size == 30` —
+// so pop only fires when the ring is *exactly* full. The popped entry
+// is written into m_targetX/Y, which is what the dot is drawn at
+// (target + dot_offset). The 30-sample lag is what creates the
+// follow-lag the player perceives — see
+// ghidra_analysis/engine/effective_speed.md for how that maps to
+// wall-clock ms at different frame rates.
+
+uint __thiscall CGunMouse::CGunMouse_CoordRing_Pop(CGunMouse *this,undefined4 *param_1)
 
 {
   undefined4 *puVar1;
@@ -84401,9 +84331,9 @@ undefined4 * __fastcall CMenu::CMenu_ctor(undefined4 *param_1)
   puStack_8 = &LAB_00478328;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1a));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x1a));
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -84472,7 +84402,53 @@ void __thiscall CMenu::FUN_00424600(CMenu *this,byte param_1)
 
 
 
-void __fastcall CGunMouse::FUN_00424610(int param_1)
+// CGunMouse::Draw — per-frame entry point.
+// 
+// Called from the parent dispatcher inside CDSApp_FrameBody. Reads the
+// live OS-mouse snapshot, pushes it onto the 30-slot mouse-coord ring,
+// pops the oldest entry into m_target* once the ring is saturated, then
+// blits the crosshair arms / reticle ring / motion-track dot.
+// 
+// Field layout (offsets from `this`):
+//   +0x190 / +0x194  m_mouseX  / m_mouseY    — refreshed from g_pApp+0xf0/+0xf4
+//   +0x198 / +0x19c  m_targetX / m_targetY   — popped from the ring (lagged)
+//   +0x1a0 / +0x1a4  m_dotOffsetX / Y         — snapshot of base from prior Erase
+//   +0x1a8 / +0x1ac  m_dotBaseOffsetX / Y     — accumulator (NotifyMove)
+//   +0x1f8           m_lastPushTick           — ms timestamp of last push
+//   +0x1fc           m_dotSpriteInfo *        — current frame's blit info
+//   +0x200           m_armSpriteInfo *        — crosshair-arm blit info
+//   +0x204           m_inFrameNotifyMoveFlag  — OnMouseMove two-branch flag
+//   +0x205           m_isActive               — Activate / Deactivate latch
+//   +0x206           m_dotReady               — pop-has-fired flag (gates dot draw)
+//   +0x208           CoordRing                — 30-slot ring of (i32, i32) coords
+// 
+// Push gate (single `if`, not while):
+//     if (m_lastPushTick + 10 <= g_dwElapsedMs) {
+//         m_lastPushTick += 10;
+//         CGunMouse_CoordRing_Push(&ring, &m_mouseX);
+//     }
+// Lag envelope is fps-dependent (see ghidra_analysis/engine/effective_speed.md):
+//   * fps >= 100: gate caps push at 100 Hz, lag = 30 × 10 ms = 300 ms.
+//   * fps  < 100: transient regime — `elapsed - lastPushTick` grows
+//                 unboundedly, gate fires every Draw, push rate equals
+//                 frame rate, lag = 30 × frame_interval.
+// On era-typical hardware (~200 fps) the trace measures lag = 134-140 ms,
+// which is the 'design-intent' value to target on any modern machine.
+// 
+// Pop step:
+//     if (ring.size == 0x1e /* 30 */) {
+//         CGunMouse_CoordRing_Pop(&ring, &m_targetX);
+//         m_dotReady = 1;
+//     }
+// Pop only fires when the ring is exactly full (size==30). Steady state
+// oscillates between size 29 and 30. Before the ring fills (cold start of
+// the menu) the dot is not drawn — m_dotReady stays 0.
+// 
+// Client-side mirror: open_bulanci/client/src/cursor.rs (GunMouse::on_cursor_tick
+// run from a 5 ms SLOT_CURSOR_TICK scheduler beat — see
+// ghidra_analysis/engine/effective_speed.md for the cadence rationale).
+
+void __fastcall CGunMouse::CGunMouse_Draw(int param_1)
 
 {
   CPoemScroller *this;
@@ -84529,27 +84505,27 @@ void __fastcall CGunMouse::FUN_00424610(int param_1)
   local_4 = local_3c;
   iVar1 = _Globals::GetColorPlane((int)this);
   if (iVar1 == 0) {
-    _Globals::FUN_00436f40(this,local_40,1,*(int *)((int)this_00 + 0xdc),'\0',-1);
-    _Globals::FUN_00436f40
+    _Globals::CDSImage__Allocate(this,local_40,1,*(int *)((int)this_00 + 0xdc),'\0',-1);
+    _Globals::CDSImage__Allocate
               ((void *)(param_1 + 0x74),1,local_3c,*(int *)((int)this_00 + 0xdc),'\0',-1);
-    _Globals::FUN_00436f40
+    _Globals::CDSImage__Allocate
               ((void *)(param_1 + 0x134),*piVar5,*(undefined4 *)(iVar3 + 8),
                *(int *)((int)this_00 + 0xdc),'\0',-1);
   }
   uVar2 = *(int *)(param_1 + 0x1f8) + 10;
   if (uVar2 <= g_dwElapsedMs) {
     *(uint *)(param_1 + 0x1f8) = uVar2;
-    FUN_00424370((CGunMouse *)(param_1 + 0x208),(undefined4 *)(param_1 + 400));
+    CGunMouse_CoordRing_Push((CGunMouse *)(param_1 + 0x208),(undefined4 *)(param_1 + 400));
   }
   if (*(int *)(param_1 + 0x210) == 0x1e) {
     iVar3 = _Globals::GetColorPlane(param_1 + 0xd4);
     if (iVar3 == 0) {
-      _Globals::FUN_00436f40
+      _Globals::CDSImage__Allocate
                 ((void *)(param_1 + 0xd4),*(int *)(*(int *)(param_1 + 0x1fc) + 4),
                  *(undefined4 *)(*(int *)(param_1 + 0x1fc) + 8),*(int *)((int)this_00 + 0xdc),'\0',
                  -1);
     }
-    FUN_004243b0((CGunMouse *)(param_1 + 0x208),(undefined4 *)(param_1 + 0x198));
+    CGunMouse_CoordRing_Pop((CGunMouse *)(param_1 + 0x208),(undefined4 *)(param_1 + 0x198));
     *(undefined1 *)(param_1 + 0x206) = 1;
   }
   if (*(char *)(param_1 + 0x206) != '\0') {
@@ -84614,7 +84590,34 @@ void __fastcall CGunMouse::FUN_00424610(int param_1)
 
 
 
-void __fastcall CGunMouse::FUN_004249b0(int param_1)
+// CGunMouse::Erase — per-frame pre-render bookkeeping.
+// 
+// Called by the parent dispatcher before CGunMouse::Draw. Issues BlitDispatch
+// calls to repaint over the previous frame's crosshair arms (so the screen
+// doesn't smear), and — only if m_dotReady is set — also erases the dot at
+// its last drawn position.
+// 
+// At the very end (only when m_dotReady != 0) it executes the critical
+// accumulator-promotion step:
+//     m_dotOffsetX = m_dotBaseOffsetX;
+//     m_dotOffsetY = m_dotBaseOffsetY;
+//     m_inFrameNotifyMoveFlag = 0;
+// 
+// This is what makes the two-branch CGunMouse::OnMouseMove work: at the
+// start of every new frame (flag == 0) the first NotifyMove resets the
+// base from the just-promoted snapshot, subsequent NotifyMoves accumulate.
+// 
+// Offsets used (relative to `this`):
+//   +0x14  arm-A image            +0x74  arm-B image          +0x134 arm-C image
+//   +0xd4  dot-erase scratch      +0xd8 /+0xdc clip rect
+//   +0x198 /+0x19c  m_targetX/Y   +0x1a0 /+0x1a4 m_dotOffsetX/Y
+//   +0x1a8 /+0x1ac  m_dotBaseOffsetX/Y
+//   +0x1fc dot sprite info ptr    +0x204 m_inFrameNotifyMoveFlag
+//   +0x206 m_dotReady
+// 
+// Client-side mirror: GunMouse::erase() in open_bulanci/client/src/cursor.rs.
+
+void __fastcall CGunMouse::CGunMouse_Erase(int param_1)
 
 {
   int iVar1;
@@ -84802,7 +84805,7 @@ CBulanci::CSwitch_ctor
     iVar3 = iVar3 + 1;
   } while (iVar3 < 2);
   _Globals::SetCurrentTrack(this + 0x7c,0,'\x01');
-  _Globals::TM_SetCurrentSequence(this + 0x68,*(int **)(this + 0xac));
+  _Globals::ODSImage__SetImage(this + 0x68,*(int **)(this + 0xac));
   *(ushort *)(this + 0x14) = *(ushort *)(this + 0x14) | 0x238;
   this[0x78] = param_4;
   this[0xc4] = (CBulanci)0x0;
@@ -84960,7 +84963,7 @@ void __fastcall CMenu::CMenu_dtor(undefined4 *param_1)
   }
   CMenu_CloseCurrentSubScreen((CMenu *)param_1,'\0');
   if ((void *)param_1[0x30] != (void *)0x0) {
-    _Globals::FUN_0043a4a0((void *)param_1[0x30],1);
+    _Globals::CDSAudioPlayer_Stop((void *)param_1[0x30],1);
   }
   local_4._0_1_ = 2;
   if ((int *)param_1[0x31] != (int *)0x0) {
@@ -85002,7 +85005,7 @@ void __thiscall CMenu::CMenu_OnEvent(CMenu *this,ushort param_1)
 
 {
   if (param_1 == 1) {
-    _Globals::FUN_0042c3c0(this,*(undefined2 *)(this + 0xcc));
+    _Globals::CDSView__EndModal(this,*(undefined2 *)(this + 0xcc));
     if (*(int **)(this + 0xc4) != (int *)0x0) {
       (**(code **)(**(int **)(this + 0xc4) + 8))();
     }
@@ -85066,7 +85069,7 @@ char __thiscall CMenu::CMenu_OnKeyDown(CMenu *this,undefined1 param_1,char param
       break;
     case 0x58:
       if (param_2 != '\0') {
-        _Globals::FUN_0042f390(this + 0x10,0x100,0x8004,0,0);
+        _Globals::CDSView__PostMessage(this + 0x10,0x100,0x8004,0,0);
       }
       return param_2;
     }
@@ -85227,18 +85230,18 @@ void __thiscall CSwitch::CSwitch_OnMouseClick(CSwitch *this,undefined4 param_1,b
 
 
 
-void __thiscall CBulanci::CMenu_LoadInfoOverlayBg(CBulanci *this,uint param_1)
+void __thiscall CBulanci::CMenu_LoadBackgroundMusic(CBulanci *this,uint param_1)
 
 {
   void *this_00;
   
-  this_00 = FUN_00422550((undefined *)0x2,param_1,0,0,'\x01');
+  this_00 = CDSAudioPlayer_CreateFromResource((undefined *)0x2,param_1,0,0,'\x01');
   if (*(int **)(this + 0xc0) != (int *)0x0) {
     (**(code **)(**(int **)(this + 0xc0) + 8))();
   }
   *(void **)(this + 0xc0) = this_00;
-  _Globals::FUN_0043a0d0(this_00,0x46);
-  _Globals::FUN_00424010(this,'\x01');
+  _Globals::CDSAudioPlayer_SetVolumePercent(this_00,0x46);
+  _Globals::CMenu_EnableBackgroundState(this,'\x01');
   return;
 }
 
@@ -85249,12 +85252,12 @@ void __thiscall CBulanci::CMenu_SetDayNightBg(CBulanci *this,char param_1)
 {
   this[0xe1] = (CBulanci)param_1;
   if (param_1 != '\0') {
-    CMenu_LoadInfoOverlayBg(this,0x1014a);
-    _Globals::FUN_0042c990(*(int **)(this + 200));
+    CMenu_LoadBackgroundMusic(this,0x1014a);
+    _Globals::CDSView__Show(*(int **)(this + 200));
     return;
   }
-  CMenu_LoadInfoOverlayBg(this,0x10149);
-  _Globals::FUN_0042d040(*(int **)(this + 200));
+  CMenu_LoadBackgroundMusic(this,0x10149);
+  _Globals::CDSView__Hide(*(int **)(this + 200));
   return;
 }
 
@@ -85299,8 +85302,8 @@ void __thiscall CMenu::CMenu_DispatchHotkey(CMenu *this,undefined2 param_1,int p
   
   *(undefined2 *)(this + 0xcc) = param_1;
   if (*(int *)(this + 0xc4) == 0) {
-    _Globals::FUN_00424010(this,'\0');
-    iVar1 = _Globals::FUN_00422430((undefined *)0x1,0,param_2,0,(uint)(this + 0x10),'\x01');
+    _Globals::CMenu_EnableBackgroundState(this,'\0');
+    iVar1 = _Globals::TriggerBankSample((undefined *)0x1,0,param_2,0,(uint)(this + 0x10),'\x01');
     if (*(int **)(this + 0xc4) != (int *)0x0) {
       (**(code **)(**(int **)(this + 0xc4) + 8))();
     }
@@ -85320,7 +85323,21 @@ void __thiscall CMenu::CMenu_DispatchHotkey(CMenu *this,undefined2 param_1,int p
 
 
 
-undefined4 __thiscall ODSImage::FUN_004253d0(ODSImage *this,int param_1)
+// CGunMouse::CoordRing_Reserve — grow / shrink the backing buffer.
+// 
+// Thin wrapper around the generic 'Vec::resize' helper at 0x004250c0:
+// if the requested capacity (param_1) is larger than the current
+// capacity, calls realloc on the backing array (each entry is 8 bytes
+// = (i32, i32)) and zero-fills the new tail; if smaller, just shrinks.
+// Then resets head to 0 — so the ring becomes a fresh, properly sized,
+// empty buffer.
+// 
+// Called exactly once from CGunMouse_ctor with capacity = 0x1e (= 30),
+// which is the magic number that, combined with the 5 ms effective
+// push cadence on era hardware, yields the trace-measured ~150 ms
+// follow-lag (see ghidra_analysis/engine/effective_speed.md).
+
+undefined4 __thiscall ODSImage::CGunMouse_CoordRing_Reserve(ODSImage *this,int param_1)
 
 {
   uint in_EAX;
@@ -85404,7 +85421,7 @@ void * __thiscall _Globals::FUN_00425460(void *this,int *param_1,int param_2,cha
   *(undefined4 *)((int)this + 0x40) = 0;
   *(undefined4 *)((int)this + 0x44) = 8;
   local_4 = 2;
-  FUN_00436f40(this,*param_1,param_1[1],param_2,param_3,-1);
+  CDSImage__Allocate(this,*param_1,param_1[1],param_2,param_3,-1);
   ExceptionList = local_c;
   return this;
 }
@@ -85422,7 +85439,7 @@ void __fastcall _Globals::FUN_004254f0(int param_1)
   local_c = ExceptionList;
   ExceptionList = &local_c;
   local_4 = 2;
-  FUN_00436d50(param_1);
+  CDSImage__FreeBuffers(param_1);
   local_4._0_1_ = 1;
   *(undefined4 *)(param_1 + 0x40) = 0;
   CDSAudioBank::FUN_00406340((CDSAudioBank *)(param_1 + 0x38),0);
@@ -85562,7 +85579,7 @@ void __fastcall CDSObject::FUN_004256c0(undefined4 *param_1)
 
 
 
-void __fastcall CGunMouse::FUN_00425730(undefined4 *param_1)
+void __fastcall CGunMouse::CGunMouse_dtor(undefined4 *param_1)
 
 {
   void *this;
@@ -85668,11 +85685,11 @@ void __thiscall CMenu::CMenu_LoadBackgroundResource(CMenu *this,undefined4 param
     piVar2 = (int *)0x0;
   }
   else {
-    piVar2 = CDSBitmap::FUN_004393d0(this_01,800 - piVar1[1],600 - piVar1[2],piVar1);
+    piVar2 = CDSBitmap::CDSBitmap_ctor(this_01,800 - piVar1[1],600 - piVar1[2],piVar1);
   }
   *(int **)(this + 0x88) = piVar2;
   local_c = (void *)((uint)local_c._1_3_ << 8);
-  _Globals::FUN_0042d0b0(this,piVar2,*(int *)(*(int *)(this + 0x8c) + 0xc));
+  _Globals::CDSView__AddChild(this,piVar2,*(int *)(*(int *)(this + 0x8c) + 0xc));
   local_c = (void *)0xffffffff;
   if (piVar1 != (int *)0x0) {
     (**(code **)(*piVar1 + 8))();
@@ -85734,8 +85751,8 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
     if (param_1 != 0xc9) {
       if (param_1 == 0xca) {
         CMenu_CloseCurrentSubScreen(this,'\x01');
-        _Globals::FUN_0042d040(*(int **)(this + 0x98));
-        _Globals::FUN_0042c990(*(int **)(this + 0x9c));
+        _Globals::CDSView__Hide(*(int **)(this + 0x98));
+        _Globals::CDSView__Show(*(int **)(this + 0x9c));
         CMenu_LoadBackgroundResource(this,0x1013e);
         puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x9c);
         local_4 = (void *)0x1;
@@ -85747,10 +85764,10 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
         }
         *(CHistoryDlg **)(this + 0x84) = this_00;
         local_4 = (void *)0xffffffff;
-        CHistoryDlg::FUN_00422f70(this_00,*(int *)((int)g_pApp + 0x306));
-        _Globals::FUN_0042d0b0(this,*(int **)(this + 0x84),*(int *)(this + 0xd0));
+        CHistoryDlg::CHistoryDlg_LoadHistoryPage(this_00,*(int *)((int)g_pApp + 0x306));
+        _Globals::CDSView__AddChild(this,*(int **)(this + 0x84),*(int *)(this + 0xd0));
         uVar4 = 0;
-        piVar2 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,0x18,0,0,'\x01');
+        piVar2 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x18,0,0,'\x01');
         _Globals::FUN_004223c0(piVar2,uVar4);
         *(undefined4 *)(this + 0x80) = 1;
         ExceptionList = local_4;
@@ -85758,8 +85775,8 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
       }
       if (param_1 == 0xcb) {
         CMenu_CloseCurrentSubScreen(this,'\x01');
-        _Globals::FUN_0042d040(*(int **)(this + 0xa0));
-        _Globals::FUN_0042c990(*(int **)(this + 0xa4));
+        _Globals::CDSView__Hide(*(int **)(this + 0xa0));
+        _Globals::CDSView__Show(*(int **)(this + 0xa4));
         CMenu_LoadBackgroundResource(this,0x1013d);
         puVar1 = (undefined4 *)_Globals::FUN_00447c42(0x7c);
         local_4 = (void *)0x2;
@@ -85771,9 +85788,9 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
         }
         local_4 = (void *)0xffffffff;
         *(int **)(this + 0x84) = piVar2;
-        _Globals::FUN_0042d0b0(this,piVar2,*(int *)(this + 0xd0));
+        _Globals::CDSView__AddChild(this,piVar2,*(int *)(this + 0xd0));
         uVar4 = 0;
-        piVar2 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,0x19,0,0,'\x01');
+        piVar2 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x19,0,0,'\x01');
         _Globals::FUN_004223c0(piVar2,uVar4);
         *(undefined4 *)(this + 0x80) = 2;
         ExceptionList = local_4;
@@ -85785,8 +85802,8 @@ LAB_00425c48:
       return;
     }
     CMenu_CloseCurrentSubScreen(this,'\x01');
-    _Globals::FUN_0042d040(*(int **)(this + 0x90));
-    _Globals::FUN_0042c990(*(int **)(this + 0x94));
+    _Globals::CDSView__Hide(*(int **)(this + 0x90));
+    _Globals::CDSView__Show(*(int **)(this + 0x94));
     CMenu_LoadBackgroundResource(this,0x1013c);
     piVar2 = (int *)_Globals::FUN_00447c42(0xa8);
     local_4 = (void *)0x0;
@@ -85798,13 +85815,13 @@ LAB_00425c48:
     }
     local_4 = (void *)0xffffffff;
     *(int **)(this + 0x84) = piVar2;
-    _Globals::FUN_0042d0b0(this,piVar2,*(int *)(this + 0xd0));
+    _Globals::CDSView__AddChild(this,piVar2,*(int *)(this + 0xd0));
     uVar4 = 0;
-    piVar2 = (int *)_Globals::FUN_00422430((undefined *)0x1,0,0x1b,0,0,'\x01');
+    piVar2 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x1b,0,0,'\x01');
     _Globals::FUN_004223c0(piVar2,uVar4);
     *(undefined4 *)(this + 0x80) = 0;
     if (this[0xe0] != (CMenu)0x0) {
-      _Globals::FUN_0042f390((void *)(*(int *)(this + 0x84) + 0x10),0x100,0xcf,0,0);
+      _Globals::CDSView__PostMessage((void *)(*(int *)(this + 0x84) + 0x10),0x100,0xcf,0,0);
       this[0xe0] = (CMenu)0x0;
       ExceptionList = local_4;
       return;
@@ -86033,7 +86050,7 @@ void __fastcall CPoemScroller::PickNextPoem(int param_1)
   *(undefined4 *)(param_1 + 0x11c) = 0;
   pvVar6 = _Globals::Runtime_MallocOrThrow(&DAT_004b7c94,(uchar *)(_Size * 0x28));
   *(void **)(param_1 + 0x11c) = pvVar6;
-  _Globals::FUN_00436f40
+  _Globals::CDSImage__Allocate
             ((void *)(param_1 + 0xbc),_Size,0x28,*(int *)(*(int *)(param_1 + 0xb4) + 0xc),'\0',-1);
   local_24 = *(void **)(param_1 + 0x118);
   *(undefined4 *)(param_1 + 0xd0) = 0;
@@ -86067,14 +86084,14 @@ void __fastcall CPoemScroller::OnScrollTick(int param_1)
 
 
 
-undefined4 * __fastcall ODSImage::FUN_00426060(undefined4 *param_1)
+undefined4 * __fastcall ODSImage::CGunMouse_ctor(undefined4 *param_1)
 
 {
   int *piVar1;
   int *piVar2;
   void *this;
   int iVar3;
-  undefined4 *local_1c;
+  dword *local_1c;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -86109,14 +86126,14 @@ undefined4 * __fastcall ODSImage::FUN_00426060(undefined4 *param_1)
   param_1[0x84] = 0;
   param_1[0x85] = 0;
   local_4 = CONCAT31(local_4._1_3_,8);
-  FUN_004253d0((ODSImage *)(param_1 + 0x82),0x1e);
+  CGunMouse_CoordRing_Reserve((ODSImage *)(param_1 + 0x82),0x1e);
   param_1[0x7e] = g_dwElapsedMs;
   param_1[0x68] = 2;
   param_1[0x69] = 3;
   param_1[0x6a] = param_1[0x68];
   param_1[0x6b] = param_1[0x69];
   piVar2 = *(int **)((int)g_pApp + 0x70);
-  local_1c = &DAT_004af900;
+  local_1c = g_dwCGunMouseTrackSources;
   do {
     piVar2 = (int *)(**(code **)(*piVar2 + 0x10))(*local_1c,0);
     local_c._0_1_ = 9;
@@ -86154,7 +86171,7 @@ undefined4 * __fastcall ODSImage::FUN_00426060(undefined4 *param_1)
 undefined4 * __thiscall CGunMouse::FUN_004262a0(CGunMouse *this,byte param_1)
 
 {
-  FUN_00425730((undefined4 *)this);
+  CGunMouse_dtor((undefined4 *)this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -86179,9 +86196,9 @@ undefined4 * __fastcall CPoemScroller::Constructor(undefined4 *param_1)
   puStack_c = &LAB_00478833;
   local_10 = ExceptionList;
   ExceptionList = &local_10;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_8 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1a));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x1a));
   *param_1 = vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -86270,7 +86287,7 @@ undefined4 * __thiscall CPoemScroller::ScalarDeletingDestructor(CPoemScroller *t
 // 
 // Library: Visual Studio 2005 Release
 
-undefined4 * _Globals::CreateObject(void)
+undefined4 * _Globals::CGunMouse_CreateObject(void)
 
 {
   undefined4 *puVar1;
@@ -86285,7 +86302,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x218);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = ODSImage::FUN_00426060(puVar1);
+    puVar1 = ODSImage::CGunMouse_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -86377,10 +86394,10 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
   puStack_8 = &LAB_00478989;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   piVar8 = (int *)0x0;
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(this + 0x68));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(this + 0x68));
   *(undefined ***)this = CMenu::vftable;
   *(undefined ***)(this + 4) = CMenu::vftable;
   *(undefined ***)(this + 0x10) = CMenu::vftable;
@@ -86412,11 +86429,11 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     piVar3 = (int *)0x0;
   }
   else {
-    piVar3 = CDSBitmap::FUN_004393d0(pCVar2,0,0,piVar12);
+    piVar3 = CDSBitmap::CDSBitmap_ctor(pCVar2,0,0,piVar12);
   }
   local_c._0_1_ = 4;
   *(int **)(this + 0x8c) = piVar3;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
+  _Globals::CDSView__AddChild(this,piVar3,0);
   pCVar4 = (CBulanci *)_Globals::FUN_00447c42(200);
   local_c._0_1_ = 6;
   if (pCVar4 == (CBulanci *)0x0) {
@@ -86427,7 +86444,7 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
   }
   local_c._0_1_ = 4;
   *(int **)(this + 0xb0) = piVar3;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
+  _Globals::CDSView__AddChild(this,piVar3,0);
   pCVar4 = (CBulanci *)_Globals::FUN_00447c42(200);
   local_c._0_1_ = 7;
   if (pCVar4 == (CBulanci *)0x0) {
@@ -86438,7 +86455,7 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
   }
   local_c._0_1_ = 4;
   *(int **)(this + 0xb4) = piVar3;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
+  _Globals::CDSView__AddChild(this,piVar3,0);
   pCVar4 = (CBulanci *)_Globals::FUN_00447c42(200);
   local_c._0_1_ = 8;
   if (pCVar4 == (CBulanci *)0x0) {
@@ -86449,7 +86466,7 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
   }
   local_c._0_1_ = 4;
   *(int **)(this + 0xb8) = piVar3;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
+  _Globals::CDSView__AddChild(this,piVar3,0);
   local_c._0_1_ = 9;
   pCVar2 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
   local_c._0_1_ = 10;
@@ -86461,11 +86478,11 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     if (pvVar1 != (void *)0x0) {
       piVar8 = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    piVar3 = CDSBitmap::FUN_004393d0(pCVar2,100,0x37,piVar8);
+    piVar3 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x37,piVar8);
   }
   local_c._0_1_ = 9;
   *(int **)(this + 0x90) = piVar3;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
+  _Globals::CDSView__AddChild(this,piVar3,0);
   pCVar2 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
   local_c._0_1_ = 0xb;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -86479,11 +86496,11 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     if (pvVar1 != (void *)0x0) {
       piVar8 = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    piVar3 = CDSBitmap::FUN_004393d0(pCVar2,100,0x37,piVar8);
+    piVar3 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x37,piVar8);
   }
   local_c._0_1_ = 9;
   *(int **)(this + 0x94) = piVar3;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
+  _Globals::CDSView__AddChild(this,piVar3,0);
   pCVar2 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
   local_c._0_1_ = 0xc;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -86497,11 +86514,11 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     if (pvVar1 != (void *)0x0) {
       piVar8 = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    piVar3 = CDSBitmap::FUN_004393d0(pCVar2,100,0x8b,piVar8);
+    piVar3 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x8b,piVar8);
   }
   local_c._0_1_ = 9;
   *(int **)(this + 0x98) = piVar3;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
+  _Globals::CDSView__AddChild(this,piVar3,0);
   pCVar2 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
   local_c._0_1_ = 0xd;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -86515,11 +86532,11 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     if (pvVar1 != (void *)0x0) {
       piVar8 = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    piVar3 = CDSBitmap::FUN_004393d0(pCVar2,100,0x8b,piVar8);
+    piVar3 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x8b,piVar8);
   }
   local_c._0_1_ = 9;
   *(int **)(this + 0x9c) = piVar3;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
+  _Globals::CDSView__AddChild(this,piVar3,0);
   pCVar2 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
   local_c._0_1_ = 0xe;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -86533,12 +86550,12 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     if (pvVar1 != (void *)0x0) {
       piVar8 = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    piVar3 = CDSBitmap::FUN_004393d0(pCVar2,100,0xdf,piVar8);
+    piVar3 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0xdf,piVar8);
     piVar5 = unaff_EBX;
   }
   local_c._0_1_ = 9;
   *(int **)(this + 0xa0) = piVar3;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
+  _Globals::CDSView__AddChild(this,piVar3,0);
   pCVar2 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
   local_c._0_1_ = 0xf;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -86552,15 +86569,15 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     if (pvVar1 != (void *)0x0) {
       piVar8 = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    piVar3 = CDSBitmap::FUN_004393d0(pCVar2,100,0xdf,piVar8);
+    piVar3 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0xdf,piVar8);
     piVar5 = unaff_EBX;
   }
   local_c._0_1_ = 9;
   *(int **)(this + 0xa4) = piVar3;
-  _Globals::FUN_0042d0b0(this,piVar3,0);
-  _Globals::FUN_0042d040(*(int **)(this + 0x94));
-  _Globals::FUN_0042d040(*(int **)(this + 0x9c));
-  _Globals::FUN_0042d040(*(int **)(this + 0xa4));
+  _Globals::CDSView__AddChild(this,piVar3,0);
+  _Globals::CDSView__Hide(*(int **)(this + 0x94));
+  _Globals::CDSView__Hide(*(int **)(this + 0x9c));
+  _Globals::CDSView__Hide(*(int **)(this + 0xa4));
   pCVar2 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
   local_c._0_1_ = 0x10;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -86574,11 +86591,11 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     if (pvVar1 != (void *)0x0) {
       piVar8 = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    piVar5 = CDSBitmap::FUN_004393d0(pCVar2,0x262,0,piVar8);
+    piVar5 = CDSBitmap::CDSBitmap_ctor(pCVar2,0x262,0,piVar8);
   }
   local_c._0_1_ = 9;
   *(int **)(this + 200) = piVar5;
-  _Globals::FUN_0042d0b0(this,piVar5,0);
+  _Globals::CDSView__AddChild(this,piVar5,0);
   puVar6 = (undefined4 *)_Globals::FUN_00447c42(0x128);
   local_c._0_1_ = 0x11;
   if (puVar6 == (undefined4 *)0x0) {
@@ -86588,7 +86605,7 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     piVar5 = CPoemScroller::Constructor(puVar6);
   }
   local_c._0_1_ = 9;
-  _Globals::FUN_0042d0b0(this,piVar5,0);
+  _Globals::CDSView__AddChild(this,piVar5,0);
   this_00 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   local_c._0_1_ = 0x12;
   if (this_00 == (CStaticText *)0x0) {
@@ -86602,7 +86619,7 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     piVar5 = CStaticText::CStaticText_BuildAtAuto(this_00,0xe6,0x23f,uVar9,uVar10,uVar11);
   }
   local_c = (void *)CONCAT31(local_c._1_3_,9);
-  _Globals::FUN_0042d0b0(this,piVar5,0);
+  _Globals::CDSView__AddChild(this,piVar5,0);
   pCVar4 = this + 0xd0;
   *(undefined4 *)pCVar4 = 0;
   *(undefined4 *)(this + 0xd4) = 0;
@@ -86620,7 +86637,7 @@ CBulanci::CMenu_ctor_with_ui(CBulanci *this,undefined4 param_2,CBulanci param_3)
     }
     local_c = (void *)CONCAT31(local_c._1_3_,9);
     *(int **)pCVar4 = piVar5;
-    _Globals::FUN_0042d0b0(this,piVar5,0);
+    _Globals::CDSView__AddChild(this,piVar5,0);
     pCVar4 = pCVar4 + 4;
     iVar7 = iVar7 + -1;
   } while (iVar7 != 0);
@@ -86664,12 +86681,12 @@ void __thiscall CPanel::FUN_00426ce0(CPanel *this,short param_1)
       uVar2 = _Globals::FUN_00412590(*(void **)(this + 0x68),bVar1);
       uVar4 = (uint)(byte)CVar3;
       if ((char)uVar2 == '\0') {
-        _Globals::FUN_0042d040(*(int **)(this + uVar4 * 4 + 0xec));
-        _Globals::FUN_0042d040(*(int **)(this + uVar4 * 4 + 0xdc));
+        _Globals::CDSView__Hide(*(int **)(this + uVar4 * 4 + 0xec));
+        _Globals::CDSView__Hide(*(int **)(this + uVar4 * 4 + 0xdc));
       }
       else {
-        _Globals::FUN_0042c990(*(int **)(this + uVar4 * 4 + 0xec));
-        _Globals::FUN_0042c990(*(int **)(this + uVar4 * 4 + 0xdc));
+        _Globals::CDSView__Show(*(int **)(this + uVar4 * 4 + 0xec));
+        _Globals::CDSView__Show(*(int **)(this + uVar4 * 4 + 0xdc));
       }
       CVar3 = (CPanel)((char)CVar3 + '\x01');
     } while ((byte)CVar3 < (byte)this[0x6c]);
@@ -86920,7 +86937,7 @@ undefined4 * __fastcall CShotCounter::Constructor(undefined4 *param_1)
   puStack_8 = &LAB_004789b8;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_4 = 0;
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -87047,9 +87064,9 @@ undefined4 * __fastcall CNumCounter::CNumCounter_ctor(undefined4 *param_1)
   puStack_8 = &LAB_00478a23;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(param_1 + 0x1a));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(param_1 + 0x1a));
   local_4 = CONCAT31(local_4._1_3_,1);
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -87193,7 +87210,7 @@ undefined4 * __fastcall CPanel::CPanel_ctor(undefined4 *param_1)
   puStack_8 = &LAB_00478a98;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   local_4 = 0;
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -87300,7 +87317,7 @@ void __thiscall _Globals::FUN_004276c0(void *this,byte param_1,char param_2)
     uVar2 = FUN_004125b0(*(void **)((int)this + 0x68),param_1);
     if (((char)uVar2 != '\0') &&
        (piVar1 = *(int **)((int)this + (uint)param_1 * 4 + 0x98), piVar1 != (int *)0x0)) {
-      FUN_0042c990(piVar1);
+      CDSView__Show(piVar1);
     }
   }
   return;
@@ -87654,8 +87671,8 @@ void __thiscall _Globals::FUN_00427c90(void *this,void *param_1)
   if (*(byte *)((int)param_1 + 0x70) < *(byte *)((int)this + 0x6c)) {
     iVar1 = *(int *)((int)param_1 + 0xf8);
     uVar6 = (uint)*(byte *)((int)param_1 + 0x70);
-    TM_SetCurrentSequence
-              ((void *)(*(int *)((int)this + uVar6 * 4 + 0x88) + 0x68),*(int **)(iVar1 + 0x68));
+    ODSImage__SetImage((void *)(*(int *)((int)this + uVar6 * 4 + 0x88) + 0x68),
+                       *(int **)(iVar1 + 0x68));
     (**(code **)(**(int **)((int)this + uVar6 * 4 + 0x88) + 0x24))(0,0);
     if (unaff_BL == 0) {
       cVar3 = FUN_004173f0(param_1);
@@ -87691,7 +87708,7 @@ undefined4 * __thiscall CBulanci::FUN_00427d40(CBulanci *this,undefined4 param_1
   local_c = ExceptionList;
   uVar1 = DAT_004b0e44 ^ (uint)&stack0xffffffe4;
   ExceptionList = &local_c;
-  CDSBitmap::FUN_004393d0((CDSBitmap *)this,param_1,param_2,(int *)0x0);
+  CDSBitmap::CDSBitmap_ctor((CDSBitmap *)this,param_1,param_2,(int *)0x0);
   *(undefined ***)this = CSpells::vftable;
   *(undefined ***)(this + 4) = CSpells::vftable;
   *(undefined ***)(this + 0x10) = CSpells::vftable;
@@ -87705,7 +87722,7 @@ undefined4 * __thiscall CBulanci::FUN_00427d40(CBulanci *this,undefined4 param_1
     piVar2 = (int *)_Globals::CheckedVirtualBaseCast(this_00,DAT_004b826c);
   }
   local_c._0_1_ = 1;
-  _Globals::TM_SetCurrentSequence(this + 0x68,piVar2);
+  _Globals::ODSImage__SetImage(this + 0x68,piVar2);
   *(ushort *)(this + 0x14) = *(ushort *)(this + 0x14) | 0x200;
   *(undefined4 *)(this + 0x78) = 0;
   this[0x7c] = param_1._0_1_;
@@ -87738,7 +87755,7 @@ undefined4 * __thiscall CBulanci::FUN_00427e30(CBulanci *this,int param_1,undefi
   local_c = ExceptionList;
   uVar2 = DAT_004b0e44 ^ (uint)&stack0xffffffdc;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   pCVar4 = this + 0x68;
   local_4 = 0;
   *(undefined ***)this = CShotCounter::vftable;
@@ -87802,9 +87819,9 @@ CBulanci::FUN_00427f70(CBulanci *this,undefined4 param_1,int param_2,uint param_
   local_c = ExceptionList;
   uVar2 = DAT_004b0e44 ^ (uint)&stack0xffffffdc;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)(this + 0x68));
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)(this + 0x68));
   pCVar4 = this + 0x80;
   local_4._0_1_ = 1;
   *(undefined ***)this = CNumCounter::vftable;
@@ -87865,21 +87882,19 @@ undefined4 * __thiscall CBulanci::FUN_004280f0(CBulanci *this,undefined4 param_1
   int *piVar4;
   int iVar5;
   CStaticText *pCVar6;
-  CDSBitmap *pCVar7;
-  CBulanci *pCVar8;
-  undefined4 *puVar9;
+  uint *puVar7;
+  CDSBitmap *pCVar8;
+  CBulanci *pCVar9;
+  undefined4 *puVar10;
+  undefined4 uVar11;
   CDSChained *this_00;
-  int *piVar10;
   void *unaff_EBX;
-  int *piVar11;
-  uint uVar12;
-  undefined4 uVar13;
-  undefined4 uVar14;
+  int *piVar12;
+  uint uVar13;
+  uint uVar14;
   uint uVar15;
-  undefined4 uVar16;
-  uint uVar17;
-  int *piVar18;
-  int *piVar19;
+  int *piVar16;
+  int *piVar17;
   void *local_c;
   undefined1 *puStack_8;
   CDSBitmap *local_4;
@@ -87888,23 +87903,23 @@ undefined4 * __thiscall CBulanci::FUN_004280f0(CBulanci *this,undefined4 param_1
   puStack_8 = &LAB_00478d32;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
-  pCVar8 = this + 0x70;
-  piVar11 = (int *)0x0;
+  CDSChained::CDSChained_ctor((undefined4 *)this);
+  pCVar9 = this + 0x70;
+  piVar12 = (int *)0x0;
   local_4 = (CDSBitmap *)0x0;
   *(undefined ***)this = CPanel::vftable;
   *(undefined ***)(this + 4) = CPanel::vftable;
   *(undefined ***)(this + 0x10) = CPanel::vftable;
   *(undefined ***)(this + 0x18) = CPanel::vftable;
   _eh_vector_constructor_iterator_
-            (pCVar8,4,2,(_func_void_void_ptr *)&LAB_00409010,_Globals::FUN_004344c0);
+            (pCVar9,4,2,(_func_void_void_ptr *)&LAB_00409010,_Globals::FUN_004344c0);
   *(undefined4 *)(this + 0x68) = param_1;
-  piVar18 = *(int **)((int)g_pApp + 0x70);
-  piVar19 = (int *)0x10075;
+  piVar16 = *(int **)((int)g_pApp + 0x70);
+  piVar17 = (int *)0x10075;
   local_4 = (CDSBitmap *)CONCAT31(local_4._1_3_,1);
-  pvVar3 = (void *)(**(code **)(*piVar18 + 0x10))();
+  pvVar3 = (void *)(**(code **)(*piVar16 + 0x10))();
   if (pvVar3 != (void *)0x0) {
-    piVar11 = (int *)_Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b826c);
+    piVar12 = (int *)_Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b826c);
   }
   local_c._0_1_ = 2;
   local_4 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
@@ -87913,26 +87928,26 @@ undefined4 * __thiscall CBulanci::FUN_004280f0(CBulanci *this,undefined4 param_1
     piVar4 = (int *)0x0;
   }
   else {
-    piVar4 = CDSBitmap::FUN_004393d0(local_4,0,0,piVar11);
+    piVar4 = CDSBitmap::CDSBitmap_ctor(local_4,0,0,piVar12);
   }
   local_c = (void *)CONCAT31(local_c._1_3_,2);
-  _Globals::FUN_0042d0b0(this,piVar4,0);
-  iVar5 = piVar11[2];
+  _Globals::CDSView__AddChild(this,piVar4,0);
+  iVar5 = piVar12[2];
   *(undefined4 *)(this + 0x20) = 0;
   *(int *)(this + 0x24) = 600 - iVar5;
   *(undefined4 *)(this + 0x28) = 800;
   *(undefined4 *)(this + 0x2c) = 600;
-  piVar11 = (int *)0x0;
-  pvVar3 = (void *)(**(code **)(*piVar18 + 0x10))();
-  if (*(int **)pCVar8 != (int *)0x0) {
-    (**(code **)(**(int **)pCVar8 + 8))();
+  piVar12 = (int *)0x0;
+  pvVar3 = (void *)(**(code **)(*piVar16 + 0x10))();
+  if (*(int **)pCVar9 != (int *)0x0) {
+    (**(code **)(**(int **)pCVar9 + 8))();
   }
   if (pvVar3 != (void *)0x0) {
     iVar5 = _Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b826c);
-    *(int *)pCVar8 = iVar5;
+    *(int *)pCVar9 = iVar5;
   }
-  uVar17 = 0;
-  pvVar3 = (void *)(**(code **)(*piVar18 + 0x10))();
+  uVar14 = 0;
+  pvVar3 = (void *)(**(code **)(*piVar16 + 0x10))();
   if (*(int **)(this + 0x74) != (int *)0x0) {
     (**(code **)(**(int **)(this + 0x74) + 8))();
   }
@@ -87940,7 +87955,7 @@ undefined4 * __thiscall CBulanci::FUN_004280f0(CBulanci *this,undefined4 param_1
     iVar5 = _Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b826c);
     *(int *)(this + 0x74) = iVar5;
   }
-  pvVar3 = (void *)(**(code **)(*piVar18 + 0x10))();
+  pvVar3 = (void *)(**(code **)(*piVar16 + 0x10))();
   if (pvVar3 != (void *)0x0) {
     _Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b826c);
   }
@@ -87950,138 +87965,125 @@ undefined4 * __thiscall CBulanci::FUN_004280f0(CBulanci *this,undefined4 param_1
     _DAT_004b3a00 = 0xeeeeee;
   }
   _Globals::FUN_00412660(*(void **)(this + 0x68),(undefined4 *)&stack0xffffffc8);
-  pvVar3 = (void *)(**(code **)(*piVar18 + 0x10))();
-  piVar18 = (int *)0x0;
+  pvVar3 = (void *)(**(code **)(*piVar16 + 0x10))();
+  piVar16 = (int *)0x0;
   if (pvVar3 != (void *)0x0) {
-    piVar18 = (int *)_Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b826c);
+    piVar16 = (int *)_Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b826c);
   }
   CVar2 = *(CBulanci *)(*(int *)(this + 0x68) + 0xd8);
   this[0x6c] = CVar2;
-  uVar17 = uVar17 & 0xffffff00;
+  uVar14 = uVar14 & 0xffffff00;
   if (CVar2 != (CBulanci)0x0) {
     do {
-      uVar12 = uVar17 & 0xff;
-      iVar5 = *(int *)(&DAT_004af924 + uVar12 * 4);
+      uVar13 = uVar14 & 0xff;
       pCVar6 = (CStaticText *)_Globals::FUN_00447c42(0x98);
       if (pCVar6 == (CStaticText *)0x0) {
-        piVar4 = (int *)0x0;
+        puVar7 = (uint *)0x0;
       }
       else {
-        uVar16 = 0x100af;
-        uVar15 = 5;
-        uVar14 = 1;
-        piVar4 = (int *)_Globals::FUN_00412910(*(void **)(this + 0x68),(byte)SUB41(uVar17,0));
-        uVar13 = 0;
+        piVar4 = (int *)_Globals::FUN_00412910(*(void **)(this + 0x68),(byte)SUB41(uVar14,0));
         _Globals::FUN_0042d490(&stack0xffffff84,piVar4);
-        piVar4 = CStaticText::CStaticText_BuildAt
-                           (pCVar6,iVar5 + 4,9,iVar5 + 0x5c,0x16,uVar13,uVar14,uVar15,uVar16);
+        puVar7 = CStaticText::CStaticText_BuildAt(pCVar6);
       }
-      *(int **)(this + uVar12 * 4 + 0xcc) = piVar4;
-      _Globals::FUN_0042d0b0(this,piVar4,0);
-      pCVar7 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
-      if (pCVar7 == (CDSBitmap *)0x0) {
+      *(uint **)(this + uVar13 * 4 + 0xcc) = puVar7;
+      _Globals::CDSView__AddChild(this,(int *)puVar7,0);
+      pCVar8 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
+      if (pCVar8 == (CDSBitmap *)0x0) {
         piVar4 = (int *)0x0;
       }
       else {
-        piVar4 = CDSBitmap::FUN_004393d0
-                           (pCVar7,*(int *)(&DAT_004af924 + uVar12 * 4) + 5,0x28,piVar11);
+        piVar4 = CDSBitmap::CDSBitmap_ctor
+                           (pCVar8,*(int *)(&DAT_004af924 + uVar13 * 4) + 5,0x28,piVar12);
       }
-      _Globals::FUN_0042d0b0(this,piVar4,0);
-      pCVar8 = (CBulanci *)_Globals::FUN_00447c42(0x470);
-      uVar15 = uVar17;
-      if (pCVar8 == (CBulanci *)0x0) {
-        puVar9 = (undefined4 *)0x0;
+      _Globals::CDSView__AddChild(this,piVar4,0);
+      pCVar9 = (CBulanci *)_Globals::FUN_00447c42(0x470);
+      uVar15 = uVar14;
+      if (pCVar9 == (CBulanci *)0x0) {
+        puVar10 = (undefined4 *)0x0;
       }
       else {
-        puVar9 = FUN_004101d0(pCVar8,*(int *)(&DAT_004af924 + uVar12 * 4) + 6,0x29,uVar17,0x1001d);
+        puVar10 = FUN_004101d0(pCVar9,*(int *)(&DAT_004af924 + uVar13 * 4) + 6,0x29,uVar14,0x1001d);
       }
-      *(undefined4 **)(this + uVar12 * 4 + 0xbc) = puVar9;
-      uVar13 = _Globals::FUN_00412930(*(void **)(this + 0x68),(byte)uVar17);
-      CBulPicture::FUN_0040aa70(*(CBulPicture **)(this + uVar12 * 4 + 0xbc),(byte)uVar13);
-      _Globals::FUN_0042d0b0(this,*(int **)(this + uVar12 * 4 + 0xbc),0);
-      *(undefined4 *)(this + uVar12 * 4 + 0x98) = 0;
-      pCVar8 = (CBulanci *)_Globals::FUN_00447c42(0x80);
-      if (pCVar8 == (CBulanci *)0x0) {
+      *(undefined4 **)(this + uVar13 * 4 + 0xbc) = puVar10;
+      uVar11 = _Globals::FUN_00412930(*(void **)(this + 0x68),(byte)uVar14);
+      CBulPicture::FUN_0040aa70(*(CBulPicture **)(this + uVar13 * 4 + 0xbc),(byte)uVar11);
+      _Globals::CDSView__AddChild(this,*(int **)(this + uVar13 * 4 + 0xbc),0);
+      *(undefined4 *)(this + uVar13 * 4 + 0x98) = 0;
+      pCVar9 = (CBulanci *)_Globals::FUN_00447c42(0x80);
+      if (pCVar9 == (CBulanci *)0x0) {
         piVar4 = (int *)0x0;
       }
       else {
-        piVar4 = FUN_00427d40(pCVar8,*(int *)(&DAT_004af924 + uVar12 * 4) + 6,0x29);
+        piVar4 = FUN_00427d40(pCVar9,*(int *)(&DAT_004af924 + uVar13 * 4) + 6,0x29);
       }
-      _Globals::FUN_0042d0b0(this,piVar4,0);
-      iVar5 = *(int *)(this + uVar12 * 4 + 0xbc);
-      piVar4 = (int *)(iVar5 + 0x20);
+      _Globals::CDSView__AddChild(this,piVar4,0);
+      iVar5 = *(int *)(this + uVar13 * 4 + 0xbc);
       this_00 = (CDSChained *)_Globals::FUN_00447c42(0x6c);
       if (this_00 == (CDSChained *)0x0) {
         this_00 = (CDSChained *)0x0;
       }
       else {
-        CDSChained::FUN_0040b560(this_00,piVar4);
+        CDSChained::FUN_0040b560(this_00,(int *)(iVar5 + 0x20));
         *(undefined ***)this_00 = CBlackView::vftable;
         *(undefined ***)(this_00 + 4) = CBlackView::vftable;
         *(undefined ***)(this_00 + 0x10) = CBlackView::vftable;
         *(undefined ***)(this_00 + 0x18) = CBlackView::vftable;
         *(undefined4 *)(this_00 + 0x68) = 0xffffff;
       }
-      *(CDSChained **)(this + uVar12 * 4 + 0xec) = this_00;
-      _Globals::FUN_0042d0b0(this,(int *)this_00,0);
-      pcVar1 = *(code **)(**(int **)(this + uVar12 * 4 + 0xec) + 0x24);
-      (*(int **)(this + uVar12 * 4 + 0xec))[0x1a] = 0x9f9f9f;
+      *(CDSChained **)(this + uVar13 * 4 + 0xec) = this_00;
+      _Globals::CDSView__AddChild(this,(int *)this_00,0);
+      pcVar1 = *(code **)(**(int **)(this + uVar13 * 4 + 0xec) + 0x24);
+      (*(int **)(this + uVar13 * 4 + 0xec))[0x1a] = 0x9f9f9f;
       (*pcVar1)();
-      _Globals::FUN_0042d040(*(int **)(this + uVar12 * 4 + 0xec));
+      _Globals::CDSView__Hide(*(int **)(this + uVar13 * 4 + 0xec));
       pCVar6 = (CStaticText *)_Globals::FUN_00447c42(0x98);
       if (pCVar6 == (CStaticText *)0x0) {
-        piVar10 = (int *)0x0;
+        puVar7 = (uint *)0x0;
       }
       else {
-        uVar16 = 0x100af;
-        uVar17 = 5;
-        uVar14 = 1;
-        uVar13 = 0;
         FUN_0042d510((CBulanci *)&stack0xffffff84,
                      *(short **)(g_apCDSStaticTextsSingleton[2] + 0x168));
-        piVar10 = CStaticText::CStaticText_BuildAt
-                            (pCVar6,*piVar4,*(undefined4 *)(iVar5 + 0x24),*(int *)(iVar5 + 0x28),
-                             *(undefined4 *)(iVar5 + 0x2c),uVar13,uVar14,uVar17,uVar16);
+        puVar7 = CStaticText::CStaticText_BuildAt(pCVar6);
       }
-      *(int **)(this + uVar12 * 4 + 0xdc) = piVar10;
-      _Globals::FUN_0042d0b0(this,piVar10,0);
-      CStaticText::CStaticText_SetStyle(*(CStaticText **)(this + uVar12 * 4 + 0xdc),&DAT_004b39fc,2)
+      *(uint **)(this + uVar13 * 4 + 0xdc) = puVar7;
+      _Globals::CDSView__AddChild(this,(int *)puVar7,0);
+      CStaticText::CStaticText_SetStyle(*(CStaticText **)(this + uVar13 * 4 + 0xdc),&DAT_004b39fc,2)
       ;
-      *(undefined1 *)(*(int *)(this + uVar12 * 4 + 0xdc) + 0x94) = 1;
-      _Globals::FUN_0042d040(*(int **)(this + uVar12 * 4 + 0xdc));
-      pCVar8 = (CBulanci *)_Globals::FUN_00447c42(0x7c);
-      if (pCVar8 == (CBulanci *)0x0) {
+      *(undefined1 *)(*(int *)(this + uVar13 * 4 + 0xdc) + 0x94) = 1;
+      _Globals::CDSView__Hide(*(int **)(this + uVar13 * 4 + 0xdc));
+      pCVar9 = (CBulanci *)_Globals::FUN_00447c42(0x7c);
+      if (pCVar9 == (CBulanci *)0x0) {
         piVar4 = (int *)0x0;
       }
       else {
-        piVar4 = FUN_00427e30(pCVar8,*piVar4,*(int *)(iVar5 + 0x2c) + 3);
+        piVar4 = FUN_00427e30(pCVar9,*(int *)(iVar5 + 0x20),*(int *)(iVar5 + 0x2c) + 3);
       }
-      *(int **)(this + uVar12 * 4 + 0x78) = piVar4;
-      _Globals::FUN_0042d0b0(this,piVar4,0);
-      pCVar7 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
-      if (pCVar7 == (CDSBitmap *)0x0) {
+      *(int **)(this + uVar13 * 4 + 0x78) = piVar4;
+      _Globals::CDSView__AddChild(this,piVar4,0);
+      pCVar8 = (CDSBitmap *)_Globals::FUN_00447c42(0x78);
+      if (pCVar8 == (CDSBitmap *)0x0) {
         piVar4 = (int *)0x0;
       }
       else {
-        piVar4 = CDSBitmap::FUN_004393d0
-                           (pCVar7,*(int *)(iVar5 + 0x28) + 3,
+        piVar4 = CDSBitmap::CDSBitmap_ctor
+                           (pCVar8,*(int *)(iVar5 + 0x28) + 3,
                             *(int *)(iVar5 + 0x2c) - (*(int **)(this + 0x70))[2],
                             *(int **)(this + 0x70));
       }
-      *(int **)(this + uVar12 * 4 + 0x88) = piVar4;
-      _Globals::FUN_0042d0b0(this,piVar4,0);
-      pCVar8 = (CBulanci *)_Globals::FUN_00447c42(0xa8);
-      if (pCVar8 == (CBulanci *)0x0) {
+      *(int **)(this + uVar13 * 4 + 0x88) = piVar4;
+      _Globals::CDSView__AddChild(this,piVar4,0);
+      pCVar9 = (CBulanci *)_Globals::FUN_00447c42(0xa8);
+      if (pCVar9 == (CBulanci *)0x0) {
         piVar4 = (int *)0x0;
       }
       else {
-        uVar17 = FUN_00412680(*(CBulanci **)(this + 0x68),(byte)uVar15);
-        piVar4 = FUN_00427f70(pCVar8,*(int *)(iVar5 + 0x28) + 3,*(int *)(iVar5 + 0x24),uVar17);
+        uVar14 = FUN_00412680(*(CBulanci **)(this + 0x68),(byte)uVar15);
+        piVar4 = FUN_00427f70(pCVar9,*(int *)(iVar5 + 0x28) + 3,*(int *)(iVar5 + 0x24),uVar14);
       }
-      *(int **)(this + uVar12 * 4 + 0xa8) = piVar4;
-      _Globals::FUN_0042d0b0(this,piVar4,0);
+      *(int **)(this + uVar13 * 4 + 0xa8) = piVar4;
+      _Globals::CDSView__AddChild(this,piVar4,0);
       CVar2 = (CBulanci)((char)uVar15 + 1);
-      uVar17 = CONCAT31((int3)(uVar15 >> 8),CVar2);
+      uVar14 = CONCAT31((int3)(uVar15 >> 8),CVar2);
     } while ((byte)CVar2 < (byte)this[0x6c]);
   }
   if ((_DAT_004b3a04 & 2) == 0) {
@@ -88094,32 +88096,27 @@ undefined4 * __thiscall CBulanci::FUN_004280f0(CBulanci *this,undefined4 param_1
   iVar5 = 0;
   pCVar6 = (CStaticText *)_Globals::FUN_00447c42(0x98);
   if (pCVar6 == (CStaticText *)0x0) {
-    piVar4 = (int *)0x0;
+    puVar7 = (uint *)0x0;
   }
   else {
-    uVar16 = 0x100ae;
-    uVar17 = 5;
-    uVar14 = 1;
-    uVar13 = 0;
     _Globals::FUN_0042d490(&stack0xffffff84,(int *)&stack0xffffffb8);
-    piVar4 = CStaticText::CStaticText_BuildAt
-                       (pCVar6,0x166,0x2d,0x1bc,0x5f,uVar13,uVar14,uVar17,uVar16);
+    puVar7 = CStaticText::CStaticText_BuildAt(pCVar6);
   }
-  *(int **)(this + 0xb8) = piVar4;
-  _Globals::FUN_0042d0b0(this,piVar4,0);
+  *(uint **)(this + 0xb8) = puVar7;
+  _Globals::CDSView__AddChild(this,(int *)puVar7,0);
   CStaticText::CStaticText_SetStyle(*(CStaticText **)(this + 0xb8),&DAT_004b39ec,4);
   *(ushort *)(this + 0x14) = *(ushort *)(this + 0x14) | 0x600;
   if (iVar5 != 0) {
     _Globals::FUN_0042d2d0((void *)(iVar5 + -0xc));
   }
-  if (piVar18 != (int *)0x0) {
-    (**(code **)(*piVar18 + 8))();
+  if (piVar16 != (int *)0x0) {
+    (**(code **)(*piVar16 + 8))();
   }
-  if (piVar11 != (int *)0x0) {
-    (**(code **)(*piVar11 + 8))();
+  if (piVar12 != (int *)0x0) {
+    (**(code **)(*piVar12 + 8))();
   }
-  if (piVar19 != (int *)0x0) {
-    (**(code **)(*piVar19 + 8))();
+  if (piVar17 != (int *)0x0) {
+    (**(code **)(*piVar17 + 8))();
   }
   ExceptionList = unaff_EBX;
   return (undefined4 *)this;
@@ -88508,7 +88505,7 @@ void CDSDsmFile::HandleRecordRead(int *param_1,void *param_2)
   InitializeQueueStreamView(local_3c,(int)this,(int)param_1,0);
   pvVar1 = param_2;
   local_8._0_1_ = 1;
-  _Globals::FUN_00431b70(local_38,param_1,param_2);
+  _Globals::CDSJpegImage__DecompressToImage(local_38,param_1,param_2);
   _Globals::FUN_0043be90((int)local_3c);
   local_38[1] = 0x20;
   HandleQueueSkip(this,(int)param_1);
@@ -89540,7 +89537,7 @@ void __fastcall _Globals::FUN_00429960(int param_1)
     (**(code **)(*piVar1 + 8))(piVar1);
     *(undefined4 *)(param_1 + 0x4c) = 0;
   }
-  FUN_00436d50(param_1 + 4);
+  CDSImage__FreeBuffers(param_1 + 4);
   return;
 }
 
@@ -89761,7 +89758,7 @@ _Globals::CDSApp_KeybQueue(void *this,undefined2 param_1,undefined1 param_2,unde
   local_10 = param_1;
   local_c = param_2;
   local_b = param_3;
-  CBulanci::FUN_0042f3e0((CBulanci *)((int)this + 0x10),&local_14);
+  CBulanci::CDSEventHandler_EnqueueEvent((CBulanci *)((int)this + 0x10),&local_14);
   return;
 }
 
@@ -89774,10 +89771,10 @@ void __thiscall CBulanci::CDSApp_OnActivateApp(CBulanci *this,char param_1)
     this[0x274] = (CBulanci)param_1;
     if (param_1 != '\0') {
       (**(code **)(*(int *)this + 0x24))(this + 0x20,1);
-      _Globals::FUN_0042f390(this + 0x10,0x400,8,0,0);
+      _Globals::CDSView__PostMessage(this + 0x10,0x400,8,0,0);
       return;
     }
-    _Globals::FUN_0042f390(this + 0x10,0x400,9,0,0);
+    _Globals::CDSView__PostMessage(this + 0x10,0x400,9,0,0);
   }
   return;
 }
@@ -89952,7 +89949,7 @@ undefined4 __thiscall CBulanci::CDSView_OnKeyDown(CBulanci *this,char param_1,ch
     if ((param_1 != 'X') || (param_2 == '\0')) {
       return uVar1 & 0xffffff00;
     }
-    uVar1 = _Globals::FUN_0042c3c0(this,0x8004);
+    uVar1 = _Globals::CDSView__EndModal(this,0x8004);
   }
   return CONCAT31((int3)(uVar1 >> 8),1);
 }
@@ -90153,7 +90150,7 @@ CBulanci::FUN_0042a330(CBulanci *this,int *param_1,int param_2,int param_3,int *
   int local_c [3];
   
   FUN_00429a40((int)this);
-  FUN_0042cbf0(this,(int)param_1,param_2);
+  CDSView__SetSize(this,(int)param_1,param_2);
   FUN_00429a80((int)this);
   *(int *)(this + 0xe0) = param_3;
   if (this[0xe4] == (CBulanci)0x0) {
@@ -90302,7 +90299,7 @@ CBulanci::CDSApp_MouseQueue(CBulanci *this,undefined2 param_1,undefined2 param_2
     *(int *)(this + 0xf8) = local_8;
     *(int *)(this + 0xfc) = local_4;
     local_c = param_2;
-    FUN_0042f3e0(this + 0x10,&local_14);
+    CDSEventHandler_EnqueueEvent(this + 0x10,&local_14);
   }
   return;
 }
@@ -90335,7 +90332,7 @@ CBulanci::CDSApp_WndProcDispatch(CBulanci *this,uint param_1,ushort param_2,unde
         break;
       case 0x10:
         if (g_pModalFocus != (void *)0x0) {
-          _Globals::FUN_0042f390((void *)((int)g_pModalFocus + 0x10),0x100,0x8004,0,0);
+          _Globals::CDSView__PostMessage((void *)((int)g_pModalFocus + 0x10),0x100,0x8004,0,0);
         }
         return 0;
       case 0x1c:
@@ -90788,7 +90785,7 @@ undefined4 * __fastcall CDSApp::FUN_0042afd0(undefined4 *param_1)
   puStack_8 = &LAB_00479180;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0(param_1);
+  CDSChained::CDSChained_ctor(param_1);
   *param_1 = &g_pCDSApp_vftable;
   param_1[1] = vftable;
   param_1[4] = vftable;
@@ -90894,7 +90891,7 @@ void __thiscall CBulanci::CDSApp_ctor(CBulanci *this,short *param_1,short *param
   local_14 = (undefined1 *)&uStack_34;
   ExceptionList = &local_10;
   local_18 = this;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   *(void ***)this = &CDSApp::g_pCDSApp_vftable;
   *(undefined ***)(this + 4) = CDSApp::vftable;
   *(undefined ***)(this + 0x10) = CDSApp::vftable;
@@ -91159,7 +91156,7 @@ void __thiscall _Globals::FUN_0042b5a0(void *this,int *param_1,int *param_2)
   local_2c = param_2[1];
   local_28 = param_2[2];
   local_24 = param_2[3];
-  CPoemScroller::FUN_00433280((CPoemScroller *)&local_30,(int *)((int)this + 0x20));
+  CPoemScroller::rect_Intersect((CPoemScroller *)&local_30,(int *)((int)this + 0x20));
   if ((local_30 < local_28) && (local_2c < local_24)) {
     iVar5 = local_28 - local_30;
     iVar9 = local_24 - local_2c;
@@ -91198,7 +91195,7 @@ void __thiscall _Globals::FUN_0042b5a0(void *this,int *param_1,int *param_2)
               local_1c = iVar1;
               local_18 = iVar8;
               local_14 = iVar2;
-              CPoemScroller::FUN_00433280((CPoemScroller *)&local_20,&local_30);
+              CPoemScroller::rect_Intersect((CPoemScroller *)&local_20,&local_30);
               if ((local_20 < local_18) && (local_1c < local_14)) {
                 local_c = piVar12[1];
                 local_10 = *piVar12;
@@ -91388,8 +91385,8 @@ void __fastcall CDSImageMouse::FUN_0042b9a0(int param_1)
   iVar2 = _Globals::GetColorPlane((int)pCVar4);
   if (((iVar2 == 0) || (*(int *)(param_1 + 0x20) != *(int *)(*(int *)(param_1 + 0xc) + 4))) ||
      (*(int *)(param_1 + 0x24) != *(int *)(*(int *)(param_1 + 0xc) + 8))) {
-    _Globals::FUN_00436d50((int)pCVar4);
-    _Globals::FUN_00436f40
+    _Globals::CDSImage__FreeBuffers((int)pCVar4);
+    _Globals::CDSImage__Allocate
               (pCVar4,*(int *)(*(int *)(param_1 + 0xc) + 4),
                *(undefined4 *)(*(int *)(param_1 + 0xc) + 8),*(int *)((int)this + 0xdc),'\0',-1);
   }
@@ -91564,7 +91561,7 @@ void __fastcall _Globals::CDSApp_RenderFrame(int *param_1)
     param_1[0x2a] = 0;
     param_1[0x2b] = param_1[0x21];
     param_1[0x2c] = param_1[0x22];
-    CPoemScroller::FUN_00433280((CPoemScroller *)(param_1 + 0x29),&DAT_004b3b9c);
+    CPoemScroller::rect_Intersect((CPoemScroller *)(param_1 + 0x29),&DAT_004b3b9c);
     FUN_0042bbe0((int)param_1);
     return;
   }
@@ -91614,7 +91611,7 @@ void __fastcall _Globals::CDSApp_FrameBody(int *param_1)
     else {
       pvVar3 = (void *)((int)g_pModalFocus + 0x10);
     }
-    FUN_0042f590(pvVar3,0x100,0x8004,0,0);
+    CDSView_PostMessage(pvVar3,0x100,0x8004,0,0);
   }
   CDSApp_RenderFrame(param_1);
   return;
@@ -91702,7 +91699,7 @@ void __thiscall _Globals::CDSView_SetModalEligible(void *this,undefined4 param_1
 
 
 
-void __thiscall CBulanci::FUN_0042bf40(CBulanci *this,char param_1)
+void __thiscall CBulanci::CDSView__UpdateScreenCoordinates(CBulanci *this,char param_1)
 
 {
   int iVar1;
@@ -91724,7 +91721,7 @@ void __thiscall CBulanci::FUN_0042bf40(CBulanci *this,char param_1)
       for (this_00 = (CBulanci *)_Globals::FUN_0042f7c0((int)(this + 0x54));
           this_00 != (CBulanci *)0x0;
           this_00 = (CBulanci *)_Globals::FUN_0042f920(*(int *)(this_00 + 0x4c) + 0x54)) {
-        FUN_0042bf40(this_00,'\x01');
+        CDSView__UpdateScreenCoordinates(this_00,'\x01');
         if (*(int *)(this_00 + 0x4c) == 0) {
           return;
         }
@@ -91736,14 +91733,14 @@ void __thiscall CBulanci::FUN_0042bf40(CBulanci *this,char param_1)
 
 
 
-void __thiscall _Globals::FUN_0042bfc0(void *this,void *param_1,int param_2)
+void __thiscall _Globals::CDSView__AddChildInternal(void *this,void *param_1,int param_2)
 
 {
   *(void **)((int)param_1 + 0x4c) = this;
   FUN_0042f9d0((void *)((int)this + 0x54),param_1,param_2);
   if ((*(byte *)((int)this + 0x44) & 0x40) != 0) {
     CDSView_SetModalEligible(param_1,1);
-    CBulanci::FUN_0042bf40(param_1,'\x01');
+    CBulanci::CDSView__UpdateScreenCoordinates(param_1,'\x01');
   }
   return;
 }
@@ -91999,7 +91996,7 @@ void __thiscall _Globals::CDSView_SetActive(void *this,undefined4 param_1)
 
 
 
-int __fastcall CBulanci::FUN_0042c2e0(int param_1)
+int __fastcall CBulanci::CDSView_GetDataSize(int param_1)
 
 {
   int *piVar1;
@@ -92022,7 +92019,7 @@ int __fastcall CBulanci::FUN_0042c2e0(int param_1)
 
 
 
-void __thiscall CBulanci::FUN_0042c320(CBulanci *this,int param_1)
+void __thiscall CBulanci::CDSView_SaveData(CBulanci *this,int param_1)
 
 {
   int *piVar1;
@@ -92044,7 +92041,7 @@ void __thiscall CBulanci::FUN_0042c320(CBulanci *this,int param_1)
 
 
 
-void __thiscall CBulanci::FUN_0042c370(CBulanci *this,int param_1)
+void __thiscall CBulanci::CDSView_LoadData(CBulanci *this,int param_1)
 
 {
   int *piVar1;
@@ -92066,7 +92063,7 @@ void __thiscall CBulanci::FUN_0042c370(CBulanci *this,int param_1)
 
 
 
-void __thiscall _Globals::FUN_0042c3c0(void *this,undefined2 param_1)
+void __thiscall _Globals::CDSView__EndModal(void *this,undefined2 param_1)
 
 {
   if ((*(byte *)((int)this + 0x44) & 0x10) != 0) {
@@ -92142,7 +92139,7 @@ void __thiscall CBulanci::CDSView_SetRect(CBulanci *this,int *param_1)
   *(int *)(this + 0x28) = param_1[2];
   *(int *)(this + 0x2c) = param_1[3];
   if (((byte)this[0x44] & 0x40) != 0) {
-    FUN_0042bf40(this,local_14 == 0 && local_18 == 0);
+    CDSView__UpdateScreenCoordinates(this,local_14 == 0 && local_18 == 0);
   }
   piVar1 = (int *)_Globals::FUN_0042f7c0((int)(this + 0x54));
   if ((piVar1 != (int *)0x0) && (local_14 != 0 || local_18 != 0)) {
@@ -92325,7 +92322,7 @@ void __thiscall CDSApp::FUN_0042c7d0(CDSApp *this,ushort param_1)
 
 {
   if ((param_1 & 0x8000) != 0) {
-    _Globals::FUN_0042c3c0(this,param_1);
+    _Globals::CDSView__EndModal(this,param_1);
   }
   return;
 }
@@ -92449,7 +92446,7 @@ void __fastcall _Globals::FUN_0042c960(int *param_1)
 
 
 
-void __fastcall _Globals::FUN_0042c990(int *param_1)
+void __fastcall _Globals::CDSView__Show(int *param_1)
 
 {
   if ((*(ushort *)(param_1 + 0x11) & 1) == 0) {
@@ -92508,7 +92505,7 @@ void __thiscall CDSView::FUN_0042ca30(CDSView *this,int *param_1,undefined4 para
     local_8 = param_1[2] + *(int *)(this + 0x20);
     local_4 = param_1[3] + *(int *)(this + 0x24);
     local_c = param_1[1] + *(int *)(this + 0x24);
-    CPoemScroller::FUN_00433280((CPoemScroller *)&local_10,(int *)(this + 0x20));
+    CPoemScroller::rect_Intersect((CPoemScroller *)&local_10,(int *)(this + 0x20));
     if ((local_10 < local_8) && (local_c < local_4)) {
       (**(code **)(**(int **)(this + 0x4c) + 0x24))(&local_10,param_2);
     }
@@ -92574,7 +92571,7 @@ void __thiscall CScroller::FUN_0042cbb0(CScroller *this,int param_1,int param_2)
 
 
 
-void __thiscall CBulanci::FUN_0042cbf0(CBulanci *this,int param_1,int param_2)
+void __thiscall CBulanci::CDSView__SetSize(CBulanci *this,int param_1,int param_2)
 
 {
   int local_10;
@@ -92610,7 +92607,7 @@ void __thiscall _Globals::FUN_0042cc30(void *this,int param_1,int param_2)
 
 
 
-void __thiscall CBulanek::FUN_0042cc80(CBulanek *this,int param_1,int param_2)
+void __thiscall CBulanek::CDSView__SetPosition(CBulanek *this,int param_1,int param_2)
 
 {
   int local_10;
@@ -92644,7 +92641,7 @@ byte __thiscall CWindow::CWindow_FocusSibling(CWindow *this,char param_1)
 
 
 
-void __fastcall CDSApp::FUN_0042ccf0(int param_1)
+void __fastcall CDSApp::CDSView_RenderChildren(int param_1)
 
 {
   CPoemScroller *this;
@@ -92678,13 +92675,13 @@ void __fastcall CDSApp::FUN_0042ccf0(int param_1)
     local_4 = DAT_004b3ba8;
     do {
       if ((*(byte *)(piVar1 + 0x11) & 0x80) != 0) {
-        CPoemScroller::FUN_00433280((CPoemScroller *)&DAT_004b3b9c,piVar1 + 0xc);
+        CPoemScroller::rect_Intersect((CPoemScroller *)&DAT_004b3b9c,piVar1 + 0xc);
         if ((DAT_004b3b9c < DAT_004b3ba4) && (DAT_004b3ba0 < DAT_004b3ba8)) {
           *(undefined4 *)this = 0;
           *(undefined4 *)(iVar2 + 0x28) = 0;
           *(undefined4 *)(iVar2 + 0x2c) = *(undefined4 *)(iVar2 + 4);
           *(undefined4 *)(iVar2 + 0x30) = *(undefined4 *)(iVar2 + 8);
-          CPoemScroller::FUN_00433280(this,&DAT_004b3b9c);
+          CPoemScroller::rect_Intersect(this,&DAT_004b3b9c);
           (**(code **)(*piVar1 + 0x38))();
         }
         DAT_004b3b9c = local_10;
@@ -92699,7 +92696,7 @@ void __fastcall CDSApp::FUN_0042ccf0(int param_1)
     *(undefined4 *)(iVar2 + 0x28) = 0;
     *(undefined4 *)(iVar2 + 0x2c) = *(undefined4 *)(iVar2 + 4);
     *(undefined4 *)(iVar2 + 0x30) = *(undefined4 *)(iVar2 + 8);
-    CPoemScroller::FUN_00433280(this,&local_20);
+    CPoemScroller::rect_Intersect(this,&local_20);
   }
   return;
 }
@@ -92731,7 +92728,7 @@ undefined4 * _Globals::CreateObject(void)
   puVar1 = (undefined4 *)FUN_00447c42(0x68);
   local_4 = 0;
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CDSChained::FUN_004032d0(puVar1);
+    puVar1 = CDSChained::CDSChained_ctor(puVar1);
     ExceptionList = local_c;
     return puVar1;
   }
@@ -92846,7 +92843,7 @@ void __fastcall _Globals::FUN_0042cff0(int *param_1)
 
 
 
-void __fastcall _Globals::FUN_0042d040(int *param_1)
+void __fastcall _Globals::CDSView__Hide(int *param_1)
 
 {
   ushort uVar1;
@@ -92884,7 +92881,7 @@ undefined2 __fastcall _Globals::FUN_0042d080(int *param_1)
 
 
 
-void __thiscall _Globals::FUN_0042d0b0(void *this,int *param_1,int param_2)
+void __thiscall _Globals::CDSView__AddChild(void *this,int *param_1,int param_2)
 
 {
   byte bVar1;
@@ -92902,15 +92899,15 @@ void __thiscall _Globals::FUN_0042d0b0(void *this,int *param_1,int param_2)
       iVar3 = ((*(int *)((int)this + 0x2c) - *(int *)((int)this + 0x24)) - (param_1[0xb] - iVar3)) /
               2;
     }
-    CBulanek::FUN_0042cc80((CBulanek *)param_1,iVar2,iVar3);
+    CBulanek::CDSView__SetPosition((CBulanek *)param_1,iVar2,iVar3);
   }
   bVar1 = *(byte *)(param_1 + 0x11);
   if ((bVar1 & 1) != 0) {
-    FUN_0042d040(param_1);
+    CDSView__Hide(param_1);
   }
-  FUN_0042bfc0(this,param_1,param_2);
+  CDSView__AddChildInternal(this,param_1,param_2);
   if ((bVar1 & 1) != 0) {
-    FUN_0042c990(param_1);
+    CDSView__Show(param_1);
   }
   if (*(int *)((int)this + 0x50) == 0) {
     CDSView_AcquireKeyboardFocus(param_1);
@@ -92930,11 +92927,11 @@ void __thiscall CMenu::FUN_0042d160(CMenu *this,int *param_1)
   }
   bVar1 = *(byte *)(param_1 + 0x11);
   if ((bVar1 & 1) != 0) {
-    _Globals::FUN_0042d040(param_1);
+    _Globals::CDSView__Hide(param_1);
   }
   FUN_0042c000(this,param_1);
   if ((bVar1 & 1) != 0) {
-    _Globals::FUN_0042c990(param_1);
+    _Globals::CDSView__Show(param_1);
   }
   return;
 }
@@ -92957,7 +92954,7 @@ undefined2 __thiscall _Globals::CDSView_DoModal(void *this,void *param_1)
          ((*(byte *)(*(int *)((int)this + 0x4c) + 0x44) & 0x80) != 0)) goto LAB_0042d1ef;
     }
     else if ((*(byte *)((int)param_1 + 0x44) & 0x80) != 0) {
-      FUN_0042d0b0(param_1,this,0);
+      CDSView__AddChild(param_1,this,0);
 LAB_0042d1ef:
       if (*(int *)((int)this + 0x4c) == 0) {
         piVar3 = (int *)0x0;
@@ -92970,7 +92967,7 @@ LAB_0042d1ef:
       CDSView_AcquireKeyboardFocus(this);
       *(ushort *)((int)this + 0x44) = *(ushort *)((int)this + 0x44) | 0x10;
       if (bVar2 == 0) {
-        FUN_0042c990(this);
+        CDSView__Show(this);
       }
       (**(code **)(*(int *)this + 0x24))(0);
       do {
@@ -92983,7 +92980,7 @@ LAB_0042d1ef:
               cVar1 == '\0'));
       (**(code **)(*(int *)this + 0x24))(0,0);
       if (bVar2 == 0) {
-        FUN_0042d040(this);
+        CDSView__Hide(this);
       }
       g_pModalFocus = unaff_EBX;
       *(ushort *)((int)this + 0x44) = *(ushort *)((int)this + 0x44) & 0xffef;
@@ -94644,7 +94641,7 @@ _Globals::FUN_0042ecc0
 
 
 
-uint __thiscall _Globals::FUN_0042ecf0(void *this,undefined4 *param_1)
+uint __thiscall _Globals::CDSQueue_Push(void *this,undefined4 *param_1)
 
 {
   undefined4 *puVar1;
@@ -94677,7 +94674,7 @@ uint __thiscall _Globals::FUN_0042ecf0(void *this,undefined4 *param_1)
 
 
 
-undefined4 __fastcall _Globals::FUN_0042ed70(int param_1)
+undefined4 __fastcall _Globals::CDSQueue_PopDiscard(int param_1)
 
 {
   int iVar1;
@@ -94696,7 +94693,7 @@ undefined4 __fastcall _Globals::FUN_0042ed70(int param_1)
 
 
 
-uint __thiscall _Globals::FUN_0042eda0(void *this,undefined4 *param_1)
+uint __thiscall _Globals::CDSQueue_PopCopy(void *this,undefined4 *param_1)
 
 {
   int iVar1;
@@ -94730,7 +94727,7 @@ uint __thiscall _Globals::FUN_0042eda0(void *this,undefined4 *param_1)
 
 
 
-int __thiscall _Globals::FUN_0042ee20(void *this,int param_1)
+int __thiscall _Globals::CDSQueue_Peek(void *this,int param_1)
 
 {
   int iVar1;
@@ -94744,7 +94741,7 @@ int __thiscall _Globals::FUN_0042ee20(void *this,int param_1)
 
 
 
-void __thiscall _Globals::FUN_0042ee40(void *this,int param_1)
+void __thiscall _Globals::CDSQueue_SetCapacity(void *this,int param_1)
 
 {
   void *pvVar1;
@@ -94884,7 +94881,7 @@ CGame::BroadcastEvent
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-int __fastcall CDSUpdatedItem::FUN_0042f060(int param_1)
+int __fastcall CDSUpdatedItem::CDSUpdatedItem_ctor(int param_1)
 
 {
   undefined4 *puVar1;
@@ -95103,7 +95100,7 @@ void __thiscall _Globals::FUN_0042f330(void *this,uint param_1,int param_2)
 
 
 uint __thiscall
-_Globals::FUN_0042f390
+_Globals::CDSView__PostMessage
           (void *this,ushort param_1,undefined2 param_2,undefined4 param_3,undefined4 param_4)
 
 {
@@ -95123,13 +95120,13 @@ _Globals::FUN_0042f390
   local_8 = param_3;
   local_4 = param_4;
   local_14 = this;
-  uVar1 = FUN_0042ecf0(g_pEventQueue,&local_14);
+  uVar1 = CDSQueue_Push(g_pEventQueue,&local_14);
   return uVar1;
 }
 
 
 
-uint __thiscall CBulanci::FUN_0042f3e0(CBulanci *this,int *param_1)
+uint __thiscall CBulanci::CDSEventHandler_EnqueueEvent(CBulanci *this,int *param_1)
 
 {
   uint uVar1;
@@ -95138,7 +95135,7 @@ uint __thiscall CBulanci::FUN_0042f3e0(CBulanci *this,int *param_1)
     return (uint)param_1 & 0xffffff00;
   }
   *param_1 = (int)this;
-  uVar1 = _Globals::FUN_0042ecf0(g_pEventQueue,param_1);
+  uVar1 = _Globals::CDSQueue_Push(g_pEventQueue,param_1);
   return uVar1;
 }
 
@@ -95155,9 +95152,9 @@ uint _Globals::CDSApp_PollEventQueue(void)
   if (g_pEventQueue != (void *)0x0) {
     iVar2 = *(int *)((int)g_pEventQueue + 8);
     this = g_pEventQueue;
-    while ((g_pEventQueue = this, iVar2 != 0 && (piVar1 = (int *)FUN_0042ee20(this,0), *piVar1 == 0)
-           )) {
-      FUN_0042ed70((int)this);
+    while ((g_pEventQueue = this, iVar2 != 0 &&
+           (piVar1 = (int *)CDSQueue_Peek(this,0), *piVar1 == 0))) {
+      CDSQueue_PopDiscard((int)this);
       iVar2 = iVar2 + -1;
       this = g_pEventQueue;
     }
@@ -95178,7 +95175,7 @@ void _Globals::CDSApp_DispatchOneEvent(void)
   if ((g_pEventQueue != (void *)0x0) && (*(int *)((int)g_pEventQueue + 8) != 0)) {
     local_8 = 0;
     local_4 = 0;
-    FUN_0042eda0(g_pEventQueue,local_14);
+    CDSQueue_PopCopy(g_pEventQueue,local_14);
     if (local_14[0] != (int *)0x0) {
       (**(code **)(*local_14[0] + 0x10))(local_14);
     }
@@ -95241,7 +95238,7 @@ void CDSApp::FUN_0042f530(void)
 
 
 uint __cdecl
-_Globals::FUN_0042f590
+_Globals::CDSView_PostMessage
           (void *param_1,ushort param_2,undefined2 param_3,undefined4 param_4,undefined4 param_5)
 
 {
@@ -95249,7 +95246,7 @@ _Globals::FUN_0042f590
   uint uVar1;
   
   if (param_1 != (void *)0x0) {
-    uVar1 = FUN_0042f390(param_1,param_2,param_3,param_4,param_5);
+    uVar1 = CDSView__PostMessage(param_1,param_2,param_3,param_4,param_5);
     return uVar1;
   }
   return in_EAX & 0xffffff00;
@@ -95257,14 +95254,14 @@ _Globals::FUN_0042f590
 
 
 
-undefined4 __thiscall _Globals::FUN_0042f5c0(void *this,int param_1)
+undefined4 __thiscall _Globals::CDSQueue_Init(void *this,int param_1)
 
 {
   uint in_EAX;
   undefined4 uVar1;
   
   if (*(int *)((int)this + 8) == 0) {
-    uVar1 = FUN_0042ee40(this,param_1);
+    uVar1 = CDSQueue_SetCapacity(this,param_1);
     *(undefined4 *)((int)this + 0xc) = 0;
     return CONCAT31((int3)((uint)uVar1 >> 8),1);
   }
@@ -95296,7 +95293,7 @@ void __thiscall _Globals::FUN_0042f620(void *this,int param_1)
 
 
 
-int __fastcall _Globals::FUN_0042f640(int param_1)
+int __fastcall _Globals::CDSEventHandler_ctor(int param_1)
 
 {
   int iVar1;
@@ -95317,7 +95314,7 @@ int __fastcall _Globals::FUN_0042f640(int param_1)
       *(undefined4 *)((int)g_pEventQueue + 8) = 0;
       *(undefined4 *)((int)g_pEventQueue + 0xc) = 0;
     }
-    FUN_0042f5c0(g_pEventQueue,0x100);
+    CDSQueue_Init(g_pEventQueue,0x100);
   }
   return param_1;
 }
@@ -95335,7 +95332,7 @@ void __fastcall _Globals::FUN_0042f690(int param_1)
   this = g_pEventQueue;
   while (iVar2 != 0) {
     iVar2 = iVar2 + -1;
-    piVar1 = (int *)FUN_0042ee20(this,iVar2);
+    piVar1 = (int *)CDSQueue_Peek(this,iVar2);
     if (*piVar1 == param_1) {
       *piVar1 = 0;
       this = g_pEventQueue;
@@ -95344,7 +95341,7 @@ void __fastcall _Globals::FUN_0042f690(int param_1)
   DAT_004b7bf4 = DAT_004b7bf4 + -1;
   if (DAT_004b7bf4 == 0) {
     if (this != (void *)0x0) {
-      FUN_0042ee40(this,0);
+      CDSQueue_SetCapacity(this,0);
       Runtime::MSVCRT::_free(this);
     }
     g_pEventQueue = (void *)0x0;
@@ -97716,7 +97713,8 @@ void _Globals::FUN_00431ae8(void)
 
 
 
-void __cdecl _Globals::FUN_00431b70(int *param_1,undefined4 param_2,void *param_3)
+void __cdecl
+_Globals::CDSJpegImage__DecompressToImage(int *param_1,undefined4 param_2,void *param_3)
 
 {
   undefined1 uVar1;
@@ -97750,7 +97748,7 @@ void __cdecl _Globals::FUN_00431b70(int *param_1,undefined4 param_2,void *param_
   if (local_150 != 3) {
     CDSSimpleException::FUN_00434c20(0xd,0xf);
   }
-  FUN_00436f40(param_3,local_15c,local_158,5,'\0',-1);
+  CDSImage__Allocate(param_3,local_15c,local_158,5,'\0',-1);
   local_1cc = (undefined1 *)GetColorPlane((int)param_3);
   while (local_140 < local_158) {
     FUN_0045eba0(local_1b8,&local_1cc,1);
@@ -97800,7 +97798,7 @@ void __thiscall CDSJpegImage::FUN_00431cc0(CDSJpegImage *this,int *param_1)
     pCVar1 = this + -0x50;
   }
   uVar2 = (**(code **)(*param_1 + 0x1c))();
-  _Globals::FUN_00431b70(param_1,uVar2,pCVar1);
+  _Globals::CDSJpegImage__DecompressToImage(param_1,uVar2,pCVar1);
   return;
 }
 
@@ -98093,7 +98091,7 @@ void __thiscall CDSBmpImage::CDSBmpImage_LoadDibStream(CDSBmpImage *this,int *pa
   if (local_2c == 0) {
     local_2c = *(int *)(&DAT_004b0030 + iVar2 * 4);
   }
-  _Globals::FUN_00436f40(this + -0x50,local_48,local_44,iVar2,'\0',local_2c);
+  _Globals::CDSImage__Allocate(this + -0x50,local_48,local_44,iVar2,'\0',local_2c);
   uVar3 = local_4c + (uint)uVar8;
   (**(code **)(*param_1 + 0x28))
             (uVar3 + 0xe,local_c + (uint)CARRY4(local_4c,(uint)uVar8) + (uint)(0xfffffff1 < uVar3),0
@@ -99474,7 +99472,7 @@ void __thiscall _Globals::FUN_00433200(void *this,int *param_1)
 
 
 
-void __thiscall CPoemScroller::FUN_00433280(CPoemScroller *this,int *param_1)
+void __thiscall CPoemScroller::rect_Intersect(CPoemScroller *this,int *param_1)
 
 {
   int iVar1;
@@ -102361,7 +102359,7 @@ _Globals::FUN_00435fb0(int param_1,int param_2,undefined4 param_3,int param_4,in
 
 
 
-int __thiscall CDSImage::FUN_00435fe0(CDSImage *this,char param_1)
+int __thiscall CDSImage::ComputeBufferSize(CDSImage *this,char param_1)
 
 {
   if ((*(int *)(this + 0x34) != 0) && (*(int *)(this + 0xc) < 4)) {
@@ -102574,12 +102572,12 @@ CPoemScroller::FUN_00436270
 
 
 
-int __fastcall CDSImage::FUN_004362f0(void *param_1)
+int __fastcall CDSImage::ComputeAllocationSize(void *param_1)
 
 {
   int iVar1;
   
-  iVar1 = FUN_00435fe0(param_1,'\0');
+  iVar1 = ComputeBufferSize(param_1,'\0');
   return ((iVar1 + 0xbU) / 0xc) * 0xc;
 }
 
@@ -102759,7 +102757,7 @@ CPoemScroller::FUN_004365f0(CPoemScroller *this,int *param_1,uint param_2,int pa
     local_8 = param_1[2];
     local_4 = param_1[3];
   }
-  FUN_00433280((CPoemScroller *)&local_10,(int *)(this + 0x24));
+  rect_Intersect((CPoemScroller *)&local_10,(int *)(this + 0x24));
   if ((local_10 < local_8) && (local_c < local_4)) {
     iVar1 = *(int *)(this + 0xc);
     if (iVar1 != 4) {
@@ -102974,14 +102972,14 @@ CPoemScroller::BlitDispatch
   }
   iVar8 = local_c - local_1c;
   iVar9 = local_10 - local_20;
-  piVar3 = (int *)FUN_00433280((CPoemScroller *)&local_20,(int *)((int)param_2 + 0x24));
+  piVar3 = (int *)rect_Intersect((CPoemScroller *)&local_20,(int *)((int)param_2 + 0x24));
   if (piVar3[2] <= *piVar3) {
     return;
   }
   if (piVar3[3] <= piVar3[1]) {
     return;
   }
-  piVar3 = (int *)FUN_00433280((CPoemScroller *)&local_10,(int *)(this + 0x24));
+  piVar3 = (int *)rect_Intersect((CPoemScroller *)&local_10,(int *)(this + 0x24));
   uVar4 = DeletingDestructorThunk_18(piVar3);
   if ((char)uVar4 != '\0') {
     return;
@@ -102990,7 +102988,7 @@ CPoemScroller::BlitDispatch
   local_1c = local_1c + iVar8;
   local_18 = local_18 + iVar9;
   local_14 = local_14 + iVar8;
-  piVar3 = (int *)FUN_00433280((CPoemScroller *)&local_20,&local_10);
+  piVar3 = (int *)rect_Intersect((CPoemScroller *)&local_20,&local_10);
   uVar4 = DeletingDestructorThunk_18(piVar3);
   if ((char)uVar4 != '\0') {
     return;
@@ -103109,7 +103107,7 @@ void __thiscall CDSImage::FUN_00436c60(CDSImage *this,int *param_1)
   cVar4 = (char)((uint)pCVar3 >> 0x18);
   (**(code **)(*param_1 + 0x14))(&stack0xffffffcf,1);
   iVar1 = *param_1;
-  iVar2 = FUN_00435fe0(this + -0x50,'\0');
+  iVar2 = ComputeBufferSize(this + -0x50,'\0');
   (**(code **)(iVar1 + 0x14))(*(undefined4 *)(this + -0x34),iVar2);
   if (cVar4 != '\0') {
     (**(code **)(*param_1 + 0x14))
@@ -103132,7 +103130,7 @@ void __thiscall _Globals::FUN_00436d20(void *this,undefined4 *param_1)
 
 
 
-void __fastcall _Globals::FUN_00436d50(int param_1)
+void __fastcall _Globals::CDSImage__FreeBuffers(int param_1)
 
 {
   if (*(void **)(param_1 + 0x1c) != (void *)0x0) {
@@ -103155,7 +103153,7 @@ void __thiscall _Globals::FUN_00436d90(void *this,int param_1)
   int iVar2;
   int extraout_ECX;
   
-  FUN_00436d50((int)this);
+  CDSImage__FreeBuffers((int)this);
   *(undefined4 *)((int)this + 4) = *(undefined4 *)(param_1 + 0xc);
   *(undefined4 *)((int)this + 8) = *(undefined4 *)(param_1 + 8);
   iVar2 = FUN_00435c70(*(undefined4 *)(param_1 + 0x54));
@@ -103268,7 +103266,7 @@ void __thiscall _Globals::FUN_00436f20(void *this,undefined4 *param_1)
 
 
 void __thiscall
-_Globals::FUN_00436f40
+_Globals::CDSImage__Allocate
           (void *this,int param_1,undefined4 param_2,int param_3,char param_4,int param_5)
 
 {
@@ -103276,7 +103274,7 @@ _Globals::FUN_00436f40
   uchar *puVar2;
   void *pvVar3;
   
-  FUN_00436d50((int)this);
+  CDSImage__FreeBuffers((int)this);
   if (param_5 == -1) {
     param_5 = *(int *)(&DAT_004b0030 + param_3 * 4);
   }
@@ -103289,7 +103287,7 @@ _Globals::FUN_00436f40
   if (param_4 == '\0') {
     *(uint *)((int)this + 0x10) = uVar1 + 3 & 0xfffffffc;
   }
-  puVar2 = (uchar *)CDSImage::FUN_004362f0(this);
+  puVar2 = (uchar *)CDSImage::ComputeAllocationSize(this);
   if (*(void **)((int)this + 0x1c) != (void *)0x0) {
     Runtime_Free(&DAT_004b7c94,*(void **)((int)this + 0x1c));
   }
@@ -103417,7 +103415,7 @@ void __thiscall CDSImage::FUN_00437160(CDSImage *this,int *param_1)
   char cVar6;
   
   this_00 = this + -0x50;
-  _Globals::FUN_00436d50((int)this_00);
+  _Globals::CDSImage__FreeBuffers((int)this_00);
   (**(code **)(*param_1 + 0x10))();
   (**(code **)(*param_1 + 0x10))();
   (**(code **)(*param_1 + 0x10))();
@@ -103431,7 +103429,7 @@ void __thiscall CDSImage::FUN_00437160(CDSImage *this,int *param_1)
   *(undefined4 *)(this + -0x28) = 0;
   *(undefined4 *)(this + -0x24) = *(undefined4 *)(this + -0x4c);
   *(undefined4 *)(this + -0x20) = *(undefined4 *)(this + -0x48);
-  puVar2 = (uchar *)FUN_004362f0(this_00);
+  puVar2 = (uchar *)ComputeAllocationSize(this_00);
   if (*(void **)(this + -0x34) != (void *)0x0) {
     _Globals::Runtime_Free(&DAT_004b7c94,*(void **)(this + -0x34));
   }
@@ -103439,7 +103437,7 @@ void __thiscall CDSImage::FUN_00437160(CDSImage *this,int *param_1)
   pvVar3 = _Globals::Runtime_MallocOrThrow(&DAT_004b7c94,puVar2);
   *(void **)(this + -0x34) = pvVar3;
   iVar1 = *param_1;
-  iVar4 = FUN_00435fe0(this_00,'\0');
+  iVar4 = ComputeBufferSize(this_00,'\0');
   (**(code **)(iVar1 + 0x10))(*(undefined4 *)(this + -0x34),iVar4);
   if (cVar6 != '\0') {
     iVar1 = *(int *)(this + -0x48);
@@ -103457,7 +103455,7 @@ void __thiscall CDSImage::FUN_00437160(CDSImage *this,int *param_1)
 
 
 
-void __thiscall CDSFont::FUN_004372b0(CDSFont *this,int *param_1)
+void __thiscall CDSFont::CDSFont__Read(CDSFont *this,int *param_1)
 
 {
   CDSImage::FUN_00437160((CDSImage *)this,param_1);
@@ -103468,7 +103466,7 @@ void __thiscall CDSFont::FUN_004372b0(CDSFont *this,int *param_1)
 
 
 
-void __thiscall CDSFont::FUN_004372f0(CDSFont *this,int *param_1)
+void __thiscall CDSFont::CDSFont__ReadNoAlloc(CDSFont *this,int *param_1)
 
 {
   CDSImage::FUN_00436c60((CDSImage *)this,param_1);
@@ -103479,7 +103477,7 @@ void __thiscall CDSFont::FUN_004372f0(CDSFont *this,int *param_1)
 
 
 
-uint __thiscall _Globals::FUN_00437330(void *this,byte param_1,byte *param_2)
+uint __thiscall _Globals::CDSFont__GetCharWidth(void *this,byte param_1,byte *param_2)
 
 {
   byte bVar1;
@@ -103497,7 +103495,7 @@ uint __thiscall _Globals::FUN_00437330(void *this,byte param_1,byte *param_2)
 
 
 void __thiscall
-_Globals::FUN_00437370
+_Globals::CDSFont__DrawChar
           (void *this,byte param_1,void *param_2,int *param_3,int param_4,byte *param_5,
           uint *param_6)
 
@@ -103537,14 +103535,14 @@ _Globals::FUN_00437370
     }
     CPoemScroller::BlitDispatch(param_2,&local_10,pvVar3,(int *)&local_20,param_6);
   }
-  uVar4 = FUN_00437330(this,param_1,param_5);
+  uVar4 = CDSFont__GetCharWidth(this,param_1,param_5);
   *param_3 = *param_3 + uVar4 + *(int *)(param_5 + 4);
   return;
 }
 
 
 
-void __thiscall _Globals::FUN_00437440(void *this,LPCWSTR param_1,UINT param_2)
+void __thiscall _Globals::WideCharToMultiByte_Wrapper(void *this,LPCWSTR param_1,UINT param_2)
 
 {
   int iVar1;
@@ -103725,7 +103723,7 @@ void _Globals::TextShaper_LayOutAndRender(LPCWSTR param_1,uint *param_2,void *pa
   puStack_10470 = param_2;
   pvStack_1045c = param_3;
   UVar6 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)(DAT_004b0e44 ^ (uint)&stack0xfffefb7c);
-  FUN_00437440(&local_414,param_1,UVar6);
+  WideCharToMultiByte_Wrapper(&local_414,param_1,UVar6);
   uStack_4 = 0;
   if (local_414 != (undefined1 *)0x0) {
     iVar9 = 0;
@@ -103769,11 +103767,11 @@ void _Globals::TextShaper_LayOutAndRender(LPCWSTR param_1,uint *param_2,void *pa
         uStack_10464 = 2;
         break;
       default:
-        uVar7 = FUN_00437330(pvStack_10460,bVar1,(byte *)param_4);
+        uVar7 = CDSFont__GetCharWidth(pvStack_10460,bVar1,(byte *)param_4);
         uVar12 = uVar12 + uVar7 + param_4[1];
         break;
       case 9:
-        uVar7 = FUN_00437330(pvStack_10460,0x20,(byte *)param_4);
+        uVar7 = CDSFont__GetCharWidth(pvStack_10460,0x20,(byte *)param_4);
         uVar12 = uVar12 + (uVar7 + param_4[1]) * 4;
       }
       pvVar4 = pvStack_1045c;
@@ -103840,7 +103838,7 @@ void _Globals::TextShaper_LayOutAndRender(LPCWSTR param_1,uint *param_2,void *pa
       uStack_10420 = uStack_10444;
       uStack_1041c = uStack_10440;
       uStack_10418 = uStack_1043c;
-      CPoemScroller::FUN_00433280((CPoemScroller *)&iStack_10448,(int *)puStack_10470);
+      CPoemScroller::rect_Intersect((CPoemScroller *)&iStack_10448,(int *)puStack_10470);
       pvVar11 = pvStack_1045c;
       uVar2 = *(undefined4 *)((int)pvStack_1045c + 8);
       uVar3 = *(undefined4 *)((int)pvStack_1045c + 4);
@@ -103848,7 +103846,7 @@ void _Globals::TextShaper_LayOutAndRender(LPCWSTR param_1,uint *param_2,void *pa
       *(undefined4 *)((int)pvVar4 + 0x28) = 0;
       *(undefined4 *)((int)pvVar4 + 0x30) = uVar2;
       *(undefined4 *)((int)pvVar4 + 0x2c) = uVar3;
-      CPoemScroller::FUN_00433280(this,&iStack_10448);
+      CPoemScroller::rect_Intersect(this,&iStack_10448);
       uStack_10428 = param_4[3];
       uStack_10438 = 9;
       uStack_10430 = 0;
@@ -103890,16 +103888,16 @@ void _Globals::TextShaper_LayOutAndRender(LPCWSTR param_1,uint *param_2,void *pa
               case 10:
                 break;
               default:
-                FUN_00437370(pvStack_10460,bVar1,pvStack_1045c,(int *)&uStack_10468,uVar7,
-                             (byte *)param_4,&uStack_10438);
+                CDSFont__DrawChar(pvStack_10460,bVar1,pvStack_1045c,(int *)&uStack_10468,uVar7,
+                                  (byte *)param_4,&uStack_10438);
                 puVar8 = puStack_10470;
                 uStack_10458 = uVar12;
                 break;
               case 9:
                 iVar9 = 4;
                 do {
-                  FUN_00437370(pvStack_10460,0x20,pvStack_1045c,(int *)&uStack_10468,uVar7,
-                               (byte *)param_4,&uStack_10438);
+                  CDSFont__DrawChar(pvStack_10460,0x20,pvStack_1045c,(int *)&uStack_10468,uVar7,
+                                    (byte *)param_4,&uStack_10438);
                   iVar9 = iVar9 + -1;
                   puVar8 = puStack_10470;
                 } while (iVar9 != 0);
@@ -103922,7 +103920,7 @@ void _Globals::TextShaper_LayOutAndRender(LPCWSTR param_1,uint *param_2,void *pa
       *(undefined4 *)((int)pvVar4 + 0x28) = 0;
       *(undefined4 *)((int)pvVar4 + 0x2c) = uVar3;
       *(undefined4 *)((int)pvVar4 + 0x30) = uVar2;
-      CPoemScroller::FUN_00433280(this,&iStack_10424);
+      CPoemScroller::rect_Intersect(this,&iStack_10424);
     }
   }
   if (local_414 != local_410) {
@@ -104914,7 +104912,7 @@ void __thiscall CBulAnim::SetPalette(CBulAnim *this,undefined4 *param_1)
 
 
 
-void __thiscall ODSImage::FUN_00439050(ODSImage *this,void *param_1)
+void __thiscall ODSImage::SetOwner(ODSImage *this,void *param_1)
 
 {
   int iVar1;
@@ -104923,7 +104921,7 @@ void __thiscall ODSImage::FUN_00439050(ODSImage *this,void *param_1)
     *(void **)(this + 8) = param_1;
     iVar1 = *(int *)(this + 0xc);
     if (iVar1 != 0) {
-      CBulanci::FUN_0042cbf0(param_1,*(int *)(iVar1 + 4),*(int *)(iVar1 + 8));
+      CBulanci::CDSView__SetSize(param_1,*(int *)(iVar1 + 4),*(int *)(iVar1 + 8));
     }
   }
   return;
@@ -104968,7 +104966,7 @@ void __thiscall CExitDlg::FUN_004390d0(CExitDlg *this,char param_1)
 
 
 
-void __thiscall _Globals::TM_SetCurrentSequence(void *this,int *param_1)
+void __thiscall _Globals::ODSImage__SetImage(void *this,int *param_1)
 
 {
   int iVar1;
@@ -105006,7 +105004,7 @@ void __thiscall _Globals::TM_SetCurrentSequence(void *this,int *param_1)
     *(int **)((int)this + 0xc) = piVar4;
     FUN_00407e20(piVar4 + 0xe,(int)this + 4,(undefined *)0x0,1);
     if (*(CBulanci **)((int)this + 8) != (CBulanci *)0x0) {
-      CBulanci::FUN_0042cbf0
+      CBulanci::CDSView__SetSize
                 (*(CBulanci **)((int)this + 8),*(int *)(*(int *)((int)this + 0xc) + 4),
                  *(int *)(*(int *)((int)this + 0xc) + 8));
     }
@@ -105022,7 +105020,7 @@ void __thiscall _Globals::TM_SetCurrentSequence(void *this,int *param_1)
 void __thiscall CBulAnim::IDSAnim_SetSequence_thunk(CBulAnim *this,undefined4 param_1,int *param_2)
 
 {
-  _Globals::TM_SetCurrentSequence(this + -4,param_2);
+  _Globals::ODSImage__SetImage(this + -4,param_2);
   return;
 }
 
@@ -105039,7 +105037,7 @@ void __thiscall _Globals::TM_SetTrack(void *this,int param_1,int param_2,undefin
   }
   else {
     SetCurrentTrack((void *)((int)this + 0x10),param_1,'\0');
-    TM_SetCurrentSequence(*(void **)((int)this + 4),*(int **)((int)this + 0x40));
+    ODSImage__SetImage(*(void **)((int)this + 4),*(int **)((int)this + 0x40));
     if (param_3 != (undefined4 *)0x0) {
       CBulAnim::SetPalette(*(CBulAnim **)((int)this + 4),param_3);
     }
@@ -105063,7 +105061,7 @@ void __thiscall _Globals::AnimInner_Init(void *this,void *param_1)
   *(void **)((int)this + 4) = this_00;
   *(void **)((int)this + 8) = param_1;
   if (*(int **)((int)this + 0x40) != (int *)0x0) {
-    TM_SetCurrentSequence(this_00,*(int **)((int)this + 0x40));
+    ODSImage__SetImage(this_00,*(int **)((int)this + 0x40));
   }
   return;
 }
@@ -105106,7 +105104,7 @@ void __fastcall _Globals::AnimInner_Teardown(void *param_1)
   ExceptionList = &local_c;
   local_4 = 0;
   *(undefined4 *)((int)param_1 + 8) = 0;
-  TM_SetCurrentSequence(param_1,(int *)0x0);
+  ODSImage__SetImage(param_1,(int *)0x0);
   local_4 = 0xffffffff;
   if (*(int **)((int)param_1 + 0xc) != (int *)0x0) {
     (**(code **)(**(int **)((int)param_1 + 0xc) + 8))(uVar1);
@@ -105143,7 +105141,7 @@ void * __thiscall _Globals::AnimInner_InitParam(void *this,int *param_1,int para
 
 
 undefined4 * __thiscall
-CDSBitmap::FUN_004393d0(CDSBitmap *this,undefined4 param_1,undefined4 param_2,int *param_3)
+CDSBitmap::CDSBitmap_ctor(CDSBitmap *this,undefined4 param_1,undefined4 param_2,int *param_3)
 
 {
   ODSImage *this_00;
@@ -105155,10 +105153,10 @@ CDSBitmap::FUN_004393d0(CDSBitmap *this,undefined4 param_1,undefined4 param_2,in
   puStack_8 = &LAB_0047a643;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSChained::FUN_004032d0((undefined4 *)this);
+  CDSChained::CDSChained_ctor((undefined4 *)this);
   this_00 = (ODSImage *)(this + 0x68);
   local_4 = 0;
-  ODSImage::FUN_00418c00(this_00,param_3);
+  ODSImage::ODSImage_ctor(this_00,param_3);
   *(undefined ***)this = vftable;
   *(undefined ***)(this + 4) = vftable;
   *(undefined ***)(this + 0x10) = vftable;
@@ -105168,7 +105166,7 @@ CDSBitmap::FUN_004393d0(CDSBitmap *this,undefined4 param_1,undefined4 param_2,in
   *(undefined4 *)(this + 0x20) = param_1;
   local_4 = CONCAT31(local_4._1_3_,1);
   *(undefined4 *)(this + 0x24) = param_2;
-  ODSImage::FUN_00439050(this_00,this);
+  ODSImage::SetOwner(this_00,this);
   ExceptionList = local_c;
   return (undefined4 *)this;
 }
@@ -105795,7 +105793,7 @@ undefined4 * __fastcall CDSObject::ConstructTrackManager(undefined4 *param_1)
   *param_1 = vftable;
   this = param_1 + 1;
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)this);
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)this);
   *param_1 = CDSVideoPlayer::vftable;
   *this = CDSVideoPlayer::vftable;
   param_1[7] = 0;
@@ -106080,7 +106078,7 @@ void __thiscall _Globals::FUN_0043a060(void *this,char param_1)
 
 
 
-void __thiscall _Globals::FUN_0043a0d0(void *this,undefined4 param_1)
+void __thiscall _Globals::CDSAudioPlayer_SetVolumePercent(void *this,undefined4 param_1)
 
 {
   *(undefined4 *)((int)this + 0x54) = param_1;
@@ -106180,7 +106178,7 @@ bool __fastcall _Globals::FUN_0043a1f0(int param_1)
     if (*(char *)(param_1 + 0x21) == '\0') {
 LAB_0043a22e:
       *(undefined1 *)(param_1 + 0x22) = 0;
-      FUN_0042f390((void *)((int)g_pDirectSoundSingleton + 0x1c),0x200,1,param_1,0);
+      CDSView__PostMessage((void *)((int)g_pDirectSoundSingleton + 0x1c),0x200,1,param_1,0);
       return false;
     }
     if ((*(char *)(param_1 + 0x1d) == '\0') &&
@@ -106321,7 +106319,7 @@ void CDSDirectSound::Catch_0043a483(void)
 
 
 
-void __thiscall _Globals::FUN_0043a4a0(void *this,undefined1 param_1)
+void __thiscall _Globals::CDSAudioPlayer_Stop(void *this,undefined1 param_1)
 
 {
   char cVar1;
@@ -106406,7 +106404,7 @@ void _Globals::FUN_0043a590(void)
   int iVar1;
   
   for (iVar1 = DAT_004b0214; iVar1 != 0; iVar1 = iVar1 + -1) {
-    FUN_0043a4a0(*(void **)(DAT_004b020c + -4 + iVar1 * 4),1);
+    CDSAudioPlayer_Stop(*(void **)(DAT_004b020c + -4 + iVar1 * 4),1);
   }
   while (DAT_004b0214 != 0) {
     CDSApp_PumpTick(g_pApp);
@@ -106496,7 +106494,7 @@ undefined4 * __thiscall CDSAudioPlayer::FUN_0043a740(CDSAudioPlayer *this,byte p
 
 
 void __thiscall
-_Globals::FUN_0043a760(void *this,int *param_1,uint param_2,uint param_3,undefined *param_4)
+_Globals::CDSAudioPlayer_Init(void *this,int *param_1,uint param_2,uint param_3,undefined *param_4)
 
 {
   int *piVar1;
@@ -106602,13 +106600,13 @@ _Globals::FUN_0043a760(void *this,int *param_1,uint param_2,uint param_3,undefin
 
 
 
-void __thiscall _Globals::FUN_0043a9d0(void *this,undefined1 param_1)
+void __thiscall _Globals::CDSAudioPlayer_Play(void *this,undefined1 param_1)
 
 {
   int *piVar1;
   int iVar2;
   
-  FUN_0043a4a0(this,1);
+  CDSAudioPlayer_Stop(this,1);
   *(undefined1 *)((int)this + 0x1d) = param_1;
   piVar1 = *(int **)((int)this + 0x14);
   if (piVar1 != (int *)0x0) {
@@ -106644,7 +106642,7 @@ void __fastcall CGaming::FUN_0043aa70(void *param_1)
   int *piVar1;
   int iVar2;
   
-  _Globals::FUN_0043a4a0(param_1,1);
+  _Globals::CDSAudioPlayer_Stop(param_1,1);
   _Globals::FUN_0043a060(param_1,'\0');
   *(undefined1 *)((int)param_1 + 0x22) = 1;
   iVar2 = g_dwElapsedMs - *(int *)((int)param_1 + 0x48);
@@ -107696,7 +107694,7 @@ CDSAudioVideoPlayer::SetupTrack
 {
   CDSAudioVideoPlayer *this_00;
   
-  _Globals::FUN_0043a760(*(void **)(this + 4),param_1,0,param_3,param_4);
+  _Globals::CDSAudioPlayer_Init(*(void **)(this + 4),param_1,0,param_3,param_4);
   this_00 = this + 8;
   _Globals::AddTrackSource(this_00,param_2);
   this[0x3d] = (CDSAudioVideoPlayer)0x1;
@@ -107711,7 +107709,7 @@ CDSAudioVideoPlayer::SetupTrack
 void __thiscall CDSAudioVideoPlayer::Play(CDSAudioVideoPlayer *this,undefined1 param_1)
 
 {
-  _Globals::FUN_0043a9d0(*(void **)(this + 4),param_1);
+  _Globals::CDSAudioPlayer_Play(*(void **)(this + 4),param_1);
   return;
 }
 
@@ -107720,7 +107718,7 @@ void __thiscall CDSAudioVideoPlayer::Play(CDSAudioVideoPlayer *this,undefined1 p
 void __fastcall _Globals::FUN_0043bc00(int param_1)
 
 {
-  FUN_0043a4a0(*(void **)(param_1 + 4),1);
+  CDSAudioPlayer_Stop(*(void **)(param_1 + 4),1);
   return;
 }
 
@@ -108586,9 +108584,9 @@ undefined4 * __fastcall CDSObject::FUN_0043c7c0(undefined4 *param_1)
   *param_1 = vftable;
   this = param_1 + 1;
   local_4 = 0;
-  CDSUpdatedItem::FUN_0042f060((int)this);
+  CDSUpdatedItem::CDSUpdatedItem_ctor((int)this);
   local_4._0_1_ = 1;
-  _Globals::FUN_0042f640((int)(param_1 + 7));
+  _Globals::CDSEventHandler_ctor((int)(param_1 + 7));
   this_00 = (CDSObject *)(param_1 + 9);
   local_4._0_1_ = 2;
   FUN_00447170((int)this_00);
@@ -110100,7 +110098,8 @@ _Globals::FUN_0043dec0(int *param_1,int *param_2,int param_3,int param_4,int par
 
 
 void __cdecl
-_Globals::FUN_0043df90(int *param_1,int *param_2,int param_3,int param_4,int param_5,int param_6)
+_Globals::BlitOpaque_BGR24_to_BGR24
+          (int *param_1,int *param_2,int param_3,int param_4,int param_5,int param_6)
 
 {
   int iVar1;
@@ -112682,7 +112681,7 @@ _Globals::FUN_00440c10
 
 
 void __cdecl
-_Globals::FUN_00440db0
+_Globals::BlitChromaKey_BGR24_to_BGR24
           (int *param_1,int *param_2,int param_3,int param_4,int param_5,int param_6,
           undefined4 param_7,uint param_8,uint param_9)
 

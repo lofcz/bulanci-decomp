@@ -45,9 +45,9 @@ These cover game rules, entities, combat mechanics, UI screens, menus, and high-
 
 ### Menu / start state machine
 
-* **Classes:** `CMenu`, `CStartGame1`, `CStartGame2`, plus the satellite dialogs `CAdvertising`, `CHistoryDlg`, `CExitDlg`, `CTcpIpConfig`, `CSessionList`, `CMsgDialog`, `CRuch`, `CPoemScroller`
-* **Bytes:** 14.2 KB
-* **Confidence:** **Partial** (full screen-graph, layouts, *and* widget vtables mapped; per-class byte-exact matching still TBD)
+* **Classes:** `CMenu`, `CStartGame1`, `CStartGame2`, `CGunMouse`, plus the satellite dialogs `CAdvertising`, `CHistoryDlg`, `CExitDlg`, `CTcpIpConfig`, `CSessionList`, `CMsgDialog`, `CRuch`, `CPoemScroller`
+* **Bytes:** 15.8 KB
+* **Confidence:** **Verified** (full screen-graph, layouts, widget vtables, and custom sniping cursor mechanics mapped and synchronized with C++ sources)
 * **What's known:**
   * **State machine driver lives in `CBulanci`**, not in `CMenu`. `CBulanci::OnEvent_MenuStateMachine @ 0x00402490` handles three scheduler events:
     * `0xf7` — show `CAdvertising` splash (resource `0x1013a`) modally, then schedule `0xcc` 256 ms later. Bootstrapped by `CBulanci_OnCreate @ 0x00402b20` via `Scheduler_PostMessage(this+0x10, 0x100, 0xf7, 0, 0)`.
@@ -66,7 +66,8 @@ These cover game rules, entities, combat mechanics, UI screens, menus, and high-
     * `0xca` → `CHistoryDlg::ctor @ 0x004231d0` (size `0x9c`).
     * `0xcb` → `CExitDlg::ctor @ 0x00411b50` (size `0x7c`).
     * `0xcf` → close current sub-screen (`CMenu_CloseCurrentSubScreen @ 0x00423a00`).
-    * `0x8004` / `0x80ce` → keymap helpers via `CMenu_DispatchHotkey @ 0x00425340`.
+    * `0x8004` / `0x80ce` → keymap helpers via `0x00425340`.
+  * **`CGunMouse` Custom Sniping Cursor**: A `0x218` (536 bytes) custom software-rendered mouse cursor that features full-screen horizontal and vertical crosshair red lines, a center reticle sprite, and a lagging inner red dot driven by a 30-element coordinate history queue (300ms ring buffer) and spring physics with drag momentum displacement.
   * **`CStartGame1::BuildUi @ 0x0040c650`** assembles four `CRadio` groups (game-type, connection, rounds, host/join) plus headers and a single "Back" `CButton` (cmd `0xcf`). The screen auto-advances when all radios are set — there is no Continue button. Radio callbacks dispatched by `CStartGame1_OnRadioChange @ 0x0040ae30` handle conditional row visibility.
   * **`CMenu_OpenNetworkSession @ 0x00414dd0`** is the bridge into the actual game. It stands up `CDSDirectPlay` at `CMenu+0x1dc`, either hosts (`HostSession(GetComputerNameW())`) or joins (push `CTcpIpConfig` modal → `JoinSession` → push `CSessionList` modal). Then calls `CMenu_ShowLobby @ 0x00414790` which builds `CStartGame2` on the stack and pushes it via `CMenu_DoModalChild @ 0x00413030`.
   * **`CStartGame2::ctor @ 0x004104f0`** is the lobby — slot-driven layout (`parent->slot_count` × `parent->team_capacity`) with one avatar (`CGameView` + `CBulAnim`), name editor (`CEdit`) and optional kick button per slot. Bottom row: Back (`cmd 0x8002`), Start (`cmd 0x8003`), plus a `CLevelList`. Admin schedules a 500 ms poll (event 7) for "all ready" detection.
@@ -80,8 +81,7 @@ These cover game rules, entities, combat mechanics, UI screens, menus, and high-
   * **Level list origin clarified**. The lobby's level array lives at `CGame+0xbc` / `CGame+0xc4` (count), where `CGame` is the embedded sub-object inside `CBulanci+0x284` (size ≈ `0x248`, reaches `CBulanci+0x4cc`). It is populated by `CMenu::OpenNetworkSession @ 0x00414dd0` (the host path) from a pre-scanned `Resource*` array at `CGame+0x66` / `CGame+0x6e`, via `FUN_00414920` chain-append. `CStartGame1` is purely UI and does **not** scan resources on entry (its 0xa8 byte size doesn't even reach offset `0xbc`). The join path receives the level list over the wire as DirectPlay msg type `0x05` (`SetLevel`).
 * **Open questions:**
   * The writer of `CGame+0x66` / `CGame+0x6e` (the source array of level-class resources). Static analysis finds **no** direct `MOV [reg+0x66], …` store — the writer must be using a different base register inside the class-registry mechanism (`FUN_0042f4b0` or one of its callees during `CBulanci::InitResourceBank`).
-  * Per-class byte-exact `CMenu` / `CStartGame1` / `CStartGame2` matching (the function bodies are fully readable, but the `mapping.csv` ↔ source-file sync hasn't been run yet for the most-recent renames).
-* **Artefacts:** `./main_menu.md`
+* **Artefacts:** `./main_menu.md`, `./history_screen.md`, `./red_menu_cursor.md`
 
 ### Multiplayer lobby UI
 
@@ -136,10 +136,10 @@ These cover game rules, entities, combat mechanics, UI screens, menus, and high-
 
 * **Classes:** `CHelpScript`, `CHistoryScript`, `CHelpDlg`, `CHistoryDlg`, `CHelpView`, `CHistoryView`
 * **Bytes:** 1.1 KB
-* **Confidence:** **Sketched**
-* **What's known:** Same `CLevelScript` substrate; invoked from `CHelpDlg::FUN_00421c10` and `CHistoryDlg::FUN_00422f70` with argc=1 (language selector). Only the `GetInfo` export is documented.
-* **Open questions:** Are extra export indices used by these subclasses? Do they override any dispatch slots?
-* **Artefacts:** `../engine/script_lifecycle.md`
+* **Confidence:** **Verified**
+* **What's known:** The History screen and page navigation are fully mapped out. The screen uses specialized `CHistoryScript` VM opcodes (such as `47` for `CreateImage`, which wraps loaded JPEGs in a `CDSBitmap` view) and coordinates with the ambient scheduler to cross-fade background music when cinematic movies (`CMovieView`) start (`0xf0`) and stop (`0xf1`).
+* **Open questions:** None.
+* **Artefacts:** `./history_screen.md`, `../engine/script_lifecycle.md`
 
 ### Powerups & Dynamic Spawner
 
@@ -153,4 +153,19 @@ These cover game rules, entities, combat mechanics, UI screens, menus, and high-
   - **Special Mode Guard Flag**: Collecting special pickups in shotgun-only mode sets flag `this[0x16b] = 1`. If the player dies (`CBulanek_OnDeath` @ `0x0041f900`) or is depleted of weapon ammo (`CWeapon::Fire` @ `0x004212b0`), this flag triggers a respawn of the special pickup back onto the map.
   - **Spells Subsystem (`CSpells` @ `0x00426da0` / `0x004278c0`)**: Floating head indicators. State is driven by events `0xee` (on) and `0xef` (off). Tracks active mask at `+0x78` mapping 3 status effects: Bit 0 = Shield / Armor (source rect `25, 0, 36, 14`), Bit 1 = Hourglass (source rect `0, 0, 11, 14`), and Bit 2 = Invisibility Eye (source rect `13, 0, 23, 14`).
 * **Open questions:** —
-* **Artefacts:** `./powerups.md`
+* **Artefacts:** `./powerups.md`, `./map_slots_spawner.md`
+
+---
+
+## Core Engine Subsystems
+
+These cover low-level platform interfaces, the main application shell, timing/tick distribution, and scripting lifecycles.
+
+### Monotonic Timing & Event Scheduler
+
+* **Classes:** `CDSApp`, `CDSUpdatedItem`, `Scheduler`
+* **Bytes:** 4.2 KB
+* **Confidence:** **Verified**
+* **What's known:** The engine runs a cooperative modal-pump loop driven by the Windows Multimedia Timer (`timeGetTime`). It features a fixed-timestep, drift-free scheduler that prevents timing errors across long runs by advancing the execution threshold mathematically rather than matching clock time.
+* **Open questions:** None; clock updates, cooperative message dispatch, and task polling are fully decompiled and documented.
+* **Artefacts:** `../engine/tick_system.md`

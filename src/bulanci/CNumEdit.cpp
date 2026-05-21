@@ -2,7 +2,11 @@
 
 // !FUNC 0x004031a0 BEGIN
 /* 4031A0-4031AF 0000F */
-uchar CNumEdit::CNumEdit_GetValue(uint* param_1) { STUB_BODY(); return 0; }
+uchar CNumEdit::CNumEdit_GetValue(uint* param_1) {
+    uint val = *reinterpret_cast<uint*>(reinterpret_cast<char*>(this) + 0xc0);
+    *param_1 = val;
+    return static_cast<uchar>(val);
+}
 // !FUNC 0x004031a0 END
 
 // !FUNC 0x00404550 BEGIN

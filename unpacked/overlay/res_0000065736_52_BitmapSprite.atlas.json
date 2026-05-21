@@ -1,0 +1,303 @@
+{
+  "atlas": "res_0000065736_52_BitmapSprite.atlas.png",
+  "gif": "res_0000065736_52_BitmapSprite.atlas.gif",
+  "frameWidth": 55,
+  "frameHeight": 62,
+  "frameCount": 8,
+  "framesStored": 9,
+  "paletteSource": "inherited",
+  "transparencySource": "mask-plane",
+  "maskPlanePresent": true,
+  "timing": {
+    "engineClockUnit": "ms",
+    "engineClockSource": "timeGetTime() polled by CDSApp_UpdateClock @ 0x0042e790; CDSObject scheduler fires events when g_dwElapsedMs >= lastFire + delay (see anim_runtime.md).",
+    "speedFormulaMs": {
+      "formula": "round(4725.0 / speed)",
+      "neutralSpeed": 100,
+      "numerator": 47.25,
+      "denominatorReference": 100.0,
+      "applies": "When the spawner passes speed != 100 to the construction site (e.g. CBulanek::FUN_0041e4b0). At speed == 100 the formula is skipped and trackMgr+0x44 stays at -1, leaving the sequence-default cadence in effect."
+    },
+    "sequenceDefaultCadenceMs": {
+      "formula": "delay_per_frame = ((f+1)*seq[0x10])/seq[0x14] - (f*seq[0x10])/seq[0x14]",
+      "totalDurationMs": null,
+      "note": "seq[0x14] = the sequence's frame count (see top-level 'frameCount'). seq[0x10] = total clip duration in ms, set by the resource-pool wrapper at load time and NOT present in any natural alignment of the on-disk BitmapSprite header. Pinning it requires further Ghidra work on the resource-pool side."
+    },
+    "flxOpcode0x0c": {
+      "purpose": "side-channel notification",
+      "description": "u16 broadcast via BroadcastFrameTimeHint @ 0x00436ef0 to the consumer's per-instance subscriber list (slot 4). Does NOT drive frameDelayOverrideMs. Listener semantics not yet pinned; the master pack's values (mostly 0/1) are too small to be ms delays.",
+      "explicitDurationFrames": 2,
+      "firstFrameWithOpcode": 3,
+      "anyPresent": true
+    }
+  },
+  "motionPath": {
+    "enabled": true,
+    "frameCountWithMove": 8,
+    "framesWithMove": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "perFrameAbsolutePosition": [
+      {
+        "index": 0,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 1,
+        "dx": 7,
+        "dy": 0,
+        "x": 7,
+        "y": 0
+      },
+      {
+        "index": 2,
+        "dx": 10,
+        "dy": 0,
+        "x": 17,
+        "y": 0
+      },
+      {
+        "index": 3,
+        "dx": 6,
+        "dy": 1,
+        "x": 23,
+        "y": 1
+      },
+      {
+        "index": 4,
+        "dx": 8,
+        "dy": -3,
+        "x": 31,
+        "y": -2
+      },
+      {
+        "index": 5,
+        "dx": 5,
+        "dy": -2,
+        "x": 36,
+        "y": -4
+      },
+      {
+        "index": 6,
+        "dx": 9,
+        "dy": -1,
+        "x": 45,
+        "y": -5
+      },
+      {
+        "index": 7,
+        "dx": 8,
+        "dy": 3,
+        "x": 53,
+        "y": -2
+      },
+      {
+        "index": 8,
+        "dx": 6,
+        "dy": 2,
+        "x": 59,
+        "y": 0
+      }
+    ],
+    "netDelta": [
+      59,
+      0
+    ],
+    "closedLoop": false,
+    "boundingBox": {
+      "minX": 0,
+      "minY": -5,
+      "maxX": 59,
+      "maxY": 1
+    },
+    "totalManhattanLength": 71,
+    "ringFrameIncluded": true
+  },
+  "frames": [
+    {
+      "index": 0,
+      "ops": [
+        "rle",
+        "regions",
+        "rleAlt"
+      ],
+      "events": [
+        {
+          "kind": 0,
+          "x": 26,
+          "y": 49
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "ops": [
+        "delta",
+        "move",
+        "regions",
+        "rleAlt"
+      ],
+      "move": [
+        7,
+        0
+      ],
+      "events": [
+        {
+          "kind": 0,
+          "x": 23,
+          "y": 49
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "ops": [
+        "delta",
+        "move",
+        "regions",
+        "rleAlt"
+      ],
+      "move": [
+        10,
+        0
+      ],
+      "events": [
+        {
+          "kind": 0,
+          "x": 22,
+          "y": 49
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "ops": [
+        "delta",
+        "move",
+        "time",
+        "rleAlt"
+      ],
+      "move": [
+        6,
+        1
+      ],
+      "durationTicks": 0,
+      "explicitTime": true
+    },
+    {
+      "index": 4,
+      "ops": [
+        "rle",
+        "move",
+        "regions",
+        "rleAlt"
+      ],
+      "move": [
+        8,
+        -3
+      ],
+      "events": [
+        {
+          "kind": 0,
+          "x": 25,
+          "y": 49
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "ops": [
+        "rle",
+        "move",
+        "regions",
+        "rleAlt"
+      ],
+      "move": [
+        5,
+        -2
+      ],
+      "events": [
+        {
+          "kind": 0,
+          "x": 28,
+          "y": 50
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "ops": [
+        "delta",
+        "move",
+        "regions",
+        "rleAlt"
+      ],
+      "move": [
+        9,
+        -1
+      ],
+      "events": [
+        {
+          "kind": 0,
+          "x": 27,
+          "y": 51
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "ops": [
+        "rle",
+        "move",
+        "regions",
+        "time",
+        "rleAlt"
+      ],
+      "move": [
+        8,
+        3
+      ],
+      "events": [
+        {
+          "kind": 0,
+          "x": 25,
+          "y": 52
+        }
+      ],
+      "durationTicks": 1,
+      "explicitTime": true
+    }
+  ],
+  "inheritedFrom": 65715,
+  "ringFrameIndex": 8,
+  "ringFrame": {
+    "index": 8,
+    "ops": [
+      "rle",
+      "move",
+      "regions",
+      "deltaAlt"
+    ],
+    "move": [
+      6,
+      2
+    ],
+    "events": [
+      {
+        "kind": 0,
+        "x": 26,
+        "y": 49
+      }
+    ]
+  }
+}

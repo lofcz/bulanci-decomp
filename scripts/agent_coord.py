@@ -49,10 +49,18 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Iterator
 
-REPO_ROOT = Path(os.path.realpath(__file__)).resolve().parents[1]
-STATE_DIR = REPO_ROOT / "state"
+from _state_root import MAIN_REPO_ROOT, STATE_DIR
+
+# `claims.json` MUST resolve to the same path for every worktree;
+# otherwise each worktree maintains its own coordinator and the locks
+# don't actually coordinate.  `_state_root` canonicalises it.
+REPO_ROOT = MAIN_REPO_ROOT
 CLAIMS_FILE = STATE_DIR / "claims.json"
 LOCK_FILE = STATE_DIR / "claims.json.lock"
+# `units_listing.csv` is checked-in source-of-truth and lives in every
+# worktree's tree.  Reading from the **main** checkout keeps unit
+# discovery stable even if a worktree happens to have a renamed unit
+# mid-flight.
 UNITS_FILE = REPO_ROOT / "config" / "bulanci" / "units_listing.csv"
 
 DEFAULT_TTL_SECONDS = 30 * 60
@@ -77,7 +85,10 @@ class ClaimStore:
 
     def __init__(self, claims_file: Path = CLAIMS_FILE):
         self.claims_file = claims_file
-        STATE_DIR.mkdir(parents=True, exist_ok=True)
+        # `STATE_DIR` is already mkdir'd by ``_state_root.state_root()``
+        # at import time; the redundant mkdir below is harmless and
+        # keeps the class usable with a custom path under tests.
+        self.claims_file.parent.mkdir(parents=True, exist_ok=True)
 
     @contextmanager
     def _locked(self) -> Iterator[None]:
@@ -201,6 +212,27 @@ class ClaimStore:
 
     def snapshot(self) -> dict[str, Claim]:
         return self._read()
+
+    def is_held(self, class_name: str, agent_id: str) -> bool:
+        """Return True iff ``class_name`` is currently claimed by ``agent_id``.
+
+        Used by the write-side scripts (``sync_units.py``,
+        ``rename_matched_bodies.py``, ``generate_sources.py``) to
+        refuse writes that aren't covered by a live claim.  Expired
+        claims do *not* count as held; the agent must re-claim or
+        heartbeat first.
+
+        Cheap: a single ``_read()`` with no lock taken.  Callers that
+        need a transactional "test and write" should use the higher
+        level ``claim()`` API instead.
+        """
+        claims = self._read()
+        cur = claims.get(class_name)
+        if cur is None:
+            return False
+        if cur.is_expired():
+            return False
+        return cur.agent_id == agent_id
 
 
 def _load_units() -> list[str]:

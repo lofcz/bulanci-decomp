@@ -1,9 +1,5 @@
 #include "ODSImage.h"
 
-// !FUNC 0x00418c00 BEGIN
-/* 418C00-418C5A 0005A */
-void* ODSImage::FUN_00418c00(int* param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00418c00 END
 
 // !FUNC 0x00418ef0 BEGIN
 /* 418EF0-418F5E 0006E */
@@ -30,13 +26,20 @@ uint* ODSImage::FUN_004228f0(uint* param_1) { STUB_BODY(); return 0; }
 uint ODSImage::FUN_004253d0(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004253d0 END
 
+
+
 // !FUNC 0x00426060 BEGIN
 /* 426060-426297 00237 */
-uint* ODSImage::FUN_00426060(uint* param_1) { STUB_BODY(); return 0; }
+uint* ODSImage::CGunMouse_ctor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00426060 END
+
+// !FUNC 0x00418c00 BEGIN
+/* 418C00-418C5A 0005A */
+void* ODSImage::ODSImage_ctor(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00418c00 END
 
 // !FUNC 0x00439050 BEGIN
 /* 439050-439074 00024 */
-uchar ODSImage::FUN_00439050(void* param_1) { STUB_BODY(); return 0; }
+uchar ODSImage::SetOwner(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00439050 END
 

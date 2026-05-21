@@ -32,12 +32,12 @@ uint CBulanek::FUN_00416630(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00416690 BEGIN
 /* 416690-4166B0 00020 */
-uint CBulanek::FUN_00416690(int param_1) { STUB_BODY(); return 0; }
+uint CBulanek::CBulanek_GetDelayedQuipSlot(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416690 END
 
 // !FUNC 0x004166b0 BEGIN
 /* 4166B0-4166D0 00020 */
-uint CBulanek::FUN_004166b0(int param_1) { STUB_BODY(); return 0; }
+uint CBulanek::CBulanek_GetHitQuipSlot(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004166b0 END
 
 // !FUNC 0x004166d0 BEGIN
@@ -57,7 +57,10 @@ uchar CBulanek::FUN_00416830(uchar param_1, ushort param_2, uint param_3, uint p
 
 // !FUNC 0x004168c0 BEGIN
 /* 4168C0-4168CD 0000D */
-uchar CBulanek::FUN_004168c0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CBulanek::FUN_004168c0(uchar param_1) {
+    *(reinterpret_cast<uchar*>(this) + 0x341) = param_1;
+    return param_1;
+}
 // !FUNC 0x004168c0 END
 
 // !FUNC 0x004172d0 BEGIN
@@ -82,7 +85,7 @@ uchar CBulanek::FUN_00417460(int* param_1, int* param_2, int param_3) { STUB_BOD
 
 // !FUNC 0x00417570 BEGIN
 /* 417570-4175E6 00076 */
-uchar CBulanek::FUN_00417570(void* param_1) { STUB_BODY(); return 0; }
+uchar CBulanek::CBulanek_ResetAmmoAndPlayReload(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00417570 END
 
 // !FUNC 0x004175f0 BEGIN
@@ -244,7 +247,7 @@ uint CBulanek::FUN_0041d090(int* param_1, int param_2, int param_3, char param_4
 
 // !FUNC 0x0041db00 BEGIN
 /* 41DB00-41DBB9 000B9 */
-uint CBulanek::FUN_0041db00(int param_1, int param_2, char param_3) { STUB_BODY(); return 0; }
+uint CBulanek::CBulanek_OnTakeDamage(int param_1, int param_2, char param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0041db00 END
 
 // !FUNC 0x0041ea90 BEGIN
@@ -289,7 +292,7 @@ uchar CBulanek::FUN_00420b30(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00420d40 BEGIN
 /* 420D40-421185 00445 */
-uchar CBulanek::FUN_00420d40(ushort param_1, uint* param_2, uint* param_3) { STUB_BODY(); return 0; }
+uchar CBulanek::CBulanek_OnEvent(ushort param_1, uint* param_2, uint* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00420d40 END
 
 // !FUNC 0x00422470 BEGIN
@@ -307,10 +310,6 @@ uchar CBulanek::FUN_0042c160(int param_1) { STUB_BODY(); return 0; }
 uchar CBulanek::FUN_0042c190(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042c190 END
 
-// !FUNC 0x0042cc80 BEGIN
-/* 42CC80-42CCCB 0004B */
-uchar CBulanek::FUN_0042cc80(int param_1, int param_2) { STUB_BODY(); return 0; }
-// !FUNC 0x0042cc80 END
 
 // !FUNC 0x0042eac0 BEGIN
 /* 42EAC0-42EAF2 00032 */

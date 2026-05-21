@@ -12,7 +12,7 @@ uchar CWeapon::FUN_00416750(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004179a0 BEGIN
 /* 4179A0-4179BC 0001C */
 void CWeapon::SetAmmo(int param_1) {
-    _Globals::FUN_00417950(param_1, reinterpret_cast<char*>(this)[100], *reinterpret_cast<int**>(reinterpret_cast<char*>(this) + 0x54) + 8);
+    _Globals::TriggerSoundEffect(param_1, reinterpret_cast<char*>(this)[100], *reinterpret_cast<int**>(reinterpret_cast<char*>(this) + 0x54) + 8);
 }
 // !FUNC 0x004179a0 END
 

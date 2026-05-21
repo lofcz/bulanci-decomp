@@ -2,7 +2,7 @@
 
 // !FUNC 0x00422670 BEGIN
 /* 422670-4226BC 0004C */
-uchar CHistoryView::FUN_00422670(short param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
+uchar CHistoryView::CHistoryView_OnEvent(short param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00422670 END
 
 // !FUNC 0x00422a70 BEGIN

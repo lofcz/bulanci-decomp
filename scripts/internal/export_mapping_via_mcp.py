@@ -28,10 +28,27 @@ import urllib.request
 from pathlib import Path
 from typing import Iterable
 
+# ``scripts/internal/`` -> ``scripts/`` is two levels up; expose the
+# shared helpers (``_state_root``, ``_file_lock``) without forcing
+# every caller to mess with PYTHONPATH.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from _file_lock import FileLock, FileLockError  # noqa: E402
+from _state_root import STATE_DIR  # noqa: E402
+
 DEFAULT_URL = os.environ.get("GHIDRA_MCP_URL", "http://127.0.0.1:8089")
 DEFAULT_PROGRAM = os.environ.get("GHIDRA_MCP_PROGRAM", "bulanci.exe")
 DEFAULT_OUTPUT = Path(__file__).parent.parent.parent / "config" / "bulanci" / "mapping.csv"
 DEFAULT_WORKERS = 16
+
+# Mapping export is a *write* of a shared file (``config/bulanci/mapping.csv``)
+# AND a long-running read of a *single* Ghidra MCP.  Two concurrent runs
+# both fetch a coherent snapshot of Ghidra state and then race to be the
+# last writer -- the loser's intermediate prototype/rename edits get
+# silently rolled back the next time anyone runs ``configure.py``.  The
+# state-shared ``mapping.lock`` serialises that.
+DEFAULT_LOCK_PATH = STATE_DIR / "mapping.lock"
+DEFAULT_LOCK_TTL = 300.0          # 5 min; export runs in ~3-9s
+DEFAULT_LOCK_TIMEOUT = 600.0      # wait up to 10 min for a held lock
 
 # Drop these compiler / Ghidra synthetic entries entirely. They never end up
 # in a real translation unit and just pollute the unit listing.
@@ -386,6 +403,10 @@ def format_csv_row(
 
 
 def export(base_url: str, program: str, output: Path, workers: int, limit: int | None) -> int:
+    """Core export routine -- assumes the caller already holds the
+    mapping lock.  Use ``export_locked()`` from anywhere that doesn't
+    already own the lock (it's the safe wrapper used by the CLI).
+    """
     print(f"[mcp] fetching function list from {base_url} (program={program})", file=sys.stderr)
     funcs = list_all_functions(base_url, program)
     funcs = [f for f in funcs if not f.get("isThunk") and not f.get("isExternal")]
@@ -436,6 +457,36 @@ def export(base_url: str, program: str, output: Path, workers: int, limit: int |
     return len(rows)
 
 
+def export_locked(
+    base_url: str,
+    program: str,
+    output: Path,
+    workers: int,
+    limit: int | None,
+    *,
+    lock_path: Path = DEFAULT_LOCK_PATH,
+    lock_ttl: float = DEFAULT_LOCK_TTL,
+    lock_timeout: float = DEFAULT_LOCK_TIMEOUT,
+    skip_lock: bool = False,
+) -> int:
+    """Run an export under the canonical ``state/mapping.lock``.
+
+    Set ``skip_lock=True`` when the caller (e.g. ``refresh_mapping.py``)
+    already holds the lock; otherwise we'd deadlock on ourselves.
+    """
+    if skip_lock:
+        return export(base_url, program, output, workers, limit)
+    lock = FileLock(
+        lock_path,
+        owner="export-mapping",
+        ttl_seconds=lock_ttl,
+        acquire_timeout_seconds=lock_timeout,
+    )
+    print(f"[mcp] acquiring {lock_path}", file=sys.stderr)
+    with lock:
+        return export(base_url, program, output, workers, limit)
+
+
 def main(argv: Iterable[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--url", default=DEFAULT_URL, help="Ghidra MCP HTTP base URL")
@@ -443,10 +494,39 @@ def main(argv: Iterable[str] | None = None) -> int:
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Where to write mapping.csv")
     parser.add_argument("--workers", type=int, default=DEFAULT_WORKERS, help="Concurrent HTTP workers")
     parser.add_argument("--limit", type=int, default=None, help="Stop after N functions (debugging)")
+    parser.add_argument(
+        "--lock-path",
+        default=str(DEFAULT_LOCK_PATH),
+        help="mapping.lock path (default: <main repo>/state/mapping.lock)",
+    )
+    parser.add_argument(
+        "--lock-timeout",
+        type=float,
+        default=DEFAULT_LOCK_TIMEOUT,
+        help="seconds to wait for another exporter to finish before bailing",
+    )
+    parser.add_argument(
+        "--skip-lock",
+        action="store_true",
+        help="DO NOT acquire mapping.lock (caller already owns it; e.g. refresh_mapping.py)",
+    )
     args = parser.parse_args(argv)
 
     output = Path(args.output)
-    n = export(args.url, args.program, output, args.workers, args.limit)
+    try:
+        n = export_locked(
+            args.url,
+            args.program,
+            output,
+            args.workers,
+            args.limit,
+            lock_path=Path(args.lock_path),
+            lock_timeout=args.lock_timeout,
+            skip_lock=args.skip_lock,
+        )
+    except FileLockError as e:
+        print(f"[mcp] {e}", file=sys.stderr)
+        return 2
     print(f"wrote {n} mapping rows to {output}")
     return 0
 

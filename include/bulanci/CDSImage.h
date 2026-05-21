@@ -38,12 +38,6 @@ public:
 	// !DECL 0x00432320 BEGIN
 	/* 432320 */ uchar FUN_00432320(int param_1);
 	// !DECL 0x00432320 END
-	// !DECL 0x00435fe0 BEGIN
-	/* 435FE0 */ int FUN_00435fe0(char param_1);
-	// !DECL 0x00435fe0 END
-	// !DECL 0x004362f0 BEGIN
-	/* 4362F0 */ int FUN_004362f0(void* param_1);
-	// !DECL 0x004362f0 END
 	// !DECL 0x00436c60 BEGIN
 	/* 436C60 */ uchar FUN_00436c60(int* param_1);
 	// !DECL 0x00436c60 END
@@ -65,6 +59,13 @@ public:
 	// !DECL 0x004375c0 BEGIN
 	/* 4375C0 */ uint* FUN_004375c0(uchar param_1);
 	// !DECL 0x004375c0 END
+
+	// !DECL 0x00435fe0 BEGIN
+	/* 435FE0 */ int ComputeBufferSize(char param_1);
+	// !DECL 0x00435fe0 END
+	// !DECL 0x004362f0 BEGIN
+	/* 4362F0 */ int ComputeAllocationSize(void* param_1);
+	// !DECL 0x004362f0 END
 };
 
 #endif

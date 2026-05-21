@@ -1,0 +1,149 @@
+{
+  "atlas": "res_0000065768_52_BitmapSprite.atlas.png",
+  "gif": "res_0000065768_52_BitmapSprite.atlas.gif",
+  "frameWidth": 54,
+  "frameHeight": 55,
+  "frameCount": 6,
+  "framesStored": 7,
+  "paletteSource": "inline",
+  "transparencySource": "perimeter",
+  "maskPlanePresent": false,
+  "timing": {
+    "engineClockUnit": "ms",
+    "engineClockSource": "timeGetTime() polled by CDSApp_UpdateClock @ 0x0042e790; CDSObject scheduler fires events when g_dwElapsedMs >= lastFire + delay (see anim_runtime.md).",
+    "speedFormulaMs": {
+      "formula": "round(4725.0 / speed)",
+      "neutralSpeed": 100,
+      "numerator": 47.25,
+      "denominatorReference": 100.0,
+      "applies": "When the spawner passes speed != 100 to the construction site (e.g. CBulanek::FUN_0041e4b0). At speed == 100 the formula is skipped and trackMgr+0x44 stays at -1, leaving the sequence-default cadence in effect."
+    },
+    "sequenceDefaultCadenceMs": {
+      "formula": "delay_per_frame = ((f+1)*seq[0x10])/seq[0x14] - (f*seq[0x10])/seq[0x14]",
+      "totalDurationMs": null,
+      "note": "seq[0x14] = the sequence's frame count (see top-level 'frameCount'). seq[0x10] = total clip duration in ms, set by the resource-pool wrapper at load time and NOT present in any natural alignment of the on-disk BitmapSprite header. Pinning it requires further Ghidra work on the resource-pool side."
+    },
+    "flxOpcode0x0c": {
+      "purpose": "side-channel notification",
+      "description": "u16 broadcast via BroadcastFrameTimeHint @ 0x00436ef0 to the consumer's per-instance subscriber list (slot 4). Does NOT drive frameDelayOverrideMs. Listener semantics not yet pinned; the master pack's values (mostly 0/1) are too small to be ms delays.",
+      "explicitDurationFrames": 0,
+      "firstFrameWithOpcode": null,
+      "anyPresent": false
+    }
+  },
+  "motionPath": {
+    "enabled": false,
+    "frameCountWithMove": 0,
+    "framesWithMove": [],
+    "perFrameAbsolutePosition": [
+      {
+        "index": 0,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 1,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 2,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 3,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 4,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 5,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      },
+      {
+        "index": 6,
+        "dx": 0,
+        "dy": 0,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "netDelta": [
+      0,
+      0
+    ],
+    "closedLoop": false,
+    "boundingBox": {
+      "minX": 0,
+      "minY": 0,
+      "maxX": 0,
+      "maxY": 0
+    },
+    "totalManhattanLength": 0,
+    "ringFrameIncluded": false
+  },
+  "frames": [
+    {
+      "index": 0,
+      "ops": [
+        "rle",
+        "palette"
+      ]
+    },
+    {
+      "index": 1,
+      "ops": [
+        "rle"
+      ]
+    },
+    {
+      "index": 2,
+      "ops": [
+        "rle"
+      ]
+    },
+    {
+      "index": 3,
+      "ops": [
+        "rle"
+      ]
+    },
+    {
+      "index": 4,
+      "ops": [
+        "rle"
+      ]
+    },
+    {
+      "index": 5,
+      "ops": [
+        "rle"
+      ]
+    }
+  ],
+  "ringFrameIndex": 6,
+  "ringFrame": {
+    "index": 6,
+    "ops": [
+      "delta"
+    ]
+  }
+}

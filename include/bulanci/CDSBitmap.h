@@ -24,7 +24,7 @@ public:
 	/* 4274F0 */ uint* FUN_004274f0(uchar param_1);
 	// !DECL 0x004274f0 END
 	// !DECL 0x004393d0 BEGIN
-	/* 4393D0 */ uint* FUN_004393d0(uint param_1, uint param_2, int* param_3);
+	/* 4393D0 */ uint* CDSBitmap_ctor(uint param_1, uint param_2, int* param_3);
 	// !DECL 0x004393d0 END
 };
 

@@ -78,7 +78,7 @@ public:
 	/* 423FA0 */ uchar CMenu_SetButtonsHidden(char param_1);
 	// !DECL 0x00423fa0 END
 	// !DECL 0x00424080 BEGIN
-	/* 424080 */ uchar FUN_00424080(void* param_1);
+	/* 424080 */ uchar CMenu_OnMusicFadeTick(void* param_1);
 	// !DECL 0x00424080 END
 	// !DECL 0x00424520 BEGIN
 	/* 424520 */ uint* CMenu_ctor(uint* param_1);

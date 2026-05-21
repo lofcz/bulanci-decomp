@@ -1,0 +1,48 @@
+{
+  "bankResourceID": 65873,
+  "reserved": 0,
+  "sampleCount": 8,
+  "totalBankBytes": 186764,
+  "samples": [
+    {
+      "index": 0,
+      "offsetInBank": 0,
+      "byteLen": 8720
+    },
+    {
+      "index": 1,
+      "offsetInBank": 8720,
+      "byteLen": 47746
+    },
+    {
+      "index": 2,
+      "offsetInBank": 56466,
+      "byteLen": 20624
+    },
+    {
+      "index": 3,
+      "offsetInBank": 77090,
+      "byteLen": 4456
+    },
+    {
+      "index": 4,
+      "offsetInBank": 81546,
+      "byteLen": 15368
+    },
+    {
+      "index": 5,
+      "offsetInBank": 96914,
+      "byteLen": 10176
+    },
+    {
+      "index": 6,
+      "offsetInBank": 107090,
+      "byteLen": 16836
+    },
+    {
+      "index": 7,
+      "offsetInBank": 123926,
+      "byteLen": 62838
+    }
+  ]
+}

@@ -325,9 +325,6 @@ public:
 	// !DECL 0x0042be90 BEGIN
 	/* 42BE90 */ uchar FUN_0042be90(int* param_1);
 	// !DECL 0x0042be90 END
-	// !DECL 0x0042bf40 BEGIN
-	/* 42BF40 */ uchar FUN_0042bf40(char param_1);
-	// !DECL 0x0042bf40 END
 	// !DECL 0x0042c0e0 BEGIN
 	/* 42C0E0 */ uint CDSView_OnKeyUp(int param_1);
 	// !DECL 0x0042c0e0 END
@@ -364,9 +361,6 @@ public:
 	// !DECL 0x0042cae0 BEGIN
 	/* 42CAE0 */ uint CDSApp_AdaptDisplaySize(int* param_1);
 	// !DECL 0x0042cae0 END
-	// !DECL 0x0042cbf0 BEGIN
-	/* 42CBF0 */ uchar FUN_0042cbf0(int param_1, int param_2);
-	// !DECL 0x0042cbf0 END
 	// !DECL 0x0042d310 BEGIN
 	/* 42D310 */ static uint FUN_0042d310(int param_1);
 	// !DECL 0x0042d310 END

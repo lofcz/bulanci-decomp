@@ -34,7 +34,12 @@ renames a `FUN_xxx` into `CFoo::Init`.
 import argparse
 import os
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _claim_guard import resolve_agent, guard_units  # noqa: E402
+
 from project import Function, FunctionType, DecompUnit
 
 WORKSPACE_PATH = Path(__file__).parent.parent
@@ -48,6 +53,30 @@ WORKSPACE_PATH = Path(__file__).parent.parent
 # Keep in sync with `include/globals.h` - any typedef declared there
 # should be listed here so the stub generator emits the bare typedef
 # name instead of a (broken) `struct Name;` forward declaration.
+# Populated by ``set_project_classes()`` at the start of a generate /
+# sync run with the union of every class name declared in
+# ``units_listing.csv``.  ``_safe_arg_type`` / ``_safe_return_type``
+# consult it so a by-value reference to a cross-unit class (e.g.
+# ``CBulanci param_3`` in ``CButton.h``) survives the auto-emit pass
+# instead of being demoted to ``int``.  The convention is that every
+# unit's header ``#include``s the headers it needs (preserved verbatim
+# by ``sync_units`` from the pre-class extras), so by-value uses of
+# project classes resolve to a complete type at compile time.
+_PROJECT_CLASSES: set[str] = set()
+
+
+def set_project_classes(classes: set[str]) -> None:
+    """Replace the project-wide class set used by ``_safe_arg_type``.
+
+    Pass the union of every leaf class name declared in
+    ``units_listing.csv`` (see ``DecompUnit.units``).  Called once per
+    generate / sync invocation; module-level state is fine because the
+    pipeline is single-threaded.
+    """
+    global _PROJECT_CLASSES
+    _PROJECT_CLASSES = set(classes or ())
+
+
 KNOWN_TYPES = {
     "void", "bool", "char", "uchar", "short", "ushort", "int", "uint",
     "long", "ulong", "longlong", "ulonglong", "float", "double",
@@ -135,9 +164,19 @@ def _normalize_type(ty: str) -> str:
 
 def _is_unknown_struct(ty: str) -> bool:
     """True iff `ty` (already stripped of `*`) is an unknown struct/class
-    name that we forward-declare in headers."""
+    name that we forward-declare in headers.
+
+    A project class (registered via ``set_project_classes``) is treated
+    as **known**: every unit's header includes the headers it needs, so
+    a by-value or by-pointer reference resolves to a complete type at
+    compile time.  This keeps cross-unit prototypes (``CBulanci
+    param_3`` in ``CButton_BuildAt``) intact instead of demoting them
+    to ``int``.
+    """
     base = _strip_pointer(ty)
     if not base or base in KNOWN_TYPES:
+        return False
+    if base in _PROJECT_CLASSES:
         return False
     if "::" in base:
         return False
@@ -261,6 +300,13 @@ def _collect_unknown_types(funByNamespaces, unitNamespaces) -> list[str]:
                 base = _strip_pointer(ty_norm)
                 if base in KNOWN_TYPES or base == "void":
                     continue
+                if base in _PROJECT_CLASSES:
+                    # Definition lives in another unit's header, which
+                    # is included via the preserved pre-class extras
+                    # (`#include "Foo.h"`).  Emitting a `struct Foo;`
+                    # forward decl alongside the include is harmless
+                    # but noisy; skip it.
+                    continue
                 if "::" in base:
                     continue
                 if not _VALID_IDENT_CHARS.match(base):
@@ -269,16 +315,57 @@ def _collect_unknown_types(funByNamespaces, unitNamespaces) -> list[str]:
     return sorted(seen)
 
 
-def generateSources(decompUnit: DecompUnit, force: bool = False):
+def generateSources(
+    decompUnit: DecompUnit,
+    force: bool = False,
+    *,
+    agent: str | None = None,
+    allow_unclaimed: bool = True,
+):
     """Scaffold any missing unit files.  Existing files are left alone
     unless `force=True` (in which case they're overwritten - destructive
     to hand-edits).  Future namespace shifts should go through
-    `scripts/sync_units.py`."""
+    `scripts/sync_units.py`.
+
+    ``agent`` enables the same per-claim filter used by ``sync_units``
+    and ``rename_matched_bodies``.  By default new units are allowed
+    even without a claim (``allow_unclaimed=True``) because
+    scaffolding a brand-new unit is intrinsically work nobody else can
+    have claimed yet -- but ``--force`` rebuilds need a real claim.
+    """
     os.makedirs(str(decompUnit.srcPath), exist_ok=True)
     os.makedirs(str(decompUnit.includePath), exist_ok=True)
+
+    # Publish the project-wide leaf class set so by-value cross-unit
+    # references survive auto-emission.  See ``set_project_classes``.
+    project_classes: set[str] = set()
+    for namespaces in decompUnit.units.values():
+        for ns in namespaces:
+            for part in ns.split("::"):
+                if part:
+                    project_classes.add(part)
+    set_project_classes(project_classes)
+
     skipped = 0
     scaffolded = 0
-    for unit, namespaces in decompUnit.units.items():
+    candidate = list(decompUnit.units.items())
+    # ``--force`` is the destructive path; require an explicit claim
+    # for those units even though scaffolding new units is usually
+    # safe.
+    enforce_unclaimed = allow_unclaimed and not force
+    permitted = set(
+        guard_units(
+            agent,
+            [u for u, _ in candidate],
+            action="generate_sources",
+            allow_unclaimed=enforce_unclaimed,
+        )
+    )
+    units_skipped_by_claim = 0
+    for unit, namespaces in candidate:
+        if agent and unit not in permitted:
+            units_skipped_by_claim += 1
+            continue
         if generateUnitSources(decompUnit.mappings, unit, namespaces,
                                decompUnit.srcPath, decompUnit.includePath,
                                force=force):
@@ -286,6 +373,8 @@ def generateSources(decompUnit: DecompUnit, force: bool = False):
         else:
             skipped += 1
     print(f"  scaffolded {scaffolded} unit(s); preserved {skipped} existing unit(s).")
+    if units_skipped_by_claim:
+        print(f"  ~ skipped {units_skipped_by_claim} unit(s) not claimed by {agent}")
     if skipped and not force:
         print("  (existing units are hand-owned; run scripts/sync_units.py to "
               "migrate per-function blocks, or pass --force to rebuild from scratch.)")
@@ -518,7 +607,35 @@ if __name__ == "__main__":
                              "Use only for one-time migrations (current PR moved to markers) "
                              "or to wipe & re-scaffold from a clean slate. Prefer "
                              "`scripts/sync_units.py` for ongoing namespace shifts.")
+    parser.add_argument(
+        "--agent",
+        default=None,
+        help=(
+            "Restrict scaffolding to units claimed by this agent id "
+            "(see scripts/agent_coord.py).  Defaults to $BULANCI_AGENT. "
+            "Leave unset on the refresher / main checkout."
+        ),
+    )
+    parser.add_argument(
+        "--strict-claims",
+        dest="allow_unclaimed",
+        action="store_false",
+        default=True,
+        help=(
+            "When --agent is set, also require a live claim for "
+            "previously-unscaffolded units (default: allow scaffolding "
+            "new units without a claim; only --force needs one)."
+        ),
+    )
     args = parser.parse_args()
     os.chdir(WORKSPACE_PATH)
     unit = DecompUnit("Game code", "bulanci", "bulanci.exe")
-    generateSources(unit, force=args.force)
+    agent = resolve_agent(args.agent)
+    if agent:
+        print(f"generate_sources: enforcing claims for agent={agent}")
+    generateSources(
+        unit,
+        force=args.force,
+        agent=agent,
+        allow_unclaimed=args.allow_unclaimed,
+    )

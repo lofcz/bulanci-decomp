@@ -1,0 +1,33 @@
+{
+  "bankResourceID": 65871,
+  "reserved": 0,
+  "sampleCount": 5,
+  "totalBankBytes": 77132,
+  "samples": [
+    {
+      "index": 0,
+      "offsetInBank": 0,
+      "byteLen": 22656
+    },
+    {
+      "index": 1,
+      "offsetInBank": 22656,
+      "byteLen": 14648
+    },
+    {
+      "index": 2,
+      "offsetInBank": 37304,
+      "byteLen": 8928
+    },
+    {
+      "index": 3,
+      "offsetInBank": 46232,
+      "byteLen": 10356
+    },
+    {
+      "index": 4,
+      "offsetInBank": 56588,
+      "byteLen": 20544
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "source": "orig\\fotbal.eap",
+  "source_type": "eap",
+  "container_start": 0,
+  "container_total_bytes": 3182928,
+  "container_dir_off": 3182374,
+  "container_chunks": 155,
+  "container_uncompressed_size": 5053277,
+  "payload_kind": "eap-bundle",
+  "eap_count": 8,
+  "eap_format_tag": 8,
+  "resources": [
+    {
+      "id": 100000,
+      "classId": 94,
+      "className": "Sign",
+      "position": 0,
+      "size": 45,
+      "rawFile": "res_0000100000_94_Sign.bin",
+      "friendlyFile": "res_0000100000_94_Sign.sign.json",
+      "sign": {
+        "date": "2006-08-30",
+        "content": "Fotbal",
+        "copyright": "Dr. Killer"
+      }
+    },
+    {
+      "id": 100001,
+      "classId": 22,
+      "className": "BitmapBMP",
+      "position": 49,
+      "size": 1920054,
+      "rawFile": "res_0000100001_22_BitmapBMP.bin",
+      "friendlyFile": "res_0000100001_22_BitmapBMP.bmp"
+    },
+    {
+      "id": 100002,
+      "classId": 21,
+      "className": "BitmapJPEG",
+      "position": 1920107,
+      "size": 85541,
+      "rawFile": "res_0000100002_21_BitmapJPEG.bin",
+      "friendlyFile": "res_0000100002_21_BitmapJPEG.jpg"
+    },
+    {
+      "id": 100003,
+      "classId": 48,
+      "className": "Mp3",
+      "position": 2005652,
+      "size": 2965564,
+      "rawFile": "res_0000100003_48_Mp3.bin",
+      "friendlyFile": "res_0000100003_48_Mp3.mp3",
+      "audio": {
+        "dataLen": 2965548,
+        "reportedSize": 32693760,
+        "channels": 2,
+        "bits": 16,
+        "freq": 44100
+      }
+    },
+    {
+      "id": 100004,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 4971220,
+      "size": 6986,
+      "rawFile": "res_0000100004_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100004_28_BitmapSpecial.png",
+      "special": {
+        "width": 39,
+        "height": 58,
+        "marker5": 5,
+        "stride": 120,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 6960,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100005,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 4978210,
+      "size": 6986,
+      "rawFile": "res_0000100005_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100005_28_BitmapSpecial.png",
+      "special": {
+        "width": 39,
+        "height": 58,
+        "marker5": 5,
+        "stride": 120,
+        "transparentRGB": "0x00FFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 6960,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100006,
+      "classId": 28,
+      "className": "BitmapSpecial",
+      "position": 4985200,
+      "size": 67370,
+      "rawFile": "res_0000100006_28_BitmapSpecial.bin",
+      "friendlyFile": "res_0000100006_28_BitmapSpecial.png",
+      "special": {
+        "width": 243,
+        "height": 92,
+        "marker5": 5,
+        "stride": 732,
+        "transparentRGB": "0xFFFFFFFF",
+        "padA": 255,
+        "tag24bit": 16777216,
+        "padB": 0,
+        "pixelBytes": 67344,
+        "bpp": 24,
+        "hasUnpacked": false
+      }
+    },
+    {
+      "id": 100007,
+      "classId": 2026,
+      "className": "Script",
+      "position": 5052574,
+      "size": 499,
+      "rawFile": "res_0000100007_2026_Script.bin",
+      "friendlyFile": "res_0000100007_2026_Script.script.asm",
+      "script": {
+        "kind": "level_script",
+        "codeLen": 443,
+        "nExports": 11,
+        "nVars": 3,
+        "entryPoints": [
+          0,
+          108,
+          380,
+          387,
+          394,
+          401,
+          408,
+          415,
+          422,
+          429,
+          436
+        ]
+      }
+    }
+  ],
+  "unknown_class_ids": [],
+  "notes": [
+    "format tag = 8 (editor-compiled .eap)",
+    "Parsed 8 .eap resources; data section begins at payload offset 200"
+  ]
+}

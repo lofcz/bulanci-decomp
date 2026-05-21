@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "name": "cursor_idle_b",
+  "image": "atlas.png",
+  "frame": {
+    "width": 14,
+    "height": 13
+  },
+  "origin": {
+    "x": 7,
+    "y": 6
+  },
+  "frames": [
+    {
+      "meta": {
+        "motion": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          -1,
+          1
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          -2,
+          1
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          -1,
+          0
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          -4,
+          -1
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          -3,
+          -1
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          3,
+          -1
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          3,
+          3
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          5,
+          2
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          3,
+          -3
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          2,
+          -4
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          -2,
+          -2
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          -3,
+          -3
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          -5,
+          -2
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          -2,
+          -1
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          -2,
+          0
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          -1,
+          3
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "meta": {
+        "motion": [
+          4,
+          2
+        ]
+      }
+    }
+  ],
+  "meta": {
+    "engineSpriteId": 65802
+  }
+}

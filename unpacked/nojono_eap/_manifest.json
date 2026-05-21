@@ -1,0 +1,95 @@
+{
+  "source": "orig\\nojono.eap",
+  "source_type": "eap",
+  "container_start": 0,
+  "container_total_bytes": 3251648,
+  "container_dir_off": 3251132,
+  "container_chunks": 139,
+  "container_uncompressed_size": 4554355,
+  "payload_kind": "eap-bundle",
+  "eap_count": 5,
+  "eap_format_tag": 8,
+  "resources": [
+    {
+      "id": 100000,
+      "classId": 94,
+      "className": "Sign",
+      "position": 0,
+      "size": 57,
+      "rawFile": "res_0000100000_94_Sign.bin",
+      "friendlyFile": "res_0000100000_94_Sign.sign.json",
+      "sign": {
+        "date": "2008-12-28",
+        "content": "No jo no",
+        "copyright": "Bulánek Twůrčí"
+      }
+    },
+    {
+      "id": 100001,
+      "classId": 21,
+      "className": "BitmapJPEG",
+      "position": 61,
+      "size": 64344,
+      "rawFile": "res_0000100001_21_BitmapJPEG.bin",
+      "friendlyFile": "res_0000100001_21_BitmapJPEG.jpg"
+    },
+    {
+      "id": 100002,
+      "classId": 22,
+      "className": "BitmapBMP",
+      "position": 64409,
+      "size": 1236054,
+      "rawFile": "res_0000100002_22_BitmapBMP.bin",
+      "friendlyFile": "res_0000100002_22_BitmapBMP.bmp"
+    },
+    {
+      "id": 100003,
+      "classId": 48,
+      "className": "Mp3",
+      "position": 1300467,
+      "size": 3252617,
+      "rawFile": "res_0000100003_48_Mp3.bin",
+      "friendlyFile": "res_0000100003_48_Mp3.mp3",
+      "audio": {
+        "dataLen": 3252601,
+        "reportedSize": 35859456,
+        "channels": 2,
+        "bits": 16,
+        "freq": 44100
+      }
+    },
+    {
+      "id": 100004,
+      "classId": 2026,
+      "className": "Script",
+      "position": 4553088,
+      "size": 1135,
+      "rawFile": "res_0000100004_2026_Script.bin",
+      "friendlyFile": "res_0000100004_2026_Script.script.asm",
+      "script": {
+        "kind": "level_script",
+        "codeLen": 1079,
+        "nExports": 11,
+        "nVars": 4,
+        "entryPoints": [
+          100,
+          212,
+          751,
+          775,
+          782,
+          789,
+          796,
+          803,
+          938,
+          1001,
+          1072
+        ]
+      }
+    }
+  ],
+  "unknown_class_ids": [],
+  "notes": [
+    "format tag = 8 (editor-compiled .eap)",
+    "Parsed 5 .eap resources; data section begins at payload offset 128"
+  ]
+}

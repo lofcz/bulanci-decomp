@@ -106,9 +106,9 @@ literal which starts immediately at `0x00487094`.
 | 0  | `+0x00` | `CDSApp_GetClassTable` (`0x0042b130`) | `return &g_AppClassTable;` |
 | 1  | `+0x04` | `CDSApp_DtorScalar` (`0x0042b980`) | scalar-deleting dtor (calls slot 2 then conditional `_free(this)`) |
 | 2  | `+0x08` | `CDSApp_dtor` (`0x0042b560`) | destructor body: `DestroyWindow(g_pHwnd); FUN_0042add0; FUN_0042f530 (drain DS); base::~()` |
-| 3  | `+0x0c` | `0x0042c2e0` | base: returns `sum(child->vtbl[3]())` over `+0x54` child list — "GetWeight"-style accumulator |
-| 4  | `+0x10` | `0x0042c320` | base: walks children, calling `child->vtbl[4](cursor); cursor += child->vtbl[3]()` — paired with slot 3; doubles as the "release prior child" hook used by `CDSApp_RenderFrame` |
-| 5  | `+0x14` | `0x0042c370` | base: same shape as slot 4 but invokes `child->vtbl[5]` — mirror operation; doubles as the "activate now-current child" hook used by `CDSApp_RenderFrame` |
+| 3  | `+0x0c` | `CDSView_GetDataSize` (`0x0042c2e0`) | **GetDataSize** — returns cumulative size of serialized data for this view and its children (e.g., `CRadio` returns 1, `CEdit` returns 4) |
+| 4  | `+0x10` | `CDSView_SaveData` (`0x0042c320`) | **SaveData** — serializes widget values into the cursor memory buffer; walks child list calling `child->vtbl[4](cursor); cursor += child->vtbl[3]()` |
+| 5  | `+0x14` | `CDSView_LoadData` (`0x0042c370`) | **LoadData** — deserializes and restores widget values from the cursor memory buffer; walks child list calling `child->vtbl[5](cursor); cursor += child->vtbl[3]()` |
 | 6  | `+0x18` | `0x004033a0` | `return 0;` — engine-default predicate |
 | 7  | `+0x1c` | `CDSView_HitTest` (`0x004028a0`) | `return inside(this->bounds[+0x30..+0x3c], pt);` |
 | 8  | `+0x20` | `CDSApp_AdaptDisplaySize` (`0x0042cae0`) | resize-on-enter-modal: queries slot 12 for parent dims, slot 11 to apply |
@@ -117,11 +117,11 @@ literal which starts immediately at `0x00487094`.
 | 11 | `+0x2c` | `CDSView_SetRect` (`0x0042c480`) | assigns `this->bounds = param_1[4]` and broadcasts slot 10 / slot 8 to children |
 | 12 | `+0x30` | `CDSView_GetParentBounds` (`0x0042c430`) | outputs `(0,0)` + `parent->bounds.size` (or `INT_MAX` if no parent) |
 | 13 | `+0x34` | `CDSView_IsModalDoneRecursive` (`0x0042c3e0`) | walks children's slot 13 — any child returning 0 means "still modal" |
-| 14 | `+0x38` | `0x0042ccf0` | per-dirty-rect render callback invoked by `CDSApp_RenderFrame` |
+| 14 | `+0x38` | `CDSView_RenderChildren` (`0x0042ccf0`) | **Render / OnDraw** — base implementation recursively renders children that intersect the drawing/clipping rect (`DAT_004b3b9c`); overridden by simple widgets to draw themselves |
 | 15..18 | `+0x3c..+0x48` | `purecall` (`0x00438340`) | unused-in-base; reserved for derived overrides |
 | 19 | `+0x4c` | `CDSView_OnFocus` (`0x0042cf50`) | per-event hook fired by mouse-down (kind 0x10) in `CDSApp_DispatchInputEvent`; base impl is a one-line thunk to `CDSView_AcquireKeyboardFocus` (click-to-focus) |
-| 20 | `+0x50` | `0x00416770` | overridden by `CBulanci` (game audio hook?) |
-| 21 | `+0x54` | `0x00416770` | overridden by `CBulanci` (same body) |
+| 20 | `+0x50` | `CDSView_OnMouseDummy` (`0x00416770`) | **OnMouseUp** — mouse up event hook; defaults to empty dummy in base; overridden by widgets to finalize click actions |
+| 21 | `+0x54` | `CDSView_OnMouseDummy` (`0x00416770`) | **OnMouseDblClk** — mouse double-click event hook; defaults to empty dummy in base |
 | 22 | `+0x58` | `CDSView_OnKeyDown` (`0x0042a000`) | give focus chance to consume; magic ALT+`X` posts close-event (`0x8004`) via `FUN_0042c3c0` |
 | 23 | `+0x5c` | `CDSView_OnKeyUp` (`0x0042c0e0`) | bubble up the `this[0x50]` chain if parent `flags2 & 2` set |
 | 24 | `+0x60` | `CDSView_OnChar` (`0x0042c100`) | bubble up the `this[0x50]` chain if parent `flags2 & 4` set |
@@ -461,33 +461,69 @@ touches are pinned; the rest of the layout is in flight.
 | `0x004b7bf0` | `g_pEventQueue`     | `void *`       | engine event queue probed by `CDSApp_PollEventQueue` / drained by `CDSApp_DispatchOneEvent` |
 | `0x0048700c` | `g_pCDSApp_vftable` | `void *[34]`   | primary CDSApp vftable (slot map above) |
 
-## What's still open
+## What's still open / Resolved Architecture Details
 
-* Slot 3 / 4 / 5 semantics — base implementations are pure
-  "walk child list" templates, so the per-class meaning is whatever
-  the derived class plugs in. The decompiler-visible pattern is
-  "slot 3 returns a `size_t`, slot 4 / 5 act on a cursor advanced by
-  that size", which is consistent with `(GetSize, Save, Load)` or
-  `(GetWeight, Distribute, Collect)` shapes — but a confirming
-  derived-class override (e.g. on `CMenu` or `CStartGame2`) hasn't
-  been read yet.
-* Slot 14 (`0x0042ccf0`) — the per-dirty-rect render callback. 320 B,
-  the largest virtual on the table; only spot-checked so far. Pinning
-  it would close the render-loop story.
-* Slot 20 / 21 — both `0x00416770` (one body, registered twice in this
-  base table). Reads like an audio-related game override that
-  shouldn't be in `CDSApp::vftable`; very likely a propagation
-  artefact from `CBulanci`'s namespace claim.
-* `CBulanci`-specific overrides for the base slots in the **derived**
-  `CBulanci::vftable` (referenced by the four `CDSApp::vftable` writes
-  in `CBulanci_ctor`'s prologue — Ghidra collapses them under the
-  same display symbol, so I haven't enumerated the per-subobject
-  override deltas yet).
-* Layout of `g_AppDescriptor` past `+0x0c` (`HandleClassRegister`'s
-  signature is generic — it's the same one used by the
-  `ClassID 52 / 2000 / ...` resource factories, but the in-memory
-  record shape after `+0x0c` is not in this artefact yet).
-* `KeybQueue` (`CDSApp_KeybQueue`) and `MouseQueue` (`CDSApp_MouseQueue`)
-  both push into a CDS chain at `this+0x10`; the chain's pop side is
-  implicit in `CDSApp_PollEventQueue` / `CDSApp_DispatchOneEvent`
-  but the exact wakeup contract has not been fully traced.
+Through comprehensive decompilation and symbol trace via the Ghidra MCP, we have resolved several key architecture questions:
+
+### 1. Slot 3 / 4 / 5 Semantics (Serialization/Persistence Interface)
+* **Slot 3: `CDSView_GetDataSize` (`0x0042c2e0`)**
+  * **Returns**: `size_t` representing the payload size of serialized state.
+  * **Base Class**: Recursively sums child sizes (`sum(child->vtbl[3]())`) by walking the child-views list at `+0x54`.
+  * **Overrides**:
+    * `CEdit_GetDataSize` (`0x00403190`) returns `4` (size of text buffer smart-pointer).
+    * `CRadio_GetDataSize` (`0x00403010`) returns `1` (size of option index byte).
+* **Slot 4: `CDSView_SaveData` (`0x0042c320`)**
+  * **Role**: Serializes (saves/collects) internal widget state into the cursor memory buffer.
+  * **Base Class**: Recursively saves child states by calling `child->vtbl[4](cursor)` and advancing the cursor by `child->vtbl[3]()`.
+  * **Overrides**:
+    * `CEdit_SaveData` (`0x00403170`) copies the internal text buffer pointer into the cursor.
+    * `CRadio_SaveData` (`0x0040aa00`) writes the selected option index byte `this[0x68]` into the cursor.
+* **Slot 5: `CDSView_LoadData` (`0x0042c370`)**
+  * **Role**: Deserializes (loads/distributes) state from the cursor memory buffer into the widget, updating variables and triggering necessary redraws/events.
+  * **Base Class**: Recursively loads child states by calling `child->vtbl[5](cursor)` and advancing the cursor by `child->vtbl[3]()`.
+  * **Overrides**:
+    * `CEdit_LoadData` (`0x00407d20`) reads the text pointer from the cursor and triggers a text change validation/invalidation.
+    * `CRadio_LoadData` (`0x00403d10`) reads the selected option index byte from the cursor and calls `CRadio_SetSelected` to load and apply it.
+
+---
+
+### 2. Slot 14 Semantics (Per-dirty-rect Render Dispatcher)
+* **Slot 14: `CDSView_RenderChildren` (`0x0042ccf0`)**
+  * **Role**: Central render dispatcher for parent containers (such as dialogs or the root app).
+  * **Behavior**: Intersects the current dirty rectangle (`g_rectDrawing` at `0x004b3b9c`) with each child's render rectangle using the utility function `rect_Intersect` (`0x00433280`). If the intersection is non-empty, it restricts the backbuffer/renderer clip rect to this intersection and dispatches a recursive `child->vtbl[14]()` (`child->Render()`) draw call.
+  * **Overrides**: Overridden by all leaf widgets (like `CButton_Render` at `0x004056b0`, `CStaticText_Render` at `0x004054d0`) to perform their actual rasterization.
+
+---
+
+### 3. Slot 20 / 21 Semantics (Mouse Event Hooks)
+* **Slot 20: `CDSView_OnMouseUp` & Slot 21: `CDSView_OnMouseDblClk`**
+  * **Behavior**: Base implementation in `CDSView` defaults to the empty dummy stub function `CDSView_OnMouseDummy` (`0x00416770`) which does nothing.
+  * **Dispatch**: Input event processing (`CDSApp_DispatchInputEvent` thunk or dispatcher) monitors mouse down/up/double-click flags and dispatches directly to the `event-handler` subobject (cast to offset `+0x10`) vtable slots:
+    * Slot 19 (`+0x4c`): `OnMouseDown`
+    * Slot 20 (`+0x50`): `OnMouseUp`
+    * Slot 21 (`+0x54`): `OnMouseDblClk`
+  * **Overrides**: Leaf widgets like buttons, scrollbars, and radios override Slot 20 (`OnMouseUp`) to finalize clicks and post commands up the parent event-handling chain.
+
+---
+
+### 4. Layout of `g_AppDescriptor` past `+0x0c`
+* Registered via `HandleClassRegister` (`0x0042e910`), which populates a `CDSClassReg` record.
+* **Memory Layout**:
+  * `+0x00` (4 bytes): `next` pointer to another `ClassReg` in the global class-registration linked list (head at `g_pClassRegHead`).
+  * `+0x04` (4 bytes): `classTable` pointer (anchor returned by vtbl[0] / `CDSApp_GetClassTable`, e.g. `0x004b3b20`).
+  * `+0x08` (4 bytes): `classId` (e.g. `2000` for `CDSApp`).
+  * `+0x0c` (4 bytes): `factory` function pointer (e.g. `0x00402a90` for `CBulanci::CreateObject`).
+  * `+0x10` (4 bytes): `reserved` / flags (initialized to `0`).
+
+---
+
+### 5. KeybQueue / MouseQueue Wakeup Contract
+* **Push Side**: `CDSApp_KeybQueue` (`0x00429cc0`) and `CDSApp_MouseQueue` (`0x0042a5c0`) pack input telemetry into 20-byte event records and call `CDSEventHandler_EnqueueEvent` (`0x0042f3e0`). This filters events against active view eligibility mask and enqueues them via `CDSQueue_Push` (`0x0042ecf0`) into the global ring buffer `g_pEventQueue`.
+* **Pop Side**:
+  * `CDSApp_PollEventQueue` peeks events using `CDSQueue_Peek` (`0x0042ee20`), automatically popping and discarding any events with a null target via `CDSQueue_PopDiscard` (`0x0042ed70`).
+  * `CDSApp_DispatchOneEvent` retrieves valid event records from the queue using `CDSQueue_PopCopy` (`0x0042eda0`) and invokes `handler->vtbl[4](event_record)` (`IDSEventHandler::DispatchEvent` at slot offset `+0x10`) to execute action routing.
+
+---
+
+### What's still open
+* `CBulanci`-specific overrides for the base slots in the **derived** `CBulanci::vftable` (referenced by the four `CDSApp::vftable` writes in `CBulanci_ctor`'s prologue — Ghidra collapses them under the same display symbol, so I haven't enumerated the per-subobject override deltas yet).

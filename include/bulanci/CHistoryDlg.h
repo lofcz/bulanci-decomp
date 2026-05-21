@@ -6,10 +6,10 @@
 class CHistoryDlg {
 public:
 	// !DECL 0x00422f70 BEGIN
-	/* 422F70 */ uchar FUN_00422f70(int param_1);
+	/* 422F70 */ uchar CHistoryDlg_LoadHistoryPage(int param_1);
 	// !DECL 0x00422f70 END
 	// !DECL 0x00423130 BEGIN
-	/* 423130 */ uchar FUN_00423130(ushort param_1);
+	/* 423130 */ uchar CHistoryDlg_OnEvent(ushort param_1);
 	// !DECL 0x00423130 END
 	// !DECL 0x004231d0 BEGIN
 	/* 4231D0 */ uint* CHistoryDlg_ctor(uint* param_1);

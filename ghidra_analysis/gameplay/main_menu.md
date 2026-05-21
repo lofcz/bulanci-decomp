@@ -59,7 +59,7 @@ WinMain (0x00402680)
              u32[] byteLengths`; resolved here, that's bank `0x10152`
              (`CDSAudioBank`, class 43) carrying 41 mono 16-bit PCM
              samples at 22050 Hz. Slot indices 0-40 are looked up by
-             `FUN_00422430` via `*(slot_table + 0x18 + idx*4)` to
+             `TriggerBankSample` via `*(slot_table + 0x18 + idx*4)` to
              build short-lived `CDSAudioPlayer` instances. The five
              menu UI cues live in slot 0x18..0x1c — see §10. The
              previous "Loads resource 0x10004 (icon? cursor?)" note
@@ -142,20 +142,20 @@ Globals on `CBulanci`:
 | `+0x80` | `int` — currently-pushed sub-screen id (-1 = none, 0 = StartGame1, 1 = HistoryDlg, 2 = ExitDlg) |
 | `+0x84` | `void*` — currently-pushed sub-screen instance |
 | `+0x88` | `void*` — current child background bitmap (replaced on screen-switch by `CMenu::FUN_00425870`) |
-| `+0x8c` | `void*` — title/logo bitmap (resource `0x1013b`, placed at `(0,0)`) |
-| `+0x90` | `CDSBitmap*` — Start icon "normal", at `(100, 55)`, resource `[0x004af90c] = 0x00010093` |
-| `+0x94` | `CDSBitmap*` — Start icon "highlight", same position, resource `[0x004af910] = 0x00010094`, hidden by default (`FUN_0042d040`) |
-| `+0x98` | `CDSBitmap*` — History icon "normal", at `(100, 139)`, resource `[0x004af914] = 0x00010043` |
-| `+0x9c` | `CDSBitmap*` — History icon "highlight", at `(100, 139)`, resource `[0x004af918] = 0x00010044`, hidden by default |
-| `+0xa0` | `CDSBitmap*` — Quit icon "normal", at `(100, 223)`, resource `[0x004af91c] = 0x0001004b` |
-| `+0xa4` | `CDSBitmap*` — Quit icon "highlight", at `(100, 223)`, resource `[0x004af920] = 0x0001004c`, hidden by default |
+| `+0x8c` | `void*` — title/logo bitmap (resource `0x1013b`, placed at `(0,0)`, unpacked: `res_0000065851_21_BitmapJPEG.jpg`) |
+| `+0x90` | `CDSBitmap*` — Start icon "normal", at `(100, 55)`, resource `[0x004af90c] = 0x00010093`, unpacked: `res_0000065683_28_BitmapSpecial.png` |
+| `+0x94` | `CDSBitmap*` — Start icon "highlight", same position, resource `[0x004af910] = 0x00010094`, hidden by default (`FUN_0042d040`), unpacked: `res_0000065684_28_BitmapSpecial.png` |
+| `+0x98` | `CDSBitmap*` — History icon "normal", at `(100, 139)`, resource `[0x004af914] = 0x00010043`, unpacked: `res_0000065603_28_BitmapSpecial.png` |
+| `+0x9c` | `CDSBitmap*` — History icon "highlight", at `(100, 139)`, resource `[0x004af918] = 0x00010044`, hidden by default, unpacked: `res_0000065604_28_BitmapSpecial.png` |
+| `+0xa0` | `CDSBitmap*` — Quit icon "normal", at `(100, 223)`, resource `[0x004af91c] = 0x0001004b`, unpacked: `res_0000065611_28_BitmapSpecial.png` |
+| `+0xa4` | `CDSBitmap*` — Quit icon "highlight", at `(100, 223)`, resource `[0x004af920] = 0x0001004c`, hidden by default, unpacked: `res_0000065612_28_BitmapSpecial.png` |
 | `+0xb0` | `CSwitch*` — **Start button** at `(35, 37)`, cmd `0xc9` |
 | `+0xb4` | `CSwitch*` — **History button** at `(35, 121)`, cmd `0xca` |
 | `+0xb8` | `CSwitch*` — **Quit button** at `(35, 205)`, cmd `0xcb` |
 | `+0xc0` | tail of CDSChained subobject (set 0 by ctor) |
 | `+0xc4` | "deferred sub-screen exit"  / current scheduler event refcount |
 | `+0xc6` | n/a |
-| `+0xc8` | `CDSBitmap*` — decorative bitmap at `(610, 0)`, resource `0x10139` (right-side hero art) |
+| `+0xc8` | `CDSBitmap*` — decorative bitmap at `(610, 0)`, resource `0x10139` (right-side hero art, unpacked: `res_0000065849_21_BitmapJPEG.jpg`) |
 | `+0xcc` | `ushort` — last-pressed cmd id (set by `FUN_00425340`) |
 | `+0xd0..0xdc` | 4× `CRuch*` — running-Bulanci background actors (one per slot, sizeof = 0x80) |
 | `+0xe0` | `bool` — `lastSplashFlag` passed in by `CBulanci::OnEvent` (used to skip the first-time anim) |
@@ -170,21 +170,25 @@ the build/version line).
 
 ### 2.2 Resource map
 
-| Symbol / addr | Value | Usage |
-|---------------|-------|-------|
-| literal `0x1013b` | menu title/background bitmap | composited at `(0,0)` |
-| literal `0x10139` | right-side hero / "Bulanci" wordmark | composited at `(610,0)` |
-| literal `0x1014a` | day-time main-menu background | bound by `CMenu::SetDayNightBg(0x004252f0)` when bit-25 of `FUN_0042e8b0` says "day" |
-| literal `0x10149` | night-time main-menu background | bound when "night" |
-| literal `0x100d4` | menu-button frame animation "off" | passed to `CSwitch_ctor` (`FUN_00424bc0`) as track 0 |
-| literal `0x100d5` | menu-button frame animation "on" | passed to `CSwitch_ctor` as track 1 |
-| literal `0x100b0` | font for bottom version line | wrapper sets fg via static-text alignment |
-| `DAT_004af90c` | `0x00010093` | Start icon normal |
-| `DAT_004af910` | `0x00010094` | Start icon highlight |
-| `DAT_004af914` | `0x00010043` | History icon normal |
-| `DAT_004af918` | `0x00010044` | History icon highlight |
-| `DAT_004af91c` | `0x0001004b` | Quit icon normal |
-| `DAT_004af920` | `0x0001004c` | Quit icon highlight |
+| Symbol / addr | Value | Usage | Unpacked File (under `unpacked/overlay/`) |
+|---------------|-------|-------|-------------------------------------------|
+| literal `0x1013b` | menu title/background bitmap | composited at `(0,0)` | `res_0000065851_21_BitmapJPEG.jpg` |
+| literal `0x10139` | right-side hero / "Bulanci" wordmark | composited at `(610,0)` (hero_bmp) | `res_0000065849_21_BitmapJPEG.jpg` |
+| literal `0x1013a` | splash screen logo | IWANNAPLAY.COM splash logo | `res_0000065850_21_BitmapJPEG.jpg` |
+| literal `0x1013c` | "Start Game" background | displayed when playing start menu | `res_0000065852_21_BitmapJPEG.jpg` |
+| literal `0x1013d` | "Quit confirmation" background | displayed on exit dialog | `res_0000065853_21_BitmapJPEG.jpg` |
+| literal `0x1013e` | "History" background | displayed in history dialog | `res_0000065854_21_BitmapJPEG.jpg` |
+| literal `0x1014a` | day-time background ambient audio (`Mp3`) | loaded and started by `CMenu_LoadBackgroundMusic` in `CMenu::SetDayNightBg(0x004252f0)` when hour is 6..21 | `res_0000065866_48_Mp3.mp3` |
+| literal `0x10149` | night-time background ambient audio (`Mp3`) | loaded and started when hour is 22..5 (night) | `res_0000065865_48_Mp3.mp3` |
+| literal `0x100d4` | menu-button frame animation "off" | passed to `CSwitch_ctor` (`FUN_00424bc0`) as track 0 | `res_0000065748_52_BitmapSprite.bin` |
+| literal `0x100d5` | menu-button frame animation "on" | passed to `CSwitch_ctor` as track 1 | `res_0000065749_52_BitmapSprite.bin` |
+| literal `0x100b0` | font for bottom version line | wrapper sets fg via static-text alignment | *(engine-static font ID)* |
+| `DAT_004af90c` | `0x00010093` | Start icon normal | `res_0000065683_28_BitmapSpecial.png` |
+| `DAT_004af910` | `0x00010094` | Start icon highlight | `res_0000065684_28_BitmapSpecial.png` |
+| `DAT_004af914` | `0x00010043` | History icon normal | `res_0000065603_28_BitmapSpecial.png` |
+| `DAT_004af918` | `0x00010044` | History icon highlight | `res_0000065604_28_BitmapSpecial.png` |
+| `DAT_004af91c` | `0x0001004b` | Quit icon normal | `res_0000065611_28_BitmapSpecial.png` |
+| `DAT_004af920` | `0x0001004c` | Quit icon highlight | `res_0000065612_28_BitmapSpecial.png` |
 
 The four "highlight" icons are created up-front, parented to the menu
 via `_Globals::AddChild = FUN_0042d0b0`, then immediately hidden via
@@ -419,7 +423,7 @@ X     ─► Scheduler_PostMessage(this+0x10, 0x100, 0x8004, ...)
         ─► CMenu::DispatchHotkey(this, 0x80cb, audioSlot=0x1a)
             (a) stashes 0x80cb at this+0xcc
             (b) plays audio bank slot 0x1a via a fresh CDSAudioPlayer
-                (FUN_00422430 → FUN_0043a760), with the player's
+                (TriggerBankSample → FUN_0043a760), with the player's
                 completion-event target set to this+0x10
             (c) hides the three main-menu buttons (Start/Hist/Quit)
         ─► …time passes while the sound plays…
@@ -476,19 +480,16 @@ void CMenu::SetDayNightBg(bool isDay)
 {
     this->day_night_latch = isDay;
     if (isDay) {
-        FUN_004252a0(this, 0x1014a);   // load and bind "day" bg
-        Show(this->hero_bmp);
+        CMenu_LoadBackgroundMusic(this, 0x1014a);   // load and loop day ambient track (Mp3)
+        Show(this->hero_bmp);                       // show right-side hero art during the day
     } else {
-        FUN_004252a0(this, 0x10149);   // "night" bg
-        Hide(this->hero_bmp);
+        CMenu_LoadBackgroundMusic(this, 0x10149);   // load and loop night ambient track (Mp3)
+        Hide(this->hero_bmp);                       // hide hero art at night
     }
 }
 ```
 
-`FUN_004252a0(this, resId)` wraps `FUN_00422550(2, resId, 0, 0, 1)`
-(probably a CDSImageMouse loader), stows the result at `this+0xc0`,
-then calls `FUN_0043a0d0(handle, 0x46)` and `FUN_00424010(this, 1)` to
-plumb the new bitmap into the dirty-rect pipeline.
+`CBulanci::CMenu_LoadBackgroundMusic(this, resId) @ 0x004252a0` wraps `_Globals::CDSAudioPlayer_CreateFromResource((undefined*)2, resId, 0, 0, 1) @ 0x00422550` to load and instantiate the ambient audio loop. It releases any previously active background music player, stashes the new `CDSAudioPlayer` instance at `this+0xc0`, configures its sequence/volume parameter to `0x46` (70/100) via `_Globals::FUN_0043a0d0`, then invokes `_Globals::CMenu_EnableBackgroundState(this, 1) @ 0x00424010` to play/loop the audio track.
 
 ### 2.8 The 4 `CRuch` running-Bulanci actors
 
@@ -881,7 +882,7 @@ The two important resource ID prefixes used by the menu:
 | ID range | Class | What |
 |----------|-------|------|
 | `0x0001xxxx` | `BitmapSprite` (52) | Button icons, hero art, splash logo (see `../formats/sprite_container.md`) |
-| `0x0010xxxx` | engine-static IDs | UI fonts, alignment hints, dropped through the pool's `Lookup` to return a wrapped `IDSImage` with the matching face. `0x100ae`/`0x100af`/`0x100b0` are colour-coded font palettes; `0x10004` is the cursor; `0x100d4`/`0x100d5` are the button-press animations; `0x10139..0x1014a` are the menu backgrounds. |
+| `0x0010xxxx` | engine-static IDs | UI fonts, alignment hints, dropped through the pool's `Lookup` to return a wrapped `IDSImage` with the matching face. `0x100ae`/`0x100af`/`0x100b0` are colour-coded font palettes; `0x10004` is the cursor; `0x100d4`/`0x100d5` are the button-press animations; `0x10139..0x1013e` are the menu backgrounds/bitmaps, while `0x10149` and `0x1014a` are the ambient audio loops (`Mp3`). |
 
 The bank's vtable:
 
@@ -1340,8 +1341,28 @@ Confirmed: **`dword >> 25` is `SYSTEMTIME.wHour` (local time)**.
 The predicate is `is_night = (uint32)((hour - 6) > 15)` — which
 unsigned-wraps to **night iff `hour ∈ {0,1,2,3,4,5,22,23}`**, i.e.
 **day = 06:00–21:59 local time**. The 16-hour day-band matches the
-two background resources `0x1014a` (day) / `0x10149` (night) that
-`CMenu::SetDayNightBg` swaps.
+two background ambient audio loop resources `0x1014a` (day) / `0x10149` (night) that
+`CMenu::SetDayNightBg` swaps. Additionally, during the day, the right-side hero art
+bitmap (`0x10139`, `this->hero_bmp`) is shown via `Show`, whereas at night it is
+hidden via `Hide` (the base background image `0x1013b` is unchanged).
+
+### 9.5 Right-Side Hero Art Transparency & "Fake Transparency" Rendering
+
+In the main menu UI, when `this->hero_bmp` (resource `0x10139`, `res_0000065849_21_BitmapJPEG.jpg`) is shown on the right side of the screen at position `(610, 0)`, it overlaps with the right edge of the main menu's rounded frame border (which is drawn as part of the background bitmap `0x1013b` at `(0, 0)`).
+
+A curious visual artifact occurs where the rounded frame's border turns flat gray where it intersects with the hero art image. Through deep reverse engineering of the image loading, construction, and blitting pipeline, we can fully account for this:
+
+1. **Asset Nature (Opaque JPEG):** The hero art is stored and loaded as a standard JPEG file. Because the JPEG format does not support alpha transparency or masks, the image is physically rectangular and includes a solid flat-gray background surrounding the character sprites.
+2. **Object Initialization:** When the JPEG is loaded via `CDSJpegImage::DecompressToImage @ 0x00431b70`, it initializes the underlying `CDSImage` (pixel format 5, 24bpp BGR) via `_Globals::FUN_00436f40`. This default initialization sets:
+   - `colorkey = 0xFFFFFFFF` (no chroma/color keying)
+   - `alpha = 0xFF` (100% fully opaque)
+   - `pMaskBuffer = NULL` (no transparency mask)
+3. **Blitter Selection:** When `CDSView_RenderChildren` processes the menu view's child nodes, it schedules the background drawing of `this->hero_bmp` by calling `_Globals::TM_TickBlit @ 0x00439080` (polymorphically bound to slot 14 in `CDSBitmap`'s vtable). This delegates to the master blit dispatcher `CPoemScroller::BlitDispatch @ 0x004368d0`.
+4. **Decision Tree:** Since `colorkey == 0xFFFFFFFF`, `alpha == 0xFF`, and `pMaskBuffer == NULL`, `BlitDispatch` routes the drawing to the completely opaque blitting table `BlitTable_Opaque @ 0x004b08c8`. For `src=5, dst=5` (24bpp source to 24bpp destination backbuffer), it dispatches to the specialized opaque kernel `_Globals::FUN_0043df90`.
+5. **The Artifact Mechanism:** Because the image is drawn completely opaquely with a flat-gray background, it directly overwrites the pixel data of the background frame border that lies underneath its bounding rectangle. The "opacity" is actually a clever **fake transparency** design shortcut typical of software-rendered games of the era (early 2000s):
+   - The designers painted the JPEG's background with the exact same RGB color as the flat areas of the main menu background.
+   - When rendered, the flat areas blend seamlessly.
+   - However, where the JPEG's rectangular boundary intersects non-flat elements like the rounded frame borders, it simply erases them and paints them flat gray.
 
 ### 9.5 Where the level list `+0xbc` comes from
 
@@ -1417,7 +1438,7 @@ the `.wav` file is `[44 + samples[N].offsetInBank,
 
 Five slots are used by the main menu and were resolved by tracing
 `Cmd_Dispatch`'s `PUSH <slot>` instructions back to their
-`FUN_00422430(0x1, 0, slot, ...)` call site:
+`TriggerBankSample(0x1, 0, slot, ...)` call site:
 
 | Slot | Sample # | Offset in PCM | byteLen | ms | Used by | Trigger | Plays |
 |------|----------|---------------|---------|----|---------|---------|-------|
@@ -1432,11 +1453,11 @@ Five slots are used by the main menu and were resolved by tracing
 
 Two semantics:
 
-1. **S/H/K (slots 0x1b / 0x18 / 0x19)**: `FUN_00422430(1, 0, slot,
+1. **S/H/K (slots 0x1b / 0x18 / 0x19)**: `TriggerBankSample(1, 0, slot,
    0, 0, 1)` is called with `param_5 = 0` — the audio plays purely
    as a confirmation SFX while the sub-screen is built synchronously.
    No completion callback.
-2. **X / F12 (slots 0x1a / 0x1c)**: `FUN_00422430(1, 0, slot, 0,
+2. **X / F12 (slots 0x1a / 0x1c)**: `TriggerBankSample(1, 0, slot, 0,
    this+0x10, 1)` is called via `DispatchHotkey` with
    `param_5 = this+0x10`. The CDSAudioPlayer posts event id `1` to
    `CMenu::OnEvent` when the sample ends; that handler reads the
@@ -1460,6 +1481,53 @@ of the WAV's data chunk — e.g.::
     s    = idx["samples"][0x18]
     pcm  = bank[44 + s["offsetInBank"] : 44 + s["offsetInBank"] + s["byteLen"]]
     # Re-wrap pcm in a fresh 22050 Hz mono 16-bit RIFF/WAVE header for playback.
+
+### 10.1 First-boot "auto-click" mechanism (the startup bark)
+
+When `bulanci.exe` is launched, players hear an audio effect (a short bark sound) play exactly once before the main menu is fully interactive. This startup sound has been tracked down via decompilation to **`sample_27.wav`** (Audio Slot `0x1b`), which is the Czech voice cue for **"Start hry"** (Start Game).
+
+The complete, deterministic execution flow leading to this sound being played on startup is as follows:
+
+1. **Initialization**:
+   When the `CBulanci` application is constructed (`CBulanci_ctor` at `0x004026f0`), the flag `lastSplashShown` (at `this[0x4c8]`) is initialized to `0`.
+
+2. **Splash Screen Display**:
+   In `CBulanci_OnCreate (0x00402b20)`, the application posts event `0xf7` to show the `CAdvertising` splash screen (with the `IWANNAPLAY.COM` logo).
+
+3. **Menu Load Transition**:
+   Upon splash screen dismissal (either via timer tick or click), event `0xcc` is processed by `CBulanci::OnEvent_MenuStateMachine (0x00402490)` to load the main menu. It constructs the menu by calling:
+   ```cpp
+   this_00 = CMenu_ctor_with_ui(pCVar4, param_2, this[0x4c8]);
+   ```
+   Since `this[0x4c8]` was initialized to `0`, `CMenu_ctor_with_ui` receives `param_3 = 0`.
+
+4. **Programmatic "Auto-Click"**:
+   At the very end of `CMenu_ctor_with_ui` (at `0x00426c85` / `0x00426c8e`), the menu checks the `param_3` (stashed initial-focus index / `lastSplashFlag`):
+   ```assembly
+   00426c85  MOV  EAX, dword ptr [ESP + 0x38]   ; parameter 3 (lastSplashFlag)
+   00426c89  CMP  EAX, 0x2
+   00426c8c  JA   0x00426c9a
+   00426c8e  MOV  ECX, dword ptr [ESI + EAX*0x4 + 0xb0]
+   00426c95  CALL 0x00424d30  ; Button_Click
+   ```
+   Because `param_3` is `0` (which is <= 2), it retrieves the Start button pointer at `this + 0xb0` (`this->btn_start`) and passes it to `_Globals::Button_Click` (at `0x00424d30`).
+
+5. **Delayed Command Dispatch**:
+   `Button_Click` schedules and posts a delayed message (`0x100`) to the parent menu's event handler with the button's command ID, which for the Start button is `0xc9`.
+
+6. **Triggering Start Game Screen & SFX**:
+   When the event pump delivers message `0x100` / command `0xc9`, `CMenu::CMenu_CmdDispatch(this, 0xc9)` is executed. It performs the transition to the first-stage game lobby screen:
+   - It closes the current sub-screen (`CMenu_CloseCurrentSubScreen`).
+   - It loads the background bitmap resource `0x1013c` (the red Start Game background).
+   - It constructs and attaches the `CStartGame1` sub-screen.
+   - Crucially, it plays the audio confirmation cue for the Start button:
+     ```cpp
+     TriggerBankSample(1, 0, 0x1b, 0, 0, 1);
+     ```
+     Audio slot `0x1b` corresponds directly to `sample_27.wav` in the main audio bank `res_0000065874_43_AudioBank.wav` (Resource `0x10152`). This plays the sound.
+
+7. **Retention of Sub-Screen**:
+   At the end of `CMenu_CmdDispatch` for case `0xc9`, it checks if `this[0xe0]` (the stashed `param_3`) is non-zero. Since `this[0xe0]` is `0` (from first boot), the application does *not* post a back message and happily remains on the newly opened `CStartGame1` screen with the voice/bark cue playing!
 
 ## 11. Remaining open questions
 

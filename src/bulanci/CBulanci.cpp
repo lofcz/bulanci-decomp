@@ -82,7 +82,9 @@ uchar* CBulanci::CBulanci_GetAppDescriptor() {
 
 // !FUNC 0x00402840 BEGIN
 /* 402840-402849 00009 */
-uint CBulanci::FUN_00402840(int param_1) { STUB_BODY(); return 0; }
+uint CBulanci::FUN_00402840(int param_1) {
+    return *reinterpret_cast<uint*>(reinterpret_cast<char*>(this) + 0x4ac);
+}
 // !FUNC 0x00402840 END
 
 // !FUNC 0x00402850 BEGIN
@@ -524,10 +526,6 @@ uchar CBulanci::CDSView_Invalidate(int* param_1, char param_2) { STUB_BODY(); re
 uchar CBulanci::FUN_0042be90(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042be90 END
 
-// !FUNC 0x0042bf40 BEGIN
-/* 42BF40-42BFB9 00079 */
-uchar CBulanci::FUN_0042bf40(char param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0042bf40 END
 
 // !FUNC 0x0042c0e0 BEGIN
 /* 42C0E0-42C0FB 0001B */
@@ -589,10 +587,6 @@ uchar CBulanci::FUN_0042c770(ushort param_1, uint param_2, uint param_3) { STUB_
 uint CBulanci::CDSApp_AdaptDisplaySize(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042cae0 END
 
-// !FUNC 0x0042cbf0 BEGIN
-/* 42CBF0-42CC29 00039 */
-uchar CBulanci::FUN_0042cbf0(int param_1, int param_2) { STUB_BODY(); return 0; }
-// !FUNC 0x0042cbf0 END
 
 // !FUNC 0x0042d310 BEGIN
 /* 42D310-42D329 00019 */
