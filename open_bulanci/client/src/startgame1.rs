@@ -21,6 +21,16 @@ const STATIC_TEXT_CHAR_SPACING: i32 = 2;
 /// has `+0x7c = 1`. The dialog buttons (incl. "Dále") rendered through
 /// this widget all get the same 1-px inter-glyph gap.
 const BUTTON_CHAR_SPACING: i32 = 1;
+const BUTTON_FONT_SIZE: u16 = 16;
+const BUTTON_W: f32 = 82.0;
+const BUTTON_H: f32 = 25.0;
+const BUTTON_NORMAL_TINT: Color = Color {
+    r: 0x85 as f32 / 255.0,
+    g: 0x85 as f32 / 255.0,
+    b: 0x85 as f32 / 255.0,
+    a: 1.0,
+};
+const BUTTON_NORMAL_BITMAP_ALPHA: f32 = 0x85 as f32 / 255.0;
 
 /// The original game coordinates for the right pane window
 const WINDOW_X: f32 = 250.0;
@@ -260,7 +270,7 @@ pub fn sg1_hit_test(
         if item.kind == Sg1Item::ContinueButton {
             let btn_abs_x = WINDOW_X + 20.0;
             let btn_abs_y = WINDOW_Y + item.y;
-            let btn_rect = Rect::new(btn_abs_x, btn_abs_y, 82.0, 25.0);
+            let btn_rect = Rect::new(btn_abs_x, btn_abs_y, BUTTON_W, BUTTON_H);
             if btn_rect.contains(vec2(mx, my)) {
                 return Some(i);
             }
@@ -519,16 +529,32 @@ impl ClientApp {
                 let btn_abs_x = WINDOW_X + 20.0;
                 let btn_abs_y = WINDOW_Y + item.y;
 
-                draw_texture(&btn_tex, btn_abs_x, btn_abs_y, WHITE);
+                // Retail `CButton::Render` dims non-highlighted buttons via
+                // `_Globals::FUN_00402f40(flags & 6) == 0x858585`.
+                let (bitmap_tint, text_color) = if is_hovered || is_pressed {
+                    (WHITE, TEXT_COLOR_PRIMARY)
+                } else {
+                    (
+                        Color::new(1.0, 1.0, 1.0, BUTTON_NORMAL_BITMAP_ALPHA),
+                        BUTTON_NORMAL_TINT,
+                    )
+                };
+                draw_texture(&btn_tex, btn_abs_x, btn_abs_y, bitmap_tint);
 
-                let dw = self.measure_t_sp("Dále", 15, BUTTON_CHAR_SPACING);
+                let dw = self.measure_t_sp("Dále", BUTTON_FONT_SIZE, BUTTON_CHAR_SPACING);
+                let font_line_h = self.fonts.large.line_height as f32;
+                let font_baseline = self.fonts.large.baseline;
+                let text_y = btn_abs_y
+                    + ((BUTTON_H - font_line_h) * 0.5).floor()
+                    + font_baseline
+                    + if is_pressed { 1.0 } else { 0.0 };
                 self.draw_t_sp(
                     "Dále",
-                    btn_abs_x + (82.0 - dw) * 0.5,
-                    btn_abs_y + 17.0,
-                    15,
+                    btn_abs_x + ((BUTTON_W - dw) * 0.5).floor(),
+                    text_y,
+                    BUTTON_FONT_SIZE,
                     BUTTON_CHAR_SPACING,
-                    TEXT_COLOR_PRIMARY,
+                    text_color,
                 );
             } else {
                 let group_focused = sg1_group_for_item(item.kind) == Some(self.sg1_focused_group);

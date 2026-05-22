@@ -171,11 +171,10 @@ impl ClientApp {
         );
         logical_render_target.texture.set_filter(FilterMode::Linear);
 
-        // Per-pixel alpha ramp: 0 → 1 over the top 40 rows, 1 → 0 over the
-        // bottom 40 rows. uv.y is normalised to [0, 1] across the 166-row
-        // surface, so the breakpoints land at 40/166 ≈ 0.2410 and
-        // 126/166 ≈ 0.7590 — exactly the original's `0x28`-row gradient
-        // bands described in `PickNextPoem` (FUN_00425df0).
+        // Per-pixel alpha ramp over exactly two medium-font rows. Retail's
+        // scroller never shows more than two partially faded poem lines at
+        // either edge; with the 13 px `0x100af` line height this lands at
+        // 26/166 ≈ 0.1566 and 140/166 ≈ 0.8434.
         let poem_material = load_material(
             ShaderSource::Glsl {
                 vertex: r#"#version 100
@@ -205,10 +204,10 @@ uniform sampler2D Texture;
 void main() {
     vec4 tex = texture2D(Texture, uv) * color;
     float a = 1.0;
-    if (uv.y < 0.2409638) {
-        a = uv.y / 0.2409638;
-    } else if (uv.y > 0.7590362) {
-        a = (1.0 - uv.y) / 0.2409638;
+    if (uv.y < 0.1566265) {
+        a = uv.y / 0.1566265;
+    } else if (uv.y > 0.8433735) {
+        a = (1.0 - uv.y) / 0.1566265;
     }
     gl_FragColor = vec4(tex.rgb, tex.a * a);
 }"#,

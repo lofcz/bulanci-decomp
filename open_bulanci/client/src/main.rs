@@ -27,6 +27,7 @@
 //! | `window_mode`      | Resize scaling + Alt+Enter borderless fullscreen   |
 
 use std::sync::Arc;
+use std::time::{SystemTime, UNIX_EPOCH};
 use macroquad::prelude::*;
 
 use bulanci_core::assets::AssetFileSystem;
@@ -68,9 +69,18 @@ fn window_conf() -> Conf {
     }
 }
 
+fn startup_random_seed() -> u64 {
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|duration| duration.as_millis() as u64)
+        .unwrap_or(1)
+}
+
 #[macroquad::main(window_conf)]
 async fn main() {
     let no_main_menu_bg = std::env::args().any(|arg| arg == "--no-main-menu-bg");
+    let random_seed = startup_random_seed();
+    rand::srand(random_seed);
 
     // ---- Settings + window placement (mirrors CDSApp_ctor +
     //      CDSApp_InitDirectDraw from the original) -----------------

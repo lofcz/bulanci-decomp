@@ -242,14 +242,14 @@ impl ClientApp {
         //   2. Splits the visible (10, 384, 215, 550) rect into top-fade /
         //      middle / bottom-fade bands and blits each band onto the
         //      backbuffer, multiplying the top and bottom bands by the
-        //      pre-baked 40-row alpha gradients at `this[+0x118]` /
+        //      pre-baked alpha gradients at `this[+0x118]` /
         //      `this[+0x11c]`.
         //
         // We do exactly the same with: (a) a 205×166 `RenderTarget` that
         // mirrors the original's CDSBmpImage; (b) a custom fragment shader
-        // that applies the 40-row top/bottom alpha ramps per-pixel as
-        // the surface is composited onto the screen. With the bitmap
-        // CDSFont in place the text is now genuinely 1:1 with the original.
+        // that applies a two-line top/bottom alpha ramp per-pixel as the
+        // surface is composited onto the screen. With the bitmap CDSFont
+        // in place the text is now genuinely 1:1 with the original.
         const RECT_X: f32 = 10.0;
         const RECT_Y: f32 = 384.0;
         const RECT_W: f32 = 205.0;
@@ -301,9 +301,9 @@ impl ClientApp {
 
         // -------- Pass 2: composite the offscreen surface onto the
         // backbuffer at (10, 384) through the fade-mask material. The
-        // material's fragment shader multiplies α by the original
-        // engine's 40-row top/bottom gradient (linear 0→1 across
-        // uv.y ∈ [0, 40/166], 1→0 across uv.y ∈ [126/166, 1]).
+        // material's fragment shader multiplies α by a two-line
+        // top/bottom gradient (linear 0→1 across uv.y ∈ [0, 26/166],
+        // 1→0 across uv.y ∈ [140/166, 1]).
         // `flip_y` undoes macroquad's render-target Y-inversion.
         gl_use_material(&self.poem_material);
         draw_texture_ex(
