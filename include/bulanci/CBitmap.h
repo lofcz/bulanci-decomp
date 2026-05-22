@@ -6,7 +6,7 @@
 class CBitmap {
 public:
 	// !DECL 0x00418260 BEGIN
-	/* 418260 */ uchar FUN_00418260(int param_1, ushort param_2);
+	/* 418260 */ uchar CLevelScript_FireOnBitmapEvt_FromView(int param_1, ushort param_2);
 	// !DECL 0x00418260 END
 	// !DECL 0x00419120 BEGIN
 	/* 419120 */ uchar* FUN_00419120();

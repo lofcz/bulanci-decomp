@@ -20,7 +20,7 @@ use bulanci_core::assets::AssetFileSystem;
 use bulanci_core::{FrameInputs, Player, WorldState};
 use bulanci_core::{EngineClock, Scheduler};
 
-use crate::audio::AudioManager;
+use crate::audio::{AudioFade, AudioManager};
 use crate::cursor::GunMouse;
 use crate::cursor_atlas::CursorAtlasSet;
 use crate::font::BitmapFontProvider;
@@ -29,12 +29,13 @@ use crate::ruch::Ruch;
 use crate::state::{
     AppPhase, MenuBtn, SubScreen, CURSOR_TICK_MS, GAME_TICK_MS, RUCH_SLOTS,
     SLOT_CURSOR_DOT_FRAME, SLOT_CURSOR_TICK,
-    SLOT_DAY_NIGHT, SLOT_GAME_TICK, SLOT_POEM_SCROLL, SLOT_RUCH_0,
+    SLOT_AUDIO_FADE, SLOT_DAY_NIGHT, SLOT_GAME_TICK, SLOT_POEM_SCROLL, SLOT_RUCH_0,
 };
 
 pub struct ClientApp {
     pub phase: AppPhase,
     pub sub_screen: SubScreen,
+    pub exit_at_ms: Option<u64>,
 
     // Engine clock + scheduler — the heart of the app's timing.
     // EngineClock mirrors the original `g_dwElapsedMs` global (refreshed
@@ -43,7 +44,10 @@ pub struct ClientApp {
     // catches up drift-free during frame stalls. See
     // ghidra_analysis/engine/tick_system.md.
     pub clock: EngineClock,
+    pub last_frame_ms: u64,
     pub scheduler: Scheduler,
+    pub intro_started_ms: u64,
+    pub menu_started: bool,
 
     // Network
     pub socket: Option<UdpSocket>,
@@ -60,13 +64,32 @@ pub struct ClientApp {
     /// etc.) without touching any of the call sites.
     pub fonts: BitmapFontProvider,
     pub textures: HashMap<String, Texture2D>,
+    pub logical_render_target: RenderTarget,
 
     // Day/night ambient music latch
     pub day_night_hour: i32, // -1 = unset
+    pub no_main_menu_bg: bool,
 
     // Menu interaction
     pub hovered_btn: Option<MenuBtn>,
     pub pressed_btn: Option<MenuBtn>,
+    pub menu_btn_off: crate::atlas::Atlas,
+    pub menu_btn_on: crate::atlas::Atlas,
+    pub menu_btn_frames: [f32; 3], // current frame (0.0 to 7.0)
+    pub menu_btn_tracks: [u8; 3],  // current track (0 = glow-up, 1 = dim-down)
+    /// Per-button gate flag, mirroring the retail
+    /// `Scheduler_GetEventSlot(CSwitch+0x80, 0)[+8] & 1` bit:
+    /// `true` ⇒ the brightness animation is **paused** at the end of
+    /// the last track (state-machine "rest"); `false` ⇒ the animation
+    /// is dispatching frames and `PlayHoverTrack`/`PlayIdleTrack`
+    /// would bail at the gate. Mouse-driven direction switches and
+    /// the hover voice cue only fire while the gate is open (armed).
+    /// The transition `false → true` happens when the active track
+    /// reaches `frame >= 7.0` (retail's `FUN_00439b90` →
+    /// `TM_PauseAndStampClock` → `Scheduler_ArmSlot` chain). See
+    /// `ghidra_analysis/gameplay/main_menu_hover_audio.md` and
+    /// `menu.rs::update_menu_input`.
+    pub menu_btn_hover_armed: [bool; 3],
 
     // Poem scroller (CPoemScroller — see §9.3 of main_menu.md)
     pub poems: Vec<Vec<PoemLine>>,
@@ -95,7 +118,9 @@ pub struct ClientApp {
     pub sg1_total_players: usize, // 1..=4
     pub sg1_local_players: usize, // 1..=3
     pub sg1_server_mode: usize,   // 0 = Vytvořit (host), 1 = Připojit se (join)
-    pub sg1_active_item: usize,   // keyboard-focused item index 0..=9
+    pub sg1_connection_type: usize, // 0 = TCP/IP, 1 = IPX
+    pub sg1_active_item: usize,   // active item index (relative to visible list)
+    pub sg1_focused_group: usize, // 0..=3, mirrors the CRadio view holding keyboard focus
     pub ip_input_buffer: String,
 
     // History screen (CHistoryDlg)
@@ -115,7 +140,12 @@ pub struct ClientApp {
 }
 
 impl ClientApp {
-    pub fn new(server_ip: &str, vfs: Arc<AssetFileSystem>, audio: Option<AudioManager>) -> Self {
+    pub fn new(
+        server_ip: &str,
+        vfs: Arc<AssetFileSystem>,
+        audio: Option<AudioManager>,
+        no_main_menu_bg: bool,
+    ) -> Self {
         // Original-game bitmap fonts (CDSFont, ClassID 54). Failure to
         // load is fatal because every UI string goes through them.
         let fonts = BitmapFontProvider::load(&vfs)
@@ -135,6 +165,11 @@ impl ClientApp {
         // edges into mush.
         let poem_render_target = render_target(205, 166);
         poem_render_target.texture.set_filter(FilterMode::Nearest);
+        let logical_render_target = render_target(
+            crate::window_init::CLIENT_WIDTH,
+            crate::window_init::CLIENT_HEIGHT,
+        );
+        logical_render_target.texture.set_filter(FilterMode::Linear);
 
         // Per-pixel alpha ramp: 0 → 1 over the top 40 rows, 1 → 0 over the
         // bottom 40 rows. uv.y is normalised to [0, 1] across the 166-row
@@ -192,34 +227,19 @@ void main() {
         )
         .expect("poem fade material failed to compile");
 
-        // Build the engine clock + scheduler immediately so we can pin all
-        // initial slot anchors to `now_ms` (the equivalent of how the
-        // original engine arms slots in CDSApp_OnCreate before the modal
-        // pump starts ticking).
+        // Build the engine clock immediately. The CMenu-owned scheduler
+        // slots are armed only when the original would construct CMenu:
+        // after the modal CAdvertising splash returns and the 0xcc menu
+        // event is delivered.
         let mut clock = EngineClock::new();
         clock.tick();
         let now_ms = clock.elapsed_ms;
-        let mut scheduler = Scheduler::new();
+        let scheduler = Scheduler::new();
 
-        register_initial_slots(&mut scheduler, now_ms);
-
-        // CRuch slots — one per actor, each with a random initial "hidden"
-        // delay (0..4000ms) per main_menu.md §9.2.
         let ruch: Vec<Ruch> = RUCH_SLOTS
             .iter()
             .map(|&slot| Ruch::new(800.0, slot))
             .collect();
-        // Initial delay: same formula as the hidden-phase delay in
-        // `CRuch_ctor @ 0x00423c20` — `(rand() * 0xfa1) >> 15 ∈ [0, 4000]`.
-        for &slot in &RUCH_SLOTS {
-            scheduler.register(slot, Ruch::random_hidden_delay(), true, now_ms);
-        }
-
-        // §10.1 — auto-click Start fires the "Start hry" voice cue exactly
-        // once on app boot.
-        if let (Some(a), Some(bytes)) = (&audio, vfs.read("audio/sfx_start.wav")) {
-            a.play_sfx(bytes);
-        }
 
         // Load the three idle-twitch motion-track atlases. Failure here
         // is fatal because the cursor is what every menu interaction
@@ -250,6 +270,10 @@ void main() {
                 "audio/day_ambient.mp3",
                 "audio/night_ambient.mp3",
                 "audio/sfx_start.wav",
+                "audio/sfx_history.wav",
+                "audio/sfx_quit.wav",
+                "audio/sfx_force_exit.wav",
+                "audio/sfx_hover.wav",
             ] {
                 if vfs.read(asset).is_none() {
                     eprintln!("[audio] missing asset: {asset}");
@@ -257,11 +281,20 @@ void main() {
             }
         }
 
-        let mut app = ClientApp {
-            phase: AppPhase::Menu,
+        let menu_btn_off = crate::atlas::Atlas::load(&vfs, "menu_button_off")
+            .expect("menu_button_off atlas missing or malformed");
+        let menu_btn_on = crate::atlas::Atlas::load(&vfs, "menu_button_on")
+            .expect("menu_button_on atlas missing or malformed");
+
+        let app = ClientApp {
+            phase: AppPhase::Intro,
             sub_screen: SubScreen::StartGame1,
+            exit_at_ms: None,
             clock,
+            last_frame_ms: now_ms,
             scheduler,
+            intro_started_ms: now_ms,
+            menu_started: false,
             socket: None,
             server_addr: server_ip.parse().unwrap_or_else(|_| "127.0.0.1:34568".parse().unwrap()),
             assigned_id: None,
@@ -270,9 +303,19 @@ void main() {
             audio,
             fonts,
             textures: HashMap::new(),
+            logical_render_target,
             day_night_hour: -1,
+            no_main_menu_bg,
             hovered_btn: None,
             pressed_btn: Some(MenuBtn::Start),
+            menu_btn_off,
+            menu_btn_on,
+            menu_btn_frames: [7.0, 7.0, 7.0], // Initially fully dimmed (since track 1 at frame 7.0 is dim)
+            menu_btn_tracks: [1, 1, 1],       // Initially on track 1 (dimming down / fully dim)
+            // Retail seeds slot 0 with `pending=1, bit0=1` in
+            // `Scheduler_RegisterEventSlot` (flags=7) — the very first
+            // mouse-enter on each button consumes that pending trigger.
+            menu_btn_hover_armed: [true; 3],
             poems,
             current_poem_idx,
             poem_scroll_y: 550.0,
@@ -285,7 +328,9 @@ void main() {
             sg1_total_players: 3,
             sg1_local_players: 3,
             sg1_server_mode: 0,
+            sg1_connection_type: 0,
             sg1_active_item: 0,
+            sg1_focused_group: 0,
             ip_input_buffer: "127.0.0.1".to_string(),
             history_page: 0,
             client_tick: 0,
@@ -297,21 +342,26 @@ void main() {
             pending_input: FrameInputs::default(),
         };
 
-        // ---- Bootstrap: immediate one-shot fires.
-        //      Matches the original engine pattern where CDSApp_OnCreate
-        //      arms scheduler slots **and** evaluates the initial state
-        //      synchronously before the modal pump starts (e.g. CMenu_ctor
-        //      auto-presses the Start button and `CMenu::PollDayNight` is
-        //      called once during construction). Doing it here avoids the
-        //      "anchor in the past" trick that would require either
-        //      wrapping-arithmetic or signed-integer scheduling. ----
-        app.on_day_night_tick();
         app
     }
 
     pub fn play_sfx(&self, path: &str) {
         if let (Some(audio), Some(bytes)) = (&self.audio, self.vfs.read(path)) {
             audio.play_sfx(bytes);
+        }
+    }
+
+    pub fn play_sfx_with_duration(&self, path: &str) -> Option<u64> {
+        if let (Some(audio), Some(bytes)) = (&self.audio, self.vfs.read(path)) {
+            audio.play_sfx_with_duration(bytes)
+        } else {
+            None
+        }
+    }
+
+    pub fn play_hover_sfx(&self, path: &str) {
+        if let (Some(audio), Some(bytes)) = (&self.audio, self.vfs.read(path)) {
+            audio.play_hover_sfx(bytes);
         }
     }
 
@@ -341,7 +391,9 @@ void main() {
         //         in the original wndproc. We must do it BEFORE the
         //         scheduler tick so any catch-up game-sim steps see the
         //         freshest input. ----
-        self.gun_mouse.update_frame();
+        if self.phase == AppPhase::Menu {
+            self.gun_mouse.update_frame();
+        }
         if self.phase == AppPhase::Playing {
             self.pending_input = FrameInputs {
                 up:    is_key_down(KeyCode::Up)    || is_key_down(KeyCode::W),
@@ -377,6 +429,9 @@ void main() {
                 break;
             }
         }
+        if self.exit_at_ms.is_some_and(|exit_at_ms| now_ms >= exit_at_ms) {
+            std::process::exit(0);
+        }
 
         // ---- 4. Drain network packets. ----
         self.poll_network();
@@ -384,6 +439,7 @@ void main() {
         // ---- 5. Per-phase input/UI handling (events that are NOT timer-
         //         driven — clicks, key-presses, sub-screen state). ----
         match self.phase {
+            AppPhase::Intro      => self.update_intro_input(now_ms),
             AppPhase::Menu       => self.update_menu_input(),
             AppPhase::Connecting => self.update_connecting_input(),
             AppPhase::Playing    => {
@@ -391,6 +447,7 @@ void main() {
                 // fired by SLOT_GAME_TICK with catch-up.
             }
         }
+        self.last_frame_ms = now_ms;
     }
 
     /// Connecting-phase input — `Esc` aborts and rewinds to the StartGame1
@@ -432,6 +489,7 @@ void main() {
                 }
             }
             SLOT_POEM_SCROLL => self.on_poem_scroll_tick(),
+            SLOT_AUDIO_FADE  => self.on_audio_fade_tick(),
             SLOT_DAY_NIGHT   => self.on_day_night_tick(),
             SLOT_GAME_TICK if self.phase == AppPhase::Playing => self.on_game_tick(),
             _ => {}
@@ -440,12 +498,16 @@ void main() {
 
     // ---- Day/night ambient music switch (CMenu::PollDayNight §2.7).
     //      Driven by SLOT_DAY_NIGHT (5s cadence). ----
-    fn on_day_night_tick(&mut self) {
+    pub(crate) fn on_day_night_tick(&mut self) {
         let hour = chrono::Local::now().hour() as i32;
         if hour == self.day_night_hour {
             return;
         }
         self.day_night_hour = hour;
+        if self.no_main_menu_bg {
+            self.scheduler.pause(SLOT_AUDIO_FADE);
+            return;
+        }
         // Predicate from §9.4: day = 06:00..21:59 local.
         let is_day = (6..=21).contains(&hour);
         let track = if is_day {
@@ -454,7 +516,19 @@ void main() {
             "audio/night_ambient.mp3"
         };
         if let (Some(audio), Some(bytes)) = (&self.audio, self.vfs.read(track)) {
-            audio.play_bg_music(bytes);
+            audio.play_bg_music_at_percent(bytes, 70);
+            audio.start_bg_fade(AudioFade::linear_percent(100, 1));
+            self.scheduler.unpause(SLOT_AUDIO_FADE, self.clock.elapsed_ms);
+        }
+    }
+
+    fn on_audio_fade_tick(&mut self) {
+        if let Some(audio) = &self.audio {
+            if !audio.step_bg_fade() {
+                self.scheduler.pause(SLOT_AUDIO_FADE);
+            }
+        } else {
+            self.scheduler.pause(SLOT_AUDIO_FADE);
         }
     }
 
@@ -486,8 +560,8 @@ void main() {
     }
 }
 
-/// Registers the fixed (non-per-instance) scheduler slots at app boot.
-fn register_initial_slots(scheduler: &mut Scheduler, now_ms: u64) {
+/// Registers the fixed (non-per-instance) scheduler slots when CMenu is built.
+pub(crate) fn register_menu_slots(scheduler: &mut Scheduler, now_ms: u64) {
     // ---- CGunMouse slots ----
     //      Two beats: a 5 ms mouse-queue tick (push+pop) and an 85 ms
     //      sprite-frame tick (advance idle-twitch motion path). The
@@ -504,10 +578,14 @@ fn register_initial_slots(scheduler: &mut Scheduler, now_ms: u64) {
     scheduler.set_last_fire_ms(SLOT_POEM_SCROLL, now_ms + 3_000);
 
     // ---- Day/night ambient music — 5s poll. The very first evaluation
-    //      happens synchronously inside `ClientApp::new` (see the
-    //      bootstrap block at the bottom of `new`); this slot then
-    //      simply maintains the 5s refresh cadence. ----
+    //      happens synchronously when the intro hands off to CMenu; this
+    //      slot then simply maintains the 5s refresh cadence. ----
     scheduler.register(SLOT_DAY_NIGHT, 5_000, true, now_ms);
+
+    // ---- Audio fades — retail CMenu_OnMusicFadeTick cadence. Paused
+    //      until an audio player arms a concrete fade. ----
+    scheduler.register(SLOT_AUDIO_FADE, 120, true, now_ms);
+    scheduler.pause(SLOT_AUDIO_FADE);
 
     // ---- Gameplay simulation tick — 17ms (~58.8Hz). Stays armed in all
     //      phases but is only consumed while AppPhase::Playing. ----

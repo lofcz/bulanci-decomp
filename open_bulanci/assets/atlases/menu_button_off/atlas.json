@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "name": "menu_button_off",
+  "image": "atlas.png",
+  "frame": {
+    "width": 64,
+    "height": 65
+  },
+  "origin": {
+    "x": 32,
+    "y": 32
+  },
+  "frames": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {}
+  ],
+  "meta": {
+    "engineSpriteId": 65748
+  }
+}

@@ -6,7 +6,7 @@
 class CLevelScript {
 public:
 	// !DECL 0x00416a90 BEGIN
-	/* 416A90 */ uchar FUN_00416a90(int param_1);
+	/* 416A90 */ uchar CLevelScriptTimer_FireOnTimer(int param_1);
 	// !DECL 0x00416a90 END
 	// !DECL 0x004185c0 BEGIN
 	/* 4185C0 */ uint* ctor(uint* param_1);

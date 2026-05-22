@@ -502,7 +502,7 @@ public:
 	/* 417CE0 */ uchar FUN_00417ce0(int param_1);
 	// !DECL 0x00417ce0 END
 	// !DECL 0x00417d20 BEGIN
-	/* 417D20 */ uchar FUN_00417d20(uint param_1, uint* param_2, char param_3);
+	/* 417D20 */ uchar CLevelScript_DispatchTraceAreaTransition(uint param_1, uint* param_2, char param_3);
 	// !DECL 0x00417d20 END
 	// !DECL 0x00417dd0 BEGIN
 	/* 417DD0 */ uchar FUN_00417dd0(uint param_1, char param_2, uint* param_3, char param_4);
@@ -571,7 +571,7 @@ public:
 	/* 419D60 */ uchar CGaming_OnTimerCountdown(short param_1, uint param_2, int param_3);
 	// !DECL 0x00419d60 END
 	// !DECL 0x00419e90 BEGIN
-	/* 419E90 */ uchar FUN_00419e90(uint* param_1, uint param_2, int* param_3, char param_4);
+	/* 419E90 */ uchar CGaming_CheckTraceAreasForEntity(uint* param_1, uint param_2, int* param_3, char param_4);
 	// !DECL 0x00419e90 END
 	// !DECL 0x0041a020 BEGIN
 	/* 41A020 */ uchar CGaming_OnPlayerCollectItem(void* param_1, int* param_2, uint param_3);
@@ -739,7 +739,7 @@ public:
 	/* 422310 */ static void* CDSAudioPlayer_Create(uchar* param_1, int* param_2, int param_3, uint param_4, char param_5);
 	// !DECL 0x00422310 END
 	// !DECL 0x004223c0 BEGIN
-	/* 4223C0 */ uchar FUN_004223c0(int* param_1, uchar param_2);
+	/* 4223C0 */ uchar CDSAudioPlayer_PlayAndRelease(int* param_1, uchar param_2);
 	// !DECL 0x004223c0 END
 	// !DECL 0x004223e0 BEGIN
 	/* 4223E0 */ static uchar FUN_004223e0(int param_1);
@@ -766,7 +766,7 @@ public:
 	/* 423F20 */ uchar CSwitch_PlayHoverTrack(int param_1);
 	// !DECL 0x00423f20 END
 	// !DECL 0x00424010 BEGIN
-	/* 424010 */ uchar CMenu_EnableBackgroundState(char param_1);
+	/* 424010 */ void CMenu_EnableBackgroundState(char param_1);
 	// !DECL 0x00424010 END
 	// !DECL 0x00424400 BEGIN
 	/* 424400 */ static uchar FUN_00424400(uint* param_1, int param_2);
@@ -1120,10 +1120,10 @@ public:
 	/* 42F2D0 */ void Scheduler_SetEventDelayMs(uint param_1, uint param_2);
 	// !DECL 0x0042f2d0 END
 	// !DECL 0x0042f300 BEGIN
-	/* 42F300 */ uchar FUN_0042f300(uint param_1);
+	/* 42F300 */ uchar Scheduler_ArmSlot(uint param_1);
 	// !DECL 0x0042f300 END
 	// !DECL 0x0042f330 BEGIN
-	/* 42F330 */ uchar FUN_0042f330(uint param_1, int param_2);
+	/* 42F330 */ uchar Scheduler_AckSlot(uint param_1, int param_2);
 	// !DECL 0x0042f330 END
 	// !DECL 0x0042f410 BEGIN
 	/* 42F410 */ uint CDSApp_PollEventQueue();
@@ -1384,7 +1384,7 @@ public:
 	/* 4370B0 */ uchar FUN_004370b0(uint param_1);
 	// !DECL 0x004370b0 END
 	// !DECL 0x00437440 BEGIN
-	/* 437440 */ uchar WideCharToMultiByte_Wrapper(LPCWSTR param_1, UINT param_2);
+	/* 437440 */ uchar WideCharToMultiByte_Wrapper(int param_1, int param_2);
 	// !DECL 0x00437440 END
 	// !DECL 0x004375e0 BEGIN
 	/* 4375E0 */ uchar TextShaper_LayOutAndRender(int param_1, uint* param_2, void* param_3, uint* param_4);
@@ -1393,13 +1393,13 @@ public:
 	/* 437B00 */ uchar FUN_00437b00(uint* param_1);
 	// !DECL 0x00437b00 END
 	// !DECL 0x00437cd0 BEGIN
-	/* 437CD0 */ uchar FUN_00437cd0(uint param_1);
+	/* 437CD0 */ uchar CDSRegKeyException_ThrowFromWin32(uint param_1);
 	// !DECL 0x00437cd0 END
 	// !DECL 0x00437d60 BEGIN
-	/* 437D60 */ uchar FUN_00437d60(int param_1, int param_2, int param_3);
+	/* 437D60 */ uchar InitializeRegistryKey(int param_1, int param_2, int param_3);
 	// !DECL 0x00437d60 END
 	// !DECL 0x00437ed0 BEGIN
-	/* 437ED0 */ uchar FUN_00437ed0(uint param_1, uint param_2);
+	/* 437ED0 */ uchar ThrowRegKeyException(uint param_1, uint param_2);
 	// !DECL 0x00437ed0 END
 	// !DECL 0x004382d0 BEGIN
 	/* 4382D0 */ uchar FUN_004382d0(uint param_1);
@@ -1540,10 +1540,10 @@ public:
 	/* 43A030 */ uchar FUN_0043a030(uint param_1);
 	// !DECL 0x0043a030 END
 	// !DECL 0x0043a060 BEGIN
-	/* 43A060 */ uchar FUN_0043a060(char param_1);
+	/* 43A060 */ void CDSAudioPlayer_ApplyEffectiveVolume(char param_1);
 	// !DECL 0x0043a060 END
 	// !DECL 0x0043a0d0 BEGIN
-	/* 43A0D0 */ uchar CDSAudioPlayer_SetVolumePercent(uint param_1);
+	/* 43A0D0 */ void CDSAudioPlayer_SetVolumePercent(uint param_1);
 	// !DECL 0x0043a0d0 END
 	// !DECL 0x0043a0f0 BEGIN
 	/* 43A0F0 */ bool FUN_0043a0f0(int param_1);
@@ -5930,11 +5930,15 @@ public:
 	// !DECL 0x0047aff0 END
 
 	// !DECL 0x0042f590 BEGIN
-	/* 42F590 */ static uint CDSView_PostMessage(void* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5);
+	/* 42F590 */ static uint CDSView_PostMessage_NullSafe(void* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5);
 	// !DECL 0x0042f590 END
 	// !DECL 0x0043df90 BEGIN
 	/* 43DF90 */ static uchar BlitOpaque_BGR24_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043df90 END
+
+	// !DECL 0x0042f390 BEGIN
+	/* 42F390 */ uint CDSView_PostMessage(ushort param_1, ushort param_2, uint param_3, uint param_4);
+	// !DECL 0x0042f390 END
 };
 
 #endif

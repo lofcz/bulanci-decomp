@@ -104,7 +104,7 @@ uchar CDSApp::FUN_0042f530() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00437fb0 BEGIN
 /* 437FB0-437FDF 0002F */
-uchar CDSApp::FUN_00437fb0(int param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::RegWriteDword(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00437fb0 END
 
 // !FUNC 0x0043c9f0 BEGIN

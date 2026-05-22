@@ -8,24 +8,12 @@ public:
 	// !DECL 0x00401280 BEGIN
 	/* 401280 */ int FUN_00401280();
 	// !DECL 0x00401280 END
-	// !DECL 0x00403d20 BEGIN
-	/* 403D20 */ uchar FUN_00403d20(int param_1, char param_2);
-	// !DECL 0x00403d20 END
 	// !DECL 0x0040a860 BEGIN
 	/* 40A860 */ uchar CStartGame1_ApplyHostJoinVisibility(int param_1);
 	// !DECL 0x0040a860 END
-	// !DECL 0x0040a8c0 BEGIN
-	/* 40A8C0 */ uchar FUN_0040a8c0(int param_1);
-	// !DECL 0x0040a8c0 END
 	// !DECL 0x0040a970 BEGIN
 	/* 40A970 */ uchar CStartGame1_ApplyJoinModeVisibility(char param_1);
 	// !DECL 0x0040a970 END
-	// !DECL 0x0040a9d0 BEGIN
-	/* 40A9D0 */ uchar FUN_0040a9d0(int param_1);
-	// !DECL 0x0040a9d0 END
-	// !DECL 0x0040a9f0 BEGIN
-	/* 40A9F0 */ uchar FUN_0040a9f0(int param_1);
-	// !DECL 0x0040a9f0 END
 	// !DECL 0x0040ae00 BEGIN
 	/* 40AE00 */ uchar FUN_0040ae00(int param_1);
 	// !DECL 0x0040ae00 END

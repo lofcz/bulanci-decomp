@@ -203,7 +203,7 @@ uchar CBulanci::FUN_00409bc0(void* param_1, int* param_2, int* param_3, uint par
 
 // !FUNC 0x00409cd0 BEGIN
 /* 409CD0-409F0D 0023D */
-uchar CBulanci::FUN_00409cd0(uchar* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::SaveConfigToRegistry(uchar* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409cd0 END
 
 // !FUNC 0x00409f0d BEGIN
@@ -228,7 +228,7 @@ uchar CBulanci::FUN_0040a290(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040a440 BEGIN
 /* 40A440-40A62F 001EF */
-uchar CBulanci::FUN_0040a440(int param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::LoadConfigFromRegistry(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040a440 END
 
 // !FUNC 0x0040a62f BEGIN
@@ -383,7 +383,7 @@ uint* CBulanci::CSwitch_ctor(uint param_1, uint param_2, int param_3, ushort par
 
 // !FUNC 0x004252a0 BEGIN
 /* 4252A0-4252E9 00049 */
-uchar CBulanci::CMenu_LoadBackgroundMusic(uint param_1) { STUB_BODY(); return 0; }
+void CBulanci::CMenu_LoadBackgroundMusic(uint param_1) { STUB_BODY(); }
 // !FUNC 0x004252a0 END
 
 // !FUNC 0x004252f0 BEGIN
@@ -428,7 +428,7 @@ uint* CBulanci::FUN_004280f0(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00429990 BEGIN
 /* 429990-429A3D 000AD */
-uchar CBulanci::FUN_00429990(uint param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CDSApp_InitDirectDraw(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00429990 END
 
 // !FUNC 0x00429a40 BEGIN
@@ -770,22 +770,22 @@ uchar CBulanci::Catch_004359f3() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00437e20 BEGIN
 /* 437E20-437ECF 000AF */
-uchar CBulanci::FUN_00437e20(int param_1, int param_2, uchar* param_3) { STUB_BODY(); return 0; }
+uchar CBulanci::RegOpenKey(int param_1, int param_2, uchar* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00437e20 END
 
 // !FUNC 0x00437f40 BEGIN
 /* 437F40-437FA2 00062 */
-uint CBulanci::FUN_00437f40(int param_1) { STUB_BODY(); return 0; }
+uint CBulanci::RegQueryDword(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00437f40 END
 
 // !FUNC 0x00437fe0 BEGIN
 /* 437FE0-4380C0 000E0 */
-uchar CBulanci::FUN_00437fe0(uint param_1, int* param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::RegWriteBinaryStream(uint param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00437fe0 END
 
 // !FUNC 0x00438160 BEGIN
 /* 438160-4382BA 0015A */
-uchar CBulanci::FUN_00438160(int param_1, int* param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::RegQueryBinaryStream(int param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00438160 END
 
 // !FUNC 0x00438340 BEGIN

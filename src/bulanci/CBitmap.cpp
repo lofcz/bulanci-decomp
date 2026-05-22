@@ -2,7 +2,7 @@
 
 // !FUNC 0x00418260 BEGIN
 /* 418260-418290 00030 */
-uchar CBitmap::FUN_00418260(int param_1, ushort param_2) { STUB_BODY(); return 0; }
+uchar CBitmap::CLevelScript_FireOnBitmapEvt_FromView(int param_1, ushort param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00418260 END
 
 // !FUNC 0x00419120 BEGIN

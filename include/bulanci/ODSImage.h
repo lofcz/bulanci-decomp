@@ -18,7 +18,7 @@ public:
 	/* 4228F0 */ uint* FUN_004228f0(uint* param_1);
 	// !DECL 0x004228f0 END
 	// !DECL 0x004253d0 BEGIN
-	/* 4253D0 */ uint FUN_004253d0(int param_1);
+	/* 4253D0 */ uint CGunMouse_CoordRing_Reserve(int param_1);
 	// !DECL 0x004253d0 END
 
 	// !DECL 0x00426060 BEGIN

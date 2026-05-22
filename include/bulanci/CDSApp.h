@@ -66,7 +66,7 @@ public:
 	/* 42F530 */ uchar FUN_0042f530();
 	// !DECL 0x0042f530 END
 	// !DECL 0x00437fb0 BEGIN
-	/* 437FB0 */ uchar FUN_00437fb0(int param_1);
+	/* 437FB0 */ uchar RegWriteDword(int param_1);
 	// !DECL 0x00437fb0 END
 	// !DECL 0x0043c9f0 BEGIN
 	/* 43C9F0 */ static uchar FUN_0043c9f0(ushort* param_1, ushort param_2, int param_3, ushort param_4);

@@ -48,7 +48,36 @@ void __cdecl _Globals::TriggerBankSample(
 
 ---
 
-## 3. Comprehensive Sample Mapping (bank_65874 / Resource 0x10152)
+## 3. `CDSAudioPlayer` Volume Percent Mapping
+
+Menu instrumentation (`scripts/frida/menu_audio_mixer_trace.js`) verified
+the original player volume model:
+
+* `CDSAudioPlayer_SetVolumePercent @ 0x0043a0d0` stores an integer
+  percent on the player (`player+0x54`).
+* `CDSAudioPlayer_ApplyEffectiveVolume @ 0x0043a060` converts that
+  percent into DirectSound attenuation in hundredths of a decibel:
+
+```c
+attenuationDb100 = ((busDb100 + 10000) * percent) / 100 - 10000;
+```
+
+For the main-menu ambient music bus, `busDb100 == 0`, so:
+
+| Percent | DirectSound attenuation | Linear gain |
+|---------|-------------------------|-------------|
+| `100` | `0` | `1.0` |
+| `90` | `-1000` | `~0.3162` |
+| `70` | `-3000` | `~0.03162` |
+
+The main menu's fade is **linear in percent**, not linear in amplitude:
+`CMenu_OnMusicFadeTick @ 0x00424080` changes the percent by exactly `1`
+every `120 ms`. The non-linear audible ramp comes from the DirectSound
+dB conversion above.
+
+---
+
+## 4. Comprehensive Sample Mapping (bank_65874 / Resource 0x10152)
 
 Through a thorough analysis of `TriggerBankSample` call sites, player quip tables, and event dispatchers, the exact purpose and triggering context of every single sample in the main audio bank have been identified:
 
@@ -100,11 +129,11 @@ Through a thorough analysis of `TriggerBankSample` call sites, player quip table
 
 ---
 
-## 4. Level-Specific Soundbanks and Scripting Integration
+## 5. Level-Specific Soundbanks and Scripting Integration
 
 While the global soundbank (`0x10152` / `65874`) contains the core game mechanics audio (UI, player voice lines, standard weapon fire), specific levels override or extend this using custom level soundbanks. 
 
-### 4.1 Architecture & Lifecycle of Level Soundbanks
+### 5.1 Architecture & Lifecycle of Level Soundbanks
 
 During initialization, the gameplay system sets up the current level's audio environment. This involves loading a custom `CDSAudioBankIndex` that dynamically overrides slot configurations.
 
@@ -132,7 +161,7 @@ The following four level-specific soundbanks are loaded and mapped based on this
 | **`65537`** | `65871` | Na dobrou noc | Bedtime story | `65868` | `res_0000065856_2026_Script.lua` |
 | **`65538`** | `65872` | Noční směna | Steel works | `65863` | `res_0000065857_2026_Script.lua` |
 
-### 4.2 Script-Triggered Audio (`PlaySoundAtView` / `SpawnAtView`)
+### 5.2 Script-Triggered Audio (`PlaySoundAtView` / `SpawnAtView`)
 
 In Lua scripts, sounds are triggered through a specific script dispatch command that was historically mislabeled as `spawnAtView` due to overlapping argument types.
 - **Real Name / Purpose**: `PlaySoundAtView(sampleId, slotId)`
@@ -143,7 +172,7 @@ In Lua scripts, sounds are triggered through a specific script dispatch command 
 
 ---
 
-### 4.3 Level Soundbank Sample Mappings
+### 5.3 Level Soundbank Sample Mappings
 
 #### A. Bank `65873` (Default Gameplay Soundbank - Fallback)
 This bank provides the standard combat and environmental audio triggers for generic levels:

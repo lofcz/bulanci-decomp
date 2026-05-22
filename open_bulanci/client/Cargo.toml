@@ -20,6 +20,43 @@ chrono = "0.4"
 # macroquad 0.4 pins `image` with `default-features = false,
 # features = ["png", "tga"]`, which omits the `jpeg` decoder; adding
 # `jpeg` here unifies the feature back in for all our `.jpg` assets
-# (bg_menu.jpg, bg_hero.jpg, bg_start.jpg, bg_history.jpg, bg_quit.jpg).
 # Do NOT remove!
 image = { version = "0.24", default-features = false, features = ["jpeg"] }
+# Pure-Rust gzip codec used by `config_blob` to round-trip the original
+# game's `Config` REG_BINARY payload, which is framed as standard
+# RFC 1952 gzip by the engine's `CDSGZipStream`. flate2 ships a `rust`
+# backend (no zlib system dep) which is what we use — keeps the WASM
+# build self-contained.
+flate2 = { version = "1.0", default-features = false, features = ["rust_backend"] }
+# Base64 is used by the cross-platform `settings` module to round-trip
+# binary blobs (REG_BINARY equivalents) through string-only backends
+# (the on-disk `config.json` JSON, browser `localStorage`). The Windows
+# registry stores raw bytes natively so the registry backend doesn't
+# touch base64, but the dependency is unconditional because both the
+# file backend (which is now compiled on every native target) and the
+# WASM backend need it.
+base64 = "0.22"
+
+# ---- Settings backends — one per target family ---------------------
+# Windows registry access: read-only into the original game's
+# `HKLM\Software\SleepTeam\Bulanci` (for users who once had the
+# original installed), read/write into `HKCU\Software\OpenBulanci`
+# under our own application namespace. Used by both the settings
+# module and `window_init` (for GetSystemMetrics).
+[target.'cfg(target_os = "windows")'.dependencies]
+winreg = "0.56"
+
+# Linux/macOS/BSD: the primary monitor's resolution comes from
+# `display-info` (which wraps X11/Wayland/AppKit under one cross-OS
+# API). Settings persistence uses the cross-platform `config.json`
+# next to the exe, so no extra dep is needed for that.
+[target.'cfg(all(not(target_arch = "wasm32"), not(target_os = "windows")))'.dependencies]
+display-info = "0.5"
+
+# WebAssembly (macroquad-on-canvas builds): the settings backend is
+# `localStorage`, exposed through `web-sys`. Window centering is a
+# no-op on the web because the canvas's screen position is owned by
+# the browser DOM / page layout, not the game.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+web-sys = { version = "0.3", features = ["Storage", "Window"] }

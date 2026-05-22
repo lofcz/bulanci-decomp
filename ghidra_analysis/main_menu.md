@@ -36,7 +36,7 @@ WinMain (0x00402680)
                   stores at this+0x70, creates ODSImage at this+0x__
                   via ODSImage::FUN_00426060 (size 0x218).
                2. RegisterClassExW + CreateWindowExW (Win32 window)
-               3. CBulanci::FUN_00429990 — DirectDrawCreate + cooperate
+               3. CBulanci::CDSApp_InitDirectDraw — DirectDrawCreate + cooperate
                4. CDSDirectSound_InitPrimary at this+0x80
                5. CDSApp_InitClock (g_dwStartMs = timeGetTime())
                6. CDSView_SetModalEligible(1), CDSView_SetActive(1)
@@ -152,15 +152,15 @@ Globals on `CBulanci`:
 | `+0xb0` | `CSwitch*` — **Start button** at `(35, 37)`, cmd `0xc9` |
 | `+0xb4` | `CSwitch*` — **History button** at `(35, 121)`, cmd `0xca` |
 | `+0xb8` | `CSwitch*` — **Quit button** at `(35, 205)`, cmd `0xcb` |
-| `+0xc0` | tail of CDSChained subobject (set 0 by ctor) |
-| `+0xc4` | "deferred sub-screen exit"  / current scheduler event refcount |
+| `+0xc0` | `CDSAudioPlayer*` — active looping menu background music player, loaded from ambient resources `0x10149` / `0x1014a` by `CMenu_LoadBackgroundMusic @ 0x004252a0` |
+| `+0xc4` | `CDSAudioPlayer*` — active deferred-exit voice player created by `CMenu_DispatchHotkey @ 0x00425340`; posts event id `1` to `this+0x10` when the sample completes |
 | `+0xc6` | n/a |
 | `+0xc8` | `CDSBitmap*` — decorative bitmap at `(610, 0)`, resource `0x10139` (right-side hero art) |
-| `+0xcc` | `ushort` — last-pressed cmd id (set by `FUN_00425340`) |
+| `+0xcc` | `ushort` — stashed modal exit code for deferred audio-cued exits (`0x80cb` for X / WM_CLOSE, `0x80c8` for F12); consumed by `CMenu::OnEvent(1)` |
 | `+0xd0..0xdc` | 4× `CRuch*` — running-Bulanci background actors (one per slot, sizeof = 0x80) |
 | `+0xe0` | `bool` — `lastSplashFlag` passed in by `CBulanci::OnEvent` (used to skip the first-time anim) |
 | `+0xe1` | `bool` — last day/night toggle state, latched by `FUN_00425400` |
-| `+0xe2` | reserved (=0) |
+| `+0xe2` | `bool` — background music enabled/fade direction flag used by `CMenu_EnableBackgroundState` and `CMenu_OnMusicFadeTick`; `0` means fade down toward 70% then stop, non-zero means fade up toward 100% |
 
 There is also a sibling `CPoemScroller` child (sizeof `0x128`, ctor
 `FUN_004262c0`) that scrolls the credits in the bottom-left and a
@@ -174,8 +174,8 @@ the build/version line).
 |---------------|-------|-------|
 | literal `0x1013b` | menu title/background bitmap | composited at `(0,0)` |
 | literal `0x10139` | right-side hero / "Bulanci" wordmark | composited at `(610,0)` |
-| literal `0x1014a` | day-time main-menu background | bound by `CMenu::SetDayNightBg(0x004252f0)` when bit-25 of `FUN_0042e8b0` says "day" |
-| literal `0x10149` | night-time main-menu background | bound when "night" |
+| literal `0x10149` | day-time main-menu background | bound by `CMenu::SetDayNightBg(0x004252f0)` when bit-25 of `FUN_0042e8b0` says "day" |
+| literal `0x1014a` | night-time main-menu background | bound when "night" |
 | literal `0x100d4` | menu-button frame animation "off" | passed to `CSwitch_ctor` (`FUN_00424bc0`) as track 0 |
 | literal `0x100d5` | menu-button frame animation "on" | passed to `CSwitch_ctor` as track 1 |
 | literal `0x100b0` | font for bottom version line | wrapper sets fg via static-text alignment |
@@ -359,8 +359,8 @@ swapped child views, kept under the same `CMenu::DoModal` umbrella.
 | `0xca` | **History** → load bg `0x1013e` → alloc `CHistoryDlg (0x9c)` via `CHistoryDlg::ctor @ 0x004231d0` → `FUN_00422f70(dlg, g_pApp[0x306])` to scroll to the last-read page → attach → input slot 0x18 → `state=1`. |
 | `0xcb` | **Quit confirm** → load bg `0x1013d` → alloc `CExitDlg (0x7c)` via `CExitDlg::ctor @ 0x00411b50` → attach → input slot 0x19 → `state=2`. |
 | `0xcf` | **Back** (from a sub-screen): `FUN_00423a00(this, 0)` — close current sub-screen, restore main-menu buttons. Also calls `FUN_00401af0(g_pApp)` (small CBulanci helper). |
-| `0x8004` | **App-exit hotkey** → forwarded via `FUN_00425340(this, 0x80cb, 0x1a)` which dispatches `0xcb` (Quit) just like clicking the Quit button. |
-| `0x80ce` | **F12** → `FUN_00425340(this, 0x80c8, 0x1c)` — currently maps to the same quit path; reserved as the alternate exit hotkey. |
+| `0x8004` | **App-exit hotkey / native close event** → `CMenu_DispatchHotkey(this, 0x80cb, 0x1a)`. This bypasses `CExitDlg`, plays the "Konec hry" voice cue, hides the three main buttons, and exits the menu modal only after the SFX completion callback fires. |
+| `0x80ce` | **F12** → `CMenu_DispatchHotkey(this, 0x80c8, 0x1c)`. Same deferred audio-cued mechanism, but with alternate exit cue slot `0x1c`. |
 | any other | Falls through to `CDSApp::OnEvent_Default (0x0042c7d0)`. |
 
 `FUN_00423a00(this, suspend)` is the **sub-screen teardown**:
@@ -472,23 +472,41 @@ which carves out the hours 6-21 as "day". On state change it calls
 `CMenu::SetDayNightBg (FUN_004252f0)`:
 
 ```cpp
-void CMenu::SetDayNightBg(bool isDay)
+void CMenu::SetDayNightBg(bool isNight)
 {
-    this->day_night_latch = isDay;
-    if (isDay) {
-        FUN_004252a0(this, 0x1014a);   // load and bind "day" bg
+    this->day_night_latch = isNight;
+    if (isNight) {
+        FUN_004252a0(this, 0x1014a);   // load and bind night bg
         Show(this->hero_bmp);
     } else {
-        FUN_004252a0(this, 0x10149);   // "night" bg
+        FUN_004252a0(this, 0x10149);   // day bg
         Hide(this->hero_bmp);
     }
 }
 ```
 
-`FUN_004252a0(this, resId)` wraps `FUN_00422550(2, resId, 0, 0, 1)`
-(probably a CDSImageMouse loader), stows the result at `this+0xc0`,
-then calls `FUN_0043a0d0(handle, 0x46)` and `FUN_00424010(this, 1)` to
-plumb the new bitmap into the dirty-rect pipeline.
+`CMenu_LoadBackgroundMusic(this, resId) @ 0x004252a0` wraps
+`CDSAudioPlayer_CreateFromResource(category=2, resId, 0, 0, loop=1) @
+0x00422550` to instantiate the ambient MP3 loop. It releases any
+previous background player at `this+0xc0`, stores the new
+`CDSAudioPlayer*` there, sets its volume percent to `0x46` (70/100) via
+`CDSAudioPlayer_SetVolumePercent @ 0x0043a0d0`, then calls
+`CMenu_EnableBackgroundState(this, 1) @ 0x00424010`.
+
+`CMenu_OnMusicFadeTick @ 0x00424080` runs from scheduler slot `0` on
+`this+0x68` at **120 ms** cadence. It changes the music player's
+integer volume percent by exactly `1` per tick: fade-in clamps at
+`100`, fade-out clamps at `70` and then stops playback. The curve is
+linear in percent; `CDSAudioPlayer_ApplyEffectiveVolume @ 0x0043a060`
+later maps that percent to DirectSound attenuation using:
+
+```c
+attenuationDb100 = ((busDb100 + 10000) * percent) / 100 - 10000;
+```
+
+With the menu bus at `0 dB`, `100%` is gain `1.0`, while `70%` is
+`-3000` hundredths dB (`~0.03162` linear gain). This was verified with
+`scripts/frida/menu_audio_mixer_trace.js`.
 
 ### 2.8 The 4 `CRuch` running-Bulanci actors
 
@@ -927,12 +945,14 @@ menu" requires:
    * `CHistoryDlg` for browsing the campaign story / about pages.
    * `CExitDlg` for the quit confirmation.
 
-4. **Quit path**: `CExitDlg` button cmd `0x8004` → routed via
-   `FUN_00425340` to the keymap (`0x80cb → 0xcb`) → opens the same
-   `CExitDlg` again (yes — pressing X re-shows the confirm), then
-   `CDSView_DoModal` exit code `-0x7ffc` propagates up to
-   `CBulanci::OnEvent::0xcc` which calls `FUN_0042c3c0(this, 0x8004)`
-   to dismantle the modal pump and shut down.
+4. **Quit path**: `CExitDlg` first opens synchronously from the Quit/K
+   button (`cmd 0xcb`, SFX slot `0x19`). The final app-exit command
+   (`0x8004`, also used by the X hotkey / native close) routes through
+   `CMenu_DispatchHotkey(this, 0x80cb, audioSlot=0x1a)`: stash
+   `0x80cb` at `CMenu+0xcc`, play "Konec hry", hide main buttons, then
+   let the audio completion event id `1` call `CMenu::OnEvent` and end
+   the modal with `-0x7f35`. `CBulanci::OnEvent::0xcc` treats that as
+   shutdown.
 
 5. **Game launch path**: `CStartGame1` → `CMenu::OpenNetworkSession` →
    `CDSDirectPlay` setup → `CStartGame2` (lobby) → on Start click
@@ -968,9 +988,11 @@ Renamed in this pass for downstream readability:
 | `0x00423a00` | `CMenu::CloseCurrentSubScreen` |
 | `0x00425870` | `CMenu::LoadBackgroundResource` |
 | `0x00423f70` | `CMenu::EnableAllRuch` |
+| `0x00424010` | `CMenu::EnableBackgroundState` |
+| `0x00424080` | `CMenu::OnMusicFadeTick` |
 | `0x00425400` | `CMenu::PollDayNight` |
 | `0x004252f0` | `CMenu::SetDayNightBg` |
-| `0x004252a0` | `CMenu::LoadInfoOverlayBg` |
+| `0x004252a0` | `CMenu::LoadBackgroundMusic` |
 | `0x00424bc0` | `CSwitch::ctor` |
 | `0x00424d30` | `_Globals::Button_Click` |
 | `0x00425340` | `CMenu::DispatchHotkey` |
@@ -1339,9 +1361,9 @@ Confirmed: **`dword >> 25` is `SYSTEMTIME.wHour` (local time)**.
 
 The predicate is `is_night = (uint32)((hour - 6) > 15)` — which
 unsigned-wraps to **night iff `hour ∈ {0,1,2,3,4,5,22,23}`**, i.e.
-**day = 06:00–21:59 local time**. The 16-hour day-band matches the
-two background resources `0x1014a` (day) / `0x10149` (night) that
-`CMenu::SetDayNightBg` swaps.
+**day = 06:00–21:59 local time**. The two background resources are
+`0x10149` (day) / `0x1014a` (night), swapped by
+`CMenu::SetDayNightBg`.
 
 ### 9.5 Where the level list `+0xbc` comes from
 

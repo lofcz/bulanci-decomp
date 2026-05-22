@@ -2,7 +2,7 @@
 
 // !FUNC 0x00416a90 BEGIN
 /* 416A90-416AA7 00017 */
-uchar CLevelScript::FUN_00416a90(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScriptTimer_FireOnTimer(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416a90 END
 
 // !FUNC 0x004185c0 BEGIN

@@ -157,7 +157,7 @@ void CDSApp_OnCreate(this) {
                               this->rect.bottom - this->rect.top,     // 600
                               NULL, NULL, g_pHInstance, NULL);
     SetFocus(g_pHwnd);
-    CBulanci::FUN_00429990(this, ...);          // game-side post-create (windowed flag)
+    CBulanci::CDSApp_InitDirectDraw(this, ...);          // game-side post-create (windowed flag)
     CDSDirectSound_InitPrimary(this + 0x80,     // 2ch / 22050 Hz / 16 bpp primary buffer
                                g_pHwnd, 2, 22050, 16);
     CDSApp_InitClock();                          // g_dwStartMs = timeGetTime()

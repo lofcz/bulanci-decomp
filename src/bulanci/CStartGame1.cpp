@@ -5,35 +5,19 @@
 int CStartGame1::FUN_00401280() { STUB_BODY(); return 0; }
 // !FUNC 0x00401280 END
 
-// !FUNC 0x00403d20 BEGIN
-/* 403D20-403D52 00032 */
-uchar CStartGame1::FUN_00403d20(int param_1, char param_2) { STUB_BODY(); return 0; }
-// !FUNC 0x00403d20 END
 
 // !FUNC 0x0040a860 BEGIN
 /* 40A860-40A8C0 00060 */
 uchar CStartGame1::CStartGame1_ApplyHostJoinVisibility(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040a860 END
 
-// !FUNC 0x0040a8c0 BEGIN
-/* 40A8C0-40A961 000A1 */
-uchar CStartGame1::FUN_0040a8c0(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0040a8c0 END
 
 // !FUNC 0x0040a970 BEGIN
 /* 40A970-40A9CA 0005A */
 uchar CStartGame1::CStartGame1_ApplyJoinModeVisibility(char param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040a970 END
 
-// !FUNC 0x0040a9d0 BEGIN
-/* 40A9D0-40A9E3 00013 */
-uchar CStartGame1::FUN_0040a9d0(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0040a9d0 END
 
-// !FUNC 0x0040a9f0 BEGIN
-/* 40A9F0-40A9F8 00008 */
-uchar CStartGame1::FUN_0040a9f0(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0040a9f0 END
 
 // !FUNC 0x0040ae00 BEGIN
 /* 40AE00-40AE2A 0002A */

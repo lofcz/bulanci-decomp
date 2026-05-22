@@ -7,16 +7,38 @@
 use macroquad::prelude::*;
 
 use crate::app::ClientApp;
-use crate::state::SubScreen;
+use crate::audio::AudioFade;
+use crate::state::{SLOT_AUDIO_FADE, SubScreen};
+
+const RETAIL_EXIT_FALLBACK_DELAY_MS: u64 = 2_083;
 
 impl ClientApp {
     pub fn update_exit_confirm_input(&mut self) {
+        if self.exit_at_ms.is_some() {
+            return;
+        }
         if is_key_pressed(KeyCode::Enter) || is_key_pressed(KeyCode::Y) {
-            std::process::exit(0);
+            self.begin_retail_exit();
         }
         if is_key_pressed(KeyCode::Escape) || is_key_pressed(KeyCode::N) {
             self.sub_screen = SubScreen::None;
             self.pressed_btn = None;
+        }
+    }
+
+    pub(crate) fn begin_retail_exit(&mut self) {
+        if self.exit_at_ms.is_some() {
+            return;
+        }
+        // Retail X/close-event path plays AudioBank slot 0x1a ("Konec hry")
+        // and lets the CDSAudioPlayer completion event unwind the CMenu modal.
+        let delay_ms = self
+            .play_sfx_with_duration("audio/sfx_force_exit.wav")
+            .unwrap_or(RETAIL_EXIT_FALLBACK_DELAY_MS);
+        self.exit_at_ms = Some(self.clock.elapsed_ms.saturating_add(delay_ms));
+        if let Some(audio) = &self.audio {
+            audio.start_bg_fade(AudioFade::linear_percent(70, 1));
+            self.scheduler.unpause(SLOT_AUDIO_FADE, self.clock.elapsed_ms);
         }
     }
 

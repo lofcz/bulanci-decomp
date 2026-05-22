@@ -94,6 +94,115 @@ above:
 | `analyze_follow_lag.py`         | Quantifies push/pop cadence and follow-lag distribution. Distinguishes "300 ms gate-capped" (fps ≥ 100) from "frame-rate-limited" (lag = `30 × frame_interval`) regimes. |
 | `extract_motion_segment.py`     | Tabulates a contiguous window of `Draw` events around the first mouse motion (`t, mx, my, tx, ty, dx, dy, mx-tx, my-ty`) — the canonical view for eyeballing whether `target_*` ever catches up to a fast flick. |
 
+## `menu_hover_audio_trace.js` — CSwitch hover SFX
+
+Runtime trace for the original main-menu button hover audio path. It
+hooks the function ENTRY points of:
+
+- `CSwitch::OnMouseEnter`      (`0x00424cf0`)
+- `CSwitch::OnMouseLeave`      (`0x00424d10`)
+- `CSwitch::PlayIdleTrack`     (`0x00423ef0`)
+- `CSwitch::PlayHoverTrack`    (`0x00423f20`)
+- `TriggerBankSample`          (`0x00422430`, slot-filtered to menu cues)
+- `CDSAudioPlayer::Init`       (`0x0043a760`, filtered to menu trigger chain)
+
+It deliberately does NOT hook the hot DirectSound mixer paths
+(`CDSAudioPlayer_Play/Stop/ApplyEffectiveVolume`); volume / category
+state are read once per Init, after the call has populated the player.
+
+> **Address sanity:** every address above is a function entry. The
+> previous iteration of this script hooked `CSwitch_PlayHoverTrack`
+> at `0x00423f50`, which is `0x30` bytes INTO the function. Frida's
+> 5-byte inline trampoline overwrote real instructions, so the
+> first hover call landed in junk and the process died. If you ever
+> retarget this script to a new address, double-check via
+> `ghidra-mcp.get_function_by_address` first.
+
+### Running
+
+You will want a draggable window so you can actually mouse-hover the
+menu buttons; chain `orig\patch_window.js` for that (see its header
+for the full rationale).
+
+```powershell
+frida -l orig\patch_window.js ^
+      -l scripts\frida\menu_hover_audio_trace.js ^
+      -f orig\bulanci.exe ^
+      -o hover_audio.jsonl
+```
+
+The Frida CLI does not accept `--no-pause` / `--resume` flags in
+recent versions — type `%resume` at the prompt instead. Use `-o
+hover_audio.jsonl` (rather than shell `>` redirection) so the prompt
+stays on stdout and only the JSONL trace goes to the file.
+
+### Capture these gestures
+
+1. Move from empty menu space onto Start, then out.
+2. Move quickly Start -> History -> Quit -> Start.
+3. Hover the currently selected button (after clicking Start to
+   navigate into Start-Game).
+4. Click a non-selected button, then hover it again while selected.
+
+### Important fields
+
+- `CSwitch_OnMouseEnter.sw.state_0xc4`: selected buttons have state
+  `1` and must NOT reach `CSwitch_PlayHoverTrack` (retail filters in
+  `OnMouseEnter` itself).
+- `TriggerBankSample.slot`: hover voice cue is global AudioBank slot
+  `0`; click cues are `0x18`/`0x19`/`0x1a`/`0x1b`/`0x1c`.
+- `CDSAudioPlayer_Init.volumePercent_0x54`: per-player volume percent
+  after Init populates the struct. Default `100`.
+- `CDSAudioPlayer_Init.category_0x4c`: category pointer used for the
+  later effective-volume calculation (Music vs SFX vs Voice).
+- `EXCEPTION`: emitted by `Process.setExceptionHandler` if anything
+  crashes. Includes register dump and the bytes around `EIP` so a
+  future regression in this script is diagnosable rather than just a
+  bare "Process terminated".
+
+## `menu_audio_mixer_trace.js` — menu music volume
+
+Runtime trace for the original `CDSAudioPlayer` mixer path. Use this
+when comparing OpenBulanci vs retail loudness; do not infer a linear
+gain from `SetVolumePercent` without this trace.
+
+It hooks:
+
+- `CMenu::LoadBackgroundMusic` (`0x004252a0`)
+- `CMenu::SetDayNightBg` (`0x004252f0`)
+- `CMenu::EnableBackgroundState` (`0x00424010`)
+- `CMenu::OnMusicFadeTick` (`0x00424080`)
+- `CDSAudioPlayer::CreateFromResource` (`0x00422550`)
+- `CDSAudioPlayer::Init` (`0x0043a760`)
+- `CDSAudioPlayer::SetVolumePercent` (`0x0043a0d0`)
+- `CDSAudioPlayer::ApplyEffectiveVolume` (`0x0043a060`)
+- `CDSAudioPlayer::Play` / `PlayAndRelease` / `Stop`
+- `TriggerBankSample` for the menu SFX slots
+- the live `IDirectSoundBuffer::SetVolume` target, discovered from each
+  player buffer's vtable at runtime.
+
+### Running
+
+```powershell
+frida -l orig\patch_window.js ^
+      -l scripts\frida\menu_audio_mixer_trace.js ^
+      -f orig\bulanci.exe ^
+      -o menu_audio_mixer.jsonl
+```
+
+Type `%resume` in the Frida prompt if needed.
+
+### Important fields
+
+- `volumePercent_0x54`: the engine's stored percent argument.
+- `category_0x4c`: the mixer bus selector used with `DAT_004b8370`.
+- `expectedEffectiveDb`: the DirectSound attenuation computed from
+  Ghidra's `CDSAudioPlayer_ApplyEffectiveVolume` formula.
+- `DirectSound_SetVolume.attenuationDb100`: the value retail actually
+  passed to `IDirectSoundBuffer::SetVolume`, in hundredths of a dB.
+- `DirectSound_SetVolume.linearGain`: `10^(attenuationDb100 / 2000)`,
+  useful when comparing against `rodio::Sink::set_volume`.
+
 The trace we captured for the cursor-follow investigation runs at
 ~200 Hz with `lastTick` 8–49 s behind `g_dwElapsedMs`, so the push
 gate fires every Draw. `analyze_follow_lag.py` reads:

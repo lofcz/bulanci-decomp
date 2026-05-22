@@ -27,6 +27,10 @@ fn hit_test_returns_correct_button_for_each_dial_center() {
 fn hit_test_misses_outside_button_strip() {
     // Far right (sub-screen area) — never hits a button.
     assert_eq!(hit_test_menu(500.0, 100.0), None);
+    // Inside the label area (e.g., x=150) — should not hit a button in the original game.
+    assert_eq!(hit_test_menu(150.0, 69.0), None);
+    assert_eq!(hit_test_menu(150.0, 153.0), None);
+    assert_eq!(hit_test_menu(150.0, 237.0), None);
     // Above the first button.
     assert_eq!(hit_test_menu(60.0, 10.0), None);
     // Below the last button.

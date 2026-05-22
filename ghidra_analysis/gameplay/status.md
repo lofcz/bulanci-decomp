@@ -59,7 +59,7 @@ These cover game rules, entities, combat mechanics, UI screens, menus, and high-
     * Background bitmap (resource `0x1013b`) at `(0, 0)`; right-side hero art (`0x10139`) at `(610, 0)`; bottom-centre version line from static pool index 93.
     * `CPoemScroller` (sizeof `0x128`) walking every `Poem` (class id `0x7fb`) resource — the scrolling credits.
     * 4× `CRuch` background actors that animate across the screen at random intervals (~8 s window).
-    * Day/Night background toggle via `CMenu_PollDayNight @ 0x00425400` → `CMenu_SetDayNightBg @ 0x004252f0` swapping resources `0x10149` (night) / `0x1014a` (day).
+    * Day/Night background toggle via `CMenu_PollDayNight @ 0x00425400` → `CMenu_SetDayNightBg @ 0x004252f0` swapping resources `0x10149` (day) / `0x1014a` (night).
     * Keyboard shortcuts (`CMenu_OnKeyDown @ 0x00424fa0`): `S`=Start, `H`=History, `K`=Quit (Czech "Konec"), `X`=app-exit.
   * **`CMenu_CmdDispatch @ 0x00425970`** is the routing centre. Sub-screens are added as **child views (not modal pushes)** so the main menu stays under its own DoModal:
     * `0xc9` → `CStartGame1::ctor @ 0x0040f400` (size `0xa8`).

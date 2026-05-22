@@ -50472,7 +50472,7 @@ undefined DAT_004a598c;
 undefined LAB_0047424e;
 undefined LAB_0047428b;
 undefined LAB_004742c9;
-undefined *PTR_u_Software\SleepTeam\Bulanci_004ae000;
+undefined *PTR_g_wszRegSubKeySleepTeamBulanci_004ae000;
 undefined LAB_00474330;
 pointer[34] vftable;
 undefined g_AppDescriptor;
@@ -50550,9 +50550,9 @@ int DAT_004b826c;
 undefined LAB_00474d3b;
 undefined DAT_004ae5a0;
 undefined4 DAT_004ae5c4;
-undefined4 DAT_004ae404;
 undefined LAB_00474d96;
-undefined4 DAT_004ae3f0;
+undefined4 g_anRadioBitmapIds;
+undefined4 g_nRadioFontId;
 undefined LAB_00474dde;
 undefined LAB_00474e3f;
 undefined4 DAT_004ae408;
@@ -51049,7 +51049,7 @@ int DAT_004b7c10;
 undefined LAB_00479180;
 void *g_pCDSApp_vftable;
 undefined g_AppClassTable;
-undefined *PTR_u_Windowed_004afc9c;
+wchar_t *g_pRegValueWindowed;
 undefined LAB_00479222;
 undefined DAT_0042b3ab;
 undefined LAB_004792c2;
@@ -51214,8 +51214,8 @@ undefined LAB_0047a2fb;
 undefined DAT_004b82c8;
 undefined LAB_0047a343;
 undefined LAB_0047a386;
-undefined *PTR_DAT_004b00c8;
 undefined LAB_0047a3b8;
+wchar_t *g_pRegSubKeyDefault;
 undefined LAB_0047a3f3;
 undefined DAT_004ab7c0;
 undefined LAB_0047a418;
@@ -53366,7 +53366,7 @@ undefined4 * __fastcall CBulanci::CBulanci_ctor(undefined4 *param_1)
   puStack_8 = &LAB_00474330;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSApp_ctor((CBulanci *)param_1,L"Bulanci",(short *)PTR_u_Software_SleepTeam_Bulanci_004ae000);
+  CDSApp_ctor((CBulanci *)param_1,L"Bulanci",(short *)PTR_g_wszRegSubKeySleepTeamBulanci_004ae000);
   uStack_4 = 0;
   *param_1 = vftable;
   param_1[1] = vftable;
@@ -54693,7 +54693,7 @@ void __thiscall CRadio::CRadio_LoadData(CRadio *this,char *param_1)
 
 
 
-void __thiscall CStartGame1::FUN_00403d20(CStartGame1 *this,int param_1,char param_2)
+void __thiscall CStartGame1::CRadio__SetItemDisabled(CStartGame1 *this,int param_1,char param_2)
 
 {
   uint *puVar1;
@@ -59364,13 +59364,13 @@ undefined4 * __thiscall CRadio::CRadio_BuildAt(CRadio *this,undefined4 param_1,u
   *(undefined4 *)(this + 0x84) = 2;
   *(undefined4 *)(this + 0x88) = 0;
   local_4 = (CRadio *)CONCAT31(local_4._1_3_,3);
-  uVar3 = (**(code **)(*piVar1 + 0x10))(DAT_004ae404,0,uVar2);
+  uVar3 = (**(code **)(*piVar1 + 0x10))(g_nRadioFontId,0,uVar2);
   if (*(int **)(this + 0x7c) != (int *)0x0) {
     (**(code **)(**(int **)(this + 0x7c) + 8))();
   }
   local_4 = this + 0x94;
   *(undefined4 *)(this + 0x7c) = uVar3;
-  puVar5 = &DAT_004ae3f0;
+  puVar5 = &g_anRadioBitmapIds;
   do {
     this_00 = (void *)(**(code **)(*piVar1 + 0x10))(*puVar5,0);
     if (*(int **)local_4 != (int *)0x0) {
@@ -60477,7 +60477,7 @@ _Globals::FUN_00409510(void *this,HKEY param_1,int param_2,undefined1 *param_3)
   puVar2 = param_3;
   param_3 = &stack0xffffffe0;
   FUN_0042d490(&stack0xffffffe0,&param_2);
-  FUN_00437d60(this,param_1,pWVar1,(REGSAM)puVar2);
+  InitializeRegistryKey(this,param_1,pWVar1,(REGSAM)puVar2);
   local_4 = 0xffffffff;
   if (param_2 != 0) {
     FUN_0042d2d0((void *)(param_2 + -0xc));
@@ -60904,7 +60904,23 @@ CBulanci::FUN_00409bc0
 
 
 
-void __fastcall CBulanci::FUN_00409cd0(undefined1 *param_1)
+// CBulanci::FUN_00409cd0(int playerProfile)
+// 
+// Serialises the in-memory player profile / settings into a
+// gzip-compressed REG_BINARY and writes it to
+// HKLM\Software\SleepTeam\Bulanci\Config.
+// 
+// Pipeline (mirror of FUN_0040a440):
+//   1. CDSEasyMemStream sink (4 KB / 2 KB high-water).
+//   2. CDSGZipStream wraps the sink for transparent deflate.
+//   3. Sequential writes emit: signature byte, profile count, the
+//      6-byte profile records, six 6-byte key-binding tuples, the
+//      14-byte option block, three DWORDs of palette/colour state,
+//      and the trailing CDSString.
+//   4. FUN_00437e20 (RegOpenKey) -> opens the SleepTeam subkey RW.
+//   5. FUN_00437fe0 -> RegSetValueExW REG_BINARY of the deflated stream.
+
+void __fastcall CBulanci::SaveConfigToRegistry(undefined1 *param_1)
 
 {
   byte bVar1;
@@ -60977,10 +60993,10 @@ void __fastcall CBulanci::FUN_00409cd0(undefined1 *param_1)
   local_10 = &stack0xffffff44;
   local_54 = 0x20;
   iVar3 = 0;
-  FUN_0042d510((CBulanci *)&stack0xffffff44,(short *)PTR_u_Software_SleepTeam_Bulanci_004ae000);
+  FUN_0042d510((CBulanci *)&stack0xffffff44,(short *)PTR_g_wszRegSubKeySleepTeamBulanci_004ae000);
   _Globals::FUN_00409510(&local_18,(HKEY)0x80000002,iVar3,puVar4);
   local_68._0_1_ = 5;
-  FUN_00437fe0((CBulanci *)&local_18,PTR_u_Config_004ae5e8,local_94);
+  RegWriteBinaryStream((CBulanci *)&local_18,PTR_u_Config_004ae5e8,local_94);
   local_68._0_1_ = 6;
   if (local_18 != 0) {
     _Globals::FUN_00437b00(&local_18);
@@ -61243,7 +61259,7 @@ void __fastcall _Globals::FUN_0040a380(undefined1 *param_1)
   local_c = ExceptionList;
   ExceptionList = &local_c;
   local_4 = 4;
-  CBulanci::FUN_00409cd0(param_1);
+  CBulanci::SaveConfigToRegistry(param_1);
   FUN_004090c0((int)param_1);
   FUN_00409f20((int)param_1);
   local_4._0_1_ = 3;
@@ -61266,7 +61282,24 @@ void __fastcall _Globals::FUN_0040a380(undefined1 *param_1)
 
 
 
-void __fastcall CBulanci::FUN_0040a440(int param_1)
+// CBulanci::FUN_0040a440(int playerProfile)
+// 
+// Loads the gzip-compressed Bulanci settings blob from
+// HKLM\Software\SleepTeam\Bulanci\Config (REG_BINARY) and rehydrates
+// the in-memory player-profile / key-bindings / SFX&music volumes
+// / option flags.
+// 
+// Pipeline:
+//   1. FUN_00437e20 (RegOpenKey) -> opens the SleepTeam subkey RW.
+//   2. CDSEasyMemStream stage (4 KB / 2 KB high-water) collects bytes.
+//   3. FUN_00438160 -> RegQueryValueExW REG_BINARY into the mem stream.
+//   4. CDSGZipStream wraps the mem stream for transparent inflate.
+//   5. Sequential reads recover: profile signature byte, profile
+//      count, an array of 6-byte profile records, six 6-byte
+//      key-binding tuples, the 14-byte option block, three DWORDs
+//      of palette/colour state, and a final CDSString.
+
+void __fastcall CBulanci::LoadConfigFromRegistry(int param_1)
 
 {
   code *pcVar1;
@@ -61296,12 +61329,12 @@ void __fastcall CBulanci::FUN_0040a440(int param_1)
   local_64 = 0;
   iVar4 = 0;
   local_14 = param_1;
-  FUN_0042d510((CBulanci *)&stack0xffffff4c,(short *)PTR_u_Software_SleepTeam_Bulanci_004ae000);
+  FUN_0042d510((CBulanci *)&stack0xffffff4c,(short *)PTR_g_wszRegSubKeySleepTeamBulanci_004ae000);
   _Globals::FUN_00409510(&local_10,(HKEY)0x80000002,iVar4,puVar5);
   local_64._0_1_ = 1;
   CDSEasyMemStream::FUN_00409170(local_9c,(undefined *)0x1000,0x800);
   local_64._0_1_ = 2;
-  FUN_00438160((CBulanci *)&local_10,(LPCWSTR)PTR_u_Config_004ae5e8,local_90);
+  RegQueryBinaryStream((CBulanci *)&local_10,(LPCWSTR)PTR_u_Config_004ae5e8,local_90);
   FUN_00435960(local_60,local_90,0);
   local_64 = CONCAT31(local_64._1_3_,3);
   CDSGZipStream::ReadBytes(local_54,(char *)(param_1 + 4),1);
@@ -61410,7 +61443,7 @@ int __fastcall CDSChain::FUN_0040a680(int param_1)
   *(undefined4 *)(param_1 + 0x85) = 8;
   local_4 = 4;
   *(undefined1 *)(param_1 + 0x78) = 0;
-  CBulanci::FUN_0040a440(param_1);
+  CBulanci::LoadConfigFromRegistry(param_1);
   ExceptionList = local_c;
   return param_1;
 }
@@ -61521,7 +61554,7 @@ void __fastcall CStartGame1::CStartGame1_ApplyHostJoinVisibility(int param_1)
 
 
 
-void __fastcall CStartGame1::FUN_0040a8c0(int param_1)
+void __fastcall CStartGame1::CStartGame1__ApplyLocalPlayersConstraints(int param_1)
 
 {
   bool bVar1;
@@ -61542,7 +61575,7 @@ void __fastcall CStartGame1::FUN_0040a8c0(int param_1)
   else {
     bVar1 = false;
   }
-  FUN_00403d20(*(CStartGame1 **)(param_1 + 0x90),2,!bVar1);
+  CRadio__SetItemDisabled(*(CStartGame1 **)(param_1 + 0x90),2,!bVar1);
   if (((*(CRadio **)(param_1 + 0x90))[0x68] == (CRadio)0x2) && (bVar1)) {
     CRadio::CRadio_SetSelected(*(CRadio **)(param_1 + 0x90),'\x01');
   }
@@ -61557,30 +61590,30 @@ void __thiscall CStartGame1::CStartGame1_ApplyJoinModeVisibility(CStartGame1 *th
   if (param_1 == '\0') {
     _Globals::CDSView__Show(*(int **)(this + 0x8c));
     _Globals::CDSView__Show(*(int **)(this + 0x9c));
-    FUN_0040a8c0((int)this);
+    CStartGame1__ApplyLocalPlayersConstraints((int)this);
     CStartGame1_ApplyHostJoinVisibility((int)this);
     return;
   }
   _Globals::CDSView__Hide(*(int **)(this + 0x9c));
   _Globals::CDSView__Hide(*(int **)(this + 0x8c));
-  FUN_0040a8c0((int)this);
+  CStartGame1__ApplyLocalPlayersConstraints((int)this);
   CStartGame1_ApplyHostJoinVisibility((int)this);
   return;
 }
 
 
 
-void __fastcall CStartGame1::FUN_0040a9d0(int param_1)
+void __fastcall CStartGame1::CStartGame1__OnTotalPlayersChange(int param_1)
 
 {
-  FUN_0040a8c0(param_1);
+  CStartGame1__ApplyLocalPlayersConstraints(param_1);
   CStartGame1_ApplyHostJoinVisibility(param_1);
   return;
 }
 
 
 
-void __fastcall CStartGame1::FUN_0040a9f0(int param_1)
+void __fastcall CStartGame1::CStartGame1__OnLocalPlayersChange(int param_1)
 
 {
   CStartGame1_ApplyHostJoinVisibility(param_1);
@@ -61927,11 +61960,11 @@ CStartGame1::CStartGame1_OnRadioChange
   }
   else {
     if (param_2 == *(int *)(this + 0x8c)) {
-      FUN_0040a9d0((int)this);
+      CStartGame1__OnTotalPlayersChange((int)this);
       return;
     }
     if (param_2 == *(int *)(this + 0x90)) {
-      FUN_0040a9f0((int)this);
+      CStartGame1__OnLocalPlayersChange((int)this);
       return;
     }
   }
@@ -89543,7 +89576,31 @@ void __fastcall _Globals::FUN_00429960(int param_1)
 
 
 
-void __thiscall CBulanci::FUN_00429990(CBulanci *this,uint param_1)
+// CBulanci::CDSApp_InitDirectDraw
+// 
+// Sets up the IDirectDraw object on `this+0x74` and selects the cooperative level. The single byte
+// at this+0xe4 (m_bWindowed) is the sole switch between:
+// 
+//   m_bWindowed == 0  ->  DDSCL_EXCLUSIVE | DDSCL_FULLSCREEN (0x11)
+//                         (engine drives ChangeDisplaySettings via SetDisplayMode
+//                          elsewhere; creates exclusive flip-chain primary)
+//   m_bWindowed != 0  ->  centers the HWND with SetWindowPos using
+//                         the cached client rect at this+0x20..0x2c,
+//                         then DDSCL_NORMAL (0x8) -- no resolution change,
+//                         windowed primary + BltFast() blit path.
+// 
+// The whole rest of the engine (surface creation, blit/flip selection,
+// AdaptDisplaySize, Alt+Enter handling in CDSApp_SetWindowed at 0x42a500,
+// Alt+Tab/OnActivateApp at 0x429d00) keys off the same byte, so it must
+// be set consistently before this function runs. On a typical modern
+// Windows install the SleepTeam HKLM key is missing, so CDSApp_ctor
+// (0x42b170) leaves m_bWindowed = 0 and the engine commits to exclusive
+// fullscreen here.
+// 
+// Throws CDSDirectXException via FUN_0043b820 if DirectDrawCreate or
+// SetCooperativeLevel returns a negative HRESULT.
+
+void __thiscall CBulanci::CDSApp_InitDirectDraw(CBulanci *this,uint param_1)
 
 {
   uint uVar1;
@@ -90131,7 +90188,7 @@ void __fastcall CDSApp::CDSApp_OnCreate(int *param_1)
     CDSApiException::FUN_00434d00();
   }
   SetFocus((HWND)g_pHwnd);
-  CBulanci::FUN_00429990((CBulanci *)param_1,unaff_EDI);
+  CBulanci::CDSApp_InitDirectDraw((CBulanci *)param_1,unaff_EDI);
   CDSDirectSound_InitPrimary((CDSApp *)(param_1 + 0x80),g_pHwnd,2,0x5622,0x10);
   CDSApp_InitClock();
   _Globals::CDSView_SetModalEligible(param_1,1);
@@ -90219,6 +90276,22 @@ LAB_0042a499:
 
 
 
+// CBulanci::CDSApp_SetWindowed(this, char param_1)
+// 
+// Runtime toggle between exclusive fullscreen and windowed mode. Called
+// from CDSApp_WndProcDispatch (0x0042a660) on WM_SYSKEYDOWN with VK_RETURN
+// (Alt+Enter) -- WndProcDispatch passes (this[0xe4] == 0) as param_1, so
+// the flag flips on every Alt+Enter.
+// 
+// No-op if param_1 equals current this[0xe4]. Otherwise:
+//   1. Saves the previous display-mode index (this+0xe0).
+//   2. FUN_00429b90: tears down the DirectDraw surfaces / primary chain.
+//   3. Updates m_bWindowed (this+0xe4 = param_1).
+//   4. CDSApp_InitDirectDraw (0x00429990): re-creates DirectDraw at the
+//      new cooperative level (DDSCL_NORMAL vs DDSCL_EXCLUSIVE|FULLSCREEN).
+//   5. If the previous mode index wasn't 7 (sentinel), restores it via
+//      FUN_0042a330(this, client_w, client_h, prev_mode_index, 1).
+
 void __thiscall CBulanci::CDSApp_SetWindowed(CBulanci *this,char param_1)
 
 {
@@ -90229,7 +90302,7 @@ void __thiscall CBulanci::CDSApp_SetWindowed(CBulanci *this,char param_1)
     iVar1 = *(int *)(this + 0xe0);
     FUN_00429b90((int)this);
     this[0xe4] = (CBulanci)param_1;
-    FUN_00429990(this,unaff_EDI);
+    CDSApp_InitDirectDraw(this,unaff_EDI);
     if (iVar1 != 7) {
       FUN_0042a330(this,(int *)(*(int *)(this + 0x28) - *(int *)(this + 0x20)),
                    *(int *)(this + 0x2c) - *(int *)(this + 0x24),iVar1,(int *)0x1);
@@ -90869,6 +90942,23 @@ void __thiscall CDSApp::FUN_0042b160(CDSApp *this,byte param_1)
 
 
 
+// CBulanci::CDSApp_ctor(short* className, short* windowTitle)
+// 
+// Full engine ctor. Zero-initialises the CBulanci/CDSApp instance,
+// installs the four CDSApp vtables (g_pCDSApp_vftable + the three
+// sub-vftables for the CDSView/CDSChained/back-buffer interfaces),
+// copies the window class name (this+0x68) and window title
+// (this+0x6c) from caller, sets default display-mode indices
+// this+0xdc = this+0xe0 = 7, and installs the alpha-blend LUT.
+// 
+// Finally reads the 'Windowed' DWORD from HKLM\Software\SleepTeam\Bulanci
+// (via RegOpenKey @ 0x00437e20 + RegQueryDword @ 0x00437f40) and stores
+// the resulting bool at this+0xe4 (m_bWindowed). On a fresh / per-user
+// Windows install this key is typically absent, RegOpenKey throws
+// CDSRegKeyException, the catch handler bails out with the flag left
+// at its zero-initialised default -> the engine commits to exclusive
+// fullscreen for the rest of the run (see InitDirectDraw @ 0x00429990).
+
 void __thiscall CBulanci::CDSApp_ctor(CBulanci *this,short *param_1,short *param_2)
 
 {
@@ -90964,8 +91054,8 @@ void __thiscall CBulanci::CDSApp_ctor(CBulanci *this,short *param_1,short *param
   local_8._0_1_ = 0xb;
   pWVar2 = (LPCWSTR)0x0;
   _Globals::FUN_0042d490(&stack0xffffffc4,(int *)this_00);
-  FUN_00437e20((CBulanci *)local_24,(HKEY)0x80000002,pWVar2,puVar3);
-  iVar1 = FUN_00437f40((CBulanci *)local_24,(LPCWSTR)PTR_u_Windowed_004afc9c);
+  RegOpenKey((CBulanci *)local_24,(HKEY)0x80000002,pWVar2,puVar3);
+  iVar1 = RegQueryDword((CBulanci *)local_24,g_pRegValueWindowed);
   this[0xe4] = (CBulanci)(iVar1 != 0);
   local_8 = CONCAT31(local_8._1_3_,10);
   _Globals::FUN_004095b0(local_24);
@@ -91029,7 +91119,7 @@ void __fastcall CDSApp::FUN_0042b3d0(undefined4 *param_1)
   _Globals::FUN_0042d490(&stack0xffffffc4,param_1 + 0x1b);
   _Globals::FUN_00409510(local_20,(HKEY)0x80000002,iVar1,puVar2);
   local_8._0_1_ = 0xb;
-  FUN_00437fb0(local_20,(LPCWSTR)PTR_u_Windowed_004afc9c);
+  RegWriteDword(local_20,g_pRegValueWindowed);
   local_8 = CONCAT31(local_8._1_3_,10);
   _Globals::FUN_004095b0((int *)local_20);
   local_8 = 9;
@@ -104008,7 +104098,7 @@ CDSRegKeyException::FUN_00437ba0(CDSRegKeyException *this,undefined4 param_1,int
 undefined * __thiscall CDSRegKeyException::FUN_00437c40(CDSRegKeyException *this,wchar_t *param_1)
 
 {
-  undefined *puVar1;
+  wchar_t *pwVar1;
   CDSRegKeyException *local_10;
   void *local_c;
   undefined1 *puStack_8;
@@ -104026,17 +104116,17 @@ undefined * __thiscall CDSRegKeyException::FUN_00437c40(CDSRegKeyException *this
   if (local_10 != (CDSRegKeyException *)0x0) {
     _Globals::FUN_0042d2d0(local_10 + -0xc);
   }
-  puVar1 = *(undefined **)(this + 0x44);
-  if (puVar1 == (undefined *)0x0) {
-    puVar1 = PTR_DAT_004b00c8;
+  pwVar1 = *(wchar_t **)(this + 0x44);
+  if (pwVar1 == (wchar_t *)0x0) {
+    pwVar1 = g_pRegSubKeyDefault;
   }
   ExceptionList = local_c;
-  return puVar1;
+  return (undefined *)pwVar1;
 }
 
 
 
-void _Globals::FUN_00437cd0(undefined4 param_1)
+void _Globals::CDSRegKeyException_ThrowFromWin32(undefined4 param_1)
 
 {
   CDSRegKeyException *this;
@@ -104071,10 +104161,23 @@ void _Globals::FUN_00437cd0(undefined4 param_1)
 
 
 
-void __thiscall _Globals::FUN_00437d60(void *this,HKEY param_1,LPCWSTR param_2,REGSAM param_3)
+// _Globals::InitializeRegistryKey(CDSRegKey* this, HKEY rootKey, LPCWSTR subKey, REGSAM samDesired)
+// 
+// Thin wrapper around RegCreateKeyExW used by CDSApp::CDSApp_dtor's
+// shutdown path (0x42b3d0) to open-or-create HKLM\Software\SleepTeam\Bulanci
+// for writing the 'Windowed' value back. Defaults subKey to PTR_DAT_004b00c8
+// ('Software\\SleepTeam\\Bulanci') when caller passes NULL. Stores the
+// opened HKEY at this+0x00 and the CDSString subkey at this+0x04.
+// 
+// On RegCreateKeyExW failure, builds a CDSString for the path and calls
+// FUN_00437cd0(lastError) which constructs and throws CDSRegKeyException
+// (see ThrowRegKeyException at 0x00437ed0 for the corresponding query path).
+
+void __thiscall
+_Globals::InitializeRegistryKey(void *this,HKEY param_1,LPCWSTR param_2,REGSAM param_3)
 
 {
-  LPCWSTR lpSubKey;
+  wchar_t *lpSubKey;
   LONG LVar1;
   void *local_c;
   undefined1 *puStack_8;
@@ -104086,14 +104189,14 @@ void __thiscall _Globals::FUN_00437d60(void *this,HKEY param_1,LPCWSTR param_2,R
   local_4 = 0;
   lpSubKey = param_2;
   if (param_2 == (LPCWSTR)0x0) {
-    lpSubKey = (LPCWSTR)PTR_DAT_004b00c8;
+    lpSubKey = g_pRegSubKeyDefault;
   }
   LVar1 = RegCreateKeyExW((HKEY)param_1,lpSubKey,0,(LPWSTR)0x0,0,param_3,(LPSECURITY_ATTRIBUTES)0x0,
                           this,&param_3);
   if (LVar1 != 0) {
     *(undefined4 *)this = 0;
     FUN_0042d490(&stack0xffffffe4,(int *)&param_2);
-    FUN_00437cd0(LVar1);
+    CDSRegKeyException_ThrowFromWin32(LVar1);
   }
   FUN_0042d490((void *)((int)this + 4),(int *)&param_2);
   local_4 = 0xffffffff;
@@ -104106,11 +104209,26 @@ void __thiscall _Globals::FUN_00437d60(void *this,HKEY param_1,LPCWSTR param_2,R
 
 
 
+// CBulanci::RegOpenKey(CDSRegKey* this, HKEY rootKey, LPCWSTR subKey, REGSAM samDesired)
+// 
+// Thin wrapper around RegOpenKeyExW. Used by CDSApp_ctor (0x42b170)
+// at startup to open HKLM\Software\SleepTeam\Bulanci for reading
+// the 'Windowed' DWORD. Defaults subKey to PTR_DAT_004b00c8
+// ('Software\\SleepTeam\\Bulanci') when caller passes NULL.
+// 
+// Stores the opened HKEY at this+0x00 and the CDSString subkey at
+// this+0x04. On RegOpenKeyExW failure, clears this+0x00 to 0 and calls
+// FUN_00437cd0(lastError) -> throws CDSRegKeyException. Because the
+// SleepTeam key is per-machine and typically missing on modern
+// installs, this throws on startup and the m_bWindowed flag stays 0
+// (see CDSApp_InitDirectDraw at 0x00429990 for the resulting
+// fullscreen behaviour).
+
 void __thiscall
-CBulanci::FUN_00437e20(CBulanci *this,HKEY param_1,LPCWSTR param_2,undefined1 *param_3)
+CBulanci::RegOpenKey(CBulanci *this,HKEY param_1,LPCWSTR param_2,undefined1 *param_3)
 
 {
-  LPCWSTR lpSubKey;
+  wchar_t *lpSubKey;
   LONG LVar1;
   void *local_c;
   undefined1 *puStack_8;
@@ -104122,14 +104240,14 @@ CBulanci::FUN_00437e20(CBulanci *this,HKEY param_1,LPCWSTR param_2,undefined1 *p
   local_4 = 0;
   lpSubKey = param_2;
   if (param_2 == (LPCWSTR)0x0) {
-    lpSubKey = (LPCWSTR)PTR_DAT_004b00c8;
+    lpSubKey = g_pRegSubKeyDefault;
   }
   LVar1 = RegOpenKeyExW((HKEY)param_1,lpSubKey,0,(REGSAM)param_3,(PHKEY)this);
   if (LVar1 != 0) {
     param_3 = &stack0xffffffe4;
     *(undefined4 *)this = 0;
     _Globals::FUN_0042d490(&stack0xffffffe4,(int *)&param_2);
-    _Globals::FUN_00437cd0(LVar1);
+    _Globals::CDSRegKeyException_ThrowFromWin32(LVar1);
   }
   _Globals::FUN_0042d490(this + 4,(int *)&param_2);
   local_4 = 0xffffffff;
@@ -104142,7 +104260,18 @@ CBulanci::FUN_00437e20(CBulanci *this,HKEY param_1,LPCWSTR param_2,undefined1 *p
 
 
 
-void _Globals::FUN_00437ed0(undefined4 param_1,undefined4 param_2)
+// _Globals::ThrowRegKeyException(DWORD lastError, LPCWSTR valueName)
+// 
+// Formats 'subKeyPath\valueName' using FUN_0042d770 with L"%s\\%s"
+// and calls FUN_00437cd0(lastError), which constructs a
+// CDSRegKeyException carrying the Win32 lastError + the fully-qualified
+// registry path, then issues `swi(3)` (int 3) to enter the exception
+// dispatcher. Reached from RegOpenKey (0x00437e20), InitializeRegistryKey
+// (0x00437d60), RegQueryDword (0x00437f40), RegWriteDword (0x00437fb0)
+// and the binary REG_BINARY ops (0x00437fe0, 0x00438160) on every
+// advapi32 failure code path.
+
+void _Globals::ThrowRegKeyException(undefined4 param_1,undefined4 param_2)
 
 {
   code *pcVar1;
@@ -104163,7 +104292,7 @@ void _Globals::FUN_00437ed0(undefined4 param_1,undefined4 param_2)
   FUN_0042d770(&local_10,L"%s\\%s");
   local_18 = 0;
   FUN_0042d490(&local_18,&local_10);
-  FUN_00437cd0(param_1);
+  CDSRegKeyException_ThrowFromWin32(param_1);
   pcVar1 = (code *)swi(3);
   (*pcVar1)();
   return;
@@ -104171,7 +104300,20 @@ void _Globals::FUN_00437ed0(undefined4 param_1,undefined4 param_2)
 
 
 
-undefined4 __thiscall CBulanci::FUN_00437f40(CBulanci *this,LPCWSTR param_1)
+// CBulanci::RegQueryDword(CDSRegKey* this, LPCWSTR valueName) -> DWORD
+// 
+// Thin wrapper around RegQueryValueExW for REG_DWORD values. Reads
+// 4 bytes from `this+0x00` (the HKEY) into local_4 and returns it.
+// Used at CDSApp_ctor (0x42b170) to load the 'Windowed' DWORD from
+// HKLM\Software\SleepTeam\Bulanci. Used at FUN_0042b3d0 / CDSApp_dtor
+// for the matching write path via RegWriteDword.
+// 
+// Throws CDSRegKeyException on either:
+//   - RegQueryValueExW failure (calls ThrowRegKeyException(lastError, name)).
+//   - Wrong value type / wrong cbData (calls ThrowRegKeyException(0x3F4, name)
+//     where 0x3F4 = ERROR_INVALID_DATATYPE).
+
+undefined4 __thiscall CBulanci::RegQueryDword(CBulanci *this,LPCWSTR param_1)
 
 {
   LPCWSTR pWVar1;
@@ -104184,31 +104326,55 @@ undefined4 __thiscall CBulanci::FUN_00437f40(CBulanci *this,LPCWSTR param_1)
   LVar2 = RegQueryValueExW(*(HKEY *)this,param_1,(LPDWORD)0x0,(LPDWORD)&param_1,(LPBYTE)&local_4,
                            &local_8);
   if (LVar2 != 0) {
-    _Globals::FUN_00437ed0(LVar2,pWVar1);
+    _Globals::ThrowRegKeyException(LVar2,pWVar1);
   }
   if ((param_1 != (LPCWSTR)0x4) && (param_1 != (LPCWSTR)0x5)) {
-    _Globals::FUN_00437ed0(0x3f4,pWVar1);
+    _Globals::ThrowRegKeyException(0x3f4,pWVar1);
   }
   return local_4;
 }
 
 
 
-void __thiscall CDSApp::FUN_00437fb0(CDSApp *this,LPCWSTR param_1)
+// CDSApp::RegWriteDword(CDSRegKey* this, LPCWSTR valueName, DWORD value)
+// 
+// Thin wrapper around RegSetValueExW with dwType = REG_DWORD (4).
+// Writes `value` (passed as the 3rd stack slot, [esp+8]) under the
+// HKEY at this+0x00. Called from CDSApp::FUN_0042b3d0 (the shutdown
+// path inside CDSApp_dtor) to persist the current m_bWindowed flag
+// back to HKLM\Software\SleepTeam\Bulanci\Windowed.
+// 
+// Throws CDSRegKeyException via ThrowRegKeyException(lastError, name)
+// on RegSetValueExW failure.
+
+void __thiscall CDSApp::RegWriteDword(CDSApp *this,LPCWSTR param_1)
 
 {
   LONG LVar1;
   
   LVar1 = RegSetValueExW(*(HKEY *)this,param_1,0,4,&stack0x00000008,4);
   if (LVar1 != 0) {
-    _Globals::FUN_00437ed0(LVar1,param_1);
+    _Globals::ThrowRegKeyException(LVar1,param_1);
   }
   return;
 }
 
 
 
-void __thiscall CBulanci::FUN_00437fe0(CBulanci *this,undefined4 param_1,int *param_2)
+// CBulanci::FUN_00437fe0(CDSRegKey* this, LPCWSTR valueName, CDSStream* src)
+// 
+// Writes a variable-length REG_BINARY (dwType = 3) value to the
+// registry. Streams the source `src` into a heap buffer via the
+// stream's vtable (size query at vtbl+0x1C, read at vtbl+0x10),
+// then RegSetValueExW(HKEY at this+0x00, valueName, 0, REG_BINARY,
+// buffer, size).
+// 
+// Used by CBulanci::FUN_00409cd0 to persist the gzip-compressed
+// player-profile / settings blob under HKLM\Software\SleepTeam\Bulanci\Config.
+// 
+// Throws CDSRegKeyException via ThrowRegKeyException on failure.
+
+void __thiscall CBulanci::RegWriteBinaryStream(CBulanci *this,undefined4 param_1,int *param_2)
 
 {
   uint uVar1;
@@ -104235,7 +104401,7 @@ void __thiscall CBulanci::FUN_00437fe0(CBulanci *this,undefined4 param_1,int *pa
   (**(code **)(*param_2 + 0x28))(uVar1,unaff_EDI,0);
   LVar2 = RegSetValueExW(*(HKEY *)this,unaff_EBP,0,3,lpData,(DWORD)cbData);
   if (LVar2 != 0) {
-    _Globals::FUN_00437ed0(LVar2,unaff_EBP);
+    _Globals::ThrowRegKeyException(LVar2,unaff_EBP);
   }
   if (lpData != (BYTE *)0x0) {
     _Globals::Runtime_Free(&DAT_004b7c94,lpData);
@@ -104287,7 +104453,23 @@ undefined4 * __thiscall CDSRegKeyException::FUN_00438140(CDSRegKeyException *thi
 
 
 
-void __thiscall CBulanci::FUN_00438160(CBulanci *this,LPCWSTR param_1,int *param_2)
+// CBulanci::FUN_00438160(CDSRegKey* this, LPCWSTR valueName, CDSStream* dst)
+// 
+// Reads a variable-length REG_BINARY (dwType = 3) value from the
+// registry into a CDSStream. First call tries a 0x800-byte stack
+// buffer; if RegQueryValueExW returns ERROR_MORE_DATA (0xEA) it
+// falls back to a heap allocation of 0x800 bytes. Validates that
+// the returned dwType is REG_BINARY (3) and pipes the bytes into
+// the stream via vtbl+0x14.
+// 
+// Used by CBulanci::FUN_0040a440 to load the gzip-compressed
+// player-profile / settings blob from
+// HKLM\Software\SleepTeam\Bulanci\Config at startup.
+// 
+// Throws CDSRegKeyException via ThrowRegKeyException on either
+// RegQueryValueExW failure or wrong-type (0x3F4 = ERROR_INVALID_DATATYPE).
+
+void __thiscall CBulanci::RegQueryBinaryStream(CBulanci *this,LPCWSTR param_1,int *param_2)
 
 {
   int iVar1;
@@ -104324,10 +104506,10 @@ void __thiscall CBulanci::FUN_00438160(CBulanci *this,LPCWSTR param_1,int *param
                              (LPDWORD)&stack0xfffff7dc);
   }
   if (iVar1 != 0) {
-    _Globals::FUN_00437ed0(iVar1,param_1);
+    _Globals::ThrowRegKeyException(iVar1,param_1);
   }
   if (DStack_81c != 3) {
-    _Globals::FUN_00437ed0(0x3f4,param_1);
+    _Globals::ThrowRegKeyException(0x3f4,param_1);
   }
   if (lpData == (LPBYTE)0x0) {
     (**(code **)(*param_2 + 0x14))(aBStack_818,0x800);

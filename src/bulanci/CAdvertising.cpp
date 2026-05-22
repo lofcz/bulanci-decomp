@@ -7,7 +7,7 @@ uchar CAdvertising::ArmDismissTimer(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040acc0 BEGIN
 /* 40ACC0-40ACD9 00019 */
-uint CAdvertising::Dismiss(int param_1) { STUB_BODY(); return 0; }
+uint CAdvertising::CAdvertising_Dismiss(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040acc0 END
 
 // !FUNC 0x0040b4b0 BEGIN

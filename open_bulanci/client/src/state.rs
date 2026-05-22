@@ -60,6 +60,9 @@ pub const SLOT_POEM_SCROLL: u32 = 0x20;
 // Day/night ambient music — poll wall-clock hour every 5s
 pub const SLOT_DAY_NIGHT: u32 = 0x30;
 
+// Audio fades — retail menu music ramps by 1 percent every 120ms.
+pub const SLOT_AUDIO_FADE: u32 = 0x31;
+
 // Game simulation — fixed 17ms (~58.8Hz) deterministic step, catch-up
 pub const SLOT_GAME_TICK: u32 = 0x40;
 pub const GAME_TICK_MS: u64 = 17;
@@ -78,6 +81,7 @@ pub const GAME_TICK_MS: u64 = 17;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum AppPhase {
+    Intro,
     Menu,
     Connecting,
     Playing,

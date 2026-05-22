@@ -818,7 +818,7 @@ uchar _Globals::FUN_00417ce0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00417d20 BEGIN
 /* 417D20-417DCF 000AF */
-uchar _Globals::FUN_00417d20(uint param_1, uint* param_2, char param_3) { STUB_BODY(); return 0; }
+uchar _Globals::CLevelScript_DispatchTraceAreaTransition(uint param_1, uint* param_2, char param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00417d20 END
 
 // !FUNC 0x00417dd0 BEGIN
@@ -933,7 +933,7 @@ uchar _Globals::CGaming_OnTimerCountdown(short param_1, uint param_2, int param_
 
 // !FUNC 0x00419e90 BEGIN
 /* 419E90-419F6B 000DB */
-uchar _Globals::FUN_00419e90(uint* param_1, uint param_2, int* param_3, char param_4) { STUB_BODY(); return 0; }
+uchar _Globals::CGaming_CheckTraceAreasForEntity(uint* param_1, uint param_2, int* param_3, char param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00419e90 END
 
 // !FUNC 0x0041a020 BEGIN
@@ -1213,7 +1213,7 @@ void* _Globals::CDSAudioPlayer_Create(uchar* param_1, int* param_2, int param_3,
 
 // !FUNC 0x004223c0 BEGIN
 /* 4223C0-4223DB 0001B */
-uchar _Globals::FUN_004223c0(int* param_1, uchar param_2) { STUB_BODY(); return 0; }
+uchar _Globals::CDSAudioPlayer_PlayAndRelease(int* param_1, uchar param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004223c0 END
 
 // !FUNC 0x004223e0 BEGIN
@@ -1261,7 +1261,7 @@ uchar _Globals::CSwitch_PlayHoverTrack(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00424010 BEGIN
 /* 424010-424078 00068 */
-uchar _Globals::CMenu_EnableBackgroundState(char param_1) { STUB_BODY(); return 0; }
+void _Globals::CMenu_EnableBackgroundState(char param_1) { STUB_BODY(); }
 // !FUNC 0x00424010 END
 
 // !FUNC 0x00424400 BEGIN
@@ -1856,12 +1856,12 @@ void _Globals::Scheduler_SetEventDelayMs(uint param_1, uint param_2) { STUB_BODY
 
 // !FUNC 0x0042f300 BEGIN
 /* 42F300-42F32A 0002A */
-uchar _Globals::FUN_0042f300(uint param_1) { STUB_BODY(); return 0; }
+uchar _Globals::Scheduler_ArmSlot(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042f300 END
 
 // !FUNC 0x0042f330 BEGIN
 /* 42F330-42F388 00058 */
-uchar _Globals::FUN_0042f330(uint param_1, int param_2) { STUB_BODY(); return 0; }
+uchar _Globals::Scheduler_AckSlot(uint param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0042f330 END
 
 
@@ -2387,7 +2387,7 @@ uchar _Globals::FUN_004370b0(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00437440 BEGIN
 /* 437440-437502 000C2 */
-uchar _Globals::WideCharToMultiByte_Wrapper(LPCWSTR param_1, UINT param_2) { STUB_BODY(); return 0; }
+uchar _Globals::WideCharToMultiByte_Wrapper(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00437440 END
 
 // !FUNC 0x004375e0 BEGIN
@@ -2402,17 +2402,17 @@ uchar _Globals::FUN_00437b00(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00437cd0 BEGIN
 /* 437CD0-437D54 00084 */
-uchar _Globals::FUN_00437cd0(uint param_1) { STUB_BODY(); return 0; }
+uchar _Globals::CDSRegKeyException_ThrowFromWin32(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00437cd0 END
 
 // !FUNC 0x00437d60 BEGIN
 /* 437D60-437E1A 000BA */
-uchar _Globals::FUN_00437d60(int param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
+uchar _Globals::InitializeRegistryKey(int param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00437d60 END
 
 // !FUNC 0x00437ed0 BEGIN
 /* 437ED0-437F3D 0006D */
-uchar _Globals::FUN_00437ed0(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar _Globals::ThrowRegKeyException(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00437ed0 END
 
 // !FUNC 0x004382d0 BEGIN
@@ -2654,12 +2654,12 @@ uchar _Globals::FUN_0043a030(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043a060 BEGIN
 /* 43A060-43A0C9 00069 */
-uchar _Globals::FUN_0043a060(char param_1) { STUB_BODY(); return 0; }
+void _Globals::CDSAudioPlayer_ApplyEffectiveVolume(char param_1) { STUB_BODY(); }
 // !FUNC 0x0043a060 END
 
 // !FUNC 0x0043a0d0 BEGIN
 /* 43A0D0-43A0E4 00014 */
-uchar _Globals::CDSAudioPlayer_SetVolumePercent(uint param_1) { STUB_BODY(); return 0; }
+void _Globals::CDSAudioPlayer_SetVolumePercent(uint param_1) { STUB_BODY(); }
 // !FUNC 0x0043a0d0 END
 
 // !FUNC 0x0043a0f0 BEGIN
@@ -9977,11 +9977,16 @@ uchar _Globals::CBulanci_RegisterAppDescriptor() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042f590 BEGIN
 /* 42F590-42F5B5 00025 */
-uint _Globals::CDSView_PostMessage(void* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
+uint _Globals::CDSView_PostMessage_NullSafe(void* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x0042f590 END
 
 // !FUNC 0x0043df90 BEGIN
 /* 43DF90-43E032 000A2 */
 uchar _Globals::BlitOpaque_BGR24_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x0043df90 END
+
+// !FUNC 0x0042f390 BEGIN
+/* 42F390-42F3DD 0004D */
+uint _Globals::CDSView_PostMessage(ushort param_1, ushort param_2, uint param_3, uint param_4) { STUB_BODY(); return 0; }
+// !FUNC 0x0042f390 END
 

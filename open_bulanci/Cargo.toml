@@ -5,3 +5,7 @@ members = [
     "client",
 ]
 resolver = "2"
+
+[patch.crates-io]
+macroquad = { path = "../../macroquad" }
+miniquad = { path = "../../miniquad" }

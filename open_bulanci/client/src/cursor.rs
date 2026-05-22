@@ -187,7 +187,7 @@ impl GunMouse {
     pub fn update_frame(&mut self) {
         self.erase();
 
-        let (mx, my) = mouse_position();
+        let (mx, my) = crate::window_mode::logical_mouse_position();
         self.mouse_x = mx;
         self.mouse_y = my;
         self.prev_frame_mouse_x = mx;

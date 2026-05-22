@@ -118,12 +118,15 @@ pub const TEXT_COLOR_STATIC: Color = Color {
 
 impl ClientApp {
     pub fn draw(&mut self) {
+        crate::window_mode::begin_logical_frame(self.logical_render_target.clone());
         clear_background(BLACK);
         match self.phase {
+            AppPhase::Intro => self.draw_intro(),
             AppPhase::Menu => self.draw_menu(),
             AppPhase::Connecting => self.draw_connecting(),
             AppPhase::Playing => self.draw_gameplay(),
         }
+        crate::window_mode::end_logical_frame(&self.logical_render_target.texture);
     }
 
     fn draw_menu(&mut self) {
@@ -225,52 +228,7 @@ impl ClientApp {
     }
 
     fn draw_menu_button(&mut self, btn: MenuBtn) {
-        let idx = btn.idx();
-        let y_dial = 37.0 + idx as f32 * 84.0;
-        let y_label = 55.0 + idx as f32 * 84.0;
-
-        // Determine highlight state. The dial's "on" / "off" pair (sprites
-        // 0x100d4 idle and 0x100d5 pressed) is selected by the underlying
-        // pressed_btn/hovered_btn state. Per §2.5: when a sub-screen is
-        // open, the corresponding icon's _hi variant is shown.
-        let is_active_for_subscreen = matches!(
-            (btn, self.sub_screen),
-            (MenuBtn::Start, SubScreen::StartGame1)
-                | (MenuBtn::History, SubScreen::History)
-                | (MenuBtn::Quit, SubScreen::ExitConfirm)
-        );
-        let is_hovered = self.hovered_btn == Some(btn);
-        let highlight = is_active_for_subscreen || is_hovered;
-
-        // ---- Dial sprite: static frame, no continuous animation. ----
-        let dial_path = if highlight {
-            "images/btn_frame_on.png"
-        } else {
-            "images/btn_frame_off.png"
-        };
-        let dial_tex = self.get_texture(dial_path);
-        draw_texture_ex(
-            &dial_tex,
-            35.0,
-            y_dial,
-            WHITE,
-            DrawTextureParams {
-                source: Some(Rect::new(0.0, 0.0, 64.0, 65.0)),
-                ..Default::default()
-            },
-        );
-
-        // ---- Label icon (130x26 bitmap; _hi variant when highlighted). ----
-        let label_path = match (btn, highlight) {
-            (MenuBtn::Start,   true)  => "images/icon_start_hi.png",
-            (MenuBtn::Start,   false) => "images/icon_start.png",
-            (MenuBtn::History, true)  => "images/icon_history_hi.png",
-            (MenuBtn::History, false) => "images/icon_history.png",
-            (MenuBtn::Quit,    true)  => "images/icon_quit_hi.png",
-            (MenuBtn::Quit,    false) => "images/icon_quit.png",
-        };
-        let label_tex = self.get_texture(label_path);
-        draw_texture(&label_tex, 100.0, y_label, WHITE);
+        crate::widget::MenuButtonWidget::draw(self, btn);
     }
 
     fn draw_poem_scroller(&self) {
@@ -339,7 +297,7 @@ impl ClientApp {
             }
             y_rt += line_h;
         }
-        set_default_camera();
+        crate::window_mode::begin_logical_frame(self.logical_render_target.clone());
 
         // -------- Pass 2: composite the offscreen surface onto the
         // backbuffer at (10, 384) through the fade-mask material. The

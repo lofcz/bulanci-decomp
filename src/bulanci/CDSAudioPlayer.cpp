@@ -2,7 +2,7 @@
 
 // !FUNC 0x0043a4f0 BEGIN
 /* 43A4F0-43A567 00077 */
-uchar CDSAudioPlayer::FUN_0043a4f0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSAudioPlayer::CDSAudioPlayer_ctor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043a4f0 END
 
 // !FUNC 0x0043a570 BEGIN

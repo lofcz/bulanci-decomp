@@ -124,7 +124,7 @@ uchar CMenu::CMenu_SetButtonsHidden(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00424080 BEGIN
 /* 424080-4240F0 00070 */
-uchar CMenu::CMenu_OnMusicFadeTick(void* param_1) { STUB_BODY(); return 0; }
+void CMenu::CMenu_OnMusicFadeTick(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00424080 END
 
 // !FUNC 0x00424520 BEGIN
@@ -181,7 +181,7 @@ uint* CMenu::FUN_00425240(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00425340 BEGIN
 /* 425340-4253CB 0008B */
-uchar CMenu::CMenu_DispatchHotkey(ushort param_1, int param_2) { STUB_BODY(); return 0; }
+void CMenu::CMenu_DispatchHotkey(ushort param_1, int param_2) { STUB_BODY(); }
 // !FUNC 0x00425340 END
 
 // !FUNC 0x00425870 BEGIN

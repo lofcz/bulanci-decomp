@@ -12,7 +12,7 @@ uchar CGunMouse::CGunMouse_OnMouseMove(uint param_1, int* param_2) { STUB_BODY()
 
 // !FUNC 0x00423ac0 BEGIN
 /* 423AC0-423AC8 00008 */
-uchar CGunMouse::FUN_00423ac0(int param_1) { STUB_BODY(); return 0; }
+uchar CGunMouse::CGunMouse_CoordRing_Clear(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423ac0 END
 
 // !FUNC 0x00423b50 BEGIN
@@ -27,12 +27,12 @@ uchar CGunMouse::CGunMouse_OnAnimTick(uint param_1, short param_2) { STUB_BODY()
 
 // !FUNC 0x00424370 BEGIN
 /* 424370-4243AB 0003B */
-uint CGunMouse::FUN_00424370(uint* param_1) { STUB_BODY(); return 0; }
+uint CGunMouse::CGunMouse_CoordRing_Push(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00424370 END
 
 // !FUNC 0x004243b0 BEGIN
 /* 4243B0-4243F1 00041 */
-uint CGunMouse::FUN_004243b0(uint* param_1) { STUB_BODY(); return 0; }
+uint CGunMouse::CGunMouse_CoordRing_Pop(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004243b0 END
 
 // !FUNC 0x00424610 BEGIN

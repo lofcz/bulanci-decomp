@@ -9,7 +9,7 @@ public:
 	/* 40ACA0 */ uchar ArmDismissTimer(uint param_1);
 	// !DECL 0x0040aca0 END
 	// !DECL 0x0040acc0 BEGIN
-	/* 40ACC0 */ uint Dismiss(int param_1);
+	/* 40ACC0 */ uint CAdvertising_Dismiss(int param_1);
 	// !DECL 0x0040acc0 END
 	// !DECL 0x0040b4b0 BEGIN
 	/* 40B4B0 */ uchar OnTimerTick(void* param_1);

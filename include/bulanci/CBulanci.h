@@ -131,7 +131,7 @@ public:
 	/* 409BC0 */ uchar FUN_00409bc0(void* param_1, int* param_2, int* param_3, uint param_4, char param_5);
 	// !DECL 0x00409bc0 END
 	// !DECL 0x00409cd0 BEGIN
-	/* 409CD0 */ uchar FUN_00409cd0(uchar* param_1);
+	/* 409CD0 */ uchar SaveConfigToRegistry(uchar* param_1);
 	// !DECL 0x00409cd0 END
 	// !DECL 0x00409f0d BEGIN
 	/* 409F0D */ uint Catch_00409f0d();
@@ -146,7 +146,7 @@ public:
 	/* 40A290 */ uchar FUN_0040a290(int param_1);
 	// !DECL 0x0040a290 END
 	// !DECL 0x0040a440 BEGIN
-	/* 40A440 */ uchar FUN_0040a440(int param_1);
+	/* 40A440 */ uchar LoadConfigFromRegistry(int param_1);
 	// !DECL 0x0040a440 END
 	// !DECL 0x0040a62f BEGIN
 	/* 40A62F */ uchar* Catch_0040a62f();
@@ -239,7 +239,7 @@ public:
 	/* 424BC0 */ uint* CSwitch_ctor(uint param_1, uint param_2, int param_3, ushort param_4);
 	// !DECL 0x00424bc0 END
 	// !DECL 0x004252a0 BEGIN
-	/* 4252A0 */ uchar CMenu_LoadBackgroundMusic(uint param_1);
+	/* 4252A0 */ void CMenu_LoadBackgroundMusic(uint param_1);
 	// !DECL 0x004252a0 END
 	// !DECL 0x004252f0 BEGIN
 	/* 4252F0 */ uchar CMenu_SetDayNightBg(char param_1);
@@ -266,7 +266,7 @@ public:
 	/* 4280F0 */ uint* FUN_004280f0(uint param_1);
 	// !DECL 0x004280f0 END
 	// !DECL 0x00429990 BEGIN
-	/* 429990 */ uchar FUN_00429990(uint param_1);
+	/* 429990 */ uchar CDSApp_InitDirectDraw(uint param_1);
 	// !DECL 0x00429990 END
 	// !DECL 0x00429a40 BEGIN
 	/* 429A40 */ uchar FUN_00429a40(int param_1);
@@ -470,16 +470,16 @@ public:
 	/* 4359F3 */ uchar Catch_004359f3();
 	// !DECL 0x004359f3 END
 	// !DECL 0x00437e20 BEGIN
-	/* 437E20 */ uchar FUN_00437e20(int param_1, int param_2, uchar* param_3);
+	/* 437E20 */ uchar RegOpenKey(int param_1, int param_2, uchar* param_3);
 	// !DECL 0x00437e20 END
 	// !DECL 0x00437f40 BEGIN
-	/* 437F40 */ uint FUN_00437f40(int param_1);
+	/* 437F40 */ uint RegQueryDword(int param_1);
 	// !DECL 0x00437f40 END
 	// !DECL 0x00437fe0 BEGIN
-	/* 437FE0 */ uchar FUN_00437fe0(uint param_1, int* param_2);
+	/* 437FE0 */ uchar RegWriteBinaryStream(uint param_1, int* param_2);
 	// !DECL 0x00437fe0 END
 	// !DECL 0x00438160 BEGIN
-	/* 438160 */ uchar FUN_00438160(int param_1, int* param_2);
+	/* 438160 */ uchar RegQueryBinaryStream(int param_1, int* param_2);
 	// !DECL 0x00438160 END
 	// !DECL 0x00438340 BEGIN
 	/* 438340 */ uchar FUN_00438340();

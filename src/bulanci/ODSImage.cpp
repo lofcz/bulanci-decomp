@@ -23,7 +23,7 @@ uint* ODSImage::FUN_004228f0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004253d0 BEGIN
 /* 4253D0-4253F6 00026 */
-uint ODSImage::FUN_004253d0(int param_1) { STUB_BODY(); return 0; }
+uint ODSImage::CGunMouse_CoordRing_Reserve(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004253d0 END
 
 

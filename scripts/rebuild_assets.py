@@ -28,15 +28,18 @@ def main() -> int:
     
     transpile_script = scripts_dir / "transpile_to_lua.py"
     cursor_script = scripts_dir / "build_cursor_atlas.py"
+    menu_script = scripts_dir / "build_menu_assets.py"
     pack_script = scripts_dir / "pack_assets.py"
     
-    # 1. Run transpiler and cursor builder in parallel
+    # 1. Run transpiler, cursor builder, and menu builder in parallel
     p_transpile = run_subprocess(transpile_script)
     p_cursor = run_subprocess(cursor_script)
+    p_menu = run_subprocess(menu_script)
     
-    # Wait for both processes to finish
+    # Wait for all processes to finish
     out_transpile, err_transpile = p_transpile.communicate()
     out_cursor, err_cursor = p_cursor.communicate()
+    out_menu, err_menu = p_menu.communicate()
     
     success = True
     
@@ -63,6 +66,17 @@ def main() -> int:
     else:
         print(f"[rebuild] SUCCESS: {cursor_script.name}")
         lines = out_cursor.strip().splitlines()
+        for line in lines:
+            print(f"  {line}")
+
+    # Check menu results
+    if p_menu.returncode != 0:
+        print(f"[rebuild] ERROR: {menu_script.name} failed with exit code {p_menu.returncode}")
+        print(err_menu)
+        success = False
+    else:
+        print(f"[rebuild] SUCCESS: {menu_script.name}")
+        lines = out_menu.strip().splitlines()
         for line in lines:
             print(f"  {line}")
             
