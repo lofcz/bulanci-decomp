@@ -19,31 +19,6 @@ retail goes through DirectSound, which hands the 22050 Hz buffer to the
 Windows shared-mode mixer; that mixer uses a high-order polyphase /
 sinc resampler to convert to the device's default rate (48 kHz on
 virtually every modern Windows install).
-
-Our runtime uses `rodio 0.17`, whose `SampleRateConverter` implements
-**unfiltered linear interpolation between integer-sample pairs**
-(see `rodio/src/conversions/sample_rate.rs:139-200`).  Linear
-interpolation has the spectral response of a triangular window, so any
-percussive content in the source produces large amounts of aliasing in
-the upper half of the output spectrum.  For `sfx_hover.wav` this shows
-up as a clearly audible high-pitched ~5 kHz "intro" during the first
-~100 ms of every playback — the FFT diff against a retail WASAPI
-capture shows 1000-12000x more energy in the 17-20 kHz band, which the
-ear perceives as a transient whine on top of the bass-heavy hover.
-
-The fix is to do the resampling **once, offline, with a proper
-band-limited polyphase filter** (scipy's `resample_poly`, Kaiser
-window).  The 48 kHz asset is shipped to the runtime; rodio sees
-`from == to == 48000` at the sample-rate-converter constructor
-(`sample_rate.rs:70-72` and `:129-132`), short-circuits the linear
-interpolation entirely, and feeds the raw samples to cpal/WASAPI.
-
-This keeps `unpacked/...extracted_all_samples/sample_00.wav` byte-
-identical to retail (the AudioBank PCM, with a 22050 Hz WAV header),
-and only the shipped `open_bulanci/assets/audio/*.wav` files differ.
-
-See `ghidra_analysis/gameplay/main_menu_hover_audio.md` §8 for the full
-analysis (FFT comparisons, offline pipeline tests in `audio.rs`).
 """
 
 RUNTIME_SAMPLE_RATE = 48000
