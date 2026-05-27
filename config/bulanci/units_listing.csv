@@ -5,8 +5,8 @@ CBitmap,CBitmap
 CBlackView,CBlackView
 CBulAnim,CBulAnim
 CBulPicture,CBulPicture
-CBulanci,CBulanci
-CBulanek,CBulanek
+CBulanci,CBulanci,CBulanci::CDSView
+CBulanek,CBulanek,CBulanek::CDSView
 CButton,CButton
 CChatEdit,CChatEdit
 CChatList,CChatList
@@ -35,12 +35,12 @@ CDSException,CDSException
 CDSFileStream,CDSFileStream
 CDSFilterStream,CDSFilterStream
 CDSFlxFile,CDSFlxFile
-CDSFont,CDSFont
+CDSFont,CDSFont,CDSFont::CDSFont,_Globals::CDSFont
 CDSGZipStream,CDSGZipStream
 CDSGZipStreamData,CDSGZipStreamData
-CDSImage,CDSImage
+CDSImage,CDSImage,_Globals::CDSImage
 CDSImageMouse,CDSImageMouse
-CDSJpegImage,CDSJpegImage
+CDSJpegImage,CDSJpegImage,_Globals::CDSJpegImage
 CDSMemQueue,CDSMemQueue
 CDSMemoryException,CDSMemoryException
 CDSMouse,CDSMouse
@@ -64,7 +64,7 @@ CDSStrmResInfo,CDSStrmResInfo
 CDSStrmStgLoadingInfo,CDSStrmStgLoadingInfo
 CDSUpdatedItem,CDSUpdatedItem
 CDSVideoPlayer,CDSVideoPlayer
-CDSView,CDSView
+CDSView,CDSView,_Globals::CDSView
 CDSWav,CDSWav
 CDSWavStream,CDSWavStream
 CDSWorkingThread,CDSWorkingThread
@@ -121,7 +121,7 @@ CSetupDlg,CSetupDlg
 CShot,CShot
 CShotCounter,CShotCounter
 CSpells,CSpells
-CStartGame1,CStartGame1
+CStartGame1,CStartGame1,CStartGame1::CStartGame1,CStartGame1::CRadio
 CStartGame2,CStartGame2
 CStaticText,CStaticText
 CSwitch,CSwitch
@@ -130,7 +130,7 @@ CTeleportPoint,CTeleportPoint
 CVolume,CVolume
 CWeapon,CWeapon
 CWindow,CWindow
-ODSImage,ODSImage
+ODSImage,ODSImage,_Globals::ODSImage
 Runtime,Runtime::MSVCRT
 _Globals,_Globals
 _LocaleUpdate,_LocaleUpdate

@@ -453,27 +453,9 @@ public:
 	// !DECL 0x00416970 BEGIN
 	/* 416970 */ int FUN_00416970(int param_1);
 	// !DECL 0x00416970 END
-	// !DECL 0x00416ae0 BEGIN
-	/* 416AE0 */ static uchar CLevelScriptOpExt_SetInsertMode(int param_1);
-	// !DECL 0x00416ae0 END
-	// !DECL 0x00416b50 BEGIN
-	/* 416B50 */ static uchar CLevelScriptOpExt_GetSlot(int param_1);
-	// !DECL 0x00416b50 END
-	// !DECL 0x00416c90 BEGIN
-	/* 416C90 */ static uint CLevelScriptOpExt_TimerRelease(int param_1);
-	// !DECL 0x00416c90 END
-	// !DECL 0x00416cb0 BEGIN
-	/* 416CB0 */ static uint CLevelScriptOpExt_TimerSetData(int param_1);
-	// !DECL 0x00416cb0 END
 	// !DECL 0x00416ce0 BEGIN
 	/* 416CE0 */ static uint FUN_00416ce0(uint* param_1, int param_2);
 	// !DECL 0x00416ce0 END
-	// !DECL 0x00416e40 BEGIN
-	/* 416E40 */ static CDSCollection* CLevelScriptOpExt_CollResize(int param_1);
-	// !DECL 0x00416e40 END
-	// !DECL 0x00416e80 BEGIN
-	/* 416E80 */ static void* CLevelScriptOpExt_CollRemove(int param_1);
-	// !DECL 0x00416e80 END
 	// !DECL 0x004171b0 BEGIN
 	/* 4171B0 */ uchar FUN_004171b0(uchar param_1);
 	// !DECL 0x004171b0 END
@@ -519,36 +501,6 @@ public:
 	// !DECL 0x00418300 BEGIN
 	/* 418300 */ int* FUN_00418300(uint* param_1, void* param_2, int* param_3, char param_4, char param_5);
 	// !DECL 0x00418300 END
-	// !DECL 0x00418770 BEGIN
-	/* 418770 */ static int CLevelScriptOpExt_BindToSlot(int param_1);
-	// !DECL 0x00418770 END
-	// !DECL 0x004187a0 BEGIN
-	/* 4187A0 */ static int CLevelScriptOpExt_SetObstacleBounds(int param_1);
-	// !DECL 0x004187a0 END
-	// !DECL 0x00418800 BEGIN
-	/* 418800 */ static CObstacle* CLevelScriptOpExt_CreateObstacle(int param_1);
-	// !DECL 0x00418800 END
-	// !DECL 0x004188e0 BEGIN
-	/* 4188E0 */ static CBulanek* CLevelScriptOpExt_TranslateTo(int param_1);
-	// !DECL 0x004188e0 END
-	// !DECL 0x00418920 BEGIN
-	/* 418920 */ static uint CLevelScriptOpExt_EvalSeq3(int param_1);
-	// !DECL 0x00418920 END
-	// !DECL 0x00418950 BEGIN
-	/* 418950 */ static uint CLevelScriptOpExt_SpawnAtView(int param_1);
-	// !DECL 0x00418950 END
-	// !DECL 0x004189e0 BEGIN
-	/* 4189E0 */ static uint CLevelScriptOpExt_MapGet(int param_1);
-	// !DECL 0x004189e0 END
-	// !DECL 0x00418ae0 BEGIN
-	/* 418AE0 */ static int CLevelScriptOpExt_ArraySet(int param_1);
-	// !DECL 0x00418ae0 END
-	// !DECL 0x00418b20 BEGIN
-	/* 418B20 */ static void* CLevelScriptOpExt_CollInsert(int param_1);
-	// !DECL 0x00418b20 END
-	// !DECL 0x00418b60 BEGIN
-	/* 418B60 */ static uchar CLevelScriptOpExt_GetImage(int param_1);
-	// !DECL 0x00418b60 END
 	// !DECL 0x00418bbc BEGIN
 	/* 418BBC */ uchar* Catch_00418bbc();
 	// !DECL 0x00418bbc END
@@ -606,15 +558,6 @@ public:
 	// !DECL 0x0041ba60 BEGIN
 	/* 41BA60 */ uchar CGaming_SetMusicAndSoundBank(uint param_1, uint param_2);
 	// !DECL 0x0041ba60 END
-	// !DECL 0x0041bb00 BEGIN
-	/* 41BB00 */ static uint CLevelScriptOpExt_SetMusic(int param_1);
-	// !DECL 0x0041bb00 END
-	// !DECL 0x0041bb30 BEGIN
-	/* 41BB30 */ static uint CLevelScriptOpExt_DefineDangerZone(int param_1);
-	// !DECL 0x0041bb30 END
-	// !DECL 0x0041bb80 BEGIN
-	/* 41BB80 */ static uint CLevelScriptOpExt_DefineTraceArea(int param_1);
-	// !DECL 0x0041bb80 END
 	// !DECL 0x0041bc40 BEGIN
 	/* 41BC40 */ uchar CreateObject_0041bc40();
 	// !DECL 0x0041bc40 END
@@ -642,21 +585,6 @@ public:
 	// !DECL 0x0041d3c6 BEGIN
 	/* 41D3C6 */ uchar* Catch_0041d3c6();
 	// !DECL 0x0041d3c6 END
-	// !DECL 0x0041d6e0 BEGIN
-	/* 41D6E0 */ static CAnim* CLevelScriptOpExt_CreateAnim(int param_1);
-	// !DECL 0x0041d6e0 END
-	// !DECL 0x0041d820 BEGIN
-	/* 41D820 */ static CGameView* CLevelScriptOpExt_CreateImage(int param_1);
-	// !DECL 0x0041d820 END
-	// !DECL 0x0041d8f0 BEGIN
-	/* 41D8F0 */ static uint CLevelScriptOpExt_LoadPreface(int param_1);
-	// !DECL 0x0041d8f0 END
-	// !DECL 0x0041d990 BEGIN
-	/* 41D990 */ static int CLevelScriptOpExt_SetViewImage(int param_1);
-	// !DECL 0x0041d990 END
-	// !DECL 0x0041da50 BEGIN
-	/* 41DA50 */ static CMina* CLevelScriptOpExt_CreateMine(int param_1);
-	// !DECL 0x0041da50 END
 	// !DECL 0x0041dd70 BEGIN
 	/* 41DD70 */ uchar FUN_0041dd70(int param_1, void* param_2);
 	// !DECL 0x0041dd70 END
@@ -666,9 +594,6 @@ public:
 	// !DECL 0x0041e2c0 BEGIN
 	/* 41E2C0 */ uchar CGaming_SpawnPickupAndBroadcast(uint param_1);
 	// !DECL 0x0041e2c0 END
-	// !DECL 0x0041e3e0 BEGIN
-	/* 41E3E0 */ static uint CLevelScriptOpExt_KillObject(int param_1);
-	// !DECL 0x0041e3e0 END
 	// !DECL 0x0041eba0 BEGIN
 	/* 41EBA0 */ uchar CGame_ApplyPickup(ODSImage param_1, uchar param_2);
 	// !DECL 0x0041eba0 END
@@ -693,15 +618,6 @@ public:
 	// !DECL 0x0041f5d0 BEGIN
 	/* 41F5D0 */ uchar FUN_0041f5d0(CGameView* param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x0041f5d0 END
-	// !DECL 0x0041f610 BEGIN
-	/* 41F610 */ static uint CLevelScriptOpExt_SpawnEnemyAt(int param_1);
-	// !DECL 0x0041f610 END
-	// !DECL 0x0041f6a0 BEGIN
-	/* 41F6A0 */ static uint CLevelScriptOpExt_SpawnOpponentEx(int param_1);
-	// !DECL 0x0041f6a0 END
-	// !DECL 0x0041f730 BEGIN
-	/* 41F730 */ static uint CLevelScriptOpExt_InsertOpponent(int param_1);
-	// !DECL 0x0041f730 END
 	// !DECL 0x0041f770 BEGIN
 	/* 41F770 */ uchar CGaming_RespawnPlayer(char param_1, uchar param_2, int* param_3);
 	// !DECL 0x0041f770 END

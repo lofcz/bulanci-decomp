@@ -43,3 +43,8 @@ void* ODSImage::ODSImage_ctor(int* param_1) { STUB_BODY(); return 0; }
 uchar ODSImage::SetOwner(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00439050 END
 
+// !FUNC 0x00439100 BEGIN
+/* 439100-4391CE 000CE */
+uchar _Globals::ODSImage::SetImage(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00439100 END
+

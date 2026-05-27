@@ -31,6 +31,10 @@ public:
 	// !DECL 0x00439050 BEGIN
 	/* 439050 */ uchar SetOwner(uchar param_1);
 	// !DECL 0x00439050 END
+
+	// !DECL 0x00439100 BEGIN
+	/* 439100 */ uchar SetImage(int* param_1);
+	// !DECL 0x00439100 END
 };
 
 #endif

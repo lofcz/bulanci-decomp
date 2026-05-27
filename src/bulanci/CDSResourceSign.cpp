@@ -108,3 +108,23 @@ uchar CDSResourceSign::CDSResourceSign_dtor(uint* param_1) { STUB_BODY(); return
 void* CDSResourceSign::CDSResourceSign_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004349a0 END
 
+// !FUNC 0x0047d1d0 BEGIN
+/* 47D1D0-47D1F2 00022 */
+uchar CDSResourceSign::RegisterCDSResourceSignAsClass94() { STUB_BODY(); return 0; }
+// !FUNC 0x0047d1d0 END
+
+// !FUNC 0x0047d200 BEGIN
+/* 47D200-47D225 00025 */
+uchar CDSResourceSign::RegisterCDSResourceSignAuxClass1() { STUB_BODY(); return 0; }
+// !FUNC 0x0047d200 END
+
+// !FUNC 0x0047d230 BEGIN
+/* 47D230-47D255 00025 */
+uchar CDSResourceSign::RegisterCDSResourceSignAuxClass2() { STUB_BODY(); return 0; }
+// !FUNC 0x0047d230 END
+
+// !FUNC 0x0047d260 BEGIN
+/* 47D260-47D285 00025 */
+uchar CDSResourceSign::RegisterCDSResourceSignAuxClass3() { STUB_BODY(); return 0; }
+// !FUNC 0x0047d260 END
+

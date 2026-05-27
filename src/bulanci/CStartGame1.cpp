@@ -81,3 +81,23 @@ uchar CStartGame1::FUN_0040f500(uchar param_1) { STUB_BODY(); return 0; }
 void* CStartGame1::FUN_0040f560(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f560 END
 
+// !FUNC 0x00403d20 BEGIN
+/* 403D20-403D52 00032 */
+uchar CStartGame1::CRadio::SetItemDisabled(int param_1, char param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x00403d20 END
+
+// !FUNC 0x0040a8c0 BEGIN
+/* 40A8C0-40A961 000A1 */
+uchar CStartGame1::CStartGame1::ApplyLocalPlayersConstraints(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0040a8c0 END
+
+// !FUNC 0x0040a9d0 BEGIN
+/* 40A9D0-40A9E3 00013 */
+uchar CStartGame1::CStartGame1::OnTotalPlayersChange(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0040a9d0 END
+
+// !FUNC 0x0040a9f0 BEGIN
+/* 40A9F0-40A9F8 00008 */
+uchar CStartGame1::CStartGame1::OnLocalPlayersChange(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0040a9f0 END
+

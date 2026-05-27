@@ -736,40 +736,16 @@ uint _Globals::CGaming_GetObjectAtSlotUnchecked(uchar param_1) { STUB_BODY(); re
 int _Globals::FUN_00416970(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416970 END
 
-// !FUNC 0x00416ae0 BEGIN
-/* 416AE0-416B07 00027 */
-uchar _Globals::CLevelScriptOpExt_SetInsertMode(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00416ae0 END
 
-// !FUNC 0x00416b50 BEGIN
-/* 416B50-416B6A 0001A */
-uchar _Globals::CLevelScriptOpExt_GetSlot(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00416b50 END
 
-// !FUNC 0x00416c90 BEGIN
-/* 416C90-416CAC 0001C */
-uint _Globals::CLevelScriptOpExt_TimerRelease(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00416c90 END
 
-// !FUNC 0x00416cb0 BEGIN
-/* 416CB0-416CD8 00028 */
-uint _Globals::CLevelScriptOpExt_TimerSetData(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00416cb0 END
 
 // !FUNC 0x00416ce0 BEGIN
 /* 416CE0-416D21 00041 */
 uint _Globals::FUN_00416ce0(uint* param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00416ce0 END
 
-// !FUNC 0x00416e40 BEGIN
-/* 416E40-416E80 00040 */
-CDSCollection* _Globals::CLevelScriptOpExt_CollResize(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00416e40 END
 
-// !FUNC 0x00416e80 BEGIN
-/* 416E80-416ED3 00053 */
-void* _Globals::CLevelScriptOpExt_CollRemove(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00416e80 END
 
 // !FUNC 0x004171b0 BEGIN
 /* 4171B0-417210 00060 */
@@ -846,55 +822,15 @@ uchar _Globals::TriggerLevelScriptSound(uchar param_1, int param_2) { STUB_BODY(
 int* _Globals::FUN_00418300(uint* param_1, void* param_2, int* param_3, char param_4, char param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00418300 END
 
-// !FUNC 0x00418770 BEGIN
-/* 418770-418798 00028 */
-int _Globals::CLevelScriptOpExt_BindToSlot(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00418770 END
 
-// !FUNC 0x004187a0 BEGIN
-/* 4187A0-4187F9 00059 */
-int _Globals::CLevelScriptOpExt_SetObstacleBounds(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x004187a0 END
 
-// !FUNC 0x00418800 BEGIN
-/* 418800-4188A1 000A1 */
-CObstacle* _Globals::CLevelScriptOpExt_CreateObstacle(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00418800 END
 
-// !FUNC 0x004188e0 BEGIN
-/* 4188E0-418913 00033 */
-CBulanek* _Globals::CLevelScriptOpExt_TranslateTo(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x004188e0 END
 
-// !FUNC 0x00418920 BEGIN
-/* 418920-418942 00022 */
-uint _Globals::CLevelScriptOpExt_EvalSeq3(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00418920 END
 
-// !FUNC 0x00418950 BEGIN
-/* 418950-418980 00030 */
-uint _Globals::CLevelScriptOpExt_SpawnAtView(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00418950 END
 
-// !FUNC 0x004189e0 BEGIN
-/* 4189E0-4189FD 0001D */
-uint _Globals::CLevelScriptOpExt_MapGet(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x004189e0 END
 
-// !FUNC 0x00418ae0 BEGIN
-/* 418AE0-418B16 00036 */
-int _Globals::CLevelScriptOpExt_ArraySet(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00418ae0 END
 
-// !FUNC 0x00418b20 BEGIN
-/* 418B20-418B60 00040 */
-void* _Globals::CLevelScriptOpExt_CollInsert(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00418b20 END
 
-// !FUNC 0x00418b60 BEGIN
-/* 418B60-418BBC 0005C */
-uchar _Globals::CLevelScriptOpExt_GetImage(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00418b60 END
 
 // !FUNC 0x00418bbc BEGIN
 /* 418BBC-418BC2 00006 */
@@ -991,20 +927,8 @@ uint* _Globals::FUN_0041b420(uint param_1, uint* param_2, uint param_3, int para
 uchar _Globals::CGaming_SetMusicAndSoundBank(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041ba60 END
 
-// !FUNC 0x0041bb00 BEGIN
-/* 41BB00-41BB28 00028 */
-uint _Globals::CLevelScriptOpExt_SetMusic(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041bb00 END
 
-// !FUNC 0x0041bb30 BEGIN
-/* 41BB30-41BB75 00045 */
-uint _Globals::CLevelScriptOpExt_DefineDangerZone(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041bb30 END
 
-// !FUNC 0x0041bb80 BEGIN
-/* 41BB80-41BBD2 00052 */
-uint _Globals::CLevelScriptOpExt_DefineTraceArea(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041bb80 END
 
 // !FUNC 0x0041bc40 BEGIN
 /* 41BC40-41BCA7 00067 */
@@ -1051,30 +975,10 @@ uint _Globals::CGame_SpawnPickupObject(uint param_1, uint param_2) { STUB_BODY()
 uchar* _Globals::Catch_0041d3c6() { STUB_BODY(); return 0; }
 // !FUNC 0x0041d3c6 END
 
-// !FUNC 0x0041d6e0 BEGIN
-/* 41D6E0-41D812 00132 */
-CAnim* _Globals::CLevelScriptOpExt_CreateAnim(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041d6e0 END
 
-// !FUNC 0x0041d820 BEGIN
-/* 41D820-41D8E9 000C9 */
-CGameView* _Globals::CLevelScriptOpExt_CreateImage(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041d820 END
 
-// !FUNC 0x0041d8f0 BEGIN
-/* 41D8F0-41D988 00098 */
-uint _Globals::CLevelScriptOpExt_LoadPreface(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041d8f0 END
 
-// !FUNC 0x0041d990 BEGIN
-/* 41D990-41DA42 000B2 */
-int _Globals::CLevelScriptOpExt_SetViewImage(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041d990 END
 
-// !FUNC 0x0041da50 BEGIN
-/* 41DA50-41DADE 0008E */
-CMina* _Globals::CLevelScriptOpExt_CreateMine(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041da50 END
 
 // !FUNC 0x0041dd70 BEGIN
 /* 41DD70-41DE5C 000EC */
@@ -1091,10 +995,6 @@ uchar* _Globals::ExplodeMine(int* param_1) { STUB_BODY(); return 0; }
 uchar _Globals::CGaming_SpawnPickupAndBroadcast(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041e2c0 END
 
-// !FUNC 0x0041e3e0 BEGIN
-/* 41E3E0-41E42D 0004D */
-uint _Globals::CLevelScriptOpExt_KillObject(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041e3e0 END
 
 // !FUNC 0x0041eba0 BEGIN
 /* 41EBA0-41ECA0 00100 */
@@ -1136,20 +1036,8 @@ uchar _Globals::CGaming_SpawnAndInitializePlayer(CGameView param_1, CGameView* p
 uchar _Globals::FUN_0041f5d0(CGameView* param_1, int param_2, int param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f5d0 END
 
-// !FUNC 0x0041f610 BEGIN
-/* 41F610-41F694 00084 */
-uint _Globals::CLevelScriptOpExt_SpawnEnemyAt(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041f610 END
 
-// !FUNC 0x0041f6a0 BEGIN
-/* 41F6A0-41F72E 0008E */
-uint _Globals::CLevelScriptOpExt_SpawnOpponentEx(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041f6a0 END
 
-// !FUNC 0x0041f730 BEGIN
-/* 41F730-41F770 00040 */
-uint _Globals::CLevelScriptOpExt_InsertOpponent(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041f730 END
 
 // !FUNC 0x0041f770 BEGIN
 /* 41F770-41F8F2 00182 */

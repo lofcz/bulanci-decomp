@@ -106,3 +106,13 @@ int CDSImage::ComputeBufferSize(char param_1) { STUB_BODY(); return 0; }
 int CDSImage::ComputeAllocationSize(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004362f0 END
 
+// !FUNC 0x00436d50 BEGIN
+/* 436D50-436D87 00037 */
+uchar _Globals::CDSImage::FreeBuffers(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00436d50 END
+
+// !FUNC 0x00436f40 BEGIN
+/* 436F40-436FEE 000AE */
+uchar _Globals::CDSImage::Allocate(int param_1, uint param_2, int param_3, char param_4, int param_5) { STUB_BODY(); return 0; }
+// !FUNC 0x00436f40 END
+

@@ -125,6 +125,10 @@ public:
 	// !DECL 0x0046c8f0 BEGIN
 	/* 46C8F0 */ static uchar FUN_0046c8f0(int param_1, char param_2);
 	// !DECL 0x0046c8f0 END
+
+	// !DECL 0x00431b70 BEGIN
+	/* 431B70 */ static uchar DecompressToImage(int* param_1, uint param_2, void* param_3);
+	// !DECL 0x00431b70 END
 };
 
 #endif

@@ -559,3 +559,8 @@ uchar CDSJpegImage::FUN_0046bfd0() { STUB_BODY(); return 0; }
 uchar CDSJpegImage::FUN_0046c8f0(int param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0046c8f0 END
 
+// !FUNC 0x00431b70 BEGIN
+/* 431B70-431CA9 00139 */
+uchar _Globals::CDSJpegImage::DecompressToImage(int* param_1, uint param_2, void* param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x00431b70 END
+

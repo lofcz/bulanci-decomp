@@ -62,3 +62,28 @@ uchar CDSView::FUN_0042cea0(uchar param_1) { STUB_BODY(); return 0; }
 uchar CDSView::CDSView_OnLButtonDownAcquireFocus(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042cf50 END
 
+// !FUNC 0x0042bfc0 BEGIN
+/* 42BFC0-42BFF6 00036 */
+uchar _Globals::CDSView::AddChildInternal(uchar param_1, int param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x0042bfc0 END
+
+// !FUNC 0x0042c3c0 BEGIN
+/* 42C3C0-42C3D2 00012 */
+uchar _Globals::CDSView::EndModal(ushort param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0042c3c0 END
+
+// !FUNC 0x0042c990 BEGIN
+/* 42C990-42C9E2 00052 */
+uchar _Globals::CDSView::Show(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0042c990 END
+
+// !FUNC 0x0042d040 BEGIN
+/* 42D040-42D075 00035 */
+uchar _Globals::CDSView::Hide(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0042d040 END
+
+// !FUNC 0x0042d0b0 BEGIN
+/* 42D0B0-42D156 000A6 */
+uchar _Globals::CDSView::AddChild(CBulanek* param_1, int param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x0042d0b0 END
+

@@ -50,6 +50,24 @@ public:
 	// !DECL 0x0040f560 BEGIN
 	/* 40F560 */ void* FUN_0040f560(uchar param_1);
 	// !DECL 0x0040f560 END
+
+	// !DECL 0x0040a8c0 BEGIN
+	/* 40A8C0 */ uchar ApplyLocalPlayersConstraints(int param_1);
+	// !DECL 0x0040a8c0 END
+	// !DECL 0x0040a9d0 BEGIN
+	/* 40A9D0 */ uchar OnTotalPlayersChange(int param_1);
+	// !DECL 0x0040a9d0 END
+	// !DECL 0x0040a9f0 BEGIN
+	/* 40A9F0 */ uchar OnLocalPlayersChange(int param_1);
+	// !DECL 0x0040a9f0 END
+};
+
+
+class CRadio {
+public:
+	// !DECL 0x00403d20 BEGIN
+	/* 403D20 */ uchar SetItemDisabled(int param_1, char param_2);
+	// !DECL 0x00403d20 END
 };
 
 #endif

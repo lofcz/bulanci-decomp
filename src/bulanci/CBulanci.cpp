@@ -833,3 +833,13 @@ void CBulanci::_qsort(void* param_1, size_t param_2, size_t param_3, _PtFuncComp
 wchar_t* CBulanci::_wcsrchr(wchar_t* param_1, wchar_t param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0044877d END
 
+// !FUNC 0x0042bf40 BEGIN
+/* 42BF40-42BFB9 00079 */
+uchar CBulanci::CDSView::UpdateScreenCoordinates(char param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0042bf40 END
+
+// !FUNC 0x0042cbf0 BEGIN
+/* 42CBF0-42CC29 00039 */
+uchar CBulanci::CDSView::SetSize(int param_1, int param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x0042cbf0 END
+

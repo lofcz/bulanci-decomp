@@ -50,6 +50,19 @@ public:
 	// !DECL 0x004349a0 BEGIN
 	/* 4349A0 */ void* CDSResourceSign_scalar_deleting_dtor(uchar param_1);
 	// !DECL 0x004349a0 END
+
+	// !DECL 0x0047d1d0 BEGIN
+	/* 47D1D0 */ uchar RegisterCDSResourceSignAsClass94();
+	// !DECL 0x0047d1d0 END
+	// !DECL 0x0047d200 BEGIN
+	/* 47D200 */ uchar RegisterCDSResourceSignAuxClass1();
+	// !DECL 0x0047d200 END
+	// !DECL 0x0047d230 BEGIN
+	/* 47D230 */ uchar RegisterCDSResourceSignAuxClass2();
+	// !DECL 0x0047d230 END
+	// !DECL 0x0047d260 BEGIN
+	/* 47D260 */ uchar RegisterCDSResourceSignAuxClass3();
+	// !DECL 0x0047d260 END
 };
 
 #endif

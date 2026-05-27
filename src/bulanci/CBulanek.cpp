@@ -336,3 +336,8 @@ uchar CBulanek::FUN_0042fa20(void* param_1, int param_2) { STUB_BODY(); return 0
 uchar CBulanek::FUN_0042fa50(void* param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0042fa50 END
 
+// !FUNC 0x0042cc80 BEGIN
+/* 42CC80-42CCCB 0004B */
+uchar CBulanek::CDSView::SetPosition(int param_1, int param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x0042cc80 END
+

@@ -205,4 +205,12 @@ public:
 	// !DECL 0x0042fa50 END
 };
 
+
+class CDSView {
+public:
+	// !DECL 0x0042cc80 BEGIN
+	/* 42CC80 */ uchar SetPosition(int param_1, int param_2);
+	// !DECL 0x0042cc80 END
+};
+
 #endif

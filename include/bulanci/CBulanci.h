@@ -510,4 +510,15 @@ public:
 	// !DECL 0x0044877d END
 };
 
+
+class CDSView {
+public:
+	// !DECL 0x0042bf40 BEGIN
+	/* 42BF40 */ uchar UpdateScreenCoordinates(char param_1);
+	// !DECL 0x0042bf40 END
+	// !DECL 0x0042cbf0 BEGIN
+	/* 42CBF0 */ uchar SetSize(int param_1, int param_2);
+	// !DECL 0x0042cbf0 END
+};
+
 #endif

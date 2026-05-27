@@ -41,6 +41,22 @@ public:
 	// !DECL 0x0042cf50 BEGIN
 	/* 42CF50 */ uchar CDSView_OnLButtonDownAcquireFocus(int* param_1);
 	// !DECL 0x0042cf50 END
+
+	// !DECL 0x0042bfc0 BEGIN
+	/* 42BFC0 */ uchar AddChildInternal(uchar param_1, int param_2);
+	// !DECL 0x0042bfc0 END
+	// !DECL 0x0042c3c0 BEGIN
+	/* 42C3C0 */ uchar EndModal(ushort param_1);
+	// !DECL 0x0042c3c0 END
+	// !DECL 0x0042c990 BEGIN
+	/* 42C990 */ uchar Show(int* param_1);
+	// !DECL 0x0042c990 END
+	// !DECL 0x0042d040 BEGIN
+	/* 42D040 */ uchar Hide(int* param_1);
+	// !DECL 0x0042d040 END
+	// !DECL 0x0042d0b0 BEGIN
+	/* 42D0B0 */ uchar AddChild(CBulanek* param_1, int param_2);
+	// !DECL 0x0042d0b0 END
 };
 
 #endif

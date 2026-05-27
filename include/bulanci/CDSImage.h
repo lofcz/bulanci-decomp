@@ -66,6 +66,13 @@ public:
 	// !DECL 0x004362f0 BEGIN
 	/* 4362F0 */ int ComputeAllocationSize(void* param_1);
 	// !DECL 0x004362f0 END
+
+	// !DECL 0x00436d50 BEGIN
+	/* 436D50 */ uchar FreeBuffers(int param_1);
+	// !DECL 0x00436d50 END
+	// !DECL 0x00436f40 BEGIN
+	/* 436F40 */ uchar Allocate(int param_1, uint param_2, int param_3, char param_4, int param_5);
+	// !DECL 0x00436f40 END
 };
 
 #endif
