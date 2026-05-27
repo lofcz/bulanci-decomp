@@ -19,7 +19,7 @@ uchar CDSResInfo::FUN_00433a10(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00433a70 BEGIN
 /* 433A70-433A8E 0001E */
-uint* CDSResInfo::FUN_00433a70(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSResInfo::FUN_00433a70(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433a70 END
 
 // !FUNC 0x00434270 BEGIN

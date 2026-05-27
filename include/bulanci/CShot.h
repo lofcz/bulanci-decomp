@@ -9,7 +9,7 @@ public:
 	/* 4170E0 */ uchar* FUN_004170e0();
 	// !DECL 0x004170e0 END
 	// !DECL 0x004170f0 BEGIN
-	/* 4170F0 */ uchar FUN_004170f0(uint* param_1);
+	/* 4170F0 */ uchar FUN_004170f0(uchar param_1);
 	// !DECL 0x004170f0 END
 	// !DECL 0x00417150 BEGIN
 	/* 417150 */ uchar FUN_00417150(uchar param_1);
@@ -24,7 +24,7 @@ public:
 	/* 417180 */ uchar FUN_00417180(uchar param_1);
 	// !DECL 0x00417180 END
 	// !DECL 0x00417190 BEGIN
-	/* 417190 */ uint* FUN_00417190(uchar param_1);
+	/* 417190 */ void* FUN_00417190(uchar param_1);
 	// !DECL 0x00417190 END
 	// !DECL 0x00417b30 BEGIN
 	/* 417B30 */ uchar FUN_00417b30(int* param_1, int* param_2, int param_3);
@@ -51,7 +51,7 @@ public:
 	/* 41DF60 */ uchar Update(int* param_1);
 	// !DECL 0x0041df60 END
 	// !DECL 0x0041edf0 BEGIN
-	/* 41EDF0 */ int* CShot_Ctor(int* param_1, void* param_2, uchar param_3, uchar param_4, uchar param_5, int param_6);
+	/* 41EDF0 */ void* CShot_Ctor(uint* param_1, CGameView* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0041edf0 END
 };
 

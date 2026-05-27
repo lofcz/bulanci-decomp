@@ -2,7 +2,7 @@
 
 // !FUNC 0x004289a0 BEGIN
 /* 4289A0-428A1E 0007E */
-uint* CDSDsmFile::InitializeQueueStreamView(int param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
+void* CDSDsmFile::InitializeQueueStreamView(int param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004289a0 END
 
 // !FUNC 0x00428ad0 BEGIN
@@ -111,7 +111,7 @@ uchar CDSDsmFile::HandleReleaseResource(uchar* param_1, uchar param_2) { STUB_BO
 
 // !FUNC 0x00429060 BEGIN
 /* 429060-42907E 0001E */
-uint* CDSDsmFile::HandleScalarDelete(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSDsmFile::HandleScalarDelete(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00429060 END
 
 // !FUNC 0x00429080 BEGIN
@@ -146,7 +146,7 @@ uchar CDSDsmFile::FUN_00433010(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00439ac0 BEGIN
 /* 439AC0-439B3A 0007A */
-uint* CDSDsmFile::InitializeChildObject(int param_1) { STUB_BODY(); return 0; }
+CDSObject* CDSDsmFile::InitializeChildObject(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00439ac0 END
 
 // !FUNC 0x0043bde0 BEGIN

@@ -21,7 +21,7 @@ public:
 	/* 40BE70 */ uchar CVolume_AdjustorThunk68_Dtor(uchar param_1);
 	// !DECL 0x0040be70 END
 	// !DECL 0x0040e1b0 BEGIN
-	/* 40E1B0 */ uint* CVolume_BuildAt(int* param_1, uint* param_2);
+	/* 40E1B0 */ void* CVolume_BuildAt(int* param_1, uint* param_2);
 	// !DECL 0x0040e1b0 END
 	// !DECL 0x0040e230 BEGIN
 	/* 40E230 */ uchar CVolume_StopAudioPreview(int param_1);
@@ -33,13 +33,13 @@ public:
 	/* 40F140 */ uint* CVolume_Allocate();
 	// !DECL 0x0040f140 END
 	// !DECL 0x0040fa70 BEGIN
-	/* 40FA70 */ uchar CVolume_dtor(uint* param_1);
+	/* 40FA70 */ uchar CVolume_dtor(uchar param_1);
 	// !DECL 0x0040fa70 END
 	// !DECL 0x0040fb00 BEGIN
 	/* 40FB00 */ uchar CVolume_OnMouseDown(int* param_1, short param_2);
 	// !DECL 0x0040fb00 END
 	// !DECL 0x0040fc00 BEGIN
-	/* 40FC00 */ uint* CVolume_vDtor(uchar param_1);
+	/* 40FC00 */ void* CVolume_vDtor(uchar param_1);
 	// !DECL 0x0040fc00 END
 };
 

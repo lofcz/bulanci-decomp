@@ -12,7 +12,7 @@ public:
 	/* 423D00 */ uchar* FUN_00423d00();
 	// !DECL 0x00423d00 END
 	// !DECL 0x00423d10 BEGIN
-	/* 423D10 */ uchar FUN_00423d10(uint* param_1);
+	/* 423D10 */ uchar FUN_00423d10(uchar param_1);
 	// !DECL 0x00423d10 END
 	// !DECL 0x00423d70 BEGIN
 	/* 423D70 */ uchar FUN_00423d70(uchar param_1);
@@ -27,7 +27,7 @@ public:
 	/* 423DA0 */ uchar FUN_00423da0(uchar param_1);
 	// !DECL 0x00423da0 END
 	// !DECL 0x00423dc0 BEGIN
-	/* 423DC0 */ uint* FUN_00423dc0(uchar param_1);
+	/* 423DC0 */ void* FUN_00423dc0(uchar param_1);
 	// !DECL 0x00423dc0 END
 	// !DECL 0x00423de0 BEGIN
 	/* 423DE0 */ uchar CRuch_OnScheduledTick(void* param_1);

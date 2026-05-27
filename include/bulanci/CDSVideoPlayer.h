@@ -18,7 +18,7 @@ public:
 	/* 439D30 */ uchar TM_Destructor(uint* param_1);
 	// !DECL 0x00439d30 END
 	// !DECL 0x00439fc0 BEGIN
-	/* 439FC0 */ uint* FUN_00439fc0(uchar param_1);
+	/* 439FC0 */ void* FUN_00439fc0(uchar param_1);
 	// !DECL 0x00439fc0 END
 };
 

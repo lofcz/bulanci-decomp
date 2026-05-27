@@ -93,7 +93,7 @@ uchar CDSImage::FUN_00437550(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004375c0 BEGIN
 /* 4375C0-4375DE 0001E */
-uint* CDSImage::FUN_004375c0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSImage::FUN_004375c0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004375c0 END
 
 // !FUNC 0x00435fe0 BEGIN

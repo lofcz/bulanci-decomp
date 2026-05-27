@@ -21,7 +21,7 @@ public:
 	/* 43B150 */ uchar CDSDirectPlaySender_dtor_body(uint* param_1);
 	// !DECL 0x0043b150 END
 	// !DECL 0x0043b530 BEGIN
-	/* 43B530 */ uint* CDSDirectPlaySender_scalar_deleting_dtor(uchar param_1);
+	/* 43B530 */ void* CDSDirectPlaySender_scalar_deleting_dtor(uchar param_1);
 	// !DECL 0x0043b530 END
 };
 

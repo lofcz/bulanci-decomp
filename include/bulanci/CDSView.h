@@ -15,7 +15,7 @@ public:
 	/* 40AD90 */ uchar FUN_0040ad90(uchar param_1);
 	// !DECL 0x0040ad90 END
 	// !DECL 0x0040ada0 BEGIN
-	/* 40ADA0 */ uint* FUN_0040ada0(uchar param_1);
+	/* 40ADA0 */ void* FUN_0040ada0(uchar param_1);
 	// !DECL 0x0040ada0 END
 	// !DECL 0x00416f40 BEGIN
 	/* 416F40 */ uchar FUN_00416f40(uchar param_1);
@@ -33,13 +33,13 @@ public:
 	/* 42C0C0 */ uint FUN_0042c0c0(int param_1);
 	// !DECL 0x0042c0c0 END
 	// !DECL 0x0042ca30 BEGIN
-	/* 42CA30 */ uchar FUN_0042ca30(int* param_1, uint param_2);
+	/* 42CA30 */ uchar CDSView_InvalidateRectClipped(int* param_1, uint param_2);
 	// !DECL 0x0042ca30 END
 	// !DECL 0x0042cea0 BEGIN
-	/* 42CEA0 */ uchar FUN_0042cea0(uint* param_1);
+	/* 42CEA0 */ uchar FUN_0042cea0(uchar param_1);
 	// !DECL 0x0042cea0 END
 	// !DECL 0x0042cf50 BEGIN
-	/* 42CF50 */ uchar OnLButtonDown(int* param_1);
+	/* 42CF50 */ uchar CDSView_OnLButtonDownAcquireFocus(int* param_1);
 	// !DECL 0x0042cf50 END
 };
 

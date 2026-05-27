@@ -7,7 +7,7 @@ uchar CSessionList::CSessionList_OnEvent(short param_1, uint param_2, uint param
 
 // !FUNC 0x0040c2d0 BEGIN
 /* 40C2D0-40C52E 0025E */
-uint* CSessionList::CSessionList_BuildDialog(uint* param_1) { STUB_BODY(); return 0; }
+CWindow* CSessionList::CSessionList_BuildDialog(CWindow* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040c2d0 END
 
 // !FUNC 0x0040c530 BEGIN

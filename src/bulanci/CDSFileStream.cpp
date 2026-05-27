@@ -32,7 +32,7 @@ inline int* SelfOrNull(CDSFileStream* self) {
 
 // !FUNC 0x00401540 BEGIN
 /* 401540-4015FC 000BC */
-uint* CDSFileStream::FUN_00401540(int param_1, uchar* param_2) { STUB_BODY(); return 0; }
+void* CDSFileStream::FUN_00401540(int param_1, uchar* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00401540 END
 
 // !FUNC 0x00401600 BEGIN
@@ -100,7 +100,7 @@ uint* CDSFileStream::GetStreamName(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00401770 BEGIN
 /* 401770-40178E 0001E */
-uint* CDSFileStream::FUN_00401770(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSFileStream::FUN_00401770(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401770 END
 
 // !FUNC 0x00409260 BEGIN

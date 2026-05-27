@@ -84,7 +84,7 @@ uchar CListViewer::FUN_00408010(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00408020 BEGIN
 /* 408020-4080C9 000A9 */
-uchar CListViewer::CListViewer_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CListViewer::CListViewer_dtor(CScroller* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00408020 END
 
 // !FUNC 0x004081a0 BEGIN
@@ -94,11 +94,11 @@ uchar CListViewer::FUN_004081a0(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00408330 BEGIN
 /* 408330-40834E 0001E */
-uint* CListViewer::CListViewer_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CListViewer::CListViewer_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00408330 END
 
 // !FUNC 0x00408c00 BEGIN
 /* 408C00-408CBA 000BA */
-uint* CListViewer::CListViewer_BuildAt(int param_1, int param_2, uint param_3, int param_4, uint param_5, uint param_6, uint param_7) { STUB_BODY(); return 0; }
+void* CListViewer::CListViewer_BuildAt(int param_1, int param_2, uint param_3, int param_4, uint param_5, uint param_6, uint param_7) { STUB_BODY(); return 0; }
 // !FUNC 0x00408c00 END
 

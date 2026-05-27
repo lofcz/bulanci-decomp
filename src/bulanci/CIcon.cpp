@@ -49,16 +49,16 @@ uchar CIcon::CIcon_AdjustorThunk18_Dtor(uchar param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x00404aa0 BEGIN
 /* 404AA0-404B02 00062 */
-uchar CIcon::CIcon_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CIcon::CIcon_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00404aa0 END
 
 // !FUNC 0x004065e0 BEGIN
 /* 4065E0-4065FE 0001E */
-uint* CIcon::CIcon_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CIcon::CIcon_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004065e0 END
 
 // !FUNC 0x004086e0 BEGIN
 /* 4086E0-4087EA 0010A */
-uint* CIcon::CIcon_BuildAt(uint param_1, uint param_2, ushort param_3, int param_4) { STUB_BODY(); return 0; }
+void* CIcon::CIcon_BuildAt(uint param_1, uint param_2, ushort param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x004086e0 END
 

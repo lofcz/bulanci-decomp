@@ -29,6 +29,6 @@ uchar CScoreItem::Destructor(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00409a90 BEGIN
 /* 409A90-409AAE 0001E */
-uint* CScoreItem::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
+void* CScoreItem::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409a90 END
 

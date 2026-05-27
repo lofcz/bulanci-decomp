@@ -54,16 +54,16 @@ public:
 	/* 408010 */ uchar FUN_00408010(uchar param_1);
 	// !DECL 0x00408010 END
 	// !DECL 0x00408020 BEGIN
-	/* 408020 */ uchar CListViewer_dtor(uint* param_1);
+	/* 408020 */ uchar CListViewer_dtor(CScroller* param_1);
 	// !DECL 0x00408020 END
 	// !DECL 0x004081a0 BEGIN
 	/* 4081A0 */ uchar FUN_004081a0(int* param_1);
 	// !DECL 0x004081a0 END
 	// !DECL 0x00408330 BEGIN
-	/* 408330 */ uint* CListViewer_vDtor(uchar param_1);
+	/* 408330 */ void* CListViewer_vDtor(uchar param_1);
 	// !DECL 0x00408330 END
 	// !DECL 0x00408c00 BEGIN
-	/* 408C00 */ uint* CListViewer_BuildAt(int param_1, int param_2, uint param_3, int param_4, uint param_5, uint param_6, uint param_7);
+	/* 408C00 */ void* CListViewer_BuildAt(int param_1, int param_2, uint param_3, int param_4, uint param_5, uint param_6, uint param_7);
 	// !DECL 0x00408c00 END
 };
 

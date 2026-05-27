@@ -33,13 +33,13 @@ public:
 	/* 431DE0 */ uchar FUN_00431de0(uint* param_1);
 	// !DECL 0x00431de0 END
 	// !DECL 0x00431e50 BEGIN
-	/* 431E50 */ static uchar FUN_00431e50(uint param_1, void* param_2, int param_3);
+	/* 431E50 */ static uchar FUN_00431e50(uint param_1, CPoemScroller* param_2, int param_3);
 	// !DECL 0x00431e50 END
 	// !DECL 0x00432030 BEGIN
 	/* 432030 */ uchar FUN_00432030(uint param_1);
 	// !DECL 0x00432030 END
 	// !DECL 0x00432090 BEGIN
-	/* 432090 */ uint* FUN_00432090(uchar param_1);
+	/* 432090 */ void* FUN_00432090(uchar param_1);
 	// !DECL 0x00432090 END
 	// !DECL 0x0045ecc0 BEGIN
 	/* 45ECC0 */ static uchar FUN_0045ecc0(int* param_1, int param_2, int param_3);

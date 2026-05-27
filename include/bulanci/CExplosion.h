@@ -12,7 +12,7 @@ public:
 	/* 41A2F0 */ int FUN_0041a2f0(int* param_1, int param_2);
 	// !DECL 0x0041a2f0 END
 	// !DECL 0x0041aad0 BEGIN
-	/* 41AAD0 */ uint* FUN_0041aad0(uint* param_1);
+	/* 41AAD0 */ uchar FUN_0041aad0(uchar param_1);
 	// !DECL 0x0041aad0 END
 	// !DECL 0x0041ab20 BEGIN
 	/* 41AB20 */ uchar* FUN_0041ab20();
@@ -21,7 +21,7 @@ public:
 	/* 41B250 */ uint DamageAtPoint(int* param_1, int param_2, int param_3, char param_4, uchar param_5);
 	// !DECL 0x0041b250 END
 	// !DECL 0x0041ce30 BEGIN
-	/* 41CE30 */ uint* CExplosion_Ctor(uint param_1, uchar param_2);
+	/* 41CE30 */ void* CExplosion_Ctor(uint param_1, int param_2);
 	// !DECL 0x0041ce30 END
 	// !DECL 0x0041e140 BEGIN
 	/* 41E140 */ uchar ApplyAreaDamage(void* param_1);

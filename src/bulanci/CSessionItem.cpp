@@ -9,6 +9,6 @@ uchar* CSessionItem::CSessionItem_GetTypeDescriptor() {
 
 // !FUNC 0x0040e8b0 BEGIN
 /* 40E8B0-40E97C 000CC */
-uint* CSessionItem::CSessionItem_Initialize(int param_1) { STUB_BODY(); return 0; }
+void* CSessionItem::CSessionItem_Initialize(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040e8b0 END
 

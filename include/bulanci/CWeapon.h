@@ -18,7 +18,7 @@ public:
 	/* 418F60 */ uchar* FUN_00418f60();
 	// !DECL 0x00418f60 END
 	// !DECL 0x0041bf00 BEGIN
-	/* 41BF00 */ uchar Update(int* param_1);
+	/* 41BF00 */ uchar Update(CBulanek* param_1);
 	// !DECL 0x0041bf00 END
 	// !DECL 0x0041bf70 BEGIN
 	/* 41BF70 */ uchar FUN_0041bf70(int param_1);
@@ -30,7 +30,7 @@ public:
 	/* 41C600 */ uchar Init(uint param_1, int* param_2);
 	// !DECL 0x0041c600 END
 	// !DECL 0x0041dae0 BEGIN
-	/* 41DAE0 */ uint* FUN_0041dae0(uchar param_1);
+	/* 41DAE0 */ void* FUN_0041dae0(uchar param_1);
 	// !DECL 0x0041dae0 END
 	// !DECL 0x004212b0 BEGIN
 	/* 4212B0 */ uchar Fire(uint param_1, ushort param_2);

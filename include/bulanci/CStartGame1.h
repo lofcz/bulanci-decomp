@@ -24,10 +24,10 @@ public:
 	/* 40AE90 */ uchar CStartGame1_OnEvent(ushort param_1);
 	// !DECL 0x0040ae90 END
 	// !DECL 0x0040c650 BEGIN
-	/* 40C650 */ uchar CStartGame1_BuildUi(int* param_1);
+	/* 40C650 */ uchar CStartGame1_BuildUi(uchar param_1);
 	// !DECL 0x0040c650 END
 	// !DECL 0x0040f400 BEGIN
-	/* 40F400 */ int* CStartGame1_ctor(int* param_1);
+	/* 40F400 */ CWindow* CStartGame1_ctor(CWindow* param_1);
 	// !DECL 0x0040f400 END
 	// !DECL 0x0040f4b0 BEGIN
 	/* 40F4B0 */ uchar* CStartGame1_GetSingleton();
@@ -45,10 +45,10 @@ public:
 	/* 40F4F0 */ uchar FUN_0040f4f0(uchar param_1);
 	// !DECL 0x0040f4f0 END
 	// !DECL 0x0040f500 BEGIN
-	/* 40F500 */ uchar FUN_0040f500(uint* param_1);
+	/* 40F500 */ uchar FUN_0040f500(uchar param_1);
 	// !DECL 0x0040f500 END
 	// !DECL 0x0040f560 BEGIN
-	/* 40F560 */ uint* FUN_0040f560(uchar param_1);
+	/* 40F560 */ void* FUN_0040f560(uchar param_1);
 	// !DECL 0x0040f560 END
 };
 

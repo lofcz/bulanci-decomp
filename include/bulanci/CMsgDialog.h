@@ -9,7 +9,7 @@ public:
 	/* 40B760 */ uchar* FUN_0040b760();
 	// !DECL 0x0040b760 END
 	// !DECL 0x0040be80 BEGIN
-	/* 40BE80 */ uint* FUN_0040be80(int param_1, uchar* param_2);
+	/* 40BE80 */ void* FUN_0040be80(int param_1, uint* param_2);
 	// !DECL 0x0040be80 END
 	// !DECL 0x0040e780 BEGIN
 	/* 40E780 */ uint* FUN_0040e780();

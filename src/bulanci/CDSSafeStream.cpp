@@ -2,7 +2,7 @@
 
 // !FUNC 0x00433ab0 BEGIN
 /* 433AB0-433B53 000A3 */
-uint* CDSSafeStream::FUN_00433ab0(int* param_1) { STUB_BODY(); return 0; }
+void* CDSSafeStream::FUN_00433ab0(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433ab0 END
 
 // !FUNC 0x00433b60 BEGIN
@@ -39,7 +39,7 @@ uchar CDSSafeStream::FUN_00433bc0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00433c90 BEGIN
 /* 433C90-433CAE 0001E */
-uint* CDSSafeStream::FUN_00433c90(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSSafeStream::FUN_00433c90(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433c90 END
 
 // !FUNC 0x00433d70 BEGIN
@@ -48,8 +48,8 @@ uchar CDSSafeStream::FUN_00433d70(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433d70 END
 
 // !FUNC 0x00446c00 BEGIN
-/* 446C00-446C0A 0000A */
-uchar CDSSafeStream::FUN_00446c00(void* param_1) { STUB_BODY(); return 0; }
+/* 446C00-446C07 00007 */
+uchar CDSSafeStream::FUN_00446c00(CDSFilterStream* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00446c00 END
 
 // !FUNC 0x00446ca0 BEGIN

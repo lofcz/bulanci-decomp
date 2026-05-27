@@ -18,10 +18,10 @@ public:
 	/* 403AC0 */ uchar CRadio_Render(int param_1);
 	// !DECL 0x00403ac0 END
 	// !DECL 0x00403cc0 BEGIN
-	/* 403CC0 */ uchar CRadio_SetSelected(char param_1);
+	/* 403CC0 */ uchar CRadio_SetSelected(int param_1);
 	// !DECL 0x00403cc0 END
 	// !DECL 0x00403d10 BEGIN
-	/* 403D10 */ uchar CRadio_LoadData(char* param_1);
+	/* 403D10 */ uchar CRadio_LoadData(void* param_1);
 	// !DECL 0x00403d10 END
 	// !DECL 0x00405240 BEGIN
 	/* 405240 */ uchar CRadio_OnMouseUp(uint param_1, uchar param_2);
@@ -42,16 +42,16 @@ public:
 	/* 4073D0 */ uchar CRadio_AdjustorThunk18_Dtor(uchar param_1);
 	// !DECL 0x004073d0 END
 	// !DECL 0x00407500 BEGIN
-	/* 407500 */ uchar CRadio_dtor(uint* param_1);
+	/* 407500 */ uchar CRadio_dtor(uchar param_1);
 	// !DECL 0x00407500 END
 	// !DECL 0x00407f30 BEGIN
-	/* 407F30 */ uint* CRadio_vDtor(uchar param_1);
+	/* 407F30 */ void* CRadio_vDtor(uchar param_1);
 	// !DECL 0x00407f30 END
 	// !DECL 0x00408540 BEGIN
-	/* 408540 */ uint* CRadio_BuildAt(uint param_1, uint param_2);
+	/* 408540 */ void* CRadio_BuildAt(uint param_1, uint param_2);
 	// !DECL 0x00408540 END
 	// !DECL 0x0040aa00 BEGIN
-	/* 40AA00 */ uchar CRadio_SaveData(uchar* param_1);
+	/* 40AA00 */ uchar CRadio_SaveData(void* param_1);
 	// !DECL 0x0040aa00 END
 };
 

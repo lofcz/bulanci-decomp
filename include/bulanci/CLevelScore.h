@@ -21,7 +21,7 @@ public:
 	/* 409690 */ uchar Serialize(void* param_1);
 	// !DECL 0x00409690 END
 	// !DECL 0x00409a40 BEGIN
-	/* 409A40 */ uint* CLevelScore_scalar_deleting_dtor(uchar param_1);
+	/* 409A40 */ void* CLevelScore_scalar_deleting_dtor(uchar param_1);
 	// !DECL 0x00409a40 END
 };
 

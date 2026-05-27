@@ -21,7 +21,7 @@ public:
 	/* 434D50 */ uchar FUN_00434d50(uint param_1);
 	// !DECL 0x00434d50 END
 	// !DECL 0x00434e10 BEGIN
-	/* 434E10 */ uint* FUN_00434e10(uchar param_1);
+	/* 434E10 */ void* FUN_00434e10(uchar param_1);
 	// !DECL 0x00434e10 END
 };
 

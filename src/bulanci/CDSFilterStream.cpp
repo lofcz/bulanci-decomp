@@ -84,7 +84,7 @@ uchar CDSFilterStream::CloseStream(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00430c30 BEGIN
 /* 430C30-430C4E 0001E */
-uint* CDSFilterStream::FUN_00430c30(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSFilterStream::FUN_00430c30(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00430c30 END
 
 // !FUNC 0x00430c90 BEGIN
@@ -104,11 +104,11 @@ uchar CDSFilterStream::SetStreamSize(uint param_1, uint param_2) { STUB_BODY(); 
 
 // !FUNC 0x00430dd0 BEGIN
 /* 430DD0-430E64 00094 */
-uint* CDSFilterStream::FUN_00430dd0(int* param_1, uint param_2, uint param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
+void* CDSFilterStream::FUN_00430dd0(int* param_1, uint param_2, uint param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00430dd0 END
 
 // !FUNC 0x00430f40 BEGIN
 /* 430F40-430FFE 000BE */
-uint* CDSFilterStream::FUN_00430f40(int param_1) { STUB_BODY(); return 0; }
+void* CDSFilterStream::FUN_00430f40(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00430f40 END
 

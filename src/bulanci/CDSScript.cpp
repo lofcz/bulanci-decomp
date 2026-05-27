@@ -22,7 +22,7 @@ uint CDSScript::ReadU8(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00438390 BEGIN
 /* 438390-4383D5 00045 */
-uint* CDSScript::ctor(uint* param_1) { STUB_BODY(); return 0; }
+void* CDSScript::ctor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00438390 END
 
 // !FUNC 0x004383e0 BEGIN
@@ -54,6 +54,6 @@ uint CDSScript::CallExport(int param_1, int param_2, void* param_3) { STUB_BODY(
 
 // !FUNC 0x00438c90 BEGIN
 /* 438C90-438CAE 0001E */
-uint* CDSScript::FUN_00438c90(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSScript::FUN_00438c90(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00438c90 END
 

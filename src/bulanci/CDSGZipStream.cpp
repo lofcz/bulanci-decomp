@@ -39,12 +39,12 @@ uint CDSGZipStream::GetStreamName(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004099d0 BEGIN
 /* 4099D0-4099EE 0001E */
-uint* CDSGZipStream::FUN_004099d0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSGZipStream::FUN_004099d0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004099d0 END
 
 // !FUNC 0x00434f90 BEGIN
-/* 434F90-434F9A 0000A */
-uchar CDSGZipStream::FUN_00434f90(void* param_1) { STUB_BODY(); return 0; }
+/* 434F90-434F97 00007 */
+uchar CDSGZipStream::FUN_00434f90(CDSFilterStream* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00434f90 END
 
 // !FUNC 0x00435220 BEGIN
@@ -79,7 +79,7 @@ uchar CDSGZipStream::FUN_00435a20(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00435ae0 BEGIN
 /* 435AE0-435B6D 0008D */
-uint* CDSGZipStream::FUN_00435ae0(int param_1) { STUB_BODY(); return 0; }
+void* CDSGZipStream::FUN_00435ae0(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00435ae0 END
 
 // !FUNC 0x00435b6d BEGIN
@@ -89,21 +89,21 @@ uchar CDSGZipStream::Catch_00435b6d() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00435ba0 BEGIN
 /* 435BA0-435C0D 0006D */
-uint* CDSGZipStream::FUN_00435ba0(int param_1) { STUB_BODY(); return 0; }
+void* CDSGZipStream::FUN_00435ba0(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00435ba0 END
 
 // !FUNC 0x0043bff0 BEGIN
-/* 43BFF0-43BFFA 0000A */
-uchar CDSGZipStream::FUN_0043bff0(void* param_1) { STUB_BODY(); return 0; }
+/* 43BFF0-43BFF7 00007 */
+uchar CDSGZipStream::FUN_0043bff0(CDSFilterStream* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043bff0 END
 
 // !FUNC 0x00446c10 BEGIN
-/* 446C10-446C18 00008 */
-uchar CDSGZipStream::FlushStream(void* param_1) { STUB_BODY(); return 0; }
+/* 446C10-446C17 00007 */
+uchar CDSGZipStream::FlushStream(CDSFilterStream* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00446c10 END
 
 // !FUNC 0x00446c20 BEGIN
-/* 446C20-446C2A 0000A */
-uchar CDSGZipStream::SetStreamSize(void* param_1) { STUB_BODY(); return 0; }
+/* 446C20-446C27 00007 */
+uchar CDSGZipStream::SetStreamSize(CDSFilterStream* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00446c20 END
 

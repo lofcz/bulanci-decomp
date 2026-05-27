@@ -31,6 +31,6 @@ uchar CDSDirectPlaySender::CDSDirectPlaySender_dtor_body(uint* param_1) { STUB_B
 
 // !FUNC 0x0043b530 BEGIN
 /* 43B530-43B54E 0001E */
-uint* CDSDirectPlaySender::CDSDirectPlaySender_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSDirectPlaySender::CDSDirectPlaySender_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043b530 END
 

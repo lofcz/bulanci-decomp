@@ -34,6 +34,6 @@ uchar CGameCounter::DeletingDestructorThunk_4(uchar param_1) { STUB_BODY(); retu
 
 // !FUNC 0x0040ef40 BEGIN
 /* 40EF40-40EF5E 0001E */
-uint* CGameCounter::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
+void* CGameCounter::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ef40 END
 

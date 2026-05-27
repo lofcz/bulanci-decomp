@@ -152,7 +152,7 @@ uchar CDSJpegImage::FUN_00431de0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00431e50 BEGIN
 /* 431E50-432027 001D7 */
-uchar CDSJpegImage::FUN_00431e50(uint param_1, void* param_2, int param_3) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::FUN_00431e50(uint param_1, CPoemScroller* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00431e50 END
 
 // !FUNC 0x00432030 BEGIN
@@ -162,7 +162,7 @@ uchar CDSJpegImage::FUN_00432030(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00432090 BEGIN
 /* 432090-4320AE 0001E */
-uint* CDSJpegImage::FUN_00432090(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSJpegImage::FUN_00432090(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00432090 END
 
 // !FUNC 0x0045ecc0 BEGIN

@@ -29,7 +29,7 @@ uchar CScore::DeletingDestructorThunk_10(uchar param_1) { STUB_BODY(); return 0;
 
 // !FUNC 0x0040e120 BEGIN
 /* 40E120-40E1A8 00088 */
-uchar CScore::Destructor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CScore::Destructor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040e120 END
 
 // !FUNC 0x0040efd0 BEGIN
@@ -39,6 +39,6 @@ uint* CScore::Create() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040f070 BEGIN
 /* 40F070-40F08E 0001E */
-uint* CScore::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
+void* CScore::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f070 END
 

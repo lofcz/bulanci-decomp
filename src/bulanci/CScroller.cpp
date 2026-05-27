@@ -46,7 +46,7 @@ uchar* CScroller::FUN_004034d0() {
 
 // !FUNC 0x004034e0 BEGIN
 /* 4034E0-4034FE 0001E */
-uint* CScroller::FUN_004034e0(uchar param_1) { STUB_BODY(); return 0; }
+void* CScroller::FUN_004034e0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004034e0 END
 
 // !FUNC 0x004040c0 BEGIN
@@ -71,7 +71,7 @@ uint CScroller::FUN_00405110(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004057c0 BEGIN
 /* 4057C0-4058E3 00123 */
-uchar CScroller::FUN_004057c0(int* param_1) { STUB_BODY(); return 0; }
+uchar CScroller::FUN_004057c0(CListViewer* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004057c0 END
 
 // !FUNC 0x00405930 BEGIN
@@ -101,7 +101,7 @@ bool CScroller::FUN_00406cc0(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004089c0 BEGIN
 /* 4089C0-408BF2 00232 */
-uint* CScroller::CScroller_BuildAt(int param_1, int param_2, uint param_3, int param_4) { STUB_BODY(); return 0; }
+void* CScroller::CScroller_BuildAt(int param_1, int param_2, uint param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x004089c0 END
 
 // !FUNC 0x004229a0 BEGIN

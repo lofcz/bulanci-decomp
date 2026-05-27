@@ -15,7 +15,7 @@ public:
 	/* 40BD50 */ uint* CProgressBar_Allocate();
 	// !DECL 0x0040bd50 END
 	// !DECL 0x0040df70 BEGIN
-	/* 40DF70 */ uint* CProgressBar_ctor(uint* param_1);
+	/* 40DF70 */ CDSChained* CProgressBar_ctor(CDSChained* param_1);
 	// !DECL 0x0040df70 END
 };
 

@@ -54,7 +54,7 @@ uchar CButton::CButton_AdjustorThunk18_Dtor(uchar param_1) { STUB_BODY(); return
 
 // !FUNC 0x00405600 BEGIN
 /* 405600-4056A7 000A7 */
-uchar CButton::CButton_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CButton::CButton_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00405600 END
 
 // !FUNC 0x004056b0 BEGIN
@@ -64,11 +64,11 @@ uchar CButton::CButton_Render(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00406670 BEGIN
 /* 406670-40668E 0001E */
-uint* CButton::CButton_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CButton::CButton_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00406670 END
 
 // !FUNC 0x004087f0 BEGIN
 /* 4087F0-4089BC 001CC */
-uint* CButton::CButton_BuildAt(int param_1, ushort param_2, CBulanci param_3, uint param_4, uint param_5, uint param_6, uint* param_7) { STUB_BODY(); return 0; }
+uint* CButton::CButton_BuildAt(int param_1, ushort param_2, uchar param_3, uint param_4, uint param_5, uint param_6, uint* param_7) { STUB_BODY(); return 0; }
 // !FUNC 0x004087f0 END
 

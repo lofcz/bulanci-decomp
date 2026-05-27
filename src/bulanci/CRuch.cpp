@@ -14,7 +14,7 @@ uchar* CRuch::FUN_00423d00() {
 
 // !FUNC 0x00423d10 BEGIN
 /* 423D10-423D6A 0005A */
-uchar CRuch::FUN_00423d10(uint* param_1) { STUB_BODY(); return 0; }
+uchar CRuch::FUN_00423d10(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423d10 END
 
 // !FUNC 0x00423d70 BEGIN
@@ -39,7 +39,7 @@ uchar CRuch::FUN_00423da0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00423dc0 BEGIN
 /* 423DC0-423DDE 0001E */
-uint* CRuch::FUN_00423dc0(uchar param_1) { STUB_BODY(); return 0; }
+void* CRuch::FUN_00423dc0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423dc0 END
 
 // !FUNC 0x00423de0 BEGIN

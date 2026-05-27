@@ -12,16 +12,16 @@ public:
 	/* 437B30 */ uchar FUN_00437b30(uint* param_1);
 	// !DECL 0x00437b30 END
 	// !DECL 0x00437ba0 BEGIN
-	/* 437BA0 */ uint* FUN_00437ba0(uint param_1, int param_2);
+	/* 437BA0 */ void* FUN_00437ba0(uint param_1, int param_2);
 	// !DECL 0x00437ba0 END
 	// !DECL 0x00437c40 BEGIN
-	/* 437C40 */ uchar* FUN_00437c40(wchar_t* param_1);
+	/* 437C40 */ wchar_t* FUN_00437c40(wchar_t* param_1);
 	// !DECL 0x00437c40 END
 	// !DECL 0x004380c0 BEGIN
 	/* 4380C0 */ uint* FUN_004380c0();
 	// !DECL 0x004380c0 END
 	// !DECL 0x00438140 BEGIN
-	/* 438140 */ uint* FUN_00438140(uchar param_1);
+	/* 438140 */ void* FUN_00438140(uchar param_1);
 	// !DECL 0x00438140 END
 };
 

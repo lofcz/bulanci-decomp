@@ -6,7 +6,7 @@
 class CBulAnim {
 public:
 	// !DECL 0x0040ad20 BEGIN
-	/* 40AD20 */ uchar CleanupBody(uint* param_1);
+	/* 40AD20 */ uchar CleanupBody(uchar param_1);
 	// !DECL 0x0040ad20 END
 	// !DECL 0x0040afd0 BEGIN
 	/* 40AFD0 */ uchar ApplyTeamPalette(uchar param_1);
@@ -39,7 +39,7 @@ public:
 	/* 40B8A0 */ uchar Sub68Dtor_thunk(uchar param_1);
 	// !DECL 0x0040b8a0 END
 	// !DECL 0x0040eaa0 BEGIN
-	/* 40EAA0 */ uint* CreateCBulAnim();
+	/* 40EAA0 */ uchar CreateCBulAnim();
 	// !DECL 0x0040eaa0 END
 	// !DECL 0x00438f20 BEGIN
 	/* 438F20 */ uchar IDSAnim_NotifyEvents(uint param_1, int param_2, int param_3);
@@ -69,7 +69,7 @@ public:
 	/* 439550 */ uchar Sub78ChainOp_thunk(int param_1);
 	// !DECL 0x00439550 END
 	// !DECL 0x004396f0 BEGIN
-	/* 4396F0 */ uint* ScalarDeletingDtor(uchar param_1);
+	/* 4396F0 */ void* ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x004396f0 END
 };
 

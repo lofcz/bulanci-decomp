@@ -32,7 +32,7 @@ uchar CGaming::FUN_00413390(char param_1, char param_2) { STUB_BODY(); return 0;
 
 // !FUNC 0x00415f80 BEGIN
 /* 415F80-416025 000A5 */
-uchar CGaming::CGaming_DrainRecordedNetMessages(void* param_1) { STUB_BODY(); return 0; }
+uchar CGaming::CGaming_DrainRecordedNetMessages(CGame* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00415f80 END
 
 // !FUNC 0x00416810 BEGIN
@@ -129,7 +129,7 @@ uchar CGaming::FUN_0041b3b0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041b500 BEGIN
 /* 41B500-41B590 00090 */
-uchar CGaming::CGaming_TickAmbientAnimations(void* param_1) { STUB_BODY(); return 0; }
+uchar CGaming::CGaming_TickAmbientAnimations(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041b500 END
 
 // !FUNC 0x0041b5a0 BEGIN
@@ -144,7 +144,7 @@ uchar CGaming::FUN_0041b620(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041b850 BEGIN
 /* 41B850-41BA51 00201 */
-uchar CGaming::CGaming_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CGaming::CGaming_dtor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041b850 END
 
 // !FUNC 0x0041bab0 BEGIN
@@ -154,7 +154,7 @@ uchar CGaming::FUN_0041bab0(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041bee0 BEGIN
 /* 41BEE0-41BEFE 0001E */
-uint* CGaming::FUN_0041bee0(uchar param_1) { STUB_BODY(); return 0; }
+void* CGaming::FUN_0041bee0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bee0 END
 
 // !FUNC 0x0041c140 BEGIN

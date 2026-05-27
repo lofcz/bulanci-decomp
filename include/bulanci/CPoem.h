@@ -36,7 +36,7 @@ public:
 	/* 409AB0 */ uint* factory();
 	// !DECL 0x00409ab0 END
 	// !DECL 0x00409af0 BEGIN
-	/* 409AF0 */ uint* ScalarDeletingDestructor(uchar param_1);
+	/* 409AF0 */ void* ScalarDeletingDestructor(uchar param_1);
 	// !DECL 0x00409af0 END
 };
 

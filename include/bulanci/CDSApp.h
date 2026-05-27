@@ -6,13 +6,13 @@
 class CDSApp {
 public:
 	// !DECL 0x004033a0 BEGIN
-	/* 4033A0 */ uint FUN_004033a0(int param_1);
+	/* 4033A0 */ uint CDSView_GetDataKindStubZero(int param_1);
 	// !DECL 0x004033a0 END
 	// !DECL 0x00429db0 BEGIN
 	/* 429DB0 */ uchar CDSApp_DispatchInputEvent(int param_1);
 	// !DECL 0x00429db0 END
 	// !DECL 0x0042a210 BEGIN
-	/* 42A210 */ uchar CDSApp_OnCreate(int* param_1);
+	/* 42A210 */ uchar CDSApp_OnCreate(uchar param_1);
 	// !DECL 0x0042a210 END
 	// !DECL 0x0042afd0 BEGIN
 	/* 42AFD0 */ uint* FUN_0042afd0(uint* param_1);
@@ -51,13 +51,13 @@ public:
 	/* 42B900 */ uchar FUN_0042b900(int param_1);
 	// !DECL 0x0042b900 END
 	// !DECL 0x0042b980 BEGIN
-	/* 42B980 */ uint* CDSApp_DtorScalar(uchar param_1);
+	/* 42B980 */ void* CDSApp_DtorScalar(uchar param_1);
 	// !DECL 0x0042b980 END
 	// !DECL 0x0042c7d0 BEGIN
 	/* 42C7D0 */ uchar FUN_0042c7d0(ushort param_1);
 	// !DECL 0x0042c7d0 END
 	// !DECL 0x0042ccf0 BEGIN
-	/* 42CCF0 */ uchar CDSView_RenderChildren(int param_1);
+	/* 42CCF0 */ uchar CDSView_RenderChildrenClipped(int param_1);
 	// !DECL 0x0042ccf0 END
 	// !DECL 0x0042e770 BEGIN
 	/* 42E770 */ uchar CDSApp_InitClock();

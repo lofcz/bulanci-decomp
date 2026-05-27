@@ -14,12 +14,12 @@ uchar CDSRegKeyException::FUN_00437b30(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00437ba0 BEGIN
 /* 437BA0-437C34 00094 */
-uint* CDSRegKeyException::FUN_00437ba0(uint param_1, int param_2) { STUB_BODY(); return 0; }
+void* CDSRegKeyException::FUN_00437ba0(uint param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00437ba0 END
 
 // !FUNC 0x00437c40 BEGIN
 /* 437C40-437CCA 0008A */
-uchar* CDSRegKeyException::FUN_00437c40(wchar_t* param_1) { STUB_BODY(); return 0; }
+wchar_t* CDSRegKeyException::FUN_00437c40(wchar_t* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00437c40 END
 
 // !FUNC 0x004380c0 BEGIN
@@ -29,6 +29,6 @@ uint* CDSRegKeyException::FUN_004380c0() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00438140 BEGIN
 /* 438140-43815E 0001E */
-uint* CDSRegKeyException::FUN_00438140(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSRegKeyException::FUN_00438140(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00438140 END
 

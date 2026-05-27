@@ -19,7 +19,7 @@ uchar CDSView::FUN_0040ad90(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040ada0 BEGIN
 /* 40ADA0-40ADBE 0001E */
-uint* CDSView::FUN_0040ada0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSView::FUN_0040ada0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ada0 END
 
 // !FUNC 0x00416f40 BEGIN
@@ -49,16 +49,16 @@ uint CDSView::FUN_0042c0c0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042ca30 BEGIN
 /* 42CA30-42CADB 000AB */
-uchar CDSView::FUN_0042ca30(int* param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CDSView::CDSView_InvalidateRectClipped(int* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0042ca30 END
 
 // !FUNC 0x0042cea0 BEGIN
 /* 42CEA0-42CF43 000A3 */
-uchar CDSView::FUN_0042cea0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSView::FUN_0042cea0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042cea0 END
 
 // !FUNC 0x0042cf50 BEGIN
 /* 42CF50-42CF58 00008 */
-uchar CDSView::OnLButtonDown(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSView::CDSView_OnLButtonDownAcquireFocus(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042cf50 END
 

@@ -2,7 +2,7 @@
 
 // !FUNC 0x00412550 BEGIN
 /* 412550-41258B 0003B */
-uchar CPanel::FUN_00412550(uchar param_1) { STUB_BODY(); return 0; }
+int CPanel::FUN_00412550(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00412550 END
 
 // !FUNC 0x00426ce0 BEGIN
@@ -39,7 +39,7 @@ uchar CPanel::CPanel_AdjustorThunk18_Dtor(uchar param_1) { STUB_BODY(); return 0
 
 // !FUNC 0x004275d0 BEGIN
 /* 4275D0-427632 00062 */
-uchar CPanel::CPanel_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CPanel::CPanel_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004275d0 END
 
 // !FUNC 0x00427640 BEGIN
@@ -49,6 +49,6 @@ uchar CPanel::FUN_00427640(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00427c10 BEGIN
 /* 427C10-427C2E 0001E */
-uint* CPanel::CPanel_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CPanel::CPanel_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00427c10 END
 

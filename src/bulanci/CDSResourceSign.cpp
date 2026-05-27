@@ -105,6 +105,6 @@ uchar CDSResourceSign::CDSResourceSign_dtor(uint* param_1) { STUB_BODY(); return
 
 // !FUNC 0x004349a0 BEGIN
 /* 4349A0-4349BE 0001E */
-uint* CDSResourceSign::CDSResourceSign_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSResourceSign::CDSResourceSign_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004349a0 END
 

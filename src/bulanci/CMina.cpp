@@ -17,7 +17,7 @@ uchar CMina::FUN_00419fd0(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041a990 BEGIN
 /* 41A990-41AA26 00096 */
-uint* CMina::FUN_0041a990(uint* param_1) { STUB_BODY(); return 0; }
+uchar CMina::FUN_0041a990(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a990 END
 
 // !FUNC 0x0041aa30 BEGIN
@@ -79,7 +79,7 @@ uchar CMina::FUN_0041b4a0(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041c010 BEGIN
 /* 41C010-41C0CB 000BB */
-uchar CMina::FUN_0041c010(uint* param_1) { STUB_BODY(); return 0; }
+uchar CMina::FUN_0041c010(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041c010 END
 
 // !FUNC 0x0041c0d0 BEGIN
@@ -89,17 +89,17 @@ uchar CMina::FUN_0041c0d0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041c530 BEGIN
 /* 41C530-41C54E 0001E */
-uint* CMina::FUN_0041c530(uchar param_1) { STUB_BODY(); return 0; }
+void* CMina::FUN_0041c530(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041c530 END
 
 // !FUNC 0x0041cb70 BEGIN
 /* 41CB70-41CCD3 00163 */
-uint* CMina::CMina_Ctor(int param_1) { STUB_BODY(); return 0; }
+void* CMina::CMina_Ctor(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041cb70 END
 
 // !FUNC 0x0041cce0 BEGIN
 /* 41CCE0-41CE2E 0014E */
-uint* CMina::InitMine(int param_1) { STUB_BODY(); return 0; }
+void* CMina::InitMine(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041cce0 END
 
 // !FUNC 0x0041efb0 BEGIN

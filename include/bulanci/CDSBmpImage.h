@@ -27,13 +27,13 @@ public:
 	/* 4322E0 */ uchar CDSBmpImage_scalar_deleting_dtor_thunk_n0x4(uchar param_1);
 	// !DECL 0x004322e0 END
 	// !DECL 0x00432330 BEGIN
-	/* 432330 */ uint* CDSBmpImage_ctor(int* param_1, int param_2, char param_3);
+	/* 432330 */ void* CDSBmpImage_ctor(int* param_1, int param_2, char param_3);
 	// !DECL 0x00432330 END
 	// !DECL 0x00432440 BEGIN
 	/* 432440 */ uchar CDSBmpImage_SaveDibStream(int* param_1);
 	// !DECL 0x00432440 END
 	// !DECL 0x00432700 BEGIN
-	/* 432700 */ uint* CDSBmpImage_scalar_deleting_dtor(uchar param_1);
+	/* 432700 */ void* CDSBmpImage_scalar_deleting_dtor(uchar param_1);
 	// !DECL 0x00432700 END
 	// !DECL 0x00436020 BEGIN
 	/* 436020 */ bool CDSBmpImage_ValidateStride(char param_1);

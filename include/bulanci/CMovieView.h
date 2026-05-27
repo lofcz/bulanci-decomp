@@ -12,7 +12,7 @@ public:
 	/* 422840 */ uchar OnMovieStop(char param_1);
 	// !DECL 0x00422840 END
 	// !DECL 0x00422860 BEGIN
-	/* 422860 */ uchar OnEvent(short param_1, int param_2);
+	/* 422860 */ uchar OnEvent(short param_1, void* param_2);
 	// !DECL 0x00422860 END
 	// !DECL 0x00422a20 BEGIN
 	/* 422A20 */ uchar* GetClassTable();
@@ -30,16 +30,16 @@ public:
 	/* 422A60 */ uchar ScalarDeletingDtor_Thunk_24(uchar param_1);
 	// !DECL 0x00422a60 END
 	// !DECL 0x00422cb0 BEGIN
-	/* 422CB0 */ uchar Cleanup(uint* param_1);
+	/* 422CB0 */ uchar Cleanup(uchar param_1);
 	// !DECL 0x00422cb0 END
 	// !DECL 0x00422d50 BEGIN
 	/* 422D50 */ uchar StartPlayback(uchar param_1);
 	// !DECL 0x00422d50 END
 	// !DECL 0x00422e30 BEGIN
-	/* 422E30 */ uint* CreateObject();
+	/* 422E30 */ uchar CreateObject();
 	// !DECL 0x00422e30 END
 	// !DECL 0x00422ee0 BEGIN
-	/* 422EE0 */ uint* ScalarDeletingDtor(uchar param_1);
+	/* 422EE0 */ void* ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00422ee0 END
 	// !DECL 0x004231a0 BEGIN
 	/* 4231A0 */ uchar TogglePlayback(void* param_1);

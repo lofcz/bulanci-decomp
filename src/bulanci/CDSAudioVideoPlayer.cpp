@@ -29,6 +29,6 @@ uint* CDSAudioVideoPlayer::Constructor(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043bd40 BEGIN
 /* 43BD40-43BD5E 0001E */
-uint* CDSAudioVideoPlayer::FUN_0043bd40(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSAudioVideoPlayer::FUN_0043bd40(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043bd40 END
 

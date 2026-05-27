@@ -27,10 +27,10 @@ public:
 	/* 4099B0 */ uint GetStreamName(uint param_1);
 	// !DECL 0x004099b0 END
 	// !DECL 0x004099d0 BEGIN
-	/* 4099D0 */ uint* FUN_004099d0(uchar param_1);
+	/* 4099D0 */ void* FUN_004099d0(uchar param_1);
 	// !DECL 0x004099d0 END
 	// !DECL 0x00434f90 BEGIN
-	/* 434F90 */ uchar FUN_00434f90(void* param_1);
+	/* 434F90 */ uchar FUN_00434f90(CDSFilterStream* param_1);
 	// !DECL 0x00434f90 END
 	// !DECL 0x00435220 BEGIN
 	/* 435220 */ uchar ReadBytes(void* param_1, uint param_2);
@@ -51,22 +51,22 @@ public:
 	/* 435A20 */ uchar FUN_00435a20(int param_1);
 	// !DECL 0x00435a20 END
 	// !DECL 0x00435ae0 BEGIN
-	/* 435AE0 */ uint* FUN_00435ae0(int param_1);
+	/* 435AE0 */ void* FUN_00435ae0(int param_1);
 	// !DECL 0x00435ae0 END
 	// !DECL 0x00435b6d BEGIN
 	/* 435B6D */ uchar Catch_00435b6d();
 	// !DECL 0x00435b6d END
 	// !DECL 0x00435ba0 BEGIN
-	/* 435BA0 */ uint* FUN_00435ba0(int param_1);
+	/* 435BA0 */ void* FUN_00435ba0(int param_1);
 	// !DECL 0x00435ba0 END
 	// !DECL 0x0043bff0 BEGIN
-	/* 43BFF0 */ uchar FUN_0043bff0(void* param_1);
+	/* 43BFF0 */ uchar FUN_0043bff0(CDSFilterStream* param_1);
 	// !DECL 0x0043bff0 END
 	// !DECL 0x00446c10 BEGIN
-	/* 446C10 */ uchar FlushStream(void* param_1);
+	/* 446C10 */ uchar FlushStream(CDSFilterStream* param_1);
 	// !DECL 0x00446c10 END
 	// !DECL 0x00446c20 BEGIN
-	/* 446C20 */ uchar SetStreamSize(void* param_1);
+	/* 446C20 */ uchar SetStreamSize(CDSFilterStream* param_1);
 	// !DECL 0x00446c20 END
 };
 

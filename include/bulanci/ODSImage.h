@@ -9,13 +9,13 @@ public:
 	/* 418EF0 */ uint* FUN_00418ef0(uint* param_1);
 	// !DECL 0x00418ef0 END
 	// !DECL 0x00419070 BEGIN
-	/* 419070 */ uint* FUN_00419070(uint* param_1);
+	/* 419070 */ uchar FUN_00419070(uchar param_1);
 	// !DECL 0x00419070 END
 	// !DECL 0x0041dbc0 BEGIN
-	/* 41DBC0 */ uint* FUN_0041dbc0(uint param_1, uchar param_2);
+	/* 41DBC0 */ void* CWeaponCtor(uint param_1, int param_2);
 	// !DECL 0x0041dbc0 END
 	// !DECL 0x004228f0 BEGIN
-	/* 4228F0 */ uint* FUN_004228f0(uint* param_1);
+	/* 4228F0 */ uchar FUN_004228f0(uchar param_1);
 	// !DECL 0x004228f0 END
 	// !DECL 0x004253d0 BEGIN
 	/* 4253D0 */ uint CGunMouse_CoordRing_Reserve(int param_1);
@@ -29,7 +29,7 @@ public:
 	/* 418C00 */ void* ODSImage_ctor(int* param_1);
 	// !DECL 0x00418c00 END
 	// !DECL 0x00439050 BEGIN
-	/* 439050 */ uchar SetOwner(void* param_1);
+	/* 439050 */ uchar SetOwner(uchar param_1);
 	// !DECL 0x00439050 END
 };
 

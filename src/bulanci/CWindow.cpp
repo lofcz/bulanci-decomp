@@ -14,7 +14,7 @@ uchar* CWindow::CWindow_GetTypeDescriptor() {
 
 // !FUNC 0x00405560 BEGIN
 /* 405560-4055BE 0005E */
-uint* CWindow::CWindow_BuildAt(uint param_1, uint param_2, uint param_3, uint param_4, uchar param_5) { STUB_BODY(); return 0; }
+void* CWindow::CWindow_BuildAt(uint param_1, uint param_2, uint param_3, uint param_4, int param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00405560 END
 
 // !FUNC 0x004055c0 BEGIN
@@ -49,7 +49,7 @@ uchar CWindow::FUN_0040c540(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040f120 BEGIN
 /* 40F120-40F13E 0001E */
-uint* CWindow::CWindow_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CWindow::CWindow_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f120 END
 
 // !FUNC 0x0042c660 BEGIN

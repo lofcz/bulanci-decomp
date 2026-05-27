@@ -19,6 +19,6 @@ uint* CProgressBar::CProgressBar_Allocate() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040df70 BEGIN
 /* 40DF70-40DFA6 00036 */
-uint* CProgressBar::CProgressBar_ctor(uint* param_1) { STUB_BODY(); return 0; }
+CDSChained* CProgressBar::CProgressBar_ctor(CDSChained* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040df70 END
 

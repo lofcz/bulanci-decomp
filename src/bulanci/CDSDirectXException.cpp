@@ -39,6 +39,6 @@ uint* CDSDirectXException::FUN_0043b8b0() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043b930 BEGIN
 /* 43B930-43B94E 0001E */
-uint* CDSDirectXException::FUN_0043b930(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSDirectXException::FUN_0043b930(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043b930 END
 

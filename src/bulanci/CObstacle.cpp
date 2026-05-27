@@ -14,6 +14,6 @@ uchar* CObstacle::FUN_00416fb0() {
 
 // !FUNC 0x00416fc0 BEGIN
 /* 416FC0-41702F 0006F */
-uint* CObstacle::FUN_00416fc0(uint* param_1) { STUB_BODY(); return 0; }
+void* CObstacle::FUN_00416fc0(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416fc0 END
 

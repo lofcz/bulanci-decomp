@@ -56,6 +56,6 @@ uint* CPoem::factory() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00409af0 BEGIN
 /* 409AF0-409B0E 0001E */
-uint* CPoem::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
+void* CPoem::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409af0 END
 

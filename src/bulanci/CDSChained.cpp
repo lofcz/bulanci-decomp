@@ -14,7 +14,7 @@ uint* CDSChained::CDSChained_ctor(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040b560 BEGIN
 /* 40B560-40B637 000D7 */
-uint* CDSChained::FUN_0040b560(uint* param_1) { STUB_BODY(); return 0; }
+void* CDSChained::FUN_0040b560(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b560 END
 
 // !FUNC 0x0042beb0 BEGIN
@@ -34,6 +34,6 @@ uchar CDSChained::FUN_00433dc0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00433dd0 BEGIN
 /* 433DD0-433DEE 0001E */
-uint* CDSChained::FUN_00433dd0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSChained::FUN_00433dd0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433dd0 END
 

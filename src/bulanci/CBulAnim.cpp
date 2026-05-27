@@ -2,7 +2,7 @@
 
 // !FUNC 0x0040ad20 BEGIN
 /* 40AD20-40AD7D 0005D */
-uchar CBulAnim::CleanupBody(uint* param_1) { STUB_BODY(); return 0; }
+uchar CBulAnim::CleanupBody(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ad20 END
 
 // !FUNC 0x0040afd0 BEGIN
@@ -63,7 +63,7 @@ uchar CBulAnim::Sub68Dtor_thunk(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040eaa0 BEGIN
 /* 40EAA0-40EB29 00089 */
-uint* CBulAnim::CreateCBulAnim() { STUB_BODY(); return 0; }
+uchar CBulAnim::CreateCBulAnim() { STUB_BODY(); return 0; }
 // !FUNC 0x0040eaa0 END
 
 // !FUNC 0x00438f20 BEGIN
@@ -113,6 +113,6 @@ uchar CBulAnim::Sub78ChainOp_thunk(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004396f0 BEGIN
 /* 4396F0-43970E 0001E */
-uint* CBulAnim::ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CBulAnim::ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004396f0 END
 

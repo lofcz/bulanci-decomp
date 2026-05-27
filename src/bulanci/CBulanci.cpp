@@ -15,17 +15,17 @@ int* CBulanci::FUN_00401350(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004013b0 BEGIN
 /* 4013B0-401442 00092 */
-uint* CBulanci::FUN_004013b0(int param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_004013b0(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004013b0 END
 
 // !FUNC 0x004014b0 BEGIN
 /* 4014B0-401516 00066 */
-uint* CBulanci::FUN_004014b0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_004014b0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004014b0 END
 
 // !FUNC 0x00401790 BEGIN
 /* 401790-401841 000B1 */
-uint* CBulanci::FUN_00401790(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_00401790(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401790 END
 
 // !FUNC 0x00401970 BEGIN
@@ -50,7 +50,7 @@ bool CBulanci::FUN_00401c59() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00401d80 BEGIN
 /* 401D80-40214F 003CF */
-int* CBulanci::FUN_00401d80(int param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_00401d80(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00401d80 END
 
 // !FUNC 0x0040214f BEGIN
@@ -70,7 +70,7 @@ uchar CBulanci::CBulanci_OnEvent_MenuStateMachine(ushort param_1, uint param_2) 
 
 // !FUNC 0x004026f0 BEGIN
 /* 4026F0-402828 00138 */
-uint* CBulanci::CBulanci_ctor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CBulanci_ctor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004026f0 END
 
 // !FUNC 0x00402830 BEGIN
@@ -128,27 +128,27 @@ uchar CBulanci::FUN_004028d0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00402990 BEGIN
 /* 402990-402A8E 000FE */
-int* CBulanci::CBulanci_BuildBitmapCache(int param_1, int param_2, int* param_3) { STUB_BODY(); return 0; }
+CDSAudioBank* CBulanci::CBulanci_BuildBitmapCache(int param_1, int param_2, int* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00402990 END
 
 // !FUNC 0x00402b00 BEGIN
 /* 402B00-402B1E 0001E */
-uint* CBulanci::FUN_00402b00(uchar param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_00402b00(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00402b00 END
 
 // !FUNC 0x00402b20 BEGIN
 /* 402B20-402BBC 0009C */
-uchar CBulanci::CBulanci_OnCreate(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CBulanci_OnCreate(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00402b20 END
 
 // !FUNC 0x00402bc0 BEGIN
 /* 402BC0-402C2D 0006D */
-uchar CBulanci::FUN_00402bc0(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_00402bc0(CDSAudioBank* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00402bc0 END
 
 // !FUNC 0x00402c30 BEGIN
 /* 402C30-402DE3 001B3 */
-uchar CBulanci::FUN_00402c30(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_00402c30(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00402c30 END
 
 // !FUNC 0x00402df0 BEGIN
@@ -188,12 +188,12 @@ uchar CBulanci::CLevelScore_InitializeDefaultScores(int param_1) { STUB_BODY(); 
 
 // !FUNC 0x004096d0 BEGIN
 /* 4096D0-4097C5 000F5 */
-uchar CBulanci::FUN_004096d0(void* param_1, int* param_2, int* param_3, int* param_4, char param_5, char param_6) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_004096d0(void* param_1, int* param_2, int* param_3, uint* param_4, char param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x004096d0 END
 
 // !FUNC 0x00409b10 BEGIN
 /* 409B10-409BB9 000A9 */
-uint* CBulanci::CLevelScore_AddPlayerScore(int* param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
+uint* CBulanci::CLevelScore_AddPlayerScore(uint* param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00409b10 END
 
 // !FUNC 0x00409bc0 BEGIN
@@ -243,42 +243,42 @@ uchar CBulanci::FUN_0040a650() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040ab90 BEGIN
 /* 40AB90-40ABB5 00025 */
-uchar CBulanci::FUN_0040ab90(int param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_0040ab90(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ab90 END
 
 // !FUNC 0x0040abc0 BEGIN
 /* 40ABC0-40ABC8 00008 */
-uchar CBulanci::CLoadingLevel_SetProgress(int param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::CLoadingLevel_SetProgress(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040abc0 END
 
 // !FUNC 0x004101d0 BEGIN
 /* 4101D0-4102C9 000F9 */
-uint* CBulanci::FUN_004101d0(uint param_1, uint param_2, uint param_3, uint param_4) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_004101d0(uint param_1, uint param_2, uint param_3, uint param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x004101d0 END
 
 // !FUNC 0x00410e20 BEGIN
 /* 410E20-411010 001F0 */
-int* CBulanci::FUN_00410e20(int* param_1) { STUB_BODY(); return 0; }
+int* CBulanci::CGameCounterCtor(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00410e20 END
 
 // !FUNC 0x00411010 BEGIN
 /* 411010-411B4B 00B3B */
-uint* CBulanci::FUN_00411010(void* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CScoreCtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00411010 END
 
 // !FUNC 0x00411df0 BEGIN
 /* 411DF0-4120E6 002F6 */
-int* CBulanci::FUN_00411df0(int param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_00411df0(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00411df0 END
 
 // !FUNC 0x00412680 BEGIN
 /* 412680-4126D4 00054 */
-int CBulanci::FUN_00412680(uchar param_1) { STUB_BODY(); return 0; }
+int CBulanci::CGameGetPlayerScoreForMode(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00412680 END
 
 // !FUNC 0x004126e0 BEGIN
 /* 4126E0-412711 00031 */
-int CBulanci::FUN_004126e0(uchar param_1) { STUB_BODY(); return 0; }
+int CBulanci::CGameGetPlayerScoreForRanking(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004126e0 END
 
 // !FUNC 0x00413940 BEGIN
@@ -288,7 +288,7 @@ uint CBulanci::FUN_00413940(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00413ce0 BEGIN
 /* 413CE0-41408A 003AA */
-uchar CBulanci::CGame_StartGame(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CGame_StartGame(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00413ce0 END
 
 // !FUNC 0x0041408a BEGIN
@@ -303,7 +303,7 @@ uchar CBulanci::CGame_GetOrCreateLevelScore(void* param_1) { STUB_BODY(); return
 
 // !FUNC 0x00416770 BEGIN
 /* 416770-416773 00003 */
-uchar CBulanci::CDSView_OnMouseDummy() { STUB_BODY(); return 0; }
+uchar CBulanci::CDSView_OnMouseStub() { STUB_BODY(); return 0; }
 // !FUNC 0x00416770 END
 
 // !FUNC 0x00416a70 BEGIN
@@ -318,12 +318,12 @@ uchar CBulanci::FUN_00417c80(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041b390 BEGIN
 /* 41B390-41B3AD 0001D */
-uchar CBulanci::FUN_0041b390(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_0041b390(CBulanek* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041b390 END
 
 // !FUNC 0x0041b6d0 BEGIN
 /* 41B6D0-41B821 00151 */
-uchar CBulanci::CGaming_LoadBackgroundMusic(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CGaming_LoadBackgroundMusic(CDSFileStream* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041b6d0 END
 
 // !FUNC 0x0041b821 BEGIN
@@ -338,7 +338,7 @@ uchar CBulanci::CBulanci_AllocAnimFromSprite(uint* param_1, uint param_2, char p
 
 // !FUNC 0x0041d2e0 BEGIN
 /* 41D2E0-41D580 002A0 */
-uchar CBulanci::CGaming_LoadLevelAssetAndMusic(void* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CGaming_LoadLevelAssetAndMusic(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041d2e0 END
 
 // !FUNC 0x0041d580 BEGIN
@@ -353,7 +353,7 @@ uint CBulanci::Catch_0041d59d() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041ff90 BEGIN
 /* 41FF90-420455 004C5 */
-uint* CBulanci::CGaming_ctor(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CGaming_ctor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041ff90 END
 
 // !FUNC 0x00420455 BEGIN
@@ -378,7 +378,7 @@ uchar CBulanci::CMenu_EnableAllRuch(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00424bc0 BEGIN
 /* 424BC0-424CED 0012D */
-uint* CBulanci::CSwitch_ctor(uint param_1, uint param_2, int param_3, ushort param_4) { STUB_BODY(); return 0; }
+void* CBulanci::CSwitch_ctor(uint param_1, uint param_2, uchar param_3, ushort param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00424bc0 END
 
 // !FUNC 0x004252a0 BEGIN
@@ -388,7 +388,7 @@ void CBulanci::CMenu_LoadBackgroundMusic(uint param_1) { STUB_BODY(); }
 
 // !FUNC 0x004252f0 BEGIN
 /* 4252F0-425333 00043 */
-uchar CBulanci::CMenu_SetDayNightBg(char param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CMenu_SetDayNightBg(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004252f0 END
 
 // !FUNC 0x00425400 BEGIN
@@ -398,7 +398,7 @@ uchar CBulanci::CMenu_PollDayNight(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004265e0 BEGIN
 /* 4265E0-426CD9 006F9 */
-uint* CBulanci::CMenu_ctor_with_ui(uint param_1, int param_2) { STUB_BODY(); return 0; }
+void* CBulanci::CMenu_ctor_with_ui(uint param_1, uchar param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004265e0 END
 
 // !FUNC 0x00427100 BEGIN
@@ -408,22 +408,22 @@ uchar CBulanci::FUN_00427100(uint param_1, char param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x00427d40 BEGIN
 /* 427D40-427E30 000F0 */
-uint* CBulanci::FUN_00427d40(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::CSpellsCtor(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00427d40 END
 
 // !FUNC 0x00427e30 BEGIN
 /* 427E30-427F6D 0013D */
-uint* CBulanci::FUN_00427e30(int param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::CShotCounterCtor(int param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00427e30 END
 
 // !FUNC 0x00427f70 BEGIN
 /* 427F70-4280E9 00179 */
-uint* CBulanci::FUN_00427f70(uint param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
+uchar CBulanci::CNumCounterCtor(uint param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00427f70 END
 
 // !FUNC 0x004280f0 BEGIN
 /* 4280F0-428869 00779 */
-uint* CBulanci::FUN_004280f0(uint param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CPanelCtor(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004280f0 END
 
 // !FUNC 0x00429990 BEGIN
@@ -453,12 +453,12 @@ uchar CBulanci::FUN_00429b90(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00429bb0 BEGIN
 /* 429BB0-429BCB 0001B */
-uchar CBulanci::CDSApp_OnDestroy(void* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CDSApp_OnDestroy(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00429bb0 END
 
 // !FUNC 0x00429d00 BEGIN
 /* 429D00-429D56 00056 */
-uchar CBulanci::CDSApp_OnActivateApp(char param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CDSApp_OnActivateApp(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00429d00 END
 
 // !FUNC 0x00429d60 BEGIN
@@ -483,7 +483,7 @@ uchar CBulanci::FUN_0042a330(int* param_1, int param_2, int param_3, int* param_
 
 // !FUNC 0x0042a500 BEGIN
 /* 42A500-42A54E 0004E */
-uchar CBulanci::CDSApp_SetWindowed(char param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CDSApp_SetWindowed(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042a500 END
 
 // !FUNC 0x0042a5c0 BEGIN
@@ -518,12 +518,12 @@ uchar CBulanci::FUN_0042b8c0(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042bd70 BEGIN
 /* 42BD70-42BD9A 0002A */
-uchar CBulanci::CDSView_Invalidate(int* param_1, char param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::CDSView_Invalidate(uchar param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0042bd70 END
 
 // !FUNC 0x0042be90 BEGIN
 /* 42BE90-42BEAB 0001B */
-uchar CBulanci::FUN_0042be90(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_0042be90(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042be90 END
 
 
@@ -574,17 +574,17 @@ uchar CBulanci::FUN_0042c540(int* param_1, int param_2, int param_3) { STUB_BODY
 
 // !FUNC 0x0042c580 BEGIN
 /* 42C580-42C658 000D8 */
-uchar CBulanci::CDSView_ComputeAnchoredRect(int* param_1, int* param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::CDSView_ComputeAnchoredRect(uchar param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0042c580 END
 
 // !FUNC 0x0042c770 BEGIN
 /* 42C770-42C7CD 0005D */
-uchar CBulanci::FUN_0042c770(ushort param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
+uchar CBulanci::CDSView_BroadcastEventToChildren(ushort param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0042c770 END
 
 // !FUNC 0x0042cae0 BEGIN
 /* 42CAE0-42CBA8 000C8 */
-uint CBulanci::CDSApp_AdaptDisplaySize(int* param_1) { STUB_BODY(); return 0; }
+uint CBulanci::CDSView_AdaptDisplaySize(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042cae0 END
 
 
@@ -605,7 +605,7 @@ int CBulanci::FUN_0042d3f0(ushort* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042d510 BEGIN
 /* 42D510-42D593 00083 */
-int* CBulanci::FUN_0042d510(short* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CDsStringAssignFromLiteral(short* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042d510 END
 
 // !FUNC 0x0042d7b0 BEGIN
@@ -620,12 +620,12 @@ uint* CBulanci::FUN_0042d7f0(uint* param_1, int param_2, int param_3) { STUB_BOD
 
 // !FUNC 0x0042d8c0 BEGIN
 /* 42D8C0-42D967 000A7 */
-uint* CBulanci::FUN_0042d8c0(DWORD param_1) { STUB_BODY(); return 0; }
+CDSFileStream* CBulanci::FUN_0042d8c0(DWORD param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042d8c0 END
 
 // !FUNC 0x0042d970 BEGIN
 /* 42D970-42DAA3 00133 */
-uchar CBulanci::FUN_0042d970(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_0042d970(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042d970 END
 
 // !FUNC 0x0042dab0 BEGIN
@@ -640,7 +640,7 @@ int* CBulanci::FUN_0042dc30(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042dc70 BEGIN
 /* 42DC70-42DEB1 00241 */
-uchar CBulanci::FUN_0042dc70(int* param_1, void* param_2, int* param_3) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_0042dc70(uchar param_1, void* param_2, int* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0042dc70 END
 
 // !FUNC 0x0042dec0 BEGIN
@@ -665,7 +665,7 @@ void* CBulanci::FUN_0042e230(short* param_1, short* param_2) { STUB_BODY(); retu
 
 // !FUNC 0x0042e2f0 BEGIN
 /* 42E2F0-42E3FE 0010E */
-int* CBulanci::FUN_0042e2f0(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_0042e2f0(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042e2f0 END
 
 // !FUNC 0x0042e400 BEGIN
@@ -685,27 +685,27 @@ int CBulanci::FUN_0042e730(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042e850 BEGIN
 /* 42E850-42E878 00028 */
-void* CBulanci::FUN_0042e850(int param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_0042e850(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042e850 END
 
 // !FUNC 0x0042e880 BEGIN
 /* 42E880-42E8A2 00022 */
-void* CBulanci::FUN_0042e880(ushort* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_0042e880(ushort* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042e880 END
 
 // !FUNC 0x0042e8b0 BEGIN
 /* 42E8B0-42E8E3 00033 */
-void* CBulanci::BuildLocalDateTime(void* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::BuildLocalDateTime(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042e8b0 END
 
 // !FUNC 0x0042ea20 BEGIN
 /* 42EA20-42EA36 00016 */
-uchar CBulanci::InitializeClassIdLookup(int param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::InitializeClassIdLookup(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042ea20 END
 
 // !FUNC 0x0042f3e0 BEGIN
 /* 42F3E0-42F404 00024 */
-uint CBulanci::CDSEventHandler_EnqueueEvent(int* param_1) { STUB_BODY(); return 0; }
+uint CBulanci::CDSEventHandler_EnqueueEvent(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042f3e0 END
 
 // !FUNC 0x0042f4b0 BEGIN
@@ -715,7 +715,7 @@ uchar CBulanci::FUN_0042f4b0(int param_1, uint param_2, uint param_3, uint param
 
 // !FUNC 0x0042f8b0 BEGIN
 /* 42F8B0-42F91D 0006D */
-int CBulanci::FUN_0042f8b0(int param_1) { STUB_BODY(); return 0; }
+uint CBulanci::FUN_0042f8b0(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042f8b0 END
 
 // !FUNC 0x0042f940 BEGIN
@@ -760,7 +760,7 @@ uchar CBulanci::FUN_004356e0(int* param_1, uint param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x00435960 BEGIN
 /* 435960-4359F3 00093 */
-uint* CBulanci::FUN_00435960(int* param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::FUN_00435960(int* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00435960 END
 
 // !FUNC 0x004359f3 BEGIN
@@ -790,7 +790,7 @@ uchar CBulanci::RegQueryBinaryStream(int param_1, int* param_2) { STUB_BODY(); r
 
 // !FUNC 0x00438340 BEGIN
 /* 438340-438343 00003 */
-uchar CBulanci::FUN_00438340() { STUB_BODY(); return 0; }
+uchar CBulanci::CDSView_NoOpStub() { STUB_BODY(); return 0; }
 // !FUNC 0x00438340 END
 
 // !FUNC 0x00438f80 BEGIN

@@ -12,7 +12,7 @@ public:
 	/* 416FB0 */ uchar* FUN_00416fb0();
 	// !DECL 0x00416fb0 END
 	// !DECL 0x00416fc0 BEGIN
-	/* 416FC0 */ uint* FUN_00416fc0(uint* param_1);
+	/* 416FC0 */ void* FUN_00416fc0(uint* param_1);
 	// !DECL 0x00416fc0 END
 };
 

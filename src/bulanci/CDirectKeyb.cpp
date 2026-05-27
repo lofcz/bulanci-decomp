@@ -24,6 +24,6 @@ uchar CDirectKeyb::FUN_00412350(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00412440 BEGIN
 /* 412440-41245E 0001E */
-uint* CDirectKeyb::FUN_00412440(uchar param_1) { STUB_BODY(); return 0; }
+void* CDirectKeyb::FUN_00412440(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00412440 END
 

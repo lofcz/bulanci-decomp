@@ -33,13 +33,13 @@ public:
 	/* 404A90 */ uchar CIcon_AdjustorThunk18_Dtor(uchar param_1);
 	// !DECL 0x00404a90 END
 	// !DECL 0x00404aa0 BEGIN
-	/* 404AA0 */ uchar CIcon_dtor(uint* param_1);
+	/* 404AA0 */ uchar CIcon_dtor(uchar param_1);
 	// !DECL 0x00404aa0 END
 	// !DECL 0x004065e0 BEGIN
-	/* 4065E0 */ uint* CIcon_vDtor(uchar param_1);
+	/* 4065E0 */ void* CIcon_vDtor(uchar param_1);
 	// !DECL 0x004065e0 END
 	// !DECL 0x004086e0 BEGIN
-	/* 4086E0 */ uint* CIcon_BuildAt(uint param_1, uint param_2, ushort param_3, int param_4);
+	/* 4086E0 */ void* CIcon_BuildAt(uint param_1, uint param_2, ushort param_3, int param_4);
 	// !DECL 0x004086e0 END
 };
 

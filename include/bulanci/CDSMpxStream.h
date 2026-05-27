@@ -33,7 +33,7 @@ public:
 	/* 4330B0 */ uchar FUN_004330b0(uint* param_1);
 	// !DECL 0x004330b0 END
 	// !DECL 0x00433160 BEGIN
-	/* 433160 */ uint* FUN_00433160(uchar param_1);
+	/* 433160 */ void* FUN_00433160(uchar param_1);
 	// !DECL 0x00433160 END
 	// !DECL 0x00433180 BEGIN
 	/* 433180 */ uchar LoadMpxFile(int* param_1);

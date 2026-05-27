@@ -12,10 +12,10 @@ public:
 	/* 404E80 */ static uchar BlitStatic(void* param_1, int* param_2, int param_3, uint param_4);
 	// !DECL 0x00404e80 END
 	// !DECL 0x004240f0 BEGIN
-	/* 4240F0 */ uchar Render(int param_1);
+	/* 4240F0 */ uchar CPoemScroller_Render(int param_1);
 	// !DECL 0x004240f0 END
 	// !DECL 0x00425ca0 BEGIN
-	/* 425CA0 */ uchar Destructor(uint* param_1);
+	/* 425CA0 */ uchar Destructor(uchar param_1);
 	// !DECL 0x00425ca0 END
 	// !DECL 0x00425da0 BEGIN
 	/* 425DA0 */ uchar* GetClassIdentifier();
@@ -45,7 +45,7 @@ public:
 	/* 4264C5 */ uchar CatchExceptionHelper();
 	// !DECL 0x004264c5 END
 	// !DECL 0x004264e0 BEGIN
-	/* 4264E0 */ uint* ScalarDeletingDestructor(uchar param_1);
+	/* 4264E0 */ void* ScalarDeletingDestructor(uchar param_1);
 	// !DECL 0x004264e0 END
 	// !DECL 0x00433280 BEGIN
 	/* 433280 */ uchar rect_Intersect(int* param_1);

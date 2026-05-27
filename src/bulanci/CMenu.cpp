@@ -24,7 +24,7 @@ uchar CMenu::FUN_00401bb4() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040b6d0 BEGIN
 /* 40B6D0-40B759 00089 */
-uint* CMenu::FUN_0040b6d0(int param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CMenu::FUN_0040b6d0(int param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b6d0 END
 
 // !FUNC 0x0040d360 BEGIN
@@ -34,12 +34,12 @@ uchar CMenu::FUN_0040d360(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040ffd0 BEGIN
 /* 40FFD0-4100C3 000F3 */
-uint* CMenu::FUN_0040ffd0(uint param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
+void* CMenu::FUN_0040ffd0(uint param_1, uint param_2, uchar param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ffd0 END
 
 // !FUNC 0x004104f0 BEGIN
 /* 4104F0-410E1C 0092C */
-uint* CMenu::CStartGame2_ctor(int param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CStartGame2_ctor(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004104f0 END
 
 // !FUNC 0x00412720 BEGIN
@@ -54,7 +54,7 @@ uint CMenu::FUN_00412760(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00412780 BEGIN
 /* 412780-4127C2 00042 */
-uchar CMenu::CMenu_CleanupSlots(void* param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_CleanupSlots(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00412780 END
 
 // !FUNC 0x004127d0 BEGIN
@@ -74,7 +74,7 @@ uchar CMenu::FUN_00413620(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00413b20 BEGIN
 /* 413B20-413B8F 0006F */
-uchar CMenu::FUN_00413b20(uint param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenuGetResourceById(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00413b20 END
 
 // !FUNC 0x00414170 BEGIN
@@ -89,12 +89,12 @@ uchar CMenu::Catch_00414232() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00414640 BEGIN
 /* 414640-4146AC 0006C */
-uchar CMenu::CMenu_NetSendKickAll(void* param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_NetSendKickAll(CStartGame2* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00414640 END
 
 // !FUNC 0x00414790 BEGIN
 /* 414790-414847 000B7 */
-uchar CMenu::CMenu_ShowLobby(void* param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_ShowLobby(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00414790 END
 
 // !FUNC 0x00414847 BEGIN
@@ -104,7 +104,7 @@ uchar CMenu::Catch_00414847() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00414dd0 BEGIN
 /* 414DD0-41520D 0043D */
-uchar CMenu::CMenu_OpenNetworkSession(void* param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_OpenNetworkSession(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00414dd0 END
 
 // !FUNC 0x0041520d BEGIN
@@ -161,7 +161,7 @@ uchar CMenu::FUN_00424600(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00424e70 BEGIN
 /* 424E70-424F4B 000DB */
-uchar CMenu::CMenu_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00424e70 END
 
 // !FUNC 0x00424f50 BEGIN
@@ -176,7 +176,7 @@ char CMenu::CMenu_OnKeyDown(uchar param_1, char param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x00425240 BEGIN
 /* 425240-42525E 0001E */
-uint* CMenu::FUN_00425240(uchar param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_VectorDtorWrapper(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00425240 END
 
 // !FUNC 0x00425340 BEGIN
@@ -236,7 +236,7 @@ uchar CMenu::CDSDirectPlay_JoinSession(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043b360 BEGIN
 /* 43B360-43B4B1 00151 */
-uchar CMenu::CDSDirectPlay_ConnectTCP(void* param_1, uint* param_2, uint* param_3, char* param_4) { STUB_BODY(); return 0; }
+uchar CMenu::CDSDirectPlay_ConnectTCP(uchar param_1, uint* param_2, uint* param_3, char* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0043b360 END
 
 // !FUNC 0x0043b620 BEGIN

@@ -39,12 +39,12 @@ uchar CDSAudioBank::FUN_004293e0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004294b0 BEGIN
 /* 4294B0-4294CE 0001E */
-uint* CDSAudioBank::FUN_004294b0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSAudioBank::FUN_004294b0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004294b0 END
 
 // !FUNC 0x00429530 BEGIN
 /* 429530-4295FC 000CC */
-uint* CDSAudioBank::FUN_00429530(int* param_1, uint param_2, uchar* param_3) { STUB_BODY(); return 0; }
+void* CDSAudioBank::FUN_00429530(int* param_1, uint param_2, uchar* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00429530 END
 
 // !FUNC 0x00429600 BEGIN

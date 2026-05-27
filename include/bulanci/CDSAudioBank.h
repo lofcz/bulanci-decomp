@@ -27,10 +27,10 @@ public:
 	/* 4293E0 */ uchar FUN_004293e0(uint* param_1);
 	// !DECL 0x004293e0 END
 	// !DECL 0x004294b0 BEGIN
-	/* 4294B0 */ uint* FUN_004294b0(uchar param_1);
+	/* 4294B0 */ void* FUN_004294b0(uchar param_1);
 	// !DECL 0x004294b0 END
 	// !DECL 0x00429530 BEGIN
-	/* 429530 */ uint* FUN_00429530(int* param_1, uint param_2, uchar* param_3);
+	/* 429530 */ void* FUN_00429530(int* param_1, uint param_2, uchar* param_3);
 	// !DECL 0x00429530 END
 	// !DECL 0x00429600 BEGIN
 	/* 429600 */ uchar FUN_00429600(int* param_1);

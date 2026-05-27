@@ -48,7 +48,7 @@ public:
 	/* 434670 */ uchar CDSResourceSign_dtor(uint* param_1);
 	// !DECL 0x00434670 END
 	// !DECL 0x004349a0 BEGIN
-	/* 4349A0 */ uint* CDSResourceSign_scalar_deleting_dtor(uchar param_1);
+	/* 4349A0 */ void* CDSResourceSign_scalar_deleting_dtor(uchar param_1);
 	// !DECL 0x004349a0 END
 };
 

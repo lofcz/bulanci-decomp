@@ -70,7 +70,7 @@ public:
 	/* 447B77 */ static void* _CallCatchBlock2(EHRegistrationNode* param_1, _s_FuncInfo* param_2, void* param_3, int param_4, ulong param_5);
 	// !DECL 0x00447b77 END
 	// !DECL 0x00447bd5 BEGIN
-	/* 447BD5 */ uchar _security_check_cookie(int param_1);
+	/* 447BD5 */ void _security_check_cookie(int param_1);
 	// !DECL 0x00447bd5 END
 	// !DECL 0x00447cb0 BEGIN
 	/* 447CB0 */ uchar _alloca_probe();
@@ -223,7 +223,7 @@ public:
 	/* 44A769 */ uchar _SEH_epilog4();
 	// !DECL 0x0044a769 END
 	// !DECL 0x0044a780 BEGIN
-	/* 44A780 */ static uint _except_handler4(int* param_1, PVOID param_2, uint param_3);
+	/* 44A780 */ static uint _except_handler4(uint param_1, int param_2);
 	// !DECL 0x0044a780 END
 	// !DECL 0x0044a920 BEGIN
 	/* 44A920 */ static int _callnewh(size_t param_1);
@@ -355,7 +355,7 @@ public:
 	/* 44C7FA */ static int _updatetmbcinfo();
 	// !DECL 0x0044c7fa END
 	// !DECL 0x0044c918 BEGIN
-	/* 44C918 */ static uchar _setmbcp_nolock(uint param_1, int param_2);
+	/* 44C918 */ static uint _setmbcp_nolock(uint param_1, int param_2);
 	// !DECL 0x0044c918 END
 	// !DECL 0x0044cac3 BEGIN
 	/* 44CAC3 */ static int _setmbcp(int param_1);
@@ -421,7 +421,7 @@ public:
 	/* 44DCFF */ uint _cftof2_l(int param_1, size_t param_2, char param_3, localeinfo_struct* param_4);
 	// !DECL 0x0044dcff END
 	// !DECL 0x0044ddf4 BEGIN
-	/* 44DDF4 */ static uchar _cftof_l(double* param_1, uchar* param_2, int param_3, size_t param_4, localeinfo_struct* param_5);
+	/* 44DDF4 */ static errno_t _cftof_l(double* param_1, uchar* param_2, int param_3, size_t param_4, localeinfo_struct* param_5);
 	// !DECL 0x0044ddf4 END
 	// !DECL 0x0044dead BEGIN
 	/* 44DEAD */ static uchar _cftog_l(double* param_1, uchar* param_2, uint param_3, size_t param_4, int param_5, localeinfo_struct* param_6);
@@ -577,10 +577,10 @@ public:
 	/* 450AD0 */ static char* _strpbrk(char* param_1, char* param_2);
 	// !DECL 0x00450ad0 END
 	// !DECL 0x00450b10 BEGIN
-	/* 450B10 */ static uchar _ansicp(int param_1);
+	/* 450B10 */ static long _ansicp(int param_1);
 	// !DECL 0x00450b10 END
 	// !DECL 0x00450b57 BEGIN
-	/* 450B57 */ static uchar _convertcp(int param_1, int param_2, char* param_3, uint* param_4, int param_5, int param_6);
+	/* 450B57 */ static int _convertcp(int param_1, int param_2, char* param_3, uint* param_4, int param_5, int param_6);
 	// !DECL 0x00450b57 END
 	// !DECL 0x00450d09 BEGIN
 	/* 450D09 */ static int _crtMessageBoxA(int param_1, int param_2, int param_3);

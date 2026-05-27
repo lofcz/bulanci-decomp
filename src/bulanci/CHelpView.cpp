@@ -2,7 +2,7 @@
 
 // !FUNC 0x004218a0 BEGIN
 /* 4218A0-4218F7 00057 */
-uint* CHelpView::FUN_004218a0(uint* param_1) { STUB_BODY(); return 0; }
+CDSChained* CHelpView::FUN_004218a0(CDSChained* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004218a0 END
 
 // !FUNC 0x00421900 BEGIN

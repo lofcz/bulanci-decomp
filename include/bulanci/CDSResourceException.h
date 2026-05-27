@@ -15,10 +15,10 @@ public:
 	/* 434440 */ uchar FUN_00434440(uint* param_1);
 	// !DECL 0x00434440 END
 	// !DECL 0x004344a0 BEGIN
-	/* 4344A0 */ uint* FUN_004344a0(uint* param_1);
+	/* 4344A0 */ CDSException* FUN_004344a0(CDSException* param_1);
 	// !DECL 0x004344a0 END
 	// !DECL 0x004348e0 BEGIN
-	/* 4348E0 */ uint* FUN_004348e0(uchar param_1);
+	/* 4348E0 */ void* FUN_004348e0(uchar param_1);
 	// !DECL 0x004348e0 END
 };
 

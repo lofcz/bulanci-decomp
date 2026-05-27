@@ -24,6 +24,6 @@ uchar CDSSafeStreamInfo::FUN_00446ea0(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00447080 BEGIN
 /* 447080-44709E 0001E */
-uint* CDSSafeStreamInfo::FUN_00447080(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSSafeStreamInfo::FUN_00447080(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00447080 END
 

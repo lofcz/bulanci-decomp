@@ -29,6 +29,6 @@ uchar CDSAudioBankSample::FUN_00429370(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00429510 BEGIN
 /* 429510-42952E 0001E */
-uint* CDSAudioBankSample::FUN_00429510(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSAudioBankSample::FUN_00429510(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00429510 END
 

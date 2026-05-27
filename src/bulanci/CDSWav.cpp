@@ -26,7 +26,7 @@ uchar CDSWav::FUN_0041a540(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041bbe0 BEGIN
 /* 41BBE0-41BBFE 0001E */
-uint* CDSWav::FUN_0041bbe0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSWav::FUN_0041bbe0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bbe0 END
 
 // !FUNC 0x00433040 BEGIN

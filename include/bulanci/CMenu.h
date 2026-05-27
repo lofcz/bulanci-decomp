@@ -18,16 +18,16 @@ public:
 	/* 401BB4 */ uchar FUN_00401bb4();
 	// !DECL 0x00401bb4 END
 	// !DECL 0x0040b6d0 BEGIN
-	/* 40B6D0 */ uint* FUN_0040b6d0(int param_1, uint param_2);
+	/* 40B6D0 */ uchar FUN_0040b6d0(int param_1, uint param_2);
 	// !DECL 0x0040b6d0 END
 	// !DECL 0x0040d360 BEGIN
 	/* 40D360 */ uchar FUN_0040d360(int param_1);
 	// !DECL 0x0040d360 END
 	// !DECL 0x0040ffd0 BEGIN
-	/* 40FFD0 */ uint* FUN_0040ffd0(uint param_1, uint param_2, int param_3);
+	/* 40FFD0 */ void* FUN_0040ffd0(uint param_1, uint param_2, uchar param_3);
 	// !DECL 0x0040ffd0 END
 	// !DECL 0x004104f0 BEGIN
-	/* 4104F0 */ uint* CStartGame2_ctor(int param_1);
+	/* 4104F0 */ uchar CStartGame2_ctor(int param_1);
 	// !DECL 0x004104f0 END
 	// !DECL 0x00412720 BEGIN
 	/* 412720 */ uchar FUN_00412720(int param_1);
@@ -36,7 +36,7 @@ public:
 	/* 412760 */ uint FUN_00412760(uchar param_1);
 	// !DECL 0x00412760 END
 	// !DECL 0x00412780 BEGIN
-	/* 412780 */ uchar CMenu_CleanupSlots(void* param_1);
+	/* 412780 */ uchar CMenu_CleanupSlots(uchar param_1);
 	// !DECL 0x00412780 END
 	// !DECL 0x004127d0 BEGIN
 	/* 4127D0 */ uchar CMenu_ThrowModalDone(int param_1);
@@ -48,7 +48,7 @@ public:
 	/* 413620 */ uchar FUN_00413620(int param_1);
 	// !DECL 0x00413620 END
 	// !DECL 0x00413b20 BEGIN
-	/* 413B20 */ uchar FUN_00413b20(uint param_1);
+	/* 413B20 */ uchar CMenuGetResourceById(uint param_1);
 	// !DECL 0x00413b20 END
 	// !DECL 0x00414170 BEGIN
 	/* 414170 */ uchar CMenu_PickSession(uint* param_1);
@@ -57,16 +57,16 @@ public:
 	/* 414232 */ uchar Catch_00414232();
 	// !DECL 0x00414232 END
 	// !DECL 0x00414640 BEGIN
-	/* 414640 */ uchar CMenu_NetSendKickAll(void* param_1);
+	/* 414640 */ uchar CMenu_NetSendKickAll(CStartGame2* param_1);
 	// !DECL 0x00414640 END
 	// !DECL 0x00414790 BEGIN
-	/* 414790 */ uchar CMenu_ShowLobby(void* param_1);
+	/* 414790 */ uchar CMenu_ShowLobby(uchar param_1);
 	// !DECL 0x00414790 END
 	// !DECL 0x00414847 BEGIN
 	/* 414847 */ uchar Catch_00414847();
 	// !DECL 0x00414847 END
 	// !DECL 0x00414dd0 BEGIN
-	/* 414DD0 */ uchar CMenu_OpenNetworkSession(void* param_1);
+	/* 414DD0 */ uchar CMenu_OpenNetworkSession(uchar param_1);
 	// !DECL 0x00414dd0 END
 	// !DECL 0x0041520d BEGIN
 	/* 41520D */ uchar Catch_0041520d();
@@ -99,7 +99,7 @@ public:
 	/* 424600 */ uchar FUN_00424600(uchar param_1);
 	// !DECL 0x00424600 END
 	// !DECL 0x00424e70 BEGIN
-	/* 424E70 */ uchar CMenu_dtor(uint* param_1);
+	/* 424E70 */ uchar CMenu_dtor(uchar param_1);
 	// !DECL 0x00424e70 END
 	// !DECL 0x00424f50 BEGIN
 	/* 424F50 */ uchar CMenu_OnEvent(ushort param_1);
@@ -108,7 +108,7 @@ public:
 	/* 424FA0 */ char CMenu_OnKeyDown(uchar param_1, char param_2);
 	// !DECL 0x00424fa0 END
 	// !DECL 0x00425240 BEGIN
-	/* 425240 */ uint* FUN_00425240(uchar param_1);
+	/* 425240 */ uchar CMenu_VectorDtorWrapper(uchar param_1);
 	// !DECL 0x00425240 END
 	// !DECL 0x00425340 BEGIN
 	/* 425340 */ void CMenu_DispatchHotkey(ushort param_1, int param_2);
@@ -144,7 +144,7 @@ public:
 	/* 43AFA0 */ uchar CDSDirectPlay_JoinSession(uint* param_1);
 	// !DECL 0x0043afa0 END
 	// !DECL 0x0043b360 BEGIN
-	/* 43B360 */ static uchar CDSDirectPlay_ConnectTCP(void* param_1, uint* param_2, uint* param_3, char* param_4);
+	/* 43B360 */ static uchar CDSDirectPlay_ConnectTCP(uchar param_1, uint* param_2, uint* param_3, char* param_4);
 	// !DECL 0x0043b360 END
 	// !DECL 0x0043b620 BEGIN
 	/* 43B620 */ uchar CDSDirectPlay_ConnectLobby(uint* param_1, uint* param_2);

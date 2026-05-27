@@ -49,7 +49,7 @@ uchar CDSWavStream::FUN_0041a640(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041bc00 BEGIN
 /* 41BC00-41BC1E 0001E */
-uint* CDSWavStream::FUN_0041bc00(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSWavStream::FUN_0041bc00(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bc00 END
 
 // !FUNC 0x00428dd0 BEGIN

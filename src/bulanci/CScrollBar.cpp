@@ -2,12 +2,12 @@
 
 // !FUNC 0x00402e80 BEGIN
 /* 402E80-402ED5 00055 */
-uchar CScrollBar::CScrollBar_BlitVerticalTrack(void* param_1, int param_2, int param_3, int param_4, int param_5) { STUB_BODY(); return 0; }
+uchar CScrollBar::CScrollBar_BlitVerticalTrack(CPoemScroller* param_1, int param_2, int param_3, int param_4, int param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00402e80 END
 
 // !FUNC 0x00402ee0 BEGIN
 /* 402EE0-402F35 00055 */
-uchar CScrollBar::CScrollBar_BlitHorizontalTrack(void* param_1, int param_2, int param_3, int param_4, int param_5) { STUB_BODY(); return 0; }
+uchar CScrollBar::CScrollBar_BlitHorizontalTrack(CPoemScroller* param_1, int param_2, int param_3, int param_4, int param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00402ee0 END
 
 // !FUNC 0x00402f60 BEGIN
@@ -74,7 +74,7 @@ uchar CScrollBar::CScrollBar_dtor(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00406430 BEGIN
 /* 406430-40644E 0001E */
-uint* CScrollBar::CScrollBar_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CScrollBar::CScrollBar_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00406430 END
 
 // !FUNC 0x00406770 BEGIN
@@ -94,6 +94,6 @@ uchar CScrollBar::CScrollBar_OnMouseUp(uint param_1, uchar param_2) { STUB_BODY(
 
 // !FUNC 0x00408370 BEGIN
 /* 408370-40853F 001CF */
-int* CScrollBar::CScrollBar_BuildAt(int param_1, int param_2, int param_3, int param_4, uint* param_5) { STUB_BODY(); return 0; }
+void* CScrollBar::CScrollBar_BuildAt(int param_1, int param_2, int param_3, int param_4, uint* param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00408370 END
 

@@ -12,7 +12,7 @@ uchar CMovieView::OnMovieStop(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00422860 BEGIN
 /* 422860-4228E2 00082 */
-uchar CMovieView::OnEvent(short param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CMovieView::OnEvent(short param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00422860 END
 
 // !FUNC 0x00422a20 BEGIN
@@ -44,7 +44,7 @@ uchar CMovieView::ScalarDeletingDtor_Thunk_24(uchar param_1) { STUB_BODY(); retu
 
 // !FUNC 0x00422cb0 BEGIN
 /* 422CB0-422D4A 0009A */
-uchar CMovieView::Cleanup(uint* param_1) { STUB_BODY(); return 0; }
+uchar CMovieView::Cleanup(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00422cb0 END
 
 // !FUNC 0x00422d50 BEGIN
@@ -54,12 +54,12 @@ uchar CMovieView::StartPlayback(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00422e30 BEGIN
 /* 422E30-422ED4 000A4 */
-uint* CMovieView::CreateObject() { STUB_BODY(); return 0; }
+uchar CMovieView::CreateObject() { STUB_BODY(); return 0; }
 // !FUNC 0x00422e30 END
 
 // !FUNC 0x00422ee0 BEGIN
 /* 422EE0-422EFE 0001E */
-uint* CMovieView::ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CMovieView::ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00422ee0 END
 
 // !FUNC 0x004231a0 BEGIN

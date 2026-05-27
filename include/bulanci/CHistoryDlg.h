@@ -12,7 +12,7 @@ public:
 	/* 423130 */ uchar CHistoryDlg_OnEvent(ushort param_1);
 	// !DECL 0x00423130 END
 	// !DECL 0x004231d0 BEGIN
-	/* 4231D0 */ uint* CHistoryDlg_ctor(uint* param_1);
+	/* 4231D0 */ CWindow* CHistoryDlg_ctor(CWindow* param_1);
 	// !DECL 0x004231d0 END
 	// !DECL 0x00423430 BEGIN
 	/* 423430 */ uchar* FUN_00423430();
@@ -27,10 +27,10 @@ public:
 	/* 423460 */ uchar FUN_00423460(uchar param_1);
 	// !DECL 0x00423460 END
 	// !DECL 0x00423470 BEGIN
-	/* 423470 */ uchar FUN_00423470(uint* param_1);
+	/* 423470 */ uchar FUN_00423470(uchar param_1);
 	// !DECL 0x00423470 END
 	// !DECL 0x00423680 BEGIN
-	/* 423680 */ uint* FUN_00423680(uchar param_1);
+	/* 423680 */ void* FUN_00423680(uchar param_1);
 	// !DECL 0x00423680 END
 };
 

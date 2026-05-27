@@ -36,12 +36,12 @@ uchar CStartGame1::CStartGame1_OnEvent(ushort param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x0040c650 BEGIN
 /* 40C650-40CC5D 0060D */
-uchar CStartGame1::CStartGame1_BuildUi(int* param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_BuildUi(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040c650 END
 
 // !FUNC 0x0040f400 BEGIN
 /* 40F400-40F4AB 000AB */
-int* CStartGame1::CStartGame1_ctor(int* param_1) { STUB_BODY(); return 0; }
+CWindow* CStartGame1::CStartGame1_ctor(CWindow* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f400 END
 
 // !FUNC 0x0040f4b0 BEGIN
@@ -73,11 +73,11 @@ uchar CStartGame1::FUN_0040f4f0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040f500 BEGIN
 /* 40F500-40F55A 0005A */
-uchar CStartGame1::FUN_0040f500(uint* param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::FUN_0040f500(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f500 END
 
 // !FUNC 0x0040f560 BEGIN
 /* 40F560-40F57E 0001E */
-uint* CStartGame1::FUN_0040f560(uchar param_1) { STUB_BODY(); return 0; }
+void* CStartGame1::FUN_0040f560(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f560 END
 

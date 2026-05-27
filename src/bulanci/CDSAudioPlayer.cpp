@@ -24,6 +24,6 @@ uchar CDSAudioPlayer::FUN_0043a650(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043a740 BEGIN
 /* 43A740-43A75E 0001E */
-uint* CDSAudioPlayer::FUN_0043a740(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSAudioPlayer::FUN_0043a740(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043a740 END
 

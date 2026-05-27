@@ -16,7 +16,7 @@ uchar* CDSChain::FUN_00401200() {
 
 // !FUNC 0x00401210 BEGIN
 /* 401210-40122E 0001E */
-uint* CDSChain::FUN_00401210(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSChain::FUN_00401210(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401210 END
 
 // !FUNC 0x00401260 BEGIN

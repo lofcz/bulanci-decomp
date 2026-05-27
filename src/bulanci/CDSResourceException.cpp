@@ -19,11 +19,11 @@ uchar CDSResourceException::FUN_00434440(uint* param_1) { STUB_BODY(); return 0;
 
 // !FUNC 0x004344a0 BEGIN
 /* 4344A0-4344BF 0001F */
-uint* CDSResourceException::FUN_004344a0(uint* param_1) { STUB_BODY(); return 0; }
+CDSException* CDSResourceException::FUN_004344a0(CDSException* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004344a0 END
 
 // !FUNC 0x004348e0 BEGIN
 /* 4348E0-4348FE 0001E */
-uint* CDSResourceException::FUN_004348e0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSResourceException::FUN_004348e0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004348e0 END
 

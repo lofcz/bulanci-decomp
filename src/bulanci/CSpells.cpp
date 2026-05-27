@@ -19,6 +19,6 @@ uchar CSpells::Draw(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00427b10 BEGIN
 /* 427B10-427B92 00082 */
-uint* CSpells::FUN_00427b10() { STUB_BODY(); return 0; }
+uchar CSpells::FUN_00427b10() { STUB_BODY(); return 0; }
 // !FUNC 0x00427b10 END
 

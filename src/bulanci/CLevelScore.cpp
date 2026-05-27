@@ -29,6 +29,6 @@ uchar CLevelScore::Serialize(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00409a40 BEGIN
 /* 409A40-409A5E 0001E */
-uint* CLevelScore::CLevelScore_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CLevelScore::CLevelScore_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409a40 END
 

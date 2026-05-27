@@ -27,7 +27,7 @@ uchar CChatList::FUN_00405ea0(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040d010 BEGIN
 /* 40D010-40D089 00079 */
-uint* CChatList::CChatList_BuildAt(int* param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
+void* CChatList::CChatList_BuildAt(int* param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0040d010 END
 
 // !FUNC 0x0040d090 BEGIN

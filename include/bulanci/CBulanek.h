@@ -39,7 +39,7 @@ public:
 	/* 416830 */ uchar FUN_00416830(uchar param_1, ushort param_2, uint param_3, uint param_4);
 	// !DECL 0x00416830 END
 	// !DECL 0x004168c0 BEGIN
-	/* 4168C0 */ uchar FUN_004168c0(uchar param_1);
+	/* 4168C0 */ uchar FUN_004168c0(int param_1);
 	// !DECL 0x004168c0 END
 	// !DECL 0x004172d0 BEGIN
 	/* 4172D0 */ uchar FUN_004172d0(int param_1);
@@ -57,7 +57,7 @@ public:
 	/* 417570 */ uchar CBulanek_ResetAmmoAndPlayReload(void* param_1);
 	// !DECL 0x00417570 END
 	// !DECL 0x004175f0 BEGIN
-	/* 4175F0 */ uchar FUN_004175f0(int* param_1);
+	/* 4175F0 */ uchar FUN_004175f0(uint* param_1);
 	// !DECL 0x004175f0 END
 	// !DECL 0x00417640 BEGIN
 	/* 417640 */ uchar FUN_00417640(int param_1);
@@ -84,7 +84,7 @@ public:
 	/* 4180E0 */ uchar FUN_004180e0(int param_1);
 	// !DECL 0x004180e0 END
 	// !DECL 0x004184a0 BEGIN
-	/* 4184A0 */ uchar FUN_004184a0(int* param_1);
+	/* 4184A0 */ uchar FUN_004184a0(void* param_1);
 	// !DECL 0x004184a0 END
 	// !DECL 0x00418e90 BEGIN
 	/* 418E90 */ uchar* FUN_00418e90();
@@ -120,16 +120,16 @@ public:
 	/* 4197B0 */ uint FUN_004197b0(int param_1, char param_2);
 	// !DECL 0x004197b0 END
 	// !DECL 0x00419a00 BEGIN
-	/* 419A00 */ uint* FUN_00419a00(uint param_1, uint param_2, uint param_3);
+	/* 419A00 */ void* FUN_00419a00(uint param_1, uint param_2, uint param_3);
 	// !DECL 0x00419a00 END
 	// !DECL 0x00419aa0 BEGIN
-	/* 419AA0 */ uint* FUN_00419aa0(uint param_1);
+	/* 419AA0 */ void* FUN_00419aa0(uint param_1);
 	// !DECL 0x00419aa0 END
 	// !DECL 0x0041a390 BEGIN
-	/* 41A390 */ uchar FUN_0041a390(int* param_1, char param_2);
+	/* 41A390 */ uchar FUN_0041a390(void* param_1, int param_2);
 	// !DECL 0x0041a390 END
 	// !DECL 0x0041adb0 BEGIN
-	/* 41ADB0 */ uchar FUN_0041adb0(uint* param_1);
+	/* 41ADB0 */ uchar FUN_0041adb0(uchar param_1);
 	// !DECL 0x0041adb0 END
 	// !DECL 0x0041aed0 BEGIN
 	/* 41AED0 */ uchar FUN_0041aed0(void* param_1);
@@ -138,10 +138,10 @@ public:
 	/* 41B180 */ uchar FUN_0041b180(int param_1);
 	// !DECL 0x0041b180 END
 	// !DECL 0x0041bc20 BEGIN
-	/* 41BC20 */ uint* FUN_0041bc20(uchar param_1);
+	/* 41BC20 */ void* FUN_0041bc20(uchar param_1);
 	// !DECL 0x0041bc20 END
 	// !DECL 0x0041c610 BEGIN
-	/* 41C610 */ uchar FUN_0041c610(void* param_1);
+	/* 41C610 */ uchar CBulanekResolveAndBindAnimTrack(void* param_1);
 	// !DECL 0x0041c610 END
 	// !DECL 0x0041c860 BEGIN
 	/* 41C860 */ uchar FUN_0041c860(void* param_1);
@@ -153,7 +153,7 @@ public:
 	/* 41DB00 */ uint CBulanek_OnTakeDamage(int param_1, int param_2, char param_3);
 	// !DECL 0x0041db00 END
 	// !DECL 0x0041ea90 BEGIN
-	/* 41EA90 */ uchar CBulanek_ApplyPickupEffect(uchar param_1);
+	/* 41EA90 */ uchar CBulanek_ApplyPickupEffect(ODSImage param_1);
 	// !DECL 0x0041ea90 END
 	// !DECL 0x0041eca0 BEGIN
 	/* 41ECA0 */ uchar FUN_0041eca0(void* param_1);
@@ -162,7 +162,7 @@ public:
 	/* 41ED10 */ uchar FUN_0041ed10(void* param_1);
 	// !DECL 0x0041ed10 END
 	// !DECL 0x0041f900 BEGIN
-	/* 41F900 */ uchar CBulanek_OnDeath(uchar param_1, uchar param_2);
+	/* 41F900 */ uchar CBulanek_OnDeath(int param_1, uchar param_2);
 	// !DECL 0x0041f900 END
 	// !DECL 0x0041fb90 BEGIN
 	/* 41FB90 */ uchar FUN_0041fb90(int* param_1);

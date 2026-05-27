@@ -21,7 +21,7 @@ public:
 	/* 4093C0 */ uchar Destructor(uint* param_1);
 	// !DECL 0x004093c0 END
 	// !DECL 0x00409a90 BEGIN
-	/* 409A90 */ uint* ScalarDeletingDestructor(uchar param_1);
+	/* 409A90 */ void* ScalarDeletingDestructor(uchar param_1);
 	// !DECL 0x00409a90 END
 };
 

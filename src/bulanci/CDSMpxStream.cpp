@@ -49,7 +49,7 @@ uchar CDSMpxStream::FUN_004330b0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00433160 BEGIN
 /* 433160-43317E 0001E */
-uint* CDSMpxStream::FUN_00433160(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSMpxStream::FUN_00433160(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433160 END
 
 // !FUNC 0x00433180 BEGIN

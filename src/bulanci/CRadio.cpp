@@ -22,12 +22,12 @@ uchar CRadio::CRadio_Render(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00403cc0 BEGIN
 /* 403CC0-403D04 00044 */
-uchar CRadio::CRadio_SetSelected(char param_1) { STUB_BODY(); return 0; }
+uchar CRadio::CRadio_SetSelected(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00403cc0 END
 
 // !FUNC 0x00403d10 BEGIN
 /* 403D10-403D20 00010 */
-uchar CRadio::CRadio_LoadData(char* param_1) { STUB_BODY(); return 0; }
+uchar CRadio::CRadio_LoadData(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00403d10 END
 
 // !FUNC 0x00405240 BEGIN
@@ -64,17 +64,17 @@ uchar CRadio::CRadio_AdjustorThunk18_Dtor(uchar param_1) { STUB_BODY(); return 0
 
 // !FUNC 0x00407500 BEGIN
 /* 407500-4075EA 000EA */
-uchar CRadio::CRadio_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CRadio::CRadio_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00407500 END
 
 // !FUNC 0x00407f30 BEGIN
 /* 407F30-407F4E 0001E */
-uint* CRadio::CRadio_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CRadio::CRadio_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00407f30 END
 
 // !FUNC 0x00408540 BEGIN
 /* 408540-4086D9 00199 */
-uint* CRadio::CRadio_BuildAt(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+void* CRadio::CRadio_BuildAt(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00408540 END
 
 // !FUNC 0x0040aa00 BEGIN

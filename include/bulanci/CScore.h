@@ -21,13 +21,13 @@ public:
 	/* 40BE00 */ uchar DeletingDestructorThunk_10(uchar param_1);
 	// !DECL 0x0040be00 END
 	// !DECL 0x0040e120 BEGIN
-	/* 40E120 */ uchar Destructor(uint* param_1);
+	/* 40E120 */ uchar Destructor(uchar param_1);
 	// !DECL 0x0040e120 END
 	// !DECL 0x0040efd0 BEGIN
 	/* 40EFD0 */ uint* Create();
 	// !DECL 0x0040efd0 END
 	// !DECL 0x0040f070 BEGIN
-	/* 40F070 */ uint* ScalarDeletingDestructor(uchar param_1);
+	/* 40F070 */ void* ScalarDeletingDestructor(uchar param_1);
 	// !DECL 0x0040f070 END
 };
 

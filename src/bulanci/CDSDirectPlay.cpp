@@ -19,6 +19,6 @@ uchar CDSDirectPlay::CDSDirectPlay_dtor_body(uint* param_1) { STUB_BODY(); retur
 
 // !FUNC 0x0043b600 BEGIN
 /* 43B600-43B61E 0001E */
-uint* CDSDirectPlay::CDSDirectPlay_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSDirectPlay::CDSDirectPlay_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043b600 END
 

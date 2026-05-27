@@ -21,7 +21,7 @@ public:
 	/* 405EA0 */ uchar FUN_00405ea0(void* param_1);
 	// !DECL 0x00405ea0 END
 	// !DECL 0x0040d010 BEGIN
-	/* 40D010 */ uint* CChatList_BuildAt(int* param_1, uint param_2, uint param_3);
+	/* 40D010 */ void* CChatList_BuildAt(int* param_1, uint param_2, uint param_3);
 	// !DECL 0x0040d010 END
 	// !DECL 0x0040d090 BEGIN
 	/* 40D090 */ uchar* CChatList_GetTypeDescriptor();

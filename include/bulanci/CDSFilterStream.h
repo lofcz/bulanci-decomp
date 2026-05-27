@@ -54,7 +54,7 @@ public:
 	/* 430C10 */ uchar CloseStream(int param_1);
 	// !DECL 0x00430c10 END
 	// !DECL 0x00430c30 BEGIN
-	/* 430C30 */ uint* FUN_00430c30(uchar param_1);
+	/* 430C30 */ void* FUN_00430c30(uchar param_1);
 	// !DECL 0x00430c30 END
 	// !DECL 0x00430c90 BEGIN
 	/* 430C90 */ uchar RaiseUnsupportedOperation(uint param_1);
@@ -66,10 +66,10 @@ public:
 	/* 430D00 */ uchar SetStreamSize(uint param_1, uint param_2);
 	// !DECL 0x00430d00 END
 	// !DECL 0x00430dd0 BEGIN
-	/* 430DD0 */ uint* FUN_00430dd0(int* param_1, uint param_2, uint param_3, uint param_4, uint param_5);
+	/* 430DD0 */ void* FUN_00430dd0(int* param_1, uint param_2, uint param_3, uint param_4, uint param_5);
 	// !DECL 0x00430dd0 END
 	// !DECL 0x00430f40 BEGIN
-	/* 430F40 */ uint* FUN_00430f40(int param_1);
+	/* 430F40 */ void* FUN_00430f40(int param_1);
 	// !DECL 0x00430f40 END
 };
 

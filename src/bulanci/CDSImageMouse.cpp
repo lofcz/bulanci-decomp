@@ -19,7 +19,7 @@ uchar CDSImageMouse::FUN_0042acb0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042af60 BEGIN
 /* 42AF60-42AF7E 0001E */
-uint* CDSImageMouse::FUN_0042af60(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSImageMouse::FUN_0042af60(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042af60 END
 
 // !FUNC 0x0042b9a0 BEGIN

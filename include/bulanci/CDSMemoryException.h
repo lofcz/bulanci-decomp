@@ -6,10 +6,10 @@
 class CDSMemoryException {
 public:
 	// !DECL 0x004349c0 BEGIN
-	/* 4349C0 */ wchar_t* FUN_004349c0(wchar_t* param_1);
+	/* 4349C0 */ void* FUN_004349c0(wchar_t* param_1);
 	// !DECL 0x004349c0 END
 	// !DECL 0x00434a70 BEGIN
-	/* 434A70 */ uint* FUN_00434a70(uint* param_1);
+	/* 434A70 */ CDSException* FUN_00434a70(CDSException* param_1);
 	// !DECL 0x00434a70 END
 	// !DECL 0x00434a90 BEGIN
 	/* 434A90 */ uchar* FUN_00434a90();

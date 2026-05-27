@@ -14,11 +14,11 @@ uchar CListBoxItem::FUN_00404cb0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004066c0 BEGIN
 /* 4066C0-4066DE 0001E */
-uint* CListBoxItem::FUN_004066c0(uchar param_1) { STUB_BODY(); return 0; }
+void* CListBoxItem::FUN_004066c0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004066c0 END
 
 // !FUNC 0x0040b640 BEGIN
 /* 40B640-40B6C9 00089 */
-uint* CListBoxItem::CListBoxItem_ctor(int param_1) { STUB_BODY(); return 0; }
+void* CListBoxItem::CListBoxItem_ctor(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b640 END
 

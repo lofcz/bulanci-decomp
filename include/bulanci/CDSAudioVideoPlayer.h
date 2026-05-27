@@ -21,7 +21,7 @@ public:
 	/* 43BCA0 */ uint* Constructor(uint* param_1);
 	// !DECL 0x0043bca0 END
 	// !DECL 0x0043bd40 BEGIN
-	/* 43BD40 */ uint* FUN_0043bd40(uchar param_1);
+	/* 43BD40 */ void* FUN_0043bd40(uchar param_1);
 	// !DECL 0x0043bd40 END
 };
 

@@ -7,7 +7,7 @@ uchar CLevelScript::CLevelScriptTimer_FireOnTimer(int param_1) { STUB_BODY(); re
 
 // !FUNC 0x004185c0 BEGIN
 /* 4185C0-418674 000B4 */
-uint* CLevelScript::ctor(uint* param_1) { STUB_BODY(); return 0; }
+CDSScript* CLevelScript::ctor(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004185c0 END
 
 // !FUNC 0x00418680 BEGIN
@@ -64,7 +64,7 @@ uchar CLevelScript::FUN_00418bf0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041a450 BEGIN
 /* 41A450-41A46E 0001E */
-uint* CLevelScript::FUN_0041a450(uchar param_1) { STUB_BODY(); return 0; }
+void* CLevelScript::FUN_0041a450(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a450 END
 
 // !FUNC 0x004216c0 BEGIN

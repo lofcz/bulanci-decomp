@@ -9,7 +9,7 @@ uchar* CChatEdit::CChatEdit_GetTypeDescriptor() {
 
 // !FUNC 0x0040ce50 BEGIN
 /* 40CE50-40CEDC 0008C */
-uint* CChatEdit::CChatEdit_BuildAt(uint* param_1, uint param_2, uint param_3, uint param_4) { STUB_BODY(); return 0; }
+void* CChatEdit::CChatEdit_BuildAt(uint* param_1, uint param_2, uint param_3, uint param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ce50 END
 
 // !FUNC 0x0040cee0 BEGIN

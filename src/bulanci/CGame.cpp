@@ -2,7 +2,7 @@
 
 // !FUNC 0x00401d00 BEGIN
 /* 401D00-401D21 00021 */
-int* CGame::FUN_00401d00(int param_1) { STUB_BODY(); return 0; }
+void* CGame::FUN_00401d00(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401d00 END
 
 // !FUNC 0x0040a840 BEGIN
@@ -111,7 +111,7 @@ uchar CGame::FUN_00414ca0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00415220 BEGIN
 /* 415220-415284 00064 */
-uchar CGame::FUN_00415220(int* param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CGame::FUN_00415220(uint* param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00415220 END
 
 // !FUNC 0x00415290 BEGIN
@@ -121,7 +121,7 @@ uchar CGame::CGame_ProcessNetMessage(int param_1, int* param_2) { STUB_BODY(); r
 
 // !FUNC 0x00415f60 BEGIN
 /* 415F60-415F7E 0001E */
-uint* CGame::FUN_00415f60(uchar param_1) { STUB_BODY(); return 0; }
+void* CGame::FUN_00415f60(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00415f60 END
 
 // !FUNC 0x00416030 BEGIN
@@ -171,7 +171,7 @@ uchar CGame::CGame_OnNetMsg_t13_PlaceSpecialPickup(int* param_1) { STUB_BODY(); 
 
 // !FUNC 0x0041f010 BEGIN
 /* 41F010-41F02E 0001E */
-uchar CGame::CGame_OnNetMsg_t19_PlayerPickedUpWorldObj(uchar param_1, uchar param_2, uchar param_3) { STUB_BODY(); return 0; }
+uchar CGame::CGame_OnNetMsg_t19_PlayerPickedUpWorldObj(uchar param_1, ODSImage param_2, uchar param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f010 END
 
 // !FUNC 0x0041f030 BEGIN
@@ -181,7 +181,7 @@ uchar CGame::CGame_OnNetMsg_t14_PlayerPickedUpSpecial(uchar param_1) { STUB_BODY
 
 // !FUNC 0x0041f210 BEGIN
 /* 41F210-41F229 00019 */
-uchar CGame::FUN_0041f210(uchar param_1, uchar param_2) { STUB_BODY(); return 0; }
+uchar CGame::FUN_0041f210(uchar param_1, ODSImage param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f210 END
 
 // !FUNC 0x00420510 BEGIN
@@ -221,7 +221,7 @@ uchar CGame::CDSDirectPlay_Receive(uint param_1, uint param_2, uint param_3) { S
 
 // !FUNC 0x0043ac00 BEGIN
 /* 43AC00-43AC97 00097 */
-uchar CGame::CDSDirectPlay_EnumSessions(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CGame::CDSDirectPlay_EnumSessions(int param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0043ac00 END
 
 // !FUNC 0x0043ca40 BEGIN

@@ -24,6 +24,6 @@ uchar CDSWorkingThread::FUN_00447240(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004472e0 BEGIN
 /* 4472E0-4472FE 0001E */
-uint* CDSWorkingThread::FUN_004472e0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSWorkingThread::FUN_004472e0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004472e0 END
 

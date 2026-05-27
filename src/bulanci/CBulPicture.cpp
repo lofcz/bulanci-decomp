@@ -39,7 +39,7 @@ uchar CBulPicture::FUN_0040b8e0(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040b8f0 BEGIN
 /* 40B8F0-40B94E 0005E */
-uchar CBulPicture::FUN_0040b8f0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CBulPicture::FUN_0040b8f0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b8f0 END
 
 // !FUNC 0x0040eb30 BEGIN
@@ -49,6 +49,6 @@ uint* CBulPicture::CBulPicture_Create() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040ebd0 BEGIN
 /* 40EBD0-40EBEE 0001E */
-uint* CBulPicture::FUN_0040ebd0(uchar param_1) { STUB_BODY(); return 0; }
+void* CBulPicture::FUN_0040ebd0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ebd0 END
 

@@ -6,7 +6,7 @@
 class CGame {
 public:
 	// !DECL 0x00401d00 BEGIN
-	/* 401D00 */ int* FUN_00401d00(int param_1);
+	/* 401D00 */ void* FUN_00401d00(int param_1);
 	// !DECL 0x00401d00 END
 	// !DECL 0x0040a840 BEGIN
 	/* 40A840 */ uchar FUN_0040a840(int param_1);
@@ -69,13 +69,13 @@ public:
 	/* 414CA0 */ uchar FUN_00414ca0(uint* param_1);
 	// !DECL 0x00414ca0 END
 	// !DECL 0x00415220 BEGIN
-	/* 415220 */ uchar FUN_00415220(int* param_1, int param_2);
+	/* 415220 */ uchar FUN_00415220(uint* param_1, int param_2);
 	// !DECL 0x00415220 END
 	// !DECL 0x00415290 BEGIN
 	/* 415290 */ uchar CGame_ProcessNetMessage(int param_1, int* param_2);
 	// !DECL 0x00415290 END
 	// !DECL 0x00415f60 BEGIN
-	/* 415F60 */ uint* FUN_00415f60(uchar param_1);
+	/* 415F60 */ void* FUN_00415f60(uchar param_1);
 	// !DECL 0x00415f60 END
 	// !DECL 0x00416030 BEGIN
 	/* 416030 */ uchar FUN_00416030(uint param_1);
@@ -105,13 +105,13 @@ public:
 	/* 41D2C0 */ uchar CGame_OnNetMsg_t13_PlaceSpecialPickup(int* param_1);
 	// !DECL 0x0041d2c0 END
 	// !DECL 0x0041f010 BEGIN
-	/* 41F010 */ uchar CGame_OnNetMsg_t19_PlayerPickedUpWorldObj(uchar param_1, uchar param_2, uchar param_3);
+	/* 41F010 */ uchar CGame_OnNetMsg_t19_PlayerPickedUpWorldObj(uchar param_1, ODSImage param_2, uchar param_3);
 	// !DECL 0x0041f010 END
 	// !DECL 0x0041f030 BEGIN
 	/* 41F030 */ uchar CGame_OnNetMsg_t14_PlayerPickedUpSpecial(uchar param_1);
 	// !DECL 0x0041f030 END
 	// !DECL 0x0041f210 BEGIN
-	/* 41F210 */ uchar FUN_0041f210(uchar param_1, uchar param_2);
+	/* 41F210 */ uchar FUN_0041f210(uchar param_1, ODSImage param_2);
 	// !DECL 0x0041f210 END
 	// !DECL 0x00420510 BEGIN
 	/* 420510 */ uchar FUN_00420510(uchar param_1, uchar param_2, int* param_3);
@@ -135,7 +135,7 @@ public:
 	/* 43AB70 */ uchar CDSDirectPlay_Receive(uint param_1, uint param_2, uint param_3);
 	// !DECL 0x0043ab70 END
 	// !DECL 0x0043ac00 BEGIN
-	/* 43AC00 */ uchar CDSDirectPlay_EnumSessions(uint param_1, uint param_2);
+	/* 43AC00 */ uchar CDSDirectPlay_EnumSessions(int param_1, uint param_2);
 	// !DECL 0x0043ac00 END
 	// !DECL 0x0043ca40 BEGIN
 	/* 43CA40 */ uchar FUN_0043ca40(int param_1);

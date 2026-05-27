@@ -16,7 +16,7 @@
 CTcpIpConfig::CTcpIpConfig() : CWindow(0, 0, 0x138, 0xa0, 1) {
     uint* param_1 = reinterpret_cast<uint*>(this);
 
-    CStaticText* staticText = reinterpret_cast<CStaticText*>(_Globals::FUN_00447c42(0x98));
+    CStaticText* staticText = reinterpret_cast<CStaticText*>(_Globals::OperatorNewWithBadAlloc(0x98));
     if (staticText != 0) {
         CBulanci staticTextStr(const_cast<short*>(reinterpret_cast<const short*>(g_pStaticTextsPool[31])));
         staticText->CStaticText_BuildAt(
@@ -27,7 +27,7 @@ CTcpIpConfig::CTcpIpConfig() : CWindow(0, 0, 0x138, 0xa0, 1) {
     }
     reinterpret_cast<_Globals*>(this)->AddChild(reinterpret_cast<int*>(staticText), 0);
 
-    CEdit* edit = reinterpret_cast<CEdit*>(_Globals::FUN_00447c42(0xb8));
+    CEdit* edit = reinterpret_cast<CEdit*>(_Globals::OperatorNewWithBadAlloc(0xb8));
     if (edit != 0) {
         edit->CEdit_BuildAt(
             0x14, 0x46, 0x124, 0x3c,
@@ -36,7 +36,7 @@ CTcpIpConfig::CTcpIpConfig() : CWindow(0, 0, 0x138, 0xa0, 1) {
     }
     reinterpret_cast<_Globals*>(this)->AddChild(reinterpret_cast<int*>(edit), 0);
 
-    CButton* okBtn = reinterpret_cast<CButton*>(_Globals::FUN_00447c42(0x98));
+    CButton* okBtn = reinterpret_cast<CButton*>(_Globals::OperatorNewWithBadAlloc(0x98));
     if (okBtn != 0) {
         CBulanci okBtnStr(const_cast<short*>(reinterpret_cast<const short*>(g_pStaticTextsPool[29])));
         okBtn->CButton_BuildAt(
@@ -47,7 +47,7 @@ CTcpIpConfig::CTcpIpConfig() : CWindow(0, 0, 0x138, 0xa0, 1) {
     }
     reinterpret_cast<_Globals*>(this)->AddChild(reinterpret_cast<int*>(okBtn), 0);
 
-    CButton* cancelBtn = reinterpret_cast<CButton*>(_Globals::FUN_00447c42(0x98));
+    CButton* cancelBtn = reinterpret_cast<CButton*>(_Globals::OperatorNewWithBadAlloc(0x98));
     if (cancelBtn != 0) {
         CBulanci cancelBtnStr(const_cast<short*>(reinterpret_cast<const short*>(g_pStaticTextsPool[30])));
         cancelBtn->CButton_BuildAt(

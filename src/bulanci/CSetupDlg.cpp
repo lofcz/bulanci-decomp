@@ -2,7 +2,7 @@
 
 // !FUNC 0x0040e290 BEGIN
 /* 40E290-40E4C8 00238 */
-uint* CSetupDlg::FUN_0040e290(uint* param_1) { STUB_BODY(); return 0; }
+CWindow* CSetupDlg::CSetupDlgCtor(CWindow* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040e290 END
 
 // !FUNC 0x0040e4d0 BEGIN

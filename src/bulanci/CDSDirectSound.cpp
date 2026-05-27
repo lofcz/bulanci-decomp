@@ -44,7 +44,7 @@ uchar CDSDirectSound::FUN_0043ca80(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043cb00 BEGIN
 /* 43CB00-43CB1E 0001E */
-uint* CDSDirectSound::FUN_0043cb00(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSDirectSound::FUN_0043cb00(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043cb00 END
 
 // !FUNC 0x0043ccb0 BEGIN

@@ -2,7 +2,7 @@
 
 // !FUNC 0x0040b0c0 BEGIN
 /* 40B0C0-40B11B 0005B */
-uint* CLevelList::CLevelList_ctor(uint* param_1) { STUB_BODY(); return 0; }
+CListBox* CLevelList::CLevelList_ctor(CListBox* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b0c0 END
 
 // !FUNC 0x0040b120 BEGIN

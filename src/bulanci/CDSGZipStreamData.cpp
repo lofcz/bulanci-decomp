@@ -19,6 +19,6 @@ uchar CDSGZipStreamData::FUN_00434fc0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00435030 BEGIN
 /* 435030-43504E 0001E */
-uint* CDSGZipStreamData::FUN_00435030(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSGZipStreamData::FUN_00435030(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00435030 END
 

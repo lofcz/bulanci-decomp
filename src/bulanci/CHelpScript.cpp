@@ -2,7 +2,7 @@
 
 // !FUNC 0x004215e0 BEGIN
 /* 4215E0-421672 00092 */
-uint* CHelpScript::ctor(uint* param_1) { STUB_BODY(); return 0; }
+CDSScript* CHelpScript::ctor(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004215e0 END
 
 // !FUNC 0x00421680 BEGIN
@@ -34,26 +34,26 @@ uchar CHelpScript::FUN_004216f0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00421920 BEGIN
 /* 421920-42193E 0001E */
-uint* CHelpScript::FUN_00421920(uchar param_1) { STUB_BODY(); return 0; }
+void* CHelpScript::FUN_00421920(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00421920 END
 
 // !FUNC 0x00421940 BEGIN
 /* 421940-4219FD 000BD */
-uchar CHelpScript::ext_op45(int param_1) { STUB_BODY(); return 0; }
+uchar CHelpScript::HelpBuildStaticTextAuto(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00421940 END
 
 // !FUNC 0x00421a00 BEGIN
 /* 421A00-421AEF 000EF */
-uchar CHelpScript::ext_op46(int param_1) { STUB_BODY(); return 0; }
+uchar CHelpScript::HelpBuildStaticTextSized(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00421a00 END
 
 // !FUNC 0x00421af0 BEGIN
 /* 421AF0-421BA0 000B0 */
-uchar CHelpScript::ext_op52(int param_1) { STUB_BODY(); return 0; }
+uchar CHelpScript::HelpBuildHelpButtonWidget(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00421af0 END
 
 // !FUNC 0x004221a0 BEGIN
 /* 4221A0-422278 000D8 */
-uint* CHelpScript::ext_op47(int param_1) { STUB_BODY(); return 0; }
+CDSBitmap* CHelpScript::HelpBuildHelpBitmapWidget(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004221a0 END
 

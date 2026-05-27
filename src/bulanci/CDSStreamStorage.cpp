@@ -14,7 +14,7 @@ uchar CDSStreamStorage::FUN_00401860(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00401870 BEGIN
 /* 401870-40188E 0001E */
-uint* CDSStreamStorage::FUN_00401870(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSStreamStorage::FUN_00401870(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401870 END
 
 // !FUNC 0x00401890 BEGIN
@@ -83,17 +83,17 @@ uint* CDSStreamStorage::FUN_00433f00(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00433f70 BEGIN
 /* 433F70-4340B8 00148 */
-void* CDSStreamStorage::FUN_00433f70(void* param_1, int param_2) { STUB_BODY(); return 0; }
+void* CDSStreamStorage::FUN_00433f70(void* param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00433f70 END
 
 // !FUNC 0x00434110 BEGIN
 /* 434110-434131 00021 */
-uchar CDSStreamStorage::FUN_00434110(uint param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CDSStreamStorage::FUN_00434110(uint param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00434110 END
 
 // !FUNC 0x00434140 BEGIN
 /* 434140-434158 00018 */
-uchar CDSStreamStorage::FUN_00434140(int param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CDSStreamStorage::FUN_00434140(int param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00434140 END
 
 // !FUNC 0x00434380 BEGIN
@@ -103,7 +103,7 @@ uint CDSStreamStorage::FUN_00434380(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00434400 BEGIN
 /* 434400-434428 00028 */
-uint* CDSStreamStorage::FUN_00434400(uint param_1) { STUB_BODY(); return 0; }
+void* CDSStreamStorage::FUN_00434400(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00434400 END
 
 // !FUNC 0x00434600 BEGIN

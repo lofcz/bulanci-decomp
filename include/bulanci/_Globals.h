@@ -28,10 +28,10 @@ public:
 	/* 4010F0 */ int FUN_004010f0(int* param_1, uchar* param_2, int param_3);
 	// !DECL 0x004010f0 END
 	// !DECL 0x00401190 BEGIN
-	/* 401190 */ uint* FUN_00401190(short* param_1);
+	/* 401190 */ void* FUN_00401190(short* param_1);
 	// !DECL 0x00401190 END
 	// !DECL 0x004011b0 BEGIN
-	/* 4011B0 */ uint* FUN_004011b0(int* param_1);
+	/* 4011B0 */ void* FUN_004011b0(uint* param_1);
 	// !DECL 0x004011b0 END
 	// !DECL 0x004011d0 BEGIN
 	/* 4011D0 */ uchar FUN_004011d0(LPCRITICAL_SECTION param_1);
@@ -49,10 +49,10 @@ public:
 	/* 401520 */ uchar FUN_00401520(uint* param_1);
 	// !DECL 0x00401520 END
 	// !DECL 0x00401910 BEGIN
-	/* 401910 */ uchar FUN_00401910(uint* param_1);
+	/* 401910 */ uchar FUN_00401910(uchar param_1);
 	// !DECL 0x00401910 END
 	// !DECL 0x00401a10 BEGIN
-	/* 401A10 */ uchar FUN_00401a10(uint* param_1);
+	/* 401A10 */ uchar FUN_00401a10(uchar param_1);
 	// !DECL 0x00401a10 END
 	// !DECL 0x00401a70 BEGIN
 	/* 401A70 */ int FUN_00401a70(int* param_1);
@@ -61,7 +61,7 @@ public:
 	/* 401D30 */ uchar FUN_00401d30(uint param_1);
 	// !DECL 0x00401d30 END
 	// !DECL 0x00401d70 BEGIN
-	/* 401D70 */ uchar FUN_00401d70(void* param_1);
+	/* 401D70 */ uchar FUN_00401d70(CDSAudioBank* param_1);
 	// !DECL 0x00401d70 END
 	// !DECL 0x00401fc3 BEGIN
 	/* 401FC3 */ uchar* Catch_00401fc3();
@@ -70,16 +70,16 @@ public:
 	/* 402290 */ uchar FUN_00402290(int param_1);
 	// !DECL 0x00402290 END
 	// !DECL 0x00402680 BEGIN
-	/* 402680 */ uint WinMain(uint param_1, uint param_2, int param_3);
+	/* 402680 */ int WinMain(HINSTANCE param_1, HINSTANCE param_2, int param_3, int param_4);
 	// !DECL 0x00402680 END
 	// !DECL 0x00402a90 BEGIN
-	/* 402A90 */ uint* CBulanci_CreateObject();
+	/* 402A90 */ uchar CBulanci_CreateObject();
 	// !DECL 0x00402a90 END
 	// !DECL 0x00402e20 BEGIN
-	/* 402E20 */ uchar FUN_00402e20(uint* param_1);
+	/* 402E20 */ uchar FUN_00402e20(uchar param_1);
 	// !DECL 0x00402e20 END
 	// !DECL 0x00402f40 BEGIN
-	/* 402F40 */ static int FUN_00402f40(ushort param_1);
+	/* 402F40 */ static int WidgetStateFlags_ToTintColor(ushort param_1);
 	// !DECL 0x00402f40 END
 	// !DECL 0x004031b0 BEGIN
 	/* 4031B0 */ static uchar FUN_004031b0(int* param_1, size_t param_2, void* param_3, int param_4);
@@ -112,13 +112,13 @@ public:
 	/* 404730 */ uint FUN_00404730(int* param_1);
 	// !DECL 0x00404730 END
 	// !DECL 0x00404890 BEGIN
-	/* 404890 */ uchar FUN_00404890(uint* param_1);
+	/* 404890 */ uchar FUN_00404890(uchar param_1);
 	// !DECL 0x00404890 END
 	// !DECL 0x00404be0 BEGIN
 	/* 404BE0 */ uint* CreateObject();
 	// !DECL 0x00404be0 END
 	// !DECL 0x00404f70 BEGIN
-	/* 404F70 */ int FUN_00404f70(int param_1);
+	/* 404F70 */ uint FUN_00404f70(int param_1);
 	// !DECL 0x00404f70 END
 	// !DECL 0x004051d0 BEGIN
 	/* 4051D0 */ uchar FUN_004051d0(int param_1, int param_2);
@@ -136,7 +136,7 @@ public:
 	/* 405BF0 */ uchar FUN_00405bf0(void* param_1);
 	// !DECL 0x00405bf0 END
 	// !DECL 0x00405c40 BEGIN
-	/* 405C40 */ uchar FUN_00405c40(void* param_1);
+	/* 405C40 */ uchar FUN_00405c40(CScroller* param_1);
 	// !DECL 0x00405c40 END
 	// !DECL 0x00406300 BEGIN
 	/* 406300 */ uchar FUN_00406300(int param_1, uchar* param_2);
@@ -160,13 +160,13 @@ public:
 	/* 4067C0 */ uchar FUN_004067c0(char param_1);
 	// !DECL 0x004067c0 END
 	// !DECL 0x00406810 BEGIN
-	/* 406810 */ uchar FUN_00406810(uint param_1, int* param_2);
+	/* 406810 */ uchar FUN_00406810(uint param_1, uint* param_2);
 	// !DECL 0x00406810 END
 	// !DECL 0x00406a20 BEGIN
 	/* 406A20 */ uchar FUN_00406a20(int* param_1);
 	// !DECL 0x00406a20 END
 	// !DECL 0x00407020 BEGIN
-	/* 407020 */ uchar FUN_00407020(void* param_1);
+	/* 407020 */ uchar FUN_00407020(CEdit* param_1);
 	// !DECL 0x00407020 END
 	// !DECL 0x004070c0 BEGIN
 	/* 4070C0 */ uint FUN_004070c0(int param_1, char param_2);
@@ -181,10 +181,10 @@ public:
 	/* 407710 */ uchar FUN_00407710(uint param_1, int param_2);
 	// !DECL 0x00407710 END
 	// !DECL 0x00407e10 BEGIN
-	/* 407E10 */ uchar FUN_00407e10(void* param_1);
+	/* 407E10 */ uchar FUN_00407e10(CDSAudioBank* param_1);
 	// !DECL 0x00407e10 END
 	// !DECL 0x00407e20 BEGIN
-	/* 407E20 */ int FUN_00407e20(int param_1, uchar* param_2, int param_3);
+	/* 407E20 */ int CIntListInsertSortedOrAppend(int param_1, uchar* param_2, int param_3);
 	// !DECL 0x00407e20 END
 	// !DECL 0x00407ec0 BEGIN
 	/* 407EC0 */ uint* CreateObject_00407ec0();
@@ -196,7 +196,7 @@ public:
 	/* 4082C0 */ uint* CreateObject_004082c0();
 	// !DECL 0x004082c0 END
 	// !DECL 0x00408ea0 BEGIN
-	/* 408EA0 */ uint* CreateObject_00408ea0();
+	/* 408EA0 */ CDSScript* CreateObject_00408ea0();
 	// !DECL 0x00408ea0 END
 	// !DECL 0x004090c0 BEGIN
 	/* 4090C0 */ uchar FUN_004090c0(int param_1);
@@ -205,7 +205,7 @@ public:
 	/* 409110 */ uchar FUN_00409110(int param_1);
 	// !DECL 0x00409110 END
 	// !DECL 0x00409510 BEGIN
-	/* 409510 */ uint* FUN_00409510(int param_1, int param_2, uchar* param_3);
+	/* 409510 */ void* FUN_00409510(int param_1, int param_2, uchar* param_3);
 	// !DECL 0x00409510 END
 	// !DECL 0x004095b0 BEGIN
 	/* 4095B0 */ uchar FUN_004095b0(int* param_1);
@@ -220,7 +220,7 @@ public:
 	/* 40A380 */ uchar FUN_0040a380(uchar* param_1);
 	// !DECL 0x0040a380 END
 	// !DECL 0x0040a7d0 BEGIN
-	/* 40A7D0 */ uchar CDSAnim_CleanupBody(uint* param_1);
+	/* 40A7D0 */ uchar CDSAnim_CleanupBody(uchar param_1);
 	// !DECL 0x0040a7d0 END
 	// !DECL 0x0040ace0 BEGIN
 	/* 40ACE0 */ static int FUN_0040ace0(int param_1, int param_2);
@@ -232,13 +232,13 @@ public:
 	/* 40B540 */ uchar FUN_0040b540(int* param_1);
 	// !DECL 0x0040b540 END
 	// !DECL 0x0040ba30 BEGIN
-	/* 40BA30 */ uint* CreateObject_0040ba30();
+	/* 40BA30 */ CListBox* CreateObject_0040ba30();
 	// !DECL 0x0040ba30 END
 	// !DECL 0x0040bb90 BEGIN
-	/* 40BB90 */ uchar FUN_0040bb90(uint* param_1);
+	/* 40BB90 */ uchar FUN_0040bb90(uchar param_1);
 	// !DECL 0x0040bb90 END
 	// !DECL 0x0040bce0 BEGIN
-	/* 40BCE0 */ uchar FUN_0040bce0(uint* param_1);
+	/* 40BCE0 */ uchar FUN_0040bce0(uchar param_1);
 	// !DECL 0x0040bce0 END
 	// !DECL 0x0040c550 BEGIN
 	/* 40C550 */ uint FUN_0040c550(int param_1);
@@ -247,10 +247,10 @@ public:
 	/* 40E590 */ uchar FUN_0040e590(int param_1);
 	// !DECL 0x0040e590 END
 	// !DECL 0x0040e810 BEGIN
-	/* 40E810 */ uint* CreateObject_0040e810();
+	/* 40E810 */ uint CreateObject_0040e810();
 	// !DECL 0x0040e810 END
 	// !DECL 0x0040e980 BEGIN
-	/* 40E980 */ uint* CreateObject_0040e980();
+	/* 40E980 */ CWindow* CreateObject_0040e980();
 	// !DECL 0x0040e980 END
 	// !DECL 0x0040ed20 BEGIN
 	/* 40ED20 */ uint* CreateObject_0040ed20();
@@ -259,13 +259,13 @@ public:
 	/* 40EED0 */ uint* CreateObject_0040eed0();
 	// !DECL 0x0040eed0 END
 	// !DECL 0x0040ef60 BEGIN
-	/* 40EF60 */ uint* CreateObject_0040ef60();
+	/* 40EF60 */ CWindow* CreateObject_0040ef60();
 	// !DECL 0x0040ef60 END
 	// !DECL 0x0040f1e0 BEGIN
-	/* 40F1E0 */ uint* CreateObject_0040f1e0();
+	/* 40F1E0 */ CWindow* CreateObject_0040f1e0();
 	// !DECL 0x0040f1e0 END
 	// !DECL 0x0040f250 BEGIN
-	/* 40F250 */ uint* CreateObject_0040f250();
+	/* 40F250 */ CWindow* CreateObject_0040f250();
 	// !DECL 0x0040f250 END
 	// !DECL 0x0040f2c0 BEGIN
 	/* 40F2C0 */ static uint FUN_0040f2c0(int param_1);
@@ -274,13 +274,13 @@ public:
 	/* 40F380 */ static uchar FUN_0040f380(int param_1, int param_2);
 	// !DECL 0x0040f380 END
 	// !DECL 0x0040fb90 BEGIN
-	/* 40FB90 */ int* CreateObject_0040fb90();
+	/* 40FB90 */ CWindow* CreateObject_0040fb90();
 	// !DECL 0x0040fb90 END
 	// !DECL 0x004102d0 BEGIN
 	/* 4102D0 */ static uchar FUN_004102d0(void* param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x004102d0 END
 	// !DECL 0x004120f0 BEGIN
-	/* 4120F0 */ uint* CreateObject_004120f0();
+	/* 4120F0 */ CWindow* CreateObject_004120f0();
 	// !DECL 0x004120f0 END
 	// !DECL 0x004123d0 BEGIN
 	/* 4123D0 */ uint* CreateObject_004123d0();
@@ -307,7 +307,7 @@ public:
 	/* 412640 */ uint FUN_00412640(int param_1);
 	// !DECL 0x00412640 END
 	// !DECL 0x00412660 BEGIN
-	/* 412660 */ uchar FUN_00412660(uint* param_1);
+	/* 412660 */ uchar CGameGetModeAndScoreLimit(int* param_1);
 	// !DECL 0x00412660 END
 	// !DECL 0x004128a0 BEGIN
 	/* 4128A0 */ uchar FUN_004128a0(uchar param_1, int param_2);
@@ -316,10 +316,10 @@ public:
 	/* 4128F0 */ uint FUN_004128f0(uchar param_1);
 	// !DECL 0x004128f0 END
 	// !DECL 0x00412910 BEGIN
-	/* 412910 */ int FUN_00412910(uchar param_1);
+	/* 412910 */ wchar_t** CGameGetPlayerNamePtr(uchar param_1);
 	// !DECL 0x00412910 END
 	// !DECL 0x00412930 BEGIN
-	/* 412930 */ uint FUN_00412930(uchar param_1);
+	/* 412930 */ uchar CGameGetPlayerColorByte(uchar param_1);
 	// !DECL 0x00412930 END
 	// !DECL 0x00412950 BEGIN
 	/* 412950 */ uchar CGame_NetSendWorldEvent_t13(ushort* param_1);
@@ -376,7 +376,7 @@ public:
 	/* 413560 */ int FUN_00413560(int param_1);
 	// !DECL 0x00413560 END
 	// !DECL 0x004137b0 BEGIN
-	/* 4137B0 */ uchar CMenu_ShowConnectingDialog(void* param_1);
+	/* 4137B0 */ uchar CMenu_ShowConnectingDialog(uchar param_1);
 	// !DECL 0x004137b0 END
 	// !DECL 0x00413c50 BEGIN
 	/* 413C50 */ static uchar FUN_00413c50(uint* param_1, int param_2);
@@ -418,7 +418,7 @@ public:
 	/* 415EF0 */ uint* CreateObject_00415ef0();
 	// !DECL 0x00415ef0 END
 	// !DECL 0x00416510 BEGIN
-	/* 416510 */ uchar FUN_00416510(uint* param_1);
+	/* 416510 */ uchar FUN_00416510(uchar param_1);
 	// !DECL 0x00416510 END
 	// !DECL 0x00416590 BEGIN
 	/* 416590 */ uchar FUN_00416590(int param_1);
@@ -427,7 +427,7 @@ public:
 	/* 4165B0 */ uchar FUN_004165b0(int param_1);
 	// !DECL 0x004165b0 END
 	// !DECL 0x004165d0 BEGIN
-	/* 4165D0 */ uchar FUN_004165d0(int param_1);
+	/* 4165D0 */ uchar FUN_004165d0(uint param_1);
 	// !DECL 0x004165d0 END
 	// !DECL 0x00416610 BEGIN
 	/* 416610 */ uchar FUN_00416610(uint param_1);
@@ -454,28 +454,28 @@ public:
 	/* 416970 */ int FUN_00416970(int param_1);
 	// !DECL 0x00416970 END
 	// !DECL 0x00416ae0 BEGIN
-	/* 416AE0 */ static uchar FUN_00416ae0(int param_1);
+	/* 416AE0 */ static uchar CLevelScriptOpExt_SetInsertMode(int param_1);
 	// !DECL 0x00416ae0 END
 	// !DECL 0x00416b50 BEGIN
-	/* 416B50 */ static uchar FUN_00416b50(int param_1);
+	/* 416B50 */ static uchar CLevelScriptOpExt_GetSlot(int param_1);
 	// !DECL 0x00416b50 END
 	// !DECL 0x00416c90 BEGIN
-	/* 416C90 */ static uint FUN_00416c90(int param_1);
+	/* 416C90 */ static uint CLevelScriptOpExt_TimerRelease(int param_1);
 	// !DECL 0x00416c90 END
 	// !DECL 0x00416cb0 BEGIN
-	/* 416CB0 */ static uint FUN_00416cb0(int param_1);
+	/* 416CB0 */ static uint CLevelScriptOpExt_TimerSetData(int param_1);
 	// !DECL 0x00416cb0 END
 	// !DECL 0x00416ce0 BEGIN
 	/* 416CE0 */ static uint FUN_00416ce0(uint* param_1, int param_2);
 	// !DECL 0x00416ce0 END
 	// !DECL 0x00416e40 BEGIN
-	/* 416E40 */ static void* FUN_00416e40(int param_1);
+	/* 416E40 */ static CDSCollection* CLevelScriptOpExt_CollResize(int param_1);
 	// !DECL 0x00416e40 END
 	// !DECL 0x00416e80 BEGIN
-	/* 416E80 */ static void* FUN_00416e80(int param_1);
+	/* 416E80 */ static void* CLevelScriptOpExt_CollRemove(int param_1);
 	// !DECL 0x00416e80 END
 	// !DECL 0x004171b0 BEGIN
-	/* 4171B0 */ uchar FUN_004171b0(uint* param_1);
+	/* 4171B0 */ uchar FUN_004171b0(uchar param_1);
 	// !DECL 0x004171b0 END
 	// !DECL 0x00417260 BEGIN
 	/* 417260 */ uchar FUN_00417260(int param_1);
@@ -520,34 +520,34 @@ public:
 	/* 418300 */ int* FUN_00418300(uint* param_1, void* param_2, int* param_3, char param_4, char param_5);
 	// !DECL 0x00418300 END
 	// !DECL 0x00418770 BEGIN
-	/* 418770 */ static int FUN_00418770(int param_1);
+	/* 418770 */ static int CLevelScriptOpExt_BindToSlot(int param_1);
 	// !DECL 0x00418770 END
 	// !DECL 0x004187a0 BEGIN
-	/* 4187A0 */ static int FUN_004187a0(int param_1);
+	/* 4187A0 */ static int CLevelScriptOpExt_SetObstacleBounds(int param_1);
 	// !DECL 0x004187a0 END
 	// !DECL 0x00418800 BEGIN
-	/* 418800 */ static uint* FUN_00418800(int param_1);
+	/* 418800 */ static CObstacle* CLevelScriptOpExt_CreateObstacle(int param_1);
 	// !DECL 0x00418800 END
 	// !DECL 0x004188e0 BEGIN
-	/* 4188E0 */ static void* FUN_004188e0(int param_1);
+	/* 4188E0 */ static CBulanek* CLevelScriptOpExt_TranslateTo(int param_1);
 	// !DECL 0x004188e0 END
 	// !DECL 0x00418920 BEGIN
-	/* 418920 */ static uint FUN_00418920(int param_1);
+	/* 418920 */ static uint CLevelScriptOpExt_EvalSeq3(int param_1);
 	// !DECL 0x00418920 END
 	// !DECL 0x00418950 BEGIN
-	/* 418950 */ static uint FUN_00418950(int param_1);
+	/* 418950 */ static uint CLevelScriptOpExt_SpawnAtView(int param_1);
 	// !DECL 0x00418950 END
 	// !DECL 0x004189e0 BEGIN
-	/* 4189E0 */ static uint FUN_004189e0(int param_1);
+	/* 4189E0 */ static uint CLevelScriptOpExt_MapGet(int param_1);
 	// !DECL 0x004189e0 END
 	// !DECL 0x00418ae0 BEGIN
-	/* 418AE0 */ static int FUN_00418ae0(int param_1);
+	/* 418AE0 */ static int CLevelScriptOpExt_ArraySet(int param_1);
 	// !DECL 0x00418ae0 END
 	// !DECL 0x00418b20 BEGIN
-	/* 418B20 */ static void* FUN_00418b20(int param_1);
+	/* 418B20 */ static void* CLevelScriptOpExt_CollInsert(int param_1);
 	// !DECL 0x00418b20 END
 	// !DECL 0x00418b60 BEGIN
-	/* 418B60 */ static uchar FUN_00418b60(int param_1);
+	/* 418B60 */ static uchar CLevelScriptOpExt_GetImage(int param_1);
 	// !DECL 0x00418b60 END
 	// !DECL 0x00418bbc BEGIN
 	/* 418BBC */ uchar* Catch_00418bbc();
@@ -559,7 +559,7 @@ public:
 	/* 418F70 */ uint* CreateObject_00418f70();
 	// !DECL 0x00418f70 END
 	// !DECL 0x00418fe0 BEGIN
-	/* 418FE0 */ uchar FUN_00418fe0(int param_1);
+	/* 418FE0 */ uchar FUN_00418fe0(uint param_1);
 	// !DECL 0x00418fe0 END
 	// !DECL 0x00419530 BEGIN
 	/* 419530 */ uint FUN_00419530(uint param_1);
@@ -580,7 +580,7 @@ public:
 	/* 41A0F0 */ uint CGaming_TryGetPlayerCoords(uchar param_1, uint* param_2);
 	// !DECL 0x0041a0f0 END
 	// !DECL 0x0041a140 BEGIN
-	/* 41A140 */ uchar CGaming_RespawnPlayerAtSafeLocation(int* param_1);
+	/* 41A140 */ uchar CGaming_RespawnPlayerAtSafeLocation(CBulanek* param_1);
 	// !DECL 0x0041a140 END
 	// !DECL 0x0041a6a0 BEGIN
 	/* 41A6A0 */ uint* CreateObject_0041a6a0();
@@ -589,16 +589,16 @@ public:
 	/* 41A710 */ uint* CreateObject_0041a710();
 	// !DECL 0x0041a710 END
 	// !DECL 0x0041a780 BEGIN
-	/* 41A780 */ uint* CreateObject_0041a780();
+	/* 41A780 */ uchar CreateObject_0041a780();
 	// !DECL 0x0041a780 END
 	// !DECL 0x0041a7f0 BEGIN
-	/* 41A7F0 */ uint* CreateObject_0041a7f0();
+	/* 41A7F0 */ uchar CreateObject_0041a7f0();
 	// !DECL 0x0041a7f0 END
 	// !DECL 0x0041ad80 BEGIN
 	/* 41AD80 */ static uchar FUN_0041ad80(void* param_1, uint param_2, uint param_3);
 	// !DECL 0x0041ad80 END
 	// !DECL 0x0041af70 BEGIN
-	/* 41AF70 */ uint FUN_0041af70(int* param_1);
+	/* 41AF70 */ uint FUN_0041af70(CBulanek* param_1);
 	// !DECL 0x0041af70 END
 	// !DECL 0x0041b420 BEGIN
 	/* 41B420 */ uint* FUN_0041b420(uint param_1, uint* param_2, uint param_3, int param_4);
@@ -607,28 +607,28 @@ public:
 	/* 41BA60 */ uchar CGaming_SetMusicAndSoundBank(uint param_1, uint param_2);
 	// !DECL 0x0041ba60 END
 	// !DECL 0x0041bb00 BEGIN
-	/* 41BB00 */ static uint CLevelScript_SetMusic(int param_1);
+	/* 41BB00 */ static uint CLevelScriptOpExt_SetMusic(int param_1);
 	// !DECL 0x0041bb00 END
 	// !DECL 0x0041bb30 BEGIN
-	/* 41BB30 */ static uint FUN_0041bb30(int param_1);
+	/* 41BB30 */ static uint CLevelScriptOpExt_DefineDangerZone(int param_1);
 	// !DECL 0x0041bb30 END
 	// !DECL 0x0041bb80 BEGIN
-	/* 41BB80 */ static uint FUN_0041bb80(int param_1);
+	/* 41BB80 */ static uint CLevelScriptOpExt_DefineTraceArea(int param_1);
 	// !DECL 0x0041bb80 END
 	// !DECL 0x0041bc40 BEGIN
-	/* 41BC40 */ uint* CreateObject_0041bc40();
+	/* 41BC40 */ uchar CreateObject_0041bc40();
 	// !DECL 0x0041bc40 END
 	// !DECL 0x0041bcb0 BEGIN
-	/* 41BCB0 */ uint* CreateObject_0041bcb0();
+	/* 41BCB0 */ uchar CreateObject_0041bcb0();
 	// !DECL 0x0041bcb0 END
 	// !DECL 0x0041bd20 BEGIN
-	/* 41BD20 */ uint* CreateObject_0041bd20();
+	/* 41BD20 */ uchar CreateObject_0041bd20();
 	// !DECL 0x0041bd20 END
 	// !DECL 0x0041bd90 BEGIN
-	/* 41BD90 */ uint* CreateObject_0041bd90();
+	/* 41BD90 */ uchar CreateObject_0041bd90();
 	// !DECL 0x0041bd90 END
 	// !DECL 0x0041be00 BEGIN
-	/* 41BE00 */ uint* CreateObject_0041be00();
+	/* 41BE00 */ uchar CreateObject_0041be00();
 	// !DECL 0x0041be00 END
 	// !DECL 0x0041be70 BEGIN
 	/* 41BE70 */ uint* CreateObject_0041be70();
@@ -643,19 +643,19 @@ public:
 	/* 41D3C6 */ uchar* Catch_0041d3c6();
 	// !DECL 0x0041d3c6 END
 	// !DECL 0x0041d6e0 BEGIN
-	/* 41D6E0 */ static uint* FUN_0041d6e0(int param_1);
+	/* 41D6E0 */ static CAnim* CLevelScriptOpExt_CreateAnim(int param_1);
 	// !DECL 0x0041d6e0 END
 	// !DECL 0x0041d820 BEGIN
-	/* 41D820 */ static uint* FUN_0041d820(int param_1);
+	/* 41D820 */ static CGameView* CLevelScriptOpExt_CreateImage(int param_1);
 	// !DECL 0x0041d820 END
 	// !DECL 0x0041d8f0 BEGIN
-	/* 41D8F0 */ static uint FUN_0041d8f0(int param_1);
+	/* 41D8F0 */ static uint CLevelScriptOpExt_LoadPreface(int param_1);
 	// !DECL 0x0041d8f0 END
 	// !DECL 0x0041d990 BEGIN
-	/* 41D990 */ static int FUN_0041d990(int param_1);
+	/* 41D990 */ static int CLevelScriptOpExt_SetViewImage(int param_1);
 	// !DECL 0x0041d990 END
 	// !DECL 0x0041da50 BEGIN
-	/* 41DA50 */ static uint* FUN_0041da50(int param_1);
+	/* 41DA50 */ static CMina* CLevelScriptOpExt_CreateMine(int param_1);
 	// !DECL 0x0041da50 END
 	// !DECL 0x0041dd70 BEGIN
 	/* 41DD70 */ uchar FUN_0041dd70(int param_1, void* param_2);
@@ -667,73 +667,73 @@ public:
 	/* 41E2C0 */ uchar CGaming_SpawnPickupAndBroadcast(uint param_1);
 	// !DECL 0x0041e2c0 END
 	// !DECL 0x0041e3e0 BEGIN
-	/* 41E3E0 */ static uint FUN_0041e3e0(int param_1);
+	/* 41E3E0 */ static uint CLevelScriptOpExt_KillObject(int param_1);
 	// !DECL 0x0041e3e0 END
 	// !DECL 0x0041eba0 BEGIN
-	/* 41EBA0 */ uchar CGame_ApplyPickup(uchar param_1, uchar param_2);
+	/* 41EBA0 */ uchar CGame_ApplyPickup(ODSImage param_1, uchar param_2);
 	// !DECL 0x0041eba0 END
 	// !DECL 0x0041ed60 BEGIN
 	/* 41ED60 */ uchar DetonatePlayerMines(int param_1);
 	// !DECL 0x0041ed60 END
 	// !DECL 0x0041f0c0 BEGIN
-	/* 41F0C0 */ uchar CGaming_TickPlayerCollisions(int* param_1);
+	/* 41F0C0 */ uchar CGaming_TickPlayerCollisions(CBulanek* param_1);
 	// !DECL 0x0041f0c0 END
 	// !DECL 0x0041f1d0 BEGIN
 	/* 41F1D0 */ uchar CGaming_SpawnSpecialPickupIfAllowed(char param_1);
 	// !DECL 0x0041f1d0 END
 	// !DECL 0x0041f230 BEGIN
-	/* 41F230 */ uchar CGaming_SpawnBulletAndPlaySound(int* param_1, uchar param_2, uchar param_3, uchar param_4, int* param_5, int param_6);
+	/* 41F230 */ uchar CGaming_SpawnBulletAndPlaySound(uint* param_1, CShot param_2, CShot param_3, uchar param_4, int* param_5, int param_6);
 	// !DECL 0x0041f230 END
 	// !DECL 0x0041f350 BEGIN
-	/* 41F350 */ uchar CGaming_TickRoundStateAndScoring(int* param_1);
+	/* 41F350 */ uchar CGaming_TickRoundStateAndScoring(CBulanek* param_1);
 	// !DECL 0x0041f350 END
 	// !DECL 0x0041f500 BEGIN
-	/* 41F500 */ uchar CGaming_SpawnAndInitializePlayer(uchar param_1, uint* param_2, int param_3, int param_4, int param_5);
+	/* 41F500 */ uchar CGaming_SpawnAndInitializePlayer(CGameView param_1, CGameView* param_2, int param_3, int param_4, int param_5);
 	// !DECL 0x0041f500 END
 	// !DECL 0x0041f5d0 BEGIN
-	/* 41F5D0 */ uchar FUN_0041f5d0(uint* param_1, int param_2, int param_3, int param_4);
+	/* 41F5D0 */ uchar FUN_0041f5d0(CGameView* param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x0041f5d0 END
 	// !DECL 0x0041f610 BEGIN
-	/* 41F610 */ static uint FUN_0041f610(int param_1);
+	/* 41F610 */ static uint CLevelScriptOpExt_SpawnEnemyAt(int param_1);
 	// !DECL 0x0041f610 END
 	// !DECL 0x0041f6a0 BEGIN
-	/* 41F6A0 */ static uint FUN_0041f6a0(int param_1);
+	/* 41F6A0 */ static uint CLevelScriptOpExt_SpawnOpponentEx(int param_1);
 	// !DECL 0x0041f6a0 END
 	// !DECL 0x0041f730 BEGIN
-	/* 41F730 */ static uint FUN_0041f730(int param_1);
+	/* 41F730 */ static uint CLevelScriptOpExt_InsertOpponent(int param_1);
 	// !DECL 0x0041f730 END
 	// !DECL 0x0041f770 BEGIN
 	/* 41F770 */ uchar CGaming_RespawnPlayer(char param_1, uchar param_2, int* param_3);
 	// !DECL 0x0041f770 END
 	// !DECL 0x0041fce0 BEGIN
-	/* 41FCE0 */ uchar FUN_0041fce0(void* param_1);
+	/* 41FCE0 */ uchar FUN_0041fce0(CWeapon* param_1);
 	// !DECL 0x0041fce0 END
 	// !DECL 0x0041fdf0 BEGIN
-	/* 41FDF0 */ uchar FUN_0041fdf0(void* param_1);
+	/* 41FDF0 */ uchar FUN_0041fdf0(CWeapon* param_1);
 	// !DECL 0x0041fdf0 END
 	// !DECL 0x00420530 BEGIN
-	/* 420530 */ uchar FUN_00420530(uchar param_1);
+	/* 420530 */ uchar FUN_00420530(CGameView param_1);
 	// !DECL 0x00420530 END
 	// !DECL 0x00420550 BEGIN
 	/* 420550 */ uchar FUN_00420550(void* param_1);
 	// !DECL 0x00420550 END
 	// !DECL 0x004205a0 BEGIN
-	/* 4205A0 */ uchar FUN_004205a0(void* param_1);
+	/* 4205A0 */ uchar FUN_004205a0(CBulanek* param_1);
 	// !DECL 0x004205a0 END
 	// !DECL 0x00420650 BEGIN
-	/* 420650 */ uchar CBulanek_DispatchCurrentWeaponAction(void* param_1);
+	/* 420650 */ uchar CBulanek_DispatchCurrentWeaponAction(CWeapon* param_1);
 	// !DECL 0x00420650 END
 	// !DECL 0x004208c0 BEGIN
 	/* 4208C0 */ uchar CBulanek_TriggerPrimaryActionAndBroadcast(int param_1);
 	// !DECL 0x004208c0 END
 	// !DECL 0x00421830 BEGIN
-	/* 421830 */ uint* CreateObject_00421830();
+	/* 421830 */ CDSScript* CreateObject_00421830();
 	// !DECL 0x00421830 END
 	// !DECL 0x00421ba0 BEGIN
-	/* 421BA0 */ uint* CreateObject_00421ba0();
+	/* 421BA0 */ CDSChained* CreateObject_00421ba0();
 	// !DECL 0x00421ba0 END
 	// !DECL 0x00422280 BEGIN
-	/* 422280 */ uint* CreateObject_00422280();
+	/* 422280 */ CWindow* CreateObject_00422280();
 	// !DECL 0x00422280 END
 	// !DECL 0x00422310 BEGIN
 	/* 422310 */ static void* CDSAudioPlayer_Create(uchar* param_1, int* param_2, int param_3, uint param_4, char param_5);
@@ -754,13 +754,13 @@ public:
 	/* 422620 */ uchar FUN_00422620(uint param_1);
 	// !DECL 0x00422620 END
 	// !DECL 0x004229b0 BEGIN
-	/* 4229B0 */ uint* CreateObject_004229b0();
+	/* 4229B0 */ CDSScript* CreateObject_004229b0();
 	// !DECL 0x004229b0 END
 	// !DECL 0x00422f00 BEGIN
-	/* 422F00 */ uint* CreateObject_00422f00();
+	/* 422F00 */ CDSChained* CreateObject_00422f00();
 	// !DECL 0x00422f00 END
 	// !DECL 0x00423610 BEGIN
-	/* 423610 */ uint* CreateObject_00423610();
+	/* 423610 */ CWindow* CreateObject_00423610();
 	// !DECL 0x00423610 END
 	// !DECL 0x00423f20 BEGIN
 	/* 423F20 */ uchar CSwitch_PlayHoverTrack(int param_1);
@@ -784,7 +784,7 @@ public:
 	/* 4250C0 */ uchar FUN_004250c0(int param_1);
 	// !DECL 0x004250c0 END
 	// !DECL 0x00425160 BEGIN
-	/* 425160 */ uint* CreateObject_00425160();
+	/* 425160 */ uchar CreateObject_00425160();
 	// !DECL 0x00425160 END
 	// !DECL 0x004251d0 BEGIN
 	/* 4251D0 */ uint* CMenu_CreateObject();
@@ -811,7 +811,7 @@ public:
 	/* 4276C0 */ uchar FUN_004276c0(uchar param_1, char param_2);
 	// !DECL 0x004276c0 END
 	// !DECL 0x00427710 BEGIN
-	/* 427710 */ uchar FUN_00427710(int* param_1);
+	/* 427710 */ uchar FUN_00427710(uint* param_1);
 	// !DECL 0x00427710 END
 	// !DECL 0x004279f0 BEGIN
 	/* 4279F0 */ uint* CreateObject_004279f0();
@@ -886,7 +886,7 @@ public:
 	/* 42A9C0 */ uchar FUN_0042a9c0(int param_1, uint param_2);
 	// !DECL 0x0042a9c0 END
 	// !DECL 0x0042aa60 BEGIN
-	/* 42AA60 */ static uint CDSApp_AppMain(uint param_1, uint param_2, int param_3);
+	/* 42AA60 */ static uint CDSApp_AppMain(HINSTANCE* param_1, uint param_2, int param_3);
 	// !DECL 0x0042aa60 END
 	// !DECL 0x0042ab28 BEGIN
 	/* 42AB28 */ uchar Catch_0042ab28();
@@ -919,16 +919,16 @@ public:
 	/* 42B910 */ uint* CreateObject_0042b910();
 	// !DECL 0x0042b910 END
 	// !DECL 0x0042bbe0 BEGIN
-	/* 42BBE0 */ uchar FUN_0042bbe0(int param_1);
+	/* 42BBE0 */ uchar FUN_0042bbe0(uchar param_1);
 	// !DECL 0x0042bbe0 END
 	// !DECL 0x0042bc00 BEGIN
-	/* 42BC00 */ uchar CDSApp_RenderFrame(int* param_1);
+	/* 42BC00 */ uchar CDSApp_RenderFrame(uchar param_1);
 	// !DECL 0x0042bc00 END
 	// !DECL 0x0042bda0 BEGIN
-	/* 42BDA0 */ uchar CDSApp_FrameBody(int* param_1);
+	/* 42BDA0 */ uchar CDSApp_FrameBody(uchar param_1);
 	// !DECL 0x0042bda0 END
 	// !DECL 0x0042be60 BEGIN
-	/* 42BE60 */ uchar CDSApp_PumpTick(int* param_1);
+	/* 42BE60 */ uchar CDSApp_PumpTick(uchar param_1);
 	// !DECL 0x0042be60 END
 	// !DECL 0x0042bed0 BEGIN
 	/* 42BED0 */ uchar CDSView_SetModalEligible(uint param_1);
@@ -949,7 +949,7 @@ public:
 	/* 42C290 */ uchar CDSView_SetActive(uint param_1);
 	// !DECL 0x0042c290 END
 	// !DECL 0x0042c6c0 BEGIN
-	/* 42C6C0 */ uchar FUN_0042c6c0(void* param_1);
+	/* 42C6C0 */ uchar FUN_0042c6c0(uchar param_1);
 	// !DECL 0x0042c6c0 END
 	// !DECL 0x0042c700 BEGIN
 	/* 42C700 */ uchar FUN_0042c700();
@@ -994,37 +994,37 @@ public:
 	/* 42D1A0 */ ushort CDSView_DoModal(void* param_1);
 	// !DECL 0x0042d1a0 END
 	// !DECL 0x0042d2d0 BEGIN
-	/* 42D2D0 */ uchar FUN_0042d2d0(void* param_1);
+	/* 42D2D0 */ uchar CDsStringReleaseHeader(void* param_1);
 	// !DECL 0x0042d2d0 END
 	// !DECL 0x0042d350 BEGIN
 	/* 42D350 */ static int* FUN_0042d350(int param_1, int param_2);
 	// !DECL 0x0042d350 END
 	// !DECL 0x0042d3a0 BEGIN
-	/* 42D3A0 */ static int* FUN_0042d3a0(void* param_1, int param_2, int param_3);
+	/* 42D3A0 */ static int* CDsStringAllocAndCopyWide(void* param_1, int param_2, int param_3);
 	// !DECL 0x0042d3a0 END
 	// !DECL 0x0042d3e0 BEGIN
-	/* 42D3E0 */ uchar FUN_0042d3e0(int param_1);
+	/* 42D3E0 */ uchar CDsStringSetLengthAndTerminate(int param_1);
 	// !DECL 0x0042d3e0 END
 	// !DECL 0x0042d440 BEGIN
 	/* 42D440 */ uchar FUN_0042d440(int* param_1);
 	// !DECL 0x0042d440 END
 	// !DECL 0x0042d490 BEGIN
-	/* 42D490 */ int* FUN_0042d490(int* param_1);
+	/* 42D490 */ void* CDsStringAssignFromHandle(uint* param_1);
 	// !DECL 0x0042d490 END
 	// !DECL 0x0042d5a0 BEGIN
-	/* 42D5A0 */ int* FUN_0042d5a0(int* param_1, size_t param_2, wchar_t* param_3, size_t param_4);
+	/* 42D5A0 */ void* FUN_0042d5a0(int* param_1, size_t param_2, wchar_t* param_3, size_t param_4);
 	// !DECL 0x0042d5a0 END
 	// !DECL 0x0042d710 BEGIN
-	/* 42D710 */ uchar FUN_0042d710(wchar_t* param_1, uint* param_2);
+	/* 42D710 */ void* CDsStringVsprintfToStackBuffer(wchar_t* param_1, uint* param_2);
 	// !DECL 0x0042d710 END
 	// !DECL 0x0042d770 BEGIN
-	/* 42D770 */ static void* FUN_0042d770(void* param_1, wchar_t* param_2);
+	/* 42D770 */ static void* CDsStringFormatV(void* param_1, wchar_t* param_2);
 	// !DECL 0x0042d770 END
 	// !DECL 0x0042d850 BEGIN
 	/* 42D850 */ uchar FUN_0042d850(int* param_1);
 	// !DECL 0x0042d850 END
 	// !DECL 0x0042d8a0 BEGIN
-	/* 42D8A0 */ uchar FUN_0042d8a0(void* param_1);
+	/* 42D8A0 */ uchar CDsStringAssignFromLong(void* param_1);
 	// !DECL 0x0042d8a0 END
 	// !DECL 0x0042db60 BEGIN
 	/* 42DB60 */ uchar FUN_0042db60(int param_1, int param_2);
@@ -1051,10 +1051,10 @@ public:
 	/* 42E8F0 */ uchar FUN_0042e8f0(uint param_1);
 	// !DECL 0x0042e8f0 END
 	// !DECL 0x0042e910 BEGIN
-	/* 42E910 */ int* HandleClassRegister(int param_1, int param_2, int param_3);
+	/* 42E910 */ void* HandleClassRegister(uint param_1, uint param_2, uint param_3);
 	// !DECL 0x0042e910 END
 	// !DECL 0x0042e960 BEGIN
-	/* 42E960 */ uint FUN_0042e960(int param_1);
+	/* 42E960 */ uint FUN_0042e960(void* param_1);
 	// !DECL 0x0042e960 END
 	// !DECL 0x0042e980 BEGIN
 	/* 42E980 */ uchar FUN_0042e980(int param_1, uint param_2, uint param_3);
@@ -1087,7 +1087,7 @@ public:
 	/* 42EC90 */ uint FUN_0042ec90(uint* param_1);
 	// !DECL 0x0042ec90 END
 	// !DECL 0x0042ecc0 BEGIN
-	/* 42ECC0 */ static uint FUN_0042ecc0(void* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5);
+	/* 42ECC0 */ static uint FUN_0042ecc0(CStartGame2* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5);
 	// !DECL 0x0042ecc0 END
 	// !DECL 0x0042ecf0 BEGIN
 	/* 42ECF0 */ uint CDSQueue_Push(uint* param_1);
@@ -1156,7 +1156,7 @@ public:
 	/* 42F730 */ void* FUN_0042f730(void* param_1, uchar* param_2);
 	// !DECL 0x0042f730 END
 	// !DECL 0x0042f780 BEGIN
-	/* 42F780 */ uchar FUN_0042f780(int* param_1, int* param_2);
+	/* 42F780 */ uchar FUN_0042f780(uint* param_1, uint* param_2);
 	// !DECL 0x0042f780 END
 	// !DECL 0x0042f7a0 BEGIN
 	/* 42F7A0 */ uchar FUN_0042f7a0(int param_1);
@@ -1207,7 +1207,7 @@ public:
 	/* 430A70 */ uchar FUN_00430a70(int param_1);
 	// !DECL 0x00430a70 END
 	// !DECL 0x00430e70 BEGIN
-	/* 430E70 */ uint* FUN_00430e70(uint param_1, void* param_2);
+	/* 430E70 */ CDSEasyMemStream* FUN_00430e70(uint param_1, void* param_2);
 	// !DECL 0x00430e70 END
 	// !DECL 0x00431070 BEGIN
 	/* 431070 */ uchar FUN_00431070(int param_1);
@@ -1237,7 +1237,7 @@ public:
 	/* 431700 */ static uchar FUN_00431700(int param_1, int* param_2, uint param_3);
 	// !DECL 0x00431700 END
 	// !DECL 0x00431790 BEGIN
-	/* 431790 */ int FUN_00431790(int param_1, int param_2, int param_3);
+	/* 431790 */ static int FUN_00431790(int param_1, int param_2, int param_3);
 	// !DECL 0x00431790 END
 	// !DECL 0x00431819 BEGIN
 	/* 431819 */ uchar* Catch_00431819();
@@ -1246,16 +1246,16 @@ public:
 	/* 431851 */ int FUN_00431851();
 	// !DECL 0x00431851 END
 	// !DECL 0x00431890 BEGIN
-	/* 431890 */ static int FUN_00431890(int param_1, int param_2, uint param_3, uint param_4, uint param_5, int param_6);
+	/* 431890 */ static int FUN_00431890(int param_1, int param_2, int param_3, uint param_4);
 	// !DECL 0x00431890 END
 	// !DECL 0x004318f0 BEGIN
-	/* 4318F0 */ static int FUN_004318f0(int param_1, int param_2, uint param_3, uint param_4, uint param_5, int param_6, uint param_7, uint param_8, int param_9);
+	/* 4318F0 */ static int FUN_004318f0(int param_1, int param_2, int param_3, uint param_4);
 	// !DECL 0x004318f0 END
 	// !DECL 0x004319d0 BEGIN
 	/* 4319D0 */ static uchar FUN_004319d0(int param_1);
 	// !DECL 0x004319d0 END
 	// !DECL 0x00431a70 BEGIN
-	/* 431A70 */ uchar FUN_00431a70(int param_1);
+	/* 431A70 */ static uchar FUN_00431a70(int param_1);
 	// !DECL 0x00431a70 END
 	// !DECL 0x00431ab4 BEGIN
 	/* 431AB4 */ uchar* Catch_00431ab4();
@@ -1285,7 +1285,7 @@ public:
 	/* 4344C0 */ uchar FUN_004344c0(int* param_1);
 	// !DECL 0x004344c0 END
 	// !DECL 0x004344d0 BEGIN
-	/* 4344D0 */ uint* CreateObject_004344d0();
+	/* 4344D0 */ CDSException* CreateObject_004344d0();
 	// !DECL 0x004344d0 END
 	// !DECL 0x00434930 BEGIN
 	/* 434930 */ uint* InitializeAndAllocate();
@@ -1294,7 +1294,7 @@ public:
 	/* 4349E0 */ void Runtime_ThrowBadAlloc(uchar* param_1);
 	// !DECL 0x004349e0 END
 	// !DECL 0x00434bd0 BEGIN
-	/* 434BD0 */ static uint* FUN_00434bd0(uint* param_1, DWORD param_2);
+	/* 434BD0 */ static uchar FUN_00434bd0(uchar param_1, DWORD param_2);
 	// !DECL 0x00434bd0 END
 	// !DECL 0x00434e30 BEGIN
 	/* 434E30 */ static uint FUN_00434e30(uint param_1, int param_2, uint* param_3, uint param_4);
@@ -1387,7 +1387,7 @@ public:
 	/* 437440 */ uchar WideCharToMultiByte_Wrapper(int param_1, int param_2);
 	// !DECL 0x00437440 END
 	// !DECL 0x004375e0 BEGIN
-	/* 4375E0 */ uchar TextShaper_LayOutAndRender(int param_1, uint* param_2, void* param_3, uint* param_4);
+	/* 4375E0 */ uchar TextShaper_LayOutAndRender(int param_1, uint* param_2, CPoemScroller* param_3, uint* param_4);
 	// !DECL 0x004375e0 END
 	// !DECL 0x00437b00 BEGIN
 	/* 437B00 */ uchar FUN_00437b00(uint* param_1);
@@ -1423,10 +1423,10 @@ public:
 	/* 438920 */ static uint FUN_00438920(int param_1);
 	// !DECL 0x00438920 END
 	// !DECL 0x00438960 BEGIN
-	/* 438960 */ static uint* FUN_00438960(int param_1);
+	/* 438960 */ static CDSEasyMemStream* FUN_00438960(int param_1);
 	// !DECL 0x00438960 END
 	// !DECL 0x00438b30 BEGIN
-	/* 438B30 */ uchar FUN_00438b30(uint param_1, int param_2, void* param_3);
+	/* 438B30 */ uint FUN_00438b30(uint param_1, int param_2, void* param_3);
 	// !DECL 0x00438b30 END
 	// !DECL 0x00438bef BEGIN
 	/* 438BEF */ uchar Catch_00438bef();
@@ -1471,10 +1471,10 @@ public:
 	/* 439350 */ void* AnimInner_InitParam(int* param_1, int param_2);
 	// !DECL 0x00439350 END
 	// !DECL 0x00439610 BEGIN
-	/* 439610 */ uint* CreateObject_00439610();
+	/* 439610 */ uchar CreateObject_00439610();
 	// !DECL 0x00439610 END
 	// !DECL 0x00439680 BEGIN
-	/* 439680 */ uint* CreateObject_00439680();
+	/* 439680 */ uchar CreateObject_00439680();
 	// !DECL 0x00439680 END
 	// !DECL 0x00439710 BEGIN
 	/* 439710 */ uchar FUN_00439710(uint param_1);
@@ -1549,7 +1549,7 @@ public:
 	/* 43A0F0 */ bool FUN_0043a0f0(int param_1);
 	// !DECL 0x0043a0f0 END
 	// !DECL 0x0043a1f0 BEGIN
-	/* 43A1F0 */ bool FUN_0043a1f0(int param_1);
+	/* 43A1F0 */ bool FUN_0043a1f0(uint param_1);
 	// !DECL 0x0043a1f0 END
 	// !DECL 0x0043a4a0 BEGIN
 	/* 43A4A0 */ uchar CDSAudioPlayer_Stop(uchar param_1);
@@ -1996,7 +1996,7 @@ public:
 	/* 447897 */ static uint FID_conflict_CxxFrameHandler3(EHExceptionRecord* param_1, EHRegistrationNode* param_2, _CONTEXT* param_3, void* param_4);
 	// !DECL 0x00447897 END
 	// !DECL 0x00447c42 BEGIN
-	/* 447C42 */ static uchar FUN_00447c42(size_t param_1);
+	/* 447C42 */ static uchar OperatorNewWithBadAlloc(size_t param_1);
 	// !DECL 0x00447c42 END
 	// !DECL 0x00447e6c BEGIN
 	/* 447E6C */ uchar FUN_00447e6c();
@@ -2149,7 +2149,7 @@ public:
 	/* 452FB7 */ uchar** FUN_00452fb7();
 	// !DECL 0x00452fb7 END
 	// !DECL 0x00453c4c BEGIN
-	/* 453C4C */ static uchar I10_OUTPUT(int param_1, uint param_2, ushort param_3, int param_4, uchar param_5, short* param_6);
+	/* 453C4C */ static uint I10_OUTPUT(int param_1, uint param_2, ushort param_3, int param_4, uchar param_5, short* param_6);
 	// !DECL 0x00453c4c END
 	// !DECL 0x00454ace BEGIN
 	/* 454ACE */ uchar FUN_00454ace();
@@ -2185,7 +2185,7 @@ public:
 	/* 45A9D0 */ uchar FUN_0045a9d0(int param_1, uchar* param_2);
 	// !DECL 0x0045a9d0 END
 	// !DECL 0x0045ab00 BEGIN
-	/* 45AB00 */ uchar FUN_0045ab00(int param_1, int param_2, uchar* param_3, uchar* param_4);
+	/* 45AB00 */ uint FUN_0045ab00(int param_1, int param_2, int param_3, uchar* param_4);
 	// !DECL 0x0045ab00 END
 	// !DECL 0x0045afb0 BEGIN
 	/* 45AFB0 */ uchar FUN_0045afb0(int param_1);
@@ -2443,7 +2443,7 @@ public:
 	/* 462980 */ uint FUN_00462980();
 	// !DECL 0x00462980 END
 	// !DECL 0x00462a00 BEGIN
-	/* 462A00 */ static int FUN_00462a00(int param_1, int param_2);
+	/* 462A00 */ static uint FUN_00462a00(int param_1, int param_2);
 	// !DECL 0x00462a00 END
 	// !DECL 0x00462f30 BEGIN
 	/* 462F30 */ static uchar FUN_00462f30(int param_1);
@@ -2452,10 +2452,10 @@ public:
 	/* 462F80 */ uint FUN_00462f80();
 	// !DECL 0x00462f80 END
 	// !DECL 0x00463010 BEGIN
-	/* 463010 */ static int FUN_00463010(uint param_1, int param_2);
+	/* 463010 */ static uint FUN_00463010(uint param_1, int param_2);
 	// !DECL 0x00463010 END
 	// !DECL 0x00463250 BEGIN
-	/* 463250 */ static int FUN_00463250(int param_1, int* param_2);
+	/* 463250 */ static uint FUN_00463250(int param_1, int* param_2);
 	// !DECL 0x00463250 END
 	// !DECL 0x004634a0 BEGIN
 	/* 4634A0 */ static uint FUN_004634a0(int param_1, int param_2);
@@ -2752,7 +2752,7 @@ public:
 	/* 46F390 */ uchar FUN_0046f390();
 	// !DECL 0x0046f390 END
 	// !DECL 0x0046f720 BEGIN
-	/* 46F720 */ uint FUN_0046f720(void* param_1);
+	/* 46F720 */ void* FUN_0046f720(void* param_1);
 	// !DECL 0x0046f720 END
 	// !DECL 0x0046f770 BEGIN
 	/* 46F770 */ uchar FUN_0046f770();

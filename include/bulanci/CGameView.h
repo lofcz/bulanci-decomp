@@ -36,13 +36,13 @@ public:
 	/* 419010 */ uchar FUN_00419010(int* param_1);
 	// !DECL 0x00419010 END
 	// !DECL 0x004191a0 BEGIN
-	/* 4191A0 */ uint* FUN_004191a0(uint param_1, uint param_2, int* param_3);
+	/* 4191A0 */ void* FUN_004191a0(uint param_1, uint param_2, int* param_3);
 	// !DECL 0x004191a0 END
 	// !DECL 0x0041acf0 BEGIN
 	/* 41ACF0 */ uchar FUN_0041acf0(short param_1, uint param_2, uint* param_3);
 	// !DECL 0x0041acf0 END
 	// !DECL 0x0041e4b0 BEGIN
-	/* 41E4B0 */ uint* FUN_0041e4b0(uchar* param_1, uchar param_2, void* param_3, int param_4, uint* param_5, int param_6, int param_7, int param_8);
+	/* 41E4B0 */ void* CBulanekCtor(uchar* param_1, int param_2, void* param_3, int param_4, void* param_5, int param_6, int param_7, int param_8);
 	// !DECL 0x0041e4b0 END
 	// !DECL 0x00439720 BEGIN
 	/* 439720 */ void TM_SetFrameDelayOverrideMs(int param_1);

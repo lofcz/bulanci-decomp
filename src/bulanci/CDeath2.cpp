@@ -19,6 +19,6 @@ uchar* CDeath2::FUN_00419b00() {
 
 // !FUNC 0x0041a8c0 BEGIN
 /* 41A8C0-41A913 00053 */
-uint* CDeath2::FUN_0041a8c0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDeath2::FUN_0041a8c0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a8c0 END
 

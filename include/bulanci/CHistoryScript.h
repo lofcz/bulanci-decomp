@@ -6,7 +6,7 @@
 class CHistoryScript {
 public:
 	// !DECL 0x004226c0 BEGIN
-	/* 4226C0 */ uint* ctor(uint* param_1);
+	/* 4226C0 */ CDSScript* ctor(CDSScript* param_1);
 	// !DECL 0x004226c0 END
 	// !DECL 0x00422760 BEGIN
 	/* 422760 */ uchar* FUN_00422760();
@@ -24,19 +24,19 @@ public:
 	/* 4227B0 */ uchar FUN_004227b0(uint* param_1);
 	// !DECL 0x004227b0 END
 	// !DECL 0x00422ae0 BEGIN
-	/* 422AE0 */ uint* FUN_00422ae0(uchar param_1);
+	/* 422AE0 */ void* FUN_00422ae0(uchar param_1);
 	// !DECL 0x00422ae0 END
 	// !DECL 0x00422b00 BEGIN
-	/* 422B00 */ static uchar ext_op45(int param_1);
+	/* 422B00 */ static uchar HhBuildStaticTextAuto(int param_1);
 	// !DECL 0x00422b00 END
 	// !DECL 0x00422bc0 BEGIN
-	/* 422BC0 */ static uchar ext_op46(int param_1);
+	/* 422BC0 */ static uchar HhBuildStaticTextSized(int param_1);
 	// !DECL 0x00422bc0 END
 	// !DECL 0x00423530 BEGIN
-	/* 423530 */ static uint* ext_op47(int param_1);
+	/* 423530 */ static CDSBitmap* HhBuildHistoryBitmapWidget(int param_1);
 	// !DECL 0x00423530 END
 	// !DECL 0x00423820 BEGIN
-	/* 423820 */ static uint ext_op52(int param_1);
+	/* 423820 */ static uint HBuildHistoryMovieWidget(int param_1);
 	// !DECL 0x00423820 END
 };
 

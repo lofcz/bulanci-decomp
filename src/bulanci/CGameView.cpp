@@ -57,7 +57,7 @@ uchar CGameView::FUN_00419010(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004191a0 BEGIN
 /* 4191A0-419273 000D3 */
-uint* CGameView::FUN_004191a0(uint param_1, uint param_2, int* param_3) { STUB_BODY(); return 0; }
+void* CGameView::FUN_004191a0(uint param_1, uint param_2, int* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004191a0 END
 
 // !FUNC 0x0041acf0 BEGIN
@@ -67,7 +67,7 @@ uchar CGameView::FUN_0041acf0(short param_1, uint param_2, uint* param_3) { STUB
 
 // !FUNC 0x0041e4b0 BEGIN
 /* 41E4B0-41EA87 005D7 */
-uint* CGameView::FUN_0041e4b0(uchar* param_1, uchar param_2, void* param_3, int param_4, uint* param_5, int param_6, int param_7, int param_8) { STUB_BODY(); return 0; }
+void* CGameView::CBulanekCtor(uchar* param_1, int param_2, void* param_3, int param_4, void* param_5, int param_6, int param_7, int param_8) { STUB_BODY(); return 0; }
 // !FUNC 0x0041e4b0 END
 
 // !FUNC 0x00439720 BEGIN

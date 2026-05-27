@@ -12,7 +12,7 @@ public:
 	/* 421DD0 */ uchar FUN_00421dd0(ushort param_1);
 	// !DECL 0x00421dd0 END
 	// !DECL 0x00421e40 BEGIN
-	/* 421E40 */ uint* FUN_00421e40(uint* param_1);
+	/* 421E40 */ CWindow* CHelpDlgCtor(CWindow* param_1);
 	// !DECL 0x00421e40 END
 	// !DECL 0x004220a0 BEGIN
 	/* 4220A0 */ uchar* FUN_004220a0();
@@ -27,10 +27,10 @@ public:
 	/* 4220D0 */ uchar FUN_004220d0(uchar param_1);
 	// !DECL 0x004220d0 END
 	// !DECL 0x004220e0 BEGIN
-	/* 4220E0 */ uchar FUN_004220e0(uint* param_1);
+	/* 4220E0 */ uchar FUN_004220e0(uchar param_1);
 	// !DECL 0x004220e0 END
 	// !DECL 0x004222f0 BEGIN
-	/* 4222F0 */ uint* FUN_004222f0(uchar param_1);
+	/* 4222F0 */ void* FUN_004222f0(uchar param_1);
 	// !DECL 0x004222f0 END
 };
 

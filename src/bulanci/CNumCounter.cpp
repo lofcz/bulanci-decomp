@@ -44,7 +44,7 @@ uchar CNumCounter::CNumCounter_AdjustorThunk68_Dtor(uchar param_1) { STUB_BODY()
 
 // !FUNC 0x00427430 BEGIN
 /* 427430-4274A9 00079 */
-uchar CNumCounter::CNumCounter_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CNumCounter::CNumCounter_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00427430 END
 
 // !FUNC 0x00427740 BEGIN
@@ -54,6 +54,6 @@ uchar CNumCounter::CNumCounter_Render(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00427af0 BEGIN
 /* 427AF0-427B0E 0001E */
-uint* CNumCounter::CNumCounter_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CNumCounter::CNumCounter_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00427af0 END
 

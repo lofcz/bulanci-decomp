@@ -15,7 +15,7 @@ public:
 	/* 4278C0 */ uchar Draw(int param_1);
 	// !DECL 0x004278c0 END
 	// !DECL 0x00427b10 BEGIN
-	/* 427B10 */ uint* FUN_00427b10();
+	/* 427B10 */ uchar FUN_00427b10();
 	// !DECL 0x00427b10 END
 };
 

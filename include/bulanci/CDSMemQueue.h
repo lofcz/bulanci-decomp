@@ -15,7 +15,7 @@ public:
 	/* 43C3D0 */ uchar FUN_0043c3d0(uint* param_1);
 	// !DECL 0x0043c3d0 END
 	// !DECL 0x0043c570 BEGIN
-	/* 43C570 */ uint* FUN_0043c570(uchar param_1);
+	/* 43C570 */ void* FUN_0043c570(uchar param_1);
 	// !DECL 0x0043c570 END
 };
 

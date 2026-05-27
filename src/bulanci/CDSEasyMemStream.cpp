@@ -2,7 +2,7 @@
 
 // !FUNC 0x00409170 BEGIN
 /* 409170-4091EE 0007E */
-uint* CDSEasyMemStream::FUN_00409170(uchar* param_1, uint param_2) { STUB_BODY(); return 0; }
+void* CDSEasyMemStream::FUN_00409170(uchar* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00409170 END
 
 // !FUNC 0x004091f0 BEGIN
@@ -48,7 +48,7 @@ uchar CDSEasyMemStream::FUN_00409270(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004092f0 BEGIN
 /* 4092F0-40930E 0001E */
-uint* CDSEasyMemStream::FUN_004092f0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSEasyMemStream::FUN_004092f0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004092f0 END
 
 // !FUNC 0x004306c0 BEGIN
@@ -83,7 +83,7 @@ uchar CDSEasyMemStream::SetStreamSize(uint param_1, uint param_2) { STUB_BODY();
 
 // !FUNC 0x00430a40 BEGIN
 /* 430A40-430A67 00027 */
-uint* CDSEasyMemStream::GetStreamName(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSEasyMemStream::GetStreamName(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00430a40 END
 
 // !FUNC 0x00430d60 BEGIN
@@ -92,12 +92,12 @@ uchar CDSEasyMemStream::FUN_00430d60(uchar* param_1, uint param_2) { STUB_BODY()
 // !FUNC 0x00430d60 END
 
 // !FUNC 0x00430db0 BEGIN
-/* 430DB0-430DB8 00008 */
-uchar CDSEasyMemStream::LockRegion(void* param_1) { STUB_BODY(); return 0; }
+/* 430DB0-430DB7 00007 */
+uchar CDSEasyMemStream::LockRegion(CDSFilterStream* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00430db0 END
 
 // !FUNC 0x00430dc0 BEGIN
-/* 430DC0-430DC8 00008 */
-uchar CDSEasyMemStream::UnlockRegion(void* param_1) { STUB_BODY(); return 0; }
+/* 430DC0-430DC7 00007 */
+uchar CDSEasyMemStream::UnlockRegion(CDSFilterStream* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00430dc0 END
 

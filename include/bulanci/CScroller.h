@@ -30,7 +30,7 @@ public:
 	/* 4034D0 */ uchar* FUN_004034d0();
 	// !DECL 0x004034d0 END
 	// !DECL 0x004034e0 BEGIN
-	/* 4034E0 */ uint* FUN_004034e0(uchar param_1);
+	/* 4034E0 */ void* FUN_004034e0(uchar param_1);
 	// !DECL 0x004034e0 END
 	// !DECL 0x004040c0 BEGIN
 	/* 4040C0 */ uchar FUN_004040c0(int param_1);
@@ -45,7 +45,7 @@ public:
 	/* 405110 */ uint FUN_00405110(char param_1);
 	// !DECL 0x00405110 END
 	// !DECL 0x004057c0 BEGIN
-	/* 4057C0 */ uchar FUN_004057c0(int* param_1);
+	/* 4057C0 */ uchar FUN_004057c0(CListViewer* param_1);
 	// !DECL 0x004057c0 END
 	// !DECL 0x00405930 BEGIN
 	/* 405930 */ bool FUN_00405930(char param_1);
@@ -63,7 +63,7 @@ public:
 	/* 406CC0 */ bool FUN_00406cc0(char param_1);
 	// !DECL 0x00406cc0 END
 	// !DECL 0x004089c0 BEGIN
-	/* 4089C0 */ uint* CScroller_BuildAt(int param_1, int param_2, uint param_3, int param_4);
+	/* 4089C0 */ void* CScroller_BuildAt(int param_1, int param_2, uint param_3, int param_4);
 	// !DECL 0x004089c0 END
 	// !DECL 0x004229a0 BEGIN
 	/* 4229A0 */ uchar FUN_004229a0(int param_1);

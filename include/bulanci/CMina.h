@@ -15,7 +15,7 @@ public:
 	/* 419FD0 */ uchar FUN_00419fd0(void* param_1);
 	// !DECL 0x00419fd0 END
 	// !DECL 0x0041a990 BEGIN
-	/* 41A990 */ uint* FUN_0041a990(uint* param_1);
+	/* 41A990 */ uchar FUN_0041a990(uchar param_1);
 	// !DECL 0x0041a990 END
 	// !DECL 0x0041aa30 BEGIN
 	/* 41AA30 */ uchar* FUN_0041aa30();
@@ -51,19 +51,19 @@ public:
 	/* 41B4A0 */ uchar FUN_0041b4a0(void* param_1);
 	// !DECL 0x0041b4a0 END
 	// !DECL 0x0041c010 BEGIN
-	/* 41C010 */ uchar FUN_0041c010(uint* param_1);
+	/* 41C010 */ uchar FUN_0041c010(uchar param_1);
 	// !DECL 0x0041c010 END
 	// !DECL 0x0041c0d0 BEGIN
 	/* 41C0D0 */ uchar FUN_0041c0d0(int param_1);
 	// !DECL 0x0041c0d0 END
 	// !DECL 0x0041c530 BEGIN
-	/* 41C530 */ uint* FUN_0041c530(uchar param_1);
+	/* 41C530 */ void* FUN_0041c530(uchar param_1);
 	// !DECL 0x0041c530 END
 	// !DECL 0x0041cb70 BEGIN
-	/* 41CB70 */ uint* CMina_Ctor(int param_1);
+	/* 41CB70 */ void* CMina_Ctor(int param_1);
 	// !DECL 0x0041cb70 END
 	// !DECL 0x0041cce0 BEGIN
-	/* 41CCE0 */ uint* InitMine(int param_1);
+	/* 41CCE0 */ void* InitMine(int param_1);
 	// !DECL 0x0041cce0 END
 	// !DECL 0x0041efb0 BEGIN
 	/* 41EFB0 */ uchar OnEvent(short param_1, uint param_2, uint* param_3);

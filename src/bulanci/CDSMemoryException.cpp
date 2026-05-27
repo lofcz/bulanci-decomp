@@ -2,12 +2,12 @@
 
 // !FUNC 0x004349c0 BEGIN
 /* 4349C0-4349DC 0001C */
-wchar_t* CDSMemoryException::FUN_004349c0(wchar_t* param_1) { STUB_BODY(); return 0; }
+void* CDSMemoryException::FUN_004349c0(wchar_t* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004349c0 END
 
 // !FUNC 0x00434a70 BEGIN
 /* 434A70-434A8F 0001F */
-uint* CDSMemoryException::FUN_00434a70(uint* param_1) { STUB_BODY(); return 0; }
+CDSException* CDSMemoryException::FUN_00434a70(CDSException* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00434a70 END
 
 // !FUNC 0x00434a90 BEGIN

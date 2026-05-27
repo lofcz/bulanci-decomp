@@ -39,7 +39,7 @@ uchar CDSBmpImage::CDSBmpImage_scalar_deleting_dtor_thunk_n0x4(uchar param_1) { 
 
 // !FUNC 0x00432330 BEGIN
 /* 432330-4323C5 00095 */
-uint* CDSBmpImage::CDSBmpImage_ctor(int* param_1, int param_2, char param_3) { STUB_BODY(); return 0; }
+void* CDSBmpImage::CDSBmpImage_ctor(int* param_1, int param_2, char param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00432330 END
 
 // !FUNC 0x00432440 BEGIN
@@ -49,7 +49,7 @@ uchar CDSBmpImage::CDSBmpImage_SaveDibStream(int* param_1) { STUB_BODY(); return
 
 // !FUNC 0x00432700 BEGIN
 /* 432700-43271E 0001E */
-uint* CDSBmpImage::CDSBmpImage_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSBmpImage::CDSBmpImage_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00432700 END
 
 // !FUNC 0x00436020 BEGIN

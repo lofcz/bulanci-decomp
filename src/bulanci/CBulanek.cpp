@@ -90,7 +90,7 @@ uchar CBulanek::CBulanek_ResetAmmoAndPlayReload(void* param_1) { STUB_BODY(); re
 
 // !FUNC 0x004175f0 BEGIN
 /* 4175F0-41763C 0004C */
-uchar CBulanek::FUN_004175f0(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanek::FUN_004175f0(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004175f0 END
 
 // !FUNC 0x00417640 BEGIN
@@ -135,7 +135,7 @@ uchar CBulanek::FUN_004180e0(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004184a0 BEGIN
 /* 4184A0-418595 000F5 */
-uchar CBulanek::FUN_004184a0(int* param_1) { STUB_BODY(); return 0; }
+uchar CBulanek::FUN_004184a0(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004184a0 END
 
 // !FUNC 0x00418e90 BEGIN
@@ -197,22 +197,22 @@ uint CBulanek::FUN_004197b0(int param_1, char param_2) { STUB_BODY(); return 0; 
 
 // !FUNC 0x00419a00 BEGIN
 /* 419A00-419A79 00079 */
-uint* CBulanek::FUN_00419a00(uint param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
+void* CBulanek::FUN_00419a00(uint param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00419a00 END
 
 // !FUNC 0x00419aa0 BEGIN
 /* 419AA0-419AFF 0005F */
-uint* CBulanek::FUN_00419aa0(uint param_1) { STUB_BODY(); return 0; }
+void* CBulanek::FUN_00419aa0(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00419aa0 END
 
 // !FUNC 0x0041a390 BEGIN
 /* 41A390-41A441 000B1 */
-uchar CBulanek::FUN_0041a390(int* param_1, char param_2) { STUB_BODY(); return 0; }
+uchar CBulanek::FUN_0041a390(void* param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a390 END
 
 // !FUNC 0x0041adb0 BEGIN
 /* 41ADB0-41AECF 0011F */
-uchar CBulanek::FUN_0041adb0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CBulanek::FUN_0041adb0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041adb0 END
 
 // !FUNC 0x0041aed0 BEGIN
@@ -227,12 +227,12 @@ uchar CBulanek::FUN_0041b180(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041bc20 BEGIN
 /* 41BC20-41BC3E 0001E */
-uint* CBulanek::FUN_0041bc20(uchar param_1) { STUB_BODY(); return 0; }
+void* CBulanek::FUN_0041bc20(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bc20 END
 
 // !FUNC 0x0041c610 BEGIN
 /* 41C610-41C857 00247 */
-uchar CBulanek::FUN_0041c610(void* param_1) { STUB_BODY(); return 0; }
+uchar CBulanek::CBulanekResolveAndBindAnimTrack(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041c610 END
 
 // !FUNC 0x0041c860 BEGIN
@@ -252,7 +252,7 @@ uint CBulanek::CBulanek_OnTakeDamage(int param_1, int param_2, char param_3) { S
 
 // !FUNC 0x0041ea90 BEGIN
 /* 41EA90-41EB9D 0010D */
-uchar CBulanek::CBulanek_ApplyPickupEffect(uchar param_1) { STUB_BODY(); return 0; }
+uchar CBulanek::CBulanek_ApplyPickupEffect(ODSImage param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041ea90 END
 
 // !FUNC 0x0041eca0 BEGIN
@@ -267,7 +267,7 @@ uchar CBulanek::FUN_0041ed10(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041f900 BEGIN
 /* 41F900-41FB8E 0028E */
-uchar CBulanek::CBulanek_OnDeath(uchar param_1, uchar param_2) { STUB_BODY(); return 0; }
+uchar CBulanek::CBulanek_OnDeath(int param_1, uchar param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f900 END
 
 // !FUNC 0x0041fb90 BEGIN

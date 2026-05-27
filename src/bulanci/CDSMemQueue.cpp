@@ -19,6 +19,6 @@ uchar CDSMemQueue::FUN_0043c3d0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043c570 BEGIN
 /* 43C570-43C58E 0001E */
-uint* CDSMemQueue::FUN_0043c570(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSMemQueue::FUN_0043c570(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043c570 END
 

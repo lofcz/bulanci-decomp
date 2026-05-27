@@ -9,7 +9,7 @@ public:
 	/* 416A90 */ uchar CLevelScriptTimer_FireOnTimer(int param_1);
 	// !DECL 0x00416a90 END
 	// !DECL 0x004185c0 BEGIN
-	/* 4185C0 */ uint* ctor(uint* param_1);
+	/* 4185C0 */ CDSScript* ctor(CDSScript* param_1);
 	// !DECL 0x004185c0 END
 	// !DECL 0x00418680 BEGIN
 	/* 418680 */ uchar* FUN_00418680();
@@ -42,7 +42,7 @@ public:
 	/* 418BF0 */ uchar FUN_00418bf0(int param_1);
 	// !DECL 0x00418bf0 END
 	// !DECL 0x0041a450 BEGIN
-	/* 41A450 */ uint* FUN_0041a450(uchar param_1);
+	/* 41A450 */ void* FUN_0041a450(uchar param_1);
 	// !DECL 0x0041a450 END
 	// !DECL 0x004216c0 BEGIN
 	/* 4216C0 */ uchar FUN_004216c0(int param_1);

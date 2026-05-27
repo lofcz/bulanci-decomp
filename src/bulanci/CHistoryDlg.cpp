@@ -12,7 +12,7 @@ uchar CHistoryDlg::CHistoryDlg_OnEvent(ushort param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x004231d0 BEGIN
 /* 4231D0-423423 00253 */
-uint* CHistoryDlg::CHistoryDlg_ctor(uint* param_1) { STUB_BODY(); return 0; }
+CWindow* CHistoryDlg::CHistoryDlg_ctor(CWindow* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004231d0 END
 
 // !FUNC 0x00423430 BEGIN
@@ -39,11 +39,11 @@ uchar CHistoryDlg::FUN_00423460(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00423470 BEGIN
 /* 423470-423522 000B2 */
-uchar CHistoryDlg::FUN_00423470(uint* param_1) { STUB_BODY(); return 0; }
+uchar CHistoryDlg::FUN_00423470(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423470 END
 
 // !FUNC 0x00423680 BEGIN
 /* 423680-42369E 0001E */
-uint* CHistoryDlg::FUN_00423680(uchar param_1) { STUB_BODY(); return 0; }
+void* CHistoryDlg::FUN_00423680(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423680 END
 

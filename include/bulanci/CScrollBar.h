@@ -6,10 +6,10 @@
 class CScrollBar {
 public:
 	// !DECL 0x00402e80 BEGIN
-	/* 402E80 */ static uchar CScrollBar_BlitVerticalTrack(void* param_1, int param_2, int param_3, int param_4, int param_5);
+	/* 402E80 */ static uchar CScrollBar_BlitVerticalTrack(CPoemScroller* param_1, int param_2, int param_3, int param_4, int param_5);
 	// !DECL 0x00402e80 END
 	// !DECL 0x00402ee0 BEGIN
-	/* 402EE0 */ static uchar CScrollBar_BlitHorizontalTrack(void* param_1, int param_2, int param_3, int param_4, int param_5);
+	/* 402EE0 */ static uchar CScrollBar_BlitHorizontalTrack(CPoemScroller* param_1, int param_2, int param_3, int param_4, int param_5);
 	// !DECL 0x00402ee0 END
 	// !DECL 0x00402f60 BEGIN
 	/* 402F60 */ uchar CScrollBar_OnMouseMove(int param_1);
@@ -48,7 +48,7 @@ public:
 	/* 404FE0 */ uchar CScrollBar_dtor(int* param_1);
 	// !DECL 0x00404fe0 END
 	// !DECL 0x00406430 BEGIN
-	/* 406430 */ uint* CScrollBar_vDtor(uchar param_1);
+	/* 406430 */ void* CScrollBar_vDtor(uchar param_1);
 	// !DECL 0x00406430 END
 	// !DECL 0x00406770 BEGIN
 	/* 406770 */ uchar CScrollBar_Invalidate(void* param_1);
@@ -60,7 +60,7 @@ public:
 	/* 4074C0 */ uchar CScrollBar_OnMouseUp(uint param_1, uchar param_2);
 	// !DECL 0x004074c0 END
 	// !DECL 0x00408370 BEGIN
-	/* 408370 */ int* CScrollBar_BuildAt(int param_1, int param_2, int param_3, int param_4, uint* param_5);
+	/* 408370 */ void* CScrollBar_BuildAt(int param_1, int param_2, int param_3, int param_4, uint* param_5);
 	// !DECL 0x00408370 END
 };
 

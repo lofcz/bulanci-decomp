@@ -34,12 +34,12 @@ uchar CShotCounter::DeletingDestructorThunk_4(uchar param_1) { STUB_BODY(); retu
 
 // !FUNC 0x004272d0 BEGIN
 /* 4272D0-427332 00062 */
-uchar CShotCounter::Destructor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CShotCounter::Destructor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004272d0 END
 
 // !FUNC 0x00427a60 BEGIN
 /* 427A60-427A7E 0001E */
-uint* CShotCounter::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
+void* CShotCounter::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00427a60 END
 
 // !FUNC 0x00448b50 BEGIN

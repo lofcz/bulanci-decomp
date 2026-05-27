@@ -24,7 +24,7 @@ uchar CDSMpx::FUN_00432f40(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00432fc0 BEGIN
 /* 432FC0-432FDE 0001E */
-uint* CDSMpx::FUN_00432fc0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSMpx::FUN_00432fc0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00432fc0 END
 
 // !FUNC 0x0043c380 BEGIN
@@ -79,12 +79,12 @@ uchar CDSMpx::ForwardReadPcmToInstance(uint* param_1, void* param_2, void* param
 
 // !FUNC 0x00446a00 BEGIN
 /* 446A00-446ADF 000DF */
-uint* CDSMpx::AttachBitstream(int* param_1, uint param_2) { STUB_BODY(); return 0; }
+void* CDSMpx::AttachBitstream(int* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00446a00 END
 
 // !FUNC 0x00446b00 BEGIN
 /* 446B00-446B88 00088 */
-uint* CDSMpx::CreateFromHandle(int param_1) { STUB_BODY(); return 0; }
+void* CDSMpx::CreateFromHandle(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00446b00 END
 
 // !FUNC 0x00446b90 BEGIN
@@ -99,7 +99,7 @@ uchar CDSMpx::FUN_004567b0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00456820 BEGIN
 /* 456820-45684E 0002E */
-uchar CDSMpx::FUN_00456820(int* param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
+uchar CDSMpx::FUN_00456820(uint* param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00456820 END
 
 // !FUNC 0x00456850 BEGIN
@@ -221,7 +221,7 @@ uint CDSMpx::mad_bit_crc(uint param_1, uint param_2, uint param_3, ushort param_
 
 // !FUNC 0x0045c100 BEGIN
 /* 45C100-45C47F 0037F */
-uchar CDSMpx::mad_layer_III(int param_1, int param_2) { STUB_BODY(); return 0; }
+int CDSMpx::mad_layer_III(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0045c100 END
 
 // !FUNC 0x0045c480 BEGIN
@@ -231,7 +231,7 @@ uint CDSMpx::mad_layer_I_sample() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0045c4e0 BEGIN
 /* 45C4E0-45C7F2 00312 */
-uchar CDSMpx::mad_layer_I(int param_1, int param_2) { STUB_BODY(); return 0; }
+uint CDSMpx::mad_layer_I(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0045c4e0 END
 
 // !FUNC 0x0045c800 BEGIN
@@ -241,7 +241,7 @@ uchar CDSMpx::mad_layer_II_samples(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0045c8c0 BEGIN
 /* 45C8C0-45CF4B 0068B */
-uchar CDSMpx::mad_layer_II(char* param_1, int param_2) { STUB_BODY(); return 0; }
+uint CDSMpx::mad_layer_II(char* param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0045c8c0 END
 
 // !FUNC 0x0045cf80 BEGIN

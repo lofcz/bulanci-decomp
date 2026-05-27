@@ -9,7 +9,7 @@ uchar* CDSCollection::FUN_00401230() {
 
 // !FUNC 0x00401240 BEGIN
 /* 401240-40125E 0001E */
-uint* CDSCollection::FUN_00401240(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSCollection::FUN_00401240(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401240 END
 
 // !FUNC 0x00401270 BEGIN
@@ -39,12 +39,12 @@ uchar CDSCollection::FUN_00431000(int param_1, char param_2) { STUB_BODY(); retu
 
 // !FUNC 0x00431210 BEGIN
 /* 431210-43125D 0004D */
-uchar CDSCollection::FUN_00431210(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSCollection::FUN_00431210(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00431210 END
 
 // !FUNC 0x00431260 BEGIN
 /* 431260-4312BD 0005D */
-uchar CDSCollection::FUN_00431260(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSCollection::FUN_00431260(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00431260 END
 
 // !FUNC 0x00431360 BEGIN

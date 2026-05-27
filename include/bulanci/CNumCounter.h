@@ -30,13 +30,13 @@ public:
 	/* 427420 */ uchar CNumCounter_AdjustorThunk68_Dtor(uchar param_1);
 	// !DECL 0x00427420 END
 	// !DECL 0x00427430 BEGIN
-	/* 427430 */ uchar CNumCounter_dtor(uint* param_1);
+	/* 427430 */ uchar CNumCounter_dtor(uchar param_1);
 	// !DECL 0x00427430 END
 	// !DECL 0x00427740 BEGIN
 	/* 427740 */ uchar CNumCounter_Render(int param_1);
 	// !DECL 0x00427740 END
 	// !DECL 0x00427af0 BEGIN
-	/* 427AF0 */ uint* CNumCounter_vDtor(uchar param_1);
+	/* 427AF0 */ void* CNumCounter_vDtor(uchar param_1);
 	// !DECL 0x00427af0 END
 };
 

@@ -44,7 +44,7 @@ uchar CEdit::CEdit_AdjustorThunk10_Dtor(uchar param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x00406050 BEGIN
 /* 406050-4060FC 000AC */
-uchar CEdit::CEdit_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CEdit::CEdit_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00406050 END
 
 // !FUNC 0x00406100 BEGIN
@@ -54,7 +54,7 @@ uchar CEdit::CEdit_Render(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00406230 BEGIN
 /* 406230-406261 00031 */
-uint* CEdit::CEdit_OnTimerTick(uint* param_1, uchar param_2) { STUB_BODY(); return 0; }
+uchar CEdit::CEdit_OnTimerTick(uchar param_1, uchar param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00406230 END
 
 // !FUNC 0x00406270 BEGIN
@@ -74,7 +74,7 @@ uchar CEdit::CEdit_AdjustorThunk18_Dtor(uchar param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x00406eb0 BEGIN
 /* 406EB0-407020 00170 */
-uchar CEdit::CEdit_LayoutToCaret(uint param_1) { STUB_BODY(); return 0; }
+uint CEdit::CEdit_LayoutToCaret(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00406eb0 END
 
 // !FUNC 0x00407040 BEGIN
@@ -84,7 +84,7 @@ uchar CEdit::CEdit_OnFocusEvent(short param_1, void* param_2) { STUB_BODY(); ret
 
 // !FUNC 0x00407760 BEGIN
 /* 407760-4078ED 0018D */
-uint* CEdit::CEdit_BuildAt(uint param_1, uint param_2, uint param_3, uint param_4, uint param_5, uint param_6, uint param_7, uint param_8) { STUB_BODY(); return 0; }
+void* CEdit::CEdit_BuildAt(uint param_1, uint param_2, uint param_3, uint param_4, uint param_5, uint param_6, uint param_7, uint param_8) { STUB_BODY(); return 0; }
 // !FUNC 0x00407760 END
 
 // !FUNC 0x004078f0 BEGIN
@@ -99,7 +99,7 @@ uchar CEdit::CEdit_OnChar(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00407d20 BEGIN
 /* 407D20-407D49 00029 */
-uchar CEdit::CEdit_LoadData(int* param_1) { STUB_BODY(); return 0; }
+uchar CEdit::CEdit_LoadData(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00407d20 END
 
 // !FUNC 0x0040ba00 BEGIN
@@ -109,6 +109,6 @@ uchar CEdit::FUN_0040ba00(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040ba10 BEGIN
 /* 40BA10-40BA2E 0001E */
-uint* CEdit::CEdit_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CEdit::CEdit_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ba10 END
 

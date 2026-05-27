@@ -6,7 +6,7 @@
 class CDSFileStream {
 public:
 	// !DECL 0x00401540 BEGIN
-	/* 401540 */ uint* FUN_00401540(int param_1, uchar* param_2);
+	/* 401540 */ void* FUN_00401540(int param_1, uchar* param_2);
 	// !DECL 0x00401540 END
 	// !DECL 0x00401600 BEGIN
 	/* 401600 */ uchar* FUN_00401600();
@@ -42,7 +42,7 @@ public:
 	/* 401740 */ uint* GetStreamName(uint* param_1);
 	// !DECL 0x00401740 END
 	// !DECL 0x00401770 BEGIN
-	/* 401770 */ uint* FUN_00401770(uchar param_1);
+	/* 401770 */ void* FUN_00401770(uchar param_1);
 	// !DECL 0x00401770 END
 	// !DECL 0x00409260 BEGIN
 	/* 409260 */ uchar FUN_00409260(int param_1);

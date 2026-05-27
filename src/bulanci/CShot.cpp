@@ -9,7 +9,7 @@ uchar* CShot::FUN_004170e0() {
 
 // !FUNC 0x004170f0 BEGIN
 /* 4170F0-41714D 0005D */
-uchar CShot::FUN_004170f0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CShot::FUN_004170f0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004170f0 END
 
 // !FUNC 0x00417150 BEGIN
@@ -34,7 +34,7 @@ uchar CShot::FUN_00417180(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00417190 BEGIN
 /* 417190-4171AE 0001E */
-uint* CShot::FUN_00417190(uchar param_1) { STUB_BODY(); return 0; }
+void* CShot::FUN_00417190(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00417190 END
 
 // !FUNC 0x00417b30 BEGIN
@@ -79,6 +79,6 @@ uchar CShot::Update(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041edf0 BEGIN
 /* 41EDF0-41EFAB 001BB */
-int* CShot::CShot_Ctor(int* param_1, void* param_2, uchar param_3, uchar param_4, uchar param_5, int param_6) { STUB_BODY(); return 0; }
+void* CShot::CShot_Ctor(uint* param_1, CGameView* param_2, int param_3, int param_4, int param_5, int param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x0041edf0 END
 

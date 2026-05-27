@@ -29,6 +29,6 @@ uchar CDSApiException::FUN_00434d50(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00434e10 BEGIN
 /* 434E10-434E2E 0001E */
-uint* CDSApiException::FUN_00434e10(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSApiException::FUN_00434e10(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00434e10 END
 

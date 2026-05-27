@@ -12,7 +12,7 @@ public:
 	/* 401860 */ uchar FUN_00401860(uint param_1);
 	// !DECL 0x00401860 END
 	// !DECL 0x00401870 BEGIN
-	/* 401870 */ uint* FUN_00401870(uchar param_1);
+	/* 401870 */ void* FUN_00401870(uchar param_1);
 	// !DECL 0x00401870 END
 	// !DECL 0x00401890 BEGIN
 	/* 401890 */ uchar FUN_00401890(uchar param_1);
@@ -51,19 +51,19 @@ public:
 	/* 433F00 */ uint* FUN_00433f00(int param_1);
 	// !DECL 0x00433f00 END
 	// !DECL 0x00433f70 BEGIN
-	/* 433F70 */ void* FUN_00433f70(void* param_1, int param_2);
+	/* 433F70 */ void* FUN_00433f70(void* param_1, void* param_2);
 	// !DECL 0x00433f70 END
 	// !DECL 0x00434110 BEGIN
-	/* 434110 */ uchar FUN_00434110(uint param_1, int param_2);
+	/* 434110 */ uchar FUN_00434110(uint param_1, void* param_2);
 	// !DECL 0x00434110 END
 	// !DECL 0x00434140 BEGIN
-	/* 434140 */ uchar FUN_00434140(int param_1, int param_2);
+	/* 434140 */ uchar FUN_00434140(int param_1, void* param_2);
 	// !DECL 0x00434140 END
 	// !DECL 0x00434380 BEGIN
 	/* 434380 */ uint FUN_00434380(int param_1);
 	// !DECL 0x00434380 END
 	// !DECL 0x00434400 BEGIN
-	/* 434400 */ uint* FUN_00434400(uint param_1);
+	/* 434400 */ void* FUN_00434400(uint param_1);
 	// !DECL 0x00434400 END
 	// !DECL 0x00434600 BEGIN
 	/* 434600 */ uchar FUN_00434600(int param_1);

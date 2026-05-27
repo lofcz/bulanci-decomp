@@ -63,7 +63,7 @@ public:
 	/* 4329C0 */ uchar DestructInPlace(uint* param_1);
 	// !DECL 0x004329c0 END
 	// !DECL 0x00432aa0 BEGIN
-	/* 432AA0 */ uint* ScalarDeletingDtor(uchar param_1);
+	/* 432AA0 */ void* ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00432aa0 END
 	// !DECL 0x00432ac0 BEGIN
 	/* 432AC0 */ uchar BindStream(int* param_1);

@@ -29,7 +29,7 @@ uchar CVolume::CVolume_AdjustorThunk68_Dtor(uchar param_1) { STUB_BODY(); return
 
 // !FUNC 0x0040e1b0 BEGIN
 /* 40E1B0-40E224 00074 */
-uint* CVolume::CVolume_BuildAt(int* param_1, uint* param_2) { STUB_BODY(); return 0; }
+void* CVolume::CVolume_BuildAt(int* param_1, uint* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040e1b0 END
 
 // !FUNC 0x0040e230 BEGIN
@@ -49,7 +49,7 @@ uint* CVolume::CVolume_Allocate() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040fa70 BEGIN
 /* 40FA70-40FAFD 0008D */
-uchar CVolume::CVolume_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CVolume::CVolume_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040fa70 END
 
 // !FUNC 0x0040fb00 BEGIN
@@ -59,6 +59,6 @@ uchar CVolume::CVolume_OnMouseDown(int* param_1, short param_2) { STUB_BODY(); r
 
 // !FUNC 0x0040fc00 BEGIN
 /* 40FC00-40FC1E 0001E */
-uint* CVolume::CVolume_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CVolume::CVolume_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040fc00 END
 

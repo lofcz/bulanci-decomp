@@ -9,7 +9,7 @@ public:
 	/* 40B290 */ uchar FUN_0040b290(ushort param_1);
 	// !DECL 0x0040b290 END
 	// !DECL 0x00411b50 BEGIN
-	/* 411B50 */ uint* CExitDlg_ctor(uint* param_1);
+	/* 411B50 */ CWindow* CExitDlg_ctor(CWindow* param_1);
 	// !DECL 0x00411b50 END
 	// !DECL 0x00411de0 BEGIN
 	/* 411DE0 */ uchar* FUN_00411de0();

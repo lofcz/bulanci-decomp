@@ -6,7 +6,7 @@
 class CDSSafeStream {
 public:
 	// !DECL 0x00433ab0 BEGIN
-	/* 433AB0 */ uint* FUN_00433ab0(int* param_1);
+	/* 433AB0 */ void* FUN_00433ab0(int* param_1);
 	// !DECL 0x00433ab0 END
 	// !DECL 0x00433b60 BEGIN
 	/* 433B60 */ uchar* FUN_00433b60();
@@ -27,13 +27,13 @@ public:
 	/* 433BC0 */ uchar FUN_00433bc0(uint* param_1);
 	// !DECL 0x00433bc0 END
 	// !DECL 0x00433c90 BEGIN
-	/* 433C90 */ uint* FUN_00433c90(uchar param_1);
+	/* 433C90 */ void* FUN_00433c90(uchar param_1);
 	// !DECL 0x00433c90 END
 	// !DECL 0x00433d70 BEGIN
 	/* 433D70 */ uchar FUN_00433d70(int param_1);
 	// !DECL 0x00433d70 END
 	// !DECL 0x00446c00 BEGIN
-	/* 446C00 */ uchar FUN_00446c00(void* param_1);
+	/* 446C00 */ uchar FUN_00446c00(CDSFilterStream* param_1);
 	// !DECL 0x00446c00 END
 	// !DECL 0x00446ca0 BEGIN
 	/* 446CA0 */ int FUN_00446ca0(int param_1);

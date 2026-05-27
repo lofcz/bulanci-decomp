@@ -6,7 +6,7 @@
 class CDSDsmFile {
 public:
 	// !DECL 0x004289a0 BEGIN
-	/* 4289A0 */ uint* InitializeQueueStreamView(int param_1, int param_2, int param_3);
+	/* 4289A0 */ void* InitializeQueueStreamView(int param_1, int param_2, int param_3);
 	// !DECL 0x004289a0 END
 	// !DECL 0x00428ad0 BEGIN
 	/* 428AD0 */ uchar HandleResourceRead(int* param_1, int param_2, uint param_3);
@@ -18,10 +18,10 @@ public:
 	/* 428D10 */ uchar Catch_00428d10();
 	// !DECL 0x00428d10 END
 	// !DECL 0x00428da0 BEGIN
-	/* 428DA0 */ uchar* GetClassMetaA();
+	/* 428DA0 */ void** GetClassMetaA();
 	// !DECL 0x00428da0 END
 	// !DECL 0x00428db0 BEGIN
-	/* 428DB0 */ uchar* GetClassRegistry();
+	/* 428DB0 */ void** GetClassRegistry();
 	// !DECL 0x00428db0 END
 	// !DECL 0x00428dc0 BEGIN
 	/* 428DC0 */ uchar FUN_00428dc0(uchar param_1);
@@ -69,7 +69,7 @@ public:
 	/* 428FF0 */ uchar HandleReleaseResource(uchar* param_1, uchar param_2);
 	// !DECL 0x00428ff0 END
 	// !DECL 0x00429060 BEGIN
-	/* 429060 */ uint* HandleScalarDelete(uchar param_1);
+	/* 429060 */ void* HandleScalarDelete(uchar param_1);
 	// !DECL 0x00429060 END
 	// !DECL 0x00429080 BEGIN
 	/* 429080 */ uchar HandleReleaseReadThunk(uchar* param_1);
@@ -90,7 +90,7 @@ public:
 	/* 433010 */ uchar FUN_00433010(int param_1);
 	// !DECL 0x00433010 END
 	// !DECL 0x00439ac0 BEGIN
-	/* 439AC0 */ uint* InitializeChildObject(int param_1);
+	/* 439AC0 */ CDSObject* InitializeChildObject(int param_1);
 	// !DECL 0x00439ac0 END
 	// !DECL 0x0043bde0 BEGIN
 	/* 43BDE0 */ uchar InitializeSourceRegion(int param_1, int param_2, int param_3);

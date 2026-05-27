@@ -2,7 +2,7 @@
 
 // !FUNC 0x004226c0 BEGIN
 /* 4226C0-422752 00092 */
-uint* CHistoryScript::ctor(uint* param_1) { STUB_BODY(); return 0; }
+CDSScript* CHistoryScript::ctor(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004226c0 END
 
 // !FUNC 0x00422760 BEGIN
@@ -34,26 +34,26 @@ uchar CHistoryScript::FUN_004227b0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00422ae0 BEGIN
 /* 422AE0-422AFE 0001E */
-uint* CHistoryScript::FUN_00422ae0(uchar param_1) { STUB_BODY(); return 0; }
+void* CHistoryScript::FUN_00422ae0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00422ae0 END
 
 // !FUNC 0x00422b00 BEGIN
 /* 422B00-422BBD 000BD */
-uchar CHistoryScript::ext_op45(int param_1) { STUB_BODY(); return 0; }
+uchar CHistoryScript::HhBuildStaticTextAuto(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00422b00 END
 
 // !FUNC 0x00422bc0 BEGIN
 /* 422BC0-422CAF 000EF */
-uchar CHistoryScript::ext_op46(int param_1) { STUB_BODY(); return 0; }
+uchar CHistoryScript::HhBuildStaticTextSized(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00422bc0 END
 
 // !FUNC 0x00423530 BEGIN
 /* 423530-423608 000D8 */
-uint* CHistoryScript::ext_op47(int param_1) { STUB_BODY(); return 0; }
+CDSBitmap* CHistoryScript::HhBuildHistoryBitmapWidget(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423530 END
 
 // !FUNC 0x00423820 BEGIN
 /* 423820-4238CF 000AF */
-uint CHistoryScript::ext_op52(int param_1) { STUB_BODY(); return 0; }
+uint CHistoryScript::HBuildHistoryMovieWidget(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423820 END
 

@@ -27,7 +27,7 @@ uint CAdvertising::OnKeyDown(char param_1, char param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x0040e5f0 BEGIN
 /* 40E5F0-40E706 00116 */
-uint* CAdvertising::CAdvertising_ctor(uint* param_1) { STUB_BODY(); return 0; }
+CWindow* CAdvertising::CAdvertising_ctor(CWindow* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040e5f0 END
 
 // !FUNC 0x0040e710 BEGIN
@@ -59,7 +59,7 @@ uchar CAdvertising::deleting_destructor_thunk_0x4(uchar param_1) { STUB_BODY(); 
 
 // !FUNC 0x0040fb70 BEGIN
 /* 40FB70-40FB8E 0001E */
-uint* CAdvertising::deleting_destructor(uchar param_1) { STUB_BODY(); return 0; }
+void* CAdvertising::deleting_destructor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040fb70 END
 
 // !FUNC 0x0040fe30 BEGIN

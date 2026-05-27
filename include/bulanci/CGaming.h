@@ -24,7 +24,7 @@ public:
 	/* 413390 */ uchar FUN_00413390(char param_1, char param_2);
 	// !DECL 0x00413390 END
 	// !DECL 0x00415f80 BEGIN
-	/* 415F80 */ uchar CGaming_DrainRecordedNetMessages(void* param_1);
+	/* 415F80 */ uchar CGaming_DrainRecordedNetMessages(CGame* param_1);
 	// !DECL 0x00415f80 END
 	// !DECL 0x00416810 BEGIN
 	/* 416810 */ uint CGaming_GetObjectAtSlotSafe(uchar param_1);
@@ -81,7 +81,7 @@ public:
 	/* 41B3B0 */ uchar FUN_0041b3b0(int param_1);
 	// !DECL 0x0041b3b0 END
 	// !DECL 0x0041b500 BEGIN
-	/* 41B500 */ uchar CGaming_TickAmbientAnimations(void* param_1);
+	/* 41B500 */ uchar CGaming_TickAmbientAnimations(uchar param_1);
 	// !DECL 0x0041b500 END
 	// !DECL 0x0041b5a0 BEGIN
 	/* 41B5A0 */ uchar FUN_0041b5a0(int* param_1);
@@ -90,13 +90,13 @@ public:
 	/* 41B620 */ uchar FUN_0041b620(void* param_1);
 	// !DECL 0x0041b620 END
 	// !DECL 0x0041b850 BEGIN
-	/* 41B850 */ uchar CGaming_dtor(uint* param_1);
+	/* 41B850 */ uchar CGaming_dtor(void* param_1);
 	// !DECL 0x0041b850 END
 	// !DECL 0x0041bab0 BEGIN
 	/* 41BAB0 */ uchar FUN_0041bab0(void* param_1);
 	// !DECL 0x0041bab0 END
 	// !DECL 0x0041bee0 BEGIN
-	/* 41BEE0 */ uint* FUN_0041bee0(uchar param_1);
+	/* 41BEE0 */ void* FUN_0041bee0(uchar param_1);
 	// !DECL 0x0041bee0 END
 	// !DECL 0x0041c140 BEGIN
 	/* 41C140 */ uchar CGaming_OnResumeOrStartGame(char param_1);

@@ -24,10 +24,10 @@ public:
 	/* 4272C0 */ uchar DeletingDestructorThunk_4(uchar param_1);
 	// !DECL 0x004272c0 END
 	// !DECL 0x004272d0 BEGIN
-	/* 4272D0 */ uchar Destructor(uint* param_1);
+	/* 4272D0 */ uchar Destructor(uchar param_1);
 	// !DECL 0x004272d0 END
 	// !DECL 0x00427a60 BEGIN
-	/* 427A60 */ uint* ScalarDeletingDestructor(uchar param_1);
+	/* 427A60 */ void* ScalarDeletingDestructor(uchar param_1);
 	// !DECL 0x00427a60 END
 	// !DECL 0x00448b50 BEGIN
 	/* 448B50 */ ulonglong FUN_00448b50(uint param_1, uint param_2);

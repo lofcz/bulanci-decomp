@@ -24,12 +24,12 @@ uchar CDSObject::FUN_0041a550(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004245c0 BEGIN
 /* 4245C0-4245CE 0000E */
-uchar CDSObject::FUN_004245c0(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSObject::CDSObject_ReleaseViaVtable(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004245c0 END
 
 // !FUNC 0x00425620 BEGIN
 /* 425620-4256B5 00095 */
-uint* CDSObject::FUN_00425620(int* param_1, int param_2, char param_3) { STUB_BODY(); return 0; }
+void* CDSObject::FUN_00425620(int* param_1, int param_2, char param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00425620 END
 
 // !FUNC 0x004256c0 BEGIN
@@ -39,12 +39,12 @@ uchar CDSObject::FUN_004256c0(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042eb00 BEGIN
 /* 42EB00-42EB2C 0002C */
-uchar CDSObject::FUN_0042eb00(void* param_1) { STUB_BODY(); return 0; }
+uchar CDSObject::FUN_0042eb00(CBulanek* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042eb00 END
 
 // !FUNC 0x0042f140 BEGIN
 /* 42F140-42F1DE 0009E */
-uchar CDSObject::FUN_0042f140(void* param_1) { STUB_BODY(); return 0; }
+uchar CDSObject::FUN_0042f140(CBulanek* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042f140 END
 
 // !FUNC 0x004323d0 BEGIN

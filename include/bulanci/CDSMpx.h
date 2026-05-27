@@ -18,7 +18,7 @@ public:
 	/* 432F40 */ uchar FUN_00432f40(uint* param_1);
 	// !DECL 0x00432f40 END
 	// !DECL 0x00432fc0 BEGIN
-	/* 432FC0 */ uint* FUN_00432fc0(uchar param_1);
+	/* 432FC0 */ void* FUN_00432fc0(uchar param_1);
 	// !DECL 0x00432fc0 END
 	// !DECL 0x0043c380 BEGIN
 	/* 43C380 */ uchar FUN_0043c380(int param_1);
@@ -51,10 +51,10 @@ public:
 	/* 4469A0 */ uchar ForwardReadPcmToInstance(uint* param_1, void* param_2, void* param_3);
 	// !DECL 0x004469a0 END
 	// !DECL 0x00446a00 BEGIN
-	/* 446A00 */ uint* AttachBitstream(int* param_1, uint param_2);
+	/* 446A00 */ void* AttachBitstream(int* param_1, uint param_2);
 	// !DECL 0x00446a00 END
 	// !DECL 0x00446b00 BEGIN
-	/* 446B00 */ uint* CreateFromHandle(int param_1);
+	/* 446B00 */ void* CreateFromHandle(int param_1);
 	// !DECL 0x00446b00 END
 	// !DECL 0x00446b90 BEGIN
 	/* 446B90 */ uchar ResolveResource(int param_1);
@@ -63,7 +63,7 @@ public:
 	/* 4567B0 */ static uchar FUN_004567b0(uint* param_1);
 	// !DECL 0x004567b0 END
 	// !DECL 0x00456820 BEGIN
-	/* 456820 */ static uchar FUN_00456820(int* param_1, int param_2, int param_3);
+	/* 456820 */ static uchar FUN_00456820(uint* param_1, uint param_2, int param_3);
 	// !DECL 0x00456820 END
 	// !DECL 0x00456850 BEGIN
 	/* 456850 */ static uint mad_stream_sync(int param_1);
@@ -126,19 +126,19 @@ public:
 	/* 4597B0 */ static uint mad_bit_crc(uint param_1, uint param_2, uint param_3, ushort param_4);
 	// !DECL 0x004597b0 END
 	// !DECL 0x0045c100 BEGIN
-	/* 45C100 */ static uchar mad_layer_III(int param_1, int param_2);
+	/* 45C100 */ static int mad_layer_III(int param_1, int param_2);
 	// !DECL 0x0045c100 END
 	// !DECL 0x0045c480 BEGIN
 	/* 45C480 */ uint mad_layer_I_sample();
 	// !DECL 0x0045c480 END
 	// !DECL 0x0045c4e0 BEGIN
-	/* 45C4E0 */ static uchar mad_layer_I(int param_1, int param_2);
+	/* 45C4E0 */ static uint mad_layer_I(int param_1, int param_2);
 	// !DECL 0x0045c4e0 END
 	// !DECL 0x0045c800 BEGIN
 	/* 45C800 */ static uchar mad_layer_II_samples(uint* param_1);
 	// !DECL 0x0045c800 END
 	// !DECL 0x0045c8c0 BEGIN
-	/* 45C8C0 */ static uchar mad_layer_II(char* param_1, int param_2);
+	/* 45C8C0 */ static uint mad_layer_II(char* param_1, int param_2);
 	// !DECL 0x0045c8c0 END
 	// !DECL 0x0045cf80 BEGIN
 	/* 45CF80 */ uchar FUN_0045cf80(uint param_1);

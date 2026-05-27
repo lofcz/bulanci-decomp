@@ -24,6 +24,6 @@ uchar CDSVideoPlayer::TM_Destructor(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00439fc0 BEGIN
 /* 439FC0-439FDE 0001E */
-uint* CDSVideoPlayer::FUN_00439fc0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSVideoPlayer::FUN_00439fc0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00439fc0 END
 

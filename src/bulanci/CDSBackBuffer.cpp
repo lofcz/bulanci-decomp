@@ -19,6 +19,6 @@ uchar CDSBackBuffer::FUN_0042ad40(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042adb0 BEGIN
 /* 42ADB0-42ADCE 0001E */
-uint* CDSBackBuffer::FUN_0042adb0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSBackBuffer::FUN_0042adb0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042adb0 END
 

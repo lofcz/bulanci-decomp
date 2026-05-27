@@ -99,7 +99,7 @@ uchar CDSFlxFile::DestructInPlace(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00432aa0 BEGIN
 /* 432AA0-432ABE 0001E */
-uint* CDSFlxFile::ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSFlxFile::ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00432aa0 END
 
 // !FUNC 0x00432ac0 BEGIN

@@ -2,7 +2,7 @@
 
 // !FUNC 0x00423950 BEGIN
 /* 423950-4239DF 0008F */
-uchar CSwitch::FUN_00423950(uint* param_1) { STUB_BODY(); return 0; }
+uchar CSwitch::FUN_00423950(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423950 END
 
 // !FUNC 0x004239e0 BEGIN
@@ -39,7 +39,7 @@ uchar CSwitch::FUN_00423b00(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00423b30 BEGIN
 /* 423B30-423B4E 0001E */
-uint* CSwitch::FUN_00423b30(uchar param_1) { STUB_BODY(); return 0; }
+void* CSwitch::FUN_00423b30(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423b30 END
 
 // !FUNC 0x00423ef0 BEGIN
@@ -49,7 +49,7 @@ uchar CSwitch::CSwitch_PlayIdleTrack(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004244a0 BEGIN
 /* 4244A0-424519 00079 */
-uint* CSwitch::FUN_004244a0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CSwitch::FUN_004244a0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004244a0 END
 
 // !FUNC 0x00424cf0 BEGIN
@@ -64,7 +64,7 @@ uchar CSwitch::CSwitch_OnMouseLeave(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00424dc0 BEGIN
 /* 424DC0-424E09 00049 */
-uchar CSwitch::CSwitch_OnSiblingPressed(short param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CSwitch::CSwitch_OnSiblingPressed(short param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00424dc0 END
 
 // !FUNC 0x00424e10 BEGIN

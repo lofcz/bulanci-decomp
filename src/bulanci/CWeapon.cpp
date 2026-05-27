@@ -33,7 +33,7 @@ uchar* CWeapon::FUN_00418f60() {
 
 // !FUNC 0x0041bf00 BEGIN
 /* 41BF00-41BF66 00066 */
-uchar CWeapon::Update(int* param_1) { STUB_BODY(); return 0; }
+uchar CWeapon::Update(CBulanek* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bf00 END
 
 // !FUNC 0x0041bf70 BEGIN
@@ -62,7 +62,7 @@ uchar CWeapon::Init(uint param_1, int* param_2) {
 
 // !FUNC 0x0041dae0 BEGIN
 /* 41DAE0-41DAFE 0001E */
-uint* CWeapon::FUN_0041dae0(uchar param_1) { STUB_BODY(); return 0; }
+void* CWeapon::FUN_0041dae0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041dae0 END
 
 // !FUNC 0x004212b0 BEGIN

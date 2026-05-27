@@ -14,12 +14,12 @@ uchar CDSStreamException::FUN_00430000(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004300f0 BEGIN
 /* 4300F0-4301A6 000B6 */
-uint* CDSStreamException::FUN_004300f0(uint param_1, int* param_2) { STUB_BODY(); return 0; }
+void* CDSStreamException::FUN_004300f0(uint param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004300f0 END
 
 // !FUNC 0x004301b0 BEGIN
 /* 4301B0-430264 000B4 */
-uint* CDSStreamException::FUN_004301b0(uint param_1, int* param_2, uint param_3) { STUB_BODY(); return 0; }
+void* CDSStreamException::FUN_004301b0(uint param_1, int* param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004301b0 END
 
 // !FUNC 0x00430360 BEGIN
@@ -34,6 +34,6 @@ uint* CDSStreamException::FUN_00430a90() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00430b20 BEGIN
 /* 430B20-430B3E 0001E */
-uint* CDSStreamException::FUN_00430b20(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSStreamException::FUN_00430b20(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00430b20 END
 

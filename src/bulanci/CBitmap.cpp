@@ -19,7 +19,7 @@ uchar CBitmap::FUN_00419130(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00419140 BEGIN
 /* 419140-41915E 0001E */
-uint* CBitmap::FUN_00419140(uchar param_1) { STUB_BODY(); return 0; }
+void* CBitmap::FUN_00419140(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00419140 END
 
 // !FUNC 0x00419160 BEGIN

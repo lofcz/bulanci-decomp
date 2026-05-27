@@ -7,7 +7,7 @@ uchar CAnim::FUN_004164f0(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00419870 BEGIN
 /* 419870-419911 000A1 */
-uint* CAnim::FUN_00419870(uint* param_1) { STUB_BODY(); return 0; }
+uchar CAnim::FUN_00419870(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00419870 END
 
 // !FUNC 0x00419920 BEGIN
@@ -24,7 +24,7 @@ uchar CAnim::FUN_00419930(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00419940 BEGIN
 /* 419940-4199F3 000B3 */
-uint* CAnim::FUN_00419940(uint param_1, uint param_2, int* param_3, int param_4) { STUB_BODY(); return 0; }
+void* CAnim::FUN_00419940(uint param_1, uint param_2, int* param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00419940 END
 
 // !FUNC 0x00419a90 BEGIN
@@ -59,7 +59,7 @@ uchar CAnim::FUN_0041ab40(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041ab50 BEGIN
 /* 41AB50-41AB6E 0001E */
-uint* CAnim::FUN_0041ab50(uchar param_1) { STUB_BODY(); return 0; }
+void* CAnim::FUN_0041ab50(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041ab50 END
 
 // !FUNC 0x0041b190 BEGIN

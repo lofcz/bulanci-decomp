@@ -29,7 +29,7 @@ uchar CDSQueueStream::FUN_00428a50(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00428ab0 BEGIN
 /* 428AB0-428ACE 0001E */
-uint* CDSQueueStream::FUN_00428ab0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSQueueStream::FUN_00428ab0(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428ab0 END
 
 // !FUNC 0x00428d30 BEGIN
@@ -79,6 +79,6 @@ uchar CDSQueueStream::WriteBytes(void* param_1, void* param_2) { STUB_BODY(); re
 
 // !FUNC 0x0043c1a0 BEGIN
 /* 43C1A0-43C1C7 00027 */
-uint* CDSQueueStream::GetStreamName(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSQueueStream::GetStreamName(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043c1a0 END
 

@@ -9,7 +9,7 @@ uchar* CMsgDialog::FUN_0040b760() {
 
 // !FUNC 0x0040be80 BEGIN
 /* 40BE80-40C052 001D2 */
-uint* CMsgDialog::FUN_0040be80(int param_1, uchar* param_2) { STUB_BODY(); return 0; }
+void* CMsgDialog::FUN_0040be80(int param_1, uint* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040be80 END
 
 // !FUNC 0x0040e780 BEGIN

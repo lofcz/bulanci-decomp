@@ -6,7 +6,7 @@
 class CSwitch {
 public:
 	// !DECL 0x00423950 BEGIN
-	/* 423950 */ uchar FUN_00423950(uint* param_1);
+	/* 423950 */ uchar FUN_00423950(uchar param_1);
 	// !DECL 0x00423950 END
 	// !DECL 0x004239e0 BEGIN
 	/* 4239E0 */ uchar* FUN_004239e0();
@@ -27,13 +27,13 @@ public:
 	/* 423B00 */ uchar FUN_00423b00(uchar param_1);
 	// !DECL 0x00423b00 END
 	// !DECL 0x00423b30 BEGIN
-	/* 423B30 */ uint* FUN_00423b30(uchar param_1);
+	/* 423B30 */ void* FUN_00423b30(uchar param_1);
 	// !DECL 0x00423b30 END
 	// !DECL 0x00423ef0 BEGIN
 	/* 423EF0 */ uchar CSwitch_PlayIdleTrack(int param_1);
 	// !DECL 0x00423ef0 END
 	// !DECL 0x004244a0 BEGIN
-	/* 4244A0 */ uint* FUN_004244a0(uint* param_1);
+	/* 4244A0 */ uchar FUN_004244a0(uchar param_1);
 	// !DECL 0x004244a0 END
 	// !DECL 0x00424cf0 BEGIN
 	/* 424CF0 */ uchar CSwitch_OnMouseEnter(int param_1);
@@ -42,7 +42,7 @@ public:
 	/* 424D10 */ uchar CSwitch_OnMouseLeave(int param_1);
 	// !DECL 0x00424d10 END
 	// !DECL 0x00424dc0 BEGIN
-	/* 424DC0 */ uchar CSwitch_OnSiblingPressed(short param_1, int param_2);
+	/* 424DC0 */ uchar CSwitch_OnSiblingPressed(short param_1, void* param_2);
 	// !DECL 0x00424dc0 END
 	// !DECL 0x00424e10 BEGIN
 	/* 424E10 */ uchar CSwitch_OnAnimEnd(uint param_1, short param_2);

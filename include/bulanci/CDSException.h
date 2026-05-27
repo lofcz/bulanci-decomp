@@ -15,10 +15,10 @@ public:
 	/* 434A30 */ uchar* FUN_00434a30();
 	// !DECL 0x00434a30 END
 	// !DECL 0x00434a40 BEGIN
-	/* 434A40 */ uchar FUN_00434a40(uint param_1, uint param_2, uchar param_3);
+	/* 434A40 */ uchar FUN_00434a40(uint param_1, uint param_2, int param_3);
 	// !DECL 0x00434a40 END
 	// !DECL 0x00434ae0 BEGIN
-	/* 434AE0 */ uint* FUN_00434ae0(uchar param_1);
+	/* 434AE0 */ void* FUN_00434ae0(uchar param_1);
 	// !DECL 0x00434ae0 END
 	// !DECL 0x00434b80 BEGIN
 	/* 434B80 */ wchar_t* FUN_00434b80(int* param_1);

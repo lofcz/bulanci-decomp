@@ -21,7 +21,7 @@ public:
 	/* 428A50 */ uchar FUN_00428a50(uint* param_1);
 	// !DECL 0x00428a50 END
 	// !DECL 0x00428ab0 BEGIN
-	/* 428AB0 */ uint* FUN_00428ab0(uchar param_1);
+	/* 428AB0 */ void* FUN_00428ab0(uchar param_1);
 	// !DECL 0x00428ab0 END
 	// !DECL 0x00428d30 BEGIN
 	/* 428D30 */ uchar FUN_00428d30(int param_1);
@@ -51,7 +51,7 @@ public:
 	/* 43C0B0 */ uchar WriteBytes(void* param_1, void* param_2);
 	// !DECL 0x0043c0b0 END
 	// !DECL 0x0043c1a0 BEGIN
-	/* 43C1A0 */ uint* GetStreamName(uint* param_1);
+	/* 43C1A0 */ uchar GetStreamName(uchar param_1);
 	// !DECL 0x0043c1a0 END
 };
 

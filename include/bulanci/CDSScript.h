@@ -18,7 +18,7 @@ public:
 	/* 438380 */ uint ReadU8(int param_1);
 	// !DECL 0x00438380 END
 	// !DECL 0x00438390 BEGIN
-	/* 438390 */ uint* ctor(uint* param_1);
+	/* 438390 */ void* ctor(void* param_1);
 	// !DECL 0x00438390 END
 	// !DECL 0x004383e0 BEGIN
 	/* 4383E0 */ uchar* FUN_004383e0();
@@ -36,7 +36,7 @@ public:
 	/* 438C40 */ uint CallExport(int param_1, int param_2, void* param_3);
 	// !DECL 0x00438c40 END
 	// !DECL 0x00438c90 BEGIN
-	/* 438C90 */ uint* FUN_00438c90(uchar param_1);
+	/* 438C90 */ void* FUN_00438c90(uchar param_1);
 	// !DECL 0x00438c90 END
 };
 

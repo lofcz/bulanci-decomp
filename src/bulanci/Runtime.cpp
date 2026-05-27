@@ -77,7 +77,7 @@ void* Runtime::MSVCRT::_CallCatchBlock2(EHRegistrationNode* param_1, _s_FuncInfo
 
 // !FUNC 0x00447bd5 BEGIN
 /* 447BD5-447BE4 0000F */
-uchar Runtime::MSVCRT::_security_check_cookie(int param_1) { STUB_BODY(); return 0; }
+void Runtime::MSVCRT::_security_check_cookie(int param_1) { STUB_BODY(); }
 // !FUNC 0x00447bd5 END
 
 // !FUNC 0x00447cb0 BEGIN
@@ -332,7 +332,7 @@ uchar Runtime::MSVCRT::_SEH_epilog4() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044a780 BEGIN
 /* 44A780-44A916 00196 */
-uint Runtime::MSVCRT::_except_handler4(int* param_1, PVOID param_2, uint param_3) { STUB_BODY(); return 0; }
+uint Runtime::MSVCRT::_except_handler4(uint param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0044a780 END
 
 // !FUNC 0x0044a920 BEGIN
@@ -552,7 +552,7 @@ int Runtime::MSVCRT::_updatetmbcinfo() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044c918 BEGIN
 /* 44C918-44CAC3 001AB */
-uchar Runtime::MSVCRT::_setmbcp_nolock(uint param_1, int param_2) { STUB_BODY(); return 0; }
+uint Runtime::MSVCRT::_setmbcp_nolock(uint param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0044c918 END
 
 // !FUNC 0x0044cac3 BEGIN
@@ -662,7 +662,7 @@ uint Runtime::MSVCRT::_cftof2_l(int param_1, size_t param_2, char param_3, local
 
 // !FUNC 0x0044ddf4 BEGIN
 /* 44DDF4-44DEAD 000B9 */
-uchar Runtime::MSVCRT::_cftof_l(double* param_1, uchar* param_2, int param_3, size_t param_4, localeinfo_struct* param_5) { STUB_BODY(); return 0; }
+errno_t Runtime::MSVCRT::_cftof_l(double* param_1, uchar* param_2, int param_3, size_t param_4, localeinfo_struct* param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x0044ddf4 END
 
 // !FUNC 0x0044dead BEGIN
@@ -922,12 +922,12 @@ char* Runtime::MSVCRT::_strpbrk(char* param_1, char* param_2) { STUB_BODY(); ret
 
 // !FUNC 0x00450b10 BEGIN
 /* 450B10-450B57 00047 */
-uchar Runtime::MSVCRT::_ansicp(int param_1) { STUB_BODY(); return 0; }
+long Runtime::MSVCRT::_ansicp(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00450b10 END
 
 // !FUNC 0x00450b57 BEGIN
 /* 450B57-450D09 001B2 */
-uchar Runtime::MSVCRT::_convertcp(int param_1, int param_2, char* param_3, uint* param_4, int param_5, int param_6) { STUB_BODY(); return 0; }
+int Runtime::MSVCRT::_convertcp(int param_1, int param_2, char* param_3, uint* param_4, int param_5, int param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x00450b57 END
 
 // !FUNC 0x00450d09 BEGIN
