@@ -34,8 +34,7 @@
 //! request a size in pixels and the provider picks the closest available
 //! bitmap.
 
-use bulanci_core::assets::AssetFileSystem;
-use macroquad::prelude::*;
+use raylib::prelude::*;
 use serde::Deserialize;
 
 // ============================================================================
@@ -144,6 +143,17 @@ impl BitmapFont {
         }
     }
 
+    /// The 256-entry CP-1250 advance table (`char_advance` for every
+    /// code byte). Handed to the scene host so Luau's `bulanci.measure`
+    /// can reproduce `measure` without borrowing the font itself.
+    pub fn advances(&self) -> [i32; 256] {
+        let mut t = [0i32; 256];
+        for (b, slot) in t.iter_mut().enumerate() {
+            *slot = self.char_advance(b as u8);
+        }
+        t
+    }
+
     /// Pixel width of `text` if rendered with this font, with one
     /// `char_spacing` pixel of padding between glyphs (same convention as
     /// `CDSFont::GetCharWidth + font_info[+4]` in
@@ -168,7 +178,15 @@ impl BitmapFont {
     /// "shredded" / blurry the moment they sample at fractional coords,
     /// because adjacent atlas glyphs sit zero-pixels apart and any
     /// interpolation bleeds one glyph's edge into the next.
-    pub fn draw_cell_top(&self, text: &str, x: f32, y: f32, color: Color, char_spacing: i32) {
+    pub fn draw_cell_top<D: RaylibDraw>(
+        &self,
+        d: &mut D,
+        text: &str,
+        x: f32,
+        y: f32,
+        color: Color,
+        char_spacing: i32,
+    ) {
         let mut pen_x = x.round();
         let y = y.round();
         for ch in text.chars() {
@@ -176,20 +194,20 @@ impl BitmapFont {
             let m = &self.glyphs[b as usize];
             if m.width != 0 && m.height as u16 > m.offset_y as u16 {
                 let src_h = (m.height as u16 - m.offset_y as u16) as f32;
-                draw_texture_ex(
+                crate::gfx::blit(
+                    d,
                     &self.atlas,
                     pen_x,
                     y + m.offset_y as f32,
+                    Some(Rectangle::new(
+                        m.offset_x as f32,
+                        m.offset_y as f32,
+                        m.width as f32,
+                        src_h,
+                    )),
+                    None,
+                    false,
                     color,
-                    DrawTextureParams {
-                        source: Some(Rect::new(
-                            m.offset_x as f32,
-                            m.offset_y as f32,
-                            m.width as f32,
-                            src_h,
-                        )),
-                        ..Default::default()
-                    },
                 );
             }
             pen_x += (self.char_advance(b) + char_spacing) as f32;
@@ -243,11 +261,19 @@ fn estimate_baseline(glyphs: &[GlyphMetric; 256]) -> f32 {
 ///     max(R, G, B)` so 2bpp anti-aliased atlases keep their shading.
 ///
 /// This way the caller can colour text at draw time by passing any tint
-/// to `draw_texture_ex` and the per-pixel alpha is preserved.
-fn atlas_png_to_texture(bytes: &[u8]) -> Texture2D {
-    let mut img =
-        Image::from_file_with_format(bytes, Some(ImageFormat::Png)).expect("font atlas decode");
-    for px in img.bytes.chunks_exact_mut(4) {
+/// and the per-pixel alpha is preserved.
+///
+/// We decode the PNG to RGBA with the `image` crate (raylib's stb_image
+/// can't expose a mutable pixel buffer ergonomically), run the chroma-key
+/// on the raw bytes, then hand them to [`crate::gfx::texture_from_rgba8`] —
+/// the shared, WebGL-safe upload path used by every texture in the client.
+fn atlas_png_to_texture(rl: &mut RaylibHandle, thread: &RaylibThread, bytes: &[u8]) -> Texture2D {
+    let decoded = image::load_from_memory_with_format(bytes, image::ImageFormat::Png)
+        .expect("font atlas decode")
+        .to_rgba8();
+    let (w, h) = decoded.dimensions();
+    let mut rgba = decoded.into_raw();
+    for px in rgba.chunks_exact_mut(4) {
         let luma = px[0].max(px[1]).max(px[2]);
         if luma == 0 {
             px[3] = 0;
@@ -258,26 +284,26 @@ fn atlas_png_to_texture(bytes: &[u8]) -> Texture2D {
             px[3] = luma;
         }
     }
-    let tex = Texture2D::from_image(&img);
-    tex.set_filter(FilterMode::Nearest);
-    tex
+    crate::gfx::texture_from_rgba8(rl, thread, w, h, &rgba, TextureFilter::TEXTURE_FILTER_POINT)
+        .expect("font atlas upload")
 }
 
-/// Load one `BitmapFont` given a base path (e.g. `"fonts/bitmap/font_medium"`).
-/// Looks up `<base>.png` and `<base>.json` in the VFS.
-pub fn load_bitmap_font(vfs: &AssetFileSystem, base: &str) -> anyhow::Result<BitmapFont> {
-    let png_key = format!("{base}.png");
-    let json_key = format!("{base}.json");
-    let png_bytes = vfs
-        .read(&png_key)
-        .ok_or_else(|| anyhow::anyhow!("missing font PNG: {png_key}"))?;
-    let json_str = vfs
-        .read_to_string(&json_key)
-        .ok_or_else(|| anyhow::anyhow!("missing font JSON: {json_key}"))??;
-    let (default_width, line_height, glyphs) = parse_metrics(&json_str)?;
+/// Load one `BitmapFont` from already-resolved bytes.  No path
+/// strings cross the API — call sites pass typed [`AssetHandle`]s
+/// through [`crate::asset::AssetServer::bytes`] and feed the results
+/// in here.  Used by [`BitmapFontProvider::from_handles`].
+pub fn load_bitmap_font_from_bytes(
+    rl: &mut RaylibHandle,
+    thread: &RaylibThread,
+    png_bytes: &[u8],
+    json_bytes: &[u8],
+) -> anyhow::Result<BitmapFont> {
+    let json_str = std::str::from_utf8(json_bytes)
+        .map_err(|e| anyhow::anyhow!("font metrics JSON is not UTF-8: {e}"))?;
+    let (default_width, line_height, glyphs) = parse_metrics(json_str)?;
     let baseline = estimate_baseline(&glyphs);
     Ok(BitmapFont {
-        atlas: atlas_png_to_texture(png_bytes),
+        atlas: atlas_png_to_texture(rl, thread, png_bytes),
         line_height,
         default_width,
         glyphs,
@@ -313,22 +339,10 @@ pub trait FontProvider {
     /// Total height of one line of text at `size_px` (atlas line height
     /// for bitmap fonts, font size for TTF).
     fn line_height(&self, size_px: u16) -> f32;
-    /// Distance from the `y` argument of [`FontProvider::draw`] up to
-    /// the top of the font cell — equivalently, the offset to subtract
-    /// from a baseline `y` to get the cell-top `y` the bitmap blitter
-    /// wants.
+    /// Distance from a baseline `y` up to the top of the font cell —
+    /// equivalently, the offset to subtract from a baseline `y` to get
+    /// the cell-top `y` the bitmap blitter wants.
     fn ascent(&self, size_px: u16) -> f32;
-    /// Draw `text` with the ASCII baseline at `y` (matching macroquad's
-    /// `draw_text_ex` convention).
-    fn draw(
-        &self,
-        text: &str,
-        x: f32,
-        y: f32,
-        size_px: u16,
-        color: Color,
-        char_spacing: i32,
-    );
 }
 
 /// The "use the original game's bitmap fonts" implementation. Holds all
@@ -340,16 +354,81 @@ pub struct BitmapFontProvider {
 }
 
 impl BitmapFontProvider {
-    /// Load all three CDSFont atlases shipped under
-    /// `assets/fonts/bitmap/` (extracted by the unpacker, see module
-    /// docs). Returns `Err` if any of the six files is missing or
-    /// corrupt.
-    pub fn load(vfs: &AssetFileSystem) -> anyhow::Result<Self> {
+    /// Load all three CDSFont atlases through the typed-handle asset
+    /// server.  Every byte buffer comes back via
+    /// [`crate::asset::AssetServer::bytes`], so missing files fall
+    /// back to the class-typed placeholders (magenta 1×1 PNG + empty
+    /// JSON) and the screen renders the placeholder text-shape
+    /// instead of panicking on startup.  No path string ever
+    /// crosses the API.
+    pub fn from_handles(
+        rl: &mut RaylibHandle,
+        thread: &RaylibThread,
+        assets: &crate::asset::AssetServer,
+    ) -> anyhow::Result<Self> {
+        use crate::generated::assets::engine::fonts as fh;
+        let load = |rl: &mut RaylibHandle,
+                        png: crate::asset::handle::AssetHandle<crate::asset::types::Font>,
+                        json: crate::asset::handle::AssetHandle<crate::asset::types::FontJson>|
+                   -> anyhow::Result<BitmapFont> {
+            let png_bytes  = assets.bytes(png);
+            let json_bytes = assets.bytes(json);
+            load_bitmap_font_from_bytes(rl, thread, &png_bytes, &json_bytes)
+        };
         Ok(Self {
-            small: load_bitmap_font(vfs, "fonts/bitmap/font_small")?,
-            medium: load_bitmap_font(vfs, "fonts/bitmap/font_medium")?,
-            large: load_bitmap_font(vfs, "fonts/bitmap/font_large")?,
+            small:  load(rl, fh::FONT_SMALL,  fh::FONT_SMALL_JSON)?,
+            medium: load(rl, fh::FONT_MEDIUM, fh::FONT_MEDIUM_JSON)?,
+            large:  load(rl, fh::FONT_LARGE,  fh::FONT_LARGE_JSON)?,
         })
+    }
+
+    /// The six handle hashes the three bitmap fonts are built from
+    /// (PNG + metrics JSON for small / medium / large).  Used by the
+    /// hot-reload tick to detect when a font asset changed.
+    pub fn source_hashes() -> [u64; 6] {
+        use crate::generated::assets::engine::fonts as fh;
+        [
+            fh::FONT_SMALL.raw(),  fh::FONT_SMALL_JSON.raw(),
+            fh::FONT_MEDIUM.raw(), fh::FONT_MEDIUM_JSON.raw(),
+            fh::FONT_LARGE.raw(),  fh::FONT_LARGE_JSON.raw(),
+        ]
+    }
+
+    /// `true` if a hot reload touched any of the three font atlases or
+    /// their metrics sidecars.
+    pub fn touched_by(&self, dirty: &std::collections::HashSet<u64>) -> bool {
+        Self::source_hashes().iter().any(|h| dirty.contains(h))
+    }
+
+    /// Rebuild all three fonts from the asset server.  On failure the
+    /// previous fonts are preserved (so a malformed mid-write metrics
+    /// JSON keeps the old glyphs until the next valid save).
+    pub fn reload(
+        &mut self,
+        rl: &mut RaylibHandle,
+        thread: &RaylibThread,
+        assets: &crate::asset::AssetServer,
+    ) -> anyhow::Result<()> {
+        *self = Self::from_handles(rl, thread, assets)?;
+        Ok(())
+    }
+
+    /// Draw `text` with the ASCII baseline at `y_baseline` (matching the
+    /// old macroquad `draw_text_ex` convention) through any active raylib
+    /// draw handle (backbuffer, render-texture mode, shader mode, …).
+    pub fn draw_text<D: RaylibDraw>(
+        &self,
+        d: &mut D,
+        text: &str,
+        x: f32,
+        y_baseline: f32,
+        size_px: u16,
+        color: Color,
+        char_spacing: i32,
+    ) {
+        let f = self.pick(size_px);
+        let cell_top = y_baseline - f.baseline;
+        f.draw_cell_top(d, text, x, cell_top, color, char_spacing);
     }
 
     /// Pick the closest matching atlas for a requested pixel size.
@@ -390,20 +469,6 @@ impl FontProvider for BitmapFontProvider {
 
     fn ascent(&self, size_px: u16) -> f32 {
         self.pick(size_px).baseline
-    }
-
-    fn draw(
-        &self,
-        text: &str,
-        x: f32,
-        y_baseline: f32,
-        size_px: u16,
-        color: Color,
-        char_spacing: i32,
-    ) {
-        let f = self.pick(size_px);
-        let cell_top = y_baseline - f.baseline;
-        f.draw_cell_top(text, x, cell_top, color, char_spacing);
     }
 }
 

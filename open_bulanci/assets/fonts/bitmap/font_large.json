@@ -5,6 +5,8 @@
   "stride": 429,
   "defaultWidth": 19,
   "lineHeight": 16,
+  "encoding": "cp1250",
+  "encodingNote": "Glyph table is indexed by Windows-1250 byte. The engine maps each input Unicode code point through cp1250 before looking up characters[byte]. Slots without a CP-1250 byte (e.g. control codes, unassigned positions) carry unicodeChar = null.",
   "image": {
     "width": 1713,
     "height": 16,
@@ -23,6 +25,8 @@
     {
       "index": 0,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 0,
       "width": 0,
       "offsetY": 0,
@@ -31,6 +35,8 @@
     {
       "index": 1,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 0,
       "width": 9,
       "offsetY": 3,
@@ -39,6 +45,8 @@
     {
       "index": 2,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 9,
       "width": 9,
       "offsetY": 3,
@@ -47,6 +55,8 @@
     {
       "index": 3,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 18,
       "width": 9,
       "offsetY": 3,
@@ -55,6 +65,8 @@
     {
       "index": 4,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 27,
       "width": 9,
       "offsetY": 3,
@@ -63,6 +75,8 @@
     {
       "index": 5,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 36,
       "width": 9,
       "offsetY": 3,
@@ -71,6 +85,8 @@
     {
       "index": 6,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 45,
       "width": 9,
       "offsetY": 3,
@@ -79,6 +95,8 @@
     {
       "index": 7,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 54,
       "width": 9,
       "offsetY": 3,
@@ -87,6 +105,8 @@
     {
       "index": 8,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 63,
       "width": 9,
       "offsetY": 3,
@@ -95,6 +115,8 @@
     {
       "index": 9,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 72,
       "width": 9,
       "offsetY": 3,
@@ -103,6 +125,8 @@
     {
       "index": 10,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 81,
       "width": 0,
       "offsetY": 0,
@@ -111,6 +135,8 @@
     {
       "index": 11,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 81,
       "width": 9,
       "offsetY": 3,
@@ -119,6 +145,8 @@
     {
       "index": 12,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 90,
       "width": 9,
       "offsetY": 3,
@@ -127,6 +155,8 @@
     {
       "index": 13,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 99,
       "width": 0,
       "offsetY": 0,
@@ -135,6 +165,8 @@
     {
       "index": 14,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 99,
       "width": 9,
       "offsetY": 3,
@@ -143,6 +175,8 @@
     {
       "index": 15,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 108,
       "width": 9,
       "offsetY": 3,
@@ -151,6 +185,8 @@
     {
       "index": 16,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 117,
       "width": 9,
       "offsetY": 3,
@@ -159,6 +195,8 @@
     {
       "index": 17,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 126,
       "width": 9,
       "offsetY": 3,
@@ -167,6 +205,8 @@
     {
       "index": 18,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 135,
       "width": 9,
       "offsetY": 3,
@@ -175,6 +215,8 @@
     {
       "index": 19,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 144,
       "width": 9,
       "offsetY": 3,
@@ -183,6 +225,8 @@
     {
       "index": 20,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 153,
       "width": 9,
       "offsetY": 3,
@@ -191,6 +235,8 @@
     {
       "index": 21,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 162,
       "width": 9,
       "offsetY": 3,
@@ -199,6 +245,8 @@
     {
       "index": 22,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 171,
       "width": 9,
       "offsetY": 3,
@@ -207,6 +255,8 @@
     {
       "index": 23,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 180,
       "width": 9,
       "offsetY": 3,
@@ -215,6 +265,8 @@
     {
       "index": 24,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 189,
       "width": 9,
       "offsetY": 3,
@@ -223,6 +275,8 @@
     {
       "index": 25,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 198,
       "width": 9,
       "offsetY": 3,
@@ -231,6 +285,8 @@
     {
       "index": 26,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 207,
       "width": 9,
       "offsetY": 3,
@@ -239,6 +295,8 @@
     {
       "index": 27,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 216,
       "width": 9,
       "offsetY": 3,
@@ -247,6 +305,8 @@
     {
       "index": 28,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 225,
       "width": 9,
       "offsetY": 3,
@@ -255,6 +315,8 @@
     {
       "index": 29,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 234,
       "width": 9,
       "offsetY": 3,
@@ -263,6 +325,8 @@
     {
       "index": 30,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 243,
       "width": 9,
       "offsetY": 3,
@@ -271,6 +335,8 @@
     {
       "index": 31,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 252,
       "width": 9,
       "offsetY": 3,
@@ -279,6 +345,8 @@
     {
       "index": 32,
       "char": " ",
+      "unicodeChar": " ",
+      "unicodeCodepoint": 32,
       "offsetX": 261,
       "width": 0,
       "offsetY": 0,
@@ -287,6 +355,8 @@
     {
       "index": 33,
       "char": "!",
+      "unicodeChar": "!",
+      "unicodeCodepoint": 33,
       "offsetX": 261,
       "width": 2,
       "offsetY": 4,
@@ -295,6 +365,8 @@
     {
       "index": 34,
       "char": "\"",
+      "unicodeChar": "\"",
+      "unicodeCodepoint": 34,
       "offsetX": 263,
       "width": 5,
       "offsetY": 3,
@@ -303,6 +375,8 @@
     {
       "index": 35,
       "char": "#",
+      "unicodeChar": "#",
+      "unicodeCodepoint": 35,
       "offsetX": 268,
       "width": 8,
       "offsetY": 4,
@@ -311,6 +385,8 @@
     {
       "index": 36,
       "char": "$",
+      "unicodeChar": "$",
+      "unicodeCodepoint": 36,
       "offsetX": 276,
       "width": 7,
       "offsetY": 2,
@@ -319,6 +395,8 @@
     {
       "index": 37,
       "char": "%",
+      "unicodeChar": "%",
+      "unicodeCodepoint": 37,
       "offsetX": 283,
       "width": 13,
       "offsetY": 4,
@@ -327,6 +405,8 @@
     {
       "index": 38,
       "char": "&",
+      "unicodeChar": "&",
+      "unicodeCodepoint": 38,
       "offsetX": 296,
       "width": 10,
       "offsetY": 14,
@@ -335,6 +415,8 @@
     {
       "index": 39,
       "char": "'",
+      "unicodeChar": "'",
+      "unicodeCodepoint": 39,
       "offsetX": 306,
       "width": 2,
       "offsetY": 3,
@@ -343,6 +425,8 @@
     {
       "index": 40,
       "char": "(",
+      "unicodeChar": "(",
+      "unicodeCodepoint": 40,
       "offsetX": 308,
       "width": 4,
       "offsetY": 3,
@@ -351,6 +435,8 @@
     {
       "index": 41,
       "char": ")",
+      "unicodeChar": ")",
+      "unicodeCodepoint": 41,
       "offsetX": 312,
       "width": 4,
       "offsetY": 3,
@@ -359,6 +445,8 @@
     {
       "index": 42,
       "char": "*",
+      "unicodeChar": "*",
+      "unicodeCodepoint": 42,
       "offsetX": 316,
       "width": 6,
       "offsetY": 3,
@@ -367,6 +455,8 @@
     {
       "index": 43,
       "char": "+",
+      "unicodeChar": "+",
+      "unicodeCodepoint": 43,
       "offsetX": 322,
       "width": 7,
       "offsetY": 5,
@@ -375,6 +465,8 @@
     {
       "index": 44,
       "char": ",",
+      "unicodeChar": ",",
+      "unicodeCodepoint": 44,
       "offsetX": 329,
       "width": 3,
       "offsetY": 11,
@@ -383,6 +475,8 @@
     {
       "index": 45,
       "char": "-",
+      "unicodeChar": "-",
+      "unicodeCodepoint": 45,
       "offsetX": 332,
       "width": 5,
       "offsetY": 8,
@@ -391,6 +485,8 @@
     {
       "index": 46,
       "char": ".",
+      "unicodeChar": ".",
+      "unicodeCodepoint": 46,
       "offsetX": 337,
       "width": 2,
       "offsetY": 11,
@@ -399,6 +495,8 @@
     {
       "index": 47,
       "char": "/",
+      "unicodeChar": "/",
+      "unicodeCodepoint": 47,
       "offsetX": 339,
       "width": 6,
       "offsetY": 3,
@@ -407,6 +505,8 @@
     {
       "index": 48,
       "char": "0",
+      "unicodeChar": "0",
+      "unicodeCodepoint": 48,
       "offsetX": 345,
       "width": 7,
       "offsetY": 4,
@@ -415,6 +515,8 @@
     {
       "index": 49,
       "char": "1",
+      "unicodeChar": "1",
+      "unicodeCodepoint": 49,
       "offsetX": 352,
       "width": 6,
       "offsetY": 4,
@@ -423,6 +525,8 @@
     {
       "index": 50,
       "char": "2",
+      "unicodeChar": "2",
+      "unicodeCodepoint": 50,
       "offsetX": 358,
       "width": 7,
       "offsetY": 4,
@@ -431,6 +535,8 @@
     {
       "index": 51,
       "char": "3",
+      "unicodeChar": "3",
+      "unicodeCodepoint": 51,
       "offsetX": 365,
       "width": 7,
       "offsetY": 4,
@@ -439,6 +545,8 @@
     {
       "index": 52,
       "char": "4",
+      "unicodeChar": "4",
+      "unicodeCodepoint": 52,
       "offsetX": 372,
       "width": 7,
       "offsetY": 4,
@@ -447,6 +555,8 @@
     {
       "index": 53,
       "char": "5",
+      "unicodeChar": "5",
+      "unicodeCodepoint": 53,
       "offsetX": 379,
       "width": 7,
       "offsetY": 4,
@@ -455,6 +565,8 @@
     {
       "index": 54,
       "char": "6",
+      "unicodeChar": "6",
+      "unicodeCodepoint": 54,
       "offsetX": 386,
       "width": 7,
       "offsetY": 4,
@@ -463,6 +575,8 @@
     {
       "index": 55,
       "char": "7",
+      "unicodeChar": "7",
+      "unicodeCodepoint": 55,
       "offsetX": 393,
       "width": 7,
       "offsetY": 4,
@@ -471,6 +585,8 @@
     {
       "index": 56,
       "char": "8",
+      "unicodeChar": "8",
+      "unicodeCodepoint": 56,
       "offsetX": 400,
       "width": 7,
       "offsetY": 4,
@@ -479,6 +595,8 @@
     {
       "index": 57,
       "char": "9",
+      "unicodeChar": "9",
+      "unicodeCodepoint": 57,
       "offsetX": 407,
       "width": 7,
       "offsetY": 4,
@@ -487,6 +605,8 @@
     {
       "index": 58,
       "char": ":",
+      "unicodeChar": ":",
+      "unicodeCodepoint": 58,
       "offsetX": 414,
       "width": 2,
       "offsetY": 6,
@@ -495,6 +615,8 @@
     {
       "index": 59,
       "char": ";",
+      "unicodeChar": ";",
+      "unicodeCodepoint": 59,
       "offsetX": 416,
       "width": 3,
       "offsetY": 6,
@@ -503,6 +625,8 @@
     {
       "index": 60,
       "char": "<",
+      "unicodeChar": "<",
+      "unicodeCodepoint": 60,
       "offsetX": 419,
       "width": 8,
       "offsetY": 5,
@@ -511,6 +635,8 @@
     {
       "index": 61,
       "char": "=",
+      "unicodeChar": "=",
+      "unicodeCodepoint": 61,
       "offsetX": 427,
       "width": 8,
       "offsetY": 6,
@@ -519,6 +645,8 @@
     {
       "index": 62,
       "char": ">",
+      "unicodeChar": ">",
+      "unicodeCodepoint": 62,
       "offsetX": 435,
       "width": 8,
       "offsetY": 5,
@@ -527,6 +655,8 @@
     {
       "index": 63,
       "char": "?",
+      "unicodeChar": "?",
+      "unicodeCodepoint": 63,
       "offsetX": 443,
       "width": 6,
       "offsetY": 4,
@@ -535,6 +665,8 @@
     {
       "index": 64,
       "char": "@",
+      "unicodeChar": "@",
+      "unicodeCodepoint": 64,
       "offsetX": 449,
       "width": 9,
       "offsetY": 4,
@@ -543,6 +675,8 @@
     {
       "index": 65,
       "char": "A",
+      "unicodeChar": "A",
+      "unicodeCodepoint": 65,
       "offsetX": 458,
       "width": 9,
       "offsetY": 4,
@@ -551,6 +685,8 @@
     {
       "index": 66,
       "char": "B",
+      "unicodeChar": "B",
+      "unicodeCodepoint": 66,
       "offsetX": 467,
       "width": 7,
       "offsetY": 4,
@@ -559,6 +695,8 @@
     {
       "index": 67,
       "char": "C",
+      "unicodeChar": "C",
+      "unicodeCodepoint": 67,
       "offsetX": 474,
       "width": 7,
       "offsetY": 4,
@@ -567,6 +705,8 @@
     {
       "index": 68,
       "char": "D",
+      "unicodeChar": "D",
+      "unicodeCodepoint": 68,
       "offsetX": 481,
       "width": 8,
       "offsetY": 4,
@@ -575,6 +715,8 @@
     {
       "index": 69,
       "char": "E",
+      "unicodeChar": "E",
+      "unicodeCodepoint": 69,
       "offsetX": 489,
       "width": 6,
       "offsetY": 4,
@@ -583,6 +725,8 @@
     {
       "index": 70,
       "char": "F",
+      "unicodeChar": "F",
+      "unicodeCodepoint": 70,
       "offsetX": 495,
       "width": 6,
       "offsetY": 4,
@@ -591,6 +735,8 @@
     {
       "index": 71,
       "char": "G",
+      "unicodeChar": "G",
+      "unicodeCodepoint": 71,
       "offsetX": 501,
       "width": 7,
       "offsetY": 4,
@@ -599,6 +745,8 @@
     {
       "index": 72,
       "char": "H",
+      "unicodeChar": "H",
+      "unicodeCodepoint": 72,
       "offsetX": 508,
       "width": 8,
       "offsetY": 4,
@@ -607,6 +755,8 @@
     {
       "index": 73,
       "char": "I",
+      "unicodeChar": "I",
+      "unicodeCodepoint": 73,
       "offsetX": 516,
       "width": 4,
       "offsetY": 4,
@@ -615,6 +765,8 @@
     {
       "index": 74,
       "char": "J",
+      "unicodeChar": "J",
+      "unicodeCodepoint": 74,
       "offsetX": 520,
       "width": 5,
       "offsetY": 4,
@@ -623,6 +775,8 @@
     {
       "index": 75,
       "char": "K",
+      "unicodeChar": "K",
+      "unicodeCodepoint": 75,
       "offsetX": 525,
       "width": 7,
       "offsetY": 4,
@@ -631,6 +785,8 @@
     {
       "index": 76,
       "char": "L",
+      "unicodeChar": "L",
+      "unicodeCodepoint": 76,
       "offsetX": 532,
       "width": 6,
       "offsetY": 4,
@@ -639,6 +795,8 @@
     {
       "index": 77,
       "char": "M",
+      "unicodeChar": "M",
+      "unicodeCodepoint": 77,
       "offsetX": 538,
       "width": 10,
       "offsetY": 4,
@@ -647,6 +805,8 @@
     {
       "index": 78,
       "char": "N",
+      "unicodeChar": "N",
+      "unicodeCodepoint": 78,
       "offsetX": 548,
       "width": 7,
       "offsetY": 4,
@@ -655,6 +815,8 @@
     {
       "index": 79,
       "char": "O",
+      "unicodeChar": "O",
+      "unicodeCodepoint": 79,
       "offsetX": 555,
       "width": 8,
       "offsetY": 4,
@@ -663,6 +825,8 @@
     {
       "index": 80,
       "char": "P",
+      "unicodeChar": "P",
+      "unicodeCodepoint": 80,
       "offsetX": 563,
       "width": 7,
       "offsetY": 4,
@@ -671,6 +835,8 @@
     {
       "index": 81,
       "char": "Q",
+      "unicodeChar": "Q",
+      "unicodeCodepoint": 81,
       "offsetX": 570,
       "width": 8,
       "offsetY": 4,
@@ -679,6 +845,8 @@
     {
       "index": 82,
       "char": "R",
+      "unicodeChar": "R",
+      "unicodeCodepoint": 82,
       "offsetX": 578,
       "width": 8,
       "offsetY": 4,
@@ -687,6 +855,8 @@
     {
       "index": 83,
       "char": "S",
+      "unicodeChar": "S",
+      "unicodeCodepoint": 83,
       "offsetX": 586,
       "width": 7,
       "offsetY": 4,
@@ -695,6 +865,8 @@
     {
       "index": 84,
       "char": "T",
+      "unicodeChar": "T",
+      "unicodeCodepoint": 84,
       "offsetX": 593,
       "width": 5,
       "offsetY": 4,
@@ -703,6 +875,8 @@
     {
       "index": 85,
       "char": "U",
+      "unicodeChar": "U",
+      "unicodeCodepoint": 85,
       "offsetX": 598,
       "width": 7,
       "offsetY": 4,
@@ -711,6 +885,8 @@
     {
       "index": 86,
       "char": "V",
+      "unicodeChar": "V",
+      "unicodeCodepoint": 86,
       "offsetX": 605,
       "width": 8,
       "offsetY": 4,
@@ -719,6 +895,8 @@
     {
       "index": 87,
       "char": "W",
+      "unicodeChar": "W",
+      "unicodeCodepoint": 87,
       "offsetX": 613,
       "width": 12,
       "offsetY": 4,
@@ -727,6 +905,8 @@
     {
       "index": 88,
       "char": "X",
+      "unicodeChar": "X",
+      "unicodeCodepoint": 88,
       "offsetX": 625,
       "width": 8,
       "offsetY": 4,
@@ -735,6 +915,8 @@
     {
       "index": 89,
       "char": "Y",
+      "unicodeChar": "Y",
+      "unicodeCodepoint": 89,
       "offsetX": 633,
       "width": 8,
       "offsetY": 4,
@@ -743,6 +925,8 @@
     {
       "index": 90,
       "char": "Z",
+      "unicodeChar": "Z",
+      "unicodeCodepoint": 90,
       "offsetX": 641,
       "width": 6,
       "offsetY": 4,
@@ -751,6 +935,8 @@
     {
       "index": 91,
       "char": "[",
+      "unicodeChar": "[",
+      "unicodeCodepoint": 91,
       "offsetX": 647,
       "width": 4,
       "offsetY": 3,
@@ -759,6 +945,8 @@
     {
       "index": 92,
       "char": "\\",
+      "unicodeChar": "\\",
+      "unicodeCodepoint": 92,
       "offsetX": 651,
       "width": 6,
       "offsetY": 4,
@@ -767,6 +955,8 @@
     {
       "index": 93,
       "char": "]",
+      "unicodeChar": "]",
+      "unicodeCodepoint": 93,
       "offsetX": 657,
       "width": 4,
       "offsetY": 3,
@@ -775,6 +965,8 @@
     {
       "index": 94,
       "char": "^",
+      "unicodeChar": "^",
+      "unicodeCodepoint": 94,
       "offsetX": 661,
       "width": 7,
       "offsetY": 4,
@@ -783,6 +975,8 @@
     {
       "index": 95,
       "char": "_",
+      "unicodeChar": "_",
+      "unicodeCodepoint": 95,
       "offsetX": 668,
       "width": 7,
       "offsetY": 14,
@@ -791,6 +985,8 @@
     {
       "index": 96,
       "char": "`",
+      "unicodeChar": "`",
+      "unicodeCodepoint": 96,
       "offsetX": 675,
       "width": 3,
       "offsetY": 3,
@@ -799,6 +995,8 @@
     {
       "index": 97,
       "char": "a",
+      "unicodeChar": "a",
+      "unicodeCodepoint": 97,
       "offsetX": 678,
       "width": 7,
       "offsetY": 6,
@@ -807,6 +1005,8 @@
     {
       "index": 98,
       "char": "b",
+      "unicodeChar": "b",
+      "unicodeCodepoint": 98,
       "offsetX": 685,
       "width": 7,
       "offsetY": 3,
@@ -815,6 +1015,8 @@
     {
       "index": 99,
       "char": "c",
+      "unicodeChar": "c",
+      "unicodeCodepoint": 99,
       "offsetX": 692,
       "width": 6,
       "offsetY": 6,
@@ -823,6 +1025,8 @@
     {
       "index": 100,
       "char": "d",
+      "unicodeChar": "d",
+      "unicodeCodepoint": 100,
       "offsetX": 698,
       "width": 7,
       "offsetY": 3,
@@ -831,6 +1035,8 @@
     {
       "index": 101,
       "char": "e",
+      "unicodeChar": "e",
+      "unicodeCodepoint": 101,
       "offsetX": 705,
       "width": 7,
       "offsetY": 6,
@@ -839,6 +1045,8 @@
     {
       "index": 102,
       "char": "f",
+      "unicodeChar": "f",
+      "unicodeCodepoint": 102,
       "offsetX": 712,
       "width": 5,
       "offsetY": 3,
@@ -847,6 +1055,8 @@
     {
       "index": 103,
       "char": "g",
+      "unicodeChar": "g",
+      "unicodeCodepoint": 103,
       "offsetX": 717,
       "width": 7,
       "offsetY": 6,
@@ -855,6 +1065,8 @@
     {
       "index": 104,
       "char": "h",
+      "unicodeChar": "h",
+      "unicodeCodepoint": 104,
       "offsetX": 724,
       "width": 7,
       "offsetY": 3,
@@ -863,6 +1075,8 @@
     {
       "index": 105,
       "char": "i",
+      "unicodeChar": "i",
+      "unicodeCodepoint": 105,
       "offsetX": 731,
       "width": 2,
       "offsetY": 3,
@@ -871,6 +1085,8 @@
     {
       "index": 106,
       "char": "j",
+      "unicodeChar": "j",
+      "unicodeCodepoint": 106,
       "offsetX": 733,
       "width": 3,
       "offsetY": 3,
@@ -879,6 +1095,8 @@
     {
       "index": 107,
       "char": "k",
+      "unicodeChar": "k",
+      "unicodeCodepoint": 107,
       "offsetX": 736,
       "width": 6,
       "offsetY": 3,
@@ -887,6 +1105,8 @@
     {
       "index": 108,
       "char": "l",
+      "unicodeChar": "l",
+      "unicodeCodepoint": 108,
       "offsetX": 742,
       "width": 4,
       "offsetY": 3,
@@ -895,6 +1115,8 @@
     {
       "index": 109,
       "char": "m",
+      "unicodeChar": "m",
+      "unicodeCodepoint": 109,
       "offsetX": 746,
       "width": 10,
       "offsetY": 6,
@@ -903,6 +1125,8 @@
     {
       "index": 110,
       "char": "n",
+      "unicodeChar": "n",
+      "unicodeCodepoint": 110,
       "offsetX": 756,
       "width": 7,
       "offsetY": 6,
@@ -911,6 +1135,8 @@
     {
       "index": 111,
       "char": "o",
+      "unicodeChar": "o",
+      "unicodeCodepoint": 111,
       "offsetX": 763,
       "width": 7,
       "offsetY": 6,
@@ -919,6 +1145,8 @@
     {
       "index": 112,
       "char": "p",
+      "unicodeChar": "p",
+      "unicodeCodepoint": 112,
       "offsetX": 770,
       "width": 7,
       "offsetY": 6,
@@ -927,6 +1155,8 @@
     {
       "index": 113,
       "char": "q",
+      "unicodeChar": "q",
+      "unicodeCodepoint": 113,
       "offsetX": 777,
       "width": 7,
       "offsetY": 6,
@@ -935,6 +1165,8 @@
     {
       "index": 114,
       "char": "r",
+      "unicodeChar": "r",
+      "unicodeCodepoint": 114,
       "offsetX": 784,
       "width": 5,
       "offsetY": 6,
@@ -943,6 +1175,8 @@
     {
       "index": 115,
       "char": "s",
+      "unicodeChar": "s",
+      "unicodeCodepoint": 115,
       "offsetX": 789,
       "width": 6,
       "offsetY": 6,
@@ -951,6 +1185,8 @@
     {
       "index": 116,
       "char": "t",
+      "unicodeChar": "t",
+      "unicodeCodepoint": 116,
       "offsetX": 795,
       "width": 5,
       "offsetY": 4,
@@ -959,6 +1195,8 @@
     {
       "index": 117,
       "char": "u",
+      "unicodeChar": "u",
+      "unicodeCodepoint": 117,
       "offsetX": 800,
       "width": 7,
       "offsetY": 6,
@@ -967,6 +1205,8 @@
     {
       "index": 118,
       "char": "v",
+      "unicodeChar": "v",
+      "unicodeCodepoint": 118,
       "offsetX": 807,
       "width": 7,
       "offsetY": 6,
@@ -975,6 +1215,8 @@
     {
       "index": 119,
       "char": "w",
+      "unicodeChar": "w",
+      "unicodeCodepoint": 119,
       "offsetX": 814,
       "width": 10,
       "offsetY": 6,
@@ -983,6 +1225,8 @@
     {
       "index": 120,
       "char": "x",
+      "unicodeChar": "x",
+      "unicodeCodepoint": 120,
       "offsetX": 824,
       "width": 6,
       "offsetY": 6,
@@ -991,6 +1235,8 @@
     {
       "index": 121,
       "char": "y",
+      "unicodeChar": "y",
+      "unicodeCodepoint": 121,
       "offsetX": 830,
       "width": 7,
       "offsetY": 6,
@@ -999,6 +1245,8 @@
     {
       "index": 122,
       "char": "z",
+      "unicodeChar": "z",
+      "unicodeCodepoint": 122,
       "offsetX": 837,
       "width": 6,
       "offsetY": 6,
@@ -1007,6 +1255,8 @@
     {
       "index": 123,
       "char": "{",
+      "unicodeChar": "{",
+      "unicodeCodepoint": 123,
       "offsetX": 843,
       "width": 6,
       "offsetY": 3,
@@ -1015,6 +1265,8 @@
     {
       "index": 124,
       "char": "|",
+      "unicodeChar": "|",
+      "unicodeCodepoint": 124,
       "offsetX": 849,
       "width": 2,
       "offsetY": 3,
@@ -1023,6 +1275,8 @@
     {
       "index": 125,
       "char": "}",
+      "unicodeChar": "}",
+      "unicodeCodepoint": 125,
       "offsetX": 851,
       "width": 6,
       "offsetY": 3,
@@ -1031,6 +1285,8 @@
     {
       "index": 126,
       "char": "~",
+      "unicodeChar": "~",
+      "unicodeCodepoint": 126,
       "offsetX": 857,
       "width": 10,
       "offsetY": 7,
@@ -1039,6 +1295,8 @@
     {
       "index": 127,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 867,
       "width": 9,
       "offsetY": 3,
@@ -1047,6 +1305,8 @@
     {
       "index": 128,
       "char": null,
+      "unicodeChar": "\u20ac",
+      "unicodeCodepoint": 8364,
       "offsetX": 876,
       "width": 8,
       "offsetY": 4,
@@ -1055,6 +1315,8 @@
     {
       "index": 129,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 884,
       "width": 9,
       "offsetY": 3,
@@ -1063,6 +1325,8 @@
     {
       "index": 130,
       "char": null,
+      "unicodeChar": "\u201a",
+      "unicodeCodepoint": 8218,
       "offsetX": 893,
       "width": 3,
       "offsetY": 11,
@@ -1071,6 +1335,8 @@
     {
       "index": 131,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 896,
       "width": 7,
       "offsetY": 4,
@@ -1079,6 +1345,8 @@
     {
       "index": 132,
       "char": null,
+      "unicodeChar": "\u201e",
+      "unicodeCodepoint": 8222,
       "offsetX": 903,
       "width": 5,
       "offsetY": 11,
@@ -1087,6 +1355,8 @@
     {
       "index": 133,
       "char": null,
+      "unicodeChar": "\u2026",
+      "unicodeCodepoint": 8230,
       "offsetX": 908,
       "width": 10,
       "offsetY": 11,
@@ -1095,6 +1365,8 @@
     {
       "index": 134,
       "char": null,
+      "unicodeChar": "\u2020",
+      "unicodeCodepoint": 8224,
       "offsetX": 918,
       "width": 5,
       "offsetY": 3,
@@ -1103,6 +1375,8 @@
     {
       "index": 135,
       "char": null,
+      "unicodeChar": "\u2021",
+      "unicodeCodepoint": 8225,
       "offsetX": 923,
       "width": 6,
       "offsetY": 3,
@@ -1111,6 +1385,8 @@
     {
       "index": 136,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 929,
       "width": 5,
       "offsetY": 3,
@@ -1119,6 +1395,8 @@
     {
       "index": 137,
       "char": null,
+      "unicodeChar": "\u2030",
+      "unicodeCodepoint": 8240,
       "offsetX": 934,
       "width": 19,
       "offsetY": 4,
@@ -1127,6 +1405,8 @@
     {
       "index": 138,
       "char": null,
+      "unicodeChar": "\u0160",
+      "unicodeCodepoint": 352,
       "offsetX": 953,
       "width": 7,
       "offsetY": 1,
@@ -1135,6 +1415,8 @@
     {
       "index": 139,
       "char": null,
+      "unicodeChar": "\u2039",
+      "unicodeCodepoint": 8249,
       "offsetX": 960,
       "width": 3,
       "offsetY": 6,
@@ -1143,6 +1425,8 @@
     {
       "index": 140,
       "char": null,
+      "unicodeChar": "\u015a",
+      "unicodeCodepoint": 346,
       "offsetX": 963,
       "width": 7,
       "offsetY": 1,
@@ -1151,6 +1435,8 @@
     {
       "index": 141,
       "char": null,
+      "unicodeChar": "\u0164",
+      "unicodeCodepoint": 356,
       "offsetX": 970,
       "width": 6,
       "offsetY": 1,
@@ -1159,6 +1445,8 @@
     {
       "index": 142,
       "char": null,
+      "unicodeChar": "\u017d",
+      "unicodeCodepoint": 381,
       "offsetX": 976,
       "width": 6,
       "offsetY": 1,
@@ -1167,6 +1455,8 @@
     {
       "index": 143,
       "char": null,
+      "unicodeChar": "\u0179",
+      "unicodeCodepoint": 377,
       "offsetX": 982,
       "width": 6,
       "offsetY": 1,
@@ -1175,6 +1465,8 @@
     {
       "index": 144,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 988,
       "width": 9,
       "offsetY": 3,
@@ -1183,6 +1475,8 @@
     {
       "index": 145,
       "char": null,
+      "unicodeChar": "\u2018",
+      "unicodeCodepoint": 8216,
       "offsetX": 997,
       "width": 3,
       "offsetY": 3,
@@ -1191,6 +1485,8 @@
     {
       "index": 146,
       "char": null,
+      "unicodeChar": "\u2019",
+      "unicodeCodepoint": 8217,
       "offsetX": 1000,
       "width": 3,
       "offsetY": 3,
@@ -1199,6 +1495,8 @@
     {
       "index": 147,
       "char": null,
+      "unicodeChar": "\u201c",
+      "unicodeCodepoint": 8220,
       "offsetX": 1003,
       "width": 6,
       "offsetY": 3,
@@ -1207,6 +1505,8 @@
     {
       "index": 148,
       "char": null,
+      "unicodeChar": "\u201d",
+      "unicodeCodepoint": 8221,
       "offsetX": 1009,
       "width": 6,
       "offsetY": 3,
@@ -1215,6 +1515,8 @@
     {
       "index": 149,
       "char": null,
+      "unicodeChar": "\u2022",
+      "unicodeCodepoint": 8226,
       "offsetX": 1015,
       "width": 6,
       "offsetY": 6,
@@ -1223,6 +1525,8 @@
     {
       "index": 150,
       "char": null,
+      "unicodeChar": "\u2013",
+      "unicodeCodepoint": 8211,
       "offsetX": 1021,
       "width": 8,
       "offsetY": 8,
@@ -1231,6 +1535,8 @@
     {
       "index": 151,
       "char": null,
+      "unicodeChar": "\u2014",
+      "unicodeCodepoint": 8212,
       "offsetX": 1029,
       "width": 12,
       "offsetY": 8,
@@ -1239,6 +1545,8 @@
     {
       "index": 152,
       "char": null,
+      "unicodeChar": null,
+      "unicodeCodepoint": null,
       "offsetX": 1041,
       "width": 6,
       "offsetY": 3,
@@ -1247,6 +1555,8 @@
     {
       "index": 153,
       "char": null,
+      "unicodeChar": "\u2122",
+      "unicodeCodepoint": 8482,
       "offsetX": 1047,
       "width": 10,
       "offsetY": 4,
@@ -1255,6 +1565,8 @@
     {
       "index": 154,
       "char": null,
+      "unicodeChar": "\u0161",
+      "unicodeCodepoint": 353,
       "offsetX": 1057,
       "width": 6,
       "offsetY": 3,
@@ -1263,6 +1575,8 @@
     {
       "index": 155,
       "char": null,
+      "unicodeChar": "\u203a",
+      "unicodeCodepoint": 8250,
       "offsetX": 1063,
       "width": 3,
       "offsetY": 6,
@@ -1271,6 +1585,8 @@
     {
       "index": 156,
       "char": null,
+      "unicodeChar": "\u015b",
+      "unicodeCodepoint": 347,
       "offsetX": 1066,
       "width": 6,
       "offsetY": 3,
@@ -1279,6 +1595,8 @@
     {
       "index": 157,
       "char": null,
+      "unicodeChar": "\u0165",
+      "unicodeCodepoint": 357,
       "offsetX": 1072,
       "width": 9,
       "offsetY": 4,
@@ -1287,6 +1605,8 @@
     {
       "index": 158,
       "char": null,
+      "unicodeChar": "\u017e",
+      "unicodeCodepoint": 382,
       "offsetX": 1081,
       "width": 6,
       "offsetY": 3,
@@ -1295,6 +1615,8 @@
     {
       "index": 159,
       "char": null,
+      "unicodeChar": "\u017a",
+      "unicodeCodepoint": 378,
       "offsetX": 1087,
       "width": 6,
       "offsetY": 3,
@@ -1303,6 +1625,8 @@
     {
       "index": 160,
       "char": null,
+      "unicodeChar": "\u00a0",
+      "unicodeCodepoint": 160,
       "offsetX": 1093,
       "width": 0,
       "offsetY": 0,
@@ -1311,6 +1635,8 @@
     {
       "index": 161,
       "char": null,
+      "unicodeChar": "\u02c7",
+      "unicodeCodepoint": 711,
       "offsetX": 1093,
       "width": 5,
       "offsetY": 3,
@@ -1319,6 +1645,8 @@
     {
       "index": 162,
       "char": null,
+      "unicodeChar": "\u02d8",
+      "unicodeCodepoint": 728,
       "offsetX": 1098,
       "width": 5,
       "offsetY": 3,
@@ -1327,6 +1655,8 @@
     {
       "index": 163,
       "char": null,
+      "unicodeChar": "\u0141",
+      "unicodeCodepoint": 321,
       "offsetX": 1103,
       "width": 7,
       "offsetY": 4,
@@ -1335,6 +1665,8 @@
     {
       "index": 164,
       "char": null,
+      "unicodeChar": "\u00a4",
+      "unicodeCodepoint": 164,
       "offsetX": 1110,
       "width": 7,
       "offsetY": 5,
@@ -1343,6 +1675,8 @@
     {
       "index": 165,
       "char": null,
+      "unicodeChar": "\u0104",
+      "unicodeCodepoint": 260,
       "offsetX": 1117,
       "width": 9,
       "offsetY": 4,
@@ -1351,6 +1685,8 @@
     {
       "index": 166,
       "char": null,
+      "unicodeChar": "\u00a6",
+      "unicodeCodepoint": 166,
       "offsetX": 1126,
       "width": 2,
       "offsetY": 3,
@@ -1359,6 +1695,8 @@
     {
       "index": 167,
       "char": null,
+      "unicodeChar": "\u00a7",
+      "unicodeCodepoint": 167,
       "offsetX": 1128,
       "width": 7,
       "offsetY": 4,
@@ -1367,6 +1705,8 @@
     {
       "index": 168,
       "char": null,
+      "unicodeChar": "\u00a8",
+      "unicodeCodepoint": 168,
       "offsetX": 1135,
       "width": 5,
       "offsetY": 3,
@@ -1375,6 +1715,8 @@
     {
       "index": 169,
       "char": null,
+      "unicodeChar": "\u00a9",
+      "unicodeCodepoint": 169,
       "offsetX": 1140,
       "width": 11,
       "offsetY": 4,
@@ -1383,6 +1725,8 @@
     {
       "index": 170,
       "char": null,
+      "unicodeChar": "\u015e",
+      "unicodeCodepoint": 350,
       "offsetX": 1151,
       "width": 7,
       "offsetY": 4,
@@ -1391,6 +1735,8 @@
     {
       "index": 171,
       "char": null,
+      "unicodeChar": "\u00ab",
+      "unicodeCodepoint": 171,
       "offsetX": 1158,
       "width": 7,
       "offsetY": 6,
@@ -1399,6 +1745,8 @@
     {
       "index": 172,
       "char": null,
+      "unicodeChar": "\u00ac",
+      "unicodeCodepoint": 172,
       "offsetX": 1165,
       "width": 8,
       "offsetY": 8,
@@ -1407,6 +1755,8 @@
     {
       "index": 173,
       "char": null,
+      "unicodeChar": "\u00ad",
+      "unicodeCodepoint": 173,
       "offsetX": 1173,
       "width": 5,
       "offsetY": 8,
@@ -1415,6 +1765,8 @@
     {
       "index": 174,
       "char": null,
+      "unicodeChar": "\u00ae",
+      "unicodeCodepoint": 174,
       "offsetX": 1178,
       "width": 11,
       "offsetY": 4,
@@ -1423,6 +1775,8 @@
     {
       "index": 175,
       "char": null,
+      "unicodeChar": "\u017b",
+      "unicodeCodepoint": 379,
       "offsetX": 1189,
       "width": 6,
       "offsetY": 1,
@@ -1431,6 +1785,8 @@
     {
       "index": 176,
       "char": null,
+      "unicodeChar": "\u00b0",
+      "unicodeCodepoint": 176,
       "offsetX": 1195,
       "width": 5,
       "offsetY": 4,
@@ -1439,6 +1795,8 @@
     {
       "index": 177,
       "char": null,
+      "unicodeChar": "\u00b1",
+      "unicodeCodepoint": 177,
       "offsetX": 1200,
       "width": 7,
       "offsetY": 5,
@@ -1447,6 +1805,8 @@
     {
       "index": 178,
       "char": null,
+      "unicodeChar": "\u02db",
+      "unicodeCodepoint": 731,
       "offsetX": 1207,
       "width": 3,
       "offsetY": 13,
@@ -1455,6 +1815,8 @@
     {
       "index": 179,
       "char": null,
+      "unicodeChar": "\u0142",
+      "unicodeCodepoint": 322,
       "offsetX": 1210,
       "width": 4,
       "offsetY": 3,
@@ -1463,6 +1825,8 @@
     {
       "index": 180,
       "char": null,
+      "unicodeChar": "\u00b4",
+      "unicodeCodepoint": 180,
       "offsetX": 1214,
       "width": 3,
       "offsetY": 3,
@@ -1471,6 +1835,8 @@
     {
       "index": 181,
       "char": null,
+      "unicodeChar": "\u00b5",
+      "unicodeCodepoint": 181,
       "offsetX": 1217,
       "width": 7,
       "offsetY": 6,
@@ -1479,6 +1845,8 @@
     {
       "index": 182,
       "char": null,
+      "unicodeChar": "\u00b6",
+      "unicodeCodepoint": 182,
       "offsetX": 1224,
       "width": 7,
       "offsetY": 4,
@@ -1487,6 +1855,8 @@
     {
       "index": 183,
       "char": null,
+      "unicodeChar": "\u00b7",
+      "unicodeCodepoint": 183,
       "offsetX": 1231,
       "width": 2,
       "offsetY": 8,
@@ -1495,6 +1865,8 @@
     {
       "index": 184,
       "char": null,
+      "unicodeChar": "\u00b8",
+      "unicodeCodepoint": 184,
       "offsetX": 1233,
       "width": 3,
       "offsetY": 13,
@@ -1503,6 +1875,8 @@
     {
       "index": 185,
       "char": null,
+      "unicodeChar": "\u0105",
+      "unicodeCodepoint": 261,
       "offsetX": 1236,
       "width": 8,
       "offsetY": 6,
@@ -1511,6 +1885,8 @@
     {
       "index": 186,
       "char": null,
+      "unicodeChar": "\u015f",
+      "unicodeCodepoint": 351,
       "offsetX": 1244,
       "width": 6,
       "offsetY": 6,
@@ -1519,6 +1895,8 @@
     {
       "index": 187,
       "char": null,
+      "unicodeChar": "\u00bb",
+      "unicodeCodepoint": 187,
       "offsetX": 1250,
       "width": 7,
       "offsetY": 6,
@@ -1527,6 +1905,8 @@
     {
       "index": 188,
       "char": null,
+      "unicodeChar": "\u013d",
+      "unicodeCodepoint": 317,
       "offsetX": 1257,
       "width": 6,
       "offsetY": 3,
@@ -1535,6 +1915,8 @@
     {
       "index": 189,
       "char": null,
+      "unicodeChar": "\u02dd",
+      "unicodeCodepoint": 733,
       "offsetX": 1263,
       "width": 6,
       "offsetY": 2,
@@ -1543,6 +1925,8 @@
     {
       "index": 190,
       "char": null,
+      "unicodeChar": "\u013e",
+      "unicodeCodepoint": 318,
       "offsetX": 1269,
       "width": 6,
       "offsetY": 3,
@@ -1551,6 +1935,8 @@
     {
       "index": 191,
       "char": null,
+      "unicodeChar": "\u017c",
+      "unicodeCodepoint": 380,
       "offsetX": 1275,
       "width": 6,
       "offsetY": 3,
@@ -1559,6 +1945,8 @@
     {
       "index": 192,
       "char": null,
+      "unicodeChar": "\u0154",
+      "unicodeCodepoint": 340,
       "offsetX": 1281,
       "width": 8,
       "offsetY": 1,
@@ -1567,6 +1955,8 @@
     {
       "index": 193,
       "char": null,
+      "unicodeChar": "\u00c1",
+      "unicodeCodepoint": 193,
       "offsetX": 1289,
       "width": 8,
       "offsetY": 1,
@@ -1575,6 +1965,8 @@
     {
       "index": 194,
       "char": null,
+      "unicodeChar": "\u00c2",
+      "unicodeCodepoint": 194,
       "offsetX": 1297,
       "width": 9,
       "offsetY": 1,
@@ -1583,6 +1975,8 @@
     {
       "index": 195,
       "char": null,
+      "unicodeChar": "\u0102",
+      "unicodeCodepoint": 258,
       "offsetX": 1306,
       "width": 9,
       "offsetY": 1,
@@ -1591,6 +1985,8 @@
     {
       "index": 196,
       "char": null,
+      "unicodeChar": "\u00c4",
+      "unicodeCodepoint": 196,
       "offsetX": 1315,
       "width": 9,
       "offsetY": 1,
@@ -1599,6 +1995,8 @@
     {
       "index": 197,
       "char": null,
+      "unicodeChar": "\u0139",
+      "unicodeCodepoint": 313,
       "offsetX": 1324,
       "width": 6,
       "offsetY": 1,
@@ -1607,6 +2005,8 @@
     {
       "index": 198,
       "char": null,
+      "unicodeChar": "\u0106",
+      "unicodeCodepoint": 262,
       "offsetX": 1330,
       "width": 7,
       "offsetY": 1,
@@ -1615,6 +2015,8 @@
     {
       "index": 199,
       "char": null,
+      "unicodeChar": "\u00c7",
+      "unicodeCodepoint": 199,
       "offsetX": 1337,
       "width": 7,
       "offsetY": 4,
@@ -1623,6 +2025,8 @@
     {
       "index": 200,
       "char": null,
+      "unicodeChar": "\u010c",
+      "unicodeCodepoint": 268,
       "offsetX": 1344,
       "width": 7,
       "offsetY": 1,
@@ -1631,6 +2035,8 @@
     {
       "index": 201,
       "char": null,
+      "unicodeChar": "\u00c9",
+      "unicodeCodepoint": 201,
       "offsetX": 1351,
       "width": 6,
       "offsetY": 1,
@@ -1639,6 +2045,8 @@
     {
       "index": 202,
       "char": null,
+      "unicodeChar": "\u0118",
+      "unicodeCodepoint": 280,
       "offsetX": 1357,
       "width": 6,
       "offsetY": 4,
@@ -1647,6 +2055,8 @@
     {
       "index": 203,
       "char": null,
+      "unicodeChar": "\u00cb",
+      "unicodeCodepoint": 203,
       "offsetX": 1363,
       "width": 6,
       "offsetY": 1,
@@ -1655,6 +2065,8 @@
     {
       "index": 204,
       "char": null,
+      "unicodeChar": "\u011a",
+      "unicodeCodepoint": 282,
       "offsetX": 1369,
       "width": 6,
       "offsetY": 1,
@@ -1663,6 +2075,8 @@
     {
       "index": 205,
       "char": null,
+      "unicodeChar": "\u00cd",
+      "unicodeCodepoint": 205,
       "offsetX": 1375,
       "width": 4,
       "offsetY": 1,
@@ -1671,6 +2085,8 @@
     {
       "index": 206,
       "char": null,
+      "unicodeChar": "\u00ce",
+      "unicodeCodepoint": 206,
       "offsetX": 1379,
       "width": 5,
       "offsetY": 1,
@@ -1679,6 +2095,8 @@
     {
       "index": 207,
       "char": null,
+      "unicodeChar": "\u010e",
+      "unicodeCodepoint": 270,
       "offsetX": 1384,
       "width": 8,
       "offsetY": 1,
@@ -1687,6 +2105,8 @@
     {
       "index": 208,
       "char": null,
+      "unicodeChar": "\u0110",
+      "unicodeCodepoint": 272,
       "offsetX": 1392,
       "width": 9,
       "offsetY": 4,
@@ -1695,6 +2115,8 @@
     {
       "index": 209,
       "char": null,
+      "unicodeChar": "\u0143",
+      "unicodeCodepoint": 323,
       "offsetX": 1401,
       "width": 7,
       "offsetY": 1,
@@ -1703,6 +2125,8 @@
     {
       "index": 210,
       "char": null,
+      "unicodeChar": "\u0147",
+      "unicodeCodepoint": 327,
       "offsetX": 1408,
       "width": 7,
       "offsetY": 1,
@@ -1711,6 +2135,8 @@
     {
       "index": 211,
       "char": null,
+      "unicodeChar": "\u00d3",
+      "unicodeCodepoint": 211,
       "offsetX": 1415,
       "width": 8,
       "offsetY": 1,
@@ -1719,6 +2145,8 @@
     {
       "index": 212,
       "char": null,
+      "unicodeChar": "\u00d4",
+      "unicodeCodepoint": 212,
       "offsetX": 1423,
       "width": 8,
       "offsetY": 1,
@@ -1727,6 +2155,8 @@
     {
       "index": 213,
       "char": null,
+      "unicodeChar": "\u0150",
+      "unicodeCodepoint": 336,
       "offsetX": 1431,
       "width": 8,
       "offsetY": 0,
@@ -1735,6 +2165,8 @@
     {
       "index": 214,
       "char": null,
+      "unicodeChar": "\u00d6",
+      "unicodeCodepoint": 214,
       "offsetX": 1439,
       "width": 8,
       "offsetY": 1,
@@ -1743,6 +2175,8 @@
     {
       "index": 215,
       "char": null,
+      "unicodeChar": "\u00d7",
+      "unicodeCodepoint": 215,
       "offsetX": 1447,
       "width": 5,
       "offsetY": 6,
@@ -1751,6 +2185,8 @@
     {
       "index": 216,
       "char": null,
+      "unicodeChar": "\u0158",
+      "unicodeCodepoint": 344,
       "offsetX": 1452,
       "width": 8,
       "offsetY": 1,
@@ -1759,6 +2195,8 @@
     {
       "index": 217,
       "char": null,
+      "unicodeChar": "\u016e",
+      "unicodeCodepoint": 366,
       "offsetX": 1460,
       "width": 7,
       "offsetY": 0,
@@ -1767,6 +2205,8 @@
     {
       "index": 218,
       "char": null,
+      "unicodeChar": "\u00da",
+      "unicodeCodepoint": 218,
       "offsetX": 1467,
       "width": 7,
       "offsetY": 1,
@@ -1775,6 +2215,8 @@
     {
       "index": 219,
       "char": null,
+      "unicodeChar": "\u0170",
+      "unicodeCodepoint": 368,
       "offsetX": 1474,
       "width": 7,
       "offsetY": 0,
@@ -1783,6 +2225,8 @@
     {
       "index": 220,
       "char": null,
+      "unicodeChar": "\u00dc",
+      "unicodeCodepoint": 220,
       "offsetX": 1481,
       "width": 7,
       "offsetY": 1,
@@ -1791,6 +2235,8 @@
     {
       "index": 221,
       "char": null,
+      "unicodeChar": "\u00dd",
+      "unicodeCodepoint": 221,
       "offsetX": 1488,
       "width": 8,
       "offsetY": 1,
@@ -1799,6 +2245,8 @@
     {
       "index": 222,
       "char": null,
+      "unicodeChar": "\u0162",
+      "unicodeCodepoint": 354,
       "offsetX": 1496,
       "width": 6,
       "offsetY": 4,
@@ -1807,6 +2255,8 @@
     {
       "index": 223,
       "char": null,
+      "unicodeChar": "\u00df",
+      "unicodeCodepoint": 223,
       "offsetX": 1502,
       "width": 7,
       "offsetY": 3,
@@ -1815,6 +2265,8 @@
     {
       "index": 224,
       "char": null,
+      "unicodeChar": "\u0155",
+      "unicodeCodepoint": 341,
       "offsetX": 1509,
       "width": 5,
       "offsetY": 3,
@@ -1823,6 +2275,8 @@
     {
       "index": 225,
       "char": null,
+      "unicodeChar": "\u00e1",
+      "unicodeCodepoint": 225,
       "offsetX": 1514,
       "width": 7,
       "offsetY": 3,
@@ -1831,6 +2285,8 @@
     {
       "index": 226,
       "char": null,
+      "unicodeChar": "\u00e2",
+      "unicodeCodepoint": 226,
       "offsetX": 1521,
       "width": 7,
       "offsetY": 3,
@@ -1839,6 +2295,8 @@
     {
       "index": 227,
       "char": null,
+      "unicodeChar": "\u0103",
+      "unicodeCodepoint": 259,
       "offsetX": 1528,
       "width": 7,
       "offsetY": 3,
@@ -1847,6 +2305,8 @@
     {
       "index": 228,
       "char": null,
+      "unicodeChar": "\u00e4",
+      "unicodeCodepoint": 228,
       "offsetX": 1535,
       "width": 7,
       "offsetY": 3,
@@ -1855,6 +2315,8 @@
     {
       "index": 229,
       "char": null,
+      "unicodeChar": "\u013a",
+      "unicodeCodepoint": 314,
       "offsetX": 1542,
       "width": 3,
       "offsetY": 0,
@@ -1863,6 +2325,8 @@
     {
       "index": 230,
       "char": null,
+      "unicodeChar": "\u0107",
+      "unicodeCodepoint": 263,
       "offsetX": 1545,
       "width": 6,
       "offsetY": 3,
@@ -1871,6 +2335,8 @@
     {
       "index": 231,
       "char": null,
+      "unicodeChar": "\u00e7",
+      "unicodeCodepoint": 231,
       "offsetX": 1551,
       "width": 6,
       "offsetY": 6,
@@ -1879,6 +2345,8 @@
     {
       "index": 232,
       "char": null,
+      "unicodeChar": "\u010d",
+      "unicodeCodepoint": 269,
       "offsetX": 1557,
       "width": 6,
       "offsetY": 3,
@@ -1887,6 +2355,8 @@
     {
       "index": 233,
       "char": null,
+      "unicodeChar": "\u00e9",
+      "unicodeCodepoint": 233,
       "offsetX": 1563,
       "width": 7,
       "offsetY": 3,
@@ -1895,6 +2365,8 @@
     {
       "index": 234,
       "char": null,
+      "unicodeChar": "\u0119",
+      "unicodeCodepoint": 281,
       "offsetX": 1570,
       "width": 7,
       "offsetY": 6,
@@ -1903,6 +2375,8 @@
     {
       "index": 235,
       "char": null,
+      "unicodeChar": "\u00eb",
+      "unicodeCodepoint": 235,
       "offsetX": 1577,
       "width": 7,
       "offsetY": 3,
@@ -1911,6 +2385,8 @@
     {
       "index": 236,
       "char": null,
+      "unicodeChar": "\u011b",
+      "unicodeCodepoint": 283,
       "offsetX": 1584,
       "width": 7,
       "offsetY": 3,
@@ -1919,6 +2395,8 @@
     {
       "index": 237,
       "char": null,
+      "unicodeChar": "\u00ed",
+      "unicodeCodepoint": 237,
       "offsetX": 1591,
       "width": 3,
       "offsetY": 3,
@@ -1927,6 +2405,8 @@
     {
       "index": 238,
       "char": null,
+      "unicodeChar": "\u00ee",
+      "unicodeCodepoint": 238,
       "offsetX": 1594,
       "width": 4,
       "offsetY": 3,
@@ -1935,6 +2415,8 @@
     {
       "index": 239,
       "char": null,
+      "unicodeChar": "\u010f",
+      "unicodeCodepoint": 271,
       "offsetX": 1598,
       "width": 11,
       "offsetY": 3,
@@ -1943,6 +2425,8 @@
     {
       "index": 240,
       "char": null,
+      "unicodeChar": "\u0111",
+      "unicodeCodepoint": 273,
       "offsetX": 1609,
       "width": 7,
       "offsetY": 3,
@@ -1951,6 +2435,8 @@
     {
       "index": 241,
       "char": null,
+      "unicodeChar": "\u0144",
+      "unicodeCodepoint": 324,
       "offsetX": 1616,
       "width": 7,
       "offsetY": 3,
@@ -1959,6 +2445,8 @@
     {
       "index": 242,
       "char": null,
+      "unicodeChar": "\u0148",
+      "unicodeCodepoint": 328,
       "offsetX": 1623,
       "width": 7,
       "offsetY": 3,
@@ -1967,6 +2455,8 @@
     {
       "index": 243,
       "char": null,
+      "unicodeChar": "\u00f3",
+      "unicodeCodepoint": 243,
       "offsetX": 1630,
       "width": 7,
       "offsetY": 3,
@@ -1975,6 +2465,8 @@
     {
       "index": 244,
       "char": null,
+      "unicodeChar": "\u00f4",
+      "unicodeCodepoint": 244,
       "offsetX": 1637,
       "width": 7,
       "offsetY": 3,
@@ -1983,6 +2475,8 @@
     {
       "index": 245,
       "char": null,
+      "unicodeChar": "\u0151",
+      "unicodeCodepoint": 337,
       "offsetX": 1644,
       "width": 7,
       "offsetY": 2,
@@ -1991,6 +2485,8 @@
     {
       "index": 246,
       "char": null,
+      "unicodeChar": "\u00f6",
+      "unicodeCodepoint": 246,
       "offsetX": 1651,
       "width": 7,
       "offsetY": 3,
@@ -1999,6 +2495,8 @@
     {
       "index": 247,
       "char": null,
+      "unicodeChar": "\u00f7",
+      "unicodeCodepoint": 247,
       "offsetX": 1658,
       "width": 8,
       "offsetY": 5,
@@ -2007,6 +2505,8 @@
     {
       "index": 248,
       "char": null,
+      "unicodeChar": "\u0159",
+      "unicodeCodepoint": 345,
       "offsetX": 1666,
       "width": 5,
       "offsetY": 3,
@@ -2015,6 +2515,8 @@
     {
       "index": 249,
       "char": null,
+      "unicodeChar": "\u016f",
+      "unicodeCodepoint": 367,
       "offsetX": 1671,
       "width": 7,
       "offsetY": 2,
@@ -2023,6 +2525,8 @@
     {
       "index": 250,
       "char": null,
+      "unicodeChar": "\u00fa",
+      "unicodeCodepoint": 250,
       "offsetX": 1678,
       "width": 7,
       "offsetY": 3,
@@ -2031,6 +2535,8 @@
     {
       "index": 251,
       "char": null,
+      "unicodeChar": "\u0171",
+      "unicodeCodepoint": 369,
       "offsetX": 1685,
       "width": 7,
       "offsetY": 2,
@@ -2039,6 +2545,8 @@
     {
       "index": 252,
       "char": null,
+      "unicodeChar": "\u00fc",
+      "unicodeCodepoint": 252,
       "offsetX": 1692,
       "width": 7,
       "offsetY": 3,
@@ -2047,6 +2555,8 @@
     {
       "index": 253,
       "char": null,
+      "unicodeChar": "\u00fd",
+      "unicodeCodepoint": 253,
       "offsetX": 1699,
       "width": 7,
       "offsetY": 3,
@@ -2055,6 +2565,8 @@
     {
       "index": 254,
       "char": null,
+      "unicodeChar": "\u0163",
+      "unicodeCodepoint": 355,
       "offsetX": 1706,
       "width": 5,
       "offsetY": 4,
@@ -2063,10 +2575,232 @@
     {
       "index": 255,
       "char": null,
+      "unicodeChar": "\u02d9",
+      "unicodeCodepoint": 729,
       "offsetX": 1711,
       "width": 2,
       "offsetY": 3,
       "height": 5
     }
-  ]
+  ],
+  "unicodeToGlyph": {
+    "U+0021": 33,
+    "U+0022": 34,
+    "U+0023": 35,
+    "U+0024": 36,
+    "U+0025": 37,
+    "U+0026": 38,
+    "U+0027": 39,
+    "U+0028": 40,
+    "U+0029": 41,
+    "U+002A": 42,
+    "U+002B": 43,
+    "U+002C": 44,
+    "U+002D": 45,
+    "U+002E": 46,
+    "U+002F": 47,
+    "U+0030": 48,
+    "U+0031": 49,
+    "U+0032": 50,
+    "U+0033": 51,
+    "U+0034": 52,
+    "U+0035": 53,
+    "U+0036": 54,
+    "U+0037": 55,
+    "U+0038": 56,
+    "U+0039": 57,
+    "U+003A": 58,
+    "U+003B": 59,
+    "U+003C": 60,
+    "U+003D": 61,
+    "U+003E": 62,
+    "U+003F": 63,
+    "U+0040": 64,
+    "U+0041": 65,
+    "U+0042": 66,
+    "U+0043": 67,
+    "U+0044": 68,
+    "U+0045": 69,
+    "U+0046": 70,
+    "U+0047": 71,
+    "U+0048": 72,
+    "U+0049": 73,
+    "U+004A": 74,
+    "U+004B": 75,
+    "U+004C": 76,
+    "U+004D": 77,
+    "U+004E": 78,
+    "U+004F": 79,
+    "U+0050": 80,
+    "U+0051": 81,
+    "U+0052": 82,
+    "U+0053": 83,
+    "U+0054": 84,
+    "U+0055": 85,
+    "U+0056": 86,
+    "U+0057": 87,
+    "U+0058": 88,
+    "U+0059": 89,
+    "U+005A": 90,
+    "U+005B": 91,
+    "U+005C": 92,
+    "U+005D": 93,
+    "U+005E": 94,
+    "U+005F": 95,
+    "U+0060": 96,
+    "U+0061": 97,
+    "U+0062": 98,
+    "U+0063": 99,
+    "U+0064": 100,
+    "U+0065": 101,
+    "U+0066": 102,
+    "U+0067": 103,
+    "U+0068": 104,
+    "U+0069": 105,
+    "U+006A": 106,
+    "U+006B": 107,
+    "U+006C": 108,
+    "U+006D": 109,
+    "U+006E": 110,
+    "U+006F": 111,
+    "U+0070": 112,
+    "U+0071": 113,
+    "U+0072": 114,
+    "U+0073": 115,
+    "U+0074": 116,
+    "U+0075": 117,
+    "U+0076": 118,
+    "U+0077": 119,
+    "U+0078": 120,
+    "U+0079": 121,
+    "U+007A": 122,
+    "U+007B": 123,
+    "U+007C": 124,
+    "U+007D": 125,
+    "U+007E": 126,
+    "U+20AC": 128,
+    "U+201A": 130,
+    "U+201E": 132,
+    "U+2026": 133,
+    "U+2020": 134,
+    "U+2021": 135,
+    "U+2030": 137,
+    "U+0160": 138,
+    "U+2039": 139,
+    "U+015A": 140,
+    "U+0164": 141,
+    "U+017D": 142,
+    "U+0179": 143,
+    "U+2018": 145,
+    "U+2019": 146,
+    "U+201C": 147,
+    "U+201D": 148,
+    "U+2022": 149,
+    "U+2013": 150,
+    "U+2014": 151,
+    "U+2122": 153,
+    "U+0161": 154,
+    "U+203A": 155,
+    "U+015B": 156,
+    "U+0165": 157,
+    "U+017E": 158,
+    "U+017A": 159,
+    "U+02C7": 161,
+    "U+02D8": 162,
+    "U+0141": 163,
+    "U+00A4": 164,
+    "U+0104": 165,
+    "U+00A6": 166,
+    "U+00A7": 167,
+    "U+00A8": 168,
+    "U+00A9": 169,
+    "U+015E": 170,
+    "U+00AB": 171,
+    "U+00AC": 172,
+    "U+00AD": 173,
+    "U+00AE": 174,
+    "U+017B": 175,
+    "U+00B0": 176,
+    "U+00B1": 177,
+    "U+02DB": 178,
+    "U+0142": 179,
+    "U+00B4": 180,
+    "U+00B5": 181,
+    "U+00B6": 182,
+    "U+00B7": 183,
+    "U+00B8": 184,
+    "U+0105": 185,
+    "U+015F": 186,
+    "U+00BB": 187,
+    "U+013D": 188,
+    "U+02DD": 189,
+    "U+013E": 190,
+    "U+017C": 191,
+    "U+0154": 192,
+    "U+00C1": 193,
+    "U+00C2": 194,
+    "U+0102": 195,
+    "U+00C4": 196,
+    "U+0139": 197,
+    "U+0106": 198,
+    "U+00C7": 199,
+    "U+010C": 200,
+    "U+00C9": 201,
+    "U+0118": 202,
+    "U+00CB": 203,
+    "U+011A": 204,
+    "U+00CD": 205,
+    "U+00CE": 206,
+    "U+010E": 207,
+    "U+0110": 208,
+    "U+0143": 209,
+    "U+0147": 210,
+    "U+00D3": 211,
+    "U+00D4": 212,
+    "U+0150": 213,
+    "U+00D6": 214,
+    "U+00D7": 215,
+    "U+0158": 216,
+    "U+016E": 217,
+    "U+00DA": 218,
+    "U+0170": 219,
+    "U+00DC": 220,
+    "U+00DD": 221,
+    "U+0162": 222,
+    "U+00DF": 223,
+    "U+0155": 224,
+    "U+00E1": 225,
+    "U+00E2": 226,
+    "U+0103": 227,
+    "U+00E4": 228,
+    "U+013A": 229,
+    "U+0107": 230,
+    "U+00E7": 231,
+    "U+010D": 232,
+    "U+00E9": 233,
+    "U+0119": 234,
+    "U+00EB": 235,
+    "U+011B": 236,
+    "U+00ED": 237,
+    "U+00EE": 238,
+    "U+010F": 239,
+    "U+0111": 240,
+    "U+0144": 241,
+    "U+0148": 242,
+    "U+00F3": 243,
+    "U+00F4": 244,
+    "U+0151": 245,
+    "U+00F6": 246,
+    "U+00F7": 247,
+    "U+0159": 248,
+    "U+016F": 249,
+    "U+00FA": 250,
+    "U+0171": 251,
+    "U+00FC": 252,
+    "U+00FD": 253,
+    "U+0163": 254,
+    "U+02D9": 255
+  },
+  "glyphsWithPixels": 251,
+  "reachableGlyphCount": 216
 }

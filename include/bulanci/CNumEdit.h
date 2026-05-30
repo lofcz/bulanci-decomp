@@ -35,10 +35,10 @@ public:
 	/* 407E00 */ uchar CNumEdit_vDtor(void* param_1);
 	// !DECL 0x00407e00 END
 	// !DECL 0x0042d2f0 BEGIN
-	/* 42D2F0 */ uint FUN_0042d2f0(uint* param_1);
+	/* 42D2F0 */ uint CNumEdit_ParseDecimalValue(uint* param_1);
 	// !DECL 0x0042d2f0 END
 	// !DECL 0x00448ed6 BEGIN
-	/* 448ED6 */ static uchar FUN_00448ed6(wchar_t* param_1);
+	/* 448ED6 */ static uchar CNumEdit_ParseWideDigitsToUint(wchar_t* param_1);
 	// !DECL 0x00448ed6 END
 	// !DECL 0x0044eb1e BEGIN
 	/* 44EB1E */ static ulong wcstoxl(localeinfo_struct* param_1, wchar_t* param_2, wchar_t** param_3, int param_4, int param_5);

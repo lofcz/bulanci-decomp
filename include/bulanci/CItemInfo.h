@@ -6,10 +6,10 @@
 class CItemInfo {
 public:
 	// !DECL 0x00403500 BEGIN
-	/* 403500 */ uchar* FUN_00403500();
+	/* 403500 */ uchar* CItemInfo_GetTypeInfo();
 	// !DECL 0x00403500 END
 	// !DECL 0x00434b10 BEGIN
-	/* 434B10 */ uint FUN_00434b10();
+	/* 434B10 */ uint CDSObject_GetThis();
 	// !DECL 0x00434b10 END
 };
 

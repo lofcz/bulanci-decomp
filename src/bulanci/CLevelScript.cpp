@@ -7,89 +7,89 @@ uchar CLevelScript::CLevelScriptTimer_FireOnTimer(int param_1) { STUB_BODY(); re
 
 // !FUNC 0x004185c0 BEGIN
 /* 4185C0-418674 000B4 */
-CDSScript* CLevelScript::ctor(CDSScript* param_1) { STUB_BODY(); return 0; }
+void* CLevelScript::ctor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004185c0 END
 
 // !FUNC 0x00418680 BEGIN
 /* 418680-418686 00006 */
-uchar* CLevelScript::FUN_00418680() {
+uchar* CLevelScript::CLevelScript_GetTypeInfo() {
     return reinterpret_cast<uchar*>(&DAT_004b3488);
 }
 // !FUNC 0x00418680 END
 
 // !FUNC 0x00418690 BEGIN
 /* 418690-41869B 0000B */
-uchar CLevelScript::FUN_00418690(uchar param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_ScalarDeletingDtor_thunk_Sub438(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418690 END
 
 // !FUNC 0x004186a0 BEGIN
 /* 4186A0-4186AB 0000B */
-uchar CLevelScript::FUN_004186a0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_ScalarDeletingDtor_thunk_Sub440(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004186a0 END
 
 // !FUNC 0x004186b0 BEGIN
 /* 4186B0-4186B8 00008 */
-uchar CLevelScript::FUN_004186b0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_ScalarDeletingDtor_thunk_Sub4(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004186b0 END
 
 // !FUNC 0x004186c0 BEGIN
 /* 4186C0-4186CB 0000B */
-uchar CLevelScript::FUN_004186c0(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_CDSChain_AdjustThisOffset_thunk_Sub42c(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004186c0 END
 
 // !FUNC 0x004186d0 BEGIN
 /* 4186D0-4186DB 0000B */
-uchar CLevelScript::FUN_004186d0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_ScalarDeletingDtor_thunk_Sub430(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004186d0 END
 
 // !FUNC 0x004186e0 BEGIN
 /* 4186E0-4186EB 0000B */
-uchar CLevelScript::FUN_004186e0(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_CDSChain_AdjustThisOffset_thunk_Sub43c(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004186e0 END
 
 // !FUNC 0x004186f0 BEGIN
 /* 4186F0-41876D 0007D */
-uchar CLevelScript::FUN_004186f0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_dtor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004186f0 END
 
 // !FUNC 0x00418be0 BEGIN
 /* 418BE0-418BEB 0000B */
-uchar CLevelScript::FUN_00418be0(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_ReleaseNestedRefcount_thunk_Sub440(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418be0 END
 
 // !FUNC 0x00418bf0 BEGIN
 /* 418BF0-418BFB 0000B */
-uchar CLevelScript::FUN_00418bf0(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_ReleaseNestedRefcount_thunk_Sub430(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418bf0 END
 
 // !FUNC 0x0041a450 BEGIN
 /* 41A450-41A46E 0001E */
-void* CLevelScript::FUN_0041a450(uchar param_1) { STUB_BODY(); return 0; }
+void* CLevelScript::CLevelScript_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a450 END
 
 // !FUNC 0x004216c0 BEGIN
 /* 4216C0-4216EF 0002F */
-uchar CLevelScript::FUN_004216c0(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_ReleaseNestedRefcount(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004216c0 END
 
 // !FUNC 0x00421810 BEGIN
 /* 421810-42181B 0000B */
-uchar CLevelScript::FUN_00421810(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_ReleaseChild_thunk_Sub438(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00421810 END
 
 // !FUNC 0x00421820 BEGIN
 /* 421820-421828 00008 */
-uchar CLevelScript::FUN_00421820(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_ReleaseChild(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00421820 END
 
 // !FUNC 0x00422770 BEGIN
 /* 422770-42277B 0000B */
-uchar CLevelScript::FUN_00422770(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CDSChain_AdjustThisOffset_ThisMinus434(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00422770 END
 
 // !FUNC 0x00438e40 BEGIN
 /* 438E40-438F10 000D0 */
-uchar CLevelScript::FUN_00438e40(int* param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScript_Serialize(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00438e40 END
 
 // !FUNC 0x00416ab0 BEGIN
@@ -134,7 +134,7 @@ int CLevelScript::CLevelScriptOpExt_SetAnimFrame(int param_1) { STUB_BODY(); ret
 
 // !FUNC 0x00416c00 BEGIN
 /* 416C00-416C35 00035 */
-uint CLevelScript::CLevelScriptOpExt_RegisterTimer(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_RegisterTimer(CLevelScriptCtx* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416c00 END
 
 // !FUNC 0x00416c40 BEGIN
@@ -224,12 +224,12 @@ CObstacle* CLevelScript::CLevelScriptOpExt_CreateObstacle(int param_1) { STUB_BO
 
 // !FUNC 0x004188b0 BEGIN
 /* 4188B0-4188D4 00024 */
-CBulanek* CLevelScript::CLevelScriptOpExt_ResortDepth(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScriptOpExt_ResortDepth(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004188b0 END
 
 // !FUNC 0x004188e0 BEGIN
 /* 4188E0-418913 00033 */
-CBulanek* CLevelScript::CLevelScriptOpExt_TranslateTo(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScriptOpExt_TranslateTo(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004188e0 END
 
 // !FUNC 0x00418920 BEGIN
@@ -239,7 +239,7 @@ uint CLevelScript::CLevelScriptOpExt_EvalSeq3(int param_1) { STUB_BODY(); return
 
 // !FUNC 0x00418950 BEGIN
 /* 418950-418980 00030 */
-uint CLevelScript::CLevelScriptOpExt_SpawnAtView(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_SpawnAtView(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418950 END
 
 // !FUNC 0x00418980 BEGIN
@@ -284,7 +284,7 @@ int CLevelScript::CLevelScriptOpExt_ArraySet(int param_1) { STUB_BODY(); return 
 
 // !FUNC 0x00418b20 BEGIN
 /* 418B20-418B60 00040 */
-void* CLevelScript::CLevelScriptOpExt_CollInsert(int param_1) { STUB_BODY(); return 0; }
+void* CLevelScript::CLevelScriptOpExt_CollInsert(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418b20 END
 
 // !FUNC 0x00418b60 BEGIN
@@ -299,12 +299,12 @@ void* CLevelScript::CLevelScriptOpExt_SetOrderAxis(int param_1) { STUB_BODY(); r
 
 // !FUNC 0x0041a4a0 BEGIN
 /* 41A4A0-41A4C5 00025 */
-CBulanek* CLevelScript::CLevelScriptOpExt_InsertView(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScriptOpExt_InsertView(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a4a0 END
 
 // !FUNC 0x0041a4d0 BEGIN
 /* 41A4D0-41A50D 0003D */
-int* CLevelScript::CLevelScriptOpExt_RemoveView(int param_1) { STUB_BODY(); return 0; }
+int* CLevelScript::CLevelScriptOpExt_RemoveView(CLevelScriptCtx* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a4d0 END
 
 // !FUNC 0x0041bb00 BEGIN
@@ -314,18 +314,14 @@ uint CLevelScript::CLevelScriptOpExt_SetMusic(int param_1) { STUB_BODY(); return
 
 // !FUNC 0x0041bb30 BEGIN
 /* 41BB30-41BB75 00045 */
-uint CLevelScript::CLevelScriptOpExt_DefineDangerZone(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_DefineDangerZone(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bb30 END
 
 // !FUNC 0x0041bb80 BEGIN
 /* 41BB80-41BBD2 00052 */
-uint CLevelScript::CLevelScriptOpExt_DefineTraceArea(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_DefineTraceArea(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bb80 END
 
-// !FUNC 0x0041d6e0 BEGIN
-/* 41D6E0-41D812 00132 */
-CAnim* CLevelScript::CLevelScriptOpExt_CreateAnim(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0041d6e0 END
 
 // !FUNC 0x0041d820 BEGIN
 /* 41D820-41D8E9 000C9 */
@@ -334,7 +330,7 @@ CGameView* CLevelScript::CLevelScriptOpExt_CreateImage(int param_1) { STUB_BODY(
 
 // !FUNC 0x0041d8f0 BEGIN
 /* 41D8F0-41D988 00098 */
-uint CLevelScript::CLevelScriptOpExt_LoadPreface(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_LoadPreface(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041d8f0 END
 
 // !FUNC 0x0041d990 BEGIN
@@ -344,32 +340,32 @@ int CLevelScript::CLevelScriptOpExt_SetViewImage(int param_1) { STUB_BODY(); ret
 
 // !FUNC 0x0041da50 BEGIN
 /* 41DA50-41DADE 0008E */
-CMina* CLevelScript::CLevelScriptOpExt_CreateMine(int param_1) { STUB_BODY(); return 0; }
+CMina* CLevelScript::CLevelScriptOpExt_CreateMine(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041da50 END
 
 // !FUNC 0x0041e3e0 BEGIN
 /* 41E3E0-41E42D 0004D */
-uint CLevelScript::CLevelScriptOpExt_KillObject(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_KillObject(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041e3e0 END
 
 // !FUNC 0x0041e430 BEGIN
 /* 41E430-41E4A9 00079 */
-uint CLevelScript::CLevelScriptOpExt_TeleportPlayerTo(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_TeleportPlayerTo(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041e430 END
 
 // !FUNC 0x0041f610 BEGIN
 /* 41F610-41F694 00084 */
-uint CLevelScript::CLevelScriptOpExt_SpawnEnemyAt(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_SpawnEnemyAt(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f610 END
 
 // !FUNC 0x0041f6a0 BEGIN
 /* 41F6A0-41F72E 0008E */
-uint CLevelScript::CLevelScriptOpExt_SpawnOpponentEx(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_SpawnOpponentEx(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f6a0 END
 
 // !FUNC 0x0041f730 BEGIN
 /* 41F730-41F770 00040 */
-uint CLevelScript::CLevelScriptOpExt_InsertOpponent(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_InsertOpponent(CLevelScriptCtx* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f730 END
 
 // !FUNC 0x00420610 BEGIN

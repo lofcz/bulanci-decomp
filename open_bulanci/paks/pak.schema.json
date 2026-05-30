@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openbulanci/paks/pak.schema.json",
+  "title": "OpenBulanci pak manifest",
+  "description": "Per-pak manifest (the project's own package.json for an asset/content pak). A pak is a layered content package: 'master' is the base game, 'mod' paks override entries from any lower pak (GZDoom load-order style) and may add brand new assets. Dev form is a folder; dist form is a compiled binary pak. Names live here (dev only); the pak compiler resolves them to hashes and strips them so dist binaries carry no slugs/paths.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "kind"],
+  "properties": {
+    "schema": {
+      "type": "integer",
+      "const": 1,
+      "description": "Manifest schema version."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Stable pak identifier. 'master' is reserved for the base game."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-facing pak name."
+    },
+    "version": {
+      "type": "string",
+      "description": "Semver-ish pak content version.",
+      "default": "0.0.0"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["master", "mod"],
+      "description": "'master' is the base game (embedded pack); 'mod' layers over lower paks."
+    },
+    "engine": {
+      "type": "string",
+      "description": "Engine/format compatibility range this pak targets, e.g. '^0.1'."
+    },
+    "author": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "dependsOn": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Pak ids that must be present and mounted below this one.",
+      "default": []
+    },
+    "loadAfter": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Pak ids this pak must mount after (load-order constraint; can reference other mods, not just master).",
+      "default": []
+    },
+    "assets": {
+      "type": "object",
+      "description": "This pak's contribution to the merged catalog: new and overriding assets, keyed by 16-hex blake2b-64('<folder>/<slug>') handle hash.",
+      "patternProperties": {
+        "^[0-9a-f]{16}$": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["file"],
+          "properties": {
+            "folder": { "type": ["string", "null"] },
+            "slug": { "type": "string" },
+            "class": { "type": "string", "description": "AssetClass name (BitmapJpeg, AudioBank, ...)." },
+            "file": { "type": "string", "description": "Path of the content file inside this pak folder (hash-named '<hash>.<ext>' or a friendly path)." },
+            "overrides": { "type": "boolean", "default": false, "description": "true when this entry shadows a hash provided by a lower pak; false for a brand-new asset." }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "scenes": {
+      "type": "object",
+      "description": "Scenes/levels this pak provides, keyed by scene name. A scene is either a legacy single Luau module (`file`), or declarative: a control-tree document (`doc`, a *.scene.json) plus attached code-behind scripts (`scripts`). Luau ships as stripped bytecode; the doc ships as JSON. Both are addressed by the literal path the SceneManager reads (`scenes/<name>.scene.json`, the script paths).",
+      "patternProperties": {
+        "^[A-Za-z0-9_/-]+$": {
+          "type": "object",
+          "additionalProperties": false,
+          "anyOf": [
+            { "required": ["file"] },
+            { "required": ["doc"] }
+          ],
+          "properties": {
+            "file": { "type": "string", "description": "Legacy single-module scene: a Luau source path inside this pak folder (built imperatively)." },
+            "doc": { "type": "string", "description": "Declarative scene document path inside this pak folder (a *.scene.json control tree)." },
+            "scripts": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Attached code-behind Luau scripts for a declarative scene, run in order after the tree is built.",
+              "default": []
+            },
+            "hash": { "type": "string", "pattern": "^[0-9a-f]{16}$", "description": "For a legacy `file` scene: the blake2b-64('scenes/<name>') handle it resolves under (defaulted from the name otherwise)." }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "levels": {
+      "type": "object",
+      "description": "Declarative levels this pak provides, keyed by level name. A level is sim-adjacent content (collision obstacles, spawn points, tunable params) authored as a *.level.json document and addressed by the literal path the engine reads ('levels/<name>.level.json'). Unlike scenes (UI control trees fed to the renderer), levels feed the gameplay simulation and are HMR-patched with a level/sim op vocabulary rather than scene ops.",
+      "patternProperties": {
+        "^[A-Za-z0-9_/-]+$": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["doc"],
+          "properties": {
+            "doc": { "type": "string", "description": "Declarative level document path inside this pak folder (a *.level.json)." },
+            "scripts": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Attached gamemode/code-behind Luau scripts for this level, run after the level loads.",
+              "default": []
+            }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    }
+  }
+}

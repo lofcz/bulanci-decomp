@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id":     "https://openbulanci.local/schemas/registry.schema.json",
+  "title":   "Bulanci master-pack asset registry",
+  "type":    "object",
+  "additionalProperties": false,
+  "required": ["assets"],
+  "description": "Single source of truth for named master-pack resources. Read by the gallery (`serve.py`), the asset-export pipeline (`build_assets.py`), and the typed-handle codegen (`build_typed_handles.py`).",
+
+  "properties": {
+    "$schema": { "type": "string" },
+
+    "scripts": {
+      "type": "object",
+      "description": "Master-pack scripts that act as gallery categories. Keyed by the script's decimal ID (e.g. `\"65843\"`).",
+      "patternProperties": {
+        "^[0-9]+$": { "$ref": "#/$defs/Script" }
+      },
+      "additionalProperties": false
+    },
+
+    "assets": {
+      "type": "object",
+      "description": "Per-resource metadata. Keyed by the hex-padded resource ID (`\"0x000100ae\"`).",
+      "patternProperties": {
+        "^0x[0-9a-f]{4,8}$": { "$ref": "#/$defs/Asset" }
+      },
+      "additionalProperties": false
+    },
+
+    "manual_assets": {
+      "type": "array",
+      "description": "Synthetic assets with no master-pack catalog ID — e.g. composite cursor reticles, hand-baked composition JSON, or pre-extracted artefacts that ship under a custom path. Each entry must declare its `class` and `source` path explicitly because the catalog can't tell us either. Listed as an array (not an object) because there's no natural key — slugs alone are the identifier.",
+      "items": { "$ref": "#/$defs/ManualAsset" }
+    },
+
+    "folders": {
+      "type": "object",
+      "description": "Sparse folder-level metadata. Only folders that need notes appear here. Folders are derived from each asset's `folder` field; this map is purely for attaching descriptions.",
+      "patternProperties": {
+        "^[A-Za-z0-9_/-]+$": { "$ref": "#/$defs/Folder" }
+      },
+      "additionalProperties": false
+    }
+  },
+
+  "$defs": {
+    "Script": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug"],
+      "properties": {
+        "slug":  { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "notes": { "type": "string" }
+      }
+    },
+
+    "Asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug"],
+      "properties": {
+        "slug":   { "type": "string", "pattern": "^[a-z][a-z0-9_]*$", "description": "Canonical name. Becomes the asset's identifier in the typed-handle codegen and the file name in `open_bulanci/assets/`." },
+        "notes":  { "type": "string" },
+        "tags":   { "type": "array", "items": { "type": "string" } },
+        "folder": { "type": "string", "pattern": "^[A-Za-z0-9_/-]+$", "description": "Forward-slash separated project folder, e.g. `menu/widgets/radio`. Used by the gallery folder tree and by the typed-handle codegen (each segment becomes a Rust module)." },
+        "ship":   { "type": "boolean", "default": false, "description": "When true, the asset pipeline copies / transcodes this resource into `open_bulanci/assets/`." },
+        "samples": {
+          "type": "object",
+          "description": "AudioBank only — per-sample slugs keyed by sample index. Each entry is exported as `audio/<sample-slug>.wav` after 22050 -> 48000 Hz polyphase resampling.",
+          "patternProperties": {
+            "^[0-9]+$": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+
+    "ManualAsset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug", "class", "source"],
+      "properties": {
+        "slug":   { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "notes":  { "type": "string" },
+        "tags":   { "type": "array", "items": { "type": "string" } },
+        "folder": { "type": "string", "pattern": "^[A-Za-z0-9_/-]+$" },
+        "class":  { "type": "string", "description": "Rust marker name from `client/src/asset/types.rs` (e.g. `BitmapSpecial`, `Font`, `CursorComposition`)." },
+        "source": { "type": "string", "description": "Path inside `open_bulanci/assets/` (relative). Used as-is by the typed-handle codegen and by the runtime VFS lookup." }
+      }
+    },
+
+    "Folder": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "notes": { "type": "string", "description": "Shown in the gallery folder tree + asset detail panel." },
+        "tags":  { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

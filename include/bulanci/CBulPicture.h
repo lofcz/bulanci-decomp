@@ -6,34 +6,34 @@
 class CBulPicture {
 public:
 	// !DECL 0x0040aa70 BEGIN
-	/* 40AA70 */ uchar FUN_0040aa70(uchar param_1);
+	/* 40AA70 */ uchar CBulPicture_ApplyTeamPalette(uchar param_1);
 	// !DECL 0x0040aa70 END
 	// !DECL 0x0040aaa0 BEGIN
-	/* 40AAA0 */ uchar FUN_0040aaa0(short param_1, uint param_2);
+	/* 40AAA0 */ uchar CBulPicture_OnRecolorEvent(short param_1, uint param_2);
 	// !DECL 0x0040aaa0 END
 	// !DECL 0x0040b050 BEGIN
-	/* 40B050 */ uchar DrawSurface(int param_1);
+	/* 40B050 */ uchar DrawSurface(void* param_1);
 	// !DECL 0x0040b050 END
 	// !DECL 0x0040b8b0 BEGIN
-	/* 40B8B0 */ uchar* FUN_0040b8b0();
+	/* 40B8B0 */ uchar* CBulPicture_GetClassTable();
 	// !DECL 0x0040b8b0 END
 	// !DECL 0x0040b8c0 BEGIN
-	/* 40B8C0 */ uchar FUN_0040b8c0(uchar param_1);
+	/* 40B8C0 */ uchar CBulPicture_ScalarDeletingDtor_thunk_Sub18(uchar param_1);
 	// !DECL 0x0040b8c0 END
 	// !DECL 0x0040b8d0 BEGIN
-	/* 40B8D0 */ uchar FUN_0040b8d0(uchar param_1);
+	/* 40B8D0 */ uchar CBulPicture_ScalarDeletingDtor_thunk_Sub4(uchar param_1);
 	// !DECL 0x0040b8d0 END
 	// !DECL 0x0040b8e0 BEGIN
-	/* 40B8E0 */ uchar FUN_0040b8e0(uchar param_1);
+	/* 40B8E0 */ uchar CBulPicture_ScalarDeletingDtor_thunk_Sub10(uchar param_1);
 	// !DECL 0x0040b8e0 END
 	// !DECL 0x0040b8f0 BEGIN
-	/* 40B8F0 */ uchar FUN_0040b8f0(uchar param_1);
+	/* 40B8F0 */ void CBulPicture_dtor(void* param_1);
 	// !DECL 0x0040b8f0 END
 	// !DECL 0x0040eb30 BEGIN
 	/* 40EB30 */ uint* CBulPicture_Create();
 	// !DECL 0x0040eb30 END
 	// !DECL 0x0040ebd0 BEGIN
-	/* 40EBD0 */ void* FUN_0040ebd0(uchar param_1);
+	/* 40EBD0 */ void* CBulPicture_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x0040ebd0 END
 };
 

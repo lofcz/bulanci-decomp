@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "CDSFlxFile DecodeFrame callsites",
+    "one_liner": "Trace live xrefs into `CDSFlxFile_DecodeFrame@0x00432c60` (CBulPicture `+0x68` / ClassID 52) and catalog opcode handlers beyond 0x0C; upstream first-draw caller still data-only.",
+    "source_batches": [30],
+    "priority": "high",
+    "structs": ["CDSFlxFile", "CBulPicture"],
+    "acceptance": "CDSFlxFile.md lists func@addr callsite table; Ghidra xref or plate on `DecodeFrame` consumer param; note if only vtable slot in .rdata."
+  },
+  {
+    "id": 2,
+    "title": "CBulPicture seq duration ms",
+    "one_liner": "Find the engine writer for sequence field `seq[0x10]` (total clip duration ms) — `CBulPicture_Create` leaves `+0x14` zero; resource-pool wrapper after `g_pApp[0x70]` vfn[4] must populate before `TM_AdvanceFrame`.",
+    "source_batches": [30],
+    "priority": "high",
+    "structs": ["CBulPicture", "CDSFlxFile", "CDSAnim"],
+    "acceptance": "Document store insn(s) with func@addr in anim_runtime.md or CBulPicture.md; optional Ghidra field rename on sequence object."
+  },
+  {
+    "id": 3,
+    "title": "FLX BindStream header dwords",
+    "one_liner": "Assign semantics to `hdr_dword0`..`hdr_dword4` / `hdr_tailDword` at `CDSFlxFile_BindStream@0x00432ac0` (file↔object table in flx_file_format.md still open).",
+    "source_batches": [30],
+    "priority": "high",
+    "structs": ["CDSFlxFile"],
+    "acceptance": "Rename Ghidra header fields or document UNK with disasm proof; update flx_file_format.md § header table."
+  },
+  {
+    "id": 4,
+    "title": "CDSFont payload tail fields",
+    "one_liner": "Prove stream layout for `justifyWidth` @ `+0x215` (GetCharWidth flag `0x20`) and 8-byte `fontFooter` @ `+0x50c` vs `glyphTable[256]` — Ghidra still omits separate fields.",
+    "source_batches": [30],
+    "priority": "high",
+    "structs": ["CDSFont", "CDSFontGlyphRec"],
+    "acceptance": "CDSFont.md layout table includes dword offsets; `modify_struct_field` or explicit overlap note in Ghidra; save_program."
+  },
+  {
+    "id": 5,
+    "title": "CDSImage MI Load/Save",
+    "one_liner": "Finish `CDSImage` MI thunk graph and decoder Load/Save `ECX-0x50` adjustment — `CDSBmpImage`/`CDSJpegImage` Ghidra 100 B vs heap `0x60` overlap; `field_44`/`field_48` constant `8` unproven.",
+    "source_batches": [31, 32],
+    "priority": "high",
+    "structs": ["CDSImage", "CDSBmpImage", "CDSJpegImage"],
+    "acceptance": "CDSImage.md UNK closed or deferred with evidence; prototypes/plates on `CDSBmpImage_Load@0x004320c0` and `CDSJpegImage_Load@0x00431cc0` use nested `m_image`."
+  },
+  {
+    "id": 6,
+    "title": "CDSJpegImage factory +0x60",
+    "one_liner": "Confirm whether pack deserialize overwrites dword @ `CDSJpegImage+0x60` after `InitVtables` stores `0x4b`; disambiguate class-id constant vs JPEG quality in `Save@0x00432030`.",
+    "source_batches": [32],
+    "priority": "medium",
+    "structs": ["CDSJpegImage"],
+    "acceptance": "CDSJpegImage.md documents all writers/readers of `+0x60`; rename only if xref proves mutable quality field."
+  },
+  {
+    "id": 7,
+    "title": "CDSMpx libmad interior",
+    "one_liner": "Map `mad_stream`/`mad_frame`/`mad_synth_bulanci` interior — Ghidra still has `unk_*` at stream `+0x08`/`+0x10`/`+0x2c..+0x38` and frame `body` blob (`CDSMpx`/`CDSMpxDecoder` batch 34).",
+    "source_batches": [34, 35],
+    "priority": "medium",
+    "structs": ["CDSMpx", "CDSMpxDecoder", "CDSMpxStream"],
+    "acceptance": "CDSMpx.md field names aligned to libmad 0.15.1b or bulanci-local aliases; cross-ref mpx_audio_format.md §2."
+  },
+  {
+    "id": 8,
+    "title": "CDSMpxStream persistence overlay",
+    "one_liner": "Reconcile `mpxFormatTail@+0x08` / `SaveMpxFile`/`LoadMpxFile` adjustor `primary+0x38` with live `mad_stream` at runtime — batch 35 follow-up UNK.",
+    "source_batches": [35],
+    "priority": "medium",
+    "structs": ["CDSMpxStream", "CDSMpx"],
+    "acceptance": "CDSMpxStream.md documents which persistence fields alias decoder memory vs file header only; plate on `SaveMpxFile@0x00432eb0`."
+  },
+  {
+    "id": 9,
+    "title": "CDSException base struct",
+    "one_liner": "Create formal Ghidra `CDSException` (0x3C prefix from `CDSException_InitFields@0x00434a40`) — deferred across batches 36–37; unblocks `CDSMemoryException`/`CDSResourceException` `pInlineMessage` dedup.",
+    "source_batches": [33, 36, 37, 39],
+    "priority": "high",
+    "structs": ["CDSException", "CDSMemoryException", "CDSResourceException", "CDSStreamException"],
+    "acceptance": "`create_struct CDSException` size 60; subclasses use component or verified tail offsets; `get_struct_layout` + save_program."
+  },
+  {
+    "id": 10,
+    "title": "CDSSafeStream flags + save",
+    "one_liner": "Find read-side consumer for `dwM_streamFlags` (`0x20` closed vs `1` active); retry `save_program` after batch 38 lock failure; fix `RegisterThreadSlice` ECX typing (`CDSSafeStream*` vs `CDSSafeStreamInfo*`).",
+    "source_batches": [38, 39],
+    "priority": "medium",
+    "structs": ["CDSSafeStream", "CDSSafeStreamInfo", "CDSFilterStream"],
+    "acceptance": "CDSSafeStream.md flags table has read xref or write-only verdict; Ghidra prototypes on `0x446ea0`/`0x446d90`; program saved."
+  }
+]

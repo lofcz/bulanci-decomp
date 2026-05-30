@@ -11,7 +11,7 @@ public:
 	/* 40C060 */ CTcpIpConfig();
 	// !DECL 0x0040c060 END
 	// !DECL 0x0040c2c0 BEGIN
-	/* 40C2C0 */ uchar* GetClassMeta();
+	/* 40C2C0 */ uchar* CTcpIpConfig_GetTypeDescriptor();
 	// !DECL 0x0040c2c0 END
 };
 

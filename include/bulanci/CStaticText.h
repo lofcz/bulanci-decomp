@@ -11,7 +11,7 @@ public:
 	/* 403040 */ uchar CStaticText_SetStyle(void* param_1, int param_2);
 	// !DECL 0x00403040 END
 	// !DECL 0x00404910 BEGIN
-	/* 404910 */ uint* CStaticText_ctor(uint* param_1);
+	/* 404910 */ void* CStaticText_ctor(void* param_1);
 	// !DECL 0x00404910 END
 	// !DECL 0x00404970 BEGIN
 	/* 404970 */ uchar* CStaticText_GetTypeDescriptor();
@@ -29,16 +29,16 @@ public:
 	/* 4052E0 */ uchar CStaticText_dtor(uchar param_1);
 	// !DECL 0x004052e0 END
 	// !DECL 0x004054d0 BEGIN
-	/* 4054D0 */ uchar CStaticText_Render(int param_1);
+	/* 4054D0 */ void CStaticText_Render(void* param_1);
 	// !DECL 0x004054d0 END
 	// !DECL 0x004064c0 BEGIN
-	/* 4064C0 */ void* CStaticText_vDtor(uchar param_1);
+	/* 4064C0 */ uchar CStaticText_vDtor(uchar param_1);
 	// !DECL 0x004064c0 END
 	// !DECL 0x00406a50 BEGIN
-	/* 406A50 */ void* CStaticText_BuildAtAuto(int param_1, uint param_2, uint param_3, uint param_4, uint param_5);
+	/* 406A50 */ uchar CStaticText_BuildAtAuto(int param_1, uint param_2, uint param_3, uint param_4, uint param_5);
 	// !DECL 0x00406a50 END
 	// !DECL 0x00406ba0 BEGIN
-	/* 406BA0 */ uint* CStaticText_BuildAt(uint param_1, uint param_2, int param_3, uint param_4, uchar param_5, uint param_6, uint param_7, uint param_8);
+	/* 406BA0 */ void* CStaticText_BuildAt(uint param_1, uint param_2, int param_3, uint param_4, uint param_5, uint param_6, uint param_7, uint param_8);
 	// !DECL 0x00406ba0 END
 
 	CStaticText(RECT rect, CBulanci text, uint param_6, uint param_7, uint param_8, uint param_9) {

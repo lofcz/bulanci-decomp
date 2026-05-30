@@ -21,13 +21,13 @@ public:
 	/* 438390 */ void* ctor(void* param_1);
 	// !DECL 0x00438390 END
 	// !DECL 0x004383e0 BEGIN
-	/* 4383E0 */ uchar* FUN_004383e0();
+	/* 4383E0 */ uchar* CDSScript_GetTypeInfo();
 	// !DECL 0x004383e0 END
 	// !DECL 0x004383f0 BEGIN
-	/* 4383F0 */ uchar FUN_004383f0(uchar param_1);
+	/* 4383F0 */ uchar CDSScript_AdjustOffsetDtor(uchar param_1);
 	// !DECL 0x004383f0 END
 	// !DECL 0x00438400 BEGIN
-	/* 438400 */ uchar FUN_00438400(uint* param_1);
+	/* 438400 */ uchar CDSScript_dtor(uint* param_1);
 	// !DECL 0x00438400 END
 	// !DECL 0x004384c0 BEGIN
 	/* 4384C0 */ uchar ReadSubExpr(int param_1);
@@ -36,7 +36,7 @@ public:
 	/* 438C40 */ uint CallExport(int param_1, int param_2, void* param_3);
 	// !DECL 0x00438c40 END
 	// !DECL 0x00438c90 BEGIN
-	/* 438C90 */ void* FUN_00438c90(uchar param_1);
+	/* 438C90 */ void* CDSScript_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00438c90 END
 };
 

@@ -19,46 +19,46 @@ public:
 	/* 401000 */ uchar FUN_00401000(uint param_1);
 	// !DECL 0x00401000 END
 	// !DECL 0x00401020 BEGIN
-	/* 401020 */ uchar FUN_00401020();
+	/* 401020 */ uchar ThrowWin32ErrorAsHRESULT();
 	// !DECL 0x00401020 END
 	// !DECL 0x00401060 BEGIN
-	/* 401060 */ static uchar FUN_00401060(int* param_1, size_t param_2, void* param_3, int param_4);
+	/* 401060 */ static uchar CDsString_EnsureCapacityWide(int* param_1, size_t param_2, void* param_3, int param_4);
 	// !DECL 0x00401060 END
 	// !DECL 0x004010f0 BEGIN
-	/* 4010F0 */ int FUN_004010f0(int* param_1, uchar* param_2, int param_3);
+	/* 4010F0 */ int CIntList_BinarySearch(int* param_1, uchar* param_2, int param_3);
 	// !DECL 0x004010f0 END
 	// !DECL 0x00401190 BEGIN
-	/* 401190 */ void* FUN_00401190(short* param_1);
+	/* 401190 */ void* CDsString_InitFromLiteral(short* param_1);
 	// !DECL 0x00401190 END
 	// !DECL 0x004011b0 BEGIN
-	/* 4011B0 */ void* FUN_004011b0(uint* param_1);
+	/* 4011B0 */ void* CDsString_InitFromHandle(uint* param_1);
 	// !DECL 0x004011b0 END
 	// !DECL 0x004011d0 BEGIN
 	/* 4011D0 */ uchar FUN_004011d0(LPCRITICAL_SECTION param_1);
 	// !DECL 0x004011d0 END
 	// !DECL 0x00401290 BEGIN
-	/* 401290 */ uchar FUN_00401290(int param_1, int param_2);
+	/* 401290 */ uchar MultiByteToWideChar_Wrapper(int param_1, int param_2);
 	// !DECL 0x00401290 END
 	// !DECL 0x00401340 BEGIN
 	/* 401340 */ uchar FUN_00401340(int* param_1);
 	// !DECL 0x00401340 END
 	// !DECL 0x00401450 BEGIN
-	/* 401450 */ uchar FUN_00401450(int* param_1);
+	/* 401450 */ uchar CBulanci_DirEnumCtx_dtor(int* param_1);
 	// !DECL 0x00401450 END
 	// !DECL 0x00401520 BEGIN
 	/* 401520 */ uchar FUN_00401520(uint* param_1);
 	// !DECL 0x00401520 END
 	// !DECL 0x00401910 BEGIN
-	/* 401910 */ uchar FUN_00401910(uchar param_1);
+	/* 401910 */ uchar CWindow_dtor(uchar param_1);
 	// !DECL 0x00401910 END
 	// !DECL 0x00401a10 BEGIN
-	/* 401A10 */ uchar FUN_00401a10(uchar param_1);
+	/* 401A10 */ uchar CAdvertising_dtor(uchar param_1);
 	// !DECL 0x00401a10 END
 	// !DECL 0x00401a70 BEGIN
 	/* 401A70 */ int FUN_00401a70(int* param_1);
 	// !DECL 0x00401a70 END
 	// !DECL 0x00401d30 BEGIN
-	/* 401D30 */ uchar FUN_00401d30(uint param_1);
+	/* 401D30 */ uchar CIntList_EnsureCapacity(uint param_1);
 	// !DECL 0x00401d30 END
 	// !DECL 0x00401d70 BEGIN
 	/* 401D70 */ uchar FUN_00401d70(CDSAudioBank* param_1);
@@ -67,7 +67,7 @@ public:
 	/* 401FC3 */ uchar* Catch_00401fc3();
 	// !DECL 0x00401fc3 END
 	// !DECL 0x00402290 BEGIN
-	/* 402290 */ uchar FUN_00402290(int param_1);
+	/* 402290 */ uchar CDSApp_ShowSetupDialog(int param_1);
 	// !DECL 0x00402290 END
 	// !DECL 0x00402680 BEGIN
 	/* 402680 */ int WinMain(HINSTANCE param_1, HINSTANCE param_2, int param_3, int param_4);
@@ -76,25 +76,25 @@ public:
 	/* 402A90 */ uchar CBulanci_CreateObject();
 	// !DECL 0x00402a90 END
 	// !DECL 0x00402e20 BEGIN
-	/* 402E20 */ uchar FUN_00402e20(uchar param_1);
+	/* 402E20 */ uchar CScroller_DtorCommon(uchar param_1);
 	// !DECL 0x00402e20 END
 	// !DECL 0x00402f40 BEGIN
 	/* 402F40 */ static int WidgetStateFlags_ToTintColor(ushort param_1);
 	// !DECL 0x00402f40 END
 	// !DECL 0x004031b0 BEGIN
-	/* 4031B0 */ static uchar FUN_004031b0(int* param_1, size_t param_2, void* param_3, int param_4);
+	/* 4031B0 */ static uchar CDsString_EnsureCapacityAnsi(int* param_1, size_t param_2, void* param_3, int param_4);
 	// !DECL 0x004031b0 END
 	// !DECL 0x00403240 BEGIN
 	/* 403240 */ static uchar FUN_00403240(uint* param_1, uint* param_2, int param_3);
 	// !DECL 0x00403240 END
 	// !DECL 0x00404100 BEGIN
-	/* 404100 */ int FUN_00404100(int param_1);
+	/* 404100 */ int CListViewer_GetVerticalScrollbarHeight(int param_1);
 	// !DECL 0x00404100 END
 	// !DECL 0x00404320 BEGIN
-	/* 404320 */ uchar FUN_00404320(int param_1);
+	/* 404320 */ uchar CListViewer_ScrollToItem(int param_1);
 	// !DECL 0x00404320 END
 	// !DECL 0x00404390 BEGIN
-	/* 404390 */ uchar FUN_00404390(int* param_1);
+	/* 404390 */ uchar CListViewer_UpdateContentSize(int* param_1);
 	// !DECL 0x00404390 END
 	// !DECL 0x004045d0 BEGIN
 	/* 4045D0 */ uchar FUN_004045d0(uint* param_1);
@@ -103,13 +103,13 @@ public:
 	/* 4045F0 */ uchar FUN_004045f0(int param_1, int param_2);
 	// !DECL 0x004045f0 END
 	// !DECL 0x004046c0 BEGIN
-	/* 4046C0 */ uchar FUN_004046c0(int param_1, int param_2);
+	/* 4046C0 */ uchar CDynPtrArray_RemoveRange(int param_1, int param_2);
 	// !DECL 0x004046c0 END
 	// !DECL 0x00404700 BEGIN
-	/* 404700 */ uchar FUN_00404700(uint* param_1);
+	/* 404700 */ uchar CDSRect_Assign(uint* param_1);
 	// !DECL 0x00404700 END
 	// !DECL 0x00404730 BEGIN
-	/* 404730 */ uint FUN_00404730(int* param_1);
+	/* 404730 */ uint CDSRect_Overlaps(int* param_1);
 	// !DECL 0x00404730 END
 	// !DECL 0x00404890 BEGIN
 	/* 404890 */ uchar FUN_00404890(uchar param_1);
@@ -118,10 +118,10 @@ public:
 	/* 404BE0 */ uint* CreateObject();
 	// !DECL 0x00404be0 END
 	// !DECL 0x00404f70 BEGIN
-	/* 404F70 */ uint FUN_00404f70(int param_1);
+	/* 404F70 */ uint CScrollBar_SetValue(int param_1);
 	// !DECL 0x00404f70 END
 	// !DECL 0x004051d0 BEGIN
-	/* 4051D0 */ uchar FUN_004051d0(int param_1, int param_2);
+	/* 4051D0 */ uchar CScrollBar_SetScrollRange(int param_1, int param_2);
 	// !DECL 0x004051d0 END
 	// !DECL 0x00405280 BEGIN
 	/* 405280 */ int FUN_00405280(int* param_1);
@@ -133,13 +133,13 @@ public:
 	/* 405BC0 */ uchar FUN_00405bc0(int param_1);
 	// !DECL 0x00405bc0 END
 	// !DECL 0x00405bf0 BEGIN
-	/* 405BF0 */ uchar FUN_00405bf0(void* param_1);
+	/* 405BF0 */ uchar CListViewer_ClearSelectedItems(void* param_1);
 	// !DECL 0x00405bf0 END
 	// !DECL 0x00405c40 BEGIN
-	/* 405C40 */ uchar FUN_00405c40(CScroller* param_1);
+	/* 405C40 */ uchar FUN_00405c40(uchar param_1);
 	// !DECL 0x00405c40 END
 	// !DECL 0x00406300 BEGIN
-	/* 406300 */ uchar FUN_00406300(int param_1, uchar* param_2);
+	/* 406300 */ uchar CDynPtrArray_RemovePointer(int param_1, uchar* param_2);
 	// !DECL 0x00406300 END
 	// !DECL 0x004063c0 BEGIN
 	/* 4063C0 */ uint* CreateObject_004063c0();
@@ -157,28 +157,28 @@ public:
 	/* 4066E0 */ uint* CreateObject_004066e0();
 	// !DECL 0x004066e0 END
 	// !DECL 0x004067c0 BEGIN
-	/* 4067C0 */ uchar FUN_004067c0(char param_1);
+	/* 4067C0 */ uchar CScrollBar_NudgeOnArrowHold(char param_1);
 	// !DECL 0x004067c0 END
 	// !DECL 0x00406810 BEGIN
-	/* 406810 */ uchar FUN_00406810(uint param_1, uint* param_2);
+	/* 406810 */ uchar CScrollBar_SetDragMode(uint param_1, uint* param_2);
 	// !DECL 0x00406810 END
 	// !DECL 0x00406a20 BEGIN
-	/* 406A20 */ uchar FUN_00406a20(int* param_1);
+	/* 406A20 */ uchar CRadio_OnMouseMove(int* param_1);
 	// !DECL 0x00406a20 END
 	// !DECL 0x00407020 BEGIN
-	/* 407020 */ uchar FUN_00407020(CEdit* param_1);
+	/* 407020 */ uchar FUN_00407020(uchar param_1);
 	// !DECL 0x00407020 END
 	// !DECL 0x004070c0 BEGIN
-	/* 4070C0 */ uint FUN_004070c0(int param_1, char param_2);
+	/* 4070C0 */ uint CEdit_SubmitText(int param_1, char param_2);
 	// !DECL 0x004070c0 END
 	// !DECL 0x004072b0 BEGIN
-	/* 4072B0 */ int FUN_004072b0(uint param_1, int param_2);
+	/* 4072B0 */ int CIntList_InsertAt(uint param_1, int param_2);
 	// !DECL 0x004072b0 END
 	// !DECL 0x004075f0 BEGIN
 	/* 4075F0 */ uchar FUN_004075f0(int param_1, uint param_2);
 	// !DECL 0x004075f0 END
 	// !DECL 0x00407710 BEGIN
-	/* 407710 */ uchar FUN_00407710(uint param_1, int param_2);
+	/* 407710 */ uchar CListViewer_InsertItemAt(uint param_1, int param_2);
 	// !DECL 0x00407710 END
 	// !DECL 0x00407e10 BEGIN
 	/* 407E10 */ uchar FUN_00407e10(CDSAudioBank* param_1);
@@ -190,7 +190,7 @@ public:
 	/* 407EC0 */ uint* CreateObject_00407ec0();
 	// !DECL 0x00407ec0 END
 	// !DECL 0x004080d0 BEGIN
-	/* 4080D0 */ uchar FUN_004080d0(int param_1, char param_2);
+	/* 4080D0 */ uchar CListViewer_SetItemSelected(int param_1, char param_2);
 	// !DECL 0x004080d0 END
 	// !DECL 0x004082c0 BEGIN
 	/* 4082C0 */ uint* CreateObject_004082c0();
@@ -199,25 +199,25 @@ public:
 	/* 408EA0 */ CDSScript* CreateObject_00408ea0();
 	// !DECL 0x00408ea0 END
 	// !DECL 0x004090c0 BEGIN
-	/* 4090C0 */ uchar FUN_004090c0(int param_1);
+	/* 4090C0 */ uchar CBulanci_ClearProfileKeyList(int param_1);
 	// !DECL 0x004090c0 END
 	// !DECL 0x00409110 BEGIN
-	/* 409110 */ uchar FUN_00409110(int param_1);
+	/* 409110 */ uchar CDsString_WriteHandleToStream(int param_1);
 	// !DECL 0x00409110 END
 	// !DECL 0x00409510 BEGIN
-	/* 409510 */ void* FUN_00409510(int param_1, int param_2, uchar* param_3);
+	/* 409510 */ void* CDSRegKey_ctor(int param_1, int param_2, uchar* param_3);
 	// !DECL 0x00409510 END
 	// !DECL 0x004095b0 BEGIN
-	/* 4095B0 */ uchar FUN_004095b0(int* param_1);
+	/* 4095B0 */ uchar CDSRegKeyQueryScope_dtor(int* param_1);
 	// !DECL 0x004095b0 END
 	// !DECL 0x004097f0 BEGIN
 	/* 4097F0 */ uchar FUN_004097f0(int param_1);
 	// !DECL 0x004097f0 END
 	// !DECL 0x00409f20 BEGIN
-	/* 409F20 */ uchar FUN_00409f20(int param_1);
+	/* 409F20 */ uchar CBulanci_ClearLevelScriptList(int param_1);
 	// !DECL 0x00409f20 END
 	// !DECL 0x0040a380 BEGIN
-	/* 40A380 */ uchar FUN_0040a380(uchar* param_1);
+	/* 40A380 */ uchar CBulanci_DestroyConfigStore(uchar* param_1);
 	// !DECL 0x0040a380 END
 	// !DECL 0x0040a7d0 BEGIN
 	/* 40A7D0 */ uchar CDSAnim_CleanupBody(uchar param_1);
@@ -232,16 +232,16 @@ public:
 	/* 40B540 */ uchar FUN_0040b540(int* param_1);
 	// !DECL 0x0040b540 END
 	// !DECL 0x0040ba30 BEGIN
-	/* 40BA30 */ CListBox* CreateObject_0040ba30();
+	/* 40BA30 */ uchar CreateObject_0040ba30();
 	// !DECL 0x0040ba30 END
 	// !DECL 0x0040bb90 BEGIN
-	/* 40BB90 */ uchar FUN_0040bb90(uchar param_1);
+	/* 40BB90 */ uchar CStartGame2_dtor(uchar param_1);
 	// !DECL 0x0040bb90 END
 	// !DECL 0x0040bce0 BEGIN
-	/* 40BCE0 */ uchar FUN_0040bce0(uchar param_1);
+	/* 40BCE0 */ uchar CGameCounter_dtor(uchar param_1);
 	// !DECL 0x0040bce0 END
 	// !DECL 0x0040c550 BEGIN
-	/* 40C550 */ uint FUN_0040c550(int param_1);
+	/* 40C550 */ uint CSessionList_GetPick(int param_1);
 	// !DECL 0x0040c550 END
 	// !DECL 0x0040e590 BEGIN
 	/* 40E590 */ uchar FUN_0040e590(int param_1);
@@ -250,7 +250,7 @@ public:
 	/* 40E810 */ uint CreateObject_0040e810();
 	// !DECL 0x0040e810 END
 	// !DECL 0x0040e980 BEGIN
-	/* 40E980 */ CWindow* CreateObject_0040e980();
+	/* 40E980 */ uchar CreateObject_0040e980();
 	// !DECL 0x0040e980 END
 	// !DECL 0x0040ed20 BEGIN
 	/* 40ED20 */ uint* CreateObject_0040ed20();
@@ -259,34 +259,34 @@ public:
 	/* 40EED0 */ uint* CreateObject_0040eed0();
 	// !DECL 0x0040eed0 END
 	// !DECL 0x0040ef60 BEGIN
-	/* 40EF60 */ CWindow* CreateObject_0040ef60();
+	/* 40EF60 */ uchar CreateObject_0040ef60();
 	// !DECL 0x0040ef60 END
 	// !DECL 0x0040f1e0 BEGIN
-	/* 40F1E0 */ CWindow* CreateObject_0040f1e0();
+	/* 40F1E0 */ uchar CreateObject_0040f1e0();
 	// !DECL 0x0040f1e0 END
 	// !DECL 0x0040f250 BEGIN
-	/* 40F250 */ CWindow* CreateObject_0040f250();
+	/* 40F250 */ uchar CreateObject_0040f250();
 	// !DECL 0x0040f250 END
 	// !DECL 0x0040f2c0 BEGIN
 	/* 40F2C0 */ static uint FUN_0040f2c0(int param_1);
 	// !DECL 0x0040f2c0 END
 	// !DECL 0x0040f380 BEGIN
-	/* 40F380 */ static uchar FUN_0040f380(int param_1, int param_2);
+	/* 40F380 */ static uchar CSessionList_AppendEnumSession(int param_1, int param_2);
 	// !DECL 0x0040f380 END
 	// !DECL 0x0040fb90 BEGIN
-	/* 40FB90 */ CWindow* CreateObject_0040fb90();
+	/* 40FB90 */ uchar CreateObject_0040fb90();
 	// !DECL 0x0040fb90 END
 	// !DECL 0x004102d0 BEGIN
-	/* 4102D0 */ static uchar FUN_004102d0(void* param_1, int param_2, int param_3, int param_4);
+	/* 4102D0 */ static uchar CStartGame2_BuildLobbyChatPanel(void* param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x004102d0 END
 	// !DECL 0x004120f0 BEGIN
-	/* 4120F0 */ CWindow* CreateObject_004120f0();
+	/* 4120F0 */ uchar CreateObject_004120f0();
 	// !DECL 0x004120f0 END
 	// !DECL 0x004123d0 BEGIN
 	/* 4123D0 */ uint* CreateObject_004123d0();
 	// !DECL 0x004123d0 END
 	// !DECL 0x00412460 BEGIN
-	/* 412460 */ uchar FUN_00412460(int param_1);
+	/* 412460 */ uchar CGame_TeardownNetworkSession(int param_1);
 	// !DECL 0x00412460 END
 	// !DECL 0x00412490 BEGIN
 	/* 412490 */ uchar GetMaxAmmoForKind(uchar param_1);
@@ -295,13 +295,13 @@ public:
 	/* 4124A0 */ uchar CGame_NetSendKick_t0a(uint param_1);
 	// !DECL 0x004124a0 END
 	// !DECL 0x00412590 BEGIN
-	/* 412590 */ uint FUN_00412590(uchar param_1);
+	/* 412590 */ uint CGameGetPlayerMidGameStatusByte(uchar param_1);
 	// !DECL 0x00412590 END
 	// !DECL 0x004125b0 BEGIN
-	/* 4125B0 */ uint FUN_004125b0(uchar param_1);
+	/* 4125B0 */ uint CGame_IsPlayerAliveForLastMan(uchar param_1);
 	// !DECL 0x004125b0 END
 	// !DECL 0x004125f0 BEGIN
-	/* 4125F0 */ bool FUN_004125f0(char param_1);
+	/* 4125F0 */ bool CGame_AllSlotsHaveState(char param_1);
 	// !DECL 0x004125f0 END
 	// !DECL 0x00412640 BEGIN
 	/* 412640 */ uint FUN_00412640(int param_1);
@@ -310,7 +310,7 @@ public:
 	/* 412660 */ uchar CGameGetModeAndScoreLimit(int* param_1);
 	// !DECL 0x00412660 END
 	// !DECL 0x004128a0 BEGIN
-	/* 4128A0 */ uchar FUN_004128a0(uchar param_1, int param_2);
+	/* 4128A0 */ uchar CGame_SetTeamScore(uchar param_1, int param_2);
 	// !DECL 0x004128a0 END
 	// !DECL 0x004128f0 BEGIN
 	/* 4128F0 */ uint FUN_004128f0(uchar param_1);
@@ -349,16 +349,16 @@ public:
 	/* 412DF0 */ uchar CGame_NetSendCustomScriptPayload_t15(int* param_1);
 	// !DECL 0x00412df0 END
 	// !DECL 0x00412f40 BEGIN
-	/* 412F40 */ static uchar FUN_00412f40(void* param_1, void* param_2, int param_3);
+	/* 412F40 */ static uchar CDsStringHandleVector_MoveTail(void* param_1, void* param_2, int param_3);
 	// !DECL 0x00412f40 END
 	// !DECL 0x004130e0 BEGIN
-	/* 4130E0 */ uchar FUN_004130e0(int param_1);
+	/* 4130E0 */ uchar CGame_ClearSchedulerChildren(int param_1);
 	// !DECL 0x004130e0 END
 	// !DECL 0x00413200 BEGIN
-	/* 413200 */ static uchar FUN_00413200(uint* param_1, int param_2);
+	/* 413200 */ static uchar CGame_CopyDefaultPaletteSeed(uint* param_1, int param_2);
 	// !DECL 0x00413200 END
 	// !DECL 0x00413220 BEGIN
-	/* 413220 */ static uchar FUN_00413220(uint* param_1, uint param_2);
+	/* 413220 */ static uchar CGame_BuildPaletteLut(uint* param_1, uint param_2);
 	// !DECL 0x00413220 END
 	// !DECL 0x00413410 BEGIN
 	/* 413410 */ static uchar FUN_00413410(uint* param_1, int param_2);
@@ -370,16 +370,16 @@ public:
 	/* 4134F0 */ uchar FUN_004134f0(uint* param_1);
 	// !DECL 0x004134f0 END
 	// !DECL 0x00413510 BEGIN
-	/* 413510 */ uchar FUN_00413510(int param_1);
+	/* 413510 */ uchar CGame_ResetForLobby(int param_1);
 	// !DECL 0x00413510 END
 	// !DECL 0x00413560 BEGIN
-	/* 413560 */ int FUN_00413560(int param_1);
+	/* 413560 */ int CGame_FindResourceByName(int param_1);
 	// !DECL 0x00413560 END
 	// !DECL 0x004137b0 BEGIN
 	/* 4137B0 */ uchar CMenu_ShowConnectingDialog(uchar param_1);
 	// !DECL 0x004137b0 END
 	// !DECL 0x00413c50 BEGIN
-	/* 413C50 */ static uchar FUN_00413c50(uint* param_1, int param_2);
+	/* 413C50 */ static uchar CGame_BuildTeamPaletteLut(uint* param_1, int param_2);
 	// !DECL 0x00413c50 END
 	// !DECL 0x00413c70 BEGIN
 	/* 413C70 */ int FUN_00413c70(int param_1, uchar* param_2);
@@ -391,22 +391,22 @@ public:
 	/* 41415E */ uchar Catch_0041415e();
 	// !DECL 0x0041415e END
 	// !DECL 0x00414250 BEGIN
-	/* 414250 */ uchar FUN_00414250(int* param_1);
+	/* 414250 */ uchar CGame_SetCommStrm(int* param_1);
 	// !DECL 0x00414250 END
 	// !DECL 0x004144c0 BEGIN
-	/* 4144C0 */ static uchar FUN_004144c0(int param_1, int param_2);
+	/* 4144C0 */ static uchar CDsStringPtrArray_ReleaseRange(int param_1, int param_2);
 	// !DECL 0x004144c0 END
 	// !DECL 0x004146b0 BEGIN
 	/* 4146B0 */ uchar FUN_004146b0(int param_1);
 	// !DECL 0x004146b0 END
 	// !DECL 0x00414730 BEGIN
-	/* 414730 */ uchar FUN_00414730(uint param_1);
+	/* 414730 */ uchar CGame_LevelList_EnsureCapacity(uint param_1);
 	// !DECL 0x00414730 END
 	// !DECL 0x00414770 BEGIN
 	/* 414770 */ uchar FUN_00414770(int param_1);
 	// !DECL 0x00414770 END
 	// !DECL 0x00414870 BEGIN
-	/* 414870 */ int FUN_00414870(int param_1, int param_2);
+	/* 414870 */ int CDsStringHandleVector_InsertAt(int param_1, int param_2);
 	// !DECL 0x00414870 END
 	// !DECL 0x00414910 BEGIN
 	/* 414910 */ uchar FUN_00414910(void* param_1);
@@ -418,7 +418,7 @@ public:
 	/* 415EF0 */ uint* CreateObject_00415ef0();
 	// !DECL 0x00415ef0 END
 	// !DECL 0x00416510 BEGIN
-	/* 416510 */ uchar FUN_00416510(uchar param_1);
+	/* 416510 */ uchar CDSView_DtorTeardownAnimInner(uchar param_1);
 	// !DECL 0x00416510 END
 	// !DECL 0x00416590 BEGIN
 	/* 416590 */ uchar FUN_00416590(int param_1);
@@ -430,10 +430,10 @@ public:
 	/* 4165D0 */ uchar FUN_004165d0(uint param_1);
 	// !DECL 0x004165d0 END
 	// !DECL 0x00416610 BEGIN
-	/* 416610 */ uchar FUN_00416610(uint param_1);
+	/* 416610 */ uchar CBulanek_NetSendTeamScoreOnCollect(uint param_1);
 	// !DECL 0x00416610 END
 	// !DECL 0x00416640 BEGIN
-	/* 416640 */ uchar FUN_00416640(uchar param_1);
+	/* 416640 */ uchar CBulanek_GetAmmoForKind(uchar param_1);
 	// !DECL 0x00416640 END
 	// !DECL 0x00416670 BEGIN
 	/* 416670 */ uint CBulanek_GetSpawnQuipSlot(int param_1);
@@ -442,34 +442,34 @@ public:
 	/* 416720 */ uint FUN_00416720(int param_1);
 	// !DECL 0x00416720 END
 	// !DECL 0x00416780 BEGIN
-	/* 416780 */ uchar FUN_00416780(int param_1);
+	/* 416780 */ uchar CWeapon_PlayFireAnim(int param_1);
 	// !DECL 0x00416780 END
 	// !DECL 0x004167e0 BEGIN
-	/* 4167E0 */ uchar FUN_004167e0(int param_1, char param_2);
+	/* 4167E0 */ uchar DefineTraceArea_PostTransitionEvent(int param_1, char param_2);
 	// !DECL 0x004167e0 END
 	// !DECL 0x004168d0 BEGIN
 	/* 4168D0 */ uint CGaming_GetObjectAtSlotUnchecked(uchar param_1);
 	// !DECL 0x004168d0 END
 	// !DECL 0x00416970 BEGIN
-	/* 416970 */ int FUN_00416970(int param_1);
+	/* 416970 */ int CGaming_CountOccupiedPlayerSlots(int param_1);
 	// !DECL 0x00416970 END
 	// !DECL 0x00416ce0 BEGIN
-	/* 416CE0 */ static uint FUN_00416ce0(uint* param_1, int param_2);
+	/* 416CE0 */ static uint CDSScript_ReadKindAndRect4(uint* param_1, int param_2);
 	// !DECL 0x00416ce0 END
 	// !DECL 0x004171b0 BEGIN
-	/* 4171B0 */ uchar FUN_004171b0(uchar param_1);
+	/* 4171B0 */ uchar CAnim_dtor(uchar param_1);
 	// !DECL 0x004171b0 END
 	// !DECL 0x00417260 BEGIN
 	/* 417260 */ uchar FUN_00417260(int param_1);
 	// !DECL 0x00417260 END
 	// !DECL 0x004173f0 BEGIN
-	/* 4173F0 */ uchar FUN_004173f0(void* param_1);
+	/* 4173F0 */ uchar CBulanek_HasAmmoForCurrentWeapon(void* param_1);
 	// !DECL 0x004173f0 END
 	// !DECL 0x004174a0 BEGIN
-	/* 4174A0 */ uint FUN_004174a0(int param_1, char param_2);
+	/* 4174A0 */ uint CBulanek_CanDispatchPlayerAction(int param_1, char param_2);
 	// !DECL 0x004174a0 END
 	// !DECL 0x00417500 BEGIN
-	/* 417500 */ uchar FUN_00417500(void* param_1);
+	/* 417500 */ uchar CBulanek_DecrementWeaponAmmo(void* param_1);
 	// !DECL 0x00417500 END
 	// !DECL 0x00417950 BEGIN
 	/* 417950 */ static void TriggerSoundEffect(int param_1, uchar param_2, int* param_3);
@@ -478,10 +478,10 @@ public:
 	/* 4179C0 */ static uchar CBulanek_PlayItemPickupSound(uchar param_1, int* param_2);
 	// !DECL 0x004179c0 END
 	// !DECL 0x00417a20 BEGIN
-	/* 417A20 */ uchar FUN_00417a20(int param_1);
+	/* 417A20 */ uchar CWeapon_FireMachineGunBurstStart(int param_1);
 	// !DECL 0x00417a20 END
 	// !DECL 0x00417ce0 BEGIN
-	/* 417CE0 */ uchar FUN_00417ce0(int param_1);
+	/* 417CE0 */ uchar CGaming_FreeDangerZoneNodes(int param_1);
 	// !DECL 0x00417ce0 END
 	// !DECL 0x00417d20 BEGIN
 	/* 417D20 */ uchar CLevelScript_DispatchTraceAreaTransition(uint param_1, uint* param_2, char param_3);
@@ -498,9 +498,6 @@ public:
 	// !DECL 0x00418000 BEGIN
 	/* 418000 */ uchar TriggerLevelScriptSound(uchar param_1, int param_2);
 	// !DECL 0x00418000 END
-	// !DECL 0x00418300 BEGIN
-	/* 418300 */ int* FUN_00418300(uint* param_1, void* param_2, int* param_3, char param_4, char param_5);
-	// !DECL 0x00418300 END
 	// !DECL 0x00418bbc BEGIN
 	/* 418BBC */ uchar* Catch_00418bbc();
 	// !DECL 0x00418bbc END
@@ -511,13 +508,13 @@ public:
 	/* 418F70 */ uint* CreateObject_00418f70();
 	// !DECL 0x00418f70 END
 	// !DECL 0x00418fe0 BEGIN
-	/* 418FE0 */ uchar FUN_00418fe0(uint param_1);
+	/* 418FE0 */ uchar CGameEntity_SetEntityType(uint param_1);
 	// !DECL 0x00418fe0 END
 	// !DECL 0x00419530 BEGIN
-	/* 419530 */ uint FUN_00419530(uint param_1);
+	/* 419530 */ uint CBulanek_TestRectOverlapWithEntity(uint param_1);
 	// !DECL 0x00419530 END
 	// !DECL 0x004195f0 BEGIN
-	/* 4195F0 */ uchar FUN_004195f0(uint param_1, int* param_2, int* param_3, int* param_4);
+	/* 4195F0 */ uchar CBulanek_ClampMoveRectByCollision(uint param_1, int* param_2, int* param_3, int* param_4);
 	// !DECL 0x004195f0 END
 	// !DECL 0x00419d60 BEGIN
 	/* 419D60 */ uchar CGaming_OnTimerCountdown(short param_1, uint param_2, int param_3);
@@ -532,7 +529,7 @@ public:
 	/* 41A0F0 */ uint CGaming_TryGetPlayerCoords(uchar param_1, uint* param_2);
 	// !DECL 0x0041a0f0 END
 	// !DECL 0x0041a140 BEGIN
-	/* 41A140 */ uchar CGaming_RespawnPlayerAtSafeLocation(CBulanek* param_1);
+	/* 41A140 */ uchar CGaming_RespawnPlayerAtSafeLocation(uchar param_1);
 	// !DECL 0x0041a140 END
 	// !DECL 0x0041a6a0 BEGIN
 	/* 41A6A0 */ uint* CreateObject_0041a6a0();
@@ -550,7 +547,7 @@ public:
 	/* 41AD80 */ static uchar FUN_0041ad80(void* param_1, uint param_2, uint param_3);
 	// !DECL 0x0041ad80 END
 	// !DECL 0x0041af70 BEGIN
-	/* 41AF70 */ uint FUN_0041af70(CBulanek* param_1);
+	/* 41AF70 */ uint FUN_0041af70(uchar param_1);
 	// !DECL 0x0041af70 END
 	// !DECL 0x0041b420 BEGIN
 	/* 41B420 */ uint* FUN_0041b420(uint param_1, uint* param_2, uint param_3, int param_4);
@@ -586,11 +583,8 @@ public:
 	/* 41D3C6 */ uchar* Catch_0041d3c6();
 	// !DECL 0x0041d3c6 END
 	// !DECL 0x0041dd70 BEGIN
-	/* 41DD70 */ uchar FUN_0041dd70(int param_1, void* param_2);
+	/* 41DD70 */ uchar CShot_ResolveHit(int param_1, void* param_2);
 	// !DECL 0x0041dd70 END
-	// !DECL 0x0041e070 BEGIN
-	/* 41E070 */ uchar* ExplodeMine(int* param_1);
-	// !DECL 0x0041e070 END
 	// !DECL 0x0041e2c0 BEGIN
 	/* 41E2C0 */ uchar CGaming_SpawnPickupAndBroadcast(uint param_1);
 	// !DECL 0x0041e2c0 END
@@ -601,40 +595,40 @@ public:
 	/* 41ED60 */ uchar DetonatePlayerMines(int param_1);
 	// !DECL 0x0041ed60 END
 	// !DECL 0x0041f0c0 BEGIN
-	/* 41F0C0 */ uchar CGaming_TickPlayerCollisions(CBulanek* param_1);
+	/* 41F0C0 */ uchar CGaming_TickPlayerCollisions(uchar param_1);
 	// !DECL 0x0041f0c0 END
 	// !DECL 0x0041f1d0 BEGIN
 	/* 41F1D0 */ uchar CGaming_SpawnSpecialPickupIfAllowed(char param_1);
 	// !DECL 0x0041f1d0 END
 	// !DECL 0x0041f230 BEGIN
-	/* 41F230 */ uchar CGaming_SpawnBulletAndPlaySound(uint* param_1, CShot param_2, CShot param_3, uchar param_4, int* param_5, int param_6);
+	/* 41F230 */ uchar CGaming_SpawnBulletAndPlaySound(uint* param_1, uchar param_2, uchar param_3, uchar param_4, int* param_5, int param_6);
 	// !DECL 0x0041f230 END
 	// !DECL 0x0041f350 BEGIN
-	/* 41F350 */ uchar CGaming_TickRoundStateAndScoring(CBulanek* param_1);
+	/* 41F350 */ uchar CGaming_TickRoundStateAndScoring(uchar param_1);
 	// !DECL 0x0041f350 END
 	// !DECL 0x0041f500 BEGIN
 	/* 41F500 */ uchar CGaming_SpawnAndInitializePlayer(CGameView param_1, CGameView* param_2, int param_3, int param_4, int param_5);
 	// !DECL 0x0041f500 END
 	// !DECL 0x0041f5d0 BEGIN
-	/* 41F5D0 */ uchar FUN_0041f5d0(CGameView* param_1, int param_2, int param_3, int param_4);
+	/* 41F5D0 */ uchar CGaming_SpawnPracticeDummy(CGameView* param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x0041f5d0 END
 	// !DECL 0x0041f770 BEGIN
 	/* 41F770 */ uchar CGaming_RespawnPlayer(char param_1, uchar param_2, int* param_3);
 	// !DECL 0x0041f770 END
 	// !DECL 0x0041fce0 BEGIN
-	/* 41FCE0 */ uchar FUN_0041fce0(CWeapon* param_1);
+	/* 41FCE0 */ uchar CWeapon_FirePistol(CWeapon* param_1);
 	// !DECL 0x0041fce0 END
 	// !DECL 0x0041fdf0 BEGIN
-	/* 41FDF0 */ uchar FUN_0041fdf0(CWeapon* param_1);
+	/* 41FDF0 */ uchar CWeapon_FireGrenade(CWeapon* param_1);
 	// !DECL 0x0041fdf0 END
 	// !DECL 0x00420530 BEGIN
 	/* 420530 */ uchar FUN_00420530(CGameView param_1);
 	// !DECL 0x00420530 END
 	// !DECL 0x00420550 BEGIN
-	/* 420550 */ uchar FUN_00420550(void* param_1);
+	/* 420550 */ uchar CGaming_SpawnCoopPartnerSlots(void* param_1);
 	// !DECL 0x00420550 END
 	// !DECL 0x004205a0 BEGIN
-	/* 4205A0 */ uchar FUN_004205a0(CBulanek* param_1);
+	/* 4205A0 */ uchar CBulanek_SpawnPlayerAndCampaignSlots(uchar param_1);
 	// !DECL 0x004205a0 END
 	// !DECL 0x00420650 BEGIN
 	/* 420650 */ uchar CBulanek_DispatchCurrentWeaponAction(CWeapon* param_1);
@@ -649,7 +643,7 @@ public:
 	/* 421BA0 */ CDSChained* CreateObject_00421ba0();
 	// !DECL 0x00421ba0 END
 	// !DECL 0x00422280 BEGIN
-	/* 422280 */ CWindow* CreateObject_00422280();
+	/* 422280 */ uchar CreateObject_00422280();
 	// !DECL 0x00422280 END
 	// !DECL 0x00422310 BEGIN
 	/* 422310 */ static void* CDSAudioPlayer_Create(uchar* param_1, int* param_2, int param_3, uint param_4, char param_5);
@@ -658,13 +652,13 @@ public:
 	/* 4223C0 */ uchar CDSAudioPlayer_PlayAndRelease(int* param_1, uchar param_2);
 	// !DECL 0x004223c0 END
 	// !DECL 0x004223e0 BEGIN
-	/* 4223E0 */ static uchar FUN_004223e0(int param_1);
+	/* 4223E0 */ static uchar CDSAudio_SetPanPreview(int param_1);
 	// !DECL 0x004223e0 END
 	// !DECL 0x00422430 BEGIN
 	/* 422430 */ static uchar TriggerBankSample(uchar* param_1, int param_2, int param_3, int param_4, uint param_5, char param_6);
 	// !DECL 0x00422430 END
 	// !DECL 0x00422500 BEGIN
-	/* 422500 */ static int FUN_00422500(int* param_1);
+	/* 422500 */ static int ComputeSpatialAttenuationDb100(int* param_1);
 	// !DECL 0x00422500 END
 	// !DECL 0x00422620 BEGIN
 	/* 422620 */ uchar FUN_00422620(uint param_1);
@@ -676,7 +670,7 @@ public:
 	/* 422F00 */ CDSChained* CreateObject_00422f00();
 	// !DECL 0x00422f00 END
 	// !DECL 0x00423610 BEGIN
-	/* 423610 */ CWindow* CreateObject_00423610();
+	/* 423610 */ uchar CreateObject_00423610();
 	// !DECL 0x00423610 END
 	// !DECL 0x00423f20 BEGIN
 	/* 423F20 */ uchar CSwitch_PlayHoverTrack(int param_1);
@@ -697,7 +691,7 @@ public:
 	/* 425060 */ uchar FUN_00425060(int param_1);
 	// !DECL 0x00425060 END
 	// !DECL 0x004250c0 BEGIN
-	/* 4250C0 */ uchar FUN_004250c0(int param_1);
+	/* 4250C0 */ uchar CDSVec_ResizeIntPair(int param_1);
 	// !DECL 0x004250c0 END
 	// !DECL 0x00425160 BEGIN
 	/* 425160 */ uchar CreateObject_00425160();
@@ -706,13 +700,13 @@ public:
 	/* 4251D0 */ uint* CMenu_CreateObject();
 	// !DECL 0x004251d0 END
 	// !DECL 0x00425450 BEGIN
-	/* 425450 */ uchar FUN_00425450(void* param_1);
+	/* 425450 */ uchar CDSVec_ResizeIntPair_ToZero(void* param_1);
 	// !DECL 0x00425450 END
 	// !DECL 0x00425460 BEGIN
-	/* 425460 */ void* FUN_00425460(int* param_1, int param_2, char param_3);
+	/* 425460 */ void* CDSImage_ctor(int* param_1, int param_2, char param_3);
 	// !DECL 0x00425460 END
 	// !DECL 0x004254f0 BEGIN
-	/* 4254F0 */ uchar FUN_004254f0(int param_1);
+	/* 4254F0 */ uchar CDSImage_dtor(int param_1);
 	// !DECL 0x004254f0 END
 	// !DECL 0x00426500 BEGIN
 	/* 426500 */ uint* CGunMouse_CreateObject();
@@ -721,10 +715,10 @@ public:
 	/* 426570 */ uint* CreateObject_00426570();
 	// !DECL 0x00426570 END
 	// !DECL 0x00426d70 BEGIN
-	/* 426D70 */ uchar FUN_00426d70(uchar param_1, uchar param_2);
+	/* 426D70 */ uchar CSpells_SetAmmoEmptyAndInvalidate(uchar param_1, uchar param_2);
 	// !DECL 0x00426d70 END
 	// !DECL 0x004276c0 BEGIN
-	/* 4276C0 */ uchar FUN_004276c0(uchar param_1, char param_2);
+	/* 4276C0 */ uchar CGameCounter_UpdatePlayerScore(uchar param_1, char param_2);
 	// !DECL 0x004276c0 END
 	// !DECL 0x00427710 BEGIN
 	/* 427710 */ uchar FUN_00427710(uint* param_1);
@@ -748,7 +742,7 @@ public:
 	/* 428C15 */ uchar Catch_00428c15();
 	// !DECL 0x00428c15 END
 	// !DECL 0x00429280 BEGIN
-	/* 429280 */ uchar FUN_00429280(int* param_1);
+	/* 429280 */ uchar CDSJpegImage_JpegSetupScope_dtor(int* param_1);
 	// !DECL 0x00429280 END
 	// !DECL 0x00429880 BEGIN
 	/* 429880 */ int FUN_00429880(int* param_1);
@@ -760,10 +754,10 @@ public:
 	/* 4298D0 */ uint FUN_004298d0(int param_1);
 	// !DECL 0x004298d0 END
 	// !DECL 0x00429930 BEGIN
-	/* 429930 */ bool FUN_00429930(int param_1);
+	/* 429930 */ bool CDSBackBuffer_Flip(int param_1);
 	// !DECL 0x00429930 END
 	// !DECL 0x00429960 BEGIN
-	/* 429960 */ uchar FUN_00429960(int param_1);
+	/* 429960 */ uchar CDSBackBuffer_FreeImageMember(int param_1);
 	// !DECL 0x00429960 END
 	// !DECL 0x00429bd0 BEGIN
 	/* 429BD0 */ uint FUN_00429bd0(int param_1);
@@ -778,7 +772,7 @@ public:
 	/* 429CC0 */ uchar CDSApp_KeybQueue(ushort param_1, uchar param_2, uchar param_3);
 	// !DECL 0x00429cc0 END
 	// !DECL 0x0042a040 BEGIN
-	/* 42A040 */ static uchar FUN_0042a040(uint* param_1, int param_2);
+	/* 42A040 */ static uchar TArray16_ZeroRange(uint* param_1, int param_2);
 	// !DECL 0x0042a040 END
 	// !DECL 0x0042a070 BEGIN
 	/* 42A070 */ int FUN_0042a070(int* param_1, uchar* param_2, int param_3);
@@ -793,10 +787,10 @@ public:
 	/* 42A590 */ uchar FUN_0042a590(int param_1);
 	// !DECL 0x0042a590 END
 	// !DECL 0x0042a910 BEGIN
-	/* 42A910 */ uchar FUN_0042a910(int param_1);
+	/* 42A910 */ uchar CDSApp_DirtyRectList_SetSize(int param_1);
 	// !DECL 0x0042a910 END
 	// !DECL 0x0042a980 BEGIN
-	/* 42A980 */ uchar FUN_0042a980(uint param_1);
+	/* 42A980 */ uchar CDSApp_DirtyRectList_EnsureCapacity(uint param_1);
 	// !DECL 0x0042a980 END
 	// !DECL 0x0042a9c0 BEGIN
 	/* 42A9C0 */ uchar FUN_0042a9c0(int param_1, uint param_2);
@@ -811,13 +805,13 @@ public:
 	/* 42ABB9 */ uchar* Catch_0042abb9();
 	// !DECL 0x0042abb9 END
 	// !DECL 0x0042abcf BEGIN
-	/* 42ABCF */ uint FUN_0042abcf();
+	/* 42ABCF */ uint Catch_0042ab28_ShowMessageAndRelease();
 	// !DECL 0x0042abcf END
 	// !DECL 0x0042ac20 BEGIN
-	/* 42AC20 */ int FUN_0042ac20(uint* param_1, int param_2);
+	/* 42AC20 */ int CDSApp_DirtyRectList_InsertAt(uint* param_1, int param_2);
 	// !DECL 0x0042ac20 END
 	// !DECL 0x0042add0 BEGIN
-	/* 42ADD0 */ uchar FUN_0042add0(int param_1);
+	/* 42ADD0 */ uchar CDSApp_SetPendingChildView(int param_1);
 	// !DECL 0x0042add0 END
 	// !DECL 0x0042ae40 BEGIN
 	/* 42AE40 */ uchar FUN_0042ae40(void* param_1);
@@ -826,10 +820,10 @@ public:
 	/* 42AE50 */ int FUN_0042ae50(int* param_1, uchar* param_2, int param_3);
 	// !DECL 0x0042ae50 END
 	// !DECL 0x0042b5a0 BEGIN
-	/* 42B5A0 */ uchar FUN_0042b5a0(int* param_1, int* param_2);
+	/* 42B5A0 */ uchar CDSApp_AddDirtyRectCoalesced(int* param_1, int* param_2);
 	// !DECL 0x0042b5a0 END
 	// !DECL 0x0042b8a0 BEGIN
-	/* 42B8A0 */ uchar FUN_0042b8a0(int* param_1);
+	/* 42B8A0 */ uchar CDSApp_AddDirtyRect(int* param_1);
 	// !DECL 0x0042b8a0 END
 	// !DECL 0x0042b910 BEGIN
 	/* 42B910 */ uint* CreateObject_0042b910();
@@ -859,22 +853,22 @@ public:
 	/* 42C1C0 */ int* FUN_0042c1c0(uint param_1);
 	// !DECL 0x0042c1c0 END
 	// !DECL 0x0042c230 BEGIN
-	/* 42C230 */ uchar FUN_0042c230(int* param_1);
+	/* 42C230 */ uchar CDSView_ReleaseKeyboardFocus(int* param_1);
 	// !DECL 0x0042c230 END
 	// !DECL 0x0042c290 BEGIN
 	/* 42C290 */ uchar CDSView_SetActive(uint param_1);
 	// !DECL 0x0042c290 END
 	// !DECL 0x0042c6c0 BEGIN
-	/* 42C6C0 */ uchar FUN_0042c6c0(uchar param_1);
+	/* 42C6C0 */ uchar CMenu_ClearAllChildren(uchar param_1);
 	// !DECL 0x0042c6c0 END
 	// !DECL 0x0042c700 BEGIN
 	/* 42C700 */ uchar FUN_0042c700();
 	// !DECL 0x0042c700 END
 	// !DECL 0x0042c7f0 BEGIN
-	/* 42C7F0 */ uchar FUN_0042c7f0(int* param_1);
+	/* 42C7F0 */ uchar CDSApp_SetInputChainHead(int* param_1);
 	// !DECL 0x0042c7f0 END
 	// !DECL 0x0042c860 BEGIN
-	/* 42C860 */ uchar FUN_0042c860(int* param_1);
+	/* 42C860 */ uchar CControl_ClaimModalFocusOnPress(int* param_1);
 	// !DECL 0x0042c860 END
 	// !DECL 0x0042c880 BEGIN
 	/* 42C880 */ uchar FUN_0042c880(int* param_1);
@@ -886,7 +880,7 @@ public:
 	/* 42C960 */ uchar FUN_0042c960(int* param_1);
 	// !DECL 0x0042c960 END
 	// !DECL 0x0042c9f0 BEGIN
-	/* 42C9F0 */ ushort FUN_0042c9f0(int* param_1);
+	/* 42C9F0 */ ushort CDSView_EnableWidget(int* param_1);
 	// !DECL 0x0042c9f0 END
 	// !DECL 0x0042cc30 BEGIN
 	/* 42CC30 */ uchar FUN_0042cc30(int param_1, int param_2);
@@ -904,7 +898,7 @@ public:
 	/* 42CFF0 */ uchar FUN_0042cff0(int* param_1);
 	// !DECL 0x0042cff0 END
 	// !DECL 0x0042d080 BEGIN
-	/* 42D080 */ ushort FUN_0042d080(int* param_1);
+	/* 42D080 */ ushort CDSView_SetAsDefaultFocusChild(int* param_1);
 	// !DECL 0x0042d080 END
 	// !DECL 0x0042d1a0 BEGIN
 	/* 42D1A0 */ ushort CDSView_DoModal(void* param_1);
@@ -913,7 +907,7 @@ public:
 	/* 42D2D0 */ uchar CDsStringReleaseHeader(void* param_1);
 	// !DECL 0x0042d2d0 END
 	// !DECL 0x0042d350 BEGIN
-	/* 42D350 */ static int* FUN_0042d350(int param_1, int param_2);
+	/* 42D350 */ static int* CDsString_AllocWide(int param_1, int param_2);
 	// !DECL 0x0042d350 END
 	// !DECL 0x0042d3a0 BEGIN
 	/* 42D3A0 */ static int* CDsStringAllocAndCopyWide(void* param_1, int param_2, int param_3);
@@ -922,13 +916,13 @@ public:
 	/* 42D3E0 */ uchar CDsStringSetLengthAndTerminate(int param_1);
 	// !DECL 0x0042d3e0 END
 	// !DECL 0x0042d440 BEGIN
-	/* 42D440 */ uchar FUN_0042d440(int* param_1);
+	/* 42D440 */ uchar CDsString_WriteWStringToStream(int* param_1);
 	// !DECL 0x0042d440 END
 	// !DECL 0x0042d490 BEGIN
 	/* 42D490 */ void* CDsStringAssignFromHandle(uint* param_1);
 	// !DECL 0x0042d490 END
 	// !DECL 0x0042d5a0 BEGIN
-	/* 42D5A0 */ void* FUN_0042d5a0(int* param_1, size_t param_2, wchar_t* param_3, size_t param_4);
+	/* 42D5A0 */ void* CDsStringInsertWide(int* param_1, size_t param_2, wchar_t* param_3, size_t param_4);
 	// !DECL 0x0042d5a0 END
 	// !DECL 0x0042d710 BEGIN
 	/* 42D710 */ void* CDsStringVsprintfToStackBuffer(wchar_t* param_1, uint* param_2);
@@ -937,7 +931,7 @@ public:
 	/* 42D770 */ static void* CDsStringFormatV(void* param_1, wchar_t* param_2);
 	// !DECL 0x0042d770 END
 	// !DECL 0x0042d850 BEGIN
-	/* 42D850 */ uchar FUN_0042d850(int* param_1);
+	/* 42D850 */ uchar CDsString_EnsureUnique(int* param_1);
 	// !DECL 0x0042d850 END
 	// !DECL 0x0042d8a0 BEGIN
 	/* 42D8A0 */ uchar CDsStringAssignFromLong(void* param_1);
@@ -949,19 +943,19 @@ public:
 	/* 42DC50 */ int* FUN_0042dc50(int* param_1);
 	// !DECL 0x0042dc50 END
 	// !DECL 0x0042e140 BEGIN
-	/* 42E140 */ int* FUN_0042e140(int* param_1);
+	/* 42E140 */ int* CDsString_ReadWStringFromStream(int* param_1);
 	// !DECL 0x0042e140 END
 	// !DECL 0x0042e4e0 BEGIN
 	/* 42E4E0 */ uchar FUN_0042e4e0(int* param_1);
 	// !DECL 0x0042e4e0 END
 	// !DECL 0x0042e630 BEGIN
-	/* 42E630 */ static uint FUN_0042e630(uint param_1);
+	/* 42E630 */ static uint IsLeapYear(uint param_1);
 	// !DECL 0x0042e630 END
 	// !DECL 0x0042e790 BEGIN
 	/* 42E790 */ void CDSApp_UpdateClock();
 	// !DECL 0x0042e790 END
 	// !DECL 0x0042e7b0 BEGIN
-	/* 42E7B0 */ uchar FUN_0042e7b0(uint* param_1, uint param_2, uint param_3);
+	/* 42E7B0 */ uchar CDate_SetDate(uint* param_1, uint param_2, uint param_3);
 	// !DECL 0x0042e7b0 END
 	// !DECL 0x0042e8f0 BEGIN
 	/* 42E8F0 */ uchar FUN_0042e8f0(uint param_1);
@@ -973,7 +967,7 @@ public:
 	/* 42E960 */ uint FUN_0042e960(void* param_1);
 	// !DECL 0x0042e960 END
 	// !DECL 0x0042e980 BEGIN
-	/* 42E980 */ uchar FUN_0042e980(int param_1, uint param_2, uint param_3);
+	/* 42E980 */ uchar HandleInterfaceRegister(int param_1, uint param_2, uint param_3);
 	// !DECL 0x0042e980 END
 	// !DECL 0x0042e9a0 BEGIN
 	/* 42E9A0 */ uint HandleVirtualBaseCast(int param_1);
@@ -1003,7 +997,7 @@ public:
 	/* 42EC90 */ uint FUN_0042ec90(uint* param_1);
 	// !DECL 0x0042ec90 END
 	// !DECL 0x0042ecc0 BEGIN
-	/* 42ECC0 */ static uint FUN_0042ecc0(CStartGame2* param_1, ushort param_2, ushort param_3, uint param_4, uint param_5);
+	/* 42ECC0 */ static uint FUN_0042ecc0(uchar param_1, ushort param_2, ushort param_3, uint param_4, uint param_5);
 	// !DECL 0x0042ecc0 END
 	// !DECL 0x0042ecf0 BEGIN
 	/* 42ECF0 */ uint CDSQueue_Push(uint* param_1);
@@ -1051,7 +1045,7 @@ public:
 	/* 42F5C0 */ uint CDSQueue_Init(int param_1);
 	// !DECL 0x0042f5c0 END
 	// !DECL 0x0042f5f0 BEGIN
-	/* 42F5F0 */ uchar FUN_0042f5f0(int param_1);
+	/* 42F5F0 */ uchar Scheduler_PopHook(int param_1);
 	// !DECL 0x0042f5f0 END
 	// !DECL 0x0042f620 BEGIN
 	/* 42F620 */ uchar FUN_0042f620(int param_1);
@@ -1060,7 +1054,7 @@ public:
 	/* 42F640 */ int CDSEventHandler_ctor(int param_1);
 	// !DECL 0x0042f640 END
 	// !DECL 0x0042f690 BEGIN
-	/* 42F690 */ uchar FUN_0042f690(int param_1);
+	/* 42F690 */ uchar CDSEventQueue_ClearForTarget(int param_1);
 	// !DECL 0x0042f690 END
 	// !DECL 0x0042f6f0 BEGIN
 	/* 42F6F0 */ void* Runtime_MallocOrThrow(uchar* param_1);
@@ -1126,34 +1120,34 @@ public:
 	/* 430E70 */ CDSEasyMemStream* FUN_00430e70(uint param_1, void* param_2);
 	// !DECL 0x00430e70 END
 	// !DECL 0x00431070 BEGIN
-	/* 431070 */ uchar FUN_00431070(int param_1);
+	/* 431070 */ uchar CDSCollection_EnsureCapacity(int param_1);
 	// !DECL 0x00431070 END
 	// !DECL 0x004310b0 BEGIN
-	/* 4310B0 */ int FUN_004310b0(uint param_1, int param_2);
+	/* 4310B0 */ int CDSCollection_Insert(uint param_1, int param_2);
 	// !DECL 0x004310b0 END
 	// !DECL 0x00431100 BEGIN
-	/* 431100 */ uchar FUN_00431100(int param_1, int param_2, char param_3);
+	/* 431100 */ uchar CDSCollection_Remove(int param_1, int param_2, char param_3);
 	// !DECL 0x00431100 END
 	// !DECL 0x004313f5 BEGIN
 	/* 4313F5 */ uchar Catch_004313f5();
 	// !DECL 0x004313f5 END
 	// !DECL 0x00431590 BEGIN
-	/* 431590 */ static uchar FUN_00431590(uint* param_1);
+	/* 431590 */ static uchar CDSJpegImage_InitJpegErrorMgr(uint* param_1);
 	// !DECL 0x00431590 END
 	// !DECL 0x004315d0 BEGIN
 	/* 4315D0 */ static uchar FUN_004315d0(int param_1, int param_2);
 	// !DECL 0x004315d0 END
 	// !DECL 0x00431670 BEGIN
-	/* 431670 */ static uint FUN_00431670(int param_1);
+	/* 431670 */ static uint fill_input_buffer(int param_1);
 	// !DECL 0x00431670 END
 	// !DECL 0x004316c0 BEGIN
-	/* 4316C0 */ static uchar FUN_004316c0(int param_1, int param_2);
+	/* 4316C0 */ static uchar jpeg_skip_input_data(int param_1, int param_2);
 	// !DECL 0x004316c0 END
 	// !DECL 0x00431700 BEGIN
-	/* 431700 */ static uchar FUN_00431700(int param_1, int* param_2, uint param_3);
+	/* 431700 */ static uchar jpeg_CDSStreamStorage_src(int param_1, int* param_2, uint param_3);
 	// !DECL 0x00431700 END
 	// !DECL 0x00431790 BEGIN
-	/* 431790 */ static int FUN_00431790(int param_1, int param_2, int param_3);
+	/* 431790 */ static int CDSJpegMemPool_BumpAlloc(int param_1, int param_2, int param_3);
 	// !DECL 0x00431790 END
 	// !DECL 0x00431819 BEGIN
 	/* 431819 */ uchar* Catch_00431819();
@@ -1168,10 +1162,10 @@ public:
 	/* 4318F0 */ static int FUN_004318f0(int param_1, int param_2, int param_3, uint param_4);
 	// !DECL 0x004318f0 END
 	// !DECL 0x004319d0 BEGIN
-	/* 4319D0 */ static uchar FUN_004319d0(int param_1);
+	/* 4319D0 */ static uchar jpeg_realize_virt_arrays(int param_1);
 	// !DECL 0x004319d0 END
 	// !DECL 0x00431a70 BEGIN
-	/* 431A70 */ static uchar FUN_00431a70(int param_1);
+	/* 431A70 */ static uchar jinit_memory_mgr(int param_1);
 	// !DECL 0x00431a70 END
 	// !DECL 0x00431ab4 BEGIN
 	/* 431AB4 */ uchar* Catch_00431ab4();
@@ -1186,7 +1180,7 @@ public:
 	/* 431F98 */ uchar Catch_00431f98();
 	// !DECL 0x00431f98 END
 	// !DECL 0x004331e0 BEGIN
-	/* 4331E0 */ uchar FUN_004331e0(int param_1);
+	/* 4331E0 */ uchar CBulanci_CloseFindHandle(int param_1);
 	// !DECL 0x004331e0 END
 	// !DECL 0x00433200 BEGIN
 	/* 433200 */ uchar FUN_00433200(int* param_1);
@@ -1210,61 +1204,61 @@ public:
 	/* 4349E0 */ void Runtime_ThrowBadAlloc(uchar* param_1);
 	// !DECL 0x004349e0 END
 	// !DECL 0x00434bd0 BEGIN
-	/* 434BD0 */ static uchar FUN_00434bd0(uchar param_1, DWORD param_2);
+	/* 434BD0 */ static uchar CDsStringFromWin32ErrorCode(uchar param_1, DWORD param_2);
 	// !DECL 0x00434bd0 END
 	// !DECL 0x00434e30 BEGIN
-	/* 434E30 */ static uint FUN_00434e30(uint param_1, int param_2, uint* param_3, uint param_4);
+	/* 434E30 */ static uint CDSGZipStream_Decompress_static(uint param_1, int param_2, uint* param_3, uint param_4);
 	// !DECL 0x00434e30 END
 	// !DECL 0x00434ee0 BEGIN
-	/* 434EE0 */ static uint FUN_00434ee0(uint param_1, int param_2, uint* param_3, uint param_4);
+	/* 434EE0 */ static uint CDSGZipStream_Compress_static(uint param_1, int param_2, uint* param_3, uint param_4);
 	// !DECL 0x00434ee0 END
 	// !DECL 0x00435050 BEGIN
-	/* 435050 */ uchar FUN_00435050(uint param_1, uint param_2);
+	/* 435050 */ uchar CDSGZipStream_ReadBufferAt(uint param_1, uint param_2);
 	// !DECL 0x00435050 END
 	// !DECL 0x00435140 BEGIN
-	/* 435140 */ uchar FUN_00435140(int param_1);
+	/* 435140 */ uchar CDSGZipStream_WriteBuffer(int param_1);
 	// !DECL 0x00435140 END
 	// !DECL 0x004354a0 BEGIN
-	/* 4354A0 */ uchar FUN_004354a0(int param_1);
+	/* 4354A0 */ uchar CDSGZipStream_CloseInt(int param_1);
 	// !DECL 0x004354a0 END
 	// !DECL 0x00435670 BEGIN
-	/* 435670 */ uchar FUN_00435670(int param_1);
+	/* 435670 */ uchar CDSGZipStream_AllocateBuffers(int param_1);
 	// !DECL 0x00435670 END
 	// !DECL 0x00435c70 BEGIN
-	/* 435C70 */ static uint FUN_00435c70(uint param_1);
+	/* 435C70 */ static uint MapBitCountToFormat(uint param_1);
 	// !DECL 0x00435c70 END
 	// !DECL 0x00435d00 BEGIN
-	/* 435D00 */ static uchar FUN_00435d00(uint param_1, int param_2, int param_3, int param_4);
+	/* 435D00 */ static uchar SampleSourcePixel_Indexed1(uint param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x00435d00 END
 	// !DECL 0x00435d30 BEGIN
-	/* 435D30 */ static uchar FUN_00435d30(uint param_1, int param_2, int param_3, int param_4);
+	/* 435D30 */ static uchar SampleSourcePixel_Indexed2(uint param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x00435d30 END
 	// !DECL 0x00435d70 BEGIN
-	/* 435D70 */ static uchar FUN_00435d70(uint param_1, int param_2, int param_3, int param_4);
+	/* 435D70 */ static uchar SampleSourcePixel_Indexed4(uint param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x00435d70 END
 	// !DECL 0x00435db0 BEGIN
 	/* 435DB0 */ static uchar FUN_00435db0(int param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x00435db0 END
 	// !DECL 0x00435dd0 BEGIN
-	/* 435DD0 */ static ushort FUN_00435dd0(int param_1, int param_2, int param_3, int param_4);
+	/* 435DD0 */ static ushort Blit_ReadDstPixel_16bpp(int param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x00435dd0 END
 	// !DECL 0x00435df0 BEGIN
-	/* 435DF0 */ static uint FUN_00435df0(int param_1, int param_2, int param_3, int param_4);
+	/* 435DF0 */ static uint CDSImage_GetPixel24(int param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x00435df0 END
 	// !DECL 0x00435e20 BEGIN
 	/* 435E20 */ static uint FUN_00435e20(int param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x00435e20 END
 	// !DECL 0x00435f30 BEGIN
-	/* 435F30 */ static uchar FUN_00435f30(int param_1, int param_2, uchar param_3, int param_4, int param_5);
+	/* 435F30 */ static uchar Blit_WriteDstPixel_8bpp(int param_1, int param_2, uchar param_3, int param_4, int param_5);
 	// !DECL 0x00435f30 END
 	// !DECL 0x00435f50 BEGIN
-	/* 435F50 */ static uchar FUN_00435f50(int param_1, int param_2, ushort param_3, int param_4, int param_5);
+	/* 435F50 */ static uchar Blit_WriteDstPixel_16bpp(int param_1, int param_2, ushort param_3, int param_4, int param_5);
 	// !DECL 0x00435f50 END
 	// !DECL 0x00435f80 BEGIN
-	/* 435F80 */ static uchar FUN_00435f80(int param_1, int param_2, uint param_3, int param_4, int param_5);
+	/* 435F80 */ static uchar CDSImage_PutPixel24(int param_1, int param_2, uint param_3, int param_4, int param_5);
 	// !DECL 0x00435f80 END
 	// !DECL 0x00435fb0 BEGIN
-	/* 435FB0 */ static uchar FUN_00435fb0(int param_1, int param_2, uint param_3, int param_4, int param_5);
+	/* 435FB0 */ static uchar Blit_WriteDstPixel_32bpp(int param_1, int param_2, uint param_3, int param_4, int param_5);
 	// !DECL 0x00435fb0 END
 	// !DECL 0x004360d0 BEGIN
 	/* 4360D0 */ int GetPaletteBuffer(int param_1);
@@ -1273,7 +1267,7 @@ public:
 	/* 4360F0 */ int GetColorPlane(int param_1);
 	// !DECL 0x004360f0 END
 	// !DECL 0x00436750 BEGIN
-	/* 436750 */ uchar FUN_00436750(int param_1);
+	/* 436750 */ uchar CDSBackBuffer_ClearPreFlipFields(int param_1);
 	// !DECL 0x00436750 END
 	// !DECL 0x00436d20 BEGIN
 	/* 436D20 */ uchar FUN_00436d20(uint* param_1);
@@ -1291,7 +1285,7 @@ public:
 	/* 436F20 */ uchar FUN_00436f20(uint* param_1);
 	// !DECL 0x00436f20 END
 	// !DECL 0x00437030 BEGIN
-	/* 437030 */ uchar FUN_00437030(void* param_1);
+	/* 437030 */ uchar CDSView_CopyColorPlane(void* param_1);
 	// !DECL 0x00437030 END
 	// !DECL 0x00437080 BEGIN
 	/* 437080 */ uchar NotifyDirtyAll(void* param_1);
@@ -1306,7 +1300,7 @@ public:
 	/* 4375E0 */ uchar TextShaper_LayOutAndRender(int param_1, uint* param_2, CPoemScroller* param_3, uint* param_4);
 	// !DECL 0x004375e0 END
 	// !DECL 0x00437b00 BEGIN
-	/* 437B00 */ uchar FUN_00437b00(uint* param_1);
+	/* 437B00 */ uchar CDSRegKey_CloseKey(uint* param_1);
 	// !DECL 0x00437b00 END
 	// !DECL 0x00437cd0 BEGIN
 	/* 437CD0 */ uchar CDSRegKeyException_ThrowFromWin32(uint param_1);
@@ -1317,47 +1311,44 @@ public:
 	// !DECL 0x00437ed0 BEGIN
 	/* 437ED0 */ uchar ThrowRegKeyException(uint param_1, uint param_2);
 	// !DECL 0x00437ed0 END
-	// !DECL 0x004382d0 BEGIN
-	/* 4382D0 */ uchar FUN_004382d0(uint param_1);
-	// !DECL 0x004382d0 END
 	// !DECL 0x004382e0 BEGIN
-	/* 4382E0 */ uint FUN_004382e0(int param_1);
+	/* 4382E0 */ uint CDSScript_GetGlobalVar(int param_1);
 	// !DECL 0x004382e0 END
 	// !DECL 0x004382f0 BEGIN
-	/* 4382F0 */ uchar FUN_004382f0(int param_1, uint param_2);
+	/* 4382F0 */ uchar CDSScript_SetGlobalVar(int param_1, uint param_2);
 	// !DECL 0x004382f0 END
 	// !DECL 0x004384a0 BEGIN
-	/* 4384A0 */ static uchar FUN_004384a0(void* param_1);
+	/* 4384A0 */ static uchar CDSScript_GetGlobalVar_004384a0(void* param_1);
 	// !DECL 0x004384a0 END
 	// !DECL 0x004388a0 BEGIN
-	/* 4388A0 */ static ushort FUN_004388a0(int param_1);
+	/* 4388A0 */ static ushort StrCharAt(int param_1);
 	// !DECL 0x004388a0 END
 	// !DECL 0x00438900 BEGIN
-	/* 438900 */ static uint FUN_00438900(int param_1);
+	/* 438900 */ static uint CDSScript_And(int param_1);
 	// !DECL 0x00438900 END
 	// !DECL 0x00438920 BEGIN
-	/* 438920 */ static uint FUN_00438920(int param_1);
+	/* 438920 */ static uint CDSScript_Or(int param_1);
 	// !DECL 0x00438920 END
 	// !DECL 0x00438960 BEGIN
-	/* 438960 */ static CDSEasyMemStream* FUN_00438960(int param_1);
+	/* 438960 */ static CDSEasyMemStream* CDSScript_StrmCreateMem(int param_1);
 	// !DECL 0x00438960 END
 	// !DECL 0x00438b30 BEGIN
-	/* 438B30 */ uint FUN_00438b30(uint param_1, int param_2, void* param_3);
+	/* 438B30 */ uint CDSScript_Run(uint param_1, int param_2, void* param_3);
 	// !DECL 0x00438b30 END
 	// !DECL 0x00438bef BEGIN
 	/* 438BEF */ uchar Catch_00438bef();
 	// !DECL 0x00438bef END
 	// !DECL 0x00438cb0 BEGIN
-	/* 438CB0 */ static int FUN_00438cb0(int param_1);
+	/* 438CB0 */ static int CDSScript_Rand(int param_1);
 	// !DECL 0x00438cb0 END
 	// !DECL 0x00438cf0 BEGIN
-	/* 438CF0 */ static int FUN_00438cf0(int param_1);
+	/* 438CF0 */ static int CDSScript_Add(int param_1);
 	// !DECL 0x00438cf0 END
 	// !DECL 0x00438d30 BEGIN
-	/* 438D30 */ static int FUN_00438d30(int param_1);
+	/* 438D30 */ static int CDSScript_Mul(int param_1);
 	// !DECL 0x00438d30 END
 	// !DECL 0x00438d50 BEGIN
-	/* 438D50 */ static int FUN_00438d50(int param_1);
+	/* 438D50 */ static int CDSScript_Div(int param_1);
 	// !DECL 0x00438d50 END
 	// !DECL 0x00438f90 BEGIN
 	/* 438F90 */ uchar TM_BindSequence(int* param_1);
@@ -1408,7 +1399,7 @@ public:
 	/* 4398B0 */ uchar TM_ClearTracks(int param_1);
 	// !DECL 0x004398b0 END
 	// !DECL 0x00439900 BEGIN
-	/* 439900 */ uchar FUN_00439900(uint param_1);
+	/* 439900 */ uchar CDSVideoPlayer_EnsureCapacity(uint param_1);
 	// !DECL 0x00439900 END
 	// !DECL 0x00439940 BEGIN
 	/* 439940 */ uchar TM_Play(uchar param_1);
@@ -1420,7 +1411,7 @@ public:
 	/* 4399B0 */ void TM_AdvanceFrame(int param_1);
 	// !DECL 0x004399b0 END
 	// !DECL 0x00439a30 BEGIN
-	/* 439A30 */ uchar FUN_00439a30(int param_1);
+	/* 439A30 */ uchar TM_SeekToFrame(int param_1);
 	// !DECL 0x00439a30 END
 	// !DECL 0x00439a70 BEGIN
 	/* 439A70 */ int FUN_00439a70(uint* param_1, int param_2);
@@ -1462,19 +1453,19 @@ public:
 	/* 43A0D0 */ void CDSAudioPlayer_SetVolumePercent(uint param_1);
 	// !DECL 0x0043a0d0 END
 	// !DECL 0x0043a0f0 BEGIN
-	/* 43A0F0 */ bool FUN_0043a0f0(int param_1);
+	/* 43A0F0 */ bool CDSAudioPlayer_RefillDirectSoundBuffer(int param_1);
 	// !DECL 0x0043a0f0 END
 	// !DECL 0x0043a1f0 BEGIN
-	/* 43A1F0 */ bool FUN_0043a1f0(uint param_1);
+	/* 43A1F0 */ bool CDSAudioPlayer_OnPlaybackTick(uint param_1);
 	// !DECL 0x0043a1f0 END
 	// !DECL 0x0043a4a0 BEGIN
 	/* 43A4A0 */ uchar CDSAudioPlayer_Stop(uchar param_1);
 	// !DECL 0x0043a4a0 END
 	// !DECL 0x0043a590 BEGIN
-	/* 43A590 */ uchar FUN_0043a590();
+	/* 43A590 */ uchar CDSAudioPlayer_StopAll();
 	// !DECL 0x0043a590 END
 	// !DECL 0x0043a5e0 BEGIN
-	/* 43A5E0 */ static uchar FUN_0043a5e0(void* param_1, int param_2);
+	/* 43A5E0 */ static uchar CDSAudio_ApplyPanTable(void* param_1, int param_2);
 	// !DECL 0x0043a5e0 END
 	// !DECL 0x0043a760 BEGIN
 	/* 43A760 */ uchar CDSAudioPlayer_Init(int* param_1, uint param_2, uint param_3, uchar* param_4);
@@ -1483,7 +1474,7 @@ public:
 	/* 43A9D0 */ uchar CDSAudioPlayer_Play(uchar param_1);
 	// !DECL 0x0043a9d0 END
 	// !DECL 0x0043aae0 BEGIN
-	/* 43AAE0 */ uchar FUN_0043aae0(int param_1);
+	/* 43AAE0 */ uchar CDSDirectPlay_ResetMembers(int param_1);
 	// !DECL 0x0043aae0 END
 	// !DECL 0x0043abc0 BEGIN
 	/* 43ABC0 */ uchar CDSDirectPlaySender_Unbind(int param_1);
@@ -1504,7 +1495,7 @@ public:
 	/* 43B200 */ uint* CreateObject_0043b200();
 	// !DECL 0x0043b200 END
 	// !DECL 0x0043b550 BEGIN
-	/* 43B550 */ uchar FUN_0043b550(uchar* param_1);
+	/* 43B550 */ uchar CDSDirectPlaySender_EnsureScratchBuffer(uchar* param_1);
 	// !DECL 0x0043b550 END
 	// !DECL 0x0043b590 BEGIN
 	/* 43B590 */ uint* CreateObject_0043b590();
@@ -1516,7 +1507,7 @@ public:
 	/* 43B6D0 */ uchar CDSDirectPlay_Send(uint param_1, void* param_2, uchar* param_3);
 	// !DECL 0x0043b6d0 END
 	// !DECL 0x0043bc00 BEGIN
-	/* 43BC00 */ uchar FUN_0043bc00(int param_1);
+	/* 43BC00 */ uchar CDSAudioVideoPlayer_Stop(int param_1);
 	// !DECL 0x0043bc00 END
 	// !DECL 0x0043bd60 BEGIN
 	/* 43BD60 */ uint* CreateObject_0043bd60();
@@ -1525,7 +1516,7 @@ public:
 	/* 43BE90 */ uchar FUN_0043be90(int param_1);
 	// !DECL 0x0043be90 END
 	// !DECL 0x0043c1d0 BEGIN
-	/* 43C1D0 */ uchar FUN_0043c1d0(uint param_1);
+	/* 43C1D0 */ uchar CDSMemQueue_Init(uint param_1);
 	// !DECL 0x0043c1d0 END
 	// !DECL 0x0043c1f0 BEGIN
 	/* 43C1F0 */ uchar FUN_0043c1f0(int param_1);
@@ -1540,346 +1531,346 @@ public:
 	/* 43C2AB */ uchar Catch_0043c2ab();
 	// !DECL 0x0043c2ab END
 	// !DECL 0x0043c980 BEGIN
-	/* 43C980 */ uint FUN_0043c980(uint param_1);
+	/* 43C980 */ uint CDSDirectSound_DuplicateSoundBuffer(uint param_1);
 	// !DECL 0x0043c980 END
 	// !DECL 0x0043ca90 BEGIN
 	/* 43CA90 */ uint* CreateObject_0043ca90();
 	// !DECL 0x0043ca90 END
 	// !DECL 0x0043ce50 BEGIN
-	/* 43CE50 */ static uchar FUN_0043ce50(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6);
+	/* 43CE50 */ static uchar BlitOpaque_Indexed1_to_Indexed1(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043ce50 END
 	// !DECL 0x0043cf10 BEGIN
-	/* 43CF10 */ static uchar FUN_0043cf10(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
+	/* 43CF10 */ static uchar BlitOpaque_Indexed1_to_RGB565(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043cf10 END
 	// !DECL 0x0043d000 BEGIN
-	/* 43D000 */ static uchar FUN_0043d000(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
+	/* 43D000 */ static uchar BlitOpaque_Indexed1_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043d000 END
 	// !DECL 0x0043d0d0 BEGIN
-	/* 43D0D0 */ static uchar FUN_0043d0d0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
+	/* 43D0D0 */ static uchar BlitOpaque_Indexed1_to_BGRA32(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043d0d0 END
 	// !DECL 0x0043d1a0 BEGIN
-	/* 43D1A0 */ static uchar FUN_0043d1a0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6);
+	/* 43D1A0 */ static uchar BlitOpaque_Indexed2_to_Indexed8(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043d1a0 END
 	// !DECL 0x0043d260 BEGIN
-	/* 43D260 */ static uchar FUN_0043d260(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
+	/* 43D260 */ static uchar BlitOpaque_Indexed2_to_RGB565(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043d260 END
 	// !DECL 0x0043d350 BEGIN
-	/* 43D350 */ static uchar FUN_0043d350(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
+	/* 43D350 */ static uchar BlitOpaque_Indexed2_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043d350 END
 	// !DECL 0x0043d420 BEGIN
-	/* 43D420 */ static uchar FUN_0043d420(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
+	/* 43D420 */ static uchar Blit_Opaque_2bpp_32bpp(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043d420 END
 	// !DECL 0x0043d4f0 BEGIN
-	/* 43D4F0 */ static uchar FUN_0043d4f0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6);
+	/* 43D4F0 */ static uchar BlitOpaque_Indexed4_to_Indexed8(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043d4f0 END
 	// !DECL 0x0043d5b0 BEGIN
 	/* 43D5B0 */ static uchar FUN_0043d5b0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043d5b0 END
 	// !DECL 0x0043d6a0 BEGIN
-	/* 43D6A0 */ static uchar FUN_0043d6a0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
+	/* 43D6A0 */ static uchar Blit_Opaque_4bpp_24bpp(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043d6a0 END
 	// !DECL 0x0043d770 BEGIN
-	/* 43D770 */ static uchar FUN_0043d770(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
+	/* 43D770 */ static uchar BlitOpaque_Indexed4_to_BGRA32(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043d770 END
 	// !DECL 0x0043d840 BEGIN
-	/* 43D840 */ static uchar FUN_0043d840(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
+	/* 43D840 */ static uchar Blit_Opaque_Indexed8_to_Indexed8(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043d840 END
 	// !DECL 0x0043d8d0 BEGIN
-	/* 43D8D0 */ static uchar FUN_0043d8d0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
+	/* 43D8D0 */ static uchar BlitOpaque_Palette8_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043d8d0 END
 	// !DECL 0x0043d990 BEGIN
-	/* 43D990 */ static uchar FUN_0043d990(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
+	/* 43D990 */ static uchar BlitOpaque_Indexed8_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043d990 END
 	// !DECL 0x0043da40 BEGIN
-	/* 43DA40 */ static uchar FUN_0043da40(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
+	/* 43DA40 */ static uchar BlitOpaque_Indexed8_to_BGRA32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7);
 	// !DECL 0x0043da40 END
 	// !DECL 0x0043dae0 BEGIN
 	/* 43DAE0 */ static uchar FUN_0043dae0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
 	// !DECL 0x0043dae0 END
 	// !DECL 0x0043dbc0 BEGIN
-	/* 43DBC0 */ static uchar FUN_0043dbc0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
+	/* 43DBC0 */ static uchar BlitOpaque_RGB565_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043dbc0 END
 	// !DECL 0x0043dc60 BEGIN
-	/* 43DC60 */ static uchar FUN_0043dc60(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
+	/* 43DC60 */ static uchar Blit_Opaque_16bpp_24bpp(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043dc60 END
 	// !DECL 0x0043dd30 BEGIN
-	/* 43DD30 */ static uchar FUN_0043dd30(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
+	/* 43DD30 */ static uchar BlitOpaque_RGB565_to_BGRA32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043dd30 END
 	// !DECL 0x0043de00 BEGIN
-	/* 43DE00 */ static uchar FUN_0043de00(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
+	/* 43DE00 */ static uchar BlitOpaque_BGR24_to_Palette8(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
 	// !DECL 0x0043de00 END
 	// !DECL 0x0043dec0 BEGIN
-	/* 43DEC0 */ static uchar FUN_0043dec0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
+	/* 43DEC0 */ static uchar Blit_Opaque_24bpp_16bpp(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043dec0 END
 	// !DECL 0x0043e040 BEGIN
 	/* 43E040 */ static uchar FUN_0043e040(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043e040 END
 	// !DECL 0x0043e0f0 BEGIN
-	/* 43E0F0 */ static uchar FUN_0043e0f0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
+	/* 43E0F0 */ static uchar BlitOpaque_BGRA32_to_Palette8(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
 	// !DECL 0x0043e0f0 END
 	// !DECL 0x0043e1a0 BEGIN
-	/* 43E1A0 */ static uchar FUN_0043e1a0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
+	/* 43E1A0 */ static uchar BlitOpaque_BGRA32_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043e1a0 END
 	// !DECL 0x0043e260 BEGIN
-	/* 43E260 */ static uchar FUN_0043e260(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
+	/* 43E260 */ static uchar BlitOpaque_BGRA32_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043e260 END
 	// !DECL 0x0043e310 BEGIN
-	/* 43E310 */ static uchar FUN_0043e310(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
+	/* 43E310 */ static uchar BlitOpaque_BGRA32_to_BGRA32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6);
 	// !DECL 0x0043e310 END
 	// !DECL 0x0043e3b0 BEGIN
-	/* 43E3B0 */ static uchar FUN_0043e3b0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
+	/* 43E3B0 */ static uchar BlitDestKey_Indexed1_to_RGB565(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043e3b0 END
 	// !DECL 0x0043e4a0 BEGIN
-	/* 43E4A0 */ static uchar FUN_0043e4a0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
+	/* 43E4A0 */ static uchar BlitDestKey_Indexed1_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043e4a0 END
 	// !DECL 0x0043e580 BEGIN
-	/* 43E580 */ static uchar FUN_0043e580(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
+	/* 43E580 */ static uchar Blit_DestKey_1bpp_32bpp(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043e580 END
 	// !DECL 0x0043e650 BEGIN
-	/* 43E650 */ static uchar FUN_0043e650(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
+	/* 43E650 */ static uchar BlitChromaKey_Indexed2_to_RGB565(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043e650 END
 	// !DECL 0x0043e740 BEGIN
 	/* 43E740 */ static uchar FUN_0043e740(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043e740 END
 	// !DECL 0x0043e820 BEGIN
-	/* 43E820 */ static uchar FUN_0043e820(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
+	/* 43E820 */ static uchar Blit_DestKey_2bpp_32bpp(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043e820 END
 	// !DECL 0x0043e8f0 BEGIN
-	/* 43E8F0 */ static uchar FUN_0043e8f0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
+	/* 43E8F0 */ static uchar BlitDestKey_Indexed4_to_RGB565(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043e8f0 END
 	// !DECL 0x0043e9e0 BEGIN
-	/* 43E9E0 */ static uchar FUN_0043e9e0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
+	/* 43E9E0 */ static uchar BlitChromaKey_Indexed4_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043e9e0 END
 	// !DECL 0x0043eac0 BEGIN
-	/* 43EAC0 */ static uchar FUN_0043eac0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
+	/* 43EAC0 */ static uchar Blit_ChromaKey_4bpp_32bpp(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043eac0 END
 	// !DECL 0x0043eb90 BEGIN
-	/* 43EB90 */ static uchar FUN_0043eb90(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
+	/* 43EB90 */ static uchar BlitDestKey_Indexed8_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043eb90 END
 	// !DECL 0x0043ec60 BEGIN
-	/* 43EC60 */ static uchar FUN_0043ec60(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
+	/* 43EC60 */ static uchar BlitDestKey_Idx8_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043ec60 END
 	// !DECL 0x0043ed10 BEGIN
-	/* 43ED10 */ static uchar FUN_0043ed10(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
+	/* 43ED10 */ static uchar Blit_DestKey_8bpp_32bpp(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8);
 	// !DECL 0x0043ed10 END
 	// !DECL 0x0043edc0 BEGIN
-	/* 43EDC0 */ static uchar FUN_0043edc0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
+	/* 43EDC0 */ static uchar BlitDestKey_RGB565_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
 	// !DECL 0x0043edc0 END
 	// !DECL 0x0043ee60 BEGIN
-	/* 43EE60 */ static uchar FUN_0043ee60(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
+	/* 43EE60 */ static uchar BlitChromaKey_RGB565_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
 	// !DECL 0x0043ee60 END
 	// !DECL 0x0043ef30 BEGIN
-	/* 43EF30 */ static uchar FUN_0043ef30(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
+	/* 43EF30 */ static uchar Blit_ChromaKey_16bpp_32bpp(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
 	// !DECL 0x0043ef30 END
 	// !DECL 0x0043f000 BEGIN
-	/* 43F000 */ static uchar FUN_0043f000(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
+	/* 43F000 */ static uchar Blit_DestKey_24bpp_16bpp(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
 	// !DECL 0x0043f000 END
 	// !DECL 0x0043f0d0 BEGIN
-	/* 43F0D0 */ static uchar FUN_0043f0d0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
+	/* 43F0D0 */ static uchar BlitDestKey_24to24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
 	// !DECL 0x0043f0d0 END
 	// !DECL 0x0043f190 BEGIN
-	/* 43F190 */ static uchar FUN_0043f190(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
+	/* 43F190 */ static uchar BlitDestKey_BGR24_to_BGRA32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8);
 	// !DECL 0x0043f190 END
 	// !DECL 0x0043f240 BEGIN
-	/* 43F240 */ static uchar FUN_0043f240(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
+	/* 43F240 */ static uchar BlitDestKey_BGRA32_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
 	// !DECL 0x0043f240 END
 	// !DECL 0x0043f310 BEGIN
-	/* 43F310 */ static uchar FUN_0043f310(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
+	/* 43F310 */ static uchar BlitDestKey_BGRA32_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
 	// !DECL 0x0043f310 END
 	// !DECL 0x0043f3c0 BEGIN
-	/* 43F3C0 */ static uchar FUN_0043f3c0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
+	/* 43F3C0 */ static uchar Blit_DestKey_32bpp_32bpp(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8);
 	// !DECL 0x0043f3c0 END
 	// !DECL 0x0043f470 BEGIN
 	/* 43F470 */ static uchar BlitChromaKey(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x0043f470 END
 	// !DECL 0x0043f630 BEGIN
-	/* 43F630 */ static uchar FUN_0043f630(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 43F630 */ static uchar BlitChromaKey_Indexed1_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x0043f630 END
 	// !DECL 0x0043f7c0 BEGIN
-	/* 43F7C0 */ static uchar FUN_0043f7c0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 43F7C0 */ static uchar BlitChromaKey_PAL1_to_BGRA32(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x0043f7c0 END
 	// !DECL 0x0043f940 BEGIN
-	/* 43F940 */ static uchar FUN_0043f940(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 43F940 */ static uchar BlitChromaKey_2bpp(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x0043f940 END
 	// !DECL 0x0043fb00 BEGIN
-	/* 43FB00 */ static uchar FUN_0043fb00(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 43FB00 */ static uchar BlitMasked_Idx2_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x0043fb00 END
 	// !DECL 0x0043fc90 BEGIN
-	/* 43FC90 */ static uchar FUN_0043fc90(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 43FC90 */ static uchar BlitChromaKey_PAL2_to_BGRA32(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x0043fc90 END
 	// !DECL 0x0043fe10 BEGIN
-	/* 43FE10 */ static uchar FUN_0043fe10(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 43FE10 */ static uchar BlitChromaKey_4bpp(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x0043fe10 END
 	// !DECL 0x0043ffd0 BEGIN
-	/* 43FFD0 */ static uchar FUN_0043ffd0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 43FFD0 */ static uchar BlitChromaKey_Indexed4_to_BGR24_0043ffd0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x0043ffd0 END
 	// !DECL 0x00440160 BEGIN
-	/* 440160 */ static uchar FUN_00440160(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 440160 */ static uchar BlitChromaKey_PAL4_to_BGRA32(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x00440160 END
 	// !DECL 0x004402e0 BEGIN
-	/* 4402E0 */ static uchar FUN_004402e0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 4402E0 */ static uchar BlitChromaKey_Indexed8_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x004402e0 END
 	// !DECL 0x00440480 BEGIN
-	/* 440480 */ static uchar FUN_00440480(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 440480 */ static uchar BlitChromaKey_PAL8_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x00440480 END
 	// !DECL 0x004405f0 BEGIN
-	/* 4405F0 */ static uchar FUN_004405f0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
+	/* 4405F0 */ static uchar BlitChromaKey_Idx8_to_BGR32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, uint param_9);
 	// !DECL 0x004405f0 END
 	// !DECL 0x00440740 BEGIN
-	/* 440740 */ static uchar FUN_00440740(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
+	/* 440740 */ static uchar BlitChromaKey_RGB565_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
 	// !DECL 0x00440740 END
 	// !DECL 0x00440900 BEGIN
-	/* 440900 */ static uchar FUN_00440900(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
+	/* 440900 */ static uchar BlitChromaKey_RGB565_to_BGR24_00440900(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
 	// !DECL 0x00440900 END
 	// !DECL 0x00440a90 BEGIN
-	/* 440A90 */ static uchar FUN_00440a90(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
+	/* 440A90 */ static uchar BlitChromaKey_RGB565_to_BGR32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
 	// !DECL 0x00440a90 END
 	// !DECL 0x00440c10 BEGIN
-	/* 440C10 */ static uchar FUN_00440c10(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
+	/* 440C10 */ static uchar BlitAlphaBlend_BGR24_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
 	// !DECL 0x00440c10 END
 	// !DECL 0x00440db0 BEGIN
 	/* 440DB0 */ static uchar BlitChromaKey_BGR24_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
 	// !DECL 0x00440db0 END
 	// !DECL 0x00440f20 BEGIN
-	/* 440F20 */ static uchar FUN_00440f20(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
+	/* 440F20 */ static uchar BlitChromaKey_BGR24_to_BGR32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
 	// !DECL 0x00440f20 END
 	// !DECL 0x00441080 BEGIN
-	/* 441080 */ static uchar FUN_00441080(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
+	/* 441080 */ static uchar BlitChromaKey_BGRA32_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
 	// !DECL 0x00441080 END
 	// !DECL 0x00441220 BEGIN
-	/* 441220 */ static uchar FUN_00441220(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
+	/* 441220 */ static uchar BlitChromaKey_BGRA32_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
 	// !DECL 0x00441220 END
 	// !DECL 0x00441390 BEGIN
-	/* 441390 */ static uchar FUN_00441390(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
+	/* 441390 */ static uchar BlitChromaKey_BGRA32_to_BGR32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, uint param_9);
 	// !DECL 0x00441390 END
 	// !DECL 0x004414e0 BEGIN
 	/* 4414E0 */ static uchar BlitMasked(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x004414e0 END
 	// !DECL 0x004416a0 BEGIN
-	/* 4416A0 */ static uchar FUN_004416a0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 4416A0 */ static uchar BlitMasked_Indexed1_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x004416a0 END
 	// !DECL 0x00441830 BEGIN
-	/* 441830 */ static uchar FUN_00441830(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 441830 */ static uchar BlitMasked_PAL1_to_BGRA32(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00441830 END
 	// !DECL 0x004419b0 BEGIN
-	/* 4419B0 */ static uchar FUN_004419b0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 4419B0 */ static uchar BlitKeyAndMask_2bpp(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x004419b0 END
 	// !DECL 0x00441b70 BEGIN
-	/* 441B70 */ static uchar FUN_00441b70(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 441B70 */ static uchar BlitMasked_Indexed2_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00441b70 END
 	// !DECL 0x00441d00 BEGIN
-	/* 441D00 */ static uchar FUN_00441d00(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 441D00 */ static uchar BlitMasked_PAL2_to_BGRA32(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00441d00 END
 	// !DECL 0x00441e80 BEGIN
-	/* 441E80 */ static uchar FUN_00441e80(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 441E80 */ static uchar BlitMasked_PAL4_to_RGB565(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00441e80 END
 	// !DECL 0x00442040 BEGIN
-	/* 442040 */ static uchar FUN_00442040(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 442040 */ static uchar BlitMasked_Indexed4_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00442040 END
 	// !DECL 0x004421d0 BEGIN
-	/* 4421D0 */ static uchar FUN_004421d0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 4421D0 */ static uchar BlitMasked_PAL4_to_BGRA32(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x004421d0 END
 	// !DECL 0x00442350 BEGIN
-	/* 442350 */ static uchar FUN_00442350(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 442350 */ static uchar BlitMasked_Idx8_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00442350 END
 	// !DECL 0x004424f0 BEGIN
-	/* 4424F0 */ static uchar FUN_004424f0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 4424F0 */ static uchar BlitMasked_Idx8_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x004424f0 END
 	// !DECL 0x00442650 BEGIN
-	/* 442650 */ static uchar FUN_00442650(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
+	/* 442650 */ static uchar BlitMasked_Idx8_to_BGR32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00442650 END
 	// !DECL 0x004427a0 BEGIN
-	/* 4427A0 */ static uchar FUN_004427a0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
+	/* 4427A0 */ static uchar BlitMasked_RGB565_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x004427a0 END
 	// !DECL 0x00442960 BEGIN
-	/* 442960 */ static uchar FUN_00442960(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
+	/* 442960 */ static uchar BlitMasked_RGB565_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00442960 END
 	// !DECL 0x00442af0 BEGIN
-	/* 442AF0 */ static uchar FUN_00442af0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
+	/* 442AF0 */ static uchar BlitMasked_RGB565_to_BGR32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00442af0 END
 	// !DECL 0x00442c60 BEGIN
-	/* 442C60 */ static uchar FUN_00442c60(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
+	/* 442C60 */ static uchar BlitMasked_BGR24_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00442c60 END
 	// !DECL 0x00442e00 BEGIN
-	/* 442E00 */ static uchar FUN_00442e00(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
+	/* 442E00 */ static uchar BlitMasked_BGR24_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00442e00 END
 	// !DECL 0x00442f70 BEGIN
-	/* 442F70 */ static uchar FUN_00442f70(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
+	/* 442F70 */ static uchar BlitMasked_BGR24_to_BGR32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00442f70 END
 	// !DECL 0x004430d0 BEGIN
-	/* 4430D0 */ static uchar FUN_004430d0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
+	/* 4430D0 */ static uchar BlitMasked_BGRA32_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x004430d0 END
 	// !DECL 0x00443270 BEGIN
-	/* 443270 */ static uchar FUN_00443270(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
+	/* 443270 */ static uchar BlitMasked_BGRA32_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x00443270 END
 	// !DECL 0x004433d0 BEGIN
-	/* 4433D0 */ static uchar FUN_004433d0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
+	/* 4433D0 */ static uchar BlitMasked_BGRA32_to_BGR32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10);
 	// !DECL 0x004433d0 END
 	// !DECL 0x00443520 BEGIN
-	/* 443520 */ static uchar FUN_00443520(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 443520 */ static uchar BlitKeyAndMask1bpp(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00443520 END
 	// !DECL 0x00443700 BEGIN
-	/* 443700 */ static uchar FUN_00443700(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 443700 */ static uchar BlitKeyAndMask_1bpp_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00443700 END
 	// !DECL 0x004438a0 BEGIN
 	/* 4438A0 */ static uchar FUN_004438a0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x004438a0 END
 	// !DECL 0x00443a30 BEGIN
-	/* 443A30 */ static uchar FUN_00443a30(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 443A30 */ static uchar BlitKeyAndMask2bpp(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00443a30 END
 	// !DECL 0x00443c10 BEGIN
-	/* 443C10 */ static uchar FUN_00443c10(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 443C10 */ static uchar BlitAlphaBlend_2bitIndex_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00443c10 END
 	// !DECL 0x00443db0 BEGIN
 	/* 443DB0 */ static uchar FUN_00443db0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00443db0 END
 	// !DECL 0x00443f40 BEGIN
-	/* 443F40 */ static uchar FUN_00443f40(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 443F40 */ static uchar BlitKeyAndMask4bpp(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00443f40 END
 	// !DECL 0x00444120 BEGIN
-	/* 444120 */ static uchar FUN_00444120(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 444120 */ static uchar BlitKeyAndMask_4bpp_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00444120 END
 	// !DECL 0x004442c0 BEGIN
 	/* 4442C0 */ static uchar FUN_004442c0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x004442c0 END
 	// !DECL 0x00444450 BEGIN
-	/* 444450 */ static uchar FUN_00444450(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 444450 */ static uchar BlitAlphaBlend_ByteIndex_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00444450 END
 	// !DECL 0x00444600 BEGIN
-	/* 444600 */ static uchar FUN_00444600(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 444600 */ static uchar BlitKeyAndMask_PAL8_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00444600 END
 	// !DECL 0x00444780 BEGIN
-	/* 444780 */ static uchar FUN_00444780(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 444780 */ static uchar BlitKeyAndMask_PAL8_to_BGRA32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00444780 END
 	// !DECL 0x004448f0 BEGIN
-	/* 4448F0 */ static uchar FUN_004448f0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 4448F0 */ static uchar BlitKeyAndMask16bpp(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x004448f0 END
 	// !DECL 0x00444ac0 BEGIN
-	/* 444AC0 */ static uchar FUN_00444ac0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 444AC0 */ static uchar BlitKeyAndMask_RGB565_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00444ac0 END
 	// !DECL 0x00444c60 BEGIN
-	/* 444C60 */ static uchar FUN_00444c60(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 444C60 */ static uchar BlitKeyAndMask_RGB565_to_BGRA32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00444c60 END
 	// !DECL 0x00444df0 BEGIN
-	/* 444DF0 */ static uchar FUN_00444df0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 444DF0 */ static uchar BlitKeyAndMask_BGR24_to_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00444df0 END
 	// !DECL 0x00444fb0 BEGIN
-	/* 444FB0 */ static uchar FUN_00444fb0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 444FB0 */ static uchar BlitMasked_BGR24_to_BGR24_00444fb0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00444fb0 END
 	// !DECL 0x00445130 BEGIN
-	/* 445130 */ static uchar FUN_00445130(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 445130 */ static uchar BlitKeyAndMask_BGR24_to_BGR32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00445130 END
 	// !DECL 0x004452a0 BEGIN
-	/* 4452A0 */ static uchar FUN_004452a0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 4452A0 */ static uchar BlitAlphaBlend_DwordIndex_RGB565(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x004452a0 END
 	// !DECL 0x00445450 BEGIN
-	/* 445450 */ static uchar FUN_00445450(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 445450 */ static uchar BlitKeyAndMask_BGRA32_to_BGR24(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x00445450 END
 	// !DECL 0x004455d0 BEGIN
-	/* 4455D0 */ static uchar FUN_004455d0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
+	/* 4455D0 */ static uchar BlitKeyAndMask_BGRA32_to_BGRA32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, uint param_8, int param_9, int param_10, uint param_11);
 	// !DECL 0x004455d0 END
 	// !DECL 0x00446620 BEGIN
-	/* 446620 */ uchar FUN_00446620(int param_1);
+	/* 446620 */ uchar CDSMpx_FinishMadFrame(int param_1);
 	// !DECL 0x00446620 END
 	// !DECL 0x00446c30 BEGIN
 	/* 446C30 */ uchar FUN_00446c30(int param_1);
@@ -1984,7 +1975,7 @@ public:
 	/* 44BFAD */ static uchar fastzero_I(void* param_1, uint param_2);
 	// !DECL 0x0044bfad END
 	// !DECL 0x0044c19e BEGIN
-	/* 44C19E */ static uchar FUN_0044c19e(uint param_1);
+	/* 44C19E */ static uchar _crtCorExitProcess(uint param_1);
 	// !DECL 0x0044c19e END
 	// !DECL 0x0044c1d9 BEGIN
 	/* 44C1D9 */ uchar FUN_0044c1d9();
@@ -2071,7 +2062,7 @@ public:
 	/* 454ACE */ uchar FUN_00454ace();
 	// !DECL 0x00454ace END
 	// !DECL 0x00454ad7 BEGIN
-	/* 454AD7 */ static uchar FUN_00454ad7(uint param_1);
+	/* 454AD7 */ static uchar MSVCRT_unlock_fhandle(uint param_1);
 	// !DECL 0x00454ad7 END
 	// !DECL 0x00456800 BEGIN
 	/* 456800 */ static uchar FUN_00456800(int param_1);
@@ -2080,22 +2071,22 @@ public:
 	/* 458F20 */ static void mad_frame_finish(int* param_1);
 	// !DECL 0x00458f20 END
 	// !DECL 0x00459900 BEGIN
-	/* 459900 */ static int FUN_00459900(uint param_1, int param_2, uint* param_3, int* param_4);
+	/* 459900 */ static int III_sideinfo(uint param_1, int param_2, uint* param_3, int* param_4);
 	// !DECL 0x00459900 END
 	// !DECL 0x00459b80 BEGIN
-	/* 459B80 */ static uchar FUN_00459b80(int* param_1, int param_2, int param_3, uchar* param_4);
+	/* 459B80 */ static uchar decode_mcu(int* param_1, int param_2, int param_3, uchar* param_4);
 	// !DECL 0x00459b80 END
 	// !DECL 0x00459e50 BEGIN
-	/* 459E50 */ static uchar FUN_00459e50(int param_1, uchar param_2);
+	/* 459E50 */ static uchar III_scalefactors(int param_1, uchar param_2);
 	// !DECL 0x00459e50 END
 	// !DECL 0x0045a060 BEGIN
-	/* 45A060 */ static uchar FUN_0045a060(uchar* param_1, int* param_2);
+	/* 45A060 */ static uchar III_scalefactors_0045a060(uchar* param_1, int* param_2);
 	// !DECL 0x0045a060 END
 	// !DECL 0x0045a220 BEGIN
 	/* 45A220 */ uint FUN_0045a220(int param_1);
 	// !DECL 0x0045a220 END
 	// !DECL 0x0045a2c0 BEGIN
-	/* 45A2C0 */ static uint FUN_0045a2c0(uint* param_1, ushort* param_2, uchar* param_3, int param_4);
+	/* 45A2C0 */ static uint III_huffdecode(uint* param_1, ushort* param_2, uchar* param_3, int param_4);
 	// !DECL 0x0045a2c0 END
 	// !DECL 0x0045a9d0 BEGIN
 	/* 45A9D0 */ uchar FUN_0045a9d0(int param_1, uchar* param_2);
@@ -2104,16 +2095,16 @@ public:
 	/* 45AB00 */ uint FUN_0045ab00(int param_1, int param_2, int param_3, uchar* param_4);
 	// !DECL 0x0045ab00 END
 	// !DECL 0x0045afb0 BEGIN
-	/* 45AFB0 */ uchar FUN_0045afb0(int param_1);
+	/* 45AFB0 */ uchar III_aliasreduce(int param_1);
 	// !DECL 0x0045afb0 END
 	// !DECL 0x0045b080 BEGIN
-	/* 45B080 */ uchar FUN_0045b080(int* param_1);
+	/* 45B080 */ uchar fastsdct(int* param_1);
 	// !DECL 0x0045b080 END
 	// !DECL 0x0045b250 BEGIN
-	/* 45B250 */ static uchar FUN_0045b250(int param_1, int* param_2);
+	/* 45B250 */ static uchar jpeg_fdct_ifast(int param_1, int* param_2);
 	// !DECL 0x0045b250 END
 	// !DECL 0x0045b370 BEGIN
-	/* 45B370 */ static uchar FUN_0045b370(int* param_1);
+	/* 45B370 */ static uchar dctIV(int* param_1);
 	// !DECL 0x0045b370 END
 	// !DECL 0x0045b480 BEGIN
 	/* 45B480 */ uchar FUN_0045b480();
@@ -2122,7 +2113,7 @@ public:
 	/* 45B530 */ uchar FUN_0045b530(int param_1);
 	// !DECL 0x0045b530 END
 	// !DECL 0x0045b7a0 BEGIN
-	/* 45B7A0 */ static uchar FUN_0045b7a0(int param_1);
+	/* 45B7A0 */ static uchar jpeg_fdct_islow(int param_1);
 	// !DECL 0x0045b7a0 END
 	// !DECL 0x0045ba90 BEGIN
 	/* 45BA90 */ uchar FUN_0045ba90(int param_1, int param_2, int param_3);
@@ -2131,103 +2122,103 @@ public:
 	/* 45BB40 */ uchar FUN_0045bb40();
 	// !DECL 0x0045bb40 END
 	// !DECL 0x0045bbb0 BEGIN
-	/* 45BBB0 */ static int FUN_0045bbb0(int* param_1, int param_2, int param_3, uint param_4);
+	/* 45BBB0 */ static int III_decode(int* param_1, int param_2, int param_3, uint param_4);
 	// !DECL 0x0045bbb0 END
 	// !DECL 0x0045d160 BEGIN
-	/* 45D160 */ static uchar FUN_0045d160(int param_1);
+	/* 45D160 */ static uchar jpeg_abort(int param_1);
 	// !DECL 0x0045d160 END
 	// !DECL 0x0045d1a0 BEGIN
-	/* 45D1A0 */ static uchar FUN_0045d1a0(int param_1);
+	/* 45D1A0 */ static uchar jpeg_destroy(int param_1);
 	// !DECL 0x0045d1a0 END
 	// !DECL 0x0045d1d0 BEGIN
 	/* 45D1D0 */ static uchar FUN_0045d1d0(int param_1);
 	// !DECL 0x0045d1d0 END
 	// !DECL 0x0045d1f0 BEGIN
-	/* 45D1F0 */ static uchar FUN_0045d1f0(int param_1);
+	/* 45D1F0 */ static uchar alloc_small(int param_1);
 	// !DECL 0x0045d1f0 END
 	// !DECL 0x0045d210 BEGIN
-	/* 45D210 */ uchar FUN_0045d210();
+	/* 45D210 */ uchar get_soi();
 	// !DECL 0x0045d210 END
 	// !DECL 0x0045d2a0 BEGIN
-	/* 45D2A0 */ uint FUN_0045d2a0(uchar param_1);
+	/* 45D2A0 */ uint get_sof(uchar param_1);
 	// !DECL 0x0045d2a0 END
 	// !DECL 0x0045d560 BEGIN
-	/* 45D560 */ uint FUN_0045d560();
+	/* 45D560 */ uint get_sos();
 	// !DECL 0x0045d560 END
 	// !DECL 0x0045d7d0 BEGIN
-	/* 45D7D0 */ static uchar FUN_0045d7d0(int* param_1);
+	/* 45D7D0 */ static uchar get_dht(int* param_1);
 	// !DECL 0x0045d7d0 END
 	// !DECL 0x0045da50 BEGIN
-	/* 45DA50 */ static uchar FUN_0045da50(int* param_1);
+	/* 45DA50 */ static uchar get_dqt(int* param_1);
 	// !DECL 0x0045da50 END
 	// !DECL 0x0045dc40 BEGIN
-	/* 45DC40 */ static uchar FUN_0045dc40(int* param_1);
+	/* 45DC40 */ static uchar get_dri(int* param_1);
 	// !DECL 0x0045dc40 END
 	// !DECL 0x0045dd20 BEGIN
 	/* 45DD20 */ uchar FUN_0045dd20(uint param_1);
 	// !DECL 0x0045dd20 END
 	// !DECL 0x0045dda0 BEGIN
-	/* 45DDA0 */ uchar FUN_0045dda0(uint param_1);
+	/* 45DDA0 */ uchar process_APP14(uint param_1);
 	// !DECL 0x0045dda0 END
 	// !DECL 0x0045dde0 BEGIN
-	/* 45DDE0 */ static uchar FUN_0045dde0(int* param_1);
+	/* 45DDE0 */ static uchar save_marker(int* param_1);
 	// !DECL 0x0045dde0 END
 	// !DECL 0x0045df60 BEGIN
-	/* 45DF60 */ static uchar FUN_0045df60(int param_1);
+	/* 45DF60 */ static uchar skip_variable(int param_1);
 	// !DECL 0x0045df60 END
 	// !DECL 0x0045dfe0 BEGIN
-	/* 45DFE0 */ uint FUN_0045dfe0();
+	/* 45DFE0 */ uint next_marker();
 	// !DECL 0x0045dfe0 END
 	// !DECL 0x0045e0c0 BEGIN
-	/* 45E0C0 */ static uint FUN_0045e0c0(int* param_1);
+	/* 45E0C0 */ static uint first_marker(int* param_1);
 	// !DECL 0x0045e0c0 END
 	// !DECL 0x0045e170 BEGIN
-	/* 45E170 */ static uint FUN_0045e170(int* param_1);
+	/* 45E170 */ static uint read_markers(int* param_1);
 	// !DECL 0x0045e170 END
 	// !DECL 0x0045e4d0 BEGIN
-	/* 45E4D0 */ static uint FUN_0045e4d0(int param_1);
+	/* 45E4D0 */ static uint read_restart_marker(int param_1);
 	// !DECL 0x0045e4d0 END
 	// !DECL 0x0045e540 BEGIN
-	/* 45E540 */ static uint FUN_0045e540(int param_1, int param_2);
+	/* 45E540 */ static uint jpeg_resync_to_restart(int param_1, int param_2);
 	// !DECL 0x0045e540 END
 	// !DECL 0x0045e5f0 BEGIN
-	/* 45E5F0 */ static uchar FUN_0045e5f0(int param_1);
+	/* 45E5F0 */ static uchar reset_marker_reader(int param_1);
 	// !DECL 0x0045e5f0 END
 	// !DECL 0x0045e620 BEGIN
-	/* 45E620 */ static uchar FUN_0045e620(int param_1);
+	/* 45E620 */ static uchar jinit_marker_reader(int param_1);
 	// !DECL 0x0045e620 END
 	// !DECL 0x0045e6a0 BEGIN
-	/* 45E6A0 */ static uchar FUN_0045e6a0(int* param_1, int param_2, int param_3);
+	/* 45E6A0 */ static uchar jpeg_CreateDecompress(int* param_1, int param_2, int param_3);
 	// !DECL 0x0045e6a0 END
 	// !DECL 0x0045e7a0 BEGIN
-	/* 45E7A0 */ uchar FUN_0045e7a0();
+	/* 45E7A0 */ uchar default_decompress_parms();
 	// !DECL 0x0045e7a0 END
 	// !DECL 0x0045e8d0 BEGIN
-	/* 45E8D0 */ static int FUN_0045e8d0(int* param_1);
+	/* 45E8D0 */ static int jpeg_consume_input(int* param_1);
 	// !DECL 0x0045e8d0 END
 	// !DECL 0x0045e9a0 BEGIN
-	/* 45E9A0 */ static uint FUN_0045e9a0(int* param_1);
+	/* 45E9A0 */ static uint jpeg_finish_decompress(int* param_1);
 	// !DECL 0x0045e9a0 END
 	// !DECL 0x0045ea70 BEGIN
-	/* 45EA70 */ static int FUN_0045ea70(int* param_1, char param_2);
+	/* 45EA70 */ static int jpeg_read_header(int* param_1, char param_2);
 	// !DECL 0x0045ea70 END
 	// !DECL 0x0045eaf0 BEGIN
-	/* 45EAF0 */ uint FUN_0045eaf0();
+	/* 45EAF0 */ uint output_pass_setup();
 	// !DECL 0x0045eaf0 END
 	// !DECL 0x0045eba0 BEGIN
-	/* 45EBA0 */ static int FUN_0045eba0(int* param_1, uint param_2, uint param_3);
+	/* 45EBA0 */ static int jpeg_read_scanlines(int* param_1, uint param_2, uint param_3);
 	// !DECL 0x0045eba0 END
 	// !DECL 0x0045ec10 BEGIN
-	/* 45EC10 */ static uint FUN_0045ec10(int* param_1);
+	/* 45EC10 */ static uint jpeg_start_decompress(int* param_1);
 	// !DECL 0x0045ec10 END
 	// !DECL 0x0045f7e0 BEGIN
-	/* 45F7E0 */ static int FUN_0045f7e0(int param_1, int param_2);
+	/* 45F7E0 */ static int jdiv_round_up(int param_1, int param_2);
 	// !DECL 0x0045f7e0 END
 	// !DECL 0x0045f7f0 BEGIN
 	/* 45F7F0 */ static int FUN_0045f7f0(int param_1, int param_2);
 	// !DECL 0x0045f7f0 END
 	// !DECL 0x0045f810 BEGIN
-	/* 45F810 */ static uchar FUN_0045f810(int param_1, int param_2, int param_3, int param_4, int param_5, size_t param_6);
+	/* 45F810 */ static uchar jcopy_sample_rows(int param_1, int param_2, int param_3, int param_4, int param_5, size_t param_6);
 	// !DECL 0x0045f810 END
 	// !DECL 0x0045f860 BEGIN
 	/* 45F860 */ static uchar FUN_0045f860(void* param_1, void* param_2, int param_3);
@@ -2236,25 +2227,25 @@ public:
 	/* 45F880 */ static uchar FUN_0045f880(void* param_1, size_t param_2);
 	// !DECL 0x0045f880 END
 	// !DECL 0x0045f8a0 BEGIN
-	/* 45F8A0 */ uchar FUN_0045f8a0();
+	/* 45F8A0 */ uchar initial_setup();
 	// !DECL 0x0045f8a0 END
 	// !DECL 0x0045faa0 BEGIN
-	/* 45FAA0 */ uint FUN_0045faa0();
+	/* 45FAA0 */ uint per_scan_setup();
 	// !DECL 0x0045faa0 END
 	// !DECL 0x0045fc50 BEGIN
-	/* 45FC50 */ uchar FUN_0045fc50();
+	/* 45FC50 */ uchar select_scan_quant_tables();
 	// !DECL 0x0045fc50 END
 	// !DECL 0x0045fd00 BEGIN
-	/* 45FD00 */ static uchar FUN_0045fd00(int param_1);
+	/* 45FD00 */ static uchar jpeg_consume_markers(int param_1);
 	// !DECL 0x0045fd00 END
 	// !DECL 0x0045fd40 BEGIN
-	/* 45FD40 */ static int FUN_0045fd40(int* param_1);
+	/* 45FD40 */ static int jpeg_reset_input_controller(int* param_1);
 	// !DECL 0x0045fd40 END
 	// !DECL 0x0045fe00 BEGIN
-	/* 45FE00 */ static uchar FUN_0045fe00(int* param_1);
+	/* 45FE00 */ static uchar jpeg_start_input_pass(int* param_1);
 	// !DECL 0x0045fe00 END
 	// !DECL 0x0045fe60 BEGIN
-	/* 45FE60 */ static uchar FUN_0045fe60(int param_1);
+	/* 45FE60 */ static uchar jinit_input_controller(int param_1);
 	// !DECL 0x0045fe60 END
 	// !DECL 0x0045feb0 BEGIN
 	/* 45FEB0 */ uint FUN_0045feb0(uint param_1, int param_2);
@@ -2269,52 +2260,52 @@ public:
 	/* 460200 */ uchar FUN_00460200();
 	// !DECL 0x00460200 END
 	// !DECL 0x00460380 BEGIN
-	/* 460380 */ static uchar FUN_00460380(int* param_1);
+	/* 460380 */ static uchar post_process_1pass(int* param_1);
 	// !DECL 0x00460380 END
 	// !DECL 0x004604d0 BEGIN
 	/* 4604D0 */ static uchar FUN_004604d0(int param_1);
 	// !DECL 0x004604d0 END
 	// !DECL 0x00460510 BEGIN
-	/* 460510 */ static uchar FUN_00460510(uchar param_1);
+	/* 460510 */ static uchar emit_byte(uchar param_1);
 	// !DECL 0x00460510 END
 	// !DECL 0x00460550 BEGIN
-	/* 460550 */ static uchar FUN_00460550(uchar param_1);
+	/* 460550 */ static uchar emit_marker(uchar param_1);
 	// !DECL 0x00460550 END
 	// !DECL 0x00460570 BEGIN
-	/* 460570 */ uchar FUN_00460570();
+	/* 460570 */ uchar emit_2bytes();
 	// !DECL 0x00460570 END
 	// !DECL 0x004605a0 BEGIN
-	/* 4605A0 */ char FUN_004605a0(int* param_1);
+	/* 4605A0 */ char encode_one_block(int* param_1);
 	// !DECL 0x004605a0 END
 	// !DECL 0x004606a0 BEGIN
-	/* 4606A0 */ uchar FUN_004606a0(int param_1, char param_2);
+	/* 4606A0 */ uchar emit_dht(int param_1, char param_2);
 	// !DECL 0x004606a0 END
 	// !DECL 0x00460790 BEGIN
-	/* 460790 */ uchar FUN_00460790();
+	/* 460790 */ uchar emit_dri();
 	// !DECL 0x00460790 END
 	// !DECL 0x004607c0 BEGIN
-	/* 4607C0 */ uchar FUN_004607c0(int* param_1);
+	/* 4607C0 */ uchar emit_sof(int* param_1);
 	// !DECL 0x004607c0 END
 	// !DECL 0x00460870 BEGIN
-	/* 460870 */ uchar FUN_00460870();
+	/* 460870 */ uchar emit_sos();
 	// !DECL 0x00460870 END
 	// !DECL 0x00460940 BEGIN
-	/* 460940 */ uchar FUN_00460940();
+	/* 460940 */ uchar emit_jfif_app0();
 	// !DECL 0x00460940 END
 	// !DECL 0x004609e0 BEGIN
-	/* 4609E0 */ uchar FUN_004609e0();
+	/* 4609E0 */ uchar emit_adobe_app14();
 	// !DECL 0x004609e0 END
 	// !DECL 0x00460a70 BEGIN
-	/* 460A70 */ static uchar FUN_00460a70(int* param_1, uchar param_2, uint param_3);
+	/* 460A70 */ static uchar emit_dri_00460a70(int* param_1, uchar param_2, uint param_3);
 	// !DECL 0x00460a70 END
 	// !DECL 0x00460ad0 BEGIN
 	/* 460AD0 */ static uchar FUN_00460ad0(int param_1);
 	// !DECL 0x00460ad0 END
 	// !DECL 0x00460bf0 BEGIN
-	/* 460BF0 */ static uchar FUN_00460bf0(void* param_1);
+	/* 460BF0 */ static uchar start_pass_huff(void* param_1);
 	// !DECL 0x00460bf0 END
 	// !DECL 0x00460cd0 BEGIN
-	/* 460CD0 */ static uchar FUN_00460cd0(int* param_1);
+	/* 460CD0 */ static uchar write_tables_only(int* param_1);
 	// !DECL 0x00460cd0 END
 	// !DECL 0x00460e80 BEGIN
 	/* 460E80 */ uchar FUN_00460e80();
@@ -2335,7 +2326,7 @@ public:
 	/* 461540 */ uchar FUN_00461540(int param_1);
 	// !DECL 0x00461540 END
 	// !DECL 0x004615b0 BEGIN
-	/* 4615B0 */ static uint FUN_004615b0(int param_1, int param_2);
+	/* 4615B0 */ static uint jpeg_decompress_data(int param_1, int param_2);
 	// !DECL 0x004615b0 END
 	// !DECL 0x004619e0 BEGIN
 	/* 4619E0 */ static int FUN_004619e0(int param_1, int param_2);
@@ -2344,46 +2335,46 @@ public:
 	/* 461B70 */ uint FUN_00461b70();
 	// !DECL 0x00461b70 END
 	// !DECL 0x00462370 BEGIN
-	/* 462370 */ static uchar FUN_00462370(uint* param_1, char param_2);
+	/* 462370 */ static uchar jinit_d_coef_controller(uint* param_1, char param_2);
 	// !DECL 0x00462370 END
 	// !DECL 0x004624c0 BEGIN
-	/* 4624C0 */ static uchar FUN_004624c0(int* param_1, char param_2, int param_3, int* param_4);
+	/* 4624C0 */ static uchar jpeg_make_d_derived_tbl(int* param_1, char param_2, int param_3, int* param_4);
 	// !DECL 0x004624c0 END
 	// !DECL 0x004627b0 BEGIN
-	/* 4627B0 */ static uint FUN_004627b0(uint* param_1, uint param_2, int param_3, int param_4);
+	/* 4627B0 */ static uint jpeg_fill_bit_buffer(uint* param_1, uint param_2, int param_3, int param_4);
 	// !DECL 0x004627b0 END
 	// !DECL 0x004628b0 BEGIN
-	/* 4628B0 */ static uint FUN_004628b0(uint* param_1, uint param_2, int param_3, int param_4, int param_5);
+	/* 4628B0 */ static uint jpeg_huff_decode(uint* param_1, uint param_2, int param_3, int param_4, int param_5);
 	// !DECL 0x004628b0 END
 	// !DECL 0x00462980 BEGIN
 	/* 462980 */ uint FUN_00462980();
 	// !DECL 0x00462980 END
 	// !DECL 0x00462a00 BEGIN
-	/* 462A00 */ static uint FUN_00462a00(int param_1, int param_2);
+	/* 462A00 */ static uint decode_mcu_00462a00(int param_1, int param_2);
 	// !DECL 0x00462a00 END
 	// !DECL 0x00462f30 BEGIN
-	/* 462F30 */ static uchar FUN_00462f30(int param_1);
+	/* 462F30 */ static uchar jinit_huff_decoder(int param_1);
 	// !DECL 0x00462f30 END
 	// !DECL 0x00462f80 BEGIN
 	/* 462F80 */ uint FUN_00462f80();
 	// !DECL 0x00462f80 END
 	// !DECL 0x00463010 BEGIN
-	/* 463010 */ static uint FUN_00463010(uint param_1, int param_2);
+	/* 463010 */ static uint jpeg_decode_mcu_DC_first(uint param_1, int param_2);
 	// !DECL 0x00463010 END
 	// !DECL 0x00463250 BEGIN
-	/* 463250 */ static uint FUN_00463250(int param_1, int* param_2);
+	/* 463250 */ static uint jpeg_decode_mcu_AC_first(int param_1, int* param_2);
 	// !DECL 0x00463250 END
 	// !DECL 0x004634a0 BEGIN
-	/* 4634A0 */ static uint FUN_004634a0(int param_1, int param_2);
+	/* 4634A0 */ static uint jpeg_decode_mcu_AC_refine(int param_1, int param_2);
 	// !DECL 0x004634a0 END
 	// !DECL 0x00463960 BEGIN
-	/* 463960 */ static uchar FUN_00463960(int* param_1);
+	/* 463960 */ static uchar start_pass_huff_decoder(int* param_1);
 	// !DECL 0x00463960 END
 	// !DECL 0x00463b50 BEGIN
-	/* 463B50 */ static uchar FUN_00463b50(int param_1);
+	/* 463B50 */ static uchar jinit_huff_decoder_00463b50(int param_1);
 	// !DECL 0x00463b50 END
 	// !DECL 0x00463bc0 BEGIN
-	/* 463BC0 */ static uchar FUN_00463bc0(int* param_1);
+	/* 463BC0 */ static uchar start_pass_dcolor(int* param_1);
 	// !DECL 0x00463bc0 END
 	// !DECL 0x00463ee0 BEGIN
 	/* 463EE0 */ static uchar FUN_00463ee0(int param_1);
@@ -2395,58 +2386,58 @@ public:
 	/* 464090 */ static uchar FUN_00464090(int param_1);
 	// !DECL 0x00464090 END
 	// !DECL 0x00464230 BEGIN
-	/* 464230 */ static uchar FUN_00464230(int param_1, char param_2);
+	/* 464230 */ static uchar jinit_d_main_controller(int param_1, char param_2);
 	// !DECL 0x00464230 END
 	// !DECL 0x004642f0 BEGIN
-	/* 4642F0 */ static uchar FUN_004642f0(int param_1, int param_2, int* param_3, uint param_4, int param_5, int* param_6, int param_7);
+	/* 4642F0 */ static uchar sep_upsample(int param_1, int param_2, int* param_3, uint param_4, int param_5, int* param_6, int param_7);
 	// !DECL 0x004642f0 END
 	// !DECL 0x004643e0 BEGIN
-	/* 4643E0 */ static uchar FUN_004643e0(int param_1, uint* param_2, uint* param_3, int* param_4);
+	/* 4643E0 */ static uchar int_upsample(int param_1, uint* param_2, uint* param_3, int* param_4);
 	// !DECL 0x004643e0 END
 	// !DECL 0x00464660 BEGIN
-	/* 464660 */ static uchar FUN_00464660(int param_1, int param_2, uint* param_3, int* param_4);
+	/* 464660 */ static uchar h2v2_smooth_downsample(int param_1, int param_2, uint* param_3, int* param_4);
 	// !DECL 0x00464660 END
 	// !DECL 0x004647a0 BEGIN
-	/* 4647A0 */ static uchar FUN_004647a0(int* param_1);
+	/* 4647A0 */ static uchar jinit_upsampler(int* param_1);
 	// !DECL 0x004647a0 END
 	// !DECL 0x00464990 BEGIN
-	/* 464990 */ uchar FUN_00464990();
+	/* 464990 */ uchar build_ycc_rgb_table();
 	// !DECL 0x00464990 END
 	// !DECL 0x00464a60 BEGIN
-	/* 464A60 */ static uchar FUN_00464a60(int param_1, int* param_2, int param_3, uint* param_4, int param_5);
+	/* 464A60 */ static uchar ycc_rgb_convert(int param_1, int* param_2, int param_3, uint* param_4, int param_5);
 	// !DECL 0x00464a60 END
 	// !DECL 0x00464ca0 BEGIN
-	/* 464CA0 */ static uchar FUN_00464ca0(int param_1, int* param_2, int param_3, uint* param_4, int param_5);
+	/* 464CA0 */ static uchar ycck_cmyk_convert(int param_1, int* param_2, int param_3, uint* param_4, int param_5);
 	// !DECL 0x00464ca0 END
 	// !DECL 0x00464e00 BEGIN
-	/* 464E00 */ static uchar FUN_00464e00(int* param_1);
+	/* 464E00 */ static uchar jinit_color_deconverter(int* param_1);
 	// !DECL 0x00464e00 END
 	// !DECL 0x00464f90 BEGIN
-	/* 464F90 */ uchar FUN_00464f90();
+	/* 464F90 */ uchar build_ycc_rgb_table_00464f90();
 	// !DECL 0x00464f90 END
 	// !DECL 0x00465180 BEGIN
 	/* 465180 */ static uchar FUN_00465180(int param_1, int* param_2, int param_3, uint* param_4);
 	// !DECL 0x00465180 END
 	// !DECL 0x004654f0 BEGIN
-	/* 4654F0 */ static uchar FUN_004654f0(int param_1);
+	/* 4654F0 */ static uchar jinit_color_deconverter_004654f0(int param_1);
 	// !DECL 0x004654f0 END
 	// !DECL 0x004655f0 BEGIN
-	/* 4655F0 */ int* FUN_004655f0(int param_1, int param_2);
+	/* 4655F0 */ int* find_biggest_color_pop(int param_1, int param_2);
 	// !DECL 0x004655f0 END
 	// !DECL 0x00465620 BEGIN
-	/* 465620 */ int* FUN_00465620(int param_1, int param_2);
+	/* 465620 */ int* find_biggest_volume(int param_1, int param_2);
 	// !DECL 0x00465620 END
 	// !DECL 0x00465650 BEGIN
 	/* 465650 */ uchar FUN_00465650(int* param_1);
 	// !DECL 0x00465650 END
 	// !DECL 0x00465a60 BEGIN
-	/* 465A60 */ static int FUN_00465a60(void* param_1, int param_2, int param_3, int param_4);
+	/* 465A60 */ static int median_cut(void* param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x00465a60 END
 	// !DECL 0x00465bb0 BEGIN
 	/* 465BB0 */ static uchar FUN_00465bb0(int param_1, int param_2);
 	// !DECL 0x00465bb0 END
 	// !DECL 0x00465d30 BEGIN
-	/* 465D30 */ static uchar FUN_00465d30(int param_1);
+	/* 465D30 */ static uchar select_colors(int param_1);
 	// !DECL 0x00465d30 END
 	// !DECL 0x00465da0 BEGIN
 	/* 465DA0 */ uchar FUN_00465da0(int param_1, int param_2, int param_3);
@@ -2458,10 +2449,10 @@ public:
 	/* 4660F0 */ uchar FUN_004660f0(int param_1, int param_2, int param_3);
 	// !DECL 0x004660f0 END
 	// !DECL 0x00466230 BEGIN
-	/* 466230 */ static uchar FUN_00466230(int param_1, int param_2, int* param_3, int param_4);
+	/* 466230 */ static uchar color_quantize3(int param_1, int param_2, int* param_3, int param_4);
 	// !DECL 0x00466230 END
 	// !DECL 0x00466300 BEGIN
-	/* 466300 */ static uchar FUN_00466300(int param_1, int param_2, int* param_3, int param_4);
+	/* 466300 */ static uchar h2v2_merged_upsample(int param_1, int param_2, int* param_3, int param_4);
 	// !DECL 0x00466300 END
 	// !DECL 0x004665c0 BEGIN
 	/* 4665C0 */ uchar FUN_004665c0();
@@ -2470,7 +2461,7 @@ public:
 	/* 4666A0 */ static uchar FUN_004666a0(int* param_1, char param_2);
 	// !DECL 0x004666a0 END
 	// !DECL 0x004667d0 BEGIN
-	/* 4667D0 */ static uchar FUN_004667d0(int* param_1);
+	/* 4667D0 */ static uchar jinit_2pass_quantizer(int* param_1);
 	// !DECL 0x004667d0 END
 	// !DECL 0x00466920 BEGIN
 	/* 466920 */ static int FUN_00466920(int* param_1, int* param_2);
@@ -2484,9 +2475,6 @@ public:
 	// !DECL 0x00466a50 BEGIN
 	/* 466A50 */ static uchar FUN_00466a50(int* param_1);
 	// !DECL 0x00466a50 END
-	// !DECL 0x00466b70 BEGIN
-	/* 466B70 */ static uchar FUN_00466b70(int param_1);
-	// !DECL 0x00466b70 END
 	// !DECL 0x00466cc0 BEGIN
 	/* 466CC0 */ int* FUN_00466cc0(int param_1);
 	// !DECL 0x00466cc0 END
@@ -2518,19 +2506,19 @@ public:
 	/* 467690 */ uchar FUN_00467690(int param_1);
 	// !DECL 0x00467690 END
 	// !DECL 0x004676e0 BEGIN
-	/* 4676E0 */ static uint FUN_004676e0(int param_1, int param_2);
+	/* 4676E0 */ static uint jpeg_compress_data(int param_1, int param_2);
 	// !DECL 0x004676e0 END
 	// !DECL 0x00467930 BEGIN
 	/* 467930 */ static uint FUN_00467930(int param_1);
 	// !DECL 0x00467930 END
 	// !DECL 0x00467af0 BEGIN
-	/* 467AF0 */ static uchar FUN_00467af0(int param_1, uint* param_2);
+	/* 467AF0 */ static uchar compress_first_pass(int param_1, uint* param_2);
 	// !DECL 0x00467af0 END
 	// !DECL 0x00467d10 BEGIN
 	/* 467D10 */ static uchar FUN_00467d10(int* param_1, int param_2);
 	// !DECL 0x00467d10 END
 	// !DECL 0x00467ed0 BEGIN
-	/* 467ED0 */ static uchar FUN_00467ed0(int* param_1, char param_2, int param_3, int* param_4);
+	/* 467ED0 */ static uchar jpeg_make_c_derived_tbl(int* param_1, char param_2, int param_3, int* param_4);
 	// !DECL 0x00467ed0 END
 	// !DECL 0x004680f0 BEGIN
 	/* 4680F0 */ uchar FUN_004680f0();
@@ -2542,25 +2530,25 @@ public:
 	/* 4681D0 */ uint FUN_004681d0();
 	// !DECL 0x004681d0 END
 	// !DECL 0x00468200 BEGIN
-	/* 468200 */ static uint FUN_00468200(void* param_1, short* param_2, uint param_3, uint* param_4);
+	/* 468200 */ static uint encode_one_block_00468200(void* param_1, short* param_2, uint param_3, uint* param_4);
 	// !DECL 0x00468200 END
 	// !DECL 0x004683a0 BEGIN
 	/* 4683A0 */ static uint FUN_004683a0(char param_1);
 	// !DECL 0x004683a0 END
 	// !DECL 0x00468420 BEGIN
-	/* 468420 */ static uint FUN_00468420(int* param_1, int param_2);
+	/* 468420 */ static uint encode_mcu(int* param_1, int param_2);
 	// !DECL 0x00468420 END
 	// !DECL 0x00468590 BEGIN
 	/* 468590 */ static uchar FUN_00468590(int* param_1);
 	// !DECL 0x00468590 END
 	// !DECL 0x00468650 BEGIN
-	/* 468650 */ static int* FUN_00468650(int* param_1, short* param_2, int param_3);
+	/* 468650 */ static int* htest_one_block(int* param_1, short* param_2, int param_3);
 	// !DECL 0x00468650 END
 	// !DECL 0x00468810 BEGIN
-	/* 468810 */ static uchar FUN_00468810(int* param_1, uint* param_2, int param_3);
+	/* 468810 */ static uchar jpeg_gen_optimal_table(int* param_1, uint* param_2, int param_3);
 	// !DECL 0x00468810 END
 	// !DECL 0x00468af0 BEGIN
-	/* 468AF0 */ static uchar FUN_00468af0(int* param_1);
+	/* 468AF0 */ static uchar finish_pass_gather(int* param_1);
 	// !DECL 0x00468af0 END
 	// !DECL 0x00468be0 BEGIN
 	/* 468BE0 */ static uchar FUN_00468be0(int* param_1, char param_2);
@@ -2584,19 +2572,19 @@ public:
 	/* 468F50 */ uchar FUN_00468f50();
 	// !DECL 0x00468f50 END
 	// !DECL 0x00468fd0 BEGIN
-	/* 468FD0 */ static uchar FUN_00468fd0(char param_1);
+	/* 468FD0 */ static uchar emit_restart(char param_1);
 	// !DECL 0x00468fd0 END
 	// !DECL 0x00469060 BEGIN
 	/* 469060 */ static uint FUN_00469060(int* param_1, int param_2);
 	// !DECL 0x00469060 END
 	// !DECL 0x004691b0 BEGIN
-	/* 4691B0 */ static uint FUN_004691b0(int* param_1, int* param_2);
+	/* 4691B0 */ static uint encode_one_block_004691b0(int* param_1, int* param_2);
 	// !DECL 0x004691b0 END
 	// !DECL 0x004696a0 BEGIN
 	/* 4696A0 */ static uchar FUN_004696a0(int* param_1);
 	// !DECL 0x004696a0 END
 	// !DECL 0x00469770 BEGIN
-	/* 469770 */ static uchar FUN_00469770(int* param_1, char param_2);
+	/* 469770 */ static uchar start_pass_huff_decoder_00469770(int* param_1, char param_2);
 	// !DECL 0x00469770 END
 	// !DECL 0x0046a840 BEGIN
 	/* 46A840 */ static uchar FUN_0046a840(size_t param_1);
@@ -2605,10 +2593,10 @@ public:
 	/* 46A870 */ static uchar FUN_0046a870(int param_1, int param_2, uint* param_3, uint param_4, uint param_5, uint* param_6, uint param_7);
 	// !DECL 0x0046a870 END
 	// !DECL 0x0046aa00 BEGIN
-	/* 46AA00 */ static uchar FUN_0046aa00(int param_1, int param_2, uint* param_3, uint param_4, uint param_5, uint* param_6, uint param_7);
+	/* 46AA00 */ static uchar compress_output(int param_1, int param_2, uint* param_3, uint param_4, uint param_5, uint* param_6, uint param_7);
 	// !DECL 0x0046aa00 END
 	// !DECL 0x0046ada0 BEGIN
-	/* 46ADA0 */ uchar FUN_0046ada0(int param_1, int param_2);
+	/* 46ADA0 */ uchar expand_right_edge(int param_1, int param_2);
 	// !DECL 0x0046ada0 END
 	// !DECL 0x0046adf0 BEGIN
 	/* 46ADF0 */ static uchar FUN_0046adf0(int param_1, int* param_2, int param_3, int param_4, int param_5);
@@ -2623,28 +2611,28 @@ public:
 	/* 46B0B0 */ static uchar FUN_0046b0b0(void* param_1, int param_2, uint* param_3, int param_4);
 	// !DECL 0x0046b0b0 END
 	// !DECL 0x0046b180 BEGIN
-	/* 46B180 */ static uchar FUN_0046b180(int param_1, int param_2, int param_3, int param_4);
+	/* 46B180 */ static uchar h2v2_fancy_upsample(int param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x0046b180 END
 	// !DECL 0x0046b400 BEGIN
 	/* 46B400 */ static uchar FUN_0046b400(int param_1, int param_2, uint* param_3, int param_4);
 	// !DECL 0x0046b400 END
 	// !DECL 0x0046b6e0 BEGIN
-	/* 46B6E0 */ static uchar FUN_0046b6e0(int param_1);
+	/* 46B6E0 */ static uchar rgb_ycc_start(int param_1);
 	// !DECL 0x0046b6e0 END
 	// !DECL 0x0046b7c0 BEGIN
-	/* 46B7C0 */ static uchar FUN_0046b7c0(int param_1, uint* param_2, int* param_3, int param_4, int param_5);
+	/* 46B7C0 */ static uchar rgb_ycc_convert(int param_1, uint* param_2, int* param_3, int param_4, int param_5);
 	// !DECL 0x0046b7c0 END
 	// !DECL 0x0046b8e0 BEGIN
-	/* 46B8E0 */ static uchar FUN_0046b8e0(int param_1, uint* param_2, int* param_3, int param_4, int param_5);
+	/* 46B8E0 */ static uchar rgb_gray_convert(int param_1, uint* param_2, int* param_3, int param_4, int param_5);
 	// !DECL 0x0046b8e0 END
 	// !DECL 0x0046b990 BEGIN
-	/* 46B990 */ static uchar FUN_0046b990(int param_1, uint* param_2, int* param_3, int param_4, int param_5);
+	/* 46B990 */ static uchar cmyk_ycck_convert(int param_1, uint* param_2, int* param_3, int param_4, int param_5);
 	// !DECL 0x0046b990 END
 	// !DECL 0x0046c3d0 BEGIN
 	/* 46C3D0 */ uchar FUN_0046c3d0();
 	// !DECL 0x0046c3d0 END
 	// !DECL 0x0046c4c0 BEGIN
-	/* 46C4C0 */ uint FUN_0046c4c0();
+	/* 46C4C0 */ uint per_scan_setup_0046c4c0();
 	// !DECL 0x0046c4c0 END
 	// !DECL 0x0046c690 BEGIN
 	/* 46C690 */ static uchar FUN_0046c690(int* param_1);
@@ -2656,122 +2644,83 @@ public:
 	/* 46DB50 */ static uchar FUN_0046db50(int param_1, int param_2, int param_3, int* param_4, int param_5);
 	// !DECL 0x0046db50 END
 	// !DECL 0x0046e000 BEGIN
-	/* 46E000 */ static uchar FUN_0046e000(int param_1);
+	/* 46E000 */ static uchar jpeg_idct_islow(int param_1);
 	// !DECL 0x0046e000 END
 	// !DECL 0x0046e320 BEGIN
-	/* 46E320 */ static uchar FUN_0046e320(int param_1);
+	/* 46E320 */ static uchar jpeg_idct_ifast(int param_1);
 	// !DECL 0x0046e320 END
-	// !DECL 0x0046f360 BEGIN
-	/* 46F360 */ uchar FUN_0046f360(uint param_1);
-	// !DECL 0x0046f360 END
-	// !DECL 0x0046f390 BEGIN
-	/* 46F390 */ uchar FUN_0046f390();
-	// !DECL 0x0046f390 END
-	// !DECL 0x0046f720 BEGIN
-	/* 46F720 */ void* FUN_0046f720(void* param_1);
-	// !DECL 0x0046f720 END
 	// !DECL 0x0046f770 BEGIN
-	/* 46F770 */ uchar FUN_0046f770();
+	/* 46F770 */ uchar lm_init();
 	// !DECL 0x0046f770 END
-	// !DECL 0x0046f7f0 BEGIN
-	/* 46F7F0 */ char* FUN_0046f7f0();
-	// !DECL 0x0046f7f0 END
 	// !DECL 0x0046f970 BEGIN
-	/* 46F970 */ uchar FUN_0046f970();
+	/* 46F970 */ uchar fill_window();
 	// !DECL 0x0046f970 END
-	// !DECL 0x0046fa70 BEGIN
-	/* 46FA70 */ static uchar FUN_0046fa70(int* param_1, int param_2);
-	// !DECL 0x0046fa70 END
 	// !DECL 0x0046fba0 BEGIN
-	/* 46FBA0 */ static uchar FUN_0046fba0(int* param_1, int param_2);
+	/* 46FBA0 */ static uchar deflate_fast(int* param_1, int param_2);
 	// !DECL 0x0046fba0 END
-	// !DECL 0x0046fe80 BEGIN
-	/* 46FE80 */ static uchar FUN_0046fe80(int* param_1, int param_2);
-	// !DECL 0x0046fe80 END
 	// !DECL 0x00470250 BEGIN
-	/* 470250 */ static uint FUN_00470250(int param_1);
+	/* 470250 */ static uint deflateResetKeep(int param_1);
 	// !DECL 0x00470250 END
-	// !DECL 0x00471120 BEGIN
-	/* 471120 */ static uint FUN_00471120(uint param_1, uchar* param_2, uint param_3);
-	// !DECL 0x00471120 END
 	// !DECL 0x00471300 BEGIN
-	/* 471300 */ static uchar FUN_00471300(int param_1);
+	/* 471300 */ static uchar pqdownheap(int param_1);
 	// !DECL 0x00471300 END
 	// !DECL 0x004713d0 BEGIN
 	/* 4713D0 */ uchar FUN_004713d0(int* param_1);
 	// !DECL 0x004713d0 END
 	// !DECL 0x004715f0 BEGIN
-	/* 4715F0 */ uchar FUN_004715f0(int param_1);
+	/* 4715F0 */ uchar zlib_scan_tree(int param_1);
 	// !DECL 0x004715f0 END
 	// !DECL 0x004716e0 BEGIN
-	/* 4716E0 */ uchar FUN_004716e0(int param_1, int param_2);
+	/* 4716E0 */ uchar send_tree(int param_1, int param_2);
 	// !DECL 0x004716e0 END
-	// !DECL 0x00471c00 BEGIN
-	/* 471C00 */ static uchar FUN_00471c00(int param_1, int param_2, int param_3);
-	// !DECL 0x00471c00 END
-	// !DECL 0x00471e60 BEGIN
-	/* 471E60 */ static uchar FUN_00471e60(int param_1, int param_2);
-	// !DECL 0x00471e60 END
 	// !DECL 0x00472270 BEGIN
-	/* 472270 */ uchar FUN_00472270(int param_1);
+	/* 472270 */ uchar detect_data_type(int param_1);
 	// !DECL 0x00472270 END
 	// !DECL 0x00472300 BEGIN
-	/* 472300 */ uint FUN_00472300(uint param_1, int param_2);
+	/* 472300 */ uint bi_reverse(uint param_1, int param_2);
 	// !DECL 0x00472300 END
 	// !DECL 0x00472320 BEGIN
-	/* 472320 */ uchar FUN_00472320();
+	/* 472320 */ uchar bi_flush();
 	// !DECL 0x00472320 END
 	// !DECL 0x004723a0 BEGIN
-	/* 4723A0 */ uchar FUN_004723a0();
+	/* 4723A0 */ uchar bi_windup();
 	// !DECL 0x004723a0 END
 	// !DECL 0x00472420 BEGIN
 	/* 472420 */ uchar FUN_00472420(int param_1, uchar* param_2, int param_3);
 	// !DECL 0x00472420 END
 	// !DECL 0x004724b0 BEGIN
-	/* 4724B0 */ static uchar FUN_004724b0(int param_1);
+	/* 4724B0 */ static uchar zlib_tr_init(int param_1);
 	// !DECL 0x004724b0 END
 	// !DECL 0x00472520 BEGIN
-	/* 472520 */ uchar FUN_00472520(uint param_1, int param_2);
+	/* 472520 */ uchar gen_codes(uint param_1, int param_2);
 	// !DECL 0x00472520 END
 	// !DECL 0x004725a0 BEGIN
-	/* 4725A0 */ static uchar FUN_004725a0(int* param_1);
+	/* 4725A0 */ static uchar build_tree(int* param_1);
 	// !DECL 0x004725a0 END
 	// !DECL 0x004727a0 BEGIN
-	/* 4727A0 */ uchar FUN_004727a0();
+	/* 4727A0 */ uchar build_bl_tree();
 	// !DECL 0x004727a0 END
 	// !DECL 0x00472870 BEGIN
-	/* 472870 */ static uchar FUN_00472870(int param_1, uchar* param_2, int param_3, int param_4);
+	/* 472870 */ static uchar send_bits(int param_1, uchar* param_2, int param_3, int param_4);
 	// !DECL 0x00472870 END
 	// !DECL 0x00472910 BEGIN
-	/* 472910 */ static uchar FUN_00472910(int param_1);
+	/* 472910 */ static uchar _tr_align(int param_1);
 	// !DECL 0x00472910 END
 	// !DECL 0x00472b00 BEGIN
-	/* 472B00 */ static uchar FUN_00472b00(int param_1, uchar* param_2, int param_3, int param_4);
+	/* 472B00 */ static uchar _tr_flush_block(int param_1, uchar* param_2, int param_3, int param_4);
 	// !DECL 0x00472b00 END
 	// !DECL 0x00472cf0 BEGIN
-	/* 472CF0 */ static uchar FUN_00472cf0(uchar param_1, uchar param_2, uint param_3, uint param_4, int param_5);
+	/* 472CF0 */ static uchar inflate_codes_new(uchar param_1, uchar param_2, uint param_3, uint param_4, int param_5);
 	// !DECL 0x00472cf0 END
 	// !DECL 0x00472d30 BEGIN
-	/* 472D30 */ static uchar FUN_00472d30(uint param_1, int* param_2, int param_3);
+	/* 472D30 */ static uchar inflate_codes(uint param_1, int* param_2, int param_3);
 	// !DECL 0x00472d30 END
-	// !DECL 0x004733f0 BEGIN
-	/* 4733F0 */ uint FUN_004733f0(uint param_1, uint param_2, int param_3, int param_4, uint* param_5, int param_6, uint* param_7, uint* param_8);
-	// !DECL 0x004733f0 END
-	// !DECL 0x004738a0 BEGIN
-	/* 4738A0 */ static int FUN_004738a0(void* param_1, int* param_2, uint* param_3, int param_4, int param_5);
-	// !DECL 0x004738a0 END
-	// !DECL 0x00473940 BEGIN
-	/* 473940 */ static int FUN_00473940(uint param_1, uint param_2, void* param_3, int* param_4, int* param_5, uint* param_6, uint* param_7, int param_8, int param_9);
-	// !DECL 0x00473940 END
 	// !DECL 0x00473ac0 BEGIN
-	/* 473AC0 */ static uint FUN_00473ac0(uint* param_1, uint* param_2, uint* param_3, uint* param_4);
+	/* 473AC0 */ static uint zlib_inflate_fixed(uint* param_1, uint* param_2, uint* param_3, uint* param_4);
 	// !DECL 0x00473ac0 END
 	// !DECL 0x00473af0 BEGIN
-	/* 473AF0 */ static int FUN_00473af0(int param_1, void* param_2, int param_3);
+	/* 473AF0 */ static int zlib_inflate_flush(int param_1, void* param_2, int param_3);
 	// !DECL 0x00473af0 END
-	// !DECL 0x00473be0 BEGIN
-	/* 473BE0 */ static uint FUN_00473be0(int param_1, int param_2, int param_3, int param_4, int param_5, int* param_6);
-	// !DECL 0x00473be0 END
 	// !DECL 0x00473f40 BEGIN
 	/* 473F40 */ uchar Unwind_00473f40();
 	// !DECL 0x00473f40 END

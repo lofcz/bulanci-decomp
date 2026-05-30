@@ -2,14 +2,14 @@
 
 // !FUNC 0x00401050 BEGIN
 /* 401050-401057 00007 */
-int CMenu::FUN_00401050() {
+int CMenu::CMenu_GetAppSubstruct() {
     return reinterpret_cast<int>(this) + 0x2e6;
 }
 // !FUNC 0x00401050 END
 
 // !FUNC 0x00401af0 BEGIN
 /* 401AF0-401B70 00080 */
-uchar CMenu::FUN_00401af0(int param_1) { STUB_BODY(); return 0; }
+void CMenu::CMenu_OnSubScreenBack(CBulanci* param_1) { STUB_BODY(); }
 // !FUNC 0x00401af0 END
 
 // !FUNC 0x00401b70 BEGIN
@@ -19,37 +19,37 @@ uchar* CMenu::Catch_00401b70() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00401bb4 BEGIN
 /* 401BB4-401BD3 0001F */
-uchar CMenu::FUN_00401bb4() { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_HideAllButtons() { STUB_BODY(); return 0; }
 // !FUNC 0x00401bb4 END
 
 // !FUNC 0x0040b6d0 BEGIN
 /* 40B6D0-40B759 00089 */
-uchar CMenu::FUN_0040b6d0(int param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CMenu::CListBoxItem_ctorWithAssoc(int param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b6d0 END
 
 // !FUNC 0x0040d360 BEGIN
 /* 40D360-40D3ED 0008D */
-uchar CMenu::FUN_0040d360(int param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CLevelList_AddItem(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040d360 END
 
 // !FUNC 0x0040ffd0 BEGIN
 /* 40FFD0-4100C3 000F3 */
-void* CMenu::FUN_0040ffd0(uint param_1, uint param_2, uchar param_3) { STUB_BODY(); return 0; }
+void* CMenu::CColorSet_ctor_slotPillar(uint param_1, uint param_2, uchar param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ffd0 END
 
 // !FUNC 0x004104f0 BEGIN
 /* 4104F0-410E1C 0092C */
-uchar CMenu::CStartGame2_ctor(int param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CStartGame2_ctor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004104f0 END
 
 // !FUNC 0x00412720 BEGIN
 /* 412720-41275A 0003A */
-uchar CMenu::FUN_00412720(int param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_InitPlayerSlotFromDefaults(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00412720 END
 
 // !FUNC 0x00412760 BEGIN
 /* 412760-412771 00011 */
-uint CMenu::FUN_00412760(uchar param_1) { STUB_BODY(); return 0; }
+uint CMenu::CMenu_GetDigitFromVirtualKey(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00412760 END
 
 // !FUNC 0x00412780 BEGIN
@@ -89,12 +89,12 @@ uchar CMenu::Catch_00414232() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00414640 BEGIN
 /* 414640-4146AC 0006C */
-uchar CMenu::CMenu_NetSendKickAll(CStartGame2* param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_NetSendKickAll(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00414640 END
 
 // !FUNC 0x00414790 BEGIN
 /* 414790-414847 000B7 */
-uchar CMenu::CMenu_ShowLobby(uchar param_1) { STUB_BODY(); return 0; }
+void CMenu::CMenu_ShowLobby(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00414790 END
 
 // !FUNC 0x00414847 BEGIN
@@ -124,12 +124,12 @@ uchar CMenu::CMenu_SetButtonsHidden(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00424080 BEGIN
 /* 424080-4240F0 00070 */
-void CMenu::CMenu_OnMusicFadeTick(void* param_1) { STUB_BODY(); }
+void CMenu::CMenu_OnMusicFadeTick(CDSUpdatedItem* param_1) { STUB_BODY(); }
 // !FUNC 0x00424080 END
 
 // !FUNC 0x00424520 BEGIN
 /* 424520-4245A9 00089 */
-uint* CMenu::CMenu_ctor(uint* param_1) { STUB_BODY(); return 0; }
+void* CMenu::CMenu_ctor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00424520 END
 
 // !FUNC 0x004245b0 BEGIN
@@ -141,22 +141,22 @@ uchar* CMenu::CMenu_GetSingleton() {
 
 // !FUNC 0x004245d0 BEGIN
 /* 4245D0-4245D8 00008 */
-uchar CMenu::FUN_004245d0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_VectorDtorWrapper_thunk_Sub4(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004245d0 END
 
 // !FUNC 0x004245e0 BEGIN
 /* 4245E0-4245E8 00008 */
-uchar CMenu::FUN_004245e0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_VectorDtorWrapper_thunk_Sub68(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004245e0 END
 
 // !FUNC 0x004245f0 BEGIN
 /* 4245F0-4245F8 00008 */
-uchar CMenu::FUN_004245f0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_VectorDtorWrapper_thunk_Sub10(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004245f0 END
 
 // !FUNC 0x00424600 BEGIN
 /* 424600-424608 00008 */
-uchar CMenu::FUN_00424600(uchar param_1) { STUB_BODY(); return 0; }
+uchar CMenu::CMenu_VectorDtorWrapper_thunk_Sub18(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00424600 END
 
 // !FUNC 0x00424e70 BEGIN
@@ -196,7 +196,7 @@ uchar CMenu::CMenu_CmdDispatch(ushort param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042c000 BEGIN
 /* 42C000-42C03A 0003A */
-uchar CMenu::FUN_0042c000(void* param_1) { STUB_BODY(); return 0; }
+void CMenu::CMenu_DetachChild(CDSView* param_1) { STUB_BODY(); }
 // !FUNC 0x0042c000 END
 
 // !FUNC 0x0042d160 BEGIN
@@ -216,7 +216,7 @@ uchar CMenu::CDSDirectPlay_InitializeConnection(int param_1) { STUB_BODY(); retu
 
 // !FUNC 0x0043aca0 BEGIN
 /* 43ACA0-43ACDE 0003E */
-uchar CMenu::CDSDirectPlay_CreateLocalPlayer(int param_1) { STUB_BODY(); return 0; }
+void CMenu::CDSDirectPlay_CreateLocalPlayer(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0043aca0 END
 
 // !FUNC 0x0043ae70 BEGIN
@@ -231,7 +231,7 @@ uchar CMenu::CDSDirectPlay_HostSession(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043afa0 BEGIN
 /* 43AFA0-43B052 000B2 */
-uchar CMenu::CDSDirectPlay_JoinSession(uint* param_1) { STUB_BODY(); return 0; }
+void CMenu::CDSDirectPlay_JoinSession(uint* param_1) { STUB_BODY(); }
 // !FUNC 0x0043afa0 END
 
 // !FUNC 0x0043b360 BEGIN

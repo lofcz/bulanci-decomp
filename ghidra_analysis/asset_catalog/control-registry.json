@@ -1,0 +1,199 @@
+{
+  "bindable": [
+    "visible",
+    "x",
+    "y",
+    "frame",
+    "text",
+    "tint",
+    "color"
+  ],
+  "common": [
+    "name",
+    "state",
+    "tint",
+    "sx",
+    "sy",
+    "rot",
+    "layout",
+    "bindings"
+  ],
+  "kinds": {
+    "button": [
+      "label",
+      "size",
+      "spacing",
+      "color"
+    ],
+    "group": [],
+    "input_region": [],
+    "quad": [
+      "color"
+    ],
+    "sprite": [
+      "handle",
+      "frame"
+    ],
+    "text": [
+      "text",
+      "size",
+      "spacing",
+      "anchor"
+    ]
+  },
+  "types": {
+    "Binding": [
+      {
+        "name": "prop",
+        "type": "String"
+      },
+      {
+        "name": "key",
+        "type": "String"
+      }
+    ],
+    "ControlNode": [
+      {
+        "name": "id",
+        "type": "String"
+      },
+      {
+        "name": "name",
+        "type": "String"
+      },
+      {
+        "name": "kind",
+        "type": "String"
+      },
+      {
+        "name": "layout",
+        "type": "Layout"
+      },
+      {
+        "name": "sx",
+        "type": "f32"
+      },
+      {
+        "name": "sy",
+        "type": "f32"
+      },
+      {
+        "name": "rot",
+        "type": "f32"
+      },
+      {
+        "name": "state",
+        "type": "String"
+      },
+      {
+        "name": "tint",
+        "type": "String"
+      },
+      {
+        "name": "handle",
+        "type": "String"
+      },
+      {
+        "name": "frame",
+        "type": "u32"
+      },
+      {
+        "name": "text",
+        "type": "String"
+      },
+      {
+        "name": "size",
+        "type": "f32"
+      },
+      {
+        "name": "spacing",
+        "type": "i32"
+      },
+      {
+        "name": "anchor",
+        "type": "String"
+      },
+      {
+        "name": "color",
+        "type": "String"
+      },
+      {
+        "name": "label",
+        "type": "String"
+      },
+      {
+        "name": "bindings",
+        "type": "Vec<Binding>"
+      },
+      {
+        "name": "children",
+        "type": "Vec<ControlNode>"
+      }
+    ],
+    "Layout": [
+      {
+        "name": "mode",
+        "type": "String"
+      },
+      {
+        "name": "x",
+        "type": "f32"
+      },
+      {
+        "name": "y",
+        "type": "f32"
+      },
+      {
+        "name": "width",
+        "type": "Option<f32>"
+      },
+      {
+        "name": "height",
+        "type": "Option<f32>"
+      },
+      {
+        "name": "direction",
+        "type": "String"
+      },
+      {
+        "name": "justify",
+        "type": "String"
+      },
+      {
+        "name": "align",
+        "type": "String"
+      },
+      {
+        "name": "gap",
+        "type": "f32"
+      },
+      {
+        "name": "padding",
+        "type": "f32"
+      }
+    ],
+    "SceneDoc": [
+      {
+        "name": "name",
+        "type": "String"
+      },
+      {
+        "name": "scripts",
+        "type": "Vec<String>"
+      },
+      {
+        "name": "states",
+        "type": "Vec<StateInit>"
+      },
+      {
+        "name": "viewport",
+        "type": "Option<[f32; 2]>"
+      },
+      {
+        "name": "root",
+        "type": "Vec<ControlNode>"
+      }
+    ]
+  },
+  "version": 1
+}

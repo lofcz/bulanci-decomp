@@ -91,3 +91,7 @@ target/.rustc_info.json
 # Frida trace captures (large per-run JSONL dumps).
 /trace.jsonl
 /trace*.jsonl
+/ghidra_analysis/asset_catalog/gallery/node_modules
+open_bulanci/web/bulanci_client.js
+open_bulanci/web/bulanci_client.wasm
+/ghidra_analysis/asset_catalog/gallery/dist

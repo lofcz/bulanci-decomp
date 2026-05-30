@@ -1,0 +1,17 @@
+{"todo_id":37,"phase":"verify","struct":"mad_stream","size_bytes":64,"finding":"buffer@0 bufend@4 skiplen@8 sync@0xc freerate@0x10 this_frame@0x14 next_frame@0x18 main_bit@0x1c anc_bit@0x24 aux@0x2c error@0x3c"}
+{"todo_id":37,"phase":"verify","struct":"mad_frame","size_bytes":9268,"finding":"header@0 body[9228]@0x28; mad_frame_init zeros param_1[0xb] and tail param_1[0x90c] @+0x2430"}
+{"todo_id":37,"phase":"verify","struct":"mad_synth_bulanci","size_bytes":4104,"finding":"filter@0 phase@0x1000 offset@0x1004; numChannels alias CDSMpx+0x3480"}
+{"todo_id":37,"phase":"verify","address":"0x004567b0","symbol":"CDSMpx_InitMadDecoderFields","finding":"Zeros skiplen/freerate/aux/aux_data/init_zero_pad; mad_bit_init @ stream+0x1c/+0x24"}
+{"todo_id":37,"phase":"verify","address":"0x00458f50","symbol":"mad_header_decode","finding":"Sets stream.error 0x101..0x104 at stream+0x3c via bitstream+0x3c"}
+{"todo_id":37,"phase":"verify","address":"0x00446770","symbol":"DecodeFrame","finding":"*(this+0x40)==1 gates RefillInputBuffer retry (stream.error)"}
+{"todo_id":37,"phase":"verify","address":"0x00459620","symbol":"mad_frame_init","finding":"body base param_1[0xb]; tail dword param_1[0x90c]"}
+{"todo_id":37,"phase":"verify","address":"0x00458eb0","symbol":"mad_synth_init","finding":"synth[0x400]/[0x401] phase/offset; channel shorts @ synth+0x1008"}
+{"todo_id":37,"phase":"ghidra","action":"recreate_struct","struct":"mad_stream","result":"64 B 14 fields; Ghidra ids retain dw* on uint members"}
+{"todo_id":37,"phase":"ghidra","action":"recreate_struct","struct":"mad_frame","result":"9268 B header+body; Ghidra id pBody"}
+{"todo_id":37,"phase":"ghidra","action":"recreate_struct","struct":"mad_synth_bulanci","result":"4104 B filter+phase+offset; Ghidra ids pFilter/dwPhase/dwOffset"}
+{"todo_id":37,"phase":"ghidra","action":"modify_struct_field","struct":"CDSMpx","fields":"stream frame synth","result":"re-linked mad_* after recreate (-BAD- cleared)"}
+{"todo_id":37,"phase":"ghidra","action":"modify_struct_field","struct":"CDSMpxDecoder","fields":"stream frame synth","result":"re-linked mad_* types"}
+{"todo_id":37,"phase":"ghidra","action":"set_decompiler_comment","addresses":["0x00459620","0x004567b0","0x00458f50","0x00458eb0","0x00456820"],"result":"libmad offset map comments"}
+{"todo_id":37,"phase":"ghidra","action":"delete_data_type","type":"mad_synth","result":"not found (orphan absent)"}
+{"todo_id":37,"phase":"ghidra","action":"save_program","program":"bulanci.exe","result":"success"}
+{"todo_id":37,"status":"done","title":"mad_stream/mad_frame libmad Ghidra rename pass","types":["CDSMpx","CDSMpxDecoder","mad_stream","mad_frame","mad_synth_bulanci"],"files_changed":["ghidra_analysis/engine/struct_recovery/CDSMpx.md","ghidra_analysis/engine/struct_recovery/round3_task_37_report.md","ghidra_analysis/engine/struct_recovery/round3_task_37_report.jsonl"],"ghidra_actions":["recreate_struct mad_stream/mad_frame/mad_synth_bulanci","modify_struct_field CDSMpx/CDSMpxDecoder stream frame synth","set_decompiler_comment@0x00459620/0x004567b0/0x00458f50/0x00458eb0/0x00456820","save_program bulanci.exe"],"blockers":["Ghidra get_struct_layout keeps dw*/p* auto-prefix on nested libmad uint/pointer fields despite recreate_struct canonical names"],"findings":{"cdsmpx_size":"39112 (0x98c8) with stream@+4 frame@+44 synth@+2478","mad_stream_tail":"skiplen/freerate/aux/pads zero-only except sync/error on decode path","mad_frame_body":"9228 B @+0x28; opaque tail @+0x2430","orphan_mad_synth":"absent"}}

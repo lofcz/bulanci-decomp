@@ -2,12 +2,12 @@
 
 // !FUNC 0x00409170 BEGIN
 /* 409170-4091EE 0007E */
-void* CDSEasyMemStream::FUN_00409170(uchar* param_1, uint param_2) { STUB_BODY(); return 0; }
+void* CDSEasyMemStream::CDSEasyMemStream_ctor(uchar* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00409170 END
 
 // !FUNC 0x004091f0 BEGIN
 /* 4091F0-4091F6 00006 */
-uchar* CDSEasyMemStream::FUN_004091f0() {
+uchar* CDSEasyMemStream::CDSEasyMemStream_GetTypeInfo() {
     return reinterpret_cast<uchar*>(&DAT_004b7d34);
 }
 // !FUNC 0x004091f0 END
@@ -33,22 +33,22 @@ longlong CDSEasyMemStream::TellPosition() {
 
 // !FUNC 0x00409240 BEGIN
 /* 409240-409248 00008 */
-uchar CDSEasyMemStream::FUN_00409240(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSEasyMemStream::CDSEasyMemStream_ScalarDeletingDtor_thunk_Sub4(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409240 END
 
 // !FUNC 0x00409250 BEGIN
 /* 409250-409258 00008 */
-uchar CDSEasyMemStream::FUN_00409250(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSEasyMemStream::CDSEasyMemStream_ScalarDeletingDtor_thunk(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409250 END
 
 // !FUNC 0x00409270 BEGIN
 /* 409270-4092E7 00077 */
-uchar CDSEasyMemStream::FUN_00409270(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSEasyMemStream::CDSEasyMemStream_dtor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409270 END
 
 // !FUNC 0x004092f0 BEGIN
 /* 4092F0-40930E 0001E */
-void* CDSEasyMemStream::FUN_004092f0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSEasyMemStream::CDSEasyMemStream_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004092f0 END
 
 // !FUNC 0x004306c0 BEGIN

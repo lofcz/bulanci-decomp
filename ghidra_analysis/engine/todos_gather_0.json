@@ -1,0 +1,139 @@
+[
+  {
+    "id": 1,
+    "title": "Recover CGame embed at CBulanci+0x284 (0x22c)",
+    "types": ["CBulanci", "CGame"],
+    "addresses": ["0x0040272b", "0x00402a90", "0x004026f0"],
+    "ghidra_actions": ["create_struct", "set_data_type", "modify_struct_field"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CBulanci.md",
+      "ghidra_analysis/engine/struct_recovery/batch_00_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "critical",
+    "source_slice": "00"
+  },
+  {
+    "id": 2,
+    "title": "Reparent CBulanci to extend CDSApp in Ghidra",
+    "types": ["CBulanci", "CDSApp"],
+    "addresses": ["0x004026f0", "0x0042b170"],
+    "ghidra_actions": ["create_struct", "modify_struct_field", "set_data_type"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSApp.md",
+      "ghidra_analysis/engine/struct_recovery/batch_01_slice01_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_01_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "critical",
+    "source_slice": "01"
+  },
+  {
+    "id": 3,
+    "title": "Register CGameView* and fix CGameView_ctor prototype",
+    "types": ["CGameView", "CBitmap"],
+    "addresses": ["0x004191a0", "0x00416590", "0x00419010"],
+    "ghidra_actions": ["set_function_prototype", "create_struct"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CGameView.md",
+      "ghidra_analysis/engine/struct_recovery/batch_01_slice01_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "high",
+    "source_slice": "01"
+  },
+  {
+    "id": 4,
+    "title": "Delete stale 1B CDSScript type; apply CDSScript* prototypes",
+    "types": ["CDSScript"],
+    "addresses": ["0x00438400", "0x00438390", "0x00438b30", "0x00438310"],
+    "ghidra_actions": ["delete_data_type", "set_function_prototype", "create_struct"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSScript.md",
+      "ghidra_analysis/engine/struct_recovery/batch_02_summary.md"
+    ],
+    "priority": "high",
+    "source_slice": "02"
+  },
+  {
+    "id": 5,
+    "title": "Name CAnim/CGameView header band +0x28..+0x67",
+    "types": ["CAnim", "CGameView", "CBitmap"],
+    "addresses": ["0x0042c480", "0x004191a0", "0x00416f50"],
+    "ghidra_actions": ["modify_struct_field", "rename_data"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CAnim.md",
+      "ghidra_analysis/engine/struct_recovery/CGameView.md",
+      "ghidra_analysis/engine/struct_recovery/batch_03_followup_summary.md"
+    ],
+    "priority": "high",
+    "source_slice": "03"
+  },
+  {
+    "id": 6,
+    "title": "Apply CDeath struct 0x108 and ctor prototypes in Ghidra",
+    "types": ["CDeath"],
+    "addresses": ["0x0041fa21", "0x0041a860", "0x00417a70", "0x00417a40"],
+    "ghidra_actions": ["create_struct", "set_function_prototype", "rename_function"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDeath.md",
+      "ghidra_analysis/engine/struct_recovery/batch_06_followup_summary.md"
+    ],
+    "priority": "high",
+    "source_slice": "06"
+  },
+  {
+    "id": 7,
+    "title": "Type CBulanci+0x280 as CMenu* (main menu hook)",
+    "types": ["CBulanci"],
+    "addresses": ["0x004026f0"],
+    "ghidra_actions": ["modify_struct_field", "set_data_type"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CBulanci.md",
+      "ghidra_analysis/engine/struct_recovery/batch_00_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source_slice": "00"
+  },
+  {
+    "id": 8,
+    "title": "Split CDSUpdatedItem fields in CAnim track_manager +0xA8",
+    "types": ["CAnim", "CBulAnim", "CDSObject"],
+    "addresses": ["0x00439c70", "0x00439c86", "0x0040eaa0"],
+    "ghidra_actions": ["modify_struct_field", "create_struct"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CAnim.md",
+      "ghidra_analysis/engine/struct_recovery/CBulAnim.md",
+      "ghidra_analysis/engine/struct_recovery/batch_04_followup_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "medium",
+    "source_slice": "04"
+  },
+  {
+    "id": 9,
+    "title": "Name CDSObject image MI slots +0x48..+0x4f",
+    "types": ["CDSObject"],
+    "addresses": ["0x0042563a", "0x00439af3", "0x00432c0e"],
+    "ghidra_actions": ["modify_struct_field", "rename_data"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSObject.md",
+      "ghidra_analysis/engine/struct_recovery/batch_00_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source_slice": "00"
+  },
+  {
+    "id": 10,
+    "title": "Map CGunMouse trackManager +0x1B0..+0x1F7 and scalar gap",
+    "types": ["CGunMouse"],
+    "addresses": ["0x00426500", "0x00402286", "0x00424370"],
+    "ghidra_actions": ["modify_struct_field", "rename_data"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CGunMouse.md",
+      "ghidra_analysis/engine/struct_recovery/batch_08_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source_slice": "09"
+  }
+]

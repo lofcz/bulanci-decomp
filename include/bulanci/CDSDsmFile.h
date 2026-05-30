@@ -24,46 +24,46 @@ public:
 	/* 428DB0 */ void** GetClassRegistry();
 	// !DECL 0x00428db0 END
 	// !DECL 0x00428dc0 BEGIN
-	/* 428DC0 */ uchar FUN_00428dc0(uchar param_1);
+	/* 428DC0 */ uchar CDSDsmFile_ScalarDeletingDtor_thunk_Sub30(uchar param_1);
 	// !DECL 0x00428dc0 END
 	// !DECL 0x00428de0 BEGIN
-	/* 428DE0 */ uchar FUN_00428de0(uchar param_1);
+	/* 428DE0 */ uchar CDSDsmFile_ScalarDeletingDtor_thunk_Sub38(uchar param_1);
 	// !DECL 0x00428de0 END
 	// !DECL 0x00428df0 BEGIN
-	/* 428DF0 */ uchar FUN_00428df0(uchar param_1);
+	/* 428DF0 */ uchar CDSDsmFile_ScalarDeletingDtor_thunk(uchar param_1);
 	// !DECL 0x00428df0 END
 	// !DECL 0x00428e00 BEGIN
-	/* 428E00 */ uchar FUN_00428e00(uchar param_1);
+	/* 428E00 */ uchar CDSDsmFile_ScalarDeletingDtor_thunk_Sub3c(uchar param_1);
 	// !DECL 0x00428e00 END
 	// !DECL 0x00428e10 BEGIN
-	/* 428E10 */ uchar FUN_00428e10(int param_1);
+	/* 428E10 */ uchar CDSChain_AdjustThisOffset_thunk_Sub34(int param_1);
 	// !DECL 0x00428e10 END
 	// !DECL 0x00428e30 BEGIN
-	/* 428E30 */ uchar FUN_00428e30(uchar param_1);
+	/* 428E30 */ uchar CDSDsmFile_ScalarDeletingDtor_thunk_Sub4(uchar param_1);
 	// !DECL 0x00428e30 END
 	// !DECL 0x00428e40 BEGIN
 	/* 428E40 */ uchar HandleRefcountRelease(int param_1);
 	// !DECL 0x00428e40 END
 	// !DECL 0x00428e70 BEGIN
-	/* 428E70 */ uchar FUN_00428e70(int param_1);
+	/* 428E70 */ uchar CDSDsmFile_HandleRefcountRelease(int param_1);
 	// !DECL 0x00428e70 END
 	// !DECL 0x00428e80 BEGIN
-	/* 428E80 */ uchar FUN_00428e80(int param_1);
+	/* 428E80 */ uchar CDSDsmFile_HandleRefcountRelease_thunk_Sub3c(int param_1);
 	// !DECL 0x00428e80 END
 	// !DECL 0x00428e90 BEGIN
-	/* 428E90 */ uchar FUN_00428e90(int param_1);
+	/* 428E90 */ uchar CDSDsmFile_HandleRefcountRelease_thunk_Sub4(int param_1);
 	// !DECL 0x00428e90 END
 	// !DECL 0x00428ea0 BEGIN
-	/* 428EA0 */ uchar FUN_00428ea0(int param_1);
+	/* 428EA0 */ uchar CDSDsmFile_HandleRefcountRelease_thunk_Sub30(int param_1);
 	// !DECL 0x00428ea0 END
 	// !DECL 0x00428eb0 BEGIN
-	/* 428EB0 */ uchar FUN_00428eb0(int param_1);
+	/* 428EB0 */ uchar CDSDsmFile_HandleRefcountRelease_thunk_Sub38(int param_1);
 	// !DECL 0x00428eb0 END
 	// !DECL 0x00428ec0 BEGIN
-	/* 428EC0 */ uchar HandleDestructInstance(uint* param_1);
+	/* 428EC0 */ void HandleDestructInstance(void* param_1);
 	// !DECL 0x00428ec0 END
 	// !DECL 0x00428f80 BEGIN
-	/* 428F80 */ uchar HandleOpenStream(int* param_1);
+	/* 428F80 */ void HandleOpenStream(CDSFilterStream* param_1);
 	// !DECL 0x00428f80 END
 	// !DECL 0x00428ff0 BEGIN
 	/* 428FF0 */ uchar HandleReleaseResource(uchar* param_1, uchar param_2);
@@ -87,10 +87,10 @@ public:
 	/* 4291B0 */ uchar HandleAcquireWriteThunk(int param_1);
 	// !DECL 0x004291b0 END
 	// !DECL 0x00433010 BEGIN
-	/* 433010 */ uchar FUN_00433010(int param_1);
+	/* 433010 */ uchar CDSChain_AdjustThisOffset_ThisMinus38(int param_1);
 	// !DECL 0x00433010 END
 	// !DECL 0x00439ac0 BEGIN
-	/* 439AC0 */ CDSObject* InitializeChildObject(int param_1);
+	/* 439AC0 */ CDSObject* InitializeChildObject(void* param_1);
 	// !DECL 0x00439ac0 END
 	// !DECL 0x0043bde0 BEGIN
 	/* 43BDE0 */ uchar InitializeSourceRegion(int param_1, int param_2, int param_3);
@@ -105,16 +105,16 @@ public:
 	/* 43C360 */ uchar Catch_0043c360();
 	// !DECL 0x0043c360 END
 	// !DECL 0x0043c450 BEGIN
-	/* 43C450 */ uchar HandleQueueResize(int param_1);
+	/* 43C450 */ void HandleQueueResize(int param_1);
 	// !DECL 0x0043c450 END
 	// !DECL 0x0043c620 BEGIN
-	/* 43C620 */ uchar HandleQueueWrite(void* param_1, void* param_2);
+	/* 43C620 */ void HandleQueueWrite(void* param_1, uint param_2);
 	// !DECL 0x0043c620 END
 	// !DECL 0x0043c6d2 BEGIN
 	/* 43C6D2 */ uchar Catch_0043c6d2();
 	// !DECL 0x0043c6d2 END
 	// !DECL 0x0043c6f0 BEGIN
-	/* 43C6F0 */ uchar HandleQueueAppendStream(int* param_1, int param_2);
+	/* 43C6F0 */ void HandleQueueAppendStream(int* param_1, int param_2);
 	// !DECL 0x0043c6f0 END
 	// !DECL 0x0043c79a BEGIN
 	/* 43C79A */ uchar Catch_0043c79a();

@@ -1,0 +1,2210 @@
+{
+  "$schema": "./registry.schema.json",
+  "scripts": {
+    "65843": {
+      "slug": "history_part_1",
+      "notes": "CHistoryScript page 1 — Bulánek definition and timeline through 1980 armistice (class 0x802)."
+    },
+    "65844": {
+      "slug": "history_part_2",
+      "notes": "CHistoryScript page 2 — timeline continues; HCreateMovie clips (1986–1988)."
+    },
+    "65845": {
+      "slug": "history_part_3",
+      "notes": "History dialog page 3 (1993–1998 timeline, archaeology + riot HCreateMovie clips). CHistoryDlg_ctor class 0x802 @0042329e."
+    },
+    "65855": {
+      "slug": "level_vybijena",
+      "notes": "Vybíjená duel arena (GetInfo type 2, GUID 6A080067-362A-478d-B9EC-68F54424001B). OnInit LoadPreface 65847 + JPEG bg 65846; CLevelScript enum 0x7ea @00409fb7."
+    },
+    "65856": {
+      "slug": "level_bedtime_story",
+      "notes": "Na dobrou noc / Bedtime story (GUID 0DDB62C1…). Overlay script 65856."
+    },
+    "65857": {
+      "slug": "level_steel_works",
+      "notes": "Noční směna / Steel works (GUID C48AEB13…). Overlay script 65857."
+    },
+    "65858": {
+      "slug": "level_malaria",
+      "notes": "Level Malárie / Malaria (GUID A0A144D0-26B0-4049-A66F-7AE630965103)."
+    },
+    "65859": {
+      "slug": "level_8bit_captivity",
+      "notes": "Level V zajetí 8-bitu; hazard anims 0x100fe..0x10108, sfx bank 0x10000."
+    },
+    "65860": {
+      "slug": "level_exitus",
+      "notes": "Exitus graveyard level (GetInfo type 6, GUID 987EF758-1BD5-4954-B543-767F158B17AF). CGaming_OnResumeOrStartGame CMP 0x10144 @0041c24b (7s timer branch)."
+    }
+  },
+  "assets": {
+    "0x00010005": {
+      "slug": "poem_zeme_duni",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Země duní (opening line; no separate title)»; CPoemScroller pool class 0x7fb @00426453. Wave2 batch0.",
+      "ship": false
+    },
+    "0x00010006": {
+      "slug": "poem_bojiste",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Bojiště»; CPoemScroller pool class 0x7fb @00426453. Wave2 batch0.",
+      "ship": false
+    },
+    "0x00010007": {
+      "slug": "poem_vybijena",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Vybíjená»; CPoemScroller pool class 0x7fb @00426453. Wave2 batch0.",
+      "ship": false
+    },
+    "0x00010008": {
+      "slug": "poem_setkani",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Setkání (Balík origin story)»; CPoemScroller pool class 0x7fb @00426453. Wave2 batch0.",
+      "ship": false
+    },
+    "0x00010009": {
+      "slug": "poem_pohrebni_pisen",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Bulánčí pohřební píseň»; CPoemScroller pool class 0x7fb @00426453. Wave2 batch0.",
+      "ship": false
+    },
+    "0x0001000a": {
+      "slug": "poem_dobry_lov",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Dobrý lov»; CPoemScroller pool class 0x7fb @00426453. Wave2 batch0.",
+      "ship": false
+    },
+    "0x0001000b": {
+      "slug": "poem_zbrane",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Zbraně»; CPoemScroller pool class 0x7fb @00426453. Wave2 batch0.",
+      "ship": false
+    },
+    "0x0001000c": {
+      "slug": "poem_od_rana",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Od rána máš divný pocit (no title line)»; CPoemScroller pool class 0x7fb @00426453. Wave2 batch0.",
+      "ship": false
+    },
+    "0x0001000d": {
+      "slug": "poem_rozbresk",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Rozbřesk sílí»; CPoemScroller pool class 0x7fb @00426453. Wave2 batch0.",
+      "ship": false
+    },
+    "0x0001000e": {
+      "slug": "poem_s_chladnou_vuli",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «S chladnou vůlí (Bulanek v rohu)»; CPoemScroller pool class 0x7fb @00426453. Wave2 batch0.",
+      "ship": false
+    },
+    "0x0001000f": {
+      "slug": "poem_do_boje",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Do boje» (CPoem class 0x7fb); CPoemScroller::Constructor pool scan @00426453 — no per-ID immediate.",
+      "ship": false
+    },
+    "0x00010010": {
+      "slug": "poem_divne_zvuky",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Divné zvuky»; same CPoemScroller enumeration as 0x1000f.",
+      "ship": false
+    },
+    "0x00010011": {
+      "slug": "poem_zpoved",
+      "folder": "ui/credits/poems",
+      "notes": "Poem «Zpověď»; same CPoemScroller enumeration as 0x1000f.",
+      "ship": false
+    },
+    "0x00010012": {
+      "slug": "pack_dsm_inner_bulanci_tmp",
+      "folder": "pack/stub",
+      "notes": "DsmInner overlay pack slot — 8-byte-prefixed PE installer stub (BULANCI.TMP); not CDSDsmFile; zero exe xrefs.",
+      "ship": false
+    },
+    "0x00010013": {
+      "slug": "ui_post_match_pillar_bitmap",
+      "folder": "menu",
+      "notes": "CColorSet slot-pillar chrome: 2×4 team-color swatch atlas (palette-tinted in CColorSet_Render). PUSH 0x10013 @0041005e; g_k_bulanci_bitmap_cache_ids[+0x10] @004ae018. Agent9/10 visual.",
+      "ship": false
+    },
+    "0x00010014": {
+      "slug": "widget_color_swatch_atlas",
+      "folder": "menu/widgets/color_switch",
+      "notes": "6px-wide colour swatch atlas for CColorSwitch (+0x70). PUSH 0x10014 @0041013f CColorSwitch_BuildAt; widgets.md. Agent2/30.",
+      "ship": false
+    },
+    "0x00010015": {
+      "slug": "level_vybijena_overlay",
+      "folder": "levels/vybijena",
+      "notes": "Full-screen InsertView layer for level script 65855 (Vybíjená) OnInit @0x017f. Script-confirmed. Agent2/30.",
+      "ship": false
+    },
+    "0x00010016": {
+      "slug": "hud_avatar_shotgun_mode",
+      "folder": "gameplay/hud",
+      "notes": "Tiny player-avatar strip loaded in CPanel_ctor when CGameGetModeAndScoreLimit returns mode 2 (shotgun-only); PUSH 0x10016 @004282c4, CDSBitmap per column +0x98. Agent2/30.",
+      "ship": false
+    },
+    "0x00010017": {
+      "slug": "hud_status_icon_7",
+      "folder": "gameplay/hud",
+      "notes": "g_dwGamingHudBitmapResIds[7] (0x10017) -> CGaming+0xa4. CGaming_ctor @0041ff90. Agent2/30.",
+      "ship": false
+    },
+    "0x00010018": {
+      "slug": "hud_status_icon_4",
+      "folder": "gameplay/hud",
+      "notes": "g_dwGamingHudBitmapResIds[4] (0x10018) -> CGaming+0x98. CGaming_ctor @0041ff90. Agent2/30.",
+      "ship": false
+    },
+    "0x00010019": {
+      "slug": "hud_status_icon_5",
+      "folder": "gameplay/hud",
+      "notes": "g_dwGamingHudBitmapResIds[5] (0x10019) -> CGaming+0x9c. CGaming_ctor @0041ff90. Agent2/30.",
+      "ship": false
+    },
+    "0x0001001a": {
+      "slug": "hud_status_icon_6",
+      "folder": "gameplay/hud",
+      "notes": "g_dwGamingHudBitmapResIds[6] (0x1001a) -> CGaming+0xa0. CGaming_ctor @0041ff90. Agent2/30.",
+      "ship": false
+    },
+    "0x0001001b": {
+      "slug": "lobby_avatar_stage",
+      "folder": "menu/lobby",
+      "notes": "BitmapSpecial stage under lobby CGameView (ODSImage parent). PUSH 0x1001b @0041068d CStartGame2_ctor before CGameView ctor. Agent2/30.",
+      "ship": false
+    },
+    "0x0001001c": {
+      "slug": "hud_portrait_frame",
+      "folder": "gameplay/hud",
+      "notes": "g_k_bulanci_bitmap_cache_ids[+0x14] (menu cache index 5); prefetched in CBulanci_BuildBitmapCache; pairs with hud_player_portrait 0x1001d at +0x18. No immediate push — cache slot only. Agent2/30.",
+      "ship": false
+    },
+    "0x0001001d": {
+      "slug": "hud_player_portrait",
+      "folder": "gameplay/hud",
+      "notes": "CBulPicture portrait atlas in CPanel_ctor (FUN_004101d0); PUSH 0x1001d @00428401. Also menu cache index 6. decomp-confirmed. Agent2/30.",
+      "ship": false
+    },
+    "0x0001001e": {
+      "slug": "btn_dialog_hover",
+      "folder": "menu/widgets/dialog_button",
+      "notes": "Dialog button skin — mouse hover.",
+      "ship": true
+    },
+    "0x0001001f": {
+      "slug": "btn_dialog_normal",
+      "folder": "menu/widgets/dialog_button",
+      "notes": "Dialog button skin — idle.",
+      "ship": true
+    },
+    "0x00010020": {
+      "slug": "btn_dialog_pressed",
+      "folder": "menu/widgets/dialog_button",
+      "notes": "Dialog button skin — pressed.",
+      "ship": true
+    },
+    "0x00010021": {
+      "slug": "hud_num_counter_frame",
+      "folder": "hud/counters",
+      "notes": "CNumCounter backdrop/frame (0x10021); digit strip is 0x10076.",
+      "ship": false
+    },
+    "0x00010022": {
+      "slug": "game_load_counter_bg",
+      "folder": "ui/load_screen",
+      "notes": "Level-load modal backdrop (CGameCounterCtor).",
+      "ship": false
+    },
+    "0x00010023": {
+      "slug": "game_load_counter_frame",
+      "folder": "ui/load_screen",
+      "notes": "Level-load modal frame/decoration.",
+      "ship": false
+    },
+    "0x00010024": {
+      "slug": "game_load_counter_cancel_btn",
+      "folder": "ui/load_screen",
+      "notes": "Round red cancel / in-progress button on load screen.",
+      "ship": false
+    },
+    "0x00010025": {
+      "slug": "exitus_scenery_grave_stone_cross_bg",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 @0x02c8 stone-cross open grave + spruce parallax at (404,56); SetOrderAxis(-25) under 65574.",
+      "ship": false
+    },
+    "0x00010026": {
+      "slug": "exitus_scenery_grave_stone_cross_fg",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 @0x02b2 stone-cross open grave + spruce foreground at (404,56).",
+      "ship": false
+    },
+    "0x00010027": {
+      "slug": "exitus_scenery_grave_cross_tilted_bg",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 @0x0341 tilted wooden cross parallax at (664,113); SetOrderAxis(-20) under 65580.",
+      "ship": false
+    },
+    "0x00010028": {
+      "slug": "exitus_scenery_grave_double_bg",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 @0x03a4 InsertView SetOrderAxis(-20) CreateImage(82,237) — twin-cross parallax back.",
+      "ship": false
+    },
+    "0x00010029": {
+      "slug": "exitus_scenery_grave_double_fg",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 @0x038e InsertView CreateImage(82,237) — twin crosses + pine foreground.",
+      "ship": false
+    },
+    "0x0001002a": {
+      "slug": "exitus_scenery_grave_single_bg",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 @0x041d InsertView SetOrderAxis(-25) CreateImage(294,361) — single-cross parallax back.",
+      "ship": false
+    },
+    "0x0001002b": {
+      "slug": "exitus_scenery_grave_bulanek_fg",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 @0x0407 InsertView CreateImage(294,361) — cross + Bulánek burial mound foreground.",
+      "ship": false
+    },
+    "0x0001002c": {
+      "slug": "exitus_scenery_grave_cross_tilted_fg",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 @0x032b InsertView CreateImage(664,113) — tilted lone cross foreground; pairs with 0x10027 bg.",
+      "ship": false
+    },
+    "0x0001002d": {
+      "slug": "exitus_scenery_spruce_bg",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 InsertView CreateImage(50,71) with SetOrderAxis(-25); back spruce parallax under 0x1002e.",
+      "ship": false
+    },
+    "0x0001002e": {
+      "slug": "exitus_scenery_tree_fence_fg",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 InsertView CreateImage(50,71); tree+fence foreground at same anchor as 0x1002d.",
+      "ship": false
+    },
+    "0x0001002f": {
+      "slug": "exitus_scenery_pine_branch_top",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 optional top-edge pine; fn@0x239 1/6 roll CreateImage(625,0).",
+      "ship": false
+    },
+    "0x00010030": {
+      "slug": "exitus_scenery_conifer_bush",
+      "folder": "levels/exitus/scenery",
+      "notes": "Exitus script 65860 optional conifer bush; fn@0x239 1/6 roll CreateImage(678,250).",
+      "ship": false
+    },
+    "0x00010031": {
+      "slug": "proj_rocket_up",
+      "folder": "gameplay/projectile",
+      "notes": "In-flight rocket projectile (322B BitmapSpecial, nose up). CGaming_ctor preload slot 11 @ g_dwCgamingPreloadResourceIds+0x2c (0x00482994). PNG-verified; mislabeled proj_syringe.",
+      "ship": true
+    },
+    "0x00010032": {
+      "slug": "proj_rocket_left",
+      "folder": "gameplay/projectile",
+      "notes": "In-flight rocket (322B, nose left). CGaming_ctor preload slot 8 @ 0x00482988. PNG-verified.",
+      "ship": true
+    },
+    "0x00010033": {
+      "slug": "proj_rocket_right",
+      "folder": "gameplay/projectile",
+      "notes": "In-flight rocket (322B, nose right). CGaming_ctor preload slot 9 @ 0x0048298c. PNG-verified.",
+      "ship": true
+    },
+    "0x00010034": {
+      "slug": "proj_rocket_down",
+      "folder": "gameplay/projectile",
+      "notes": "In-flight rocket (322B, nose down). CGaming_ctor preload slot 10 @ 0x00482990. PNG-verified.",
+      "ship": true
+    },
+    "0x00010035": {
+      "slug": "level_exitus_preface",
+      "folder": "levels/exitus",
+      "notes": "Exitus level script 65860 LoadPreface background (1.4 MiB BitmapSpecial).",
+      "ship": true
+    },
+    "0x00010036": {
+      "slug": "ui_history_movie_archeology_1995",
+      "folder": "menu/history",
+      "notes": "HistoryScript 65845 HCreateMovie clip beside the 23.2.1995 archaeology entry.",
+      "ship": true
+    },
+    "0x00010037": {
+      "slug": "ui_pageNav_first_pressed",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: first-page button pressed state (g_CHelpHistory_NavIconResourceIds).",
+      "ship": true
+    },
+    "0x00010038": {
+      "slug": "ui_pageNav_first_normal",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: first-page button idle (CIcon slot @ 0x482b28 / History dlg).",
+      "ship": true
+    },
+    "0x00010039": {
+      "slug": "ui_pageNav_first_hover",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: first-page button hover.",
+      "ship": true
+    },
+    "0x0001003a": {
+      "slug": "ui_pageNav_prev_hover",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: previous-page button hover (History dlg 3rd CIcon).",
+      "ship": true
+    },
+    "0x0001003b": {
+      "slug": "ui_pageNav_prev_normal",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: previous-page button idle (CHelpDlg @ 0x482b1c).",
+      "ship": true
+    },
+    "0x0001003c": {
+      "slug": "ui_pageNav_prev_pressed",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: prev-page pressed; g_kHelpDlg_pageNavIconResIds[+0x20] / History mirror @ 0x48338c.",
+      "ship": true
+    },
+    "0x0001003d": {
+      "slug": "ui_pageNav_next_hover",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: next-page hover; CIcon slot base 0x482b10+4.",
+      "ship": true
+    },
+    "0x0001003e": {
+      "slug": "ui_pageNav_next_normal",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: next-page idle; CIcon slot base 0x482b10.",
+      "ship": true
+    },
+    "0x0001003f": {
+      "slug": "ui_pageNav_next_pressed",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: next-page pressed; g_kHelpDlg_pageNavIconResIds[+0x14].",
+      "ship": true
+    },
+    "0x00010040": {
+      "slug": "ui_pageNav_last_hover",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: last-page hover; g_kHelpDlg_pageNavIconResIds[+4] (CIcon base 0x482b04).",
+      "ship": true
+    },
+    "0x00010041": {
+      "slug": "ui_pageNav_last_normal",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: last-page button idle (15×21). CIcon table @ 0x482b04 / 0x48336c; CHelpDlgCtor @ 00422041, CHistoryDlg_ctor @ 004233d1.",
+      "ship": true
+    },
+    "0x00010042": {
+      "slug": "ui_pageNav_last_pressed",
+      "folder": "menu/widgets/page_nav",
+      "notes": "CHelp/History nav: last-page button pressed; paired +8 B from 0x10041 in same CIcon triplet.",
+      "ship": true
+    },
+    "0x00010043": {
+      "slug": "icon_history",
+      "folder": "menu/icons",
+      "notes": "Main menu History icon normal (130×26 @ 100,139). DAT_004af914=65603; CMenu_ctor_with_ui READ @ 004268e3. Pairs with icon_history_hi (0x10044); matches icon_start/icon_quit naming.",
+      "ship": true
+    },
+    "0x00010044": {
+      "slug": "icon_history_hi",
+      "folder": "menu/icons",
+      "notes": "Main menu History icon highlight (hidden until hover); DAT_004af918=65604; CMenu_ctor_with_ui @ 00426963.",
+      "ship": true
+    },
+    "0x00010045": {
+      "slug": "ui_history_movie_still_1986",
+      "folder": "menu/history",
+      "notes": "HCreateMovie still (166×153) beside 12.7.1986 timeline row; HistoryScript 65844 @0x06b7 at (350,90). Overlay-only.",
+      "ship": true
+    },
+    "0x00010046": {
+      "slug": "level_bedtime_rock_cluster",
+      "folder": "levels/bedtime_story/scenery",
+      "notes": "Rock cluster on grass (68×61). Script 65856 fn@0x394 InsertView z=-25; bird-nest CreateAnim slot 9 @ (+17,-29).",
+      "ship": false
+    },
+    "0x00010047": {
+      "slug": "level_bedtime_berry_bush",
+      "folder": "levels/bedtime_story/scenery",
+      "notes": "Large berry bush (148×116). Script 65856 fn@0x4e1 z=-25; butterfly CreateAnim slot 4 @ (+82,+1).",
+      "ship": false
+    },
+    "0x00010048": {
+      "slug": "level_bedtime_berry_bush_sm",
+      "folder": "levels/bedtime_story/scenery",
+      "notes": "Small berry bush (101×76). Script 65856 fn@0x5c9 SetObstacleBounds z=-40.",
+      "ship": false
+    },
+    "0x00010049": {
+      "slug": "level_bedtime_fallen_log",
+      "folder": "levels/bedtime_story/scenery",
+      "notes": "Fallen log on grass (135×114). Script 65856 fn@0x286; chimney-smoke CreateAnim slot 6 @ (+49,-15).",
+      "ship": false
+    },
+    "0x0001004a": {
+      "slug": "dead_orphan_dot",
+      "folder": "gameplay/unused",
+      "notes": "Dead master-pack slot: 89×89 monochrome dot, zero engine/script/installer consumers (confirmed-dead-asset).",
+      "ship": false
+    },
+    "0x0001004b": {
+      "slug": "icon_quit",
+      "folder": "menu/icons",
+      "notes": "Main-menu Konec icon idle (130×26). g_dwRes_0x1004b_icon_quit @ 0x004af91c.",
+      "ship": true
+    },
+    "0x0001004c": {
+      "slug": "icon_quit_hi",
+      "folder": "menu/icons",
+      "notes": "Main-menu Konec icon hover (130×26). g_dwRes_0x1004c_icon_quit_hi @ 0x004af920.",
+      "ship": true
+    },
+    "0x0001004d": {
+      "slug": "history_p3_cinematic_still",
+      "folder": "menu/history",
+      "notes": "History page 3 (res 65845) HCreateMovie still @ (350,90) beside 1995 riot-anniversary prose; pairs MPX 77828/77829.",
+      "ship": false
+    },
+    "0x0001004e": {
+      "slug": "hud_spell_icon",
+      "folder": "gameplay/hud",
+      "notes": "BitmapSpecial 38×15 base art for per-player CSpells HUD widget (CSpellsCtor loads 0x1004e).",
+      "ship": false
+    },
+    "0x0001004f": {
+      "slug": "gaming_hud_glyph_4x9",
+      "folder": "gameplay/hud",
+      "notes": "Tiny 4×9 HUD glyph; last entry in g_dwGamingHudBitmapResIds loaded into CGaming+0x88 ring.",
+      "ship": false
+    },
+    "0x00010050": {
+      "slug": "gaming_hud_glyph_9x4_a",
+      "folder": "gameplay/hud",
+      "notes": "9×4 paletted HUD glyph; g_dwGamingHudBitmapResIds[12] (0x10050) → CGaming+0xb8. CGaming_ctor @ 0x0041ff90. decomp-confirmed.",
+      "ship": false
+    },
+    "0x00010051": {
+      "slug": "gaming_hud_glyph_9x4_b",
+      "folder": "gameplay/hud",
+      "notes": "9×4 HUD glyph variant (frame 1); g_dwGamingHudBitmapResIds[13] → CGaming+0xbc.",
+      "ship": false
+    },
+    "0x00010052": {
+      "slug": "gaming_hud_glyph_4x9_c",
+      "folder": "gameplay/hud",
+      "notes": "4×9 HUD glyph; g_dwGamingHudBitmapResIds[14] (0x10052) → CGaming+0xc0, precedes slot-15 0x1004f.",
+      "ship": false
+    },
+    "0x00010053": {
+      "slug": "level_bedtime_bg_fullscreen",
+      "folder": "levels/bedtime_story",
+      "notes": "Bedtime story / Na dobrou noc (script 65856) full-screen backdrop 800×515; OnInit InsertView @ (0,0). Script-confirmed.",
+      "ship": false
+    },
+    "0x00010054": {
+      "slug": "level_steel_works_prop_boxes",
+      "folder": "levels/steel_works",
+      "notes": "SleepTeam-branded cardboard crates (202×90). script 65857 InsertView @ (551,425). Agent03/10.",
+      "ship": false
+    },
+    "0x00010055": {
+      "slug": "level_steel_works_bg_mid",
+      "folder": "levels/steel_works",
+      "notes": "Steel works mid-layer 334×408; script 65857 InsertView insert-mode 2 @ (0,0).",
+      "ship": false
+    },
+    "0x00010056": {
+      "slug": "level_steel_works_parallax_pod",
+      "folder": "levels/steel_works",
+      "notes": "Tilted furnace/capsule prop (272×270) for parallax layer @ (129,99), SetOrderAxis z=-110. script 65857. Agent03/10.",
+      "ship": false
+    },
+    "0x00010057": {
+      "slug": "level_steel_works_bg_back",
+      "folder": "levels/steel_works",
+      "notes": "Steel works rear backdrop 800×515; script 65857 InsertView @ (0,0) before parallax stack.",
+      "ship": false
+    },
+    "0x00010058": {
+      "slug": "level_steel_works_preface",
+      "folder": "levels/steel_works",
+      "notes": "Steel works LoadPreface scroll 800×600 (script 65857 @ 0x00e1) before layered InsertView setup.",
+      "ship": false
+    },
+    "0x00010059": {
+      "slug": "level_steel_works_hanging_lamp",
+      "folder": "levels/steel_works",
+      "notes": "Industrial hanging lamp (87×133) @ (713,0). script 65857 InsertView. Agent03/10.",
+      "ship": false
+    },
+    "0x0001005a": {
+      "slug": "level_steel_works_crane_hook",
+      "folder": "levels/steel_works",
+      "notes": "Diagonal crane hook / rod with ring (64×192) @ (736,323). script 65857 insert-mode 2. Agent03/10.",
+      "ship": false
+    },
+    "0x0001005b": {
+      "slug": "level_malaria_bush",
+      "folder": "levels/malaria",
+      "notes": "Jungle bush prop (310×228) at (432,61). overlay script 65858 (Malaria / Malárie) OnInit.",
+      "ship": false
+    },
+    "0x0001005c": {
+      "slug": "level_malaria_fore_branches",
+      "folder": "levels/malaria",
+      "notes": "Foreground bare-branch frame overlay (800×515, mostly transparent). InsertView last @65858+0x0232 after all anim layers. Agent04/10.",
+      "ship": false
+    },
+    "0x0001005d": {
+      "slug": "level_8bit_wire_pyramid",
+      "folder": "levels/8bit",
+      "notes": "1-bit wireframe pyramid decor (120×148). SetOrderAxis z=-67 at (300,106). overlay script 65859 (8-bit / V zajetí 8-bitu).",
+      "ship": false
+    },
+    "0x0001005e": {
+      "slug": "level_8bit_wire_glyph_sm",
+      "folder": "levels/8bit",
+      "notes": "Small 1-bit wireframe prop (36×68). SetOrderAxis z=-30 at (133,55). overlay script 65859.",
+      "ship": false
+    },
+    "0x0001005f": {
+      "slug": "level_8bit_wire_prism",
+      "folder": "levels/8bit",
+      "notes": "1-bit wireframe prism (180×149). SetOrderAxis z=-25 at (58,250). overlay script 65859 InsertView.",
+      "ship": false
+    },
+    "0x00010060": {
+      "slug": "level_8bit_spawn_pool_3",
+      "folder": "levels/8bit",
+      "notes": "SpawnOpponentEx random-skin pool [3] (5×9). CollInsert last into gvar 12; overlay script 65859.",
+      "ship": false
+    },
+    "0x00010061": {
+      "slug": "level_8bit_spawn_pool_0",
+      "folder": "levels/8bit",
+      "notes": "SpawnOpponentEx random-skin pool [0] (9×5). First CollInsert into gvar 12; overlay script 65859.",
+      "ship": false
+    },
+    "0x00010062": {
+      "slug": "level_8bit_spawn_pool_1",
+      "folder": "levels/8bit",
+      "notes": "SpawnOpponentEx random-skin pool [1] (9×5). CollInsert slot 1; overlay script 65859.",
+      "ship": false
+    },
+    "0x00010063": {
+      "slug": "level_8bit_spawn_pool_2",
+      "folder": "levels/8bit",
+      "notes": "SpawnOpponentEx random-skin pool [2] (5×9). CollInsert slot 2; overlay script 65859.",
+      "ship": false
+    },
+    "0x00010064": {
+      "slug": "level_8bit_bg",
+      "folder": "levels/8bit",
+      "notes": "Full-screen background for level \"V zajetí 8-bitu\" (script 65859). InsertView at (0,0). Not a spawn pool."
+    },
+    "0x00010065": {
+      "slug": "level_8bit_wireframe_dome",
+      "folder": "levels/8bit",
+      "notes": "Wireframe hemisphere decor at (576,80) z=-25 (script 65859). Not a spawn pool."
+    },
+    "0x00010066": {
+      "slug": "level_exitus_bg",
+      "folder": "levels/exitus",
+      "notes": "Full-screen meadow background for Exitus level (script 65860)."
+    },
+    "0x00010067": {
+      "slug": "level_malaria_bg",
+      "folder": "levels/malaria",
+      "notes": "Base swamp/grass ground plane (800×515). First InsertView @65858+0x00ca (insert mode 0). Distinct from 0x1005c branch overlay. Agent04/10."
+    },
+    "0x00010068": {
+      "slug": "level_malaria_preface",
+      "folder": "levels/malaria",
+      "notes": "LoadPreface scroll bitmap shown before Malárie gameplay (script 65858)."
+    },
+    "0x00010069": {
+      "slug": "level_8bit_preface",
+      "folder": "levels/8bit",
+      "notes": "LoadPreface scroll — Space Invaders-style intro for the 8-bit level (script 65859)."
+    },
+    "0x0001006a": {
+      "slug": "level_bedtime_mushroom_house",
+      "folder": "levels/bedtime_story",
+      "notes": "Red-spot mushroom house (220×226). Script 65856 fn@0x01e7 z=-39 with bed obstacle bounds; butterfly CreateAnim slot 8 @ (+50,+50)."
+    },
+    "0x0001006b": {
+      "slug": "level_bedtime_roof_eave",
+      "folder": "levels/bedtime_story",
+      "notes": "Mossy roof eave overlay (113×49) at (+8,+141) relative to mushroom house. Script 65856 fn@0x01e7 — corrected from mis-name grass_edge."
+    },
+    "0x0001006c": {
+      "slug": "weapon_pistol_secondary",
+      "folder": "gameplay/weapons/pistol",
+      "notes": "gAWeaponDefsTable[0].nSecondaryBitmapId (0x1006c) — pistol weapon-pickup secondary still. Vertical sprite strip loaded by CWeapon::ctor @ 0x0041dbc0."
+    },
+    "0x0001006d": {
+      "slug": "hud_status_icon_3",
+      "folder": "gameplay/hud",
+      "notes": "g_dwGamingHudBitmapIds[3] (0x1006d) — fourth HUD/status glyph. Loaded into CGaming+0x94 by CGaming_ctor @ 0x0041ff90."
+    },
+    "0x0001006e": {
+      "slug": "hud_status_icon_0",
+      "folder": "gameplay/hud",
+      "notes": "g_dwGamingHudBitmapIds[0] (0x1006e). Preloaded CGaming_ctor @0x0041ff90 into CGaming+0x88 slot 0. Agent11/30 decomp-confirmed."
+    },
+    "0x0001006f": {
+      "slug": "hud_status_icon_1",
+      "folder": "gameplay/hud",
+      "notes": "g_dwGamingHudBitmapIds[1] (0x1006f). CGaming_ctor preload slot 1. Agent11/30."
+    },
+    "0x00010070": {
+      "slug": "hud_status_icon_2",
+      "folder": "gameplay/hud",
+      "notes": "g_dwGamingHudBitmapIds[2] (0x10070). CGaming_ctor preload slot 2. Agent11/30."
+    },
+    "0x00010071": {
+      "slug": "setup_volume_slider_glyph_1",
+      "folder": "ui/setup",
+      "notes": "g_dwVolumeSliderBitmapIds[1] (0x10071). CSetupDlg CVolume_BuildAt @0x0040e388. Agent11/30."
+    },
+    "0x00010072": {
+      "slug": "setup_volume_slider_glyph_0",
+      "folder": "ui/setup",
+      "notes": "g_dwVolumeSliderBitmapIds[0] (0x10072). CSetupDlg volume slider middle glyph. Agent11/30."
+    },
+    "0x00010073": {
+      "slug": "setup_volume_slider_glyph_2",
+      "folder": "ui/setup",
+      "notes": "g_dwVolumeSliderBitmapIds[2] (0x10073). CSetupDlg volume slider right glyph. Agent11/30."
+    },
+    "0x00010074": {
+      "slug": "history_movie_torch_cauldron",
+      "folder": "ui/history",
+      "notes": "HCreateMovie still in HistoryScript 65844 @0x069d (65652). Olympic torch / cauldron scene. Agent11/30."
+    },
+    "0x00010075": {
+      "slug": "hud_panel_bottom_bar_bg",
+      "folder": "gameplay/hud",
+      "notes": "CPanelCtor PUSH/load 0x10075 @0x00428170 — full-width in-game HUD strip background. Agent11/30 decomp-confirmed."
+    },
+    "0x00010076": {
+      "slug": "hud_counter_digit_strip_0_9",
+      "folder": "gameplay/hud",
+      "notes": "Vertical 0-9 digit strip; gAShotCounterIconIds[3] and gANumCounterIconIds[0] @0x004af940. CShotCounter/CNumCounter HUD. Agent11/30."
+    },
+    "0x00010077": {
+      "slug": "radio_unselected_hover",
+      "folder": "menu/widgets/radio",
+      "notes": "g_anRadioBitmapIds[1] (0x10077). CRadio_BuildAt cell state: unselected+hover. Agent11/30.",
+      "ship": true
+    },
+    "0x00010078": {
+      "slug": "radio_selected_hover",
+      "folder": "menu/widgets/radio",
+      "notes": "Radio button: selected + mouse hover.",
+      "ship": true
+    },
+    "0x00010079": {
+      "slug": "radio_unselected",
+      "folder": "menu/widgets/radio",
+      "notes": "Radio button: unselected, idle.",
+      "ship": true
+    },
+    "0x0001007a": {
+      "slug": "radio_selected",
+      "folder": "menu/widgets/radio",
+      "notes": "Radio button: selected, idle.",
+      "ship": true
+    },
+    "0x0001007b": {
+      "slug": "radio_keyboard_focus",
+      "folder": "menu/widgets/radio",
+      "notes": "g_anRadioBitmapIds[4] (0x1007b). CRadio cell state[4] keyboard focus per widgets.md §CRadio.",
+      "ship": true
+    },
+    "0x0001007c": {
+      "slug": "hud_shot_counter_ammo_strip",
+      "folder": "gameplay/hud",
+      "notes": "Shot-counter ammo glyph strip. g_dwShotCounterIconResIds[0] @ 0x004af938; CShotCounterCtor.",
+      "ship": true
+    },
+    "0x0001007d": {
+      "slug": "ui_setup_volume_slider_end_pressed",
+      "folder": "ui/setup",
+      "notes": "CSetupDlg horizontal CVolume end-cap pressed. g_volumeSliderBitmapIds[7] @ 0x004aea50.",
+      "ship": false
+    },
+    "0x0001007e": {
+      "slug": "ui_setup_volume_slider_end_normal",
+      "folder": "ui/setup",
+      "notes": "Setup volume slider end-cap normal. g_volumeSliderBitmapIds[6] @ 0x004aea4c.",
+      "ship": false
+    },
+    "0x0001007f": {
+      "slug": "ui_setup_volume_slider_end_disabled",
+      "folder": "ui/setup",
+      "notes": "Setup volume slider end-cap disabled. g_volumeSliderBitmapIds[8] @ 0x004aea54.",
+      "ship": false
+    },
+    "0x00010080": {
+      "slug": "hud_panel_player_bitmap",
+      "folder": "gameplay/hud",
+      "notes": "Per-player HUD column avatar strip. PUSH 0x10080 @ CPanelCtor 0x00428265.",
+      "ship": true
+    },
+    "0x00010081": {
+      "slug": "scroll_thumb_pressed",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "Shared thumb pressed: g_kScrollBarBitmapIds_H[4] @ 004ae5d4, g_volumeSliderBitmapIds[4] @ 004aea44. Vertical skin uses 0x10082 (65666). CScrollBar_BuildAt / CSetupDlg volume. Wave2 batch 5.",
+      "ship": true
+    },
+    "0x00010082": {
+      "slug": "scroll_v_thumb_pressed",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "CScrollBar vertical default skin thumb pressed (g_kScrollBarBitmapIds_V[4] @ 004ae5b0). Wave2 batch 5.",
+      "ship": true
+    },
+    "0x00010083": {
+      "slug": "scroll_thumb_normal",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "Shared thumb idle: g_kScrollBarBitmapIds_H[3] @ 004ae5d0, g_volumeSliderBitmapIds[3] @ 004aea40. Wave2 batch 5.",
+      "ship": true
+    },
+    "0x00010084": {
+      "slug": "scroll_v_thumb_normal",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "CScrollBar vertical default skin thumb normal (g_kScrollBarBitmapIds_V[3] @ 004ae5ac). Wave2 batch 5.",
+      "ship": true
+    },
+    "0x00010085": {
+      "slug": "scroll_thumb_disabled",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "Shared thumb disabled: g_kScrollBarBitmapIds_H[5] @ 004ae5d8, g_volumeSliderBitmapIds[5] @ 004aea48. Wave2 batch 5.",
+      "ship": true
+    },
+    "0x00010086": {
+      "slug": "scroll_v_thumb_disabled",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "CScrollBar vertical default skin thumb disabled (g_kScrollBarBitmapIds_V[5] @ 004ae5b4). Wave2 batch 5.",
+      "ship": true
+    },
+    "0x00010087": {
+      "slug": "scroll_v_bottom_pressed",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "CScrollBar vertical default skin bottom arrow pressed (g_kScrollBarBitmapIds_V[7] @ 004ae5bc). Wave2 batch 5.",
+      "ship": true
+    },
+    "0x00010088": {
+      "slug": "scroll_h_top_pressed",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "CScrollBar horizontal default skin top/left arrow pressed (g_kScrollBarBitmapIds_H[1] @ 004ae5c8). Wave2 batch 5.",
+      "ship": true
+    },
+    "0x00010089": {
+      "slug": "scroll_h_bottom_pressed",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "CScrollBar horizontal default skin bottom/right arrow pressed (g_kScrollBarBitmapIds_H[7] @ 004ae5e0). Wave2 batch 5.",
+      "ship": true
+    },
+    "0x0001008a": {
+      "slug": "scroll_v_top_pressed",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "CScrollBar vertical default skin top arrow pressed (g_kScrollBarBitmapIds_V[1] @ 004ae5a4). Wave2 batch 5.",
+      "ship": true
+    },
+    "0x0001008b": {
+      "slug": "scroll_v_bottom_normal",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "g_dwScrollbarVertDefaultBitmapIds[6] (0x1008b). Vertical scrollbar bottom arrow, normal @ DAT_004ae5b8. CScrollBar_BuildAt; CBulanci_OnCreate preload. Wave2 batch 6.",
+      "ship": true
+    },
+    "0x0001008c": {
+      "slug": "ui_scrollbar_h_arrow_left_normal",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "g_dwScrollBarBitmapIds_H[0] (0x1008c). Horizontal scrollbar top/left arrow, normal @ DAT_004ae5c4. CScrollBar_BuildAt default skin. Wave2 batch 6.",
+      "ship": true
+    },
+    "0x0001008d": {
+      "slug": "ui_scrollbar_h_arrow_right_normal",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "g_dwScrollBarBitmapIds_H[6] (0x1008d). Horizontal scrollbar bottom/right arrow, normal @ DAT_004ae5dc. Wave2 batch 6.",
+      "ship": true
+    },
+    "0x0001008e": {
+      "slug": "ui_scrollbar_v_arrow_up_normal",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "g_dwScrollBarBitmapIds_V[0] (0x1008e). Vertical scrollbar top arrow, normal @ DAT_004ae5a0. Wave2 batch 6.",
+      "ship": true
+    },
+    "0x0001008f": {
+      "slug": "ui_scrollbar_v_arrow_down_disabled",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "g_dwScrollBarBitmapIds_V[8] (0x1008f). Vertical scrollbar bottom arrow, disabled @ DAT_004ae5c0. Wave2 batch 6.",
+      "ship": true
+    },
+    "0x00010090": {
+      "slug": "ui_scrollbar_h_arrow_left_disabled",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "g_dwScrollBarBitmapIds_H[2] (0x10090). Horizontal scrollbar top/left arrow, disabled @ DAT_004ae5cc. Wave2 batch 6.",
+      "ship": true
+    },
+    "0x00010091": {
+      "slug": "ui_scrollbar_h_arrow_right_disabled",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "g_dwScrollBarBitmapIds_H[8] (0x10091). Horizontal scrollbar bottom/right arrow, disabled @ DAT_004ae5e4. Wave2 batch 6.",
+      "ship": true
+    },
+    "0x00010092": {
+      "slug": "ui_scrollbar_v_arrow_up_disabled",
+      "folder": "ui/widgets/scrollbar",
+      "notes": "g_dwScrollBarBitmapIds_V[2] (0x10092). Vertical scrollbar top arrow, disabled @ DAT_004ae5a8. Wave2 batch 6.",
+      "ship": true
+    },
+    "0x00010093": {
+      "slug": "icon_start",
+      "folder": "menu/icons",
+      "notes": "g_dwMenuIconRes_StartNormal @ 0x004af90c. CMenu_ctor_with_ui CDSBitmap @ (100,55). Pairs with icon_start_hi (0x10094). Wave2 batch 6.",
+      "ship": true
+    },
+    "0x00010094": {
+      "slug": "icon_start_hi",
+      "folder": "menu/icons",
+      "notes": "g_dwMenuIconRes_StartHighlight @ 0x004af910. CMenu+0x94 hover; hidden until swap. Wave2 batch 6.",
+      "ship": true
+    },
+    "0x00010095": {
+      "slug": "ui_scoreboard_background",
+      "folder": "ui/score",
+      "notes": "BitmapSpecial 0x10095 — CScoreCtor single-player high-score panel backdrop (800x600). g_dwResId_ui_scoreboard_background @ 0x004ae0cc; PUSH @ 0x00411825. Wave2 batch 7/15.",
+      "ship": true
+    },
+    "0x00010096": {
+      "slug": "score_avatar_rank1_tie0",
+      "folder": "gameplay/scoreboard",
+      "notes": "Post-match CScore column portrait (1st-place column portrait (tie slot 0).). Sparse 4x4 table g_dwScoreRowAvatarResIds[0].",
+      "ship": true
+    },
+    "0x00010097": {
+      "slug": "score_avatar_rank2_tie0",
+      "folder": "gameplay/scoreboard",
+      "notes": "Post-match CScore column portrait (2nd-place column portrait (tie slot 0).). Sparse 4x4 table g_dwScoreRowAvatarResIds[4].",
+      "ship": true
+    },
+    "0x00010098": {
+      "slug": "score_avatar_rank2_tie1",
+      "folder": "gameplay/scoreboard",
+      "notes": "Post-match CScore column portrait (2nd-place column portrait (tie slot 1).). Sparse 4x4 table g_dwScoreRowAvatarResIds[5].",
+      "ship": true
+    },
+    "0x00010099": {
+      "slug": "score_avatar_rank3_tie0",
+      "folder": "gameplay/scoreboard",
+      "notes": "Post-match CScore column portrait (3rd-place column portrait (tie slot 0).). Sparse 4x4 table g_dwScoreRowAvatarResIds[8].",
+      "ship": true
+    },
+    "0x0001009a": {
+      "slug": "score_avatar_rank3_tie1",
+      "folder": "gameplay/scoreboard",
+      "notes": "Post-match CScore column portrait (3rd-place column portrait (tie slot 1).). Sparse 4x4 table g_dwScoreRowAvatarResIds[9].",
+      "ship": true
+    },
+    "0x0001009b": {
+      "slug": "score_avatar_rank3_tie2",
+      "folder": "gameplay/scoreboard",
+      "notes": "Post-match CScore column portrait (3rd-place column portrait (tie slot 2).). Sparse 4x4 table g_dwScoreRowAvatarResIds[10].",
+      "ship": true
+    },
+    "0x0001009c": {
+      "slug": "score_avatar_rank4_tie0",
+      "folder": "gameplay/scoreboard",
+      "notes": "Post-match CScore column portrait (4th-place column portrait (tie slot 0).). Sparse 4x4 table g_dwScoreRowAvatarResIds[12].",
+      "ship": true
+    },
+    "0x0001009d": {
+      "slug": "score_avatar_rank4_tie1",
+      "folder": "gameplay/scoreboard",
+      "notes": "Post-match CScore column portrait (4th-place column portrait (tie slot 1).). Sparse 4x4 table g_dwScoreRowAvatarResIds[13].",
+      "ship": true
+    },
+    "0x0001009e": {
+      "slug": "score_avatar_rank4_tie2",
+      "folder": "gameplay/scoreboard",
+      "notes": "Post-match CScore column portrait (4th-place column portrait (tie slot 2).). Sparse 4x4 table g_dwScoreRowAvatarResIds[14].",
+      "ship": true
+    },
+    "0x0001009f": {
+      "slug": "score_avatar_rank4_tie3",
+      "folder": "gameplay/scoreboard",
+      "notes": "Post-match CScore column portrait (4th-place column portrait (tie slot 3).). Sparse 4x4 table g_dwScoreRowAvatarResIds[15].",
+      "ship": true
+    },
+    "0x000100a0": {
+      "slug": "weapon_hud_special_secondary",
+      "folder": "gameplay/weapons",
+      "notes": "HUD/inventory secondary icon for special pickup (weapon kind 1). Table field gAWeaponDefsTable[1].nSecondaryBitmapId @ 0x00482850.",
+      "ship": true
+    },
+    "0x000100a1": {
+      "slug": "weapon_hud_rocket_secondary",
+      "folder": "gameplay/weapons",
+      "notes": "HUD secondary icon for rocket launcher (weapon kind 5). gAWeaponDefsTable[5].nSecondaryBitmapId @ 0x004828c0.",
+      "ship": true
+    },
+    "0x000100a2": {
+      "slug": "weapon_hud_mg_secondary",
+      "folder": "gameplay/weapons",
+      "notes": "HUD secondary icon for machine gun (weapon kind 4). gAWeaponDefsTable[4].nSecondaryBitmapId @ 0x004828a4.",
+      "ship": true
+    },
+    "0x000100a3": {
+      "slug": "weapon_hud_mine_secondary",
+      "folder": "gameplay/weapons",
+      "notes": "HUD secondary icon for landmines (weapon kind 2). gAWeaponDefsTable[2].nSecondaryBitmapId @ 0x0048286c.",
+      "ship": true
+    },
+    "0x000100a4": {
+      "slug": "scoreboard_floor_grid",
+      "folder": "gameplay/scoreboard",
+      "notes": "Post-match score screen floor / perspective grid backdrop (resource 0x100a4).",
+      "ship": true
+    },
+    "0x000100a5": {
+      "slug": "hud_shot_counter_bg",
+      "folder": "gameplay/hud",
+      "notes": "Background strip for per-player shot/ammo counter widget (CShotCounter).",
+      "ship": true
+    },
+    "0x000100a6": {
+      "slug": "hud_shot_counter_ammo_icon_0",
+      "folder": "gameplay/hud",
+      "notes": "Shot-counter ammo icon strip slot 0 in gAShotCounterIconIds[0].",
+      "ship": true
+    },
+    "0x000100a7": {
+      "slug": "weapon_hud_rocket_still",
+      "folder": "gameplay/weapons",
+      "notes": "HUD primary icon for rocket launcher (weapon kind 5). gAWeaponDefsTable[5].nStillBitmapId @ 0x004828bc.",
+      "ship": true
+    },
+    "0x000100a8": {
+      "slug": "weapon_hud_mg_still",
+      "folder": "gameplay/weapons",
+      "notes": "HUD primary icon for machine gun (weapon kind 4). gAWeaponDefsTable[4].nStillBitmapId @ 0x004828a0.",
+      "ship": true
+    },
+    "0x000100a9": {
+      "slug": "weapon_hud_special_still",
+      "folder": "gameplay/weapons",
+      "notes": "HUD primary icon for special pickup (weapon kind 1). gAWeaponDefsTable[1].nStillBitmapId @ 0x0048284c.",
+      "ship": true
+    },
+    "0x000100aa": {
+      "slug": "weapon_hud_mine_still",
+      "folder": "gameplay/weapons/mine",
+      "notes": "gAWeaponDefsTable[2].nStillBitmapId (kind 2 mines) — CWeapon pickup-widget still. Decomp-confirmed @ CWeapon::ctor 0x0041dbc0."
+    },
+    "0x000100ab": {
+      "slug": "weapon_hud_mg_still",
+      "folder": "gameplay/weapons/machine_gun",
+      "notes": "gAWeaponDefsTable[3].nStillBitmapId (pickup kind 4 machine gun) — CWeapon HUD still; no secondary bitmap in table row."
+    },
+    "0x000100ac": {
+      "slug": "weapon_hud_pistol_still",
+      "folder": "gameplay/weapons/pistol",
+      "notes": "gAWeaponDefsTable[0].nStillBitmapId (kind 0 pistol) — CWeapon pickup-widget still; also preloaded in CPanel_ctor @ 0x004280f0."
+    },
+    "0x000100ad": {
+      "slug": "cursor_reticle_sprite",
+      "folder": "menu/cursor",
+      "notes": "CGunMouse m_pReticleSprite (+0x200) — scope ring BitmapSpecial loaded in CGunMouse_ctor @ 0x00426060. Distinct from manual composite cursor_reticle PNG."
+    },
+    "0x000100ae": {
+      "slug": "font_large",
+      "folder": "engine/fonts",
+      "notes": "Large CDSFont (`0x100ae`) — CButton labels, dialog headings, the `Dále` continue button.",
+      "ship": true
+    },
+    "0x000100af": {
+      "slug": "font_medium",
+      "folder": "engine/fonts",
+      "notes": "Medium CDSFont (`0x100af`) — CRadio labels, CListBox rows, CPoemScroller body, CEdit content.",
+      "ship": true
+    },
+    "0x000100b0": {
+      "slug": "font_small",
+      "folder": "engine/fonts",
+      "notes": "Small CDSFont (`0x100b0`) — version line / copyright text / lobby hints.",
+      "ship": true
+    },
+    "0x000100b1": {
+      "slug": "sprite_mine",
+      "folder": "gameplay/mine",
+      "notes": "CMina landmine BitmapSprite (104×31, 18 frames) — loaded in CMina_Ctor / InitMine @ 0x0041cb70."
+    },
+    "0x000100b2": {
+      "slug": "sprite_explosion",
+      "folder": "gameplay/explosion",
+      "notes": "CExplosion blast BitmapSprite — loaded in CExplosion_Ctor @ 0x0041ce30; chain-detonates other CMina entities."
+    },
+    "0x000100b3": {
+      "slug": "sprite_pickup_special",
+      "folder": "gameplay/pickups",
+      "notes": "g_PickupKind_SpriteIdTable[1] — world sprite for special/hourglass pickup (kind 1); shotgun-shaped prop in shotgun-only training mode."
+    },
+    "0x000100b4": {
+      "slug": "score_walker_rank1_facing0",
+      "folder": "gameplay/scoreboard",
+      "notes": "Facing track 0 (TM_SetTrack index 0). 15 frames @ 55x43. g_dwLobbyWalkerResIds[0] @ 0x00481968 (CStartGame2_ctor); g_dwScoreWalkerResIdsByRank[0] @ 0x004ae748 (CScoreCtor rank*16). Agent18/30.",
+      "ship": true
+    },
+    "0x000100b5": {
+      "slug": "score_walker_rank1_facing1",
+      "folder": "gameplay/scoreboard",
+      "notes": "Facing track 1. 15 frames @ 55x43. g_dwLobbyWalkerResIds[1]; g_dwScoreWalkerResIdsByRank[1]. Agent18/30.",
+      "ship": true
+    },
+    "0x000100b6": {
+      "slug": "score_walker_rank1_facing2",
+      "folder": "gameplay/scoreboard",
+      "notes": "Facing track 2. 15 frames @ 55x43. g_dwLobbyWalkerResIds[2]; g_dwScoreWalkerResIdsByRank[2]. Agent18/30.",
+      "ship": true
+    },
+    "0x000100b7": {
+      "slug": "score_walker_rank1_facing3",
+      "folder": "gameplay/scoreboard",
+      "notes": "Facing track 3. 20 frames @ 55x43. g_dwLobbyWalkerResIds[3]; g_dwScoreWalkerResIdsByRank[3]. Agent18/30.",
+      "ship": true
+    },
+    "0x000100b8": {
+      "slug": "score_walker_rank2_facing0",
+      "folder": "gameplay/scoreboard",
+      "notes": "2nd-place column walker facing 0. 15 frames @ 55x43. g_dwScoreWalkerResIdsByRank[4] (rank1 row). Agent18/30.",
+      "ship": true
+    },
+    "0x000100b9": {
+      "slug": "score_walker_rank2_facing1",
+      "folder": "gameplay/scoreboard",
+      "notes": "2nd-place column walker facing 1. 15 frames @ 55x43. g_dwScoreWalkerResIdsByRank[5]. Agent18/30.",
+      "ship": true
+    },
+    "0x000100ba": {
+      "slug": "score_walker_rank2_facing2",
+      "folder": "gameplay/scoreboard",
+      "notes": "2nd-place column walker facing 2. 15 frames @ 55x43. g_dwScoreWalkerResIdsByRank[6]. Agent18/30.",
+      "ship": true
+    },
+    "0x000100bb": {
+      "slug": "score_walker_rank2_facing3",
+      "folder": "gameplay/scoreboard",
+      "notes": "2nd-place column walker facing 3. 20 frames @ 55x43. g_dwScoreWalkerResIdsByRank[7]. Agent18/30.",
+      "ship": true
+    },
+    "0x000100bc": {
+      "slug": "score_walker_rank3_facing0",
+      "folder": "gameplay/scoreboard",
+      "notes": "3rd-place column walker facing 0. 15 frames @ 55x43. g_dwScoreWalkerResIdsByRank[8] (rank2 row). Agent18/30.",
+      "ship": true
+    },
+    "0x000100bd": {
+      "slug": "score_walker_rank3_facing1",
+      "folder": "gameplay/scoreboard",
+      "notes": "3rd-place column walker facing 1. 15 frames @ 55x43. g_dwScoreWalkerResIdsByRank[9]. Agent18/30.",
+      "ship": true
+    },
+    "0x000100be": {
+      "slug": "score_walker_rank3_facing2",
+      "folder": "gameplay/scoreboard",
+      "notes": "3rd-place column walker facing 2. 43 frames @ 104x55. g_dwScoreWalkerResIdsByRank[10] @ 0x004ae770. Agent19/30.",
+      "ship": true
+    },
+    "0x000100bf": {
+      "slug": "score_walker_rank3_facing3",
+      "folder": "gameplay/scoreboard",
+      "notes": "3rd-place column walker facing 3. g_dwScoreWalkerResIdsByRank[11]. Agent19/30.",
+      "ship": true
+    },
+    "0x000100c0": {
+      "slug": "score_walker_rank4_facing0",
+      "folder": "gameplay/scoreboard",
+      "notes": "4th-place column walker facing 0. g_dwScoreWalkerResIdsByRank[12]; CScoreCtor READ. Agent19/30.",
+      "ship": true
+    },
+    "0x000100c1": {
+      "slug": "score_walker_rank4_facing1",
+      "folder": "gameplay/scoreboard",
+      "notes": "4th-place column walker facing 1. g_dwScoreWalkerResIdsByRank[13]; CScoreCtor READ. Agent19/30.",
+      "ship": true
+    },
+    "0x000100c2": {
+      "slug": "score_walker_rank4_facing2",
+      "folder": "gameplay/scoreboard",
+      "notes": "4th-place column walker facing 2. g_dwScoreWalkerResIdsByRank[14]. CDSAudioPlayer_Init AND is false-positive. Agent19/30.",
+      "ship": true
+    },
+    "0x000100c3": {
+      "slug": "score_walker_rank4_facing3",
+      "folder": "gameplay/scoreboard",
+      "notes": "4th-place column walker facing 3. g_dwScoreWalkerResIdsByRank[15]. Agent19/30.",
+      "ship": true
+    },
+    "0x000100c4": {
+      "slug": "player_walk_normal_up",
+      "folder": "gameplay/character",
+      "notes": "CBulanek normal walk up. gABulanekWalkAnimsNormal[3] / Special[7]. 62 frames @ 104x55. Agent19/30.",
+      "ship": true
+    },
+    "0x000100c5": {
+      "slug": "player_walk_special_up",
+      "folder": "gameplay/character",
+      "notes": "CBulanek special-variant walk up. gABulanekWalkAnimsSpecial[3]. Agent19/30.",
+      "ship": true
+    },
+    "0x000100c6": {
+      "slug": "player_walk_normal_down",
+      "folder": "gameplay/character",
+      "notes": "CBulanek normal walk down. gABulanekWalkAnimsNormal[0]. Agent19/30.",
+      "ship": true
+    },
+    "0x000100c7": {
+      "slug": "player_walk_special_down",
+      "folder": "gameplay/character",
+      "notes": "CBulanek special-variant walk down. gABulanekWalkAnimsSpecial[0]. Agent19/30.",
+      "ship": true
+    },
+    "0x000100c8": {
+      "slug": "player_walk_normal_left",
+      "folder": "gameplay/character",
+      "notes": "8-frame left walk (104x55). g_dwResId_player_walk_normal_left @ 0x004af2f0; gABulanekWalkAnimsNormal[1]. Skin slot g_dwResId_player_skin_palette_02 @ 0x004ae0f4. CBulanekCtor. Wave2 batch 7/15.",
+      "ship": true
+    },
+    "0x000100c9": {
+      "slug": "player_walk_special_left",
+      "folder": "gameplay/character",
+      "notes": "Tournament/special left walk. g_dwResId_player_walk_special_left @ 0x004af2e0; gABulanekWalkAnimsSpecial[1]. Wave2 batch 7/15.",
+      "ship": true
+    },
+    "0x000100ca": {
+      "slug": "player_walk_normal_right",
+      "folder": "gameplay/character",
+      "notes": "Right walk track. g_dwResId_player_walk_normal_right @ 0x004af2f4; palette slot @ 0x004ae0f8. Wave2 batch 7/15.",
+      "ship": true
+    },
+    "0x000100cb": {
+      "slug": "player_walk_special_right",
+      "folder": "gameplay/character",
+      "notes": "Special-variant right walk. g_dwResId_player_walk_special_right @ 0x004af2e4. Wave2 batch 7/15.",
+      "ship": true
+    },
+    "0x000100cc": {
+      "slug": "player_sit_facing_up",
+      "folder": "gameplay/character",
+      "notes": "Sit pose facing up (133px). g_dwResId_player_sit_facing_up @ 0x004af004; gABulanekSitAnimSheet[3]. Wave2 batch 7/15.",
+      "ship": true
+    },
+    "0x000100cd": {
+      "slug": "player_enemy_sit_facing_up",
+      "folder": "gameplay/character",
+      "notes": "Enemy entity sit-up. g_dwResId_player_enemy_sit_facing_up @ 0x004af014; gABulanekEnemySitAnimSheet[3]. Wave2 batch 7/15.",
+      "ship": true
+    },
+    "0x000100ce": {
+      "slug": "player_sit_facing_down",
+      "folder": "gameplay/character",
+      "notes": "Sit down. g_dwResId_player_sit_facing_down @ 0x004aeff8; CBulanek_ResolveAndBindAnimTrack READ @ 0x0041c654. Wave2 batch 7/15.",
+      "ship": true
+    },
+    "0x000100cf": {
+      "slug": "player_enemy_sit_facing_down",
+      "folder": "gameplay/character",
+      "notes": "Enemy sit down. g_dwResId_player_enemy_sit_facing_down @ 0x004af008; READ @ 0x0041c663. Wave2 batch 7/15.",
+      "ship": true
+    },
+    "0x000100d0": {
+      "slug": "player_sit_facing_left",
+      "folder": "gameplay/character",
+      "notes": "Sit left. g_dwResId_player_sit_facing_left @ 0x004aeffc; gABulanekSitAnimSheet[1]. Wave2 batch 7/15.",
+      "ship": true
+    },
+    "0x000100d1": {
+      "slug": "player_enemy_sit_facing_left",
+      "folder": "gameplay/player",
+      "notes": "gABulanekEnemySitAnimSheet[1] @ 0x004af00c (facing left sit); CBulanekResolveAndBindAnimTrack when kind 0x20..0x23. Ghidra label gABulanekEnemySitAnimSheet_facingLeft_res_0x100d1. Wave2 batch 8.",
+      "ship": true
+    },
+    "0x000100d2": {
+      "slug": "bulanek_walk_right",
+      "folder": "gameplay/bulanek",
+      "notes": "Walk track index 2 (right) in gABulanekWalkAnimsNormal; CBulanekCtor loads four direction tracks.",
+      "ship": true
+    },
+    "0x000100d3": {
+      "slug": "bulanek_walk_right_special",
+      "folder": "gameplay/bulanek",
+      "notes": "Walk track index 2 (right) in gABulanekWalkAnimsSpecial for enemy/special CBulanek variants.",
+      "ship": true
+    },
+    "0x000100d4": {
+      "slug": "menu_button_off",
+      "folder": "menu/widgets/menu_button",
+      "notes": "Menu button motion track played while idle / unfocused.",
+      "ship": true
+    },
+    "0x000100d5": {
+      "slug": "menu_button_on",
+      "folder": "menu/widgets/menu_button",
+      "notes": "Menu button motion track played while focused / hovered.",
+      "ship": true
+    },
+    "0x000100d6": {
+      "slug": "sponsor_banner_centrum_large",
+      "folder": "unused/sponsor",
+      "notes": "Dead asset: 40-frame centrum.cz sponsor banner; pool slot allocated at boot but never referenced.",
+      "ship": false
+    },
+    "0x000100d7": {
+      "slug": "sponsor_banner_centrum_small",
+      "folder": "unused/sponsor",
+      "notes": "Dead asset: 13-frame centrum.cz sponsor banner; verified unreferenced in engine and scripts.",
+      "ship": false
+    },
+    "0x000100d8": {
+      "slug": "level_dj_slaughter_fx_small",
+      "folder": "levels/vybijena",
+      "notes": "Script 65855 OnInit InsertView CreateAnim at (448,81); 8-frame overlay prop.",
+      "ship": true
+    },
+    "0x000100d9": {
+      "slug": "level_dj_slaughter_fx_large",
+      "folder": "levels/vybijena",
+      "notes": "Script 65855 OnInit InsertView CreateAnim at (463,63); 55-frame intro character/prop.",
+      "ship": true
+    },
+    "0x000100da": {
+      "slug": "bulanek_death_tombstone",
+      "folder": "gameplay/bulanek",
+      "notes": "Tournament-mode death tombstone anim; CBulanek_BindDeathTombstoneAnim @ 0x41c860 from CBulanek_OnDeath when kind 0x20..0x23.",
+      "ship": true
+    },
+    "0x000100db": {
+      "slug": "pickup_rocket_launcher",
+      "folder": "gameplay/pickups",
+      "notes": "Rocket-launcher pickup overlay sprite; g_PickupKind_SpriteIdTable index 5 @ 0x4827f4.",
+      "ship": true
+    },
+    "0x000100dc": {
+      "slug": "gaming_ambient_sky_glow",
+      "folder": "gameplay/gaming",
+      "notes": "CGaming_ctor @ 0x00420358 PUSH 0x100dc -> CBulanci+0x330; 15f 386x386 paletted sky glow. Wave2 batch 8.",
+      "ship": true
+    },
+    "0x000100dd": {
+      "slug": "gaming_ambient_insects",
+      "folder": "gameplay/gaming",
+      "notes": "CGaming_ctor @ 0x00420344 PUSH 0x100dd -> CBulanci+0x32c; 20f 232x232 insect swarm loop. Wave2 batch 8.",
+      "ship": true
+    },
+    "0x000100de": {
+      "slug": "pickup_machine_gun",
+      "folder": "gameplay/pickups",
+      "notes": "g_PickupKind_SpriteIdTable[kind=4] @ 0x00482804; 22f 474x474 pickup overlay. Ghidra label g_PickupKind_SpriteIdTable_kind4_machineGun_res_0x100de. Wave2 batch 8.",
+      "ship": true
+    },
+    "0x000100df": {
+      "slug": "level_bedtime_bunny_clip_a",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Brown bunny clip A (renamed from chimney_smoke). 8f 116×114; script 65856 fn@0x0286 @0x035a slot 6; cycle [65759,65760,65761,65763,65762]. Agent0/10.",
+      "ship": true
+    },
+    "0x000100e0": {
+      "slug": "level_bedtime_bunny_clip_b",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bunny clip B — 5f static; slot-6 cycle. Agent0/10.",
+      "ship": true
+    },
+    "0x000100e1": {
+      "slug": "level_bedtime_bunny_clip_c",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bunny clip C — 20f idle; slot-6 cycle. Agent0/10.",
+      "ship": true
+    },
+    "0x000100e2": {
+      "slug": "level_bedtime_bunny_clip_d",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bunny clip D — 25f decapitation/death; played last (65762) in slot-6 cycle. Agent0/10.",
+      "ship": true
+    },
+    "0x000100e3": {
+      "slug": "level_bedtime_bunny_clip_e",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bunny clip E — 20f idle; script lists 65763 before death clip 65762. Agent0/10.",
+      "ship": true
+    },
+    "0x000100e4": {
+      "slug": "level_bedtime_butterfly_fly_a",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bedtime script 65856 fn@0x01e7 @+0x0254 CreateAnim (+50,+50) slot 8; first of [65764,65765,65766] butterfly trio (65766=0x100e6). 32f 21x37. Wave2 batch 8.",
+      "ship": true
+    },
+    "0x000100e5": {
+      "slug": "level_bedtime_butterfly_fly_b",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bedtime story (65856) butterfly clip B — second of [65764,65765,65766] @ script+0x0254 slot 8; 31f 561×561. Corrected from lamp_flicker_b. Wave2 batch 9.",
+      "ship": false
+    },
+    "0x000100e6": {
+      "slug": "level_bedtime_butterfly_fly_c",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bedtime story (65856) butterfly clip C — third of [65764,65765,65766] in fn@0x01e7 @ script+0x0254, slot 8. Internal 32-frame flying loop. Script-confirmed. Agent23/30."
+    },
+    "0x000100e7": {
+      "slug": "level_bedtime_mouse_pop_r",
+      "folder": "levels/bedtime_story/mouse",
+      "notes": "Bedtime story slot-9 gun-mouse SetAnim index 0 — pop up from cover, facing right. 7f 54×55. Script 65856 fn@0x0394 @+0x0495 CreateAnim frames[65767..65774] bind slot 9; danger zones @+0x03d9. PNG-verified mouse (not Bulánek). Agent1/10."
+    },
+    "0x000100e8": {
+      "slug": "level_bedtime_mouse_hide_r",
+      "folder": "levels/bedtime_story/mouse",
+      "notes": "SetAnim index 1 — sink/hide into cover, facing right. 6f 54×55. Same slot-9 chain. Agent1/10."
+    },
+    "0x000100e9": {
+      "slug": "level_bedtime_mouse_shoot_r",
+      "folder": "levels/bedtime_story/mouse",
+      "notes": "SetAnim index 2 — shoot rifle facing right with muzzle flash. 10f 54×55. Agent1/10."
+    },
+    "0x000100ea": {
+      "slug": "level_bedtime_mouse_death_r",
+      "folder": "levels/bedtime_story/mouse",
+      "notes": "SetAnim index 3 — death/gib burst facing right. 6f 54×55. Agent1/10."
+    },
+    "0x000100eb": {
+      "slug": "level_bedtime_mouse_pop_l",
+      "folder": "levels/bedtime_story/mouse",
+      "notes": "SetAnim index 4 — pop up from cover, facing left. 6f 54×55. Agent1/10."
+    },
+    "0x000100ec": {
+      "slug": "level_bedtime_mouse_hide_l",
+      "folder": "levels/bedtime_story/mouse",
+      "notes": "SetAnim index 5 — sink/hide into cover, facing left. 6f 54×55. Agent1/10."
+    },
+    "0x000100ed": {
+      "slug": "level_bedtime_mouse_shoot_l",
+      "folder": "levels/bedtime_story/mouse",
+      "notes": "SetAnim index 6 — shoot from gun mount, facing left. 9f 54×55. Agent1/10."
+    },
+    "0x000100ee": {
+      "slug": "level_bedtime_mouse_death_l",
+      "folder": "levels/bedtime_story/mouse",
+      "notes": "SetAnim index 7 — death/gib burst facing left. 6f 54×55. Agent1/10."
+    },
+    "0x000100ef": {
+      "slug": "level_bedtime_bird_nest_a",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bedtime story bird-in-nest clip A — first of [65775,65776,65777,65779,65778] in fn@0x04e1 @ script+0x0589, slot 4. Script-confirmed. Agent23/30."
+    },
+    "0x000100f0": {
+      "slug": "level_bedtime_bird_nest_b",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bedtime bird-nest clip B (2nd of [65775..65778]) — 9f 66×53, slot 4 fn@0x04e1. Script-confirmed. Agent24/30."
+    },
+    "0x000100f1": {
+      "slug": "level_bedtime_bird_nest_c",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bedtime bird-nest clip C (3rd of nest cycle). Script-confirmed. Agent24/30."
+    },
+    "0x000100f2": {
+      "slug": "level_bedtime_bird_nest_e",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bird-nest clip E — 10f death/gore; last in script cycle. Agent0/10 visual."
+    },
+    "0x000100f3": {
+      "slug": "level_bedtime_bird_nest_d",
+      "folder": "levels/bedtime_story/decor",
+      "notes": "Bird-nest clip D — 12f idle; 4th in script cycle. Agent0/10 visual."
+    },
+    "0x000100f4": {
+      "slug": "level_steel_works_crucible_glow",
+      "folder": "levels/steel_works",
+      "notes": "Molten crucible glow loop (24×63×46). CreateAnim @65857+0x0105 (701,180) delay=3. Agent03/10.",
+      "ship": false
+    },
+    "0x000100f5": {
+      "slug": "level_steel_works_furnace_mechanism",
+      "folder": "levels/steel_works",
+      "notes": "Furnace loader/tripod mechanism anim (121×243×334, motion path). BindToSlot(6) @65857+0x0179. Agent03/10.",
+      "ship": false
+    },
+    "0x000100f6": {
+      "slug": "level_malaria_panorama_anim",
+      "folder": "levels/malaria",
+      "notes": "Malárie scrolling panorama — slot 6 @ 65858+0x00f0, 83f 308×255. Script-confirmed. Agent24/30."
+    },
+    "0x000100f7": {
+      "slug": "level_malaria_canopy_detail",
+      "folder": "levels/malaria",
+      "notes": "Malárie rear canopy / treeline — slot 12 @ 65858+0x0180 (690,320), 82f 124×191. Script-confirmed. Agent24/30."
+    },
+    "0x000100f8": {
+      "slug": "level_malaria_swamp_mid",
+      "folder": "levels/malaria",
+      "notes": "Malárie mid-ground swamp layer — slot 8 @ 65858+0x0120, 49f 272×152. Script-confirmed. Agent24/30."
+    },
+    "0x000100f9": {
+      "slug": "level_malaria_swamp_fore",
+      "folder": "levels/malaria",
+      "notes": "Malárie foreground swamp reeds — slot 9 @ 65858+0x0138 (670,390), 49f 135×105. Script-confirmed. Agent24/30."
+    },
+    "0x000100fa": {
+      "slug": "level_malaria_soldier_walk_4dir",
+      "folder": "levels/malaria",
+      "notes": "Malárie ambient soldier walk (65858 slot 13).",
+      "ship": false
+    },
+    "0x000100fb": {
+      "slug": "level_malaria_bulanek_walk",
+      "folder": "levels/malaria",
+      "notes": "Malárie Bulánek walk at map origin (65858 slot 7).",
+      "ship": false
+    },
+    "0x000100fc": {
+      "slug": "level_malaria_bulanek_swamp_walk",
+      "folder": "levels/malaria",
+      "notes": "Malárie dark-green Bulánek walk (65858 slot 10).",
+      "ship": false
+    },
+    "0x000100fd": {
+      "slug": "level_malaria_jungle_leaves",
+      "folder": "levels/malaria",
+      "notes": "Malárie jungle leaf decor loop (65858 slot 11).",
+      "ship": false
+    },
+    "0x000100fe": {
+      "slug": "level_8bit_pillow_burst",
+      "folder": "levels/8bit",
+      "notes": "Wireframe box shatter (7f=7 frames). 65859 slot 10 pillow hazard; not zombie.",
+      "ship": false
+    },
+    "0x000100ff": {
+      "slug": "level_8bit_crate_break_5f",
+      "folder": "levels/8bit",
+      "notes": "8-bit crate break short (65859 slot 16).",
+      "ship": false
+    },
+    "0x00010100": {
+      "slug": "level_8bit_crate_break_6f_slot12",
+      "folder": "levels/8bit",
+      "notes": "Wireframe crate break 6 frames (65859 slot 12). Renamed from mislabeled crate_break_7f.",
+      "ship": false
+    },
+    "0x00010101": {
+      "slug": "level_8bit_crate_break_6f_slot14",
+      "folder": "levels/8bit",
+      "notes": "Wireframe crate break 6 frames (65859 slot 14).",
+      "ship": false
+    },
+    "0x00010102": {
+      "slug": "level_8bit_zombie_peek_e",
+      "folder": "levels/8bit",
+      "notes": "8-bit zombie peek composite clip E (65859 slot 9).",
+      "ship": false
+    },
+    "0x00010103": {
+      "slug": "level_8bit_zombie_peek_a",
+      "folder": "levels/8bit",
+      "notes": "8-bit zombie peek composite clip A (65859 slot 9).",
+      "ship": false
+    },
+    "0x00010104": {
+      "slug": "level_8bit_zombie_peek_c",
+      "folder": "levels/8bit",
+      "notes": "8-bit zombie peek clip C (SetAnim index 2). Agent26/30.",
+      "ship": false
+    },
+    "0x00010105": {
+      "slug": "level_8bit_zombie_peek_f",
+      "folder": "levels/8bit",
+      "notes": "8-bit zombie peek clip F (SetAnim index 5). Agent26/30.",
+      "ship": false
+    },
+    "0x00010106": {
+      "slug": "level_8bit_zombie_peek_b",
+      "folder": "levels/8bit",
+      "notes": "8-bit zombie peek clip B (SetAnim index 1). Agent26/30.",
+      "ship": false
+    },
+    "0x00010107": {
+      "slug": "level_8bit_zombie_peek_d",
+      "folder": "levels/8bit",
+      "notes": "8-bit zombie peek clip D (SetAnim index 3). Agent26/30.",
+      "ship": false
+    },
+    "0x00010108": {
+      "slug": "level_8bit_knockout_fall",
+      "folder": "levels/8bit",
+      "notes": "8-bit Bulanek knockout fall anim (65859 slot 20). Agent26/30.",
+      "ship": false
+    },
+    "0x00010109": {
+      "slug": "cursor_idle_c",
+      "folder": "menu/cursor",
+      "notes": "Cursor idle-twitch motion track C.",
+      "ship": true
+    },
+    "0x0001010a": {
+      "slug": "cursor_idle_b",
+      "folder": "menu/cursor",
+      "notes": "Cursor idle-twitch motion track B.",
+      "ship": true
+    },
+    "0x0001010b": {
+      "slug": "cursor_idle_a",
+      "folder": "menu/cursor",
+      "notes": "Cursor idle-twitch motion track A (played first when cursor activates).",
+      "ship": true
+    },
+    "0x0001010c": {
+      "slug": "pickup_mine_blink",
+      "folder": "gameplay/pickups",
+      "notes": "Mine pickup world sprite; g_PickupKind_SpriteIdTable[2] @ 0x004827fc. Agent26/30.",
+      "ship": false
+    },
+    "0x0001010d": {
+      "slug": "weapon_pistol_pickup_anim_dir3",
+      "folder": "gameplay/weapons",
+      "notes": "Pistol pickup anim dir3 @ g_weapon_def_pistol_anim_dir3 (0x0048282c). Agent26/30.",
+      "ship": false
+    },
+    "0x0001010e": {
+      "slug": "weapon_pistol_pickup_anim_dir0",
+      "folder": "gameplay/weapons",
+      "notes": "Pistol pickup widget anim dir0 — gAWeaponDefsTable[0].animFrameIds[0] @ 0x00482820; CWeapon::ctor @0x0041dbc0. Wave2 batch 9.",
+      "ship": false
+    },
+    "0x0001010f": {
+      "slug": "weapon_pistol_pickup_anim_dir1",
+      "folder": "gameplay/weapons",
+      "notes": "Pistol pickup widget anim dir1 — gAWeaponDefsTable[0].animFrameIds[1] @ 0x00482824. Wave2 batch 9.",
+      "ship": false
+    },
+    "0x00010110": {
+      "slug": "weapon_pistol_pickup_anim_dir2",
+      "folder": "gameplay/weapons",
+      "notes": "Pistol pickup widget anim dir2 — gAWeaponDefsTable[0].animFrameIds[2] @ 0x00482828. Wave2 batch 9.",
+      "ship": false
+    },
+    "0x00010111": {
+      "slug": "weapon_special_pickup_anim_dir3",
+      "folder": "gameplay/weapons",
+      "notes": "Special-weapon pickup anim dir3 — gAWeaponDefsTable[1].animFrameIds[3] @ 0x00482848. Wave2 batch 9.",
+      "ship": false
+    },
+    "0x00010112": {
+      "slug": "weapon_special_pickup_anim_dir0",
+      "folder": "gameplay/weapons",
+      "notes": "Special-weapon pickup anim dir0 — gAWeaponDefsTable[1].animFrameIds[0] @ 0x0048283c. Wave2 batch 9.",
+      "ship": false
+    },
+    "0x00010113": {
+      "slug": "weapon_special_pickup_anim_dir1",
+      "folder": "gameplay/weapons",
+      "notes": "Special-weapon pickup anim dir1 — gAWeaponDefsTable[1].animFrameIds[1] @ 0x00482840. Wave2 batch 9.",
+      "ship": false
+    },
+    "0x00010114": {
+      "slug": "weapon_special_pickup_anim_dir2",
+      "folder": "gameplay/weapons",
+      "notes": "Special-weapon pickup anim dir2 — gAWeaponDefsTable[1].animFrameIds[2] @ 0x00482844. Wave2 batch 9.",
+      "ship": false
+    },
+    "0x00010115": {
+      "slug": "weapon_mine_pickup_anim_dir3",
+      "folder": "gameplay/weapons",
+      "notes": "Mine pickup widget anim dir3 — gAWeaponDefsTable[2].animFrameIds[3] @ 0x00482864. Wave2 batch 9.",
+      "ship": false
+    },
+    "0x00010116": {
+      "slug": "weapon_mine_pickup_anim_dir0",
+      "folder": "gameplay/weapons",
+      "notes": "Mine pickup widget anim dir0 — gAWeaponDefsTable[2].animFrameIds[0] @ 0x00482858. Wave2 batch 9.",
+      "ship": false
+    },
+    "0x00010117": {
+      "slug": "weapon_mine_pickup_anim_dir1",
+      "folder": "gameplay/weapons/mine",
+      "notes": "Mine pickup widget anim dir1 — gAWeaponDefsTable[2].animFrameIds[1] @ 0x0048285c. Wave2 batch 10.",
+      "ship": false
+    },
+    "0x00010118": {
+      "slug": "weapon_mine_pickup_anim_dir2",
+      "folder": "gameplay/weapons/mine",
+      "notes": "Mine pickup widget anim dir2 — gAWeaponDefsTable[2].animFrameIds[2] @ 0x00482860. Wave2 batch 10.",
+      "ship": false
+    },
+    "0x00010119": {
+      "slug": "weapon_detonator_pickup_anim_dir3",
+      "folder": "gameplay/weapons/detonator",
+      "notes": "Remote-detonator pickup anim dir3 — gAWeaponDefsTable[3].animFrameIds[3] @ 0x00482880. Wave2 batch 10.",
+      "ship": false
+    },
+    "0x0001011a": {
+      "slug": "weapon_detonator_pickup_anim_dir0",
+      "folder": "gameplay/weapons/detonator",
+      "notes": "Remote-detonator pickup anim dir0 — gAWeaponDefsTable[3].animFrameIds[0] @ 0x00482874. Wave2 batch 10.",
+      "ship": false
+    },
+    "0x0001011b": {
+      "slug": "weapon_detonator_pickup_anim_dir1",
+      "folder": "gameplay/weapons/detonator",
+      "notes": "Remote-detonator pickup anim dir1 — gAWeaponDefsTable[3].animFrameIds[1] @ 0x00482878. Wave2 batch 10.",
+      "ship": false
+    },
+    "0x0001011c": {
+      "slug": "weapon_detonator_pickup_anim_dir2",
+      "folder": "gameplay/weapons/detonator",
+      "notes": "Remote-detonator pickup anim dir2 — gAWeaponDefsTable[3].animFrameIds[2] @ 0x0048287c. Wave2 batch 10.",
+      "ship": false
+    },
+    "0x0001011d": {
+      "slug": "weapon_mg_pickup_anim_dir3",
+      "folder": "gameplay/weapons/machine_gun",
+      "notes": "Machine-gun pickup anim dir3 — gAWeaponDefsTable[4].animFrameIds[3] @ 0x0048289c. Wave2 batch 10.",
+      "ship": false
+    },
+    "0x0001011e": {
+      "slug": "weapon_mg_pickup_anim_dir0",
+      "folder": "gameplay/weapons/machine_gun",
+      "notes": "Machine-gun pickup anim dir0 — gAWeaponDefsTable[4].animFrameIds[0] @ 0x00482890. Wave2 batch 10.",
+      "ship": false
+    },
+    "0x0001011f": {
+      "slug": "weapon_mg_pickup_anim_dir1",
+      "folder": "gameplay/weapons/machine_gun",
+      "notes": "Machine-gun pickup anim dir1 — gAWeaponDefsTable[4].animFrameIds[1] @ 0x00482894. Wave2 batch 10.",
+      "ship": false
+    },
+    "0x00010120": {
+      "slug": "weapon_mg_pickup_anim_dir2",
+      "folder": "gameplay/weapons/machine_gun",
+      "notes": "Machine-gun pickup anim dir2 — gAWeaponDefsTable[4].animFrameIds[2] @ 0x00482898. Wave2 batch 10.",
+      "ship": false
+    },
+    "0x00010121": {
+      "slug": "weapon_rocket_widget_anim_dir3",
+      "folder": "gameplay/weapons/rocket_launcher",
+      "notes": "Rocket launcher pickup-widget anim dir3 @ gAWeaponDefsTable[5]+0x0c (0x004828b8); distinct from projectile dirs 0x10122–0x10124.",
+      "ship": true
+    },
+    "0x00010122": {
+      "slug": "weapon_rocket_pickup_anim_dir0",
+      "folder": "gameplay/weapons/rocket_launcher",
+      "notes": "Rocket-launcher held/firing widget anim dir0 — gAWeaponDefsTable[5].animFrameIds[0] @ 0x004828ac. PNG: bazooka side view; not in-flight proj (see 0x10031–0x10034).",
+      "ship": true
+    },
+    "0x00010123": {
+      "slug": "weapon_rocket_pickup_anim_dir1",
+      "folder": "gameplay/weapons/rocket_launcher",
+      "notes": "Rocket-launcher held/firing widget anim dir1 — gAWeaponDefsTable[5].animFrameIds[1] @ 0x004828b0.",
+      "ship": true
+    },
+    "0x00010124": {
+      "slug": "weapon_rocket_pickup_anim_dir2",
+      "folder": "gameplay/weapons/rocket_launcher",
+      "notes": "Rocket-launcher held/firing widget anim dir2 — gAWeaponDefsTable[5].animFrameIds[2] @ 0x004828b4.",
+      "ship": true
+    },
+    "0x00010125": {
+      "slug": "training_ambient_anim_0",
+      "folder": "gameplay/training",
+      "notes": "Solo-training ambient BitmapSprite loaded into CGaming+0x324 when CBulanci+0xd8==1.",
+      "ship": true
+    },
+    "0x00010126": {
+      "slug": "training_ambient_anim_1",
+      "folder": "gameplay/training",
+      "notes": "Solo-training ambient sprite at CGaming+0x328; also gABulanekSitAnimSheet[0].",
+      "ship": true
+    },
+    "0x00010127": {
+      "slug": "bulanek_walk_anim_slot7",
+      "folder": "gameplay/characters/bulanek",
+      "notes": "Player walk animation sheet entry 7 (gABulanekWalkAnimSheet); pre-cached in CBulanci bitmap table index 74.",
+      "ship": true
+    },
+    "0x00010128": {
+      "slug": "bulanek_walk_anim_slot6",
+      "folder": "gameplay/characters/bulanek",
+      "notes": "Walk sheet slot 6 / sit sheet slot 1 — CBulanekResolveAndBindAnimTrack fallback table.",
+      "ship": true
+    },
+    "0x00010129": {
+      "slug": "bulanek_walk_anim_slot0",
+      "folder": "gameplay/characters/bulanek",
+      "notes": "Primary walk animation sheet slot 0 (gABulanekWalkAnimSheet[0]); resolved first in movement bind.",
+      "ship": true
+    },
+    "0x0001012a": {
+      "slug": "bulanek_walk_anim_slot1",
+      "folder": "gameplay/characters/bulanek",
+      "notes": "Walk sheet slot 1; also sit sheet slot 2.",
+      "ship": true
+    },
+    "0x0001012b": {
+      "slug": "bulanek_walk_anim_slot4",
+      "folder": "gameplay/characters/bulanek",
+      "notes": "Walk sheet slot 4 (gABulanekWalkAnimSheet[4]).",
+      "ship": true
+    },
+    "0x0001012c": {
+      "slug": "bulanek_walk_anim_slot5",
+      "folder": "gameplay/characters/bulanek",
+      "notes": "gABulanekWalkAnimSheet[5] @ 0x004ae144; CBulanek_ResolveAndBindAnimTrack. Menu bitmap cache index 79. 87×63, 33 frames. Wave2 remaining.",
+      "ship": true
+    },
+    "0x0001012d": {
+      "slug": "bulanek_walk_anim_slot3",
+      "folder": "gameplay/characters/bulanek",
+      "notes": "gABulanekWalkAnimSheet[11] @ 0x004ae14c; CBulanek_ResolveAndBindAnimTrack. 55×63, 36 frames. Wave2 remaining.",
+      "ship": true
+    },
+    "0x0001012e": {
+      "slug": "bulanek_walk_anim_slot2",
+      "folder": "gameplay/characters/bulanek",
+      "notes": "gABulanekWalkAnimSheet[10] @ 0x004ae148; CBulanek_ResolveAndBindAnimTrack. 55×62, 33 frames. Wave2 remaining.",
+      "ship": true
+    },
+    "0x0001012f": {
+      "slug": "ui_scoreboard_backdrop",
+      "folder": "ui/scoreboard",
+      "notes": "CScoreCtor PUSH 0x1012f @ 0x00411a63; menu bitmap cache index 109. 276×120, 33 frames full-screen scoreboard. Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010130": {
+      "slug": "teleport_point_sparkle_anim",
+      "folder": "gameplay/entities",
+      "notes": "CTeleportPoint_Ctor PUSH 0x10130 @ 0x0041ca36. 78×61, 8-frame portal sparkle. Wave2 remaining.",
+      "ship": true
+    },
+    "0x00010131": {
+      "slug": "exit_dlg_bulanek_anim_left",
+      "folder": "menu/dialogs",
+      "notes": "CExitDlg_ctor PUSH 0x10131 @ 0x00411c0e; CAnim @ (194, 22). Quit-confirm left Bulánek (122×13 strip, 63 fr). Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010132": {
+      "slug": "exit_dlg_bulanek_anim_right",
+      "folder": "menu/dialogs",
+      "notes": "CExitDlg_ctor PUSH 0x10132 @ 0x00411c8a; CAnim @ (313, 282). Quit-confirm right Bulánek (610×610, 37 fr). Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010133": {
+      "slug": "history_part_1",
+      "folder": "ui/history",
+      "notes": "CHistoryScript page 1 (class 0x802); Bulánek definition + timeline through 1980 armistice. Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010134": {
+      "slug": "history_part_2",
+      "folder": "ui/history",
+      "notes": "CHistoryScript page 2; timeline continues; HCreateMovie clips (1986–1988). Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010135": {
+      "slug": "history_part_3",
+      "folder": "ui/history",
+      "notes": "CHistoryScript page 3 (1993–1998 timeline); HCreateMovie clips pair 77828–77831. Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010136": {
+      "slug": "level_vybijena_jpeg_bg",
+      "folder": "levels/vybijena",
+      "notes": "Full-screen JPEG background; script 65855 OnInit InsertView @0x00b4 CreateImage(0,0,65846) (322 KiB). Wave2 batch 12.",
+      "ship": false
+    },
+    "0x00010137": {
+      "slug": "level_vybijena_preface",
+      "folder": "levels/vybijena",
+      "notes": "LoadPreface scroll for Vybíjená; script 65855 OnInit @0x00a0. Wave2 batch 12.",
+      "ship": false
+    },
+    "0x00010138": {
+      "slug": "level_bedtime_story_preface",
+      "folder": "levels/bedtime_story",
+      "notes": "LoadPreface for Na dobrou noc; script 65856 OnInit @0x00d5. Wave2 batch 12.",
+      "ship": false
+    },
+    "0x00010139": {
+      "slug": "bg_hero",
+      "folder": "menu/backgrounds",
+      "notes": "Right-side hero art / Sleep Team logo (resource 0x10139, drawn at (610, 0)).",
+      "ship": true
+    },
+    "0x0001013a": {
+      "slug": "intro_splash",
+      "folder": "menu/intro",
+      "notes": "Intro / title splash image (full-screen JPEG).",
+      "ship": true
+    },
+    "0x0001013b": {
+      "slug": "bg_menu",
+      "folder": "menu/backgrounds",
+      "notes": "Full-screen main-menu background (resource 0x1013b).",
+      "ship": true
+    },
+    "0x0001013c": {
+      "slug": "bg_start",
+      "folder": "menu/backgrounds",
+      "notes": "Start-game sub-screen background (resource 0x1013c).",
+      "ship": true
+    },
+    "0x0001013d": {
+      "slug": "bg_quit",
+      "folder": "menu/backgrounds",
+      "notes": "Quit confirmation sub-screen background (resource 0x1013d).",
+      "ship": true
+    },
+    "0x0001013e": {
+      "slug": "bg_history",
+      "folder": "menu/backgrounds",
+      "notes": "History sub-screen background (resource 0x1013e).",
+      "ship": true
+    },
+    "0x0001013f": {
+      "slug": "level_vybijena",
+      "folder": "levels/vybijena",
+      "notes": "Vybíjená / Dj Slaughter level script (GetInfo type 2). LoadPreface 65847 + JPEG bg 65846; CLevelScript enum 0x7ea @00409fb7. Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010140": {
+      "slug": "level_bedtime_story",
+      "folder": "levels/bedtime_story",
+      "notes": "Na dobrou noc / Bedtime story level script. SetMusic(65868,65537). Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010141": {
+      "slug": "level_steel_works",
+      "folder": "levels/steel_works",
+      "notes": "Noční směna / Steel works level script. SetMusic(65863,65538). Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010142": {
+      "slug": "level_malaria",
+      "folder": "levels/malaria",
+      "notes": "Malárie / Malaria level script (GUID A0A144D0…). Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010143": {
+      "slug": "level_8bit_captivity",
+      "folder": "levels/8bit",
+      "notes": "V zajetí 8-bitu level script; hazard anims 0x100fe..0x10108, sfx bank 0x10000. Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010144": {
+      "slug": "level_exitus",
+      "folder": "levels/exitus",
+      "notes": "Exitus graveyard level script. CGaming_OnResumeOrStartGame CMP 0x10144 @0041c24b (7s timer branch). Wave2 remaining.",
+      "ship": false
+    },
+    "0x00010145": {
+      "slug": "music_level_vybijena",
+      "folder": "levels/vybijena",
+      "notes": "Level BGM for Vybíjená / Dj Slaughter (script 65855 SetMusic).",
+      "ship": true
+    },
+    "0x00010146": {
+      "slug": "music_level_exitus",
+      "folder": "levels/exitus",
+      "notes": "Level BGM for Exitus (script 65860 SetMusic).",
+      "ship": true
+    },
+    "0x00010147": {
+      "slug": "music_level_steel_works",
+      "folder": "levels/steel_works",
+      "notes": "Level BGM for Noční směna / Steel works; pairs with level_steel_works_sfx_bank (0x10150).",
+      "ship": true
+    },
+    "0x00010148": {
+      "slug": "music_level_8bit",
+      "folder": "levels/8bit",
+      "notes": "Level BGM for V zajetí 8-bitu; pairs with level_8bit_sfx_bank (0x1014e).",
+      "ship": true
+    },
+    "0x00010149": {
+      "slug": "day_ambient",
+      "folder": "menu/music",
+      "notes": "Menu background music — day variant (CMenu::SetDayNightBg false branch).",
+      "ship": true
+    },
+    "0x0001014a": {
+      "slug": "night_ambient",
+      "folder": "menu/music",
+      "notes": "Menu background music — night variant (CMenu::SetDayNightBg true branch).",
+      "ship": true
+    },
+    "0x0001014b": {
+      "slug": "music_match_intro",
+      "folder": "audio/music",
+      "notes": "Pre-match intro Mp3 preloaded in CGaming_ctor @00420148 -> CGaming+0x358; played during pre-match modal.",
+      "ship": true
+    },
+    "0x0001014c": {
+      "slug": "music_level_bedtime_story",
+      "folder": "levels/bedtime_story",
+      "notes": "Level BGM for Na dobrou noc; pairs with level_bedtime_sfx_bank (0x1014f).",
+      "ship": true
+    },
+    "0x0001014d": {
+      "slug": "music_level_malaria",
+      "folder": "levels/malaria",
+      "notes": "Level BGM for Malárie / Malaria (script 65858 SetMusic).",
+      "ship": true
+    },
+    "0x0001014e": {
+      "slug": "level_8bit_sfx_bank",
+      "folder": "levels/8bit",
+      "notes": "8-bit level SFX PCM bank (5 samples). Indexed by AudioBankIndex 65536.",
+      "ship": true,
+      "samples": {
+        "0": "sfx_8bit_opponent_spawn",
+        "1": "sfx_8bit_explosion",
+        "2": "sfx_8bit_event_complete",
+        "3": "sfx_8bit_beep_low",
+        "4": "sfx_8bit_beep_high"
+      }
+    },
+    "0x0001014f": {
+      "slug": "level_bedtime_sfx_bank",
+      "folder": "levels/bedtime_story",
+      "notes": "Bedtime story level SFX PCM bank (5 samples). Indexed by AudioBankIndex 65537.",
+      "ship": true,
+      "samples": {
+        "0": "sfx_bedtime_lamp_click",
+        "1": "sfx_bedtime_pillow_pop",
+        "2": "sfx_bedtime_toy_squeak",
+        "3": "sfx_bedtime_bed_creak",
+        "4": "sfx_bedtime_monster_snort"
+      }
+    },
+    "0x00010150": {
+      "slug": "level_steel_works_sfx_bank",
+      "folder": "levels/steel_works",
+      "notes": "Steel works level SFX PCM bank (3 samples). Indexed by AudioBankIndex 65538.",
+      "ship": true,
+      "samples": {
+        "0": "sfx_steel_hydraulic_loop",
+        "1": "sfx_steel_explosion",
+        "2": "sfx_steel_spark_clang"
+      }
+    },
+    "0x00010151": {
+      "slug": "sfx_bank_gameplay_default_pcm",
+      "folder": "audio/sfx",
+      "notes": "PCM partner of AudioBankIndex 0x10003 (65539); CGaming_ctor PUSH 0x10003 @00420180. 8 samples (pickup, explosion, ricochet, splash, horn). Fallback when levels omit custom SetMusic bank.",
+      "ship": false
+    },
+    "0x00010152": {
+      "slug": "menu_sfx_bank",
+      "folder": "menu/sfx",
+      "notes": "Menu button SFX voices + the hover ping. Each entry below is exported as audio/<slug>.wav after 22 050 -> 48 000 Hz polyphase resampling.",
+      "ship": true,
+      "samples": {
+        "0": "sfx_hover",
+        "14": "sfx_radio_click",
+        "24": "sfx_history",
+        "25": "sfx_quit",
+        "26": "sfx_force_exit",
+        "27": "sfx_start",
+        "28": "sfx_alt_exit"
+      }
+    },
+    "0x00013000": {
+      "slug": "history_mpx_olympics_1988_still",
+      "folder": "menu/history",
+      "notes": "HCreateMovie BitmapSpecial mask @ (350,90) in HistoryScript 65844 @0x06b7; movieId 65605 (ui_history_movie_still_1986). Precedes 24.8.1988 Olympics prose; pairs anim 77825.",
+      "ship": true
+    },
+    "0x00013001": {
+      "slug": "history_mpx_olympics_1988_anim",
+      "folder": "menu/history",
+      "notes": "HCreateMovie BitmapJpegAnim @65844 @0x06b7 with still 77824; DSM 166x154 180 frames @22.05 kHz. Mazlik Olympic shooting-gold vignette.",
+      "ship": true
+    },
+    "0x00013002": {
+      "slug": "history_mpx_pillow_war_torch_still",
+      "folder": "menu/history",
+      "notes": "HCreateMovie BitmapSpecial mask @ (30,266) in HistoryScript 65844 @0x069d; movieId 65652 (history_movie_torch_cauldron). After Druha polstářová válka text; pairs anim 77827.",
+      "ship": true
+    },
+    "0x00013003": {
+      "slug": "history_mpx_pillow_war_torch_anim",
+      "folder": "menu/history",
+      "notes": "HCreateMovie BitmapJpegAnim @65844 @0x069d with still 77826; DSM 166x153 149 frames @44.1 kHz. Torch/cauldron clip for 1986 pillow-war entry.",
+      "ship": true
+    },
+    "0x00013004": {
+      "slug": "history_mpx_riot_anniversary_1995_still",
+      "folder": "menu/history",
+      "notes": "HCreateMovie BitmapSpecial mask @ (350,90) in HistoryScript 65845 @0x06c9; movieId 65613 (history_p3_cinematic_still). Before 5.5.1995 Výročí vzpoury text; pairs anim 77829.",
+      "ship": true
+    },
+    "0x00013005": {
+      "slug": "history_mpx_riot_anniversary_1995_anim",
+      "folder": "menu/history",
+      "notes": "HCreateMovie BitmapJpegAnim @65845 @0x06c9 with still 77828; DSM 166x154 287 frames @22.05 kHz. 20th Bulanci uprising anniversary street march.",
+      "ship": true
+    },
+    "0x00013006": {
+      "slug": "history_mpx_archeology_1995_still",
+      "folder": "menu/history",
+      "notes": "HCreateMovie BitmapSpecial mask @ (30,266) in HistoryScript 65845 @0x06af; movieId 65590 (ui_history_movie_archeology_1995). After 23.2.1995 Vankusov dig text; pairs anim 77831.",
+      "ship": true
+    },
+    "0x00013007": {
+      "slug": "history_mpx_archeology_1995_anim",
+      "folder": "menu/history",
+      "notes": "HCreateMovie BitmapJpegAnim @65845 @0x06af with still 77830; DSM 166x153 396 frames @22.05 kHz. Bronze-age hunter archaeology vignette.",
+      "ship": true
+    }
+  },
+  "folders": {
+    "audio/music": {
+      "notes": "Engine-global music not tied to a single level folder (e.g. pre-match intro)."
+    },
+    "engine/fonts": {
+      "notes": "Engine-shared bitmap fonts (no extractor yet — referenced by the renderer)."
+    },
+    "gameplay/bulanek": {
+      "notes": "Player-character walk/death BitmapSprites referenced from gABulanekWalkAnims* tables and CBulanek_OnDeath."
+    },
+    "gameplay/characters": {
+      "notes": "Player avatar (CBulanek) animation sheets and related sprites."
+    },
+    "gameplay/characters/bulanek": {
+      "notes": "Walk/sit animation resource IDs in gABulanekWalkAnimSheet / gABulanekSitAnimSheet."
+    },
+    "gameplay/hud": {
+      "notes": "In-match HUD bitmaps preloaded by `CGaming_ctor` from `g_dwCgamingPreloadResourceIds`."
+    },
+    "gameplay/level_scenery": {
+      "notes": "Deprecated folder — bedtime scenery moved to levels/bedtime_story/scenery (Agent 2/10)."
+    },
+    "gameplay/pickups": {
+      "notes": "Weapon-pickup overlay sprites indexed by g_PickupKind_SpriteIdTable."
+    },
+    "gameplay/scoreboard": {
+      "notes": "CScore post-match ranking screen: column portraits (0x10096..0x1009f) and walker tracks (0x100b4..)."
+    },
+    "gameplay/training": {
+      "notes": "Solo-practice / 1-player training mode assets (CGaming ctor when player count == 1)."
+    },
+    "gameplay/unused": {
+      "notes": "Confirmed-dead or otherwise unreferenced master-pack slots kept for overlay fidelity."
+    },
+    "gameplay/weapons": {
+      "notes": "Weapon projectile sprites and HUD icons from gAWeaponDefsTable @ 0x00482820."
+    },
+    "gameplay/weapons/pistol": {
+      "notes": "Pistol (weapon kind 0) sprites referenced from gAWeaponDefsTable[0]."
+    },
+    "gameplay/weapons/rocket_launcher": {
+      "notes": "Pickup kind 5 — four directional CShot projectile atlases (+0x10121 dir3 at index 289)."
+    },
+    "levels": {
+      "notes": "Per-level backgrounds, preface scrolls, and placed props from overlay Scripts."
+    },
+    "levels/8bit": {
+      "notes": "V zajetí 8-bitu — wireframe 8-bit homage level (script 65859)."
+    },
+    "levels/bedtime_story": {
+      "notes": "Na dobrou noc / Bedtime story level props (script 65856)."
+    },
+    "levels/bedtime_story/decor": {
+      "notes": "Ambient decor clips — butterfly (slot 8) and bird nest (slot 4)."
+    },
+    "levels/bedtime_story/enemy": {
+      "notes": "DEPRECATED — slot-9 gun-mouse clips live under levels/bedtime_story/mouse (Agent1/10)."
+    },
+    "levels/bedtime_story/mouse": {
+      "notes": "Bedtime story gun-mouse (grey mouse + rifle) SetAnim clips 0..7 on script 65856 slot 9; IDs 0x100e7..0x100ee (65767..65774)."
+    },
+    "levels/bedtime_story/scenery": {
+      "notes": "Bedtime story outdoor props — rock, bushes, fallen log (script 65856 random spawn helpers fn@0x286/0x394/0x4e1/0x5c9)."
+    },
+    "levels/exitus": {
+      "notes": "Exitus level art (script 65860)."
+    },
+    "levels/exitus/scenery": {
+      "notes": "Grave markers, trees, and parallax scenery props placed by script 65860 InsertView."
+    },
+    "levels/malaria": {
+      "notes": "Malárie level art (script 65858)."
+    },
+    "levels/steel_works": {
+      "notes": "Noční směna / Steel works level art (script 65857)."
+    },
+    "levels/vybijena": {
+      "notes": "Vybíjená / Dj Slaughter level art and audio (script 65855)."
+    },
+    "menu": {
+      "notes": "Everything reachable from the main-menu shell (splash, widgets, music, mouse, SFX)."
+    },
+    "menu/backgrounds": {
+      "notes": "Full-screen sub-screen JPEG backgrounds (`bg_menu`, `bg_hero`, `bg_start`, `bg_history`, `bg_quit`)."
+    },
+    "menu/credits": {
+      "notes": "Scrolling poem texts (CPoem / class 0x7fb) shown from the main-menu credits scroller."
+    },
+    "menu/cursor": {
+      "notes": "Three idle-twitch motion tracks the cursor cycles through (`CGunMouse_ctor`)."
+    },
+    "menu/history": {
+      "notes": "History-screen stills and cinematic helpers referenced from CHistoryScript pages."
+    },
+    "menu/icons": {
+      "notes": "Two-state (idle / hover) label icons for the three main-menu buttons."
+    },
+    "menu/music": {
+      "notes": "Day / night ambient loops; `CMenu::LoadBackgroundMusic` picks one per session."
+    },
+    "menu/sfx": {
+      "notes": "Voiced menu SFX bank — sliced into individual WAVs at pipeline time."
+    },
+    "menu/widgets": {
+      "notes": "Reusable widget skins (radio button, dialog button, animated menu button)."
+    },
+    "menu/widgets/dialog_button": {
+      "notes": "Three-state dialog-button skin (`CButton_BuildAt`, dialog flavour)."
+    },
+    "menu/widgets/menu_button": {
+      "notes": "Animated motion tracks for the main-menu buttons (idle vs. focused)."
+    },
+    "menu/widgets/page_nav": {
+      "notes": "Help/History dialog page-navigation button skins (first/prev/next/last x normal/hover/pressed)."
+    },
+    "menu/widgets/radio": {
+      "notes": "Five-state `CRadio` skin: idle/hover x selected/unselected + the flash on click."
+    },
+    "pack/stub": {
+      "notes": "Non-game overlay blobs (installer stubs, pack metadata) with no runtime .text references."
+    },
+    "ui/credits/poems": {
+      "notes": "Main-menu credits scrolling poems (class 2043 / 0x7fb); CPoemScroller @004262c0."
+    },
+    "ui/lobby": {
+      "notes": "Post-match team-color lobby chrome (CColorSet pillars and related BitmapSpecials)."
+    },
+    "unused/sponsor": {
+      "notes": "Removed sponsor banners still present in the master pack but unreferenced at runtime."
+    }
+  }
+}

@@ -1,0 +1,767 @@
+{
+  "name": "main_menu",
+  "scripts": [
+    "scenes/main_menu/boot.luau",
+    "scenes/main_menu/dials.luau",
+    "scenes/main_menu/history.luau",
+    "scenes/main_menu/exit.luau"
+  ],
+  "states": [
+    {
+      "name": "sg1",
+      "on": true
+    },
+    {
+      "name": "history",
+      "on": false
+    },
+    {
+      "name": "exit",
+      "on": false
+    }
+  ],
+  "root": [
+    {
+      "kind": "sprite",
+      "name": "bg",
+      "handle": "menu/backgrounds/bg_menu"
+    },
+    {
+      "kind": "sprite",
+      "name": "hero",
+      "layout": {
+        "x": 610
+      },
+      "handle": "menu/backgrounds/bg_hero"
+    },
+    {
+      "kind": "sprite",
+      "name": "dial0_btn",
+      "layout": {
+        "x": 35,
+        "y": 37
+      },
+      "handle": "menu/widgets/menu_button/menu_button_on",
+      "frame": 7
+    },
+    {
+      "kind": "sprite",
+      "name": "dial0_icon",
+      "layout": {
+        "x": 100,
+        "y": 55
+      },
+      "handle": "menu/icons/icon_start"
+    },
+    {
+      "kind": "input_region",
+      "name": "dial0_rg",
+      "layout": {
+        "x": 35,
+        "y": 37,
+        "width": 64,
+        "height": 65
+      }
+    },
+    {
+      "kind": "sprite",
+      "name": "dial1_btn",
+      "layout": {
+        "x": 35,
+        "y": 121
+      },
+      "handle": "menu/widgets/menu_button/menu_button_on",
+      "frame": 7
+    },
+    {
+      "kind": "sprite",
+      "name": "dial1_icon",
+      "layout": {
+        "x": 100,
+        "y": 139
+      },
+      "handle": "menu/icons/icon_history"
+    },
+    {
+      "kind": "input_region",
+      "name": "dial1_rg",
+      "layout": {
+        "x": 35,
+        "y": 121,
+        "width": 64,
+        "height": 65
+      }
+    },
+    {
+      "kind": "sprite",
+      "name": "dial2_btn",
+      "layout": {
+        "x": 35,
+        "y": 205
+      },
+      "handle": "menu/widgets/menu_button/menu_button_on",
+      "frame": 7
+    },
+    {
+      "kind": "sprite",
+      "name": "dial2_icon",
+      "layout": {
+        "x": 100,
+        "y": 223
+      },
+      "handle": "menu/icons/icon_quit"
+    },
+    {
+      "kind": "input_region",
+      "name": "dial2_rg",
+      "layout": {
+        "x": 35,
+        "y": 205,
+        "width": 64,
+        "height": 65
+      }
+    },
+    {
+      "kind": "group",
+      "name": "poem_layer"
+    },
+    {
+      "kind": "text",
+      "name": "version",
+      "layout": {
+        "x": 230,
+        "y": 584
+      },
+      "tint": "909090ff",
+      "text": "Verze: 1.80",
+      "size": 11,
+      "spacing": 1
+    },
+    {
+      "kind": "group",
+      "name": "sg1",
+      "state": "sg1",
+      "children": [
+        {
+          "kind": "sprite",
+          "name": "sg1_bg",
+          "layout": {
+            "x": 406,
+            "y": 339
+          },
+          "handle": "menu/backgrounds/bg_start"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_h0",
+          "layout": {
+            "x": 270,
+            "y": 93
+          },
+          "tint": "909090ff",
+          "text": "Hru:",
+          "spacing": 2
+        },
+        {
+          "kind": "text",
+          "name": "sg1_h1",
+          "layout": {
+            "x": 270,
+            "y": 178
+          },
+          "tint": "909090ff",
+          "text": "Počet hráčů celkem:",
+          "spacing": 2
+        },
+        {
+          "kind": "text",
+          "name": "sg1_h2",
+          "layout": {
+            "x": 270,
+            "y": 297
+          },
+          "tint": "909090ff",
+          "text": "Na tomto počítači:",
+          "spacing": 2
+        },
+        {
+          "kind": "text",
+          "name": "sg1_h3",
+          "layout": {
+            "x": 270,
+            "y": 399
+          },
+          "tint": "909090ff",
+          "text": "Způsob připojení:",
+          "spacing": 2
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_r1_cb",
+          "layout": {
+            "x": 280,
+            "y": 105
+          },
+          "tint": "ffffffff",
+          "handle": "menu/widgets/radio/radio_selected"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_r1_lbl",
+          "layout": {
+            "x": 306,
+            "y": 118
+          },
+          "tint": "cececeff",
+          "text": "Vytvořit",
+          "size": 15,
+          "spacing": 2
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_r1_rg",
+          "layout": {
+            "x": 280,
+            "y": 105,
+            "width": 185,
+            "height": 20
+          }
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_r2_cb",
+          "layout": {
+            "x": 280,
+            "y": 122
+          },
+          "tint": "ffffffff",
+          "handle": "menu/widgets/radio/radio_unselected"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_r2_lbl",
+          "layout": {
+            "x": 306,
+            "y": 135
+          },
+          "tint": "909090ff",
+          "text": "Připojit se",
+          "size": 15,
+          "spacing": 2
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_r2_rg",
+          "layout": {
+            "x": 280,
+            "y": 122,
+            "width": 185,
+            "height": 20
+          }
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_r3_cb",
+          "layout": {
+            "x": 280,
+            "y": 190
+          },
+          "tint": "858585ff",
+          "handle": "menu/widgets/radio/radio_unselected"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_r3_lbl",
+          "layout": {
+            "x": 306,
+            "y": 203
+          },
+          "tint": "858585ff",
+          "text": "1 hráč (trénink)",
+          "size": 15,
+          "spacing": 2
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_r3_rg",
+          "layout": {
+            "x": 280,
+            "y": 190,
+            "width": 185,
+            "height": 20
+          }
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_r4_cb",
+          "layout": {
+            "x": 280,
+            "y": 207
+          },
+          "tint": "858585ff",
+          "handle": "menu/widgets/radio/radio_unselected"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_r4_lbl",
+          "layout": {
+            "x": 306,
+            "y": 220
+          },
+          "tint": "858585ff",
+          "text": "2 hráči",
+          "size": 15,
+          "spacing": 2
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_r4_rg",
+          "layout": {
+            "x": 280,
+            "y": 207,
+            "width": 185,
+            "height": 20
+          }
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_r5_cb",
+          "layout": {
+            "x": 280,
+            "y": 224
+          },
+          "tint": "858585ff",
+          "handle": "menu/widgets/radio/radio_selected"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_r5_lbl",
+          "layout": {
+            "x": 306,
+            "y": 237
+          },
+          "tint": "858585ff",
+          "text": "3 hráči",
+          "size": 15,
+          "spacing": 2
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_r5_rg",
+          "layout": {
+            "x": 280,
+            "y": 224,
+            "width": 185,
+            "height": 20
+          }
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_r6_cb",
+          "layout": {
+            "x": 280,
+            "y": 241
+          },
+          "tint": "858585ff",
+          "handle": "menu/widgets/radio/radio_unselected"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_r6_lbl",
+          "layout": {
+            "x": 306,
+            "y": 254
+          },
+          "tint": "858585ff",
+          "text": "4 hráči",
+          "size": 15,
+          "spacing": 2
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_r6_rg",
+          "layout": {
+            "x": 280,
+            "y": 241,
+            "width": 185,
+            "height": 20
+          }
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_r7_cb",
+          "layout": {
+            "x": 280,
+            "y": 309
+          },
+          "tint": "858585ff",
+          "handle": "menu/widgets/radio/radio_unselected"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_r7_lbl",
+          "layout": {
+            "x": 306,
+            "y": 322
+          },
+          "tint": "858585ff",
+          "text": "1 hráč",
+          "size": 15,
+          "spacing": 2
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_r7_rg",
+          "layout": {
+            "x": 280,
+            "y": 309,
+            "width": 185,
+            "height": 20
+          }
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_r8_cb",
+          "layout": {
+            "x": 280,
+            "y": 326
+          },
+          "tint": "858585ff",
+          "handle": "menu/widgets/radio/radio_unselected"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_r8_lbl",
+          "layout": {
+            "x": 306,
+            "y": 339
+          },
+          "tint": "858585ff",
+          "text": "2 hráči",
+          "size": 15,
+          "spacing": 2
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_r8_rg",
+          "layout": {
+            "x": 280,
+            "y": 326,
+            "width": 185,
+            "height": 20
+          }
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_r9_cb",
+          "layout": {
+            "x": 280,
+            "y": 343
+          },
+          "tint": "858585ff",
+          "handle": "menu/widgets/radio/radio_selected"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_r9_lbl",
+          "layout": {
+            "x": 306,
+            "y": 356
+          },
+          "tint": "858585ff",
+          "text": "3 hráči",
+          "size": 15,
+          "spacing": 2
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_r9_rg",
+          "layout": {
+            "x": 280,
+            "y": 343,
+            "width": 185,
+            "height": 20
+          }
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_r10_cb",
+          "layout": {
+            "x": 280,
+            "y": 411
+          },
+          "tint": "858585ff",
+          "handle": "menu/widgets/radio/radio_unselected"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_r10_lbl",
+          "layout": {
+            "x": 306,
+            "y": 424
+          },
+          "tint": "858585ff",
+          "text": "TCP/IP protokol",
+          "size": 15,
+          "spacing": 2
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_r10_rg",
+          "layout": {
+            "x": 280,
+            "y": 411,
+            "width": 185,
+            "height": 20
+          }
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_r11_cb",
+          "layout": {
+            "x": 280,
+            "y": 428
+          },
+          "tint": "858585ff",
+          "handle": "menu/widgets/radio/radio_unselected"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_r11_lbl",
+          "layout": {
+            "x": 306,
+            "y": 441
+          },
+          "tint": "858585ff",
+          "text": "IPX protokol",
+          "size": 15,
+          "spacing": 2
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_r11_rg",
+          "layout": {
+            "x": 280,
+            "y": 428,
+            "width": 185,
+            "height": 20
+          }
+        },
+        {
+          "kind": "sprite",
+          "name": "sg1_cont",
+          "layout": {
+            "x": 270,
+            "y": 516
+          },
+          "tint": "ffffff85",
+          "handle": "menu/widgets/dialog_button/btn_dialog_normal"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_cont_lbl",
+          "layout": {
+            "x": 291,
+            "y": 535
+          },
+          "tint": "858585ff",
+          "text": "Dále",
+          "spacing": 1
+        },
+        {
+          "kind": "input_region",
+          "name": "sg1_cont_rg",
+          "layout": {
+            "x": 270,
+            "y": 516,
+            "width": 82,
+            "height": 25
+          }
+        },
+        {
+          "kind": "text",
+          "name": "sg1_ip_label",
+          "layout": {
+            "x": 445,
+            "y": 350
+          },
+          "tint": "ffd933ff",
+          "text": "IP hostitele:",
+          "size": 14
+        },
+        {
+          "kind": "quad",
+          "name": "sg1_ip_border",
+          "layout": {
+            "x": 445,
+            "y": 360,
+            "width": 180,
+            "height": 25
+          },
+          "color": "ffffffff"
+        },
+        {
+          "kind": "quad",
+          "name": "sg1_ip_bg",
+          "layout": {
+            "x": 446,
+            "y": 361,
+            "width": 178,
+            "height": 23
+          },
+          "color": "1a1a1ad9"
+        },
+        {
+          "kind": "text",
+          "name": "sg1_ip_value",
+          "layout": {
+            "x": 452,
+            "y": 378
+          },
+          "tint": "99ff99ff",
+          "text": "127.0.0.1",
+          "size": 14
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "history",
+      "state": "history",
+      "children": [
+        {
+          "kind": "sprite",
+          "name": "hist_bg",
+          "handle": "menu/backgrounds/bg_history"
+        },
+        {
+          "kind": "text",
+          "name": "hist_title",
+          "layout": {
+            "x": 270,
+            "y": 90
+          },
+          "tint": "f2d966ff",
+          "text": "HISTORIE",
+          "size": 22
+        },
+        {
+          "kind": "quad",
+          "name": "hist_rule",
+          "layout": {
+            "x": 270,
+            "y": 100,
+            "width": 470,
+            "height": 2
+          },
+          "color": "f2d966ff"
+        },
+        {
+          "kind": "text",
+          "name": "hist_prompt",
+          "layout": {
+            "x": 270,
+            "y": 542
+          },
+          "tint": "b3b3b3ff",
+          "size": 14
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "exit",
+      "state": "exit",
+      "children": [
+        {
+          "kind": "sprite",
+          "name": "exit_bg",
+          "layout": {
+            "x": 203,
+            "y": 169
+          },
+          "handle": "menu/backgrounds/bg_quit"
+        },
+        {
+          "kind": "quad",
+          "layout": {
+            "x": 203,
+            "y": 169,
+            "width": 394,
+            "height": 2
+          },
+          "color": "e6e6e6f2"
+        },
+        {
+          "kind": "quad",
+          "layout": {
+            "x": 203,
+            "y": 428,
+            "width": 394,
+            "height": 2
+          },
+          "color": "e6e6e6f2"
+        },
+        {
+          "kind": "quad",
+          "layout": {
+            "x": 203,
+            "y": 169,
+            "width": 2,
+            "height": 261
+          },
+          "color": "e6e6e6f2"
+        },
+        {
+          "kind": "quad",
+          "layout": {
+            "x": 595,
+            "y": 169,
+            "width": 2,
+            "height": 261
+          },
+          "color": "e6e6e6f2"
+        },
+        {
+          "kind": "text",
+          "name": "exit_title",
+          "layout": {
+            "x": 203,
+            "y": 240
+          },
+          "tint": "ffd966ff",
+          "text": "Opravdu chcete skončit?",
+          "size": 20
+        },
+        {
+          "kind": "text",
+          "name": "exit_yes",
+          "layout": {
+            "x": 240,
+            "y": 310
+          },
+          "tint": "99ff99ff",
+          "text": "[Enter / Y]  Ano"
+        },
+        {
+          "kind": "text",
+          "name": "exit_no",
+          "layout": {
+            "x": 440,
+            "y": 310
+          },
+          "tint": "ffb3b3ff",
+          "text": "[Esc / N]    Ne"
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "ruch_layer"
+    },
+    {
+      "kind": "group",
+      "name": "cursor_layer"
+    }
+  ]
+}

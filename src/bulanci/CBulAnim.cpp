@@ -2,7 +2,7 @@
 
 // !FUNC 0x0040ad20 BEGIN
 /* 40AD20-40AD7D 0005D */
-uchar CBulAnim::CleanupBody(uchar param_1) { STUB_BODY(); return 0; }
+void CBulAnim::CleanupBody(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0040ad20 END
 
 // !FUNC 0x0040afd0 BEGIN
@@ -78,7 +78,7 @@ uchar CBulAnim::IDSAnim_BindUserData(uint param_1, int* param_2) { STUB_BODY(); 
 
 // !FUNC 0x00439010 BEGIN
 /* 439010-439044 00034 */
-uchar CBulAnim::SetPalette(uint* param_1) { STUB_BODY(); return 0; }
+void CBulAnim::SetPalette(uint* param_1) { STUB_BODY(); }
 // !FUNC 0x00439010 END
 
 // !FUNC 0x004391d0 BEGIN
@@ -91,14 +91,10 @@ uchar CBulAnim::IDSAnim_SetSequence_thunk(uint param_1, int* param_2) { STUB_BOD
 uchar CBulAnim::IDSAnim_SelectRandomTrack(uint param_1, short param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004392a0 END
 
-// !FUNC 0x00439520 BEGIN
-/* 439520-439528 00008 */
-uchar CBulAnim::Sub04Dtor_thunk(uchar param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00439520 END
 
 // !FUNC 0x00439530 BEGIN
 /* 439530-439538 00008 */
-uchar CBulAnim::Sub10Dtor_thunk(uchar param_1) { STUB_BODY(); return 0; }
+uchar CBulAnim::CBulAnim_Sub10Dtor_thunk(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00439530 END
 
 // !FUNC 0x00439540 BEGIN

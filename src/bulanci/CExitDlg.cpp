@@ -2,17 +2,17 @@
 
 // !FUNC 0x0040b290 BEGIN
 /* 40B290-40B2E4 00054 */
-uchar CExitDlg::FUN_0040b290(ushort param_1) { STUB_BODY(); return 0; }
+uchar CExitDlg::CExitDlg_RouteSyntheticCloseEvent(ushort param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b290 END
 
 // !FUNC 0x00411b50 BEGIN
 /* 411B50-411DD3 00283 */
-CWindow* CExitDlg::CExitDlg_ctor(CWindow* param_1) { STUB_BODY(); return 0; }
+void* CExitDlg::CExitDlg_ctor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00411b50 END
 
 // !FUNC 0x00411de0 BEGIN
 /* 411DE0-411DE6 00006 */
-uchar* CExitDlg::FUN_00411de0() {
+uchar* CExitDlg::CExitDlg_GetClassTable() {
     return reinterpret_cast<uchar*>(&DAT_004b3654);
 }
 // !FUNC 0x00411de0 END

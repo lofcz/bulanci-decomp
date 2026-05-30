@@ -2,13 +2,13 @@
 
 // !FUNC 0x00401280 BEGIN
 /* 401280-40128B 0000B */
-int CStartGame1::FUN_00401280() { STUB_BODY(); return 0; }
+int CStartGame1::CStartGame1_GetEmbeddedCGamePtr() { STUB_BODY(); return 0; }
 // !FUNC 0x00401280 END
 
 
 // !FUNC 0x0040a860 BEGIN
 /* 40A860-40A8C0 00060 */
-uchar CStartGame1::CStartGame1_ApplyHostJoinVisibility(int param_1) { STUB_BODY(); return 0; }
+void CStartGame1::CStartGame1_ApplyHostJoinVisibility(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0040a860 END
 
 
@@ -21,7 +21,7 @@ uchar CStartGame1::CStartGame1_ApplyJoinModeVisibility(char param_1) { STUB_BODY
 
 // !FUNC 0x0040ae00 BEGIN
 /* 40AE00-40AE2A 0002A */
-uchar CStartGame1::FUN_0040ae00(int param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_UpdateModalChildVisibility(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ae00 END
 
 // !FUNC 0x0040ae30 BEGIN
@@ -41,7 +41,7 @@ uchar CStartGame1::CStartGame1_BuildUi(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040f400 BEGIN
 /* 40F400-40F4AB 000AB */
-CWindow* CStartGame1::CStartGame1_ctor(CWindow* param_1) { STUB_BODY(); return 0; }
+void* CStartGame1::CStartGame1_ctor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f400 END
 
 // !FUNC 0x0040f4b0 BEGIN
@@ -53,32 +53,32 @@ uchar* CStartGame1::CStartGame1_GetSingleton() {
 
 // !FUNC 0x0040f4c0 BEGIN
 /* 40F4C0-40F4C8 00008 */
-uchar CStartGame1::FUN_0040f4c0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_ScalarDeletingDtor_thunk_Sub10(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f4c0 END
 
 // !FUNC 0x0040f4d0 BEGIN
 /* 40F4D0-40F4D8 00008 */
-uchar CStartGame1::FUN_0040f4d0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_ScalarDeletingDtor_thunk_Sub70(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f4d0 END
 
 // !FUNC 0x0040f4e0 BEGIN
 /* 40F4E0-40F4E8 00008 */
-uchar CStartGame1::FUN_0040f4e0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_ScalarDeletingDtor_thunk_Sub18(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f4e0 END
 
 // !FUNC 0x0040f4f0 BEGIN
 /* 40F4F0-40F4F8 00008 */
-uchar CStartGame1::FUN_0040f4f0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_AdjustOffsetDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f4f0 END
 
 // !FUNC 0x0040f500 BEGIN
 /* 40F500-40F55A 0005A */
-uchar CStartGame1::FUN_0040f500(uchar param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f500 END
 
 // !FUNC 0x0040f560 BEGIN
 /* 40F560-40F57E 0001E */
-void* CStartGame1::FUN_0040f560(uchar param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f560 END
 
 // !FUNC 0x00403d20 BEGIN

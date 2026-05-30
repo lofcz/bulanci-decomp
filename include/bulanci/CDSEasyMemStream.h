@@ -6,10 +6,10 @@
 class CDSEasyMemStream {
 public:
 	// !DECL 0x00409170 BEGIN
-	/* 409170 */ void* FUN_00409170(uchar* param_1, uint param_2);
+	/* 409170 */ void* CDSEasyMemStream_ctor(uchar* param_1, uint param_2);
 	// !DECL 0x00409170 END
 	// !DECL 0x004091f0 BEGIN
-	/* 4091F0 */ uchar* FUN_004091f0();
+	/* 4091F0 */ uchar* CDSEasyMemStream_GetTypeInfo();
 	// !DECL 0x004091f0 END
 	// !DECL 0x00409200 BEGIN
 	/* 409200 */ uchar CloseStream(int param_1);
@@ -21,16 +21,16 @@ public:
 	/* 409230 */ longlong TellPosition();
 	// !DECL 0x00409230 END
 	// !DECL 0x00409240 BEGIN
-	/* 409240 */ uchar FUN_00409240(uchar param_1);
+	/* 409240 */ uchar CDSEasyMemStream_ScalarDeletingDtor_thunk_Sub4(uchar param_1);
 	// !DECL 0x00409240 END
 	// !DECL 0x00409250 BEGIN
-	/* 409250 */ uchar FUN_00409250(uchar param_1);
+	/* 409250 */ uchar CDSEasyMemStream_ScalarDeletingDtor_thunk(uchar param_1);
 	// !DECL 0x00409250 END
 	// !DECL 0x00409270 BEGIN
-	/* 409270 */ uchar FUN_00409270(uint* param_1);
+	/* 409270 */ uchar CDSEasyMemStream_dtor(uint* param_1);
 	// !DECL 0x00409270 END
 	// !DECL 0x004092f0 BEGIN
-	/* 4092F0 */ void* FUN_004092f0(uchar param_1);
+	/* 4092F0 */ void* CDSEasyMemStream_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x004092f0 END
 	// !DECL 0x004306c0 BEGIN
 	/* 4306C0 */ uchar ReleaseBackingBuffer(int param_1);

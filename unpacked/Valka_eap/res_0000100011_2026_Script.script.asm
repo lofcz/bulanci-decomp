@@ -116,3 +116,32 @@ fn export#9 @ 0x05cd  ; OnNetCustom(streamHandle)  -- fires from `CGame::Process
 fn export#10 @ 0x0614  ; OnGameStart()  -- fires from `CGaming::FUN_0041c140(true)` whenever the level transitions from paused/loaded to running (level start, post-pause resume). Music is started and engine-side timer slots 1/2 are armed right after this returns
   ; varCount=0
     @0x0615  Return(IntConst(0))
+
+fn @ 0x0000  ; helper (call-target)
+  ; varCount=0
+    @0x0001  IfEqual(TeleportPlayerTo(GetLocalVar(0), GetLocalVar(1), GetLocalVar(2), IntConst(0)), IntConst(0), 94)
+    @0x0017  IfEqual(IsNet(), IntConst(0), 88)
+    @0x0022  StrmSetSize(GetGlobalVar(3), IntConst(0))
+    @0x002a  StrmWrite(GetGlobalVar(3), IntConst(1), IntConst(1))
+    @0x0037  StrmWrite(GetGlobalVar(3), GetLocalVar(0), IntConst(1))
+    @0x0041  StrmWrite(GetGlobalVar(3), GetLocalVar(1), IntConst(4))
+    @0x004b  StrmWrite(GetGlobalVar(3), GetLocalVar(2), IntConst(4))
+    @0x0055  StrmSend(GetGlobalVar(3))
+    @0x0058  Return(IntConst(1))
+    @0x005e  Return(IntConst(0))
+
+fn @ 0x04a3  ; helper (call-target)
+  ; varCount=2
+    @0x04a4  SetLocalVar(0, Rand(IntConst(0), IntConst(1)))
+    @0x04b1  SetLocalVar(1, GetLocalVar(0))
+    @0x04b5  Switch(GetLocalVar(1); 0=>0x4c9, 1=>0x4ea)
+    @0x04c9  IfEqual(Call(fn@0x0, GetLocalVar(2), IntConst(9), IntConst(11)), IntConst(1), 1335)
+    @0x04e5  Goto(1291)
+    @0x04ea  IfEqual(Call(fn@0x0, GetLocalVar(2), IntConst(739), IntConst(466)), IntConst(1), 1335)
+    @0x0506  Goto(1291)
+    @0x050b  SetLocalVar(1, Add(GetLocalVar(1), IntConst(1)))
+    @0x0515  IfNotEqual(GetLocalVar(1), IntConst(2), 1320)
+    @0x0521  SetLocalVar(1, IntConst(0))
+    @0x0528  IfNotEqual(GetLocalVar(1), GetLocalVar(0), 1205)
+    @0x0531  Return(IntConst(0))
+    @0x0537  Return(IntConst(1))

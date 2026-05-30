@@ -6,7 +6,7 @@
 class CDSFont {
 public:
 	// !DECL 0x00437510 BEGIN
-	/* 437510 */ uchar* FUN_00437510();
+	/* 437510 */ uchar* CDSFont_GetTypeInfo();
 	// !DECL 0x00437510 END
 
 	// !DECL 0x004372b0 BEGIN

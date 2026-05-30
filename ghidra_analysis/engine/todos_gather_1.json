@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "title": "Rebuild global CWindow to 0x70 dialog prefix",
+    "types": ["CWindow", "CMsgDialog", "CScore", "CSessionList"],
+    "addresses": ["0x00405560", "0x0040e780", "0x0040efd0", "0x0040c2d0"],
+    "ghidra_actions": ["delete_data_type", "create_struct", "modify_struct_field", "save_program"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/batch_19_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_15_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_17_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/CScore.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "critical",
+    "source_slice": "19"
+  },
+  {
+    "id": 2,
+    "title": "Shrink CGame Ghidra layout to 0x248 bytes",
+    "types": ["CGame", "CPauseDlg", "CBulanci"],
+    "addresses": ["0x00414a80", "0x00411df0", "0x0040ac20", "0x00477679"],
+    "ghidra_actions": ["delete_data_type", "create_struct", "modify_struct_field", "set_function_prototype"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/batch_13_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/CPauseDlg.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "critical",
+    "source_slice": "15"
+  },
+  {
+    "id": 3,
+    "title": "Name CGame level resource table at +0x66",
+    "types": ["CGame", "CLevelList"],
+    "addresses": ["0x00413560", "0x004104f0", "0x00414ee4"],
+    "ghidra_actions": ["modify_struct_field", "rename_function"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CLevelList.md",
+      "ghidra_analysis/engine/struct_recovery/batch_12_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "high",
+    "source_slice": "12"
+  },
+  {
+    "id": 4,
+    "title": "Fix CPauseDlg_Build decompiler this type",
+    "types": ["CPauseDlg", "CGaming"],
+    "addresses": ["0x00411df0", "0x00420423", "0x00420380"],
+    "ghidra_actions": ["set_function_prototype", "rename_function"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CPauseDlg.md",
+      "ghidra_analysis/engine/struct_recovery/batch_15_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_13_followup_summary.md"
+    ],
+    "priority": "high",
+    "source_slice": "15"
+  },
+  {
+    "id": 5,
+    "title": "Type CMina gaming_host at anim +0x84",
+    "types": ["CMina", "CGameView", "CGaming"],
+    "addresses": ["0x004212b0", "0x0041cb70", "0x00419010", "0x00419fd0"],
+    "ghidra_actions": ["modify_struct_field", "set_function_prototype"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CMina.md",
+      "ghidra_analysis/engine/struct_recovery/batch_14_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_14_followup_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "high",
+    "source_slice": "14"
+  },
+  {
+    "id": 6,
+    "title": "Apply CLevelScore struct 0x28 in Ghidra",
+    "types": ["CLevelScore", "CScoreItem", "CGame"],
+    "addresses": ["0x00477679", "0x00409620", "0x00409b10", "0x00409368"],
+    "ghidra_actions": ["create_struct", "modify_struct_field", "save_program"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CLevelScore.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md",
+      "ghidra_analysis/engine/struct_recovery/batch_13_summary.md"
+    ],
+    "priority": "high",
+    "source_slice": "13"
+  },
+  {
+    "id": 7,
+    "title": "Split CScore base_to_6c into CWindow fields",
+    "types": ["CScore", "CWindow"],
+    "addresses": ["0x00411010", "0x0040e120", "0x0040abe0", "0x00405560"],
+    "ghidra_actions": ["modify_struct_field", "delete_data_type", "create_struct"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CScore.md",
+      "ghidra_analysis/engine/struct_recovery/batch_17_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_17_summary.md"
+    ],
+    "priority": "medium",
+    "source_slice": "17"
+  },
+  {
+    "id": 8,
+    "title": "Fix CHelpScript ctor prototype blocker",
+    "types": ["CHelpScript", "CDSScript"],
+    "addresses": ["0x004215e0", "0x00404c50"],
+    "ghidra_actions": ["set_function_prototype", "modify_struct_field"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CHelpScript.md",
+      "ghidra_analysis/engine/struct_recovery/batch_10_slice10_agent.md",
+      "ghidra_analysis/engine/struct_recovery/batch_10_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source_slice": "10"
+  },
+  {
+    "id": 9,
+    "title": "Retype CSessionList scheduler methods this",
+    "types": ["CSessionList", "CGaming", "CGame"],
+    "addresses": ["0x0040c570", "0x0040c2d0", "0x0041630d"],
+    "ghidra_actions": ["set_function_prototype", "set_parameter_type"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CSessionList.md",
+      "ghidra_analysis/engine/struct_recovery/batch_18_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_18_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source_slice": "18"
+  },
+  {
+    "id": 10,
+    "title": "Replace CMina CAnim_recovered with CAnim",
+    "types": ["CMina", "CAnim"],
+    "addresses": ["0x0041cb70", "0x004212b0"],
+    "ghidra_actions": ["modify_struct_field", "delete_data_type", "create_struct"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CMina.md",
+      "ghidra_analysis/engine/struct_recovery/batch_14_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "medium",
+    "source_slice": "14"
+  }
+]

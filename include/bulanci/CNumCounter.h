@@ -12,7 +12,7 @@ public:
 	/* 4270A0 */ uchar CNumCounter_OnTimerTick(void* param_1);
 	// !DECL 0x004270a0 END
 	// !DECL 0x00427340 BEGIN
-	/* 427340 */ uint* CNumCounter_ctor(uint* param_1);
+	/* 427340 */ uchar CNumCounter_ctor(uchar param_1);
 	// !DECL 0x00427340 END
 	// !DECL 0x004273e0 BEGIN
 	/* 4273E0 */ uchar* CNumCounter_GetTypeDescriptor();
@@ -30,13 +30,13 @@ public:
 	/* 427420 */ uchar CNumCounter_AdjustorThunk68_Dtor(uchar param_1);
 	// !DECL 0x00427420 END
 	// !DECL 0x00427430 BEGIN
-	/* 427430 */ uchar CNumCounter_dtor(uchar param_1);
+	/* 427430 */ void CNumCounter_dtor(uchar param_1);
 	// !DECL 0x00427430 END
 	// !DECL 0x00427740 BEGIN
-	/* 427740 */ uchar CNumCounter_Render(int param_1);
+	/* 427740 */ void CNumCounter_Render(uchar param_1);
 	// !DECL 0x00427740 END
 	// !DECL 0x00427af0 BEGIN
-	/* 427AF0 */ void* CNumCounter_vDtor(uchar param_1);
+	/* 427AF0 */ uchar CNumCounter_vDtor(uchar param_1);
 	// !DECL 0x00427af0 END
 };
 

@@ -1,10 +1,22 @@
-//! Background-music + SFX playback via `rodio`. Two sinks: one looped for
-//! ambient music, one fire-and-forget for menu/gameplay sound effects.
+//! Background-music + SFX playback via `rodio` on native targets.
+//! Web builds omit rodio/cpal (they do not compile on emscripten yet).
 
+#[cfg(not(target_arch = "wasm32"))]
 use rodio::cpal::traits::{DeviceTrait, HostTrait};
+#[cfg(not(target_arch = "wasm32"))]
 use rodio::{Decoder, OutputStream, OutputStreamHandle, Sink, Source};
+#[cfg(not(target_arch = "wasm32"))]
 use std::cell::Cell;
+#[cfg(not(target_arch = "wasm32"))]
 use std::sync::atomic::{AtomicBool, Ordering};
+
+// Web build plays through raylib's `raudio` module (miniaudio) instead of
+// rodio/cpal, which don't yet build on emscripten. The method surface is
+// identical to the native `AudioManager`, so call sites are platform-agnostic.
+#[cfg(target_arch = "wasm32")]
+use raylib::core::audio::{Music, RaylibAudio, Sound};
+#[cfg(target_arch = "wasm32")]
+use std::cell::{Cell, RefCell};
 
 const MIN_VOLUME_PERCENT: i32 = 0;
 const MAX_VOLUME_PERCENT: i32 = 100;
@@ -16,7 +28,7 @@ const MAX_VOLUME_PERCENT: i32 = 100;
 // 1000-12000x more energy than retail in the 17-20 kHz aliasing band).
 // The fix is upstream of the runtime: SFX are pre-resampled to 48 kHz
 // with a Kaiser-windowed polyphase filter inside
-// `scripts/build_menu_assets.py`, which makes rodio's `from == to`
+// `open_bulanci/asset_pipeline/build_assets.py`, which makes rodio's `from == to`
 // short-circuit kick in (see `rodio/src/conversions/sample_rate.rs:70-72`
 // and `:129-132`) and pass the samples through unmodified to cpal/WASAPI.
 // See `ghidra_analysis/gameplay/main_menu_hover_audio.md` §8 for the
@@ -37,6 +49,7 @@ impl AudioFade {
     }
 }
 
+#[cfg(not(target_arch = "wasm32"))]
 pub struct AudioManager {
     _stream: OutputStream,
     _stream_handle: OutputStreamHandle,
@@ -47,6 +60,154 @@ pub struct AudioManager {
     focused: AtomicBool,
 }
 
+/// Web (emscripten) audio backed by raylib's `raudio` (miniaudio).
+///
+/// Mirrors the native rodio [`AudioManager`] API one-for-one so the rest of
+/// the client is platform-agnostic. Two structural differences from native,
+/// both forced by raylib's design:
+///
+///  * **Streamed music must be pumped every frame** via `UpdateMusicStream`,
+///    so this build relies on [`AudioManager::update`] being called once per
+///    frame (it is a no-op on native).
+///  * **`Sound`/`Music` are lifetime-bound to the [`RaylibAudio`] device.**
+///    The device is a process-lifetime singleton, so we leak it once to get a
+///    `&'static` borrow — that lets the loaded clips live in this struct
+///    without a self-referential type.
+///
+/// The browser suspends the page's `AudioContext` until a user gesture; the
+/// shell page (`web/index.html`) resumes it on the first click, after which
+/// playback that was started earlier becomes audible.
+#[cfg(target_arch = "wasm32")]
+pub struct AudioManager {
+    audio: &'static RaylibAudio,
+    bg: RefCell<Option<Music<'static>>>,
+    bg_volume_percent: Cell<i32>,
+    bg_fade: Cell<Option<AudioFade>>,
+    /// Active one-shot SFX, retained until they finish (dropping a `Sound`
+    /// unloads it mid-playback). Reaped in [`AudioManager::update`].
+    sfx: RefCell<Vec<Sound<'static>>>,
+    focused: Cell<bool>,
+}
+
+#[cfg(target_arch = "wasm32")]
+impl AudioManager {
+    pub fn new() -> Option<Self> {
+        let audio = RaylibAudio::init_audio_device().ok()?;
+        // Leak the device: it lives for the whole program (the page), and the
+        // `'static` borrow is what lets `Music`/`Sound` be stored here.
+        let audio: &'static RaylibAudio = Box::leak(Box::new(audio));
+        Some(AudioManager {
+            audio,
+            bg: RefCell::new(None),
+            bg_volume_percent: Cell::new(MAX_VOLUME_PERCENT),
+            bg_fade: Cell::new(None),
+            sfx: RefCell::new(Vec::new()),
+            focused: Cell::new(true),
+        })
+    }
+
+    /// Pump the music stream and drop finished one-shots. Must be called once
+    /// per frame (see [`crate::app::ClientApp::update`]).
+    pub fn update(&self) {
+        if let Some(music) = self.bg.borrow().as_ref() {
+            music.update_stream();
+        }
+        self.sfx.borrow_mut().retain(|s| s.is_playing());
+    }
+
+    pub fn set_focused(&self, focused: bool) {
+        if self.focused.replace(focused) == focused {
+            return;
+        }
+        if let Some(music) = self.bg.borrow().as_ref() {
+            if focused {
+                music.resume_stream();
+            } else {
+                music.pause_stream();
+            }
+        }
+        for sfx in self.sfx.borrow().iter() {
+            if focused {
+                sfx.resume();
+            } else {
+                sfx.pause();
+            }
+        }
+    }
+
+    pub fn play_bg_music_at_percent(&self, music_bytes: &[u8], volume_percent: i32) {
+        self.bg_fade.set(None);
+        // Drop the previous stream (unloads it) before loading the next.
+        *self.bg.borrow_mut() = None;
+        // Background tracks ship as MP3 (see assets/audio/*_ambient.mp3).
+        let music = match self.audio.new_music_from_memory(".mp3", music_bytes) {
+            Ok(music) => music,
+            Err(e) => {
+                eprintln!("[audio] bg music decode failed: {e}");
+                return;
+            }
+        };
+        self.bg_volume_percent.set(clamp_volume_percent(volume_percent));
+        music.set_volume(volume_percent_to_linear_gain(volume_percent));
+        music.play_stream();
+        if !self.focused.get() {
+            music.pause_stream();
+        }
+        *self.bg.borrow_mut() = Some(music);
+    }
+
+    pub fn set_bg_volume_percent(&self, volume_percent: i32) {
+        let volume_percent = clamp_volume_percent(volume_percent);
+        self.bg_volume_percent.set(volume_percent);
+        if let Some(music) = self.bg.borrow().as_ref() {
+            music.set_volume(volume_percent_to_linear_gain(volume_percent));
+        }
+    }
+
+    pub fn start_bg_fade(&self, fade: AudioFade) {
+        self.bg_fade.set(Some(fade));
+    }
+
+    pub fn step_bg_fade(&self) -> bool {
+        let Some(fade) = self.bg_fade.get() else {
+            return false;
+        };
+        let current = self.bg_volume_percent.get();
+        if current == fade.target_percent {
+            self.bg_fade.set(None);
+            return false;
+        }
+        let next = step_toward(current, fade.target_percent, fade.step_percent);
+        self.set_bg_volume_percent(next);
+        if next == fade.target_percent {
+            self.bg_fade.set(None);
+            false
+        } else {
+            true
+        }
+    }
+
+    pub fn play_sfx(&self, sfx_bytes: &[u8]) {
+        let _ = self.play_sfx_with_duration(sfx_bytes);
+    }
+
+    pub fn play_sfx_with_duration(&self, sfx_bytes: &[u8]) -> Option<u64> {
+        if !self.focused.get() {
+            return None;
+        }
+        // SFX ship as WAV (see assets/audio/sfx_*.wav).
+        let wave = self.audio.new_wave_from_memory(".wav", sfx_bytes).ok()?;
+        let frames = u64::from(wave.frame_count());
+        let rate = u64::from(wave.sample_rate().max(1));
+        let duration_ms = frames * 1000 / rate;
+        let sound = self.audio.new_sound_from_wave(&wave).ok()?;
+        sound.play();
+        self.sfx.borrow_mut().push(sound);
+        Some(duration_ms)
+    }
+}
+
+#[cfg(not(target_arch = "wasm32"))]
 impl AudioManager {
     pub fn new() -> Option<Self> {
         // Diagnostic: print the actual cpal output device config so we know
@@ -86,6 +247,12 @@ impl AudioManager {
             focused: AtomicBool::new(true),
         })
     }
+
+    /// No-op on native: rodio streams on its own thread and needs no
+    /// per-frame pump. Exists so the per-frame call site is platform-agnostic
+    /// (the web build pumps the raylib music stream here).
+    #[inline]
+    pub fn update(&self) {}
 
     pub fn set_focused(&self, focused: bool) {
         let was_focused = self.focused.swap(focused, Ordering::SeqCst);
@@ -160,8 +327,8 @@ impl AudioManager {
             .total_duration()
             .map(|duration| duration.as_millis().min(u128::from(u64::MAX)) as u64);
         // No fade-in / convert — SFX are pre-rendered to 48 kHz by
-        // `scripts/build_menu_assets.py` (see the module-level comment
-        // above SFX_FADE_IN section) so the decoded i16 samples are
+        // `open_bulanci/asset_pipeline/build_assets.py` (see the
+        // module-level comment above SFX_FADE_IN section) so the decoded i16 samples are
         // already at the device rate and rodio's `SampleRateConverter`
         // short-circuits.
         if let Ok(sink) = Sink::try_new(&self._stream_handle) {
@@ -170,14 +337,20 @@ impl AudioManager {
         }
         duration_ms
     }
+}
 
-    pub fn play_hover_sfx(&self, sfx_bytes: &[u8]) {
-        // Retail CSwitch_PlayHoverTrack creates a fresh one-shot
-        // CDSAudioPlayer for AudioBank slot 0 on every eligible mouse-enter.
-        // Eligibility is handled in menu.rs (idle switch only), not by
-        // suppressing overlap while a previous hover sample is still playing.
-        self.play_sfx(sfx_bytes);
-    }
+/// Set the engine's master output volume from the web shell's audio controls
+/// (see `web/index.html`). `percent` is `0..=100` and scales both music and
+/// SFX (raylib applies it at the final mix). Exported to JS via
+/// `Module.ccall('ob_set_master_volume', ...)`; see the `EXPORTED_FUNCTIONS`
+/// link arg in `.cargo/config.toml`.
+#[cfg(target_arch = "wasm32")]
+#[no_mangle]
+pub extern "C" fn ob_set_master_volume(percent: i32) {
+    let gain = clamp_volume_percent(percent) as f32 / 100.0;
+    // `SetMasterVolume` just stores a global in raudio; safe even if the audio
+    // device failed to initialize.
+    unsafe { raylib::ffi::SetMasterVolume(gain) };
 }
 
 fn clamp_volume_percent(volume_percent: i32) -> i32 {
@@ -204,7 +377,7 @@ fn volume_percent_to_linear_gain(volume_percent: i32) -> f32 {
     10.0_f32.powf(attenuation_db100 as f32 / 2000.0)
 }
 
-#[cfg(test)]
+#[cfg(all(test, not(target_arch = "wasm32")))]
 mod tests {
     use super::*;
 
@@ -227,7 +400,7 @@ mod tests {
     fn shipped_sfx_assets_are_pre_resampled_to_48k() {
         // Regression guard for the polyphase-resampling fix.
         //
-        // `scripts/build_menu_assets.py` must pre-resample every menu SFX
+        // `open_bulanci/asset_pipeline/build_assets.py` must pre-resample every menu SFX
         // from the retail bank's native 22050 Hz to the runtime's target
         // rate of 48 kHz before it ships to `open_bulanci/assets/audio/`.
         // If this regresses, rodio's `SampleRateConverter` will alias the
@@ -246,7 +419,7 @@ mod tests {
             let dec = Decoder::new(cursor).expect("decoder");
             assert_eq!(
                 dec.sample_rate(), 48000,
-                "{} must be pre-resampled to 48 kHz (run scripts/build_menu_assets.py)", name,
+                "{} must be pre-resampled to 48 kHz (run open_bulanci/asset_pipeline/build_assets.py)", name,
             );
             assert_eq!(dec.channels(), 1, "{} must be mono", name);
         }
@@ -290,7 +463,9 @@ pub fn is_window_focused() -> bool {
     type HWND = *mut std::ffi::c_void;
     type DWORD = u32;
 
-    #[link(name = "user32")]
+    // See `window_init.rs`: no `#[link(name = "user32")]` so the symbols
+    // resolve against the `user32.lib` that `sola-raylib-sys` links after
+    // its own rlib (avoids the raylib `ShowCursor` LNK2005 clash).
     extern "system" {
         fn GetForegroundWindow() -> HWND;
         fn GetWindowThreadProcessId(hwnd: HWND, lpdwProcessId: *mut DWORD) -> DWORD;
@@ -324,7 +499,9 @@ pub fn is_cursor_in_client_area() -> bool {
         pub bottom: i32,
     }
 
-    #[link(name = "user32")]
+    // See `window_init.rs`: no `#[link(name = "user32")]` so the symbols
+    // resolve against the `user32.lib` that `sola-raylib-sys` links after
+    // its own rlib (avoids the raylib `ShowCursor` LNK2005 clash).
     extern "system" {
         fn GetActiveWindow() -> HWND;
         fn GetCursorPos(lpPoint: *mut POINT) -> i32;

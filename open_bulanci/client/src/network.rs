@@ -47,6 +47,8 @@ impl ClientApp {
                     self.client_tick = self.authoritative_state.tick;
                     self.last_server_tick = self.authoritative_state.tick;
                     self.phase = AppPhase::Playing;
+                    // The match is live — retract the connecting overlay.
+                    self.surfaces.pop_overlay_named("connecting");
                 }
                 ServerMessage::StateUpdate { state } => {
                     if self.phase == AppPhase::Playing && state.tick > self.last_server_tick {

@@ -2,12 +2,12 @@
 
 // !FUNC 0x00426e10 BEGIN
 /* 426E10-427012 00202 */
-uchar CShotCounter::Render(int param_1) { STUB_BODY(); return 0; }
+void CShotCounter::Render(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00426e10 END
 
 // !FUNC 0x00427210 BEGIN
 /* 427210-42728A 0007A */
-uint* CShotCounter::Constructor(uint* param_1) { STUB_BODY(); return 0; }
+void* CShotCounter::Constructor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00427210 END
 
 // !FUNC 0x00427290 BEGIN
@@ -27,19 +27,15 @@ uchar CShotCounter::DeletingDestructorThunk_10(uchar param_1) { STUB_BODY(); ret
 uchar CShotCounter::DeletingDestructorThunk_18(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004272b0 END
 
-// !FUNC 0x004272c0 BEGIN
-/* 4272C0-4272C8 00008 */
-uchar CShotCounter::DeletingDestructorThunk_4(uchar param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x004272c0 END
 
 // !FUNC 0x004272d0 BEGIN
 /* 4272D0-427332 00062 */
-uchar CShotCounter::Destructor(uchar param_1) { STUB_BODY(); return 0; }
+void CShotCounter::Destructor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x004272d0 END
 
 // !FUNC 0x00427a60 BEGIN
 /* 427A60-427A7E 0001E */
-void* CShotCounter::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
+uchar CShotCounter::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00427a60 END
 
 // !FUNC 0x00448b50 BEGIN

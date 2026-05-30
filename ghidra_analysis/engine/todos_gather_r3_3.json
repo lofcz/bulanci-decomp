@@ -1,0 +1,230 @@
+[
+  {
+    "id": 31,
+    "title": "Name FLX opcode 0x0C subscriber vfn[4] in Ghidra",
+    "types": ["CDSFlxFile", "ODSImage", "CDSImage", "CBitmap", "CGunMouse", "CWeapon"],
+    "addresses": ["0x00436ef0", "0x00432dc5", "0x00439100", "0x00416770", "0x00419280", "0x00423bd0", "0x004212b0", "0x00481ab4", "0x00481f00", "0x00483794", "0x00481ed4"],
+    "ghidra_actions": [
+      "set_plate_comment on g_pODSImage / CBitmap / CGunMouse / CWeapon vtables slot[4] = FrameTimeHint subscriber (from BroadcastFrameTimeHint catalog)",
+      "rename_function if any slot[4] targets remain FUN_* beyond CDSView_OnMouseStub / CBitmap_FireOnBitmapEvtFromView / CGunMouse_OnAnimTick / CWeapon_Fire",
+      "set_decompiler_comment@0x00436ef0 subscriber vfn+0x10 dispatch table cross-ref CDSFlxFile.md",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSFlxFile.md",
+      "ghidra_analysis/engine/anim_runtime.md",
+      "ghidra_analysis/engine/status.md",
+      "ghidra_analysis/engine/agent_todos_50_r2_results.jsonl",
+      "ghidra_analysis/engine/todos_gather_r2_3.json"
+    ],
+    "priority": "medium",
+    "source": "backlog",
+    "supersedes_todo_id": 31
+  },
+  {
+    "id": 32,
+    "title": "Ghidra comments for nSeqTotalDurationMs / TM seq[0x10]",
+    "types": ["CDSFlxFile", "CDSAnim", "CBulPicture"],
+    "addresses": ["0x00432ac0", "0x00432b18", "0x004399b0", "0x004340c0"],
+    "ghidra_actions": [
+      "modify_struct_field CDSFlxFile nSeqTotalDurationMs comment (FLX inMemSize @ file+0x1c → meta +0x14; track seq face aliases seq[0x10] ms for TM_AdvanceFrame)",
+      "set_decompiler_comment@0x00432ac0 BindStream store to +0x14",
+      "set_decompiler_comment@0x004399b0 TM_AdvanceFrame Bresenham uses seq[0x10] total ms / seq[0x14] frame count",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSFlxFile.md",
+      "ghidra_analysis/engine/struct_recovery/CBulPicture.md",
+      "ghidra_analysis/engine/anim_runtime.md",
+      "ghidra_analysis/engine/status.md",
+      "ghidra_analysis/engine/todos_gather_r2_3.json"
+    ],
+    "priority": "medium",
+    "source": "backlog",
+    "supersedes_todo_id": 32
+  },
+  {
+    "id": 33,
+    "title": "Verify CDSFlxFile Ghidra fields vs flx_file_format.md",
+    "types": ["CDSFlxFile"],
+    "addresses": ["0x00432ac0", "0x00432a50", "0x00432c60"],
+    "ghidra_actions": [
+      "get_struct_layout CDSFlxFile compare to flx_file_format.md file↔object table",
+      "rename any remaining hdr_* / field_* / nInMemSizeHint mismatch vs doc canonical names (nSeqTotalDurationMs, nAnimFrameCountMinusOne, bodySeekBiasLo)",
+      "set_plate_comment@0x00432ac0 BindStream dword map",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSFlxFile.md",
+      "ghidra_analysis/formats/flx_file_format.md",
+      "ghidra_analysis/engine/struct_recovery/batch_30_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_30_summary.md",
+      "ghidra_analysis/engine/todos_gather_r2_3.json"
+    ],
+    "priority": "high",
+    "source": "handoff",
+    "supersedes_todo_id": 33
+  },
+  {
+    "id": 34,
+    "title": "CDSFont fontFooter dword semantics @ +0x50c",
+    "types": ["CDSFont", "CDSFontGlyphRec", "CDSImage"],
+    "addresses": ["0x004372b0", "0x004372c5", "0x00437330", "0x0043733a", "0x00437160"],
+    "ghidra_actions": [
+      "search_instructions consumers of CDSFont+0x50c..+0x513 beyond Read paths",
+      "modify_struct_field fontFooter or split dword pair if xref proves distinct fields",
+      "modify_struct_field CDSFont +0x08..+0x4b align canonical names with CDSImage.md (post task-11 embed)",
+      "set_decompiler_comment@0x004372c5 / @0x0043733a payload tail",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSFont.md",
+      "ghidra_analysis/engine/struct_recovery/CDSFontGlyphRec.md",
+      "ghidra_analysis/engine/struct_recovery/CDSImage.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_11_report.md",
+      "ghidra_analysis/engine/struct_recovery/batch_30_followup_summary.md",
+      "ghidra_analysis/engine/todos_gather_r2_3.json"
+    ],
+    "priority": "high",
+    "source": "handoff",
+    "supersedes_todo_id": 34
+  },
+  {
+    "id": 35,
+    "title": "CDSImage MI facets + nField_44/nField_48 naming",
+    "types": ["CDSImage", "CDSBmpImage", "CDSJpegImage", "CDSPtrSlotVec", "CDSBackBuffer"],
+    "addresses": ["0x00425460", "0x00425580", "0x00436f40", "0x004320c0", "0x00432440", "0x00431cc0", "0x00432030", "0x00406340", "0x00437160", "0x00436c60"],
+    "ghidra_actions": [
+      "rename CDSImage field_44/field_48 to semantic names or document write-only bpp tag in struct + comments",
+      "verify CDSImage_StreamHostFacet / CDSImage_EventFacet @ +0x54/+0x58; expand vtable slot plates on stream_hierarchy.md paths",
+      "rename_function CDSPtrSlotVec_Resize callee namespace if decompiler still shows CDSAudioBank::",
+      "xref post-init readers for +0x44/+0x48 beyond CDSImage_Load serialize (expect zero on raster path)",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSImage.md",
+      "ghidra_analysis/engine/struct_recovery/CDSBmpImage.md",
+      "ghidra_analysis/engine/struct_recovery/CDSJpegImage.md",
+      "ghidra_analysis/engine/struct_recovery/CDSPtrSlotVec.md",
+      "ghidra_analysis/engine/struct_recovery/batch_31_followup_summary.md",
+      "ghidra_analysis/engine/todos_gather_r2_3.json"
+    ],
+    "priority": "high",
+    "source": "handoff",
+    "supersedes_todo_id": 35
+  },
+  {
+    "id": 36,
+    "title": "Disasm CDSJpegImage registry factory @ 0x0043c160",
+    "types": ["CDSJpegImage", "CDSBmpImage"],
+    "addresses": ["0x0043c160", "0x00432070", "0x00432030", "0x00431cc0"],
+    "ghidra_actions": [
+      "create_function@0x0043c160 if missing; compare alloc size vs CDSJpegImage_CreateObject@0x00432070",
+      "confirm +0x60 role on 100 B wrapper vs embedded 0x60 image (quality 0x4b vs class id)",
+      "set_decompiler_comment@0x00432030 Save quality read via MI adjustor",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSJpegImage.md",
+      "ghidra_analysis/engine/struct_recovery/batch_32_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_32_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/round3_spawn_manifest.md",
+      "ghidra_analysis/engine/todos_gather_r2_3.json"
+    ],
+    "priority": "low",
+    "source": "backlog",
+    "supersedes_todo_id": 36
+  },
+  {
+    "id": 37,
+    "title": "mad_stream/mad_frame libmad Ghidra rename pass",
+    "types": ["CDSMpx", "CDSMpxDecoder", "mad_stream", "mad_frame", "mad_synth_bulanci"],
+    "addresses": ["0x004465e0", "0x004567b0", "0x00456820", "0x00458f50", "0x00432f40"],
+    "ghidra_actions": [
+      "modify_struct_field mad_stream skiplen/freerate at +0x08/+0x10 (drop dw* prefix)",
+      "rename or document mad_stream +0x2c..+0x38 zero-only unk fields",
+      "set_decompiler_comment mad_frame.body interior @ +0x2430 region",
+      "delete_data_type orphan mad_synth 4108 B if still unused",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSMpx.md",
+      "ghidra_analysis/engine/struct_recovery/CDSMpxDecoder.md",
+      "ghidra_analysis/engine/struct_recovery/batch_34_followup_summary.md",
+      "ghidra_analysis/engine/todos_gather_r2_3.json"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 37
+  },
+  {
+    "id": 38,
+    "title": "CDSMpxStream persist band vs live mad_stream",
+    "types": ["CDSMpxStream", "CDSMpx", "CDSQueueStream"],
+    "addresses": ["0x00432eb0", "0x00433180", "0x00446b00", "0x00446a00", "0x004290c0"],
+    "ghidra_actions": [
+      "set_function_prototype SaveMpxFile/LoadMpxFile with CDSMpxPersistFacet* adjustor (primary+0x38)",
+      "modify_struct_field mpxFormatTail@+0x08 component vs mad_stream alias note on CDSMpxStream",
+      "plate_comment@0x00432eb0 persistence file header vs decoder RAM overlay",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSMpxStream.md",
+      "ghidra_analysis/engine/struct_recovery/CDSQueueStream.md",
+      "ghidra_analysis/engine/struct_recovery/batch_35_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_40_report.md",
+      "ghidra_analysis/engine/todos_gather_r2_3.json"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 38
+  },
+  {
+    "id": 39,
+    "title": "Dedup exception structs: inherited prefix + tail fields",
+    "types": ["CDSException", "CDSSimpleException", "CDSMemoryException", "CDSResourceException", "CDSStreamException", "CDSDirectXException"],
+    "addresses": ["0x00434a40", "0x00434c20", "0x00434aa0", "0x004346f0", "0x004300f0", "0x00434d00"],
+    "ghidra_actions": [
+      "modify_struct_field CDSMemoryException pUnkBaseTail → inherited CDSException::pInlineMessage component @ +0x14",
+      "delete_data_type any flat 60 B CDSException duplicate not used as embed base",
+      "verify CDSResourceException / CDSStreamException / CDSDirectXException use CDSException base @ +0 with tails @ +0x3c+",
+      "get_struct_layout all exception siblings; save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSException.md",
+      "ghidra_analysis/engine/struct_recovery/CDSSimpleException.md",
+      "ghidra_analysis/engine/struct_recovery/CDSMemoryException.md",
+      "ghidra_analysis/engine/struct_recovery/CDSResourceException.md",
+      "ghidra_analysis/engine/struct_recovery/batch_33_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_36_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_37_summary.md",
+      "ghidra_analysis/engine/todos_gather_r2_3.json"
+    ],
+    "priority": "high",
+    "source": "handoff",
+    "supersedes_todo_id": 39
+  },
+  {
+    "id": 40,
+    "title": "CDSSafeStream auxHeap allocator + VERIFIED pass",
+    "types": ["CDSSafeStream", "CDSSafeStreamInfo", "CDSChain", "CDSFilterStream"],
+    "addresses": ["0x00446ea0", "0x00446d90", "0x00446c30", "0x00433ab0", "0x0042f800", "0x00434160"],
+    "ghidra_actions": [
+      "xref allocator for m_chain_auxHeap @ CDSSafeStream+0x24 (CDSChain+0x0c); rename FUN_0042f800 if heap-free helper",
+      "set_plate_comment@0x00446ea0 ECX=CDSSafeStream* vs decompiler CDSSafeStreamInfo*",
+      "re-run save_program; update status.md confidence if write-only flags + auxHeap verdict hold"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSSafeStream.md",
+      "ghidra_analysis/engine/struct_recovery/CDSSafeStreamInfo.md",
+      "ghidra_analysis/engine/struct_recovery/CDSChain.md",
+      "ghidra_analysis/engine/struct_recovery/batch_38_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_38_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_39_followup_summary.md",
+      "ghidra_analysis/engine/todos_gather_r2_3.json"
+    ],
+    "priority": "medium",
+    "source": "backlog",
+    "supersedes_todo_id": 40
+  }
+]

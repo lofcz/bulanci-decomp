@@ -20,4 +20,8 @@ end
 function GetInfo(...)
     local args = {...}
     local v = {}
+    engine.hhAddChild(engine.hhSetStaticTextStyle())
+    engine.hhBuildStaticTextAuto(30, 30, "1981-1983", 1, 65711)
+    engine.get_global(0)
+    0
 end

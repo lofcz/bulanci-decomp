@@ -394,19 +394,20 @@ most-derived `CBulAnim::FUN_004396f0`).
 
 ## Open questions
 
-* On-disk source of `seq[0x10]` (sequence-default duration). The
-  sequence pointer added to the track is `resource_handle + 4` (the
-  second-face vftable of whatever `(*g_pApp[0x70])->vfn[4](resId, 0)`
-  returns). For a `CBulPicture` resource, the byte that becomes
-  `seq[0x10]` lands at `CBulPicture+0x14` — but that field is left
-  uninitialized by `CBulPicture_Create @ 0x0040eb30` (the constructor
-  writes vftables at `+0x00/+0x04/+0x10/+0x18` and a 256-dword color
-  remap at `+0x6c..+0x46c`, nothing else). The duration must be written
-  by the resource-pool wrapper that hands out the sequence, not by the
-  bitmap layer. **Not present in any natural alignment of the 0x2c-byte
-  BitmapSprite header.** Working hypothesis: a per-resource-type
-  default (most plausibly 47.25 ms × frame count, mirroring the
-  speed-formula degenerate case at speed=100).
+* ~~On-disk source of `seq[0x10]`~~ **Resolved (agent todo 32).** Track
+  `seq` is the `CDSFlxFile` meta face (`resource+4`), not the
+  `CBulPicture` view shell. `CDSFlxFile_BindStream @ 0x00432ac0`
+  copies the 36-byte FLX header after `Read(0x24)`: file dword `+0x1c`
+  (`inMemSize`, master-pack constant `0x470`) → `CDSFlxFile+0x14`
+  `nSeqTotalDurationMs`; file `+0x20` (`flags` = anim length − 1) →
+  `+0x18` `nSeqFrameCountMinusOne`. `TM_AdvanceFrame @ 0x004399b0`
+  consumes those as `seq[0x10]` (total clip ms) and `seq[0x14]` (wrap
+  index). `CBulPicture_Create @ 0x0040eb30` never touches them — the
+  anim path binds the stream handle (`pBitmap` / pool `GetResource`), not
+  the 0x470 portrait widget. **Not** `47.25 × frameCount` at runtime;
+  total ms is the header constant (`1136` ms) with per-frame delay
+  `≈ 1136 / N` via Bresenham (degenerate speed formula matches
+  `1136/24 ≈ 47.25` ms only when `N=24`).
 * True semantic of FLX opcode 0x0C. The fan-out target (each
   consumer's subscriber list, slot 4) is mechanically obvious but no
   concrete subscriber for a CBulPicture has been mapped yet.

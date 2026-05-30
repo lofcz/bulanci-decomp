@@ -4,11 +4,24 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-mlua = { version = "0.9", features = ["lua54", "vendored", "serialize"] }
+mlua = { version = "0.12.0-rc.1", features = ["luau", "vendored", "serde"] }
 serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
 postcard = { version = "1.0", features = ["alloc"] }
 zstd = "0.13"
 anyhow = "1.0"
+blake2 = { version = "0.10", default-features = false }
+# Reflective control model: derive(Reflect) on the scene control structs so
+# the editor's property grid + a JSON type registry come from one source of
+# truth (see scene::control / scene::registry). General-purpose, used here
+# standalone (no Bevy engine).
+bevy_reflect = "0.18"
+# Flexbox/grid/block layout engine for declarative control layout (the
+# Avalonia-style container model). Pure Rust, wasm-friendly; the layout pass
+# turns control styles into resolved rects fed to the scene graph. Pinned to
+# the stable 0.10 line (the 0.11 experimental cache-fix builds churn the
+# generic length/auto API).
+taffy = "0.10"
 
 [build-dependencies]
 zstd = "0.13"

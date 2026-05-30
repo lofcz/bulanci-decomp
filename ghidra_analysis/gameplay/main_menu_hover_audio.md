@@ -297,7 +297,7 @@ root cause and fix.
 ### 8.1 Failed hypothesis: DirectSound pre-roll vs sharp PCM onset
 
 `sfx_hover.wav` is the only menu SFX whose PCM **starts mid-oscillation**
-rather than at digital silence (`scripts/check_sfx_onsets.py`):
+rather than at digital silence (`open_bulanci/asset_pipeline/check_sfx_onsets.py`):
 
 ```
 sample                 sr   ch  first 10 samples (mono)                                peak50  step5
@@ -393,8 +393,8 @@ let (first_samples, next_samples) = if from == to {
 ```
 
 The shipping asset path therefore needs to match the runtime's output
-rate.  `scripts/build_menu_assets.py` now calls
-`scripts/resample_sfx.py` (a thin wrapper around scipy's
+rate.  `open_bulanci/asset_pipeline/build_assets.py` now calls
+`open_bulanci/asset_pipeline/resample_sfx.py` (a thin wrapper around scipy's
 `signal.resample_poly` with the default Kaiser window — ≈100 dB
 stopband attenuation) to convert each retail-extracted 22050 Hz mono
 WAV to 48 kHz mono before copying it into
@@ -426,25 +426,25 @@ from "1000-12000x more energy" to "1.4x at most" (full table in §8.4).
 A startup diagnostic in `AudioManager::new` prints the cpal default
 output's `sample_rate / channels / sample_format` so that future
 non-48-kHz devices are obvious from the log; if such a device ever
-appears, the right fix is to teach `build_menu_assets.py` to ship a
+appears, the right fix is to teach `build_assets.py` to ship a
 per-rate variant, not to re-introduce the broken linear-interp path.
 
 ### 8.4 Reproducing the analysis
 
 | Script                                | Purpose                                                                                  |
 |---------------------------------------|------------------------------------------------------------------------------------------|
-| `scripts/check_sfx_onsets.py`         | Dump first-10-samples + peak/step for every menu SFX (raw asset side).                   |
+| `open_bulanci/asset_pipeline/check_sfx_onsets.py` | Dump first-10-samples + peak/step for every menu SFX (raw asset side).                   |
 | `scripts/dump_full_envelope.py`       | 10 ms peak envelope of two WAVs, full duration, side by side.                            |
 | `scripts/compare_hover_recordings.py` | Onset-aligned 5 ms windowed envelope + first 32 normalized samples.                      |
 | `scripts/fft_hover_compare.py`        | Top FFT peaks + spectral centroid of the loudest 256 ms slice.                           |
 | `scripts/fft_intro_compare.py`        | Band-by-band FFT comparison of the first 100 ms after onset.  This is what found the aliasing. |
-| `scripts/resample_sfx.py`             | scipy polyphase resampler used by `build_menu_assets.py` to produce the 48 kHz assets.   |
+| `open_bulanci/asset_pipeline/resample_sfx.py` | scipy polyphase resampler used by `build_assets.py` to produce the 48 kHz assets.   |
 
 Two regression tests in `open_bulanci/client/src/audio.rs::tests`
 keep the playback path honest:
 
 - `shipped_sfx_assets_are_pre_resampled_to_48k` — every shipped menu
-  SFX must decode at 48 kHz mono; if `build_menu_assets.py` regresses
+  SFX must decode at 48 kHz mono; if `build_assets.py` regresses
   and ships a 22050 Hz asset, this fails before the binary is built.
 - `hover_pcm_dominant_frequency_matches_retail` — the dominant
   per-channel frequency of the first 10 ms of resampled hover stays

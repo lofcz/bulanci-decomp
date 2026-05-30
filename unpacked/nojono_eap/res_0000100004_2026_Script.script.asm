@@ -98,3 +98,16 @@ fn export#9 @ 0x03e9  ; OnNetCustom(streamHandle)  -- fires from `CGame::Process
 fn export#10 @ 0x0430  ; OnGameStart()  -- fires from `CGaming::FUN_0041c140(true)` whenever the level transitions from paused/loaded to running (level start, post-pause resume). Music is started and engine-side timer slots 1/2 are armed right after this returns
   ; varCount=0
     @0x0431  Return(IntConst(0))
+
+fn @ 0x0000  ; helper (call-target)
+  ; varCount=0
+    @0x0001  IfEqual(TeleportPlayerTo(GetLocalVar(0), GetLocalVar(1), GetLocalVar(2), IntConst(0)), IntConst(0), 94)
+    @0x0017  IfEqual(IsNet(), IntConst(0), 88)
+    @0x0022  StrmSetSize(GetGlobalVar(3), IntConst(0))
+    @0x002a  StrmWrite(GetGlobalVar(3), IntConst(1), IntConst(1))
+    @0x0037  StrmWrite(GetGlobalVar(3), GetLocalVar(0), IntConst(1))
+    @0x0041  StrmWrite(GetGlobalVar(3), GetLocalVar(1), IntConst(4))
+    @0x004b  StrmWrite(GetGlobalVar(3), GetLocalVar(2), IntConst(4))
+    @0x0055  StrmSend(GetGlobalVar(3))
+    @0x0058  Return(IntConst(1))
+    @0x005e  Return(IntConst(0))

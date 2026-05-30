@@ -7,7 +7,7 @@ uchar CDSBmpImage::CDSBmpImage_AllocRowScratch(uchar* param_1) { STUB_BODY(); re
 
 // !FUNC 0x004320c0 BEGIN
 /* 4320C0-432230 00170 */
-uchar CDSBmpImage::CDSBmpImage_LoadDibStream(int* param_1) { STUB_BODY(); return 0; }
+void CDSBmpImage::CDSBmpImage_LoadDibStream(CDSFilterStream* param_1) { STUB_BODY(); }
 // !FUNC 0x004320c0 END
 
 // !FUNC 0x00432290 BEGIN
@@ -44,7 +44,7 @@ void* CDSBmpImage::CDSBmpImage_ctor(int* param_1, int param_2, char param_3) { S
 
 // !FUNC 0x00432440 BEGIN
 /* 432440-4326D7 00297 */
-uchar CDSBmpImage::CDSBmpImage_SaveDibStream(int* param_1) { STUB_BODY(); return 0; }
+void CDSBmpImage::CDSBmpImage_SaveDibStream(CDSStreamStorage* param_1) { STUB_BODY(); }
 // !FUNC 0x00432440 END
 
 // !FUNC 0x00432700 BEGIN
@@ -59,6 +59,6 @@ bool CDSBmpImage::CDSBmpImage_ValidateStride(char param_1) { STUB_BODY(); return
 
 // !FUNC 0x00436060 BEGIN
 /* 436060-4360CA 0006A */
-uchar CDSBmpImage::CDSBmpImage_FillBitmapInfoHeader(uint* param_1) { STUB_BODY(); return 0; }
+void CDSBmpImage::CDSBmpImage_FillBitmapInfoHeader(BITMAPINFOHEADER* param_1) { STUB_BODY(); }
 // !FUNC 0x00436060 END
 

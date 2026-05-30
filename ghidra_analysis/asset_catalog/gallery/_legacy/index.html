@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Bulanci Asset Catalog</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<div id="layout">
+
+  <aside id="sidebar">
+    <h1>Asset Catalog</h1>
+    <div id="summary" class="summary">loading...</div>
+
+    <input id="search" type="search" placeholder="search id, slug, notes..." />
+
+    <div class="facet-group">
+      <h2>Name status</h2>
+      <ul id="facet-named" class="facet"></ul>
+    </div>
+
+    <div class="facet-group">
+      <h2>Category</h2>
+      <ul id="facet-category" class="facet"></ul>
+    </div>
+
+    <div class="facet-group">
+      <h2>Class</h2>
+      <ul id="facet-class" class="facet"></ul>
+    </div>
+
+    <div id="active-filters"></div>
+  </aside>
+
+  <main id="grid"></main>
+
+  <section id="detail" class="hidden">
+    <header>
+      <button id="detail-close" type="button" aria-label="close">&times;</button>
+      <div id="detail-title"></div>
+    </header>
+    <div id="detail-body"></div>
+  </section>
+
+</div>
+<script src="/app.js" defer></script>
+</body>
+</html>

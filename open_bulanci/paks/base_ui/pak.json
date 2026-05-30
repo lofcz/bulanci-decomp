@@ -1,0 +1,36 @@
+{
+  "$schema": "../pak.schema.json",
+  "schema": 1,
+  "id": "base_ui",
+  "name": "Base UI",
+  "version": "0.1.0",
+  "kind": "mod",
+  "engine": "^0.1",
+  "description": "Engine-shipped base UI: Luau widget library (button/frame/label/list) composed from the scene-engine primitives, plus the data-driven menu/screen scenes. Mods can override or extend any of these by shadowing the same hashes from a higher pak.",
+  "dependsOn": ["master"],
+  "loadAfter": ["master"],
+  "assets": {},
+  "scenes": {
+    "intro": {
+      "doc": "scenes/intro.scene.json",
+      "scripts": [
+        "scenes/intro/intro.luau"
+      ]
+    },
+    "main_menu": {
+      "doc": "scenes/main_menu.scene.json",
+      "scripts": [
+        "scenes/main_menu/boot.luau",
+        "scenes/main_menu/dials.luau",
+        "scenes/main_menu/history.luau",
+        "scenes/main_menu/exit.luau"
+      ]
+    },
+    "connecting": {
+      "doc": "scenes/connecting.scene.json",
+      "scripts": [
+        "scenes/connecting/connecting.luau"
+      ]
+    }
+  }
+}

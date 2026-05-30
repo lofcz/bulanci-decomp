@@ -81,6 +81,9 @@ pub mod scheduler;
 pub mod engine;
 pub mod luau_vm;
 pub mod assets;
+pub mod scene;
+pub mod level;
+pub mod gameplay;
 
 pub use clock::EngineClock;
 pub use scheduler::Scheduler;

@@ -6,22 +6,22 @@
 class CDSException {
 public:
 	// !DECL 0x0042fff0 BEGIN
-	/* 42FFF0 */ uchar FUN_0042fff0(int* param_1);
+	/* 42FFF0 */ uchar CDSException_ReleaseViaFlag(int* param_1);
 	// !DECL 0x0042fff0 END
 	// !DECL 0x00434a10 BEGIN
-	/* 434A10 */ uchar FUN_00434a10(uint* param_1);
+	/* 434A10 */ uchar CDSException_InitBaseFields(uint* param_1);
 	// !DECL 0x00434a10 END
 	// !DECL 0x00434a30 BEGIN
-	/* 434A30 */ uchar* FUN_00434a30();
+	/* 434A30 */ uchar* CDSException_GetTypeInfo();
 	// !DECL 0x00434a30 END
 	// !DECL 0x00434a40 BEGIN
-	/* 434A40 */ uchar FUN_00434a40(uint param_1, uint param_2, int param_3);
+	/* 434A40 */ uchar CDSException_InitFields(uint param_1, uint param_2, int param_3);
 	// !DECL 0x00434a40 END
 	// !DECL 0x00434ae0 BEGIN
-	/* 434AE0 */ void* FUN_00434ae0(uchar param_1);
+	/* 434AE0 */ void* CDSException_DtorScalar(uchar param_1);
 	// !DECL 0x00434ae0 END
 	// !DECL 0x00434b80 BEGIN
-	/* 434B80 */ wchar_t* FUN_00434b80(int* param_1);
+	/* 434B80 */ wchar_t* CDSException_GetMessageW(void* param_1);
 	// !DECL 0x00434b80 END
 	// !DECL 0x00448a6d BEGIN
 	/* 448A6D */ uchar _purecall();

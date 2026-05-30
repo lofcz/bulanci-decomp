@@ -6,13 +6,13 @@
 class CDSStrmResInfo {
 public:
 	// !DECL 0x00433940 BEGIN
-	/* 433940 */ uchar FUN_00433940(int* param_1);
+	/* 433940 */ uchar CDSStrmResInfo_Serialize(int* param_1);
 	// !DECL 0x00433940 END
 	// !DECL 0x00433980 BEGIN
-	/* 433980 */ uchar FUN_00433980(int* param_1);
+	/* 433980 */ void CDSStrmResInfo_Deserialize(CDSStreamStorage* param_1);
 	// !DECL 0x00433980 END
 	// !DECL 0x00433a90 BEGIN
-	/* 433A90 */ uchar* FUN_00433a90();
+	/* 433A90 */ uchar* CDSStrmResInfo_GetTypeInfo();
 	// !DECL 0x00433a90 END
 };
 

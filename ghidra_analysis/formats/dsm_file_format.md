@@ -108,7 +108,7 @@ base classes in the RTTI chain collapse into **6 distinct vftables**:
 |---|---:|---:|---|---|
 | vtable1 | `+0x00` | 3   | `CDSDsmFile` self | `0` = `GetClassRegistry` (`0x00428db0`) |
 | vtable2 | `+0x04` | 10  | `IDSImageSource`-shaped | `5` = `HandleAcquireWriteThunk`, **`7` = `HandleRecordRead` (`0x00428c40`)**, `8` = `HandleReleaseWriteThunk`, **`9` = `InitializeChildObject` (`0x00439ac0`)** |
-| vtable3 | `+0x1c` | 8   | `CDSWav`-shaped | `5` = `HandleAcquireReadThunk`, **`6` = `HandleResourceRead` (`0x00428ad0`)**, `7` = `HandleReleaseReadThunk` |
+| vtable3 | `+0x1c` | 8   | `CDSWav`-shaped (catalog only) | `5` = `HandleAcquireReadThunk`, **`6` = `CDSDsmFile::HandleResourceRead` (`0x00428ad0`)**, `7` = `HandleReleaseReadThunk` — **`this=obj+0x1c`**, not class-43 `CDSWav_HandleResourceRead@0x0043b960` |
 | vtable4 | `+0x30` | 4   | `CDSFileStream`-shaped | thunks + class-meta getter only |
 | vtable5 | `+0x38` | 6   | `CDSChain`-shaped (`IDSStorage`) | **`4` = `HandleOpenStream` (`0x00428f80`)** |
 | vtable6 | `+0x3c` | 5   | `CPoem`-shaped (`IDSReferenced`) | thunks + class-meta getter only |
@@ -138,6 +138,15 @@ these as runtime type tags for `CheckedVirtualBaseCast` (`0x0042e9f0`).
 +0x60   u32             handleBank.elemStride = 8
 +0x64   u32             (tail / padding)
 ```
+
+**CDSWav struct overlay (agent todo 50):** vtable3 at `+0x1c` is
+*CDSWav-shaped* in the type catalog, but the **0x68-byte** `CDSDsmFile`
+object does **not** host a class-43 `OperatorNew(0x40)` `CDSWavStream`.
+`CDSDsmFile::HandleResourceRead@0x00428ad0` receives **`this = obj+0x1c`**
+and reads `src` / `dwPayloadEndOffset` / per-handle queue state — see
+[CDSWav.md](../engine/struct_recovery/CDSWav.md). Standalone PCM uses
+`CDSWav_HandleResourceRead@0x0043b960` with **`this = primary+4`**
+(face_8slots) on the shared 60-byte wav/bank layout.
 
 Note that the file-header fields straddle the vtable3 pointer at
 `+0x1c`. This is by design: when `HandleOpenStream` is dispatched via

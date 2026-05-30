@@ -1,0 +1,306 @@
+{
+  "1": {
+    "todo_id": 1,
+    "status": "done",
+    "agent": "r3-worker-1",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true
+  },
+  "2": {
+    "todo_id": 2,
+    "status": "done",
+    "agent": "r3-worker-2",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true
+  },
+  "3": {
+    "todo_id": 3,
+    "status": "done",
+    "agent": null,
+    "completed_at": "2026-05-30"
+  },
+  "4": {
+    "todo_id": 4,
+    "status": "done",
+    "agent": "r3-worker-4",
+    "completed_at": "2026-05-30"
+  },
+  "5": {
+    "todo_id": 5,
+    "status": "done",
+    "agent": "r3-worker-5",
+    "completed_at": "2026-05-30"
+  },
+  "6": {
+    "todo_id": 6,
+    "status": "done",
+    "agent": "r3-worker-6",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true,
+    "summary": "CDeath dwM_modeFlags/bM_tourneyFlag xref closure; bM_tourneyFlag Ghidra rename"
+  },
+  "7": {
+    "todo_id": 7,
+    "status": "done",
+    "agent": "r3-worker-7"
+  },
+  "8": {
+    "todo_id": 8,
+    "status": "done",
+    "agent": "r3-worker-8",
+    "completed_at": "2026-05-30"
+  },
+  "9": {
+    "todo_id": 9,
+    "status": "done",
+    "agent": "r3-worker-9",
+    "completed_at": "2026-05-30",
+    "summary": "CGameTypeDlg CWindow embed 148B; CGameCounter verified 128B; prototypes + save"
+  },
+  "10": {
+    "todo_id": 10,
+    "status": "done",
+    "agent": "r3-worker-10"
+  },
+  "11": {
+    "todo_id": 11,
+    "status": "done",
+    "agent": "r3-worker-11",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true,
+    "summary": "CHelp/CHistoryDlg CWindow win + CIntList m_pageIds; CHelpScript_ctor; save"
+  },
+  "12": {
+    "todo_id": 12,
+    "status": "launched",
+    "agent": null
+  },
+  "13": {
+    "todo_id": 13,
+    "status": "done",
+    "agent": "r3-worker-13",
+    "completed_at": "2026-05-30"
+  },
+  "14": {
+    "todo_id": 14,
+    "status": "done",
+    "agent": "r3-worker-14",
+    "completed_at": "2026-05-30"
+  },
+  "15": {
+    "todo_id": 15,
+    "status": "done",
+    "agent": "worker-15",
+    "completed_at": "2026-05-30",
+    "summary": "InitTrackSequence audio bind path disasm + Ghidra comments; pPlayer typed"
+  },
+  "16": {
+    "todo_id": 16,
+    "status": "done",
+    "agent": "r3-worker-16",
+    "completed_at": "2026-05-30"
+  },
+  "17": {
+    "todo_id": 17,
+    "status": "done",
+    "agent": "r3-worker-17",
+    "completed_at": "2026-05-30",
+    "summary": "CPoem wstrHandle @+0x18 via IDSStream MI; +0x04 is vtable facet"
+  },
+  "18": {
+    "todo_id": 18,
+    "status": "done",
+    "agent": "r3-worker-18"
+  },
+  "19": {
+    "todo_id": 19,
+    "status": "done",
+    "agent": "r3-worker-19"
+  },
+  "20": {
+    "todo_id": 20,
+    "status": "done",
+    "agent": "r3-worker-20",
+    "completed_at": "2026-05-30",
+    "summary": "CSetupDlg tail CVolume*/CStaticText*; CSpells mask protos + comments"
+  },
+  "21": {
+    "todo_id": 21,
+    "status": "done",
+    "agent": "r3-worker-21",
+    "completed_at": "2026-05-30"
+  },
+  "22": {
+    "todo_id": 22,
+    "status": "launched",
+    "agent": null
+  },
+  "23": {
+    "todo_id": 23,
+    "status": "done",
+    "agent": "r3-worker-23",
+    "completed_at": "2026-05-30"
+  },
+  "24": {
+    "todo_id": 24,
+    "status": "done",
+    "agent": "r3-worker-24",
+    "completed_at": "2026-05-30"
+  },
+  "25": {
+    "todo_id": 25,
+    "status": "done",
+    "agent": "r3-worker-25",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true
+  },
+  "26": {
+    "todo_id": 26,
+    "status": "done",
+    "agent": "r3-worker-26",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true
+  },
+  "27": {
+    "todo_id": 27,
+    "status": "launched",
+    "agent": null
+  },
+  "28": {
+    "todo_id": 28,
+    "status": "launched",
+    "agent": null
+  },
+  "29": {
+    "todo_id": 29,
+    "status": "done",
+    "agent": "r3-worker-29",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": false
+  },
+  "30": {
+    "todo_id": 30,
+    "status": "done",
+    "agent": "r3-worker-30"
+  },
+  "31": {
+    "todo_id": 31,
+    "status": "launched",
+    "agent": null
+  },
+  "32": {
+    "todo_id": 32,
+    "status": "done",
+    "agent": "bulanci-r3-worker-32"
+  },
+  "33": {
+    "todo_id": 33,
+    "status": "done",
+    "agent": "r3-worker-33",
+    "completed_at": "2026-05-30"
+  },
+  "34": {
+    "todo_id": 34,
+    "status": "done",
+    "agent": "r3-worker-34",
+    "completed_at": "2026-05-30",
+    "summary": "fontFooter +0x50c/+0x510 = defaultWidth/lineHeight; persist-only; no Ghidra field split"
+  },
+  "35": {
+    "todo_id": 35,
+    "status": "done",
+    "agent": "r3-worker-35",
+    "completed_at": "2026-05-30"
+  },
+  "36": {
+    "todo_id": 36,
+    "status": "completed",
+    "agent": "r3-worker-36",
+    "completed_at": "2026-05-30"
+  },
+  "37": {
+    "todo_id": 37,
+    "status": "done",
+    "agent": "r3-worker-37",
+    "completed_at": "2026-05-30",
+    "summary": "recreate_struct mad_*; CDSMpx embed relink; libmad decompiler comments; save_program"
+  },
+  "38": {
+    "todo_id": 38,
+    "status": "done",
+    "agent": "r3-worker-38",
+    "completed_at": "2026-05-30",
+    "summary": "CDSMpxPersistFacet protos; mpxFormatTail MpxFormatTail_persist; Save/Load plates; save_program"
+  },
+  "39": {
+    "todo_id": 39,
+    "status": "done",
+    "agent": "r3-worker-39",
+    "completed_at": "2026-05-30",
+    "summary": "CDSException base embed on all exception siblings; pUnkBaseTail removed; save_program"
+  },
+  "40": {
+    "todo_id": 40,
+    "status": "done",
+    "agent": "r3-worker-40",
+    "completed_at": "2026-05-30"
+  },
+  "41": {
+    "todo_id": 41,
+    "status": "done",
+    "agent": "r3-worker-41",
+    "completed_at": "2026-05-30",
+    "summary": "CBulanek 412B: CGameView prefix flat, tail renames, pre-ammo/quip fields"
+  },
+  "42": {
+    "todo_id": 42,
+    "status": "done",
+    "agent": "r3-worker-42",
+    "completed_at": "2026-05-30",
+    "summary": "CBulanekCtor: set_function_this_type; scheduler@+0x88 videoTrackManager@+0xA8 decompile verified"
+  },
+  "43": {
+    "todo_id": 43,
+    "status": "launched",
+    "agent": null
+  },
+  "44": {
+    "todo_id": 44,
+    "status": "launched",
+    "agent": null
+  },
+  "45": {
+    "todo_id": 45,
+    "status": "done",
+    "agent": "r3-worker-45"
+  },
+  "46": {
+    "todo_id": 46,
+    "status": "done",
+    "agent": "r3-worker-46"
+  },
+  "47": {
+    "todo_id": 47,
+    "status": "done",
+    "agent": "r3-worker-47",
+    "completed_at": "2026-05-30"
+  },
+  "48": {
+    "todo_id": 48,
+    "status": "done",
+    "agent": "r3-worker-48",
+    "completed_at": "2026-05-30"
+  },
+  "49": {
+    "todo_id": 49,
+    "status": "done",
+    "agent": "r3-worker-49",
+    "completed_at": "2026-05-30"
+  },
+  "50": {
+    "todo_id": 50,
+    "status": "done",
+    "agent": "r3-worker-50",
+    "completed_at": "2026-05-30"
+  }
+}

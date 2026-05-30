@@ -6,7 +6,7 @@
 class CLevelList {
 public:
 	// !DECL 0x0040b0c0 BEGIN
-	/* 40B0C0 */ CListBox* CLevelList_ctor(CListBox* param_1);
+	/* 40B0C0 */ void* CLevelList_ctor(void* param_1);
 	// !DECL 0x0040b0c0 END
 	// !DECL 0x0040b120 BEGIN
 	/* 40B120 */ uchar* CLevelList_GetTypeDescriptor();

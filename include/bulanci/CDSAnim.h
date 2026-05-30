@@ -6,7 +6,7 @@
 class CDSAnim {
 public:
 	// !DECL 0x00439470 BEGIN
-	/* 439470 */ uchar DefaultCtor(uchar param_1);
+	/* 439470 */ void* DefaultCtor(void* param_1, uint param_2);
 	// !DECL 0x00439470 END
 	// !DECL 0x00439510 BEGIN
 	/* 439510 */ uchar* GetTypeInfo();

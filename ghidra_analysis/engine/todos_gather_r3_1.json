@@ -1,0 +1,162 @@
+[
+  {
+    "id": 11,
+    "title": "Name CHelpScript CHistoryDlg CWindow prefix +0x00..+0x6f",
+    "types": ["CHelpScript", "CHistoryDlg", "CWindow", "CDSScript"],
+    "addresses": ["0x004215e0", "0x00405560", "0x004217ed", "0x00422620"],
+    "ghidra_actions": ["modify_struct_field", "rename_data", "set_data_type", "save_program"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/batch_10_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_10_summary.md",
+      "ghidra_analysis/engine/struct_recovery/CHelpScript.md",
+      "ghidra_analysis/engine/struct_recovery/CHistoryDlg.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 18
+  },
+  {
+    "id": 12,
+    "title": "Prove CHistoryScript +0x438 stash and decode classId 0x802",
+    "types": ["CHistoryScript", "CHistoryView", "CDSChained", "CDSScript"],
+    "addresses": ["0x004226c0", "0x00422760", "0x00422620", "0x00434250"],
+    "ghidra_actions": ["modify_struct_field", "set_decompiler_comment", "rename_data", "search_instructions"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/batch_11_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_11_summary.md",
+      "ghidra_analysis/engine/struct_recovery/CHistoryScript.md",
+      "ghidra_analysis/engine/struct_recovery/CHistoryView.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": null
+  },
+  {
+    "id": 13,
+    "title": "Trace CGame+0x66 writer for CLevelList resource table",
+    "types": ["CGame", "CLevelList", "CItemInfo", "CMenu"],
+    "addresses": ["0x00414ee4", "0x00413560", "0x00404c50", "0x0040d490"],
+    "ghidra_actions": ["search_instructions", "modify_struct_field", "rename_function", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/batch_12_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_12_summary.md",
+      "ghidra_analysis/engine/struct_recovery/CLevelList.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "high",
+    "source": "backlog",
+    "supersedes_todo_id": 13
+  },
+  {
+    "id": 14,
+    "title": "Verify CLevelScore 0x28 Ghidra apply; name CListBoxItem+0x04",
+    "types": ["CLevelScore", "CListBoxItem", "CScoreItem", "CGame"],
+    "addresses": ["0x00477679", "0x00409620", "0x00409b10", "0x0040b640"],
+    "ghidra_actions": ["delete_data_type", "create_struct", "modify_struct_field", "save_program"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CLevelScore.md",
+      "ghidra_analysis/engine/struct_recovery/CListBoxItem.md",
+      "ghidra_analysis/engine/struct_recovery/batch_16_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "critical",
+    "source": "blocker",
+    "supersedes_todo_id": 16
+  },
+  {
+    "id": 15,
+    "title": "Decompile CMovieView InitTrackSequence audio bind path",
+    "types": ["CMovieView", "CDSAnimSequence", "CDSBitmap", "CMina"],
+    "addresses": ["0x004237b0", "0x004236a0", "0x00422860", "0x0041cb70"],
+    "ghidra_actions": ["set_function_prototype", "set_decompiler_comment", "modify_struct_field", "rename_function"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/batch_14_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_14_summary.md",
+      "ghidra_analysis/engine/struct_recovery/CMovieView.md",
+      "ghidra_analysis/engine/struct_recovery/CMina.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 15
+  },
+  {
+    "id": 16,
+    "title": "Fix CPauseDlg_Build decompiler ECX opaque this",
+    "types": ["CPauseDlg", "CGaming", "CGame", "CMsgDialog"],
+    "addresses": ["0x00411df0", "0x00420423", "0x00420380", "0x0040ac20"],
+    "ghidra_actions": ["set_function_prototype", "set_parameter_type", "set_plate_comment", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CPauseDlg.md",
+      "ghidra_analysis/engine/struct_recovery/batch_15_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_13_followup_summary.md",
+      "ghidra_analysis/engine/agent_todos_50_r2.json"
+    ],
+    "priority": "high",
+    "source": "blocker",
+    "supersedes_todo_id": 14
+  },
+  {
+    "id": 17,
+    "title": "Prove CPoem wstrHandle vs pCachedText after Deserialize",
+    "types": ["CPoem", "CPoemScroller", "CDSFileStream"],
+    "addresses": ["0x00409100", "0x00409870", "0x00409ab0", "0x00425df0"],
+    "ghidra_actions": ["search_instructions", "modify_struct_field", "set_decompiler_comment", "rename_data"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CPoem.md",
+      "ghidra_analysis/engine/struct_recovery/CPoemScroller.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": null
+  },
+  {
+    "id": 18,
+    "title": "Document CScoreItem m_deaths omit from Serialize schema",
+    "types": ["CScoreItem", "CScore", "CLevelScore"],
+    "addresses": ["0x00408f50", "0x00408f90", "0x00408fd0", "0x00411010"],
+    "ghidra_actions": ["set_decompiler_comment", "modify_struct_field", "search_instructions"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/batch_17_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_17_summary.md",
+      "ghidra_analysis/engine/struct_recovery/CScoreItem.md",
+      "ghidra_analysis/engine/struct_recovery/CScore.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 17
+  },
+  {
+    "id": 19,
+    "title": "Retype CSessionList scheduler helpers ECX this",
+    "types": ["CSessionList", "CGame", "CGaming", "CSessionItem"],
+    "addresses": ["0x0040c570", "0x0040c5d0", "0x00416030", "0x0040c2d0"],
+    "ghidra_actions": ["set_function_prototype", "set_parameter_type", "set_decompiler_comment", "set_plate_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/batch_18_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_18_summary.md",
+      "ghidra_analysis/engine/struct_recovery/CSessionList.md",
+      "ghidra_analysis/engine/agent_todos_50_r2.json"
+    ],
+    "priority": "medium",
+    "source": "blocker",
+    "supersedes_todo_id": 19
+  },
+  {
+    "id": 20,
+    "title": "Type CSetupDlg CSpells dialog tails and spell mask bytes",
+    "types": ["CSetupDlg", "CSpells", "CVolume", "CStaticText"],
+    "addresses": ["0x0040e290", "0x0040e590", "0x00427d40", "0x00426da0"],
+    "ghidra_actions": ["modify_struct_field", "set_data_type", "set_function_prototype", "save_program"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CSetupDlg.md",
+      "ghidra_analysis/engine/struct_recovery/CSpells.md",
+      "ghidra_analysis/engine/struct_recovery/batch_19_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": null
+  }
+]

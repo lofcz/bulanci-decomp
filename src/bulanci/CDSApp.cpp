@@ -12,7 +12,7 @@ uchar CDSApp::CDSApp_DispatchInputEvent(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042a210 BEGIN
 /* 42A210-42A324 00114 */
-uchar CDSApp::CDSApp_OnCreate(uchar param_1) { STUB_BODY(); return 0; }
+void CDSApp::CDSApp_OnCreate(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0042a210 END
 
 // !FUNC 0x0042afd0 BEGIN
@@ -29,17 +29,17 @@ uchar* CDSApp::CDSApp_GetClassTable() {
 
 // !FUNC 0x0042b140 BEGIN
 /* 42B140-42B148 00008 */
-uchar CDSApp::FUN_0042b140(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_Referenced_GetTypeInfo(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042b140 END
 
 // !FUNC 0x0042b150 BEGIN
 /* 42B150-42B158 00008 */
-uchar CDSApp::FUN_0042b150(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_EventHandler_GetTypeInfo(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042b150 END
 
 // !FUNC 0x0042b160 BEGIN
 /* 42B160-42B168 00008 */
-uchar CDSApp::FUN_0042b160(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_Chain_GetTypeInfo(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042b160 END
 
 // !FUNC 0x0042b3d0 BEGIN
@@ -59,22 +59,22 @@ uchar CDSApp::FUN_0042b48c() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042b560 BEGIN
 /* 42B560-42B592 00032 */
-uchar CDSApp::CDSApp_dtor(int* param_1) { STUB_BODY(); return 0; }
+void CDSApp::CDSApp_dtor(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0042b560 END
 
 // !FUNC 0x0042b8e0 BEGIN
 /* 42B8E0-42B8E8 00008 */
-uchar CDSApp::FUN_0042b8e0(int param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_ChainDtorBody(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042b8e0 END
 
 // !FUNC 0x0042b8f0 BEGIN
 /* 42B8F0-42B8F8 00008 */
-uchar CDSApp::FUN_0042b8f0(int param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_ReferencedDtorBody(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042b8f0 END
 
 // !FUNC 0x0042b900 BEGIN
 /* 42B900-42B908 00008 */
-uchar CDSApp::FUN_0042b900(int param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_EventHandlerDtorBody(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042b900 END
 
 // !FUNC 0x0042b980 BEGIN
@@ -84,12 +84,12 @@ void* CDSApp::CDSApp_DtorScalar(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042c7d0 BEGIN
 /* 42C7D0-42C7E4 00014 */
-uchar CDSApp::FUN_0042c7d0(ushort param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_RouteSyntheticCloseEvent(ushort param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042c7d0 END
 
 // !FUNC 0x0042ccf0 BEGIN
 /* 42CCF0-42CE30 00140 */
-uchar CDSApp::CDSView_RenderChildrenClipped(int param_1) { STUB_BODY(); return 0; }
+void CDSApp::CDSView_RenderChildrenClipped(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0042ccf0 END
 
 // !FUNC 0x0042e770 BEGIN
@@ -109,12 +109,12 @@ uchar CDSApp::RegWriteDword(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043c9f0 BEGIN
 /* 43C9F0-43CA3A 0004A */
-uchar CDSApp::FUN_0043c9f0(ushort* param_1, ushort param_2, int param_3, ushort param_4) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_FillPCMWaveFormat(ushort* param_1, ushort param_2, int param_3, ushort param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0043c9f0 END
 
 // !FUNC 0x0043cb20 BEGIN
 /* 43CB20-43CBB2 00092 */
-int CDSApp::FUN_0043cb20(ushort param_1, int param_2, ushort param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
+int CDSApp::CDSApp_CreateSoundBuffer(ushort param_1, int param_2, ushort param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x0043cb20 END
 
 // !FUNC 0x0043cbc0 BEGIN
@@ -124,7 +124,7 @@ uchar CDSApp::CDSDirectSound_InitPrimary(uint param_1, ushort param_2, int param
 
 // !FUNC 0x004465b0 BEGIN
 /* 4465B0-4465CF 0001F */
-uchar CDSApp::FUN_004465b0() { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_FreeAlphaBlendLut() { STUB_BODY(); return 0; }
 // !FUNC 0x004465b0 END
 
 // !FUNC 0x00467430 BEGIN

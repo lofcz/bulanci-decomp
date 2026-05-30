@@ -112,3 +112,36 @@ fn export#9 @ 0x05ec  ; OnNetCustom(streamHandle)  -- fires from `CGame::Process
 fn export#10 @ 0x0633  ; OnGameStart()  -- fires from `CGaming::FUN_0041c140(true)` whenever the level transitions from paused/loaded to running (level start, post-pause resume). Music is started and engine-side timer slots 1/2 are armed right after this returns
   ; varCount=0
     @0x0634  Return(IntConst(0))
+
+fn @ 0x0000  ; helper (call-target)
+  ; varCount=0
+    @0x0001  IfEqual(TeleportPlayerTo(GetLocalVar(0), GetLocalVar(1), GetLocalVar(2), IntConst(0)), IntConst(0), 94)
+    @0x0017  IfEqual(IsNet(), IntConst(0), 88)
+    @0x0022  StrmSetSize(GetGlobalVar(3), IntConst(0))
+    @0x002a  StrmWrite(GetGlobalVar(3), IntConst(1), IntConst(1))
+    @0x0037  StrmWrite(GetGlobalVar(3), GetLocalVar(0), IntConst(1))
+    @0x0041  StrmWrite(GetGlobalVar(3), GetLocalVar(1), IntConst(4))
+    @0x004b  StrmWrite(GetGlobalVar(3), GetLocalVar(2), IntConst(4))
+    @0x0055  StrmSend(GetGlobalVar(3))
+    @0x0058  Return(IntConst(1))
+    @0x005e  Return(IntConst(0))
+
+fn @ 0x049c  ; helper (call-target)
+  ; varCount=2
+    @0x049d  SetLocalVar(0, Rand(IntConst(0), IntConst(3)))
+    @0x04aa  SetLocalVar(1, GetLocalVar(0))
+    @0x04ae  Switch(GetLocalVar(1); 0=>0x4d2, 1=>0x4f3, 2=>0x514, 3=>0x535)
+    @0x04d2  IfEqual(Call(fn@0x0, GetLocalVar(2), IntConst(9), IntConst(466)), IntConst(1), 1410)
+    @0x04ee  Goto(1366)
+    @0x04f3  IfEqual(Call(fn@0x0, GetLocalVar(2), IntConst(739), IntConst(466)), IntConst(1), 1410)
+    @0x050f  Goto(1366)
+    @0x0514  IfEqual(Call(fn@0x0, GetLocalVar(2), IntConst(9), IntConst(11)), IntConst(1), 1410)
+    @0x0530  Goto(1366)
+    @0x0535  IfEqual(Call(fn@0x0, GetLocalVar(2), IntConst(739), IntConst(11)), IntConst(1), 1410)
+    @0x0551  Goto(1366)
+    @0x0556  SetLocalVar(1, Add(GetLocalVar(1), IntConst(1)))
+    @0x0560  IfNotEqual(GetLocalVar(1), IntConst(4), 1395)
+    @0x056c  SetLocalVar(1, IntConst(0))
+    @0x0573  IfNotEqual(GetLocalVar(1), GetLocalVar(0), 1198)
+    @0x057c  Return(IntConst(0))
+    @0x0582  Return(IntConst(1))

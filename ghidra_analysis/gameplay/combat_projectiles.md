@@ -11,7 +11,7 @@ This subsystem is responsible for handling all offensive player actions, project
 | Class | Size (Allocation) | Base Class | Primary Responsibility |
 |---|---|---|---|
 | `CWeapon` | — | None | Managed firing controller for players (`CBulanek`). Orchestrates ammo consumption, firing rates, and projectile spawning. |
-| `CShot` | `~0xac` bytes | `CDSView` | Projectile entity (single-bullet or multi-projectile scatter). Includes sub-frame path interpolation and collision detection. |
+| `CShot` | **`0xb0` bytes** (`OperatorNewWithBadAlloc`) | `CDSView` + `CDSUpdatedItem` @ `+0x88` | Projectile entity (single bullet or 5-pellet spread). Sub-frame trace collision; net spawn opcode **`0x0F`**. |
 | `CMina` | `0x118` bytes | `CDSView` | Deployable landmines. Overlapped by players to trigger chain-reaction-capable explosions. |
 | `CExplosion` | `0xf4` bytes | `CDSView` | Explosion controller. Orchestrates radial area-of-effect (AOE) raycasting, damage allocation, and chain-detonating of neighbor mines. |
 | `CSpells` | `0x80` bytes | `ODSImage` | Visual power-up indicators (e.g., Shields, Invisibility bubbles) attached to player characters. |
@@ -52,44 +52,131 @@ void __thiscall CWeapon::Fire(CWeapon *this, undefined4 param_1, ushort trigger_
 
 ### B. `CShot` (Projectile Entity)
 
-The `CShot` class handles moving projectiles, supporting both single direct bullets and multi-bullet shotgun-like spread patterns.
+MSVC **multiple-inheritance** object: primary `CDSView` vtables at `+0`, `+4`, `+0x10`, `+0x18`; embedded **`CDSUpdatedItem`** at **`+0x88`** (scheduler / timer). Allocation size **`0xb0`**.
 
-#### Core Constructor: `CShot::CShot` (Address: `0x0041edf0`)
-```cpp
-CShot* __thiscall CShot::CShot(
-    CShot *this, 
-    int *startPos, 
-    void *gamingState, 
-    byte direction, 
-    CGameView param_4, 
-    byte weaponStrength, 
-    int param_6
-);
-```
-- Sets up direction `this[0xa4] = direction`.
-- Sets owner player ID `this[0xa5] = shooterId`.
-- Sets weapon strength level `this[0xa6] = weaponStrength`.
-- Loads corresponding bullet frame sequence from the sprite bank (`FUN_00417f40`).
-- If `weaponStrength > 2` (scatter/spread weapons like Shotgun):
-  - Sets sub-shots mask to `this[0xa7] = 0x1f` (`11111` in binary, designating 5 active sub-projectiles).
-  - Multiplies trajectory path by a random scatter angle:
-    $$\Delta \text{angle} = \frac{\text{rand()} \times 9}{32768} - 4 \quad \in [-4, 4] \text{ pixels}$$
-- Executes an immediate collision check upon spawning via `_Globals::SpatialQuery` (`FUN_00418300`). If a target or wall is in zero-distance contact, it triggers immediate hit resolution and destroys the projectile.
+#### Object layout (`sizeof == 0xb0`)
 
-#### Core Update/Tick: `CShot::Update` (Address: `0x0041df60`)
-```cpp
-void __thiscall CShot::Update(CShot *this, int *newPosRect);
-```
-Updates the projectile coordinates based on velocity. If the projectile has multiple sub-shots (`this[0xa6]` is scatter), it iterates over all active sub-shot bits (0 to 4), calculates each sub-projectile's local bounding box (`FUN_00417b30`), and executes trace collision.
+| Offset | Size | Field | Notes |
+|--------|------|-------|-------|
+| `+0x00` | 4 | `vftable` (primary) | → `0x00481cbc` |
+| `+0x04` | 4 | `vftable` (secondary) | → `0x00481ca0` |
+| `+0x10` | 4 | `vftable` (tertiary) | → `0x00481c88` |
+| `+0x18` | 4 | `vftable` (quaternary) | → `0x00481c74` |
+| `+0x20` | 16 | `worldRect` | `left, top, right, bottom` — logical position |
+| `+0x30` | 16 | `screenRect` | Used by `CShot_Draw` for single-pellet blit |
+| `+0x44` … `+0x87` | — | `CDSView` / entity base | See `widgets.md` (`+0x4c` parent, flags at `+0x68`…) |
+| `+0x68` | 1 | `movementEnabled` | Set by `CGameEntity_SetEntityType` (`0x00418fe0`) |
+| `+0x6c` | 4 | `entityTypeId` | **`0x0F`** for bullets (`CShot_Ctor`) |
+| `+0x84` | 4 | `pCGaming` | Owning `CGaming*`; set in `CBulanek::AddEntity` (`0x0041a390`) |
+| `+0x88` | 0x18+ | `CDSUpdatedItem` | `Scheduler_RegisterEventSlot(this+0x88, 0, 0x32, 6)` |
+| `+0x88` | 4 | `vftable` (updated item) | → `0x00481c5c` |
+| `+0xa0` | 4 | `pBulletFrames` | From `CGameView::FUN_00417f40` (sprite strip) |
+| `+0xa4` | 1 | `direction` | Facing byte (0–3 cardinal) |
+| `+0xa5` | 1 | `ownerSlotId` | Shooter slot; `0xFF` = neutral |
+| `+0xa6` | 1 | `weaponStrength` | `0`/`>1` → single pellet path in `Update`; **`1` or `2`** → 5-pellet loop |
+| `+0xa7` | 1 | `pelletMask` | Bit *i* = pellet *i* alive; init **`0x1F`**; cleared on hit |
+| `+0xa8` | 1 | `expired` | `CGaming_CleanupInactiveBullets` tests `[0x2a]` (= `+0xa8`) |
+| `+0xac` | 4 | `scatterJitter` | Only if `weaponStrength > 2` after clamp: `rand()*9/32768 - 4` |
 
-#### Precise Collision Tracing: `CShot::TraceCollision` (Address: `0x0041de60`)
+Shared **`CDSView`** fields used by all game entities: `+0x20` rect, `+0x84` world pointer, `+0x68`/`+0x6c` type flags.
+
+#### Core Constructor: `CShot_Ctor` (`0x0041edf0`)
+
 ```cpp
-uint __thiscall CShot::TraceCollision(CShot *this, int *newRect, int *oldRect, byte *outHitFlag);
+CShot* __thiscall CShot_Ctor(
+    CShot *this,
+    int *spawnRect,      // param_2 → copies to +0x20, sizes from frame strip
+    CGameView *mapView,  // param_3 — spatial queries + frame lookup
+    byte direction,      // +0xa4
+    byte ownerSlotId,    // +0xa5
+    byte weaponStrength, // +0xa6 (clamped to 3)
+    int frameVariant);   // param_7 → FUN_00417f40
 ```
-To prevent bullets from skipping through targets at high velocities ("tunneling"), `CShot` implements a sub-frame interpolation trace loop:
-1. Steps along the trajectory vector, interpolating the coordinate delta up to 4 sub-steps per tick.
-2. At each sub-step, it generates a temporary sub-frame bounding box and runs a spatial obstacle/entity query (`_Globals::FUN_00418300`).
-3. If an intersection is discovered, it breaks the interpolation early and executes `_Globals::ResolveHit` (`FUN_0041dd70`) at that specific intersection point.
+
+Flow:
+
+1. `CDSChained_ctor` → temporary `CGameView::vftable` → `CDSUpdatedItem_ctor` @ `+0x88` → final **`CShot`** vtables.
+2. `CGameEntity_SetEntityType(this, 0x0F)` — entity class id for scene graph.
+3. `Scheduler_RegisterEventSlot(this+0x88, 0, 0x32, 6)` — 50 ms tick slot.
+4. Spawn overlap test: `SpatialQuery` on `+0x20`; hit → `CShot_ResolveHit`, `expired=1`, hide + arm scheduler.
+5. If `weaponStrength > 2`: write `scatterJitter` at `+0xac` (pellet mask still `0x1F`).
+
+#### Spawn pipeline: `CGaming_SpawnBulletAndPlaySound` (`0x0041f230`)
+
+| Step | Behavior |
+|------|----------|
+| Post message | `CDSView__PostMessage(this+0x10, 0x200, 0xF4, …)` |
+| Allocate | `OperatorNewWithBadAlloc(0xB0)` + `CShot_Ctor` when `(param_5 & 3) != 0` |
+| `weaponStrength` arg | `(param_5 & 3) - 1` → `0`, `1`, or `2` |
+| List insert | `CIntListInsertSortedOrAppend(this+0x2C8, shot, …)` — **`CGaming` bullet list** |
+| Register | `CBulanek::AddEntity(gaming, shot, 1)` → sets `shot+0x84` |
+| SFX | `param_5 & 0xF0`: `0x10`→sample 21, `0x20`→13, `0x40`→19 |
+
+#### Hit resolution: `CShot_ResolveHit` (`0x0041dd70`)
+
+- `weaponStrength == 2` (`+0xa6`): spawns **`CExplosion`** (`0xF4`) at `this+0x20` (rocket / explosive shot).
+- Else: `CGaming_TryGetPlayerCoords` → **`CGaming_OnSlotPlacementEvent`** (`0x00417e80`) with `param_5=1` → **`CGame_NetSendShotSpawn_t0f`** (opcode **`0x0F`**, 8 bytes) when victim slot occupied.
+
+#### `CGaming_OnSlotPlacementEvent` (`0x00417e80`)
+
+| `param_5` | Effect |
+|-----------|--------|
+| `!= 0` | If shooter slot live → **`NetSendShotSpawn_t0f`** (sync spawn) |
+| `== 0` | Teleport victim to impact coords; script events **`0xD7`** (damage) / **`0xD8`** (score) |
+
+#### Core Update: `CShot::Update` (`0x0041df60`)
+
+Calls `CGameView::FUN_00419010` (rect move + grid cell update via vtable `+0x74`).
+
+| `weaponStrength` (`+0xa6`) | Collision path |
+|----------------------------|----------------|
+| `0` or `> 1` | One `TraceCollision(newRect, oldRect@+0x20)`; hit → `expired=1` |
+| `1` or `2` | For each set bit in `pelletMask` (`+0xa7`): `CShot_ComputePelletRect` ×2, `TraceCollision`; clear bit on hit; mask `== 0` → `expired=1` |
+
+#### Collision tracing: `CShot::TraceCollision` (`0x0041de60`)
+
+Sub-step loop **`i = 1..4`**: lerp `(new-old)*i/4`, `FUN_00433200` (rect normalize), `SpatialQuery(pCGaming@+0x84, …)`. Hit → `CShot_ResolveHit`. If no hit, accept when rect inside **`[0..800)×[0..0x204)`**.
+
+#### Draw: `CShot_Draw` (`0x00417bd0`)
+
+| `weaponStrength` (`+0xa6`) | Blit |
+|----------------------------|------|
+| **`1` only** (`!= 0` and `!= 2`) | Up to 5 pellets via `pelletMask` + `+0x20` |
+| **`0` or `2`** | Single blit from **`+0x30`** (`screenRect`) |
+
+Note: **`Update`** treats both **`1` and `2`** as multi-pellet collision; **`Draw`** only multi-blits for type **`1`** (type **`2`** is explosive — see `CShot_ResolveHit`).
+
+#### Pellet geometry: `CShot_ComputePelletRect` (`0x00417b30`)
+
+Offsets pellet *index* `param_3` (0–4) along the axis perpendicular to `direction` (`+0xa4`), using frame width/height from `pBulletFrames+4/+8`.
+
+#### Vtable map (primary `CDSView` facet @ `0x00481cbc`)
+
+| Slot | Address | Symbol (Ghidra) |
+|------|---------|-----------------|
+| 0 | `0x004170e0` | `CShot::FUN_004170e0` — RTTI / class id (`DAT_004b37bc`) |
+| 1 | `0x00417190` | scalar deleting dtor |
+| 2–10 | `0x004245c0` … `0x0042c580` | shared `CDSView` plumbing |
+| **11** | **`0x0041df60`** | **`CShot::Update`** |
+| 12–13 | `0x0042c430`, `0x0042c3e0` | layout / focus |
+| **14** | **`0x00417bd0`** | **`CShot_Draw`** |
+| 19 | `0x0042cf50` | `CDSView_OnLButtonDownAcquireFocus` |
+| 22–24 | `0x0042c0c0` … `0x0042c100` | show/hide/end-modal |
+| **27** | **`0x0041acf0`** | **`CGameView` event dispatch** (inherits) |
+| **30** | **`0x0041b1d0`** | scheduler hook (reads `this+0x88` slot 0) |
+
+**`CDSUpdatedItem` facet** @ `0x00481c5c` (`this+0x88`): slots include `0x0041a980`, `0x00418ed0`, `0x00417170`, `0x00419b40` (timer / track callbacks).
+
+**Contrast — `CGameView` gameplay facet** @ `0x00481b14`: slot **11** = `0x00419010` (generic entity move) instead of `CShot::Update`.
+
+#### Bullet list on `CGaming`
+
+| Offset | Field |
+|--------|-------|
+| `+0x2C8` | `CIntList` head / vector for active `CShot*` |
+| `+0x2D0` | element count (cleanup walks backward) |
+
+`CGaming_CleanupInactiveBullets` (`0x0041b?` region): removes shots with **`+0xa8 != 0`**, calls dtor vtable slot 2.
 
 ---
 

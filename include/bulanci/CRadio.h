@@ -6,7 +6,7 @@
 class CRadio {
 public:
 	// !DECL 0x00402fb0 BEGIN
-	/* 402FB0 */ uchar CRadio_OnMouseDown(uint param_1, short param_2);
+	/* 402FB0 */ void CRadio_OnMouseDown(uint param_1, short param_2);
 	// !DECL 0x00402fb0 END
 	// !DECL 0x00403010 BEGIN
 	/* 403010 */ uint CRadio_GetDataSize();
@@ -15,19 +15,19 @@ public:
 	/* 403020 */ uchar CRadio_Invalidate(int* param_1);
 	// !DECL 0x00403020 END
 	// !DECL 0x00403ac0 BEGIN
-	/* 403AC0 */ uchar CRadio_Render(int param_1);
+	/* 403AC0 */ void CRadio_Render(void* param_1);
 	// !DECL 0x00403ac0 END
 	// !DECL 0x00403cc0 BEGIN
-	/* 403CC0 */ uchar CRadio_SetSelected(int param_1);
+	/* 403CC0 */ void CRadio_SetSelected(uchar param_1);
 	// !DECL 0x00403cc0 END
 	// !DECL 0x00403d10 BEGIN
-	/* 403D10 */ uchar CRadio_LoadData(void* param_1);
+	/* 403D10 */ uchar CRadio_LoadData(uchar param_1);
 	// !DECL 0x00403d10 END
 	// !DECL 0x00405240 BEGIN
 	/* 405240 */ uchar CRadio_OnMouseUp(uint param_1, uchar param_2);
 	// !DECL 0x00405240 END
 	// !DECL 0x00407300 BEGIN
-	/* 407300 */ uint* CRadio_ctor(uint* param_1);
+	/* 407300 */ uchar CRadio_ctor(uchar param_1);
 	// !DECL 0x00407300 END
 	// !DECL 0x004073a0 BEGIN
 	/* 4073A0 */ uchar* CRadio_GetTypeDescriptor();
@@ -42,16 +42,16 @@ public:
 	/* 4073D0 */ uchar CRadio_AdjustorThunk18_Dtor(uchar param_1);
 	// !DECL 0x004073d0 END
 	// !DECL 0x00407500 BEGIN
-	/* 407500 */ uchar CRadio_dtor(uchar param_1);
+	/* 407500 */ void CRadio_dtor(uchar param_1);
 	// !DECL 0x00407500 END
 	// !DECL 0x00407f30 BEGIN
-	/* 407F30 */ void* CRadio_vDtor(uchar param_1);
+	/* 407F30 */ uchar CRadio_vDtor(uchar param_1);
 	// !DECL 0x00407f30 END
 	// !DECL 0x00408540 BEGIN
-	/* 408540 */ void* CRadio_BuildAt(uint param_1, uint param_2);
+	/* 408540 */ uchar CRadio_BuildAt(uint param_1, uint param_2);
 	// !DECL 0x00408540 END
 	// !DECL 0x0040aa00 BEGIN
-	/* 40AA00 */ uchar CRadio_SaveData(void* param_1);
+	/* 40AA00 */ uchar CRadio_SaveData(uchar param_1);
 	// !DECL 0x0040aa00 END
 };
 

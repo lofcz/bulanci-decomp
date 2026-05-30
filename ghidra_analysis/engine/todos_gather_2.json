@@ -1,0 +1,145 @@
+[
+  {
+    "id": 1,
+    "title": "Embed CDSChain_full in CGame at +0x31 (0xa4)",
+    "types": ["CDSChain", "CGame"],
+    "addresses": ["0x00414aeb", "0x0040a680", "0x0040a440"],
+    "ghidra_actions": ["modify_struct_field", "set_data_type", "create_struct"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSChain.md",
+      "ghidra_analysis/engine/struct_recovery/batch_26_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "critical",
+    "source_slice": "26"
+  },
+  {
+    "id": 2,
+    "title": "Rename CDSChained view-tree walk helpers (GetFirstChildView / GetNextSiblingView)",
+    "types": ["CDSChained", "CDSChain"],
+    "addresses": ["0x0042fb70", "0x0042fc30", "0x0042fab0"],
+    "ghidra_actions": ["rename_function", "set_function_prototype"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSChained.md",
+      "ghidra_analysis/engine/struct_recovery/CDSChain.md",
+      "ghidra_analysis/engine/struct_recovery/batch_26_followup_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "critical",
+    "source_slice": "26"
+  },
+  {
+    "id": 3,
+    "title": "Delete duplicate 1B CDAudioVideoPlayer type; fix ctor/dtor prototypes",
+    "types": ["CDSAudioVideoPlayer"],
+    "addresses": ["0x0043bca0", "0x0043bc10", "0x0043bd40"],
+    "ghidra_actions": ["delete_data_type", "create_struct", "set_function_prototype"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSAudioVideoPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/batch_24_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_24_followup_summary.md"
+    ],
+    "priority": "critical",
+    "source_slice": "24"
+  },
+  {
+    "id": 4,
+    "title": "Field-map CDSObject track_manager inside CDSAnim @ +0x88",
+    "types": ["CDSAnim", "CDSObject", "CAnim"],
+    "addresses": ["0x00439c70", "0x004399b0", "0x004391e0", "0x00439720"],
+    "ghidra_actions": ["modify_struct_field", "create_struct", "rename_data"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSAnim.md",
+      "ghidra_analysis/engine/anim_runtime.md",
+      "ghidra_analysis/engine/status.md",
+      "ghidra_analysis/engine/struct_recovery/batch_21_summary.md"
+    ],
+    "priority": "critical",
+    "source_slice": "21"
+  },
+  {
+    "id": 5,
+    "title": "Retype CDSDirectSound_InitPrimary call sites (CDSApp+0x200)",
+    "types": ["CDSDirectSound", "CDSApp"],
+    "addresses": ["0x0043cbc0", "0x0042b116"],
+    "ghidra_actions": ["set_function_prototype", "set_data_type"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSDirectSound.md",
+      "ghidra_analysis/engine/struct_recovery/batch_27_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_27_followup_summary.md"
+    ],
+    "priority": "high",
+    "source_slice": "27"
+  },
+  {
+    "id": 6,
+    "title": "Resolve CDSDirectSound SetEvent offset (+0x4c vs +0x50) in SignalEventIfVoicesActive",
+    "types": ["CDSDirectSound"],
+    "addresses": ["0x0043ccb0", "0x0043cce1", "0x0043c8b0"],
+    "ghidra_actions": ["set_decompiler_comment", "modify_struct_field"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSDirectSound.md",
+      "ghidra_analysis/engine/struct_recovery/batch_27_summary.md"
+    ],
+    "priority": "high",
+    "source_slice": "27"
+  },
+  {
+    "id": 7,
+    "title": "Name CDSAnim/CDSChained drawable prefix +0x28..+0x67 (CDSView shell)",
+    "types": ["CDSAnim", "CDSChained", "CDSBitmap"],
+    "addresses": ["0x00439560", "0x00439470", "0x004032d0"],
+    "ghidra_actions": ["modify_struct_field", "rename_data"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSAnim.md",
+      "ghidra_analysis/engine/struct_recovery/CDSChained.md",
+      "ghidra_analysis/engine/struct_recovery/CDSBitmap.md",
+      "ghidra_analysis/engine/anim_runtime.md"
+    ],
+    "priority": "high",
+    "source_slice": "21"
+  },
+  {
+    "id": 8,
+    "title": "Trace CDSAudioPlayer pEventTarget (+0x18) playback-complete dispatch",
+    "types": ["CDSAudioPlayer", "CDSDirectSound"],
+    "addresses": ["0x00422382", "0x00422470", "0x00422580"],
+    "ghidra_actions": ["rename_function", "set_function_prototype", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSAudioPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/batch_23_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_23_followup_summary.md"
+    ],
+    "priority": "high",
+    "source_slice": "23"
+  },
+  {
+    "id": 9,
+    "title": "Fix CTeleportPoint OnEvent partner_node typing (drop this[-1] hack)",
+    "types": ["CTeleportPoint", "CAnim"],
+    "addresses": ["0x0041c9a0", "0x0041d090", "0x0041cad7"],
+    "ghidra_actions": ["set_function_prototype", "modify_struct_field"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CTeleportPoint.md",
+      "ghidra_analysis/engine/struct_recovery/batch_21_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_21_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "high",
+    "source_slice": "21"
+  },
+  {
+    "id": 10,
+    "title": "Fix CDSCollection_InsertKeyed decompiler this (CDSUpdatedItem* quirk)",
+    "types": ["CDSCollection", "CDSStreamStorage"],
+    "addresses": ["0x004310f0", "0x004312c0", "0x00401790"],
+    "ghidra_actions": ["set_function_prototype", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSCollection.md",
+      "ghidra_analysis/engine/struct_recovery/batch_27_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_29_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source_slice": "27"
+  }
+]

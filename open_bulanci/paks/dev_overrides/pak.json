@@ -1,0 +1,18 @@
+{
+  "$schema": "../pak.schema.json",
+  "schema": 1,
+  "id": "dev_overrides",
+  "name": "Dev Overrides",
+  "version": "0.0.0",
+  "kind": "mod",
+  "engine": "^0.1",
+  "description": "Default writable mod pak. The asset studio's live pushes and edits are written here (hash-named override files + this manifest), so they persist across restarts and are picked up by both the native client and the web broker.",
+  "dependsOn": [
+    "master"
+  ],
+  "loadAfter": [
+    "master"
+  ],
+  "assets": {},
+  "scenes": {}
+}

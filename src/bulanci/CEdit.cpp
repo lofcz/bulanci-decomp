@@ -22,7 +22,7 @@ uchar CEdit::CEdit_MeasureCharWidth(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00404d10 BEGIN
 /* 404D10-404DB5 000A5 */
-uint* CEdit::CEdit_ctor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CEdit::CEdit_ctor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00404d10 END
 
 // !FUNC 0x00404dc0 BEGIN
@@ -44,12 +44,12 @@ uchar CEdit::CEdit_AdjustorThunk10_Dtor(uchar param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x00406050 BEGIN
 /* 406050-4060FC 000AC */
-uchar CEdit::CEdit_dtor(uchar param_1) { STUB_BODY(); return 0; }
+void CEdit::CEdit_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00406050 END
 
 // !FUNC 0x00406100 BEGIN
 /* 406100-406225 00125 */
-uchar CEdit::CEdit_Render(int param_1) { STUB_BODY(); return 0; }
+void CEdit::CEdit_Render(CDSView* param_1) { STUB_BODY(); }
 // !FUNC 0x00406100 END
 
 // !FUNC 0x00406230 BEGIN
@@ -79,17 +79,17 @@ uint CEdit::CEdit_LayoutToCaret(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00407040 BEGIN
 /* 407040-4070BD 0007D */
-uchar CEdit::CEdit_OnFocusEvent(short param_1, void* param_2) { STUB_BODY(); return 0; }
+void CEdit::CEdit_OnFocusEvent(short param_1, void* param_2) { STUB_BODY(); }
 // !FUNC 0x00407040 END
 
 // !FUNC 0x00407760 BEGIN
 /* 407760-4078ED 0018D */
-void* CEdit::CEdit_BuildAt(uint param_1, uint param_2, uint param_3, uint param_4, uint param_5, uint param_6, uint param_7, uint param_8) { STUB_BODY(); return 0; }
+uchar CEdit::CEdit_BuildAt(uint param_1, uint param_2, uint param_3, uint param_4, uint param_5, uint param_6, uint param_7, uint param_8) { STUB_BODY(); return 0; }
 // !FUNC 0x00407760 END
 
 // !FUNC 0x004078f0 BEGIN
 /* 4078F0-407AF6 00206 */
-char CEdit::FUN_004078f0(uchar* param_1, uchar* param_2) { STUB_BODY(); return 0; }
+char CEdit::CEdit_OnKeyDown(uchar* param_1, uchar* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004078f0 END
 
 // !FUNC 0x00407b40 BEGIN
@@ -104,11 +104,11 @@ uchar CEdit::CEdit_LoadData(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040ba00 BEGIN
 /* 40BA00-40BA08 00008 */
-uchar CEdit::FUN_0040ba00(uchar param_1) { STUB_BODY(); return 0; }
+uchar CEdit::CEdit_ScalarDeletingDtor_thunk(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ba00 END
 
 // !FUNC 0x0040ba10 BEGIN
 /* 40BA10-40BA2E 0001E */
-void* CEdit::CEdit_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+uchar CEdit::CEdit_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ba10 END
 

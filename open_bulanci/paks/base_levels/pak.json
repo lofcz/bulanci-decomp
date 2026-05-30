@@ -1,0 +1,18 @@
+{
+  "$schema": "../pak.schema.json",
+  "schema": 1,
+  "id": "base_levels",
+  "name": "Base Levels",
+  "version": "0.1.0",
+  "kind": "mod",
+  "engine": "^0.1",
+  "description": "Engine-shipped gameplay levels: sim-adjacent content (collision obstacles, spawn points, gamemode tunables) authored as declarative *.level.json docs. Each level is an HMR surface, so the editor can hot-patch obstacles/spawns/params live. Mods override or add levels by shadowing/extending these from a higher pak.",
+  "dependsOn": ["master"],
+  "loadAfter": ["master"],
+  "assets": {},
+  "levels": {
+    "test_arena": {
+      "doc": "levels/test_arena.level.json"
+    }
+  }
+}

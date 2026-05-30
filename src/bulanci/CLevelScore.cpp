@@ -24,7 +24,7 @@ uchar CLevelScore::CLevelScore_dtor(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00409690 BEGIN
 /* 409690-4096C8 00038 */
-uchar CLevelScore::Serialize(void* param_1) { STUB_BODY(); return 0; }
+void CLevelScore::Serialize(int* param_1) { STUB_BODY(); }
 // !FUNC 0x00409690 END
 
 // !FUNC 0x00409a40 BEGIN

@@ -27,8 +27,8 @@ __declspec(noinline) uchar CDSResourceSign::CDSResourceSign_WriteDateField(int* 
 uchar CDSResourceSign::CDSResourceSign_WriteToStream(int* param_1) {
     char* base = reinterpret_cast<char*>(this);
     reinterpret_cast<CDSResourceSign*>(base + 0x14)->CDSResourceSign_WriteDateField(param_1);
-    reinterpret_cast<_Globals*>(base + 0x18)->FUN_0042d440(param_1);
-    reinterpret_cast<_Globals*>(base + 0x1c)->FUN_0042d440(param_1);
+    reinterpret_cast<_Globals*>(base + 0x18)->CDsString_WriteWStringToStream(param_1);
+    reinterpret_cast<_Globals*>(base + 0x1c)->CDsString_WriteWStringToStream(param_1);
     typedef uchar(__thiscall* PFN)(void*, void*, int);
     return reinterpret_cast<PFN*>(*param_1)[5](param_1, base + 0x20, 1);
 }
@@ -39,10 +39,10 @@ uchar CDSResourceSign::CDSResourceSign_WriteToStream(int* param_1) {
 uchar CDSResourceSign::CDSResourceSign_ReadFromStream(int* param_1) {
     char* base = reinterpret_cast<char*>(this);
     reinterpret_cast<CDSResourceSign*>(base + 0x14)->CDSResourceSign_ReadDateField(param_1);
-    reinterpret_cast<_Globals*>(base + 0x18)->FUN_0042e140(param_1);
-    reinterpret_cast<_Globals*>(base + 0x1c)->FUN_0042e140(param_1);
+    reinterpret_cast<_Globals*>(base + 0x18)->CDsString_ReadWStringFromStream(param_1);
+    reinterpret_cast<_Globals*>(base + 0x1c)->CDsString_ReadWStringFromStream(param_1);
     int threshold;
-    reinterpret_cast<_Globals*>(&threshold)->FUN_0042e7b0(reinterpret_cast<uint*>(0x7d2), 3, 0xd);
+    reinterpret_cast<_Globals*>(&threshold)->CDate_SetDate(reinterpret_cast<uint*>(0x7d2), 3, 0xd);
     if (*reinterpret_cast<int*>(base + 0x14) >= threshold) {
         typedef uchar(__thiscall* PFN)(void*, void*, int);
         reinterpret_cast<PFN*>(*param_1)[4](param_1, base + 0x20, 1);

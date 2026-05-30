@@ -1,0 +1,39 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "win64 (debug)",
+			"type": "cppvsdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/open_bulanci/target/debug/bulanci_client.exe",
+			"args": [],
+			"cwd": "${workspaceFolder}/open_bulanci",
+			"console": "integratedTerminal",
+			"preLaunchTask": "win64: build (debug)",
+			// Connect out to the asset studio's Vite mod-broker
+			// (ws://127.0.0.1:5173/__engine/subscribe) so this running game
+			// subscribes for live HMR — scenes, levels, gameplay tunables — and
+			// catches up to the editor's current state on (re)launch. Off in
+			// shipped builds.
+			"environment": [
+				{ "name": "BULANCI_DEV_EDITOR", "value": "1" }
+			]
+		},
+		{
+			"name": "wasm (web)",
+			"type": "msedge",
+			"request": "launch",
+			"url": "http://localhost:8765",
+			"webRoot": "${workspaceFolder}/open_bulanci/web",
+			"preLaunchTask": "wasm: build & serve"
+		},
+		{
+			"name": "editor (web)",
+			"type": "msedge",
+			"request": "launch",
+			"url": "http://localhost:5173",
+			"webRoot": "${workspaceFolder}/ghidra_analysis/asset_catalog/gallery",
+			"preLaunchTask": "editor: dev server"
+		}
+	]
+}

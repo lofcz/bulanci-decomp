@@ -1,0 +1,290 @@
+{
+  "05274b7b7c450f0a": {
+    "class": "BitmapSpecial",
+    "folder": "menu/widgets/radio",
+    "slug": "radio_unselected_hover",
+    "source": "images/radio_unselected_hover.png"
+  },
+  "1379fa8c40f3b58c": {
+    "class": "BitmapSpritePng",
+    "folder": "menu/cursor",
+    "slug": "cursor_idle_b_png",
+    "source": "atlases/cursor_idle_b/atlas.png"
+  },
+  "15ba6aaf72915f39": {
+    "class": "AudioSample",
+    "folder": "menu/sfx",
+    "slug": "sfx_start",
+    "source": "audio/sfx_start.wav"
+  },
+  "17b614b9a24e12f6": {
+    "class": "Mp3",
+    "folder": "menu/music",
+    "slug": "night_ambient",
+    "source": "audio/night_ambient.mp3"
+  },
+  "1972f42b553b8191": {
+    "class": "AudioSample",
+    "folder": "menu/sfx",
+    "slug": "sfx_history",
+    "source": "audio/sfx_history.wav"
+  },
+  "23ceb4c7f5be333d": {
+    "class": "CursorComposition",
+    "folder": "menu/cursor",
+    "slug": "cursor_composition",
+    "source": "cursor/cursor.json"
+  },
+  "24790ca4f83f6b74": {
+    "class": "FontJson",
+    "folder": "engine/fonts",
+    "slug": "font_large_json",
+    "source": "fonts/bitmap/font_large.json"
+  },
+  "26241a4532f6779d": {
+    "class": "BitmapSpecial",
+    "folder": "menu/widgets/dialog_button",
+    "slug": "btn_dialog_pressed",
+    "source": "images/btn_dialog_pressed.png"
+  },
+  "281cce8cef4d491f": {
+    "class": "Font",
+    "folder": "engine/fonts",
+    "slug": "font_large",
+    "source": "fonts/bitmap/font_large.png"
+  },
+  "2a566b91f41de741": {
+    "class": "BitmapSprite",
+    "folder": "menu/cursor",
+    "slug": "cursor_idle_c",
+    "source": "atlases/cursor_idle_c/atlas.json"
+  },
+  "2bcd1f52f9c3d2e2": {
+    "class": "BitmapSprite",
+    "folder": "menu/cursor",
+    "slug": "cursor_idle_a",
+    "source": "atlases/cursor_idle_a/atlas.json"
+  },
+  "33e80ae428f0892c": {
+    "class": "BitmapSpecial",
+    "folder": "menu/icons",
+    "slug": "icon_history",
+    "source": "images/icon_history.png"
+  },
+  "3ad42890a2aee22d": {
+    "class": "BitmapJPEG",
+    "folder": "menu/intro",
+    "slug": "intro_splash",
+    "source": "images/intro_splash.jpg"
+  },
+  "3ee575e53c4b4428": {
+    "class": "BitmapJPEG",
+    "folder": "menu/backgrounds",
+    "slug": "bg_menu",
+    "source": "images/bg_menu.jpg"
+  },
+  "3ee62626cc598309": {
+    "class": "BitmapSpecial",
+    "folder": "menu/widgets/radio",
+    "slug": "radio_selected",
+    "source": "images/radio_selected.png"
+  },
+  "42bfaa2680ab2d1e": {
+    "class": "AudioSample",
+    "folder": "menu/sfx",
+    "slug": "sfx_hover",
+    "source": "audio/sfx_hover.wav"
+  },
+  "4c592109ab55b6f0": {
+    "class": "BitmapSpecial",
+    "folder": "menu/widgets/dialog_button",
+    "slug": "btn_dialog_normal",
+    "source": "images/btn_dialog_normal.png"
+  },
+  "4d81d338d8528513": {
+    "class": "FontJson",
+    "folder": "engine/fonts",
+    "slug": "font_small_json",
+    "source": "fonts/bitmap/font_small.json"
+  },
+  "560e284c55ed5fdf": {
+    "class": "AudioSample",
+    "folder": "menu/sfx",
+    "slug": "sfx_force_exit",
+    "source": "audio/sfx_force_exit.wav"
+  },
+  "58f17b9a2c46d102": {
+    "class": "BitmapSpecial",
+    "folder": "menu/widgets/radio",
+    "slug": "radio_active",
+    "source": "images/radio_active.png"
+  },
+  "5f0abf2b34ac2a88": {
+    "class": "BitmapJPEG",
+    "folder": "menu/backgrounds",
+    "slug": "bg_quit",
+    "source": "images/bg_quit.jpg"
+  },
+  "5f17c082b5be3060": {
+    "class": "Mp3",
+    "folder": "menu/music",
+    "slug": "day_ambient",
+    "source": "audio/day_ambient.mp3"
+  },
+  "61442474ab03d0b8": {
+    "class": "BitmapSpecial",
+    "folder": "menu/icons",
+    "slug": "icon_history_hi",
+    "source": "images/icon_history_hi.png"
+  },
+  "628312c8b7195df9": {
+    "class": "FontJson",
+    "folder": "engine/fonts",
+    "slug": "font_medium_json",
+    "source": "fonts/bitmap/font_medium.json"
+  },
+  "63bb5b6d1e7692bc": {
+    "class": "AudioBank",
+    "folder": "menu/sfx",
+    "slug": "menu_sfx_bank",
+    "source": "audio/menu_sfx_bank/"
+  },
+  "678639b9f316bcf3": {
+    "class": "BitmapSprite",
+    "folder": "menu/widgets/menu_button",
+    "slug": "menu_button_on",
+    "source": "atlases/menu_button_on/atlas.json"
+  },
+  "67a12dcf6e0a8640": {
+    "class": "BitmapJPEG",
+    "folder": "menu/backgrounds",
+    "slug": "bg_start",
+    "source": "images/bg_start.jpg"
+  },
+  "6b0507c655f95178": {
+    "class": "AudioSample",
+    "folder": "menu/sfx",
+    "slug": "sfx_alt_exit",
+    "source": "audio/sfx_alt_exit.wav"
+  },
+  "6e58921e8d66d5a3": {
+    "class": "BitmapSpecial",
+    "folder": "menu/widgets/radio",
+    "slug": "radio_selected_hover",
+    "source": "images/radio_selected_hover.png"
+  },
+  "72a0e30368a34484": {
+    "class": "BitmapSpecial",
+    "folder": "menu/icons",
+    "slug": "icon_start_hi",
+    "source": "images/icon_start_hi.png"
+  },
+  "76d545dfafe068b7": {
+    "class": "BitmapSpecial",
+    "folder": "menu/icons",
+    "slug": "icon_quit_hi",
+    "source": "images/icon_quit_hi.png"
+  },
+  "92104ce60df0f7a9": {
+    "class": "BitmapSpecial",
+    "folder": "menu/icons",
+    "slug": "icon_start",
+    "source": "images/icon_start.png"
+  },
+  "97e8475bb35dc635": {
+    "class": "BitmapSpritePng",
+    "folder": "menu/cursor",
+    "slug": "cursor_idle_c_png",
+    "source": "atlases/cursor_idle_c/atlas.png"
+  },
+  "a0a1b1c2998b7b37": {
+    "class": "AudioSample",
+    "folder": "menu/sfx",
+    "slug": "sfx_radio_click",
+    "source": "audio/sfx_radio_click.wav"
+  },
+  "abecde44316a4828": {
+    "class": "BitmapSpecial",
+    "folder": "menu/cursor",
+    "slug": "cursor_reticle",
+    "source": "images/cursor_reticle.png"
+  },
+  "b756402087421bcf": {
+    "class": "BitmapSprite",
+    "folder": "menu/cursor",
+    "slug": "cursor_idle_b",
+    "source": "atlases/cursor_idle_b/atlas.json"
+  },
+  "b7fe6c8ea2235784": {
+    "class": "BitmapSpritePng",
+    "folder": "menu/cursor",
+    "slug": "cursor_idle_a_png",
+    "source": "atlases/cursor_idle_a/atlas.png"
+  },
+  "bbd659dd8513603e": {
+    "class": "BitmapSpecial",
+    "folder": "menu/icons",
+    "slug": "icon_quit",
+    "source": "images/icon_quit.png"
+  },
+  "bfa692baa37ff965": {
+    "class": "Font",
+    "folder": "engine/fonts",
+    "slug": "font_small",
+    "source": "fonts/bitmap/font_small.png"
+  },
+  "ca81f9949369139d": {
+    "class": "BitmapJPEG",
+    "folder": "menu/backgrounds",
+    "slug": "bg_hero",
+    "source": "images/bg_hero.jpg"
+  },
+  "d01b1d81475bc61b": {
+    "class": "BitmapSpritePng",
+    "folder": "menu/widgets/menu_button",
+    "slug": "menu_button_off_png",
+    "source": "atlases/menu_button_off/atlas.png"
+  },
+  "d10dbf267649d35d": {
+    "class": "BitmapSprite",
+    "folder": "menu/widgets/menu_button",
+    "slug": "menu_button_off",
+    "source": "atlases/menu_button_off/atlas.json"
+  },
+  "d1dd830e60d0c524": {
+    "class": "BitmapJPEG",
+    "folder": "menu/backgrounds",
+    "slug": "bg_history",
+    "source": "images/bg_history.jpg"
+  },
+  "d63e1eaf85be56dd": {
+    "class": "BitmapSpecial",
+    "folder": "menu/widgets/radio",
+    "slug": "radio_unselected",
+    "source": "images/radio_unselected.png"
+  },
+  "d9a53ed3c4074dfe": {
+    "class": "BitmapSpecial",
+    "folder": "menu/widgets/dialog_button",
+    "slug": "btn_dialog_hover",
+    "source": "images/btn_dialog_hover.png"
+  },
+  "e2f2467fea700ca7": {
+    "class": "Font",
+    "folder": "engine/fonts",
+    "slug": "font_medium",
+    "source": "fonts/bitmap/font_medium.png"
+  },
+  "efbdc4fa5c7345c4": {
+    "class": "BitmapSpritePng",
+    "folder": "menu/widgets/menu_button",
+    "slug": "menu_button_on_png",
+    "source": "atlases/menu_button_on/atlas.png"
+  },
+  "fac33dd8f13b201e": {
+    "class": "AudioSample",
+    "folder": "menu/sfx",
+    "slug": "sfx_quit",
+    "source": "audio/sfx_quit.wav"
+  }
+}

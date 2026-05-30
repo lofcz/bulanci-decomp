@@ -32,33 +32,33 @@ inline int* SelfOrNull(CDSFileStream* self) {
 
 // !FUNC 0x00401540 BEGIN
 /* 401540-4015FC 000BC */
-void* CDSFileStream::FUN_00401540(int param_1, uchar* param_2) { STUB_BODY(); return 0; }
+uchar CDSFileStream::CDSFileStream_Ctor(int param_1, uchar* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00401540 END
 
 // !FUNC 0x00401600 BEGIN
 /* 401600-401606 00006 */
-uchar* CDSFileStream::FUN_00401600() {
+uchar* CDSFileStream::CDSFileStream_GetClassTable() {
     return reinterpret_cast<uchar*>(&DAT_004b7c20);
 }
 // !FUNC 0x00401600 END
 
 // !FUNC 0x00401610 BEGIN
 /* 401610-401616 00006 */
-uchar* CDSFileStream::FUN_00401610() {
+uchar* CDSFileStream::CDSFileStream_GetClassRegistry() {
     return reinterpret_cast<uchar*>(&DAT_004b7c28);
 }
 // !FUNC 0x00401610 END
 
 // !FUNC 0x00401620 BEGIN
 /* 401620-401626 00006 */
-uchar* CDSFileStream::FUN_00401620() {
+uchar* CDSFileStream::IDSStream_GetClassRegistry() {
     return reinterpret_cast<uchar*>(&DAT_004b7ce0);
 }
 // !FUNC 0x00401620 END
 
 // !FUNC 0x00401630 BEGIN
 /* 401630-401636 00006 */
-uchar* CDSFileStream::FUN_00401630() {
+uchar* CDSFileStream::CDSFileStream_GetTypeInfo() {
     return reinterpret_cast<uchar*>(&DAT_004b7e78);
 }
 // !FUNC 0x00401630 END
@@ -70,17 +70,17 @@ void CDSFileStream::CloseStream(int param_1) { STUB_BODY(); }
 
 // !FUNC 0x00401660 BEGIN
 /* 401660-401689 00029 */
-uchar CDSFileStream::FUN_00401660(int param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::IDSStream_ReleaseRefcount(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401660 END
 
 // !FUNC 0x00401690 BEGIN
 /* 401690-401698 00008 */
-uchar CDSFileStream::FUN_00401690(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::CDSFileStream_AdjustOffsetDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401690 END
 
 // !FUNC 0x004016a0 BEGIN
 /* 4016A0-4016A8 00008 */
-uchar CDSFileStream::FUN_004016a0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::CDSFileStream_ScalarDeletingDtor_thunk(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004016a0 END
 
 // !FUNC 0x004016b0 BEGIN
@@ -90,7 +90,7 @@ uchar CDSFileStream::ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x004016c0 BEGIN
 /* 4016C0-40173B 0007B */
-uchar CDSFileStream::FUN_004016c0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::CDSFileStream_dtor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004016c0 END
 
 // !FUNC 0x00401740 BEGIN
@@ -100,32 +100,32 @@ uint* CDSFileStream::GetStreamName(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00401770 BEGIN
 /* 401770-40178E 0001E */
-void* CDSFileStream::FUN_00401770(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::CDSFileStream_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401770 END
 
 // !FUNC 0x00409260 BEGIN
 /* 409260-409268 00008 */
-uchar CDSFileStream::FUN_00409260(int param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::IDSStream_ReleaseRefcount_thunk_Sub4(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409260 END
 
 // !FUNC 0x00409450 BEGIN
 /* 409450-409458 00008 */
-uchar CDSFileStream::FUN_00409450(int param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::IDSStream_AddRef(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409450 END
 
 // !FUNC 0x00409490 BEGIN
 /* 409490-409498 00008 */
-uchar CDSFileStream::FUN_00409490(int param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::IDSStream_Release(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409490 END
 
 // !FUNC 0x00409970 BEGIN
 /* 409970-409978 00008 */
-uchar CDSFileStream::FUN_00409970(int param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::CDSFileStream_ReleaseViaChained(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409970 END
 
 // !FUNC 0x00429300 BEGIN
 /* 429300-429308 00008 */
-uchar CDSFileStream::FUN_00429300(int param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::CDSFileStream_AdjustThisOffset(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00429300 END
 
 // !FUNC 0x004333e0 BEGIN
@@ -371,11 +371,11 @@ void CDSFileStream::FlushStream() {
 
 // !FUNC 0x00433750 BEGIN
 /* 433750-433877 00127 */
-uchar CDSFileStream::FUN_00433750(int param_1, DWORD param_2) { STUB_BODY(); return 0; }
+uchar CDSFileStream::CDSFileStream_Open(int param_1, DWORD param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00433750 END
 
 // !FUNC 0x004338d0 BEGIN
 /* 4338D0-433940 00070 */
-uchar CDSFileStream::FUN_004338d0(int param_1) { STUB_BODY(); return 0; }
+uchar CDSFileStream::CDSFileStream_CreateInstance(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004338d0 END
 

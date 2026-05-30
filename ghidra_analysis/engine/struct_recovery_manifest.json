@@ -1,0 +1,29 @@
+{
+  "program": "bulanci.exe",
+  "workspace": "C:\\Users\\mstagl-dev\\Documents\\GitHub\\bulanci",
+  "output_dir": "ghidra_analysis/engine/struct_recovery",
+  "evidence_required": [
+    "OperatorNew/alloc constant OR ctor mem range OR dtor delete size",
+    "At least 2 independent field-offset xrefs OR ctor writes + 1 consumer",
+    "RTTI/vtable if C++ class"
+  ],
+  "exclude_if_sized": [
+    "CDSDirectPlay", "CDSDirectPlaySender", "CDSMemQueue", "SchedulerEventSlot",
+    "CGaming", "CGame", "CBulanek", "CDSView", "CDSRect", "CDsmHeader", "CObstacle",
+    "CDSWorkingThread", "PlayerLobbyRec", "NetSlotBinding"
+  ],
+  "batches": [
+    ["CBulanci", "CDSObject", "CDSApp", "CGameView", "CDSScript", "CAdvertising", "CAnim", "CBitmap"],
+    ["CBulAnim", "CBulPicture", "CColorSet", "CDeath", "CDeath2", "CDirectKeyb", "CExitDlg", "CExplosion"],
+    ["CGameCounter", "CGameTypeDlg", "CGunMouse", "CHelpDlg", "CHelpScript", "CHistoryDlg", "CHistoryScript", "CHistoryView"],
+    ["CItemInfo", "CLevelList", "CLevelScore", "CListBoxItem", "CMina", "CMovieView", "CMsgDialog", "CPauseDlg"],
+    ["CPoem", "CPoemScroller", "CScore", "CScoreItem", "CSessionItem", "CSessionList", "CSetupDlg", "CSpells"],
+    ["CSwitch", "CTcpIpConfig", "CTeleportPoint", "CDSAnim", "CDSApiException", "CDSAudioBank", "CDSAudioBankSample", "CDSAudioPlayer"],
+    ["CDSAudioVideoPlayer", "CDSBackBuffer", "CDSBitmap", "CDSBmpImage", "CDSChain", "CDSChained", "CDSCollection", "CDSDirectSound"],
+    ["CDSDirectXException", "CDSEasyMemStream", "CDSException", "CDSFilterStream", "CDSFlxFile", "CDSFont", "CDSGZipStreamData", "CDSImage"],
+    ["CDSImageMouse", "CDSJpegImage", "CDSMemoryException", "CDSMouse", "CDSMpx", "CDSMpxDecoder", "CDSMpxStream", "CDSQueueStream"],
+    ["CDSRegKeyException", "CDSResInfo", "CDSResourceException", "CDSResourceSign", "CDSSafeStream", "CDSSafeStreamInfo", "CDSSimpleException", "CDSStreamException"],
+    ["CDSStreamStorage", "CDSStrmResInfo", "CDSUpdatedItem", "CDSVideoPlayer", "CDSWav", "CDSWavStream", "ODSImage"],
+    ["type_info", "exception", "bad_exception", "bad_alloc", "_LocaleUpdate", "_s_CatchableType", "EHExceptionRecord", "EHRegistrationNode", "TranslatorGuardRN"]
+  ]
+}

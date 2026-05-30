@@ -6,34 +6,34 @@
 class CSwitch {
 public:
 	// !DECL 0x00423950 BEGIN
-	/* 423950 */ uchar FUN_00423950(uchar param_1);
+	/* 423950 */ void CSwitch_dtor(void* param_1);
 	// !DECL 0x00423950 END
 	// !DECL 0x004239e0 BEGIN
-	/* 4239E0 */ uchar* FUN_004239e0();
+	/* 4239E0 */ uchar* CSwitch_GetClassTable();
 	// !DECL 0x004239e0 END
 	// !DECL 0x004239f0 BEGIN
 	/* 4239F0 */ uchar CSwitch_OnFocusChange(uint param_1, short param_2);
 	// !DECL 0x004239f0 END
 	// !DECL 0x00423ad0 BEGIN
-	/* 423AD0 */ uchar FUN_00423ad0(uchar param_1);
+	/* 423AD0 */ uchar CSwitch_ScalarDeletingDtor_thunk_Sub68(uchar param_1);
 	// !DECL 0x00423ad0 END
 	// !DECL 0x00423ae0 BEGIN
-	/* 423AE0 */ uchar FUN_00423ae0(uchar param_1);
+	/* 423AE0 */ uchar CSwitch_ScalarDeletingDtor_thunk_Sub10(uchar param_1);
 	// !DECL 0x00423ae0 END
 	// !DECL 0x00423af0 BEGIN
-	/* 423AF0 */ uchar FUN_00423af0(uchar param_1);
+	/* 423AF0 */ uchar CSwitch_ScalarDeletingDtor_thunk_Sub18(uchar param_1);
 	// !DECL 0x00423af0 END
 	// !DECL 0x00423b00 BEGIN
-	/* 423B00 */ uchar FUN_00423b00(uchar param_1);
+	/* 423B00 */ uchar CSwitch_ScalarDeletingDtor_thunk_Sub4(uchar param_1);
 	// !DECL 0x00423b00 END
 	// !DECL 0x00423b30 BEGIN
-	/* 423B30 */ void* FUN_00423b30(uchar param_1);
+	/* 423B30 */ void* CSwitch_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00423b30 END
 	// !DECL 0x00423ef0 BEGIN
 	/* 423EF0 */ uchar CSwitch_PlayIdleTrack(int param_1);
 	// !DECL 0x00423ef0 END
 	// !DECL 0x004244a0 BEGIN
-	/* 4244A0 */ uchar FUN_004244a0(uchar param_1);
+	/* 4244A0 */ void* CSwitch_DefaultCtor(void* param_1, uint param_2);
 	// !DECL 0x004244a0 END
 	// !DECL 0x00424cf0 BEGIN
 	/* 424CF0 */ uchar CSwitch_OnMouseEnter(int param_1);
@@ -45,7 +45,7 @@ public:
 	/* 424DC0 */ uchar CSwitch_OnSiblingPressed(short param_1, void* param_2);
 	// !DECL 0x00424dc0 END
 	// !DECL 0x00424e10 BEGIN
-	/* 424E10 */ uchar CSwitch_OnAnimEnd(uint param_1, short param_2);
+	/* 424E10 */ void CSwitch_OnAnimEnd(uint param_1, short param_2);
 	// !DECL 0x00424e10 END
 	// !DECL 0x00425260 BEGIN
 	/* 425260 */ uchar CSwitch_OnMouseClick(uint param_1, uchar param_2);

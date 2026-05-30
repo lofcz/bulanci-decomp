@@ -1,0 +1,22 @@
+{
+  "name": "intro",
+  "scripts": [
+    "scenes/intro/intro.luau"
+  ],
+  "root": [
+    {
+      "kind": "quad",
+      "name": "intro_bg",
+      "layout": {
+        "width": 800,
+        "height": 600
+      },
+      "color": "ffffffff"
+    },
+    {
+      "kind": "sprite",
+      "name": "intro_splash",
+      "handle": "menu/intro/intro_splash"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "./profile.schema.json",
+  "schema": 1,
+  "comment": "Active pak set in load order (low -> high priority). 'master' is the embedded base game (no path); mod paks point at a folder under paks/. Higher entries override lower ones (last-wins); see open_bulanci/core/src/assets.rs.",
+  "paks": [
+    { "id": "master", "kind": "master" },
+    { "id": "base_ui", "kind": "mod", "path": "base_ui" },
+    { "id": "base_levels", "kind": "mod", "path": "base_levels" },
+    { "id": "dev_overrides", "kind": "mod", "path": "dev_overrides" }
+  ]
+}

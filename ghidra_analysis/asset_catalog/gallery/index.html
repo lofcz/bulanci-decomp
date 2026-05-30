@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bulanci Asset Catalog</title>
+  </head>
+  <body class="bg-background text-foreground antialiased">
+    <div id="root"></div>
+    <!--
+      React-Scan auto-installer — gated to localhost so externally-hosted
+      copies of this gallery never even fetch the script.  Must be
+      injected BEFORE main.tsx loads so it can patch React-DOM before
+      the first render (otherwise react-scan logs "Must import React
+      Scan before React runs.").  We use `document.write` from an
+      inline script so the injected <script> is treated as a
+      parser-blocking synchronous load — `createElement(...).appendChild`
+      defaults to async and would race the deferred ES module.
+    -->
+    <script>
+      (function () {
+        var h = location.hostname;
+        if (h !== "localhost" && h !== "127.0.0.1" && h !== "[::1]") return;
+        document.write(
+          '<script src="https://unpkg.com/react-scan/dist/auto.global.js" crossorigin="anonymous"><\/script>'
+        );
+      })();
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

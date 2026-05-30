@@ -1,0 +1,19 @@
+{
+  "name": "test_arena",
+  "obstacles": [
+    { "id": "wall_n", "x1": 0, "y1": 0, "x2": 800, "y2": 16 },
+    { "id": "wall_s", "x1": 0, "y1": 584, "x2": 800, "y2": 600 },
+    { "id": "wall_w", "x1": 0, "y1": 0, "x2": 16, "y2": 600 },
+    { "id": "wall_e", "x1": 784, "y1": 0, "x2": 800, "y2": 600 },
+    { "id": "pillar_c", "x1": 360, "y1": 260, "x2": 440, "y2": 340 }
+  ],
+  "spawns": [
+    { "id": "spawn_red", "x": 80, "y": 300, "team": 0 },
+    { "id": "spawn_blue", "x": 720, "y": 300, "team": 1 }
+  ],
+  "params": {
+    "time_limit": 180,
+    "score_cap": 10,
+    "respawn_ticks": 120
+  }
+}

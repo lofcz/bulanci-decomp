@@ -9,7 +9,7 @@ uchar* CProgressBar::CProgressBar_GetTypeDescriptor() {
 
 // !FUNC 0x0040b1f0 BEGIN
 /* 40B1F0-40B28E 0009E */
-uchar CProgressBar::CProgressBar_Render(int param_1) { STUB_BODY(); return 0; }
+void CProgressBar::CProgressBar_Render(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0040b1f0 END
 
 // !FUNC 0x0040bd50 BEGIN
@@ -19,6 +19,6 @@ uint* CProgressBar::CProgressBar_Allocate() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040df70 BEGIN
 /* 40DF70-40DFA6 00036 */
-CDSChained* CProgressBar::CProgressBar_ctor(CDSChained* param_1) { STUB_BODY(); return 0; }
+void* CProgressBar::CProgressBar_ctor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040df70 END
 

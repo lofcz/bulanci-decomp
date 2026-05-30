@@ -1,5 +1,8 @@
 @echo off
-rem Simple master batch file to rebuild all assets from source
-rem This bat script runs python scripts/rebuild_assets.py which parallelizes transpiling and cursor generation
-python "%~dp0..\scripts\rebuild_assets.py"
+rem Simple master batch file to rebuild all assets from source.
+rem Runs open_bulanci/asset_pipeline/rebuild_assets.py which parallelises
+rem transpile_to_lua.py + build_assets.py (registry-driven extraction
+rem of every `ship = true` resource), then packs everything via
+rem pack_assets.py.
+python "%~dp0asset_pipeline\rebuild_assets.py"
 pause

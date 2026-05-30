@@ -27,7 +27,7 @@ uint CAdvertising::OnKeyDown(char param_1, char param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x0040e5f0 BEGIN
 /* 40E5F0-40E706 00116 */
-CWindow* CAdvertising::CAdvertising_ctor(CWindow* param_1) { STUB_BODY(); return 0; }
+void* CAdvertising::CAdvertising_ctor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040e5f0 END
 
 // !FUNC 0x0040e710 BEGIN
@@ -39,12 +39,12 @@ uchar* CAdvertising::GetClassId() {
 
 // !FUNC 0x0040e720 BEGIN
 /* 40E720-40E728 00008 */
-uchar CAdvertising::deleting_destructor_thunk_0x10(uchar param_1) { STUB_BODY(); return 0; }
+uchar CAdvertising::CAdvertising_ScalarDeletingDtor_thunk_Sub10(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040e720 END
 
 // !FUNC 0x0040e730 BEGIN
 /* 40E730-40E738 00008 */
-uchar CAdvertising::deleting_destructor_thunk_0x70(uchar param_1) { STUB_BODY(); return 0; }
+uchar CAdvertising::CAdvertising_ScalarDeletingDtor_thunk_Sub70(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040e730 END
 
 // !FUNC 0x0040e740 BEGIN
@@ -52,14 +52,10 @@ uchar CAdvertising::deleting_destructor_thunk_0x70(uchar param_1) { STUB_BODY();
 uchar CAdvertising::deleting_destructor_thunk_0x18(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040e740 END
 
-// !FUNC 0x0040e750 BEGIN
-/* 40E750-40E758 00008 */
-uchar CAdvertising::deleting_destructor_thunk_0x4(uchar param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0040e750 END
 
 // !FUNC 0x0040fb70 BEGIN
 /* 40FB70-40FB8E 0001E */
-void* CAdvertising::deleting_destructor(uchar param_1) { STUB_BODY(); return 0; }
+void* CAdvertising::CAdvertising_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040fb70 END
 
 // !FUNC 0x0040fe30 BEGIN

@@ -4,31 +4,20 @@
 //! `CBulanci::OnEvent(0xf7)` builds `CAdvertising`, loads resource
 //! `0x1013a`, runs it modally, then enters the main menu via event `0xcc`.
 
-use macroquad::prelude::*;
-
 use crate::app::{register_menu_slots, ClientApp};
-use crate::ruch::Ruch;
-use crate::state::{AppPhase, RUCH_SLOTS};
-
-const INTRO_DURATION_MS: u64 = 4_000;
+use crate::state::AppPhase;
 
 impl ClientApp {
-    /// Mirrors `CAdvertising`: dismiss after the 4000ms timer, left mouse
-    /// button down, or any key not eaten by the base window handler.
-    pub(crate) fn update_intro_input(&mut self, now_ms: u64) {
-        let should_dismiss = now_ms.saturating_sub(self.intro_started_ms) >= INTRO_DURATION_MS
-            || is_mouse_button_pressed(MouseButton::Left)
-            || get_last_key_pressed().is_some();
-
-        if should_dismiss {
-            self.enter_menu_from_intro(now_ms);
-        }
-    }
-
     /// Deliver the post-splash menu event. This is where the original
     /// constructs `CMenu`, so all menu-owned timers and one-shot effects
     /// start here rather than at process boot.
-    fn enter_menu_from_intro(&mut self, now_ms: u64) {
+    ///
+    /// The *dismissal policy* that gets us here — the 4s timeout, a click,
+    /// or any key — now lives entirely in `scenes/intro/intro.luau` (it raises
+    /// `bulanci.scene.pop()` when any trigger fires). Only this menu-entry
+    /// lifecycle stays in Rust, since it crosses the app-phase + scheduler
+    /// boundary a scene can't own.
+    pub(crate) fn enter_menu_from_intro(&mut self, now_ms: u64) {
         if self.menu_started {
             return;
         }
@@ -36,24 +25,18 @@ impl ClientApp {
         self.phase = AppPhase::Menu;
         self.last_frame_ms = now_ms;
 
+        // Retract the splash overlay, revealing the menu base beneath.
+        self.surfaces.pop_overlay_named("intro");
+
         register_menu_slots(&mut self.scheduler, now_ms);
-        for &slot in &RUCH_SLOTS {
-            self.scheduler.register(slot, Ruch::random_hidden_delay(), true, now_ms);
-        }
 
         // CMenu ctor immediately clicks Start, playing slot 0x1b exactly
         // when the menu appears, not while the CAdvertising modal is live.
-        self.play_sfx("audio/sfx_start.wav");
+        // (The data-driven menu scene mirrors the rest of that auto-click —
+        // opening the StartGame1 sub-screen + lighting the Start dial — in
+        // Luau; this keeps the audio cue on the Rust lifecycle boundary so
+        // it lands on the exact intro→menu transition frame.)
+        self.play_sfx_h(crate::generated::assets::menu::sfx::SFX_START);
         self.on_day_night_tick();
-    }
-
-    /// CAdvertising ctor adds a full-window white CBlackView, then centers
-    /// bitmap resource 0x1013a on it.
-    pub(crate) fn draw_intro(&mut self) {
-        clear_background(WHITE);
-        let splash = self.get_texture("images/intro_splash.jpg");
-        let x = ((800.0 - splash.width()) * 0.5).floor();
-        let y = ((600.0 - splash.height()) * 0.5).floor();
-        draw_texture(&splash, x, y, WHITE);
     }
 }

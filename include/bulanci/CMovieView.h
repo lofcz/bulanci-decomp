@@ -6,7 +6,7 @@
 class CMovieView {
 public:
 	// !DECL 0x00422630 BEGIN
-	/* 422630 */ uchar StopPlayback(int param_1);
+	/* 422630 */ void StopPlayback(void* param_1);
 	// !DECL 0x00422630 END
 	// !DECL 0x00422840 BEGIN
 	/* 422840 */ uchar OnMovieStop(char param_1);
@@ -17,9 +17,6 @@ public:
 	// !DECL 0x00422a20 BEGIN
 	/* 422A20 */ uchar* GetClassTable();
 	// !DECL 0x00422a20 END
-	// !DECL 0x00422a30 BEGIN
-	/* 422A30 */ uchar ScalarDeletingDtor_Thunk_4(uchar param_1);
-	// !DECL 0x00422a30 END
 	// !DECL 0x00422a40 BEGIN
 	/* 422A40 */ uchar ScalarDeletingDtor_Thunk_104(uchar param_1);
 	// !DECL 0x00422a40 END
@@ -36,7 +33,7 @@ public:
 	/* 422D50 */ uchar StartPlayback(uchar param_1);
 	// !DECL 0x00422d50 END
 	// !DECL 0x00422e30 BEGIN
-	/* 422E30 */ uchar CreateObject();
+	/* 422E30 */ uchar CMovieView_CreateObject();
 	// !DECL 0x00422e30 END
 	// !DECL 0x00422ee0 BEGIN
 	/* 422EE0 */ void* ScalarDeletingDtor(uchar param_1);

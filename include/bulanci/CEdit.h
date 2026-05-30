@@ -18,7 +18,7 @@ public:
 	/* 404530 */ uchar CEdit_MeasureCharWidth(uchar param_1);
 	// !DECL 0x00404530 END
 	// !DECL 0x00404d10 BEGIN
-	/* 404D10 */ uint* CEdit_ctor(uint* param_1);
+	/* 404D10 */ uchar CEdit_ctor(uchar param_1);
 	// !DECL 0x00404d10 END
 	// !DECL 0x00404dc0 BEGIN
 	/* 404DC0 */ uchar* CEdit_GetTypeDescriptor();
@@ -30,10 +30,10 @@ public:
 	/* 404DF0 */ uchar CEdit_AdjustorThunk10_Dtor(uchar param_1);
 	// !DECL 0x00404df0 END
 	// !DECL 0x00406050 BEGIN
-	/* 406050 */ uchar CEdit_dtor(uchar param_1);
+	/* 406050 */ void CEdit_dtor(uchar param_1);
 	// !DECL 0x00406050 END
 	// !DECL 0x00406100 BEGIN
-	/* 406100 */ uchar CEdit_Render(int param_1);
+	/* 406100 */ void CEdit_Render(CDSView* param_1);
 	// !DECL 0x00406100 END
 	// !DECL 0x00406230 BEGIN
 	/* 406230 */ uchar CEdit_OnTimerTick(uchar param_1, uchar param_2);
@@ -51,10 +51,10 @@ public:
 	/* 406EB0 */ uint CEdit_LayoutToCaret(uint param_1);
 	// !DECL 0x00406eb0 END
 	// !DECL 0x00407040 BEGIN
-	/* 407040 */ uchar CEdit_OnFocusEvent(short param_1, void* param_2);
+	/* 407040 */ void CEdit_OnFocusEvent(short param_1, void* param_2);
 	// !DECL 0x00407040 END
 	// !DECL 0x00407760 BEGIN
-	/* 407760 */ void* CEdit_BuildAt(uint param_1, uint param_2, uint param_3, uint param_4, uint param_5, uint param_6, uint param_7, uint param_8);
+	/* 407760 */ uchar CEdit_BuildAt(uint param_1, uint param_2, uint param_3, uint param_4, uint param_5, uint param_6, uint param_7, uint param_8);
 	// !DECL 0x00407760 END
 
 	CEdit(RECT rect, uint param_5, uint param_6, uint param_7, uint param_8) {
@@ -62,7 +62,7 @@ public:
 	}
 
 	// !DECL 0x004078f0 BEGIN
-	/* 4078F0 */ char FUN_004078f0(uchar* param_1, uchar* param_2);
+	/* 4078F0 */ char CEdit_OnKeyDown(uchar* param_1, uchar* param_2);
 	// !DECL 0x004078f0 END
 	// !DECL 0x00407b40 BEGIN
 	/* 407B40 */ uchar CEdit_OnChar(uchar param_1);
@@ -71,10 +71,10 @@ public:
 	/* 407D20 */ uchar CEdit_LoadData(uint* param_1);
 	// !DECL 0x00407d20 END
 	// !DECL 0x0040ba00 BEGIN
-	/* 40BA00 */ uchar FUN_0040ba00(uchar param_1);
+	/* 40BA00 */ uchar CEdit_ScalarDeletingDtor_thunk(uchar param_1);
 	// !DECL 0x0040ba00 END
 	// !DECL 0x0040ba10 BEGIN
-	/* 40BA10 */ void* CEdit_vDtor(uchar param_1);
+	/* 40BA10 */ uchar CEdit_vDtor(uchar param_1);
 	// !DECL 0x0040ba10 END
 };
 

@@ -2,22 +2,22 @@
 
 // !FUNC 0x004183d0 BEGIN
 /* 4183D0-41849C 000CC */
-int CExplosion::FUN_004183d0(uint* param_1, int param_2, char param_3) { STUB_BODY(); return 0; }
+int CExplosion::CollectEntitiesInBlastRect(uint* param_1, int param_2, char param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004183d0 END
 
 // !FUNC 0x0041a2f0 BEGIN
 /* 41A2F0-41A38D 0009D */
-int CExplosion::FUN_0041a2f0(int* param_1, int param_2) { STUB_BODY(); return 0; }
+int CExplosion::CollectLandminesInBlastRect(int* param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a2f0 END
 
 // !FUNC 0x0041aad0 BEGIN
 /* 41AAD0-41AB15 00045 */
-uchar CExplosion::FUN_0041aad0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CExplosion::CExplosion_InitVtables(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041aad0 END
 
 // !FUNC 0x0041ab20 BEGIN
 /* 41AB20-41AB26 00006 */
-uchar* CExplosion::FUN_0041ab20() {
+uchar* CExplosion::CExplosion_GetClassTable() {
     return reinterpret_cast<uchar*>(&DAT_004b386c);
 }
 // !FUNC 0x0041ab20 END

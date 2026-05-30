@@ -70,12 +70,16 @@
 //! - Every frame's origin = explicit per-frame `origin` if present,
 //!   else atlas-level `origin`, else `(0, 0)`.
 
+use std::collections::HashSet;
+
 use anyhow::{anyhow, Context, Result};
-use macroquad::prelude::{FilterMode, Texture2D};
+use raylib::prelude::*;
 use serde::Deserialize;
 use serde_json::Value;
 
-use bulanci_core::assets::AssetFileSystem;
+use crate::asset::handle::AssetHandle;
+use crate::asset::types::{BitmapSprite, BitmapSpritePng};
+use crate::asset::AssetServer;
 
 /// Source rect inside the sheet image. All four values are unsigned
 /// pixel counts — atlases never reference pixels outside the sheet.
@@ -115,51 +119,69 @@ pub struct Atlas {
     /// Verbatim atlas-level metadata (`Value::Null` when absent).
     #[allow(dead_code)]
     pub meta: Value,
+    /// Source handles this atlas was built from, kept so the
+    /// hot-reload tick can rebuild it in place when either the JSON
+    /// layout or the PNG sheet changes on disk.  `None` for headless
+    /// test parses (which feed raw bytes, not handles).
+    source: Option<(AssetHandle<BitmapSprite>, AssetHandle<BitmapSpritePng>)>,
 }
 
 impl Atlas {
-    /// VFS path of the binary (production) atlas blob for a handle.
-    pub fn bin_path(name: &str) -> String {
-        format!("atlases/{name}/atlas.bin")
-    }
+    /// Load an atlas from typed handles.  The JSON handle provides the
+    /// frame layout / metadata; the PNG handle provides the pixels.
+    /// Neither side ever sees the underlying source path — both go
+    /// through [`AssetServer::bytes`], so deleting a real file falls
+    /// back to a class-typed placeholder instead of panicking.
+    ///
+    /// Both handles come from `crate::generated::assets`, where the
+    /// codegen emits them as a pair (`FOO` for the JSON,
+    /// `FOO_PNG` for the image) for every `BitmapSprite` registry
+    /// entry.  No call site ever needs to know either path string.
+    pub fn load(
+        rl: &mut RaylibHandle,
+        thread: &RaylibThread,
+        assets: &AssetServer,
+        json: AssetHandle<BitmapSprite>,
+        png:  AssetHandle<BitmapSpritePng>,
+    ) -> Result<Self> {
+        let json_bytes = assets.bytes(json);
+        let png_bytes  = assets.bytes(png);
 
-    /// VFS path of the JSON (source / dev) atlas blob for a handle.
-    pub fn json_path(name: &str) -> String {
-        format!("atlases/{name}/atlas.json")
-    }
-
-    /// Load atlas `<name>` from the VFS. Gated by build profile.
-    /// Fails loudly on missing files, schema mismatch, or bad formats.
-    #[cfg(debug_assertions)]
-    pub fn load(vfs: &AssetFileSystem, name: &str) -> Result<Self> {
-        let json_path = Self::json_path(name);
-        let parsed: AtlasJson = if let Some(j) = vfs.read(&json_path) {
-            serde_json::from_slice(j)
-                .with_context(|| format!("parsing json {json_path}"))?
+        // The JSON's leading byte tells us whether the runtime is
+        // looking at a real `atlas.json` (`{`) or the MsgPack
+        // production form (anything else).  The fallback constant
+        // [`crate::asset::fallback::EMPTY_ATLAS_JSON`] starts with
+        // `{`, so missing atlases also take the JSON branch and
+        // produce a valid zero-frame atlas — no special-case.
+        let parsed: AtlasJson = if json_bytes.first() == Some(&b'{') {
+            serde_json::from_slice(&json_bytes)
+                .context("parsing atlas json blob")?
         } else {
-            let bin_path = Self::bin_path(name);
-            let b = vfs
-                .read(&bin_path)
-                .ok_or_else(|| anyhow!("atlas {name}: missing both {json_path} and {bin_path}"))?;
-            rmp_serde::from_slice(b)
-                .with_context(|| format!("decoding msgpack {bin_path}"))?
+            rmp_serde::from_slice(&json_bytes)
+                .context("decoding atlas msgpack blob")?
         };
 
-        resolve_texture(name, parsed, vfs)
-    }
+        let mut atlas = resolve(&parsed.name.clone(), parsed)?;
+        // Strip the internal helper key (set by `resolve`) before
+        // exposing metadata to callers.
+        if let Value::Object(ref mut map) = atlas.meta {
+            map.remove("__image");
+        }
 
-    /// Load atlas `<name>` from the VFS. Production builds only ship
-    /// and compile the binary MsgPack loading logic.
-    #[cfg(not(debug_assertions))]
-    pub fn load(vfs: &AssetFileSystem, name: &str) -> Result<Self> {
-        let bin_path = Self::bin_path(name);
-        let b = vfs
-            .read(&bin_path)
-            .ok_or_else(|| anyhow!("atlas {name}: missing {bin_path}"))?;
-        let parsed: AtlasJson = rmp_serde::from_slice(b)
-            .with_context(|| format!("decoding msgpack {bin_path}"))?;
+        // Nearest filtering keeps the sprite-sheet frames pixel-crisp.
+        // Upload via `gfx::texture_from_encoded` (not LoadTextureFromImage)
+        // so NPOT cursor sheets work on emscripten/WebGL.
+        let texture = crate::gfx::texture_from_encoded(
+            rl,
+            thread,
+            &png_bytes,
+            TextureFilter::TEXTURE_FILTER_POINT,
+        )
+        .ok_or_else(|| anyhow!("atlas sheet decode/upload failed"))?;
+        atlas.texture = Some(texture);
+        atlas.source = Some((json, png));
 
-        resolve_texture(name, parsed, vfs)
+        Ok(atlas)
     }
 
     /// GPU texture for this atlas. Panics if called on a headless
@@ -169,41 +191,41 @@ impl Atlas {
     pub fn texture(&self) -> &Texture2D {
         self.texture
             .as_ref()
-            .expect("atlas texture missing; only headless parses leave this None")
+            .expect("sprite texture missing; only headless parses leave this None")
     }
 
     #[inline]
     pub fn frame_count(&self) -> usize {
         self.frames.len()
     }
-}
 
-fn resolve_texture(name: &str, raw: AtlasJson, vfs: &AssetFileSystem) -> Result<Atlas> {
-    let mut atlas = resolve(name, raw)?;
-
-    let image_path = format!(
-        "atlases/{name}/{}",
-        atlas
-            .meta
-            .get("__image")
-            .and_then(|v| v.as_str())
-            .map(str::to_owned)
-            .unwrap_or_else(|| "atlas.png".to_owned())
-    );
-
-    // Strip the internal helper key before exposing metadata publicly.
-    if let Value::Object(ref mut map) = atlas.meta {
-        map.remove("__image");
+    /// `true` if either of this atlas's source handles is in `dirty`.
+    /// Used by the hot-reload tick to decide whether to rebuild.
+    /// Always `false` for headless parses (which carry no handles).
+    pub fn touched_by(&self, dirty: &HashSet<u64>) -> bool {
+        match self.source {
+            Some((json, png)) => {
+                dirty.contains(&json.raw()) || dirty.contains(&png.raw())
+            }
+            None => false,
+        }
     }
 
-    let bytes = vfs
-        .read(&image_path)
-        .ok_or_else(|| anyhow!("atlas {name}: missing image {image_path}"))?;
-    let texture = Texture2D::from_file_with_format(bytes, None);
-    texture.set_filter(FilterMode::Nearest);
-    atlas.texture = Some(texture);
-
-    Ok(atlas)
+    /// Rebuild this atlas in place from its stored source handles.
+    /// No-op for headless parses.  On a decode failure the old atlas
+    /// is preserved and the error is returned, so a malformed mid-
+    /// write file just keeps the previous frame's pixels until the
+    /// next (complete) save lands.
+    pub fn reload(
+        &mut self,
+        rl: &mut RaylibHandle,
+        thread: &RaylibThread,
+        assets: &AssetServer,
+    ) -> Result<()> {
+        let Some((json, png)) = self.source else { return Ok(()); };
+        *self = Atlas::load(rl, thread, assets, json, png)?;
+        Ok(())
+    }
 }
 
 fn resolve(name: &str, raw: AtlasJson) -> Result<Atlas> {
@@ -213,7 +235,11 @@ fn resolve(name: &str, raw: AtlasJson) -> Result<Atlas> {
             raw.schema_version
         ));
     }
-    if raw.name != name {
+    // In dev builds the on-disk JSON still carries its slug as
+    // `raw.name`, so we keep the consistency check for that path.
+    // The shipped msgpack has it stripped (empty string); skip the
+    // check then so production loads don't error.
+    if !raw.name.is_empty() && raw.name != name {
         return Err(anyhow!(
             "atlas {name}: name field is '{}', folder name disagrees",
             raw.name
@@ -287,6 +313,7 @@ fn resolve(name: &str, raw: AtlasJson) -> Result<Atlas> {
         frames,
         texture: None,
         meta,
+        source: None,
     })
 }
 
@@ -296,7 +323,17 @@ fn resolve(name: &str, raw: AtlasJson) -> Result<Atlas> {
 struct AtlasJson {
     #[serde(rename = "schemaVersion")]
     schema_version: u32,
+    // `name` and `image` are present in editable on-disk JSON (the
+    // source-of-truth artefacts the asset gallery edits) but are
+    // **stripped** by `pack_assets.py` before the msgpack lands in
+    // the shipping pack — they're slug strings and would re-leak into
+    // `.rodata`.  `serde(default)` lets both forms deserialize: the
+    // stripped pack ones come back as empty strings, the on-disk
+    // dev ones keep their original values for headless tests and
+    // pipeline tooling.
+    #[serde(default)]
     name: String,
+    #[serde(default)]
     image: String,
     #[serde(default)]
     frame: Option<FrameDims>,

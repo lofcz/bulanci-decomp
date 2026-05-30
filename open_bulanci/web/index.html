@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>OpenBulanci</title>
+        <style>
+            html,
+            body {
+                margin: 0;
+                height: 100%;
+                background: #000;
+                overflow: hidden;
+                font-family: system-ui, "Segoe UI", sans-serif;
+            }
+
+            /* The stage fills the whole viewport; the toolbar floats on top so
+               the canvas can use plain viewport units for its "fit" size
+               without subtracting a toolbar height. */
+            #stage {
+                position: fixed;
+                inset: 0;
+                display: grid;
+                place-items: center;
+                background: #000;
+                overflow: auto;
+            }
+
+            /* The drawing buffer is fixed at the game's native 800x600 (canvas
+               width/height attributes + raylib InitWindow). Scaling only resizes
+               the *displayed* element: numeric zoom sets an explicit 4:3 size via
+               inline width/height (see the controls script), while ".fit" tracks
+               the viewport. Every option keeps a 4:3 box so the element rect
+               matches the rendered bitmap and raylib's mouse mapping stays
+               pixel-accurate. `pixelated` keeps upscales crisp. */
+            #canvas {
+                display: block;
+                background: #000;
+                image-rendering: pixelated;
+            }
+            #canvas.fit {
+                width: min(100vw, calc(100vh * 4 / 3));
+                height: min(100vh, calc(100vw * 3 / 4));
+            }
+
+            /* Floating toolbar, top-center, dims until hovered. */
+            #controls {
+                position: fixed;
+                top: 8px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+                display: flex;
+                gap: 6px;
+                align-items: center;
+                padding: 5px 7px;
+                border-radius: 8px;
+                background: rgba(15, 15, 18, 0.72);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                opacity: 0.25;
+                transition: opacity 0.15s ease;
+                user-select: none;
+            }
+            #controls:hover {
+                opacity: 1;
+            }
+            #controls button {
+                background: #1e1e22;
+                color: #cfcfd4;
+                border: 1px solid #34343c;
+                border-radius: 5px;
+                padding: 4px 10px;
+                font-size: 13px;
+                line-height: 1;
+                cursor: pointer;
+            }
+            #controls button:hover {
+                background: #2a2a31;
+            }
+            #controls button.active {
+                background: #c0392b;
+                border-color: #c0392b;
+                color: #fff;
+            }
+            #controls .sep {
+                width: 1px;
+                align-self: stretch;
+                background: rgba(255, 255, 255, 0.12);
+                margin: 0 2px;
+            }
+            /* Collapsed: shrink the bar to just the toggle handle so it's out of
+               the way (it stays centered at the top and dim until hovered). */
+            #controls.collapsed > :not(#toggleControls) {
+                display: none;
+            }
+            /* Sliders (zoom + volume), themed to match the toolbar buttons. */
+            #controls input[type="range"] {
+                -webkit-appearance: none;
+                appearance: none;
+                height: 4px;
+                border-radius: 3px;
+                background: #34343c;
+                outline: none;
+                cursor: pointer;
+            }
+            #controls input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 13px;
+                height: 13px;
+                border-radius: 50%;
+                background: #c0392b;
+                border: 1px solid #e35;
+            }
+            #controls input[type="range"]::-moz-range-thumb {
+                width: 13px;
+                height: 13px;
+                border: 1px solid #e35;
+                border-radius: 50%;
+                background: #c0392b;
+            }
+            #zoom {
+                width: 110px;
+            }
+            #volume {
+                width: 90px;
+            }
+            /* Live zoom readout, tabular so digits don't jitter while dragging. */
+            #zoomLabel {
+                min-width: 40px;
+                color: #9a9aa2;
+                font-size: 12px;
+                line-height: 1;
+                text-align: right;
+                font-variant-numeric: tabular-nums;
+            }
+            /* In fullscreen, always fit the screen regardless of the chosen zoom
+               (inline width/height would otherwise win, so override it). */
+            #stage:fullscreen #canvas {
+                width: min(100vw, calc(100vh * 4 / 3)) !important;
+                height: min(100vh, calc(100vw * 3 / 4)) !important;
+            }
+
+            /* "Game exited" overlay. The browser tab can't be closed, so on quit
+               we dim the frozen last frame and offer a clean reboot. Hidden until
+               the wasm client calls obShowRestart() (see app.rs request_app_exit). */
+            #restart {
+                position: fixed;
+                inset: 0;
+                z-index: 20;
+                display: none;
+                place-items: center;
+                /* Opaque so the frozen last game frame is fully cleared. */
+                background: #000;
+            }
+            #restart.show {
+                display: grid;
+            }
+            #restart .panel {
+                text-align: center;
+                color: #cfcfd4;
+                padding: 30px 40px;
+                border-radius: 10px;
+                background: rgba(18, 18, 22, 0.92);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            #restart h1 {
+                margin: 0 0 6px;
+                font-size: 20px;
+                font-weight: 600;
+                color: #fff;
+            }
+            #restart p {
+                margin: 0 0 20px;
+                font-size: 13px;
+                color: #9a9aa2;
+            }
+            #restart button {
+                background: #c0392b;
+                color: #fff;
+                border: 1px solid #e35;
+                border-radius: 6px;
+                padding: 10px 24px;
+                font-size: 15px;
+                cursor: pointer;
+            }
+            #restart button:hover {
+                background: #d4432f;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="controls">
+            <button data-zoom="100" title="Native 800×600">1×</button>
+            <button data-zoom="200" title="Double size 1600×1200">2×</button>
+            <button id="fit" title="Scale to window (keeps 4:3)">Fit</button>
+            <input
+                id="zoom"
+                type="range"
+                min="50"
+                max="400"
+                step="5"
+                value="100"
+                title="Zoom"
+                aria-label="Zoom"
+            />
+            <span id="zoomLabel">100%</span>
+            <span class="sep"></span>
+            <button id="fullscreen" title="Toggle fullscreen">⛶ Fullscreen</button>
+            <span class="sep"></span>
+            <button id="mute" title="Mute / unmute" aria-pressed="false">🔊</button>
+            <input
+                id="volume"
+                type="range"
+                min="0"
+                max="100"
+                value="100"
+                title="Volume"
+                aria-label="Volume"
+            />
+            <span class="sep"></span>
+            <button
+                id="toggleControls"
+                title="Hide controls"
+                aria-expanded="true"
+            >
+                ▴
+            </button>
+        </div>
+        <div id="stage">
+            <canvas
+                id="canvas"
+                width="800"
+                height="600"
+                oncontextmenu="event.preventDefault()"
+                tabindex="-1"
+            ></canvas>
+        </div>
+
+        <div id="restart">
+            <div class="panel">
+                <h1>Konec hry</h1>
+                <p>The game has exited. Start a fresh session below.</p>
+                <button id="restartBtn">▶ Play again</button>
+            </div>
+        </div>
+
+        <script>
+            // Emscripten reads this global when bulanci_client.js loads, so it
+            // must exist first.
+            var Module = {
+                canvas: document.getElementById("canvas"),
+                print: function (text) {
+                    console.log(text);
+                },
+                printErr: function (text) {
+                    console.error(text);
+                },
+            };
+
+            // ---- Restart overlay: shown by the wasm client on clean exit. ----
+            // Rebooting via a full page reload is the simplest way to get a
+            // pristine engine + audio context back, since the tab stays open.
+            (function () {
+                var overlay = document.getElementById("restart");
+                document
+                    .getElementById("restartBtn")
+                    .addEventListener("click", function () {
+                        location.reload();
+                    });
+                // Called from Rust via emscripten_run_script; idempotent.
+                window.obShowRestart = function () {
+                    if (!overlay) return;
+                    overlay.classList.add("show");
+                    // Clear the screen: drop the frozen last frame (the loop has
+                    // stopped, so the canvas keeps its final image) and hide the
+                    // now-moot display/audio toolbar to keep the exit screen clean.
+                    var stage = document.getElementById("stage");
+                    if (stage) stage.style.display = "none";
+                    var controls = document.getElementById("controls");
+                    if (controls) controls.style.display = "none";
+                };
+            })();
+
+            // ---- Collapse/restore the toolbar so it stays out of the way. ----
+            (function () {
+                var controls = document.getElementById("controls");
+                var toggle = document.getElementById("toggleControls");
+                toggle.addEventListener("click", function () {
+                    var collapsed = controls.classList.toggle("collapsed");
+                    toggle.textContent = collapsed ? "▾" : "▴";
+                    toggle.title = collapsed ? "Show controls" : "Hide controls";
+                    toggle.setAttribute("aria-expanded", String(!collapsed));
+                });
+            })();
+
+            // ---- Display controls: fluid zoom + presets + fullscreen. ----
+            (function () {
+                var canvas = document.getElementById("canvas");
+                var stage = document.getElementById("stage");
+                var zoom = document.getElementById("zoom");
+                var zoomLabel = document.getElementById("zoomLabel");
+                var fitButton = document.getElementById("fit");
+                var fsButton = document.getElementById("fullscreen");
+                var presetButtons = document.querySelectorAll(
+                    "#controls [data-zoom]"
+                );
+                var ZMIN = 50,
+                    ZMAX = 400;
+
+                function highlight(mode) {
+                    fitButton.classList.toggle("active", mode === "fit");
+                    presetButtons.forEach(function (b) {
+                        b.classList.toggle(
+                            "active",
+                            mode !== "fit" && +b.dataset.zoom === mode
+                        );
+                    });
+                }
+
+                // Any zoom in [ZMIN, ZMAX]% renders the native 800x600 buffer at
+                // an explicit 4:3 size, so the slider is fully continuous.
+                function applyZoom(pct) {
+                    pct = Math.max(ZMIN, Math.min(ZMAX, Math.round(pct)));
+                    canvas.classList.remove("fit");
+                    canvas.style.width = (800 * pct) / 100 + "px";
+                    canvas.style.height = (600 * pct) / 100 + "px";
+                    zoom.value = pct;
+                    zoomLabel.textContent = pct + "%";
+                    highlight(pct);
+                }
+
+                function applyFit() {
+                    canvas.classList.add("fit");
+                    canvas.style.width = "";
+                    canvas.style.height = "";
+                    zoomLabel.textContent = "Fit";
+                    highlight("fit");
+                }
+
+                zoom.addEventListener("input", function () {
+                    applyZoom(parseInt(zoom.value, 10));
+                });
+
+                presetButtons.forEach(function (b) {
+                    b.addEventListener("click", function () {
+                        applyZoom(parseInt(b.dataset.zoom, 10));
+                    });
+                });
+
+                fitButton.addEventListener("click", applyFit);
+
+                fsButton.addEventListener("click", function () {
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    } else if (stage.requestFullscreen) {
+                        stage.requestFullscreen().catch(function () {});
+                    }
+                });
+
+                // Default: exact 1:1 native resolution (800×600).
+                applyZoom(100);
+            })();
+
+            // ---- Audio controls: master volume + mute. ----
+            // These drive the engine's master output via the wasm export
+            // `ob_set_master_volume` (see client/src/audio.rs), so the slider
+            // scales both music and SFX exactly like the desktop build.
+            (function () {
+                var slider = document.getElementById("volume");
+                var muteButton = document.getElementById("mute");
+                // Last non-zero level, restored when unmuting (Windows-style).
+                var lastVolume = parseInt(slider.value, 10) || 100;
+
+                function currentPercent() {
+                    return parseInt(slider.value, 10) || 0;
+                }
+
+                function pushToEngine() {
+                    try {
+                        if (Module && typeof Module.ccall === "function") {
+                            Module.ccall(
+                                "ob_set_master_volume",
+                                null,
+                                ["number"],
+                                [currentPercent()]
+                            );
+                        }
+                    } catch (e) {
+                        // Runtime not ready yet; reapplied on init below.
+                    }
+                }
+
+                function refreshIcon() {
+                    var silent = currentPercent() === 0;
+                    muteButton.textContent = silent ? "🔇" : "🔊";
+                    muteButton.classList.toggle("active", silent);
+                    muteButton.setAttribute("aria-pressed", String(silent));
+                }
+
+                slider.addEventListener("input", function () {
+                    if (currentPercent() > 0) lastVolume = currentPercent();
+                    refreshIcon();
+                    pushToEngine();
+                });
+
+                // Mute swaps the slider between 0 and the last stored level, so
+                // the thumb physically moves like the Windows volume control.
+                muteButton.addEventListener("click", function () {
+                    if (currentPercent() > 0) {
+                        lastVolume = currentPercent();
+                        slider.value = 0;
+                    } else {
+                        slider.value = lastVolume > 0 ? lastVolume : 100;
+                    }
+                    refreshIcon();
+                    pushToEngine();
+                });
+
+                refreshIcon();
+
+                // Apply the initial volume once the wasm runtime is live.
+                var priorInit = Module.onRuntimeInitialized;
+                Module.onRuntimeInitialized = function () {
+                    if (typeof priorInit === "function") priorInit();
+                    pushToEngine();
+                };
+            })();
+
+            // ---- Live-mod client: receive asset overlays from the studio. ----
+            // The asset studio's Vite dev server runs a broker (see the gallery's
+            // vite.config.ts). We connect *out* to it and apply pushed overrides
+            // through the engine's exported install/remove hooks, so an edit in
+            // the studio tab hot-reloads in this game tab. The broker replays a
+            // snapshot on connect, so a game opened after edits still catches up.
+            (function () {
+                function override() {
+                    return (
+                        new URLSearchParams(location.search).get("broker") ||
+                        localStorage.getItem("bulanci.mod.broker")
+                    );
+                }
+                // Only auto-connect for local dev (the two-tab modding setup) or
+                // when a broker is explicitly configured, so a deployed public
+                // build doesn't sit retrying a connection to nobody.
+                function modEnabled() {
+                    if (override()) return true;
+                    var h = location.hostname;
+                    return h === "localhost" || h === "127.0.0.1" || h === "[::1]" || h === "";
+                }
+                function brokerUrl() {
+                    var url = override();
+                    if (url) return url;
+                    // The studio dev server defaults to :5173 on the same host.
+                    return (
+                        "ws://" +
+                        (location.hostname || "localhost") +
+                        ":5173/__engine/subscribe"
+                    );
+                }
+
+                function applyInstall(hashHex, bytes) {
+                    if (!(window.Module && Module.ccall && Module._malloc)) return;
+                    var len = bytes.length;
+                    var ptr = Module._malloc(len);
+                    if (!ptr) return;
+                    Module.HEAPU8.set(bytes, ptr);
+                    try {
+                        Module.ccall(
+                            "ob_install_overlay",
+                            null,
+                            ["string", "number", "number"],
+                            [hashHex, ptr, len]
+                        );
+                    } finally {
+                        Module._free(ptr);
+                    }
+                }
+
+                function applyClear(hashHex) {
+                    if (!(window.Module && Module.ccall)) return;
+                    Module.ccall("ob_remove_overlay", null, ["string"], [hashHex]);
+                }
+
+                // Scene-HMR patch: hand the raw ScenePatch JSON to the engine,
+                // which queues it for the main loop to apply in place.
+                function applyScenePatch(jsonText) {
+                    if (!(window.Module && Module.ccall)) return;
+                    Module.ccall("ob_scene_patch", null, ["string"], [jsonText]);
+                }
+
+                // Binary frames:
+                //   op=1 install: [1][hash:16 ascii][len:u32le][payload]
+                //   op=2 clear:   [2][hash:16 ascii]
+                //   op=3 scene:   [3][len:u32le][utf8 ScenePatch json]
+                function handleFrame(buffer) {
+                    var u8 = new Uint8Array(buffer);
+                    if (u8.length < 1) return;
+                    var op = u8[0];
+                    if (op === 3) {
+                        if (u8.length < 5) return;
+                        var plen = new DataView(buffer).getUint32(1, true);
+                        var json = new TextDecoder("utf-8").decode(
+                            u8.subarray(5, 5 + plen)
+                        );
+                        applyScenePatch(json);
+                        return;
+                    }
+                    if (u8.length < 17) return;
+                    var hashHex = new TextDecoder("ascii").decode(u8.subarray(1, 17));
+                    if (op === 1) {
+                        if (u8.length < 21) return;
+                        var len = new DataView(buffer).getUint32(17, true);
+                        applyInstall(hashHex, u8.subarray(21, 21 + len));
+                    } else if (op === 2) {
+                        applyClear(hashHex);
+                    }
+                }
+
+                var ws = null;
+                var retry = null;
+                function schedule() {
+                    if (retry) return;
+                    retry = setTimeout(function () {
+                        retry = null;
+                        connect();
+                    }, 2000);
+                }
+                function connect() {
+                    var url = brokerUrl();
+                    try {
+                        ws = new WebSocket(url);
+                    } catch (e) {
+                        schedule();
+                        return;
+                    }
+                    ws.binaryType = "arraybuffer";
+                    ws.onopen = function () {
+                        console.log("[mod] connected to studio broker " + url);
+                    };
+                    ws.onmessage = function (ev) {
+                        if (ev.data instanceof ArrayBuffer) handleFrame(ev.data);
+                    };
+                    ws.onerror = function () {
+                        try {
+                            ws.close();
+                        } catch (e) {}
+                    };
+                    ws.onclose = schedule;
+                }
+
+                // Start once the engine is up (exports + heap available).
+                var priorInit = Module.onRuntimeInitialized;
+                Module.onRuntimeInitialized = function () {
+                    if (typeof priorInit === "function") priorInit();
+                    if (modEnabled()) connect();
+                };
+            })();
+
+            // Autoplay policy: the page's WebAudio context starts suspended
+            // until a user gesture. miniaudio (raylib's audio backend) installs
+            // its own resume-on-gesture handler, but we nudge any context we
+            // can reach on the first interaction as a belt-and-suspenders.
+            window.addEventListener(
+                "pointerdown",
+                function () {
+                    var ctx = Module && Module.audioContext;
+                    if (ctx && ctx.state === "suspended") {
+                        ctx.resume();
+                    }
+                },
+                { capture: true, once: true }
+            );
+        </script>
+        <script src="bulanci_client.js"></script>
+    </body>
+</html>

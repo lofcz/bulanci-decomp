@@ -4,23 +4,15 @@
 //! catch-up: under a frame stall the simulation will fire many times in
 //! one frame so the predicted world stays clock-locked to the wall clock.
 
-use macroquad::prelude::*;
+use raylib::prelude::*;
 
+use bulanci_core::gameplay::draw::{
+    bullet_item, obstacle_item, player_items, TEAM0_COLOR, TEAM1_COLOR,
+};
+use bulanci_core::scene::DrawItem;
 use bulanci_core::ClientMessage;
 
 use crate::app::ClientApp;
-
-/// Convert a facing dir byte to a (dx, dy) pixel offset used for drawing
-/// the muzzle indicator. 0 = UP, 1 = RIGHT, 2 = DOWN, 3 = LEFT.
-pub fn facing_offset(facing_dir: u8) -> (f32, f32) {
-    match facing_dir {
-        0 => (0.0, -25.0),
-        1 => (25.0, 0.0),
-        2 => (0.0, 25.0),
-        3 => (-25.0, 0.0),
-        _ => (0.0, 0.0),
-    }
-}
 
 impl ClientApp {
     /// SLOT_GAME_TICK handler — fires drift-free at strict 17ms cadence.
@@ -57,67 +49,55 @@ impl ClientApp {
         self.input_history.retain(|&tick, _| tick >= self.client_tick.saturating_sub(300));
     }
 
-    pub fn draw_gameplay(&mut self) {
-        // ---- Map obstacles. ----
+    pub fn draw_gameplay<D: RaylibDraw>(&self, d: &mut D) {
+        // The match world (obstacles, players, bullets) is built into the same
+        // flat `DrawItem` list scenes produce and blitted through the unified
+        // renderer — so gameplay composes in the surface stack with the menu's
+        // draw path instead of its own bespoke immediate-mode code. The local
+        // predicted player is highlighted green; server-cached peers red.
+        let tunables = self.predicted_sim.tunables;
+        let mut items: Vec<DrawItem> = Vec::new();
+
         for obs in &self.predicted_sim.state.obstacles {
-            let x = obs.x1 as f32;
-            let y = obs.y1 as f32;
-            let w = (obs.x2 - obs.x1) as f32;
-            let h = (obs.y2 - obs.y1) as f32;
-            draw_rectangle(x, y, w, h, DARKGRAY);
-            draw_rectangle_lines(x, y, w, h, 2.0, GRAY);
+            items.push(obstacle_item(obs));
         }
-
-        // ---- Other players. ----
         for other in self.players_cache.values() {
-            if !other.is_alive {
-                continue;
+            if other.is_alive {
+                items.extend(player_items(other, TEAM1_COLOR, tunables));
             }
-            draw_circle(other.pos.x as f32, other.pos.y as f32, 20.0, RED);
-            let (fx, fy) = facing_offset(other.facing_dir);
-            draw_line(
-                other.pos.x as f32, other.pos.y as f32,
-                other.pos.x as f32 + fx, other.pos.y as f32 + fy,
-                3.0, YELLOW,
-            );
         }
-
-        // ---- Local player (predicted). ----
+        let mut local_is_dead = false;
         if let Some(id) = self.assigned_id {
             if let Some(me) = self.predicted_sim.state.players.iter().find(|p| p.id == id) {
                 if me.is_alive {
-                    draw_circle(me.pos.x as f32, me.pos.y as f32, 20.0, GREEN);
-                    let (fx, fy) = facing_offset(me.facing_dir);
-                    draw_line(
-                        me.pos.x as f32, me.pos.y as f32,
-                        me.pos.x as f32 + fx, me.pos.y as f32 + fy,
-                        3.0, YELLOW,
-                    );
+                    items.extend(player_items(me, TEAM0_COLOR, tunables));
                 } else {
-                    self.draw_t("Jste mrtvý! Čeká se na respawn…", 230.0, 290.0, 22, RED);
+                    local_is_dead = true;
                 }
             }
         }
-
-        // ---- Bullets. ----
         for b in &self.predicted_sim.state.bullets {
             if b.is_active {
-                draw_circle(b.pos.x as f32, b.pos.y as f32, 4.0, ORANGE);
+                items.push(bullet_item(b));
             }
         }
+        crate::scene_runtime::draw_items(self, &items, d);
 
-        // ---- HUD. ----
-        self.draw_t(&format!("Tick: {}", self.client_tick), 15.0, 30.0, 18, WHITE);
-        self.draw_t("Skóre:", 15.0, 58.0, 18, Color::new(1.0, 0.85, 0.3, 1.0));
+        // ---- HUD (text overlay; a HUD scene surface is the future home). ----
+        if local_is_dead {
+            self.draw_t(d, "Jste mrtvý! Čeká se na respawn…", 230.0, 290.0, 22, Color::RED);
+        }
+        self.draw_t(d, &format!("Tick: {}", self.client_tick), 15.0, 30.0, 18, Color::WHITE);
+        self.draw_t(d, "Skóre:", 15.0, 58.0, 18, Color::new(255, 217, 77, 255));
         let mut y = 78.0;
         if let Some(id) = self.assigned_id {
             if let Some(me) = self.predicted_sim.state.players.iter().find(|p| p.id == id) {
-                self.draw_t(&format!("Vy (#{}): {}", id, me.score), 15.0, y, 16, GREEN);
+                self.draw_t(d, &format!("Vy (#{}): {}", id, me.score), 15.0, y, 16, Color::GREEN);
                 y += 18.0;
             }
         }
         for other in self.players_cache.values() {
-            self.draw_t(&format!("#{}: {}", other.id, other.score), 15.0, y, 16, RED);
+            self.draw_t(d, &format!("#{}: {}", other.id, other.score), 15.0, y, 16, Color::RED);
             y += 18.0;
         }
     }

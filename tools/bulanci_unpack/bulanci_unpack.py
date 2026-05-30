@@ -906,9 +906,8 @@ _LEVELSCRIPT_EXT_OPCODES: dict = {
 
 
 # CHelpScript / CHistoryScript install their *own* 8-entry extension tables
-# at offset 45..52, NOT the 58-entry CLevelScript extension. Until each
-# handler is traced and named, opcodes 45..52 in these scripts decode as
-# `<UNKNOWN op=N>`. Handler addresses (from `bulanci.exe`):
+# at offset 45..52, NOT the 58-entry CLevelScript extension. Handler
+# addresses (from `bulanci.exe`):
 #
 #   CHistoryScript table @ 0x004af7ac (CHistoryScript::CHistoryScript, 0x004226c0):
 #     45 -> 0x00422b00   46 -> 0x00422bc0   47 -> 0x00423530   48 -> 0x00421750
@@ -918,9 +917,40 @@ _LEVELSCRIPT_EXT_OPCODES: dict = {
 #     45 -> 0x00421940   46 -> 0x00421a00   47 -> 0x004221a0   48 -> 0x00421750
 #     49 -> 0x004215c0   50 -> 0x00422810   51 -> 0x004217e0   52 -> 0x00421af0
 #
-# Slots 48..51 are shared between the two -- likely generic helpers.
-_HELPSCRIPT_EXT_OPCODES: dict = {}
-_HISTORYSCRIPT_EXT_OPCODES: dict = {}
+# Slots 48..51 are shared (identical handler addresses between Help and
+# History). The other four slots (45/46/47/52) come in two flavours:
+#
+#   * 45..47 are functionally identical between Help and History (each
+#     pair instantiates the same widget class with the same arg layout;
+#     only the surrounding error-handling block differs). 47 in
+#     particular is THE loader that turns the inline `i32 imageId` into
+#     a CDSBitmap via `g_pApp.menu->FUN_00413b20(id)` -- it is the only
+#     reference path that ties HistoryScript-screen image IDs to the
+#     binary.
+#
+#   * 52 differs by type: CHistoryScript spawns a CMovieView
+#     (loading a BitmapJpegAnim by inline i32) while CHelpScript spawns
+#     a CButton (no i32, just sub-exprs).
+#
+# Naming convention below: shared opcodes are prefixed with `Hh` (Help/
+# history); the divergent ones are named for the widget they create.
+_SHARED_HELPHISTORY_OPCODES = {
+    45: ("HhBuildStaticTextAuto", ["sub", "sub", "sub", "sub", "i32"]),  # x, y, text, w, fontId
+    46: ("HhBuildStaticText",     ["sub", "sub", "sub", "sub", "sub", "sub", "i32", "sub"]),  # x, y, w, h, text, font, ?, ?
+    47: ("HhCreateBitmap",        ["sub", "sub", "i32"]),  # x, y, imageId  <-- LOADS bitmaps
+    48: ("HhSetStaticTextStyle",  "_textstyle"),  # widget + u8 count + count*sub
+    49: ("HhPassFirst",           ["sub", "sub"]),  # returns 1st arg; 2nd consumed but unused
+    50: ("HhSetByteField",        ["sub", "sub"]),  # *(widget+0x74+0x18) = byte(arg2)
+    51: ("HhAddChild",            ["sub"]),
+}
+_HELPSCRIPT_EXT_OPCODES: dict = {
+    **_SHARED_HELPHISTORY_OPCODES,
+    52: ("HCreateButton", ["sub", "sub", "sub", "sub"]),  # ?, ?, text, kind
+}
+_HISTORYSCRIPT_EXT_OPCODES: dict = {
+    **_SHARED_HELPHISTORY_OPCODES,
+    52: ("HCreateMovie",  ["sub", "sub", "i32", "sub", "sub"]),  # x, y, movieId, ?, ?  <-- LOADS movies
+}
 
 
 _SCRIPT_OPCODES = {
@@ -1034,6 +1064,14 @@ def _disassemble_script(
     for i, addr in enumerate(exports_int):
         fn_index.setdefault(addr, i)
 
+    # Helper-function discovery: every Call(fn@target, ...) we see during
+    # disassembly is appended to `call_targets`. After the export pass we
+    # walk every still-unseen target so the listing covers the "inline
+    # helper" tail that the old code dropped on the floor (and which
+    # often contains CreateAnim / CreateImage opcodes loading sprite IDs
+    # that nothing else in the binary references literally).
+    call_targets: set[int] = set()
+
     def export_label(off: int) -> str:
         i = fn_index.get(off)
         return f"export#{i}" if i is not None else f"fn@{off:#x}"
@@ -1058,6 +1096,16 @@ def _disassemble_script(
             for _ in range(param_count):
                 end, s = read_command(end)
                 arg_strs.append(s)
+            # Track non-export call targets so we disassemble them as
+            # separate functions after the main pass. Only consider
+            # offsets inside the code blob; negative/huge targets are
+            # almost always sign-extended `i32` literals interpreted as
+            # call addresses (a corrupted byte stream).
+            if (
+                target not in fn_index
+                and 0 <= target < len(code)
+            ):
+                call_targets.add(target)
             return end, f"{name}({export_label(target)}, {', '.join(arg_strs)})"
 
         if spec == "_switch":
@@ -1089,6 +1137,19 @@ def _disassemble_script(
                 frame_ids.append(fid)
             ids_str = ", ".join(str(f) for f in frame_ids)
             return end, f"{name}({x}, {y}, delay={delay}, frames=[{ids_str}])"
+
+        if spec == "_textstyle":
+            # CHelpHistoryScript::ext_op48_shared (handler 0x00421750):
+            #   sub widget, u8 count, count*sub style-attr
+            # Each sub is an alloca-pushed style attribute eventually
+            # passed to CStaticText::SetStyle(widget, attrs[], count).
+            end, widget = read_command(end)
+            count = code[end]; end += 1
+            attrs = []
+            for _ in range(count):
+                end, s = read_command(end)
+                attrs.append(s)
+            return end, f"{name}({widget}, count={count}, [{', '.join(attrs)}])"
 
         if spec == "_strconst":
             # UTF-16LE characters until a null terminator. The compiler may
@@ -1198,6 +1259,52 @@ def _disassemble_script(
             else:
                 lines.append(f"fn export#{i} @ {fs:#06x}:")
             disasm_function(fs, fe)
+
+        # Helper-function pass: every script in the master pack has
+        # inline-helper functions called via Call(fn@addr, args) that
+        # the export walker skips (they sit in the "unreachable tail"
+        # past each export's first Return). These helpers regularly
+        # contain CreateAnim / CreateImage opcodes whose i32 frame IDs
+        # are the ONLY literal reference to certain master-pack assets
+        # (e.g. all of band 8 in "Na dobrou noc" = res 65856 lives in
+        # such a helper). Walk every discovered call target and
+        # disassemble it as `fn@OFFSET`.
+        #
+        # End-of-helper detection: we use the next sorted helper / export
+        # address as the upper bound so we don't accidentally consume the
+        # following helper's bytes as one giant function.
+        worked: set[int] = set()
+        # Worklist that grows as we discover nested calls inside helpers.
+        pending = sorted(call_targets - set(exports_int))
+        while pending:
+            target = pending.pop(0)
+            if target in worked or target in fn_index:
+                continue
+            worked.add(target)
+            # Compute end_hint: next known boundary (export or already-
+            # disassembled helper or end-of-code), taking only addresses
+            # strictly greater than this one.
+            boundaries = sorted({
+                *exports_int,
+                *worked,
+                *call_targets,
+                len(code),
+            } - {target})
+            end_hint = len(code)
+            for b in boundaries:
+                if b > target:
+                    end_hint = b
+                    break
+            lines.append("")
+            lines.append(f"fn @ {target:#06x}  ; helper (call-target)")
+            before = len(call_targets)
+            disasm_function(target, end_hint)
+            # If disassembling this helper revealed more call targets,
+            # add them to the worklist.
+            new_targets = call_targets - worked - set(exports_int) - set(pending)
+            if new_targets:
+                pending.extend(sorted(new_targets))
+                pending.sort()
 
     return "\n".join(lines) + "\n"
 

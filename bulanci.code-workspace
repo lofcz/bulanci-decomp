@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "bulanci",
+			"path": "."
+		},
+		{
+			"name": "sola-raylib (engine fork)",
+			"path": "../sola-raylib"
+		},
+		{
+			"name": "raylib + glfw (vendored submodule)",
+			"path": "../sola-raylib/raylib-sys/raylib"
+		}
+	],
+	"settings": {}
+}

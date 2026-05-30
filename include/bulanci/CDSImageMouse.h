@@ -6,22 +6,22 @@
 class CDSImageMouse {
 public:
 	// !DECL 0x0042ac80 BEGIN
-	/* 42AC80 */ uchar* FUN_0042ac80();
+	/* 42AC80 */ uchar* CDSImageMouse_GetTypeDescriptor();
 	// !DECL 0x0042ac80 END
 	// !DECL 0x0042aca0 BEGIN
-	/* 42ACA0 */ uchar FUN_0042aca0(uchar param_1);
+	/* 42ACA0 */ uchar CDSImageMouse_ScalarDeletingDtor_thunk(uchar param_1);
 	// !DECL 0x0042aca0 END
 	// !DECL 0x0042acb0 BEGIN
-	/* 42ACB0 */ uchar FUN_0042acb0(uint* param_1);
+	/* 42ACB0 */ uchar CDSImageMouse_dtor(uint* param_1);
 	// !DECL 0x0042acb0 END
 	// !DECL 0x0042af60 BEGIN
-	/* 42AF60 */ void* FUN_0042af60(uchar param_1);
+	/* 42AF60 */ void* CDSImageMouse_vDtor(uchar param_1);
 	// !DECL 0x0042af60 END
 	// !DECL 0x0042b9a0 BEGIN
-	/* 42B9A0 */ uchar FUN_0042b9a0(int param_1);
+	/* 42B9A0 */ void CDSImageMouse_Draw(void* param_1);
 	// !DECL 0x0042b9a0 END
 	// !DECL 0x0042ba90 BEGIN
-	/* 42BA90 */ uchar FUN_0042ba90(int param_1);
+	/* 42BA90 */ void CDSImageMouse_Erase(void* param_1);
 	// !DECL 0x0042ba90 END
 };
 

@@ -2,7 +2,7 @@
 
 // !FUNC 0x00416650 BEGIN
 /* 416650-416668 00018 */
-uchar CDeath::FUN_00416650(int param_1) { STUB_BODY(); return 0; }
+uchar CDeath::CDeath_UpdateLastManStandingState(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416650 END
 
 // !FUNC 0x00417a40 BEGIN
@@ -12,7 +12,7 @@ uchar CDeath::FUN_00417a40(uint param_1, int param_2, int param_3) { STUB_BODY()
 
 // !FUNC 0x00417a70 BEGIN
 /* 417A70-417A83 00013 */
-uchar CDeath::FUN_00417a70(uint param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
+uchar CDeath::CDeath_UpdateStateFromParams(uint param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00417a70 END
 
 // !FUNC 0x00417a90 BEGIN
@@ -22,13 +22,13 @@ uchar CDeath::FUN_00417a90(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00419a80 BEGIN
 /* 419A80-419A86 00006 */
-uchar* CDeath::FUN_00419a80() {
+uchar* CDeath::CDeath_GetClassTable() {
     return reinterpret_cast<uchar*>(&DAT_004b37dc);
 }
 // !FUNC 0x00419a80 END
 
 // !FUNC 0x0041a860 BEGIN
 /* 41A860-41A8B3 00053 */
-uchar CDeath::FUN_0041a860(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDeath::CDeath_SubobjectCtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a860 END
 

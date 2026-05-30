@@ -1,0 +1,239 @@
+[
+  {
+    "id": 41,
+    "title": "Clean CBulanek tail Ghidra renames + pre-ammo pads",
+    "types": ["CBulanek", "CGameView", "CGaming"],
+    "addresses": ["0x0041e4b0", "0x004205a0", "0x00420910", "0x0041aed0"],
+    "ghidra_actions": [
+      "rename_data apWalkTrackSources@+0x14C apAiTrackHolders@+0x178 vftable_event@+0xA0",
+      "modify_struct_field split pPad_preAmmo@+0x100..+0x11B per CBulanek.md ammo band",
+      "rename_data pCdsViewPrefix → CGameView mirror fields through +0x87 where xref-proven",
+      "get_struct_layout CBulanek verify 412B field names match doc",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/agent_todos_50_r2_results.jsonl",
+      "ghidra_analysis/engine/struct_recovery/CBulanek.md",
+      "ghidra_analysis/engine/struct_recovery/batch_41_slice_report.md",
+      "ghidra_analysis/engine/struct_recovery/batch_41_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "critical",
+    "source": "blocker",
+    "source_slice": "41",
+    "r2_status": "done",
+    "supersedes_todo_id": 41
+  },
+  {
+    "id": 42,
+    "title": "Fix CBulanekCtor scheduler + videoTrackManager decompiler",
+    "types": ["CBulanek", "CDSVideoPlayer", "CDSUpdatedItem", "CGame"],
+    "addresses": ["0x0041e4b0", "0x00439c70", "0x00420910", "0x0042f060", "0x0042f210"],
+    "ghidra_actions": [
+      "set_function_prototype CBulanekCtor(CBulanek *this, …)",
+      "modify_struct_field CBulanek scheduler CDSUpdatedItem @ +0x88 videoTrackManager CDSVideoPlayer @ +0xA8",
+      "set_plate_comment@0x0041e4b0 CDSUpdatedItem_ctor(this+0x88) ConstructTrackManager(this+0xa8)",
+      "set_decompiler_comment BeginCurrentTrackPlayback path in CBulanek_ApplyAction",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CBulanek.md",
+      "ghidra_analysis/engine/struct_recovery/CDSVideoPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/CDSUpdatedItem.md",
+      "ghidra_analysis/engine/struct_recovery/batch_41_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_41_slice_report.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "critical",
+    "source": "blocker",
+    "source_slice": "41",
+    "supersedes_todo_id": 42
+  },
+  {
+    "id": 43,
+    "title": "Plate CDSCollection_InsertKeyed true CDSCollection* ECX",
+    "types": ["CDSCollection", "CDSUpdatedItem", "CDSStreamStorage"],
+    "addresses": ["0x004312c0", "0x0042f060", "0x00431170", "0x00433cb0"],
+    "ghidra_actions": [
+      "set_function_prototype CDSCollection_InsertKeyed(CDSCollection *this, …)",
+      "set_plate_comment@0x004312c0 asm m_items/m_count @ [ESI+0x8]/[ESI+0xc]",
+      "set_decompiler_comment caller CDSUpdatedItem_ctor g_pTaskList is not InsertKeyed this",
+      "xref InsertKeyed vs FindKeyIndex ECX bases"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSCollection.md",
+      "ghidra_analysis/engine/struct_recovery/batch_41_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_42_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/round3_tasks_remaining.json",
+      "ghidra_analysis/engine/agent_todos_50_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "source_slice": "41",
+    "r2_status": "partial",
+    "supersedes_todo_id": 43
+  },
+  {
+    "id": 44,
+    "title": "Cosmetic CDSTrackVector embed @ CDSVideoPlayer+0x1c",
+    "types": ["CDSVideoPlayer", "CDSTrackVector"],
+    "addresses": ["0x00439c70", "0x00439730", "0x00439a70", "0x00439b90"],
+    "ghidra_actions": [
+      "create_struct CDSTrackVector 16 bytes nested @ CDSVideoPlayer+0x1c",
+      "set_function_prototype TM_LookupTrackIndex/TM_InsertTrackAt inner-vector this",
+      "modify_struct_field dwSchedulerCookie @ +0x40 if still dwField_0x40",
+      "get_struct_layout CDSVideoPlayer"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSVideoPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/batch_41_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_42_followup_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "low",
+    "source": "verify",
+    "source_slice": "41",
+    "r2_status": "done",
+    "supersedes_todo_id": 44
+  },
+  {
+    "id": 45,
+    "title": "Verify CDSStreamStorage nested CDSCollection/CDSChain decompile",
+    "types": ["CDSStreamStorage", "CDSCollection", "CDSChain", "CBulanci"],
+    "addresses": ["0x00401790", "0x00431170", "0x00433cb0", "0x00401f36"],
+    "ghidra_actions": [
+      "modify_struct_field replace flat collection_* with CDSCollection @ +0x1c CDSChain @ +0x34",
+      "set_data_type CBulanci_OpenPackStream return CDSStreamStorage*",
+      "decompile CloseStreamByKey LEA ECX,[ESI+0x1c] shows m_items path",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSStreamStorage.md",
+      "ghidra_analysis/engine/struct_recovery/batch_40_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_40_followup_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "medium",
+    "source": "verify",
+    "source_slice": "40",
+    "r2_status": "done",
+    "supersedes_todo_id": 45
+  },
+  {
+    "id": 46,
+    "title": "Sweep CDSStreamStorage IDSStorage stub comments + loader protos",
+    "types": ["CDSStreamStorage", "CDSChain", "CDSStrmResInfo"],
+    "addresses": ["0x004339c0", "0x004339d0", "0x00433f00", "0x00433f70", "0x00434160", "0x00434760"],
+    "ghidra_actions": [
+      "set_decompiler_comment GetStreamCount returns m_items ptr not m_count",
+      "set_decompiler_comment GetStreamEntry vtable-only dead stub @ +0x20",
+      "set_function_prototype GetThreadLoaderNode AppendOrReuseStream InitRootSafeStream",
+      "audit IDSAnim_SelectRandomTrack fake CDSStreamStorage* cast reads dwChainRoot @ +0x40"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSStreamStorage.md",
+      "ghidra_analysis/engine/struct_recovery/batch_40_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_40_followup_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "high",
+    "source": "handoff",
+    "source_slice": "40",
+    "supersedes_todo_id": 46
+  },
+  {
+    "id": 47,
+    "title": "Verify CDSStrmResInfo pad_tail @ +0x20 AppendOrReuseStream read",
+    "types": ["CDSStrmResInfo", "CDSResInfo", "CDSStreamStorage"],
+    "addresses": ["0x00433f70", "0x00433940", "0x00433980", "0x00434270"],
+    "ghidra_actions": [
+      "modify_struct_field pad_tail dword @ +0x20 with consumer xref from AppendOrReuseStream",
+      "set_decompiler_comment streamExtent ulonglong @ +0x14 not pEmbeddedResource on CDSStrmResInfo",
+      "rename_data remove misleading pEmbeddedResource label on stream subclass"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSStrmResInfo.md",
+      "ghidra_analysis/engine/struct_recovery/batch_40_followup_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "low",
+    "source": "verify",
+    "source_slice": "40",
+    "r2_status": "done",
+    "supersedes_todo_id": 47
+  },
+  {
+    "id": 48,
+    "title": "Prove ODSImage.pOwner CBulanek* on gameplay SetOwner paths",
+    "types": ["ODSImage", "CWeapon", "CBulanek", "CDSImage"],
+    "addresses": ["0x00439050", "0x00439100", "0x0041dbc0", "0x0042ea80"],
+    "ghidra_actions": [
+      "modify_struct_field ODSImage.pOwner CBulanek* if all weapon/view stores are CBulanek*",
+      "set_function_prototype SetOwner(ODSImage *, CBulanek *)",
+      "rename_function_by_address FUN_0042ea80 if still generic AddRef helper",
+      "set_decompiler_comment ODSImage__SetImage slot-vector path"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/ODSImage.md",
+      "ghidra_analysis/engine/struct_recovery/batch_43_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_43_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "source_slice": "43",
+    "r2_status": "done",
+    "supersedes_todo_id": 48
+  },
+  {
+    "id": 49,
+    "title": "Retype CWeapon_ctor this; name trackManager interior +0x08..+0x4F",
+    "types": ["CWeapon", "CBulanek", "CDSVideoPlayer", "CGaming"],
+    "addresses": ["0x0041dbc0", "0x004212b0", "0x00481ed4", "0x0041fce0", "0x00439c70"],
+    "ghidra_actions": [
+      "set_function_prototype CWeapon_ctor(CWeapon *this, CBulanek *pOwner, uchar weaponKind)",
+      "set_plate_comment@0x0041dbc0 ECX is CWeapon* not ODSImage*",
+      "modify_struct_field CWeapon trackManager CDSVideoPlayer interior through ConstructTrackManager writes",
+      "decompile TM_Play/CWeapon_FirePistol with trackManager @ this+0x08",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CWeapon.md",
+      "ghidra_analysis/engine/struct_recovery/CBulanek.md",
+      "ghidra_analysis/engine/struct_recovery/batch_43_summary.md",
+      "ghidra_analysis/engine/struct_recovery/CGaming.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "high",
+    "source": "blocker",
+    "source_slice": "43",
+    "r2_status": "partial",
+    "supersedes_todo_id": 49
+  },
+  {
+    "id": 50,
+    "title": "Handoff CDSWav polymorphic dtor vs CDSWavStream ownership",
+    "types": ["CDSWav", "CDSWavStream", "CDSDsmFile"],
+    "addresses": ["0x0041bbe0", "0x0041a530", "0x0043b960", "0x00428ad0"],
+    "ghidra_actions": [
+      "trace CDSWav_ScalarDeletingDtor vs CDSWavStream_dtor on class-43 delete paths",
+      "set_decompiler_comment only if new xref proves alternate owner",
+      "get_struct_layout CDSWav CDSWav_face8slots confirm no regression"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSWav.md",
+      "ghidra_analysis/engine/struct_recovery/CDSWavStream.md",
+      "ghidra_analysis/engine/struct_recovery/batch_42_summary.md",
+      "ghidra_analysis/engine/formats/dsm_file_format.md",
+      "ghidra_analysis/engine/agent_todos_50_r2_results.jsonl",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "low",
+    "source": "verify",
+    "source_slice": "42",
+    "r2_status": "done",
+    "supersedes_todo_id": 50
+  }
+]

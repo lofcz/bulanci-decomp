@@ -90,7 +90,7 @@ public:
 // `LAB_*` addresses are the init_source / fill_input_buffer / skip_input_data
 // trampolines compiled earlier in the unit; bytes_in_buffer is filled in by
 // fill_input_buffer when the decoder pulls from the wrapped CDSStreamStorage.
-uchar CDSJpegImage::FUN_00431510(int param_1, uint param_2) {
+uchar CDSJpegImage::jpeg_CDSStreamStorage_dst(int param_1, uint param_2) {
     int iVar1;
     int uVar2;
 
@@ -110,12 +110,12 @@ uchar CDSJpegImage::FUN_00431510(int param_1, uint param_2) {
 
 // !FUNC 0x00431cc0 BEGIN
 /* 431CC0-431CEB 0002B */
-uchar CDSJpegImage::FUN_00431cc0(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::CDSJpegImage_Load(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00431cc0 END
 
 // !FUNC 0x00431d50 BEGIN
 /* 431D50-431D56 00006 */
-uchar* CDSJpegImage::FUN_00431d50() {
+uchar* CDSJpegImage::CDSJpegImage_GetTypeInfo() {
     return reinterpret_cast<uchar*>(&DAT_004b7d80);
 }
 // !FUNC 0x00431d50 END
@@ -127,47 +127,47 @@ uchar CDSJpegImage::FUN_00431d60() { return 1; }
 
 // !FUNC 0x00431d70 BEGIN
 /* 431D70-431D78 00008 */
-uchar CDSJpegImage::FUN_00431d70(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::CDSJpegImage_ScalarDeletingDtor_thunk_Sub4(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00431d70 END
 
 // !FUNC 0x00431d80 BEGIN
 /* 431D80-431D88 00008 */
-uchar CDSJpegImage::FUN_00431d80(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::CDSJpegImage_ScalarDeletingDtor_thunk_Sub4c(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00431d80 END
 
 // !FUNC 0x00431da0 BEGIN
 /* 431DA0-431DA8 00008 */
-uchar CDSJpegImage::FUN_00431da0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::CDSJpegImage_ScalarDeletingDtorThunk(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00431da0 END
 
 // !FUNC 0x00431db0 BEGIN
 /* 431DB0-431DB8 00008 */
-uchar CDSJpegImage::FUN_00431db0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::CDSJpegImage_ScalarDeletingDtor_thunk(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00431db0 END
 
 // !FUNC 0x00431de0 BEGIN
 /* 431DE0-431E4E 0006E */
-uchar CDSJpegImage::FUN_00431de0(uint* param_1) { STUB_BODY(); return 0; }
+void CDSJpegImage::CDSJpegImage_dtor(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00431de0 END
 
 // !FUNC 0x00431e50 BEGIN
 /* 431E50-432027 001D7 */
-uchar CDSJpegImage::FUN_00431e50(uint param_1, CPoemScroller* param_2, int param_3) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::CompressFromImage(uint param_1, CPoemScroller* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00431e50 END
 
 // !FUNC 0x00432030 BEGIN
 /* 432030-432066 00036 */
-uchar CDSJpegImage::FUN_00432030(uint param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::CDSJpegImage_Save(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00432030 END
 
 // !FUNC 0x00432090 BEGIN
 /* 432090-4320AE 0001E */
-void* CDSJpegImage::FUN_00432090(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSJpegImage::CDSJpegImage_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00432090 END
 
 // !FUNC 0x0045ecc0 BEGIN
 /* 45ECC0-45ED7E 000BE */
-uchar CDSJpegImage::FUN_0045ecc0(int* param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jpeg_CreateCompress(int* param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0045ecc0 END
 
 // !FUNC 0x0045ed80 BEGIN
@@ -194,17 +194,17 @@ uchar CDSJpegImage::FUN_0045ed80(int param_1, uchar param_2) {
 
 // !FUNC 0x0045edf0 BEGIN
 /* 45EDF0-45EEDE 000EE */
-uchar CDSJpegImage::FUN_0045edf0(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jpeg_finish_compress(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0045edf0 END
 
 // !FUNC 0x0045eee0 BEGIN
 /* 45EEE0-45EF5A 0007A */
-uchar CDSJpegImage::FUN_0045eee0(int* param_1, char param_2) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jpeg_start_compress(int* param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0045eee0 END
 
 // !FUNC 0x0045ef60 BEGIN
 /* 45EF60-45EFDB 0007B */
-uchar CDSJpegImage::FUN_0045ef60(int* param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jpeg_write_scanlines(int* param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0045ef60 END
 
 // !FUNC 0x0045efe0 BEGIN
@@ -286,7 +286,7 @@ uchar CDSJpegImage::FUN_0045f1b0(int* param_1, int param_2, char param_3) {
 /* 45F1F0-45F228 00038 */
 // libjpeg-6b: jpeg_quality_scaling (jcparam.c) -- convert a user-friendly
 // quality rating in [1..100] into a percentage scaling factor.
-int CDSJpegImage::FUN_0045f1f0(int param_1) {
+int CDSJpegImage::jpeg_quality_scaling(int param_1) {
     if (param_1 <= 0) param_1 = 1;
     if (param_1 > 100) param_1 = 100;
     if (param_1 < 50)
@@ -301,8 +301,8 @@ int CDSJpegImage::FUN_0045f1f0(int param_1) {
 /* 45F230-45F251 00021 */
 // libjpeg-6b: jpeg_set_quality (jcparam.c) -- public 0..100 quality entry
 // point.  Converts to a linear scaling and forwards to jpeg_set_linear_quality.
-uchar CDSJpegImage::FUN_0045f230(int* param_1, int param_2, char param_3) {
-    int scaled = CDSJpegImage::FUN_0045f1f0(param_2);
+uchar CDSJpegImage::jpeg_set_quality(int* param_1, int param_2, char param_3) {
+    int scaled = CDSJpegImage::jpeg_quality_scaling(param_2);
     CDSJpegImage::FUN_0045f1b0(param_1, scaled, param_3);
     return 0;
 }
@@ -310,12 +310,12 @@ uchar CDSJpegImage::FUN_0045f230(int* param_1, int param_2, char param_3) {
 
 // !FUNC 0x0045f260 BEGIN
 /* 45F260-45F304 000A4 */
-uchar CDSJpegImage::FUN_0045f260(int* param_1, void* param_2) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jpeg_add_quant_table(int* param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0045f260 END
 
 // !FUNC 0x0045f310 BEGIN
 /* 45F310-45F362 00052 */
-uchar CDSJpegImage::FUN_0045f310() { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jpeg_add_default_quant_tables() { STUB_BODY(); return 0; }
 // !FUNC 0x0045f310 END
 
 // !FUNC 0x0045f370 BEGIN
@@ -333,7 +333,7 @@ uchar CDSJpegImage::FUN_0045f310() { STUB_BODY(); return 0; }
     cp_->dc_tbl_no      = (dt_);                                       \
     cp_->ac_tbl_no      = (at_);                                       \
 } while (0)
-uchar CDSJpegImage::FUN_0045f370(int* param_1, int param_2) {
+uchar CDSJpegImage::jpeg_set_colorspace(int* param_1, int param_2) {
     JpegCompress_layout* cinfo = reinterpret_cast<JpegCompress_layout*>(param_1);
     JpegCompInfo_layout* comps = reinterpret_cast<JpegCompInfo_layout*>(cinfo->comp_info);
 
@@ -412,20 +412,20 @@ uchar CDSJpegImage::FUN_0045f370(int* param_1, int param_2) {
 // libjpeg-6b: jpeg_default_colorspace (jcparam.c).  Maps cinfo->in_color_space
 // (param_1[10]) to a sensible jpeg_color_space and dispatches to
 // jpeg_set_colorspace.  Note: JCS_RGB and JCS_YCbCr both map to JCS_YCbCr.
-uchar CDSJpegImage::FUN_0045f660(int* param_1) {
+uchar CDSJpegImage::jpeg_default_colorspace(int* param_1) {
     JpegCompress_layout* cinfo = reinterpret_cast<JpegCompress_layout*>(param_1);
     switch (cinfo->in_color_space) {
     case 0: /* JCS_UNKNOWN */
-        CDSJpegImage::FUN_0045f370(param_1, 0); break;
+        CDSJpegImage::jpeg_set_colorspace(param_1, 0); break;
     case 1: /* JCS_GRAYSCALE */
-        CDSJpegImage::FUN_0045f370(param_1, 1); break;
+        CDSJpegImage::jpeg_set_colorspace(param_1, 1); break;
     case 2: /* JCS_RGB */
     case 3: /* JCS_YCbCr */
-        CDSJpegImage::FUN_0045f370(param_1, 3); break;
+        CDSJpegImage::jpeg_set_colorspace(param_1, 3); break;
     case 4: /* JCS_CMYK */
-        CDSJpegImage::FUN_0045f370(param_1, 4); break;
+        CDSJpegImage::jpeg_set_colorspace(param_1, 4); break;
     case 5: /* JCS_YCCK */
-        CDSJpegImage::FUN_0045f370(param_1, 5); break;
+        CDSJpegImage::jpeg_set_colorspace(param_1, 5); break;
     default:
         *reinterpret_cast<int*>(reinterpret_cast<int>(cinfo->err) + 8) = 9;
         (*reinterpret_cast<void(__cdecl**)(int*)>(*reinterpret_cast<int*>(cinfo->err)))(
@@ -440,8 +440,8 @@ uchar CDSJpegImage::FUN_0045f660(int* param_1) {
 // libjpeg-6b: jpeg_set_defaults (jcparam.c).  Apply colorspace-independent
 // defaults to a fresh compress context, lazily allocate comp_info, then
 // dispatch through jpeg_default_colorspace.  std_huff_tables is implemented
-// here in FUN_0045f310.
-uchar CDSJpegImage::FUN_0045f6e0(int* param_1) {
+// here in jpeg_add_default_quant_tables.
+uchar CDSJpegImage::jpeg_set_defaults(int* param_1) {
     JpegCompress_layout* cinfo = reinterpret_cast<JpegCompress_layout*>(param_1);
 
     if (cinfo->global_state != 100) {
@@ -456,8 +456,8 @@ uchar CDSJpegImage::FUN_0045f6e0(int* param_1) {
                 *reinterpret_cast<int*>(cinfo->mem)))(param_1, 0, 0x348));
     }
     cinfo->data_precision = 8;
-    CDSJpegImage::FUN_0045f230(param_1, 75, 1);
-    /* TODO: std_huff_tables(cinfo) -- FUN_0045f310's Ghidra signature
+    CDSJpegImage::jpeg_set_quality(param_1, 75, 1);
+    /* TODO: std_huff_tables(cinfo) -- jpeg_add_default_quant_tables's Ghidra signature
        currently lacks the cinfo parameter, so we can't call it from a
        static helper.  Patch this once the namespace/argument detection is
        fixed; the binary call site is what objdiff is looking for. */
@@ -484,19 +484,19 @@ uchar CDSJpegImage::FUN_0045f6e0(int* param_1) {
     cinfo->X_density = 1;
     cinfo->Y_density = 1;
 
-    CDSJpegImage::FUN_0045f660(param_1);
+    CDSJpegImage::jpeg_default_colorspace(param_1);
     return 0;
 }
 // !FUNC 0x0045f6e0 END
 
 // !FUNC 0x00460d60 BEGIN
 /* 460D60-460DB3 00053 */
-uchar CDSJpegImage::FUN_00460d60(int param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jinit_marker_writer(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00460d60 END
 
 // !FUNC 0x00460dc0 BEGIN
 /* 460DC0-460E75 000B5 */
-uchar CDSJpegImage::FUN_00460dc0(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jinit_compress_master(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00460dc0 END
 
 // !FUNC 0x00467600 BEGIN
@@ -511,7 +511,7 @@ uchar CDSJpegImage::FUN_00467dc0(int param_1, char param_2) { STUB_BODY(); retur
 
 // !FUNC 0x00468d70 BEGIN
 /* 468D70-468DC4 00054 */
-uchar CDSJpegImage::FUN_00468d70(int param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jinit_huff_encoder(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00468d70 END
 
 // !FUNC 0x00469900 BEGIN
@@ -521,7 +521,7 @@ uchar CDSJpegImage::FUN_00469900(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0046a750 BEGIN
 /* 46A750-46A7E2 00092 */
-uchar CDSJpegImage::FUN_0046a750(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jpeg_jinit_inverse_dct(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0046a750 END
 
 // !FUNC 0x0046abd0 BEGIN
@@ -541,17 +541,17 @@ uchar CDSJpegImage::FUN_0046b590(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0046bbc0 BEGIN
 /* 46BBC0-46BDC1 00201 */
-uchar CDSJpegImage::FUN_0046bbc0(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jinit_color_converter(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0046bbc0 END
 
 // !FUNC 0x0046bdf0 BEGIN
 /* 46BDF0-46BFC8 001D8 */
-uchar CDSJpegImage::FUN_0046bdf0() { STUB_BODY(); return 0; }
+uchar CDSJpegImage::initial_setup() { STUB_BODY(); return 0; }
 // !FUNC 0x0046bdf0 END
 
 // !FUNC 0x0046bfd0 BEGIN
 /* 46BFD0-46C3CB 003FB */
-uchar CDSJpegImage::FUN_0046bfd0() { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jpeg_validate_script() { STUB_BODY(); return 0; }
 // !FUNC 0x0046bfd0 END
 
 // !FUNC 0x0046c8f0 BEGIN

@@ -36,32 +36,32 @@ uchar* CDSDsmFile::GetClassRegistry() {
 
 // !FUNC 0x00428dc0 BEGIN
 /* 428DC0-428DC8 00008 */
-uchar CDSDsmFile::FUN_00428dc0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSDsmFile_ScalarDeletingDtor_thunk_Sub30(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428dc0 END
 
 // !FUNC 0x00428de0 BEGIN
 /* 428DE0-428DE8 00008 */
-uchar CDSDsmFile::FUN_00428de0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSDsmFile_ScalarDeletingDtor_thunk_Sub38(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428de0 END
 
 // !FUNC 0x00428df0 BEGIN
 /* 428DF0-428DF8 00008 */
-uchar CDSDsmFile::FUN_00428df0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSDsmFile_ScalarDeletingDtor_thunk(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428df0 END
 
 // !FUNC 0x00428e00 BEGIN
 /* 428E00-428E08 00008 */
-uchar CDSDsmFile::FUN_00428e00(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSDsmFile_ScalarDeletingDtor_thunk_Sub3c(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428e00 END
 
 // !FUNC 0x00428e10 BEGIN
 /* 428E10-428E18 00008 */
-uchar CDSDsmFile::FUN_00428e10(int param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSChain_AdjustThisOffset_thunk_Sub34(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428e10 END
 
 // !FUNC 0x00428e30 BEGIN
 /* 428E30-428E38 00008 */
-uchar CDSDsmFile::FUN_00428e30(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSDsmFile_ScalarDeletingDtor_thunk_Sub4(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428e30 END
 
 // !FUNC 0x00428e40 BEGIN
@@ -71,37 +71,37 @@ uchar CDSDsmFile::HandleRefcountRelease(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00428e70 BEGIN
 /* 428E70-428E78 00008 */
-uchar CDSDsmFile::FUN_00428e70(int param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSDsmFile_HandleRefcountRelease(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428e70 END
 
 // !FUNC 0x00428e80 BEGIN
 /* 428E80-428E88 00008 */
-uchar CDSDsmFile::FUN_00428e80(int param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSDsmFile_HandleRefcountRelease_thunk_Sub3c(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428e80 END
 
 // !FUNC 0x00428e90 BEGIN
 /* 428E90-428E98 00008 */
-uchar CDSDsmFile::FUN_00428e90(int param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSDsmFile_HandleRefcountRelease_thunk_Sub4(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428e90 END
 
 // !FUNC 0x00428ea0 BEGIN
 /* 428EA0-428EA8 00008 */
-uchar CDSDsmFile::FUN_00428ea0(int param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSDsmFile_HandleRefcountRelease_thunk_Sub30(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428ea0 END
 
 // !FUNC 0x00428eb0 BEGIN
 /* 428EB0-428EB8 00008 */
-uchar CDSDsmFile::FUN_00428eb0(int param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSDsmFile_HandleRefcountRelease_thunk_Sub38(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428eb0 END
 
 // !FUNC 0x00428ec0 BEGIN
 /* 428EC0-428F77 000B7 */
-uchar CDSDsmFile::HandleDestructInstance(uint* param_1) { STUB_BODY(); return 0; }
+void CDSDsmFile::HandleDestructInstance(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00428ec0 END
 
 // !FUNC 0x00428f80 BEGIN
 /* 428F80-428FE4 00064 */
-uchar CDSDsmFile::HandleOpenStream(int* param_1) { STUB_BODY(); return 0; }
+void CDSDsmFile::HandleOpenStream(CDSFilterStream* param_1) { STUB_BODY(); }
 // !FUNC 0x00428f80 END
 
 // !FUNC 0x00428ff0 BEGIN
@@ -141,12 +141,12 @@ uchar CDSDsmFile::HandleAcquireWriteThunk(int param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x00433010 BEGIN
 /* 433010-433018 00008 */
-uchar CDSDsmFile::FUN_00433010(int param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::CDSChain_AdjustThisOffset_ThisMinus38(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433010 END
 
 // !FUNC 0x00439ac0 BEGIN
 /* 439AC0-439B3A 0007A */
-CDSObject* CDSDsmFile::InitializeChildObject(int param_1) { STUB_BODY(); return 0; }
+CDSObject* CDSDsmFile::InitializeChildObject(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00439ac0 END
 
 // !FUNC 0x0043bde0 BEGIN
@@ -171,12 +171,12 @@ uchar CDSDsmFile::Catch_0043c360() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043c450 BEGIN
 /* 43C450-43C54C 000FC */
-uchar CDSDsmFile::HandleQueueResize(int param_1) { STUB_BODY(); return 0; }
+void CDSDsmFile::HandleQueueResize(int param_1) { STUB_BODY(); }
 // !FUNC 0x0043c450 END
 
 // !FUNC 0x0043c620 BEGIN
 /* 43C620-43C6D2 000B2 */
-uchar CDSDsmFile::HandleQueueWrite(void* param_1, void* param_2) { STUB_BODY(); return 0; }
+void CDSDsmFile::HandleQueueWrite(void* param_1, uint param_2) { STUB_BODY(); }
 // !FUNC 0x0043c620 END
 
 // !FUNC 0x0043c6d2 BEGIN
@@ -186,7 +186,7 @@ uchar CDSDsmFile::Catch_0043c6d2() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043c6f0 BEGIN
 /* 43C6F0-43C79A 000AA */
-uchar CDSDsmFile::HandleQueueAppendStream(int* param_1, int param_2) { STUB_BODY(); return 0; }
+void CDSDsmFile::HandleQueueAppendStream(int* param_1, int param_2) { STUB_BODY(); }
 // !FUNC 0x0043c6f0 END
 
 // !FUNC 0x0043c79a BEGIN

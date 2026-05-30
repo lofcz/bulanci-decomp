@@ -12,17 +12,17 @@ uchar CChatList::FUN_004058f0(int param_1, int param_2) { STUB_BODY(); return 0;
 
 // !FUNC 0x00405b10 BEGIN
 /* 405B10-405B30 00020 */
-uchar CChatList::FUN_00405b10(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CChatList::CChatList_SetHorizontalExtent(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00405b10 END
 
 // !FUNC 0x00405ca0 BEGIN
 /* 405CA0-405DC9 00129 */
-uint CChatList::FUN_00405ca0(int param_1) { STUB_BODY(); return 0; }
+uint CChatList::CChatList_ScrollToItem(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00405ca0 END
 
 // !FUNC 0x00405ea0 BEGIN
 /* 405EA0-405FB2 00112 */
-uchar CChatList::FUN_00405ea0(void* param_1) { STUB_BODY(); return 0; }
+uchar CChatList::RecalculateHorizontalExtent(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00405ea0 END
 
 // !FUNC 0x0040d010 BEGIN

@@ -43,7 +43,7 @@ void __cdecl _Globals::TriggerBankSample(
 - **`bankResourcePtr`**: Pointer to the loaded `CDSAudioBankIndex` object. If `0`, it defaults to the main app audio bank index stored at `g_pApp + 0x4c0` (Resource `0x10004`).
 - **`slot`**: The index mapping to the sample within the sound bank.
 - **`preDelay`**: Delay before playing (always `0` at call sites).
-- **`eventTarget`**: Address of an `IDSEventHandler` sub-object. If provided, the audio player posts event ID `1` to this handler upon playback completion (used for hotkey exits, menu animations, etc.). If `0`, the SFX plays with no completion callback.
+- **`eventTarget`**: `IDSEventHandler*` stored on `CDSAudioPlayer` at `+0x18`. On playback end, `CDSAudioPlayer_OnPlaybackTick` posts WM `0x200`/1 to `CDSDirectSound`’s view facet; `CDSDirectSound_OnPlaybackCompleteMessage@0x0043cdc0` reads `+0x18` and enqueues to the handler (e.g. `CMenu_OnEvent(1)` after `DispatchHotkey` X/F12). If `0`, no completion callback.
 - **`looping`**: A boolean flag determining whether the sample loops or is standard (usually passed as `1` / `'\x01'` to enable proper buffer arming).
 
 ---

@@ -6,25 +6,25 @@
 class CHelpScript {
 public:
 	// !DECL 0x004215e0 BEGIN
-	/* 4215E0 */ CDSScript* ctor(CDSScript* param_1);
+	/* 4215E0 */ void* ctor(void* param_1);
 	// !DECL 0x004215e0 END
 	// !DECL 0x00421680 BEGIN
-	/* 421680 */ uchar* FUN_00421680();
+	/* 421680 */ uchar* CHelpScript_GetClassTable();
 	// !DECL 0x00421680 END
 	// !DECL 0x00421690 BEGIN
-	/* 421690 */ uchar FUN_00421690(uchar param_1);
+	/* 421690 */ uchar CHelpScript_ScalarDeletingDtor_thunk(uchar param_1);
 	// !DECL 0x00421690 END
 	// !DECL 0x004216a0 BEGIN
-	/* 4216A0 */ uchar FUN_004216a0(uchar param_1);
+	/* 4216A0 */ uchar CHelpScript_ScalarDeletingDtor_thunk_Sub438(uchar param_1);
 	// !DECL 0x004216a0 END
 	// !DECL 0x004216b0 BEGIN
-	/* 4216B0 */ uchar FUN_004216b0(uchar param_1);
+	/* 4216B0 */ uchar CHelpScript_AdjustOffsetDtor(uchar param_1);
 	// !DECL 0x004216b0 END
 	// !DECL 0x004216f0 BEGIN
-	/* 4216F0 */ uchar FUN_004216f0(uint* param_1);
+	/* 4216F0 */ void CHelpScript_dtor(void* param_1);
 	// !DECL 0x004216f0 END
 	// !DECL 0x00421920 BEGIN
-	/* 421920 */ void* FUN_00421920(uchar param_1);
+	/* 421920 */ void* CHelpScript_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00421920 END
 	// !DECL 0x00421940 BEGIN
 	/* 421940 */ static uchar HelpBuildStaticTextAuto(int param_1);

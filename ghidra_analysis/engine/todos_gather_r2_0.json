@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1,
+    "title": "Field-name CGame scheduler embed +0x04..+0x1b",
+    "types": ["CGame", "CDSUpdatedItem"],
+    "addresses": ["0x00414a80", "0x00416030"],
+    "ghidra_actions": ["modify_struct_field", "create_struct", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CGame.md",
+      "ghidra_analysis/engine/struct_recovery/CDSUpdatedItem.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "critical",
+    "source": "blocker",
+    "supersedes_todo_id": 1
+  },
+  {
+    "id": 2,
+    "title": "Name CDSApp MI gaps +0x08..+0x67 on CBulanci.app",
+    "types": ["CDSApp", "CBulanci"],
+    "addresses": ["0x0042b170", "0x004026f0", "0x0042c480"],
+    "ghidra_actions": ["modify_struct_field", "rename_data", "set_function_prototype"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSApp.md",
+      "ghidra_analysis/engine/struct_recovery/CBulanci.md",
+      "ghidra_analysis/engine/struct_recovery/batch_01_followup_summary.md",
+      "ghidra_analysis/engine/app_shell.md"
+    ],
+    "priority": "critical",
+    "source": "handoff",
+    "supersedes_todo_id": 2
+  },
+  {
+    "id": 3,
+    "title": "Retype CGameView spatial/event helpers as CGameView*",
+    "types": ["CGameView", "CBitmap"],
+    "addresses": ["0x00416f50", "0x0041acf0", "0x00416590"],
+    "ghidra_actions": ["set_function_prototype", "set_parameter_type", "rename_function"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CGameView.md",
+      "ghidra_analysis/engine/struct_recovery/batch_03_followup_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "high",
+    "source": "handoff",
+    "supersedes_todo_id": 3
+  },
+  {
+    "id": 4,
+    "title": "Name CDSScript VM header dwords +0x08..+0x27",
+    "types": ["CDSScript"],
+    "addresses": ["0x00438390", "0x00438380", "0x00438b30"],
+    "ghidra_actions": ["modify_struct_field", "rename_data", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSScript.md",
+      "ghidra_analysis/engine/struct_recovery/batch_02_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "high",
+    "source": "handoff",
+    "supersedes_todo_id": 4
+  },
+  {
+    "id": 5,
+    "title": "Wire CAnim.track_manager CDSTrackVector @ +0xc4",
+    "types": ["CAnim", "CDSVideoPlayer", "CDSTrackVector"],
+    "addresses": ["0x00439c70", "0x00419940", "0x004164f0"],
+    "ghidra_actions": ["modify_struct_field", "create_struct", "set_function_prototype"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CAnim.md",
+      "ghidra_analysis/engine/struct_recovery/CDSVideoPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/batch_03_followup_summary.md"
+    ],
+    "priority": "high",
+    "source": "blocker",
+    "supersedes_todo_id": 5
+  },
+  {
+    "id": 6,
+    "title": "Xref CDeath field_100/field_104 and rename tail",
+    "types": ["CDeath", "CAnim"],
+    "addresses": ["0x0041a860", "0x00419a00", "0x00417a70", "0x0041fa21"],
+    "ghidra_actions": ["modify_struct_field", "rename_data", "search_instructions", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDeath.md",
+      "ghidra_analysis/engine/struct_recovery/batch_06_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_05_followup_summary.md"
+    ],
+    "priority": "high",
+    "source": "blocker",
+    "supersedes_todo_id": 6
+  },
+  {
+    "id": 7,
+    "title": "Resolve CGame field_4b4 and field_4c4 semantics",
+    "types": ["CGame", "CBulanci"],
+    "addresses": ["0x004026f0", "0x00402c8a", "0x00402761"],
+    "ghidra_actions": ["modify_struct_field", "rename_data", "search_instructions"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CGame.md",
+      "ghidra_analysis/engine/struct_recovery/CBulanci.md",
+      "ghidra_analysis/engine/struct_recovery/batch_00_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_01_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 7
+  },
+  {
+    "id": 8,
+    "title": "Name CBulAnim CDSView drawable prefix +0x08..+0x67",
+    "types": ["CBulAnim", "CDSChained", "CDSView"],
+    "addresses": ["0x004104f0", "0x0042c480", "0x0040b050"],
+    "ghidra_actions": ["modify_struct_field", "rename_data", "create_struct"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CBulAnim.md",
+      "ghidra_analysis/engine/struct_recovery/CDSChained.md",
+      "ghidra_analysis/engine/struct_recovery/batch_04_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 8
+  },
+  {
+    "id": 9,
+    "title": "Document CDSObject image scheduler overlay +0x04..+0x38",
+    "types": ["CDSObject", "CDSImage", "CDSUpdatedItem"],
+    "addresses": ["0x0042563a", "0x00439c86", "0x004360d0"],
+    "ghidra_actions": ["modify_struct_field", "set_decompiler_comment", "create_struct"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSObject.md",
+      "ghidra_analysis/engine/struct_recovery/CDSImage.md",
+      "ghidra_analysis/engine/struct_recovery/batch_00_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source": "blocker",
+    "supersedes_todo_id": 9
+  },
+  {
+    "id": 10,
+    "title": "Field-split CGunMouse embedded CDSImage @ +0x10..+0x190",
+    "types": ["CGunMouse", "CDSImage"],
+    "addresses": ["0x00426060", "0x00424610", "0x00425730"],
+    "ghidra_actions": ["modify_struct_field", "create_struct", "set_function_prototype"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CGunMouse.md",
+      "ghidra_analysis/engine/struct_recovery/CDSImage.md",
+      "ghidra_analysis/engine/struct_recovery/batch_08_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_09_summary.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 10
+  }
+]

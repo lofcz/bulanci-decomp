@@ -9,7 +9,7 @@ public:
 	/* 40ADC0 */ uchar CSessionList_OnEvent(short param_1, uint param_2, uint param_3);
 	// !DECL 0x0040adc0 END
 	// !DECL 0x0040c2d0 BEGIN
-	/* 40C2D0 */ CWindow* CSessionList_BuildDialog(CWindow* param_1);
+	/* 40C2D0 */ void* CSessionList_BuildDialog(void* param_1);
 	// !DECL 0x0040c2d0 END
 	// !DECL 0x0040c530 BEGIN
 	/* 40C530 */ uchar* CSessionList_GetTypeDescriptor();

@@ -1,0 +1,585 @@
+[
+  {
+    "id": 0,
+    "title": "CDSJpegImage",
+    "one_liner": "`CDSJpegImage`: registry factory `0x0043c160` not disassembled; dual meaning of `+0x60` (`0x4b` class id vs JPEG quality 75 in Save)",
+    "source_batches": [
+      32
+    ],
+    "priority": "high",
+    "structs": [
+      "CDSJpegImage"
+    ],
+    "acceptance": "Prove or document UNK in CDSJpegImage.md with func@addr evidence"
+  },
+  {
+    "id": 1,
+    "title": "CGame",
+    "one_liner": "- Deferred: Ghidra `CGame` is still 872 B vs embedded span `0x248` (`CBulanci.md`). Tail field remains `void *` in Ghidra; docs note semantic `CGame*` with xref proof at `+0x70`.",
+    "source_batches": [
+      13
+    ],
+    "priority": "high",
+    "structs": [
+      "CGame",
+      "CBulanci"
+    ],
+    "acceptance": "Resolve in Ghidra with xref evidence: - Deferred: Ghidra `CGame` is still 872 B vs embedded span `0x248` (`CBulanci.md`). Tail field remains `void *` in Ghidr"
+  },
+  {
+    "id": 2,
+    "title": "CDSAudioBank",
+    "one_liner": "CDSAudioBank: Exact relationship `CDSAudioBank` vs `CDSWavStream` C++ types on class-43 instances (shared `0x40` alloc, different vtable sets at factory vs `CDSAudioBank_Ctor`).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CDSAudioBank"
+    ],
+    "acceptance": "Update CDSAudioBank.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 3,
+    "title": "CDSJpegImage",
+    "one_liner": "`CDSJpegImage`: registry slot @ `0x0043c160` is `0x24`-byte factory (not this type); `+0x60` dual role (class id constant vs default JPEG quality) \u2014 do not rename to `m_jpegQuality` without new xrefs.",
+    "source_batches": [
+      25
+    ],
+    "priority": "high",
+    "structs": [
+      "CDSJpegImage"
+    ],
+    "acceptance": "Prove or document UNK in CDSJpegImage.md with func@addr evidence"
+  },
+  {
+    "id": 4,
+    "title": "CDSFlxFile",
+    "one_liner": "CDSFlxFile: `field_2c` (zeroed in factory; read in `DecodeFrame` on `+0x04` face).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CDSFlxFile"
+    ],
+    "acceptance": "Update CDSFlxFile.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 5,
+    "title": "CMsgDialog",
+    "one_liner": "`CMsgDialog` class factory id at `CMsgDialog_GetClassTable@0x0040b760`.",
+    "source_batches": [
+      13
+    ],
+    "priority": "high",
+    "structs": [
+      "CMsgDialog",
+      "CMsgDialog_GetClassTable"
+    ],
+    "acceptance": "Prove or document UNK in CMsgDialog.md with func@addr evidence"
+  },
+  {
+    "id": 6,
+    "title": "CMsgDialog",
+    "one_liner": "RTTI class ids (`0x808` pause, `CMsgDialog` factory table).",
+    "source_batches": [
+      15
+    ],
+    "priority": "high",
+    "structs": [
+      "CMsgDialog"
+    ],
+    "acceptance": "Prove or document UNK in CMsgDialog.md with func@addr evidence"
+  },
+  {
+    "id": 7,
+    "title": "CPauseDlg_Allocate",
+    "one_liner": "- Separate factory path: `CPauseDlg_Allocate@0x0040f090` (DATA xref class registration only).",
+    "source_batches": [
+      13
+    ],
+    "priority": "high",
+    "structs": [
+      "CPauseDlg_Allocate"
+    ],
+    "acceptance": "Resolve in Ghidra with xref evidence: - Separate factory path: `CPauseDlg_Allocate@0x0040f090` (DATA xref class registration only)."
+  },
+  {
+    "id": 8,
+    "title": "CDSAudioBank",
+    "one_liner": "CDSAudioBank: Semantics of `dwField_20` / `dwField_38` (factory zero/init only; no post-deserialize consumer in batch scope).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CDSAudioBank"
+    ],
+    "acceptance": "Update CDSAudioBank.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 9,
+    "title": "CDSAudioVideoPlayer",
+    "one_liner": "CDSAudioVideoPlayer: Standalone heap `CDSVideoPlayer` factory path vs this embedded `0x48`-byte subobject (same ctor/dtor helpers).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CDSAudioVideoPlayer"
+    ],
+    "acceptance": "Update CDSAudioVideoPlayer.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 10,
+    "title": "CDSException",
+    "one_liner": "CDSException: Replacing the 1-byte `CDSException` placeholder with an inheritable Ghidra struct (MCP `create_struct` reports \"already exists\"; inline script path failed).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CDSException"
+    ],
+    "acceptance": "Update CDSException.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 11,
+    "title": "CDSFont",
+    "one_liner": "CDSFont: Full `CDSImage` field map for `+0x08..+0x4b` once merged with `CDSImage.md`.",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CDSFont"
+    ],
+    "acceptance": "Update CDSFont.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 12,
+    "title": "CDSImageMouse",
+    "one_liner": "CDSImageMouse: Relationship to `CGunMouse` (`0x218`): menu cursor is a separate class; `CGunMouse` does not use this factory (`CGunMouse_CreateObject` \u2192 `0x218`).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CDSImageMouse"
+    ],
+    "acceptance": "Update CDSImageMouse.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 13,
+    "title": "CDSJpegImage",
+    "one_liner": "CDSJpegImage: Registry factory @ `0x0043c160` \u2014 not yet a Ghidra function; may differ from `CDSJpegImage_CreateObject` @ `0x00432070`.",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CDSJpegImage"
+    ],
+    "acceptance": "Update CDSJpegImage.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 14,
+    "title": "CDSMouse",
+    "one_liner": "CDSMouse: Whether heap `CDSMouse` instances are ever used at runtime vs factory serving as abstract base registration only (derived classes bypass this factory).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CDSMouse"
+    ],
+    "acceptance": "Update CDSMouse.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 15,
+    "title": "CDSStrmResInfo",
+    "one_liner": "CDSStrmResInfo: `loaderAux` consumer (factory clears; not read in `Serialize`).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CDSStrmResInfo"
+    ],
+    "acceptance": "Update CDSStrmResInfo.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 16,
+    "title": "CMsgDialog",
+    "one_liner": "CMsgDialog: Class factory table `CMsgDialog_GetClassTable@0x0040b760` \u2192 `&DAT_004b3524` (class id not decoded).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CMsgDialog"
+    ],
+    "acceptance": "Update CMsgDialog.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 17,
+    "title": "CPauseDlg",
+    "one_liner": "CPauseDlg: RTTI class id `0x808`; factory table `&DAT_004b367c` (`CPauseDlg_GetClassTable@0x0040be10`).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CPauseDlg"
+    ],
+    "acceptance": "Update CPauseDlg.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 18,
+    "title": "CDSQueueStream",
+    "one_liner": "CDSQueueStream: Purpose of standalone-only dword at `+0x20` when `sizeof` is `0x24` (no Read/Seek/Set xref).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CDSQueueStream"
+    ],
+    "acceptance": "Update CDSQueueStream.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 19,
+    "title": "CListBoxItem",
+    "one_liner": "Ghidra `/CListBoxItem` placeholder vs `CListBoxItemRow` naming (manual rename/merge when Java scripts compile).",
+    "source_batches": [
+      16
+    ],
+    "priority": "high",
+    "structs": [
+      "CListBoxItem",
+      "CListBoxItemRow"
+    ],
+    "acceptance": "Prove or document UNK in CListBoxItem.md with func@addr evidence"
+  },
+  {
+    "id": 20,
+    "title": "CBulanci",
+    "one_liner": "CBulanci: Interior of embedded `CGame` (`0x248` bytes) \u2014 Ghidra\u2019s existing `CGame` type is 872 bytes and must not be used as-is; use `byte[584]` until `CGame` batch recovers it.",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CBulanci"
+    ],
+    "acceptance": "Update CBulanci.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 21,
+    "title": "CPauseDlg",
+    "one_liner": "CPauseDlg: `pGame` left as `void *` until `CGame` struct recovery batch (872 B Ghidra placeholder must not be applied).",
+    "source_batches": [],
+    "priority": "high",
+    "structs": [
+      "CPauseDlg"
+    ],
+    "acceptance": "Update CPauseDlg.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 22,
+    "title": "CDSMpxDecoder",
+    "one_liner": "CDSMpxDecoder: MI vtables (proven on `CDSMpx`, not separate alloc): `CDSMpx_dtor@0x00432f40` restores `param_1[1]=0x4872f4` (`+0x04`, 8-slot audio face per `mpx_audio_format.md` \u00a71) and `param_1[6]=0x4872e0` (`+0x18`). `AttachBitstream` only swaps `+0x00` to the 3-slot `CDSMpxDec",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSMpxDecoder"
+    ],
+    "acceptance": "Update CDSMpxDecoder.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 23,
+    "title": "CGame",
+    "one_liner": "`pGame` Ghidra type until `CGame` batch recovers `0x248` layout.",
+    "source_batches": [
+      13
+    ],
+    "priority": "high",
+    "structs": [
+      "CGame"
+    ],
+    "acceptance": "Prove or document UNK in CGame.md with func@addr evidence"
+  },
+  {
+    "id": 24,
+    "title": "CDSObject",
+    "one_liner": "`CDSObject`: image-variant `scheduler`/`CDSImage` overlay, `+0x34` play flags, `+0x48..+0x4f` vtable patch naming",
+    "source_batches": [
+      0
+    ],
+    "priority": "med",
+    "structs": [
+      "CDSObject",
+      "CDSImage"
+    ],
+    "acceptance": "Prove or document UNK in CDSObject.md with func@addr evidence"
+  },
+  {
+    "id": 25,
+    "title": "CDSUpdatedItem",
+    "one_liner": "`CDSUpdatedItem+0x00` on hosts without facet vtable write (e.g. `CAdvertising+0x70`).",
+    "source_batches": [
+      42
+    ],
+    "priority": "med",
+    "structs": [
+      "CDSUpdatedItem",
+      "CAdvertising"
+    ],
+    "acceptance": "Prove or document UNK in CDSUpdatedItem.md with func@addr evidence"
+  },
+  {
+    "id": 26,
+    "title": "CBulanci",
+    "one_liner": "`ODSImage::pOwner` still generic `pointer` (owner is `CBulanci*` in `SetOwner` decompile \u2014 typing deferred).",
+    "source_batches": [
+      43
+    ],
+    "priority": "med",
+    "structs": [
+      "CBulanci"
+    ],
+    "acceptance": "Prove or document UNK in CBulanci.md with func@addr evidence"
+  },
+  {
+    "id": 27,
+    "title": "CDSApiException",
+    "one_liner": "CDSApiException: Deferred: formal `CDSException` Ghidra struct to deduplicate with siblings \u2014 prefix `0x00..0x3b` matches `CDSSimpleException` / `CDSException_InitFields` (see batch 36 `CDSSimpleException.md`, batch 26 follow-up); manifest batch 29.",
+    "source_batches": [
+      26,
+      29,
+      36
+    ],
+    "priority": "med",
+    "structs": [
+      "CDSApiException"
+    ],
+    "acceptance": "Update CDSApiException.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 28,
+    "title": "(misc)",
+    "one_liner": "`pSubObjStash@+0x3c` type; exact MI placement of `-0x18` / `-0x38` bases beyond vtable xrefs.",
+    "source_batches": [
+      35
+    ],
+    "priority": "med",
+    "structs": [
+      "(misc)"
+    ],
+    "acceptance": "Prove or document UNK in (misc).md with func@addr evidence"
+  },
+  {
+    "id": 29,
+    "title": "CAnim",
+    "one_liner": "CAnim: `+0x90..+0x97` \u2014 between `IDSAnim` vtable and `anim_sub` vtable.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CAnim"
+    ],
+    "acceptance": "Update CAnim.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 30,
+    "title": "CBitmap",
+    "one_liner": "CBitmap: `+0x8c` \u2014 `ODSImage::vf_odsimage` / `IDSAnim` vtable (`CGameView_ctor` patches `*(this+0x8c)`); `CBitmap_FireOnBitmapEvtFromView@0x00419280` thunk uses `this` = view`+0x8c`.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CBitmap"
+    ],
+    "acceptance": "Update CBitmap.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 31,
+    "title": "CBulAnim",
+    "one_liner": "CBulAnim: `+0x08..+0x0F`, `+0x1C..+0x67` \u2014 CDSView / ODSImage / chain subobjects; only scattered vtable writes proven at `+0x10/+0x18`.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CBulAnim"
+    ],
+    "acceptance": "Update CBulAnim.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 32,
+    "title": "CBulAnim",
+    "one_liner": "CBulAnim: `+0x70..+0x77` \u2014 eight bytes between `CDSUpdatedItem` and `AnimInner` vtables.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CBulAnim"
+    ],
+    "acceptance": "Update CBulAnim.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 33,
+    "title": "CBulPicture",
+    "one_liner": "CBulPicture: `+0x08..+0x0F`, `+0x1C..+0x1F` \u2014 CDSChained/CDSView header between known vtables and `originX`.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CBulPicture"
+    ],
+    "acceptance": "Update CBulPicture.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 34,
+    "title": "CDSApiException",
+    "one_liner": "CDSApiException: Full `CDSException` hierarchy vtable map at `+0x00` beyond stored pointer value `0x487564` not expanded here.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSApiException"
+    ],
+    "acceptance": "Update CDSApiException.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 35,
+    "title": "CDSBackBuffer",
+    "one_liner": "CDSBackBuffer: Tail `CDSImage` MI vtables (`+0x4c..+0x5b` in full 96 B type) absent in 80 B `CDSBackBuffer` embed.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSBackBuffer"
+    ],
+    "acceptance": "Update CDSBackBuffer.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 36,
+    "title": "CDSChain",
+    "one_liner": "CDSChain: Full `CDSChain` object (`CDSChain_ctor@0x0040a680`, `mapping.csv` span `0xa4`) \u2014 vector at `this+0xd`, registry load, extra vtables at `+0x64`..`+0x85`.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSChain"
+    ],
+    "acceptance": "Update CDSChain.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 37,
+    "title": "CDSCollection",
+    "one_liner": "CDSCollection: None at collection payload (+0x08..+0x17). Base vtables (+0/+4) follow engine `IDSReferenced` / `IDSChained` pattern; parent-type sizes not re-derived here.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSCollection"
+    ],
+    "acceptance": "Update CDSCollection.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 38,
+    "title": "CDSImageMouse",
+    "one_liner": "CDSImageMouse: `pCursorSprite` type (vtable slot uses `*(this+0xc)` with width at `+4`, height at `+8` \u2014 resource handle pattern).",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSImageMouse"
+    ],
+    "acceptance": "Update CDSImageMouse.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 39,
+    "title": "CDSMpx",
+    "one_liner": "CDSMpx: MI vtable slots at `+0x04` / `+0x18` share storage with `stream` while decoding; only restored in `CDSMpx_dtor`, not during `AttachBitstream`.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSMpx"
+    ],
+    "acceptance": "Update CDSMpx.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 40,
+    "title": "CDSMpxStream",
+    "one_liner": "CDSMpxStream: Exact byte offset of the `IDSChained` / `face_8slots` subobjects beyond ctor vtable writes (`+0x38`, `+0x3c`, `+0x04`).",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSMpxStream"
+    ],
+    "acceptance": "Update CDSMpxStream.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 41,
+    "title": "CDSObject",
+    "one_liner": "CDSObject: `+0x48..+0x4f` on image instances: vtable patches in `CDSObject_CtorWithImage` (`pPad_48+4`, `pPad_54`); not named as nested struct fields.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSObject"
+    ],
+    "acceptance": "Update CDSObject.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 42,
+    "title": "CDSScript",
+    "one_liner": "CDSScript: Five vtable pointers (+0x00..+0x28): only two DWORD vtables written in base ctor; remaining slots filled by subclasses.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSScript"
+    ],
+    "acceptance": "Update CDSScript.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 43,
+    "title": "CDSStreamStorage",
+    "one_liner": "CDSStreamStorage: `GetStreamEntry@0x004339d0` \u2014 asm `MOV EAX,[ECX+0x20]` then index (`0x004339d0`); uses `CDSCollection::m_pVtable_IDSChained` slot, not `m_items` at `+0x24` used by `CloseStreamByKey` / `GetStreamCount`. Vtable-only xref (`0x0047f7c0`); likely dead or alternate i",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSStreamStorage"
+    ],
+    "acceptance": "Update CDSStreamStorage.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 44,
+    "title": "CDSStreamStorage",
+    "one_liner": "CDSStreamStorage: `CDSCollection` @ `this+0x1c`: `CDSStreamStorage_ctor@0x00401790` writes collection vtables at `+0x1c`/`+0x20`; `CloseStreamByKey@0x00433cb0` `LEA ECX,[ESI+0x1c]` \u2192 `FindKeyIndex`; `FindKeyIndex@0x00431170` uses `EBP+0x8`/`+0xc` (= `m_items`/`m_count`). Entry lo",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSStreamStorage"
+    ],
+    "acceptance": "Update CDSStreamStorage.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 45,
+    "title": "CDSUpdatedItem",
+    "one_liner": "CDSUpdatedItem: `CAdvertising+0x70` and other hosts: `+0x00` at embed base not written by `CDSUpdatedItem_ctor`; may remain parent padding unless a host-specific ctor stores a facet vtable (proven: `CDSVideoPlayer` scheduler embed, `CShot+0x88`).",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CDSUpdatedItem"
+    ],
+    "acceptance": "Update CDSUpdatedItem.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 46,
+    "title": "CHistoryScript",
+    "one_liner": "CHistoryScript: Semantic type of `+0x438` sub-object beyond vtable / `FUN_00434250` cleanup.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CHistoryScript"
+    ],
+    "acceptance": "Update CHistoryScript.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 47,
+    "title": "CMina",
+    "one_liner": "CMina: Full `CAnim` field map inside `0x00\u20130xEF` (vtable slots at `+0x88/+0x98` overwritten in ctor but not named here).",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CMina"
+    ],
+    "acceptance": "Update CMina.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 48,
+    "title": "CTeleportPoint",
+    "one_liner": "CTeleportPoint: Full CAnim decomposition for bytes `+0x6a..+0x73`, `+0x85..+0xa3`, `+0xa8..+0xd3` (vtable/anim core only partially named).",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CTeleportPoint"
+    ],
+    "acceptance": "Update CTeleportPoint.md; Ghidra mutation if evidence supports"
+  },
+  {
+    "id": 49,
+    "title": "CLevelList",
+    "one_liner": "CLevelList: `CListBox.p_base` byte-level layout (204 B) \u2014 deferred to `CListBox` / `CListViewer` struct recovery; see cross-ref above.",
+    "source_batches": [],
+    "priority": "med",
+    "structs": [
+      "CLevelList"
+    ],
+    "acceptance": "Update CLevelList.md; Ghidra mutation if evidence supports"
+  }
+]

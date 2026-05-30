@@ -1,0 +1,26 @@
+{
+  "rust-analyzer.linkedProjects": [
+    "open_bulanci/Cargo.toml"
+  ],
+  "rust-analyzer.cargo.features": "all",
+  "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.cargo.targetDir": true,
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.formatOnSave": true
+  },
+  "files.watcherExclude": {
+    "**/target/**": true
+  },
+
+  "luau-lsp.platform.type": "standard",
+  "luau-lsp.sourcemap.enabled": false,
+  "luau-lsp.completion.imports.enabled": true,
+  "luau-lsp.inlayHints.parameterNames": "literals",
+  "luau-lsp.inlayHints.variableTypes": false,
+  "luau-lsp.ignoreGlobs": [
+    "**/target/**",
+    "**/dist/**",
+    "**/node_modules/**"
+  ]
+}

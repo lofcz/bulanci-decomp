@@ -7,44 +7,44 @@ uchar CDSQueueStream::CloseStream(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00428a20 BEGIN
 /* 428A20-428A26 00006 */
-uchar* CDSQueueStream::FUN_00428a20() {
+uchar* CDSQueueStream::CDSQueueStream_GetTypeInfo() {
     return reinterpret_cast<uchar*>(&DAT_004b847c);
 }
 // !FUNC 0x00428a20 END
 
 // !FUNC 0x00428a30 BEGIN
 /* 428A30-428A38 00008 */
-uchar CDSQueueStream::FUN_00428a30(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSQueueStream::CDSQueueStream_ScalarDeletingDtor_thunk_Sub0c(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428a30 END
 
 // !FUNC 0x00428a40 BEGIN
 /* 428A40-428A48 00008 */
-uchar CDSQueueStream::FUN_00428a40(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSQueueStream::CDSQueueStream_ScalarDeletingDtorThunk(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428a40 END
 
 // !FUNC 0x00428a50 BEGIN
 /* 428A50-428AB0 00060 */
-uchar CDSQueueStream::FUN_00428a50(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSQueueStream::CDSQueueStream_dtor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428a50 END
 
 // !FUNC 0x00428ab0 BEGIN
 /* 428AB0-428ACE 0001E */
-void* CDSQueueStream::FUN_00428ab0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSQueueStream::CDSQueueStream_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428ab0 END
 
 // !FUNC 0x00428d30 BEGIN
 /* 428D30-428D38 00008 */
-uchar CDSQueueStream::FUN_00428d30(int param_1) { STUB_BODY(); return 0; }
+uchar CDSQueueStream::CDSQueueStream_ReleaseRefThunk(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00428d30 END
 
 // !FUNC 0x00433c60 BEGIN
 /* 433C60-433C89 00029 */
-uchar CDSQueueStream::FUN_00433c60(int param_1) { STUB_BODY(); return 0; }
+uchar CDSQueueStream::CDSQueueStream_ReleaseRefcount(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433c60 END
 
 // !FUNC 0x00433d60 BEGIN
 /* 433D60-433D68 00008 */
-uchar CDSQueueStream::FUN_00433d60(int param_1) { STUB_BODY(); return 0; }
+uchar CDSQueueStream::CDSQueueStream_ReleaseRefcount_thunk_Sub0c(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433d60 END
 
 // !FUNC 0x0043beb0 BEGIN
@@ -69,12 +69,12 @@ uchar CDSQueueStream::SeekPosition(int param_1, uint param_2, int param_3) { STU
 
 // !FUNC 0x0043c000 BEGIN
 /* 43C000-43C0AE 000AE */
-uchar CDSQueueStream::ReadBytes(void* param_1, void* param_2) { STUB_BODY(); return 0; }
+void CDSQueueStream::ReadBytes(void* param_1, size_t param_2) { STUB_BODY(); }
 // !FUNC 0x0043c000 END
 
 // !FUNC 0x0043c0b0 BEGIN
 /* 43C0B0-43C15E 000AE */
-uchar CDSQueueStream::WriteBytes(void* param_1, void* param_2) { STUB_BODY(); return 0; }
+void CDSQueueStream::WriteBytes(void* param_1, size_t param_2) { STUB_BODY(); }
 // !FUNC 0x0043c0b0 END
 
 // !FUNC 0x0043c1a0 BEGIN

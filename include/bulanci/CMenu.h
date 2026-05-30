@@ -6,34 +6,34 @@
 class CMenu {
 public:
 	// !DECL 0x00401050 BEGIN
-	/* 401050 */ int FUN_00401050();
+	/* 401050 */ int CMenu_GetAppSubstruct();
 	// !DECL 0x00401050 END
 	// !DECL 0x00401af0 BEGIN
-	/* 401AF0 */ uchar FUN_00401af0(int param_1);
+	/* 401AF0 */ void CMenu_OnSubScreenBack(CBulanci* param_1);
 	// !DECL 0x00401af0 END
 	// !DECL 0x00401b70 BEGIN
 	/* 401B70 */ uchar* Catch_00401b70();
 	// !DECL 0x00401b70 END
 	// !DECL 0x00401bb4 BEGIN
-	/* 401BB4 */ uchar FUN_00401bb4();
+	/* 401BB4 */ uchar CMenu_HideAllButtons();
 	// !DECL 0x00401bb4 END
 	// !DECL 0x0040b6d0 BEGIN
-	/* 40B6D0 */ uchar FUN_0040b6d0(int param_1, uint param_2);
+	/* 40B6D0 */ uchar CListBoxItem_ctorWithAssoc(int param_1, uint param_2);
 	// !DECL 0x0040b6d0 END
 	// !DECL 0x0040d360 BEGIN
-	/* 40D360 */ uchar FUN_0040d360(int param_1);
+	/* 40D360 */ uchar CLevelList_AddItem(int param_1);
 	// !DECL 0x0040d360 END
 	// !DECL 0x0040ffd0 BEGIN
-	/* 40FFD0 */ void* FUN_0040ffd0(uint param_1, uint param_2, uchar param_3);
+	/* 40FFD0 */ void* CColorSet_ctor_slotPillar(uint param_1, uint param_2, uchar param_3);
 	// !DECL 0x0040ffd0 END
 	// !DECL 0x004104f0 BEGIN
-	/* 4104F0 */ uchar CStartGame2_ctor(int param_1);
+	/* 4104F0 */ uchar CStartGame2_ctor(uchar param_1);
 	// !DECL 0x004104f0 END
 	// !DECL 0x00412720 BEGIN
-	/* 412720 */ uchar FUN_00412720(int param_1);
+	/* 412720 */ uchar CMenu_InitPlayerSlotFromDefaults(int param_1);
 	// !DECL 0x00412720 END
 	// !DECL 0x00412760 BEGIN
-	/* 412760 */ uint FUN_00412760(uchar param_1);
+	/* 412760 */ uint CMenu_GetDigitFromVirtualKey(uchar param_1);
 	// !DECL 0x00412760 END
 	// !DECL 0x00412780 BEGIN
 	/* 412780 */ uchar CMenu_CleanupSlots(uchar param_1);
@@ -57,10 +57,10 @@ public:
 	/* 414232 */ uchar Catch_00414232();
 	// !DECL 0x00414232 END
 	// !DECL 0x00414640 BEGIN
-	/* 414640 */ uchar CMenu_NetSendKickAll(CStartGame2* param_1);
+	/* 414640 */ uchar CMenu_NetSendKickAll(uchar param_1);
 	// !DECL 0x00414640 END
 	// !DECL 0x00414790 BEGIN
-	/* 414790 */ uchar CMenu_ShowLobby(uchar param_1);
+	/* 414790 */ void CMenu_ShowLobby(uchar param_1);
 	// !DECL 0x00414790 END
 	// !DECL 0x00414847 BEGIN
 	/* 414847 */ uchar Catch_00414847();
@@ -78,25 +78,25 @@ public:
 	/* 423FA0 */ uchar CMenu_SetButtonsHidden(char param_1);
 	// !DECL 0x00423fa0 END
 	// !DECL 0x00424080 BEGIN
-	/* 424080 */ void CMenu_OnMusicFadeTick(void* param_1);
+	/* 424080 */ void CMenu_OnMusicFadeTick(CDSUpdatedItem* param_1);
 	// !DECL 0x00424080 END
 	// !DECL 0x00424520 BEGIN
-	/* 424520 */ uint* CMenu_ctor(uint* param_1);
+	/* 424520 */ void* CMenu_ctor(void* param_1);
 	// !DECL 0x00424520 END
 	// !DECL 0x004245b0 BEGIN
 	/* 4245B0 */ uchar* CMenu_GetSingleton();
 	// !DECL 0x004245b0 END
 	// !DECL 0x004245d0 BEGIN
-	/* 4245D0 */ uchar FUN_004245d0(uchar param_1);
+	/* 4245D0 */ uchar CMenu_VectorDtorWrapper_thunk_Sub4(uchar param_1);
 	// !DECL 0x004245d0 END
 	// !DECL 0x004245e0 BEGIN
-	/* 4245E0 */ uchar FUN_004245e0(uchar param_1);
+	/* 4245E0 */ uchar CMenu_VectorDtorWrapper_thunk_Sub68(uchar param_1);
 	// !DECL 0x004245e0 END
 	// !DECL 0x004245f0 BEGIN
-	/* 4245F0 */ uchar FUN_004245f0(uchar param_1);
+	/* 4245F0 */ uchar CMenu_VectorDtorWrapper_thunk_Sub10(uchar param_1);
 	// !DECL 0x004245f0 END
 	// !DECL 0x00424600 BEGIN
-	/* 424600 */ uchar FUN_00424600(uchar param_1);
+	/* 424600 */ uchar CMenu_VectorDtorWrapper_thunk_Sub18(uchar param_1);
 	// !DECL 0x00424600 END
 	// !DECL 0x00424e70 BEGIN
 	/* 424E70 */ uchar CMenu_dtor(uchar param_1);
@@ -120,7 +120,7 @@ public:
 	/* 425970 */ uchar CMenu_CmdDispatch(ushort param_1);
 	// !DECL 0x00425970 END
 	// !DECL 0x0042c000 BEGIN
-	/* 42C000 */ uchar FUN_0042c000(void* param_1);
+	/* 42C000 */ void CMenu_DetachChild(CDSView* param_1);
 	// !DECL 0x0042c000 END
 	// !DECL 0x0042d160 BEGIN
 	/* 42D160 */ uchar FUN_0042d160(int* param_1);
@@ -132,7 +132,7 @@ public:
 	/* 43ABD0 */ uchar CDSDirectPlay_InitializeConnection(int param_1);
 	// !DECL 0x0043abd0 END
 	// !DECL 0x0043aca0 BEGIN
-	/* 43ACA0 */ uchar CDSDirectPlay_CreateLocalPlayer(int param_1);
+	/* 43ACA0 */ void CDSDirectPlay_CreateLocalPlayer(uchar param_1);
 	// !DECL 0x0043aca0 END
 	// !DECL 0x0043ae70 BEGIN
 	/* 43AE70 */ uchar CDSDirectPlay_SetGuids(uint* param_1, uint* param_2);
@@ -141,7 +141,7 @@ public:
 	/* 43AF00 */ uchar CDSDirectPlay_HostSession(uint param_1);
 	// !DECL 0x0043af00 END
 	// !DECL 0x0043afa0 BEGIN
-	/* 43AFA0 */ uchar CDSDirectPlay_JoinSession(uint* param_1);
+	/* 43AFA0 */ void CDSDirectPlay_JoinSession(uint* param_1);
 	// !DECL 0x0043afa0 END
 	// !DECL 0x0043b360 BEGIN
 	/* 43B360 */ static uchar CDSDirectPlay_ConnectTCP(uchar param_1, uint* param_2, uint* param_3, char* param_4);

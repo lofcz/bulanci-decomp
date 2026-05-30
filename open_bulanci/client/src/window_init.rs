@@ -27,15 +27,15 @@
 //!    in that pathological case.
 //!
 //! Cross-platform note: native macOS / Linux / Windows all support
-//! window repositioning identically through `miniquad`. WebAssembly
-//! (browser canvas) has no movable top-level window concept — the
-//! canvas is embedded in the page DOM — so this module is a no-op
+//! window repositioning identically through raylib's `SetWindowPosition`.
+//! WebAssembly (browser canvas) has no movable top-level window concept —
+//! the canvas is embedded in the page DOM — so this module is a no-op
 //! under `target_arch = "wasm32"`.
 
-use macroquad::window::miniquad;
+use raylib::prelude::RaylibHandle;
 
-/// The client area we always render to — must match
-/// `window_conf().window_width / window_height` in `main.rs`.
+/// The client area we always render to — must match the `init().size(..)`
+/// call in `main.rs`.
 pub const CLIENT_WIDTH: u32 = 800;
 pub const CLIENT_HEIGHT: u32 = 600;
 
@@ -47,16 +47,16 @@ pub const CLIENT_HEIGHT: u32 = 600;
 /// * the screen is smaller than the client area (we'd compute a
 ///   negative offset that the OS would either clamp or reject —
 ///   leaving the window at its default position is friendlier).
-pub fn center_window_on_primary_monitor() {
+pub fn center_window_on_primary_monitor(rl: &mut RaylibHandle) {
     let Some((sw, sh)) = primary_screen_size() else {
         return;
     };
     if sw < CLIENT_WIDTH || sh < CLIENT_HEIGHT {
         return;
     }
-    let x = (sw - CLIENT_WIDTH) / 2;
-    let y = (sh - CLIENT_HEIGHT) / 2;
-    miniquad::window::set_window_position(x, y);
+    let x = ((sw - CLIENT_WIDTH) / 2) as i32;
+    let y = ((sh - CLIENT_HEIGHT) / 2) as i32;
+    rl.set_window_position(x, y);
 }
 
 // ============================================================================
@@ -77,7 +77,12 @@ pub fn center_window_on_primary_monitor() {
 ///   decides where the canvas sits in the page.
 #[cfg(target_os = "windows")]
 fn primary_screen_size() -> Option<(u32, u32)> {
-    #[link(name = "user32")]
+    // No `#[link(name = "user32")]` here on purpose: `sola-raylib-sys`
+    // already links `user32` (after its own rlib in the link order).
+    // Re-declaring the link forces `user32.lib` *before* the raylib rlib,
+    // which makes user32's `ShowCursor` import win and turns raylib's
+    // static `ShowCursor` into an LNK2005 duplicate. Just declaring the
+    // symbol lets it resolve against the raylib-provided `user32.lib`.
     extern "system" {
         fn GetSystemMetrics(n_index: i32) -> i32;
     }

@@ -1,0 +1,180 @@
+[
+  {
+    "id": 21,
+    "title": "Name CSwitch CDSView shell +0x28..+0x67 and resolve +0xa8/+0xb4 click aliases",
+    "types": ["CSwitch", "CTcpIpConfig", "CDSChained", "CDSVideoPlayer"],
+    "addresses": ["0x00424bc0", "0x00424d30", "0x0040c060", "0x0042beb0"],
+    "ghidra_actions": ["modify_struct_field", "rename_data", "set_decompiler_comment", "set_function_prototype"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CSwitch.md",
+      "ghidra_analysis/engine/struct_recovery/CTcpIpConfig.md",
+      "ghidra_analysis/engine/struct_recovery/CDSChained.md",
+      "ghidra_analysis/engine/struct_recovery/batch_20_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_20_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "medium",
+    "source": "slice_20",
+    "supersedes_todo_id": null
+  },
+  {
+    "id": 22,
+    "title": "Prove CTeleportPoint overlap_entity writer and CAnim pLinked_bulanek store path",
+    "types": ["CTeleportPoint", "CAnim", "CBulanek", "CDSAnim"],
+    "addresses": ["0x0041fed0", "0x0041d090", "0x0041fca0", "0x00439c70"],
+    "ghidra_actions": ["modify_struct_field", "rename_function", "set_function_prototype", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CTeleportPoint.md",
+      "ghidra_analysis/engine/struct_recovery/CDSAnim.md",
+      "ghidra_analysis/engine/struct_recovery/batch_21_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_21_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "high",
+    "source": "slice_21",
+    "supersedes_todo_id": 29
+  },
+  {
+    "id": 23,
+    "title": "Disambiguate CDSAudioBank vs CDSWavStream on 0x40 alloc (class 43 factory)",
+    "types": ["CDSAudioBank", "CDSWavStream", "CDSApiException"],
+    "addresses": ["0x0043bb00", "0x00429480", "0x00429600", "0x00429240"],
+    "ghidra_actions": ["set_function_prototype", "modify_struct_field", "rename_function", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSAudioBank.md",
+      "ghidra_analysis/engine/struct_recovery/CDSApiException.md",
+      "ghidra_analysis/engine/struct_recovery/batch_22_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_22_followup_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "high",
+    "source": "slice_22",
+    "supersedes_todo_id": null
+  },
+  {
+    "id": 24,
+    "title": "Catalog non-menu CDSAudioPlayer pEventTarget hosts beyond CMenu_OnEvent",
+    "types": ["CDSAudioPlayer", "CDSAudioBankSample", "CDSDirectSound"],
+    "addresses": ["0x00422382", "0x0043cdc0", "0x00422470", "0x0043a760"],
+    "ghidra_actions": ["rename_function", "set_function_prototype", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSAudioPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/CDSAudioBankSample.md",
+      "ghidra_analysis/engine/struct_recovery/batch_23_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_23_followup_summary.md",
+      "ghidra_analysis/engine/agent_todos_50_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "slice_23",
+    "supersedes_todo_id": 28
+  },
+  {
+    "id": 25,
+    "title": "Retype CDSAudioVideoPlayer videoTrackManager to CDSVideoPlayer; name CDSBackBuffer embed tail",
+    "types": ["CDSAudioVideoPlayer", "CDSBackBuffer", "CDSVideoPlayer", "CDSImage"],
+    "addresses": ["0x0043bd00", "0x00429930", "0x0042ad40", "0x0043bca0"],
+    "ghidra_actions": ["modify_struct_field", "create_struct", "set_function_prototype", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSAudioVideoPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/CDSBackBuffer.md",
+      "ghidra_analysis/engine/struct_recovery/batch_24_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_24_followup_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "high",
+    "source": "slice_24",
+    "supersedes_todo_id": 23
+  },
+  {
+    "id": 26,
+    "title": "Apply CDSBitmap drawable shell parity and CDSBmpImage Load/Save MI at +0x54",
+    "types": ["CDSBitmap", "CDSBmpImage", "ODSImage", "CDSChained"],
+    "addresses": ["0x004393d0", "0x00432330", "0x004320c0", "0x00432440"],
+    "ghidra_actions": ["modify_struct_field", "rename_function", "set_function_prototype", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSBitmap.md",
+      "ghidra_analysis/engine/struct_recovery/CDSBmpImage.md",
+      "ghidra_analysis/engine/struct_recovery/CDSChained.md",
+      "ghidra_analysis/engine/anim_runtime.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "medium",
+    "source": "slice_25",
+    "supersedes_todo_id": 27
+  },
+  {
+    "id": 27,
+    "title": "Resolve CDSChain_full sentinel semantics and standalone CBulanci chain object",
+    "types": ["CDSChain", "CDSChained", "CGame", "CBulanci"],
+    "addresses": ["0x0040a680", "0x00414aeb", "0x0042f800", "0x0042fab0"],
+    "ghidra_actions": ["modify_struct_field", "set_decompiler_comment", "rename_function", "set_function_prototype"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSChain.md",
+      "ghidra_analysis/engine/struct_recovery/CDSChained.md",
+      "ghidra_analysis/engine/struct_recovery/batch_26_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_26_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_20_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "critical",
+    "source": "slice_26",
+    "supersedes_todo_id": 21
+  },
+  {
+    "id": 28,
+    "title": "MCP retry ECX retype: CDSCollection_InsertKeyed, InitPrimary, slice 13 CListBoxItem row",
+    "types": ["CDSCollection", "CDSDirectSound", "CDSApp", "CListBoxItem", "CLevelScore"],
+    "addresses": ["0x004312c0", "0x0043cbc0", "0x0042a2fa", "0x0040b640", "0x00477693"],
+    "ghidra_actions": ["set_function_prototype", "set_decompiler_comment", "set_plate_comment", "modify_struct_field"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSCollection.md",
+      "ghidra_analysis/engine/struct_recovery/CDSDirectSound.md",
+      "ghidra_analysis/engine/struct_recovery/CListBoxItem.md",
+      "ghidra_analysis/engine/struct_recovery/CLevelScore.md",
+      "ghidra_analysis/engine/struct_recovery/batch_27_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_27_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_13_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md",
+      "ghidra_analysis/engine/agent_todos_50_results.jsonl"
+    ],
+    "priority": "high",
+    "source": "slice_27",
+    "supersedes_todo_id": 30
+  },
+  {
+    "id": 29,
+    "title": "Decode CDSEasyMemStream dwIdsStream_state==7 and CDSDirectXException What vs inline buffer",
+    "types": ["CDSEasyMemStream", "CDSDirectXException", "CDSException"],
+    "addresses": ["0x00430d60", "0x00409200", "0x0043b820", "0x00434b80"],
+    "ghidra_actions": ["set_decompiler_comment", "modify_struct_field", "rename_data"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSEasyMemStream.md",
+      "ghidra_analysis/engine/struct_recovery/CDSDirectXException.md",
+      "ghidra_analysis/engine/struct_recovery/CDSException.md",
+      "ghidra_analysis/engine/struct_recovery/batch_28_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_28_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_26_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source": "slice_28",
+    "supersedes_todo_id": null
+  },
+  {
+    "id": 30,
+    "title": "Name CDSFilterStream dwField_10 after BindSource; dedup CDSSimpleException vs CDSException embed",
+    "types": ["CDSFilterStream", "CDSException", "CDSSimpleException", "CDSStreamStorage"],
+    "addresses": ["0x00430ca0", "0x00430420", "0x00434760", "0x00434c20"],
+    "ghidra_actions": ["modify_struct_field", "delete_data_type", "create_struct", "set_decompiler_comment"],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSFilterStream.md",
+      "ghidra_analysis/engine/struct_recovery/CDSException.md",
+      "ghidra_analysis/engine/struct_recovery/batch_29_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_29_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/CDSSafeStream.md"
+    ],
+    "priority": "medium",
+    "source": "slice_29",
+    "supersedes_todo_id": null
+  }
+]

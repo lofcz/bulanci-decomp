@@ -2,7 +2,7 @@
 
 // !FUNC 0x00439470 BEGIN
 /* 439470-439508 00098 */
-uchar CDSAnim::DefaultCtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSAnim::DefaultCtor(void* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00439470 END
 
 // !FUNC 0x00439510 BEGIN

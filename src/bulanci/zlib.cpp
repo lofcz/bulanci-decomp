@@ -55,7 +55,7 @@ __declspec(noinline) uint zlib::inflateInit2(int param_1, int param_2, char* par
 //   }
 // DEF_WBITS = 15.  EXACT 26/26 bytes.
 // noinline so /O2 cannot fold the wrapper into CDSGZipStream::Decompress
-// (FUN_00434e30) -- without it the caller pushes 4 args and calls
+// (CDSGZipStream_Decompress_static) -- without it the caller pushes 4 args and calls
 // inflateInit2_ directly, dropping the CALL-to-wrapper the original emits.
 // The wrapper body itself compiles identically with or without noinline (26
 // bytes, EXACT) because the directive only affects caller-side decisions.

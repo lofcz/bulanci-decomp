@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+
 use crate::{WorldState, Player, Position, MapObstacle, Timer, Bullet};
 
 pub const TICK_RATE: u64 = 60;
@@ -5,11 +7,47 @@ pub const PLAYER_WIDTH: i32 = 40;
 pub const PLAYER_HEIGHT: i32 = 40;
 pub const BULLET_SPEED: i32 = 8;
 pub const PLAYER_SPEED: i32 = 4;
+pub const ARENA_WIDTH: i32 = 800;
+pub const ARENA_HEIGHT: i32 = 600;
+
+/// The data-driven tunables the deterministic sim reads instead of hardcoding
+/// magic numbers. This is the Rust↔gamemode split boundary: the *algorithms*
+/// (movement, AABB collision, hitscan, bullets, netcode) stay in Rust as
+/// primitives; their *parameters* live in data so a gamemode (Luau, or the
+/// editor via HMR) can retune them. Every field is integer-valued so a live
+/// edit stays lockstep-deterministic across peers. `Default` reproduces the
+/// historical constants exactly, so an un-tuned sim behaves identically.
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
+pub struct SimTunables {
+    pub player_speed: i32,
+    pub player_w: i32,
+    pub player_h: i32,
+    pub bullet_speed: i32,
+    pub arena_w: i32,
+    pub arena_h: i32,
+}
+
+impl Default for SimTunables {
+    fn default() -> Self {
+        SimTunables {
+            player_speed: PLAYER_SPEED,
+            player_w: PLAYER_WIDTH,
+            player_h: PLAYER_HEIGHT,
+            bullet_speed: BULLET_SPEED,
+            arena_w: ARENA_WIDTH,
+            arena_h: ARENA_HEIGHT,
+        }
+    }
+}
 
 #[derive(Debug, Clone, Default)]
 pub struct EngineSimulation {
     pub state: WorldState,
     pub pending_spawn_points: Vec<Position>,
+    /// Live, gamemode-/HMR-tunable parameters (defaults = the historical
+    /// constants). Mutated only at a tick boundary so the deterministic tick
+    /// never sees a parameter change mid-step.
+    pub tunables: SimTunables,
 }
 
 impl EngineSimulation {
@@ -17,10 +55,28 @@ impl EngineSimulation {
         EngineSimulation {
             state: WorldState::default(),
             pending_spawn_points: Vec::new(),
+            tunables: SimTunables::default(),
         }
     }
 
-    /// Reset simulation state.
+    /// Construct a sim with explicit tunables (a gamemode preset).
+    pub fn with_tunables(tunables: SimTunables) -> Self {
+        EngineSimulation {
+            state: WorldState::default(),
+            pending_spawn_points: Vec::new(),
+            tunables,
+        }
+    }
+
+    /// Swap the tunables. Callers must only do this at a tick boundary (the
+    /// deterministic-HMR contract); doing it mid-tick would desync peers.
+    pub fn set_tunables(&mut self, tunables: SimTunables) {
+        self.tunables = tunables;
+    }
+
+    /// Reset simulation **state** (not config): the world and spawn queue are
+    /// cleared, but the tunables persist (they're gamemode configuration, not
+    /// per-match state).
     pub fn reset(&mut self) {
         self.state = WorldState::default();
         self.pending_spawn_points.clear();
@@ -81,23 +137,24 @@ impl EngineSimulation {
         };
 
         // Spawning position based on direction
+        let t = self.tunables;
         let mut spawn_pos = player.pos.clone();
         let (vel_x, vel_y) = match player.facing_dir {
             0 => { // UP
-                spawn_pos.y -= PLAYER_HEIGHT / 2 + 5;
-                (0, -BULLET_SPEED)
+                spawn_pos.y -= t.player_h / 2 + 5;
+                (0, -t.bullet_speed)
             }
             1 => { // RIGHT
-                spawn_pos.x += PLAYER_WIDTH / 2 + 5;
-                (BULLET_SPEED, 0)
+                spawn_pos.x += t.player_w / 2 + 5;
+                (t.bullet_speed, 0)
             }
             2 => { // DOWN
-                spawn_pos.y += PLAYER_HEIGHT / 2 + 5;
-                (0, BULLET_SPEED)
+                spawn_pos.y += t.player_h / 2 + 5;
+                (0, t.bullet_speed)
             }
             3 => { // LEFT
-                spawn_pos.x -= PLAYER_WIDTH / 2 + 5;
-                (-BULLET_SPEED, 0)
+                spawn_pos.x -= t.player_w / 2 + 5;
+                (-t.bullet_speed, 0)
             }
             _ => (0, 0),
         };
@@ -126,22 +183,23 @@ impl EngineSimulation {
             }
 
             if let Some(Some(input)) = inputs.get(player_id as usize) {
+                let speed = self.tunables.player_speed;
                 let mut move_x = 0;
                 let mut move_y = 0;
 
                 if input.up {
-                    move_y -= PLAYER_SPEED;
+                    move_y -= speed;
                     self.state.players[player_idx].facing_dir = 0;
                 } else if input.down {
-                    move_y += PLAYER_SPEED;
+                    move_y += speed;
                     self.state.players[player_idx].facing_dir = 2;
                 }
 
                 if input.left {
-                    move_x -= PLAYER_SPEED;
+                    move_x -= speed;
                     self.state.players[player_idx].facing_dir = 3;
                 } else if input.right {
-                    move_x += PLAYER_SPEED;
+                    move_x += speed;
                     self.state.players[player_idx].facing_dir = 1;
                 }
 
@@ -226,14 +284,15 @@ impl EngineSimulation {
 
     /// Check if a player intersects any map obstacles or other players
     fn check_player_collision(&self, player_idx: usize) -> bool {
+        let t = self.tunables;
         let player = &self.state.players[player_idx];
-        let p_left = player.pos.x - PLAYER_WIDTH / 2;
-        let p_right = player.pos.x + PLAYER_WIDTH / 2;
-        let p_top = player.pos.y - PLAYER_HEIGHT / 2;
-        let p_bottom = player.pos.y + PLAYER_HEIGHT / 2;
+        let p_left = player.pos.x - t.player_w / 2;
+        let p_right = player.pos.x + t.player_w / 2;
+        let p_top = player.pos.y - t.player_h / 2;
+        let p_bottom = player.pos.y + t.player_h / 2;
 
         // Screen boundary collision checking
-        if p_left < 0 || p_right > 800 || p_top < 0 || p_bottom > 600 {
+        if p_left < 0 || p_right > t.arena_w || p_top < 0 || p_bottom > t.arena_h {
             return true;
         }
 
@@ -249,10 +308,10 @@ impl EngineSimulation {
             if i == player_idx || !other.is_alive {
                 continue;
             }
-            let o_left = other.pos.x - PLAYER_WIDTH / 2;
-            let o_right = other.pos.x + PLAYER_WIDTH / 2;
-            let o_top = other.pos.y - PLAYER_HEIGHT / 2;
-            let o_bottom = other.pos.y + PLAYER_HEIGHT / 2;
+            let o_left = other.pos.x - t.player_w / 2;
+            let o_right = other.pos.x + t.player_w / 2;
+            let o_top = other.pos.y - t.player_h / 2;
+            let o_bottom = other.pos.y + t.player_h / 2;
 
             if p_right > o_left && p_left < o_right && p_bottom > o_top && p_top < o_bottom {
                 return true;
@@ -264,10 +323,11 @@ impl EngineSimulation {
 
     /// Check if a bullet intersects any obstacles
     fn check_bullet_obstacle_collision(&self, b_idx: usize) -> bool {
+        let t = self.tunables;
         let bullet = &self.state.bullets[b_idx];
-        
+
         // Out of bounds
-        if bullet.pos.x < 0 || bullet.pos.x > 800 || bullet.pos.y < 0 || bullet.pos.y > 600 {
+        if bullet.pos.x < 0 || bullet.pos.x > t.arena_w || bullet.pos.y < 0 || bullet.pos.y > t.arena_h {
             return true;
         }
 
@@ -283,6 +343,7 @@ impl EngineSimulation {
 
     /// Check if a bullet intersects any alive players (returns hit player id)
     fn check_bullet_player_collision(&self, b_idx: usize) -> Option<u8> {
+        let t = self.tunables;
         let bullet = &self.state.bullets[b_idx];
 
         for player in &self.state.players {
@@ -290,10 +351,10 @@ impl EngineSimulation {
                 continue;
             }
 
-            let p_left = player.pos.x - PLAYER_WIDTH / 2;
-            let p_right = player.pos.x + PLAYER_WIDTH / 2;
-            let p_top = player.pos.y - PLAYER_HEIGHT / 2;
-            let p_bottom = player.pos.y + PLAYER_HEIGHT / 2;
+            let p_left = player.pos.x - t.player_w / 2;
+            let p_right = player.pos.x + t.player_w / 2;
+            let p_top = player.pos.y - t.player_h / 2;
+            let p_bottom = player.pos.y + t.player_h / 2;
 
             if bullet.pos.x >= p_left && bullet.pos.x <= p_right && bullet.pos.y >= p_top && bullet.pos.y <= p_bottom {
                 return Some(player.id);

@@ -1,0 +1,15 @@
+{
+  "languageMode": "nonstrict",
+  "lint": {
+    "*": true
+  },
+  "lintErrors": false,
+  "aliases": {
+    "bulanci": "./.luau-types/bulanci",
+    "widgets": "./base_ui/lib/widgets",
+    "fx": "./base_ui/lib/fx",
+    "cursor": "./base_ui/lib/cursor",
+    "poem": "./base_ui/lib/poem",
+    "startgame1": "./base_ui/lib/startgame1"
+  }
+}

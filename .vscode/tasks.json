@@ -1,0 +1,68 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "win64: build (debug)",
+			"detail": "cargo build -p bulanci_client (with MSVC + libclang env)",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder}/open_bulanci/scripts/build-client.ps1",
+				"-Profile",
+				"debug"
+			],
+			"options": { "cwd": "${workspaceFolder}" },
+			"group": { "kind": "build", "isDefault": true },
+			"problemMatcher": ["$rustc"],
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"clear": true
+			}
+		},
+		{
+			"label": "wasm: build & serve",
+			"detail": "Build wasm release, deploy to web/, serve detached on :8765",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder}/open_bulanci/scripts/run-web.ps1"
+			],
+			"options": { "cwd": "${workspaceFolder}" },
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"clear": true
+			},
+			"problemMatcher": ["$rustc"]
+		},
+		{
+			"label": "editor: dev server",
+			"detail": "Start the asset studio (Vite+ gallery) dev server on :5173",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"${workspaceFolder}/ghidra_analysis/asset_catalog/gallery/scripts/run-editor.ps1"
+			],
+			"options": { "cwd": "${workspaceFolder}" },
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"clear": true
+			},
+			"problemMatcher": []
+		}
+	]
+}

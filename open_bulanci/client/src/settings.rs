@@ -527,13 +527,16 @@ mod windows_backend {
 mod wasm_backend {
     use super::{SettingsStore, OPEN_HKCU_SUBKEY};
     use base64::Engine;
+    use std::ffi::{CStr, CString};
+    use std::os::raw::c_char;
 
-    /// Browser `localStorage`-backed store. Keys are namespaced under
-    /// `bulanci/Software/OpenBulanci/<NAME>` so they don't collide
-    /// with anything else the hosting page might be writing. Two
-    /// storage classes share the keyspace without ambiguity because
-    /// we serialize `u32` as a decimal string and `bytes` as
-    /// `b64:<base64>` — the prefix discriminates.
+    extern "C" {
+        fn emscripten_run_script(script: *const c_char);
+        fn emscripten_run_script_string(script: *const c_char) -> *mut c_char;
+        fn free(ptr: *mut c_char);
+    }
+
+    /// Browser `localStorage`-backed store via emscripten's JS bridge.
     pub struct LocalStorageStore;
 
     impl LocalStorageStore {
@@ -541,58 +544,68 @@ mod wasm_backend {
             LocalStorageStore
         }
 
-        fn storage() -> Option<web_sys::Storage> {
-            let win = web_sys::window()?;
-            win.local_storage().ok().flatten()
+        fn make_key(name: &str) -> String {
+            format!("bulanci/{}/{}", OPEN_HKCU_SUBKEY.replace('\\', "/"), name)
         }
 
-        fn make_key(name: &str) -> String {
-            // Backslashes -> forward slashes for URL-style key paths,
-            // even though localStorage doesn't care about either.
-            format!("bulanci/{}/{}", OPEN_HKCU_SUBKEY.replace('\\', "/"), name)
+        fn js_literal(s: &str) -> String {
+            serde_json::to_string(s).unwrap_or_else(|_| "\"\"".to_string())
+        }
+
+        fn run_script_string(script: &str) -> Option<String> {
+            let cscript = CString::new(script).ok()?;
+            let ptr = unsafe { emscripten_run_script_string(cscript.as_ptr()) };
+            if ptr.is_null() {
+                return None;
+            }
+            let out = unsafe { CStr::from_ptr(ptr).to_string_lossy().into_owned() };
+            unsafe { free(ptr) };
+            if out.is_empty() { None } else { Some(out) }
+        }
+
+        fn run_script_void(script: &str) {
+            if let Ok(cscript) = CString::new(script) {
+                unsafe { emscripten_run_script(cscript.as_ptr()) };
+            }
+        }
+
+        fn get_item(key: &str) -> Option<String> {
+            let k = Self::js_literal(&Self::make_key(key));
+            let script = format!(
+                "(function(){{try{{var v=localStorage.getItem({k});return v===null?'':v;}}catch(e){{return '';}}}})()"
+            );
+            Self::run_script_string(&script)
+        }
+
+        fn set_item(key: &str, value: &str) {
+            let k = Self::js_literal(&Self::make_key(key));
+            let v = Self::js_literal(value);
+            let script = format!("try{{localStorage.setItem({k},{v});}}catch(e){{}}");
+            Self::run_script_void(&script);
         }
     }
 
     impl SettingsStore for LocalStorageStore {
         fn get_u32(&self, key: &str) -> Option<u32> {
-            let s = Self::storage()?
-                .get_item(&Self::make_key(key))
-                .ok()
-                .flatten()?;
-            s.parse::<u32>().ok()
+            Self::get_item(key)?.parse::<u32>().ok()
         }
 
         fn set_u32(&self, key: &str, value: u32) {
-            let Some(storage) = Self::storage() else {
-                eprintln!("[settings] localStorage unavailable");
-                return;
-            };
-            if let Err(e) = storage.set_item(&Self::make_key(key), &value.to_string()) {
-                eprintln!("[settings] localStorage set u32 failed: {e:?}");
-            }
+            Self::set_item(key, &value.to_string());
         }
 
         fn get_bytes(&self, key: &str) -> Option<Vec<u8>> {
-            let s = Self::storage()?
-                .get_item(&Self::make_key(key))
-                .ok()
-                .flatten()?;
+            let s = Self::get_item(key)?;
             let b64 = s.strip_prefix("b64:")?;
             base64::engine::general_purpose::STANDARD.decode(b64).ok()
         }
 
         fn set_bytes(&self, key: &str, value: &[u8]) {
-            let Some(storage) = Self::storage() else {
-                eprintln!("[settings] localStorage unavailable");
-                return;
-            };
             let encoded = format!(
                 "b64:{}",
                 base64::engine::general_purpose::STANDARD.encode(value)
             );
-            if let Err(e) = storage.set_item(&Self::make_key(key), &encoded) {
-                eprintln!("[settings] localStorage set bytes failed: {e:?}");
-            }
+            Self::set_item(key, &encoded);
         }
     }
 }

@@ -48,12 +48,12 @@ uchar CNumEdit::CNumEdit_vDtor(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042d2f0 BEGIN
 /* 42D2F0-42D303 00013 */
-uint CNumEdit::FUN_0042d2f0(uint* param_1) { STUB_BODY(); return 0; }
+uint CNumEdit::CNumEdit_ParseDecimalValue(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042d2f0 END
 
 // !FUNC 0x00448ed6 BEGIN
 /* 448ED6-448EE7 00011 */
-uchar CNumEdit::FUN_00448ed6(wchar_t* param_1) { STUB_BODY(); return 0; }
+uchar CNumEdit::CNumEdit_ParseWideDigitsToUint(wchar_t* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00448ed6 END
 
 // !FUNC 0x0044eb1e BEGIN

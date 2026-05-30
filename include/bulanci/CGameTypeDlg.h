@@ -12,10 +12,10 @@ public:
 	/* 40AB00 */ uchar FUN_0040ab00(short param_1, int param_2, uint param_3);
 	// !DECL 0x0040ab00 END
 	// !DECL 0x0040bc00 BEGIN
-	/* 40BC00 */ uchar* FUN_0040bc00();
+	/* 40BC00 */ uchar* CGameTypeDlg_GetClassTable();
 	// !DECL 0x0040bc00 END
 	// !DECL 0x0040ee40 BEGIN
-	/* 40EE40 */ uint* FUN_0040ee40();
+	/* 40EE40 */ uint* CGameTypeDlg_CreateObject();
 	// !DECL 0x0040ee40 END
 };
 

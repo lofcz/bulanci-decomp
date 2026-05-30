@@ -6,7 +6,7 @@
 
 // !FUNC 0x00416750 BEGIN
 /* 416750-41676C 0001C */
-uchar CWeapon::FUN_00416750(int* param_1) { STUB_BODY(); return 0; }
+uchar CWeapon::CWeapon_ReleaseViaVtable(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416750 END
 
 // !FUNC 0x004179a0 BEGIN
@@ -18,7 +18,7 @@ void CWeapon::SetAmmo(int param_1) {
 
 // !FUNC 0x00417a00 BEGIN
 /* 417A00-417A13 00013 */
-void CWeapon::FUN_00417a00(uint param_1, uint param_2, int param_3) {
+void CWeapon::CWeapon_UpdateStateFromParams(uint param_1, uint param_2, int param_3) {
     *reinterpret_cast<int*>(reinterpret_cast<char*>(this) + 0x58) = *reinterpret_cast<int*>(param_3 + 4);
     *reinterpret_cast<int*>(reinterpret_cast<char*>(this) + 0x5c) = *reinterpret_cast<int*>(param_3 + 8);
 }
@@ -26,19 +26,19 @@ void CWeapon::FUN_00417a00(uint param_1, uint param_2, int param_3) {
 
 // !FUNC 0x00418f60 BEGIN
 /* 418F60-418F66 00006 */
-uchar* CWeapon::FUN_00418f60() {
+uchar* CWeapon::CWeapon_GetClassTable() {
     return reinterpret_cast<uchar*>(&DAT_004b3754);
 }
 // !FUNC 0x00418f60 END
 
 // !FUNC 0x0041bf00 BEGIN
 /* 41BF00-41BF66 00066 */
-uchar CWeapon::Update(CBulanek* param_1) { STUB_BODY(); return 0; }
+void CWeapon::Update(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0041bf00 END
 
 // !FUNC 0x0041bf70 BEGIN
 /* 41BF70-41BF7F 0000F */
-uchar CWeapon::FUN_0041bf70(int param_1) {
+uchar CWeapon::CWeapon_HideAssociatedView(int param_1) {
     CWeapon* weapon = *reinterpret_cast<CWeapon**>(reinterpret_cast<char*>(param_1) + 0x50);
     if (weapon != NULL) {
         weapon->Update(reinterpret_cast<int*>(weapon));
@@ -62,7 +62,7 @@ uchar CWeapon::Init(uint param_1, int* param_2) {
 
 // !FUNC 0x0041dae0 BEGIN
 /* 41DAE0-41DAFE 0001E */
-void* CWeapon::FUN_0041dae0(uchar param_1) { STUB_BODY(); return 0; }
+void* CWeapon::CWeapon_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041dae0 END
 
 // !FUNC 0x004212b0 BEGIN

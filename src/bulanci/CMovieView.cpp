@@ -2,7 +2,7 @@
 
 // !FUNC 0x00422630 BEGIN
 /* 422630-422666 00036 */
-uchar CMovieView::StopPlayback(int param_1) { STUB_BODY(); return 0; }
+void CMovieView::StopPlayback(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00422630 END
 
 // !FUNC 0x00422840 BEGIN
@@ -22,10 +22,6 @@ uchar* CMovieView::GetClassTable() {
 }
 // !FUNC 0x00422a20 END
 
-// !FUNC 0x00422a30 BEGIN
-/* 422A30-422A38 00008 */
-uchar CMovieView::ScalarDeletingDtor_Thunk_4(uchar param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00422a30 END
 
 // !FUNC 0x00422a40 BEGIN
 /* 422A40-422A48 00008 */
@@ -54,7 +50,7 @@ uchar CMovieView::StartPlayback(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00422e30 BEGIN
 /* 422E30-422ED4 000A4 */
-uchar CMovieView::CreateObject() { STUB_BODY(); return 0; }
+uchar CMovieView::CMovieView_CreateObject() { STUB_BODY(); return 0; }
 // !FUNC 0x00422e30 END
 
 // !FUNC 0x00422ee0 BEGIN

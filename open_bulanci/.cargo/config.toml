@@ -1,0 +1,34 @@
+# Web (wasm32-unknown-emscripten) build configuration for open_bulanci.
+#
+# These flags only apply when building for the emscripten target; native
+# builds are unaffected. See sola-raylib's examples/.cargo/config.toml and
+# book/src/web.md for the raylib link-flag rationale.
+
+[target.wasm32-unknown-emscripten]
+rustflags = [
+    # --- raylib web runtime ---
+    "-C", "link-arg=-sUSE_GLFW=3",
+    # No ASYNCIFY: incompatible with `-fwasm-exceptions` on current emsdk, and
+    # `game_loop::run` drives frames via `emscripten_set_main_loop_arg` instead.
+    "-C", "link-arg=-sFORCE_FILESYSTEM=1",
+    "-C", "link-arg=-sALLOW_MEMORY_GROWTH=1",
+    "-C", "link-arg=-sEXPORTED_RUNTIME_METHODS=['ccall','wasmMemory','HEAPU8','HEAP32','HEAPF32']",
+    # JS-callable exports (via `Module.ccall` / `Module._malloc`):
+    #  * `_main`                  program entry.
+    #  * `_ob_set_master_volume`  web audio controls (see web/index.html).
+    #  * `_ob_install_overlay` /
+    #    `_ob_remove_overlay`      live-mod bridge receive path (asset/web_bridge.rs).
+    #  * `_ob_scene_patch`         scene-HMR patch receive path (asset/web_bridge.rs).
+    #  * `_malloc` / `_free`       let the shell hand overlay blobs to the engine.
+    "-C", "link-arg=-sEXPORTED_FUNCTIONS=['_main','_ob_set_master_volume','_ob_install_overlay','_ob_remove_overlay','_ob_scene_patch','_malloc','_free']",
+    # --- exception/longjmp ABI: must match rustc 1.93+ and mlua's vendored C/C++ ---
+    "-C", "link-arg=-fwasm-exceptions",
+    "-C", "link-arg=-sSUPPORT_LONGJMP=wasm",
+]
+
+# mlua's vendored Lua/Luau C/C++ (in bulanci_core) must be compiled with the
+# same wasm exception-handling ABI as rustc emits, or the wasm link fails.
+# raylib's own C is already built with these flags by raylib-sys/build.rs.
+[env]
+CFLAGS_wasm32_unknown_emscripten = "-fwasm-exceptions -sSUPPORT_LONGJMP=wasm"
+CXXFLAGS_wasm32_unknown_emscripten = "-fwasm-exceptions -sSUPPORT_LONGJMP=wasm"

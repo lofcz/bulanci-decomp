@@ -2,34 +2,34 @@
 
 // !FUNC 0x0042fff0 BEGIN
 /* 42FFF0-430000 00010 */
-uchar CDSException::FUN_0042fff0(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSException::CDSException_ReleaseViaFlag(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042fff0 END
 
 // !FUNC 0x00434a10 BEGIN
 /* 434A10-434A28 00018 */
-uchar CDSException::FUN_00434a10(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSException::CDSException_InitBaseFields(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00434a10 END
 
 // !FUNC 0x00434a30 BEGIN
 /* 434A30-434A36 00006 */
-uchar* CDSException::FUN_00434a30() {
+uchar* CDSException::CDSException_GetTypeInfo() {
     return reinterpret_cast<uchar*>(&DAT_004b81c0);
 }
 // !FUNC 0x00434a30 END
 
 // !FUNC 0x00434a40 BEGIN
 /* 434A40-434A67 00027 */
-uchar CDSException::FUN_00434a40(uint param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
+uchar CDSException::CDSException_InitFields(uint param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00434a40 END
 
 // !FUNC 0x00434ae0 BEGIN
 /* 434AE0-434AFF 0001F */
-void* CDSException::FUN_00434ae0(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSException::CDSException_DtorScalar(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00434ae0 END
 
 // !FUNC 0x00434b80 BEGIN
 /* 434B80-434BC9 00049 */
-wchar_t* CDSException::FUN_00434b80(int* param_1) { STUB_BODY(); return 0; }
+wchar_t* CDSException::CDSException_GetMessageW(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00434b80 END
 
 // !FUNC 0x00448a6d BEGIN

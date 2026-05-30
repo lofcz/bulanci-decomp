@@ -6,7 +6,7 @@
 class CBulAnim {
 public:
 	// !DECL 0x0040ad20 BEGIN
-	/* 40AD20 */ uchar CleanupBody(uchar param_1);
+	/* 40AD20 */ void CleanupBody(void* param_1);
 	// !DECL 0x0040ad20 END
 	// !DECL 0x0040afd0 BEGIN
 	/* 40AFD0 */ uchar ApplyTeamPalette(uchar param_1);
@@ -48,7 +48,7 @@ public:
 	/* 438F60 */ uchar IDSAnim_BindUserData(uint param_1, int* param_2);
 	// !DECL 0x00438f60 END
 	// !DECL 0x00439010 BEGIN
-	/* 439010 */ uchar SetPalette(uint* param_1);
+	/* 439010 */ void SetPalette(uint* param_1);
 	// !DECL 0x00439010 END
 	// !DECL 0x004391d0 BEGIN
 	/* 4391D0 */ uchar IDSAnim_SetSequence_thunk(uint param_1, int* param_2);
@@ -56,11 +56,8 @@ public:
 	// !DECL 0x004392a0 BEGIN
 	/* 4392A0 */ uchar IDSAnim_SelectRandomTrack(uint param_1, short param_2);
 	// !DECL 0x004392a0 END
-	// !DECL 0x00439520 BEGIN
-	/* 439520 */ uchar Sub04Dtor_thunk(uchar param_1);
-	// !DECL 0x00439520 END
 	// !DECL 0x00439530 BEGIN
-	/* 439530 */ uchar Sub10Dtor_thunk(uchar param_1);
+	/* 439530 */ uchar CBulAnim_Sub10Dtor_thunk(uchar param_1);
 	// !DECL 0x00439530 END
 	// !DECL 0x00439540 BEGIN
 	/* 439540 */ uchar Sub18Dtor_thunk(uchar param_1);

@@ -1,0 +1,125 @@
+{
+  "totalResources": 347,
+  "withAnyXref": 347,
+  "withConcreteXref": 344,
+  "withInsnXref": 102,
+  "withDataXref": 146,
+  "withGhidraText": 45,
+  "withIdaText": 87,
+  "withAnalysisMd": 43,
+  "withScriptHit": 113,
+  "orphanOnly": 3,
+  "deadOnly": 3,
+  "adjacencyOnly": 0,
+  "overlayOnly": 0,
+  "byClass": {
+    "AudioBankIndex": {
+      "count": 5,
+      "withAnyXref": 5,
+      "withConcreteXref": 5,
+      "orphanOnly": 0,
+      "deadOnly": 0,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    },
+    "Poem": {
+      "count": 13,
+      "withAnyXref": 13,
+      "withConcreteXref": 13,
+      "orphanOnly": 0,
+      "deadOnly": 0,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    },
+    "DsmInner": {
+      "count": 1,
+      "withAnyXref": 1,
+      "withConcreteXref": 1,
+      "orphanOnly": 0,
+      "deadOnly": 0,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    },
+    "BitmapSpecial": {
+      "count": 159,
+      "withAnyXref": 159,
+      "withConcreteXref": 158,
+      "orphanOnly": 1,
+      "deadOnly": 1,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    },
+    "Font": {
+      "count": 3,
+      "withAnyXref": 3,
+      "withConcreteXref": 3,
+      "orphanOnly": 0,
+      "deadOnly": 0,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    },
+    "BitmapSprite": {
+      "count": 130,
+      "withAnyXref": 130,
+      "withConcreteXref": 128,
+      "orphanOnly": 2,
+      "deadOnly": 2,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    },
+    "HistoryScript": {
+      "count": 3,
+      "withAnyXref": 3,
+      "withConcreteXref": 3,
+      "orphanOnly": 0,
+      "deadOnly": 0,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    },
+    "BitmapJPEG": {
+      "count": 9,
+      "withAnyXref": 9,
+      "withConcreteXref": 9,
+      "orphanOnly": 0,
+      "deadOnly": 0,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    },
+    "Script": {
+      "count": 6,
+      "withAnyXref": 6,
+      "withConcreteXref": 6,
+      "orphanOnly": 0,
+      "deadOnly": 0,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    },
+    "Mp3": {
+      "count": 9,
+      "withAnyXref": 9,
+      "withConcreteXref": 9,
+      "orphanOnly": 0,
+      "deadOnly": 0,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    },
+    "AudioBank": {
+      "count": 5,
+      "withAnyXref": 5,
+      "withConcreteXref": 5,
+      "orphanOnly": 0,
+      "deadOnly": 0,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    },
+    "BitmapJpegAnim": {
+      "count": 4,
+      "withAnyXref": 4,
+      "withConcreteXref": 4,
+      "orphanOnly": 0,
+      "deadOnly": 0,
+      "adjacencyOnly": 0,
+      "overlayOnly": 0
+    }
+  }
+}

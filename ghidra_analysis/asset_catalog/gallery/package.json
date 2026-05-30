@@ -1,0 +1,61 @@
+{
+  "name": "bulanci-asset-catalog",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "bun@1.3.14",
+  "scripts": {
+    "dev": "vp dev",
+    "build": "tsc -b && vp build",
+    "preview": "vp preview"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@galacean/editor-ui": "^1.2.0",
+    "@radix-ui/react-context-menu": "^2.2.16",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-popover": "^1.1.15",
+    "@radix-ui/react-scroll-area": "^1.2.1",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.4",
+    "@tanstack/react-virtual": "^3.13.26",
+    "blakejs": "^1.2.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "dockview-react": "^6.6.1",
+    "idb-keyval": "^6.2.4",
+    "lucide-react": "^0.460.0",
+    "monaco-editor": "^0.55.1",
+    "mutative": "^1.3.0",
+    "react": "^19.0.0",
+    "react-arborist": "^3.8.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.5.4",
+    "travels": "^1.3.1",
+    "tw-animate-css": "^1.2.0",
+    "vscode-jsonrpc": "^8.2.1",
+    "vscode-ws-jsonrpc": "^3.5.0",
+    "zustand": "^5.0.14",
+    "zustand-mutative": "^1.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^6.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.2",
+    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+    "ws": "^8.21.0",
+    "vite-plus": "latest"
+  },
+  "overrides": {
+    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+    "vitest": "npm:@voidzero-dev/vite-plus-test@latest"
+  }
+}

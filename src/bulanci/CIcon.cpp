@@ -12,7 +12,7 @@ uchar CIcon::CIcon_Invalidate(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00403e40 BEGIN
 /* 403E40-403E96 00056 */
-uchar CIcon::CIcon_Render(int param_1) { STUB_BODY(); return 0; }
+void CIcon::CIcon_Render(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00403e40 END
 
 // !FUNC 0x00403ea0 BEGIN
@@ -22,7 +22,7 @@ uchar CIcon::CIcon_OnMouseUp(uint param_1, uchar param_2) { STUB_BODY(); return 
 
 // !FUNC 0x004049e0 BEGIN
 /* 4049E0-404A5A 0007A */
-uint* CIcon::CIcon_ctor(uint* param_1) { STUB_BODY(); return 0; }
+void* CIcon::CIcon_ctor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004049e0 END
 
 // !FUNC 0x00404a60 BEGIN
@@ -49,16 +49,16 @@ uchar CIcon::CIcon_AdjustorThunk18_Dtor(uchar param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x00404aa0 BEGIN
 /* 404AA0-404B02 00062 */
-uchar CIcon::CIcon_dtor(uchar param_1) { STUB_BODY(); return 0; }
+void CIcon::CIcon_dtor(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00404aa0 END
 
 // !FUNC 0x004065e0 BEGIN
 /* 4065E0-4065FE 0001E */
-void* CIcon::CIcon_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+uchar CIcon::CIcon_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004065e0 END
 
 // !FUNC 0x004086e0 BEGIN
 /* 4086E0-4087EA 0010A */
-void* CIcon::CIcon_BuildAt(uint param_1, uint param_2, ushort param_3, int param_4) { STUB_BODY(); return 0; }
+uchar CIcon::CIcon_BuildAt(uint param_1, uint param_2, ushort param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x004086e0 END
 

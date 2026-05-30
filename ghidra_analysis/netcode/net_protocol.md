@@ -4,8 +4,8 @@ The multiplayer stack is two layers thick:
 
 ```
 +----------------------------------------------------+
-| CGame::ProcessNetMessage  (FUN_00415290)           |  ←— first-byte dispatch
-| switch ((char)msg[0]) { case 0x00..0x19, 0x64 }    |
+| CGame::ProcessNetMessage  @ 0x00415290           |  ←— first-byte dispatch
+| switch ((char)msg[0]) { case 0x00..0x19, 0x64 }    |  (0x1A–0x63: dropped)
 +----------------------------------------------------+
        ▲ (called per-frame from CGame::FUN_00416030  ▲ (and from the
        ▲  case 0, which pulls one message via Recv)  ▲  recording-playback
@@ -29,7 +29,8 @@ The multiplayer stack is two layers thick:
 |     ┌─────────────────────────────────────────────┐|
 |     | +0x00 : primary  vftable  (CDSDirectPlay)   ||
 |     | +0x04 : secondary vftable (CDSWorkingThread)||
-|     | +0x18..+0x34 : CDSMemQueue (lock+ringbuf)   ||
+|     | +0x18..+0x37 : CDSMemQueue (lock+ringbuf)   ||
+|     |   internal record: u32 len + payload only   ||
 |     | +0x38 : void* scratchBuf  (re-used on drain)||
 |     | +0x40 : HANDLE wakeEvent                    ||
 |     | +0x44 : byte   stopFlag                     ||
@@ -45,8 +46,17 @@ The multiplayer stack is two layers thick:
         ▲   args: (idFrom, idTo=0, flags=DPSEND_GUARANTEED, buf, len)
 ```
 
-`CGame` stores its `CDSDirectPlay*` at `CGame+0x1dc`. CGaming inherits from
-CGame at offset 4, so the same field is `CGaming+0x1d8`.
+`CGaming` inherits `CGame` at offset 4. In-match networking fields (verified
+from `CGame::SchedulerDispatch` case 0 @ `0x00416030`):
+
+| `CGaming+` | `CGame+` | Field |
+|---|---|---|
+| `+0x1D8` | `+0x1D4` | `CDSDirectPlay*` (COM session wrapper) |
+| `+0x1DC` | `+0x1D8` | receive payload buffer pointer |
+| `+0x1E0` | `+0x1DC` | receive buffer capacity / size out-param |
+
+Do not conflate `CDSDirectPlay*` with the recv byte buffer — they are adjacent
+pointers at `+0x1D8` / `+0x1DC` on `CGaming`.
 
 ## RTTI / vtable anchors
 
@@ -107,8 +117,8 @@ exclusively (ANSI variant). No DPlay 8 / DirectPlay Voice traces.
 | `0x0043b270` | `CDSDirectPlay::CDSDirectPlay()`             | —              | Zeroes GUIDs and member ptrs; ctors the embedded sender, which spins up the worker thread.            |
 | `0x0043b2e0` | `CDSDirectPlay::~CDSDirectPlay()` (impl)     | —              | Free conn buffer, dtor sender, drop COM refs.                                                          |
 | `0x0043ae70` | `CDSDirectPlay::SetGuids(sp, app)`           | `CoCreateInstance` ×2 | Stores SP GUID at +0x0c, app GUID at +0x1c. Always called by the host/join helpers.                   |
-| `0x0043b620` | `CDSDirectPlay::ConnectLobby(sp, app)`       | `EnumConnections` @+0x8c | Used for hosting **and** for the IPX fallback path; uses the in-process service provider directly.    |
-| `0x0043b360` | `CDSDirectPlay::ConnectTCP(sp, app, host)`   | `IDirectPlayLobby3::CreateCompoundAddress` @+0x38 | Builds a DPADDRESS with DPAID_ServiceProvider + DPAID_INet(host string), then `InitializeConnection`. |
+| `0x0043b620` | `CDSDirectPlay::ConnectLobby(sp, app)`       | `EnumConnections` @+0x8c | **Host path** (`CMenu_OpenNetworkSession` @ `0x414dd0`) and IPX fallback; uses the in-process service provider directly. |
+| `0x0043b360` | `CDSDirectPlay::ConnectTCP(sp, app, host)`   | `IDirectPlayLobby3::CreateCompoundAddress` @+0x38 | **Join + TCP only** (after IP dialog); builds DPADDRESS with DPAID_ServiceProvider + DPAID_INet(host string), then `InitializeConnection`. |
 | `0x0043abd0` | `CDSDirectPlay::InitializeConnection()`      | `InitializeConnection` @+0x98 | Marks `+0x35 = 1`.                                                                                    |
 | `0x0043af00` | `CDSDirectPlay::HostSession(name)`           | `Open(SD, DPOPEN_CREATE)` @+0x60 + `CreatePlayer` @+0x18 | `DPSESSIONDESC2.dwFlags = 0x2044` = `DIRECTPLAYPROTOCOL\|MIGRATEHOST\|KEEPALIVE`. **Host migration is on.** |
 | `0x0043afa0` | `CDSDirectPlay::JoinSession(instanceGuid)`   | `Open(SD, DPOPEN_JOIN)` @+0x60 + `CreatePlayer` @+0x18 | `dwFlags = 0x2000` (just `DIRECTPLAYPROTOCOL`). The session instance GUID comes from the lobby's session list. |
@@ -125,13 +135,26 @@ exclusively (ANSI variant). No DPlay 8 / DirectPlay Voice traces.
 
 ### Wire format
 
-Every payload that crosses the wire is:
+Every **DirectPlay application payload** Bulánci emits is:
 
 ```
-DWORD  dwFromID    ┐  added by DirectPlay
-DWORD  dwLength    ┘  (used by recording playback only)
-byte   msgType     ←  first byte of the payload Bulánci itself emits
+byte   msgType     ←  first byte (offset 0); no engine-level length prefix
 …      msgBody     ←  type-specific, always little-endian
+```
+
+There is **no encryption or compression** on this path — bytes are copied
+verbatim to/from `IDirectPlay4::Send` / `Receive`.
+
+The embedded send queue (`CDSDirectPlaySender::EnqueueSend` @ `0x43b680`)
+writes **`u32 len + payload`** into the internal `CDSMemQueue` ring only;
+that length prefix is **not** on the wire.
+
+Demo recording/replay (`CGaming+0x1BC` stream) uses a separate journal format:
+
+```
+DWORD  idFrom
+DWORD  len
+byte   payload[len]
 ```
 
 Everything is sent with `idTo=0` (**broadcast to every player in the session**)
@@ -139,6 +162,10 @@ and `DPSEND_GUARANTEED` (reliable, ordered — DirectPlay's TCP-like delivery
 on top of either real TCP or IPX). No client-server filtering exists below
 the dispatcher; filtering happens in `case` bodies via `this[0x30] == 0x6`
 ("we're in the playing state") and similar state checks.
+
+**Verified opcode ceiling:** engine handles **`0x00`–`0x19`** plus admin
+**`0x64`** only (27 game opcodes). Opcodes **`0x1A`–`0x63`** (including
+`0x20`–`0x2F`) fall through the dispatcher with no handler.
 
 ## `CGame::ProcessNetMessage` (`FUN_00415290`)
 
@@ -190,7 +217,7 @@ little-endian. `WCHAR` is UTF-16 LE. ANSI strings come from
 
 | Type | Total | Layout (offset · field · meaning) | Sender (renamed in Ghidra) | Dispatcher handler |
 |---:|---:|---|---|---|
-| `0x00` | `0x2A + N*0x24` | `+0 u8 type=0` · `+1 u8 dpInit` (`CGame[0x35]`) · `+2 u8 N` (≤4) · `+3 u32 N` (loop count) · `+7..+0x29` 35 bytes uninitialised · `+0x2A` `N × PlayerRec[36]` (ANSI, zero-padded) | `CGame_OpenNetworkSession_AndSendJoin_t00` @ `0x00414dd0` | case 0 — host adds players, then broadcasts `0x01`. |
+| `0x00` | `0x2A + N*0x24` | `+0 u8 type=0` · `+1 u8 dpInit` (`CGame+0x35`) · `+2 u8 field_0x37` · `+3 u32 profileCount` · `+7..+0x29` uninit padding · `+0x2A` `N × PlayerRec[36]` (ANSI, zero-padded) | `CMenu_OpenNetworkSession` @ `0x00414dd0` (join inline) | case 0 — host adds players, then broadcasts `0x01`. |
 | `0x01` | `0x23 + M*0x24` | `+0 u8 type=1` · `+1 u32 echoedClientDPID` · `+5 u8 totalSlots` · `+6 u8 M` (≤4) · `+7 u8 hostSlot[4]` · `+0xB u32 dpid[4]` (always 4 slots; unused are noise) · `+0x1B u32 randSeed` · `+0x1F u32 M` · `+0x23` `M × PlayerRec[36]` | `CGame_ProcessNetMessage` case 0 itself (`0x00415290`) | case 1 — client transitions `CGame[0x30]: 1→2` and fills the roster. |
 | `0x02` | `wcslen·2 + 4` | `+0 u8 type=2` · `+1 u8 slot` · `+2 WCHAR name[wcslen+1]` (UTF-16, null-terminated) | `CGame_NetSendRename_t02` @ `0x004139b0` | case 2 — `CBulanci::FUN_0042d510(slot, name)` + chat-list event 0xE1. |
 | `0x03` | `3` | `+0 u8 type=3` · `+1 u8 slot` · `+2 u8 avatarIdx` | `CGame_NetSendSetAvatar_t03` @ `0x00412c70` | case 3 — `CGame[slot*0x23 + 0xdc] = avatar`. |
@@ -198,8 +225,8 @@ little-endian. `WCHAR` is UTF-16 LE. ANSI strings come from
 | `0x05` | `0x26` | `+0 u8 type=5` · `+1 CHAR name[37]` (ANSI, zero-padded, null-terminated) | `CGame_NetSendSetLevel_t05` @ `0x00414340` | case 5 — `CGame[0xcc]` (level title) updated. **Fixed 38 bytes regardless of name length.** |
 | `0x06` | `wcslen·2 + 4` | `+0 u8 type=6` · `+1 u8 slot` · `+2 WCHAR text[wcslen+1]` (UTF-16, null-terminated) | `CGame_NetSendChat_t06` @ `0x00413b90` | case 6 — chat-list event 0xE1 with the text. |
 | `0x07` | `2` | `+0 u8 type=7` · `+1 u8 countdown` | `CGame_NetSendCountdown_t07` @ `0x00412da0` | case 7 — `CGame[0x1e8] = countdown`. |
-| `0x08` | `3` | `+0 u8 type=8` · `+1 u8 slot` · `+2 u8 newState` (hard-coded `2` = "level loaded" at the only call-site) | `CGame_NetSendSlotChange_t08_t09` @ `0x00413ce0` (2nd Send) | case 8 — `CGame[slot*0xd + 0x16f] = state`. |
-| `0x09` | `6` | `+0 u8 type=9` · `+1 u8 slot` (hard-coded `1`) · `+2 u32 value` (hard-coded `0`) | `CGame_NetSendSlotChange_t08_t09` @ `0x00413ce0` (1st Send) | case 9 — chat-list event 0xE3. |
+| `0x08` | `3` | `+0 u8 type=8` · `+1 u8 slot` · `+2 u8 newState` (hard-coded `2` = "level loaded" at the only call-site) | inline in `CGame_StartGame` @ `0x00413ce0` (2nd Send) | case 8 — `CGame[slot*0xd + 0x16f] = state`. |
+| `0x09` | `6` | `+0 u8 type=9` · `+1 u8 slot` (hard-coded `1`) · `+2 u32 value` (hard-coded `0`) | inline in `CGame_StartGame` @ `0x00413ce0` (1st Send) | case 9 — chat-list event 0xE3. |
 | `0x0A` | `3` | `+0 u8 type=0xA` · `+1 u8 senderSlot` (`CGame[0xdb]`) · `+2 u8 newStatus` | `CGame_NetSendKick_t0a` @ `0x004124a0` | case A — only `CGame[0x30] == 6`. Sets `CGame[slot*0xd + 0x174] = newStatus` (per-slot mid-game status). |
 | `0x64` | `2` | `+0 u8 type=0x64` · `+1 u8 adminByte` | `CGame_NetSendAdminByte_t64` @ `0x00412d40` | case `'d'` — `CGame[0x19d] = v`. |
 
@@ -215,11 +242,11 @@ All match cases no-op unless `CGame[0x30] == 6` (playing state).
 | Type | Total | Layout                                                                                                                | Sender (renamed) | Dispatcher handler (in `CGame::CGame_ProcessNetMessage`) |
 |---:|---:|---|---|---|
 | `0x0B` | `2` | `+0 u8 type=0xB` · `+1 u8 isWin` (1 → engine event `0x80CC`, 0 → `0x80CD`)                                            | `CGame_NetSendRoundResult_t0b` @ `0x00413180` | case B — round-end UI event. |
-| `0x0C` | `3` | `+0 u8 type=0xC` · `+1 u8 attacker` · `+2 u8 victim`                                                                  | `CGame_NetSendDamage_t0c` @ `0x00412a40` | case C — `FUN_0041f210(cgaming, atk, vic)`. |
+| `0x0C` | `3` | `+0 u8 type=0xC` · `+1 u8 slot` · `+2 u8 weaponKind` | `CGame_NetSendDamage_t0c` @ `0x00412a40` | case C — `CGame_OnNetMsg_t0c_ApplyWeaponLoadout` @ `0x41f210` → `ApplyPickupEffect` (weapon/ammo sync, not HP). |
 | `0x0D` | `7` | `+0 u8 type=0xD` · `+1 u8 slot` · `+2 u8 animState` · `+3 S16 x` · `+5 S16 y`                                         | `CGame_NetSendPlayerState_t0d` @ `0x00412b10` (called from `CBulanek::FUN_00420910` on every anim change) | case D — `FUN_004209f0(cgaming, slot, animState, &xy)`. Position is signed 16-bit (truncated). |
 | `0x0E` | `2` | `+0 u8 type=0xE` · `+1 u8 slot`                                                                                       | `CGame_NetSendPlayerEvent1_t0e` @ `0x00412b60` | case E — `FUN_00420a70(cgaming, slot)` → `FUN_004208c0(player)` → **`FUN_00420650(player)`** = "do primary action with currently-held item": `switch(*(byte*)(player+0x64))` → fire pistol (case 0) / throw grenade (case 1) / place mine (case 2 or 5) / case 3 / case 4. The weapon kind is implicit because it's already mirrored on every peer via `0x0d` / state messages. |
 | `0x0F` | `8` | `+0 u8 type=0xF` · `+1 u8 shooter` · `+2 u8 target` (`0xFF` = none) · `+3 u8 weapon` · `+4 S16 x` · `+6 S16 y`        | `CGame_NetSendShotSpawn_t0f` @ `0x00412b90` | case F — `FUN_00417e80(cgaming, shooter, target, weapon, &xy, 0)`. Sent **alongside `0x0e`** for bullet-style weapons so the projectile spawns deterministically on every peer (kind + seed + velocity baked in). |
-| `0x10` | `7` | `+0 u8 type=0x10` · `+1 u8 shooter` · `+2 u8 victim` · `+3 S16 x` · `+5 S16 y`                                        | `CGame_NetSendHit_t10` @ `0x00412bf0` | case 10 — `FUN_00420510(cgaming, shooter, victim, &xy)`. |
+| `0x10` | `7` | `+0 u8 type=0x10` · `+1 u8 hit_slot` · `+2 u8 face` · `+3 S16 x` · `+5 S16 y` | `CGame_NetSendHit_t10` @ `0x00412bf0` | case 10 — `CGaming_OnNetMsg_t10_Hit` @ `0x420510` → `RespawnPlayer` at impact. |
 | `0x11` | `2` | `+0 u8 type=0x11` · `+1 u8 slot`                                                                                      | `CGame_NetSendPlayerDie_t11` @ `0x00412c40` | case 11 — `FUN_004180c0(cgaming, slot)` → `CBulanek::FUN_00417570` (death + respawn timer). |
 | `0x12` | `3` | `+0 u8 type=0x12` · `+1 S16 secondsLeft`                                                                              | `CGame_NetSendRoundTimer_t12` @ `0x00412a00` | case 12 — `CGame[0x20e] = secs; FUN_00419d60(cgaming, secs, …)`. |
 | `0x13` | `5` | `+0 u8 type=0x13` · `+1 S16 x` · `+3 S16 y`                                                                           | `CGame_NetSendWorldEvent_t13` @ `0x00412950` (sent **by the host** from `CGaming::FUN_0041e350`, the random pickup-spawner) | case 13 — `FUN_0041d2c0(cgaming, &xy) = FUN_0041d280(cgaming, kind=1, slot=100, &xy)` → **spawns the "special" world pickup** (kind=1, sprite `&DAT_004827f4[1] = 0x000100b3`) at world-slot 100. |
@@ -228,7 +255,7 @@ All match cases no-op unless `CGame[0x30] == 6` (playing state).
 | `0x16` | `3` | `+0 u8 type=0x16` · `+1 u8 category` (0..3) · `+2 u8 arg`                                                             | `CGame_NetSendTeamScoreEvent_t16` @ `0x00414550` (only when `isReplay==0`) | case 16 — calls back with `isReplay=1` to run the local effect without re-broadcasting. |
 | `0x17` | `3` | `+0 u8 type=0x17` · `+1 u8 a` · `+2 u8 b`                                                                             | `CGame_NetSendOpposingEvent_t17` @ `0x004138b0` | case 17 — opposite-team counterpart of `0x16`. |
 | `0x18` | `7` | `+0 u8 type=0x18` · `+1 u8 kind` · `+2 u8 world_slot` · `+3 S16 x` · `+5 S16 y`                                       | `CGame_NetSendPlaceObject_t18` @ `0x00412ac0` (sent **by the host** from `CGaming::FUN_0041e350`, allocates `world_slot ∈ [101..107]` via `FUN_00416810`) | case 18 — `FUN_0041d280(cgaming, kind, world_slot, &xy)` → **spawns world pickup of `kind ∈ [2..5]`** (sprite from `&DAT_004827f4[kind]`) at `world_slot`. This is the general "weapon-on-the-ground" / item-drop spawner. |
-| `0x19` | `4` | `+0 u8 type=0x19` · `+1 u8 player` · `+2 u8 kind` · `+3 u8 world_slot`                                                | `CGame_NetSendTriByteEvent_t19` @ `0x00412a80` (sent by the picking player from `FUN_0041eba0`) | case 19 — `FUN_0041f010(cgaming, player, kind, world_slot) = FUN_0041eba0(player, kind, world_slot)` → **player picked up `kind` from `world_slot`**: destroys the world-object, increments `player[0x11C + kind]` inventory, plays pickup anim. |
+| `0x19` | `4` | `+0 u8 type=0x19` · `+1 u8 world_slot` · `+2 u8 kind` · `+3 u8 player_slot` | `CGame_NetSendTriByteEvent_t19` @ `0x00412a80` (from `CGame_ApplyPickup`) | case 19 — `CGame_OnNetMsg_t19_PlayerPickedUpWorldObj` @ `0x41f010`. |
 
 `idFrom == 0` (DirectPlay system message) cases:
 
@@ -252,8 +279,9 @@ The case bodies gate themselves on this:
 | `3` | … (level loading)                  |
 | `6` | **in-game / playing**              |
 
-All in-game (`0x0a..0x14`, `0x16..0x19`) message handlers no-op unless
-`this[0x30] == 6`.
+All in-game (`0x0a..0x15`, `0x18..0x19`) message handlers no-op unless
+`this[0x30] == 6`. Opcodes **`0x16` and `0x17`** are not gated in the
+dispatcher (they re-enter send helpers with `isReplay=1`).
 
 ## Replication of player / projectile state
 
@@ -267,13 +295,10 @@ The engine ships only **events**, never per-tick snapshots. Conceptually:
   remote `CBulanek`'s position and starts the matching animation. Between
   state changes there is no traffic — interpolation/extrapolation, if any,
   is local-only.
-* **Shots / projectiles** — `FUN_00417e80(shooter, target, weapon, &xy,
-  isLocal)` is called both by AI/local shoot code and the dispatcher.
-  When `isLocal != 0` (the local player fired), it broadcasts type
-  **`0x0f`** so peers can spawn the same projectile locally. Hit
-  resolution (type **`0x10`**) and damage application (**`0x0c`**) are
-  separate messages: the shooter's machine doesn't decide damage — the
-  authoritative slot does (typically the host).
+* **Hit / respawn-at-impact** — type **`0x10`** carries `[hit_slot, face,
+  x, y]` from the hit player's machine; peers run `CGaming_OnNetMsg_t10_Hit`
+  to reposition and set facing. Separate from weapon loadout sync (**`0x0C`**
+  `[slot, weaponKind]`) and shot spawn (**`0x0F`**).
 * **Death** — type **`0x11`** is emitted from `CBulanek::FUN_00412c40`,
   which is in turn called by the death state machine after damage drains
   the slot's HP. The dispatcher's case body re-runs the local death

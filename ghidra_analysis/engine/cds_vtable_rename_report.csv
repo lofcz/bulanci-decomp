@@ -1,0 +1,37 @@
+kind,target,address,new_name,status,reason
+global,g_pCDSApp_vftable,0x0048700c,g_pCDSApp_vftable,already_set,was correct; plate comment refreshed
+global,g_pCDSView_vftable_primary,0x0047f954,g_pCDSView_vftable_primary,applied,type CDSView_vftable_t * (not bare struct; g_p prefix rule)
+global,g_pCBulanci_vftable_primary,0x0047f834,g_pCBulanci_vftable_primary,already_set,plate comment refreshed
+global,g_pCDSObject_vftable_IDSReferenced,0x0047f6a8,g_pCDSObject_vftable_IDSReferenced,applied,3-slot IDSReferenced face
+global,g_pCDSChain_vftable_IDSChained,0x0047f6b8,g_pCDSChain_vftable_IDSChained,applied,6-slot chain face @+0x14
+global,g_pCDSChain_vftable_IDSReferenced,0x0047f6d4,g_pCDSChain_vftable_IDSReferenced,applied,3-slot referenced face @+0x18
+global,g_pCDSWorkingThread_vftable_IDSReferenced,0x00489560,g_pCDSWorkingThread_vftable_IDSReferenced,applied,
+global,g_pCDSWorkingThread_vftable_IDSChained,0x00489570,g_pCDSWorkingThread_vftable_IDSChained,applied,
+global,g_pCDSBackBuffer_vftable_IDSEventHandler,0x00486f9c,g_pCDSBackBuffer_vftable_IDSEventHandler,applied,embedded in CDSApp @+0x7c
+global,g_pCDSBackBuffer_vftable_IDSReferenced,0x00486fb0,g_pCDSBackBuffer_vftable_IDSReferenced,applied,embedded @+0x80
+global,g_pCDSFlxFile_vftable_resource,0x0048725c,g_pCDSFlxFile_vftable_resource,applied,was unnamed vftable label
+global,g_pCDSFlxFile_vftable_chain,0x00487274,g_pCDSFlxFile_vftable_chain,applied,
+global,g_pCDSFlxFile_vftable_event,0x00487290,g_pCDSFlxFile_vftable_event,applied,
+global,g_pCDSFlxFile_vftable_meta,0x004872a4,g_pCDSFlxFile_vftable_meta,applied,10-slot meta face
+global,g_pCDSFlxFile_vftable_IDSReferenced,0x004872d0,g_pCDSFlxFile_vftable_IDSReferenced,applied,
+global,g_kBulanciAppGuid,0x00481a50,g_abBulanciDirectPlayGuid,rejected_rename,existing g_abBulanciDirectPlayGuid kept; g_kBulanciAppGuid rejected (k prefix not in validator for GUID)
+data_comment,0x00481a50,0x00481a50,,applied,plate comment with GUID literal via batch_set_comments
+function,CDSView_GetClassTable,0x00403390,CDSView_GetClassTable,applied,CDSView primary slot0
+function,CDSView_DtorScalar,0x0040ada0,CDSView_DtorScalar,applied,CDSView primary slot1
+function,CBulanci_DtorScalar,0x00402b00,CBulanci_DtorScalar,applied,CBulanci primary slot1
+function,CBulanci_dtor,0x00402c30,CBulanci_dtor,applied,CBulanci primary slot2
+function,CDSChain_GetClassTable,0x004011f0,CDSChain_GetClassTable,applied,shared IDSChained slot0 (89 xrefs)
+function,CDSChain_AdjustThisOffset,0x0042ac90,CDSChain_AdjustThisOffset,applied,shared IDSChained slot1
+function,CDSChain_ReleaseChild,0x0041aa40,CDSChain_ReleaseChild,applied,shared IDSChained slot2
+function,CDSChain_Referenced_GetClassTable,0x00401200,CDSChain_Referenced_GetClassTable,applied,IDSReferenced slot0
+function,CDSChain_Referenced_DtorScalar,0x00401210,CDSChain_Referenced_DtorScalar,applied,IDSReferenced slot1
+function,CDSObject_GetClassTable,0x004011e0,CDSObject_GetClassTable,applied,CDSObject IDSReferenced slot0
+function,CDSWorkingThread_GetClassTable,0x00447210,CDSWorkingThread_GetClassTable,applied,
+function,CDSWorkingThread_DtorScalar,0x004472e0,CDSWorkingThread_DtorScalar,applied,
+function,CDSBackBuffer_GetClassTable,0x0042ad20,CDSBackBuffer_GetClassTable,applied,
+function,CDSBackBuffer_DtorScalar,0x0042adb0,CDSBackBuffer_DtorScalar,applied,
+function,CDSFlxFile_*,0x004328f0-0x00432b60,CDSFlxFile_Sub*,applied,resource/chain/event/meta faces per catalog
+batch,ApplyCdsVtableRenames.java,,,applied,40 functions renamed; 46 already correct; 0 failures
+batch,vftable_methods.csv,,,patched,1763 method_name cells updated from TSV (shared thunks propagate)
+export,DumpVftablesCsv.java,,,skipped,MCP could not load script after copy (bundle errors in ghidra_scripts); used TSV patch instead
+save,bulanci.exe,,,saved,save_program succeeded

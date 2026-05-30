@@ -6,25 +6,25 @@
 class CHistoryScript {
 public:
 	// !DECL 0x004226c0 BEGIN
-	/* 4226C0 */ CDSScript* ctor(CDSScript* param_1);
+	/* 4226C0 */ void* ctor(void* param_1);
 	// !DECL 0x004226c0 END
 	// !DECL 0x00422760 BEGIN
-	/* 422760 */ uchar* FUN_00422760();
+	/* 422760 */ uchar* CHistoryScript_GetClassTable();
 	// !DECL 0x00422760 END
 	// !DECL 0x00422780 BEGIN
-	/* 422780 */ uchar FUN_00422780(uchar param_1);
+	/* 422780 */ uchar CHistoryScript_ScalarDeletingDtor_thunk(uchar param_1);
 	// !DECL 0x00422780 END
 	// !DECL 0x00422790 BEGIN
-	/* 422790 */ uchar FUN_00422790(uchar param_1);
+	/* 422790 */ uchar CHistoryScript_ScalarDeletingDtor_thunk_Sub438(uchar param_1);
 	// !DECL 0x00422790 END
 	// !DECL 0x004227a0 BEGIN
-	/* 4227A0 */ uchar FUN_004227a0(uchar param_1);
+	/* 4227A0 */ uchar CHistoryScript_AdjustOffsetDtor(uchar param_1);
 	// !DECL 0x004227a0 END
 	// !DECL 0x004227b0 BEGIN
-	/* 4227B0 */ uchar FUN_004227b0(uint* param_1);
+	/* 4227B0 */ void CHistoryScript_dtor(void* param_1);
 	// !DECL 0x004227b0 END
 	// !DECL 0x00422ae0 BEGIN
-	/* 422AE0 */ void* FUN_00422ae0(uchar param_1);
+	/* 422AE0 */ void* CHistoryScript_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00422ae0 END
 	// !DECL 0x00422b00 BEGIN
 	/* 422B00 */ static uchar HhBuildStaticTextAuto(int param_1);

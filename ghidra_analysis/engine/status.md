@@ -45,7 +45,7 @@ These represent core execution engines, lifecycle managers, hardware wrappers, a
   * **App descriptor** at `g_AppDescriptor @ 0x004b3300` is a CDS class-registration record filled at C++ static-init time by `CBulanci_RegisterAppDescriptor` calling `HandleClassRegister(_, 2000, &g_AppClassTable, &CBulanci_CreateObject)`. The `+0xc` slot holds the factory pointer the engine top-level invokes.
   * Functions named in Ghidra (this round): `WinMain`, `CDSApp_AppMain`, `CDSApp_OnCreate`, `CDSApp_Run`, `CDSApp_WndProc`, `CDSApp_WndProcDispatch`, `CDSApp_OnActivateApp`, `CDSApp_PreCreateHook`, `CDSApp_OnDestroy`, `CDSApp_SetWindowed`, `CDSApp_ctor`, `CDSApp_dtor`, `CDSApp_DtorScalar`, `CDSApp_GetClassTable`, `CDSApp_DispatchInputEvent`, `CDSApp_KeybQueue`, `CDSApp_MouseQueue`, `CDSApp_PumpTick`, `CDSApp_FrameBody`, `CDSApp_RenderFrame`, `CDSApp_InitClock`, `CDSApp_UpdateClock`, `CDSApp_PulseTasks`, `CDSApp_PollEventQueue`, `CDSApp_DispatchOneEvent`, `CDSApp_AdaptDisplaySize`, `CDSView_DoModal`, `CDSView_SetModalEligible`, `CDSView_SetActive`, `CDSView_Invalidate`, `CDSView_IsModalDoneRecursive`, `CDSView_AcquireKeyboardFocus`, `CDSView_HitTest`, `CDSView_SetRect`, `CDSView_GetParentBounds`, `CDSView_ComputeAnchoredRect`, `CDSView_OnFocus`, `CDSView_OnKeyDown`, `CDSView_OnKeyUp`, `CDSView_OnChar`, `CDSView_EmptyHook27`, `CBulanci_CreateObject`, `CBulanci_ctor`, `CBulanci_RegisterAppDescriptor`, `CBulanci_GetAppDescriptor`, `CDSDirectSound_InitPrimary`.
 * **Open questions:** Semantics of base-class vtable slots 3/4/5 (broadcast templates whose per-class meaning depends on the derived override — needs a concrete override read on e.g. `CMenu`); layout of `g_AppDescriptor` past `+0x0c`; the wakeup contract between `CDSApp_KeybQueue` / `CDSApp_MouseQueue` enqueues at `this+0x10` and the pump's `CDSApp_PollEventQueue` / `CDSApp_DispatchOneEvent` dequeue side. None of these block byte-exact matching of `CDSApp` itself.
-* **Artefacts:** `./app_shell.md`
+* **Artefacts:** `./app_shell.md`, `./master_vtable_catalog.csv`, `./master_vtable_catalog.md`, `./vftable_methods.csv`
 
 ### Animation runtime
 
@@ -68,7 +68,7 @@ These represent core execution engines, lifecycle managers, hardware wrappers, a
   * **Per-tick blit** goes through `CPoemScroller::BlitDispatch` (`TM_TickBlit @ 0x00439080`), called against the engine singleton at `DAT_004b3b88 + 0x80`.
   * **Construction templates** for both `CBulAnim` (`CMenu::FUN_004104f0`) and `CAnim` (`CBulanci::FUN_00411010`) recovered: alloc → base ctor `CDSAnim::FUN_00439560(this, x, y, NULL, 0)` → patch all 7 vftables → 4× `BindSequence(this+0x78, ...)` for the four facing/anim variants packaged in one BitmapSprite → `SetTrack` with a random starting frame and the team-tinted 256-entry palette remap.
 * **Open questions:**
-  * On-disk source of `seq[0x10]` (sequence-default duration in ms). The sequence pointer added to the track is `resource_handle + 4`, but a CBulPicture's `+0x14` field (the offset that becomes `seq[0x10]`) is uninitialized by `CBulPicture_Create` — it must be written later by the resource-pool wrapper that wraps a BitmapSprite blob into the 2-vftable sequence object returned by `(*g_pApp[0x70])->vfn[4](resId, 0)`.
+  * ~~On-disk source of `seq[0x10]`~~ **done (todo 32):** `CDSFlxFile_BindStream@0x00432ac0` writes FLX header `inMemSize` (`+0x1c`, usually `0x470` = 1136 ms total) to `nSeqTotalDurationMs` @ `CDSFlxFile+0x14` and `flags` (`+0x20`, frame count − 1) to `nSeqFrameCountMinusOne` @ `+0x18`. Track `seq` = `CDSFlxFile` meta face `resource+4`; `CBulPicture_Create` does not participate.
   * The real purpose of FLX opcode 0x0C (broadcasts a u16 via `BroadcastFrameTimeHint @ 0x00436ef0` to per-consumer subscribers). Plausible roles: profiling/debug timing hints, script-VM hooks for cadence-aware behavior, or a deprecated codepath.
   * Exact slot order of the 24-entry primary vtable (the IDSImage face).
   * Semantics of `+0x70` and `+0x74` in the IDSAnim subobject (used as a subscriber-identity cookie in `SetCurrentSequence`).
@@ -132,3 +132,125 @@ These represent core execution engines, lifecycle managers, hardware wrappers, a
 * **What's known:** Every widget has a 4- or 5-entry vtable with what looks like ctor/dtor/Draw/Tick/HandleInput.
 * **Open questions:** Exact virtual-slot order on the shared base — unlocks ~270 widget functions for typed matching.
 * **Artefacts:** —
+
+---
+
+## Gameplay spine (CBulanci / CBulanek campaign)
+
+* **Classes:** `CBulanci`, `CGame`, `CGaming`, `CGameView`, `CBulanek`, `CWeapon`, (+ leaves `CBulAnim`, `CShot`, `CMina`, `CTeleportPoint`)
+* **Confidence:** **Partial** (coordinator round 2026-05-30)
+* **What's known:**
+  * **`CBulanci`**: `0x4CC` heap app object; **`CDSApp app`** @ `+0` + **`CGame game`** @ `+0x284` (`0x248`, audio tail inside embed) — `CBulanci.md`.
+  * **`CGame`**: **584 B (`0x248`)** in Ghidra; used for embed and `CGame *` consumers — `CGame.md`.
+  * **`CGaming`**: match modal **876 B (`0x36C`)** on stack; **128 entity slots** @ `+0xC8`; **not** 0x20c (that is `CDirectKeyb`) — `CGaming.md`.
+  * **`CGameView`**: shared **152 B (`0x98`)** view header; `CBulanek` reuses through `+0x87` — `CGameView.md` / `CBitmap.md`.
+  * **`CBulanek`**: player entity **412 B (`0x19c`)**; ctor `0x0041e4b0`; 6 vtable facets; weapon @ `+0xF8`, game @ `+0xF4`, track mgr @ `+0xA8` — `CBulanek.md`.
+  * **`CWeapon`**: **112 B (`0x70`)**; owned by `CBulanek+0xF8`; `Fire` @ vtable `0x00481ed4` slot 4 — `CWeapon.md`.
+  * **Input path**: `CGame__SchedulerDispatch` case 7 → `CGame_DispatchPlayerAction` → `CBulanek_ApplyAction` (`player_controls.md`).
+* **Open questions:**
+  * Apply Ghidra structs for `CGameView`, `CGaming`, full `CBulanek` field names (MCP layout still has gaps; **`videoTrackManager` @ +0xA8** applied — agent todo 42).
+  * `CGame` padded bands and level-list element type @ `+0xbc`.
+  * `CShot` struct doc (slice 52; agent in flight).
+  * ~~Resolve `pGameEmbed` vs standalone `CGame` typing on `CBulanci`~~ **done** (agent todo 12).
+* **Artefacts:** `struct_recovery/CBulanek.md`, `CGameView.md`, `CGaming.md`, `CWeapon.md`, `gameplay_struct_backlog.md`, `struct_recovery/batches_50.json`
+
+---
+
+## Agent todo wave round 3 (2026-05-30)
+
+**Coordinator:** round-3 gather G0–G4 → [`todos_gather_r3_0.json`](./todos_gather_r3_0.json) … [`todos_gather_r3_4.json`](./todos_gather_r3_4.json) merged into [`agent_todos_50_r3.json`](./agent_todos_50_r3.json) (checklist: [`agent_todos_50_r3.md`](./agent_todos_50_r3.md)). **Sources:** 29 handoff, 13 blocker, 8 backlog (R2 results + slice blockers; skips R2-done unless new blocker). **Workers:** 50 background agents → [`agent_todos_50_r3_results.jsonl`](./agent_todos_50_r3_results.jsonl); registry [`agent_todos_50_r3_workers.json`](./agent_todos_50_r3_workers.json).
+
+**Round-3 focus:** CBulanek tail rename + ctor decompiler (41–42), `CLevelScore`/`CListBoxItem` Ghidra verify (14), `CDSChain_full` sentinel (27), MCP ECX bundle (28), ~~`CDSAudioVideoPlayer` nested track (25)~~ **done** — `videoTrackManager` → `CDSVideoPlayer` @ +0x08 (R3 todo 25), gameplay dialog/`CWindow` embeds (slices 00–19).
+
+**Ghidra MCP (2026-05-30):** Structure resize and member-function `this` typing — upstream [STRUCT_RESIZE_WORKFLOW](https://github.com/bethington/ghidra-mcp/blob/main/docs/STRUCT_RESIZE_WORKFLOW.md) (`resize_struct`, `recreate_struct`, `set_function_this_type`, …).
+
+| Band | ids | Priority highlights |
+|------|-----|---------------------|
+| G0 slices 00–09 | 1–10 | `CBulanci` tail xrefs, `CDSApp` +0x100 band, `CAdvertising` `CWindow` embed |
+| G1 slices 10–19 | 11–20 | **`CLevelScore` 0x28 apply** (14), `CPauseDlg_Build` ECX (16), `CGame+0x66` writer (13) |
+| G2 slices 20–29 | 21–30 | **`CDSChain_full`** (27), **MCP ECX bundle** (28), `videoTrackManager` retype (25) |
+| G3 slices 30–39 | 31–40 | FLX naming (31–33), `CDSFont`/`CDSImage` MI (34–35), exception dedup (39) |
+| G4 slices 40–49 | 41–50 | **CBulanek** tail cleanup (41), scheduler/video mgr ctor (42), `CWeapon_ctor` (49) |
+
+Round-2 manifest (superseded for new work): [`agent_todos_50_r2.json`](./agent_todos_50_r2.json) | results: [`agent_todos_50_r2_results.jsonl`](./agent_todos_50_r2_results.jsonl) (3/50 recorded at R3 gather time).
+
+---
+
+## Agent todo wave round 2 (2026-05-30)
+
+**Coordinator:** round-2 gather G0–G4 → [`todos_gather_r2_0.json`](./todos_gather_r2_0.json) … [`todos_gather_r2_4.json`](./todos_gather_r2_4.json) merged into [`agent_todos_50_r2.json`](./agent_todos_50_r2.json) (checklist: [`agent_todos_50_r2.md`](./agent_todos_50_r2.md)). **Sources:** 34 handoff, 14 blocker, 2 backlog (follow-ups from round-1 done/partial + slice blockers; excludes CRT SKIP). **Workers:** 50 background agents → [`agent_todos_50_r2_results.jsonl`](./agent_todos_50_r2_results.jsonl); registry [`agent_todos_50_r2_workers.json`](./agent_todos_50_r2_workers.json).
+
+**Round-2 focus:** gameplay spine field passes (`CGame`/`CGaming`/`CBulanek`), Ghidra apply gaps (slice 13 `CLevelScore`, MCP ECX retry todo 28), `CDSScript`/`CDSAudioVideoPlayer` cleanup, `CDSChain_full` sentinel (todo 27).
+
+| Band | ids | Priority highlights |
+|------|-----|---------------------|
+| G0 slices 00–09 | 1–10 | `CGame` scheduler embed, `CDSApp` MI gaps, `CDSScript` VM header |
+| G1 slices 10–19 | 11–20 | `CGaming.game` 0x248 embed, slice 13 `CLevelScore`, `CPauseDlg` ECX |
+| G2 slices 20–29 | 21–30 | `CDSChain_full`, MCP retry bundle, `CDSAudioVideoPlayer` nested track |
+| G3 slices 30–39 | 31–40 | FLX opcode 0x0C, `CDSImage` MI, exception dedup |
+| G4 slices 40–49 | 41–50 | `CBulanek` tail layout, `CWeapon` ctor, `CDSWav` vs DSM |
+
+**R2 worker 50 (todo 50):** **done** — `HandleResourceRead` `this` bases proven by disasm: `CDSWav_HandleResourceRead@0x43b960` ECX=face (`primary+4`); `CDSWav_ReleaseRefcount@0x433040` ECX=primary+0; `CDSDsmFile_HandleResourceRead@0x428ad0` ECX=`CDSDsmFile+0x1c`. Ghidra: `CDSWav_face8slots` struct, prototypes/comments, DSM rename.
+
+**R3 worker 50 (todo 50):** **done** — class-43 heap owner is **`CDSWavStream`**: `CDSWavStream_ScalarDeletingDtor@0x41bc00` → `CDSWavStream_dtor` + stash `@+0x34`; `CDSWav_ScalarDeletingDtor@0x41bbe0` is light MI (`CDSObject` only). Factory `0x4823xx` routes all installed delete thunks to stream dtor; ROM `0x482348` not written by factory. Report: [`struct_recovery/round3_task_50_report.md`](./struct_recovery/round3_task_50_report.md).
+
+Round-1 manifest (superseded for new work): [`agent_todos_50.json`](./agent_todos_50.json) | results: [`agent_todos_50_results.jsonl`](./agent_todos_50_results.jsonl).
+
+**R2 worker 1 (todo 1):** ~~`CGame.scheduler` `CDSUpdatedItem` @ +0x04~~ **done** — was `byte[24] pScheduler`; decompile `CGame_ctor` / `CGame__SchedulerDispatch@0x00416030`.
+
+---
+
+## Agent todo wave (2026-05-30) — round 1
+
+50 parallel workers dispatched from [`agent_todos_50.json`](./agent_todos_50.json) (checklist: [`agent_todos_50.md`](./agent_todos_50.md)). Gather: G0–G4 → 50 handoff todos (0 backlog fill).
+
+1. ~~Recover CGame embed at CBulanci+0x284~~ **done** — `CBulanci.game` `CGame` 584 B (todos 1/12)
+2. Reparent CBulanci to extend CDSApp in Ghidra [critical]
+3. ~~Register CGameView* and fix CGameView_ctor prototype~~ **done** — `CGameView` 152 B + `CGameView *`; ctor/update/init prototypes (agent todo 3)
+4. ~~Delete stale 1B CDSScript type; apply CDSScript* prototypes~~ [high] — **done** (worker 4, 2026-05-30)
+5. Name CAnim/CGameView header band +0x28..+0x67 [high]
+6. Apply CDeath struct 0x108 and ctor prototypes in Ghidra [high]
+7. ~~Type CBulanci+0x280 as CMenu* (main menu hook)~~ **done** — `pMainMenu` `CMenu *` @ +640 (agent todo 7)
+8. Split CDSUpdatedItem fields in CAnim track_manager +0xA8 [medium]
+9. Name CDSObject image MI slots +0x48..+0x4f [medium]
+10. Map CGunMouse trackManager +0x1B0..+0x1F7 and scalar gap [medium]
+11. ~~Rebuild global CWindow to 0x70 dialog prefix~~ **done** — `CWindow` 112 B (32 fields, chain band `+0x40..+0x50`); `CSessionList` embeds `win` (agent todo 11)
+12. ~~Shrink CGame Ghidra layout to 0x248 bytes~~ **done** — `CGame` 584 B; `CBulanci.game` embed; `CGame_embedded` removed (worker 12)
+13. ~~Name CGame level resource table at +0x66~~ **done** — `pLevelResourceTable` @ +0x66, `CGame_FindResourceByName` prototype (worker 13)
+14. ~~Fix CPauseDlg_Build decompiler this type~~ [high] **partial** — return `CPauseDlg*`; prototype/plate/call-site comments; `pGame` struct fixed; decompiler ECX `this` still `CBulanci*` / `field_0x70` (MCP `__thiscall` limit; r2 worker 14)
+15. ~~Type CMina gaming_host at anim +0x84~~ **done** — `CAnim`/`CBitmap` `gaming_host` → `CGaming *`; `CMina_UpdateTraceAreas@0x00419fd0` (agent todo 15)
+16. ~~Apply CLevelScore struct 0x28 in Ghidra~~ [high] **done** — `CLevelScore` 40 B, `scoreChain` `CDSChain` @ +0x14 (agent todo 16)
+17. ~~Split CScore base_to_6c into CWindow fields~~ [medium] **done** — `CScore` 116 B, 31 fields, `CExitDlg`-aligned prefix (worker 17)
+18. ~~Name CHelpScript / dialog CWindow prefix~~ **done** — `CHelpScript` + `CDSScript script`; `CHistoryDlg`/`CHelpDlg` embedded `CWindow win` @ 0; ctors `0x004215e0`/`0x004231d0`/`0x00421e40` (agent todo 18 r2)
+19. ~~Retype CSessionList scheduler methods this~~ **done** (R3 todo 19 — `set_function_this_type` @ 0x0040c570/0x0040c5d0/0x0040c550; scheduler @ 0x004162bd/0x0041630d)
+20. ~~Replace CMina CAnim_recovered with CAnim~~ [medium] **DONE** (worker 20 — `CMina.animBase` = `CAnim`, `CAnim_recovered` absent)
+21. Embed CDSChain_full in CGame at +0x31 (0xa4) [critical]
+22. Rename CDSChained view-tree walk helpers [critical]
+23. ~~Delete duplicate 1B CDAudioVideoPlayer type~~ **done** — nested 1 B type removed; `CDSAudioVideoPlayer_Constructor`/`_dtor`/`_ScalarDeletingDtor` use `CDSAudioVideoPlayer *`; `videoTrackManager` `byte[72]` @ +8 (agent todo 23)
+24. ~~Field-map CDSObject track_manager inside CDSAnim @ +0x88~~ **DONE** (agent todo 24: `CDSVideoPlayer track_manager` @ `CDSAnim+0x88`, `CDSObject` prefix renamed, `CDSTrackEntry` 8 B)
+25. ~~Retype CDSDirectSound_InitPrimary call sites~~ **done** — `CDSDirectSound_InitPrimary(CDSDirectSound *)`; call sites `LEA [app+0x200]` @ 0x0042a2fa / 0x0042b27d; `CDSApp::directSound` @ +0x200 (agent todo 25; InitPrimary body still `CDSApp *` in decompiler)
+26. ~~Resolve CDSDirectSound SetEvent offset (+0x4c vs +0x50)~~ **done** — handle @ +0x50; `SignalEventIfVoicesActive` asm off-by-4 @ `0x0043cce1` [high]
+27. ~~Name CDSAnim/CDSChained drawable prefix +0x28..+0x67~~ **done** — `CDSAnim`/`CDSBitmap` Ghidra fields `+0x14..+0x67` mirror `CDSChained` shell; `wChainInit44` @ `+0x44` (visibility byte, `TM_SetTrack`) (worker 27) [high]
+28. ~~Trace CDSAudioPlayer pEventTarget playback-complete dispatch~~ **done** — `CDSDirectSound_OnPlaybackCompleteMessage@0x0043cdc0` reads +0x18 after WM 0x200/1 from `OnPlaybackTick` [high]
+29. ~~Fix CTeleportPoint OnEvent partner_node typing~~ **done** — `pPartner_node` `CTeleportPoint*`; OnEvent partner probe `this[-1].pPartner_node` + `dwView_flags` @ partner `+0x44` (paired alloc)
+30. ~~Fix CDSCollection_InsertKeyed decompiler this quirk~~ **partial** (worker 30) — `CDSCollection*` prototype + plate/asm; ECX retype blocked by Ghidra API [medium]
+31. ~~CDSFlxFile DecodeFrame callsites~~ [high] — **done** (worker 31): vtable-only static xref `0x004872c0`; live dispatch `TM_AdvanceFrame@0x00439a15` → meta vtable slot 7; Ghidra comments + `CDSFlxFile.md` callsite table
+32. ~~CBulPicture seq duration ms~~ **done** — `CDSFlxFile_BindStream` hdr `inMemSize` → `nSeqTotalDurationMs` / `seq[0x10]`; Ghidra renames + comment @ `0x00432b18` (worker 32) [high]
+33. ~~FLX BindStream header dwords~~ **done** — file↔outer table @ `CDSFlxFile_BindStream@0x00432ac0`; `flx_file_format.md` + decompiler comment (agent todo 33)
+34. CDSFont payload tail fields [high]
+35. CDSImage MI Load/Save [high]
+36. ~~CDSJpegImage factory +0x60~~ **done** — `CreateObject` @ `0x00432070` (`0x64`); `+0x60` quality `0x4b`; `CDSQueueStream` @ `0x0043c160` disambiguated (worker 36) [medium]
+37. ~~CDSMpx libmad interior~~ **done** — recreated `mad_stream`/`mad_frame`/`mad_synth_bulanci`; `CDSMpx` embeds `stream`/`frame`/`synth`; libmad↔Ghidra name map in `CDSMpx.md` (worker 37) [medium]
+38. ~~CDSMpxStream persistence overlay~~ **done** — `CDSMpxStream` 39112 B with `mpxFormatTail`/`pPayloadStream`/`dwPayloadBytes` @ +0x08..+0x3c; `CDSMpxPersistFacet` 0x38; `SaveMpxFile`/`LoadMpxFile`/`CreateFromHandle` prototypes (worker 38) [medium]
+39. CDSException base struct [high]
+40. ~~CDSSafeStream auxHeap + flags~~ **done** (agent 40) — `dwM_streamFlags` write-only; `m_chain_auxHeap` teardown-only (`CDSChain_ReleaseAuxHeap`); plate @ `0x446ea0`/`0x446d90`; `save_program` OK
+41. ~~CBulanek scheduler @ +0x88~~ **done** — `CBulanek.scheduler` `CDSUpdatedItem` @ +136; ctor/tick xrefs (agent todo 41)
+42. CBulanek videoTrackManager @ +0xA8 [critical]
+43. ~~CDSUpdatedItem IDSUpdated facet @ +0x00~~ **done** — `pVftable_IDSUpdated` @ embed +0; 29-ctor catalog; `CShot`/`CGame`/`CMenu` embeds typed (agent todo 43)
+44. ~~CDSVideoPlayer CDSTrackVector @ +0x1c~~ **done** — nested `CDSTrackVector` @ +0x1c; `TM_LookupTrackIndex` / `TM_InsertTrackAt` prototypes (agent todo 44)
+45. ~~CDSStreamStorage pack collection embed~~ **done** — `CDSCollection` @ +0x1c, `CDSChain` @ +0x34; `OpenPackStream` `CDSStreamStorage*` path (agent todo 45)
+46. CDSStreamStorage IDSStorage stub audit [high]
+47. ~~CDSStrmResInfo streamExtent @ +0x14~~ [medium] **done** (agent 47)
+48. ~~ODSImage weapon namespace cleanup~~ [critical] — done (todo 48)
+49. ~~CWeapon 0x70 Ghidra struct apply~~ **done** — `CWeapon` 112 B Ghidra struct; `trackManager` `CDSVideoPlayer` @ +8, `weaponKind` @ +0x64 (agent todo 49)
+50. CDSWav class-43 vs bank overlay [high]

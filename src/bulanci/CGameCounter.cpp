@@ -2,12 +2,12 @@
 
 // !FUNC 0x0040b140 BEGIN
 /* 40B140-40B1EF 000AF */
-uchar CGameCounter::OnEvent(short param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CGameCounter::CGameCounter_OnEvent(short param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b140 END
 
 // !FUNC 0x0040bc20 BEGIN
 /* 40BC20-40BC9A 0007A */
-uint* CGameCounter::Constructor(uint* param_1) { STUB_BODY(); return 0; }
+void* CGameCounter::Constructor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040bc20 END
 
 // !FUNC 0x0040bca0 BEGIN

@@ -5,23 +5,31 @@ edition = "2021"
 
 [dependencies]
 bulanci_core = { path = "../core" }
-macroquad = "0.4"
-rodio = "0.17"
+# Game framework: sola-raylib (self-compiled fork, aliased `raylib`).
+# Path-pinned to the sibling checkout so local engine extensions are
+# picked up. This is the sole rendering/windowing/input backend.
+#
+# `custom_frame_control` hands the present/poll/pace cycle to
+# `game_loop::run` instead of `EndDrawing`, so polling stays at the top of
+# the loop and GLFW can drive live frames during the OS modal resize loop.
+raylib = { package = "sola-raylib", path = "../../../sola-raylib/raylib", features = ["custom_frame_control"] }
+# Tiny, dependency-free PRNG for the handful of cosmetic random draws
+# (poem selection, ruch scanline placement/timing) that previously used
+# macroquad's `rand`. Seeded once at startup from the wall clock.
+fastrand = "2"
 postcard = { version = "1.0", features = ["alloc"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 rmp-serde = "1.3"
 anyhow = "1.0"
 chrono = "0.4"
-# NOT imported directly anywhere — this dependency exists purely to
-# extend the `image` crate's feature set via Cargo's feature unification
-# so that macroquad's own image decoder (`macroquad::Texture2D::
-# from_file_with_format`) can decode JPEGs at runtime. Upstream
-# macroquad 0.4 pins `image` with `default-features = false,
-# features = ["png", "tga"]`, which omits the `jpeg` decoder; adding
-# `jpeg` here unifies the feature back in for all our `.jpg` assets
-# Do NOT remove!
-image = { version = "0.24", default-features = false, features = ["jpeg"] }
+# Used directly by `font.rs` to decode the CDSFont atlas PNGs to RGBA
+# for the chroma-key pass (black→transparent, white→alpha) before the
+# pixels are uploaded to a raylib texture via `update_texture`. The
+# `jpeg` feature is unused by us now (raylib's own stb_image decodes the
+# `.jpg` backgrounds) but kept on so the decoder set stays a superset of
+# what any asset on disk might be.
+image = { version = "0.24", default-features = false, features = ["png", "jpeg"] }
 # Pure-Rust gzip codec used by `config_blob` to round-trip the original
 # game's `Config` REG_BINARY payload, which is framed as standard
 # RFC 1952 gzip by the engine's `CDSGZipStream`. flate2 ships a `rust`
@@ -36,6 +44,19 @@ flate2 = { version = "1.0", default-features = false, features = ["rust_backend"
 # file backend (which is now compiled on every native target) and the
 # WASM backend need it.
 base64 = "0.22"
+
+# Native-only helpers for the dev asset pipeline:
+#  * `notify` — cross-platform file watcher behind `asset::mods`'s hot
+#    reload (ReadDirectoryChangesW / inotify / FSEvents).
+#  * `tungstenite` — minimal blocking WebSocket client behind
+#    `asset::ws_dev`, the dev client's outbound link to the asset studio's
+#    Vite mod-broker.  Handshake only (no TLS): the broker is a loopback
+#    `ws://` endpoint.  No async runtime, opt-in via `BULANCI_DEV_EDITOR`.
+# Web builds skip both via the `cfg` guards around those modules.
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+rodio = "0.17"
+notify = "6.1"
+tungstenite = { version = "0.21", default-features = false, features = ["handshake"] }
 
 # ---- Settings backends — one per target family ---------------------
 # Windows registry access: read-only into the original game's
@@ -52,11 +73,3 @@ winreg = "0.56"
 # next to the exe, so no extra dep is needed for that.
 [target.'cfg(all(not(target_arch = "wasm32"), not(target_os = "windows")))'.dependencies]
 display-info = "0.5"
-
-# WebAssembly (macroquad-on-canvas builds): the settings backend is
-# `localStorage`, exposed through `web-sys`. Window centering is a
-# no-op on the web because the canvas's screen position is owned by
-# the browser DOM / page layout, not the game.
-[target.'cfg(target_arch = "wasm32")'.dependencies]
-wasm-bindgen = "0.2"
-web-sys = { version = "0.3", features = ["Storage", "Window"] }

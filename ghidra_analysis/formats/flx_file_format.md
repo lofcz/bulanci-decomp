@@ -57,17 +57,32 @@ its dwords are then scattered into the outer `CDSFlxFile` object. We
 have not yet reverse-engineered every field but the dispatcher tells
 us:
 
-| outer offset | role                                                  |
+| outer offset | role (proven `CDSFlxFile_BindStream` @ `0x00432ac0`) |
 |---:|---|
-|  +0x28        | first header dword (likely `flags` / magic)          |
-|  +0x30 / 0x34 | source-stream `Tell()` snapshot (u64) captured after the header read -- this is the **byte offset of the first frame** inside the source stream |
-|  +0x38        | source `IDSStream*` pointer                          |
-|  +0x3c        | scratch decode-buffer pointer (alloc'd lazily)       |
-|  +0x40        | body size = stream length minus 0x24                 |
-|  +0x44 ..     | remaining header dwords; not yet decoded             |
+|  +0x08 .. +0x18 | five geometry/resource dwords from the 36-byte read (`nChannels` .. `nAnimFrameCountMinusOne`) |
+|  +0x30 / +0x34 | source-stream `Tell()` snapshot (u64) captured **after** the header read — byte offset of the first frame |
+|  +0x38        | source `IDSStream*` pointer (`pSourceStream`)       |
+|  +0x3c        | scratch decode-buffer pointer (`pDecodeBuffer`, alloc'd lazily) |
+|  +0x40        | `bodyStartCursor` — dword 1 from the header read   |
+|  +0x44        | `bodyEndCursor` = stream length minus `0x24`       |
+|  +0x48        | `dwTotalSize` — dword 0 from the header read (`== len(raw)`) |
+|  +0x4c        | `dwEncodedSize2` — dword 2 from the header read (usually equals `bodyStartCursor`) |
+
+| file header offset | outer offset | field |
+|---:|---:|---|
+|  +0x00 | +0x48 | `dwTotalSize` |
+|  +0x04 | +0x40 | `bodyStartCursor` |
+|  +0x08 | +0x4c | `dwEncodedSize2` |
+|  +0x10 | +0x10 | `nBitmapWidth` |
+|  +0x14 | +0x0c | `nBitmapHeight` |
+|  +0x18 | +0x08 | `nChannels` |
+|  +0x1c | +0x14 | `nSeqTotalDurationMs` (file alias `inMemSize` / legacy `nInMemSizeHint`; often `0x470`) |
+|  +0x20 | +0x18 | `nSeqFrameCountMinusOne` (file alias `flags`; `frameCount - 1`) |
+
+(`+0x28` is the `vf_chain` vtable slot from the factory, not a header field.)
 
 The stream cursor is **circular**: at the end of a frame, if the next
-read would go past `outer+0x40`, the cursor wraps to `outer+0x3c`
+read would go past `outer+0x44` (`bodyEndCursor`), the cursor wraps to `outer+0x3c`
 (`DecodeFrame` final block). This is what makes the format loopable
 without a separate loop bit.
 
@@ -276,34 +291,37 @@ by the `Sub20ChainOp` / `Sub24ChainOp` adjustor thunks that forward to
 
 * **`v4 = 0x0048725c`** -- type-tag (5 slots).
 
-### Outer field layout (partial)
+### Outer field layout (Ghidra `CDSFlxFile`, 0x50 bytes)
 
-| outer offset | role |
-|---:|---|
-| `+0x00` | vtable `v0` (`CDSObject`) |
-| `+0x04` | vtable `v1` (secondary) |
-| `+0x1c` | vtable `v2` (tertiary) |
-| `+0x20` | refcount (u32) -- `ReleaseRef` decrements; on transition `1 -> 0` it calls slot+0x4 of the wrapped object then deletes |
-| `+0x24` | vtable `v3` (IDSResource) |
-| `+0x28` | vtable `v4` + embedded `CDSChain` subobject |
-| `+0x30` / `+0x34` | source-stream `Tell()` snapshot (u64) at start of body |
-| `+0x38` | `IDSStream*` (source) |
-| `+0x3c` | scratch decode-buffer pointer (alloc'd via `FUN_0042f6f0`, freed via `FUN_0042f720`) |
-| `+0x40` | body size = stream length minus 0x24 |
-| `+0x44` | (header-derived field; details TBD) |
-| `+0x48` | "child window id" -- consumed by `CreateBoundClone` |
+| outer offset | name | role |
+|---:|---|---|
+| `+0x00` | `vf_IDSReferenced` | `CDSObject` vtable |
+| `+0x04` | `vf_metaFace` | secondary (`DecodeFrame` / `CloseStream`) |
+| `+0x08` | `nChannels` | from file `+0x18`; master pack always `3` |
+| `+0x0c` | `nBitmapHeight` | from file `+0x14` |
+| `+0x10` | `nBitmapWidth` | from file `+0x10` |
+| `+0x14` | `nSeqTotalDurationMs` | from file `+0x1c` |
+| `+0x18` | `nSeqFrameCountMinusOne` | from file `+0x20` |
+| `+0x1c` | `vf_event` | tertiary vtable |
+| `+0x20` | `refcount` | `ReleaseRef` |
+| `+0x24` | `vf_IDSResource` | `BindStream` adjustor face |
+| `+0x28` | `vf_chain` | type-tag + embedded `CDSChain` |
+| `+0x2c` | `bodySeekBiasLo` | added to frame cursor on `IDSStream::Seek` (factory `0`) |
+| `+0x30` / `+0x34` | `dwStreamTellLo` / `dwStreamTellHi` | `Tell()` after header read (first frame @ `0x24`) |
+| `+0x38` | `pSourceStream` | `IDSStream*` |
+| `+0x3c` | `pDecodeBuffer` | lazy scratch buffer |
+| `+0x40` | `bodyStartCursor` | file dword @ `+0x04` |
+| `+0x44` | `bodyEndCursor` | `streamLength - 0x24` |
+| `+0x48` | `dwTotalSize` | file dword @ `+0x00`; copied to decode consumer `+0x14` in `CreateBoundClone` |
+| `+0x4c` | `dwEncodedSize2` | file dword @ `+0x08` |
 
 ## Open questions
 
-1. **Header dwords +0x28..+0x44.** The 36-byte file header is read in
-   one shot but only `+0x28`, `+0x40`, `+0x44`, `+0x48` are obviously
-   used downstream. The remaining 5 dwords are scattered into negative
-   offsets of the IDSResource subobject (the decompiler shows `this -
-   0x14`, `this - 0x1c`, etc.) but their semantics still need a careful
-   pass with structure-typed `this`. Some of the unknowns likely map
-   onto the BitmapSprite outer header's `width`, `height`, `frameCount`,
-   `channels`, `inMemSize`, `flags` fields documented in
-   `sprite_container.md`.
+1. ~~**Header dwords.**~~ **Resolved (agent todo 33 / slice 30):** all nine
+   header dwords mapped in `CDSFlxFile_BindStream` disasm — see table
+   above and `struct_recovery/CDSFlxFile.md`. Bitmap geometry uses
+   `nBitmapWidth` / `nBitmapHeight`; `nChannels` is always `3` in the
+   master pack; `nSeqTotalDurationMs` (file `+0x1c`) is commonly `0x470` (`sizeof(CBulPicture)`).
 2. **Where the FLX is consumed.** `param_2` of `DecodeFrame` is an
    external "consumer" with the observer slots `+0x4`
    (`NotifyMove`-target), `+0xc` (`NotifyRegionList`-target),

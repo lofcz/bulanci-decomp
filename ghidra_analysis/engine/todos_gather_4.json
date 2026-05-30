@@ -1,0 +1,189 @@
+[
+  {
+    "id": 1,
+    "title": "CBulanek scheduler @ +0x88",
+    "types": ["CBulanek", "CDSUpdatedItem"],
+    "addresses": ["0x0041e4b0", "0x0042f060", "0x0042f210", "0x0042eb30", "0x00420910"],
+    "ghidra_actions": [
+      "modify_struct_field CBulanek scheduler @ +0x88 as CDSUpdatedItem",
+      "set_function_prototype CBulanekCtor with Scheduler_RegisterEventSlot(this+0x88,...)",
+      "xref CBulanek_SchedulerTick and CBulanek_ApplyAction slot registration"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CBulanek.md",
+      "ghidra_analysis/engine/struct_recovery/CDSUpdatedItem.md",
+      "ghidra_analysis/engine/struct_recovery/batch_41_slice_report.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "critical",
+    "source_slice": "41"
+  },
+  {
+    "id": 2,
+    "title": "CBulanek videoTrackManager @ +0xA8",
+    "types": ["CBulanek", "CDSVideoPlayer"],
+    "addresses": ["0x0041e4b0", "0x00439c70", "0x00439b90", "0x00420910"],
+    "ghidra_actions": [
+      "modify_struct_field CBulanek videoTrackManager @ +0xA8 as CDSVideoPlayer",
+      "set_function_prototype ConstructTrackManager on CBulanek+0xA8",
+      "trace BeginCurrentTrackPlayback from CBulanek_ApplyAction"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CBulanek.md",
+      "ghidra_analysis/engine/struct_recovery/CDSVideoPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/batch_41_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "critical",
+    "source_slice": "41"
+  },
+  {
+    "id": 3,
+    "title": "CDSUpdatedItem IDSUpdated facet @ +0x00",
+    "types": ["CDSUpdatedItem", "CAdvertising", "CShot"],
+    "addresses": ["0x0042f060", "0x00439c70", "0x0040e670", "0x0041edf0"],
+    "ghidra_actions": [
+      "modify_struct_field CDSUpdatedItem pVftable_IDSUpdated @ +0x00",
+      "catalog host-specific vtable stores for 29 CDSUpdatedItem_ctor xrefs",
+      "rename Ghidra dwField_0x00 on embed hosts"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSUpdatedItem.md",
+      "ghidra_analysis/engine/struct_recovery/batch_41_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_42_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/round3_tasks.json"
+    ],
+    "priority": "high",
+    "source_slice": "41"
+  },
+  {
+    "id": 4,
+    "title": "CDSVideoPlayer CDSTrackVector @ +0x1c",
+    "types": ["CDSVideoPlayer"],
+    "addresses": ["0x00439c70", "0x00439730", "0x00439a70", "0x00439900"],
+    "ghidra_actions": [
+      "create_struct CDSTrackVector 16 bytes at CDSVideoPlayer+0x1c",
+      "set helper prototypes TM_LookupTrackIndex/TM_InsertTrackAt with inner-vector this",
+      "get_struct_layout CDSVideoPlayer after nested embed"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSVideoPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/batch_41_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_42_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source_slice": "41"
+  },
+  {
+    "id": 5,
+    "title": "CDSStreamStorage pack collection embed",
+    "types": ["CDSStreamStorage", "CDSCollection", "CDSChain", "CDSStrmResInfo"],
+    "addresses": ["0x00401790", "0x00431170", "0x00433cb0", "0x00433f70", "0x00434160"],
+    "ghidra_actions": [
+      "replace flat collection_* fields with nested CDSCollection @ +0x1c and CDSChain @ +0x34",
+      "rename_function_by_address remaining FUN_00434760 if still generic",
+      "retype CBulanci_OpenPackStream standalone CDSStreamStorage* path"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSStreamStorage.md",
+      "ghidra_analysis/engine/struct_recovery/CDSStrmResInfo.md",
+      "ghidra_analysis/engine/struct_recovery/batch_40_summary.md",
+      "ghidra_analysis/engine/struct_recovery/batch_40_followup_summary.md"
+    ],
+    "priority": "high",
+    "source_slice": "40"
+  },
+  {
+    "id": 6,
+    "title": "CDSStreamStorage IDSStorage stub audit",
+    "types": ["CDSStreamStorage", "CDSCollection"],
+    "addresses": ["0x004339c0", "0x004339d0", "0x004392b0", "0x0047f7a4"],
+    "ghidra_actions": [
+      "decompile GetStreamCount vs m_items @ +0x24 and m_count @ +0x28",
+      "mark GetStreamEntry @ +0x20 vtable-only or fix IDSStorage slot 7",
+      "audit IDSAnim_SelectRandomTrack CBulAnim cast to CDSStreamStorage*"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSStreamStorage.md",
+      "ghidra_analysis/engine/struct_recovery/batch_40_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/round3_tasks.json"
+    ],
+    "priority": "high",
+    "source_slice": "40"
+  },
+  {
+    "id": 7,
+    "title": "CDSStrmResInfo streamExtent @ +0x14",
+    "types": ["CDSStrmResInfo", "CDSResInfo"],
+    "addresses": ["0x00433d80", "0x00433940", "0x00433980", "0x00433f70", "0x00434270"],
+    "ghidra_actions": [
+      "modify_struct_field CDSStrmResInfo +0x14 to streamExtent uint64",
+      "remove misleading pEmbeddedResource label at +0x14",
+      "document pad_tail dword read @ +0x20 in AppendOrReuseStream"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSStrmResInfo.md",
+      "ghidra_analysis/engine/struct_recovery/batch_40_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source_slice": "40"
+  },
+  {
+    "id": 8,
+    "title": "ODSImage weapon namespace cleanup",
+    "types": ["ODSImage", "CWeapon", "CBitmap"],
+    "addresses": ["0x0041dbc0", "0x00418c00", "0x00419070", "0x00439100"],
+    "ghidra_actions": [
+      "rename_function ODSImage::CWeapon_ctor to CWeapon_ctor",
+      "namespace_audit ODSImage::* vs 0x10 mixin symbols",
+      "rename FUN_00419070 to CBitmap_ViewHeader_Init if still generic"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/ODSImage.md",
+      "ghidra_analysis/engine/struct_recovery/CWeapon.md",
+      "ghidra_analysis/engine/struct_recovery/CBitmap.md",
+      "ghidra_analysis/engine/struct_recovery/batch_43_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "critical",
+    "source_slice": "43"
+  },
+  {
+    "id": 9,
+    "title": "CWeapon 0x70 Ghidra struct apply",
+    "types": ["CWeapon", "CBulanek"],
+    "addresses": ["0x0041dbc0", "0x004212b0", "0x00481ed4", "0x0041e4b0"],
+    "ghidra_actions": [
+      "create_struct CWeapon 112 bytes",
+      "modify_struct_field weaponKind @ +0x64",
+      "embed CDSVideoPlayer trackManager @ +0x08 via ConstructTrackManager"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CWeapon.md",
+      "ghidra_analysis/engine/struct_recovery/CDSVideoPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/batch_43_summary.md"
+    ],
+    "priority": "high",
+    "source_slice": "43"
+  },
+  {
+    "id": 10,
+    "title": "CDSWav class-43 vs bank overlay",
+    "types": ["CDSWav", "CDSWavStream", "CDSAudioBank", "CDSDsmFile"],
+    "addresses": ["0x0043bb00", "0x0043bb50", "0x0043ba30", "0x00428ad0", "0x00433040"],
+    "ghidra_actions": [
+      "prove CDSWav_HandleResourceRead this base (primary vs face_8slots+0)",
+      "map CDSDsmFile+0x1c wav facet vs class-43 CDSWavStream layout",
+      "document CDSAudioBank_Ctor alternate vtable set on same 0x40 footprint"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/CDSWav.md",
+      "ghidra_analysis/engine/struct_recovery/CDSWavStream.md",
+      "ghidra_analysis/engine/struct_recovery/batch_42_summary.md",
+      "ghidra_analysis/engine/formats/dsm_file_format.md"
+    ],
+    "priority": "high",
+    "source_slice": "42"
+  }
+]

@@ -6,28 +6,28 @@
 class CDSMpx {
 public:
 	// !DECL 0x00432f10 BEGIN
-	/* 432F10 */ uchar* FUN_00432f10();
+	/* 432F10 */ uchar* CDSMpx_GetTypeInfo();
 	// !DECL 0x00432f10 END
 	// !DECL 0x00432f20 BEGIN
-	/* 432F20 */ uchar FUN_00432f20(uchar param_1);
+	/* 432F20 */ uchar CDSMpx_AdjustOffsetDtor(uchar param_1);
 	// !DECL 0x00432f20 END
 	// !DECL 0x00432f30 BEGIN
-	/* 432F30 */ uchar FUN_00432f30(uchar param_1);
+	/* 432F30 */ uchar CDSMpx_ScalarDeletingDtor_thunk_Sub18(uchar param_1);
 	// !DECL 0x00432f30 END
 	// !DECL 0x00432f40 BEGIN
-	/* 432F40 */ uchar FUN_00432f40(uint* param_1);
+	/* 432F40 */ uchar CDSMpx_dtor(uint* param_1);
 	// !DECL 0x00432f40 END
 	// !DECL 0x00432fc0 BEGIN
-	/* 432FC0 */ void* FUN_00432fc0(uchar param_1);
+	/* 432FC0 */ void* CDSMpx_vDtor(uchar param_1);
 	// !DECL 0x00432fc0 END
 	// !DECL 0x0043c380 BEGIN
-	/* 43C380 */ uchar FUN_0043c380(int param_1);
+	/* 43C380 */ uchar CDSMpx_ResetStreamState(int param_1);
 	// !DECL 0x0043c380 END
 	// !DECL 0x0043c590 BEGIN
 	/* 43C590 */ uchar FUN_0043c590(uchar* param_1, uint param_2, char param_3);
 	// !DECL 0x0043c590 END
 	// !DECL 0x004465e0 BEGIN
-	/* 4465E0 */ uchar ResetDecoderState(int param_1);
+	/* 4465E0 */ void ResetDecoderState(void* param_1);
 	// !DECL 0x004465e0 END
 	// !DECL 0x00446640 BEGIN
 	/* 446640 */ uchar ReinitDecoder(int param_1);
@@ -39,10 +39,10 @@ public:
 	/* 4466A0 */ uchar FUN_004466a0(int* param_1);
 	// !DECL 0x004466a0 END
 	// !DECL 0x004466c0 BEGIN
-	/* 4466C0 */ uint RefillInputBuffer(int param_1);
+	/* 4466C0 */ uint RefillInputBuffer(void* param_1);
 	// !DECL 0x004466c0 END
 	// !DECL 0x00446770 BEGIN
-	/* 446770 */ uint DecodeFrame(int param_1);
+	/* 446770 */ uint DecodeFrame(void* param_1);
 	// !DECL 0x00446770 END
 	// !DECL 0x00446940 BEGIN
 	/* 446940 */ uchar ReadPCM(void* param_1, void* param_2);
@@ -54,16 +54,16 @@ public:
 	/* 446A00 */ void* AttachBitstream(int* param_1, uint param_2);
 	// !DECL 0x00446a00 END
 	// !DECL 0x00446b00 BEGIN
-	/* 446B00 */ void* CreateFromHandle(int param_1);
+	/* 446B00 */ void* CreateFromHandle(CDSMpxStream* param_1);
 	// !DECL 0x00446b00 END
 	// !DECL 0x00446b90 BEGIN
-	/* 446B90 */ uchar ResolveResource(int param_1);
+	/* 446B90 */ void ResolveResource(void* param_1);
 	// !DECL 0x00446b90 END
 	// !DECL 0x004567b0 BEGIN
-	/* 4567B0 */ static uchar FUN_004567b0(uint* param_1);
+	/* 4567B0 */ static uchar CDSMpx_InitMadDecoderFields(uint* param_1);
 	// !DECL 0x004567b0 END
 	// !DECL 0x00456820 BEGIN
-	/* 456820 */ static uchar FUN_00456820(uint* param_1, uint param_2, int param_3);
+	/* 456820 */ static uchar CDSMpx_mad_stream_buffer(uint* param_1, uint param_2, int param_3);
 	// !DECL 0x00456820 END
 	// !DECL 0x00456850 BEGIN
 	/* 456850 */ static uint mad_stream_sync(int param_1);
@@ -81,16 +81,16 @@ public:
 	/* 458450 */ static uchar DecodeGranuleMono(int param_1, int param_2, int param_3, int param_4);
 	// !DECL 0x00458450 END
 	// !DECL 0x00458e10 BEGIN
-	/* 458E10 */ static uchar DispatchLayerDecoder(int param_1, int* param_2);
+	/* 458E10 */ static void DispatchLayerDecoder(void* param_1, MpegAudioFrameInfo* param_2);
 	// !DECL 0x00458e10 END
 	// !DECL 0x00458eb0 BEGIN
 	/* 458EB0 */ static void mad_synth_init(int* param_1);
 	// !DECL 0x00458eb0 END
 	// !DECL 0x00458ee0 BEGIN
-	/* 458EE0 */ static void mad_header_init(uint* param_1);
+	/* 458EE0 */ static void mad_header_init(mad_header_t* param_1);
 	// !DECL 0x00458ee0 END
 	// !DECL 0x00458f50 BEGIN
-	/* 458F50 */ static uint mad_header_decode(int param_1);
+	/* 458F50 */ static uint mad_header_decode(void* param_1, MpegAudioFrameInfo* param_2);
 	// !DECL 0x00458f50 END
 	// !DECL 0x00459130 BEGIN
 	/* 459130 */ static uint EstimateAvgBitrate(uint* param_1, int* param_2);
@@ -102,7 +102,7 @@ public:
 	/* 459500 */ static uint ReadOneFrame(int* param_1, uint* param_2);
 	// !DECL 0x00459500 END
 	// !DECL 0x004595a0 BEGIN
-	/* 4595A0 */ static void mad_frame_mute(int param_1);
+	/* 4595A0 */ static void mad_frame_mute(uint* param_1);
 	// !DECL 0x004595a0 END
 	// !DECL 0x00459620 BEGIN
 	/* 459620 */ static void mad_frame_init(uint* param_1);
@@ -138,17 +138,14 @@ public:
 	/* 45C800 */ static uchar mad_layer_II_samples(uint* param_1);
 	// !DECL 0x0045c800 END
 	// !DECL 0x0045c8c0 BEGIN
-	/* 45C8C0 */ static uint mad_layer_II(char* param_1, int param_2);
+	/* 45C8C0 */ static uint mad_layer_II(void* param_1, void* param_2);
 	// !DECL 0x0045c8c0 END
 	// !DECL 0x0045cf80 BEGIN
-	/* 45CF80 */ uchar FUN_0045cf80(uint param_1);
+	/* 45CF80 */ uchar CDSMpx_III_sideinfo(uint param_1);
 	// !DECL 0x0045cf80 END
 	// !DECL 0x0045cfa0 BEGIN
-	/* 45CFA0 */ uchar FUN_0045cfa0();
+	/* 45CFA0 */ uchar CDSMpx_III_scalefactors_lsf();
 	// !DECL 0x0045cfa0 END
-	// !DECL 0x0045cfc0 BEGIN
-	/* 45CFC0 */ static uint FUN_0045cfc0(uint param_1, uint param_2, uint param_3);
-	// !DECL 0x0045cfc0 END
 	// !DECL 0x0045d030 BEGIN
 	/* 45D030 */ static uchar FUN_0045d030(int* param_1, int param_2, uint param_3, uint param_4);
 	// !DECL 0x0045d030 END

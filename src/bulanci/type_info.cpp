@@ -22,6 +22,6 @@ void type_info::_Type_info_dtor(void* param_1) { STUB_BODY(); }
 
 // !FUNC 0x00449937 BEGIN
 /* 449937-449940 00009 */
-uchar type_info::FUN_00449937() { STUB_BODY(); return 0; }
+uchar type_info::type_info_UnlockRegistry() { STUB_BODY(); return 0; }
 // !FUNC 0x00449937 END
 

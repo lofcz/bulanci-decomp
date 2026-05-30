@@ -12,53 +12,53 @@ uchar CDSDirectSound::Catch_0043a483() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0043c8a0 BEGIN
 /* 43C8A0-43C8A6 00006 */
-uchar* CDSDirectSound::FUN_0043c8a0() {
+uchar* CDSDirectSound::CDSDirectSound_GetTypeInfo() {
     return reinterpret_cast<uchar*>(&DAT_004b84c0);
 }
 // !FUNC 0x0043c8a0 END
 
 // !FUNC 0x0043c8b0 BEGIN
 /* 43C8B0-43C973 000C3 */
-uchar CDSDirectSound::FUN_0043c8b0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSDirectSound::~CDSDirectSound(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043c8b0 END
 
 // !FUNC 0x0043ca50 BEGIN
 /* 43CA50-43CA58 00008 */
-uchar CDSDirectSound::FUN_0043ca50(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSDirectSound::CDSDirectSound_DtorScalar_minus04(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043ca50 END
 
 // !FUNC 0x0043ca60 BEGIN
 /* 43CA60-43CA68 00008 */
-uchar CDSDirectSound::FUN_0043ca60(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSDirectSound::CDSDirectSound_ScalarDeletingDtor_thunk_Sub24(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043ca60 END
 
 // !FUNC 0x0043ca70 BEGIN
 /* 43CA70-43CA78 00008 */
-uchar CDSDirectSound::FUN_0043ca70(int param_1) { STUB_BODY(); return 0; }
+uchar CDSDirectSound::CDSObject_ReleaseViaVtable_ThisMinus24(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043ca70 END
 
 // !FUNC 0x0043ca80 BEGIN
 /* 43CA80-43CA88 00008 */
-uchar CDSDirectSound::FUN_0043ca80(uchar param_1) { STUB_BODY(); return 0; }
+uchar CDSDirectSound::CDSDirectSound_DtorScalar_minus1c(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043ca80 END
 
 // !FUNC 0x0043cb00 BEGIN
 /* 43CB00-43CB1E 0001E */
-void* CDSDirectSound::FUN_0043cb00(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSDirectSound::CDSDirectSound_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043cb00 END
 
 // !FUNC 0x0043ccb0 BEGIN
 /* 43CCB0-43CCF7 00047 */
-uchar CDSDirectSound::FUN_0043ccb0(int param_1) { STUB_BODY(); return 0; }
+void CDSDirectSound::CDSDirectSound_SignalEventIfVoicesActive(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0043ccb0 END
 
 // !FUNC 0x0043cd00 BEGIN
 /* 43CD00-43CDB5 000B5 */
-uchar CDSDirectSound::FUN_0043cd00(int param_1) { STUB_BODY(); return 0; }
+void CDSDirectSound::CDSDirectSound_WorkerThreadLoop(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0043cd00 END
 
 // !FUNC 0x0043cdc0 BEGIN
 /* 43CDC0-43CE48 00088 */
-uchar CDSDirectSound::FUN_0043cdc0(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSDirectSound::CDSDirectSound_OnMouseButtonDown(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043cdc0 END
 

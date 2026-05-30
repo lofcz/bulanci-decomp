@@ -27,7 +27,7 @@ uchar CButton::CButton_OnFocusReceived(short param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00404b10 BEGIN
 /* 404B10-404B9C 0008C */
-uint* CButton::CButton_ctor(uint* param_1) { STUB_BODY(); return 0; }
+void* CButton::CButton_ctor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00404b10 END
 
 // !FUNC 0x00404ba0 BEGIN
@@ -54,17 +54,17 @@ uchar CButton::CButton_AdjustorThunk18_Dtor(uchar param_1) { STUB_BODY(); return
 
 // !FUNC 0x00405600 BEGIN
 /* 405600-4056A7 000A7 */
-uchar CButton::CButton_dtor(uchar param_1) { STUB_BODY(); return 0; }
+void CButton::CButton_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00405600 END
 
 // !FUNC 0x004056b0 BEGIN
 /* 4056B0-4057B3 00103 */
-uchar CButton::CButton_Render(int param_1) { STUB_BODY(); return 0; }
+void CButton::CButton_Render(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x004056b0 END
 
 // !FUNC 0x00406670 BEGIN
 /* 406670-40668E 0001E */
-void* CButton::CButton_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+uchar CButton::CButton_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00406670 END
 
 // !FUNC 0x004087f0 BEGIN

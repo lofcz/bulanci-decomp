@@ -29,12 +29,12 @@ uchar CVolume::CVolume_AdjustorThunk68_Dtor(uchar param_1) { STUB_BODY(); return
 
 // !FUNC 0x0040e1b0 BEGIN
 /* 40E1B0-40E224 00074 */
-void* CVolume::CVolume_BuildAt(int* param_1, uint* param_2) { STUB_BODY(); return 0; }
+uchar CVolume::CVolume_BuildAt(int* param_1, uint* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040e1b0 END
 
 // !FUNC 0x0040e230 BEGIN
 /* 40E230-40E261 00031 */
-uchar CVolume::CVolume_StopAudioPreview(int param_1) { STUB_BODY(); return 0; }
+void CVolume::CVolume_StopAudioPreview(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0040e230 END
 
 // !FUNC 0x0040e270 BEGIN
@@ -54,11 +54,11 @@ uchar CVolume::CVolume_dtor(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040fb00 BEGIN
 /* 40FB00-40FB6E 0006E */
-uchar CVolume::CVolume_OnMouseDown(int* param_1, short param_2) { STUB_BODY(); return 0; }
+void CVolume::CVolume_OnMouseDown(int* param_1, short param_2) { STUB_BODY(); }
 // !FUNC 0x0040fb00 END
 
 // !FUNC 0x0040fc00 BEGIN
 /* 40FC00-40FC1E 0001E */
-void* CVolume::CVolume_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+uchar CVolume::CVolume_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040fc00 END
 

@@ -30,21 +30,29 @@
 //! engine ID. Engine provenance lives inside each atlas's
 //! `meta.engineSpriteId` for traceability.
 
+use std::collections::HashSet;
+
 use anyhow::{anyhow, Context, Result};
-use macroquad::prelude::Texture2D;
+use raylib::prelude::{RaylibHandle, RaylibThread};
 use serde::Deserialize;
 use serde_json::Value;
 
-use bulanci_core::assets::AssetFileSystem;
-
+use crate::asset::handle::AssetHandle;
+use crate::asset::types::{BitmapSprite, BitmapSpritePng, CursorComposition};
+use crate::asset::AssetServer;
 use crate::atlas::{Atlas, AtlasFrame};
 #[cfg(test)]
 use crate::atlas::parse_atlas_bytes;
 
-/// VFS path of the production (MsgPack) composition blob.
-pub const CURSOR_BIN_PATH: &str = "cursor/cursor.bin";
-/// VFS path of the source-form composition blob.
-pub const CURSOR_JSON_PATH: &str = "cursor/cursor.json";
+/// Everything `CursorAtlasSet::load` needs to rebuild itself on a hot
+/// reload: the composition handle plus the per-track JSON/PNG handle
+/// pairs.  Kept on the set so the engine tick can reconstruct the
+/// whole thing when any dependency's bytes change.  `None` for the
+/// headless test constructor (which never hot-reloads).
+struct CursorSource {
+    composition: AssetHandle<CursorComposition>,
+    idle_tracks: Vec<(AssetHandle<BitmapSprite>, AssetHandle<BitmapSpritePng>)>,
+}
 
 /// Loaded cursor composition. Holds the three idle-track atlases in
 /// `DAT_004af900` order: `idx 0` is the track `SetCurrentTrack(0, 1)`
@@ -54,22 +62,38 @@ pub struct CursorAtlasSet {
     atlases: Vec<Atlas>,
     #[allow(dead_code)]
     meta: Value,
+    source: Option<CursorSource>,
 }
 
 impl CursorAtlasSet {
-    /// Load the composition + each named atlas from the VFS. Fails
-    /// loudly if the composition is missing, any referenced atlas is
-    /// missing, or invariants regress — every artefact is shipped in
-    /// `assets.pack`, so a failure here means the build is broken.
-    pub fn load(vfs: &AssetFileSystem) -> Result<Self> {
-        let composition: CursorJson = if let Some(b) = vfs.read(CURSOR_BIN_PATH) {
-            rmp_serde::from_slice(b)
-                .with_context(|| format!("decoding msgpack {CURSOR_BIN_PATH}"))?
+    /// Load the composition + every idle-track atlas through typed
+    /// handles.  The composition handle gives us the JSON blob (or
+    /// the [`crate::asset::fallback::EMPTY_CURSOR_JSON`] placeholder
+    /// when missing); the per-track JSON / PNG handles are passed in
+    /// explicitly because the composition file lists slugs and the
+    /// typed-handle layer must resolve them at compile time, not at
+    /// runtime.  We assert that the JSON's `idleTracks` count matches
+    /// the supplied handle list so a registry edit that adds /
+    /// removes a track surfaces as a startup error rather than a
+    /// silent mis-mapping.
+    pub fn load(
+        rl: &mut RaylibHandle,
+        thread: &RaylibThread,
+        assets: &AssetServer,
+        composition_handle: AssetHandle<CursorComposition>,
+        idle_tracks: &[(AssetHandle<BitmapSprite>, AssetHandle<BitmapSpritePng>)],
+    ) -> Result<Self> {
+        let comp_bytes = assets.bytes(composition_handle);
+        // The pack-time transcoder rewrites `cursor/cursor.json` to a
+        // MsgPack blob (smaller, faster to decode), but the placeholder
+        // and any dev override stay as raw JSON.  The leading byte
+        // disambiguates: `{` is JSON, anything else is MsgPack.
+        let composition: CursorJson = if comp_bytes.first() == Some(&b'{') {
+            serde_json::from_slice(&comp_bytes)
+                .context("decoding cursor composition JSON")?
         } else {
-            let j = vfs.read(CURSOR_JSON_PATH).ok_or_else(|| {
-                anyhow!("missing both {CURSOR_BIN_PATH} and {CURSOR_JSON_PATH}")
-            })?;
-            serde_json::from_slice(j).with_context(|| format!("parsing {CURSOR_JSON_PATH}"))?
+            rmp_serde::from_slice(&comp_bytes)
+                .context("decoding cursor composition MsgPack")?
         };
         if composition.schema_version != 1 {
             return Err(anyhow!(
@@ -80,42 +104,69 @@ impl CursorAtlasSet {
         if composition.idle_tracks.is_empty() {
             return Err(anyhow!("cursor composition: idleTracks is empty"));
         }
+        if composition.idle_tracks.len() != idle_tracks.len() {
+            return Err(anyhow!(
+                "cursor composition lists {} tracks but the caller provided {} handle pairs",
+                composition.idle_tracks.len(),
+                idle_tracks.len(),
+            ));
+        }
 
-        let mut atlases = Vec::with_capacity(composition.idle_tracks.len());
-        for entry in &composition.idle_tracks {
-            let atlas = Atlas::load(vfs, &entry.atlas)
-                .with_context(|| format!("loading cursor idle track '{}'", entry.atlas))?;
+        let mut atlases = Vec::with_capacity(idle_tracks.len());
+        for (idx, &(json_h, png_h)) in idle_tracks.iter().enumerate() {
+            let atlas = Atlas::load(rl, thread, assets, json_h, png_h)
+                .with_context(|| format!("loading cursor idle track #{idx}"))?;
             atlases.push(atlas);
         }
 
         Ok(Self {
             atlases,
             meta: composition.meta,
+            source: Some(CursorSource {
+                composition: composition_handle,
+                idle_tracks: idle_tracks.to_vec(),
+            }),
         })
     }
 
-    #[inline]
-    pub fn len(&self) -> usize {
-        self.atlases.len()
+    /// `true` if the composition or any idle-track atlas depends on a
+    /// hash in `dirty` — i.e. the user edited `cursor.bin` or one of
+    /// the track PNG/JSON files.  Drives the engine tick's decision to
+    /// call [`CursorAtlasSet::reload`].
+    pub fn touched_by(&self, dirty: &HashSet<u64>) -> bool {
+        let Some(src) = &self.source else { return false; };
+        if dirty.contains(&src.composition.raw()) {
+            return true;
+        }
+        src.idle_tracks
+            .iter()
+            .any(|(j, p)| dirty.contains(&j.raw()) || dirty.contains(&p.raw()))
     }
 
-    /// All loaded atlases as a slice, in composition order. The cursor
-    /// passes this to [`crate::cursor::GunMouse::on_sprite_frame_tick`]
-    /// so every tick reads the active track's motion from the same
-    /// place its frame index is advanced from.
+    /// Rebuild the whole set from its stored handles.  We rebuild the
+    /// entire composition (not just the dirty track) because a
+    /// `cursor.bin` edit can change the track count or meta, and the
+    /// extra two atlas decodes are cheap and only happen on an actual
+    /// edit.  On failure the previous set is preserved.
+    pub fn reload(
+        &mut self,
+        rl: &mut RaylibHandle,
+        thread: &RaylibThread,
+        assets: &AssetServer,
+    ) -> Result<()> {
+        let Some(src) = &self.source else { return Ok(()); };
+        let composition = src.composition;
+        let idle_tracks = src.idle_tracks.clone();
+        *self = CursorAtlasSet::load(rl, thread, assets, composition, &idle_tracks)?;
+        Ok(())
+    }
+
+    /// All loaded atlases as a slice, in composition order. Served to the
+    /// Luau menu scene (via `scene_runtime::build_services`) as frame
+    /// count + per-frame `(Δx, Δy)` motion so the cursor's idle-twitch dot
+    /// reads its motion from the same place its frame index is advanced.
     pub fn atlases(&self) -> &[Atlas] {
         &self.atlases
-    }
-
-    /// Atlas at composition index `i` (wraps via `i % len()`).
-    pub fn atlas(&self, i: usize) -> &Atlas {
-        &self.atlases[i % self.atlases.len()]
-    }
-
-    /// Convenience: texture of the i-th track. Equivalent to
-    /// `self.atlas(i).texture()`.
-    pub fn texture(&self, i: usize) -> &Texture2D {
-        self.atlas(i).texture()
     }
 
     /// Verbatim composition-level metadata (the
@@ -163,8 +214,19 @@ struct CursorJson {
     meta: Value,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Default)]
 struct IdleTrackEntry {
+    // Compiled-out of release builds: in release, `pack_assets.py`
+    // strips every per-track `atlas: "<slug>"` field from the cursor
+    // composition msgpack precisely because the field name would
+    // leak into `.rodata` via the serde derive table.  The headless
+    // tests still read the on-disk JSON though, where the field is
+    // present, so we keep it under `#[cfg(test)]` (with `default` so
+    // production deserialisation succeeds against the stripped blob
+    // — empty `idleTracks` entries are fine, the production loader
+    // takes the atlas handles from `CursorAtlasSet::load`'s arg).
+    #[cfg(test)]
+    #[serde(default)]
     atlas: String,
 }
 
@@ -201,6 +263,7 @@ pub(crate) fn parse_cursor_set_for_tests(
     Ok(CursorAtlasSet {
         atlases,
         meta: composition.meta,
+        source: None,
     })
 }
 
@@ -210,14 +273,14 @@ mod tests {
     //! referenced atlas. Production paths go through
     //! [`CursorAtlasSet::load`]; these tests target the
     //! filesystem-backed source artefacts directly to catch
-    //! `build_cursor_atlas.py` regressions before they reach the
-    //! pack step.
+    //! `open_bulanci/asset_pipeline/build_assets.py` regressions
+    //! before they reach the pack step.
 
     use super::*;
 
     fn shipped_cursor_set() -> CursorAtlasSet {
         let composition = std::fs::read("../assets/cursor/cursor.json")
-            .expect("run scripts/build_cursor_atlas.py first (missing cursor.json)");
+            .expect("run open_bulanci/asset_pipeline/build_assets.py first (missing cursor.json)");
         let composition_parsed: CursorJson = serde_json::from_slice(&composition)
             .expect("cursor.json schema regression");
 
@@ -240,11 +303,11 @@ mod tests {
     /// The shipped composition has three idle tracks, in
     /// `DAT_004af900` order, every track closes its motion loop at
     /// (0, 0), and frame dims stay at 14×13. If this regresses,
-    /// regenerate via `scripts/build_cursor_atlas.py` and re-pack.
+    /// regenerate via `open_bulanci/asset_pipeline/build_assets.py` and re-pack.
     #[test]
     fn shipped_composition_has_three_closed_idle_tracks() {
         let set = shipped_cursor_set();
-        assert_eq!(set.len(), 3, "expected exactly 3 idle-twitch tracks");
+        assert_eq!(set.atlases().len(), 3, "expected exactly 3 idle-twitch tracks");
 
         let names: Vec<&str> = set.atlases().iter().map(|a| a.name.as_str()).collect();
         assert_eq!(names, vec!["cursor_idle_a", "cursor_idle_b", "cursor_idle_c"]);

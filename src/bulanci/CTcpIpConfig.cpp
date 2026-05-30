@@ -72,7 +72,7 @@ CTcpIpConfig::CTcpIpConfig() : CWindow(0, 0, 0x138, 0xa0, 1) {
 
 // !FUNC 0x0040c2c0 BEGIN
 /* 40C2C0-40C2C6 00006 */
-uchar* CTcpIpConfig::GetClassMeta() {
+uchar* CTcpIpConfig::CTcpIpConfig_GetTypeDescriptor() {
     return reinterpret_cast<uchar*>(&DAT_004b34e8);
 }
 // !FUNC 0x0040c2c0 END

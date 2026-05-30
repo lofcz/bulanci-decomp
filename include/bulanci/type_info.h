@@ -18,7 +18,7 @@ public:
 	/* 4498D0 */ static void _Type_info_dtor(void* param_1);
 	// !DECL 0x004498d0 END
 	// !DECL 0x00449937 BEGIN
-	/* 449937 */ uchar FUN_00449937();
+	/* 449937 */ uchar type_info_UnlockRegistry();
 	// !DECL 0x00449937 END
 };
 

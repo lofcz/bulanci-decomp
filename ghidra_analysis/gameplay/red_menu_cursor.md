@@ -422,7 +422,7 @@ is the value the port hard-codes on `SLOT_CURSOR_DOT_FRAME`.
 
 `open_bulanci/assets/cursor/manifest.json` lists the same three
 tracks in the same order, alongside their PNG strip filenames and
-their per-tick `(dx, dy)` arrays. `scripts/build_cursor_atlas.py`
+their per-tick `(dx, dy)` arrays. `open_bulanci/asset_pipeline/build_assets.py`
 bakes that manifest from the unpacker's `*.atlas.json` sidecars and
 copies the matching `*.atlas.png` strips into `assets/cursor/`. At
 runtime, `client/src/cursor_atlas.rs` loads the lot via the VFS into
@@ -479,7 +479,7 @@ pixels. The regenerated `*.atlas.png` strips correctly carry
 `alpha = 0` over their background pixels, allowing the Rust client to
 blit each frame directly via `draw_texture_ex` with no runtime
 chroma-keying step. The pipeline that copies them into the runtime
-VFS lives in `scripts/build_cursor_atlas.py` (see §6.C).
+VFS lives in `open_bulanci/asset_pipeline/build_assets.py` (see §6.C).
 
 The engine itself does NOT need this fix; the live game runs on a 8 bpp
 DDraw destination-side chroma key set on the back buffer surface that

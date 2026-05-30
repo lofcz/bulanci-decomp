@@ -1,0 +1,33 @@
+{
+  "name": "connecting",
+  "scripts": [
+    "scenes/connecting/connecting.luau"
+  ],
+  "root": [
+    {
+      "kind": "sprite",
+      "name": "conn_bg",
+      "handle": "menu/backgrounds/bg_menu"
+    },
+    {
+      "kind": "text",
+      "name": "conn_title",
+      "layout": {
+        "y": 260
+      },
+      "text": "Připojování k serveru…",
+      "size": 22,
+      "tint": "ffd966ff"
+    },
+    {
+      "kind": "text",
+      "name": "conn_sub",
+      "layout": {
+        "y": 300
+      },
+      "text": "Esc pro zrušení",
+      "size": 14,
+      "tint": "b3b3b3ff"
+    }
+  ]
+}

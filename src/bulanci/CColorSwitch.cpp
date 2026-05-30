@@ -7,12 +7,12 @@ uchar CColorSwitch::CColorSwitch_OnEvent(short param_1) { STUB_BODY(); return 0;
 
 // !FUNC 0x0040aa40 BEGIN
 /* 40AA40-40AA5A 0001A */
-uchar CColorSwitch::CColorSwitch_SetSelected(int param_1) { STUB_BODY(); return 0; }
+uchar CColorSwitch::CColorSwitch_SetSelected(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040aa40 END
 
 // !FUNC 0x0040aa60 BEGIN
 /* 40AA60-40AA70 00010 */
-uchar CColorSwitch::CColorSwitch_SetSelectedFromPtr(void* param_1) { STUB_BODY(); return 0; }
+uchar CColorSwitch::CColorSwitch_SetSelectedFromPtr(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040aa60 END
 
 // !FUNC 0x0040b950 BEGIN
@@ -39,12 +39,12 @@ uchar CColorSwitch::CColorSwitch_AdjustorThunk18_Dtor(uchar param_1) { STUB_BODY
 
 // !FUNC 0x0040b990 BEGIN
 /* 40B990-40B9EE 0005E */
-uchar CColorSwitch::CColorSwitch_dtor(uchar param_1) { STUB_BODY(); return 0; }
+void CColorSwitch::CColorSwitch_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0040b990 END
 
 // !FUNC 0x0040ccd0 BEGIN
 /* 40CCD0-40CDFA 0012A */
-uchar CColorSwitch::CColorSwitch_Render(int param_1) { STUB_BODY(); return 0; }
+void CColorSwitch::CColorSwitch_Render(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0040ccd0 END
 
 // !FUNC 0x0040ce00 BEGIN
@@ -59,11 +59,11 @@ uint* CColorSwitch::CColorSwitch_ctor() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040ec80 BEGIN
 /* 40EC80-40EC9E 0001E */
-void* CColorSwitch::CColorSwitch_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+uchar CColorSwitch::CColorSwitch_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ec80 END
 
 // !FUNC 0x004100d0 BEGIN
 /* 4100D0-4101C8 000F8 */
-void* CColorSwitch::CColorSwitch_BuildAt(uint param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
+uchar CColorSwitch::CColorSwitch_BuildAt(uint param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004100d0 END
 
