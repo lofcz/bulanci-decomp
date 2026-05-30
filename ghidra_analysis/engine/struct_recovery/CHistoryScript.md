@@ -42,9 +42,9 @@
 
 | 0x434 | 4 | `int` | `nNestedRefCount` | ctor `= 1@0x004226c0`; shared with `CHelpScript` / `CLevelScript` tail |
 
-| 0x438 | 4 | `void *` | `vf_IDSChained_tail` | ctor `MOV [ESI+0x438],0x483088@0x0042272a`; catalog `IDSChained` 5-slot; slot 3 `CHistoryScript_ScalarDeletingDtor_thunk_Sub438@0x00422790` |
+| 0x438 | 4 | `void *` | `vf_IDSChained_tail` | ctor `MOV [ESI+0x438],0x483088@0x0042272a`; Ghidra label `g_pCHistoryScript_vftable_IDSChained_tail`; slot 3 `CHistoryScript_ScalarDeletingDtor_thunk_Sub438@0x00422790` (`SUB ECX,0x438` disasm, R5 w05) |
 
-| 0x43C | 4 | `void *` | `pSubObjStash` | ctor `= 0@0x004226c0`; `CHistoryScript_dtor@0x004227b0` → `IDSChainedTail_ClearSubObjStash(&vf_IDSChained_tail)` |
+| 0x43C | 4 | `IDSChainedTailStash *` | `pSubObjStash` | ctor `= NULL@0x004226fe` (sole `[ESI+0x43c]` store); cleared by `IDSChainedTail_ClearSubObjStash(&vf_IDSChained_tail)` — never non-null on history path |
 
 | 0x440 | 4 | `void *` | `pBoundView` | ctor zero-init; `CDSScript_SetBoundParentView@0x00422620`; `CHistoryDlg_LoadHistoryPage@0x00422f70` |
 
@@ -114,6 +114,8 @@ Slice 11: `FUN_00422620` → `CDSScript_SetBoundParentView`; `FUN_00434250` → 
 
 - **Slice 11 (2026-05-30):** Ghidra `CHistoryScript` @ 0x444 verified; renamed `CDSScript_SetBoundParentView`, `IDSChainedTail_ClearSubObjStash`; `CHistoryScript_dtor` typed `CHistoryScript *`. Class id **2050** (`0x802`) per ctor plate comment.
 - **R3 task 12 (2026-05-30):** Proved stash protocol: `pSubObjStash@+0x43c` cleared by `IDSChainedTail_ClearSubObjStash(&vf_IDSChained_tail)` in dtor and `CHistoryDlg_LoadHistoryPage` (`LEA ECX,[script+0x438]` @ `0x0042302c`); class id **`0x802` (2050)** from static `HandleClassRegister` @ `0x0047bfc0` and `CHistoryDlg_ctor` pool filter @ `0x0042329e`.
+- **R4 task 11 (2026-05-30):** Shared opcode 51 `HhAddChildToParentView@0x004217e0` → **cdecl** `CHelpScript *script` on stack; `LoadHistoryPage` `pCVar5` typed `CHistoryScript *` → `IDSChainedTail_ClearSubObjStash(&pCVar5->vf_IDSChained_tail)`.
+- **R4 task 12 (2026-05-30):** Program-wide byte scan: **only** `CHelpScript_ctor` / `CHistoryScript_ctor` write `[reg+0x43c]` (both zero). Created **`IDSChainedTailStash`** (`pClearField_10`/`pClearField_14` per `IDSChainedTail_ClearSubObjStash`); retyped `pSubObjStash` → `IDSChainedTailStash *`. Extra consumer: `CGaming_ctor@0x004202cf` clears stash on menu-loaded level script before `CallExport`.
 
 
 
@@ -123,7 +125,8 @@ Slice 11: `FUN_00422620` → `CDSScript_SetBoundParentView`; `FUN_00434250` → 
 
 - Whether `+0x434` matches nested-refcount semantics on level/help script paths (no direct `CHistoryScript` consumer beyond ctor `=1`).
 
-- Non-null **writers** of `pSubObjStash` (ctor `=0`, dtor clear, `CHistoryDlg_LoadHistoryPage` clear — no allocator for stash payload on history path).
+- ~~Non-null writers on history/help path~~ — **closed (R4-12):** no non-null store in binary; stash always `NULL` on CHistory/CHelp scripts.
+- Non-null **`pSubObjStash`** on other CDS types (`CDSObject`, streams) and meaning of `IDSChainedTailStash.pClearField_10/14` (R4 todo 38).
 
 - ~~Class ID `0x800` / `0x802` decode~~ — **done (R3 task 12):** `ClassRegEntry` @ `0x004b38e8` (`CHistoryScript_GetClassTable`); static init `@0x0047bfc0` → `HandleClassRegister(..., classId=0x802, factory=CHistoryScript_CreateObject@0x4229b0)`; `CHistoryDlg_ctor` filters app script-pool nodes with `*(node+0xc)==0x802`, page id `*(node+8)`.
 

@@ -58,9 +58,9 @@ Win32 `EXCEPTION_RECORD` field names. Offsets `0x14`–`0x1C` are the first thre
 
 ## UNK
 
-- `ExceptionRecord` (`+0x08`), `ExceptionAddress` (`+0x0C`): no direct field xref in bulanci EH paths (only whole-struct `RtlUnwind` cast).
-- `ExceptionInformation[3..14]` (`+0x20`..`+0x4C`): no consumer xref; C++ EH path always uses three parameters.
-- Exact bit meanings of `ExceptionFlags & 0x66` / `& ~2` (CRT unwind state; not needed for game RE).
+- *(R5 worker 43 — permanent SKIP / CRT)* `ExceptionRecord` (`+0x08`), `ExceptionAddress` (`+0x0C`): Win32 header fields; bulanci only passes whole `EXCEPTION_RECORD` to `RtlUnwind` — no game field consumer.
+- *(R5 worker 43 — permanent SKIP / CRT)* `ExceptionInformation[3..14]` (`+0x20`..`+0x4C`): unused; MSVC C++ EH uses `NumberParameters == 3` only (`FindHandler@0x0044b874`).
+- *(R5 worker 43 — permanent SKIP / CRT)* `ExceptionFlags & 0x66` / `& ~2`: CRT unwind bookkeeping (`_UnwindNestedFrames@0x00447845`, `TranslatorGuardHandler@0x004479d2`); no game semantics.
 
 ## Xref summary (CRT only)
 

@@ -109,9 +109,21 @@ save_program bulanci.exe   # agent todo 34 / r3-worker-34 / 2026-05-30
 - Replaced `pCdsImagePrefix[68]` with per-field `CDSImage` layout `+0x08..+0x4b` in Ghidra `CDSFont`.
 - See `round3_task_11_report.md`.
 
+## R4 apply (task 34 — footer → runtime metrics)
+
+```
+search_instructions 0x560 → 2 hits: AllocFactory MOV 0 @ 0x0043759d; GetCharWidth read @ 0x0043735d
+search_instructions 0x564 → 4 hits: AllocFactory MOV 0 @ 0x004375a7; TextShaper + CEdit_BuildAt reads only
+search_instructions 0x50c/0x510 → Read/ReadNoAlloc LEA only (no post-Read consumers)
+set_decompiler_comment@0x0043759d / @0x004375a7 / @0x0043735d
+save_program bulanci.exe   # round4 task 34 / 2026-05-30
+```
+
+**Conclusion:** There is **no** instruction path that copies `fontFooter_defaultWidth` / `fontFooter_lineHeight` into `defaultAdvance` / `lineSpacing`. Persisted metrics stay at `+0x50c`/`+0x510`; runtime tail slots remain zero unless a future binary differs. See `round4_task_34_report.md`.
+
 ## UNK
 
-- **`fontFooter` runtime use:** dword0/1 = persisted `defaultWidth` / `lineHeight` (todo 34, 2026-05-30; `bulanci_unpack` + `search_instructions`). **No** post-`Read` instruction consumers of `+0x50c`/`+0x510`. Live metrics use `defaultAdvance` @ `+0x560` (`GetCharWidth`, `>> 2`) and `lineSpacing` @ `+0x564` (`TextShaper_LayOutAndRender`, `CEdit_BuildAt`) — ctor-zeroed, not copied from footer by `CDSFont::Read`.
+- **`fontFooter` runtime use:** dword0/1 = persisted `defaultWidth` / `lineHeight` (R3 todo 34 + R4 copy-path trace). **No** post-`Read` consumers of `+0x50c`/`+0x510` and **no** stores to `+0x560`/`+0x564` beyond AllocFactory zero init. Live metrics fields are read by `GetCharWidth` / `TextShaper` / `CEdit_BuildAt` but never populated from the stream in this binary.
 - `justifyWidth` @ `+0x215` aliases `glyphTable[87].width` (`0x60 + 87×5 + 2`); not a separate Ghidra field.
 - Semantics of `field_44` / `field_48` constants `8` on fonts (same open item as `CDSImage.md`).
 - Whether `m_pixels` (`+0x1c`) is used on fonts after `Load` (primary plane stored at `+0x20` for stream-host entry).

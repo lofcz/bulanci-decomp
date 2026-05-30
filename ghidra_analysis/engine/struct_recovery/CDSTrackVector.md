@@ -30,7 +30,9 @@ ConstructTrackManager decompile: (this->trackVector).pTracks / .dwTracks* / .cTr
 save_program bulanci.exe
 ```
 
+**Agent todo 44 R4 (2026-05-30):** `set_function_this_type` + prototype @ `InsertOrFindTrack@0x00439bd0` → class `CDSTrackVector`, `CDSTrackVector *this`; decompile `TM_LookupTrackIndex(this,…,this->dwTracks)` (live count @ `+8`). Asm `MOV ESI,ECX` / `MOV EAX,[ESI+0x8]`. `modify_struct_field` / `recreate_struct` for `cTracks*` — MCP success but `get_struct_layout` may still list `dwTracks*`. Report: [round4_task_44_report.md](./round4_task_44_report.md).
+
 ## UNK
 
-- Ghidra struct listing may still label count fields `dwTracks*` after MCP rename attempts; logical names remain `cTracks*`.
-- `InsertOrFindTrack@0x00439bd0` not class-scoped to `CDSTrackVector` yet.
+- Ghidra struct listing may still label count fields `dwTracks*` after MCP rename attempts; logical names remain `cTracks*` in markdown.
+- `CDSVideoPlayer_EnsureCapacity@0x00439900` not class-scoped; called with `CDSTrackVector *` base for growth.

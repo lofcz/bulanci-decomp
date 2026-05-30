@@ -557,6 +557,38 @@
                 };
             })();
 
+            // ---- Editor preview: boot straight into the scene under edit. ----
+            // The editor's Live panel embeds this page with `?scene=<name>`.
+            // Once the runtime is up we hand the name to the engine's
+            // `ob_goto_scene` export, which jumps the embedded game to exactly
+            // that scene (it then hot-reloads in place over the broker WS). A
+            // single queued request suffices; we retry briefly only until the
+            // ccall succeeds (exports ready).
+            (function () {
+                var scene = new URLSearchParams(location.search).get("scene");
+                if (!scene) return;
+                function jump() {
+                    try {
+                        if (window.Module && Module.ccall) {
+                            Module.ccall("ob_goto_scene", null, ["string"], [scene]);
+                            return true;
+                        }
+                    } catch (e) {
+                        /* runtime not ready yet */
+                    }
+                    return false;
+                }
+                var priorInit = Module.onRuntimeInitialized;
+                Module.onRuntimeInitialized = function () {
+                    if (typeof priorInit === "function") priorInit();
+                    if (jump()) return;
+                    var tries = 0;
+                    var iv = setInterval(function () {
+                        if (jump() || ++tries > 100) clearInterval(iv);
+                    }, 50);
+                };
+            })();
+
             // Autoplay policy: the page's WebAudio context starts suspended
             // until a user gesture. miniaudio (raylib's audio backend) installs
             // its own resume-on-gesture handler, but we nudge any context we

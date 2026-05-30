@@ -23,19 +23,19 @@
 | 0x10 | 4 | `void *` | `pVftable_IDSEventHandler` | `CDSEventHandler_ctor(this+0x10)` then ctor overwrites `0x47f920` |
 | 0x14 | 2 | `ushort` | `wViewFlags` | `CHistoryView_ctor` `\|= 0x67f@0x00422a70`; `CHelpView_ctor` `\|= 0x77f@0x004218a0` |
 | 0x16 | 2 | `ushort` | `wPad_16` | padding between `wViewFlags` and `+0x18` vtable |
-| 0x18 | 4 | `void *` | `pVftable_field18` | ctor → `0x47f90c`; `CHistoryView_ctor` overwrites |
+| 0x18 | 4 | `void *` | `pVftable_IDSReferenced` | ctor → `g_pCDSView_vftable_IDSReferenced` (`0x47f90c`); `CHistoryView_ctor` overwrites |
 | 0x1C | 4 | `uint` | `dwField_1c` | ctor zero |
 | 0x20 | 4 | `int` | `bbox_left` | `CDSChained_InitWithRect@0x0040b560` copies `pRect[0]`; `CHistoryView_ctor` `{0,0,0x212,0x1fe}` |
 | 0x24 | 4 | `int` | `bbox_top` | same |
 | 0x28 | 4 | `int` | `bbox_right` | same |
 | 0x2C | 4 | `int` | `bbox_bottom` | same |
-| 0x30 | 4 | `uint` | `dwField_30` | ctor zero |
-| 0x34 | 4 | `uint` | `dwField_34` | ctor zero |
-| 0x38 | 4 | `uint` | `dwField_38` | ctor zero |
-| 0x3C | 4 | `uint` | `dwField_3c` | ctor zero |
+| 0x30 | 4 | `int` | `nScreenBbox_left` | `CDSView__UpdateScreenCoordinates@0x0042bf40` copies from `bbox_left`; `CScrollBar_Render@0x004035ad` reads for blit |
+| 0x34 | 4 | `int` | `nScreenBbox_top` | same (`bbox_top` / `+0x34`) |
+| 0x38 | 4 | `int` | `nScreenBbox_right` | same (`bbox_right` / `+0x38`) |
+| 0x3C | 4 | `int` | `nScreenBbox_bottom` | same (`bbox_bottom` / `+0x3c`) |
 | 0x40 | 4 | `uint` | `dwChainRoot` | `CDSChained_ResetChainCounters@0x0042beb0` `= 0` |
 | 0x44 | 2 | `ushort` | `wChainInit44` | `ResetChainCounters` `= 1` |
-| 0x46 | 2 | `ushort` | `wChainFlag46` | `ResetChainCounters` `= 0`; `CPauseDlg_Build` `\|= 0x2c` on dialog builds |
+| 0x46 | 2 | `ushort` | `wChainFlag46` | `ResetChainCounters` `= 0`; **bit 0** keyboard-focusable (`CDSView_AcquireKeyboardFocus@0x0042c8f9` tests `&1`; `CWindow_BuildAt@0x004055b3` `\|= 1`; `CHelpView_ctor@0x004218eb` `\|= 1`); `CPauseDlg_Build` `\|= 0x2c` on dialog builds |
 | 0x48 | 2 | `ushort` | `wChainFlag48` | `ResetChainCounters` `= 0` |
 | 0x4A | 2 | `ushort` | `wChainFlag4a` | `ResetChainCounters` `= 0` |
 | 0x4C | 4 | `void *` | `pParent` | `ResetChainCounters` `= 0`; `CHistoryView_OnEvent@0x00422670` |
@@ -44,7 +44,7 @@
 | 0x58 | 4 | `void *` | `pVftable_CDSChain_IDSChained` | ctor → `g_pCDSChain_vftable_IDSChained` |
 | 0x5C | 4 | `uint` | `dwField_5c` | ctor zero |
 | 0x60 | 4 | `uint` | `dwField_60` | ctor zero |
-| 0x64 | 4 | `uint` | `dwField_64` | ctor zero |
+| 0x64 | 4 | `void *` | `pOverlapEntity` | `CDSChained_ctor@0x004032d0` zero; `CBulanek_UpdateStateFromParams@0x004178f7` / `CTeleportPoint_OnEvent@0x0041feff` on gameplay views — **not** written on dialog/`CSwitch` paths |
 
 ## Leaf functions (view tree)
 
@@ -70,9 +70,11 @@ Slice **26** (2026-05-30): renamed `FUN_0040b560` → `CDSChained_InitWithRect`;
 
 Agent todo **22** (2026-05-30): `CDSChained_GetFirstChildView` / `GetNextSiblingView` @ `0x0042f7c0` / `0x0042f920` — `void * __fastcall GetFirstChildView(CDSChain *pChain)`; `void * __stdcall GetNextSiblingView(void *pCurrentView)` with **ECX** = `pChain` at entry. `CDSChained_ClearChildren` → `void __fastcall ClearChildren(CDSChain *pChain, char bRelease)`. `CDSChain_Remove@0x0042fc30` decompiles as `for` over both walkers.
 
+**Agent todo 21 R4 (2026-05-30):** Renamed `dwField_30..3c` → `nScreenBbox_*` (screen-space blit rect); `dwField_64` → `pOverlapEntity`. `set_decompiler_comment` @ `0x0042bf40`, `0x00403346`. `save_program`.
+
 ## UNK
 
-- Semantic names for `dwField_08` / `dwField_0c` / `dwField_1c` and render-rect copies at `+0x30..+0x3c` (likely `CDSView` layer; larger widgets extend past `0x68`).
+- ~~Semantic names for `dwField_08` / `dwField_0c` / `dwField_1c`~~ — **closed (R5 worker 32):** ctor-zero padding; no leaf consumer ([round5_worker_32_report.md](./round5_worker_32_report.md)).
 - **Shared shell:** `CDSAnim` / `CDSBitmap` reuse this `+0x00..+0x67` layout (agent todo **27**, 2026-05-30); anim classes repurpose `+0x20/+0x24` as `nPos_x/y` and stamp anim vtables from `+0x68`.
 - `dwChainRoot` / `wChainInit44` linkage semantics (child/sibling chain counters).
 - Decompiler still prefixes `_Globals::` on the walker symbols despite global names; `CDSChain_RemoveListNode` may still show `CBulanci::` in call sites until namespace cleanup.

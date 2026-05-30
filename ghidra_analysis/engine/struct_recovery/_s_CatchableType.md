@@ -54,10 +54,24 @@ get_struct_layout _s_CatchableType  → Size: 28
 
 ## UNK
 
-- Demangler `/Demangler/_s_CatchableType` (size 1) vs `/_s_CatchableType` (28) — blocks automatic prototype apply on `___TypeMatch` / `CatchIt`.
-- Exact semantic names for every `properties` bit (only `0x1`, `0x2`, `0x8`, `0x80000000` observed).
-- Whether any tail padding exists after `copyFunction` (no access `>= 0x1C`).
-- Full `_s_ThrowInfo` layout (`pCatchableTypeArray` at `ThrowInfo+0xC`, count at `[0]`) — separate struct batch.
+- Demangler `/Demangler/_s_CatchableType` (size 1) vs `/_s_CatchableType` (28) — blocks `set_function_prototype` on `___TypeMatch` / `CatchIt` (R5 w46: API validation error; use `/_s_CatchableType` or locals).
+- Full `_s_ThrowInfo` layout (`pCatchableTypeArray` at `ThrowInfo+0xC`, count at `[0]`) — separate struct batch (out of T–Z scope).
+
+### R5 worker 46 — `dwProperties` flags (VS2005 CRT, this binary)
+
+| Mask | MSVC name (reference) | Evidence (func@addr) |
+|------|----------------------|----------------------|
+| `0x00000001` | `CT_IS_SIMPLE_TYPE` | `___BuildCatchObjectHelper@0x0044b555` `*param_4 & 1` — pointer-sized `_memmove` from thrown object |
+| `0x00000002` | `CT_BY_REFERENCE` | `___TypeMatch@0x0044b09d` `*param_2 & 2` on catchable |
+| `0x00000004` | `CT_HAS_VIRTUAL_BASE` | `___BuildCatchObjectHelper@0x0044b644` `(*param_4 & 4) != 0` when `copyFunction` set |
+| `0x00000008` | `CT_WINRTUWP` (by-ref store) | `___BuildCatchObjectHelper@0x0044b555` `*param_4 & 8` — stores thrown address into catch buffer |
+| `0x80000000` | throw-side magic | `___BuildCatchObjectHelper@0x0044b535` on `*param_3` (throw object), not catchable |
+
+`___TypeMatch@0x0044b09d` also tests handler `*param_1` bits `1`/`8` and throw `*param_3` bits `1`/`2` (throw-info flags, not catchable `dwProperties`).
+
+### R5 worker 46 (closed)
+
+- **Tail padding (VERIFIED none)**: No instruction in `___BuildCatchObject` / `___BuildCatchObjectHelper` / `___TypeMatch` reads catchable metadata at `>= +0x1C`; Ghidra struct size **28** matches last field `copyFunction` @ `+0x18`.
 
 ## Xref summary (CRT only)
 

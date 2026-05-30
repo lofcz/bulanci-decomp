@@ -18,11 +18,13 @@
 | Offset | Size | Type | Name | Notes |
 |--------|------|------|------|-------|
 | `0x00` | 112 | `CWindow` | `win` | Dialog prefix: vtables, bbox `+0x20..+0x2c`, chain band `+0x40..+0x50`, `bModalFlag` @ `+0x68`, `pDefaultFocusChild` @ `+0x6c` |
-| `0x70` | 1 | `byte` | `bGaming_slot_id` | `CAnim` / `CGameView` gaming slot; unused on pure dialogs |
+| `0x70` | 1 | `byte` | `bGaming_slot_id` | **Union @ `+0x70..+0x7c`** — gameplay: `bPlayerSlot` (`CGameView_InitGamingFields@0x00416590`); dialog: `CSessionList` child ptr @ same offset |
 | `0x71` | 3 | `byte[3]` | `pPad_71` | padding |
-| `0x74` | 4 | `int` | `nDest_x` | gameplay coord band; **`CSessionList.pSessionListBox`** aliases this offset |
+| `0x74` | 4 | `int` | `nDest_x` | gameplay: collision/teleport band; **`CSessionList.pSessionListBox`** aliases |
 | `0x78` | 4 | `int` | `nDest_y` | gameplay; **`CSessionList.pCaptionStatic`** aliases |
-| `0x7c` | 4 | `int` | `nSrc_x` | gameplay; **`CSessionList.pJoinButton`** aliases |
+| `0x7c` | 4 | `int` | `nSrc_x` | gameplay collision right; **`CSessionList.pJoinButton`** aliases; **128 B shell ends here** |
+
+**Tail union:** interpret `+0x70..+0x7c` as either gaming bytes/ints (`CAnim`, `CGameView`) or three dialog child pointers (`CSessionList`) — never both on one instance. Subclasses larger than 128 B (`CGameView` `0x98`, `CAnim` `0xf0`) add `nCollisionBottom` @ `+0x80`, `pGaming_host` @ `+0x84`, etc.
 
 **Union @ `+0x68..+0x6f` (inside `win`):** dialog uses `bModalFlag` + `pDefaultFocusChild`; gameplay views (`CAnim`, `CGameView`) use `bView_state_*` / `dwView_aux_6c` at the same offsets — do not apply both interpretations on one instance.
 
@@ -48,11 +50,20 @@ save_program bulanci.exe
 
 ## UNK
 
-- Whether any type uses all four extension dwords through `+0x7f` on the base 128 B shell (vs larger subclasses like `CGameView` `0x98+`).
-- Full semantic names for `win.dwField_08` / chain dwords (shared with `CDSChained`).
+- Dispatch path for primary vtable **`pRenderSelf`** (slot 15) — see [CDSView_vftable.md](./CDSView_vftable.md).
+- **`win.dwField_08` / `dwField_0c` / `dwField_1c`**: **closed (R5 worker 32)** — `CDSChained_ctor` zero only; no view-shell consumer ([round5_worker_32_report.md](./round5_worker_32_report.md)).
+
+## Vtables
+
+Primary **`CDSView_vftable_t`** (28 slots) @ `g_pCDSView_vftable_primary` (`0x0047f954`); dialog variant @ `g_pCWindow_vftable_primary` (`0x0047fd5c`). Full slot map, hit-test / draw / dispatch, and non-vtable `CDSView__AddChild` / `CDSView__SetSize`: **[CDSView_vftable.md](./CDSView_vftable.md)**.
+
+## R5 worker 6 (2026-05-30)
+
+View-tree `FUN_*` in `0x00402000`–`0x0042c000`: renamed list/scroller/static-text/radio helpers (`CListViewer_IndexToItemRect`, `CStaticText_SetLabelFromStringHandle`, `CScroller_*`, `CDSApp_FlushDirtyRects*`, …). Report: [round5_worker_06_report.md](./round5_worker_06_report.md).
 
 ## Cross-links
 
+- [CDSView_vftable.md](./CDSView_vftable.md) — primary + MI vtables, slot→function table
 - [CWindow.md](./CWindow.md) — `0x70` dialog base embedded in `CDSView.win`
 - [CSessionList.md](./CSessionList.md) — `CWindow win` + pointer tail @ `+0x70..+0x78`
 - [CGameView.md](./CGameView.md) / [CAnim.md](./CAnim.md) — flat header mirrors `win` offsets through `+0x67`, gaming bytes @ `+0x68+`

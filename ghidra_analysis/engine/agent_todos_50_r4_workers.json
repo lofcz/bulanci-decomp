@@ -1,0 +1,295 @@
+{
+  "1": {
+    "todo_id": 1,
+    "status": "launched",
+    "agent": null
+  },
+  "2": {
+    "todo_id": 2,
+    "status": "launched",
+    "agent": null
+  },
+  "3": {
+    "todo_id": 3,
+    "status": "launched",
+    "agent": null
+  },
+  "4": {
+    "todo_id": 4,
+    "status": "launched",
+    "agent": null
+  },
+  "5": {
+    "todo_id": 5,
+    "status": "done",
+    "agent": "r4-worker-5",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true,
+    "summary": "CDSStaticDrawableFace pBitmap; ctor nBlitExtentW/H decompile"
+  },
+  "6": {
+    "todo_id": 6,
+    "status": "launched",
+    "agent": null
+  },
+  "7": {
+    "todo_id": 7,
+    "status": "done",
+    "agent": "r4-worker-7",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true,
+    "summary": "PollKeyboard CDirectKeyb* this; CGame.pDirectKeyb typed; scheduler decompile fixed"
+  },
+  "8": {
+    "todo_id": 8,
+    "status": "launched",
+    "agent": null
+  },
+  "9": {
+    "todo_id": 9,
+    "status": "done",
+    "agent": "r4-worker-9",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true,
+    "summary": "CGameTypeDlg pLabelGroup/pNumEditGroup arrays; OnNotify+RefreshFocus decompile fixed"
+  },
+  "10": {
+    "todo_id": 10,
+    "status": "launched",
+    "agent": null
+  },
+  "11": {
+    "todo_id": 11,
+    "status": "launched",
+    "agent": null
+  },
+  "12": {
+    "todo_id": 12,
+    "status": "done",
+    "agent": "r4-worker-12",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true,
+    "summary": "pSubObjStash: no non-null writers; IDSChainedTailStash struct; CGaming_ctor clear"
+  },
+  "13": {
+    "todo_id": 13,
+    "status": "launched",
+    "agent": null
+  },
+  "14": {
+    "todo_id": 14,
+    "status": "done",
+    "agent": "r4-worker-14",
+    "completed_at": "2026-05-30",
+    "summary": "set_function_this_type CLevelScore helpers + CGame_GetOrCreateLevelScore"
+  },
+  "15": {
+    "todo_id": 15,
+    "status": "done",
+    "agent": "r4-worker-15",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true,
+    "summary": "InitTrackSequence unaff_ESI merged to this; stdcall tail; ctor call fixed"
+  },
+  "16": {
+    "todo_id": 16,
+    "status": "launched",
+    "agent": null
+  },
+  "17": {
+    "todo_id": 17,
+    "status": "launched",
+    "agent": null
+  },
+  "18": {
+    "todo_id": 18,
+    "status": "launched",
+    "agent": null
+  },
+  "19": {
+    "todo_id": 19,
+    "status": "launched",
+    "agent": null
+  },
+  "20": {
+    "todo_id": 20,
+    "status": "launched",
+    "agent": null
+  },
+  "21": {
+    "todo_id": 21,
+    "status": "launched",
+    "agent": null
+  },
+  "22": {
+    "todo_id": 22,
+    "status": "done",
+    "agent": "r4-worker-22",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true,
+    "summary": "pOverlap_entity CBulanek*; respawn overlap writer closed; UpdateStateFromParams decompile fixed"
+  },
+  "23": {
+    "todo_id": 23,
+    "status": "launched",
+    "agent": null
+  },
+  "24": {
+    "todo_id": 24,
+    "status": "launched",
+    "agent": null
+  },
+  "25": {
+    "todo_id": 25,
+    "status": "launched",
+    "agent": null
+  },
+  "26": {
+    "todo_id": 26,
+    "status": "launched",
+    "agent": null
+  },
+  "27": {
+    "todo_id": 27,
+    "status": "launched",
+    "agent": null
+  },
+  "28": {
+    "todo_id": 28,
+    "status": "launched",
+    "agent": null
+  },
+  "29": {
+    "todo_id": 29,
+    "status": "launched",
+    "agent": null
+  },
+  "30": {
+    "todo_id": 30,
+    "status": "done",
+    "agent": "r4-worker-30",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true
+  },
+  "31": {
+    "todo_id": 31,
+    "status": "launched",
+    "agent": null
+  },
+  "32": {
+    "todo_id": 32,
+    "status": "launched",
+    "agent": null
+  },
+  "33": {
+    "todo_id": 33,
+    "status": "done",
+    "agent": "r4-worker-33",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true,
+    "summary": "bodySeekBiasLo: sole writer CreateObject=0; Seek uses streamTell via meta face"
+  },
+  "34": {
+    "todo_id": 34,
+    "status": "launched",
+    "agent": null
+  },
+  "35": {
+    "todo_id": 35,
+    "status": "done",
+    "agent": "r4-worker-35",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true,
+    "summary": "CDSPtrSlotVec namespace fix; bpp/format tags write-only; Load/Save stride stream map corrected"
+  },
+  "36": {
+    "todo_id": 36,
+    "status": "done",
+    "agent": "r4-worker-36",
+    "completed_at": "2026-05-30",
+    "summary": "R4 plates on registry 0x4b vs 0x15 vs JPEG quality +0x60; Save decompiler comment; save_program"
+  },
+  "37": {
+    "todo_id": 37,
+    "status": "done",
+    "agent": "r4-worker-37",
+    "completed_at": "2026-05-30",
+    "summary": "mad_frame sbsample+overlap interior; libmad renames/comments; save_program",
+    "ghidra_saved": true
+  },
+  "38": {
+    "todo_id": 38,
+    "status": "done",
+    "agent": "r4-worker-38",
+    "completed_at": "2026-05-30",
+    "summary": "CDSMpxStream payload offsets + IDSChainedStashFacet@+0x3c; save_program"
+  },
+  "39": {
+    "todo_id": 39,
+    "status": "launched",
+    "agent": null
+  },
+  "40": {
+    "todo_id": 40,
+    "status": "launched",
+    "agent": null
+  },
+  "41": {
+    "todo_id": 41,
+    "status": "launched",
+    "agent": null
+  },
+  "42": {
+    "todo_id": 42,
+    "status": "done",
+    "agent": "r4-worker-42",
+    "summary": "CBulanekCtor: R4 verified CBulanek* this; scheduler@+0x88 videoTrackManager@+0xA8 decompile + asm"
+  },
+  "43": {
+    "todo_id": 43,
+    "status": "launched",
+    "agent": null
+  },
+  "44": {
+    "todo_id": 44,
+    "status": "done",
+    "agent": "r4-worker-44",
+    "completed_at": "2026-05-30",
+    "summary": "InsertOrFindTrack CDSTrackVector* this; R3 void*this closed"
+  },
+  "45": {
+    "todo_id": 45,
+    "status": "launched",
+    "agent": null
+  },
+  "46": {
+    "todo_id": 46,
+    "status": "done",
+    "agent": "r4-worker-46",
+    "completed_at": "2026-05-30",
+    "ghidra_saved": true,
+    "summary": "InitRootSafeStream collection vcall artifact; Tell not Seek"
+  },
+  "47": {
+    "todo_id": 47,
+    "status": "launched",
+    "agent": null
+  },
+  "48": {
+    "todo_id": 48,
+    "status": "done",
+    "agent": "r4-worker-48",
+    "completed_at": "2026-05-30"
+  },
+  "49": {
+    "todo_id": 49,
+    "status": "done",
+    "agent": "r4-worker-49",
+    "completed_at": "2026-05-30"
+  },
+  "50": {
+    "todo_id": 50,
+    "status": "launched",
+    "agent": null
+  }
+}

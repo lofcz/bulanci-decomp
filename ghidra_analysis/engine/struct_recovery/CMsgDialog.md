@@ -93,7 +93,7 @@ Applied in batch 13 via inline script (clone of dialog base + `CWindow` tail). R
 
 ## UNK
 
-- Semantics of `wChainCounter_48` / `wChainCounter_4a` (ctor-zeroed only).
+- ~~`wChainCounter_48` / `wChainCounter_4a`~~ — **closed (R5-44):** same offsets as `CDSChained.wChainFlag48` / `wChainFlag4a`; sole writer `CDSChained_ResetChainCounters@0x0042beb0` (`=0`). Subclasses like `CScroller` repurpose `+0x48` for scroll metadata — not counters on dialog shells.
 - No in-tree overlay resource confirmed to deserialize `classId 2021` (registration present; menu uses direct ctor).
 
 ## Follow-up (round 3)

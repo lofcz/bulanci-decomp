@@ -1,0 +1,9 @@
+{"worker":10,"phase":"scan","address_range":"0x00439000-0x0043D000","scope":"CDSVideoPlayer/TM/FLX-adjacent","fun_remaining_tm":1,"fun_skipped_non_tm":"0x43b000-0x43cd000"}
+{"worker":10,"phase":"rename","old":"FUN_00438fd0","new":"TM_SetAnimFrameFromAnimSub","addr":"0x00438fd0","proof":"caller CLevelScriptOpExt_SetAnimFrame@0x00416bd0; forwards this+0x10"}
+{"worker":10,"phase":"rename","old":"FUN_004397e0","new":"TM_ShiftTrackEntries","addr":"0x004397e0","proof":"8B memmove; caller TM_InsertTrackAt@0x00439a70"}
+{"worker":10,"phase":"rename","old":"CGaming_PreMatchModal_ArmSchedulerSlot0","new":"CGaming_ArmTrackMgrSchedulerIfUnpaused","addr":"0x00439880","proof":"caller CGaming_RunPreMatchModal@0x0041c290; !bPaused arms scheduler+0x40 stamp"}
+{"worker":10,"phase":"rename","old":"CDSVideoPlayer_GetActiveTrackBytesPerFrame","new":"TM_GetCurrentTrackSeqFrameCount","addr":"0x00439990","proof":"reads seq+0x14; CDSAudioPlayer_OnPlaybackTick@0x0043a1f0 -> TM_SeekToFrame"}
+{"worker":10,"phase":"rename","old":"FUN_00439bc0","new":"TM_ResetTrackListHead","addr":"0x00439bc0","proof":"*(this+8)=0; TM_ClearTracks(this,0)"}
+{"worker":10,"phase":"rename","old":"FUN_0043a030","new":"CDSAudioPlayer_SetDirectSoundBufferPosition","addr":"0x0043a030","proof":"caller CDSAudioPlayer_Create@0x00422310; IDirectSoundBuffer vtable+0x40"}
+{"worker":10,"phase":"defer","addr":"0x00439710","name":"FUN_00439710","reason":"MOV [ECX+0x3c] conflicts with dwCurrentFrameIdx@+0x38 consumer TM_AdvanceFrame; ctor init matches pNotifyCookie"}
+{"worker":10,"status":"partial","ghidra_saved":true,"renames_applied":6,"renames_deferred":1,"files":["ghidra_analysis/engine/struct_recovery/round5_worker_10_report.md","ghidra_analysis/engine/struct_recovery/round5_worker_10_report.jsonl"],"ghidra_actions":["rename_function_by_address x6","set_function_prototype x6","set_decompiler_comment x3","save_program bulanci.exe"]}

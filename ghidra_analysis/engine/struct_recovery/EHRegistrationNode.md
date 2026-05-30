@@ -59,10 +59,10 @@ Prefer `TranslatorGuardRN` when the stack object is the 40-byte translator guard
 
 ## UNK
 
-- **`+0` overload (`CSET_SPECIAL`)**: `_CallSETranslator@0x00447915` with `param_1 == 0x123` stores `0x4479a6` at `*param_2` — `param_2` is a `void **` continuation slot, not a live `pNext` (see `TranslatorGuardRN.md` UNK).
-- **`CallCatchBlock` `param_2 - 4`**: `CallCatchBlock@0x0044b36a` reads `[param_2-4]` — saved EBP in the SEH frame, not part of this struct.
-- **`ENABLE_EHTRACE` tail field**: Not present in this VS2005 build (no xref past `+0x08` on plain `EHRegistrationNode*`).
-- **Game xrefs**: None.
+- *(R5 worker 43 — documented overload, not a field)* **`CSET_SPECIAL` (`pExcept == 0x123`)**: `_CallSETranslator@0x0044790b`–`0x00447915` — `MOV EAX,0x4479a6`; `MOV ECX,[EBP+0xc]`; `MOV [ECX],EAX` — writes **ExceptionContinuation** into `void **` at `param_2`, not `pNext` (see `TranslatorGuardRN.md`).
+- *(R5 worker 43 — not struct storage)* **`CallCatchBlock` `param_2 - 4`**: `CallCatchBlock@0x0044b36a` reads saved **EBP** in the SEH activation record, not `EHRegistrationNode` bytes.
+- *(R5 worker 43 — build fact)* **`ENABLE_EHTRACE` tail**: absent in VS2005 Release (no access past `+0x08` on plain `EHRegistrationNode*`).
+- *(R5 worker 43)* **Game xrefs**: none (CRT-only).
 
 ## Xref summary (CRT only)
 

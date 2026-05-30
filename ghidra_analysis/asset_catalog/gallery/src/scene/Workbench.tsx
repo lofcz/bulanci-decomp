@@ -35,12 +35,16 @@ import {
   ASSET_LIST_ID, WorkbenchCtx,
   SceneTreePanel, PreviewPanel, InspectorPanel, ScriptsPanel,
 } from "@/scene/panels";
+import { LiveGamePanel } from "@/scene/LiveGamePanel";
 
-const LAYOUT_KEY = "bulanci.scene.dockview.layout.v1";
+// Bumped to v2 when the Live (embedded engine) panel was added, so existing
+// users get it in their default layout instead of a stale saved layout.
+const LAYOUT_KEY = "bulanci.scene.dockview.layout.v2";
 
 const PANELS = {
   tree: SceneTreePanel,
   preview: PreviewPanel,
+  live: LiveGamePanel,
   inspector: InspectorPanel,
   scripts: ScriptsPanel,
 };
@@ -48,6 +52,7 @@ const PANELS = {
 function defaultLayout(api: DockviewApi): void {
   api.addPanel({ id: "tree", component: "tree", title: "Scene" });
   api.addPanel({ id: "preview", component: "preview", title: "Design", position: { referencePanel: "tree", direction: "right" } });
+  api.addPanel({ id: "live", component: "live", title: "Live", position: { referencePanel: "preview", direction: "within" } });
   api.addPanel({ id: "scripts", component: "scripts", title: "Scripts", position: { referencePanel: "preview", direction: "within" } });
   api.addPanel({ id: "inspector", component: "inspector", title: "Inspector", position: { referencePanel: "preview", direction: "right" } });
   api.getPanel("preview")?.api.setActive();

@@ -52,8 +52,12 @@ Proven layout could be applied later as 13-byte struct if CRT typing is desired;
 
 ## UNK
 
-- Explicit `~_LocaleUpdate` (inlined epilogue pattern only).
-- Padding after 0x0C if any caller assumes 16-byte alignment (not observed).
+(none — R5 worker 46)
+
+### R5 worker 46 (closed)
+
+- **No dedicated dtor (VERIFIED)**: Teardown is caller-inlined — e.g. `getSystemCP@0x0044c8ab` and `__woutput_l@0x0044f03a` / `@0x0044f88b` `AND dword ptr [ptd+0x70], 0xfffffffd` when `updated != 0`; matches ctor OR-in of bit `0x2` at `ptd+0x70`.
+- **No tail padding (VERIFIED)**: Last proven field `updated` @ `+0x0C`; effective size **0x0D**; no consumer indexes `this+0x10` or assumes 16-byte stack alignment in sampled CRT callers.
 
 ## Cross-refs
 

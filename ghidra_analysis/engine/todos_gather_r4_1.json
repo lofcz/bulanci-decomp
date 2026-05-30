@@ -1,0 +1,231 @@
+[
+  {
+    "id": 11,
+    "title": "Fix HhAddChildToParentView stack; name CDSScript pad band",
+    "types": ["CHelpScript", "CHistoryScript", "CDSScript", "CDSView"],
+    "addresses": ["0x004217e0", "0x00422620", "0x004215e0", "0x0042302c"],
+    "ghidra_actions": [
+      "set_function_prototype",
+      "set_function_this_type",
+      "force_decompile",
+      "modify_struct_field",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_11_report.md",
+      "ghidra_analysis/engine/struct_recovery/CHelpScript.md",
+      "ghidra_analysis/engine/struct_recovery/CHistoryScript.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/struct_recovery/batch_10_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source": "blocker",
+    "supersedes_todo_id": 11
+  },
+  {
+    "id": 12,
+    "title": "Trace CHistoryScript pSubObjStash writers and target type",
+    "types": ["CHistoryScript", "CDSChained", "CHistoryDlg", "CDSScript"],
+    "addresses": ["0x00434250", "0x004229b0", "0x0042302c", "0x004226fe"],
+    "ghidra_actions": [
+      "search_instructions",
+      "get_xrefs_to",
+      "set_decompiler_comment",
+      "modify_struct_field",
+      "rename_data"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_12_report.md",
+      "ghidra_analysis/engine/struct_recovery/CHistoryScript.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/struct_recovery/batch_11_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 12
+  },
+  {
+    "id": 13,
+    "title": "Create Ghidra CLevelScriptResource 0x14 row struct",
+    "types": ["CLevelList", "CGame", "CDSChain", "CItemInfo"],
+    "addresses": ["0x004097f0", "0x00409f60", "0x0040a062", "0x00408ff0"],
+    "ghidra_actions": [
+      "create_struct",
+      "modify_struct_field",
+      "set_data_type",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_13_report.md",
+      "ghidra_analysis/engine/struct_recovery/CLevelList.md",
+      "ghidra_analysis/engine/struct_recovery/CGame.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 13
+  },
+  {
+    "id": 14,
+    "title": "Retype CLevelScore helpers ECX; fix GetOrCreateLevelScore",
+    "types": ["CLevelScore", "CGame", "CScoreItem", "CBulanci"],
+    "addresses": ["0x004142b4", "0x00409b10", "0x00409620", "0x00409330"],
+    "ghidra_actions": [
+      "set_function_this_type",
+      "set_function_prototype",
+      "set_decompiler_comment",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_14_report.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_14_results.jsonl",
+      "ghidra_analysis/engine/struct_recovery/CLevelScore.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_28_report.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "high",
+    "source": "blocker",
+    "supersedes_todo_id": 14
+  },
+  {
+    "id": 15,
+    "title": "Merge CMovieView InitTrackSequence unaff_ESI into this",
+    "types": ["CMovieView", "CDSBitmap", "CDSAnimSequence", "ODSImage"],
+    "addresses": ["0x004237b0", "0x004236a0", "0x00423785", "0x00422860"],
+    "ghidra_actions": [
+      "set_function_prototype",
+      "set_function_this_type",
+      "set_decompiler_variable_type",
+      "force_decompile",
+      "disassemble",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_15_report.md",
+      "ghidra_analysis/engine/struct_recovery/CMovieView.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_26_report.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "blocker",
+    "supersedes_todo_id": 15
+  },
+  {
+    "id": 16,
+    "title": "Rename CPauseDlg pGame component at +0x70",
+    "types": ["CPauseDlg", "CGame", "CMsgDialog", "CGaming"],
+    "addresses": ["0x00411df0", "0x00420423", "0x00420380"],
+    "ghidra_actions": [
+      "modify_struct_field",
+      "force_decompile",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_16_report.md",
+      "ghidra_analysis/engine/struct_recovery/CPauseDlg.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "low",
+    "source": "handoff",
+    "supersedes_todo_id": 16
+  },
+  {
+    "id": 17,
+    "title": "Plate CPoem IDSStream MI thunks; xref GetText",
+    "types": ["CPoem", "CDSFileStream", "IDSStream", "CPoemScroller"],
+    "addresses": ["0x00409100", "0x00409870", "0x004094a0", "0x00425df0"],
+    "ghidra_actions": [
+      "set_plate_comment",
+      "set_function_prototype",
+      "get_xrefs_to",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_17_report.md",
+      "ghidra_analysis/engine/struct_recovery/CPoem.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 17
+  },
+  {
+    "id": 18,
+    "title": "Retype CScoreItem_MatchesKillsDeathsAndName highlight this",
+    "types": ["CScoreItem", "CScore", "CLevelScore", "CBulanci"],
+    "addresses": ["0x00409080", "0x00411010", "0x00408fd0", "0x00409b6a"],
+    "ghidra_actions": [
+      "set_function_prototype",
+      "set_parameter_type",
+      "set_function_this_type",
+      "set_decompiler_comment",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_18_report.md",
+      "ghidra_analysis/engine/struct_recovery/CScoreItem.md",
+      "ghidra_analysis/engine/struct_recovery/CScore.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/struct_recovery/batch_17_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source": "blocker",
+    "supersedes_todo_id": 18
+  },
+  {
+    "id": 19,
+    "title": "Type scheduler case-1 pActiveCGaming as CSessionList*",
+    "types": ["CGame", "CSessionList", "CGaming", "CDSChained"],
+    "addresses": ["0x00416030", "0x004162bd", "0x0041630d", "0x0040c2d0"],
+    "ghidra_actions": [
+      "set_decompiler_comment",
+      "set_plate_comment",
+      "set_function_prototype",
+      "modify_struct_field",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_19_report.md",
+      "ghidra_analysis/engine/struct_recovery/CSessionList.md",
+      "ghidra_analysis/engine/struct_recovery/CGame.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 19
+  },
+  {
+    "id": 20,
+    "title": "Decompile CSpells ammo invalidate jumptable; CScrollBar+0xb0",
+    "types": ["CSpells", "CSetupDlg", "CVolume", "CScrollBar"],
+    "addresses": ["0x00426d70", "0x00426d97", "0x0040e590", "0x0040e5b0"],
+    "ghidra_actions": [
+      "disassemble",
+      "set_function_prototype",
+      "set_function_this_type",
+      "modify_struct_field",
+      "set_decompiler_comment",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_20_report.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_20_results.jsonl",
+      "ghidra_analysis/engine/struct_recovery/CSpells.md",
+      "ghidra_analysis/engine/struct_recovery/CSetupDlg.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "blocker",
+    "supersedes_todo_id": 20
+  }
+]

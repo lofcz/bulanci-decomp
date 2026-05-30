@@ -13,24 +13,9 @@ param(
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot            # open_bulanci/
 
-# Load the emscripten SDK (emcc on PATH) + MSVC/libclang for the C build steps.
-. (Join-Path $PSScriptRoot 'dev-shell.ps1')
-
-# ---- Compile + deploy. ----
-Push-Location $root
-try {
-    cargo build -p bulanci_client --target wasm32-unknown-emscripten --release
-    if ($LASTEXITCODE -ne 0) { throw "wasm build failed (exit $LASTEXITCODE)" }
-
-    $out = Join-Path $root 'target/wasm32-unknown-emscripten/release'
-    $web = Join-Path $root 'web'
-    Copy-Item (Join-Path $out 'bulanci_client.js'), (Join-Path $out 'bulanci_client.wasm') `
-        -Destination $web -Force
-    Write-Host "[run-web] deployed bulanci_client.js/.wasm -> $web" -ForegroundColor Green
-}
-finally {
-    Pop-Location
-}
+# ---- Compile + deploy (shared with the editor's auto-build plugin). ----
+& (Join-Path $PSScriptRoot 'build-web.ps1') -Profile release
+if ($LASTEXITCODE -ne 0) { throw "wasm build failed (exit $LASTEXITCODE)" }
 
 # ---- Free a stale server on the port, then serve detached. ----
 # Starting the server detached (instead of blocking here) lets this task exit so

@@ -9,7 +9,8 @@
 | Claim | Address | Evidence |
 |-------|---------|----------|
 | Heap `sizeof == 0x40` | `0x0043bb00` | `CDSWavStream_Factory`: `OperatorNewWithBadAlloc(0x40)` |
-| Registry class **43** (`0x2b`) | `0x0047d9e0` | `PUSH 0x2b`; factory `0x0043bb00`; typeinfo `CDSWavStream` (`0x004b843c`) |
+| Registry class **43** (`0x2b`) | `CDSWavStream_StaticClassRegister@0x0047d9e0` | `PUSH 0x2b`; factory `0x0043bb00`; meta `0x004b843c`; `_atexit` → `CDSWavStream_StaticClassRegister_atexit@0x0047ed20` |
+| MI typeinfo registers | `0x0047d9b0`..`0x0047da40` | `HandleInterfaceRegister` adjustors `+0x18`/`+0x04`/`+0x34` (`0x004465d0`, `0x00428980`, `0x0043baa0`); R5 worker 9 |
 | Factory vtable stores | `0x0043bb00` | `+0x00→0x4823c0`, `+0x04→0x48239c`, `+0x18→0x482388`, `+0x30→0x48236c`, `+0x34→0x482354`; `+0x14`/`+0x20`/`+0x38` zeroed; `+0x1c←1` |
 | Dtor through `+0x34` stash | `0x0041bc00` | `CDSWavStream_dtor`: `FUN_00434250(this+0x34)`; `CDSObject__CDSObject_dtor(this)` |
 | Ghidra struct size | — | `get_struct_layout CDSWavStream` → **64** bytes (`0x40`; matches `OperatorNew(0x40)`) |
@@ -43,6 +44,20 @@
 | `0x00482388` | `IDSEventHandler` | 4 | Shared with `CDSWav` |
 | `0x0048239c` | `face_8slots` | 8 | PCM bind slot 4 |
 | `0x004823c0` | `IDSReferenced` | 3 | Primary base |
+
+### MI adjustors / meta stubs (R5 worker 19)
+
+| Thunk / stub | Vtable @ slot | Adjust | Target |
+|--------------|---------------|--------|--------|
+| `CDSWavStream_GetTypeInfo@0x0041a5c0` | `IDSReferenced` `0x4823c0` slot **0** | — | `MOV EAX,0x4b843c; RET` (class-43 RTTI) |
+| `CDSWavStream_ScalarDeletingDtor_thunk_Sub4@0x0041a5d0` | `face_8slots` `0x48239c` slot **3** | `ECX - 4` | `CDSWavStream_ScalarDeletingDtor@0x0041bc00` |
+| `CDSWav_ReleaseChild_thunk_Sub30@0x0041a5e0` | `IDSChained6` `0x48236c` slot **2** | `ECX - 0x30` | `CDSWav_ReleaseRefcount@0x00433040` |
+| `CDSWav_ReleaseChild_thunk_Sub34@0x0041a5f0` | `IDSChained5` `0x482354` slot **2** | `ECX - 0x34` | `CDSWav_ReleaseRefcount@0x00433040` |
+| `CDSWavStream_ScalarDeletingDtor_thunk_Sub30@0x0041a600` | `IDSChained6` `0x48236c` slot **3** | `ECX - 0x30` | `CDSWavStream_ScalarDeletingDtor@0x0041bc00` |
+| `CDSChain_AdjustThisOffset_ThisMinus30@0x0041a610` | `IDSChained5` `0x482354` slot **1** | `ECX - 0x30` | `CDSChain_AdjustThisOffset@0x0042ac90` (`LEA EAX,[ECX-4]; RET`) |
+| `CDSWavStream_ScalarDeletingDtor_thunk_Sub34@0x0041a620` | `IDSChained5` `0x482354` slot **3** | `ECX - 0x34` | `CDSWavStream_ScalarDeletingDtor@0x0041bc00` |
+
+Shared with `CDSWav` face: `CDSWav_GetClassMeta@0x0041a510` at `face_8slots` slot **0** on `0x48239c`.
 
 ## Ghidra apply
 

@@ -2,7 +2,7 @@
 
 ## Status
 
-**PARTIAL** — heap size `0x94` verified; extends `CWindow` (`0x70`) with nine cached child pointers (`+0x70..+0x90`). Full UI built by `CStartGame2::CGameTypeDlg_BuildUi` (lobby game-type / rules dialog).
+**PARTIAL** — heap size `0x94` verified; extends `CWindow` (`0x70`) with nine cached child pointers (`+0x70..+0x90`). Full UI built by `CGameTypeDlg_BuildUi` — stack **`CGameTypeDlg` (0x94 B)** from `CStartGame2_OnCmd` case **`0xDA`** ([CStartGame2.md](./CStartGame2.md)).
 
 ## Size proof
 
@@ -27,12 +27,8 @@
 | 0x00..0x6F | — | — | `CWindow` prefix | `CGameTypeDlg_BuildUi@0x0040d930` via `CWindow_BuildAt` (see [CPauseDlg.md](./CPauseDlg.md) / `widgets.md` §16) |
 | 0x70 | 4 | `CRadio *` | `pRadioModeA` | `BuildUi` store; `CGameTypeDlg_OnNotify@0x0040ab00` compares to `param_2` on notify `0xCE` |
 | 0x74 | 4 | `CRadio *` | `pRadioModeB` | `BuildUi` store; hidden when mode A selected |
-| 0x78 | 4 | `CStaticText *` | `pLabelGroup0` | `BuildUi`; `CGameTypeDlg_OnNotify` hide/show triplet base (`this+index*4+0x78`) |
-| 0x7C | 4 | `CStaticText *` | `pLabelGroup1` | `BuildUi` |
-| 0x80 | 4 | `CStaticText *` | `pLabelGroup2` | `BuildUi` |
-| 0x84 | 4 | `CNumEdit *` | `pNumEditGroup0` | `BuildUi`; paired with `pLabelGroup0` (`hide` loop uses `pCVar3-0xC` / `pCVar3`) |
-| 0x88 | 4 | `CNumEdit *` | `pNumEditGroup1` | `BuildUi` |
-| 0x8C | 4 | `CNumEdit *` | `pNumEditGroup2` | `BuildUi` |
+| 0x78 | 12 | `CStaticText *[3]` | `pLabelGroup` | `BuildUi` stores `[0..2]`; `OnNotify@0x0040ab00` `Show(pLabelGroup[radio+0x68])` |
+| 0x84 | 12 | `CNumEdit *[3]` | `pNumEditGroup` | `BuildUi` stores `[0..2]`; hide loop walks `pNumEditGroup` with `[-3]` label pairs |
 | 0x90 | 4 | `CButton *` | `pBtnOk` | `BuildUi` store; `CGameTypeDlg_RefreshFocusOrEnable@0x0040aad0` `IsDlgButtonChecked(0x8002)` enables `param_1[0x24]` child |
 
 ## Behavior (leaf evidence)
@@ -46,6 +42,8 @@
 ## Ghidra apply
 
 **Applied (R3 task 9, 2026-05-30):** `get_struct_layout` → 148 B: `CWindow win` @0 (112 B) + typed tail `pRadioModeA`..`pBtnOk` @0x70..0x90. `CGameTypeDlg_BuildUi@0x40d930` in class `CGameTypeDlg` with `CGameTypeDlg *` this (`&this->win`, `this->pRadioModeA`, …). `OnNotify` / `RefreshFocusOrEnable` / `CreateObject` prototyped. `save_program bulanci.exe`.
+
+**Applied (R4 task 9, 2026-05-30):** `recreate_struct` — `pLabelGroup[3]` @0x78, `pNumEditGroup[3]` @0x84 (fixes decompiler `(&win+1)` indexing). `OnNotify` decompile: `pLabelGroup[bVar1]` / `pNumEditGroup[bVar1]`. `RefreshFocusOrEnable` `__thiscall` + `this->pBtnOk` @+0x90. `save_program bulanci.exe`.
 
 ## UNK
 

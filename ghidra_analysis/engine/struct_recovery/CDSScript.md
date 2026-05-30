@@ -76,6 +76,8 @@ Tail layout: `CHelpScript.md`, `CHistoryScript.md`, `CLevelScript` (no dedicated
 
 Round 3 task 42: renamed vtable fields in Ghidra (`vf_primary` / `vf_IDSChained` → names above). Note: Ghidra type at `+0x24..+0x40` may still not match asm field order — see task 42 report.
 
+**R4 todo 11 (2026-05-30):** Verified Ghidra pad band names (`dwReserved_0c`, `dwReserved_14`, `pPad_after_bReturnFlag`, `pPad_afterOpcodeTable`); `ReadSubExpr@0x004384c0` → `CDSScript *` fastcall for opcode-dispatch callees.
+
 ## Follow-up
 
 - **Round 3 task 42**: closed “five vtable pointers in `+0x00..+0x28`” UNK — only two vptrs in prefix; four/five vtables on full subclass object (see table above).

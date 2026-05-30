@@ -62,10 +62,22 @@ save_program bulanci.exe
 
 Decompile after apply: `CGaming::CExplosion_CollectEntitiesInBlastRect(CGaming *this,…)` reads `this->field_0x31c` (+0x54 chain); `ApplyAreaDamage` calls collect with `local_1010 = this->pGaming`.
 
+## Ghidra apply (R4 todo 8, 2026-05-30)
+
+```
+set_function_this_type CGaming*@0x004183d0 / @0x0041a2f0 — confirmed in CGaming class namespace
+set_function_this_type CExplosion*@0x0041e140 / @0x0041b250 — confirmed
+disasm: ApplyAreaDamage@0x41e175 MOV ECX,[ESI+0x84]; landmines@0x41e288 MOV ECX,[ESP+0x40] (pGaming)
+disasm: CBulanek_CheckSlotCollision@0x4193da MOV ECX,[ESI+0x84] before CALL CollectEntities
+get_struct_layout CExplosion → 244 B; pGaming@0x84 CGaming *
+save_program bulanci.exe
+```
+
 ## Key functions
 
 | Symbol | Address |
 |--------|---------|
+| `CDSView_PostEntityDetachMessage_f9` | `0x004165b0` |
 | `CExplosion_Ctor` | `0x0041ce30` |
 | `CExplosion_ApplyAreaDamage` | `0x0041e140` |
 | `CExplosion_DamageAtPoint` | `0x0041b250` |

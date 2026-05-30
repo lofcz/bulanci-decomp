@@ -31,5 +31,9 @@ No `create_struct` — CRT stub policy.
 
 ## UNK
 
-- Full `type_info` layout in VS2005 (name pointer / decorated name handle) — only dtor/equals surfaced in this binary’s import slice.
-- Relationship to game `CDS*` types (none; RTTI comparisons hit `0x0049xxxx` / `0x004axxxx` data, not engine classes).
+- Bytes `+0x04..+0x08` between vftable and name string (not read in this binary’s `type_info` slice).
+
+### R5 worker 46 (closed)
+
+- **Decorated name offset (VERIFIED)**: `type_info::operator==@0x00447377` — `_strcmp((char *)(param_1 + 9), (char *)(this + 9))`; compare runs on **byte offset +9** (after 4-byte vftable + 4-byte opaque prefix).
+- **No game `CDS*` relationship (VERIFIED)**: CRT-only; RTTI tables in `0x0049xxxx` / `0x004axxxx` `.rdata`; no `OperatorNew` / gameplay ctor paths.

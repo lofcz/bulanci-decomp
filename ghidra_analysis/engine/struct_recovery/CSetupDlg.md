@@ -40,7 +40,7 @@ Live path: `CDSApp_ShowSetupDialog` stack-allocates / shows setup UI (uses `CSet
 | `CSetupDlg_ctor` | `0x0040e290` | Build modal dialog; volume slider uses `g_volumeSliderBitmapIds` |
 | `CSetupDlg_UpdateVolumeLabel` | `0x0040e4e0` | Format binding name into `pVolumeLabel` static text |
 | `CSetupDlg_SetVolumeBinding` | `0x0040e590` | `CScrollBar_SetValue(pVolume, idx)` + label refresh |
-| `CSetupDlg_OnVolumeFocus` | `0x0040e5b0` | Focus notify `7`: audio pan preview from `pVolume+0xb0` |
+| `CSetupDlg_OnVolumeFocus` | `0x0040e5b0` | Focus notify `7`: pan preview from `pVolume` → `CScrollBar::nCurrentValue` @ `+0xb0` |
 
 ## Ghidra apply
 
@@ -54,9 +54,10 @@ save_program bulanci.exe
 
 Applied R3 task 20 — see [round3_task_20_report.md](./round3_task_20_report.md).
 
+**R4 task 20:** `CVolume` embeds `CScrollBar scrollbar` (204 B); `nCurrentValue` @ `+0xb0` — binding index for `CDSAudio_SetPanPreview` + label refresh ([CScrollBar.md](./CScrollBar.md), [round4_task_20_report.md](./round4_task_20_report.md)).
+
 ## UNK
 
 - Full `CWindow` / `CDSChained` field naming inside `0x00..0x6B` (shared with other dialogs).
 - OK/Cancel `CButton` children are heap-only (ctor calls `CDSView__AddChild` without storing pointers in tail).
 - Whether any runtime path calls `InitializeByClassId(2058)` vs direct ctor/factory.
-- `CVolume.p_scrollbar_base+0xb0` scroll binding index (used by `CSetupDlg_OnVolumeFocus` pan preview).

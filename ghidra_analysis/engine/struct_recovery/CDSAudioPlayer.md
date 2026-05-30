@@ -20,8 +20,8 @@
 | 0x00 | 4 | `void *` | `pVftable_primary` | `CDSAudioPlayer_ctor@0x0043a4f0` |
 | 0x04 | 4 | `void *` | `pVftable_IDSReferenced` | ctor; dtor |
 | 0x08 | 4 | `uint` | `dwRefCount` | ctor `= 1`; `Play@0x0043a9d0` pre-increment before `vtable+8` release in `PlayAndRelease` |
-| 0x0C | 4 | `void *` | `pSource` | ctor `0`; `Init@0x0043a760` assigns `IDSAudioSource*`; dtor `Release` |
-| 0x10 | 4 | `void *` | `pTrackSync` | ctor `0`; `OnPlaybackTick@0x0043a1f0` → `TM_SeekToFrame(*(this+0x10), …)` when non-null |
+| 0x0C | 4 | `IDSAudioSource *` | `pSource` | ctor `0`; `Init@0x0043a760` assigns bank-slot pointer (`CDSAudioBankSample` **alloc+4**); dtor `Release` |
+| 0x10 | 4 | `CDSVideoPlayer *` | `pTrackSync` | ctor `0`; sole writer `CDSAudioVideoPlayer_SetupTrack@0x0043bba0` → `&videoTrackManager`; reader `OnPlaybackTick@0x0043a1f0` → `CDSVideoPlayer_GetActiveTrackBytesPerFrame` + `TM_SeekToFrame` |
 | 0x14 | 4 | `void *` | `pDirectSoundBuffer` | ctor `0`; `Init` / `Play` / `Stop` / `ApplyEffectiveVolume` IDirectSound buffer vtable calls |
 | 0x18 | 4 | `void *` | `pEventTarget` | `Init` stores 4th arg; `CDSAudioPlayer_Create@0x00422382` passes `param_4` from `TriggerBankSample` (`eventTarget`); cleared `FUN_00422470@0x00422470` |
 | 0x1C | 1 | `byte` | `bStreaming` | `Init` streaming flag; `Play` loop test with `bLooping` |
@@ -63,16 +63,41 @@
 | `0x00422470` | `CBulanek_ReleaseAudioPlayerRef` | Clears `pEventTarget` (`+0x18`), `Stop`, nulls `int*` slot |
 | `0x0043cdc0` | `CDSDirectSound_OnPlaybackCompleteMessage` | **Reads** `pEventTarget` on WM `0x200`/1; enqueues to handler |
 
-**`pSource` layout** (pointer is **IDSAudioSource** face, bank slot `alloc+4`): `+4` `dwSampleByteSize`, `+8` `wChannels`, `+0xA` `wBitsPerSample`, `+0xC` `dwSampleRate`, `+0x10` cached duplicate `IDirectSoundBuffer*` when streaming (`Init@0x0043a760`).
+**`pSource` = `IDSAudioSource*`** (bank slot `CDSAudioBankSample` **alloc+4**; see [CDSAudioBankSample.md](./CDSAudioBankSample.md) / [round3_task_24_report.md](./round3_task_24_report.md)):
+
+| `IDSAudioSource` offset | Field | `Init` use |
+|-------------------------|-------|------------|
+| +0x04 | `dwSampleByteSize` | Buffer sizing; `OnPlaybackTick` vs `dwPlaybackBytePos` |
+| +0x08 | `wChannels` | `CDSApp_CreateSoundBuffer` |
+| +0x0A | `wBitsPerSample` | same |
+| +0x0C | `dwSampleRate` | same |
+| +0x10 | `pCachedDirectSoundBuffer` | Streaming duplicate path; may alias full-object `pHeldRef` |
+| vtable+0x14 | `CDSWav_HandleAcquireReadThunk` | Returns **0** → `dwSourceReadCursor` |
+| vtable+0x18 | `CDSAudioBankSample_HandleResourceRead` | `Read(&player->dwSourceReadCursor, …)` fills DS buffer |
+| vtable+0x1c | close read | Called when non-streaming (`bStreaming==0`) |
+
+**Factory chain:** `TriggerBankSample@0x00422430` → `*(IDSAudioSource**)(bank+0x18)[slot]` → `CDSAudioPlayer_Create@0x00422382` → `Init(this, pSource, …)`.
 
 ## Ghidra apply
 
 ```
 get_struct_layout CDSAudioPlayer
-→ Size: 88 bytes (0x58)
+→ Size: 88 bytes (0x58); pSource @ +0x0C typed IDSAudioSource *
 ```
 
-Struct verified in Ghidra (agent slice **23**, 2026-05-30). Renamed `FUN_0043a350` → `CDSAudioPlayer_FillDirectSoundBuffer` (prototype `CDSAudioPlayer *this`). `Init` prototype set; decompiler keeps `void *this` per Ghidra thiscall API limit.
+Struct verified in Ghidra (slice **23** + **R4 pass** 2026-05-30):
+
+| Action | Target |
+|--------|--------|
+| `modify_struct_field` | `pSource` → **`IDSAudioSource *`** @ +0x0C |
+| `set_function_this_type` | `CDSAudioPlayer_ctor`, `Init`, `Play`, `Stop`, `OnPlaybackTick`, `RefillDirectSoundBuffer`, `FillDirectSoundBuffer`, `ApplyEffectiveVolume` |
+| `set_function_prototype` | `Init(…, IDSAudioSource *pSource, …)`; `Create(…, IDSAudioSource *pSource, …)`; `OnPlaybackTick` / `RefillDirectSoundBuffer` → **__thiscall** |
+| `set_decompiler_comment` | `TriggerBankSample@0x00422430`, `CDSDirectSound_OnPlaybackCompleteMessage@0x0043cdc0` |
+| `save_program` | `bulanci.exe` |
+| `modify_struct_field` | `pTrackSync` → **`CDSVideoPlayer *`** (R5 worker 38) |
+| `rename_function_by_address` | `0x00439990` → `CDSVideoPlayer_GetActiveTrackBytesPerFrame` |
+
+Post-R4 decompile: `Init` / `OnPlaybackTick` use typed `this->pSource`, `pSource->wChannels`, `dwSampleByteSize`, `pCachedDirectSoundBuffer`, and named playback flags (`bPlaying`, `bStreaming`, etc.).
 
 ## Playback-complete dispatch (`pEventTarget` @ +0x18)
 
@@ -98,4 +123,4 @@ Player ref slots on `CBulanek`: death voice @ `pPad_mid+0x58`, hit quip @ +0x170
 
 ## UNK
 
-- Whether `pTrackSync` is always `TM_*` track manager or other sync object (only `TM_SeekToFrame` xref proven).
+- *(none — R5 worker 38 closed `pTrackSync` typing; see [round5_worker_38_report.md](./round5_worker_38_report.md))*

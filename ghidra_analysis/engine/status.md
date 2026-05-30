@@ -68,7 +68,7 @@ These represent core execution engines, lifecycle managers, hardware wrappers, a
   * **Per-tick blit** goes through `CPoemScroller::BlitDispatch` (`TM_TickBlit @ 0x00439080`), called against the engine singleton at `DAT_004b3b88 + 0x80`.
   * **Construction templates** for both `CBulAnim` (`CMenu::FUN_004104f0`) and `CAnim` (`CBulanci::FUN_00411010`) recovered: alloc → base ctor `CDSAnim::FUN_00439560(this, x, y, NULL, 0)` → patch all 7 vftables → 4× `BindSequence(this+0x78, ...)` for the four facing/anim variants packaged in one BitmapSprite → `SetTrack` with a random starting frame and the team-tinted 256-entry palette remap.
 * **Open questions:**
-  * ~~On-disk source of `seq[0x10]`~~ **done (todo 32):** `CDSFlxFile_BindStream@0x00432ac0` writes FLX header `inMemSize` (`+0x1c`, usually `0x470` = 1136 ms total) to `nSeqTotalDurationMs` @ `CDSFlxFile+0x14` and `flags` (`+0x20`, frame count − 1) to `nSeqFrameCountMinusOne` @ `+0x18`. Track `seq` = `CDSFlxFile` meta face `resource+4`; `CBulPicture_Create` does not participate.
+  * ~~On-disk source of `seq[0x10]` / `inMemSize` vs `sizeof(CBulPicture)`~~ **done (R3+R4 todo 32):** `CDSFlxFile_BindStream@0x00432ac0` copies file `inMemSize` → `nSeqTotalDurationMs` (per-clip ms; master pack **1/130** == `0x470`). Sole Bresenham reader `TM_AdvanceFrame@0x004399b0`. ClassID **76** `CDSDsmFile` fills same meta offsets; see [round4_task_32_report.md](struct_recovery/round4_task_32_report.md).
   * The real purpose of FLX opcode 0x0C (broadcasts a u16 via `BroadcastFrameTimeHint @ 0x00436ef0` to per-consumer subscribers). Plausible roles: profiling/debug timing hints, script-VM hooks for cadence-aware behavior, or a deprecated codepath.
   * Exact slot order of the 24-entry primary vtable (the IDSImage face).
   * Semantics of `+0x70` and `+0x74` in the IDSAnim subobject (used as a subscriber-identity cookie in `SetCurrentSequence`).
@@ -235,7 +235,7 @@ Round-1 manifest (superseded for new work): [`agent_todos_50.json`](./agent_todo
 29. ~~Fix CTeleportPoint OnEvent partner_node typing~~ **done** — `pPartner_node` `CTeleportPoint*`; OnEvent partner probe `this[-1].pPartner_node` + `dwView_flags` @ partner `+0x44` (paired alloc)
 30. ~~Fix CDSCollection_InsertKeyed decompiler this quirk~~ **partial** (worker 30) — `CDSCollection*` prototype + plate/asm; ECX retype blocked by Ghidra API [medium]
 31. ~~CDSFlxFile DecodeFrame callsites~~ [high] — **done** (worker 31): vtable-only static xref `0x004872c0`; live dispatch `TM_AdvanceFrame@0x00439a15` → meta vtable slot 7; Ghidra comments + `CDSFlxFile.md` callsite table
-32. ~~CBulPicture seq duration ms~~ **done** — `CDSFlxFile_BindStream` hdr `inMemSize` → `nSeqTotalDurationMs` / `seq[0x10]`; Ghidra renames + comment @ `0x00432b18` (worker 32) [high]
+32. ~~FLX inMemSize / seq timing audit~~ **done (R4)** — pack: 1/130 `inMemSize==0x470`; per-sprite total ms; DSM parallel path; Ghidra comments @ `0x00432b18` / `0x004399b0` / `0x0040eb30` ([round4_task_32_report.md](struct_recovery/round4_task_32_report.md)) [medium]
 33. ~~FLX BindStream header dwords~~ **done** — file↔outer table @ `CDSFlxFile_BindStream@0x00432ac0`; `flx_file_format.md` + decompiler comment (agent todo 33)
 34. CDSFont payload tail fields [high]
 35. CDSImage MI Load/Save [high]
@@ -243,11 +243,11 @@ Round-1 manifest (superseded for new work): [`agent_todos_50.json`](./agent_todo
 37. ~~CDSMpx libmad interior~~ **done** — recreated `mad_stream`/`mad_frame`/`mad_synth_bulanci`; `CDSMpx` embeds `stream`/`frame`/`synth`; libmad↔Ghidra name map in `CDSMpx.md` (worker 37) [medium]
 38. ~~CDSMpxStream persistence overlay~~ **done** — `CDSMpxStream` 39112 B with `mpxFormatTail`/`pPayloadStream`/`dwPayloadBytes` @ +0x08..+0x3c; `CDSMpxPersistFacet` 0x38; `SaveMpxFile`/`LoadMpxFile`/`CreateFromHandle` prototypes (worker 38) [medium]
 39. CDSException base struct [high]
-40. ~~CDSSafeStream auxHeap + flags~~ **done** (agent 40) — `dwM_streamFlags` write-only; `m_chain_auxHeap` teardown-only (`CDSChain_ReleaseAuxHeap`); plate @ `0x446ea0`/`0x446d90`; `save_program` OK
+40. ~~CDSSafeStream auxHeap + MI vs filter~~ **done** (R3+R4 todo 40) — `pAuxHeap` teardown-only (no alloc in binary); MI header `+0x00..+0x14` shared, body diverges @ `+0x18` (chain vs cursor); dual alloc `CreateFilterSafeStream`; `save_program` OK — [round4_task_40_report.md](struct_recovery/round4_task_40_report.md)
 41. ~~CBulanek scheduler @ +0x88~~ **done** — `CBulanek.scheduler` `CDSUpdatedItem` @ +136; ctor/tick xrefs (agent todo 41)
 42. CBulanek videoTrackManager @ +0xA8 [critical]
 43. ~~CDSUpdatedItem IDSUpdated facet @ +0x00~~ **done** — `pVftable_IDSUpdated` @ embed +0; 29-ctor catalog; `CShot`/`CGame`/`CMenu` embeds typed (agent todo 43)
-44. ~~CDSVideoPlayer CDSTrackVector @ +0x1c~~ **done** — nested `CDSTrackVector` @ +0x1c; `TM_LookupTrackIndex` / `TM_InsertTrackAt` prototypes (agent todo 44)
+44. ~~CDSVideoPlayer CDSTrackVector @ +0x1c~~ **done** — R3 embed + helpers; R4 `InsertOrFindTrack` `CDSTrackVector*` (agent todo 44)
 45. ~~CDSStreamStorage pack collection embed~~ **done** — `CDSCollection` @ +0x1c, `CDSChain` @ +0x34; `OpenPackStream` `CDSStreamStorage*` path (agent todo 45)
 46. CDSStreamStorage IDSStorage stub audit [high]
 47. ~~CDSStrmResInfo streamExtent @ +0x14~~ [medium] **done** (agent 47)

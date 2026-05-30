@@ -30,7 +30,9 @@ rename_function 0x00406340 → CDSPtrSlotVec_Resize
 prototype: void __thiscall CDSPtrSlotVec_Resize(CDSPtrSlotVec *this, int newCapacity)
 ```
 
-**Agent todo 35 r2 (2026-05-30):** `set_function_prototype@0x00406340` — cleared stale `CDSAudioBank * this` in signature string (Ghidra listing may still show `void *this` in decompiler).
+**Agent todo 35 r2 (2026-05-30):** `set_function_prototype@0x00406340` — cleared stale `CDSAudioBank * this` in signature string.
+
+**Agent todo 35 r4 (2026-05-30):** `set_function_this_type` → `CDSPtrSlotVec *`; `CDSImage_dtor` callee decompiles as `CDSPtrSlotVec::CDSPtrSlotVec_Resize` (see [round4_task_35_report.md](./round4_task_35_report.md)).
 
 ## UNK
 

@@ -365,6 +365,29 @@ impl ClientApp {
         app
     }
 
+    /// Editor preview jump (web build): boot straight into the scene under
+    /// edit. Finish the intro handoff if it's still up, drop every overlay
+    /// (the splash) down to the base, then swap the base to `name`, so the
+    /// embedded engine shows exactly the edited scene — which then hot-reloads
+    /// in place from the broker's live overlay/patch stream.
+    #[cfg(target_arch = "wasm32")]
+    pub(crate) fn preview_goto(&mut self, name: &str, now_ms: u64) {
+        if self.phase == AppPhase::Intro {
+            self.enter_menu_from_intro(now_ms);
+        }
+        while self.surfaces.pop_overlay().is_some() {}
+        if self.surfaces.name_at(0) == Some(name) {
+            return;
+        }
+        match crate::scene_runtime::load_scene(self, name) {
+            Some(s) => {
+                self.surfaces.set_base(Surface::scene(s, SurfaceLayer::Base));
+                eprintln!("[preview] goto base scene '{name}'");
+            }
+            None => eprintln!("[preview] scene '{name}' missing — preview unchanged"),
+        }
+    }
+
     /// Load `name` through the scene router and push it as a modal overlay on
     /// top of the current stack (intro / connecting / dialogs). A missing
     /// target is logged, not fatal — the surface beneath stays shown.
@@ -589,6 +612,16 @@ impl ClientApp {
                     }
                 }
             }
+        }
+
+        // ---- 0d. Editor preview-goto (web build only). The editor's Live
+        //          panel boots the embedded engine with `?scene=<name>`; the
+        //          shell calls `ob_goto_scene`, queued here. Jump straight to
+        //          the scene under edit so the iframe previews exactly it. ----
+        #[cfg(target_arch = "wasm32")]
+        if let Some(name) = crate::asset::web_bridge::take_preview_goto() {
+            let now = self.clock.elapsed_ms;
+            self.preview_goto(&name, now);
         }
 
         // ---- 1. Refresh the monotonic engine clock. ----

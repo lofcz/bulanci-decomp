@@ -72,6 +72,8 @@ save_program bulanci.exe
 
 Applied R3 task 20 — see [round3_task_20_report.md](./round3_task_20_report.md).
 
+**R4 task 20:** `CSpells_SetAmmoEmptyAndInvalidate@0x00426d70` ends with **tail-call** `vf_primary+0x24` → `CDSView_InvalidateRectClipped(this, NULL, 0)` @ `0x0042ca30` (slot 9 on `CSpells` CDSView vtable) — **not** a switch jumptable @ `0x00426d97` ([round4_task_20_report.md](./round4_task_20_report.md)).
+
 ## UNK
 
 - Dual use of `+0x78..+0x7a` as spell **dword** mask vs per-byte ammo-empty state (`CSpells_SetAmmoEmptyAndInvalidate` vs `OnEvent`) — may share storage with disjoint lifetimes.

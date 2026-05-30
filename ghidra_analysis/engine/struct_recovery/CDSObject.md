@@ -43,12 +43,27 @@
 | `+0x38` | `dwCurrentFrame` | `m_paletteEntries` (dword); same allocate |
 | `+0x48` | (padding on `0x48` alloc) | `nEmbeddedImage_field_44` — `CDSImage::field_44` (`CDSImage_ctor@0x00425460` `+0x44 = 8`) |
 | `+0x4c` | — | `pEmbeddedImage_vf_primary` — `CDSImage` MI slot `+0x48`; `CDSObject_CtorWithImage@0x0042568a` stores `CDSImage::vftable`; `CDSImage_ReleaseRefcount@0x004322f0` dispatches `(**(code**)(*(this+0x4c)+4))()` |
-| `+0x50` | 4 | `uint` | `dwImageField_50` | `CDSObject_CtorWithImage@0x00425666` `MOV [this+0x50], 1` (dword tag; MI `vf_IDSChained` at `+0x54`) |
-| `+0x54` | — | `*pPad_54 = g_pCDSImage_vftable_IDSChained` |
-| `+0x58` | — | `*(pPad_54+4) = CDSImage::vftable`; `FUN_00434250` in dtor |
-| `+0x5c` | — | `dwImageField_5c = 0` (embed tail; standalone `CDSImage` uses `m_chain` here) |
+| `+0x50` | 4 | `int` | `nImageRefcount` | `CDSObject_CtorWithImage@0x00425670` `MOV [ESI+0x50],1`; `CDSImage_ReleaseRefcount@0x004322f0` read/dec `@+0x50`; `CDSImage_ReleaseRefcount_thunk_Sub58@0x00432320` `SUB ECX,0x58` from streamHost `@+0x58` |
+| `+0x54` | 4 | `void *` | `pImage_vf_IDSChained` | `CDSObject_CtorWithImage@0x00425691` `= g_pCDSImage_vftable_IDSChained` (overwrites embed `CDSImage::nRefcount` slot) |
+| `+0x58` | 4 | `void *` | `pImage_vf_streamHost` | `CDSObject_CtorWithImage@0x00425698`; `CDSObject_dtor@0x004256c0` `IDSChainedTail_ClearSubObjStash(this+0x58)` |
+| `+0x5c` | 4 | `void *` | `pImage_tail_5c` | `CDSObject_CtorWithImage@0x00425677` `= 0` (no `m_chain` on `0x60` host; standalone `CDSImage+0x5c`) |
 
 Palette / plane helpers (`GetPaletteBuffer@0x004360d0`, `GetColorPlane@0x004360f0`) take a **`CDSImage*`** and use **`CDSImage+0x34`** (`m_paletteEntries`), which is **`CDSObject+0x38`** when embedded.
+
+## Image embed tail band (`+0x48..+0x5c`, `0x60` heap only)
+
+Standalone `CDSImage` MI tail (`CDSImage.md`) vs absolute host offsets when `CDSImage` is embedded at `CDSObject+0x04`:
+
+| `CDSObject` abs | Standalone `CDSImage+Δ` | Standalone field | Embed host field | Evidence |
+|-----------------|-------------------------|------------------|------------------|----------|
+| `+0x48` | `+0x44` | `nDefaultBppTag` | `nEmbeddedImage_field_44` | `CDSImage_ctor@0x004254af` `= 8`; heap ctor only |
+| `+0x4c` | `+0x48` | `nDefaultFormatTag` | `pEmbeddedImage_vf_primary` | `CDSObject_CtorWithImage@0x0042568a` `= CDSImage::vftable`; `CDSImage_ReleaseRefcount@0x004322f3` dispatch `[ECX+0x4c]` |
+| `+0x50` | `+0x4c` | `pVf_IDSChained` | `nImageRefcount` | Ctor `MOV [+0x50],1` **before** MI vtable patches; **not** a vtable pointer |
+| `+0x54` | `+0x50` | `nRefcount` | `pImage_vf_IDSChained` | Ctor `@0x00425691` overwrites inner refcount slot with IDSChained MI vtable |
+| `+0x58` | `+0x54` | `streamHost` | `pImage_vf_streamHost` | Ctor `@0x00425698`; `ReleaseRefcount_thunk_Sub58@0x00432320` `ECX-0x58` → outer base for release |
+| `+0x5c` | `+0x58` | `eventFacet` | `pImage_tail_5c` | Ctor `@0x00425677` `= 0`; `CDSObject_dtor` stash clear via `param_1+0x16` dwords → `+0x58` facet |
+
+**Release path:** `CDSImage_ReleaseRefcount` uses `[this+0x50]` / `[this+0x4c]`. On bound `0x60` objects, stream-host thunks pass **`CDSObject*`** (not `CDSImage+4`), so `nImageRefcount` @ host `+0x50` is authoritative; inner `CDSImage::nRefcount` at host `+0x54` is not used post-ctor.
 
 ## Ghidra apply
 
@@ -70,11 +85,17 @@ Round 3 task 24: `bPlayFlags` @ `+0x34`, `dwCurrentFrame` @ `+0x38`, image tail 
 
 **Agent todo 1 r3 (2026-05-30):** `dwImageField_50` `uint` @ `+0x50` (`MOV [this+0x50],1` @ `CDSObject_CtorWithImage@0x00425670`); `set_function_this_type` on `CDSObject_CtorWithImage` + `CDSImage_ctor@0x00425460`; decompile shows `nDefaultBppTag` on embed path → abs `+0x48` `nEmbeddedImage_field_44`. Comments @ `0x00425670`, `0x004254af`; `save_program bulanci.exe`.
 
+**Agent todo 1 r4 (2026-05-30):** Verified Ghidra `CDSObject` @ `+0x54` `pImage_vf_IDSChained`, `+0x58` `pImage_vf_streamHost`, `+0x5c` `pImage_tail_5c` (96 B); `CDSObject_CtorWithImage@0x00425620` decompile assigns all three MI slots; comment @ `0x0042568a`; `save_program bulanci.exe`.
+
+**R5 worker 30 (2026-05-30):** `dwImageField_50` → `nImageRefcount` (`int` @ `+0x50`); embed tail band table `+0x48..+0x5c`; comments @ `CDSObject_CtorWithImage@0x00425670`, `CDSImage_ReleaseRefcount@0x004322f0`; `save_program bulanci.exe`. Report: [round5_worker_30_report.md](./round5_worker_30_report.md).
+
 ## Follow-up
 
-- Scheduler/`CDSImage` overlay, `bPlayFlags`, `+0x48..+0x5c` MI naming — see agent todo 1 r3 / `CDSImage.md` (R3 `agent_todos_50_r3` id **24** is `CDSAudioBankSample`, not `CDSObject`).
+- Full MI thunk graph (`CDSImage_Load` adjustors) — `CDSImage.md` / `bmp_decoder.md`.
 
 ## UNK
 
-- ~~`+0x50` naming~~ **done** (agent todo 1 r3): Ghidra `dwImageField_50` (`uint`); `pImage_vf_IDSChained` moved to `+0x54`.
-- MI thunk wiring for `image_vf_streamHost` / `image_tail_5c` (defer to `CDSImage.md`, `bmp_decoder.md`).
+- ~~`+0x50` semantics~~ **done** (R5 worker 30): `nImageRefcount` — outer-object release counter; pairs with `pEmbeddedImage_vf_primary` @ `+0x4c` in `CDSImage_ReleaseRefcount`.
+- ~~`+0x54` / `+0x5c` MI field names~~ **done** (agent todo 1 r4): `pImage_vf_IDSChained`, `pImage_vf_streamHost`, `pImage_tail_5c`.
+- Whether `pEmbeddedImage_vf_primary` should be typed as a dedicated facet struct (currently `void *`) — low value; dispatch proven @ `+0x4c`.
+- MI thunk / scalar-deleting dtor slot order — defer to `CDSImage.md`, `bmp_decoder.md`.

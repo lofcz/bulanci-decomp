@@ -56,11 +56,21 @@ Applied in batch 38; verified slice 38 (2026-05-30).
 
 **Verdict (agent todo 40, VERIFIED):** teardown-only — `CDSChain_ReleaseAuxHeap@0x0042f800` calls `Runtime_Free` on `pAuxHeap` when non-NULL before list splices. Callers: `CDSChained_AppendChild`, `CDSChain_RemoveListNode`, `FUN_0042f980`, `FUN_0042f9d0`, `FUN_0042fa20`, `FUN_0042fa50`. Ctor zeros @ `CDSSafeStream_ctor+0x00433b19` (sole program `MOV` to `+0x24`). **No allocator xref** in program-wide `search_instructions` for `[reg+0x24]` beyond zero-init.
 
+## MI vs `CDSFilterStream` (R4 todo 40)
+
+Shared **stream header** through `+0x14` (`IDSReferenced` … `IDSChained`). At **`+0x18`** the layouts diverge:
+
+| Offset | `CDSFilterStream` | `CDSSafeStream` |
+|--------|-------------------|-----------------|
+| `+0x18` | `dwCursorLo` (filter window/cursor body through `+0x30`) | Embedded **`CDSChain`** (`vf_chain_*`, `m_chain_head`, `m_chain_auxHeap`, `nM_chain_count`) |
+| `+0x2c` | — | `CRITICAL_SECTION lock` |
+| `+0x44` | — | `m_streamName` |
+
+`CDSStreamStorage_CreateFilterSafeStream@0x00434760` allocates **both** types (`0x38` + `0x48`) and passes `&filter->pVftable_IDSStream` into `CDSSafeStream_ctor` — composition, not a single object replacing the filter tail. See [CDSFilterStream.md](./CDSFilterStream.md) and [round4_task_40_report.md](./round4_task_40_report.md).
+
 ## UNK
 
-- Exact MI hierarchy field-sharing vs `CDSFilterStream` beyond shared vtable cluster (safe stream replaces filter body with `CDSChain`).
 - `CDSSafeStream_Write` always raises unsupported (`@0x00446c00`) — no write buffer fields.
-- Who allocates the heap block freed at `CDSChain+0x0c` on non–safe-stream chain heads (if ever non-NULL).
 
 ## References
 

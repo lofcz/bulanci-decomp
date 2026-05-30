@@ -40,6 +40,8 @@
 | `0x00483794` (`CGunMouse`) | `CGunMouse_OnAnimTick@0x00423bd0` | cursor weapon tick |
 | `0x00481ed4` (`CWeapon`) | `CWeapon_Fire@0x004212b0` | weapon overlay |
 
+**R4 task 31:** FLX `0x0C` passes chunk **`u16`** into `vfn[4]`; meaning is subscriber-specific (`eventCode`, `0xFFFF` anim tick, weapon fire matrix) — see [CDSFlxFile.md](./CDSFlxFile.md) § FrameTimeHint `u16` semantics. Canonical five-slot `IDSAnim` row at `0x00481f00` (`CBitmap`) documented in [CBitmap.md](./CBitmap.md).
+
 ## Ghidra apply
 
 ```
@@ -106,9 +108,22 @@ Runtime `pOwner` values are **CDSView hosts** (bitmap/view shells), not the heap
 | **Other classes** | `CGunMouse_ctor`, `CDSBitmap_ShellCtor` | Never used `ODSImage::` prefix; `CDSBitmap::…SubobjectCtor` renamed to `CDSBitmap_ShellCtor` |
 | **Decompiler `this`** | `CWeapon_ctor`, `SetOwner`, `ODSImage__SetImage` | Ghidra MCP cannot retype ECX `this`; plate comment @ `0x0041dbc0` documents `CWeapon *` |
 
+## R4 todo 48 (2026-05-30) — `CDSView*` on `pOwner` evaluation
+
+| Check | Result |
+|-------|--------|
+| Ghidra `CDSView` | **128 B** — `CWindow win` @ `+0`; `nDest_x` @ `+0x74` — **not** the embedder layout |
+| `CDSView__SetSize@0x0042cbf0` disasm | Reads **`[ECX+0x20]` / `[ECX+0x24]`** as origin pair — matches **`CBitmap` / `CAnim` / `CDSBitmap`** (`nOrigin_x` / `nBbox_left` @ `+0x20`) |
+| `TM_TickBlit@0x00439080` | `BlitDispatch(..., (int *)(pOwner+0x30), …)` — bounds @ **`+0x30`** on **CDSChained view shell**, not `CDSView` struct |
+| `modify_struct_field pOwner → CDSView *` | **Rejected** (dry-run OK; not applied) — would mis-type all four `SetOwner` callers |
+| `pOwner` field type | **Keep `CBulanci *`** — documents `CBulanci::CDSView__SetSize` namespace only; runtime hosts are `CGameView` / `CAnim` / `CDSBitmap` shells |
+| Ghidra comments | R4 verdict @ `SetOwner@0x00439050`, `ODSImage__SetImage@0x00439100` |
+
+Future improvement: dedicated **`CBitmap *`** (or shared view-base struct) once MI offsets are unified — not the standalone `CDSView` type.
+
 ## UNK
 
-- Whether `pOwner` should eventually be a dedicated `CDSView *` (or `CBitmap *`) instead of `CBulanci *` once `CDSView` is a formal Ghidra struct (today all embedders share the `CDSView__SetSize`/`+0x30` blit layout proven on `CBitmap`).
+- Whether `pOwner` should become **`CBitmap *`** (or a shared CDSChained-view base) instead of `CBulanci *` — **`CDSView *` ruled out** (R4).
 - Whether `vf_primary` and `vf_odsimage` are both required for all embedders (some paths only repatch `vf_primary` after `ODSImage_ctor`).
 - `FUN_00419070` / `CWeapon_ctor` / `CGunMouse_ctor` — distinct full-object ctors; not the `0x10` mixin (see `CGunMouse.md`, weapon overlay notes in `damage_pipeline.md`).
 - `FUN_0042ea80` AddRef helper in `ODSImage__SetImage` — exact COM base type not named.

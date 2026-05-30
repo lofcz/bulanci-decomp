@@ -41,10 +41,21 @@ get_struct_layout("CDSApiException") → Size: 68 bytes
 
 Round 3 task 27 (2026-05-30): replaced flat duplicate prefix with embedded `CDSException base`; `save_program bulanci.exe`. Slice 22 agent (2026-05-30): re-verified `get_struct_layout` 68 B; decompile `What` uses `pFormattedMessage` / `dwWin32Error`.
 
+## IDSChained vtable @ `0x00487564`
+
+| Slot | Address | Symbol |
+|------|---------|--------|
+| 0 | `0x00434b00` | `CDSApiException_GetClassTable` |
+| 1 | `0x00434e10` | `CDSApiException_DtorScalar` |
+| 2 | `0x0042fff0` | `CDSException_ReleaseViaFlag` (shared) |
+| 3 | `0x00434c70` | `CDSApiException_What` |
+| 4 | `0x00434b10` | `CDSObject_GetThis` (shared `CItemInfo`) |
+
+**Agent todo 39 r4 (2026-05-30):** `CDSApiException_ThrowFromGetLastError@0x00434d00` — `local_4` typed `CDSApiException *`; decompile uses `pFormattedMessage` / `dwWin32Error`. See [round4_task_39_report.md](./round4_task_39_report.md).
+
 ## UNK
 
 - None within `0x00..0x43` for instances constructed via documented throw helpers.
-- Full `CDSException` hierarchy vtable slot map at `+0x00` beyond stored pointer `0x487564` not expanded here (round 3 task 34).
 
 ## Follow-up resolved (round 3 task 27)
 

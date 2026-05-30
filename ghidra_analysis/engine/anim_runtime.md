@@ -275,9 +275,21 @@ There is no path from this fan-out that writes the track manager's
   values are mostly `0` and `1`. If interpreted as ms they'd be
   sub-perceptible — they cannot be a per-frame delay override.
 
-The opcode's actual purpose is still open; plausible roles include
-script-VM cadence hooks or a debug timing hint. Whatever it does, it
-**does not** drive `TM_AdvanceFrame`'s schedule.
+**R4 task 31 — subscriber semantics (proven):** the `u16` is passed verbatim to each
+`ODSImage+4` subscriber's `vfn[4]` (`vtable+0x10`). Meaning is **class-specific**,
+not a global delay:
+
+| Subscriber | Handler | `u16` use |
+|------------|---------|-----------|
+| default / bitmap embed | `CDSView_OnMouseStub` | ignored |
+| `CBitmap` | `CBitmap_FireOnBitmapEvtFromView` | `eventCode` → script `OnBitmapEvt` export 3 |
+| `CGunMouse` | `CGunMouse_OnAnimTick` | only `0xFFFF` → random cursor track |
+| `CWeapon` | `CWeapon::Fire` | weapon fire / mine / ammo-empty matrix |
+
+Master-pack assets still show mostly `0`/`1` in the chunk body; those values are
+**not** `trackMgr+0x44` ms. Per-map `eventCode` constants remain script-layer UNK.
+
+Whatever else the opcode does, it **does not** drive `TM_AdvanceFrame`'s schedule.
 
 ### Connection to `CBulPicture` / FLX decoder
 
@@ -394,20 +406,18 @@ most-derived `CBulAnim::FUN_004396f0`).
 
 ## Open questions
 
-* ~~On-disk source of `seq[0x10]`~~ **Resolved (agent todo 32).** Track
-  `seq` is the `CDSFlxFile` meta face (`resource+4`), not the
-  `CBulPicture` view shell. `CDSFlxFile_BindStream @ 0x00432ac0`
-  copies the 36-byte FLX header after `Read(0x24)`: file dword `+0x1c`
-  (`inMemSize`, master-pack constant `0x470`) → `CDSFlxFile+0x14`
-  `nSeqTotalDurationMs`; file `+0x20` (`flags` = anim length − 1) →
-  `+0x18` `nSeqFrameCountMinusOne`. `TM_AdvanceFrame @ 0x004399b0`
-  consumes those as `seq[0x10]` (total clip ms) and `seq[0x14]` (wrap
-  index). `CBulPicture_Create @ 0x0040eb30` never touches them — the
-  anim path binds the stream handle (`pBitmap` / pool `GetResource`), not
-  the 0x470 portrait widget. **Not** `47.25 × frameCount` at runtime;
-  total ms is the header constant (`1136` ms) with per-frame delay
-  `≈ 1136 / N` via Bresenham (degenerate speed formula matches
-  `1136/24 ≈ 47.25` ms only when `N=24`).
+* ~~On-disk source of `seq[0x10]` / `inMemSize` vs `sizeof(CBulPicture)`~~
+  **Resolved (R3+R4 todo 32).** Track `seq` is the resource meta face
+  (`CheckedVirtualBaseCast(..., DAT_004b8370)`), not the `CBulPicture`
+  view shell. `CDSFlxFile_BindStream @ 0x00432ac0` is the sole FLX writer
+  of `seq[0x10]` (`MOV @ 0x00432b18`). File `+0x1c` `inMemSize` →
+  `nSeqTotalDurationMs` (per-sprite total clip **ms**; master pack
+  **1/130** equal `0x470`, range 210..8591). `TM_AdvanceFrame @
+  0x004399b0` is the sole Bresenham reader (`IMUL [ECX+0x10]`). **Other
+  seq types:** ClassID **76** `CDSDsmFile::HandleOpenStream` fills
+  `dwDurationMs` / `dwFrameCount` at the same meta offsets (full frame
+  count at `seq[0x14]`); `CDSAudioVideoPlayer_SetupTrack` also calls
+  `TM_AdvanceFrame`. See [round4_task_32_report.md](struct_recovery/round4_task_32_report.md).
 * True semantic of FLX opcode 0x0C. The fan-out target (each
   consumer's subscriber list, slot 4) is mechanically obvious but no
   concrete subscriber for a CBulPicture has been mapped yet.

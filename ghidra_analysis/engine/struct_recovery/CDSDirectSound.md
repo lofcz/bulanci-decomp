@@ -76,7 +76,7 @@ Applied/updated via `modify_struct_field` + `add_struct_field` (batch 27). Ghidr
 | `CDSApp_OnCreate` call | 0x0042a2fa / 0x0042a300 | `LEA ECX,[ESI+0x200]` → `CALL InitPrimary`; decompiler `&param_1->field_0x200` (= `CDSApp::directSound`) |
 | `CDSApp_ctor` embed ctor | 0x0042b27d / 0x0042b293 | `LEA ECX,[ESI+0x200]` → `CDSDirectSound_ctor`; next field @ `ESI+0x254` |
 
-`CDSApp::directSound` is `CDSDirectSound` @ `+0x200`. **R3 task 28:** `set_function_this_type(CDSDirectSound *)` @ `0x0043cbc0` — decompile uses `pM_pDirectSound` (+0x38), `pM_pPrimaryBuffer` (+0x3c), PCM fields (+0x44..+0x48). Call sites: `LEA ECX,[ESI+0x200]` @ `0x0042a2fa` / `0x0042b27d`. Residual: `CDSApp_CreateSoundBuffer((CDSApp *)this, …)` cast when calling app-shell helper.
+`CDSApp::directSound` is `CDSDirectSound` @ `+0x200`. **R3 task 28:** `set_function_this_type(CDSDirectSound *)` @ `0x0043cbc0` — decompile uses `pM_pDirectSound` (+0x38), `pM_pPrimaryBuffer` (+0x3c), PCM fields (+0x44..+0x48). Call sites: `LEA ECX,[ESI+0x200]` @ `0x0042a2fa` / `0x0042b27d`. **R4 task 28:** `CDSApp_CreateSoundBuffer((CDSApp *)this, …)` remains in decompile — layout-correct parent cast (`CDSDirectSound` embed @ `CDSApp+0x200`); plate @ `0x0043cc4a`. Residual is cosmetic only.
 
 ## SetEvent offset resolution (agent todo 26)
 

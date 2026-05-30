@@ -62,19 +62,21 @@ get_struct_layout CSessionList → Size: 124 bytes
 
 Slice 18: `set_function_prototype` on BuildDialog / GetPick / AppendEnumSession / SelectBySessionGuid / SetStatusFromStringHandle; `CMenu_PickSession` local `CSessionList`. **Agent todo 11 (2026-05-30):** `delete_data_type` + `create_struct` with embedded `CWindow win`; `CSessionList_BuildDialog` decompiles `this->win.*` / `this->pSessionListBox`. `save_program bulanci.exe`.
 
+**R5 worker 41 (2026-05-30):** `set_decompiler_comment` @ `CSessionList_BuildDialog@0x0040c2d0` — inherited chain band; `save_program bulanci.exe`.
+
 ## UNK
 
-- `CDSChained` dwords in `+0x08..+0x64` gap (inherited from dialog pattern; no `CSessionList`-specific xrefs in `BuildDialog`).
-- Cancel `CButton` — confirmed **no** `this` member (`BuildDialog` only `CDSView__AddChild`).
+- **BLOCKED (R5 worker 41):** `win.+0x08..+0x64` chain / ctor band — semantics live on [CWindow.md](./CWindow.md) / [CDSChained.md](./CDSChained.md). All `CSessionList_*` methods (`BuildDialog`, `OnEvent`, `GetPick`, `SelectBySessionGuid`, `SetStatusFromStringHandle`, `AppendEnumSession`) touch only `win` bbox/flags (`+0x14`, `+0x20..+0x2c`, `+0x46`, `+0x68`, `+0x6c`) and tail children `@+0x70..+0x78`; **no** session-dialog-specific xrefs into `dwField_08` / chain counters.
+- **PROVEN (R5 worker 41):** Cancel `CButton` — **no** `this` member; `CSessionList_BuildDialog@0x0040c2d0` builds cancel, `CDSView__AddChild` only (decompile lines after join button).
 
-## Scheduler `this` typing (agent todo 19, R3 2026-05-30)
+## Scheduler `this` typing (agent todo 19, R3 + R4 2026-05-30)
 
 | Item | Result |
 |------|--------|
-| `set_function_this_type` | **Done** — `CSessionList_SelectBySessionGuid@0x0040c570`, `CSessionList_SetStatusFromStringHandle@0x0040c5d0`, `CSessionList_GetPick@0x0040c550` moved into class `CSessionList`; decompiler shows `CSessionList *this`, `this->pSessionListBox`, `this->pCaptionStatic` |
+| `set_function_this_type` (R3) | **Done** — `CSessionList_SelectBySessionGuid@0x0040c570`, `CSessionList_SetStatusFromStringHandle@0x0040c5d0`, `CSessionList_GetPick@0x0040c550` moved into class `CSessionList`; decompiler shows `CSessionList *this`, `this->pSessionListBox`, `this->pCaptionStatic` |
 | `CSessionList_BuildDialog@0x0040c2d0` | Already `CSessionList *` (`__fastcall`); `this->win` / child pointers typed |
-| Scheduler | `CGame__SchedulerDispatch@0x00416030` case 1 — PRE comments @ `0x004162bd` / `0x0041630d` document `(CSessionList *)pActiveCGaming` during lobby EnumSessions |
-| Prior blocker | `set_parameter_type` on ECX was unnecessary once `set_function_this_type` applied |
+| Scheduler case 1 (R4) | `CGame__SchedulerDispatch@0x00416030`: `this_01 = (CSessionList *)this->pActiveCGaming` @ `0x00416248`; typed calls + `(this_01->pSessionListBox->listViewer).nItemCount`; comments @ `0x004162bd` / `0x0041630d` |
+| `CGame.pActiveCGaming` struct | Stays **`pointer`** @ `+0x1f0` — do not retag `CGaming *` on `CGame` (merges case 1/7 locals and breaks `pSessionListBox` access). See `round4_task_19_report.md`. |
 
 Lobby scheduler case 1 loads `CGame.pActiveCGaming` and passes it to session-list helpers; during lobby that pointer is the stack/heap **`CSessionList*`**, not in-match **`CGaming*`**.
 

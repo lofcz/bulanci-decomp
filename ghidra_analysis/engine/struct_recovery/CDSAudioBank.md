@@ -10,13 +10,13 @@ Two **distinct** MSVC types (`.?AVCDSAudioBank@@` @ `0x004afc64`, `.?AVCDSWavStr
 
 | | **CDSWavStream** | **CDSAudioBank** |
 |---|------------------|------------------|
-| **Registry** | Class id **43** decimal (`PUSH 0x2b` @ `0x0047d9ea`); factory `CDSWavStream_Factory@0x0043bb00`; typeinfo `0x004b843c` | Typeinfo `0x004b3ae0` used @ `0x0047c4b0` with class id **67** decimal (`PUSH 0x43`) — **AudioBankIndex**, not the PCM blob |
+| **Registry** | Class id **43** decimal — `CDSWavStream_StaticClassRegister@0x0047d9e0` (`PUSH 0x2b`); factory `CDSWavStream_Factory@0x0043bb00`; typeinfo `0x004b843c` | **AudioBankIndex** class id **67** (`PUSH 0x43`) — `CDSAudioBank_StaticClassRegister@0x0047c4b0`; factory `CDSAudioBank_Factory@0x00429470`; meta `0x004b3ae0`; MI `@0x0047c4e0`/`0x0047c510` |
 | **Catalog “AudioBank.wav” (class 43)** | Runtime factory + vtables | Domain name only; **not** `CDSAudioBank_Ctor` |
 | **Vtables `+0x00..+0x18`** | `0x4823c0`, `0x48239c`, `0x482388` | `0x486eec`, `0x486ed8`, `0x486ec0`, `dwInitFlag@+0x08` |
 | **`+0x14`** | Factory → **0** | `0x486ea4` — `CDSAudioBank_Deserialize` vtable; **only** ctor/dtor write |
 | **`+0x30`, `+0x34`** | `0x48236c`, `0x482354` (stream attach / save) | Not set by `CDSAudioBank_Ctor` |
 | **`+0x08`** | `dwPcmEndBound` on wav (`CDSWav_HandleResourceRead`) | Bank ctor writes **1** (`in_EAX[2]=1`) — same physical offset, facet-specific meaning (todo 50) |
-| **Construction** | Factory + `CGaming_LoadBackgroundMusic@0x0041b6d0` (inline) | `CDSAudioBank_Ctor@0x00429480` — **no CALL xrefs** |
+| **Construction** | Factory + `CGaming_LoadBackgroundMusic@0x0041b6d0` (inline) | Class **67**: `CDSAudioBank_Factory@0x00429470` — `OperatorNew(0x20)` compact header. `CDSAudioBank_Ctor@0x00429480` — **0x40** bank facet, **no CALL xrefs** (deserialize/dtor path only) |
 | **Destruction** | `CDSWavStream_ScalarDeletingDtor@0x0041bc00` | `CDSAudioBank_ScalarDeletingDtor@0x004294b0` → bank dtor restores `0x486exx` |
 | **PCM / samples on class-43** | `CDSWav::FUN_0043ba30` (`+0x04` face); stream `FUN_0043bb50` / `CDSWavStream_SaveToStream` (`+0x30`) | `CDSAudioBank_Deserialize@0x00429600` requires `+0x14` bank vtable — **not** installed by class-43 factory |
 
@@ -46,7 +46,9 @@ Two **distinct** MSVC types (`.?AVCDSAudioBank@@` @ `0x004afc64`, `.?AVCDSWavStr
 | 0x14 | 4 | `void *` | `pVftable_sub14` | Bank: `0x486ea4` @ ctor (Deserialize vtable); factory → **0** |
 | 0x18 | 8 | `CDSPtrSlotVec` | `slotVector` | `CDSAudioBank_ReleaseSampleSlots@0x00429240` → `nCapacity` / `pSlots`; `CDSPtrSlotVec_Resize@0x00406340` |
 | 0x20 | 4 | `pointer` | `pStreamStorage` | `CDSWavStream_Factory` zero; `FUN_0043bb50` / `CDSWavStream_SaveToStream` (task 08) |
-| 0x24 | 12 | — | *(gap)* | `FUN_0043ba30` uses `+0x24`/`+0x28` on wav path |
+| 0x24 | 4 | `uint` | `dwPcmBindLo` | `CDSWav_BindPcmMemStream@0x0043ba30` slice hi bound; bank ctor does not init |
+| 0x28 | 4 | `uint` | `dwPcmBindHi` | same; cleared on bind |
+| 0x2C | 4 | `uint` | `dwStreamTellHi` | wav stream tell companion (shared 0x40 tail with `CDSWavStream`) |
 | 0x30 | 4 | `void *` | `pVftable_CDSWavStream_IDSChained6` | Factory → `0x48236c`; bank ctor does not set |
 | 0x34 | 4 | `void *` | `pVftable_CDSWavStream_IDSChained5` | Factory → `0x482354`; bank ctor does not set |
 | 0x38 | 4 | `uint` | `dwReservedTail` | `CDSWavStream_Factory` → `[EAX+0x38]=0`; no runtime consumer on 0x40-byte object |
@@ -63,7 +65,12 @@ prototype CDSAudioBank_Deserialize(CDSAudioBank *, int *pStream) @ 0x00429600
 decompiler comments: class-43 = CDSWavStream facet; bank facet = 0x486exx + Deserialize
 recreate_struct CDSAudioBank 64 B with explicit offsets (round-3 todo 23): pVftable_bankDeserialize @ 0x14, slotVector @ 0x18, pStreamStorage @ 0x20, dwReservedTail @ 0x38, pad @ 0x3c
 set_function_prototype / set_function_this_type @ 0x00429480, 0x00429600
-save_program bulanci.exe  (round-2 todo 23, round-3 todo 23, 2026-05-30)
+create_struct CDSAudioBank_BankDeserializeFacet 48 B (R4 todo 23): MI entry @ full +0x14; pParentOrBackref via this[-1] (Ghidra places @ facet+0x2c)
+set_function_this_type CDSAudioBank_BankDeserializeFacet * @ CDSAudioBank_Deserialize@0x00429600
+set_function_prototype void __thiscall CDSAudioBank_Deserialize(CDSAudioBank_BankDeserializeFacet *, int *pStream)
+plate/decompiler comments @ 0x00429600 / 0x00429630 / 0x004296b5
+save_program bulanci.exe  (round-2 todo 23, round-3 todo 23, R4 todo 23, 2026-05-30)
+rename CDSAudioBank_Factory @ 0x00429470; split wav tail dwPcmBindLo/Hi/dwStreamTellHi @ +0x24..+0x2c (R5 worker 38)
 ```
 
 ## CGame consumer (audio bank tail)
@@ -76,6 +83,18 @@ save_program bulanci.exe  (round-2 todo 23, round-3 todo 23, 2026-05-30)
 - **Class 67** (decimal, `0x43`): `CDSAudioBank` typeinfo `0x004b3ae0` @ `0x0047c4b0` (index metadata — do not confuse with class 43).
 - MI typeinfo adjust thunks (`CDSAudioBank_TypeinfoAdjust_*`, parent meta `0x004b3ae0`): `+4` @ `0x0042fd30`, `+0xc` @ `0x0043bdd0`, `+0x14` @ `0x004291c0` (registered @ `0x0047c4e8`..`0x0047c548`).
 
+## MI deserialize facet (R4 todo 23)
+
+`CDSAudioBank_Deserialize@0x00429600` is dispatched on the **bank deserialize vtable** at full **`+0x14`** (`pVftable_bankDeserialize`, `0x486ea4`). Ghidra **`this`** = **`CDSAudioBank_BankDeserializeFacet *`** (not primary `CDSAudioBank *`).
+
+| Facet `this` | Full object | Use |
+|--------------|-------------|-----|
+| `&this->slotVector` | `+0x18` | `CDSPtrSlotVec_Resize` / slot pointer array |
+| `this[-1].pParentOrBackref` | `+0x10` | parent stream lookup before `CheckedVirtualBaseCast` |
+| `&this[-1].pVftable_CDSWavStream_IDSChained6` | base `+0x00` | **address** passed to `CDSAudioBank_ReleaseSampleSlots` (asm `LEA ECX,[EDI-0x14]`) |
+
+Class-43 **`CDSWavStream_Factory@0x0043bb00`** leaves `+0x14` zero — wav instances do not hit this deserialize path.
+
 ## Follow-up
 
 - Round-3 task **08**: `pStreamStorage` / `dwReservedTail` semantics.
@@ -83,6 +102,5 @@ save_program bulanci.exe  (round-2 todo 23, round-3 todo 23, 2026-05-30)
 
 ## UNK
 
-- `CDSAudioBank_Ctor` — no direct CALL xrefs; possible indirect use via class-67 registration (`0x00429470`).
-- Full MI inheritance declaration order (C++ source).
-- `+0x24..+0x2f` — wav PCM helpers (`FUN_0043ba30`); bank ctor does not initialize.
+- Full MI inheritance declaration order (C++ source only).
+- Whether class-67 `OperatorNew(0x20)` instances ever grow to 0x40 or always stay compact index headers.

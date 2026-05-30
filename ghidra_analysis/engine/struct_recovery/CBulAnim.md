@@ -27,12 +27,12 @@
 | `+0x1C` | 4 | `uint` | `dwField_1c` | `CDSChained_ctor@0x004032d0` |
 | `+0x20` | 4 | `int` | `nPos_x` | `CDSAnim::ParameterizedCtor@0x00439560`; lobby `(rowX+10)` @ `CStartGame2_ctor` |
 | `+0x24` | 4 | `int` | `nPos_y` | same; lobby `y=0x44` |
-| `+0x28` | 4 | `int` | `nBbox_right` | `CDSChained_ctor` zero-init |
-| `+0x2C` | 4 | `int` | `nBbox_bottom` | `CDSChained_ctor` zero-init |
-| `+0x30` | 4 | `uint` | `dwField_30` | `CDSChained_ctor` zero-init |
-| `+0x34` | 4 | `uint` | `dwField_34` | same |
-| `+0x38` | 4 | `uint` | `dwField_38` | same |
-| `+0x3C` | 4 | `uint` | `dwField_3c` | same |
+| `+0x28` | 4 | `int` | `bbox_right` | `CDSChained_ctor` zero-init (`param_1[10]`); anim path — no CBulAnim-specific writer |
+| `+0x2C` | 4 | `int` | `bbox_bottom` | same (`param_1[0xb]`) |
+| `+0x30` | 4 | `int` | `nScreenBbox_left` | `CDSView__UpdateScreenCoordinates@0x0042bf40` copies drawable prefix `+0x20..+0x2c` → `+0x30..+0x3c` (same offsets as `CDSChained.nScreenBbox_*`) |
+| `+0x34` | 4 | `int` | `nScreenBbox_top` | same |
+| `+0x38` | 4 | `int` | `nScreenBbox_right` | same |
+| `+0x3C` | 4 | `int` | `nScreenBbox_bottom` | same |
 | `+0x40` | 4 | `uint` | `dwChainRoot` | `CDSChained_ResetChainCounters@0x0042beb0` |
 | `+0x44` | 1 | `byte` | `bVisibility_mask` | `TM_SetTrack@0x004391e0` `TEST byte [outer+0x44], 0x40` |
 | `+0x46` | 2 | `ushort` | `wChainFlag46` | `ResetChainCounters@0x0042beb0` |
@@ -83,14 +83,15 @@ Slice **04** (2026-05-30): repaired tail after round-3 task 32 — `trackManager
 
 **Round-2 todo 8 (2026-05-30):** named CDSView drawable prefix `+0x08..+0x67` to mirror `CDSAnim`/`CDSBitmap`: `dwChainField_08/0c`, `pVft_event`/`pVft_ref`, `wChainInit44` (ushort, was `bVisibility_mask` byte); chain band `+0x40..+0x64` unchanged. Decompile `CStartGame2_ctor@0x004104f0` uses `wViewFlags`, `nPos_x/y`. `save_program bulanci.exe`.
 
+**R5 worker 36 (2026-05-30):** Ghidra `dwField_30..3c` → **`nScreenBbox_*`**; `nBbox_right/bottom` → **`bbox_right/bottom`**; `pOwner` → **`CBulanci *`**. Comments @ `IDSAnim_SelectRandomTrack`, `TM_SetTrack` visibility (`byte [outer+0x44]`). [round5_worker_36_report.md](./round5_worker_36_report.md). `save_program bulanci.exe`.
+
 ## RTTI / vtables
 
 Primary CDSView vtable `0x00480a14` (`CBulAnim` in `vftable_methods.csv`). Factory: `CreateCBulAnim@0x0040eaa0`. Inherits `CDSAnim::DefaultCtor` before CBulAnim vtable patch (`0x00439470`).
 
 ## UNK
 
-- Semantic names for `dwField_08` / `dwField_0c` / `dwField_30..3c` (inherit `CDSChained` UNK).
-- `dwField_1c` @ `+0x1C`: `IDSAnim_SelectRandomTrack@0x004392a0` casts to `CDSStreamStorage*` and calls `GetStreamCount` — asm effective read is **`dwChainRoot` @ `+0x40`**, not pack `m_items` (see [CDSStreamStorage.md](./CDSStreamStorage.md) todo 46).
-- `nBbox_right` / `nBbox_bottom` — zero-init only on anim path; no CBulAnim-specific bbox writer found.
-- `+0x45` — high byte overlapping `wChainInit44` vs `bVisibility_mask` at `+0x44`.
-- `trackManager` — optional nested `CDSTrackVector` at `trackManager+0x1c` (see [CDSVideoPlayer.md](./CDSVideoPlayer.md) todo 44).
+- `dwChainField_08` / `dwChainField_0c` / `dwField_1c` @ `+0x1C` — `CDSChained_ctor` zero; `IDSAnim_SelectRandomTrack@0x004392a0` uses **fake** `CDSStreamStorage*` at `+0x1c` so `GetStreamCount` reads **`dwChainRoot` @ `+0x40`** (documented @ `0x004392a0`).
+- `bbox_right` / `bbox_bottom` — zero-init only on anim path; screen blit uses `nScreenBbox_*` after `CDSView__UpdateScreenCoordinates` when parent chain updates.
+- `+0x44` visibility — `TM_SetTrack@0x004391e0` tests **`byte [outer+0x44]`** bit `0x40` (low byte of `wChainInit44`); not a separate `+0x45` field.
+- `trackManager` — nested **`CDSTrackVector trackVector` @ `trackManager+0x1c`** per [CDSVideoPlayer.md](./CDSVideoPlayer.md) (verified; Ghidra `dwTracks*` names may persist).

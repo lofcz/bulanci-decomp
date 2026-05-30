@@ -43,6 +43,8 @@ Menu enumeration filters `classId == 0x802` (`CHistoryScript`) when filling `m_p
 - **Agent todo 18 (2026-05-30):** `pCwindow_prefix` → embedded **`CWindow win`** @ 0; `pActiveScript` typed `CDSScript *`; `CHistoryDlg_ctor` prototype restored; `save_program`.
 - **R3 todo 11 (2026-05-30):** `CWindow` prefix `+0x00..+0x6f` exposed via `(this->win).pVftable_primary` … `pDefaultFocusChild` in `CHistoryDlg_ctor@0x004231d0`; `set_function_this_type` on ctor / `CHistoryDlg_LoadHistoryPage`; `CWindow_BuildAt` typed `CWindow *`.
 
+**R5 worker 13 (2026-05-30):** Page swap calls `CMenu_DetachChildWithVisibility@0x0042d160` before releasing `pHistoryView` (`CHistoryDlg_LoadHistoryPage@0x00422fc1`).
+
 ## UNK
 
 - Ghidra may auto-prefix embedded `CIntList` / `int` members as `pM_data` / `nM_currentPage` in decompiler; logical names `m_pageIds.*` / `m_currentPage`.

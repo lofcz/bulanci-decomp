@@ -33,16 +33,22 @@
 | `CScoreItem::Deserialize` | `0x00408f50` | WString @ `+0xc`; read dwords @ `+0x10`, `+0x14` only (`m_deaths` omitted) |
 | `CScoreItem::Serialize` | `0x00408f90` | WString @ `+0xc`; write dwords @ `+0x10`, `+0x14` only (`m_deaths` omitted) |
 | `CScoreItem_CompareByNetScore` | `0x00408fd0` | Sort key: `(kills - deaths)` per row |
-| `CScoreItem_MatchesKillsDeathsAndName` | `0x00409080` | Row highlight predicate in `CScore_ctor` SP list |
-| `CScoreItem::Destructor` | `0x004093xx` | Release `m_name` (`CDsString`) |
+| `CScoreItem_MatchesKillsDeathsAndName` | `0x00409080` | `int __thiscall (CScoreItem *pHighlightTemplate, CScoreItem *pRow)` — K/D/name equality for SP high-score highlight (`CScore_ctor@0x004119d5`) |
+| `CScoreItem_dtor` | `0x004093c0` | Release `m_name` @ `+0x10` (`CDsStringReleaseHeader`); restore IDSReferenced vtable |
+| `CScoreItem_ScalarDeletingDtor` | `0x00409a90` | `CScoreItem_dtor`; `_free(this)` when `param_1 & 1` |
+| `CScoreItem_ScalarDeletingDtor_thunk_n0x4` | `0x004093b0` | MI slot+3 @ `0x48046c`: `SUB ECX,4` → `JMP 0x00409a90` |
 | `CLevelScore_InitializeDefaultScores` | `0x00409620` | Seed six default `0x1c` rows |
-| `CLevelScore_AddPlayerScore` | `0x00409b10` | Alloc/init/append one row; cap list at 6 via `FUN_0042f940` |
+| `CLevelScore_AddPlayerScore` | `0x00409b10` | Alloc/init/append one row; sort via `CDSChain_SortChildrenWithComparator`; cap at 6 via `CDSChain_GetChildAtIndex` + `CDSChain_RemoveListNode` |
 
 ## Ghidra apply
 
 `create_struct CScoreItem` (batch 17). **Agent todo 17 r2 (2026-05-30):** reconciled `m_link_prev` vs stream — prototypes `CScoreItem_{Serialize,Deserialize}(CDSChained *this, …)`; plate/decompiler comments @ `0x00408f50`/`0x00408f90`; `CDSChained_InsertListNode@0x0042f820`; `save_program bulanci.exe`.
 
 **Agent todo 18 r3 (2026-05-30):** documented `m_deaths` omit from wire — plate/decompiler comments @ `0x00408f50`/`0x00408f90`/`0x00408fd0`/`0x00411010`; `search_instructions` confirms no `+0x18` in Serialize/Deserialize; `save_program bulanci.exe`.
+
+**R5 worker 18 (2026-05-30):** renamed generic `Destructor` / `ScalarDeletingDestructor` / `DeletingDestructorThunk_*` on score/poem paths — `CScoreItem_dtor`, `CScoreItem_ScalarDeletingDtor`, `CScoreItem_ScalarDeletingDtor_thunk_n0x4` (+ sibling types in worker report); `save_program bulanci.exe`.
+
+**Agent todo 18 r4 (2026-05-30):** retyped highlight helper — `CScoreItem::CScoreItem_MatchesKillsDeathsAndName` (was `CBulanci*` `this`); `set_function_prototype` + `set_function_this_type`; disasm @ `0x004119d5` proves `ECX` = template row, stack = chain row; decompiler uses `m_kills`/`m_deaths`/`m_name`; `save_program bulanci.exe`.
 
 Post-apply `get_struct_layout`:
 
@@ -54,3 +60,4 @@ Post-apply `get_struct_layout`:
 - ~~`m_link_prev` vs stream I/O at `+0xc`~~ — **resolved** (agent todo 17 r2): list fields list-only; stream uses `+0xc`/`+0x10`/`+0x14` as wired above (not `m_link_prev` when `ECX` is full row pointer).
 - ~~`m_deaths` on wire~~ — **resolved** (agent todo 18 r3): **not** in `Serialize`/`Deserialize`; runtime + compare/highlight only.
 - Whether `m_kills` / `m_deaths` are always K/D vs generic score columns (behavior matches net ranking: compare uses `kills - deaths`).
+- ~~`CScoreItem_MatchesKillsDeathsAndName` wrong `this` (`CBulanci*`)~~ — **resolved** (agent todo 18 r4): `__thiscall` with `CScoreItem *` template in `ECX`, `pRow` on stack; see `round4_task_18_report.md`.

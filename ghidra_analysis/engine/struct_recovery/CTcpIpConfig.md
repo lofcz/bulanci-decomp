@@ -16,7 +16,7 @@
 
 | Offset | Size | Type | Name | Evidence (func@addr) |
 |--------|------|------|------|----------------------|
-| 0x00–0x6B | 0x6C | `CWindow` | *(base through chain band)* | Same field map as `CWindow` — `get_struct_layout CWindow` / `CTcpIpConfig` (112 B) |
+| 0x00–0x6B | 0x6C | `CWindow` | *(base through chain band)* | Same field map as `CWindow` — `nScreenBbox_*` @ `+0x30..+0x3c`, `pOverlapEntity` @ `+0x64` (R4 todo 21) |
 | 0x40 | 4 | `dword` | `dwChainHead_40` | `CDSChained_ResetChainCounters`; dialog chain band |
 | 0x44 | 2 | `ushort` | `wViewStateFlags` | same |
 | 0x46 | 2 | `ushort` | `wWidgetFlags` | ctor `\|= 8` after bbox shift |
@@ -77,6 +77,8 @@ save_program bulanci.exe
 Applied 2026-05-30 slice 20.
 
 **Agent todo 21 (2026-05-30):** Filled chain-band gap @ `+0x40..+0x4a` (`dwChainHead_40`, `wViewStateFlags`, `wWidgetFlags`, `wChainCounter_48`/`4a`); renamed `dwParent`→`pParent`, `pPad_50`→`dwChainField_50`. `set_decompiler_comment@0x0040c060`. `save_program`.
+
+**Agent todo 21 R4 (2026-05-30):** `nScreenBbox_*` / `pOverlapEntity` aligned with `CDSChained` / `CWindow`; plate @ `0x0040c060`. `save_program`.
 
 ## UNK
 

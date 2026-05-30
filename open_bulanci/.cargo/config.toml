@@ -19,8 +19,9 @@ rustflags = [
     #  * `_ob_install_overlay` /
     #    `_ob_remove_overlay`      live-mod bridge receive path (asset/web_bridge.rs).
     #  * `_ob_scene_patch`         scene-HMR patch receive path (asset/web_bridge.rs).
+    #  * `_ob_goto_scene`          editor preview boot-to-scene (asset/web_bridge.rs).
     #  * `_malloc` / `_free`       let the shell hand overlay blobs to the engine.
-    "-C", "link-arg=-sEXPORTED_FUNCTIONS=['_main','_ob_set_master_volume','_ob_install_overlay','_ob_remove_overlay','_ob_scene_patch','_malloc','_free']",
+    "-C", "link-arg=-sEXPORTED_FUNCTIONS=['_main','_ob_set_master_volume','_ob_install_overlay','_ob_remove_overlay','_ob_scene_patch','_ob_goto_scene','_malloc','_free']",
     # --- exception/longjmp ABI: must match rustc 1.93+ and mlua's vendored C/C++ ---
     "-C", "link-arg=-fwasm-exceptions",
     "-C", "link-arg=-sSUPPORT_LONGJMP=wasm",

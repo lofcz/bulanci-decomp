@@ -15,6 +15,7 @@
 
 #![cfg(target_arch = "wasm32")]
 
+use std::cell::RefCell;
 use std::ffi::CStr;
 use std::os::raw::c_char;
 use std::sync::{Arc, OnceLock};
@@ -104,4 +105,42 @@ pub extern "C" fn ob_scene_patch(json: *const c_char) {
         return;
     };
     server.push_scene_patch(text.to_string());
+}
+
+/// A pending editor "preview this scene" request. The editor's Live panel
+/// boots the embedded engine with `?scene=<name>`; the web shell calls
+/// [`ob_goto_scene`] once the runtime is up, and [`ClientApp::update`] drains
+/// it each frame to jump straight to the scene under edit. `RefCell` (not a
+/// lock) because wasm is single-threaded. Holds only the latest request.
+thread_local! {
+    static PREVIEW_GOTO: RefCell<Option<String>> = const { RefCell::new(None) };
+}
+
+/// Jump the embedded engine to scene `name` (editor preview boot param).
+/// Exported via `Module.ccall('ob_goto_scene', null, ['string'], [name])`;
+/// see `EXPORTED_FUNCTIONS` in `.cargo/config.toml`. A no-op for an empty
+/// name; the request is queued and applied on the next frame.
+///
+/// # Safety
+/// `name` must be a valid NUL-terminated C string (emscripten `'string'`
+/// marshalling) or null.
+#[no_mangle]
+pub extern "C" fn ob_goto_scene(name: *const c_char) {
+    if name.is_null() {
+        return;
+    }
+    let Ok(text) = (unsafe { CStr::from_ptr(name) }).to_str() else {
+        return;
+    };
+    let trimmed = text.trim();
+    if trimmed.is_empty() {
+        return;
+    }
+    PREVIEW_GOTO.with(|p| *p.borrow_mut() = Some(trimmed.to_string()));
+}
+
+/// Take the pending editor preview-goto request, if any (drained per frame by
+/// the client). `None` when no jump is queued.
+pub fn take_preview_goto() -> Option<String> {
+    PREVIEW_GOTO.with(|p| p.borrow_mut().take())
 }

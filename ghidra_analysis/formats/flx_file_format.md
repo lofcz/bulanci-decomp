@@ -306,8 +306,8 @@ by the `Sub20ChainOp` / `Sub24ChainOp` adjustor thunks that forward to
 | `+0x20` | `refcount` | `ReleaseRef` |
 | `+0x24` | `vf_IDSResource` | `BindStream` adjustor face |
 | `+0x28` | `vf_chain` | type-tag + embedded `CDSChain` |
-| `+0x2c` | `bodySeekBiasLo` | added to frame cursor on `IDSStream::Seek` (factory `0`) |
-| `+0x30` / `+0x34` | `dwStreamTellLo` / `dwStreamTellHi` | `Tell()` after header read (first frame @ `0x24`) |
+| `+0x2c` | `bodySeekBiasLo` | factory zero only; **no** non-zero writer in `.text` (R4 todo 33) |
+| `+0x30` / `+0x34` | `dwStreamTellLo` / `dwStreamTellHi` | `Tell()` after header read; used in `DecodeFrame`/`CloseStream` Seek64 (meta-face `+0x2c`/`+0x30` operands) |
 | `+0x38` | `pSourceStream` | `IDSStream*` |
 | `+0x3c` | `pDecodeBuffer` | lazy scratch buffer |
 | `+0x40` | `bodyStartCursor` | file dword @ `+0x04` |

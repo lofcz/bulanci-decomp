@@ -66,8 +66,9 @@ Decompiler on Load/Save (`0x004320c0`, `0x00432440`) uses **`this[-1].m_image.*`
 
 **Agent todo 26 r3 (2026-05-30):** `CDSBmpImage.pVf_primary` → `pVf_IDSReferenced`; plate on `CDSBmpImage_LoadDibStream@0x004320c0` (stream-host `+0x54` / `m_image` adjustor); prototypes refreshed on Load/Save/ctor; `save_program bulanci.exe`.
 
+**Agent todo 26 r4 (2026-05-30):** `set_function_this_type` **`CDSImage *`** on `CDSBmpImage_ValidateStride@0x00436020` and `CDSBmpImage_FillBitmapInfoHeader@0x00436060` (Save passes `streamHost-0x50` @ `0x00432475`–`0x0043247d`); decompile now uses `nM_width` / `nM_format` / `nM_stride` / `nM_paletteEntries` on strict/loose stride checks; `set_decompiler_comment` on ValidateStride; `save_program bulanci.exe`.
+
 ## UNK
 
-- `CDSBmpImage_ValidateStride` strict branch still decompiles with swapped field names until next analysis pass; assembly uses `m_width` / `m_stride` / `m_format` per `bmp_decoder.md`.
 - Whether any path registers a dedicated `CDSBmpImage` class factory (text surfaces use `CDSObject_CtorWithImage` @ `0x60`, not `CDSBmpImage_ctor` directly).
 - Full overlap map between this flat layout and standalone `CDSImage` for copy-blits (`CDSImage_Load@0x00437160`).

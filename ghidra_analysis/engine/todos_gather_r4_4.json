@@ -1,0 +1,135 @@
+[
+  {
+    "id": 41,
+    "title": "CBulanek pre-ammo band semantics + apWalk/apAi array names",
+    "types": ["CBulanek", "CGameView", "CGaming"],
+    "addresses": ["0x0041e4b0", "0x00420d40", "0x0041f900", "0x004205a0"],
+    "ghidra_actions": [
+      "modify_struct_field",
+      "rename_data",
+      "search_instructions",
+      "set_decompiler_comment",
+      "get_struct_layout",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_41_report.md",
+      "ghidra_analysis/engine/struct_recovery/CBulanek.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "critical",
+    "source": "blocker",
+    "supersedes_todo_id": 41
+  },
+  {
+    "id": 43,
+    "title": "Retype FindKeyIndex; fix InsertKeyed callee cast",
+    "types": ["CDSCollection", "CDSStreamStorage", "CDSUpdatedItem"],
+    "addresses": ["0x00431170", "0x004312c0", "0x00433cb0", "0x0042f060"],
+    "ghidra_actions": [
+      "set_function_this_type",
+      "set_function_prototype",
+      "set_decompiler_comment",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_43_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSCollection.md",
+      "ghidra_analysis/engine/struct_recovery/CDSStreamStorage.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 43
+  },
+  {
+    "id": 44,
+    "title": "CDSTrackVector InsertOrFindTrack this; cTracks* layout labels",
+    "types": ["CDSTrackVector", "CDSVideoPlayer"],
+    "addresses": ["0x00439bd0", "0x00439730", "0x00439a70", "0x00439c70"],
+    "ghidra_actions": [
+      "set_function_this_type",
+      "set_function_prototype",
+      "modify_struct_field",
+      "get_struct_layout",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_44_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSTrackVector.md",
+      "ghidra_analysis/engine/struct_recovery/CDSVideoPlayer.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "low",
+    "source": "handoff",
+    "supersedes_todo_id": 44
+  },
+  {
+    "id": 45,
+    "title": "CloseStreamByKey pass CDSCollection* to FindKeyIndex",
+    "types": ["CDSStreamStorage", "CDSCollection", "CBulanci"],
+    "addresses": ["0x00433cb0", "0x00431170", "0x00401790", "0x00401f36"],
+    "ghidra_actions": [
+      "set_function_prototype",
+      "set_decompiler_comment",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_45_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSStreamStorage.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_43_report.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 45
+  },
+  {
+    "id": 46,
+    "title": "InitRootSafeStream vcall through collection facet",
+    "types": ["CDSStreamStorage", "CDSCollection", "CDSChain"],
+    "addresses": ["0x00434160", "0x00401790", "0x00433f00", "0x00434760"],
+    "ghidra_actions": [
+      "disassemble",
+      "set_decompiler_comment",
+      "force_decompile",
+      "set_function_this_type",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_46_report.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_46_report.jsonl",
+      "ghidra_analysis/engine/struct_recovery/CDSStreamStorage.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 46
+  },
+  {
+    "id": 48,
+    "title": "Evaluate ODSImage.pOwner as CDSView* embedder host",
+    "types": ["ODSImage", "CDSView", "CWeapon", "CBulanek"],
+    "addresses": ["0x00439050", "0x00439100", "0x00419200", "0x004393d0"],
+    "ghidra_actions": [
+      "modify_struct_field",
+      "get_xrefs_to",
+      "set_decompiler_comment",
+      "get_struct_layout",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_48_report.md",
+      "ghidra_analysis/engine/struct_recovery/ODSImage.md",
+      "ghidra_analysis/engine/struct_recovery/CWeapon.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "low",
+    "source": "handoff",
+    "supersedes_todo_id": 48
+  }
+]

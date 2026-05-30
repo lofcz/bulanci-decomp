@@ -2,20 +2,20 @@
 
 ## Status
 
-**PARTIAL** — application shell **`0x284` (644 B)**; proven fields from `CDSApp_ctor` @ `0x0042b170`, `app_shell.md`, and render/input paths. **`CBulanci`** embeds **`CDSApp app`** @ `+0x00` (agent todo 2, 2026-05-30).
+**PARTIAL** — application shell **`0x280` (640 B)** in shipping layout; proven fields from `CDSApp_ctor` @ `0x0042b170`, `app_shell.md`, and render/input paths. **`CBulanci`** embeds **`CDSApp app`** @ `+0x00`; **`pMainMenu`** immediately follows at `+0x280` (agent todo 2; R4 CBulanci pass 2026-05-30).
 
 ## Size proof table
 
 | Claim | Address | Evidence |
 |-------|---------|----------|
-| Prefix ends @ `+0x284` | `CBulanci.md` | `pGameEmbed` @ `+0x284`; `0x284` = CDSApp logical span in shipping class |
+| Prefix ends @ `+0x280` | `CBulanci.md` | `CDSApp` **640 B**; `pMainMenu` @ `+0x280`; `game` @ `+0x284` |
 | `CDSBackBuffer` @ `+0x7c` | `0x0042b170` | `CDSApp_ctor`: `g_pCDSBackBuffer_vftable_*` at `this+0x7c` / `+0x80` |
 | Embed span `0x50` | `0x0042b170` | Next init at `+0xcc` (physical client rect) |
 | `CDSDirectSound` @ `+0x200` | `0x0042b170` | `CDSDirectSound_ctor(this+0x200)` |
 | `drawable` @ `+0x274` | `CDSApp_RenderFrame` / ctor | `this[0x274]` gate; ctor sets via `pPad_preGame[0x1e8]` |
 | `windowed` @ `+0xe4` | `0x0042b170` | Registry `Windowed` → `this+0xe4` (`pPad_preGame[0x58]` in CBulanci decompile) |
 
-## Layout table (CDSApp @ `+0x00`–`+0x283`)
+## Layout table (CDSApp @ `+0x00`–`+0x27f`)
 
 | Offset | Size | Type | Name | Evidence (func@addr) |
 |--------|------|------|------|----------------------|
@@ -31,6 +31,7 @@
 | `+0x54` | 4 | `pointer` | `pChildChain` | `CDSChained` children |
 | `+0x68` | 4 | `pointer` | `pClassName` | `CDsStringAssignFromLiteral` @ ctor |
 | `+0x6c` | 4 | `pointer` | `pRegistryPath` | ctor |
+| `+0x70` | 4 | `CDSStreamStorage *` | `pMasterPackStorage` | `CBulanci_InitResourceBank@0x00402180` `MOV [ESI+0x70],EDI`; `CBulanci_OnCreate@0x00402b20` pack lookup; `CBulanci_BuildBitmapCache` |
 | `+0x7c` | 80 | `CDSBackBuffer` | `backBuffer` | `CDSApp_ctor`; flip @ `CDSBackBuffer_Flip(this+0x7c)` |
 | `+0xc4` | 4 | `int` | *(in embed)* | `defaultBpp = 8` → `backBuffer.embeddedImage+0x44` |
 | `+0xcc` | 16 | `int[4]` | `physicalRect` | mouse rescale when windowed |
@@ -75,11 +76,15 @@ Slice **01** (2026-05-30):
 
 **R3 worker todo 2 (2026-05-30):** Re-verified band via MCP (`LEA [ESI+0x100]` memset, `g_pApp+0x110/0x111` consumers, `CGaming_RunPreMatchModal` snapshot). `set_function_this_type` `CDSApp_ctor` / `CDSApp_DispatchInputEvent` / `CDSApp_OnCreate`. Decompiler comments @ `0x00403dc8`, `0x00403e02`, `0x0041c4a0`, `0x00429f70`. `save_program`.
 
+**R4 worker todo 2 (2026-05-30):** `modify_struct_field` rename `pKeyLatchByVk`/`pKeyDownBitmap` → `keyLatchByVk`/`keyDownBitmap` (MCP success; `get_struct_layout` export may still show `p*` array-decay names). `set_function_this_type` + `set_function_prototype` `CDSApp_OnCreate@0x0042a210` → **`__thiscall CBulanci::CDSApp_OnCreate(CBulanci *this)`** (vtable dispatch from `g_pApp` after `CBulanci_CreateObject`). Re-confirmed `CDSApp_ctor` / `CDSApp_DispatchInputEvent` as `CDSApp *`. Report: [round4_task_02_report.md](./round4_task_02_report.md). `save_program`.
+
+**R4 pass CBulanci (2026-05-30):** `resize_struct CDSApp` **640 B**; `pMasterPackStorage` @ **`+0x70`** (was 12 B pad before `backBuffer`). Consumers: `CBulanci_InitResourceBank`, `OnCreate`, `BuildBitmapCache`. See [pass_r4_CBulanci_report.md](./pass_r4_CBulanci_report.md). `save_program`.
+
 ## UNK
 
 - `+0x08..+0x1f`: MI padding between secondary vtables.
 - `+0x40..+0x43`: `dwViewField_40` (no sole writer).
-- `+0x70..+0x7b`: `miPad_before_backBuffer` (12 B before `CDSBackBuffer` @ `+0x7c`).
+- ~~`+0x70..+0x7b` pad~~ — **done** (R4 CBulanci pass): **`pMasterPackStorage`** `CDSStreamStorage *` @ `+0x70`.
 - ~~`+0x100..+0x1ff` opaque~~ — **done** (agent todo 2 r3): `keyLatchByVk[256]`; VK `0x10`/`0x11` slots repurposed for tab-focus / input-block flags.
 - `+0x228..+0x253`: between DirectSound tail and dirty-rect array.
 - Reconcile **`CDSDirectSound`** Ghidra size (84 B) vs historical **`0x54`** bound.

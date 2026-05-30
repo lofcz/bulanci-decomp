@@ -22,7 +22,7 @@
 | `0x0C` | 4 | `dword` | `dwField_0c` | `CDSChained_ctor@0x004032d0` |
 | `0x10` | 4 | `void *` | `pVftable_IDSEventHandler` | `CWindow_BuildAt` → `0x47fd24` |
 | `0x14` | 2 | `ushort` | `wViewFlags` | `CWindow_BuildAt` `\|= 0x77f` |
-| `0x18` | 4 | `void *` | `pVftable_field18` | `CWindow_BuildAt` → `0x47fd10` |
+| `0x18` | 4 | `void *` | `pVftable_IDSReferenced` | `CWindow_BuildAt` → `g_pCWindow_vftable_IDSReferenced` (`0x47fd10`) |
 | `0x1C` | 4 | `dword` | `dwField_1c` | `CDSChained_ctor@0x004032d0` |
 | `0x20` | 4 | `int` | `nBbox_left` | `CWindow_BuildAt` args `left` |
 | `0x24` | 4 | `int` | `nBbox_top` | `top` |
@@ -62,12 +62,16 @@ get_struct_layout CWindow → Size: 112 bytes
 
 ## UNK
 
-- `dwField_08` / `dwField_0c` / `dwField_30..3c` / `dwField_5c..64` semantics beyond `CDSChained_ctor` zero/init.
+- ~~`dwField_08` / `dwField_0c` / `dwField_30..3c` / `dwField_5c..64` semantics beyond `CDSChained_ctor` zero/init~~ — **`dwField_08/0c/1c` closed (R5 worker 32):** ctor padding only; `dwField_30..3c` → `nScreenBbox_*` on chain band ([round5_worker_32_report.md](./round5_worker_32_report.md), [CDSChained.md](./CDSChained.md)).
 - Subclass tails (`+0x70+`) are per-type — see `CMsgDialog`, `CSessionList`, `CExitDlg`, `CScore`.
 
 ## CDSView relationship (agent todo 11, 2026-05-30)
 
 `CDSView` is the **128 B** (`0x80`) engine view shell: embedded **`CWindow win`** @ `+0x00` (same **112 B** / `0x70` dialog prefix as `CMsgDialog` / `CWindow_BuildAt`) plus a **16 B** band @ `+0x70..+0x7F` (`bGaming_slot_id`, `nDest_x`/`nDest_y`/`nSrc_x` on gameplay views; `CSessionList` reuses `+0x70..+0x78` for child pointers). Leaf dialogs that allocate only `OperatorNew(0x70)` are **`CWindow`-sized**, not full `CDSView`. See [CDSView.md](./CDSView.md).
+
+## R5 worker 6 (2026-05-30)
+
+Dialog/render `FUN_*` band `0x00402000`–`0x0042c000`: `CMsgDialog_ShowModalFromStringHandle@0x0040f2c0`, `CRadio_AddOption@0x004075f0`, `CDSView_UnwindDtor_StringVec9@0x00404890` (shared `CScrollBar`/`CVolume` EH). See [round5_worker_06_report.md](./round5_worker_06_report.md).
 
 ## Cross-links
 

@@ -1,0 +1,6 @@
+{"todo_id":26,"round":4,"phase":"verify","address":"0x00432475","symbol":"CDSBmpImage_SaveDibStream","finding":"LEA EBX,[ESI-0x50]; MOV ECX,EBX; CALL ValidateStride — ECX is CDSImage* pixel plane"}
+{"todo_id":26,"round":4,"phase":"verify","address":"0x00436020","symbol":"CDSBmpImage_ValidateStride","finding":"set_function_this_type CDSImage*; strict: DAT_004b0050[nM_format]*nM_width+7>>3==nM_stride; loose: nM_stride&3==0"}
+{"todo_id":26,"round":4,"phase":"verify","address":"0x00436060","symbol":"CDSBmpImage_FillBitmapInfoHeader","finding":"CDSImage* this; biWidth/biHeight from nM_width/nM_height; biBitCount from format table"}
+{"todo_id":26,"round":4,"phase":"verify","struct":"CDSBitmap","finding":"dwChainField_08/0c renamed dwField_08/0c; +0x30..3c ctor-zero only (shared CDSChained band)"}
+{"todo_id":26,"round":4,"phase":"verify","address":"0x004237b0","symbol":"CMovieView_InitTrackSequence","finding":"this via ESI rename (R4 todo 15); set_function_this_type blocked on __stdcall ctor tail"}
+{"todo_id":26,"round":4,"phase":"apply","ghidra_actions":["set_function_this_type CDSImage*@0x00436020/0x00436060","set_function_prototype","set_decompiler_comment@0x00436020","modify_struct_field CDSBitmap dwField_08/0c","force_decompile","save_program bulanci.exe"]}

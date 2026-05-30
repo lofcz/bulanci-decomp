@@ -95,7 +95,7 @@ A highly sophisticated graphical bullet-slot renderer.
   2. **Reload Bar Interpolation:** If `m_bInterpolate != 0` (reload in progress), it calculates progress via:
      $$\text{height\_offset} = \frac{\text{m\_currentAmmo} \times \text{sprite\_height}}{\text{m\_maxAmmo} - 1}$$
      It then clips and blits the filled bar sprite (`m_pFilledSprite`) to reflect reloading progress.
-  3. **Discrete Bullet Rendering:** If not in interpolation mode, it loops from `0` to `m_currentAmmo` and draws discrete bullet sprites side-by-side. Horizontal placements are calculated using a rounding helper (`0x00448b50`) to space bullets perfectly.
+  3. **Discrete Bullet Rendering:** If not in interpolation mode, it loops from `0` to `m_currentAmmo` and draws discrete bullet sprites side-by-side. Horizontal placements are calculated using `CShotCounter_RoundBulletSpacing@0x00448b50` (banker's-round on x87 ST0) to space bullets perfectly.
 
 ---
 

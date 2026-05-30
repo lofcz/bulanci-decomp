@@ -30,7 +30,9 @@ get_struct_layout CDirectKeyb  → size 524 (0x20c)
 
 Applied: vtable + `m_keyState` + `m_prevKeyState` + `m_pDI` + `m_pKeyboard` (`get_struct_layout` size 524). Slice 06 renamed key buffers; `CDirectKeyb_PollKeyboard@0x00412160` decompile uses `CDirectKeyb*`.
 
-## GetKeyEdge `this` typing (R3 todo 7)
+## GetKeyEdge / PollKeyboard `this` typing (R3 todo 7, R4 todo 7)
 
-- `CDirectKeyb_GetKeyEdge@0x004121a0`: **disasm-proven** ECX=`CDirectKeyb*` (`ADD ECX,scanCode`; `[ECX+4]` vs `[ECX+0x104]` = `m_keyState` / `m_prevKeyState`). Caller `CGame__SchedulerDispatch@0x004160e3` passes `[CGame+0x204]` `pDirectKeyb`.
-- **Ghidra (2026-05-30):** `set_function_this_type(CDirectKeyb *)` + `force_decompile` — signature `CDirectKeyb::CDirectKeyb_GetKeyEdge(CDirectKeyb *this, uchar scanCode)`; body uses `pM_keyState` / `pM_prevKeyState` arrays. Report: [round3_task_07_report.md](./round3_task_07_report.md).
+- `CDirectKeyb_GetKeyEdge@0x004121a0`: **disasm-proven** ECX=`CDirectKeyb*` (`ADD ECX,scanCode`; `[ECX+4]` vs `[ECX+0x104]` = `m_keyState` / `m_prevKeyState`). Caller `CGame__SchedulerDispatch@0x004160e3` passes `this->pDirectKeyb`.
+- `CDirectKeyb_PollKeyboard@0x00412160`: same ECX base (`LEA +0x4/+0x104`; `GetDeviceState` on `[EAX+0x208]`). Was wrongly `CGame::CDirectKeyb_PollKeyboard(CGame*)` until R4.
+- **Ghidra R3:** `set_function_this_type(CDirectKeyb *)` on GetKeyEdge — [round3_task_07_report.md](./round3_task_07_report.md).
+- **Ghidra R4:** `set_function_this_type(CDirectKeyb *)` on PollKeyboard; `CGame.pDirectKeyb` → `CDirectKeyb *`; scheduler decompile `PollKeyboard(this->pDirectKeyb)` / `GetKeyEdge(this->pDirectKeyb, scanCode)`. Decompiler still emits `pM_keyState` / `pM_prevKeyState` for `byte[256]` fields (Ghidra array decay). Report: [round4_task_07_report.md](./round4_task_07_report.md).

@@ -2,7 +2,7 @@
 
 ## Status
 
-**PARTIAL** — `sizeof == 0x108`; freestanding corpse view (`CAnim` prefix `0xf0` + 24-byte tail). Ghidra **`CDeath` (264 B)** with tail fields named; R3 agent todo **#6** xref closed on `dwM_modeFlags` / `bM_tourneyFlag` ([round3_task_06_report.md](./round3_task_06_report.md)). Tournament tombstone sibling: **`CDeath2`** (`0xfc`).
+**PARTIAL** — `sizeof == 0x108`; freestanding corpse view (`CAnim` prefix `0xf0` + 24-byte tail). Ghidra **`CDeath` (264 B)** with tail fields named; R3 agent todo **#6** xref closed on `dwM_modeFlags` / `bM_tourneyFlag` ([round3_task_06_report.md](./round3_task_06_report.md)); R4 todo **#6** `set_function_this_type` on `CDeath_ctor` ([round4_task_06_report.md](./round4_task_06_report.md)). Tournament tombstone sibling: **`CDeath2`** (`0xfc`, [pass_r4_CDeath2_report.md](./pass_r4_CDeath2_report.md)). **R5:** tombstone/corpse bind band map ([round5_worker_35_report.md](./round5_worker_35_report.md)).
 
 ## Size proof table
 
@@ -30,8 +30,8 @@
 | Offset | `CDeath2` (`0xfc`) | `CDeath` (`0x108`) |
 |--------|-------------------|-------------------|
 | `+0xf0` | `pHost` @ `CDeath2_ctor` | `pHost` @ `CDeath_ctor` |
-| `+0xf4` | `dwM_placementOffsetX` (zeroed subobject) | `m_modeFlags` (`param_3 & 3`) |
-| `+0xf8` | `dwM_placementOffsetY` (zeroed; tombstone bind) | `dwM_animHeightBias` (set in anim bind) |
+| `+0xf4` | `nM_placementOffsetX` (zeroed; tombstone bind) | `dwM_modeFlags` (`param_3 & 3`) |
+| `+0xf8` | `nM_placementOffsetY` (zeroed; tombstone bind) | `dwM_animHeightBias` (set in anim bind) |
 | `+0xfc` | *(object end)* | `bM_tourneyFlag` byte |
 | `+0x100` | — | `nM_placementOffsetX` (zeroed; anim bind) |
 | `+0x104` | — | `nM_placementOffsetY` (zeroed; anim bind) |
@@ -67,7 +67,7 @@ set_decompiler_comment CDeath_SubobjectCtor / CBulanek_ResolveAndBindAnimTrack
 save_program bulanci.exe
 ```
 
-Decompile (2026-05-30): `CDeath_SubobjectCtor` zeros `nM_placementOffsetX/Y`; `CBulanek_ResolveAndBindAnimTrack@0x0041c790` is sole non-ctor consumer (anchor adjust, mirrors `CBulanek_BindDeathTombstoneAnim` on `CDeath2`). `CDeath_ctor` plate comment documents `CDeath*` ECX (decompiler may still show `CBulanek*` — `__thiscall` API limit). `CDeath_IDSAnim_NotifyEvents` @ `0x00417a40` (was `FUN_00417a40`).
+Decompile (2026-05-30): `CDeath_SubobjectCtor` zeros `nM_placementOffsetX/Y`; `CBulanek_ResolveAndBindAnimTrack@0x0041c790` is sole non-ctor consumer (anchor adjust, mirrors `CBulanek_BindDeathTombstoneAnim` on `CDeath2`). **R4:** `CDeath_ctor` moved into class `CDeath` — decompile uses `this->pHost`, `dwM_modeFlags`, `bM_tourneyFlag`, `nM_placementOffset*`. `CBulanek_OnDeath` calls `CDeath::CDeath_ctor((CDeath *)alloc, victim, …)`. `CDeath_IDSAnim_NotifyEvents` @ `0x00417a40` (was `FUN_00417a40`).
 
 ## Xref closure (R3 todo #6, 2026-05-30)
 
@@ -80,7 +80,25 @@ Decompile (2026-05-30): `CDeath_SubobjectCtor` zeros `nM_placementOffsetX/Y`; `C
 
 Spawn: `CBulanek_OnDeath@0x0041fa21` → `OperatorNew(0x108)` → `CDeath_ctor` → `CBulanek_ResolveAndBindAnimTrack(corpse)`.
 
+## Tombstone bind bands (R5 worker 35)
+
+Corpse path: `CBulanek_ResolveAndBindAnimTrack@0x0041c790`. Tournament tombstone sibling uses `CBulanek_BindDeathTombstoneAnim@0x0041c860` on **`CDeath2`** — see [CDeath2.md](./CDeath2.md).
+
+| Band | Offsets | Fields | Corpse bind | Net copy |
+|------|---------|--------|-------------|----------|
+| **Coord** | `+0x20..+0x2c` | `nOrigin_x/y`, `nDraw_pos_x/y` | read/write anchor adjust | — |
+| **View-state pad** | `+0x68..+0x73` | `CAnim` bytes (`pPad_68` cluster) | sets `+0x69` (`bView_state_69`) = 1 | — |
+| **Net dword A** | `+0x74/+0x78` | `dwM_netStateWord0/1` | write from host `+0x70` vcall + origin | `CDeath_UpdateStateFromParams@0x00417a70` |
+| **Net dword B** | `+0x7c/+0x80` | `nSrc_x/y` (CAnim dest/src overlay) | write reposition dwords | — |
+| **ODS / TM** | `+0x94`, `+0x98` | `pOds_drawable`, `vftable_anim_sub` | `GetPaletteBuffer`, `TM_BindSequence` | — |
+| **Death tail** | `+0xf0..+0x104` | `pHost`, mode/tourney/placement | mode/tourney read; placement subtract | ctor only |
+
+**Placement tail:** `nM_placementOffsetX/Y` @ `+0x100/+0x104` — zeroed in ctor; sole non-ctor consumer is corpse bind (same anchor math as `CDeath2` `+0xf4/+0xf8`).
+
+**Not touched by tombstone bind:** `+0x30..+0x67` (`pPad_30` / CDSView bounds band) — inherited `CAnim` header only.
+
 ## UNK
 
 - Writers of `nM_placementOffsetX/Y` before anim bind (remain zero unless future xref).
+- `pHost` Ghidra type `-BAD-` (`CBulanek *` offset correct).
 - Full interior `CAnim` field map — see [CAnim.md](./CAnim.md).

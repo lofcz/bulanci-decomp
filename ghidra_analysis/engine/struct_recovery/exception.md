@@ -49,5 +49,6 @@ No `create_struct` — CRT stub policy.
 
 ## UNK
 
-- *(follow-up round 2 closed)* **Naming:** Ghidra uses both `exception` (`exception@0x0044beb0`, `~exception@0x0044bf6e`, copy) and `std::exception` (`std::exception::exception@0x0044beb0` decompile name, `std::exception_ScalarDeletingDtor@0x0044bf91`) for the same CRT type — demangler/export inconsistency only.
-- *(follow-up round 2 closed)* **Game embed:** No by-value `exception` in engine types. `std::exception::exception` xref: sole direct call from `FindHandler@0x0044b874` (EH rewrite). `~exception` also from `std::bad_exception_ScalarDeletingDtor`, `std_bad_alloc_ScalarDeletingDtor`, and `FUN_0047ee91` (`_atexit` tail for static `bad_alloc` @ `DAT_004b85b0`). `OperatorNewWithBadAlloc@0x00447c42` copies static `bad_alloc` into stack `local_10` then `__CxxThrowException_8` — throw path only, not a struct field.
+- *(R5 worker 43 — no open UNK; CRT SKIP)* All items below closed in prior batches; re-verified 2026-05-30.
+- **Naming:** Ghidra uses both `exception` and `std::exception` for the same CRT type — demangler inconsistency only.
+- **Game embed:** none. Ctors/dtors only on EH / `bad_alloc` throw glue (`FindHandler@0x0044b874`, `OperatorNewWithBadAlloc@0x00447c42`, static `bad_alloc` `@atexit`).

@@ -106,6 +106,8 @@ Round 3 task 23: `CPauseDlg.pGame` → **`CGame *`**; `CPauseDlg_OnNotify` uses 
 
 **R3 task 16 (2026-05-30):** `set_function_this_type` `CPauseDlg_Build@0x00411df0` → **`CPauseDlg *`** (moves fn into class `CPauseDlg`); `set_function_prototype` + `force_decompile`. Decompiler signature: `CPauseDlg::CPauseDlg_Build(CPauseDlg *this, CGame *pGame)`; body uses `this->pVftable_*`, `pBtnPrimary`/`pBtnSecondary`, `nBbox_bottom`, `wWidgetFlags` (not `field_0x*` / `CBulanci *this`). Plate/asm EOL retained @ call `0x00420423`.
 
+**R4 task 16 (2026-05-30):** `modify_struct_field` `CPauseDlg` **`offset:0x70`** → name **`pGame`**, type **`CGame *`** (was unnamed / decompiler `field32_0x70`); `force_decompile` @ `0x00411df0`. Verified: `this->pGame = pGame`, `this->pGame->pRecvBuf`; `CPauseDlg_OnKeyDown@0x0040ac20` already `this->pGame`.
+
 ## Lifecycle (heap vs factory)
 
 | Path | Caller | Init | Xrefs to allocator/build |
@@ -127,5 +129,5 @@ Round 3 task 23: `CPauseDlg.pGame` → **`CGame *`**; `CPauseDlg_OnNotify` uses 
 
 - Semantics of `wChainCounter_48` / `wChainCounter_4a` (zeroed at ctor; no `CPauseDlg`-local readers).
 - Extra pause buttons in `CPauseDlg_Build` are heap children via `CDSView__AddChild` (not tail fields past `+0x78`).
-- **`CPauseDlg_Build` `pGame` field name** — decompile may show `field32_0x70` until `CPauseDlg.pGame` component rename sticks; offset `+0x70` and `CGame *` type are correct (task 21/23).
+- ~~**`CPauseDlg_Build` `pGame` field name**~~ — **R4 task 16:** `modify_struct_field` `offset:0x70` → **`pGame`**; `CPauseDlg_Build` decompile uses `this->pGame` / `this->pGame->pRecvBuf` (not `field32_0x70`).
 - Whether any shipped overlay / stream calls `InitializeByClassId(2056)` (factory registered; gameplay uses `CPauseDlg_Build`).

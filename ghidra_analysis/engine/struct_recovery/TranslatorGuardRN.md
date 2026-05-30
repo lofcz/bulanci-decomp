@@ -56,9 +56,12 @@ Applied layout (Ghidra may auto-rename some members):
 
 ## UNK
 
-- **Offset 0 dual use**: On `_CallSETranslator` with `pExcept == 0x123` (`CSET_SPECIAL`), `param_2` is a `void **` and `*(void**)param_2 = 0x4479a6` (`ExceptionContinuation`); not a valid `pNext` in that mode (`_CallSETranslator@0x004478fd`).
 - **`ENABLE_EHTRACE` trailing `trace_level`**: Present in newer MSVC sources; not observed in this VS2005 binary (size stops at 0x28).
-- **Game xrefs**: None — CRT-only (`TranslatorGuardHandler` data ref from `_CallSETranslator`; handler @ `0x4479d2`).
+
+### R5 worker 46 (closed)
+
+- **Offset 0 dual use (VERIFIED)**: `_CallSETranslator@0x004478fd` — when `ExceptionRecord == (EHExceptionRecord *)0x123` (`CSET_SPECIAL`), writes `Frame->pNext = (EHRegistrationNode *)0x4479a6` (`ExceptionContinuation`); normal path links `FS:[0]` via stack `local_2c` and stores `TranslatorGuardHandler` in the guard block. Offset `+0` is **not** a valid `pNext` in CSET_SPECIAL mode.
+- **Game xrefs (VERIFIED none)**: `get_function_xrefs` — `_CallSETranslator` callers only `FindHandlerForForeignException@0x0044b7d5`, `TranslatorGuardHandler@0x00447a53`; handler pointer data refs `0x00447923`, `0x004a4f34` (CRT `.rdata` only).
 
 ## Consumers (leaf CRT only)
 

@@ -42,6 +42,8 @@ Functions: `CDSStrmResInfo_factory@0x00433d80`, `CDSStrmResInfo_Serialize@0x0043
 
 **Agent todo 47 (round 3, 2026-05-30):** Re-verified Ghidra layout: `streamExtent` `ulonglong` @ `+0x14`; `dwFilterSliceAddend` @ `+0x20` (sole xref `MOV EDX,[EDI+0x20]` @ `0x0043405b`). PRE comments @ `0x00433940`, `0x00433980`, `0x0043405b`, `0x00434270`, `0x00434290` distinguish `CDSResInfo::pEmbeddedResource` (base `+0x14`) from stream tail. `save_program bulanci.exe`.
 
+**Agent todo 47 (round 4, 2026-05-30):** R3 closure verify — `get_struct_layout` + `force_decompile` on factory path functions; disasm confirms `8b5720` @ `0x0043405b`; decompiler uses `entry->dwFilterSliceAddend`. No struct mutations. Report: [round4_task_47_report.md](./round4_task_47_report.md). `save_program bulanci.exe`.
+
 ## Follow-up resolved (round 3, task 15)
 
 - **`loaderAux` @ `+0x10`:** No dedicated consumer. Factory and `CloseStreamByKey` stack keys zero the slot; persistence skips it (keys at `+0x8`/`+0xc`, tail at `+0x14`..`+0x1f`). Treat as runtime-only dword between the two-vtable header and the serialized stream tail (cf. fourth vtable at `+0x10` on `CDSResourceSign`).

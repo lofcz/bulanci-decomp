@@ -37,12 +37,21 @@
 
 ### MI adjustors (thunks → primary)
 
-| Thunk | Adjust | Target |
-|-------|--------|--------|
-| `CDSWav_ScalarDeletingDtor_thunk@0x0041a530` | `this - 0x18` | `CDSWav_ScalarDeletingDtor` |
-| `CDSWav_ScalarDeletingDtor_thunk_Sub4@0x0041a540` | `this - 4` | same |
-| `CDSWav_ReleaseChild_thunk_Sub30@0x0041a5e0` | `this - 0x30` | `CDSWav_ReleaseRefcount` |
-| `CDSWav_ReleaseChild_thunk_Sub34@0x0041a5f0` | `this - 0x34` | same |
+| Thunk | Vtable @ slot | Adjust | Target (proof: disasm JMP) |
+|-------|---------------|--------|----------------------------|
+| `CDSWav_ScalarDeletingDtor_thunk@0x0041a530` | `IDSEventHandler` `0x48230c` slot **3** (`0x482318` DATA) | `ECX - 0x18` | `CDSWav_ScalarDeletingDtor@0x0041bbe0` |
+| `CDSWav_ScalarDeletingDtor_thunk_Sub4@0x0041a540` | `face_8slots` `0x482320` slot **3** | `ECX - 4` | same |
+| `CDSWav_ReleaseChild_thunk_Sub30@0x0041a5e0` | `CDSWavStream` `IDSChained6` `0x48236c` slot **2** | `ECX - 0x30` | `CDSWav_ReleaseRefcount@0x00433040` |
+| `CDSWav_ReleaseChild_thunk_Sub34@0x0041a5f0` | `CDSWavStream` `IDSChained5` `0x482354` slot **2** | `ECX - 0x34` | same |
+
+### Vtable meta stubs (not adjustors)
+
+| Stub | Vtable @ slot | Body | Returns |
+|------|---------------|------|---------|
+| `CDSWav_GetClassMeta@0x0041a510` | `face_8slots` slot **0** (also `CDSAudioBankSample` `0x486f10`, DSM/Mpx faces) | `MOV EAX,0x4b83c0; RET` | `&DAT_004b83c0` |
+| `CDSWav_GetTypeInfo@0x0041a520` | `IDSReferenced` `0x482344` slot **0** | `MOV EAX,0x4b8410; RET` | `&DAT_004b8410` |
+
+R5 worker **19** (2026-05-30): plate comments on all wav/stream thunks above; `vftable_methods.csv` still lists legacy `FUN_*` names — Ghidra symbols are canonical.
 
 ## Ghidra apply
 
@@ -55,6 +64,22 @@ rename_function_by_address 0x00428ad0 → CDSDsmFile_HandleResourceRead
 set_decompiler_comment @ 0x0043b960, 0x0043ba30, 0x00433040, 0x00428ad0
 save_program bulanci.exe
 ```
+
+## Ghidra apply (R4 todo 50, 2026-05-30)
+
+R3 proved ownership read-only; R4 applied MCP typing so decompiler uses face/primary views:
+
+| Action | Target | Result |
+|--------|--------|--------|
+| `set_function_prototype` + `set_function_this_type` | `0x0043b960` | `CDSWav_face8slots::CDSWav_HandleResourceRead`; `this->dwPcmEndBound`, `this->pStreamStorage` |
+| `set_function_prototype` + `set_function_this_type` | `0x0043ba30` | `CDSWav_face8slots::CDSWav_BindPcmMemStream` (`__thiscall`) |
+| `set_function_prototype` + `set_function_this_type` | `0x00433040` | `CDSWav::CDSWav_ReleaseRefcount` on primary |
+| `set_function_prototype` + `set_function_this_type` | `0x0041a640` | `CDSWavStream::CDSWavStream_dtor`; stash via `this->pVftable_IDSChained5` |
+| `set_function_this_type` | `0x0041bbe0`, `0x0041bc00` | `CDSWav *` / `CDSWavStream *` deleting dtors |
+| `set_plate_comment` | `0x0041bbe0`, `0x0041bc00`, `0x0043b960` | Ownership / ECX=face plates |
+| `save_program` | `bulanci.exe` | saved |
+
+Structs `CDSWav` (60 B), `CDSWav_face8slots` (40 B), `CDSWavStream` (64 B) unchanged. `CDSDsmFile_HandleResourceRead@0x00428ad0` already named from R2.
 
 ## DSM embed vs class-43 heap (`CDSDsmFile+0x1c`)
 

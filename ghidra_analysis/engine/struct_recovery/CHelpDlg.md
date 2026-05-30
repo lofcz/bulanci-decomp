@@ -39,6 +39,8 @@ Batch 8: placeholder → `CHelpDlg` (156 B). Follow-up round 2: dialog tail fiel
 
 **R3 todo 11 (2026-05-30):** `CWindow win` prefix field-split through `+0x6f` in decompile (`CHelpDlgCtor` → `CWindow_BuildAt(&this->win,…)`); `set_function_this_type` on ctor / `CHelpDlg_LoadHelpPage`.
 
+**R5 worker 13 (2026-05-30):** Page swap calls `CMenu_DetachChildWithVisibility@0x0042d160` before releasing `pHelpView` (`CHelpDlg_LoadHelpPage@0x00421c61`).
+
 Menu enumeration filters `classId == 0x81c` (`CHelpScript`) when filling `m_pageIds` (`CHelpDlgCtor@00421e40`).
 
 ## UNK
@@ -46,3 +48,5 @@ Menu enumeration filters `classId == 0x81c` (`CHelpScript`) when filling `m_page
 - Ghidra type-prefix on `m_pageIds_*` fields in decompiler (`pM_`/`nM_`) — cosmetic.
 
 **Round 3 task 10:** `pHelpView` is `CHelpView *`; page load/release uses `(pHelpView->chain).pVftable_primary` — see [CHelpView.md](./CHelpView.md).
+
+**R5 worker 05 (2026-05-30):** Primary vtable labeled `g_pCHelpDlg_vftable_primary` @ `0x00482b84` (`CHelpDlgCtor` / `CHelpDlg_dtor` xrefs). MI deleting thunks disambiguated: `CHelpDlg_ScalarDeletingDtor_thunk_Sub18` @ `0x004220b0` (`SUB ECX,0x18`), `…_Sub10` @ `0x004220d0` (`SUB ECX,0x10`), `CHelpDlg_AdjustorThunk04_Dtor` @ `0x004220c0`. Report: [round5_worker_05_report.md](./round5_worker_05_report.md).

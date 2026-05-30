@@ -32,8 +32,10 @@ Round-3 todo **15** (2026-05-30): **InitTrackSequence audio bind path** disasm-p
 
 Round-3 todo **26** (2026-05-30): `CDSBitmap` shell parity with [CDSBitmap.md](./CDSBitmap.md) — `CMovieView_Constructor` / `CMovieView_InitTrackSequence` renamed; EOL disasm @ `0x004237f5` documents `wViewFlags \|= 0x278` on embedded bitmap `+0x14`. See [round3_task_26_report.md](./round3_task_26_report.md).
 
+Round-4 todo **15** (2026-05-30): merged **`unaff_ESI` → `this`** in `CMovieView_InitTrackSequence@0x004237b0` — prototype `void __stdcall …(void)` (ESI register local, not ECX); body uses `this->pAudioSequence`, `this->bitmapBase.trackImage`, `this->bitmapBase.wViewFlags`. Renamed ctor-frame scratch: `pStreamMgr` (EDI), `ctorFrame` (EBP), `pvLoad` (LoadResource temp). Constructor tail: `CMovieView_InitTrackSequence()` after JMP @ `0x00423785` (no bogus `this_00` arg). See [round4_task_15_report.md](./round4_task_15_report.md).
+
 ## UNK
 
 - Exact `CDSBitmap` / `CDSChained` field names in `viewHeader_28` / `pad_50` (see [CDSBitmap.md](./CDSBitmap.md)).
 - ~~Whether `pAudioSequence` is `CDSAnimSequence *` vs generic COM pointer~~ — **done** (R2 todo 15): typed `CDSAnimSequence *`; cast `CheckedVirtualBaseCast(..., DAT_004b826c)`.
-- ~~`InitTrackSequence@0x004237b0` decompilation incomplete~~ — **partial** (R3 todo 15): bind path **done** (disasm + typed decompile via `unaff_ESI`); clean single-`this` body still blocked (ctor tail `JMP`, `this` in **ESI**).
+- ~~`InitTrackSequence@0x004237b0` decompilation incomplete~~ — **done** (R3 bind path + R4 todo 15): `CMovieView *this` in body; ctor tail `JMP` still a separate function with `pStreamMgr`/`ctorFrame` scratch locals.

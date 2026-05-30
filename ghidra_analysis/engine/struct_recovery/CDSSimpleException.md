@@ -37,6 +37,17 @@ Applied via `create_struct` (2026-05-30 batch 36). **Agent todo 30 (2026-05-30):
 - **IDSChained @ `0x0048754c`:** Five slots are the **primary** vptr at `+0` (`vftable_methods.csv`); no embedded secondary vtable subobject or `AdjustThisOffset` on this type. Catalog label `IDSChained` is the interface name for that table, not an extra member offset.
 - **Vtable slots (proven):** `[0]` `CDSSimpleException_GetClassTable@0x00434ac0` → `&DAT_004b81fc`; `[1]` `CDSException_DtorScalar@0x00434ae0`; `[2]` `CDSException_ReleaseViaFlag@0x0042fff0`; `[3]` `CDSSimpleException_What@0x00434ad0` returns `param_1` unchanged (used from `GetMessageW` static-text path via `*(vftable+0xc)`); `[4]` `CDSObject_GetThis@0x00434b10` returns `(uint)this`.
 - **`inlineMessage` span:** `0x14 + 0x28 = 0x3C` matches `OperatorNew(0x3c)` in `CDSSimpleException_Throw@0x00434c20`; no fields past `+0x13` on this subclass.
+- **R4 throw local:** `local_4` is `CDSSimpleException *`; `CDSException_InitFields` call still shows `(CDSException *)` cast (decompiler limitation). See [round4_task_39_report.md](./round4_task_39_report.md).
+
+## IDSChained vtable @ `0x0048754c`
+
+| Slot | Address | Symbol |
+|------|---------|--------|
+| 0 | `0x00434ac0` | `CDSSimpleException_GetClassTable` |
+| 1 | `0x00434ae0` | `CDSException_DtorScalar` (base) |
+| 2 | `0x0042fff0` | `CDSException_ReleaseViaFlag` |
+| 3 | `0x00434ad0` | `CDSSimpleException_What` |
+| 4 | `0x00434b10` | `CDSObject_GetThis` |
 
 ## Notes
 

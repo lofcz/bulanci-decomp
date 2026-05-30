@@ -26,14 +26,15 @@
 | 0x24 | 4 | `int` | `nBbox_top` | `CSwitch_ctor` `= param_2` (y) |
 | 0x28 | 4 | `int` | `nBbox_right` | `CDSChained` shell parity |
 | 0x2C | 4 | `int` | `nBbox_bottom` | same |
-| 0x30 | 16 | `uint`×4 | `dwField_30`…`dwField_3c` | ctor zero band; `CDSChained` names |
+| 0x30 | 16 | `int`×4 | `nScreenBbox_left`…`nScreenBbox_bottom` | `CDSChained` shell; filled by `CDSView__UpdateScreenCoordinates@0x0042bf40` when in menu view tree (no `CSwitch`-local writer) |
 | 0x40 | 4 | `uint` | `dwChainRoot` | `CDSChained_ResetChainCounters@0x0042beb0` |
 | 0x44 | 1 | `byte` | `wChainInit44` | `Button_Click` `(this+0x44)&5==1` — low byte of chain init ushort |
 | 0x46 | 6 | `ushort`×3 | `wChainFlag46`…`wChainFlag4a` | `ResetChainCounters` |
 | 0x4C | 4 | `void *` | `pParent` | `Button_Click` posts to `*(this+0x4c)+0x10` |
 | 0x50 | 4 | `uint` | `dwField_50` | chain band |
 | 0x54 | 8 | `void *`×2 | `pVftable_CDSChain_*` | embedded `CDSChain` MI @ `+0x54`/`+0x58` |
-| 0x5C | 12 | `uint`×3 | `dwField_5c`…`dwField_64` | ctor zero tail |
+| 0x5C | 8 | `uint`×2 | `dwField_5c`…`dwField_60` | `CDSChained_ctor` zero only — no `.text` stores on `CSwitch` |
+| 0x64 | 4 | `void *` | `pOverlapEntity` | ctor zero; gameplay-only slot on `CAnim`/`CTeleportPoint` — unused on menu `CSwitch` |
 | 0x68 | 4 | `void *` | `pVftable_IDSUpdated` | `CSwitch_ctor`; `CSwitch_dtor@0x00423950` restore |
 | 0x6C | 4 | `void *` | `pVftable_IDSAnim` | `CSwitch_ctor`; `OnAnimEnd` uses `this-0x6c` base |
 | 0x78 | 1 | `byte` | `bType` | `CSwitch_ctor` `this+0x78 = param_3` (`1` = momentary menu button) |
@@ -74,9 +75,11 @@ Applied 2026-05-30 slice 20.
 
 **Agent todo 21 (2026-05-30):** `get_struct_layout CSwitch` — shell `+0x30..+0x64` mirrors `CDSChained` (`dwField_30..3c`, `dwChainRoot`, `wChainInit44` ushort @ `+0x44`, `wChainFlag*`, `pParent`, `dwField_50`, CDSChain MI, `dwField_5c..64`). `bChainInit44`→`wChainInit44` (ushort). `set_function_prototype` `CSwitch_ctor@0x00424bc0`, `Button_Click@0x00424d30` (`CSwitch *`); decompiler shows `trackManager.nCurrentTrackIdx` / `dwCurrentFrameIdx`. Comments @ `0x0042beb0`, `0x00424d30`. `save_program`.
 
+**Agent todo 21 R4 (2026-05-30):** `nScreenBbox_*` / `pOverlapEntity` on `CSwitch` (Ghidra); comments @ `0x0042bf40`, `0x00403346`. `save_program`.
+
 ## UNK
 
-- Semantic names for `dwField_30`…`dwField_3c` / `dwField_50` / `dwField_5c`…`64` beyond ctor zero (shared with `CDSChained` — see `CDSChained.md`).
+- `dwField_50` / `dwField_5c` / `dwField_60` — ctor/`ResetChainCounters` only on `CSwitch` (see `CDSChained.md`).
 - `wChainInit44` stored as **byte** in Ghidra layout (1 B @ `+0x44`); live `ResetChainCounters` writes **ushort** `=1` — decompiler uses `bChainInit44`/`wChainInit44` interchangeably for `(flags & 5)==1`.
 - `OnAnimEnd` hover test uses anim-subobject-relative `+0x58` (maps to host `+0xc4` `bState` when rebased).
 - Decor / non-menu `CSwitch` instances (if any) not exhaustively xrefs’d beyond menu alloc sites.

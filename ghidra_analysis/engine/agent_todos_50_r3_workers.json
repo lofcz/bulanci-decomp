@@ -266,8 +266,10 @@
   },
   "44": {
     "todo_id": 44,
-    "status": "launched",
-    "agent": null
+    "status": "done",
+    "agent": "r3-worker-44",
+    "completed_at": "2026-05-30",
+    "summary": "Cosmetic CDSTrackVector embed @ CDSVideoPlayer+0x1c (R4 follow-up in round4_task_44)"
   },
   "45": {
     "todo_id": 45,

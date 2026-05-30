@@ -54,13 +54,15 @@ Lobby rows resolve packed level resources through `CGame`, not by scanning insid
 
 ### `CLevelScriptResource` heap row (0x14, not in `CLevelList`)
 
-| Offset | Field | Evidence |
-|--------|-------|----------|
-| `+0x00` | `dwResourceId` | `CBulanci_EnumerateLevelScripts@0x00409f60` `puVar6[0]` |
-| `+0x04` | `dwSortKey` | `GetGlobalVar(1)`; `CGame_LevelResourceQsortCmp@0x00408ff0` |
-| `+0x08` | `hNameAlt` | `GetGlobalVar(0)`; released `CLevelScriptResource_dtor@0x004097f0` |
-| `+0x0c` | `pPackStream` | pack `AddRef`; dtor `Release` |
-| `+0x10` | `hLevelName` | `GetGlobalVar(2)`; `CGame_FindResourceByName` / host lobby loop |
+Ghidra type **`CLevelScriptResource`** (20 B) — R4 todo 13; writer trace R3 todo 13.
+
+| Offset | Ghidra field | Role | Evidence |
+|--------|--------------|------|----------|
+| `+0x00` | `dwResourceId` | pack entry id | `CBulanci_EnumerateLevelScripts@0x00409f60` |
+| `+0x04` | `dwSortKey` | `GetGlobalVar(1)` | `CGame_LevelResourceQsortCmp@0x00408ff0` → `(*elem)->dwSortKey` |
+| `+0x08` | `dwNameAlt` | CDsString handle (`GetGlobalVar(0)`) | `CLevelScriptResource_dtor@0x004097f0` |
+| `+0x0c` | `pPackStream` | `IDSStream *` pack ref | dtor `pPackStream->pVftable` Release |
+| `+0x10` | `dwLevelName` | CDsString handle (`GetGlobalVar(2)`) | `CGame_FindResourceByName` compares `row+0x10` |
 
 ## Leaf functions (Ghidra names)
 
@@ -86,6 +88,8 @@ Lobby rows resolve packed level resources through `CGame`, not by scanning insid
 - **Slice 12 (2026-05-30):** `CLevelList::CreateObject@0x40ba30` (was `_Globals::CreateObject` collision); `CMenu::CLevelList_AddItem@0x40d360` prototype `void (CMenu*, int levelEntry)`.
 
 **Agent todo 13 (2026-05-30):** `chain.pLevelResourceTable` / `nLevelResourceCount` (`CGame+0x66`/`+0x6e`); writer `CBulanci_EnumerateLevelScripts@0x0040a062`; `CBulanci_BuildLevelResourceTable@0x0040a0b0`; `CGame_LevelResourceQsortCmp@0x00408ff0`; `CGame_FindResourceByName` prototype; comments @ readers/host path.
+
+**R4 todo 13 (2026-05-30):** `create_struct CLevelScriptResource` (20 B); `CLevelScriptResource_dtor` / `CGame_LevelResourceQsortCmp` prototypes use row type. See [round4_task_13_report.md](./round4_task_13_report.md).
 
 ```
 Structure: CLevelList  Size: 228

@@ -26,12 +26,14 @@
 
 | Slot | Address | Symbol |
 |------|---------|--------|
-| Primary `IDSEventHandler` | `0x0047faa4` | `[0]=CItemInfo::GetTypeInfo@0x403500`; `[1]=CDSException_DtorScalar@0x434ae0`; `[2]=CDSObject_ReleaseViaVtable@0x4245c0`; `[3]=CDSObject_GetThis@0x434b10` |
-| Type descriptor | `0x004b33b8` | `CItemInfo::GetTypeInfo@0x403500` returns `&DAT_004b33b8` |
+| Primary `IDSEventHandler` | `0x0047faa4` | `[0]=CItemInfo_GetTypeInfo@0x403500`; `[1]=CDSException_DtorScalar@0x434ae0`; `[2]=CDSObject_ReleaseViaVtable@0x4245c0`; `[3]=CDSObject_GetThis@0x434b10` |
+| Type descriptor | `0x004b33b8` | `CItemInfo_GetTypeInfo@0x403500` returns `&DAT_004b33b8` |
 
 ## Ghidra apply
 
-**Slice 12 (2026-05-30):** `modify_struct_field` renamed `dwPad_04`, `dwReserved_08`, `dwRowFlags`; `CItemInfo::CreateObject@0x404c50` return type `CItemInfo *`; `CItemInfo::GetTypeInfo@0x403500`.
+**Slice 12 (2026-05-30):** `modify_struct_field` renamed `dwPad_04`, `dwReserved_08`, `dwRowFlags`; `CItemInfo::CreateObject@0x404c50` return type `CItemInfo *`; `CItemInfo_GetTypeInfo@0x403500`.
+
+**R5 worker 11 (2026-05-30):** `rename_function_by_address` `CItemInfo::GetTypeInfo` → `CItemInfo_GetTypeInfo@0x403500` (MFC `GetTypeInfo` slot; returns `&DAT_004b33b8`). See [round5_worker_11_report.md](./round5_worker_11_report.md).
 
 ```
 Structure: CItemInfo  Size: 16

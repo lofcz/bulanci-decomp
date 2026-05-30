@@ -50,6 +50,14 @@
 | Default `ODSImage::pVf_odsimage` before repatch | `0x00481ab4` | `ODSImage_ctor@0x00418c2a` `MOV [ESI+4],0x481ab4` |
 | Thunk `this` adjustment | `0x00419280` | `ADD EAX,-0x8c` before `JMP CLevelScript_FireOnBitmapEvt_FromView`; reads `byte [this-0x1c]` → `gaming_slot_id@+0x70`, `[this-0x8]` → `gaming_host@+0x84` |
 
+| Slot | Target @ `0x00481f00` | Role |
+|------|----------------------|------|
+| `[0]` | `IDSAnim_NotifyEvents@0x00438f20` | 16-byte event batch → `IDSEventHandler+0x24` |
+| `[1]` | `IDSAnim_BindUserData@0x00438f60` | `FUN_0042cc30` on chained face |
+| `[2]` | `IDSAnim_SetSequence_thunk@0x004391d0` | `ODSImage__SetImage` |
+| `[3]` | `CDSView_EmptyHook27@0x00438f80` | no-op |
+| `[4]` | `CBitmap_FireOnBitmapEvtFromView@0x00419280` | FLX `0x0C` → `eventCode` for `OnBitmapEvt` (R4 task 31) |
+
 Same **IDSAnim** interface family as `CAnim` at `+0x8c` (`0x00482008` in `anim_runtime.md`); `CBitmap` uses the shorter `0x98`-byte view layout (no `+0x98` anim-inner subobject).
 
 ## Ghidra apply
@@ -68,7 +76,7 @@ Same **IDSAnim** interface family as `CAnim` at `+0x8c` (`0x00482008` in `anim_r
 
 - `+0x08..+0x0f` — not written in `CGameView_ctor` / `FUN_00419070`.
 - `pPad_28`, `dwField_40`, `pChain_pad_48`, `pHeader_tail_58` — named pads; no ctor init (see `CGameView.md`).
-- IDSAnim slots `[0..3]` at `0x00481f00` — shared `CBulAnim::IDSAnim_*` thunks per catalog; per-slot semantics not re-derived in round 3.
+- `OnBitmapEvt` **`eventCode`** constants per map (script layer; not in `.exe`).
 
 ## Follow-up
 

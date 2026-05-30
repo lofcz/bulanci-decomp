@@ -122,7 +122,8 @@ Leaf path: `CBulanek_OnTakeDamage` → `CBulanek_CreateRespawnTeleportPair` — 
 ## UNK
 
 - `track_mgr` interior (`+0xac..+0xc3`, `CDSUpdatedItem` layout).
-- `overlap_entity` @ `+0x64` — **no CBulanek\* store** on respawn-teleport path after ctor zero; `OnEvent` reads slot while `AddEntity` binds owner at `+0x84` (`gaming_host`). Runtime fill via `CBulanek_UpdateStateFromParams` on other view types only (not proven for gates).
+- `pOverlap_entity` @ `+0x64` (hex) — **no `.text` store** after respawn ctor/`AddEntity` (R4: only `CDSChained_ctor` / `InitWithRect` init `.text` writers). `OnEvent param_2==0` consumes slot as `CBulanek*`; runtime fill UNK (collision/net/script). **`CBulanek_UpdateStateFromParams` does not write this field** (writes CBulanek `pHeader_tail_58+0xc`).
+- `pPartner_node` @ `+0xf0` — respawn: `CreateRespawnTeleportPair` stores **damaged `CBulanek*`** (both gates); map pairs may store other `CTeleportPoint*` (todo 29).
 - `+0x6d..+0x6f`, `+0x71..+0x73`, `+0x90..+0x97` — no dedicated consumers on `CAnim`-sized instances.
 
-**Agent todo 22 (2026-05-30):** Proved store path: `overlap_entity` ≡ `CDSChained::dwField_64` @ `+0x64`; zeroed in `CDSChained_ctor` (`MOV [ESI+0x64],EDI` @ `0x00403366`). Secondary: `CDSChained_InitWithRect@0x0040b611`; `CBulanek_UpdateStateFromParams@0x004178f7` → `MOV [ECX+0x64],EDX`. Owner CBulanek* at `gaming_host` `+0x84` via `CBulanek_AddEntity@0x0041a390` only (`0x0041a3a6`), not `+0x64`. R3: `set_function_this_type` on OnEvent/Ctor/CreateRespawnPair/AddEntity/UpdateStateFromParams; [round3_task_22_report.md](./round3_task_22_report.md). `save_program`.
+**Agent todo 22 (2026-05-30):** R3: overlap vs `gaming_host` split; [round3_task_22_report.md](./round3_task_22_report.md). **R4:** Respawn `pPartner_node` = damaged `CBulanek*`; no respawn writer to `pOverlap_entity`; `UpdateStateFromParams` clarified; OnEvent `0x0041ff16` = predecessor `+0x6c`; [round4_task_22_report.md](./round4_task_22_report.md). `save_program`.

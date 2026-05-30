@@ -18,8 +18,9 @@
 | Claim | Address | Evidence |
 |-------|---------|----------|
 | `GetClassIdentifier` | `CPoemScroller::GetClassIdentifier@0x00425da0` | `return &DAT_004b3998` |
+| **classId = 2044 (`0x7fc`)** | static init @ `0x0047c1b0` region | `HandleClassRegister` — factory `0x426570`, meta `0x4b3998` (plate @ `FUN_0047e440` / `_atexit` stub cluster) |
 | Factory | `CPoemScroller_CreateObject@0x004265b0` | `OperatorNew(0x128)` + ctor |
-| Menu embed | `CMenu_ctor_with_ui@0x00426b78` | Stack / sibling `CPoemScroller_Constructor` (see `main_menu.md` §9.3) |
+| Menu embed | `CMenu_ctor_with_ui@0x00426b78` | Stack / sibling `CPoemScroller_Constructor` (see `main_menu.md` §9.3) — **live path**; factory `0x7fc` registered but menu builds in-place |
 
 ## Layout
 
@@ -87,7 +88,7 @@ Decompile of `CPoemScroller_Constructor` after apply shows typed fields (`param_
 ## UNK
 
 - `pad_30_67` — full `CDSChained` / `CDSView` child-chain band (`+0x30..+0x67`).
-- `CPoemScroller` classId in `HandleClassRegister` block (factory xref only; meta `DAT_004b3998`).
+- ~~`CPoemScroller` classId in `HandleClassRegister` block~~ — **closed R5 w45:** **classId `0x7fc` (2044)** @ static init `0x0047c1b0`; factory `CPoemScroller_CreateObject@0x004265b0` (`0x426570` push).
 - Exact `TextShaper` font descriptor layout at `+0x94` (three dwords + color pair pointer).
 
 ## Parent / consumers

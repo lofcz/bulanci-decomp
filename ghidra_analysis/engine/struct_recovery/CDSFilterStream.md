@@ -46,10 +46,20 @@ Applied slice 29 (2026-05-30): struct already present at 0x38; confirmed layout 
 
 **Agent todo 30 (2026-05-30):** Renamed `dwField_10` → `dwIdsStream_state`; decompiler comments @ `BindSource` store (`0x00430ce5`) and ctor init (`0x00430dd8`).
 
+## CDSSafeStream composition (R4 todo 40)
+
+`CDSStreamStorage_CreateFilterSafeStream@0x00434760` builds a **`0x38`** filter plus a **`0x48`** safe stream. Safe stream shares the header through `+0x14` but **replaces** the filter body at `+0x18` with an embedded `CDSChain` (not cursor/window fields). Safe ctor argument is the filter’s **`IDSStream`** subobject (`filter+0x0c`).
+
 ## UNK
 
-- `ReadBytes` decompiler still types `this` as outer `CDSFilterStream*` (cursor math should use `IDSStream*` at `+0x0c`).
 - `CDSGZipStream` / `CDSEasyMemStream` tails beyond shared filter prefix (separate batches).
+- Shared Ghidra `IDSStream` plate struct (40 B) uses filter-oriented names at `+0x0c..+0x24`; `CDSEasyMemStream::ReadBytes` reuses the same offsets with mem-stream semantics (`dwCursor` @ `+0x8`, backing pointer cast from `dwSizeCapLo` @ `+0x1c`) — see `stream_hierarchy.md` §2.3 vs §2.4.
+
+## Follow-up (R4 task 30, 2026-05-30)
+
+- `set_function_this_type` `IDSStream *` @ `CDSFilterStream_ReadBytes@0x00430420` → class `IDSStream`; decompile uses `dwCursorLo`/`dwCursorHi`, `nSizeCapHi`, `dwSizeCapLo`, `pInnerStream` on the `filter+0x0c` plate.
+- Extended `IDSStream` Ghidra struct **32 → 40 B** (`pInnerStream` @ `+0x24` on plate). `save_program bulanci.exe`.
+- Report: [round4_task_30_report.md](./round4_task_30_report.md).
 
 ## References
 

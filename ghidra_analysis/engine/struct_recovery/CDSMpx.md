@@ -71,13 +71,16 @@ Ghidra type `mad_stream` (64 B). Libmad-canonical names in **Name**; Ghidra fiel
 
 ### `mad_frame` (+0x44, 0x2434 bytes)
 
-Ghidra `mad_frame` (9268 B): `header` + `pBody` (`body`).
+Ghidra `mad_frame` (9268 B): `header` + post-header body (R4 split — no monolithic `byte[9228]`).
 
 | Off | Size | Name | Ghidra | Evidence |
 |-----|------|------|--------|----------|
 | 0x00 | 0x28 | `header` | `header` (`MpegAudioFrameInfo`) | `mad_header_init@0x00458ee0`; `mad_header_decode` |
 | 0x14 | 4 | `dwSampleRateHz` | *(in `header`)* | `DecodeFrame` copies `*(this+0x58)` → `sampleFormatPacked` (`header+0x14`) |
-| 0x28 | 9228 | `body` | `pBody` | `mad_frame_init` `param_1[0xb]`, `param_1[0x90c]`; layer decoders |
+| 0x28 | 4 | `options` | `dwOptions` | L3 `mad_layer_III` ORs sideinfo into header flag dwords |
+| 0x2c | 4 | — | `dwOptions_pad` | Pad before `sbsample` base |
+| 0x30 | 9216 | `sbsample` | `pSbsample` | `mad_layer_I@0x0045c4e0` writes `frame+0x30`, stride `0x480`/ch |
+| 0x2430 | 4 | `overlap` | `overlap` | `mad_layer_III` `calloc(0x480,4)`; `mad_frame_init` nulls `param_1[0x90c]` |
 
 ### `mad_synth_bulanci` (+0x2478, 0x1008 bytes)
 
@@ -99,6 +102,8 @@ Ghidra `mad_synth_bulanci` (4104 B): `pFilter` / `dwPhase` / `dwOffset`. `numCha
 
 **Agent todo 37 r3 (2026-05-30):** `recreate_struct` `mad_stream`/`mad_frame`/`mad_synth_bulanci`; re-linked `CDSMpx`/`CDSMpxDecoder` `stream`/`frame`/`synth` after recreate; decompiler comments @ `mad_frame_init@0x00459620`, `CDSMpx_InitMadDecoderFields@0x004567b0`, `mad_header_decode@0x00458f50`, `mad_synth_init@0x00458eb0`; orphan `mad_synth` absent; `save_program`. Ghidra `get_struct_layout` still auto-prefixes uint/pointer members (`dwSkiplen`, `pBody`, …) — libmad-canonical **Name** column below is authoritative for decompiler offset math.
 
+**Agent todo 37 r4 (2026-05-30):** `recreate_struct` `mad_frame` → `header`/`options`/`sbsample int[2304]`/`overlap` @+0x2430; `mad_layer_I`/`III` decompiler comments; `CDSMpx` embed names `stream`/`frame`/`synth`; `save_program`. `mad_stream`/`mad_synth_bulanci` MCP renames still export `dw*`/`p*` in `get_struct_layout`.
+
 ```
 delete_data_type mad_stream, mad_frame, mad_synth_bulanci
 create_struct mad_stream (64 B), mad_frame (9268 B), mad_synth_bulanci (4104 B)
@@ -106,6 +111,21 @@ modify_struct_field CDSMpx/CDSMpxDecoder: stream, frame, synth → libmad types
 get_struct_layout CDSMpx → 39112 (0x98c8)
 save_program bulanci.exe
 ```
+
+## Persist band overlay (CDSMpxStream head, R5 worker 29)
+
+When the `0x98c8` object is viewed as **`CDSMpxStream`**, bytes **`P+0x08..+0x30`** are the file/persist band (see [CDSMpxStream.md](./CDSMpxStream.md)). The same physical bytes are **`mad_stream` tail fields** relative to **`stream@+0x04`** on **`CDSMpx`** after `AttachBitstream` / `ResetDecoderState`:
+
+| `P+off` | Persist (Save/Load) | `mad_stream` field (`stream+off-4`) |
+|---------|---------------------|-------------------------------------|
+| `+0x08..+0x13` | `mpxFormatTail` (12 B on disk) | `bufend` + `skiplen` + `sync` |
+| `+0x14..+0x1f` | *(not in 12-byte file tail)* | `freerate` + `this_frame` + `next_frame` |
+| `+0x20` | `pPayloadStream` | `main_bit` first dword |
+| `+0x28` | `payloadStartLo` | `anc_bit` bytes 0..3 |
+| `+0x2c` | `payloadStartHi` | `anc_bit` bytes 4..7 |
+| `+0x30` | `dwPayloadBytes` | `aux` |
+
+On-disk serialization writes **`dwPayloadBytes` first**, then **`mpxFormatTail`**, then the MPEG payload (`SaveMpxFile@0x00432eb0`).
 
 ## Follow-up (round 3 task 39)
 
@@ -115,7 +135,7 @@ save_program bulanci.exe
 ## UNK
 
 - Virtual calls through `face_8slots` / `IDSEventHandler` on an active decoder after `AttachBitstream` (none in `DecodeFrame` / `ReadPCM` path).
-- `mad_frame.body` layer-III granule/side-info interior (`param_1[0x90c]` @ `frame+0x2430`).
+- Layer-III Huffman/granule sub-structs inside `III_decode` / `sbsample` (not modeled as nested Ghidra types).
 - Semantic name for dword at `frame+0x14` copied to `sampleFormatPacked` (may be header field, not a distinct sample-format slot).
 - Gap `+0x5884..+0x5887` and `+0x58b0..+0x58bb` (no independent xrefs).
 - `ResolveResource@0x00446b90` reads `+0x1c`/`+0x24`/`+0x28` — likely base-class resource path, not remapped here.

@@ -53,12 +53,16 @@ get_struct_layout("CDSEasyMemStream") → Size: 44 bytes
 
 ## UNK
 
-- `ReadBytes`/`WriteBytes` decompile still maps wrong struct fields unless `this` is typed as `IDSStream` at `outer+0x0c` (Ghidra API cannot retype ECX on `__thiscall` stream slots).
 - Full `IDSEventHandler` slot map on `vf_IDSEventHandler` beyond ctor/dtor restore pattern.
+- **`IDSStream` plate struct (40 B)** shares offset bands across implementers; filter `ReadBytes` uses `+0x0c..+0x24` (R4 todo 30). Mem stream keeps `dwCursor` @ `+0x8` and casts `dwSizeCapLo` @ `+0x1c` to the backing pointer. `CDSQueueStream` plate @ outer `+0x04` remains separate.
 
 ## Follow-up resolved (agent todo 29)
 
 - **`dwStreamState`** (outer `+0x10`, decompiler alias `dwIdsStream_state` on `IDSStream+4`): `0x20` = **CLOSED** (default in ctor @ `0x00409170`, restored by `CloseStream@0x00409200`); `7` = **OPEN** after `InitBackingBuffer@0x00430d60` malloc succeeds — same `0x20` closed sentinel as `CDSFileStream` / `CDSFilterStream` / `CDSGZipStream` `CloseStream`. I/O throws stream errno `8` when `backing_heap` is null (pre-init or after `ReleaseBackingBuffer`). Ghidra PRE_COMMENT on ctor, `InitBackingBuffer`, and `CloseStream`.
+
+**R4 todo 29 (2026-05-30):** Created Ghidra **`IDSStream`** (32 B plate: `pVftable` … `pBacking_heap`). `set_function_this_type` on `ReadBytes@0x004307f0`, `WriteBytes@0x004308c0`, `SeekPosition@0x00430980`, `TellPosition@0x00409230`, `GetSize@0x00409220`, `SetStreamSize@0x004309f0`, `CloseStream@0x00409200` — decompile now uses `this->dwCursor`, `pBacking_heap`, `dwRing_head_offset`, etc. `WriteBytes` calls `CDSEasyMemStream_EnsureCapacity((CDSEasyMemStream *)&this[-1].dwGrowth_chunk, …)` for outer recovery. `save_program`.
+
+**R4 todo 30 (2026-05-30):** Grew `IDSStream` to **40 B** and renamed `+0x0c..+0x24` for filter passthrough (`dwCursorLo`/`Hi`, `nSizeCapHi`, `pInnerStream`). Mem `ReadBytes` still type-checks via cast from `dwSizeCapLo`; see [round4_task_30_report.md](./round4_task_30_report.md).
 
 ## Notes (follow-up batch 26)
 

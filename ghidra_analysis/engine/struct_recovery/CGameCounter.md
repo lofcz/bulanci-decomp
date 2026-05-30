@@ -2,7 +2,7 @@
 
 ## Status
 
-**PARTIAL** — heap size `0x80` verified; extends `CDSChained` (`0x68`) with `IDSUpdated` vtable at `+0x10`, two `CDSString` pack handles, four `CDSBitmap*` progress slots. Level-load HUD coordinator (`CBulanci::CGameCounterCtor`).
+**PARTIAL** — heap size `0x80` verified; extends `CDSChained` (`0x68`) with `IDSUpdated` vtable at `+0x10`, two `CDSString` pack handles, four `CDSBitmap*` progress slots. Level-load HUD coordinator (`CGameCounter_ctor` / `CGame_StartGame`) — **not** embedded on lobby `CStartGame2` ([CStartGame2.md](./CStartGame2.md)).
 
 ## Size proof
 

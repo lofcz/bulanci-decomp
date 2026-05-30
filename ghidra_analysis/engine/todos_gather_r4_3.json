@@ -1,0 +1,246 @@
+[
+  {
+    "id": 31,
+    "title": "Trace FrameTimeHint u16 and IDSAnim slots 0..3",
+    "types": ["CDSFlxFile", "ODSImage", "CBitmap", "CGunMouse", "CWeapon", "IDSAnim"],
+    "addresses": ["0x00436ef0", "0x00432dc5", "0x00439100", "0x00483794", "0x00481f00", "0x00481ab4", "0x00481f10"],
+    "ghidra_actions": [
+      "decompile_function",
+      "search_instructions",
+      "set_decompiler_comment",
+      "set_plate_comment",
+      "get_xrefs_to",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_31_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSFlxFile.md",
+      "ghidra_analysis/engine/struct_recovery/ODSImage.md",
+      "ghidra_analysis/engine/anim_runtime.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/todos_gather_r3_3.json"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 31
+  },
+  {
+    "id": 32,
+    "title": "Audit FLX inMemSize 0x470 vs sizeof(CBulPicture) and other seq types",
+    "types": ["CDSFlxFile", "CDSAnim", "CBulPicture", "CDSAnimSequence"],
+    "addresses": ["0x00432ac0", "0x00432b18", "0x004399b0", "0x0040eb30", "0x004340c0"],
+    "ghidra_actions": [
+      "search_instructions",
+      "search_byte_patterns",
+      "set_decompiler_comment",
+      "get_xrefs_to",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_32_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSFlxFile.md",
+      "ghidra_analysis/engine/struct_recovery/CBulPicture.md",
+      "ghidra_analysis/engine/anim_runtime.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/todos_gather_r3_3.json"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 32
+  },
+  {
+    "id": 33,
+    "title": "Xref CDSFlxFile bodySeekBiasLo non-zero writers",
+    "types": ["CDSFlxFile"],
+    "addresses": ["0x00432a50", "0x00432ac0", "0x00432c60"],
+    "ghidra_actions": [
+      "search_instructions",
+      "get_xrefs_to",
+      "set_decompiler_comment",
+      "get_struct_layout",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_33_report.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_33_results.jsonl",
+      "ghidra_analysis/formats/flx_file_format.md",
+      "ghidra_analysis/engine/struct_recovery/CDSFlxFile.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/todos_gather_r3_3.json"
+    ],
+    "priority": "low",
+    "source": "handoff",
+    "supersedes_todo_id": 33
+  },
+  {
+    "id": 34,
+    "title": "Trace CDSFont fontFooter to nDefaultAdvance/nLineSpacing copy path",
+    "types": ["CDSFont", "CDSFontGlyphRec", "CDSImage"],
+    "addresses": ["0x004372b0", "0x004372c5", "0x00437330", "0x00437160", "0x0043733a"],
+    "ghidra_actions": [
+      "search_instructions",
+      "decompile_function",
+      "set_decompiler_comment",
+      "get_xrefs_to",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_34_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSFont.md",
+      "ghidra_analysis/engine/struct_recovery/CDSFontGlyphRec.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/todos_gather_r3_3.json"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 34
+  },
+  {
+    "id": 35,
+    "title": "CDSImage bpp tag semantics and dtor thunk namespace fix",
+    "types": ["CDSImage", "CDSBmpImage", "CDSJpegImage", "CDSPtrSlotVec", "CDSBackBuffer"],
+    "addresses": ["0x00425460", "0x00425580", "0x00436c60", "0x00406340", "0x0042b170", "0x004320c0"],
+    "ghidra_actions": [
+      "search_instructions",
+      "set_function_prototype",
+      "set_function_this_type",
+      "force_decompile",
+      "set_decompiler_comment",
+      "modify_struct_field",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_35_report.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_35_results.jsonl",
+      "ghidra_analysis/engine/struct_recovery/CDSImage.md",
+      "ghidra_analysis/engine/struct_recovery/CDSBackBuffer.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/todos_gather_r3_3.json"
+    ],
+    "priority": "high",
+    "source": "blocker",
+    "supersedes_todo_id": 35
+  },
+  {
+    "id": 36,
+    "title": "Plate CDSQueueStream vs CDSJpegImage classId 0x4b registry sites",
+    "types": ["CDSJpegImage", "CDSQueueStream"],
+    "addresses": ["0x0043c160", "0x00432070", "0x0047daa0", "0x0047cbf0", "0x00432030"],
+    "ghidra_actions": [
+      "set_plate_comment",
+      "set_decompiler_comment",
+      "get_xrefs_to",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_36_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSJpegImage.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/todos_gather_r3_3.json"
+    ],
+    "priority": "low",
+    "source": "backlog",
+    "supersedes_todo_id": 36
+  },
+  {
+    "id": 37,
+    "title": "Manual libmad member renames; mad_frame.body interior map",
+    "types": ["CDSMpx", "CDSMpxDecoder", "mad_stream", "mad_frame", "mad_synth_bulanci"],
+    "addresses": ["0x004567b0", "0x00456820", "0x00458f50", "0x00459620", "0x00458eb0", "0x00432f40"],
+    "ghidra_actions": [
+      "modify_struct_field",
+      "recreate_struct",
+      "set_decompiler_comment",
+      "disassemble",
+      "get_struct_layout",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_37_report.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_37_report.jsonl",
+      "ghidra_analysis/engine/struct_recovery/CDSMpx.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/todos_gather_r3_3.json"
+    ],
+    "priority": "medium",
+    "source": "blocker",
+    "supersedes_todo_id": 37
+  },
+  {
+    "id": 38,
+    "title": "Fix CDSMpxStream payload offsets and pSubObjStash type",
+    "types": ["CDSMpxStream", "CDSMpx", "CDSQueueStream", "MpxFormatTail_persist", "mad_stream"],
+    "addresses": ["0x00432eb0", "0x00433180", "0x00446b00", "0x004290c0"],
+    "ghidra_actions": [
+      "modify_struct_field",
+      "get_struct_layout",
+      "disassemble_function",
+      "set_plate_comment",
+      "set_function_prototype",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_38_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSMpxStream.md",
+      "ghidra_analysis/formats/mpx_audio_format.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/todos_gather_r3_3.json"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 38
+  },
+  {
+    "id": 39,
+    "title": "Exception throw-site this types and vtable slot catalogs",
+    "types": ["CDSException", "CDSApiException", "CDSDirectXException", "CDSResourceException", "CDSStreamException"],
+    "addresses": ["0x00434a40", "0x004346f0", "0x004300f0", "0x00434d00", "0x00434c20"],
+    "ghidra_actions": [
+      "set_function_prototype",
+      "set_function_this_type",
+      "set_parameter_type",
+      "force_decompile",
+      "read_memory",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_39_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSException.md",
+      "ghidra_analysis/engine/struct_recovery/CDSResourceException.md",
+      "ghidra_analysis/engine/struct_recovery/CDSApiException.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/todos_gather_r3_3.json"
+    ],
+    "priority": "high",
+    "source": "blocker",
+    "supersedes_todo_id": 39
+  },
+  {
+    "id": 40,
+    "title": "CDSChain pAuxHeap allocator and CDSSafeStream vs CDSFilterStream MI",
+    "types": ["CDSSafeStream", "CDSChain", "CDSFilterStream", "CDSChained"],
+    "addresses": ["0x0042f800", "0x0042f9b3", "0x00433ab0", "0x00446ea0", "0x00430ca0", "0x00434160"],
+    "ghidra_actions": [
+      "search_instructions",
+      "get_xrefs_to",
+      "set_decompiler_comment",
+      "modify_struct_field",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_40_report.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_40_results.jsonl",
+      "ghidra_analysis/engine/struct_recovery/CDSSafeStream.md",
+      "ghidra_analysis/engine/struct_recovery/CDSChain.md",
+      "ghidra_analysis/engine/struct_recovery/CDSFilterStream.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_27_report.md",
+      "ghidra_analysis/engine/todos_gather_r3_3.json"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 40
+  }
+]

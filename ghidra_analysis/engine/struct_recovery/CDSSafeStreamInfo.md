@@ -33,7 +33,7 @@ Verified slice 38 (2026-05-30). Lazy alloc in `CDSSafeStream_GetThreadSlice@0x00
 
 ## UNK
 
-- Whether `m_streamSlice` is always the same CDS interface type (lazy path uses `CheckedVirtualBaseCast` with literal `7`).
+- **`m_streamSlice` (`+0x14`) type on lazy alloc** — **partial (R5 worker 42):** `CDSSafeStream_GetThreadSlice@0x00446d90` walks chain for `dwM_threadId` match; on miss, loads first child stream, `CheckedVirtualBaseCast(pv, 2)`, calls chained vfn slot `+0x10`, then `CheckedVirtualBaseCast(..., 7)` into `puVar4[5]` (`m_streamSlice`). Treat as **`IDSStream *`** face (engine interface index `7`); exact RTTI token not resolved to a named struct this pass.
 - Virtual methods on `CDSSafeStreamInfo` beyond dtor / `GetTypeInfo` (`0x00446cb0`) — not required for layout.
 
 ## References

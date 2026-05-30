@@ -21,13 +21,13 @@
 | `0x08` | 4 | `uint` | `nChannels` | `BindStream@0x00432ac0` file `+0x18` → outer `+0x08`; master pack always `3` (`sprite_container.md` §6) |
 | `0x0c` | 4 | `uint` | `nBitmapHeight` | file `+0x14` → outer `+0x0c`; **bitmap height in pixels**; passed to `CDSImage__Allocate` via `&+0x0c` in `CreateBoundClone@0x00432be0` |
 | `0x10` | 4 | `uint` | `nBitmapWidth` | file `+0x10` → outer `+0x10`; **bitmap width in pixels** (legacy header label was `height`) |
-| `0x14` | 4 | `uint` | `nSeqTotalDurationMs` | file `+0x1c` `inMemSize` → outer `+0x14` @ `CDSFlxFile_BindStream@0x00432ac0` (`MOV [ESI+0x10]` on `+0x24` face); pack value usually `0x470` (1136). **Anim:** meta-face `seq[0x10]` for `TM_AdvanceFrame@0x004399b0` Bresenham total clip ms (same dword as legacy alloc hint). |
+| `0x14` | 4 | `uint` | `nSeqTotalDurationMs` | file `+0x1c` `inMemSize` → outer `+0x14` @ `CDSFlxFile_BindStream@0x00432ac0` (`MOV [ESI+0x10]` on `+0x24` face @ `0x00432b18`). **Anim:** meta-face `seq[0x10]` for `TM_AdvanceFrame@0x004399b0` Bresenham total clip **ms**. Master pack: **1/130** sprites have `inMemSize == 0x470` (`sizeof(CBulPicture)`); observed **210..8591** (median ~65 ms/frame when divided by `flags+1`). Legacy header name “alloc hint” is misleading. |
 | `0x18` | 4 | `uint` | `nSeqFrameCountMinusOne` | file `+0x20` `flags` → outer `+0x18`; `== animFrameCount - 1` (130/130). **Anim:** meta-face `seq[0x14]` — frame-index wrap compare in `TM_AdvanceFrame`. |
 | `0x1c` | 4 | `void *` | `vf_event` | `CDSFlxFile_CreateObject@0x00432a50` `puVar1[7] = 0x487290` |
 | `0x20` | 4 | `int` | `refcount` | `CDSFlxFile_CreateObject@0x00432a50` `puVar1[8] = 1`; `ReleaseRef@0x00432950` dec/tests `+0x20` |
 | `0x24` | 4 | `void *` | `vf_IDSResource` | `CDSFlxFile_CreateObject@0x00432a50` `puVar1[9] = 0x487274` (`BindStream` adjustor `this-0x24`) |
 | `0x28` | 4 | `void *` | `vf_chain` | `CDSFlxFile_CreateObject@0x00432a50` `puVar1[10] = 0x48725c`; `DestructInPlace@0x004329c0` `FUN_00434250(this+0x28)` |
-| `0x2c` | 4 | `int` | `bodySeekBiasLo` | `CDSFlxFile_CreateObject@0x00432a6d` `MOV [EAX+0x2c],0`; `DecodeFrame@0x00432c89` `ADD EDX,[ESI+0x2c]` before `IDSStream::Seek` (`+0x04` face); `CDSFlxFile_CloseStream@0x00432ba2` seek low with `[ESI+0x30]` high |
+| `0x2c` | 4 | `int` | `bodySeekBiasLo` | `CDSFlxFile_CreateObject@0x00432a6d` **sole writer** `MOV [EAX+0x2c],0` (R4 todo 33: no non-zero store in `.text`). **Not read** on outer base; `DecodeFrame`/`CloseStream` use **meta `+0x2c`** = outer `dwStreamTellLo` @ `+0x30` |
 | `0x30` | 8 | `uint64` | `streamTell` | `CDSFlxFile_BindStream@0x00432ac0` `*(this+0xc)` when `this` is `+0x24` face → outer `+0x30` |
 | `0x38` | 4 | `void *` | `pSourceStream` | `DestructInPlace@0x004329c0` `[0xe]`; `BindStream@0x00432ac0` `*(this+0x14)` |
 | `0x3c` | 4 | `void *` | `pDecodeBuffer` | `DestructInPlace@0x004329c0` `[0xf]` free; `DecodeFrame@0x00432c60` alloc/read |
@@ -42,7 +42,7 @@
 |-------|-------------|------|----------|
 | Resource pool | `CDSFlxFile` `0x50` | ClassID **52** lazy stream + header | `CBulPicture_ctor@0x004101d0` `g_pApp+0x70` factory; `CheckedVirtualBaseCast(..., DAT_004b826c)` |
 | Decode consumer | `CDSObject` `0x60` | `CreateBoundClone@0x00432be0` → `CDSObject_CtorWithImage`; `DecodeFrame` `param_2` | `OperatorNew(0x60)`; planes via `GetColorPlane` / `GetPaletteBuffer` (`sprite_container.md` §2.3) |
-| View wrapper | `CBulPicture` `0x470` | `pBitmap` @ `+0x68` holds cast resource; extent from `*(bitmap+4)` / `*(bitmap+8)` | `CBulPicture_ctor@0x004101d0`; `DrawSurface@0x0040b050` → `BlitDispatch(..., this+0x68, ...)` |
+| View wrapper | `CBulPicture` `0x470` | `pBitmap` @ `+0x68` = `CDSStaticDrawableFace *` from cast; extent `origin + cast->nBlitExtentW/H` | `CBulPicture_ctor@0x004101d0` — cast base **`CDSFlxFile+0x08`** so `+4/+8` = `nBitmapHeight` / `nBitmapWidth` (`+0x0c`/`+0x10`); `DrawSurface` → `BlitDispatch` |
 
 `DecodeFrame` does **not** write into `CBulPicture` directly; it fills the `0x60` consumer (`CDSImage` embed), which the view binds as `pBitmap`.
 
@@ -83,9 +83,10 @@ set_function_prototype CDSFlxFile_BindStream @ 0x00432ac0  (void __thiscall, IDS
 save_program bulanci.exe   # agent todos 32–33 / 2026-05-30
 ```
 
-## Follow-up (round 3 task 4)
+## Follow-up (round 3 task 4 / R4 task 33)
 
-- Resolved: `+0x2c` is **`bodySeekBiasLo`** — low dword added to the in-body frame cursor (`*param_1`) when `DecodeFrame` / `CloseStream` call `IDSStream::Seek` on `pSourceStream` (`[ESI+0x34]` on the `+0x04` face = outer `+0x38`). High dword is outer `+0x30` (`Tell()` snapshot from `BindStream`). Factory and `BindStream` leave it **0**; no non-zero store in the `0x432xxx` method cluster.
+- **`bodySeekBiasLo` @ outer `+0x2c`:** factory zero only (`CDSFlxFile_CreateObject@0x00432a6d`). Program-wide `search_byte_patterns` (`89 48 2c`, `89 46 2c`, `c7 40 2c`, …): **no** non-zero store targeting FLX outer `+0x2c`; `BindStream` does not touch it.
+- **Seek addends in `DecodeFrame` / `CloseStream`:** `this` is meta face `+0x04`; `[ESI+0x2c]` / `[ESI+0x30]` are **`dwStreamTellLo` / `dwStreamTellHi`** (outer `+0x30` / `+0x34`) from `BindStream` `Tell()` — not `bodySeekBiasLo`. With factory zero, effective seek uses stream tell only.
 
 ## Agent todo 33 (2026-05-30) — BindStream header dwords
 
@@ -97,7 +98,7 @@ save_program bulanci.exe   # agent todos 32–33 / 2026-05-30
 | `0x10` | `0x10` | `nBitmapWidth` | pixels |
 | `0x14` | `0x0c` | `nBitmapHeight` | pixels |
 | `0x18` | `0x08` | `nChannels` | master pack always `3` |
-| `0x1c` | `0x14` | `nSeqTotalDurationMs` | file `nInMemSizeHint`; often `0x470` |
+| `0x1c` | `0x14` | `nSeqTotalDurationMs` | file `inMemSize`; per-sprite total clip ms (rarely `0x470`) |
 | `0x20` | `0x18` | `nSeqFrameCountMinusOne` | file `nAnimFrameCountMinusOne`; `frameCount - 1` |
 
 Evidence: `CDSFlxFile_BindStream@0x00432ac0` disasm (`Read(0x24)` then stores at `[ESI-0x1c]`..`[ESI+0x28]` on the `+0x24` face). Ghidra: decompiler PRE_COMMENT @ `0x00432ac0`; `flx_file_format.md` table updated (replaces `hdr_dword*` placeholders).
@@ -122,8 +123,19 @@ Evidence: `CDSFlxFile_BindStream@0x00432ac0` disasm (`Read(0x24)` then stores at
 | `0x00483794` (`CGunMouse`) | `CGunMouse_OnAnimTick@0x00423bd0` | cursor weapon |
 | `0x00481ed4` (`CWeapon`) | `Fire@0x004212b0` | weapon overlay |
 
+### FrameTimeHint `u16` semantics (R4 task 31)
+
+Chunk body = one **`u16`** (unpacker: `durationTicks`; **not** `trackMgr+0x44`). Per-subscriber use:
+
+| Subscriber | Handler | `u16` role |
+|------------|---------|------------|
+| Default / `CDSBitmap` / `CMovieView` | `CDSView_OnMouseStub` | ignored |
+| `CBitmap` | `CBitmap_FireOnBitmapEvtFromView` | **`eventCode`** → script export 3 (`OnBitmapEvt`) |
+| `CGunMouse` | `CGunMouse_OnAnimTick` | only **`0xFFFF`** → random track + optional `TM_Play` |
+| `CWeapon` | `CWeapon::Fire` | weapon-kind matrix (`0`, `0xFFFF`, shot kind `u16+3`) |
+
 ## UNK
 
 - Legacy `sprite_container.md` tile-width/height labels at file `+0x0c`/`+0x10` — disasm maps those offsets to **`nBitmapHeight` / `nBitmapWidth`** (pack-verified); tile hints not used in `CreateBoundClone`.
-- Whether `bodySeekBiasLo` is ever set non-zero outside `CDSFlxFile_CreateObject` (no in-module writer found; may stay 0 for all shipped paths).
-- **`seq[0x10]` duration ms** for FLX track timing — not written in `CBulPicture_Create`; see agent todo 32 / `anim_runtime.md` (field may stay unset until resource-pool bind).
+- ~~**`seq[0x10]` / `inMemSize` semantics**~~ — **closed (R4 todo 32):** per-sprite total clip ms from `BindStream`; not `sizeof(CBulPicture)` ([round4_task_32_report.md](./round4_task_32_report.md)).
+- **FLX `flags` at `seq[0x14]`** — stores `frameCount−1` while `CDSAnimSequence::dwFrameCount` name implies full count; DSM uses full count at same offset.

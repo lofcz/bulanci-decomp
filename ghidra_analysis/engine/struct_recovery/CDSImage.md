@@ -2,7 +2,7 @@
 
 ## Status
 
-**PARTIAL** — instance size **VERIFIED** at `0x60` (96 bytes). Core bitmap fields and five MI vtable slots proven; `+0x38..+0x40` slot vector and some MI thunk edges remain UNK.
+**PARTIAL** — instance size **VERIFIED** at `0x60` (96 bytes). Raster header, **`m_slotVector` + `m_slotCount` @ `+0x38..+0x40`** (subscriber list), and MI vtable **slot maps** proven (R5 w31). Scalar-deleting dtor **call graph** between MI bases still open (R5 task 35).
 
 ## Size proof table
 
@@ -31,10 +31,10 @@
 | `0x2c` | 4 | `int` | `m_copyWidth` | `CDSImage__Allocate@0x00436f40` (`= m_width`); `CDSImage_Load@0x00437160` |
 | `0x30` | 4 | `int` | `m_copyHeight` | `CDSImage__Allocate@0x00436f40` (`= m_height`); `CDSImage_Load@0x00437160` |
 | `0x34` | 4 | `int` | `m_paletteEntries` | `CDSImage__Allocate@0x00436f40`; `GetColorPlane@0x004360f0`; `ComputeBufferSize@0x00435fe0` |
-| `0x38` | 8 | `CDSPtrSlotVec` | `m_slotVector` | `CDSImage_dtor@0x004254f0` (`CDSPtrSlotVec_Resize(&this->m_slotVector,0)`); `nField_40=0` @ `+0x40` |
-| `0x40` | 4 | `int` | `field_40` | `CDSImage_dtor@0x004254f0` cleared before slot resize |
-| `0x44` | 4 | `int` | `nDefaultBppTag` | `CDSImage_ctor@0x00425460` (`MOV [this+0x44],8`); `CDSImage_InitDefaults` (`=0`); `CDSJpegImage_InitVtables`; `CDSImage_Load` 4-byte stream read; `CDSApp_ctor` `field_0xc4=8` on back-buffer embed — **no post-init reader** |
-| `0x48` | 4 | `int` | `nDefaultFormatTag` | `CDSImage_InitDefaults@0x00425580` (`MOV [this+0x48],8`); `CDSJpegImage_InitVtables@0x00431d15` same constant — **not** `nM_copyHeight` @ `+0x30`; **no post-init reader** (back-buffer embed repurposes slot as `pDirectDrawSurface`) |
+| `0x38` | 8 | `CDSPtrSlotVec` | `m_slotVector` | `CDSImage_dtor@0x004254f0` (`CDSPtrSlotVec_Resize(&this->m_slotVector,0)`); `CIntListInsertSortedOrAppend(&m_slotVector,…)` uses count @ `+0x40` |
+| `0x40` | 4 | `int` | `m_slotCount` | **Active subscriber count** for `m_slotVector.pSlots` (CIntList layout: count @ `this+8` when `this=&m_slotVector`). Writers: ctor/InitDefaults/dtor `=0`; readers: `BroadcastFrameTimeHint@0x00436ef0`, `ODSImage__SetImage@0x00439100`, `CDynPtrArray_RemoveRange` via `&m_slotVector` |
+| `0x44` | 4 | `int` | `nDefaultBppTag` | `CDSImage_ctor@0x00425460` (`MOV [this+0x44],8`); `CDSImage_InitDefaults` (`=0`); `CDSJpegImage_InitVtables`; `CDSApp_ctor` embed `=8` — **write-only**; **not** in `CDSImage_Load`/`Save` stream (R4: `[EDI-0x44]` from host `+0x54` is **`m_stride` @ +0x10**) |
+| `0x48` | 4 | `int` | `nDefaultFormatTag` | `CDSImage_InitDefaults@0x00425580` (`MOV [this+0x48],8`); default format tag constant — **not** `nM_copyHeight` @ `+0x30`; **write-only** on standalone path (back-buffer embed repurposes slot as `pDirectDrawSurface`) |
 | `0x4c` | 4 | `void *` | `vf_IDSChained` | `CDSImage_InitDefaults@0x00425580`; `CDSImage_ReleaseRefcount@0x004322f0` |
 | `0x50` | 4 | `int` | `refcount` | `CDSImage_InitDefaults@0x00425580` (`= 1`); `CDSBmpImage_ctor@0x00432330`; `CDSImage_ReleaseRefcount@0x004322f0` |
 | `0x54` | 4 | `CDSImage_StreamHostFacet` | `streamHost` | `CDSImage_InitDefaults@0x00425580`; MI entry for `CDSImage_Load`/`Save` / `CDSBmpImage_LoadDibStream` (`ECX=this+0x54`) |
@@ -63,7 +63,7 @@ create_struct CDSImage fields=[
   {"name":"m_copyHeight","type":"int","offset":48},
   {"name":"m_paletteEntries","type":"int","offset":52},
   {"name":"m_slotVector","type":"CDSPtrSlotVec","offset":56},
-  {"name":"field_40","type":"int","offset":64},
+  {"name":"m_slotCount","type":"int","offset":64},
   {"name":"nDefaultBppTag","type":"int","offset":68},
   {"name":"nDefaultFormatTag","type":"int","offset":72},
   {"name":"vf_IDSChained","type":"void *","offset":76},
@@ -103,12 +103,54 @@ get_struct_layout CDSImage → Size: 96 (verified batch 31)
 | `CDSJpegImage_Save` | `0x00432030` | IDSChained `+0x54` | `CompressFromImage(dst, &this[-1].m_image, quality@+0x60)` | disasm `[ECX+0xc]` |
 | `CDSImage_Load` / `Save` | `0x00437160` / `0x00436c60` | stream-host facet | `&this[-1].m_image.*` (font @ `CDSFont+0x54`) | `CDSFont.md` |
 
-**Ghidra (agent todo 35 r3, 2026-05-30):** Renamed `nField_44`→`nDefaultBppTag`, `nField_48`→`nDefaultFormatTag` (write-only default `8`; serialize via `CDSImage_Load` only). Plate comments on Load/Save/InitDefaults; vtable EOL @ `0x00487208` (BMP stream-host), `0x0048719c`/`0x00487184` (JPEG). `CDSPtrSlotVec_Resize@0x00406340` prototype refreshed. `save_program` ✓.
+**Ghidra (agent todo 35 r3, 2026-05-30):** Renamed `nField_44`→`nDefaultBppTag`, `nField_48`→`nDefaultFormatTag`. Plate comments on Load/Save/InitDefaults; vtable EOL @ `0x00487208` (BMP stream-host), `0x0048719c`/`0x00487184` (JPEG). `save_program` ✓.
 
-**Ghidra (agent todo 35 r2):** `CDSImage__Allocate` / `CDSPtrSlotVec_Resize` prototypes; facet types `CDSImage_StreamHostFacet` / `CDSImage_EventFacet` @ `+0x54`/`+0x58`. Xref proof: writers = ctor, InitDefaults, Load serialize, JPEG/BMP init, embed ctor `8`; **zero** post-init readers on raster path.
+**Ghidra (agent todo 35 r4, 2026-05-30):** `set_function_this_type` `CDSPtrSlotVec_Resize@0x00406340` + `CDSImage_dtor@0x004254f0` — dtor decompile shows `CDSPtrSlotVec::CDSPtrSlotVec_Resize` (R3 `CDSAudioBank::` prefix cleared). Disasm proof: `CDSImage_Load`/`Save` `[EDI-0x44]` → **`m_stride` @ +0x10**, not bpp tag; tags are write-only defaults (`8` = 8bpp / format tag). See [round4_task_35_report.md](./round4_task_35_report.md).
+
+**Ghidra (pass r4 CDSImage, 2026-05-30):** `set_function_this_type` on `CDSImage__Allocate@0x00436f40`, stream-host MI `CDSImage_Load`/`Save`/`CDSBmpImage_LoadDibStream`/`SaveDibStream` → `CDSImage_StreamHostFacet *`, `CDSJpegImage_InitVtables@0x00431cf0` → `CDSJpegImage *`, `ComputeBufferSize@0x00435fe0` → `CDSImage *`. `CDSImage_ctor` / `CDSImage_InitDefaults` / `CDSBmpImage_ctor` already typed. Full consumer xref table: [pass_r4_CDSImage_report.md](./pass_r4_CDSImage_report.md). `save_program bulanci.exe` ✓.
+
+**Ghidra (agent todo 35 r2):** `CDSImage__Allocate` / `CDSPtrSlotVec_Resize` prototypes; facet types `CDSImage_StreamHostFacet` / `CDSImage_EventFacet` @ `+0x54`/`+0x58`. Xref proof: writers = ctor, InitDefaults, JPEG/BMP init, embed ctor `8`; **zero** post-init readers on raster path.
+
+**Ghidra (R5 worker 31, 2026-05-30):** `nField_40` → `m_slotCount`; `GetPaletteBuffer` / `GetColorPlane` / `CDSImage__FreeBuffers` → `__thiscall` + `CDSImage *`. Comments @ `BroadcastFrameTimeHint@0x00436ef0`, `ODSImage__SetImage@0x00439100`, `CDSImage_dtor`. See [round5_worker_31_report.md](./round5_worker_31_report.md).
+
+## Subscriber slot list (`+0x38` / `+0x40`)
+
+`m_slotVector` (`CDSPtrSlotVec`: `pSlots` + `cCapacity`) backs a **`void **` subscriber table. **`m_slotCount`** is the live element count; `CIntListInsertSortedOrAppend` / `CDynPtrArray_RemoveRange` / `CIntList_BinarySearch` take `&m_slotVector` and use count at **`this+8`** (= image `+0x40`).
+
+| API | Address | Role |
+|-----|---------|------|
+| `ODSImage__SetImage` | `0x00439100` | Register/unregister `ODSImage+4` (`pVf_odsimage`) on drawable `m_slotVector` |
+| `BroadcastFrameTimeHint` | `0x00436ef0` | FLX opcode `0x0C`: foreach subscriber, `CALL vfn[+0x10](image, u16)` |
+| `CDSImage_dtor` | `0x004254f0` | `m_slotCount = 0`; `CDSPtrSlotVec_Resize(&m_slotVector, 0)` |
+
+**Embed exception:** `CDSBackBuffer.embeddedImage` @ `+0x40` holds **`CDSAudioPlayer *`** on menu paths — not `m_slotCount` ([CDSBackBuffer.md](./CDSBackBuffer.md)).
+
+## MI facet vtables (standalone `CDSImage`)
+
+From `master_vtable_catalog.csv` + `CDSImage_InitDefaults@0x00425580`. Wrappers patch BMP/JPEG addresses at same offsets ([CDSBmpImage.md](./CDSBmpImage.md)).
+
+| Offset | Vtable | Slots | Notable |
+|--------|--------|-------|---------|
+| `+0x4c` | `0x00483728` | 5 IDSChained | [3] `0x00437530` ~dtor thunk |
+| `+0x54` streamHost | `0x00483740` | 6 IDSChained | [3] `0x00437520` ~dtor; [4–5] `CDSImage_Load` / `Save` |
+| `+0x58` eventFacet | `0x0048375c` | 4 IDSEventHandler | [3] `0x00437540` ~dtor |
+
+`CDSBmpImage` stream-host @ `0x00487208` — slots [4–5] = DIB Load/Save ([bmp_decoder.md](../../formats/bmp_decoder.md)).
+
+## Consumers (xref summary)
+
+| API | Address | Callers (representative) |
+|-----|---------|--------------------------|
+| `CDSImage_ctor` | `0x00425460` | `CDSObject_CtorWithImage`, `CDSBmpImage_ctor` |
+| `CDSImage_InitDefaults` | `0x00425580` | `CGunMouse_ctor` (×4), `CDSImageMouse_CreateObject`, `CDSFont_AllocFactory`, `CPoemScroller_Constructor` |
+| `CDSImage_dtor` | `0x004254f0` | `CDSObject_dtor`, `CDSJpegImage_dtor`, `CDSBackBuffer_dtor`, image-object unwind |
+| `CDSImage__Allocate` | `0x00436f40` | `CDSImage_ctor`, `CGunMouse_Draw`, `CDSImageMouse_Draw`, `CDSBmpImage_LoadDibStream`, `CDSJpegImage::DecompressToImage`, `PickNextPoem` |
+| `CDSPtrSlotVec_Resize` | `0x00406340` | `CDSImage_dtor` (`&m_slotVector, 0`); also `CGame`, `CDSUpdatedItem`, unrelated types |
+| `GetColorPlane` / `GetPaletteBuffer` | `0x004360f0` / `0x004360d0` | BMP/JPEG load, `CBulAnim::SetPalette`, embed palette helpers (`CDSObject+4`) |
+| Stream-host Load/Save | `+0x54` vtable | `CDSImage_Load`/`Save`, `CDSBmpImage_*DibStream`, `CDSJpegImage_Load`/`Save`, `CDSFont` stream facet |
 
 ## UNK
 
-- `nDefaultBppTag` / `nDefaultFormatTag` constant `8` semantics beyond serialize (likely default bpp/format tag); back-buffer embed repurposes `+0x48` as `pDirectDrawSurface` — **no runtime reader** on standalone raster path (todo 35 r3).
-- Full MI thunk graph between `+0x54` / `0x58` bases and scalar-deleting dtors — documented in `bmp_decoder.md` / `CDSBmpImage.md`; not fully modeled as separate Ghidra facet types.
+- Full scalar-deleting dtor thunk **call graph** between `+0x4c` / `+0x54` / `+0x58` bases (slot indices catalogued above; adjustor targets in [bmp_decoder.md](../../formats/bmp_decoder.md) — R5 task 35).
+- Whether `m_slotVector` is ever grown with `CDSPtrSlotVec_Resize` to `>0` on standalone heap images (only **dtor** xref to `Resize` on image path; subscribers use `CIntList_EnsureCapacity` via insert helper).
 - Embed `+0x50` refcount vs `vf_IDSChained` slot overlap with `CDSObject_CtorWithImage` write of `1` (`CDSObject.md`, agent todo 1 r3).

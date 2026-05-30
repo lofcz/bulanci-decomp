@@ -59,6 +59,8 @@ Batch 8: placeholder → `CGunMouse` (536 B). Follow-up round 2: `coordRing` →
 
 **Slice 09 (2026-05-30):** `modify_struct_field` — `armH`/`armV`/`dotImage`/`reticleRing` typed as embedded `CDSImage` (96 B each); `CGunMouseCoordQueue` fields `m_data`/`m_capacity`/`m_size`/`m_head`; prototypes `CGunMouse_Draw`/`CGunMouse_ctor`/`CGunMouse_OnMouseMove`/`CGunMouse_CoordRing_{Push,Pop}` use `CGunMouse*` / `CGunMouseCoordQueue*`. `get_struct_layout`: **Size: 536**, 25 top-level fields (four `CDSImage` + nested queue).
 
+**R4 task 31:** `pVf_odsimage` @ `0x00483794` — `vfn[4]` = `CGunMouse_OnAnimTick@0x00423bd0` (FLX opcode `0x0C`); **`u16` only `0xFFFF`** triggers random `SetCurrentTrack` + optional `TM_Play`. Slot `[1]` repatched to `CGunMouse_OnMouseMove@0x00423900` (opcode `0x0A` `NotifyMove`, not `IDSAnim_BindUserData`).
+
 **Agent todo 10 (2026-05-30):** `trackManager` @ `+0x1b0` retyped `byte[72]` → embedded `CDSVideoPlayer` (72 B); decompiler shows `ConstructTrackManager(&this->trackManager)` and `(this->trackManager).pRenderTarget`. **Scalar gap closed:** `reticleRing` ends `+0x190`; eight `int` cursor fields `+0x190..+0x1af` are contiguous (no pad). `CGunMouseCoordQueue` Ghidra names aligned to `m_*`.
 
 ## Related types (round 3 task 12)

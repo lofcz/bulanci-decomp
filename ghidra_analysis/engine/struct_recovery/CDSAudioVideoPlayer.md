@@ -33,7 +33,7 @@ Same **`CDSObject::ConstructTrackManager`** / **`CDSVideoPlayer_TM_Destructor`**
 | **Embedded** (this class) | Subobject at `+0x08` inside `OperatorNew(0x50)` parent | `TM_Destructor` only in `CDSAudioVideoPlayer_dtor` — no `_free` on embed |
 | **Standalone heap** | `CDSVideoPlayer::CreateTrackManagerHeap@0x00439f50`: `OperatorNew(0x48)` + `ConstructTrackManager` | `CDSVideoPlayer_ScalarDeletingDtor@0x00439fc0`: `TM_Destructor` + `_free` |
 
-Standalone factory: sole xref **DATA** @ `CDSVideoPlayer_StaticClassRegister@0x0047d750` (class id `0x31`, `HandleClassRegister`) — no direct gameplay caller found.
+Standalone factory: sole xref **DATA** @ `CDSVideoPlayer_StaticClassRegister@0x0047d750` (class id `0x31`, `HandleClassRegister`) — no direct gameplay caller found. **R4 todo 25:** runtime invocation only via `InitializeByClassId(0x31)` from stream deserialization (`CDSChain_Append` / `CDSCollection_DeserializeElement` / `CreateFilterSafeStream`); `CMovieView::StartPlayback` uses embedded `videoTrackManager`, not the heap factory.
 
 `SetupTrack` wires sync: `CDSAudioPlayer_Init`, `AddTrackSource(&videoTrackManager)`, `*(pAudioPlayer+0x10) = &videoTrackManager`, `SetCurrentTrack` / `TM_AdvanceFrame`.
 
@@ -85,5 +85,5 @@ save_program bulanci.exe (agent todo 25 R3)
 
 ## UNK
 
-- Runtime use of heap `CDSVideoPlayer` via class id `0x31` registration (if any).
-- `CDSAudioVideoPlayer_Stop@0x0043bc00` may still decompile with opaque `this` (MCP __thiscall ECX limit); prototype set to `CDSAudioVideoPlayer *`.
+- Whether shipped overlay/level streams ever serialize deserialize **class id 0x31** (engine path proven; no in-repo asset hit).
+- `g_apClassByIdTable[0x31]` may stay null if `InitializeClassIdLookup(&DAT_004b834c)` never runs — `InitializeByClassId` still resolves via `g_pClassRegHead` list walk.

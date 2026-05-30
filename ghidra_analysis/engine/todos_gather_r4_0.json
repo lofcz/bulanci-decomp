@@ -1,0 +1,185 @@
+[
+  {
+    "id": 1,
+    "title": "CDSObject image MI +0x54/+0x5c and CGame cmdline dtor @0x4028d0",
+    "types": ["CDSObject", "CDSImage", "CGame", "CBulanci"],
+    "addresses": ["0x00425620", "0x0042563a", "0x00425460", "0x004028d0", "0x00401992"],
+    "ghidra_actions": [
+      "modify_struct_field",
+      "set_function_prototype",
+      "set_decompiler_comment",
+      "disassemble",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_01_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSObject.md",
+      "ghidra_analysis/engine/struct_recovery/CGame.md",
+      "ghidra_analysis/engine/struct_recovery/CBulanci.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "high",
+    "source": "handoff",
+    "supersedes_todo_id": 1
+  },
+  {
+    "id": 2,
+    "title": "CDSApp keyLatch display names and OnCreate CBulanci* param",
+    "types": ["CDSApp", "CBulanci", "CWindow"],
+    "addresses": ["0x0042b170", "0x0042a210", "0x00429db0", "0x00403dc8", "0x00403e02"],
+    "ghidra_actions": [
+      "modify_struct_field",
+      "set_function_prototype",
+      "set_function_this_type",
+      "set_decompiler_comment",
+      "search_instructions",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_02_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSApp.md",
+      "ghidra_analysis/engine/struct_recovery/CBulanci.md",
+      "ghidra_analysis/engine/app_shell.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 2
+  },
+  {
+    "id": 4,
+    "title": "Retype CGameView gaming_host to CGaming* in InitGamingFields",
+    "types": ["CGameView", "CGaming", "CAnim"],
+    "addresses": ["0x00416590", "0x0041acf0", "0x00416f50"],
+    "ghidra_actions": [
+      "set_function_this_type",
+      "modify_struct_field",
+      "set_decompiler_comment",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_04_report.md",
+      "ghidra_analysis/engine/struct_recovery/CGameView.md",
+      "ghidra_analysis/engine/struct_recovery/CAnim.md",
+      "ghidra_analysis/engine/struct_recovery/batch_03_followup_summary.md",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "high",
+    "source": "handoff",
+    "supersedes_todo_id": 4
+  },
+  {
+    "id": 5,
+    "title": "Align CDSBitmap FLX face +4/+8 for CBulPicture extent reads",
+    "types": ["CBulPicture", "CDSBitmap", "CDSFlxFile"],
+    "addresses": ["0x004101d0", "0x0040b050", "0x00410284", "0x0040eb30"],
+    "ghidra_actions": [
+      "modify_struct_field",
+      "get_struct_layout",
+      "set_function_this_type",
+      "set_decompiler_comment",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_05_report.md",
+      "ghidra_analysis/engine/struct_recovery/CBulPicture.md",
+      "ghidra_analysis/engine/struct_recovery/CDSBitmap.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "backlog",
+    "supersedes_todo_id": 5
+  },
+  {
+    "id": 7,
+    "title": "Rename CDirectKeyb m_keyState and CGame.pDirectKeyb @+0x204",
+    "types": ["CDirectKeyb", "CGame"],
+    "addresses": ["0x004121a0", "0x00412160", "0x0041609a", "0x004160e3"],
+    "ghidra_actions": [
+      "modify_struct_field",
+      "rename_data",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_07_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDirectKeyb.md",
+      "ghidra_analysis/engine/struct_recovery/CGame.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "low",
+    "source": "handoff",
+    "supersedes_todo_id": 7
+  },
+  {
+    "id": 8,
+    "title": "Name CGaming entity-list field @+0x31c for blast collectors",
+    "types": ["CGaming", "CExplosion", "CAnim"],
+    "addresses": ["0x004183d0", "0x0041a2f0", "0x0041e175", "0x0041e288"],
+    "ghidra_actions": [
+      "search_instructions",
+      "modify_struct_field",
+      "set_decompiler_comment",
+      "get_xrefs_to",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_08_report.md",
+      "ghidra_analysis/engine/struct_recovery/CExplosion.md",
+      "ghidra_analysis/engine/struct_recovery/batch_07_followup_summary.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 8
+  },
+  {
+    "id": 9,
+    "title": "Fix CGameTypeDlg_OnNotify decompile widget tail indexing",
+    "types": ["CGameTypeDlg", "CWindow", "CGameCounter"],
+    "addresses": ["0x0040ab00", "0x0040aad0", "0x0040d930", "0x0040b140"],
+    "ghidra_actions": [
+      "set_function_this_type",
+      "set_function_prototype",
+      "force_decompile",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_09_report.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_09_report.jsonl",
+      "ghidra_analysis/engine/struct_recovery/CGameTypeDlg.md",
+      "ghidra_analysis/engine/struct_recovery/CGameCounter.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "backlog",
+    "supersedes_todo_id": 9
+  },
+  {
+    "id": 10,
+    "title": "CHelpView classId 0x81d and wChainFlag46 vs CHistoryView",
+    "types": ["CHelpView", "CHistoryView", "CDSChained", "CHelpDlg"],
+    "addresses": ["0x004218a0", "0x00422a70", "0x0047bf60", "0x00421c10", "0x00421e40"],
+    "ghidra_actions": [
+      "search_instructions",
+      "set_decompiler_comment",
+      "get_xrefs_to",
+      "modify_struct_field",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_10_report.md",
+      "ghidra_analysis/engine/struct_recovery/CHelpView.md",
+      "ghidra_analysis/engine/struct_recovery/CHelpDlg.md",
+      "ghidra_analysis/engine/struct_recovery/batch_09_followup_summary.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 10
+  }
+]

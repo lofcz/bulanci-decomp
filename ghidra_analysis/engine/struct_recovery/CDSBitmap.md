@@ -19,8 +19,8 @@
 |--------|------|------|------|----------------------|
 | 0x00 | 4 | `pointer` | `vf_primary` | `CDSBitmap_ctor@0x004393d0` |
 | 0x04 | 4 | `pointer` | `vf_IDSChained` | same |
-| 0x08 | 4 | `uint` | `dwChainField_08` | `CDSChained_ctor` @ `CDSBitmap_ctor` / `CDSBitmap_SubobjectCtor` |
-| 0x0c | 4 | `uint` | `dwChainField_0c` | same |
+| 0x08 | 4 | `uint` | `dwField_08` | `CDSChained_ctor` @ `CDSBitmap_ctor` / `CDSBitmap_SubobjectCtor` |
+| 0x0c | 4 | `uint` | `dwField_0c` | same |
 | 0x10 | 4 | `pointer` | `vf_slot_10` | `CDSBitmap_ctor` |
 | 0x14 | 2 | `ushort` | `wViewFlags` | `CMovieView::InitTrackSequence` `\|= 0x278` @ `*(ushort *)(bitmap+0x14)` |
 | 0x16 | 2 | `ushort` | `wPad_16` | `CDSChained` mirror |
@@ -62,6 +62,10 @@ get_struct_layout CDSBitmap → Size: 120 bytes (0x78)
 
 **Agent todo 26 r3 (2026-05-30):** `CDSBitmap_SubobjectCtor@0x004228f0` (was `CDSBitmap_ShellCtor`); `CMovieView_Constructor` / `CMovieView_InitTrackSequence` renamed; plate + disasm EOL on `InitTrackSequence` for `wViewFlags \|= 0x278` @ `bitmapBase+0x14` (`0x004237f5`); `CDSBitmap_ctor` prototype; `save_program bulanci.exe`.
 
+**R4 todo 5 (2026-05-30):** `CheckedVirtualBaseCast(..., DAT_004b826c)` on heap `CDSBitmap` returns **`bitmap+0x1c`** for `CBulPicture` / `BlitDispatch` extent band — cast `+4/+8` = `nBbox_left` / `nBbox_top` @ `+0x20`/`+0x24`. Nominal `CBulPicture.pBitmap` is `CDSStaticDrawableFace *` (see `round4_task_05_report.md`).
+
+**Agent todo 26 r4 (2026-05-30):** `dwChainField_08/0c` → `dwField_08/0c` (parity with [CDSChained.md](./CDSChained.md)); chain band `+0x30..+0x3c` documented as ctor-zero scratch shared with `CDSAnim`/`CDSChained` (no bitmap-specific readers); `InitTrackSequence` `this` merge completed in [round4_task_15_report.md](./round4_task_15_report.md); `save_program bulanci.exe`.
+
 Factory subobject init (no `ODSImage_ctor`): `CDSBitmap::CDSBitmap_SubobjectCtor` @ `0x004228f0`.
 
 | Extra evidence | Address | Note |
@@ -71,5 +75,5 @@ Factory subobject init (no `ODSImage_ctor`): `CDSBitmap::CDSBitmap_SubobjectCtor
 
 ## UNK
 
-- `dwChainField_08/0c`, `dwField_30..3c`, `dwField_50`, `dwField_5c/60/64` — semantics beyond ctor/`ResetChainCounters`.
+- `dwField_30..3c`, `dwField_50`, `dwField_5c/60/64` — runtime semantics beyond `CDSChained_ctor` zero and `CDSChained_ResetChainCounters@0x0042beb0` (`+0x40..+0x50` band only).
 - Whether standalone heap `CDSBitmap` and `CMovieView` embed share identical tail layout above `+0x68` (CMovieView adds resource pointers at `+0x78`).

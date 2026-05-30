@@ -5,7 +5,7 @@ import path from "node:path";
 import fs from "node:fs";
 import { promises as fsp } from "node:fs";
 import { createReadStream } from "node:fs";
-import { spawnSync } from "node:child_process";
+import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { WebSocketServer } from "ws";
 import { toSocket } from "vscode-ws-jsonrpc";
 import { createWebSocketConnection, createServerProcess, forward } from "vscode-ws-jsonrpc/server";
@@ -38,7 +38,21 @@ const MIMES: Record<string, string> = {
   ".jpeg": "image/jpeg",
   ".wav":  "audio/wav",
   ".mp3":  "audio/mpeg",
+  // The embedded live-engine preview (`/play/*`, served by bulanciWebGame).
+  ".wasm": "application/wasm",
+  ".js":   "text/javascript; charset=utf-8",
+  ".mjs":  "text/javascript; charset=utf-8",
+  ".html": "text/html; charset=utf-8",
+  ".css":  "text/css; charset=utf-8",
 };
+
+// The wasm web build (`open_bulanci/web/`: index.html + bulanci_client.js/.wasm).
+// Served at `/play/` so the editor can embed the REAL engine as a live preview,
+// same-origin with the broker below. The artifacts are built + deployed by the
+// auto-build orchestrator in `bulanciWebEngine` (or scripts/build-web.ps1).
+const obRoot      = path.resolve(repoRoot, "open_bulanci");
+const webGameDir  = path.resolve(obRoot, "web");
+const webWasmFile = path.resolve(webGameDir, "bulanci_client.wasm");
 
 /** Vite plugin that serves the catalog + unpacked overlay straight
  *  from the local filesystem under `/data/catalog/*` and
@@ -554,6 +568,232 @@ class PakStore {
   }
 }
 
+// ---------------------------------------------------------------------
+// Embedded live-engine (wasm) — auto-build + serve under `/play/`
+// ---------------------------------------------------------------------
+
+/** Roots whose changes invalidate the wasm engine and trigger a rebuild.
+ *  Only Rust + build inputs matter — pak/Luau/asset edits hot-reload over the
+ *  broker WS without recompiling, so they are deliberately excluded. */
+const WEB_ENGINE_WATCH_DIRS = [
+  path.resolve(obRoot, "client/src"),
+  path.resolve(obRoot, "core/src"),
+];
+const WEB_ENGINE_WATCH_FILES = [
+  path.resolve(obRoot, "client/Cargo.toml"),
+  path.resolve(obRoot, "core/Cargo.toml"),
+  path.resolve(obRoot, "Cargo.toml"),
+  path.resolve(obRoot, "Cargo.lock"),
+  path.resolve(obRoot, ".cargo/config.toml"),
+  path.resolve(obRoot, "core/build.rs"),
+  path.resolve(obRoot, "client/build.rs"),
+];
+
+/** A path that, when changed, should rebuild the wasm engine. */
+function isEngineSource(p: string): boolean {
+  const norm = path.resolve(p);
+  if (WEB_ENGINE_WATCH_FILES.includes(norm)) return true;
+  if (!WEB_ENGINE_WATCH_DIRS.some((d) => norm === d || norm.startsWith(d + path.sep))) return false;
+  return norm.endsWith(".rs");
+}
+
+/** Newest mtime (ms) across the watched source, or 0 if none exist. Used to
+ *  decide on startup whether the deployed artifact is stale. */
+function engineSourceNewestMtime(): number {
+  let newest = 0;
+  const stat = (p: string) => { try { const s = fs.statSync(p); if (s.mtimeMs > newest) newest = s.mtimeMs; } catch { /* missing */ } };
+  for (const f of WEB_ENGINE_WATCH_FILES) stat(f);
+  const walk = (dir: string) => {
+    let ents: fs.Dirent[] = [];
+    try { ents = fs.readdirSync(dir, { withFileTypes: true }); } catch { return; }
+    for (const e of ents) {
+      const abs = path.join(dir, e.name);
+      if (e.isDirectory()) { walk(abs); continue; }
+      if (e.name.endsWith(".rs")) stat(abs);
+    }
+  };
+  for (const d of WEB_ENGINE_WATCH_DIRS) walk(d);
+  return newest;
+}
+
+interface EngineBuildState {
+  /** A deployed wasm artifact exists (regardless of freshness). */
+  built: boolean;
+  /** Lifecycle: never built / compiling / deployed / failed / autobuild off. */
+  status: "idle" | "building" | "ready" | "error" | "disabled";
+  /** Bumped on every successful (re)build — the panel reloads the iframe when
+   *  it increases, so a Rust edit shows up without a manual refresh. */
+  generation: number;
+  /** Wall-clock duration of the last build (ms). */
+  durationMs: number;
+  /** Tail of the last build's combined stdout/stderr (for the panel + errors). */
+  log: string[];
+  /** Auto-build (build on demand + rebuild on Rust change) is enabled. */
+  enabled: boolean;
+  profile: "debug" | "release";
+}
+
+/** Serves the wasm web build under `/play/` AND owns its build lifecycle so the
+ *  dev loop is just "run the editor": on startup it builds the engine if the
+ *  deployed artifact is missing or older than the Rust source, and it watches
+ *  `client/src` + `core/src` (+ manifests) to rebuild + redeploy on any Rust
+ *  change. Builds run detached (never blocking the dev server); the panel polls
+ *  `GET /play/__status` for progress and reloads the iframe when `generation`
+ *  bumps. `POST /play/__build` forces a rebuild.
+ *
+ *  Disable the auto-build with `BULANCI_WEB_AUTOBUILD=0` (e.g. no emsdk); the
+ *  panel then just serves whatever is already deployed. `BULANCI_WEB_PROFILE`
+ *  (`release` default, or `debug` for faster relinks) picks the cargo profile. */
+function bulanciWebEngine(): Plugin {
+  const enabled = process.env.BULANCI_WEB_AUTOBUILD !== "0";
+  const profile = process.env.BULANCI_WEB_PROFILE === "debug" ? "debug" : "release";
+  const LOG_TAIL = 240;
+
+  const state: EngineBuildState = {
+    built: false,
+    status: enabled ? "idle" : "disabled",
+    generation: 0,
+    durationMs: 0,
+    log: [],
+    enabled,
+    profile,
+  };
+  try { state.built = fs.statSync(webWasmFile).isFile(); } catch { /* not built */ }
+  // Seed generation so an already-deployed artifact loads immediately.
+  if (state.built) { state.status = enabled ? "ready" : "disabled"; state.generation = 1; }
+
+  let building = false;
+  let pending = false;
+  let proc: ChildProcess | null = null;
+
+  const pushLog = (line: string) => {
+    for (const l of line.split(/\r?\n/)) {
+      if (l.length) {
+        state.log.push(l);
+        console.log(`[web-engine] ${l}`);
+      }
+    }
+    if (state.log.length > LOG_TAIL) state.log.splice(0, state.log.length - LOG_TAIL);
+  };
+
+  const startBuild = (reason: string) => {
+    if (!enabled) return;
+    if (building) { pending = true; return; }
+    building = true;
+    pending = false;
+    state.status = "building";
+    state.log = [];
+    const startedAt = Date.now();
+    pushLog(`building wasm engine (${profile}) — ${reason}`);
+
+    const scriptPath = path.resolve(obRoot, "scripts/build-web.ps1");
+    // Windows-first (the engine's C toolchain is set up by dev-shell.ps1 via
+    // vcvars/emsdk). pwsh on other platforms is best-effort.
+    const isWin = process.platform === "win32";
+    const cmd  = isWin ? "powershell" : "pwsh";
+    const args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", scriptPath, "-Profile", profile];
+
+    try {
+      proc = spawn(cmd, args, { cwd: obRoot, windowsHide: true });
+    } catch (err) {
+      building = false;
+      state.status = "error";
+      pushLog(`failed to spawn build: ${err}`);
+      return;
+    }
+    proc.stdout?.on("data", (d: Buffer) => pushLog(d.toString()));
+    proc.stderr?.on("data", (d: Buffer) => pushLog(d.toString()));
+    proc.on("error", (err) => { pushLog(`build process error: ${err.message}`); });
+    proc.on("close", (code) => {
+      proc = null;
+      building = false;
+      state.durationMs = Date.now() - startedAt;
+      try { state.built = fs.statSync(webWasmFile).isFile(); } catch { state.built = false; }
+      if (code === 0 && state.built) {
+        state.status = "ready";
+        state.generation += 1;
+        pushLog(`done in ${(state.durationMs / 1000).toFixed(1)}s → generation ${state.generation}`);
+      } else {
+        state.status = "error";
+        pushLog(`build failed (exit ${code})`);
+      }
+      if (pending) startBuild("coalesced change");
+    });
+  };
+
+  return {
+    name: "bulanci-web-engine",
+    configureServer(server) {
+      // Build on startup if the deployed artifact is missing or stale.
+      if (enabled) {
+        const artifactMtime = state.built ? (() => { try { return fs.statSync(webWasmFile).mtimeMs; } catch { return 0; } })() : 0;
+        const stale = !state.built || engineSourceNewestMtime() > artifactMtime;
+        if (stale) startBuild(state.built ? "source changed since last deploy" : "no deployed artifact");
+        else pushLog("deployed wasm engine is up to date");
+
+        // Watch the Rust source for changes → debounced rebuild. The dirs live
+        // outside the Vite root, so add them to the watcher explicitly; they're
+        // never imported, so this only drives our cargo build (no Vite HMR).
+        try { server.watcher.add([...WEB_ENGINE_WATCH_DIRS, ...WEB_ENGINE_WATCH_FILES]); } catch { /* best effort */ }
+        let debounce: ReturnType<typeof setTimeout> | null = null;
+        const onChange = (p: string) => {
+          if (!isEngineSource(p)) return;
+          if (debounce) clearTimeout(debounce);
+          debounce = setTimeout(() => { debounce = null; startBuild(`changed ${path.basename(p)}`); }, 400);
+        };
+        server.watcher.on("change", onChange);
+        server.watcher.on("add", onChange);
+        server.watcher.on("unlink", onChange);
+      }
+
+      server.middlewares.use(async (req, res, next) => {
+        const url = req.url ?? "";
+        if (url !== "/play" && !url.startsWith("/play/") && !url.startsWith("/play?")) {
+          return next();
+        }
+        const method = req.method ?? "GET";
+        let rel = url.slice("/play".length).split("?")[0];
+        rel = decodeURIComponent(rel).replace(/^\/+/, "");
+        if (rel === "") rel = "index.html";
+
+        // Build status (polled by the Live panel) + force-rebuild control.
+        if (rel === "__status") {
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.setHeader("Cache-Control", "no-store");
+          res.end(JSON.stringify(state));
+          return;
+        }
+        if (rel === "__build") {
+          if (method !== "POST") { res.statusCode = 405; res.end("use POST"); return; }
+          startBuild("manual rebuild");
+          res.statusCode = enabled ? 202 : 409;
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({ ok: enabled, status: state.status, enabled }));
+          return;
+        }
+
+        const abs = path.resolve(webGameDir, rel);
+        if (abs !== webGameDir && !abs.startsWith(webGameDir + path.sep)) {
+          res.statusCode = 403; res.end("forbidden"); return;
+        }
+        try {
+          const stat = await fsp.stat(abs);
+          if (!stat.isFile()) { res.statusCode = 404; res.end("not a file"); return; }
+          res.statusCode = 200;
+          res.setHeader("Content-Type",   MIMES[path.extname(abs).toLowerCase()] || "application/octet-stream");
+          res.setHeader("Content-Length", stat.size);
+          res.setHeader("Cache-Control",  "no-store");
+          createReadStream(abs).pipe(res);
+        } catch (err) {
+          if ((err as NodeJS.ErrnoException).code === "ENOENT") { res.statusCode = 404; res.end("not built yet"); }
+          else { console.error("[bulanci-web-engine]", url, err); res.statusCode = 500; res.end("web-engine error"); }
+        }
+      });
+    },
+  };
+}
+
 /** Dev-only live-mod broker. Bridges the asset studio's HTTP overlay
  *  pushes to the running web game (served separately on :8765) over a
  *  WebSocket, so two browser tabs can mod the game live.
@@ -837,7 +1077,7 @@ function bulanciLuauLsp(): Plugin {
 // step in `serve.py` / a CI step copies `data/` into `dist/data/`).
 export default defineConfig({
   fmt: {},
-  plugins: [react(), tailwindcss(), bulanciDataSource(), bulanciModBroker(), bulanciLuauLsp()],
+  plugins: [react(), tailwindcss(), bulanciDataSource(), bulanciWebEngine(), bulanciModBroker(), bulanciLuauLsp()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -89,7 +89,31 @@ Ghidra: `set_function_this_type` → **`IDSAudioSource *`** on Read @ `0x004291d
 | 6 | `0x004291d0` | **Read** (PCM `memcpy`) |
 | 7 | `0x00438340` | `CDSView_NoOpStub` |
 
+### `IDSStream` vtable `0x486efc` (4 slots, round 4 todo 24)
+
+| Slot | Address | Symbol / role |
+|------|---------|----------------|
+| 0 | `0x00401600` | `CDSFileStream_GetClassTable` (shared stream family) |
+| 1 | `0x004049d0` | `CDSChain_AdjustThisOffset` (`this-0x14`) |
+| 2 | `0x00433070` | `CDSWav_ReleaseChild_thunk_Sub18` (`this-0x18`) |
+| 3 | `0x00429360` | `CDSAudioBankSample_ScalarDeletingDtor_thunk_Sub18` → bank sample dtor |
+
+## `pDecoder` = `IDSAudioSource*` (round 4 todo 24)
+
+Bank deserialize and sample ctor share one decoder interface:
+
+| Step | func@addr | Evidence |
+|------|-----------|----------|
+| Cast resource decoder | `CDSAudioBank_Deserialize@0x00429858` | `CheckedVirtualBaseCast(pv, DAT_004b83c4)` @ `0x00429675` → `local_18` passed as `pDecoder` |
+| Format copy | `CDSAudioBankSample_ctor@0x00429530` | `pDecoder->dwSampleByteSize`, `wChannels`, `wBitsPerSample`, `dwSampleRate` before overwrite of `dwSampleByteSize` with PCM byte count |
+| PCM fill | same | `(pDecoder->pVftable+0x18)(readParam, pPcmBuffer, pPcmByteCount)` — same slot as bank-slot **Read** |
+| Prefetch path | `CDSAudioBank_Deserialize@0x00429858` | `vtable+0x14` open handle; `+0x18` decode to temp; `+0x1c` close |
+
+`DAT_004b83c4` is the **`IDSAudioSource`** RTTI token (between `CDSWav` class-meta `DAT_004b83c0` and `CDSDirectPlay` `DAT_004b83c8`). Also used by `CDSAudioPlayer_CreateFromResource@0x00422593` and `CGaming_LoadLevelAssetAndMusic@0x0041d431`.
+
+Ghidra: `CDSAudioBankSample_ctor(CDSAudioBankSample *, IDSAudioSource *pDecoder, …)` + `set_function_this_type` → decompile uses named `IDSAudioSource` fields (2026-05-30 R4).
+
 ## UNK
 
-- Why ctor sets **`dwInitFlag=1`** with no consumer (reserved / dead field).
-- Decoder-only `pDecoder` layout in `CDSAudioBank_Deserialize` (only `+8`/`+0xC` format copies proven at ctor).
+- **`dwInitFlag=1`** — sole write @ ctor `0x00429564`; **no reads** (`search_instructions` on ctor `mov …+0x1c]` → one match). Treat as **dead init sentinel** (same pattern as `CDSAudioBank+0x08`).
+- **`DAT_004b83c4`** MSVC typeinfo string not recovered from `.rdata` (token proven by xref set only).

@@ -132,5 +132,5 @@ See `src/bulanci/CDSChain.cpp` — `CDSChain_LoadConfigFromRegistry`. Uses `CDSC
 
 ## UNK
 
-- Exact symbolic name of IDSChained vtable slot `+0x10` (registry load callback taking `CDSGZipStream*`).
-- Whether MSVC writes `pGzipForEh` explicitly in asm or only via EH metadata (runtime value equals `&gzip` at `[EBP+0]` when catch runs after gzip ctor).
+- *(R5 worker 43 closed)* ~~IDSChained vtable slot `+0x10`~~ → **`CDSChain_Append@0x0042fb70`** (vtable `0x0047f6b8` index 4). Arg = gzip **IDSStream read face** at `[EBP+0xc]` (`CDSGZipStream` stack object `+0xc`); `ECX` = `&this->pVftable_IDSChained` (`CDSChain_full+0x68`). Prototype `void __thiscall CDSChain_Append(CDSChain_full *this, void *pConfigStream)`.
+- *(documented)* `pGzipForEh` @ `[EBP+0x48]`: MSVC EH spill after 72-byte `CDSGZipStream`; runtime equals pointer to stack gzip when catch runs (no explicit store in parent asm).

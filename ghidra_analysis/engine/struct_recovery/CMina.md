@@ -19,7 +19,7 @@
 |--------|------|------|------|----------------------|
 | 0xF0 | 0x18 | `CDSUpdatedItem` | `updatedItem` | `CDSUpdatedItem_ctor(this+0xf0)` @ `CMina_Ctor`; dtor @ `CMina_dtor@0x0041c010` |
 | 0x108 | 4 | `CBulanek *` | `pOwnerBulanek` | `CMina_Ctor@0x0041cb70`; read `param_1[0x42]` in `_Globals__ExplodeMine@0x0041e070` |
-| 0x10C | 4 | `void *` | `pAux` | zeroed ctor; `FUN_0041b4a0` @ `CMina_dtor`; `FUN_0041c0d0` stores danger-zone node |
+| 0x10C | 4 | `void *` | `pDangerZoneNode` | `CMina_RegisterDangerZone@0x0041c0d0` ← `CGaming_AppendDangerZoneNode`; `CMina_ReleaseDangerZoneNode@0x0041b4a0` @ dtor |
 | 0x110 | 4 | `int` | `nDeployOrOwnerCtx` | `InitMine@0x0041cce0`; `*(this+0x110)=*(param_2+0x84)` in `CMina_Ctor` |
 | 0x114 | 1 | `byte` | `bArmed` | ctor; `(char)param_1[0x45]` in `_Globals__ExplodeMine` |
 | 0x115 | 3 | — | *(pad)* | allocation size `0x118` − last field end |
@@ -33,7 +33,7 @@ Full byte map matches Ghidra type **`CAnim`** (`get_struct_layout` → 240 B). G
 | 0x00 | 4 | `pointer` | `vftable_primary` | `CAnim_SubobjectCtor@0x00419870` → `g_pCAnim_*`; overwritten | **`g_pCMina_vftable_primary`** @ `CMina_Ctor@0x0041cb70`, `InitMine@0x0041cce0`, `CMina_dtor@0x0041c010`, `CMina_DefaultCtor@0x0041a990` |
 | 0x04 | 4 | `pointer` | `vftable_IDSChained` | same | **`g_pCMina_vftable_IDSChained`** (same ctors/dtor) |
 | 0x08 | 4 | `uint` | `dwChainField_08` | `CDSChained` layout mirror | *(inherits chain header; no CMina-only write)* |
-| 0x0C | 4 | `uint` | `dwChainField_0c` | `CDSChained` layout mirror | **read** `!= 0` gate @ `FUN_00419fd0@0x00419fd0` |
+| 0x0C | 4 | `uint` | `bTraceAreasActive` | `CDSChained` layout mirror | **read** `!= 0` gate @ `CMina_UpdateTraceAreas@0x00419fd0` — enables 0x80-slot gaming sweep |
 | 0x10 | 4 | `pointer` | `vftable_IDSReferenced` | `CAnim_SubobjectCtor@0x00419870` | vtable write (same ctors) |
 | 0x14 | 2 | `uint16` | `wViewFlags` | `CBulAnim` / views: `\|= 0x200` pattern | **`\|= 0x200`** @ `CMina_Ctor`, `InitMine`; `FUN_0041b420` when `param_4 != 0` |
 | 0x16 | 2 | `uint16` | `wPad_16` | `CDSChained` mirror | — |
@@ -100,13 +100,14 @@ Slice **14** (2026-05-30): `get_struct_layout CMina` → **280 B (`0x118`)** —
 
 Agent todo **20** r2 (worker 20, 2026-05-30): **DONE** — `CMina.animBase` = **`CAnim`** (240 B). Mapped header band `+0x28..+0x67`: `nSpatial_bucket_x/y`, bounds, `dwView_pad_40`, `view_flags`, `pChain_pad_48`, `child_chain`, `pHeader_tail_58`, `pLinked_bulanek`. `FUN_0041c0d0` → **`CMina_RegisterDangerZone`**. `save_program bulanci.exe`.
 
+**R5 worker 44 (2026-05-30):** `CAnim.bTraceAreasActive` @ `animBase+0x0c` — when non-zero, `CMina_UpdateTraceAreas@0x00419fd0` walks `animBase.pGaming_host` entity ring (slots `0x80` down to `0x7e`). `pDangerZoneNode` @ `+0x10C` holds `0x20` B heap node from `CGaming_AppendDangerZoneNode@0x0041b420` (appends to `CGaming+0x2d8` vector); released by `CMina_ReleaseDangerZoneNode@0x0041b4a0`. `save_program bulanci.exe`.
+
 ## UNK
 
-- `dwChainField_0c` meaning when non-zero (trace-area loop gate only).
 - `dwView_pad_40`, `pChain_pad_48`, `pHeader_tail_58` — only `CMina_RegisterDangerZone` / generic CDSView paths.
 - `pTrack_manager` (+0xa8..+0xef) interior — opaque `ConstructTrackManager` blob.
-- `pAux` — danger-zone node via `CMina_RegisterDangerZone@0x0041c0d0`; release `FUN_0041b4a0` @ dtor (type TBD).
-- `nDeployOrOwnerCtx` — weapon path stores owner `pGamingHost`; deploy path stores opaque deploy `int` (not a pointer).
+- `CDangerZoneNode` interior field names (`+0x00` kind, `+0x08` rect, `+0x18` flags, `+0x1c` owner view) — size `0x20` proven in `CGaming_AppendDangerZoneNode`.
+- `nDeployOrOwnerCtx` — weapon path stores `CGaming *` host for danger-zone alloc (`*(updatedItem+0x20)` at register site); deploy path stores opaque deploy `int` (not a pointer).
 
 ## Follow-up
 

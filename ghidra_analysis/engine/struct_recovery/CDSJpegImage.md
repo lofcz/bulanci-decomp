@@ -60,6 +60,10 @@ The numeric **`0x4b`** (75) appears in three distinct places: engine class id fo
 
 **Agent todo 36 r3 (2026-05-30):** Disasm verified `0x0043c160` = `CDSQueueStream_CreateObject` (`PUSH 0x24`); JPEG factory `CDSJpegImage_CreateObject@0x00432070` (`PUSH 0x64`). Ghidra EOL/plate comments @ `0x0043c160`, `0x00432070`, `0x00431d48`, `CDSJpegImage_Save`, static registers `0x0047cbf0`/`0x0047daa0`. `save_program`. Report: [round3_task_36_report.md](./round3_task_36_report.md).
 
+**Agent todo 36 r4 (2026-05-30):** R4 plates on `CDSQueueStream_StaticClassRegister@0x0047daa0` (registry class id **0x4b**), `CDSJpegImage_StaticClassRegister@0x0047cbf0` (**0x15**), both factories, and `CDSJpegImage_Save` decompiler comment (MI quality dword @ `+0x60` vs registry ids). `get_xrefs_to` confirms factories only referenced from their static registers (+ init table `0x0047f488`). `save_program`. Report: [round4_task_36_report.md](./round4_task_36_report.md).
+
+**R5 worker 07 (2026-05-30):** `FUN_00431d60` → **`CDSJpegImage_AlwaysReturnsOne`** — IDSChained vftable `0x00487184` slot **[4]**; decompile `return 1`; peer resources use `AlwaysReturnsZero@0x00409480` at the same slot. Report: [round5_worker_07_report.md](./round5_worker_07_report.md).
+
 **Agent todo 36 r2 (2026-05-30):** Program-wide audit of object-offset `+0x60` on **100-byte** `CDSJpegImage` wrappers:
 
 | Kind | Site | Notes |

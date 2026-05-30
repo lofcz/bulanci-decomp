@@ -40,9 +40,19 @@ Slice 29 (2026-05-30): re-verified `get_struct_layout` → 60 B; prototypes on `
 
 **Agent todo 39 (2026-05-30):** Re-verified `CDSException` 60 B; embedded `CDSException base` @ `+0` on `CDSMemoryException`, `CDSResourceException`, `CDSStreamException` (matches `CDSApiException` pattern). `CDSException_InitFields` / `CDSException_GetMessageW` prototypes refreshed.
 
+## Shared IDSChained helpers
+
+| Slot role | Address | Notes |
+|-----------|---------|-------|
+| `ReleaseViaFlag` | `0x0042fff0` | Slot `[2]` on exception vtables; calls scalar dtor when `bDeleteOnRelease` |
+| `DtorScalar` (base) | `0x00434ae0` | Used as slot `[1]` on `CDSSimpleException`; subclass-specific dtors elsewhere |
+| `CDSObject_GetThis` | `0x00434b10` | Slot `[4]` on exception siblings |
+
+**Agent todo 39 r4 (2026-05-30):** exception throw-site locals + per-class vtable tables — [round4_task_39_report.md](./round4_task_39_report.md).
+
 ## UNK
 
-- Secondary `IDSChained` / `IDSEventHandler` faces on the exception vtable (catalog only; no separate subobject offsets in throw paths).
+- Secondary `IDSChained` / `IDSEventHandler` faces beyond the primary 5-slot table at `+0` (no separate subobject offsets in throw paths).
 - `CDSSimpleException` embeds `CDSException base` @ `+0` (agent todos 30 / 39, 2026-05-30) — see `round3_task_30_report.md`.
 
 ## Notes

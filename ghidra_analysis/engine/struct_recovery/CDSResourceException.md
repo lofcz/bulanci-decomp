@@ -49,7 +49,19 @@ Slice **37** (2026-05-30): struct confirmed in Ghidra; renamed `FUN_004346f0` â†
 
 **Agent todo 39 (2026-05-30):** Rebuilt with embedded `CDSException base`; `CDSResourceException_ctor` prototype set (`CDSResourceException *` this). Decompiler `this` typing still limited by Ghidra `__thiscall` API.
 
+## IDSChained vtable @ `0x004874b0`
+
+| Slot | Address | Symbol |
+|------|---------|--------|
+| 0 | `0x00434430` | `CDSResourceException_GetClassTable` |
+| 1 | `0x004348e0` | `CDSResourceException_DtorScalar` |
+| 2 | `0x0042fff0` | `CDSException_ReleaseViaFlag` (shared) |
+| 3 | `0x00434350` | `CDSResourceException_What` |
+| 4 | `0x00434b10` | `CDSObject_GetThis` (shared) |
+
+**Agent todo 39 r4 (2026-05-30):** vtable catalog + throw helper comments; decompiler may still prefix `CDSStreamStorage::` on `ThrowFromResourceId` display. See [round4_task_39_report.md](./round4_task_39_report.md).
+
 ## UNK
 
 - `CDSResourceException_What` format string / `CDsStringFormatV` template id not recovered.
-- Secondary vtable slots on `0x4874b0` not expanded (same deferral as other `CDSException` subclasses).
+- `ThrowFromResourceId` Ghidra class namespace reparent (script path blocked).

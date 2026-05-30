@@ -41,11 +41,15 @@
 |--------|---------|------|
 | `CScore::Create` | `0x0040efd0` | Heap factory: `OperatorNew(0x74)`, MI vtables, `pEndMatchAudio=0` |
 | `CScore_ctor` | `0x00411010` | Stack modal ctor: `CWindow_BuildAt(800×600)`, rank rows, SP high-score branch, trophy `CAnim`, audio @ `+0x70` |
-| `CScore::Destructor` | `0x0040e120` | Stop/release `pEndMatchAudio`, `CWindow_dtor` |
+| `CScore_dtor` | `0x0040e120` | Stop/release `pEndMatchAudio`, `CWindow_dtor` |
+| `CScore_ScalarDeletingDtor` | `0x0040f070` | `CScore_dtor`; `_free(this)` when `param_1 & 1` |
+| `CScore_ScalarDeletingDtor_thunk_n0x18` | `0x0040bde0` | MI @ `0x481000` slot+3: `SUB ECX,0x18` → `JMP 0x0040f070` |
+| `CScore_ScalarDeletingDtor_thunk_n0x10` | `0x0040be00` | MI @ `0x481014` slot+3: `SUB ECX,0x10` → `JMP 0x0040f070` |
+| `CScore_ScalarDeletingDtor_thunk_n0x4` | `0x0040bdf0` | MI @ `0x48102c` slot+3: `SUB ECX,4` → `JMP 0x0040f070` |
 | `CScore::OnKeyPress` | `0x0040abe0` | Esc/Enter → `CDSView__EndModal(0x8003)` |
 | `CScore_PlayerRankComparator` | `0x0040abd0` | `qsort` comparator for live match ranking |
-| `CScore_RenderHighScoreRow` | `0x00409bc0` | SP branch: five `FUN_004096d0` columns per `CScoreItem` row |
-| `CScoreItem_MatchesKillsDeathsAndName` | `0x00409080` | High-score highlight: K/D + name match vs prior row (`CScore_ctor@0x00411010`) |
+| `CScore_RenderHighScoreRow` | `0x00409bc0` | SP branch: five `CScore_RenderHighScoreColumn` columns per `CScoreItem` row |
+| `CScoreItem_MatchesKillsDeathsAndName` | `0x00409080` | `CScoreItem` helper: `ECX`=highlight template, `pRow`=chain row; call @ `CScore_ctor+0x9c5` (`0x004119d5`) |
 
 Parent: `CBulanci_ShowPostMatchScoreModal` / `CGame` end-of-level → stack `CScore_ctor` + `CDSView_DoModal`.
 
@@ -57,7 +61,10 @@ Parent: `CBulanci_ShowPostMatchScoreModal` / `CGame` end-of-level → stack `CSc
 - Renames: `CScoreCtor` → `CScore_ctor`; `FUN_00409bc0` → `CScore_RenderHighScoreRow`
 - `save_program bulanci.exe`
 
+**R5 worker 45 (2026-05-30):** `modify_struct_field` `pEndMatchAudio` → **`CDSAudioPlayer *`** @ `+0x70`; `set_function_this_type` `CScore_ctor@0x00411010`, `CScore::Destructor@0x0040e120` (`__thiscall`); decompile uses `this->pEndMatchAudio`, `CDSAudioPlayer_Play` / `CDSAudioPlayer_Stop`. Evidence: `TriggerBankSample` return cast + `param_1[0x1c]` in `Create@0x0040efd0`. `save_program bulanci.exe`.
+
 ## UNK
 
 - `CDSChained` interior dwords (`dwField_08`, `dwTimelineFlags`, `dwField_30`..`dwField_64`) — shared ctor pattern only; no `CScore`-specific consumers beyond `CWindow_BuildAt`.
 - Stack `CScore` instance in `CScoreCtor` is separate from heap `Create` path; modal uses ctor on stack then `CDSView_DoModal` (see `post_match_lobby.md`).
+- ~~`pEndMatchAudio` type (`void *`)~~ — **closed R5 w45** (`CDSAudioPlayer *`, ctor/dtor/play/stop xrefs).

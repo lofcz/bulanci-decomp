@@ -53,9 +53,21 @@ set_function_prototype CPoem_GetText@0x00409870
 save_program bulanci.exe
 ```
 
+## IDSStream vtable `0x480498` @ `+0x14` (R4 todo 17)
+
+| Slot | Offset | Thunk / method | MI `this` adjust | Role |
+|------|--------|----------------|------------------|------|
+| +3 | `0x0c` | `DeletingDestructorThunk_12@0x00409440` | `SUB ECX,0x14` | deleting dtor from stream face |
+| +4 | `0x10` | `Deserialize@0x00409100` | `ADD ECX,0x4` | load poem → `pWstrHandle` @ `+0x18` |
+| +5 | `0x14` | `GetText@0x00409870` | `ADD ECX,0x4` | pack poem from `pWstrHandle` |
+
+**GetText xrefs:** no direct code xrefs (vtable `0x004804ac` only). **Indirect:** `CDSCollection_SerializeElement@0x0042ff20` → `vcall [IDSStream+0x14]` from `CDSCollection_Save@0x00431210`. **Deserialize load:** `CDSCollection_DeserializeElement@0x0042fd40` → `vcall [+0x10]` from `CDSCollection_Load@0x00431360`. Runtime menu uses pool-loaded instances via `CPoemScroller_PickNextPoem` (`poem+0x18`), not GetText.
+
+**MI deleting dtors** (R4 plated): `DeletingDestructorThunk_4@0x00409430` (`SUB 0xc`, chained `+0x0c`); `DeletingDestructorThunk_10@0x00409460` (`SUB 0x4`, facet `+0x04`).
+
 ## UNK
 
-- MI adjuster thunks (`DeletingDestructorThunk_*` at `+0xc`, `+0x10`, `+0x14` bases) — defer to `CDSFileStream` / `IDSStream` family pattern.
+- Remaining shared `CDSFileStream` / `IDSStream` slot entries at `0x480498` slots 0–2 (not CPoem-specific).
 
 ## pWstrHandle vs +0x04 / pCachedText (R3 todo 17, VERIFIED)
 

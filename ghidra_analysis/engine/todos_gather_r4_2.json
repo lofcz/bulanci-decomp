@@ -1,0 +1,236 @@
+[
+  {
+    "id": 21,
+    "title": "Prove CSwitch/CDSChained dwField_30..64 writers beyond ctor zero",
+    "types": ["CSwitch", "CDSChained", "CTcpIpConfig", "CDSChain"],
+    "addresses": ["0x00424bc0", "0x00424d30", "0x0042beb0", "0x0040c060"],
+    "ghidra_actions": [
+      "search_instructions",
+      "modify_struct_field",
+      "set_decompiler_comment",
+      "get_xrefs_to",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_21_report.md",
+      "ghidra_analysis/engine/struct_recovery/CSwitch.md",
+      "ghidra_analysis/engine/struct_recovery/CTcpIpConfig.md",
+      "ghidra_analysis/engine/struct_recovery/CDSChained.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 21
+  },
+  {
+    "id": 22,
+    "title": "CTeleportPoint respawn overlap_entity writer; decompile UpdateStateFromParams +0x64",
+    "types": ["CTeleportPoint", "CAnim", "CBulanek", "CDSChained"],
+    "addresses": ["0x0041fed0", "0x004178f7", "0x0041d090", "0x0041a390", "0x0041ff16"],
+    "ghidra_actions": [
+      "search_instructions",
+      "set_function_this_type",
+      "force_decompile",
+      "set_decompiler_comment",
+      "modify_struct_field",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_22_report.md",
+      "ghidra_analysis/engine/struct_recovery/CTeleportPoint.md",
+      "ghidra_analysis/engine/struct_recovery/CAnim.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/status.md",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "high",
+    "source": "blocker",
+    "supersedes_todo_id": 22
+  },
+  {
+    "id": 23,
+    "title": "Retype CDSAudioBank_Deserialize MI facet this at +0x14 adjustor",
+    "types": ["CDSAudioBank", "CDSWavStream", "CDSAudioBankSample"],
+    "addresses": ["0x00429600", "0x00429480", "0x00429858", "0x0043bb00"],
+    "ghidra_actions": [
+      "set_function_this_type",
+      "set_function_prototype",
+      "force_decompile",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_23_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSAudioBank.md",
+      "ghidra_analysis/engine/struct_recovery/CDSWavStream.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "high",
+    "source": "blocker",
+    "supersedes_todo_id": 23
+  },
+  {
+    "id": 24,
+    "title": "CDSAudioBankSample IDSStream vtable 0x486efc slots; bank decoder facet",
+    "types": ["CDSAudioBankSample", "CDSAudioBank", "CDSDirectSound"],
+    "addresses": ["0x00429530", "0x004291d0", "0x00429858", "0x00422382"],
+    "ghidra_actions": [
+      "modify_struct_field",
+      "set_decompiler_comment",
+      "rename_function",
+      "get_xrefs_to",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_24_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSAudioBankSample.md",
+      "ghidra_analysis/engine/struct_recovery/CDSAudioPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/batch_23_followup_summary.md"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 24
+  },
+  {
+    "id": 25,
+    "title": "Xref heap CDSVideoPlayer classId 0x31 factory consumer path",
+    "types": ["CDSVideoPlayer", "CDSAudioVideoPlayer", "CMovieView"],
+    "addresses": ["0x0047d750", "0x0043bc00", "0x0043bca0", "0x00422d50"],
+    "ghidra_actions": [
+      "get_xrefs_to",
+      "search_instructions",
+      "set_function_this_type",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_25_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSAudioVideoPlayer.md",
+      "ghidra_analysis/engine/struct_recovery/CDSVideoPlayer.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/status.md"
+    ],
+    "priority": "low",
+    "source": "handoff",
+    "supersedes_todo_id": 25
+  },
+  {
+    "id": 26,
+    "title": "CDSBitmap chain band +0x30..64 semantics; InitTrackSequence set_function_this_type",
+    "types": ["CDSBitmap", "CDSBmpImage", "CMovieView", "CDSChained"],
+    "addresses": ["0x004393d0", "0x004237b0", "0x004236a0", "0x004320c0", "0x0042beb0"],
+    "ghidra_actions": [
+      "search_instructions",
+      "set_function_this_type",
+      "force_decompile",
+      "modify_struct_field",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_26_report.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_15_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSBitmap.md",
+      "ghidra_analysis/engine/struct_recovery/CDSBmpImage.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/anim_runtime.md"
+    ],
+    "priority": "medium",
+    "source": "blocker",
+    "supersedes_todo_id": 26
+  },
+  {
+    "id": 27,
+    "title": "CDSChain_full dtor on 0xa4 object; CGame.chain vs CBulanciConfigStore parity",
+    "types": ["CDSChain", "CDSChain_full", "CGame", "CBulanci"],
+    "addresses": ["0x0042fcd0", "0x0042f820", "0x0040a680", "0x00414aeb", "0x0042f951"],
+    "ghidra_actions": [
+      "modify_struct_field",
+      "set_function_prototype",
+      "set_decompiler_comment",
+      "get_xrefs_to",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_27_report.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_27_report.jsonl",
+      "ghidra_analysis/engine/struct_recovery/CDSChain.md",
+      "ghidra_analysis/engine/struct_recovery/CGame.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl",
+      "ghidra_analysis/engine/gameplay_struct_backlog.md"
+    ],
+    "priority": "critical",
+    "source": "handoff",
+    "supersedes_todo_id": 27
+  },
+  {
+    "id": 28,
+    "title": "CDSDirectSound InitPrimary app-shell helper; InsertKeyed FindKeyIndex this cast",
+    "types": ["CDSDirectSound", "CDSCollection", "CDSApp", "CDSStreamStorage"],
+    "addresses": ["0x0043cbc0", "0x004312c0", "0x0042a2fa", "0x00433d09"],
+    "ghidra_actions": [
+      "set_function_prototype",
+      "set_function_this_type",
+      "set_decompiler_comment",
+      "force_decompile",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_28_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSDirectSound.md",
+      "ghidra_analysis/engine/struct_recovery/CDSCollection.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_43_report.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "handoff",
+    "supersedes_todo_id": 28
+  },
+  {
+    "id": 29,
+    "title": "CDSEasyMemStream IDSStream ReadBytes ECX plate at outer+0x0c",
+    "types": ["CDSEasyMemStream", "CDSException", "CDSDirectXException"],
+    "addresses": ["0x00430d60", "0x00434760", "0x00434b80", "0x00409200"],
+    "ghidra_actions": [
+      "set_function_this_type",
+      "set_function_prototype",
+      "force_decompile",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_29_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSEasyMemStream.md",
+      "ghidra_analysis/engine/struct_recovery/CDSException.md",
+      "ghidra_analysis/engine/struct_recovery/batch_28_followup_summary.md",
+      "ghidra_analysis/engine/struct_recovery/round3_task_39_report.md"
+    ],
+    "priority": "medium",
+    "source": "blocker",
+    "supersedes_todo_id": 29
+  },
+  {
+    "id": 30,
+    "title": "CDSFilterStream_ReadBytes retype IDSStream* plate at embed +0x0c",
+    "types": ["CDSFilterStream", "CDSSafeStream", "CDSStreamStorage"],
+    "addresses": ["0x00430ca0", "0x00430ce5", "0x00430420", "0x00401790"],
+    "ghidra_actions": [
+      "set_function_this_type",
+      "set_function_prototype",
+      "force_decompile",
+      "set_decompiler_comment",
+      "save_program"
+    ],
+    "evidence_paths": [
+      "ghidra_analysis/engine/struct_recovery/round3_task_30_report.md",
+      "ghidra_analysis/engine/struct_recovery/CDSFilterStream.md",
+      "ghidra_analysis/engine/struct_recovery/CDSSafeStream.md",
+      "ghidra_analysis/engine/agent_todos_50_r3_results.jsonl"
+    ],
+    "priority": "medium",
+    "source": "blocker",
+    "supersedes_todo_id": 30
+  }
+]

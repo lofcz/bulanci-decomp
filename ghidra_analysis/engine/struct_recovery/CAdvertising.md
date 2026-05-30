@@ -44,11 +44,23 @@ Structure: CAdvertising — 144 bytes
 
 Ghidra may display `(this->win).wViewFlags` / `bM_bBlockDismiss` (auto prefix); logical names `win.wViewFlags` / `m_bBlockDismiss`.
 
+## Heap child views (R4 todo 3, 2026-05-30)
+
+Not inline fields — owned by the dialog’s child chain via `CDSView__AddChild`.
+
+| Phase | Alloc | Type (decompile) | Function @ addr | Role |
+|-------|-------|------------------|-----------------|------|
+| ctor | `OperatorNew(0x6c)` | `CDSChained*` | `CAdvertising_ctor@0x0040e5f0` | Full-screen white fill; `CDSChained_InitWithRect(0,0,800,600)`; vtable `0x47fb04`; `AddChild` @ `0x0040e6e0` |
+| `LoadSplashImage` | `OperatorNew(0x78)` | `CDSBitmap*` | `LoadSplashImage@0x0040fe30` | Centered splash from FLX track size; `CDSBitmap_ctor`; second `AddChild` @ `0x0040fee0` |
+
+Menu splash path: `CBulanci_OnEvent_MenuStateMachine` event `0xf7` → `CAdvertising_ctor` → `LoadSplashImage(..., 0x1013a)` → `DoModal` → dtor.
+
 ## UNK
 
 - **`win` interior dwords** (`dwField_*`, chain band): inherited from `CWindow` / `CDSChained`; no `CAdvertising`-specific xrefs beyond ctor.
-- **Child views**: white backdrop (`operator new(0x6c)`) and splash `CDSBitmap` (`0x78`) are heap children via `CDSView__AddChild`, not inline fields.
+- **108 B backdrop** exact struct name (108 B < `CWindow` 112 B): only alloc + `CDSChained_InitWithRect` proven; not a separate Ghidra struct yet.
 
 ## Follow-up
 
 - Batch 42: `updatedItem+0x00` (`IDSUpdated` facet `0x4817b8`) proven host-written in `CAdvertising_ctor@0x0040e670` — not an UNK padding dword. See [round3_batch42_cdsupdateditem_facets_report.md](./round3_batch42_cdsupdateditem_facets_report.md), [CDSUpdatedItem.md](./CDSUpdatedItem.md).
+- R4: [round4_task_03_report.md](./round4_task_03_report.md) — heap children + `CWindow_dtor` path documented in Ghidra.

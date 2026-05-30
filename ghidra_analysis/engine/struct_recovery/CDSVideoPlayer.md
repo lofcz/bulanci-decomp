@@ -44,16 +44,27 @@
 
 **Static registration:** `CDSVideoPlayer_StaticClassRegister@0x0047d750` pushes factory `0x00439f50`, class id **`0x31`**, `HandleClassRegister@0x0042e910`. `get_xrefs_to(0x00439f50)` → DATA only (no in-game `CALL`).
 
+**R4 todo 25 (2026-05-30) — factory consumer path:**
+
+| Stage | func@addr | Role |
+|-------|-----------|------|
+| Register | `CDSVideoPlayer_StaticClassRegister@0x0047d750` | `HandleClassRegister(DAT_004b834c, 0x31, …, CreateTrackManagerHeap)` |
+| Dispatch | `InitializeByClassId@0x0042ef00` | `g_apClassByIdTable[classId]` fast path or `g_pClassRegHead` walk → `CALL [entry+0xc]` |
+| Stream callers | `CDSChain_Append@0x0042fbe5`, `CDSCollection_DeserializeElement@0x0042fd96`, `CDSStreamStorage_CreateFilterSafeStream@0x00434791` | Read `classId` from `IDSStream` (`vtable+0x10`) then `InitializeByClassId` |
+| Gameplay (not heap) | `CMovieView::StartPlayback@0x00422d50` | `OperatorNew(0x50)` + embedded `videoTrackManager` — does **not** use class id `0x31` |
+
+Program-wide `PUSH 0x31` for class id: **one** site (registration). No retail hardcoded gameplay caller found; heap factory is engine/registry + deserialize path only.
+
 Primary movie path uses **embedded** TM inside `CDSAudioVideoPlayer` (`CMovieView::StartPlayback@0x00422d50`), not the heap factory.
 
 ## Ghidra apply
 
 ```
-get_struct_layout CDSVideoPlayer  → Size: 72 bytes; CDSUpdatedItem @ +4; CDSTrackVector trackVector @ +0x1c (agent todo 44, 2026-05-30)
+get_struct_layout CDSVideoPlayer  → Size: 72 bytes; CDSUpdatedItem @ +4; CDSTrackVector trackVector @ +0x1c (agent todo 44; R5 worker 26 re-applied type/name)
 get_struct_layout CDSTrackVector  → Size: 16 bytes; pTracks, cTracks* (Ghidra may still list dwTracks*)
 ```
 
-**Prototypes:** `ConstructTrackManager@0x00439c70` → `CDSVideoPlayer * __fastcall ConstructTrackManager(CDSVideoPlayer *this, int schedulerParam)`; `TM_PauseAndStampClock@0x00439850` / `TM_AdvanceFrame@0x004399b0` / `TM_Play@0x00439940` → `CDSVideoPlayer *this` (agent todo 44); `TM_LookupTrackIndex@0x00439730` / `TM_InsertTrackAt@0x00439a70` → `CDSTrackVector *this` (Ghidra ECX may still decompile as `void*`).
+**Prototypes:** `ConstructTrackManager@0x00439c70` → `CDSVideoPlayer * __fastcall ConstructTrackManager(CDSVideoPlayer *this, int schedulerParam)`; `TM_PauseAndStampClock@0x00439850` / `TM_AdvanceFrame@0x004399b0` / `TM_Play@0x00439940` → `CDSVideoPlayer *this` (agent todo 44); `TM_LookupTrackIndex@0x00439730` / `TM_InsertTrackAt@0x00439a70` / `InsertOrFindTrack@0x00439bd0` → `CDSTrackVector *this` (R4: `InsertOrFindTrack` class-scoped; see [round4_task_44_report.md](./round4_task_44_report.md)).
 
 **Prototype (todo 42):** `BeginCurrentTrackPlayback@0x00439b40` → `void __fastcall BeginCurrentTrackPlayback(CDSVideoPlayer *this)` — callers include `CBulanekCtor` (`this+0xa8`) and `CBulanek_ApplyAction` (`&videoTrackManager`).
 
@@ -67,6 +78,6 @@ get_struct_layout CDSTrackVector  → Size: 16 bytes; pTracks, cTracks* (Ghidra 
 
 ## UNK
 
-- `TM_LookupTrackIndex@0x00439730` with `searchCount==-1` reads `cTracksAllocated` at inner `+4`; live path passes `cTracks` from inner `+8` via `InsertOrFindTrack`.
-- Decompiler `this` on track-vector helpers may remain `void*` despite `CDSTrackVector *` prototypes (__thiscall ECX limitation).
-- Runtime consumer of class id `0x31` heap factory (registration only in static init).
+- `TM_LookupTrackIndex@0x00439730` with `searchCount==-1` reads `cTracksAllocated` at inner `+4`; live path passes `cTracks` from inner `+8` via `InsertOrFindTrack` (R4 decompile: `this->dwTracks`).
+- `CDSVideoPlayer_EnsureCapacity` namespace / nested `trackVector.field_0x*` in host ctor decompile (cosmetic).
+- Shipped resource streams with deserialize **class id 0x31** (registry + `InitializeByClassId` path documented R4 todo 25; no in-repo asset proof).

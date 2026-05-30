@@ -51,9 +51,11 @@ Applied follow-up: replaced `pPad_0x14` with `pInlineMessage`; aligned base fiel
 | `0x0043b6f0` | `CDSDirectXException_LookupStringIdForHresult` | Linear scan `g_DirectXHresultStringTable` @ `0x4b0288` |
 | `0x0043b720` | `CDSDirectXException_ResolveMessageStringId` | Context-gated lookup; else `g_apCDSStaticTextsSingleton[2]+0x50` |
 
+**Agent todo 39 r4 (2026-05-30):** `CDSDirectXException_ThrowFromHresult@0x0043b820` — `this` / `local_10` typed `CDSDirectXException *`; tail fields named in decompile. See [round4_task_39_report.md](./round4_task_39_report.md).
+
 ## UNK
 
-- `ThrowFromHresult` decompiler still types the heap object as `CDSException*` (shows `this[1].*` for tail fields); struct manager embed is correct.
+- Vtable @ `0x489474`: slot symbols partially `FUN_*` in Ghidra (`master_vtable_catalog.csv` has full list).
 
 ## Follow-up resolved (agent todo 29, round 2)
 

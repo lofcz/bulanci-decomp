@@ -37,11 +37,13 @@
 
 | Address | Symbol | Role |
 |---------|--------|------|
-| `0x00401790` | `CBulanci::CDSStreamStorage_ctor` | Same body as standalone `OperatorNew(0x60)` ctor; xref `CBulanci_OpenPackStream@0x00401f36` |
+| `0x004340f0` | `CDSStreamStorage_CreateObject` | `OperatorNew(0x60)` @ `0x004340f2` → tail `JMP CDSStreamStorage_InitObjectFields` @ `0x00434100`; vtable DATA xref `0x0047d010` |
+| `0x00433df0` | `CDSStreamStorage_InitObjectFields` | Shared init: vtables, embedded `CDSCollection` @ `+0x1c`, `CDSChain` @ `+0x34`, `InitializeCriticalSection` @ `+0x48` (no `InitRootSafeStream`) |
+| `0x00401790` | `CBulanci::CDSStreamStorage_ctor` | In-place ctor + `InitRootSafeStream`; xref `CBulanci_OpenPackStream@0x00401f36` |
 | `0x00433e60` | `CDSStreamStorage_dtor` | Chain/collection/safe-stream teardown + `DeleteCriticalSection` @ `+0x48` |
-| `0x00431170` | `CDSStreamStorage_FindKeyIndex` | Keyed index on embedded `CDSCollection` (`this+0x1c`) |
+| `0x00431170` | `CDSCollection_FindKeyIndex` | Keyed index on `CDSCollection*` (ECX = storage `+0x1c` embed) |
 | `0x00433cb0` | `CDSStreamStorage_CloseStreamByKey` | Stack `CDSStrmResInfo` key → `FindKeyIndex` → `m_items[i]` |
-| `0x00434160` | `CDSStreamStorage_InitRootSafeStream` | `CDSSafeStream` @ `pRootSafeStream` (`+0x18`); `IStream::Seek` → `streamBaseOffset` (`+0x10`) |
+| `0x00434160` | `CDSStreamStorage_InitRootSafeStream` | `CDSSafeStream` @ `pRootSafeStream` (`+0x18`, **IDSEventHandler facet** `ctor+4`); **`CDSSafeStream_Tell`** (IDSEventHandler vfn `+0x20`) → `dwStreamBaseOffsetLo/Hi` (`+0x10`) — not `IStream::Seek` (R4 task 46) |
 | `0x00433f00` | `CDSStreamStorage_GetThreadLoaderNode` | Per-thread loader node on embedded `CDSChain` @ `+0x34` |
 | `0x00433f70` | `CDSStreamStorage_AppendOrReuseStream` | `EnterCriticalSection`; if `entry->streamExtent==0` append else `AddRefHeldObject`; append path reads `entry->filterSliceAddend` @ `+0x20` (`MOV EDX,[EDI+0x20]` @ `0x0043405b`) → `CreateFilterSafeStream` param_4 |
 | `0x00434760` | `CDSStreamStorage_CreateFilterSafeStream` | Filter wrapper over root safe-stream slice |
@@ -68,9 +70,11 @@ get_struct_layout CDSStreamStorage → 96 bytes
 +0x48  pCriticalSection[24]
 ```
 
-**Prototypes:** `CDSStreamStorage_ctor@0x00401790` → `CDSStreamStorage * __thiscall CDSStreamStorage_ctor(CDSStreamStorage *this, int *param_1)`; `CDSStreamStorage_FindKeyIndex@0x00431170` → `CDSCollection *` ECX (plate comment); `CBulanci_OpenPackStream@0x00401d80` → `OperatorNew(0x60)` + `CDSStreamStorage_ctor` → return `&pCVar7->pVftable_IDSStorage`.
+**Prototypes:** `CDSStreamStorage_ctor@0x00401790` → `CDSStreamStorage * __thiscall CDSStreamStorage_ctor(CDSStreamStorage *this, int *param_1)`; `CDSCollection_FindKeyIndex@0x00431170` → `CDSCollection *` ECX (class `CDSCollection`); `CBulanci_OpenPackStream@0x00401d80` → `OperatorNew(0x60)` + `CDSStreamStorage_ctor` → return `&pCVar7->pVftable_IDSStorage`.
 
-**Decompiler:** `CloseStreamByKey@0x00433cb0` uses `(this->collection).pM_items[i]` after `FindKeyIndex((CDSStreamStorage *)&this->collection, …)`. `CreateFilterSafeStream@0x00434760` already named (batch 29).
+**R4 todo 45 (2026-05-30):** `CloseStreamByKey@0x00433cb0` calls `CDSCollection_FindKeyIndex(&this->collection, …)` — asm `LEA ECX,[ESI+0x1c]` @ `0x00433d09`; decompile `(this->collection).pM_items[i]` after lookup. `set_function_prototype` + `set_function_this_type` on callee @ `0x00431170`. Report: [round4_task_45_report.md](./round4_task_45_report.md).
+
+**Decompiler:** `CreateFilterSafeStream@0x00434760` already named (batch 29).
 
 ## IDSStorage interface stubs (`g_pCDSStreamStorage_vftable_IDSStorage` @ `0x0047f7a4`, 9 slots)
 
@@ -100,6 +104,16 @@ Vtable `g_pCDSStreamStorage_vftable_IDSStorage@0x0047f7a4` (9 slots): slot +6 �
 
 Decompiler comments @ `0x00433f00`, `0x00433f70`, `0x00434160`, `0x00434760`, `0x0043405b` (`dwFilterSliceAddend`). Plate/PRE comments @ `0x004339c0`, `0x004339d0`, `0x00434160`, `0x004392a0`. `set_function_this_type CDSStreamStorage*` @ `InitRootSafeStream@0x00434160`. `save_program bulanci.exe` (**r3 task 46**, 2026-05-30). Report: [round3_task_46_report.md](./round3_task_46_report.md).
 
+## Round 4 (task 46) — `InitRootSafeStream` vcall disambiguation (2026-05-30)
+
+| Site | Asm / symbol | Verdict |
+|------|--------------|---------|
+| `0x004341d8`–`0x004341e6` | `LEA ECX,[ESI+0x20]`; `CALL [g_pCDSCollection_vftable_IDSChained+0x10]` (`CDSCollection_Load@0x00431360`); arg `EDI` = `&CDSSafeStream.vf_IDSEventHandler` | **Decompiler artifact** — static target is collection chained slot +0x10, but pack-init path cannot be literal `CDSCollection_Load` (would `Resize(0)` the embed). PRE @ `0x004341d8`. |
+| `0x004341e8`–`0x004341f5` | `ECX=[ESI+0x18]` (`pRootSafeStream` facet); `CALL [vtable+0x20]` → `CDSSafeStream_Tell@0x00446fe0` | **Closed** — captures 64-bit position into `dwStreamBaseOffsetLo/Hi` @ `+0x10` (was mislabeled `IStream::Seek`). PRE @ `0x004341e8`. |
+| `pRootSafeStream` @ `+0x18` | `LEA EDI,[EAX+4]` after `CDSSafeStream_ctor` | Stores **IDSEventHandler facet** (`CDSSafeStream+4`), not object base. |
+
+Report: [round4_task_46_report.md](./round4_task_46_report.md).
+
 **Call quirk:** `AppendOrReuseStream` passes **`entry` in ECX** to `CreateFilterSafeStream` so `InitializeByClassId` reads `entry->dwClassId` @ `+0x0c` (not `storage->nRefcount`).
 
 ## UNK
@@ -117,12 +131,16 @@ Decompiler comments @ `0x00433f00`, `0x00433f70`, `0x00434160`, `0x00434760`, `0
 |------|---------|----------|
 | Ctor init | `CDSStreamStorage_ctor@0x00401790` | `MOV [ESI+0x1c],0x47f700`; `MOV [ESI+0x20],0x47f6e4`; zeros `+0x24`..`+0x2c`; `MOV [ESI+0x30],0x20` |
 | Key lookup call | `CDSStreamStorage_CloseStreamByKey@0x00433cb0` | `LEA ECX,[ESI+0x1c]` @ `0x00433d09` → `CALL FindKeyIndex` with `CDSStrmResInfo_CompareKey@0x004342f0` |
-| `FindKeyIndex` body | `CDSStreamStorage_FindKeyIndex@0x00431170` | `MOV EBP,ECX`; `[EBP+0x8]` = `m_items`; `[EBP+0xc]` = `m_count`; linear if `compareFn==NULL`, else binary search |
+| `FindKeyIndex` body | `CDSCollection_FindKeyIndex@0x00431170` | `MOV EBP,ECX`; `[EBP+0x8]` = `m_items`; `[EBP+0xc]` = `m_count`; linear if `compareFn==NULL`, else binary search |
 | Entry resolve | `CloseStreamByKey@0x00433d24` | `MOV ECX,[ESI+0x24]`; `MOV EDI,[ECX+EDI*4]` — index into `m_items` on storage `this` |
 | Other callers | `CDSCollection_InsertKeyed@0x004312dc` | `CALL FindKeyIndex` with `ECX` = `CDSCollection*` base (no `+0x1c` skip) |
 
 Ghidra flat names: `collection_pVftable` @ `+0x1c`, `pStreamEntries` @ `+0x24`, `streamEntryCount` @ `+0x28`.
 
-**Semantics:** `FindKeyIndex` is a collection helper (storage-scoped symbol). Operates on `CDSCollection*` (= `CDSStreamStorage+0x1c`). Returns index; `CloseStreamByKey` loads stream-entry pointer from `m_items[i]`.
+**Semantics:** `CDSCollection_FindKeyIndex` lives in class `CDSCollection`; callers pass `CDSCollection*` (= `CDSStreamStorage+0x1c` embed). Returns index; `CloseStreamByKey` loads stream-entry pointer from `(this->collection).pM_items[i]`.
 
 **`GetStreamEntry` stub:** `MOV EAX,[ECX+0x20]` / `MOV EAX,[EAX+ECX*4]` indexes **`m_pVtable_IDSChained`** (storage `+0x20`), not **`m_items`** (`+0x24`). Vtable-only @ `0x0047f7c0` — dead interface stub, off-by-4 from live path.
+
+## Follow-up (round 5 worker 01)
+
+- SEH unwind **`eh_CDSStreamStorage_DeleteCriticalSection@0x004011d0`** — `Unwind_004740b9` passes `frameObject+0x48` (`lock`); pairs with ctor/dtor `DeleteCriticalSection` @ `+0x48`.

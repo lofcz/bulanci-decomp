@@ -207,6 +207,16 @@ IJG release-6b function on the right.
 | `0x0045f7e0` | `jdiv_round_up` | `jutils.c` (22 callers, the canonical "ceil(a/b)" helper) |
 | `0x0049db50..0x0049dc8f` | `const int jpeg_natural_order[DCTSIZE2+16]` (320 B) | `jutils.c` |
 
+### Huffman encoder / decoder helpers (`jchuff.c` / `jdhuff.c`, R5 worker 49)
+
+| Address | IJG function | Source file | Proof summary |
+|---------|--------------|-------------|---------------|
+| `0x00468120` | `emit_bits_s` | `jchuff.c` | `put_buffer` @ `+8`, `put_bits` @ `+0xc`, 0xFF stuffing, `size==0` → `JERR_HUFF_MISSING_CODE` (`0x28`); 7× caller from `encode_one_block@0x00468200` |
+| `0x00468e10` | `emit_bits_e` | `jchuff.c` | `put_buffer` @ `+0x18`, `put_bits` @ `+0x1c`, gather gate @ `+0xc`; 8× xref incl. `encode_one_block@0x004691b0` |
+| `0x00468ef0` | `emit_ac_symbol` | `jchuff.c` | gather @ `+0xc` else `emit_bits_e` with `actbl->ehufco/si`; ZRL `0xF0` loops in `encode_one_block@0x004691b0` |
+| `0x00468f50` | `emit_eobrun` | `jchuff.c` | pending count @ `+0x38`, `emit_ac_symbol` + `emit_bits_e`, `emit_buffered_bits` tail @ `+0x40` |
+| `0x00462f80` | `process_restart` | `jdhuff.c` | `cinfo->restart_interval` / `restarts_to_go@coef+0x28`; 3× caller `jpeg_decode_mcu_*_first` / refine |
+
 The remaining 25-30 unidentified functions in the `0x46xxxx` block
 (encoder DCT/Huffman/sampler/marker-writer/mem-mgr/etc.) are
 **guaranteed** to be the other stock IJG-6b sources -- `jcmainct.c`,

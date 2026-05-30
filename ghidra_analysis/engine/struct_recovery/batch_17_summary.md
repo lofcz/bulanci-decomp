@@ -29,5 +29,5 @@
 ## Follow-ups
 
 - Expand `CScore.base_CWindow_MI` when global `CWindow` recovery catches up (mirror `CExitDlg` bbox/parent fields).
-- `CScoreItem_MatchesKillsDeathsAndName`: calling convention / first parameter is scratch `CBulanci`-shaped context, not `CScoreItem*`.
+- ~~`CScoreItem_MatchesKillsDeathsAndName` wrong `this`~~ — **resolved** r4 todo 18: `__thiscall` `CScoreItem*` template in `ECX`, `pRow` on stack (`0x004119d5`).
 - `m_deaths` omitted from `Serialize` — confirm network vs disk schema.
