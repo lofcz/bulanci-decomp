@@ -18,3 +18,8 @@ uchar CDSBackBuffer::CDSBackBuffer_OnEvent(uchar param_1) { STUB_BODY(); return 
 void* CDSBackBuffer::CDSBackBuffer_DtorScalar(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042adb0 END
 
+// !FUNC 0x0042ad40 BEGIN
+/* 42AD40-42ADAB 0006B */
+void CDSBackBuffer::CDSBackBuffer_dtor(void* param_1) { STUB_BODY(); }
+// !FUNC 0x0042ad40 END
+

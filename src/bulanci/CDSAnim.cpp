@@ -14,6 +14,6 @@ uchar* CDSAnim::GetTypeInfo() {
 
 // !FUNC 0x00439560 BEGIN
 /* 439560-43960A 000AA */
-void* CDSAnim::ParameterizedCtor(uint param_1, uint param_2, int* param_3, int param_4) { STUB_BODY(); return 0; }
+void* CDSAnim::ParameterizedCtor(int param_1, int param_2, int* param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00439560 END
 

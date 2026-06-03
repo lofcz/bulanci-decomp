@@ -24,7 +24,7 @@ public:
 	/* 4274F0 */ void* CDSBitmap_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x004274f0 END
 	// !DECL 0x004393d0 BEGIN
-	/* 4393D0 */ void* CDSBitmap_ctor(uint param_1, uint param_2, int* param_3);
+	/* 4393D0 */ void* CDSBitmap_ctor(int param_1, int param_2, int* param_3);
 	// !DECL 0x004393d0 END
 };
 

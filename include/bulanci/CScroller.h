@@ -30,13 +30,13 @@ public:
 	/* 4034D0 */ uchar* CScroller_GetTypeInfo();
 	// !DECL 0x004034d0 END
 	// !DECL 0x004034e0 BEGIN
-	/* 4034E0 */ uchar CScroller_ScalarDeletingDtor(uchar param_1);
+	/* 4034E0 */ void* CScroller_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x004034e0 END
 	// !DECL 0x004040c0 BEGIN
-	/* 4040C0 */ uchar FUN_004040c0(int param_1);
+	/* 4040C0 */ uchar CScroller_ResetScrollSchedulerSlot(int param_1);
 	// !DECL 0x004040c0 END
 	// !DECL 0x00404110 BEGIN
-	/* 404110 */ uchar FUN_00404110(short param_1, int param_2);
+	/* 404110 */ uchar CScroller_OnViewEvent(short param_1, int param_2);
 	// !DECL 0x00404110 END
 	// !DECL 0x00404de0 BEGIN
 	/* 404DE0 */ uchar CDSChain_AdjustThisOffset(int param_1);
@@ -45,7 +45,7 @@ public:
 	/* 405110 */ uint CScroller_HandlePageKeys(char param_1);
 	// !DECL 0x00405110 END
 	// !DECL 0x004057c0 BEGIN
-	/* 4057C0 */ uchar CScroller_Render(uchar param_1);
+	/* 4057C0 */ uchar CScroller_Render(CListViewer* param_1);
 	// !DECL 0x004057c0 END
 	// !DECL 0x00405930 BEGIN
 	/* 405930 */ bool CScroller_OnKeyDown(char param_1);
@@ -54,19 +54,19 @@ public:
 	/* 405AF0 */ uchar CScroller_SetRect(int* param_1);
 	// !DECL 0x00405af0 END
 	// !DECL 0x004069b0 BEGIN
-	/* 4069B0 */ uchar FUN_004069b0(char param_1);
+	/* 4069B0 */ uchar CScroller_OnKeyUp(char param_1);
 	// !DECL 0x004069b0 END
 	// !DECL 0x00406cc0 BEGIN
-	/* 406CC0 */ bool CScroller_OnKeyUp(char param_1);
+	/* 406CC0 */ bool CScroller_OnKeyUp_00406cc0(char param_1);
 	// !DECL 0x00406cc0 END
 	// !DECL 0x004089c0 BEGIN
-	/* 4089C0 */ uchar CScroller_BuildAt(int param_1, int param_2, uint param_3, int param_4);
+	/* 4089C0 */ void* CScroller_BuildAt(int param_1, int param_2, uint param_3, int param_4);
 	// !DECL 0x004089c0 END
 	// !DECL 0x004229a0 BEGIN
 	/* 4229A0 */ uchar CDSObject_ReleaseViaVtable(int param_1);
 	// !DECL 0x004229a0 END
 	// !DECL 0x0042cbb0 BEGIN
-	/* 42CBB0 */ uchar FUN_0042cbb0(int param_1, int param_2);
+	/* 42CBB0 */ uchar CScroller_OffsetChildViewRect(int param_1, int param_2);
 	// !DECL 0x0042cbb0 END
 };
 

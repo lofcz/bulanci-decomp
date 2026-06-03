@@ -51,7 +51,13 @@ use super::server::AssetServer;
 /// Default broker endpoint when `BULANCI_DEV_EDITOR=1`.  The asset studio's
 /// Vite dev server defaults to `:5173` on the same host, and the mod-broker
 /// plugin claims `/__engine/subscribe` on the upgrade.
-const DEFAULT_URL: &str = "ws://127.0.0.1:5173/__engine/subscribe";
+///
+/// The host is `localhost` (not `127.0.0.1`) on purpose: Vite/Node bind
+/// `localhost` to the **IPv6** loopback `[::1]` only on Windows, so an IPv4
+/// `127.0.0.1` connect is refused.  `localhost` resolves to both `::1` and
+/// `127.0.0.1`; [`tungstenite::connect`] tries each resolved address in turn,
+/// so it reaches the broker regardless of which stack the dev server listens on.
+const DEFAULT_URL: &str = "ws://localhost:5173/__engine/subscribe";
 
 /// How long to wait between connection attempts / after a drop.  Mirrors
 /// the web shell's 2 s reconnect schedule.

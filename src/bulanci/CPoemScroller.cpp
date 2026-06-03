@@ -12,12 +12,12 @@ uchar CPoemScroller::BlitStatic(void* param_1, int* param_2, int param_3, uint p
 
 // !FUNC 0x004240f0 BEGIN
 /* 4240F0-42436B 0027B */
-void CPoemScroller::CPoemScroller_Render(void* param_1) { STUB_BODY(); }
+void CPoemScroller::CPoemScroller_Render(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x004240f0 END
 
 // !FUNC 0x00425ca0 BEGIN
 /* 425CA0-425D98 000F8 */
-void CPoemScroller::Destructor(void* param_1) { STUB_BODY(); }
+void CPoemScroller::CPoemScroller_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00425ca0 END
 
 // !FUNC 0x00425da0 BEGIN
@@ -29,22 +29,22 @@ uchar* CPoemScroller::GetClassIdentifier() {
 
 // !FUNC 0x00425db0 BEGIN
 /* 425DB0-425DB8 00008 */
-uchar CPoemScroller::DeletingDestructorThunk_10(uchar param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::CPoemScroller_ScalarDeletingDtor_thunk_n0x4(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00425db0 END
 
 // !FUNC 0x00425dc0 BEGIN
 /* 425DC0-425DC8 00008 */
-uchar CPoemScroller::DeletingDestructorThunk_1c(uchar param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::CPoemScroller_ScalarDeletingDtor_thunk_n0x68(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00425dc0 END
 
 // !FUNC 0x00425dd0 BEGIN
 /* 425DD0-425DD8 00008 */
-uchar CPoemScroller::DeletingDestructorThunk_24(uchar param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::CPoemScroller_ScalarDeletingDtor_thunk_n0x10(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00425dd0 END
 
 // !FUNC 0x00425de0 BEGIN
 /* 425DE0-425DE8 00008 */
-uchar CPoemScroller::DeletingDestructorThunk_4(uchar param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::CPoemScroller_ScalarDeletingDtor_thunk_n0x18(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00425de0 END
 
 // !FUNC 0x00425df0 BEGIN
@@ -54,12 +54,12 @@ void CPoemScroller::PickNextPoem(void* param_1) { STUB_BODY(); }
 
 // !FUNC 0x00426030 BEGIN
 /* 426030-42605A 0002A */
-uchar CPoemScroller::OnScrollTick(int param_1) { STUB_BODY(); return 0; }
+void CPoemScroller::OnScrollTick(int* param_1) { STUB_BODY(); }
 // !FUNC 0x00426030 END
 
 // !FUNC 0x004262c0 BEGIN
 /* 4262C0-4264C5 00205 */
-void* CPoemScroller::Constructor(void* param_1) { STUB_BODY(); return 0; }
+void* CPoemScroller::CPoemScroller_Constructor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004262c0 END
 
 // !FUNC 0x004264c5 BEGIN
@@ -69,13 +69,9 @@ uchar CPoemScroller::CatchExceptionHelper() { STUB_BODY(); return 0; }
 
 // !FUNC 0x004264e0 BEGIN
 /* 4264E0-4264FE 0001E */
-void* CPoemScroller::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
+void* CPoemScroller::CPoemScroller_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004264e0 END
 
-// !FUNC 0x00433280 BEGIN
-/* 433280-4332C8 00048 */
-void CPoemScroller::rect_Intersect(tagRECT* param_1) { STUB_BODY(); }
-// !FUNC 0x00433280 END
 
 // !FUNC 0x00435c20 BEGIN
 /* 435C20-435C64 00044 */
@@ -94,7 +90,7 @@ uchar CPoemScroller::CPoemScroller_SampleSourcePixel(uint param_1, uint param_2)
 
 // !FUNC 0x00436160 BEGIN
 /* 436160-436191 00031 */
-uint CPoemScroller::FUN_00436160(uint param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
+uint CPoemScroller::CPoemScroller_WriteDestPixelRemapped(uint param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00436160 END
 
 // !FUNC 0x004361a0 BEGIN
@@ -104,7 +100,7 @@ uchar CPoemScroller::CPoemScroller_OpaqueBlitPixel_Indexed1(int* param_1, uint p
 
 // !FUNC 0x00436210 BEGIN
 /* 436210-436267 00057 */
-int CPoemScroller::CPoemScroller_FindNearestPaletteIndex(void* param_1) { STUB_BODY(); return 0; }
+int CPoemScroller::CPoemScroller_FindNearestPaletteIndex(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00436210 END
 
 // !FUNC 0x00436270 BEGIN
@@ -128,13 +124,13 @@ uchar CPoemScroller::CPoemScroller_DrawRectOutline(int* param_1, uint param_2, i
 // !FUNC 0x00436530 END
 
 // !FUNC 0x004365f0 BEGIN
-/* 4365F0-436748 00158 */
+/* 4365F0-436745 00155 */
 uchar CPoemScroller::CPoemScroller_FillRect(int* param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004365f0 END
 
 // !FUNC 0x00436760 BEGIN
 /* 436760-436768 00008 */
-uchar CPoemScroller::FUN_00436760(int param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::CPoemScroller_ClearBlitMask(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00436760 END
 
 // !FUNC 0x00436770 BEGIN
@@ -149,7 +145,7 @@ uchar CPoemScroller::BlitDispatch(int* param_1, void* param_2, int* param_3, uin
 
 // !FUNC 0x00436e10 BEGIN
 /* 436E10-436E3B 0002B */
-uchar CPoemScroller::CPoemScroller_SetBlitMask(uint param_1) { STUB_BODY(); return 0; }
+uchar CPoemScroller::CPoemScroller_SetBlitMask(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00436e10 END
 
 // !FUNC 0x00445740 BEGIN

@@ -6,10 +6,10 @@
 class CDSDsmFile {
 public:
 	// !DECL 0x004289a0 BEGIN
-	/* 4289A0 */ void* InitializeQueueStreamView(int param_1, int param_2, int param_3);
+	/* 4289A0 */ void* InitializeQueueStreamView(int param_1, uchar* param_2, int param_3);
 	// !DECL 0x004289a0 END
 	// !DECL 0x00428ad0 BEGIN
-	/* 428AD0 */ uchar HandleResourceRead(int* param_1, int param_2, uint param_3);
+	/* 428AD0 */ uchar CDSDsmFile_HandleResourceRead(int* param_1, int param_2, uint param_3);
 	// !DECL 0x00428ad0 END
 	// !DECL 0x00428c40 BEGIN
 	/* 428C40 */ uchar HandleRecordRead(int* param_1, void* param_2);
@@ -63,7 +63,7 @@ public:
 	/* 428EC0 */ void HandleDestructInstance(void* param_1);
 	// !DECL 0x00428ec0 END
 	// !DECL 0x00428f80 BEGIN
-	/* 428F80 */ void HandleOpenStream(CDSFilterStream* param_1);
+	/* 428F80 */ void HandleOpenStream(uchar param_1);
 	// !DECL 0x00428f80 END
 	// !DECL 0x00428ff0 BEGIN
 	/* 428FF0 */ uchar HandleReleaseResource(uchar* param_1, uchar param_2);
@@ -90,10 +90,10 @@ public:
 	/* 433010 */ uchar CDSChain_AdjustThisOffset_ThisMinus38(int param_1);
 	// !DECL 0x00433010 END
 	// !DECL 0x00439ac0 BEGIN
-	/* 439AC0 */ CDSObject* InitializeChildObject(void* param_1);
+	/* 439AC0 */ uchar InitializeChildObject(void* param_1);
 	// !DECL 0x00439ac0 END
 	// !DECL 0x0043bde0 BEGIN
-	/* 43BDE0 */ uchar InitializeSourceRegion(int param_1, int param_2, int param_3);
+	/* 43BDE0 */ uchar InitializeSourceRegion(int param_1, uchar* param_2, int param_3);
 	// !DECL 0x0043bde0 END
 	// !DECL 0x0043be78 BEGIN
 	/* 43BE78 */ uchar Catch_0043be78();

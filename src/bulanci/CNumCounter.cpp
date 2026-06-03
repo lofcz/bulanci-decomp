@@ -48,12 +48,12 @@ void CNumCounter::CNumCounter_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00427430 END
 
 // !FUNC 0x00427740 BEGIN
-/* 427740-4278BD 0017D */
+/* 427740-4278B4 00174 */
 void CNumCounter::CNumCounter_Render(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00427740 END
 
 // !FUNC 0x00427af0 BEGIN
 /* 427AF0-427B0E 0001E */
-uchar CNumCounter::CNumCounter_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CNumCounter::CNumCounter_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00427af0 END
 

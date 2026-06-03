@@ -31,17 +31,17 @@ void* CDSWav::CDSWav_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x00433040 BEGIN
 /* 433040-433069 00029 */
-uchar CDSWav::CDSWav_ReleaseRefcount(int param_1) { STUB_BODY(); return 0; }
+void CDSWav::CDSWav_ReleaseRefcount() { STUB_BODY(); }
 // !FUNC 0x00433040 END
 
 // !FUNC 0x00433070 BEGIN
 /* 433070-433078 00008 */
-uchar CDSWav::CDSWav_ReleaseChild_thunk_Sub18(int param_1) { STUB_BODY(); return 0; }
+uchar CDSWav::CDSMpxStream_ReleaseRefcount_thunk_Sub18(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433070 END
 
 // !FUNC 0x004330a0 BEGIN
 /* 4330A0-4330A8 00008 */
-uchar CDSWav::CDSWav_ReleaseChild(int param_1) { STUB_BODY(); return 0; }
+uchar CDSWav::CDSMpxStream_ReleaseRefcount_thunk_Sub4(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004330a0 END
 
 // !FUNC 0x0043b950 BEGIN
@@ -49,13 +49,5 @@ uchar CDSWav::CDSWav_ReleaseChild(int param_1) { STUB_BODY(); return 0; }
 uint CDSWav::CDSWav_HandleAcquireReadThunk() { STUB_BODY(); return 0; }
 // !FUNC 0x0043b950 END
 
-// !FUNC 0x0043b960 BEGIN
-/* 43B960-43B9E7 00087 */
-uchar CDSWav::CDSWav_HandleResourceRead(uint* param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
-// !FUNC 0x0043b960 END
 
-// !FUNC 0x0043ba30 BEGIN
-/* 43BA30-43BA99 00069 */
-uchar CDSWav::FUN_0043ba30(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0043ba30 END
 

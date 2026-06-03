@@ -6,13 +6,13 @@
 class CBulAnim {
 public:
 	// !DECL 0x0040ad20 BEGIN
-	/* 40AD20 */ void CleanupBody(void* param_1);
+	/* 40AD20 */ void CleanupBody(uchar param_1);
 	// !DECL 0x0040ad20 END
 	// !DECL 0x0040afd0 BEGIN
-	/* 40AFD0 */ uchar ApplyTeamPalette(uchar param_1);
+	/* 40AFD0 */ uchar CBulAnim_ApplyTeamPalette(uchar param_1);
 	// !DECL 0x0040afd0 END
 	// !DECL 0x0040b020 BEGIN
-	/* 40B020 */ uchar OnTeamPaletteEvt(short param_1, uint param_2);
+	/* 40B020 */ uchar CBulAnim_OnTeamPaletteEvt(short param_1, uint param_2);
 	// !DECL 0x0040b020 END
 	// !DECL 0x0040b820 BEGIN
 	/* 40B820 */ uchar* GetTypeInfo_Sub68();
@@ -21,7 +21,7 @@ public:
 	/* 40B830 */ uchar* GetTypeInfo_Sub78();
 	// !DECL 0x0040b830 END
 	// !DECL 0x0040b840 BEGIN
-	/* 40B840 */ uchar PrimaryTick_thunk(int param_1);
+	/* 40B840 */ uchar CBulAnim_PrimaryTick_thunk(int param_1);
 	// !DECL 0x0040b840 END
 	// !DECL 0x0040b850 BEGIN
 	/* 40B850 */ uchar PrimaryRender_thunk(char param_1);
@@ -39,7 +39,7 @@ public:
 	/* 40B8A0 */ uchar Sub68Dtor_thunk(uchar param_1);
 	// !DECL 0x0040b8a0 END
 	// !DECL 0x0040eaa0 BEGIN
-	/* 40EAA0 */ uchar CreateCBulAnim();
+	/* 40EAA0 */ CDSAnim* CreateCBulAnim();
 	// !DECL 0x0040eaa0 END
 	// !DECL 0x00438f20 BEGIN
 	/* 438F20 */ uchar IDSAnim_NotifyEvents(uint param_1, int param_2, int param_3);
@@ -51,7 +51,7 @@ public:
 	/* 439010 */ void SetPalette(uint* param_1);
 	// !DECL 0x00439010 END
 	// !DECL 0x004391d0 BEGIN
-	/* 4391D0 */ uchar IDSAnim_SetSequence_thunk(uint param_1, int* param_2);
+	/* 4391D0 */ uchar IDSAnim_SetSequence_thunk(uint param_1, CDSImage* param_2);
 	// !DECL 0x004391d0 END
 	// !DECL 0x004392a0 BEGIN
 	/* 4392A0 */ uchar IDSAnim_SelectRandomTrack(uint param_1, short param_2);

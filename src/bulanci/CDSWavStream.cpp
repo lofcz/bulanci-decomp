@@ -44,7 +44,7 @@ uchar CDSWavStream::CDSWavStream_ScalarDeletingDtor_thunk_Sub18(uchar param_1) {
 
 // !FUNC 0x0041a640 BEGIN
 /* 41A640-41A69A 0005A */
-void CDSWavStream::CDSWavStream_dtor(void* param_1) { STUB_BODY(); }
+void CDSWavStream::CDSWavStream_dtor() { STUB_BODY(); }
 // !FUNC 0x0041a640 END
 
 // !FUNC 0x0041bc00 BEGIN
@@ -64,6 +64,6 @@ uchar CDSWavStream::CDSWavStream_SaveToStream(int* param_1) { STUB_BODY(); retur
 
 // !FUNC 0x0043bb50 BEGIN
 /* 43BB50-43BB93 00043 */
-uchar CDSWavStream::FUN_0043bb50(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSWavStream::CDSWavStream_AttachStreamStorage(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043bb50 END
 

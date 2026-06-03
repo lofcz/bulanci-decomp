@@ -2,7 +2,7 @@
 
 // !FUNC 0x00423950 BEGIN
 /* 423950-4239DF 0008F */
-void CSwitch::CSwitch_dtor(void* param_1) { STUB_BODY(); }
+void CSwitch::CSwitch_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00423950 END
 
 // !FUNC 0x004239e0 BEGIN
@@ -49,7 +49,7 @@ uchar CSwitch::CSwitch_PlayIdleTrack(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004244a0 BEGIN
 /* 4244A0-424519 00079 */
-void* CSwitch::CSwitch_DefaultCtor(void* param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CSwitch::CSwitch_DefaultCtor(uchar param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004244a0 END
 
 // !FUNC 0x00424cf0 BEGIN
@@ -76,4 +76,9 @@ void CSwitch::CSwitch_OnAnimEnd(uint param_1, short param_2) { STUB_BODY(); }
 /* 425260-425292 00032 */
 uchar CSwitch::CSwitch_OnMouseClick(uint param_1, uchar param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00425260 END
+
+// !FUNC 0x00424bc0 BEGIN
+/* 424BC0-424CED 0012D */
+void* CSwitch::CSwitch_ctor(int param_1, int param_2, uchar param_3, ushort param_4) { STUB_BODY(); return 0; }
+// !FUNC 0x00424bc0 END
 

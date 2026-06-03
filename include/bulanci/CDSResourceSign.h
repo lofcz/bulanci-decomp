@@ -12,13 +12,13 @@ public:
 	/* 42E6A0 */ uchar CDSResourceSign_WriteDateField(int* param_1);
 	// !DECL 0x0042e6a0 END
 	// !DECL 0x00434310 BEGIN
-	/* 434310 */ void CDSResourceSign_WriteToStream(CDSFilterStream* param_1);
+	/* 434310 */ void CDSResourceSign_WriteToStream(void* param_1);
 	// !DECL 0x00434310 END
 	// !DECL 0x004343a0 BEGIN
 	/* 4343A0 */ uchar CDSResourceSign_ReadFromStream(int* param_1);
 	// !DECL 0x004343a0 END
 	// !DECL 0x00434540 BEGIN
-	/* 434540 */ uint* CDSResourceSign_ctor(uint* param_1);
+	/* 434540 */ void* CDSResourceSign_ctor(void* param_1);
 	// !DECL 0x00434540 END
 	// !DECL 0x004345c0 BEGIN
 	/* 4345C0 */ uchar* CDSResourceSign_GetClassData();

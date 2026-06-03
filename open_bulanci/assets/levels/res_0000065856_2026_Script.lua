@@ -1,4 +1,8 @@
--- Transpiled Bulanci Level Script
+-- Transpiled Bulanci Level Script — "Na dobrou noc" / "Bedtime story" (res 65856, classId 2026)
+-- Level-specific helper labels come from ghidra_analysis/asset_catalog/registry.json:
+--   level_bedtime_butterfly_fly_* (decor), level_bedtime_bunny_clip_* (on log platform),
+--   level_bedtime_mouse_* (gun-mouse with danger zones), level_bedtime_bird_nest_*,
+--   level_bedtime_bush_* (decor), level_bedtime_mimic_* (bedtime-mimic event).
 local engine = require("engine")
 
 local function get_local(v, args, var_count, idx)
@@ -17,6 +21,10 @@ local function set_local(v, args, var_count, idx, val)
     end
 end
 
+-- place_butterfly_decor(x, y): BUTTERFLY decor (level_bedtime_butterfly_fly_*).
+-- 1/8 chance of being absent (Rand 0..7). Inserts butterfly trio anim 65764..65766 on slot 1
+-- (32f/31f/32f flying loops), 2 images (65643 body at +8/+141, 65642 base at order axis -39),
+-- 1 obstacle at (27,97)-(175,133), obstacle bounds (27,180)-(180,216).
 local function fn_0x01e7(...)
     local args = {...}
     local v = {}
@@ -31,10 +39,14 @@ local function fn_0x01e7(...)
     do return 0 end
 end
 
+-- place_bunny_on_log(x, y): BROWN BUNNY on log platform (level_bedtime_bunny_clip_*).
+-- 1/10 chance of being absent (Rand 0..9). Inserts 6 obstacles (the log's decorative shape),
+-- 1 image 65609 (the LOG), 5-frame bunny anim 65759..65763 on slot 6.
+-- Bunny clips: A=8f idle, B=5f static, C=20f idle, D=25f decapitation/death, E=20f idle.
 local function fn_0x0286(...)
     local args = {...}
     local v = {}
-    if math.random(0, 7) == 0 then goto lbl_0x038e end
+    if math.random(0, 9) == 0 then goto lbl_0x038e end
     engine.setInsertMode(2)
     engine.insertView(engine.bindToSlot(engine.translateTo(engine.createObstacle(79, 50, 112, 80), get_local(v, args, 1, 1), get_local(v, args, 1, 2)), 7))
     engine.insertView(engine.translateTo(engine.createObstacle(2, 58, 23, 108), get_local(v, args, 1, 1), get_local(v, args, 1, 2)))
@@ -43,61 +55,62 @@ local function fn_0x0286(...)
     engine.insertView(engine.translateTo(engine.createObstacle(66, 14, 87, 69), get_local(v, args, 1, 1), get_local(v, args, 1, 2)))
     engine.insertView(engine.translateTo(engine.createObstacle(87, 0, 134, 42), get_local(v, args, 1, 1), get_local(v, args, 1, 2)))
     engine.setInsertMode(0)
-    engine.insertView(engine.createImage(get_local(v, args, 1, 1), get_local(v, args, 1, 2), 65609))
-    set_local(v, args, 1, 0, engine.create_anim((get_local(v, args, 1, 1) + 49), (get_local(v, args, 1, 2) + -15), 1, {65759, 65760, 65761, 65763, 65762}))
+    engine.insertView(engine.createImage(get_local(v, args, 1, 1), get_local(v, args, 1, 2), 65609))  -- the LOG
+    set_local(v, args, 1, 0, engine.create_anim((get_local(v, args, 1, 1) + 49), (get_local(v, args, 1, 2) + -15), 1, {65759, 65760, 65761, 65763, 65762}))  -- the BUNNY
     engine.bindToSlot(get_local(v, args, 1, 0), 6)
     engine.insertView(get_local(v, args, 1, 0))
     ::lbl_0x038e::
     do return 0 end
 end
 
+-- place_gun_mouse(x, y, danger_w): GREY MOUSE WITH RIFLE (level_bedtime_mouse_*).
+-- 1/8 chance of being absent (Rand 0..7). Sets g_pos5/6 (mouse position), g_anim_7/9/10/11=0.
+-- If server: defines 2 danger zones (left and right of the bush, 30px tall, danger_w apart),
+-- registers timer 0. Inserts 3 obstacles (the bush), image 65606 (the cover, order axis -25),
+-- 8-frame mouse anim 65767..65774 (clips pop/hide/shoot/death for left+right) on slot 9.
 local function fn_0x0394(...)
     local args = {...}
     local v = {}
-    if math.random(0, 9) == 0 then goto lbl_0x04db end
-    engine.set_global(5, get_local(v, args, 1, 1))
-    engine.set_global(6, get_local(v, args, 1, 2))
-    engine.set_global(7, 0)
-    engine.set_global(9, 0)
-    engine.set_global(10, 0)
-    engine.set_global(11, 0)
-    if engine.isServer() == 0 then goto lbl_0x0426 end
-    engine.defineDangerZone(0, 0, (get_local(v, args, 1, 2) + -3), get_local(v, args, 1, 1), (get_local(v, args, 1, 2) + 27))
-    engine.defineDangerZone(1, (get_local(v, args, 1, 1) + 66), (get_local(v, args, 1, 2) + -3), get_local(v, args, 1, 3), (get_local(v, args, 1, 2) + 27))
-    engine.registerTimer(0, 0, 7)
-    ::lbl_0x0426::
+    if math.random(0, 7) == 0 then goto lbl_0x04db end
     engine.setInsertMode(2)
     engine.insertView(engine.set_global(8, engine.translateTo(engine.createObstacle(36, 0, 45, 14), get_local(v, args, 1, 1), get_local(v, args, 1, 2))))
     engine.insertView(engine.translateTo(engine.createObstacle(5, 0, 36, 58), get_local(v, args, 1, 1), get_local(v, args, 1, 2)))
     engine.insertView(engine.translateTo(engine.createObstacle(36, 14, 59, 58), get_local(v, args, 1, 1), get_local(v, args, 1, 2)))
     engine.setInsertMode(1)
-    engine.insertView(engine.setOrderAxis(engine.createImage(get_local(v, args, 1, 1), get_local(v, args, 1, 2), 65606), -25))
-    set_local(v, args, 1, 0, engine.create_anim((get_local(v, args, 1, 1) + 17), (get_local(v, args, 1, 2) + -29), 1, {65767, 65768, 65769, 65770, 65771, 65772, 65773, 65774}))
+    engine.insertView(engine.setOrderAxis(engine.createImage(get_local(v, args, 1, 1), get_local(v, args, 1, 2), 65606), -25))  -- bush cover
+    set_local(v, args, 1, 0, engine.create_anim((get_local(v, args, 1, 1) + 17), (get_local(v, args, 1, 2) + -29), 1, {65767, 65768, 65769, 65770, 65771, 65772, 65773, 65774}))  -- MOUSE anim
     engine.bindToSlot(engine.setOrderAxis(get_local(v, args, 1, 0), 35), 9)
     engine.insertView(get_local(v, args, 1, 0))
     ::lbl_0x04db::
     do return 0 end
 end
 
+-- place_bird_in_nest(x, y): BIRD IN A NEST (level_bedtime_bird_nest_*).
+-- 1/7 chance of being absent (Rand 0..6). Inserts 4 obstacles (the nest), 1 image 65607 (the nest, order axis -25),
+-- 5-frame bird anim 65775..65779 on slot 4.
+-- Bird clips: A=first idle, B=2nd (9f 66x53), C=3rd, D=12f idle, E=10f death/gore.
 local function fn_0x04e1(...)
     local args = {...}
     local v = {}
-    if math.random(0, 7) == 0 then goto lbl_0x05c3 end
+    if math.random(0, 6) == 0 then goto lbl_0x05c3 end
     engine.setInsertMode(2)
     engine.insertView(engine.bindToSlot(engine.translateTo(engine.createObstacle(106, 20, 122, 36), get_local(v, args, 1, 1), get_local(v, args, 1, 2)), 5))
     engine.insertView(engine.translateTo(engine.createObstacle(7, 35, 63, 83), get_local(v, args, 1, 1), get_local(v, args, 1, 2)))
     engine.insertView(engine.translateTo(engine.createObstacle(63, 55, 134, 98), get_local(v, args, 1, 1), get_local(v, args, 1, 2)))
     engine.insertView(engine.translateTo(engine.createObstacle(49, 20, 93, 35), get_local(v, args, 1, 1), get_local(v, args, 1, 2)))
     engine.setInsertMode(1)
-    set_local(v, args, 1, 0, engine.setOrderAxis(engine.createImage(get_local(v, args, 1, 1), get_local(v, args, 1, 2), 65607), -25))
+    set_local(v, args, 1, 0, engine.setOrderAxis(engine.createImage(get_local(v, args, 1, 1), get_local(v, args, 1, 2), 65607), -25))  -- the NEST
     engine.insertView(get_local(v, args, 1, 0))
-    set_local(v, args, 1, 0, engine.create_anim((get_local(v, args, 1, 1) + 82), (get_local(v, args, 1, 2) + 1), 1, {65775, 65776, 65777, 65779, 65778}))
+    set_local(v, args, 1, 0, engine.create_anim((get_local(v, args, 1, 1) + 82), (get_local(v, args, 1, 2) + 1), 1, {65775, 65776, 65777, 65779, 65778}))  -- the BIRD
     engine.bindToSlot(engine.setOrderAxis(get_local(v, args, 1, 0), 50), 4)
     engine.insertView(get_local(v, args, 1, 0))
     ::lbl_0x05c3::
     do return 0 end
 end
 
+-- place_bush_decor(x, y): BERRY BUSH decor (level_bedtime_bush_*).
+-- 1/6 chance of being absent (Rand 0..6). Inserts 1 image 65608 with order axis -40,
+-- obstacle bounds (9,23)-(90,60). No anim, no danger zone, no timer. Pure decor.
 local function fn_0x05c9(...)
     local args = {...}
     local v = {}
@@ -249,21 +262,24 @@ function OnInit(...)
     engine.loadPreface(65848)
     engine.setMusic(65868, 65537)
     engine.setInsertMode(0)
-    engine.insertView(engine.createImage(0, 0, 65619))
+    engine.insertView(engine.createImage(0, 0, 65619))  -- background night scene
+    -- g_variant_3 = math.random(0,1): 0=Variant A, 1=Variant B (whole-entity layout)
     if engine.set_global(3, math.random(0, 1)) == 1 then goto lbl_0x016c end
-    fn_0x0286(568, 360)
-    fn_0x0394(227, 103, 800)
-    fn_0x01e7(417, 113)
-    fn_0x04e1(154, 306)
-    fn_0x05c9(61, 127)
+    -- Variant A (right-heavy):
+    fn_0x0286(568, 360)  -- place_bunny_on_log  (right side)
+    fn_0x0394(227, 103, 800)  -- place_gun_mouse (right bush, wide danger 800px)
+    fn_0x01e7(417, 113)  -- place_butterfly_decor (mid)
+    fn_0x04e1(154, 306)  -- place_bird_in_nest  (left)
+    fn_0x05c9(61, 127)   -- place_bush_decor   (far left)
     engine.insertBulanci()
     do return 0 end
     ::lbl_0x016c::
-    fn_0x0286(195, 364)
-    fn_0x0394(124, 283, 580)
-    fn_0x01e7(309, 50)
-    fn_0x04e1(576, 245)
-    fn_0x05c9(67, 85)
+    -- Variant B (left-heavy):
+    fn_0x0286(195, 364)  -- place_bunny_on_log  (left side)
+    fn_0x0394(124, 283, 580)  -- place_gun_mouse (left bush, narrow danger 580px)
+    fn_0x01e7(309, 50)   -- place_butterfly_decor (mid)
+    fn_0x04e1(576, 245)  -- place_bird_in_nest  (right)
+    fn_0x05c9(67, 85)    -- place_bush_decor   (far left)
     engine.insertBulanci()
     do return 0 end
 end

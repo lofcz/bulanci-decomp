@@ -1,0 +1,959 @@
+{
+  "round": 8,
+  "kind": "fun_single",
+  "remaining_fun_total": 93,
+  "workers": 50,
+  "left_after_round": 43,
+  "tasks": [
+    {
+      "id": 1,
+      "round": 8,
+      "title": "FUN recovery: FUN_00466A30 @ 0x00466a30 (xrefs=2)",
+      "band": "dispatch",
+      "seed_address": "0x00466a30",
+      "ghidra_name": "FUN_00466A30",
+      "xref_count": 2,
+      "addresses": [
+        "0x00466a30"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 33 \u2014 zlib gen_codes idiv helper"
+    },
+    {
+      "id": 2,
+      "round": 8,
+      "title": "FUN recovery: FUN_00467300 @ 0x00467300 (xrefs=2)",
+      "band": "dispatch",
+      "seed_address": "0x00467300",
+      "ghidra_name": "FUN_00467300",
+      "xref_count": 2,
+      "addresses": [
+        "0x00467300"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 34 \u2014 jdmerge row alloc helper"
+    },
+    {
+      "id": 3,
+      "round": 8,
+      "title": "FUN recovery: FUN_004370B0 @ 0x004370b0 (xrefs=1)",
+      "band": "sim",
+      "seed_address": "0x004370b0",
+      "ghidra_name": "FUN_004370B0",
+      "xref_count": 1,
+      "addresses": [
+        "0x004370b0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 26/27 \u2014 track-switch iterator; caller SetCurrentTrack"
+    },
+    {
+      "id": 4,
+      "round": 8,
+      "title": "FUN recovery: FUN_0045B480 @ 0x0045b480 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x0045b480",
+      "ghidra_name": "FUN_0045B480",
+      "xref_count": 1,
+      "addresses": [
+        "0x0045b480"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 36 \u2014 libmad IMDCT half before III_imdct_l"
+    },
+    {
+      "id": 5,
+      "round": 8,
+      "title": "FUN recovery: FUN_00460200 @ 0x00460200 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00460200",
+      "ghidra_name": "FUN_00460200",
+      "xref_count": 1,
+      "addresses": [
+        "0x00460200"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 40 \u2014 jdmaster.c decompress master_selection split"
+    },
+    {
+      "id": 6,
+      "round": 8,
+      "title": "FUN recovery: FUN_00460F30 @ 0x00460f30 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00460f30",
+      "ghidra_name": "FUN_00460F30",
+      "xref_count": 1,
+      "addresses": [
+        "0x00460f30"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 42 \u2014 jcprepct edge expand; caller prep vtable"
+    },
+    {
+      "id": 7,
+      "round": 8,
+      "title": "FUN recovery: FUN_00461080 @ 0x00461080 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00461080",
+      "ghidra_name": "FUN_00461080",
+      "xref_count": 1,
+      "addresses": [
+        "0x00461080"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 43 \u2014 jcprepct row replicate"
+    },
+    {
+      "id": 8,
+      "round": 8,
+      "title": "FUN recovery: FUN_00461160 @ 0x00461160 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00461160",
+      "ghidra_name": "FUN_00461160",
+      "xref_count": 1,
+      "addresses": [
+        "0x00461160"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 44 \u2014 jcprepct row shift"
+    },
+    {
+      "id": 9,
+      "round": 8,
+      "title": "FUN recovery: FUN_004613E0 @ 0x004613e0 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x004613e0",
+      "ghidra_name": "FUN_004613E0",
+      "xref_count": 1,
+      "addresses": [
+        "0x004613e0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 42/43 \u2014 prep vtable start_pass homolog"
+    },
+    {
+      "id": 10,
+      "round": 8,
+      "title": "FUN recovery: FUN_00461460 @ 0x00461460 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00461460",
+      "ghidra_name": "FUN_00461460",
+      "xref_count": 1,
+      "addresses": [
+        "0x00461460"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 45 \u2014 decompress main buffer init"
+    },
+    {
+      "id": 11,
+      "round": 8,
+      "title": "FUN recovery: FUN_00466920 @ 0x00466920 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00466920",
+      "ghidra_name": "FUN_00466920",
+      "xref_count": 1,
+      "addresses": [
+        "0x00466920"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 50 \u2014 merged-upsampler dither table size"
+    },
+    {
+      "id": 12,
+      "round": 8,
+      "title": "FUN recovery: FUN_00467340 @ 0x00467340 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00467340",
+      "ghidra_name": "FUN_00467340",
+      "xref_count": 1,
+      "addresses": [
+        "0x00467340"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 34 \u2014 caller of row alloc"
+    },
+    {
+      "id": 13,
+      "round": 8,
+      "title": "FUN recovery: FUN_00466A50 @ 0x00466a50 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00466a50",
+      "ghidra_name": "FUN_00466A50",
+      "xref_count": 1,
+      "addresses": [
+        "0x00466a50"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R7 task 50 \u2014 caller of dither size calc"
+    },
+    {
+      "id": 14,
+      "round": 8,
+      "title": "FUN recovery: FUN_00448A97 @ 0x00448a97 (xrefs=5)",
+      "band": "sim",
+      "seed_address": "0x00448a97",
+      "ghidra_name": "FUN_00448A97",
+      "xref_count": 5,
+      "addresses": [
+        "0x00448a97"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R6 \u2014 high-xref sim/other"
+    },
+    {
+      "id": 15,
+      "round": 8,
+      "title": "FUN recovery: FUN_00452FB7 @ 0x00452fb7 (xrefs=4)",
+      "band": "dispatch",
+      "seed_address": "0x00452fb7",
+      "ghidra_name": "FUN_00452FB7",
+      "xref_count": 4,
+      "addresses": [
+        "0x00452fb7"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R6 \u2014 sim cluster"
+    },
+    {
+      "id": 16,
+      "round": 8,
+      "title": "FUN recovery: FUN_0044FCDF @ 0x0044fcdf (xrefs=4)",
+      "band": "sim",
+      "seed_address": "0x0044fcdf",
+      "ghidra_name": "FUN_0044FCDF",
+      "xref_count": 4,
+      "addresses": [
+        "0x0044fcdf"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R6 \u2014 sim cluster"
+    },
+    {
+      "id": 17,
+      "round": 8,
+      "title": "FUN recovery: FUN_0046A840 @ 0x0046a840 (xrefs=3)",
+      "band": "dispatch",
+      "seed_address": "0x0046a840",
+      "ghidra_name": "FUN_0046A840",
+      "xref_count": 3,
+      "addresses": [
+        "0x0046a840"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R6 \u2014 dispatch UNK"
+    },
+    {
+      "id": 18,
+      "round": 8,
+      "title": "FUN recovery: FUN_0046C3D0 @ 0x0046c3d0 (xrefs=3)",
+      "band": "dispatch",
+      "seed_address": "0x0046c3d0",
+      "ghidra_name": "FUN_0046C3D0",
+      "xref_count": 3,
+      "addresses": [
+        "0x0046c3d0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R6 \u2014 dispatch UNK"
+    },
+    {
+      "id": 19,
+      "round": 8,
+      "title": "FUN recovery: FUN_0046DB50 @ 0x0046db50 (xrefs=2)",
+      "band": "dispatch",
+      "seed_address": "0x0046db50",
+      "ghidra_name": "FUN_0046DB50",
+      "xref_count": 2,
+      "addresses": [
+        "0x0046db50"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R6 \u2014 dispatch UNK"
+    },
+    {
+      "id": 20,
+      "round": 8,
+      "title": "FUN recovery: FUN_00439710 @ 0x00439710 (xrefs=2)",
+      "band": "sim",
+      "seed_address": "0x00439710",
+      "ghidra_name": "FUN_00439710",
+      "xref_count": 2,
+      "addresses": [
+        "0x00439710"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R6 \u2014 sim band UNK"
+    },
+    {
+      "id": 21,
+      "round": 8,
+      "title": "FUN recovery: FUN_004466A0 @ 0x004466a0 (xrefs=2)",
+      "band": "sim",
+      "seed_address": "0x004466a0",
+      "ghidra_name": "FUN_004466A0",
+      "xref_count": 2,
+      "addresses": [
+        "0x004466a0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": "R6 \u2014 sim UNK"
+    },
+    {
+      "id": 22,
+      "round": 8,
+      "title": "FUN recovery: FUN_00449C90 @ 0x00449c90 (xrefs=2)",
+      "band": "sim",
+      "seed_address": "0x00449c90",
+      "ghidra_name": "FUN_00449C90",
+      "xref_count": 2,
+      "addresses": [
+        "0x00449c90"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 23,
+      "round": 8,
+      "title": "FUN recovery: FUN_0044AB59 @ 0x0044ab59 (xrefs=2)",
+      "band": "sim",
+      "seed_address": "0x0044ab59",
+      "ghidra_name": "FUN_0044AB59",
+      "xref_count": 2,
+      "addresses": [
+        "0x0044ab59"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 24,
+      "round": 8,
+      "title": "FUN recovery: FUN_0044FE54 @ 0x0044fe54 (xrefs=2)",
+      "band": "sim",
+      "seed_address": "0x0044fe54",
+      "ghidra_name": "FUN_0044FE54",
+      "xref_count": 2,
+      "addresses": [
+        "0x0044fe54"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 25,
+      "round": 8,
+      "title": "FUN recovery: FUN_00472420 @ 0x00472420 (xrefs=2)",
+      "band": "eh",
+      "seed_address": "0x00472420",
+      "ghidra_name": "FUN_00472420",
+      "xref_count": 2,
+      "addresses": [
+        "0x00472420"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 26,
+      "round": 8,
+      "title": "FUN recovery: FUN_004500E2 @ 0x004500e2 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x004500e2",
+      "ghidra_name": "FUN_004500E2",
+      "xref_count": 1,
+      "addresses": [
+        "0x004500e2"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 27,
+      "round": 8,
+      "title": "FUN recovery: FUN_0045011E @ 0x0045011e (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x0045011e",
+      "ghidra_name": "FUN_0045011E",
+      "xref_count": 1,
+      "addresses": [
+        "0x0045011e"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 28,
+      "round": 8,
+      "title": "FUN recovery: FUN_00452869 @ 0x00452869 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00452869",
+      "ghidra_name": "FUN_00452869",
+      "xref_count": 1,
+      "addresses": [
+        "0x00452869"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 29,
+      "round": 8,
+      "title": "FUN recovery: FUN_00452F0B @ 0x00452f0b (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00452f0b",
+      "ghidra_name": "FUN_00452F0B",
+      "xref_count": 1,
+      "addresses": [
+        "0x00452f0b"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 30,
+      "round": 8,
+      "title": "FUN recovery: FUN_00454ACE @ 0x00454ace (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00454ace",
+      "ghidra_name": "FUN_00454ACE",
+      "xref_count": 1,
+      "addresses": [
+        "0x00454ace"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 31,
+      "round": 8,
+      "title": "FUN recovery: FUN_00466A10 @ 0x00466a10 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00466a10",
+      "ghidra_name": "FUN_00466A10",
+      "xref_count": 1,
+      "addresses": [
+        "0x00466a10"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 32,
+      "round": 8,
+      "title": "FUN recovery: FUN_00466CC0 @ 0x00466cc0 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00466cc0",
+      "ghidra_name": "FUN_00466CC0",
+      "xref_count": 1,
+      "addresses": [
+        "0x00466cc0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 33,
+      "round": 8,
+      "title": "FUN recovery: FUN_00466D40 @ 0x00466d40 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00466d40",
+      "ghidra_name": "FUN_00466D40",
+      "xref_count": 1,
+      "addresses": [
+        "0x00466d40"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 34,
+      "round": 8,
+      "title": "FUN recovery: FUN_00466F00 @ 0x00466f00 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00466f00",
+      "ghidra_name": "FUN_00466F00",
+      "xref_count": 1,
+      "addresses": [
+        "0x00466f00"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 35,
+      "round": 8,
+      "title": "FUN recovery: FUN_00467020 @ 0x00467020 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00467020",
+      "ghidra_name": "FUN_00467020",
+      "xref_count": 1,
+      "addresses": [
+        "0x00467020"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 36,
+      "round": 8,
+      "title": "FUN recovery: FUN_00467150 @ 0x00467150 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00467150",
+      "ghidra_name": "FUN_00467150",
+      "xref_count": 1,
+      "addresses": [
+        "0x00467150"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 37,
+      "round": 8,
+      "title": "FUN recovery: FUN_00467D10 @ 0x00467d10 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00467d10",
+      "ghidra_name": "FUN_00467D10",
+      "xref_count": 1,
+      "addresses": [
+        "0x00467d10"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 38,
+      "round": 8,
+      "title": "FUN recovery: FUN_004683A0 @ 0x004683a0 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x004683a0",
+      "ghidra_name": "FUN_004683A0",
+      "xref_count": 1,
+      "addresses": [
+        "0x004683a0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 39,
+      "round": 8,
+      "title": "FUN recovery: FUN_00468590 @ 0x00468590 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00468590",
+      "ghidra_name": "FUN_00468590",
+      "xref_count": 1,
+      "addresses": [
+        "0x00468590"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 40,
+      "round": 8,
+      "title": "FUN recovery: FUN_00468BE0 @ 0x00468be0 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00468be0",
+      "ghidra_name": "FUN_00468BE0",
+      "xref_count": 1,
+      "addresses": [
+        "0x00468be0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 41,
+      "round": 8,
+      "title": "FUN recovery: FUN_00469060 @ 0x00469060 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00469060",
+      "ghidra_name": "FUN_00469060",
+      "xref_count": 1,
+      "addresses": [
+        "0x00469060"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 42,
+      "round": 8,
+      "title": "FUN recovery: FUN_004696A0 @ 0x004696a0 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x004696a0",
+      "ghidra_name": "FUN_004696A0",
+      "xref_count": 1,
+      "addresses": [
+        "0x004696a0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 43,
+      "round": 8,
+      "title": "FUN recovery: FUN_00469900 @ 0x00469900 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x00469900",
+      "ghidra_name": "FUN_00469900",
+      "xref_count": 1,
+      "addresses": [
+        "0x00469900"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 44,
+      "round": 8,
+      "title": "FUN recovery: FUN_0046A870 @ 0x0046a870 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x0046a870",
+      "ghidra_name": "FUN_0046A870",
+      "xref_count": 1,
+      "addresses": [
+        "0x0046a870"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 45,
+      "round": 8,
+      "title": "FUN recovery: FUN_0046ABD0 @ 0x0046abd0 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x0046abd0",
+      "ghidra_name": "FUN_0046ABD0",
+      "xref_count": 1,
+      "addresses": [
+        "0x0046abd0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 46,
+      "round": 8,
+      "title": "FUN recovery: FUN_0046ACF0 @ 0x0046acf0 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x0046acf0",
+      "ghidra_name": "FUN_0046ACF0",
+      "xref_count": 1,
+      "addresses": [
+        "0x0046acf0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 47,
+      "round": 8,
+      "title": "FUN recovery: FUN_0046ADF0 @ 0x0046adf0 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x0046adf0",
+      "ghidra_name": "FUN_0046ADF0",
+      "xref_count": 1,
+      "addresses": [
+        "0x0046adf0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 48,
+      "round": 8,
+      "title": "FUN recovery: FUN_0046AE80 @ 0x0046ae80 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x0046ae80",
+      "ghidra_name": "FUN_0046AE80",
+      "xref_count": 1,
+      "addresses": [
+        "0x0046ae80"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 49,
+      "round": 8,
+      "title": "FUN recovery: FUN_0046B000 @ 0x0046b000 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x0046b000",
+      "ghidra_name": "FUN_0046B000",
+      "xref_count": 1,
+      "addresses": [
+        "0x0046b000"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    },
+    {
+      "id": 50,
+      "round": 8,
+      "title": "FUN recovery: FUN_0046B0B0 @ 0x0046b0b0 (xrefs=1)",
+      "band": "dispatch",
+      "seed_address": "0x0046b0b0",
+      "ghidra_name": "FUN_0046B0B0",
+      "xref_count": 1,
+      "addresses": [
+        "0x0046b0b0"
+      ],
+      "evidence_paths": [
+        "ghidra_analysis/engine/GHIDRA_MCP.md",
+        "ghidra_analysis/engine/ROUND8_FUN_PROTOCOL.md",
+        "ghidra_analysis/engine/fun_recovery/round7_fun_task_*_report.md",
+        "config/bulanci/mapping.csv"
+      ],
+      "prior_hint": ""
+    }
+  ]
+}

@@ -14,22 +14,22 @@ uchar* CScore::GetClassIdentifier() {
 
 // !FUNC 0x0040bde0 BEGIN
 /* 40BDE0-40BDE8 00008 */
-uchar CScore::DeletingDestructorThunk_18(uchar param_1) { STUB_BODY(); return 0; }
+uchar CScore::CScore_ScalarDeletingDtor_thunk_n0x18(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040bde0 END
 
 // !FUNC 0x0040bdf0 BEGIN
 /* 40BDF0-40BDF8 00008 */
-uchar CScore::DeletingDestructorThunk_4(uchar param_1) { STUB_BODY(); return 0; }
+uchar CScore::CScore_ScalarDeletingDtor_thunk_n0x4(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040bdf0 END
 
 // !FUNC 0x0040be00 BEGIN
 /* 40BE00-40BE08 00008 */
-uchar CScore::DeletingDestructorThunk_10(uchar param_1) { STUB_BODY(); return 0; }
+uchar CScore::CScore_ScalarDeletingDtor_thunk_n0x10(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040be00 END
 
 // !FUNC 0x0040e120 BEGIN
 /* 40E120-40E1A8 00088 */
-uchar CScore::Destructor(uchar param_1) { STUB_BODY(); return 0; }
+void CScore::CScore_dtor() { STUB_BODY(); }
 // !FUNC 0x0040e120 END
 
 // !FUNC 0x0040efd0 BEGIN
@@ -39,6 +39,11 @@ uint* CScore::Create() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040f070 BEGIN
 /* 40F070-40F08E 0001E */
-void* CScore::ScalarDeletingDestructor(uchar param_1) { STUB_BODY(); return 0; }
+void* CScore::CScore_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f070 END
+
+// !FUNC 0x00411010 BEGIN
+/* 411010-411B3A 00B2A */
+uchar CScore::CScore_ctor(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00411010 END
 

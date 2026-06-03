@@ -6,34 +6,28 @@
 class ODSImage {
 public:
 	// !DECL 0x00418ef0 BEGIN
-	/* 418EF0 */ uint* ODSImage_FactoryCtor(uint* param_1);
+	/* 418EF0 */ uint* ODSImage_FactoryCtor(uint* param_1, int param_2);
 	// !DECL 0x00418ef0 END
-	// !DECL 0x00419070 BEGIN
-	/* 419070 */ uchar FUN_00419070(uchar param_1);
-	// !DECL 0x00419070 END
-	// !DECL 0x0041dbc0 BEGIN
-	/* 41DBC0 */ void* CWeapon_ctor(uint param_1, int param_2);
-	// !DECL 0x0041dbc0 END
 	// !DECL 0x004228f0 BEGIN
-	/* 4228F0 */ uchar FUN_004228f0(uchar param_1);
+	/* 4228F0 */ uint* CDSBitmap_SubobjectCtor(uint* param_1);
 	// !DECL 0x004228f0 END
 	// !DECL 0x004253d0 BEGIN
-	/* 4253D0 */ uint CGunMouse_CoordRing_Reserve(int param_1);
+	/* 4253D0 */ int CGunMouse_CoordRing_Reserve(int param_1);
 	// !DECL 0x004253d0 END
 
 	// !DECL 0x00426060 BEGIN
-	/* 426060 */ uint* CGunMouse_ctor(uint* param_1);
+	/* 426060 */ CGunMouse* CGunMouse_ctor(CGunMouse* param_1);
 	// !DECL 0x00426060 END
 
 	// !DECL 0x00418c00 BEGIN
-	/* 418C00 */ void* ODSImage_ctor(int* param_1);
+	/* 418C00 */ void* ODSImage_ctor(CDSImage* param_1);
 	// !DECL 0x00418c00 END
 	// !DECL 0x00439050 BEGIN
-	/* 439050 */ uchar SetOwner(uchar param_1);
+	/* 439050 */ void SetOwner(uchar param_1);
 	// !DECL 0x00439050 END
 
 	// !DECL 0x00439100 BEGIN
-	/* 439100 */ uchar SetImage(int* param_1);
+	/* 439100 */ void ODSImage_SetImage(CDSImage* param_1);
 	// !DECL 0x00439100 END
 };
 

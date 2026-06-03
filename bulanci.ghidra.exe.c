@@ -58144,6 +58144,7 @@ int *DAT_004b3b94;
 int DAT_004b3b94;
 undefined LAB_0047931b;
 undefined4 DAT_004b3b94;
+CDSView *DAT_004b3b94;
 undefined *PTR_DAT_004afce0;
 undefined LAB_004793a8;
 undefined LAB_004793d8;
@@ -58739,9 +58740,9 @@ undefined LAB_00460ab0;
 undefined LAB_00460b20;
 undefined LAB_00460cc0;
 undefined write_tables_only;
-undefined emit_dri;
-undefined FUN_00460ad0;
-undefined start_pass_huff;
+undefined write_marker_header;
+undefined write_file_header;
+undefined write_scan_header;
 undefined LAB_004613e0;
 undefined LAB_00461590;
 undefined LAB_004617f0;
@@ -58795,14 +58796,14 @@ undefined LAB_00465570;
 undefined LAB_00466670;
 undefined color_quantize3;
 undefined h2v2_merged_upsample;
-undefined FUN_004666a0;
+undefined start_pass_2;
 undefined LAB_004667c0;
 undefined4 DAT_0049df50;
 undefined1 DAT_0049de50;
 undefined LAB_00466d90;
 undefined FUN_00467020;
 undefined FUN_00467150;
-undefined FUN_00466e40;
+undefined color_quantize;
 undefined FUN_00466f00;
 undefined LAB_00467440;
 undefined FUN_00467340;
@@ -58882,12 +58883,12 @@ undefined4 DAT_004b21a0;
 undefined4 DAT_004b21a4;
 undefined DAT_004b21a8;
 undefined DAT_004b31a8;
-undefined FUN_0047de40;
+undefined atexit_stub_0047de40;
 undefined CBulanci_CreateObject;
 undefined CMsgDialog_Allocate;
-undefined FUN_0047e030;
+undefined CMsgDialog_StaticClassRegister_atexit;
 undefined CPauseDlg_Allocate;
-undefined FUN_0047e150;
+undefined CPauseDlg_StaticClassRegister_atexit;
 undefined CDSAudioBank_Factory;
 undefined CDSAudioBank_StaticClassRegister_atexit;
 undefined DAT_004b3af4;
@@ -58896,13 +58897,13 @@ undefined CDSAudioBank_TypeinfoAdjust_4;
 undefined DAT_004b3b00;
 undefined CDSAudioBank_TypeinfoAdjust_c;
 undefined CDSAudioBank_TypeinfoAdjust12_StaticRegister_atexit;
-undefined FUN_0047e5c0;
+undefined CDSMouse_StaticClassRegister_atexit;
 undefined CDSMouse_Factory;
 undefined DAT_004b3b68;
-undefined FUN_0047e5d0;
-undefined FUN_0047e5e0;
+undefined atexit_stub_0047e5d0;
+undefined CDSImageMouse_StaticClassRegister_atexit;
 undefined CDSImageMouse_CreateObject;
-undefined FUN_0047e810;
+undefined CDSJpegImage_StaticClassRegister_atexit;
 undefined CDSJpegImage_CreateObject;
 undefined CDSMpxStream_StaticClassRegister_atexit;
 undefined CDSMpxStream_CreateObject;
@@ -58910,17 +58911,17 @@ undefined LAB_00428990;
 undefined DAT_004b7e60;
 undefined CDSMpxStream_TypeinfoAdjust4_StaticRegister_atexit;
 undefined LAB_00433880;
-undefined FUN_0047e930;
+undefined Class_3_StaticClassRegister_atexit;
 undefined InitializeAndAllocate;
-undefined FUN_0047ea10;
+undefined atexit_stub_0047ea10;
 undefined DAT_004b7f5c;
-undefined FUN_0047ea20;
+undefined atexit_stub_0047ea20;
 undefined LAB_00434230;
 undefined DAT_004b7f68;
-undefined FUN_0047ea30;
+undefined atexit_stub_0047ea30;
 undefined LAB_00434240;
 undefined LAB_004b7f74;
-undefined FUN_0047ea40;
+undefined atexit_stub_0047ea40;
 undefined StaticDtor_CDSMemoryExceptionSingleton_atexit;
 undefined CDSVideoPlayer_StaticClassRegister_atexit;
 undefined CDSVideoPlayer::CreateTrackManagerHeap;
@@ -58937,7 +58938,7 @@ undefined CDSWavStream_TypeinfoAdjust4_StaticRegister_atexit;
 undefined LAB_0043baa0;
 undefined DAT_004b845c;
 undefined CDSWavStream_TypeinfoAdjust34_StaticRegister_atexit;
-undefined FUN_0047ed60;
+undefined Class_0x4b_StaticClassRegister_atexit;
 undefined CDSQueueStream_CreateObject;
 undefined CDSMemoryException_004b7f80;
 undefined4 DAT_004b0214;
@@ -59037,7 +59038,7 @@ void __thiscall CDSApp::CDSApp_DispatchInputEvent(CDSApp *this,CDSEventRecord *p
     this->pPad_e5[2] = uVar6;
     if ((param_1->wMsg_id & 8) != 0) {
       if (g_pModalFocus != (void *)0x0) {
-        _Globals::FUN_0042c880(g_pModalFocus);
+        _Globals::CDSView_UpdateInputChainOnMouseMove(g_pModalFocus);
       }
       if (g_pInputChainHead == (void *)0x0) {
         return;
@@ -59899,7 +59900,7 @@ void __thiscall CAdvertising::CAdvertising_dtor(CAdvertising *this)
 
 
 
-uint _Globals::FUN_00401a70(CDSException *param_1)
+uint _Globals::CDSException_TopLevelFilter(CDSException *param_1)
 
 {
   wchar_t *pwVar1;
@@ -59973,7 +59974,7 @@ undefined * CMenu::Catch_00401b70(void)
   int unaff_EBP;
   
   iVar1 = *(int *)(unaff_EBP + -0x14);
-  uVar2 = _Globals::FUN_00401a70(*(CDSException **)(unaff_EBP + -0x18));
+  uVar2 = _Globals::CDSException_TopLevelFilter(*(CDSException **)(unaff_EBP + -0x18));
   if (uVar2 != 0x14) {
     iVar1 = *(int *)(iVar1 + 0x280);
     if (iVar1 == 0) {
@@ -60013,7 +60014,7 @@ void __fastcall CBulanci::CBulanci_StartGameAndShowPostMatchScore(int param_1)
   local_10 = ExceptionList;
   ExceptionList = &local_10;
   local_8 = 0;
-  CGame_StartGame(param_1 + 0x284);
+  CGame::CGame_StartGame((CGame *)(param_1 + 0x284));
   local_8 = 0xffffffff;
   CBulanci_ShowPostMatchScoreModal();
   return;
@@ -60027,7 +60028,7 @@ undefined * CBulanci::Catch_00401c30(void)
   uint uVar1;
   int unaff_EBP;
   
-  uVar1 = _Globals::FUN_00401a70(*(CDSException **)(unaff_EBP + -0x1c));
+  uVar1 = _Globals::CDSException_TopLevelFilter(*(CDSException **)(unaff_EBP + -0x1c));
   *(bool *)(unaff_EBP + -0x11) = uVar1 == 0x14;
   return &DAT_00401c4b;
 }
@@ -60047,7 +60048,7 @@ bool CBulanci::CBulanci_ShowPostMatchScoreModal(void)
                     // via bLastSplashFlag)
   CScore::CScore_ctor((CScore *)(unaff_EBP + -0x90),(int)unaff_ESI + 0x284);
   *(undefined4 *)(unaff_EBP + -4) = 2;
-  sVar1 = _Globals::CDSView_DoModal((void *)(unaff_EBP + -0x90),unaff_ESI);
+  sVar1 = CDSView::CDSView_DoModal((CDSView *)(unaff_EBP + -0x90),unaff_ESI);
   if (sVar1 == -0x7ffc) {
     if (g_pModalFocus == (void *)0x0) {
       target_evt = (void *)0x0;
@@ -60128,39 +60129,37 @@ CBulanci::CBulanci_OpenPackStream(CBulanci *this,void *param_1,void *param_2)
   byte *local_24;
   BYTE *local_20;
   byte *local_1c;
-  undefined *local_18;
+  int local_18;
   undefined1 *local_14;
   void *local_10;
   undefined1 *puStack_c;
-  undefined *local_8;
+  int local_8;
   
   puStack_c = &LAB_00474219;
   local_10 = ExceptionList;
   uStack_50 = DAT_004b0e44 ^ (uint)&stack0xfffffffc;
   local_14 = (undefined1 *)&uStack_50;
   ExceptionList = &local_10;
-  local_8 = (undefined *)0x0;
+  local_8 = 0;
   piVar1 = CBulanci_GetPathExtension((CBulanci *)&param_1,&local_28);
   local_8._0_1_ = 1;
   piVar1 = CBulanci_WideStringToLowerInPlace(piVar1);
-  local_18 = (undefined *)0x0;
+  local_18 = 0;
   _Globals::CDsStringAssignFromHandle(&local_18,piVar1);
   local_8._0_1_ = 3;
   if (local_28 != 0) {
     _Globals::CDsStringReleaseHeader((void *)(local_28 + -0xc));
   }
-  iVar2 = CBulanci_CompareWideString((CBulanci *)&local_18,(ushort *)&LAB_0047f7df_1);
-  if ((iVar2 != 0) &&
-     (iVar2 = CBulanci_CompareWideString((CBulanci *)&local_18,(ushort *)&LAB_0047f7d8), iVar2 != 0)
-     ) {
-    local_8 = (undefined *)((uint)local_8._1_3_ << 8);
-    if (local_18 != (undefined *)0x0) {
-      _Globals::CDsStringReleaseHeader(local_18 + -0xc);
+  iVar2 = CDsString_CompareHandles(&LAB_0047f7df_1);
+  if ((iVar2 != 0) && (iVar2 = CDsString_CompareHandles(&LAB_0047f7d8), iVar2 != 0)) {
+    local_8 = (uint)local_8._1_3_ << 8;
+    if (local_18 != 0) {
+      _Globals::CDsStringReleaseHeader((void *)(local_18 + -0xc));
     }
     goto LAB_00402128;
   }
   pCVar3 = (CDSFileStream *)_Globals::OperatorNewWithBadAlloc(0x20);
-  local_8 = (undefined *)CONCAT31(local_8._1_3_,4);
+  local_8 = CONCAT31(local_8._1_3_,4);
   if (pCVar3 == (CDSFileStream *)0x0) {
 LAB_00401e5f:
     pbVar9 = (byte *)0x0;
@@ -60179,7 +60178,7 @@ LAB_00401e5f:
   local_1c = pbVar9;
   if (param_2 != (void *)0x0) {
     pvVar4 = _Globals::Runtime_MallocOrThrow(&DAT_004b7c94,(uchar *)0x3d0900);
-    local_8 = (undefined *)CONCAT31(local_8._1_3_,6);
+    local_8 = CONCAT31(local_8._1_3_,6);
     (**(code **)(*(int *)pbVar9 + 0x28))(0);
     (**(code **)(*(int *)pbVar9 + 0x10))(pvVar4,4000000);
     iVar2 = 0;
@@ -60214,7 +60213,7 @@ LAB_00401e5f:
   }
   local_20 = pBVar8;
   pCVar6 = (CDSStreamStorage *)_Globals::OperatorNewWithBadAlloc(0x60);
-  local_8 = (undefined *)CONCAT31(local_8._1_3_,0xc);
+  local_8 = CONCAT31(local_8._1_3_,0xc);
   if ((pCVar6 == (CDSStreamStorage *)0x0) ||
      (pCVar6 = CDSStreamStorage::CDSStreamStorage_ctor(pCVar6,(int *)pBVar8),
      pCVar6 == (CDSStreamStorage *)0x0)) {
@@ -60223,7 +60222,7 @@ LAB_00401e5f:
   else {
     pCVar6 = (CDSStreamStorage *)&pCVar6->pVftable_IDSStorage;
   }
-  local_8 = (undefined *)0x9;
+  local_8 = 9;
   local_8._1_3_ = 0;
   if (pCVar6 == (CDSStreamStorage *)0x0) {
     local_8._0_1_ = 7;
@@ -60245,11 +60244,11 @@ LAB_00401e5f:
       if (pbVar9 != (byte *)0x0) {
         (**(code **)(*(int *)pbVar9 + 8))();
       }
-      local_8 = (undefined *)((uint)local_8._1_3_ << 8);
-      if (local_18 != (undefined *)0x0) {
-        _Globals::CDsStringReleaseHeader(local_18 + -0xc);
+      local_8 = (uint)local_8._1_3_ << 8;
+      if (local_18 != 0) {
+        _Globals::CDsStringReleaseHeader((void *)(local_18 + -0xc));
       }
-      local_8 = (undefined *)0xffffffff;
+      local_8 = 0xffffffff;
       if (param_1 != (void *)0x0) {
         _Globals::CDsStringReleaseHeader((void *)((int)param_1 + -0xc));
       }
@@ -60274,11 +60273,11 @@ LAB_00401e5f:
       if (local_1c != (byte *)0x0) {
         (**(code **)(*(int *)local_1c + 8))();
       }
-      local_8 = (undefined *)((uint)local_8._1_3_ << 8);
-      if (local_18 != (undefined *)0x0) {
-        _Globals::CDsStringReleaseHeader(local_18 + -0xc);
+      local_8 = (uint)local_8._1_3_ << 8;
+      if (local_18 != 0) {
+        _Globals::CDsStringReleaseHeader((void *)(local_18 + -0xc));
       }
-      local_8 = (undefined *)0xffffffff;
+      local_8 = 0xffffffff;
       if (param_1 == (void *)0x0) {
         ExceptionList = local_10;
         return pCVar6;
@@ -60291,7 +60290,7 @@ LAB_00401e5f:
 LAB_004020d9:
     local_8._0_1_ = 8;
     (**(code **)(pCVar6->pVftable_IDSReferenced + 8))();
-    local_8 = (undefined *)CONCAT31(local_8._1_3_,7);
+    local_8 = CONCAT31(local_8._1_3_,7);
     if (pBVar8 != (BYTE *)0x0) {
       (**(code **)(*(int *)pBVar8 + 8))();
     }
@@ -60303,12 +60302,12 @@ LAB_0040210b:
       (**(code **)(iVar2 + 8))();
     }
   }
-  local_8 = (undefined *)((uint)local_8._1_3_ << 8);
-  if (local_18 != (undefined *)0x0) {
-    _Globals::CDsStringReleaseHeader(local_18 + -0xc);
+  local_8 = (uint)local_8._1_3_ << 8;
+  if (local_18 != 0) {
+    _Globals::CDsStringReleaseHeader((void *)(local_18 + -0xc));
   }
 LAB_00402128:
-  local_8 = (undefined *)0xffffffff;
+  local_8 = 0xffffffff;
   if (param_1 != (void *)0x0) {
     _Globals::CDsStringReleaseHeader((void *)((int)param_1 + -0xc));
   }
@@ -60416,29 +60415,27 @@ void __thiscall _Globals::CDSApp_ShowSetupDialog(void *this,int param_1)
 
 {
   ushort code;
-  CSetupDlg local_84;
-  void *local_c;
-  undefined1 *puStack_8;
-  int local_4;
+  CDSView local_84;
+  undefined4 local_4;
   
-  local_4 = -1;
-  puStack_8 = &LAB_0047428b;
-  local_c = ExceptionList;
-  ExceptionList = &local_c;
-  CSetupDlg::CSetupDlgCtor(&local_84);
+  local_4 = 0xffffffff;
+  local_84.nSrc_x = (int)&LAB_0047428b;
+  local_84.nDest_y = (int)ExceptionList;
+  ExceptionList = &local_84.nDest_y;
+  CSetupDlg::CSetupDlgCtor((CSetupDlg *)&local_84);
   local_4 = 0;
-  CSetupDlg::CSetupDlg_SetVolumeBinding(&local_84,*(int *)((int)this + 0x2fe));
-  CBulanek::CDSView__SetPosition
-            ((CBulanek *)&local_84,
-             (((*(int *)(param_1 + 0x28) - local_84.nBbox_right) - *(int *)(param_1 + 0x20)) +
-             local_84.nBbox_left) / 2,
-             (((*(int *)(param_1 + 0x2c) - *(int *)(param_1 + 0x24)) - local_84.nBbox_bottom) +
-             local_84.nBbox_top) / 2);
-  FUN_0042cc30(&local_84,*(int *)(param_1 + 0x20),*(int *)(param_1 + 0x24));
-  code = CDSView_DoModal(&local_84,this);
+  CSetupDlg::CSetupDlg_SetVolumeBinding((CSetupDlg *)&local_84,*(int *)((int)this + 0x2fe));
+  CDSView::CDSView__SetPosition
+            (&local_84,
+             (((*(int *)(param_1 + 0x28) - local_84.win.nBbox_right) - *(int *)(param_1 + 0x20)) +
+             local_84.win.nBbox_left) / 2,
+             (((*(int *)(param_1 + 0x2c) - *(int *)(param_1 + 0x24)) - local_84.win.nBbox_bottom) +
+             local_84.win.nBbox_top) / 2);
+  CDSView_OffsetRectAndAdapt(&local_84,*(int *)(param_1 + 0x20),*(int *)(param_1 + 0x24));
+  code = CDSView::CDSView_DoModal(&local_84,this);
   switch(code) {
   case 0x8002:
-    *(undefined4 *)((int)this + 0x2fe) = *(undefined4 *)(local_84.pVolume + 0xb0);
+    *(undefined4 *)((int)this + 0x2fe) = *(undefined4 *)(local_84._112_4_ + 0xb0);
     break;
   default:
     CDSAudio_SetPanPreview(*(int *)((int)this + 0x2fe));
@@ -60448,9 +60445,9 @@ void __thiscall _Globals::CDSApp_ShowSetupDialog(void *this,int param_1)
   case 0x80cd:
     CDSView__PostMessage((void *)(param_1 + 0x10),0x100,code,0,0);
   }
-  local_4 = -1;
+  local_4 = 0xffffffff;
   CWindow_dtor((int)&local_84);
-  ExceptionList = local_c;
+  ExceptionList = (void *)local_84.nDest_y;
   return;
 }
 
@@ -60474,7 +60471,7 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort cmd_id,uint cm
   char extraout_AL;
   short modal_rc;
   CMenu *this_00;
-  void *menu;
+  CDSView *menu;
   undefined **target_evt;
   undefined4 in_EDX;
   CAdvertising splash;
@@ -60494,14 +60491,14 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort cmd_id,uint cm
         CAdvertising::CAdvertising_ctor(&splash);
         local_4 = 1;
         CAdvertising::LoadSplashImage(&splash,0x1013a);
-        _Globals::CDSView_DoModal(&splash,this);
+        CDSView::CDSView_DoModal((CDSView *)&splash,this);
         local_4 = 0xffffffff;
         CAdvertising::CAdvertising_dtor(&splash);
         _Globals::CDSView__PostMessage(&(this->app).vftable_sub10,0x100,0xcc,0,1);
         ExceptionList = local_c;
         return;
       }
-      CDSApp::CDSApp_RouteSyntheticCloseEvent(&this->app,cmd_id);
+      CDSView::CDSApp_RouteSyntheticCloseEvent((CDSView *)this,cmd_id);
       ExceptionList = local_c;
       return;
     }
@@ -60524,15 +60521,15 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort cmd_id,uint cm
   this_00 = (CMenu *)_Globals::OperatorNewWithBadAlloc(0xe4);
   local_4 = 0;
   if (this_00 == (CMenu *)0x0) {
-    menu = (void *)0x0;
+    menu = (CDSView *)0x0;
   }
   else {
-    menu = (void *)CMenu::CMenu_ctor_with_ui(this_00,cmd_arg,(this->game).bMenuLastSplashFlag);
+    menu = (CDSView *)CMenu::CMenu_ctor_with_ui(this_00,cmd_arg,(this->game).bMenuLastSplashFlag);
   }
   local_4 = 0xffffffff;
   this->pMainMenu = menu;
   (this->game).bMenuLastSplashFlag = 0;
-  modal_rc = _Globals::CDSView_DoModal(menu,this);
+  modal_rc = CDSView::CDSView_DoModal(menu,this);
   if ((int *)this->pMainMenu != (int *)0x0) {
     (**(code **)(*(int *)this->pMainMenu + 4))(1);
   }
@@ -60883,31 +60880,44 @@ CBulanci * __thiscall CBulanci::CBulanci_DtorScalar(CBulanci *this,byte param_1)
 
 
 
-void __fastcall CBulanci::CBulanci_OnCreate(CBulanci *param_1)
+// CBulanci_OnCreate — main app window creation / game init.
+// 
+// At the top, BEFORE any other setup, this function seeds the global PRNG:
+//   BuildLocalDateTime(out_8byte)     // packed local SYSTEMTIME (hour/min/sec/ms in low 4 bytes,
+// date in high 4)
+//   srand(CBulanci_PackedTimeToMs(packedTime))  // -> srand(ms_since_00:00_localtime)
+// 
+// The seed value is a 32-bit count of milliseconds since today's local midnight.
+// This is the PRNG's INITIAL seed for the whole app lifetime (menu randomness,
+// ambient anims, etc.).  At every match start, CGaming_ctor @ 0x41ff90 re-seeds
+// the PRNG from CGame+0xd4 (which gets written by CMenu_OpenNetworkSession @ 0x414f31
+// to g_dwElapsedMs at 'Start Game' click time).
+
+void __fastcall CBulanci::CBulanci_OnCreate(CBulanci *pThis)
 
 {
   int *piVar1;
-  ulong uVar2;
-  undefined *puVar3;
-  undefined1 local_8 [8];
+  ulong dwSeed;
+  undefined *puVar2;
+  undefined1 packedDateTime [8];
   
-  piVar1 = (int *)BuildLocalDateTime(local_8);
-  uVar2 = CBulanci_PackedTimeToMs(piVar1);
-  FUN_004477df(uVar2);
-  CDSApp_OnCreate(param_1);
-  CBulanci_BuildBitmapCache(param_1,0x4ae008,0x6e,(int *)0x0);
+  piVar1 = (int *)BuildLocalDateTime(packedDateTime);
+  dwSeed = CBulanci_PackedTimeToMs(piVar1);
+  Runtime_MSVCRT__srand(dwSeed);
+  CDSApp_OnCreate(pThis);
+  CBulanci_BuildBitmapCache(pThis,0x4ae008,0x6e,(int *)0x0);
                     // Load res 0x10004 (65540 CDSAudioBankIndex) → bank 65874 global UI/combat
                     // SFX; stored g_pApp+0x4c0
-  puVar3 = (undefined *)
-           (**(code **)(((param_1->app).pMasterPackStorage)->pVftable_IDSReferenced + 0x10))
+  puVar2 = (undefined *)
+           (**(code **)(((pThis->app).pMasterPackStorage)->pVftable_IDSReferenced + 0x10))
                      (0x10004,0);
-  piVar1 = (int *)(param_1->game).pReleaseOnDestroy;
+  piVar1 = (int *)(pThis->game).pReleaseOnDestroy;
   if (piVar1 != (int *)0x0) {
     (**(code **)(*piVar1 + 8))();
   }
-  (param_1->game).pReleaseOnDestroy = puVar3;
-  CBulanci_ResizeClientAndDisplayMode(param_1,(int *)0x320,600,6,(int *)0x1);
-  _Globals::CDSView_PostMessage_NullSafe(&(param_1->app).vftable_sub10,0x100,0xf7,0,0);
+  (pThis->game).pReleaseOnDestroy = puVar2;
+  CBulanci_ResizeClientAndDisplayMode(pThis,(int *)0x320,600,6,(int *)0x1);
+  _Globals::CDSView_PostMessage_NullSafe(&(pThis->app).vftable_sub10,0x100,0xf7,0,0);
   return;
 }
 
@@ -60984,7 +60994,7 @@ void __fastcall CBulanci::CBulanci_dtor(CBulanci *param_1)
                     // CBulanci_dtor audio-bank loop: (game).pAudioBankArray / dwAudioBankCount
                     // (CBulanci+0x4b0 == &game.pAudioBankArray)
   local_4 = 0;
-  FUN_0042d970();
+  CBulanci_AssignTempPathWithTrailingBackslash();
   local_4._0_1_ = 1;
   _Globals::CDsStringFormatV(&local_270,L"%s*.tmp");
   local_4._0_1_ = 0;
@@ -61251,7 +61261,7 @@ void __fastcall CScroller::CScroller_IDSUpdated_ArmSlot(void *param_1)
 {
   (**(code **)(*(int *)((int)param_1 + -0x68) + 0x24))(0,0);
   *(undefined4 *)((int)param_1 + 0x30) = 0;
-  _Globals::Scheduler_ArmSlot(param_1,0);
+  CDSUpdatedItem::Scheduler_ArmSlot(param_1,0);
   return;
 }
 
@@ -61340,7 +61350,7 @@ LAB_00403219:
 
 
 
-void __cdecl _Globals::FUN_00403240(undefined4 *param_1,undefined4 *param_2,int param_3)
+void __cdecl MemMoveDword(undefined4 *param_1,undefined4 *param_2,int param_3)
 
 {
   undefined4 *puVar1;
@@ -61464,7 +61474,7 @@ bool __thiscall CGaming::CGaming_IsSchedulerSlotActive(CGaming *this,uint param_
 {
   void *pvVar1;
   
-  pvVar1 = _Globals::Scheduler_GetEventSlot(this,param_1);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)this,param_1);
   return (bool)('\x01' - (((byte)*(undefined4 *)((int)pvVar1 + 8) & 1) != 1));
 }
 
@@ -62092,7 +62102,7 @@ void __thiscall CIcon::CIcon_OnMouseUp(CIcon *this,undefined4 param_1,byte param
   
   if (((param_2 & 1) != 0) && (this->bPressedFlag != 0)) {
     this->bPressedFlag = 0;
-    _Globals::FUN_0042cf60((int *)this);
+    CDSView::CDSView_OnMouseUpModalInputRefresh((CDSView *)this);
     (**(code **)(*(int *)this + 0x24))(0,0);
     cVar1 = (**(code **)(*(int *)this + 0x1c))(unaff_ESI);
     if (cVar1 != '\0') {
@@ -62122,7 +62132,7 @@ void __thiscall CButton::CButton_OnMouseUp(CButton *this,undefined4 param_1,byte
   
   if (((param_2 & 1) != 0) && (this->bPressedFlag != 0)) {
     this->bPressedFlag = 0;
-    _Globals::FUN_0042cf60((int *)this);
+    CDSView::CDSView_OnMouseUpModalInputRefresh((CDSView *)this);
     (**(code **)(*(int *)this + 0x24))(0,0);
     cVar1 = (**(code **)(*(int *)this + 0x1c))(unaff_ESI);
     if (cVar1 != '\0') {
@@ -62232,18 +62242,18 @@ void __thiscall CButton::CButton_OnFocusReceived(CButton *this,short param_1)
 void __fastcall CScroller::CScroller_ResetScrollSchedulerSlot(int param_1)
 
 {
-  void *this;
+  CDSUpdatedItem *this;
   void *pvVar1;
   
                     // UNCERTAIN: reset Scheduler event slot at this+0x68 slot 0 (AckSlot +
                     // SetEventLastFireMs -1) and bump scroll snapshot +0x98; caller CScroller
                     // FUN_00404110 on scrollbar sync.
-  this = (void *)(param_1 + 0x68);
-  pvVar1 = _Globals::Scheduler_GetEventSlot(this,0);
+  this = (CDSUpdatedItem *)(param_1 + 0x68);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(this,0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
-    _Globals::Scheduler_AckSlot(this,0,-1);
+    CDSUpdatedItem::Scheduler_AckSlot(this,0,-1);
   }
-  _Globals::Scheduler_SetEventLastFireMs(this,0,-1);
+  CDSUpdatedItem::Scheduler_SetEventLastFireMs(this,0,-1);
   *(int *)(param_1 + 0x98) = *(int *)(param_1 + 0x98) + 1;
   return;
 }
@@ -62283,7 +62293,7 @@ void __thiscall CScroller::CScroller_OnViewEvent(CScroller *this,short param_1,i
 
 
 
-void __thiscall CListViewer::FUN_00404180(CListViewer *this,int *param_1)
+void __thiscall CListViewer_GetContentRect(void *this,int *param_1)
 
 {
   int iVar1;
@@ -62293,11 +62303,11 @@ void __thiscall CListViewer::FUN_00404180(CListViewer *this,int *param_1)
                     // CListViewer_GetVerticalScrollbarHeight when horiz/vert scrollbars visible.
                     // Callers: CScroller_Render, CListViewer_RenderItems. Pair FUN_004041e0 (batch
                     // 11).
-  iVar1 = *(int *)(this->pPad_base + 0x34);
-  *param_1 = *(int *)(this->pPad_base + 0x30) + 3;
+  iVar1 = *(int *)((int)this + 0x34);
+  *param_1 = *(int *)((int)this + 0x30) + 3;
   param_1[1] = iVar1 + 3;
-  iVar1 = *(int *)(this->pPad_base + 0x3c);
-  param_1[2] = *(int *)(this->pPad_base + 0x38) + -3;
+  iVar1 = *(int *)((int)this + 0x3c);
+  param_1[2] = *(int *)((int)this + 0x38) + -3;
   param_1[3] = iVar1 + -3;
   iVar1 = _Globals::CListViewer_GetVerticalScrollbarHeight((int)this);
   if ((*(byte *)(*(int *)(extraout_EDX + 0x90) + 0x44) & 1) != 0) {
@@ -62338,7 +62348,7 @@ void __thiscall CListViewer::CListViewer_GetContentAreaSize(CListViewer *this,in
 
 
 
-void __thiscall CListViewer::FUN_00404240(CListViewer *this,int *param_1)
+void __thiscall CListViewer_GetVisibleRect(void *this,int *param_1)
 
 {
   int iVar1;
@@ -62350,9 +62360,9 @@ void __thiscall CListViewer::FUN_00404240(CListViewer *this,int *param_1)
                     // GetContentRect-style helper.
   local_8 = 0;
   local_4 = 0;
-  CListViewer_GetContentAreaSize(this,&local_8);
-  *param_1 = this->nScrollX_px;
-  iVar1 = this->nScrollY_px;
+  CListViewer::CListViewer_GetContentAreaSize(this,&local_8);
+  *param_1 = *(int *)((int)this + 0x80);
+  iVar1 = *(int *)((int)this + 0x84);
   param_1[1] = iVar1;
   param_1[2] = *param_1 + local_8;
   param_1[3] = iVar1 + local_4;
@@ -62500,7 +62510,7 @@ void __thiscall _Globals::CListViewer_UpdateContentSize(void *this,int *param_1)
 
 
 
-void __thiscall CListViewer::FUN_004044f0(CListViewer *this,int *param_1,int *param_2)
+void __thiscall CListViewer_MapPointToContent(void *this,int *param_1,int *param_2)
 
 {
   int iVar1;
@@ -62511,9 +62521,9 @@ void __thiscall CListViewer::FUN_004044f0(CListViewer *this,int *param_1,int *pa
                     // HitTestItem.
   *param_1 = *param_2;
   param_1[1] = param_2[1];
-  iVar1 = this->nScrollY_px;
-  iVar2 = *(int *)(this->pPad_base + 0x34);
-  *param_1 = *param_1 + (this->nScrollX_px - *(int *)(this->pPad_base + 0x30)) + -3;
+  iVar1 = *(int *)((int)this + 0x84);
+  iVar2 = *(int *)((int)this + 0x34);
+  *param_1 = *param_1 + (*(int *)((int)this + 0x80) - *(int *)((int)this + 0x30)) + -3;
   param_1[1] = param_1[1] + (iVar1 - iVar2) + -3;
   return;
 }
@@ -62559,7 +62569,7 @@ void __fastcall CBlackView::OnDraw(CBlackView *this)
 
 
 
-void __fastcall _Globals::FUN_004045d0(undefined4 *param_1)
+void __fastcall FreeIfNotInline(undefined4 *param_1)
 
 {
                     // UNCERTAIN: MSVC small-string unwind — free *param_1 when heap-backed
@@ -62573,7 +62583,7 @@ void __fastcall _Globals::FUN_004045d0(undefined4 *param_1)
 
 
 
-void __thiscall _Globals::FUN_004045f0(void *this,LPCWSTR param_1,UINT param_2)
+void __thiscall _Globals::CDsString_AssignFromWideCapped80(void *this,LPCWSTR param_1,UINT param_2)
 
 {
   int iVar1;
@@ -62622,7 +62632,7 @@ void __thiscall _Globals::CDynPtrArray_RemoveRange(void *this,int param_1,int pa
   
   iVar1 = param_1 + param_2;
   if (iVar1 < *(int *)((int)this + 8)) {
-    FUN_00403240((undefined4 *)(*(int *)this + param_1 * 4),(undefined4 *)(*(int *)this + iVar1 * 4)
+    MemMoveDword((undefined4 *)(*(int *)this + param_1 * 4),(undefined4 *)(*(int *)this + iVar1 * 4)
                  ,*(int *)((int)this + 8) - iVar1);
   }
   *(int *)((int)this + 8) = *(int *)((int)this + 8) - param_2;
@@ -62651,16 +62661,13 @@ undefined4 __thiscall _Globals::CDSRect_Overlaps(void *this,tagRECT *param_1)
 
 {
   int *extraout_EAX;
-  void *local_10;
-  void *local_c;
-  int local_8;
-  int local_4;
+  tagRECT local_10;
   
-  local_10 = *(void **)this;
-  local_c = *(void **)((int)this + 4);
-  local_8 = *(int *)((int)this + 8);
-  local_4 = *(int *)((int)this + 0xc);
-  CPoemScroller::rect_Intersect((CPoemScroller *)&local_10,param_1);
+  local_10.left = *(LONG *)this;
+  local_10.top = *(LONG *)((int)this + 4);
+  local_10.right = *(LONG *)((int)this + 8);
+  local_10.bottom = *(LONG *)((int)this + 0xc);
+  tagRECT::CDSRect_Intersect(&local_10,param_1);
   if ((*extraout_EAX < extraout_EAX[2]) && (extraout_EAX[1] < extraout_EAX[3])) {
     return 1;
   }
@@ -63069,7 +63076,7 @@ undefined * CListBoxItem::CListBoxItem_GetTypeInfo(void)
 
 
 
-undefined4 * __thiscall CChatList::FUN_00404c80(CChatList *this,undefined4 *param_1)
+undefined4 * __thiscall CChatList::CChatList_GetItemText(CChatList *this,undefined4 *param_1)
 
 {
                     // UNCERTAIN: __thiscall copies CDS string from this+0x10 via
@@ -63380,7 +63387,7 @@ void __thiscall CScrollBar::CScrollBar_SetScrollRange(CScrollBar *this,int minVa
       _Globals::CDSView__Show((int *)this);
       return;
     }
-    _Globals::CDSView__Hide((int *)this);
+    CDSView::CDSView__Hide((CDSView *)this);
   }
   return;
 }
@@ -63391,7 +63398,7 @@ void __thiscall CRadio::CRadio_OnMouseUp(CRadio *this,undefined4 param_1,byte pa
 
 {
   if (((param_2 & 1) != 0) && (this->bPressedIndex != 0xff)) {
-    _Globals::FUN_0042cf60((int *)this);
+    CDSView::CDSView_OnMouseUpModalInputRefresh((CDSView *)this);
     this->bIsPressed = 0;
     if (this->bHoverIndex == this->bPressedIndex) {
       CRadio_SetSelected(this,this->bPressedIndex);
@@ -63646,7 +63653,7 @@ CWindow::CWindow_BuildAt(CWindow *this,int left,int top,int right,int bottom,uch
 
 
 
-void __fastcall CWindow::CWindow_Render(int param_1)
+void __fastcall CWindow::CWindow_Render(CDSView *param_1)
 
 {
   CPoemScroller *pCVar1;
@@ -63657,10 +63664,10 @@ void __fastcall CWindow::CWindow_Render(int param_1)
   else {
     pCVar1 = (CPoemScroller *)((int)g_pApp + 0x80);
   }
-  if (*(char *)(param_1 + 0x68) != '\0') {
-    CPoemScroller::BlitStatic(pCVar1,(int *)(param_1 + 0x30),0xbfbfbf,0);
+  if ((param_1->win).bModalFlag != 0) {
+    CPoemScroller::BlitStatic(pCVar1,&(param_1->win).nScreenBbox_left,0xbfbfbf,0);
   }
-  CDSApp::CDSView_RenderChildrenClipped(param_1);
+  CDSView::CDSView_RenderChildrenClipped(param_1);
   return;
 }
 
@@ -63796,15 +63803,15 @@ void __fastcall CScroller::CScroller_Render(CListViewer *param_1)
   CPoemScroller *pCVar2;
   uint uVar3;
   tagRECT local_30;
-  void *local_20;
-  void *local_1c;
-  void *local_18;
+  int local_20;
+  int local_1c;
+  int local_18;
   undefined1 local_14 [8];
   int local_c;
   int local_8;
-  int local_4;
+  undefined4 local_4;
   
-  CDSApp::CDSView_RenderChildrenClipped();
+  CDSView::CDSView_RenderChildrenClipped((CDSView *)param_1);
   if (g_pApp == (void *)0xffffff84) {
     pCVar2 = (CPoemScroller *)0x0;
   }
@@ -63814,33 +63821,33 @@ void __fastcall CScroller::CScroller_Render(CListViewer *param_1)
   uVar3 = 0xffffffff;
   iVar1 = _Globals::WidgetStateFlags_ToTintColor(param_1->pPad_base[0x44] & 6);
   CPoemScroller::BlitStatic(pCVar2,(int *)(param_1->pPad_base + 0x30),iVar1,uVar3);
-  local_20 = (void *)0x0;
-  local_1c = (void *)0x0;
-  local_18 = (void *)0x0;
+  local_20 = 0;
+  local_1c = 0;
+  local_18 = 0;
   local_14._0_4_ = 0;
-  CListViewer::FUN_00404180(param_1,(int *)&local_20);
-  local_30.left = (LONG)local_20;
-  local_30.right = (LONG)local_18;
-  local_30.top = (LONG)local_1c;
+  CListViewer_GetContentRect(param_1,&local_20);
+  local_30.left = local_20;
+  local_30.right = local_18;
+  local_30.top = local_1c;
   local_30.bottom = local_14._0_4_;
   local_14._4_4_ = pCVar2->nBounds_top;
   this = &pCVar2->nBounds_top;
   local_c = pCVar2->nBounds_right;
   local_8 = pCVar2->nBounds_bottom;
-  local_4 = *(int *)pCVar2->pPad_30_67;
-  CPoemScroller::rect_Intersect((CPoemScroller *)&local_30,(tagRECT *)(local_14 + 4));
+  local_4 = *(undefined4 *)pCVar2->pPad_30_67;
+  tagRECT::CDSRect_Intersect(&local_30,(tagRECT *)(local_14 + 4));
   if ((local_30.left < local_30.right) && (local_30.top < local_30.bottom)) {
     *this = 0;
     pCVar2->nBounds_right = 0;
     pCVar2->nBounds_bottom = (int)pCVar2->pVftable_IDSChained_04;
     *(int *)pCVar2->pPad_30_67 = pCVar2->nField_08;
-    CPoemScroller::rect_Intersect((CPoemScroller *)this,&local_30);
+    tagRECT::CDSRect_Intersect((tagRECT *)this,&local_30);
     (**(code **)(*(int *)param_1->pPad_base + 0x70))(&local_20);
     *this = 0;
     pCVar2->nBounds_right = 0;
     *(int *)pCVar2->pPad_30_67 = pCVar2->nField_08;
     pCVar2->nBounds_bottom = (int)pCVar2->pVftable_IDSChained_04;
-    CPoemScroller::rect_Intersect((CPoemScroller *)this,(tagRECT *)local_14);
+    tagRECT::CDSRect_Intersect((tagRECT *)this,(tagRECT *)local_14);
   }
   return;
 }
@@ -63918,7 +63925,7 @@ void __thiscall CScroller::CScroller__UpdateScrollbars(CScroller *this,int *para
   if (bVar5) {
     iVar6 = iVar6 - uVar10;
   }
-  CBulanci::CDSView__SetSize((CBulanci *)this->pVerticalScrollBar,iVar6 + -6,uVar10);
+  CDSView::CDSView__SetSize((CDSView *)this->pVerticalScrollBar,iVar6 + -6,uVar10);
   if (bVar5) {
     iVar9 = this->nContentHeight_px - (((iVar3 - (-(uint)bVar4 & uVar10)) - iVar2) + -6);
   }
@@ -63929,7 +63936,7 @@ void __thiscall CScroller::CScroller__UpdateScrollbars(CScroller *this,int *para
   if (bVar4) {
     iVar7 = iVar7 - uVar10;
   }
-  CBulanci::CDSView__SetSize((CBulanci *)this->pHorizontalScrollBar,uVar10,iVar7 + -6);
+  CDSView::CDSView__SetSize((CDSView *)this->pHorizontalScrollBar,uVar10,iVar7 + -6);
   iVar9 = *(int *)(this->pHorizontalScrollBar + 0xb0);
   this->nScrollX_px = *(int *)(this->pVerticalScrollBar + 0xb0);
   this->nScrollY_px = iVar9;
@@ -63941,7 +63948,7 @@ void __thiscall CScroller::CScroller__UpdateScrollbars(CScroller *this,int *para
 void __thiscall CScroller::CScroller_SetRect(CScroller *this,int *param_1)
 
 {
-  CBulanci::CDSView_SetRect((CBulanci *)this,param_1);
+  CDSView::CDSView_SetRect((CDSView *)this,param_1);
   CScroller__UpdateScrollbars(this,(int *)(this->pPad_base + 0x20));
   return;
 }
@@ -63992,7 +63999,7 @@ void * __thiscall CListViewer::CListViewer_HitTestItem(CListViewer *this,int par
 
 
 
-void __thiscall _Globals::FUN_00405bc0(void *this,int param_1)
+void __thiscall _Globals::CListViewer_ReindexItemsFrom(void *this,int param_1)
 
 {
   int iVar1;
@@ -64150,7 +64157,7 @@ void * __thiscall CListViewer::CListViewer_AddItem(CListViewer *this,void *item)
   local_20.right = 0;
   local_20.bottom = 0;
   CListViewer_IndexToItemRect(this,iVar2,local_10);
-  FUN_00404240(this,&local_20.left);
+  CListViewer_GetVisibleRect(this,&local_20.left);
   uVar1 = _Globals::CDSRect_Overlaps(local_10,&local_20);
   if ((char)uVar1 != '\0') {
     return this->pItems[iVar2];
@@ -64192,8 +64199,9 @@ void __fastcall CChatList::RecalculateHorizontalExtent(CScroller *param_1)
     local_1c.top = 0;
     local_1c.right = 0;
     local_1c.bottom = 0;
-    piVar4 = FUN_00404c80(*(CChatList **)(*(int *)(param_1[1].pPad_base + 0x10) + iVar6 * 4),
-                          &local_20);
+    piVar4 = CChatList_GetItemText
+                       (*(CChatList **)(*(int *)(param_1[1].pPad_base + 0x10) + iVar6 * 4),&local_20
+                       );
     local_4 = 0;
     pWVar5 = (LPCWSTR)*piVar4;
     if ((LPCWSTR)*piVar4 == (LPCWSTR)0x0) {
@@ -64409,13 +64417,13 @@ void __thiscall CDSPtrSlotVec::CDSPtrSlotVec_Resize(CDSPtrSlotVec *this,int newC
   void *pvVar1;
   
   if (this->nCapacity < newCapacity) {
-    pvVar1 = _Globals::FUN_0042f730(this->pSlots,(uchar *)(newCapacity * 4));
+    pvVar1 = _Globals::Runtime_ReallocOrThrow(this->pSlots,(uchar *)(newCapacity * 4));
     this->nCapacity = newCapacity;
     this->pSlots = pvVar1;
     return;
   }
   if (newCapacity < this->nCapacity) {
-    pvVar1 = _Globals::FUN_0042f730(this->pSlots,(uchar *)(newCapacity * 4));
+    pvVar1 = _Globals::Runtime_ReallocOrThrow(this->pSlots,(uchar *)(newCapacity * 4));
     this->nCapacity = newCapacity;
     this->pSlots = pvVar1;
   }
@@ -64725,25 +64733,27 @@ void __thiscall CEdit::CEdit_AdjustorThunk18_Dtor(CEdit *this,byte param_1)
 
 
 
-void __fastcall CScrollBar::CScrollBar_Invalidate(void *param_1)
+void __fastcall CScrollBar::CScrollBar_Invalidate(CDSUpdatedItem *param_1)
 
 {
   void *pvVar1;
   uint uVar2;
   
-  pvVar1 = _Globals::Scheduler_GetEventSlot(param_1,0);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(param_1,0);
   uVar2 = *(int *)((int)pvVar1 + 4) - 0x1e;
   if (uVar2 < 0x28) {
     uVar2 = 0x28;
   }
-  _Globals::Scheduler_SetEventDelayMs(param_1,0,uVar2);
-  if (*(int *)((int)param_1 + 0x58) == 1) {
-    CScrollBar_SetValue((CScrollBar *)((int)param_1 + -0x68),
-                        *(int *)((int)param_1 + 0x48) - *(int *)((int)param_1 + 0x4c));
+  CDSUpdatedItem::Scheduler_SetEventDelayMs(param_1,0,uVar2);
+  if (param_1[3].dwEventSlots == 1) {
+    CScrollBar_SetValue((CScrollBar *)&param_1[-5].dwEventSlots,
+                        (int)param_1[3].pVftable_IDSUpdated -
+                        (int)param_1[3].pVftable_IDSEventHandler);
     return;
   }
-  CScrollBar_SetValue((CScrollBar *)((int)param_1 + -0x68),
-                      *(int *)((int)param_1 + 0x4c) + *(int *)((int)param_1 + 0x48));
+  CScrollBar_SetValue((CScrollBar *)&param_1[-5].dwEventSlots,
+                      (int)param_1[3].pVftable_IDSEventHandler + (int)param_1[3].pVftable_IDSUpdated
+                     );
   return;
 }
 
@@ -64759,8 +64769,8 @@ void __thiscall _Globals::CScrollBar_NudgeOnArrowHold(void *this,char param_1)
     iVar1 = -iVar1;
   }
   CScrollBar::CScrollBar_SetValue(this,*(int *)((int)this + 0xb0) + iVar1);
-  Scheduler_AckSlot((void *)((int)this + 0x68),0,-1);
-  Scheduler_SetEventDelayMs((void *)((int)this + 0x68),0,300);
+  CDSUpdatedItem::Scheduler_AckSlot((CDSUpdatedItem *)((int)this + 0x68),0,-1);
+  CDSUpdatedItem::Scheduler_SetEventDelayMs((CDSUpdatedItem *)((int)this + 0x68),0,300);
   return;
 }
 
@@ -64788,7 +64798,7 @@ void __thiscall _Globals::CScrollBar_SetDragMode(void *this,undefined4 param_1,u
       if (iVar1 != 5) goto LAB_0040685f;
       *(byte *)((int)this + 0xa4) = *(byte *)((int)this + 0xa4) & 0xcf;
     }
-    Scheduler_ArmSlot((void *)((int)this + 0x68),0);
+    CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)((int)this + 0x68),0);
 LAB_0040685f:
     piVar4 = (int *)((int)g_pApp + 0xf0);
     cVar3 = (**(code **)(*(int *)this + 0x1c))(piVar4);
@@ -65070,16 +65080,16 @@ void __thiscall CListViewer::CListViewer_RenderItems(CListViewer *this,int *para
   void *item;
   int iVar2;
   CPoemScroller *this_01;
-  void *local_30;
-  void *local_2c;
+  int local_30;
+  int local_2c;
   int local_28;
   int local_24;
   tagRECT local_20;
   tagRECT local_10;
   
   iVar1 = _Globals::WidgetStateFlags_ToTintColor(this->pPad_base[0x44] & 6);
-  local_30 = (void *)0x0;
-  local_2c = (void *)0x0;
+  local_30 = 0;
+  local_2c = 0;
   local_28 = 0;
   local_24 = 0;
   local_20.left = 0;
@@ -65096,11 +65106,11 @@ void __thiscall CListViewer::CListViewer_RenderItems(CListViewer *this,int *para
   else {
     this_01 = (CPoemScroller *)((int)g_pApp + 0x80);
   }
-  FUN_00404180(this,(int *)&local_30);
+  CListViewer_GetContentRect(this,&local_30);
   if (iVar1 == 0xffffff) {
     iVar1 = 0xa0a0a0;
   }
-  CPoemScroller::CPoemScroller_FillRect(this_01,(int *)&local_30,0,iVar1);
+  CPoemScroller::CPoemScroller_FillRect(this_01,&local_30,0,iVar1);
   item = (void *)CListViewer_RefreshHitTestAtScroll(this);
   local_10.left = this_01->nBounds_top;
   this_00 = &this_01->nBounds_top;
@@ -65108,24 +65118,24 @@ void __thiscall CListViewer::CListViewer_RenderItems(CListViewer *this,int *para
   local_10.right = this_01->nBounds_bottom;
   local_10.bottom = *(LONG *)this_01->pPad_30_67;
   for (; item != (void *)0x0; item = CListViewer_AddItem(this,item)) {
-    CListViewer_IndexToItemRect(this,*(int *)((int)item + 4),(int *)&local_30);
+    CListViewer_IndexToItemRect(this,*(int *)((int)item + 4),&local_30);
     iVar2 = *param_1 - this->nScrollX_px;
     iVar1 = param_1[1] - this->nScrollY_px;
-    local_30 = (void *)((int)local_30 + iVar2);
-    local_2c = (void *)((int)local_2c + iVar1);
+    local_30 = local_30 + iVar2;
+    local_2c = local_2c + iVar1;
     local_28 = local_28 + iVar2;
     local_24 = local_24 + iVar1;
-    local_20.left = (LONG)local_30;
-    local_20.top = (LONG)local_2c;
+    local_20.left = local_30;
+    local_20.top = local_2c;
     local_20.right = local_28;
     local_20.bottom = local_24;
-    CPoemScroller::rect_Intersect((CPoemScroller *)&local_20,&local_10);
+    tagRECT::CDSRect_Intersect(&local_20,&local_10);
     if ((local_20.left < local_20.right) && (local_20.top < local_20.bottom)) {
       *this_00 = 0;
       this_01->nBounds_right = 0;
       this_01->nBounds_bottom = (int)this_01->pVftable_IDSChained_04;
       *(int *)this_01->pPad_30_67 = this_01->nField_08;
-      CPoemScroller::rect_Intersect((CPoemScroller *)this_00,&local_20);
+      tagRECT::CDSRect_Intersect((tagRECT *)this_00,&local_20);
       (**(code **)(*(int *)this->pPad_base + 0x74))(&local_30,item);
     }
   }
@@ -65133,7 +65143,7 @@ void __thiscall CListViewer::CListViewer_RenderItems(CListViewer *this,int *para
   this_01->nBounds_right = 0;
   *(int *)this_01->pPad_30_67 = this_01->nField_08;
   this_01->nBounds_bottom = (int)this_01->pVftable_IDSChained_04;
-  CPoemScroller::rect_Intersect((CPoemScroller *)this_00,&local_10);
+  tagRECT::CDSRect_Intersect((tagRECT *)this_00,&local_10);
   return;
 }
 
@@ -65186,7 +65196,7 @@ uint __thiscall CEdit::CEdit_LayoutToCaret(CEdit *this,uint param_1)
     }
     local_94 = local_90;
     UVar2 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)(DAT_004b0e44 ^ (uint)&stack0xffffff5c);
-    _Globals::FUN_004045f0(&local_94,pWVar5,UVar2);
+    _Globals::CDsString_AssignFromWideCapped80(&local_94,pWVar5,UVar2);
     *(uint *)(this->p_base + 0xb4) = uVar4;
     iVar6 = 0;
     uStack_4 = 0;
@@ -65225,7 +65235,7 @@ uint __thiscall CEdit::CEdit_LayoutToCaret(CEdit *this,uint param_1)
 
 
 
-void __fastcall _Globals::FUN_00407020(CEdit *param_1)
+void __fastcall _Globals::CEdit_LayoutToCaretNoAnchor(CEdit *param_1)
 
 {
   uint uVar1;
@@ -65257,13 +65267,13 @@ void __thiscall CEdit::CEdit_OnFocusEvent(CEdit *this,short evtId,CEdit *target)
         uVar1 = *(uint *)(*(int *)(this->p_base + 0x98) + -0xc);
       }
       CEdit_LayoutToCaret(this,uVar1);
-      _Globals::Scheduler_AckSlot(this->p_base + 0x68,0,-1);
+      CDSUpdatedItem::Scheduler_AckSlot((CDSUpdatedItem *)(this->p_base + 0x68),0,-1);
       return;
     }
   }
   else if ((evtId == 3) && (target == this)) {
     this->p_base[0xa0] = 0;
-    _Globals::Scheduler_ArmSlot(this->p_base + 0x68,0);
+    CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)(this->p_base + 0x68),0);
   }
   return;
 }
@@ -65290,7 +65300,7 @@ uint __thiscall _Globals::CEdit_SubmitText(void *this,LPCWSTR param_1,char param
   local_c = ExceptionList;
   ExceptionList = &local_c;
   local_4 = 0;
-  iVar2 = CStartGame2::CStartGame2_CompareLevelName((CStartGame2 *)((int)this + 0x98),&param_1);
+  iVar2 = CStartGame2::CDsString_CompareHandles((CStartGame2 *)((int)this + 0x98),&param_1);
   if (iVar2 == 0) {
 LAB_004071e9:
     local_4 = 0xffffffff;
@@ -65317,7 +65327,7 @@ LAB_004071e9:
     if (cVar1 != '\0') {
       CDsStringAssignFromHandle((CStartGame2 *)((int)this + 0x98),&param_1);
       if (param_2 != '\0') {
-        FUN_00407020(this);
+        CEdit_LayoutToCaretNoAnchor(this);
       }
       (**(code **)(*(int *)this + 0x24))(0);
       if (*(int *)((int)this + 0x4c) == 0) {
@@ -65383,7 +65393,7 @@ int __thiscall _Globals::CIntList_InsertAt(void *this,undefined4 param_1,int par
   iVar2 = *(int *)((int)this + 8) - param_2;
   if (iVar2 != 0) {
     puVar1 = (undefined4 *)(*(int *)this + param_2 * 4);
-    FUN_00403240(puVar1 + 1,puVar1,iVar2);
+    MemMoveDword(puVar1 + 1,puVar1,iVar2);
   }
   *(undefined4 *)(*(int *)this + param_2 * 4) = param_1;
   *(int *)((int)this + 8) = *(int *)((int)this + 8) + 1;
@@ -65553,7 +65563,7 @@ void __thiscall CScrollBar::CScrollBar_OnMouseUp(CScrollBar *this,undefined4 par
   
   if ((((param_2 & 1) != 0) && (this->bDragging != 0)) && (iVar1 = this->nDragMode, iVar1 != 0)) {
     if ((iVar1 != 2) && (iVar1 != 4)) {
-      _Globals::FUN_0042cf60((int *)this);
+      CDSView::CDSView_OnMouseUpModalInputRefresh((CDSView *)this);
     }
     _Globals::CScrollBar_SetDragMode(this,0,(undefined4 *)0x0);
   }
@@ -65654,7 +65664,7 @@ void __thiscall CRadio::CRadio_AddOption(CRadio *this,LPCWSTR param_1,undefined4
   if (iVar5 < iVar4) {
     iVar5 = iVar4;
   }
-  CBulanci::CDSView__SetSize((CBulanci *)this,iVar5,iVar3);
+  CDSView::CDSView__SetSize((CDSView *)this,iVar5,iVar3);
   this_00 = (undefined4 *)_Globals::OperatorNewWithBadAlloc(8);
   if (this_00 == (undefined4 *)0x0) {
     this_00 = (undefined4 *)0x0;
@@ -65699,7 +65709,7 @@ void __thiscall _Globals::CListViewer_InsertItemAt(void *this,undefined4 param_1
     param_2 = *(int *)((int)this + 0xb4);
   }
   CIntList_InsertAt((void *)((int)this + 0xac),param_1,param_2);
-  FUN_00405bc0(this,param_2);
+  CListViewer_ReindexItemsFrom(this,param_2);
   CListViewer_UpdateContentSize(this_00,(int *)((int)this + 0x20));
   CScroller::CScroller__UpdateScrollbars(this,(int *)((int)this + 0x20));
   (**(code **)(*(int *)this + 0x24))(0,0);
@@ -65836,7 +65846,7 @@ CEdit::CEdit_BuildAt
   CEdit_LayoutToCaret(this,0);
   *(ushort *)(this->p_base + 0x14) = *(ushort *)(this->p_base + 0x14) | 0x215;
   *(ushort *)(this->p_base + 0x46) = *(ushort *)(this->p_base + 0x46) | 0x41;
-  _Globals::Scheduler_RegisterEventSlot(this_00,0,1000,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_00,0,1000,7);
   ExceptionList = unaff_EBX;
   return this;
 }
@@ -65966,7 +65976,7 @@ LAB_00407975:
                     // success: this+0xa0=1; Scheduler_SetEventLastFireMs(this+0x68,0,-1);
                     // vtable+0x24 InvalidateRectClipped(this,NULL,0).
     this->p_base[0xa0] = 1;
-    _Globals::Scheduler_SetEventLastFireMs(this->p_base + 0x68,0,-1);
+    CDSUpdatedItem::Scheduler_SetEventLastFireMs((CDSUpdatedItem *)(this->p_base + 0x68),0,-1);
     (**(code **)(*(int *)this->p_base + 0x24))();
   }
   ExceptionList = local_c;
@@ -66069,7 +66079,7 @@ LAB_00407c38:
   }
   CEdit_LayoutToCaret(this,*(int *)(this->p_base + 0xb4) + iVar3);
   this->p_base[0xa0] = 1;
-  _Globals::Scheduler_SetEventLastFireMs(this->p_base + 0x68,0,-1);
+  CDSUpdatedItem::Scheduler_SetEventLastFireMs((CDSUpdatedItem *)(this->p_base + 0x68),0,-1);
   (**(code **)(*(int *)this->p_base + 0x24))();
   param_1 = 1;
 LAB_00407cda:
@@ -66439,7 +66449,7 @@ void __thiscall CListViewer::CListViewer_OnFocusSelectItem(CListViewer *this,int
   if ((bVar1 != 0) && ((this->dwLayoutFlags & 8) == 0)) {
     local_8 = 0;
     local_4 = 0;
-    FUN_004044f0(this,&local_8,param_1);
+    CListViewer_MapPointToContent(this,&local_8,param_1);
     pvVar2 = CListViewer_HitTestItem(this_00,local_8,local_4);
     if (pvVar2 != (void *)0x0) {
       _Globals::CListViewer_SetItemSelected(this,*(int *)((int)pvVar2 + 4),'\x01');
@@ -66716,9 +66726,9 @@ CScrollBar::CScrollBar_BuildAt
   this->nStep = 1;
   this->nPage = 0x14;
   this->nDragMode = 0;
-  _Globals::CDSView__Hide((int *)this);
+  CDSView::CDSView__Hide((CDSView *)this);
   this->wViewFlags = this->wViewFlags | 0x38;
-  _Globals::Scheduler_RegisterEventSlot(&this->scheduler,0,0,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->scheduler,0,0,7);
   ExceptionList = local_c;
   return this;
 }
@@ -67167,7 +67177,7 @@ CScroller::CScroller_BuildAt(CScroller *this,int param_1,int param_2,undefined4 
 
 {
   int left;
-  CBulanek *this_00;
+  CDSView *this_00;
   CScrollBar *pCVar1;
   undefined4 uVar2;
   int iVar3;
@@ -67219,28 +67229,28 @@ CScroller::CScroller_BuildAt(CScroller *this,int param_1,int param_2,undefined4 
   else {
     iVar3 = CScrollBar::CScrollBar_BuildAt(pCVar1,left,iVar3,iVar4,iVar3 + 10,(undefined4 *)0x0);
   }
-  this_00 = (CBulanek *)this->pHorizontalScrollBar;
+  this_00 = (CDSView *)this->pHorizontalScrollBar;
   this->pVerticalScrollBar = iVar3;
-  iVar4 = this_00->nSpatial_bucket_x - this_00->nOrigin_x;
+  iVar4 = (this_00->win).nBbox_right - (this_00->win).nBbox_left;
   iVar3 = *(int *)(iVar3 + 0x2c) - *(int *)(iVar3 + 0x24);
   local_4 = CONCAT31(local_4._1_3_,1);
-  CBulanek::CDSView__SetPosition
+  CDSView::CDSView__SetPosition
             (this_00,((*(int *)(this->pPad_base + 0x28) - *(int *)(this->pPad_base + 0x20)) - iVar4)
                      + -3,3);
-  FUN_0042cbb0((CScroller *)this->pHorizontalScrollBar,0,-6 - iVar3);
+  CScroller_OffsetChildViewRect((CScroller *)this->pHorizontalScrollBar,0,-6 - iVar3);
   *(undefined2 *)(this->pHorizontalScrollBar + 0x48) = 0xd;
-  CBulanek::CDSView__SetPosition
-            ((CBulanek *)this->pVerticalScrollBar,3,
+  CDSView::CDSView__SetPosition
+            ((CDSView *)this->pVerticalScrollBar,3,
              ((*(int *)(this->pPad_base + 0x2c) - *(int *)(this->pPad_base + 0x24)) - iVar3) + -3);
-  FUN_0042cbb0((CScroller *)this->pVerticalScrollBar,-6 - iVar4,0);
+  CScroller_OffsetChildViewRect((CScroller *)this->pVerticalScrollBar,-6 - iVar4,0);
   *(undefined2 *)(this->pVerticalScrollBar + 0x48) = 0xe;
-  _Globals::CDSView__AddChild(this);
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   this->nScrollX_px = 0;
   this->nScrollY_px = 0;
   *(ushort *)(this->pPad_base + 0x14) = *(ushort *)(this->pPad_base + 0x14) | 0x23b;
   *(ushort *)(this->pPad_base + 0x46) = *(ushort *)(this->pPad_base + 0x46) | 1;
-  _Globals::Scheduler_RegisterEventSlot(&this->updatedItem,0,200,5);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot((CDSUpdatedItem *)&this->updatedItem,0,200,5);
   this->nLastRenderScrollSnapshot = 0;
   ExceptionList = local_c;
   return this;
@@ -67602,7 +67612,7 @@ CScoreItem::CScoreItem_MatchesKillsDeathsAndName
                     // MOV ECX,[ESP+0x60]; PUSH ESI (chain row).
   if ((pHighlightTemplate->field6_0x18 == this->field6_0x18) &&
      (pHighlightTemplate->m_kills == this->m_kills)) {
-    iVar1 = CStartGame2::CStartGame2_CompareLevelName
+    iVar1 = CStartGame2::CDsString_CompareHandles
                       ((CStartGame2 *)&pHighlightTemplate->m_name,&this->m_name);
     if (iVar1 == 0) {
       return 1;
@@ -68158,7 +68168,7 @@ void CBulanci::CScore_AllocStaticTextAt
   if (highlightRow != '\0') {
     pCVar1->bForce_default_colour = 1;
   }
-  _Globals::CDSView__AddChild(parentView);
+  CDSView::CDSView__AddChild((CDSView *)parentView);
   ExceptionList = local_c;
   return;
 }
@@ -68453,11 +68463,11 @@ CLevelScore::CLevelScore_AddPlayerScore
   pCVar3[1].pVftable_IDSChained = param_3;
   pCVar3[1].pVftable_IDSReferenced = param_2;
   _Globals::CDSChained_AppendChild(this_00,pCVar3);
-  CBulanci::CDSChain_SortChildrenWithComparator((CBulanci *)this_00,CScoreItem_CompareByNetScore);
+  CDSChain_SortChildrenWithComparator((CLevelScore *)this_00,CScoreItem_CompareByNetScore);
   uVar4 = (this->scoreChain).dwChildCount;
   while (6 < (int)uVar4) {
     uVar4 = uVar4 - 1;
-    pCVar2 = CBulanci::CDSChain_GetChildAtIndex((CBulanci *)this_00,uVar4);
+    pCVar2 = CDSChain::CDSChain_GetChildAtIndex(this_00,uVar4);
     if (pCVar2 == pCVar3) {
       pCVar3 = (CDSChain *)0x0;
     }
@@ -68593,7 +68603,7 @@ void __fastcall CBulanci::SaveConfigToRegistry(CBulanciConfigStore *configStore)
   local_c = (undefined *)0x0;
   _Globals::CDsStringAssignFromHandle(&local_c,&configStore->dwTrailingStringHandle);
   local_68._0_1_ = 4;
-  FUN_0042e400((CBulanci *)&local_c,(int *)local_58);
+  CDsString_WriteNarrowLengthPrefixedToStream((CBulanci *)&local_c,(int *)local_58);
   local_68._0_1_ = 2;
   if (local_c != (undefined *)0x0) {
     _Globals::CDsStringReleaseHeader(local_c + -0xc);
@@ -69017,14 +69027,15 @@ void __fastcall CBulanci::CDSChain_LoadConfigFromRegistry(CDSChain_full *this)
   for (uVar3 = 0; uVar3 < 6; uVar3 = uVar3 + 1) {
     CDSGZipStream::ReadBytes((CDSGZipStream *)local_54,this->pKeyBindings + uVar3 * 6,1);
     CDSGZipStream::ReadBytes((CDSGZipStream *)local_54,this->pKeyBindings + uVar3 * 6 + 1,1);
-    FUN_0042e2f0((CBulanci *)(this->pKeyBindings + uVar3 * 6 + 2),(int *)local_54);
+    CDsString_ReadNarrowLengthPrefixedFromStream
+              ((CBulanci *)(this->pKeyBindings + uVar3 * 6 + 2),(int *)local_54);
   }
   CDSGZipStream::ReadBytes((CDSGZipStream *)local_54,&this->dwOptionsDword,4);
   CDSGZipStream::ReadBytes((CDSGZipStream *)local_54,this->pOptionBlock,0xe);
   CDSGZipStream::ReadBytes((CDSGZipStream *)local_54,&this->nPanBindingIndex,4);
   CDSGZipStream::ReadBytes((CDSGZipStream *)local_54,&this->nReservedAudioDword1,4);
   CDSGZipStream::ReadBytes((CDSGZipStream *)local_54,&this->nReservedAudioDword2,4);
-  FUN_0042e2f0((CBulanci *)&this->strConfigTail,(int *)local_54);
+  CDsString_ReadNarrowLengthPrefixedFromStream((CBulanci *)&this->strConfigTail,(int *)local_54);
                     // R5 w43: IDSChained vtable+0x10 slot[4]=CDSChain_Append@0x0042fb70;
                     // ECX=&pVftable_IDSChained (+0x68); arg=[EBP+0xc] gzip IDSStream read face
   pcVar1 = *(code **)(this->pVftable_IDSChained + 0x10);
@@ -69216,7 +69227,7 @@ void __fastcall CGame::CGame_FocusLobbyScroller(int param_1)
 
 {
   _Globals::CScroller_ClearContent(*(CScroller **)(param_1 + 0x70));
-  _Globals::CDSView_SetAsDefaultFocusChild(*(int **)(param_1 + 0x78));
+  CDSView::CDSView_SetAsDefaultFocusChild(*(CDSView **)(param_1 + 0x78));
   return;
 }
 
@@ -69235,8 +69246,8 @@ void __fastcall CStartGame1::CStartGame1_ApplyHostJoinVisibility(CStartGame1 *th
     _Globals::CDSView__Show((int *)this->pStaticHostHeader);
     return;
   }
-  _Globals::CDSView__Hide((int *)this->pRadioHostJoin);
-  _Globals::CDSView__Hide((int *)this->pStaticHostHeader);
+  CDSView::CDSView__Hide((CDSView *)this->pRadioHostJoin);
+  CDSView::CDSView__Hide((CDSView *)this->pStaticHostHeader);
   return;
 }
 
@@ -69250,8 +69261,8 @@ void __fastcall CStartGame1::CStartGame1__ApplyLocalPlayersConstraints(int param
   if ((*(char *)(*(int *)(param_1 + 0x8c) + 0x68) == '\0') &&
      (*(char *)(*(int *)(param_1 + 0x88) + 0x68) == '\0')) {
     CRadio::CRadio_SetSelected(*(CRadio **)(param_1 + 0x90),'\0');
-    _Globals::CDSView__Hide(*(int **)(param_1 + 0x90));
-    _Globals::CDSView__Hide(*(int **)(param_1 + 0xa0));
+    CDSView::CDSView__Hide(*(CDSView **)(param_1 + 0x90));
+    CDSView::CDSView__Hide(*(CDSView **)(param_1 + 0xa0));
     return;
   }
   _Globals::CDSView__Show(*(int **)(param_1 + 0x90));
@@ -69282,8 +69293,8 @@ void __thiscall CStartGame1::CStartGame1_ApplyJoinModeVisibility(CStartGame1 *th
     CStartGame1_ApplyHostJoinVisibility(this);
     return;
   }
-  _Globals::CDSView__Hide((int *)this->pStaticConnectionHeader);
-  _Globals::CDSView__Hide((int *)this->pRadioConnection);
+  CDSView::CDSView__Hide((CDSView *)this->pStaticConnectionHeader);
+  CDSView::CDSView__Hide((CDSView *)this->pRadioConnection);
   CStartGame1__ApplyLocalPlayersConstraints((int)this);
   CStartGame1_ApplyHostJoinVisibility(this);
   return;
@@ -69394,7 +69405,7 @@ void __thiscall CGameTypeDlg::CGameTypeDlg_RefreshFocusOrEnable(CGameTypeDlg *th
     _Globals::CDSView_EnableWidget((int *)this->pBtnOk);
     return;
   }
-  _Globals::CDSView_SetAsDefaultFocusChild((int *)this->pBtnOk);
+  CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pBtnOk);
   return;
 }
 
@@ -69416,8 +69427,8 @@ CGameTypeDlg::CGameTypeDlg_OnNotify(CGameTypeDlg *this,short param_1,int param_2
       ppCVar3 = this->pNumEditGroup;
       iVar2 = 3;
       do {
-        _Globals::CDSView__Hide((int *)ppCVar3[-3]);
-        _Globals::CDSView__Hide((int *)*ppCVar3);
+        CDSView::CDSView__Hide((CDSView *)ppCVar3[-3]);
+        CDSView::CDSView__Hide((CDSView *)*ppCVar3);
         ppCVar3 = ppCVar3 + 1;
         iVar2 = iVar2 + -1;
       } while (iVar2 != 0);
@@ -69432,22 +69443,22 @@ CGameTypeDlg::CGameTypeDlg_OnNotify(CGameTypeDlg *this,short param_1,int param_2
   else if (param_1 == 0xd6) {
     CGameTypeDlg_RefreshFocusOrEnable(this);
   }
-  CBulanci::CDSApp_BroadcastSyntheticEventToChildren((CBulanci *)this,param_1,param_2,param_3);
+  CDSView::CDSApp_BroadcastSyntheticEventToChildren((CDSView *)this,param_1,param_2,param_3);
   return;
 }
 
 
 
-void __thiscall CBulanci::FUN_0040ab90(CBulanci *this,undefined *param_1,undefined *param_2)
+void __thiscall CBulanci_StoreAndInvalidate(void *this,undefined4 param_1,undefined4 param_2)
 
 {
                     // UNCERTAIN: stores param_2 at +0x68 and param_1 at +0x6c then Invalidate via
                     // vtable+0x24; sole caller CLoadingLevel_SetProgress @ 0x0040abc3.
-  (this->app).pClassName = param_2;
-  (this->app).pRegistryPath = param_1;
+  *(undefined4 *)((int)this + 0x68) = param_2;
+  *(undefined4 *)((int)this + 0x6c) = param_1;
                     // WARNING: Could not recover jumptable at 0x0040abb3. Too many branches
                     // WARNING: Treating indirect jump as call
-  (**(code **)((this->app).vftable_primary + 0x24))();
+  (**(code **)(*(int *)this + 0x24))();
   return;
 }
 
@@ -69457,7 +69468,7 @@ void __thiscall
 CBulanci::CLoadingLevel_SetProgress(CBulanci *this,undefined4 param_1,undefined4 param_2)
 
 {
-  FUN_0040ab90((CBulanci *)(this->app).pMasterPackStorage,param_1,param_2);
+  CBulanci_StoreAndInvalidate((this->app).pMasterPackStorage,param_1,param_2);
   return;
 }
 
@@ -69503,7 +69514,7 @@ uint __thiscall CPauseDlg::CPauseDlg_OnKeyDown(CPauseDlg *this,char param_1,char
 
 
 
-void __fastcall CPauseDlg::FUN_0040ac50(int param_1)
+void __fastcall CPauseDlg_ShowSetup(int param_1)
 
 {
   undefined4 uVar1;
@@ -69528,7 +69539,7 @@ void __fastcall CPauseDlg::FUN_0040ac50(int param_1)
 void __thiscall CAdvertising::ArmDismissTimer(CAdvertising *this,uint param_1)
 
 {
-  _Globals::Scheduler_RegisterEventSlot(&this->updatedItem,0,param_1,6);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->updatedItem,0,param_1,6);
   return;
 }
 
@@ -69551,7 +69562,7 @@ uint __fastcall CAdvertising::CAdvertising_Dismiss(int splash)
 
 
 
-int __cdecl _Globals::FUN_0040ace0(int param_1,int param_2)
+int __cdecl RandInRange(int param_1,int param_2)
 
 {
   int iVar1;
@@ -69565,7 +69576,7 @@ int __cdecl _Globals::FUN_0040ace0(int param_1,int param_2)
 
 
 
-void __fastcall _Globals::FUN_0040ad10(int param_1)
+void __fastcall _Globals::Unwind_CDSVideoPlayer_TM(int param_1)
 
 {
                     // UNCERTAIN: EH unwind CDSVideoPlayer_TM_Destructor((base+0x98)+0x10);
@@ -69636,14 +69647,14 @@ CSessionList::CSessionList_OnEvent
 
 {
   if (param_1 != 0xd0) {
-    CBulanci::CDSApp_BroadcastSyntheticEventToChildren((CBulanci *)this,param_1,param_2,param_3);
+    CDSView::CDSApp_BroadcastSyntheticEventToChildren((CDSView *)this,param_1,param_2,param_3);
     return;
   }
   if (*(int *)((this->pSessionListBox->listViewer).pPad_scrollCalc + 8) != 0) {
     _Globals::CDSView_EnableWidget((int *)this->pJoinButton);
     return;
   }
-  _Globals::CDSView_SetAsDefaultFocusChild((int *)this->pJoinButton);
+  CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pJoinButton);
   return;
 }
 
@@ -69652,16 +69663,16 @@ CSessionList::CSessionList_OnEvent
 void __fastcall CStartGame1::CStartGame1_UpdateModalChildVisibility(int param_1)
 
 {
-  int *piVar1;
+  CDSView *this;
   
-  piVar1 = *(int **)(param_1 + 0x34);
-  if (piVar1 != (int *)0x0) {
-    if ((*(byte *)(piVar1 + 0x11) & 1) != 0) {
-      _Globals::CDSView__Hide(piVar1);
+  this = *(CDSView **)(param_1 + 0x34);
+  if (this != (CDSView *)0x0) {
+    if (((this->win).wViewStateFlags & 1) != 0) {
+      CDSView::CDSView__Hide(this);
       return;
     }
     if (g_pModalFocus == *(void **)(param_1 + -0x24)) {
-      _Globals::CDSView__Show(piVar1);
+      _Globals::CDSView__Show((int *)this);
     }
   }
   return;
@@ -69675,7 +69686,7 @@ CStartGame1::CStartGame1_OnRadioChange
 
 {
   if (param_1 != 0xce) {
-    CBulanci::CDSApp_BroadcastSyntheticEventToChildren((CBulanci *)this,param_1,param_2,param_3);
+    CDSView::CDSApp_BroadcastSyntheticEventToChildren((CDSView *)this,param_1,param_2,param_3);
     return;
   }
   if (param_2 == this->pRadioGameType) {
@@ -69711,7 +69722,7 @@ void __thiscall CStartGame1::CStartGame1_OnEvent(CStartGame1 *this,ushort param_
     _Globals::CDSView_PostMessage_NullSafe(target_evt,0x100,0xcf,0,0);
     return;
   }
-  CDSApp::CDSApp_RouteSyntheticCloseEvent((CDSApp *)this,param_1);
+  CDSView::CDSApp_RouteSyntheticCloseEvent((CDSView *)this,param_1);
   return;
 }
 
@@ -69986,7 +69997,7 @@ void __thiscall CExitDlg::CExitDlg_RouteSyntheticCloseEvent(CExitDlg *this,ushor
     _Globals::CDSView__PostMessage((void *)((int)this->pParent + 0x10),0x100,0x8004,0,0);
     return;
   }
-  CDSApp::CDSApp_RouteSyntheticCloseEvent((CDSApp *)this,param_1);
+  CDSView::CDSApp_RouteSyntheticCloseEvent((CDSView *)this,param_1);
   return;
 }
 
@@ -70013,14 +70024,14 @@ CPauseDlg::CPauseDlg_OnNotify(CPauseDlg *this,short param_1,byte param_2,int par
   }
   if (param_3 == 0) {
     _Globals::CDSView__Show((int *)this->pBtnPrimary);
-    _Globals::CDSView__Hide((int *)this->pBtnSecondary);
+    CDSView::CDSView__Hide((CDSView *)this->pBtnSecondary);
     if ((this->pBtnSecondary->bViewStateFlags & 2) != 0) {
       pCVar2 = this->pBtnPrimary;
       goto LAB_0040b365;
     }
   }
   else {
-    _Globals::CDSView__Hide((int *)this->pBtnPrimary);
+    CDSView::CDSView__Hide((CDSView *)this->pBtnPrimary);
     _Globals::CDSView__Show((int *)this->pBtnSecondary);
     if ((this->pBtnPrimary->bViewStateFlags & 2) != 0) {
       pCVar2 = this->pBtnSecondary;
@@ -70029,7 +70040,7 @@ LAB_0040b365:
     }
   }
   if (bVar5) {
-    _Globals::CDSView__Hide((int *)this);
+    CDSView::CDSView__Hide((CDSView *)this);
   }
 LAB_0040b375:
   bVar3 = this->pGame->bHostSlotCursor;
@@ -70072,7 +70083,7 @@ void __thiscall CPauseDlg::CPauseDlg_OnCommand(CPauseDlg *this,ushort cmd)
         return;
       }
       if (cmd == 0xec) {
-        FUN_0040ac50((int)this);
+        CPauseDlg_ShowSetup((int)this);
         return;
       }
       goto LAB_0040b48b;
@@ -70087,7 +70098,7 @@ void __thiscall CPauseDlg::CPauseDlg_OnCommand(CPauseDlg *this,ushort cmd)
   }
   _Globals::CDSView__PostMessage((void *)((int)this->pParent + 0x10),0x100,code,arg0,0);
 LAB_0040b48b:
-  CDSApp::CDSApp_RouteSyntheticCloseEvent((CDSApp *)this,cmd);
+  CDSView::CDSApp_RouteSyntheticCloseEvent((CDSView *)this,cmd);
   return;
 }
 
@@ -70097,7 +70108,7 @@ void __fastcall CAdvertising::OnTimerTick(void *param_1)
 
 {
   CAdvertising_Dismiss((int)param_1 + -0x70);
-  _Globals::Scheduler_ArmSlot(param_1,0);
+  CDSUpdatedItem::Scheduler_ArmSlot(param_1,0);
   return;
 }
 
@@ -70106,7 +70117,7 @@ void __fastcall CAdvertising::OnTimerTick(void *param_1)
 void __thiscall CAdvertising::OnLButtonDown(CAdvertising *this,int x,int y,uint flags)
 
 {
-  CDSView::CDSView_OnLButtonDownAcquireFocus((int *)this);
+  CDSView::CDSView_OnLButtonDownAcquireFocus((CDSView *)this);
   if (this->bM_bBlockDismiss == 0) {
     CAdvertising_Dismiss((int)this);
   }
@@ -70135,7 +70146,7 @@ uint __thiscall CAdvertising::OnKeyDown(CAdvertising *this,char key,char repeat)
 
 
 
-void __fastcall _Globals::FUN_0040b540(int *param_1)
+void __fastcall ReleaseAndClearPointer(int *param_1)
 
 {
                     // UNCERTAIN: __fastcall refcount helper — if *param_1 non-null calls vtable+8
@@ -70948,7 +70959,7 @@ CMsgDialog::CMsgDialog_ctor(CMsgDialog *this,int cdsStringHandle,undefined4 *pBu
   int iVar1;
   CStaticText *this_00;
   CButton *pCVar2;
-  CBulanek *this_01;
+  CDSView *this_01;
   int iVar3;
   int iVar4;
   CStaticText *this_02;
@@ -70986,12 +70997,12 @@ CMsgDialog::CMsgDialog_ctor(CMsgDialog *this,int cdsStringHandle,undefined4 *pBu
   this->nBbox_right = this->nBbox_left + iVar3 + 0x3c;
   local_4._0_1_ = 1;
   this->nBbox_bottom = this->nBbox_top + iVar4 + 0x3c;
-  _Globals::FUN_0042cc30(this_02,0x1e,10);
-  _Globals::CDSView__AddChild(this);
+  _Globals::CDSView_OffsetRectAndAdapt(this_02,0x1e,10);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar2 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
   if (pCVar2 == (CButton *)0x0) {
-    this_01 = (CBulanek *)0x0;
+    this_01 = (CDSView *)0x0;
   }
   else {
     iVar1 = (int)pButtonMode + 3;
@@ -71003,13 +71014,13 @@ CMsgDialog::CMsgDialog_ctor(CMsgDialog *this,int cdsStringHandle,undefined4 *pBu
     ;
     pButtonMode = &local_48;
     local_48 = 0;
-    this_01 = (CBulanek *)CButton::CButton_BuildAt(pCVar2);
+    this_01 = (CDSView *)CButton::CButton_BuildAt(pCVar2);
   }
   local_4 = CONCAT31(local_4._1_3_,1);
-  CBulanek::CDSView__SetPosition
-            (this_01,((iVar3 - (this_01->nSpatial_bucket_x - this_01->nOrigin_x)) + 0x3c) / 2,
-             iVar4 + 0x14);
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__SetPosition
+            (this_01,((iVar3 - ((this_01->win).nBbox_right - (this_01->win).nBbox_left)) + 0x3c) / 2
+             ,iVar4 + 0x14);
+  CDSView::CDSView__AddChild((CDSView *)this);
   this->wWidgetFlags = this->wWidgetFlags | 0xc;
   local_4 = -1;
   if (cdsStringHandle != 0) {
@@ -71062,14 +71073,14 @@ void __thiscall CTcpIpConfig::CTcpIpConfig(CTcpIpConfig *this)
               (this_00,0x14,0x14,0x124,0x3c,puVar2,puVar3,shapeFlags,fontResId);
   }
   local_4._0_1_ = 0;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   this_01 = (CEdit *)_Globals::OperatorNewWithBadAlloc(0xb8);
   local_4._0_1_ = 2;
   if (this_01 != (CEdit *)0x0) {
     CEdit::CEdit_BuildAt(this_01,0x14,0x46,0x124,0x3c,0x12,2,0,0x100af);
   }
   local_4._0_1_ = 0;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar1 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
   if (pCVar1 != (CButton *)0x0) {
@@ -71078,7 +71089,7 @@ void __thiscall CTcpIpConfig::CTcpIpConfig(CTcpIpConfig *this)
     CButton::CButton_BuildAt(pCVar1);
   }
   local_4._0_1_ = 0;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar1 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 4;
   if (pCVar1 != (CButton *)0x0) {
@@ -71087,7 +71098,7 @@ void __thiscall CTcpIpConfig::CTcpIpConfig(CTcpIpConfig *this)
     CButton::CButton_BuildAt(pCVar1);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   this->nBbox_bottom = this->nBbox_bottom - this->nBbox_top;
   this->nBbox_right = (this->nBbox_right - this->nBbox_left) + 300;
   this->nBbox_left = 300;
@@ -71181,7 +71192,7 @@ CSessionList * __fastcall CSessionList::CSessionList_BuildDialog(CSessionList *t
   }
   local_4._0_1_ = 0;
   this->pCaptionStatic = pCVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar3 = (CListBox *)_Globals::OperatorNewWithBadAlloc(0xe4);
   local_4._0_1_ = 2;
   if (pCVar3 == (CListBox *)0x0) {
@@ -71192,7 +71203,7 @@ CSessionList * __fastcall CSessionList::CSessionList_BuildDialog(CSessionList *t
   }
   local_4._0_1_ = 0;
   this->pSessionListBox = pCVar3;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
   if (pCVar4 == (CButton *)0x0) {
@@ -71205,7 +71216,7 @@ CSessionList * __fastcall CSessionList::CSessionList_BuildDialog(CSessionList *t
   }
   local_4._0_1_ = 0;
   this->pJoinButton = pCVar4;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 4;
   if (pCVar4 != (CButton *)0x0) {
@@ -71214,8 +71225,8 @@ CSessionList * __fastcall CSessionList::CSessionList_BuildDialog(CSessionList *t
     CButton::CButton_BuildAt(pCVar4);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::CDSView__AddChild(this);
-  _Globals::CDSView_SetAsDefaultFocusChild((int *)this->pJoinButton);
+  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pJoinButton);
   (this->win).nBbox_bottom = (this->win).nBbox_bottom - (this->win).nBbox_top;
   (this->win).nBbox_right = ((this->win).nBbox_right - (this->win).nBbox_left) + 300;
   (this->win).nBbox_left = 300;
@@ -71352,7 +71363,7 @@ CSessionList::CSessionList_SetStatusFromStringHandle(CSessionList *this,int stri
 // 
 // See main_menu.md §3.
 
-void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
+void __fastcall CStartGame1::CStartGame1_BuildUi(CDSView *param_1)
 
 {
   CStaticText *pCVar1;
@@ -71383,7 +71394,7 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x14,puVar4,(uint)puVar5,puVar7);
   }
   local_4 = -1;
-  _Globals::CDSView__AddChild(param_1);
+  CDSView::CDSView__AddChild(param_1);
   pCVar2 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
   local_4 = 1;
   if (pCVar2 == (CRadio *)0x0) {
@@ -71392,19 +71403,19 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
   else {
     pCVar2 = CRadio::CRadio_BuildAt(pCVar2,0x1e,0x2d);
   }
-  param_1[0x22] = (int)pCVar2;
+  param_1[1].win.dwField_08 = (dword)pCVar2;
   puVar4 = (undefined *)0x0;
   local_4 = -1;
   pWVar6 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x8c));
-  CRadio::CRadio_AddOption((CRadio *)param_1[0x22],pWVar6,puVar4);
+  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_08,pWVar6,puVar4);
   puVar4 = (undefined *)0x0;
   pWVar6 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x90));
-  CRadio::CRadio_AddOption((CRadio *)param_1[0x22],pWVar6,puVar4);
-  _Globals::CDSView__AddChild(param_1);
+  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_08,pWVar6,puVar4);
+  CDSView::CDSView__AddChild(param_1);
   pCVar1 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4 = 2;
   if (pCVar1 == (CStaticText *)0x0) {
@@ -71419,8 +71430,8 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     pCVar1 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x69,puVar4,(uint)puVar5,puVar7);
   }
   local_4 = -1;
-  param_1[0x27] = (int)pCVar1;
-  _Globals::CDSView__AddChild(param_1);
+  param_1[1].win.dwField_1c = (dword)pCVar1;
+  CDSView::CDSView__AddChild(param_1);
   pCVar2 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
   local_4 = 3;
   if (pCVar2 == (CRadio *)0x0) {
@@ -71429,29 +71440,29 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
   else {
     pCVar2 = CRadio::CRadio_BuildAt(pCVar2,0x1e,0x82);
   }
-  param_1[0x23] = (int)pCVar2;
+  param_1[1].win.dwField_0c = (dword)pCVar2;
   puVar4 = (undefined *)0x0;
   local_4 = -1;
   pWVar6 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1ac));
-  CRadio::CRadio_AddOption((CRadio *)param_1[0x23],pWVar6,puVar4);
+  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_0c,pWVar6,puVar4);
   puVar4 = (undefined *)0x0;
   pWVar6 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x9c));
-  CRadio::CRadio_AddOption((CRadio *)param_1[0x23],pWVar6,puVar4);
+  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_0c,pWVar6,puVar4);
   puVar4 = (undefined *)0x0;
   pWVar6 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa0));
-  CRadio::CRadio_AddOption((CRadio *)param_1[0x23],pWVar6,puVar4);
+  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_0c,pWVar6,puVar4);
   puVar4 = (undefined *)0x0;
   pWVar6 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa4));
-  CRadio::CRadio_AddOption((CRadio *)param_1[0x23],pWVar6,puVar4);
-  _Globals::CDSView__AddChild(param_1);
+  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_0c,pWVar6,puVar4);
+  CDSView::CDSView__AddChild(param_1);
   pCVar1 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4 = 4;
   if (pCVar1 == (CStaticText *)0x0) {
@@ -71466,8 +71477,8 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     pCVar1 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0xdf,puVar4,(uint)puVar5,puVar7);
   }
   local_4 = -1;
-  param_1[0x28] = (int)pCVar1;
-  _Globals::CDSView__AddChild(param_1);
+  param_1[1].win.nBbox_left = (int)pCVar1;
+  CDSView::CDSView__AddChild(param_1);
   pCVar2 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
   local_4 = 5;
   if (pCVar2 == (CRadio *)0x0) {
@@ -71476,24 +71487,24 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
   else {
     pCVar2 = CRadio::CRadio_BuildAt(pCVar2,0x1e,0xf8);
   }
-  param_1[0x24] = (int)pCVar2;
+  param_1[1].win.pVftable_IDSEventHandler = pCVar2;
   puVar4 = (undefined *)0x0;
   local_4 = -1;
   pWVar6 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x98));
-  CRadio::CRadio_AddOption((CRadio *)param_1[0x24],pWVar6,puVar4);
+  CRadio::CRadio_AddOption(param_1[1].win.pVftable_IDSEventHandler,pWVar6,puVar4);
   puVar4 = (undefined *)0x0;
   pWVar6 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x9c));
-  CRadio::CRadio_AddOption((CRadio *)param_1[0x24],pWVar6,puVar4);
+  CRadio::CRadio_AddOption(param_1[1].win.pVftable_IDSEventHandler,pWVar6,puVar4);
   puVar4 = (undefined *)0x0;
   pWVar6 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa0));
-  CRadio::CRadio_AddOption((CRadio *)param_1[0x24],pWVar6,puVar4);
-  _Globals::CDSView__AddChild(param_1);
+  CRadio::CRadio_AddOption(param_1[1].win.pVftable_IDSEventHandler,pWVar6,puVar4);
+  CDSView::CDSView__AddChild(param_1);
   pCVar1 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4 = 6;
   if (pCVar1 == (CStaticText *)0x0) {
@@ -71508,8 +71519,8 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     pCVar1 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x145,puVar4,(uint)puVar5,puVar7);
   }
   local_4 = -1;
-  param_1[0x26] = (int)pCVar1;
-  _Globals::CDSView__AddChild(param_1);
+  param_1[1].win.pVftable_IDSReferenced = pCVar1;
+  CDSView::CDSView__AddChild(param_1);
   pCVar2 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
   local_4 = 7;
   if (pCVar2 == (CRadio *)0x0) {
@@ -71518,19 +71529,19 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
   else {
     pCVar2 = CRadio::CRadio_BuildAt(pCVar2,0x1e,0x15e);
   }
-  param_1[0x25] = (int)pCVar2;
+  *(CRadio **)&param_1[1].win.wViewFlags = pCVar2;
   puVar4 = (undefined *)0x0;
   local_4 = -1;
   pWVar6 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xb0));
-  CRadio::CRadio_AddOption((CRadio *)param_1[0x25],pWVar6,puVar4);
+  CRadio::CRadio_AddOption(*(CRadio **)&param_1[1].win.wViewFlags,pWVar6,puVar4);
   puVar4 = (undefined *)0x0;
   pWVar6 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xb4));
-  CRadio::CRadio_AddOption((CRadio *)param_1[0x25],pWVar6,puVar4);
-  _Globals::CDSView__AddChild(param_1);
+  CRadio::CRadio_AddOption(*(CRadio **)&param_1[1].win.wViewFlags,pWVar6,puVar4);
+  CDSView::CDSView__AddChild(param_1);
   pCVar3 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4 = 8;
   if (pCVar3 != (CButton *)0x0) {
@@ -71539,12 +71550,12 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(int *param_1)
     CButton::CButton_BuildAt(pCVar3);
   }
   local_4 = -1;
-  _Globals::CDSView__AddChild(param_1);
-  param_1[0x29] = 0;
+  CDSView::CDSView__AddChild(param_1);
+  param_1[1].win.nBbox_top = 0;
   CStartGame1_GetEmbeddedCGamePtr();
-  (**(code **)(*param_1 + 0x14))();
+  (**(code **)((int)(param_1->win).pVftable_primary + 0x14))();
   if (unaff_retaddr != '\0') {
-    (**(code **)(*param_1 + 0x24))();
+    (**(code **)((int)(param_1->win).pVftable_primary + 0x24))();
   }
   ExceptionList = pCVar3;
   return;
@@ -71714,7 +71725,6 @@ CChatEdit::CChatEdit_BuildAt
 char __thiscall CChatEdit::CChatEdit_OnChar(CChatEdit *this,undefined1 *param_1,undefined1 *param_2)
 
 {
-  CBulanci *this_00;
   byte bVar1;
   char cVar2;
   int iVar3;
@@ -71733,9 +71743,8 @@ char __thiscall CChatEdit::CChatEdit_OnChar(CChatEdit *this,undefined1 *param_1,
   ExceptionList = &local_c;
   if (((char)param_1 == '\r') && ((char)param_2 == '\0')) {
     iVar3 = *(int *)((this->base).p_base + 0x98);
-    this_00 = (CBulanci *)((this->base).p_base + 0x98);
     if ((iVar3 != 0) && (*(int *)(iVar3 + -0xc) != 0)) {
-      iVar3 = CBulanci::CBulanci_CompareWideString(this_00,(ushort *)L"clearchat");
+      iVar3 = CBulanci::CDsString_CompareHandles(L"clearchat");
       if (iVar3 == 0) {
         _Globals::CScroller_ClearContent((CScroller *)this->chatList);
         (**(code **)(*(int *)this->chatList + 0x24))();
@@ -71745,7 +71754,8 @@ char __thiscall CChatEdit::CChatEdit_OnChar(CChatEdit *this,undefined1 *param_1,
         if (this->stateCtxOrNull != (undefined *)0x0) {
           bVar1 = bVar1 + this->stateCtxOrNull[0x68];
         }
-        CGame::CGame_NetSendChat_t06((CGame *)this->gameHost,bVar1,(int *)this_00,(void *)0x0);
+        CGame::CGame_NetSendChat_t06
+                  ((CGame *)this->gameHost,bVar1,(int *)((this->base).p_base + 0x98),(void *)0x0);
       }
       param_2 = (undefined1 *)0x0;
       cVar2 = '\x01';
@@ -72021,7 +72031,7 @@ void __thiscall CLevelList::CStartGame2_SelectPlayerByName(CLevelList *this,wcha
     if (iVar3 == 0) goto LAB_0040d461;
     iVar2 = iVar3 + -1;
     iVar3 = iVar3 + -1;
-    iVar2 = CStartGame2::CStartGame2_CompareLevelName
+    iVar2 = CStartGame2::CDsString_CompareHandles
                       ((CStartGame2 *)
                        (*(int *)((int)(this->base).listViewer.pItems[iVar2] + 8) + 0x10),&name);
     ppvVar1 = ExceptionList;
@@ -72075,7 +72085,7 @@ CLevelList::CLevelList_RenderItem(CLevelList *this,int *param_1,CListBoxItem *pa
 void __thiscall CStartGame2::CStartGame2_UpdateDuplicateSerialWarning(CStartGame2 *this)
 
 {
-  int *piVar1;
+  CDSView *this_00;
   undefined *local_c;
   
                     // R5 w40: IDSEventHandler vft @0x480ce8 slot4. Uses CWindow+0x40 chain head as
@@ -72089,14 +72099,14 @@ void __thiscall CStartGame2::CStartGame2_UpdateDuplicateSerialWarning(CStartGame
       _Globals::CStaticText_SetLabelFromStringHandle((int *)this->dwChainHead_40);
       this->bParentByte0_serialPending = 0;
     }
-    piVar1 = (int *)this->dwChainHead_40;
-    if ((*(byte *)(piVar1 + 0x11) & 1) != 0) {
+    this_00 = (CDSView *)this->dwChainHead_40;
+    if (((this_00->win).wViewStateFlags & 1) != 0) {
       local_c = (undefined *)0x40d561;
-      _Globals::CDSView__Hide(piVar1);
+      CDSView::CDSView__Hide(this_00);
       return;
     }
     local_c = (undefined *)0x40d56b;
-    _Globals::CDSView__Show(piVar1);
+    _Globals::CDSView__Show((int *)this_00);
   }
   return;
 }
@@ -72148,7 +72158,7 @@ void __thiscall CStartGame2::CStartGame2_UpdateGamemodeCaption(CStartGame2 *this
     }
     local_4 = (uint)local_4._1_3_ << 8;
     this->pGamemodeCaption = pCVar2;
-    _Globals::CDSView__AddChild(this);
+    CDSView::CDSView__AddChild((CDSView *)this);
   }
   else {
     local_10 = &stack0xffffffd4;
@@ -72204,7 +72214,7 @@ CStartGame2::CStartGame2_OnCustomMsg
   case 0xe3:
     if (param_2 == 1) {
       _Globals::CDSView_EnableWidget((int *)this->pBtnBack);
-      _Globals::Scheduler_AckSlot(&this->updated,0,-1);
+      CDSUpdatedItem::Scheduler_AckSlot(&this->updated,0,-1);
       CBulanci::CDSView_EmptyHook27();
       return;
     }
@@ -72248,7 +72258,7 @@ CStartGame2::CStartGame2_OnBroadcast(CStartGame2 *this,short param_1,int param_2
       }
       CStartGame2_ApplySetAvatar
                 ((CStartGame2 *)this->pParentState,(byte)param_2,(char)((uint)param_2 >> 8),pvVar4);
-      CBulanci::CDSApp_BroadcastSyntheticEventToChildren((CBulanci *)this,0xd1,param_2,param_3);
+      CDSView::CDSApp_BroadcastSyntheticEventToChildren((CDSView *)this,0xd1,param_2,param_3);
       return;
     }
     if (param_1 == 0xd6) {
@@ -72261,18 +72271,17 @@ CStartGame2::CStartGame2_OnBroadcast(CStartGame2 *this,short param_1,int param_2
             iVar5 = 0;
             _Globals::CDsStringAssignFromHandle(&stack0xffffffec,(undefined4 *)(param_2 + 0x98));
             CStartGame2_ApplyPlayerRename((CStartGame2 *)this->pParentState,bVar3,iVar5,pvVar4);
-            CBulanci::CDSApp_BroadcastSyntheticEventToChildren
-                      ((CBulanci *)this,0xd6,param_2,param_3);
+            CDSView::CDSApp_BroadcastSyntheticEventToChildren((CDSView *)this,0xd6,param_2,param_3);
             return;
           }
           bVar3 = bVar3 + 1;
         } while (bVar3 < bVar1);
-        CBulanci::CDSApp_BroadcastSyntheticEventToChildren((CBulanci *)this,0xd6,param_2,param_3);
+        CDSView::CDSApp_BroadcastSyntheticEventToChildren((CDSView *)this,0xd6,param_2,param_3);
         return;
       }
     }
   }
-  CBulanci::CDSApp_BroadcastSyntheticEventToChildren((CBulanci *)this,param_1,param_2,param_3);
+  CDSView::CDSApp_BroadcastSyntheticEventToChildren((CDSView *)this,param_1,param_2,param_3);
   return;
 }
 
@@ -72320,7 +72329,7 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
     CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x14,puVar7,(uint)puVar8,puVar10);
   }
   local_4._0_1_ = 0;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar3 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
   local_4._0_1_ = 2;
   if (pCVar3 == (CRadio *)0x0) {
@@ -72346,7 +72355,7 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffcc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x17c));
   CRadio::CRadio_AddOption(this->pRadioModeA,pWVar9,puVar7);
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
   if (pCVar2 == (CStaticText *)0x0) {
@@ -72361,7 +72370,7 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
     pCVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar2,0x9b,0x14,puVar7,(uint)puVar8,puVar10);
   }
   local_4._0_1_ = 0;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar3 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
   local_4._0_1_ = 4;
   if (pCVar3 == (CRadio *)0x0) {
@@ -72382,13 +72391,13 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffcc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1b8));
   CRadio::CRadio_AddOption(this->pRadioModeB,pWVar9,puVar7);
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   if (*(char *)(param_1 + 0x86) == '\0') {
-    _Globals::CDSView_SetAsDefaultFocusChild((int *)pCVar2);
-    _Globals::CDSView_SetAsDefaultFocusChild((int *)this->pRadioModeB);
+    CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)pCVar2);
+    CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pRadioModeB);
   }
-  _Globals::CDSView__Hide((int *)this->pRadioModeB);
-  _Globals::CDSView__Hide((int *)pCVar2);
+  CDSView::CDSView__Hide((CDSView *)this->pRadioModeB);
+  CDSView::CDSView__Hide((CDSView *)pCVar2);
   pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 5;
   if (pCVar2 == (CStaticText *)0x0) {
@@ -72404,7 +72413,7 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   }
   local_4._0_1_ = 0;
   this->pLabelGroup[0] = pCVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CStartGame2 *)_Globals::OperatorNewWithBadAlloc(0xc4);
   local_4._0_1_ = 6;
   if (pCVar4 == (CStartGame2 *)0x0) {
@@ -72415,7 +72424,7 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   }
   local_4._0_1_ = 0;
   this->pNumEditGroup[0] = pCVar5;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 7;
   if (pCVar2 == (CStaticText *)0x0) {
@@ -72431,7 +72440,7 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   }
   local_4._0_1_ = 0;
   this->pLabelGroup[1] = pCVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CStartGame2 *)_Globals::OperatorNewWithBadAlloc(0xc4);
   local_4._0_1_ = 8;
   if (pCVar4 == (CStartGame2 *)0x0) {
@@ -72442,7 +72451,7 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   }
   local_4._0_1_ = 0;
   this->pNumEditGroup[1] = pCVar5;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 9;
   if (pCVar2 == (CStaticText *)0x0) {
@@ -72458,7 +72467,7 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   }
   local_4._0_1_ = 0;
   this->pLabelGroup[2] = pCVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CStartGame2 *)_Globals::OperatorNewWithBadAlloc(0xc4);
   local_4._0_1_ = 10;
   if (pCVar4 == (CStartGame2 *)0x0) {
@@ -72469,7 +72478,7 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   }
   local_4._0_1_ = 0;
   this->pNumEditGroup[2] = pCVar5;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar6 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 0xb;
   if (pCVar6 == (CButton *)0x0) {
@@ -72482,7 +72491,7 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   }
   local_4._0_1_ = 0;
   this->pBtnOk = pCVar6;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar6 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 0xc;
   if (pCVar6 != (CButton *)0x0) {
@@ -72491,7 +72500,7 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
     CButton::CButton_BuildAt(pCVar6);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   ExceptionList = local_c;
   return this;
 }
@@ -72546,7 +72555,7 @@ CWindow * __fastcall CLoadingLevel::CLoadingLevel_ctor(CWindow *param_1)
     CStaticText::CStaticText_BuildAtAuto(this,0x14,0x14,puVar2,(uint)puVar3,uVar4);
   }
   local_4._0_1_ = 0;
-  _Globals::CDSView__AddChild(param_1);
+  CDSView::CDSView__AddChild((CDSView *)param_1);
   pCVar1 = (CProgressBar *)_Globals::OperatorNewWithBadAlloc(0x70);
   local_4._0_1_ = 2;
   if (pCVar1 == (CProgressBar *)0x0) {
@@ -72557,7 +72566,7 @@ CWindow * __fastcall CLoadingLevel::CLoadingLevel_ctor(CWindow *param_1)
   }
   local_4 = (uint)local_4._1_3_ << 8;
   param_1[1].pVftable_primary = pCVar1;
-  _Globals::CDSView__AddChild(param_1);
+  CDSView::CDSView__AddChild((CDSView *)param_1);
   param_1->wWidgetFlags = param_1->wWidgetFlags | 0xc;
   ExceptionList = local_c;
   return param_1;
@@ -72713,7 +72722,7 @@ CSetupDlg * __fastcall CSetupDlg::CSetupDlgCtor(CSetupDlg *this)
   }
   local_4._0_1_ = 0;
   this->pVolumeLabel = pCVar1;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   this_00 = (CVolume *)_Globals::OperatorNewWithBadAlloc(0xd0);
   local_4._0_1_ = 2;
   if (this_00 == (CVolume *)0x0) {
@@ -72730,7 +72739,7 @@ CSetupDlg * __fastcall CSetupDlg::CSetupDlgCtor(CSetupDlg *this)
   }
   local_4._0_1_ = 0;
   this->pVolume = uVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   CScrollBar::CScrollBar_SetScrollRange((CScrollBar *)this->pVolume,-0x32,0x32);
   pCVar3 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
@@ -72740,7 +72749,7 @@ CSetupDlg * __fastcall CSetupDlg::CSetupDlgCtor(CSetupDlg *this)
     CButton::CButton_BuildAt(pCVar3);
   }
   local_4._0_1_ = 0;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar3 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 4;
   if (pCVar3 != (CButton *)0x0) {
@@ -72749,7 +72758,7 @@ CSetupDlg * __fastcall CSetupDlg::CSetupDlgCtor(CSetupDlg *this)
     CButton::CButton_BuildAt(pCVar3);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   ExceptionList = local_c;
   return this;
 }
@@ -72872,7 +72881,7 @@ CAdvertising * __thiscall CAdvertising::CAdvertising_ctor(CAdvertising *this)
   local_4 = CONCAT31(local_4._1_3_,1);
                     // CDSView__AddChild(this, backdropChild): first heap child is white full-screen
                     // fill; splash CDSBitmap added later in LoadSplashImage.
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   puVar1 = &(this->win).wViewFlags;
   *puVar1 = *puVar1 | 0x111;
   this->bM_bBlockDismiss = 0;
@@ -73789,10 +73798,10 @@ undefined4 __cdecl _Globals::CMsgDialog_ShowModalFromStringHandle(int param_1)
   CDsStringAssignFromHandle(&stack0xffffff70,&param_1);
   CMsgDialog::CMsgDialog_ctor(&local_7c,cdsStringHandle,pButtonMode);
   local_4._0_1_ = 1;
-  uVar1 = CDSView_DoModal(&local_7c,g_pApp);
+  uVar1 = CDSView::CDSView_DoModal((CDSView *)&local_7c,g_pApp);
   local_4 = (uint)local_4._1_3_ << 8;
   CWindow_dtor((int)&local_7c);
-  local_4 = 0xffffffff;
+  local_4 = -1;
   uVar2 = 0;
   if (param_1 != 0) {
     CDsStringReleaseHeader((void *)(param_1 + -0xc));
@@ -74019,7 +74028,7 @@ CStartGame2::CStartGame2_Tick_CheckDuplicateNames(CStartGame2 *this,int param_1)
           if (local_18 != bVar1) {
             this_00 = (CStartGame2 *)
                       _Globals::CGameGetPlayerNamePtr((void *)this->pParentState,bVar1);
-            iVar3 = CStartGame2_CompareLevelName(this_00,&local_14);
+            iVar3 = CDsString_CompareHandles(this_00,&local_14);
             if (iVar3 == 0) {
               param_1 = 0;
               local_4 = CONCAT31(local_4._1_3_,1);
@@ -74116,7 +74125,7 @@ CStartGame2 * __thiscall CStartGame2::CKeybShow_Build(CStartGame2 *this,int para
     CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x14,puVar10,(uint)puVar11,puVar12);
   }
   local_4._0_1_ = 0;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   local_1c = (undefined1 *)0x0;
   local_4._0_1_ = 2;
   iVar9 = 0;
@@ -74175,7 +74184,7 @@ CStartGame2 * __thiscall CStartGame2::CKeybShow_Build(CStartGame2 *this,int para
   }
   local_4._0_1_ = 2;
   CStaticText_SetLayoutAndInvalidate(this_00,2,3);
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar6 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 5;
   if (pCVar6 != (CButton *)0x0) {
@@ -74188,7 +74197,7 @@ CStartGame2 * __thiscall CStartGame2::CKeybShow_Build(CStartGame2 *this,int para
     CButton::CButton_BuildAt(pCVar6);
   }
   local_4._0_1_ = 2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   *(ushort *)&this->field_0x46 = *(ushort *)&this->field_0x46 | 0xc;
   local_4 = (uint)local_4._1_3_ << 8;
   if (local_1c != (undefined1 *)0x0) {
@@ -74341,7 +74350,7 @@ void __thiscall CStartGame2::CStartGame2_OnCmd(CStartGame2 *this,ushort param_1)
     cVar3 = '\x02';
     break;
   default:
-    CDSApp::CDSApp_RouteSyntheticCloseEvent((CDSApp *)this,param_1);
+    CDSView::CDSApp_RouteSyntheticCloseEvent((CDSView *)this,param_1);
     ExceptionList = local_c;
     return;
   case 0xda:
@@ -74353,7 +74362,7 @@ void __thiscall CStartGame2::CStartGame2_OnCmd(CStartGame2 *this,ushort param_1)
     local_114 = *(undefined2 *)(iVar2 + 0x1a8);
     local_4 = (void *)0x0;
     CBulanci::CDSView_LoadData((CBulanci *)&local_110,(int)local_120);
-    sVar1 = _Globals::CDSView_DoModal(&local_110,this);
+    sVar1 = CDSView::CDSView_DoModal((CDSView *)&local_110,this);
     if (sVar1 == -0x7ffe) {
       CBulanci::CDSView_SaveData((CBulanci *)&local_110,(int)local_120);
       CStartGame2_ApplySlotCountIfChanged
@@ -74381,7 +74390,7 @@ void __thiscall CStartGame2::CStartGame2_OnCmd(CStartGame2 *this,ushort param_1)
                      (((CGame *)this->pParentState)->chain).field_0x5 + cVar3);
   CKeybShow_Build((CStartGame2 *)local_7c,iVar2);
   local_4 = (void *)0x1;
-  sVar1 = _Globals::CDSView_DoModal(local_7c,this);
+  sVar1 = CDSView::CDSView_DoModal((CDSView *)local_7c,this);
   if (sVar1 == -0x7ffc) {
     _Globals::CDSView__EndModal(this,0x8004);
   }
@@ -74437,7 +74446,7 @@ void __thiscall CAdvertising::LoadSplashImage(CAdvertising *this,undefined4 para
   local_c = (void *)((uint)local_c._1_3_ << 8);
                     // CDSView__AddChild(this, pSplashBitmap, 0): second heap child overlays
                     // centered splash on white backdrop.
-  _Globals::CDSView__AddChild(this,pCVar3,0);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,0);
   ArmDismissTimer(this,unaff_retaddr);
   local_c = (void *)0xffffffff;
   if (trackParams != (int *)0x0) {
@@ -74695,8 +74704,7 @@ CBulPicture::CBulPicture_ctor
 
 
 void __cdecl
-_Globals::CStartGame2_BuildLobbyChatPanel
-          (undefined4 this,undefined *param_2,int param_3,int param_4)
+_Globals::CStartGame2_BuildLobbyChatPanel(CDSView *this,undefined *param_2,int param_3,int param_4)
 
 {
   CColorSwitch *this_00;
@@ -74707,7 +74715,7 @@ _Globals::CStartGame2_BuildLobbyChatPanel
   undefined *puVar3;
   undefined *puVar4;
   undefined4 uVar5;
-  CBulanek *local_28;
+  CDSView *local_28;
   int local_1c;
   int local_18;
   int local_14;
@@ -74723,22 +74731,22 @@ _Globals::CStartGame2_BuildLobbyChatPanel
   ExceptionList = &local_c;
   if (*(int *)(param_2 + 0x1dc) != 0) {
     iVar2 = param_3 + 0x10e;
-    local_28 = (CBulanek *)0x0;
+    local_28 = (CDSView *)0x0;
     if (1 < (byte)param_2[0x37]) {
       this_00 = (CColorSwitch *)OperatorNewWithBadAlloc(0x74);
       local_4._0_2_ = 0;
       local_4._2_2_ = 0;
       if (this_00 == (CColorSwitch *)0x0) {
-        local_28 = (CBulanek *)0x0;
+        local_28 = (CDSView *)0x0;
       }
       else {
-        local_28 = (CBulanek *)CColorSwitch::CColorSwitch_BuildAt(this_00,0,0,param_2);
+        local_28 = (CDSView *)CColorSwitch::CColorSwitch_BuildAt(this_00,0,0,param_2);
       }
       local_4._0_2_ = 0xffff;
       local_4._2_2_ = 0xffff;
-      CDSView__AddChild(this);
-      iVar2 = iVar2 - (local_28->nSpatial_bucket_x - local_28->nOrigin_x);
-      CBulanek::CDSView__SetPosition(local_28,iVar2,param_4 + 0xb2);
+      CDSView::CDSView__AddChild(this);
+      iVar2 = iVar2 - ((local_28->win).nBbox_right - (local_28->win).nBbox_left);
+      CDSView::CDSView__SetPosition(local_28,iVar2,param_4 + 0xb2);
       iVar2 = iVar2 + -3;
     }
     this_01 = (CStaticText *)OperatorNewWithBadAlloc(0x98);
@@ -74754,7 +74762,7 @@ _Globals::CStartGame2_BuildLobbyChatPanel
     }
     local_4._0_2_ = 0xffff;
     local_4._2_2_ = 0xffff;
-    CDSView__AddChild(this);
+    CDSView::CDSView__AddChild(this);
     pCVar1 = (CChatList *)OperatorNewWithBadAlloc(0xe8);
     local_4._0_2_ = 2;
     local_4._2_2_ = 0;
@@ -74770,7 +74778,7 @@ _Globals::CStartGame2_BuildLobbyChatPanel
     }
     local_4._0_2_ = 0xffff;
     local_4._2_2_ = 0xffff;
-    CDSView__AddChild(this);
+    CDSView::CDSView__AddChild(this);
     this_02 = (CChatEdit *)OperatorNewWithBadAlloc(0xc4);
     local_4._0_2_ = 3;
     local_4._2_2_ = 0;
@@ -74783,7 +74791,7 @@ _Globals::CStartGame2_BuildLobbyChatPanel
     }
     local_4._0_2_ = 0xffff;
     local_4._2_2_ = 0xffff;
-    CDSView__AddChild(this);
+    CDSView::CDSView__AddChild(this);
   }
   ExceptionList = local_c;
   return;
@@ -74826,26 +74834,27 @@ CStartGame2 * __thiscall CStartGame2::CStartGame2_ctor(CStartGame2 *this,int par
   bool bVar4;
   byte bVar5;
   byte teamTint;
-  CColorSet *pCVar6;
+  CColorSet *this_00;
+  CDSView *pCVar6;
   void *pvVar7;
-  CGameView *this_00;
-  CDSAnim *this_01;
-  CEdit *pCVar8;
-  CButton *pCVar9;
-  CStaticText *pCVar10;
-  CLevelList *pCVar11;
+  CGameView *this_01;
+  CDSAnim *this_02;
+  CEdit *this_03;
+  CButton *pCVar8;
+  CStaticText *pCVar9;
+  CLevelList *pCVar10;
   int levelEntry;
-  int iVar12;
+  int iVar11;
   undefined4 unaff_EBX;
-  int *piVar13;
-  int iVar14;
-  CEdit **ppCVar15;
-  undefined4 *puVar16;
-  undefined *puVar17;
-  int **ppiVar18;
-  undefined1 auVar19 [4];
-  undefined *puVar20;
-  char cVar21;
+  int *piVar12;
+  int iVar13;
+  CEdit **ppCVar14;
+  undefined4 *puVar15;
+  undefined *puVar16;
+  int **ppiVar17;
+  undefined1 auVar18 [4];
+  undefined *puVar19;
+  char cVar20;
   uchar uStack_430;
   undefined4 uStack_42c;
   undefined4 *local_424;
@@ -74881,245 +74890,247 @@ CStartGame2 * __thiscall CStartGame2::CStartGame2_ctor(CStartGame2 *this,int par
   local_414 = *(int **)((int)g_pApp + 0x70);
   uStack_42c = CONCAT13(bVar3,(undefined3)uStack_42c);
   local_4 = (CDSDirectPlay *)CONCAT31(local_4._1_3_,1);
-  puVar16 = local_40c;
-  for (iVar12 = 0x100; iVar12 != 0; iVar12 = iVar12 + -1) {
-    *puVar16 = 0xffffffff;
-    puVar16 = puVar16 + 1;
+  puVar15 = local_40c;
+  for (iVar11 = 0x100; iVar11 != 0; iVar11 = iVar11 + -1) {
+    *puVar15 = 0xffffffff;
+    puVar15 = puVar15 + 1;
   }
   teamTint = 0;
   if (bVar1 != 0) {
-    ppCVar15 = this->pSlotNameEdit;
+    ppCVar14 = this->pSlotNameEdit;
     local_420 = (int *)0x0;
     local_424 = (undefined4 *)0x22;
     do {
-      piVar13 = local_414;
+      piVar12 = local_414;
       if ((teamTint < bVar2) || (bVar4 = true, (int)((uint)bVar3 + (uint)bVar2) <= (int)local_420))
       {
         bVar4 = false;
       }
-      pCVar6 = (CColorSet *)_Globals::OperatorNewWithBadAlloc(0x70);
+      this_00 = (CColorSet *)_Globals::OperatorNewWithBadAlloc(0x70);
       local_4._0_1_ = 2;
-      if (pCVar6 == (CColorSet *)0x0) {
-        pCVar6 = (CColorSet *)0x0;
+      if (this_00 == (CColorSet *)0x0) {
+        pCVar6 = (CDSView *)0x0;
       }
       else {
-        pCVar6 = CColorSet::CColorSet_ctor_slotPillar(pCVar6,(int)local_424 + -3,10,teamTint);
+        pCVar6 = (CDSView *)
+                 CColorSet::CColorSet_ctor_slotPillar(this_00,(int)local_424 + -3,10,teamTint);
       }
       local_4 = (CDSDirectPlay *)CONCAT31(local_4._1_3_,1);
-      ppCVar15[4] = (CEdit *)pCVar6;
+      ppCVar14[4] = (CEdit *)pCVar6;
       if (!bVar4) {
-        _Globals::CDSView_SetAsDefaultFocusChild((int *)pCVar6);
+        CDSView::CDSView_SetAsDefaultFocusChild(pCVar6);
       }
-      _Globals::CDSView__AddChild(this);
-      pvVar7 = (void *)(**(code **)(*piVar13 + 0x10))();
+      CDSView::CDSView__AddChild((CDSView *)this);
+      pvVar7 = (void *)(**(code **)(*piVar12 + 0x10))();
       local_420 = (int *)0x0;
       if (pvVar7 != (void *)0x0) {
         local_420 = (int *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b826c);
       }
       local_c._0_1_ = 3;
       *(undefined1 *)(local_420 + 6) = 0x80;
-      this_00 = (CGameView *)_Globals::OperatorNewWithBadAlloc(0x98);
+      this_01 = (CGameView *)_Globals::OperatorNewWithBadAlloc(0x98);
       local_c._0_1_ = 4;
-      if (this_00 != (CGameView *)0x0) {
-        CGameView::CGameView_ctor(this_00,(int)local_424,0x35,local_420);
+      if (this_01 != (CGameView *)0x0) {
+        CGameView::CGameView_ctor(this_01,(int)local_424,0x35,local_420);
       }
       local_c._0_1_ = 3;
-      _Globals::CDSView__AddChild(this);
-      this_01 = (CDSAnim *)_Globals::OperatorNewWithBadAlloc(0xd4);
+      CDSView::CDSView__AddChild((CDSView *)this);
+      this_02 = (CDSAnim *)_Globals::OperatorNewWithBadAlloc(0xd4);
       local_c._0_1_ = 5;
-      if (this_01 == (CDSAnim *)0x0) {
-        this_01 = (CDSAnim *)0x0;
+      if (this_02 == (CDSAnim *)0x0) {
+        this_02 = (CDSAnim *)0x0;
       }
       else {
-        CDSAnim::ParameterizedCtor(this_01,(int)local_424 + 10,0x44,(int *)0x0,0);
-        this_01->pVft_primary = &CBulAnim::vftable;
-        this_01->pVft_chain = &CBulAnim::vftable;
-        this_01->pVft_event = &CBulAnim::vftable;
-        this_01->pVft_ref = &CBulAnim::vftable;
-        this_01->pVft_update = &CBulAnim::vftable;
-        this_01->pVft_anim = &CBulAnim::vftable;
-        this_01->pVft_anim_sub = &CBulAnim::vftable;
-        *(uchar *)&this_01[1].pVft_primary = uStack_430;
-        this_01->wViewFlags = this_01->wViewFlags | 0x200;
+        CDSAnim::ParameterizedCtor(this_02,(int)local_424 + 10,0x44,(int *)0x0,0);
+        this_02->pVft_primary = &CBulAnim::vftable;
+        this_02->pVft_chain = &CBulAnim::vftable;
+        this_02->pVft_event = &CBulAnim::vftable;
+        this_02->pVft_ref = &CBulAnim::vftable;
+        this_02->pVft_update = &CBulAnim::vftable;
+        this_02->pVft_anim = &CBulAnim::vftable;
+        this_02->pVft_anim_sub = &CBulAnim::vftable;
+        *(uchar *)&this_02[1].pVft_primary = uStack_430;
+        this_02->wViewFlags = this_02->wViewFlags | 0x200;
       }
       local_c._0_1_ = 3;
-      _Globals::CDSView__AddChild(this);
-      puVar16 = &g_dwLobbyWalkerResIds;
+      CDSView::CDSView__AddChild((CDSView *)this);
+      puVar15 = &g_dwLobbyWalkerResIds;
       do {
-        pvVar7 = (void *)(**(code **)((*ppCVar15)->p_base + 0x10))();
-        piVar13 = (int *)0x0;
+        pvVar7 = (void *)(**(code **)((*ppCVar14)->p_base + 0x10))();
+        piVar12 = (int *)0x0;
         if (pvVar7 != (void *)0x0) {
-          piVar13 = (int *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b8370);
+          piVar12 = (int *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b8370);
         }
         local_c._0_1_ = 6;
-        _Globals::TM_BindSequence(&this_01->pVft_anim_sub,piVar13);
+        _Globals::TM_BindSequence(&this_02->pVft_anim_sub,piVar12);
         local_c._0_1_ = 3;
-        if (piVar13 != (int *)0x0) {
-          (**(code **)(*piVar13 + 8))();
+        if (piVar12 != (int *)0x0) {
+          (**(code **)(*piVar12 + 8))();
         }
-        puVar16 = puVar16 + 1;
-      } while ((int)puVar16 < 0x481978);
+        puVar15 = puVar15 + 1;
+      } while ((int)puVar15 < 0x481978);
       bVar5 = _Globals::CGameGetPlayerColorByte(local_4,uStack_430);
       _Globals::CGame_BuildTeamPaletteLut(&local_414,(uint)bVar5);
-      ppiVar18 = &local_414;
-      puVar17 = (undefined *)0x1;
-      iVar12 = Runtime::MSVCRT::_rand();
+      ppiVar17 = &local_414;
+      puVar16 = (undefined *)0x1;
+      iVar11 = Runtime::MSVCRT::_rand();
       _Globals::TM_SetTrack
-                (&this_01->pVft_anim_sub,(int)(iVar12 * 4 + (iVar12 * 4 >> 0x1f & 0x7fffU)) >> 0xf,
-                 (int)puVar17,(uint *)ppiVar18);
-      pCVar8 = (CEdit *)_Globals::OperatorNewWithBadAlloc(0xb8);
+                (&this_02->pVft_anim_sub,(int)(iVar11 * 4 + (iVar11 * 4 >> 0x1f & 0x7fffU)) >> 0xf,
+                 (int)puVar16,(uint *)ppiVar17);
+      this_03 = (CEdit *)_Globals::OperatorNewWithBadAlloc(0xb8);
       local_c._0_1_ = 7;
-      if (pCVar8 == (CEdit *)0x0) {
-        pCVar8 = (CEdit *)0x0;
+      if (this_03 == (CEdit *)0x0) {
+        pCVar6 = (CDSView *)0x0;
       }
       else {
-        pCVar8 = CEdit::CEdit_BuildAt
-                           (pCVar8,uStack_42c + -0xc,0x8a,uStack_42c + 0x58,0x96,0x28,1,1,0x100af);
+        pCVar6 = (CDSView *)
+                 CEdit::CEdit_BuildAt
+                           (this_03,uStack_42c + -0xc,0x8a,uStack_42c + 0x58,0x96,0x28,1,1,0x100af);
       }
-      cVar21 = (char)((uint)unaff_EBX >> 8);
+      cVar20 = (char)((uint)unaff_EBX >> 8);
       local_c._0_1_ = 3;
-      *local_424 = pCVar8;
-      if (cVar21 == '\0') {
-        _Globals::CDSView_SetAsDefaultFocusChild((int *)pCVar8);
+      *local_424 = pCVar6;
+      if (cVar20 == '\0') {
+        CDSView::CDSView_SetAsDefaultFocusChild(pCVar6);
       }
-      _Globals::CDSView__AddChild(this);
-      if (cVar21 != '\0') {
-        pCVar9 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+      CDSView::CDSView__AddChild((CDSView *)this);
+      if (cVar20 != '\0') {
+        pCVar8 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
         local_c._0_1_ = 8;
-        if (pCVar9 != (CButton *)0x0) {
+        if (pCVar8 != (CButton *)0x0) {
           CBulanci::CDsStringAssignFromLiteral
                     ((CBulanci *)&stack0xfffffb98,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xc4)
                     );
-          CButton::CButton_BuildAt(pCVar9);
+          CButton::CButton_BuildAt(pCVar8);
         }
         local_c._0_1_ = 3;
-        _Globals::CDSView__AddChild(this);
+        CDSView::CDSView__AddChild((CDSView *)this);
       }
       local_c = (CDSDirectPlay *)CONCAT31(local_c._1_3_,1);
       (**(code **)(*local_420 + 8))();
       local_420 = (int *)((int)local_420 + 1);
-      ppCVar15 = ppCVar15 + 1;
+      ppCVar14 = ppCVar14 + 1;
       teamTint = teamTint + 1;
       local_424 = (undefined4 *)(uStack_42c + 0x82);
     } while (teamTint < bVar1);
   }
   if ((*(char *)(this->pParentState + 0x36) == '\0') && (1 < bVar1)) {
-    pCVar9 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+    pCVar8 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
     local_4._0_1_ = 9;
-    if (pCVar9 != (CButton *)0x0) {
+    if (pCVar8 != (CButton *)0x0) {
       CBulanci::CDsStringAssignFromLiteral
                 ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xcc));
-      CButton::CButton_BuildAt(pCVar9);
+      CButton::CButton_BuildAt(pCVar8);
     }
   }
   else {
-    pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+    pCVar9 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
     local_4._0_1_ = 10;
-    if (pCVar10 != (CStaticText *)0x0) {
-      puVar20 = (undefined *)0x100ae;
-      auVar19 = (undefined1  [4])0x2;
-      puVar17 = (undefined *)0x0;
+    if (pCVar9 != (CStaticText *)0x0) {
+      puVar19 = (undefined *)0x100ae;
+      auVar18 = (undefined1  [4])0x2;
+      puVar16 = (undefined *)0x0;
       CBulanci::CDsStringAssignFromLiteral
                 ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 200));
-      CStaticText::CStaticText_BuildAtAuto(pCVar10,0x14,0xd2,puVar17,(uint)auVar19,puVar20);
+      CStaticText::CStaticText_BuildAtAuto(pCVar9,0x14,0xd2,puVar16,(uint)auVar18,puVar19);
     }
   }
   local_4._0_1_ = 1;
-  _Globals::CDSView__AddChild(this);
-  pCVar9 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  CDSView::CDSView__AddChild((CDSView *)this);
+  pCVar8 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 0xb;
-  if (pCVar9 != (CButton *)0x0) {
+  if (pCVar8 != (CButton *)0x0) {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x15c));
-    CButton::CButton_BuildAt(pCVar9);
+    CButton::CButton_BuildAt(pCVar8);
   }
   local_4._0_1_ = 1;
-  _Globals::CDSView__AddChild(this);
-  pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+  CDSView::CDSView__AddChild((CDSView *)this);
+  pCVar9 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 0xc;
-  if (pCVar10 != (CStaticText *)0x0) {
-    puVar20 = (undefined *)0x100ae;
-    auVar19 = (undefined1  [4])0x2;
-    puVar17 = (undefined *)0x0;
+  if (pCVar9 != (CStaticText *)0x0) {
+    puVar19 = (undefined *)0x100ae;
+    auVar18 = (undefined1  [4])0x2;
+    puVar16 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xd0));
-    CStaticText::CStaticText_BuildAtAuto(pCVar10,0x14,0xf4,puVar17,(uint)auVar19,puVar20);
+    CStaticText::CStaticText_BuildAtAuto(pCVar9,0x14,0xf4,puVar16,(uint)auVar18,puVar19);
   }
   local_4._0_1_ = 1;
-  _Globals::CDSView__AddChild(this);
-  iVar12 = _Globals::OperatorNewWithBadAlloc(0xe4);
+  CDSView::CDSView__AddChild((CDSView *)this);
+  iVar11 = _Globals::OperatorNewWithBadAlloc(0xe4);
   local_4._0_1_ = 0xd;
-  if (iVar12 == 0) {
-    pCVar11 = (CLevelList *)0x0;
+  if (iVar11 == 0) {
+    pCVar10 = (CLevelList *)0x0;
   }
   else {
-    pCVar11 = (CLevelList *)CLevelList::CLevelList_ctor(iVar12);
+    pCVar10 = (CLevelList *)CLevelList::CLevelList_ctor(iVar11);
   }
-  this->pLevelList = pCVar11;
-  iVar12 = *(int *)(this->pParentState + 0xc4);
-  iVar14 = 0;
+  this->pLevelList = pCVar10;
+  iVar11 = *(int *)(this->pParentState + 0xc4);
+  iVar13 = 0;
   local_4 = (CDSDirectPlay *)CONCAT31(local_4._1_3_,1);
-  if (0 < iVar12) {
+  if (0 < iVar11) {
     do {
       pvVar7 = (void *)this->pParentState;
-      puVar17 = (undefined *)0x0;
+      puVar16 = (undefined *)0x0;
       _Globals::CDsStringAssignFromHandle
-                (&stack0xfffffbb0,(undefined4 *)(*(int *)((int)pvVar7 + 0xbc) + iVar14 * 4));
-      levelEntry = _Globals::CGame_FindResourceByName(pvVar7,(int)puVar17);
+                (&stack0xfffffbb0,(undefined4 *)(*(int *)((int)pvVar7 + 0xbc) + iVar13 * 4));
+      levelEntry = _Globals::CGame_FindResourceByName(pvVar7,(int)puVar16);
       CMenu::CMenu__CLevelList_AddItem((CMenu *)this->pLevelList,levelEntry);
-      iVar14 = iVar14 + 1;
-    } while (iVar14 < iVar12);
+      iVar13 = iVar13 + 1;
+    } while (iVar13 < iVar11);
   }
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   if (*(char *)(this->pParentState + 0x36) != '\0') {
-    _Globals::CDSView_SetAsDefaultFocusChild((int *)this->pLevelList);
+    CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pLevelList);
   }
   _Globals::CStartGame2_BuildLobbyChatPanel();
-  pCVar9 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  pCVar8 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 0xe;
-  if (pCVar9 == (CButton *)0x0) {
-    pCVar9 = (CButton *)0x0;
+  if (pCVar8 == (CButton *)0x0) {
+    pCVar8 = (CButton *)0x0;
   }
   else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xd8));
-    pCVar9 = (CButton *)CButton::CButton_BuildAt(pCVar9);
+    pCVar8 = (CButton *)CButton::CButton_BuildAt(pCVar8);
   }
   local_4._0_1_ = 1;
-  this->pBtnBack = pCVar9;
-  _Globals::CDSView__AddChild(this);
+  this->pBtnBack = pCVar8;
+  CDSView::CDSView__AddChild((CDSView *)this);
   this->pPressStartHint = (CDSView *)0x0;
   if (*(char *)(this->pParentState + 0x36) != '\0') {
-    _Globals::CDSView_SetAsDefaultFocusChild((int *)this->pBtnBack);
-    pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+    CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pBtnBack);
+    pCVar9 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
     local_4._0_1_ = 0xf;
-    if (pCVar10 == (CStaticText *)0x0) {
-      pCVar10 = (CStaticText *)0x0;
+    if (pCVar9 == (CStaticText *)0x0) {
+      pCVar9 = (CStaticText *)0x0;
     }
     else {
-      puVar20 = (undefined *)0x100af;
-      auVar19 = (undefined1  [4])0x2;
-      puVar17 = (undefined *)0x0;
+      puVar19 = (undefined *)0x100af;
+      auVar18 = (undefined1  [4])0x2;
+      puVar16 = (undefined *)0x0;
       CBulanci::CDsStringAssignFromLiteral
                 ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1a8));
-      pCVar10 = CStaticText::CStaticText_BuildAtAuto
-                          (pCVar10,0x28,0x1ef,puVar17,(uint)auVar19,puVar20);
+      pCVar9 = CStaticText::CStaticText_BuildAtAuto(pCVar9,0x28,0x1ef,puVar16,(uint)auVar18,puVar19)
+      ;
     }
     local_4._0_1_ = 1;
-    this->pPressStartHint = (CDSView *)pCVar10;
-    _Globals::CDSView__AddChild(this);
-    _Globals::CDSView__Hide((int *)this->pPressStartHint);
-    _Globals::Scheduler_RegisterEventSlot(&this->updated,0,500,7);
+    this->pPressStartHint = (CDSView *)pCVar9;
+    CDSView::CDSView__AddChild((CDSView *)this);
+    CDSView::CDSView__Hide(this->pPressStartHint);
+    CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->updated,0,500,7);
   }
-  pCVar9 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  pCVar8 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 0x10;
-  if (pCVar9 != (CButton *)0x0) {
+  if (pCVar8 != (CButton *)0x0) {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    CButton::CButton_BuildAt(pCVar9);
+    CButton::CButton_BuildAt(pCVar8);
   }
   local_4 = (CDSDirectPlay *)CONCAT31(local_4._1_3_,1);
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   this->bPad_bd = 0;
   this->bPad_bc = 0;
   ExceptionList = local_c;
@@ -75146,17 +75157,19 @@ CStartGame2 * __thiscall CStartGame2::CStartGame2_ctor(CStartGame2 *this,int par
 // 
 // Class vtable: CGameCounter::vftable (4 inner instances).
 
-int * __fastcall CBulanci::CGameCounterCtor(int *param_1)
+CDSView * __fastcall CBulanci::CGameCounterCtor(CDSView *param_1)
 
 {
-  int *piVar1;
-  uint uVar2;
-  void *pvVar3;
-  int iVar4;
-  CDSBitmap *pCVar5;
+  ushort *puVar1;
+  int *piVar2;
+  int *piVar3;
+  uint uVar4;
+  void *pvVar5;
+  int iVar6;
+  CDSBitmap *pCVar7;
   int nBbox_left;
   void *unaff_ESI;
-  int *piVar6;
+  byte *pbVar8;
   int *trackParams;
   void *local_c;
   undefined1 *puStack_8;
@@ -75165,70 +75178,76 @@ int * __fastcall CBulanci::CGameCounterCtor(int *param_1)
   local_4 = 0xffffffff;
   puStack_8 = &LAB_0047632c;
   local_c = ExceptionList;
-  uVar2 = DAT_004b0e44 ^ (uint)&stack0xffffffd8;
+  uVar4 = DAT_004b0e44 ^ (uint)&stack0xffffffd8;
   ExceptionList = &local_c;
-  CDSChained::CDSChained_ctor(param_1);
-  piVar6 = param_1 + 0x1a;
+  CDSChained::CDSChained_ctor((undefined4 *)param_1);
+  pbVar8 = &(param_1->win).bModalFlag;
   local_4 = 0;
-  *param_1 = (int)g_pCGameCounter_vftable_primary;
-  param_1[1] = (int)CGameCounter::g_pCGameCounter_vftable_IDSChained;
-  param_1[4] = (int)CGameCounter::g_pCGameCounter_vftable_IDSUpdated;
-  param_1[6] = (int)CGameCounter::g_pCGameCounter_vftable_IDSEventHandler;
-  _eh_vector_constructor_iterator_(piVar6,4,2,eh_ctor_ZeroDword,_Globals::eh_dtor_CDSObject_ptr);
-  piVar1 = *(int **)((int)g_pApp + 0x70);
+  (param_1->win).pVftable_primary = g_pCGameCounter_vftable_primary;
+  (param_1->win).pVftable_IDSChained = CGameCounter::g_pCGameCounter_vftable_IDSChained;
+  (param_1->win).pVftable_IDSEventHandler = CGameCounter::g_pCGameCounter_vftable_IDSUpdated;
+  (param_1->win).pVftable_IDSReferenced = CGameCounter::g_pCGameCounter_vftable_IDSEventHandler;
+  _eh_vector_constructor_iterator_(pbVar8,4,2,eh_ctor_ZeroDword,_Globals::eh_dtor_CDSObject_ptr);
+  piVar2 = *(int **)((int)g_pApp + 0x70);
   trackParams = (int *)0x0;
   local_4 = CONCAT31(local_4._1_3_,1);
-  pvVar3 = (void *)(**(code **)(*piVar1 + 0x10))(0x10022,0,uVar2);
-  if (pvVar3 != (void *)0x0) {
-    _Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b826c);
+  pvVar5 = (void *)(**(code **)(*piVar2 + 0x10))(0x10022,0,uVar4);
+  if (pvVar5 != (void *)0x0) {
+    _Globals::CheckedVirtualBaseCast(pvVar5,DAT_004b826c);
   }
   local_c = (void *)CONCAT31(local_c._1_3_,2);
-  pvVar3 = (void *)(**(code **)(*piVar1 + 0x10))(0x10023,0);
-  if ((int *)*piVar6 != (int *)0x0) {
-    (**(code **)(*(int *)*piVar6 + 8))();
+  pvVar5 = (void *)(**(code **)(*piVar2 + 0x10))(0x10023,0);
+  piVar3 = *(int **)pbVar8;
+  if (piVar3 != (int *)0x0) {
+    (**(code **)(*piVar3 + 8))();
   }
-  if (pvVar3 != (void *)0x0) {
-    iVar4 = _Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b826c);
-    *piVar6 = iVar4;
+  if (pvVar5 != (void *)0x0) {
+    iVar6 = _Globals::CheckedVirtualBaseCast(pvVar5,DAT_004b826c);
+    (param_1->win).bModalFlag = (char)iVar6;
+    (param_1->win).pPad_69[0] = (char)((uint)iVar6 >> 8);
+    (param_1->win).pPad_69[1] = (char)((uint)iVar6 >> 0x10);
+    (param_1->win).pPad_69[2] = (char)((uint)iVar6 >> 0x18);
   }
-  pvVar3 = (void *)(**(code **)(*piVar1 + 0x10))(0x10024,0);
-  if ((int *)param_1[0x1b] != (int *)0x0) {
-    (**(code **)(*(int *)param_1[0x1b] + 8))();
+  pvVar5 = (void *)(**(code **)(*piVar2 + 0x10))(0x10024,0);
+  piVar2 = (param_1->win).pDefaultFocusChild;
+  if (piVar2 != (int *)0x0) {
+    (**(code **)(*piVar2 + 8))();
   }
-  if (pvVar3 != (void *)0x0) {
-    iVar4 = _Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b826c);
-    param_1[0x1b] = iVar4;
+  if (pvVar5 != (void *)0x0) {
+    pvVar5 = (void *)_Globals::CheckedVirtualBaseCast(pvVar5,DAT_004b826c);
+    (param_1->win).pDefaultFocusChild = pvVar5;
   }
-  pCVar5 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
-  if (pCVar5 == (CDSBitmap *)0x0) {
-    pCVar5 = (CDSBitmap *)0x0;
+  pCVar7 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
+  if (pCVar7 == (CDSBitmap *)0x0) {
+    pCVar7 = (CDSBitmap *)0x0;
   }
   else {
-    pCVar5 = CDSBitmap::CDSBitmap_ctor(pCVar5,0,0,param_1);
+    pCVar7 = CDSBitmap::CDSBitmap_ctor(pCVar7,0,0,(int *)param_1);
   }
-  _Globals::CDSView__AddChild(param_1,pCVar5,0);
+  CDSView::CDSView__AddChild(param_1,pCVar7,0);
   nBbox_left = 0x205;
-  piVar6 = param_1 + 0x1c;
-  iVar4 = 4;
+  pbVar8 = &param_1->bGaming_slot_id;
+  iVar6 = 4;
   do {
-    pCVar5 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
-    if (pCVar5 == (CDSBitmap *)0x0) {
-      pCVar5 = (CDSBitmap *)0x0;
+    pCVar7 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
+    if (pCVar7 == (CDSBitmap *)0x0) {
+      pCVar7 = (CDSBitmap *)0x0;
     }
     else {
-      pCVar5 = CDSBitmap::CDSBitmap_ctor(pCVar5,nBbox_left,0x219,trackParams);
+      pCVar7 = CDSBitmap::CDSBitmap_ctor(pCVar7,nBbox_left,0x219,trackParams);
     }
-    *piVar6 = (int)pCVar5;
-    _Globals::CDSView__AddChild(param_1,pCVar5,0);
+    *(CDSBitmap **)pbVar8 = pCVar7;
+    CDSView::CDSView__AddChild(param_1,pCVar7,0);
     nBbox_left = nBbox_left + 0x46;
-    piVar6 = piVar6 + 1;
-    iVar4 = iVar4 + -1;
-  } while (iVar4 != 0);
-  param_1[8] = 0;
-  param_1[9] = 0;
-  param_1[10] = param_1[1];
-  param_1[0xb] = param_1[2];
-  *(ushort *)(param_1 + 5) = *(ushort *)(param_1 + 5) | 0x378;
+    pbVar8 = pbVar8 + 4;
+    iVar6 = iVar6 + -1;
+  } while (iVar6 != 0);
+  (param_1->win).nBbox_left = 0;
+  (param_1->win).nBbox_top = 0;
+  (param_1->win).nBbox_right = (int)(param_1->win).pVftable_IDSChained;
+  (param_1->win).nBbox_bottom = (param_1->win).dwField_08;
+  puVar1 = &(param_1->win).wViewFlags;
+  *puVar1 = *puVar1 | 0x378;
   if (trackParams != (int *)0x0) {
     (**(code **)(*trackParams + 8))();
   }
@@ -75267,7 +75286,7 @@ int * __fastcall CBulanci::CGameCounterCtor(int *param_1)
 // Class vtable: CScore::vftable (4 inner instances).
 // Referenced from: CGame end-of-level transition.
 
-CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
+CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
 
 {
   bool bVar1;
@@ -75368,7 +75387,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
     CDSBitmap::CDSBitmap_ctor(pCVar7,0,0,local_45c);
   }
   local_4 = CONCAT31(local_4._1_3_,'\x02');
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   bVar15 = (byte)(param_2->app).nPhysicalRect_bottom;
   pcStack_474 = (char *)0x0;
   puVar19 = auStack_40c;
@@ -75376,7 +75395,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
     *puVar19 = 0xffffffff;
     puVar19 = puVar19 + 1;
   }
-  uStack_480 = (CScore *)(uint)(uint3)uStack_480;
+  uStack_480 = (CDSView *)(uint)(uint3)uStack_480;
   if (bVar15 != 0) {
     do {
       uVar17 = (uint)uStack_480._3_1_;
@@ -75395,7 +75414,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
                   (pCVar7,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),0xe5,local_45c);
       }
       local_4._0_1_ = '\x02';
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       if (uStack_480._3_1_ == 0) {
         pCStack_438 = (CAnim *)local_45c[1];
       }
@@ -75410,7 +75429,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
                             *(int *)(&gAScoreRowAnimHeights + (int)pcStack_474 * 4),(int *)0x0,0);
       }
       local_4._0_1_ = '\x02';
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       piVar25 = local_450;
       if (((char)(param_2->app).nPhysicalRect_bottom == '\x01') &&
          (local_434 == (CDSStreamStorage *)0x0)) {
@@ -75468,7 +75487,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
       }
       local_4._0_1_ = '\x02';
       pCVar10->bForce_default_colour = 1;
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       puStack_458 = (undefined *)0x0;
       uVar12 = (uint)pvStack_454 & 0xff;
       local_4._0_1_ = '\b';
@@ -75495,7 +75514,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
       }
       local_4._0_1_ = '\b';
       pCVar10->bForce_default_colour = 1;
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       _Globals::CDsStringFormatV(&puStack_458,*(wchar_t **)(g_apCDSStaticTextsSingleton[2] + 0x16c))
       ;
       pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
@@ -75517,7 +75536,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
       }
       local_4._0_1_ = '\b';
       pCVar10->bForce_default_colour = 1;
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       piStack_464 = (int *)((param_2->app).pPad_e5 + uVar12 * 0x23 + 5);
       pvStack_44c = (void *)0x0;
       uStack_448 = 0;
@@ -75555,7 +75574,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
           local_4._0_1_ = '\v';
           CStaticText::CStaticText_SetStyle(pCVar10,&pvStack_44c,2);
           pCVar10->bForce_default_colour = 1;
-          _Globals::CDSView__AddChild(this);
+          CDSView::CDSView__AddChild((CDSView *)this);
           pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
           local_4._0_1_ = '\r';
           if (pCVar10 == (CStaticText *)0x0) {
@@ -75575,7 +75594,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
           }
           local_4._0_1_ = '\v';
           pCVar10->bForce_default_colour = 1;
-          _Globals::CDSView__AddChild(this);
+          CDSView::CDSView__AddChild((CDSView *)this);
           iVar6 = iVar6 + -0xe;
           local_4._0_1_ = '\b';
           if (pCStack_43c != (CDSStreamStorage *)0x0) {
@@ -75590,7 +75609,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
         _Globals::CDsStringReleaseHeader(puStack_458 + -0xc);
       }
       bVar4 = uStack_480._3_1_ + 1;
-      uStack_480 = (CScore *)CONCAT13(bVar4,(uint3)uStack_480);
+      uStack_480 = (CDSView *)CONCAT13(bVar4,(uint3)uStack_480);
     } while (bVar4 < bVar15);
   }
   if ((char)(param_2->app).nPhysicalRect_bottom == '\x01') {
@@ -75610,7 +75629,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
       CDSBitmap::CDSBitmap_ctor((CDSBitmap *)pCStack_438,0x14a,0xbe,piVar25);
     }
     local_c._0_1_ = 0xe;
-    _Globals::CDSView__AddChild(uStack_480);
+    CDSView::CDSView__AddChild(uStack_480);
     local_450 = (int *)0xbf;
     uStack_448 = 0xd6;
     piVar20 = &gAScoreboardColumnLabelStringIds;
@@ -75638,7 +75657,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
       }
       local_c._0_1_ = 0xe;
       pCVar10->bForce_default_colour = 1;
-      _Globals::CDSView__AddChild(uStack_480);
+      CDSView::CDSView__AddChild(uStack_480);
       piVar18 = piVar18 + 2;
       piVar20 = piVar20 + 1;
     } while ((int)piVar18 < 0x4aeadc);
@@ -75677,7 +75696,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
     }
     local_c = (void *)CONCAT31(local_c._1_3_,2);
     (**(code **)(*piVar25 + 8))();
-    this = uStack_480;
+    this = (CScore *)uStack_480;
   }
   pvVar8 = (void *)(**(code **)(*local_450 + 0x10))();
   piVar25 = (int *)0x0;
@@ -75691,13 +75710,13 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
     CAnim::CAnim_ctor(pCStack_438,0x78,0x32,piVar25,1);
   }
   local_c._0_1_ = 0x11;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   this_01 = (CDSAudioPlayer *)
             _Globals::TriggerBankSample((undefined *)0x2,0,0x1d,0,(void *)0x0,'\x01');
-  if (this->pEndMatchAudio != (CDSAudioPlayer *)0x0) {
-    (**(code **)((int)this->pEndMatchAudio->pVftable_primary + 8))();
+  if (*(int **)&((CDSView *)this)->bGaming_slot_id != (int *)0x0) {
+    (**(code **)(**(int **)&((CDSView *)this)->bGaming_slot_id + 8))();
   }
-  this->pEndMatchAudio = this_01;
+  *(CDSAudioPlayer **)&((CDSView *)this)->bGaming_slot_id = this_01;
   CDSAudioPlayer::CDSAudioPlayer_Play(this_01,0);
   local_c._0_1_ = 2;
   if (piVar25 != (int *)0x0) {
@@ -75708,7 +75727,7 @@ CScore * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
     (**(code **)(*piStack_464 + 8))();
   }
   ExceptionList = pvStack_14;
-  return this;
+  return (CDSView *)this;
 }
 
 
@@ -75755,7 +75774,7 @@ CExitDlg * __fastcall CExitDlg::CExitDlg_ctor(CExitDlg *this)
     CAnim::CAnim_ctor(pCVar2,0xc2,0x16,piVar5,3);
   }
   local_4 = CONCAT31(local_4._1_3_,1);
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   if (piVar5 != (int *)0x0) {
     (**(code **)(*piVar5 + 8))();
   }
@@ -75770,7 +75789,7 @@ CExitDlg * __fastcall CExitDlg::CExitDlg_ctor(CExitDlg *this)
     CAnim::CAnim_ctor(pCVar2,0x139,0x11a,piVar5,3);
   }
   local_4._0_1_ = 1;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   this_00 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 4;
   if (this_00 != (CStaticText *)0x0) {
@@ -75782,7 +75801,7 @@ CExitDlg * __fastcall CExitDlg::CExitDlg_ctor(CExitDlg *this)
     CStaticText::CStaticText_BuildAtAuto(this_00,0x28,0x48,puVar6,(uint)puVar7,puVar8);
   }
   local_4._0_1_ = 1;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 5;
   if (pCVar4 != (CButton *)0x0) {
@@ -75791,7 +75810,7 @@ CExitDlg * __fastcall CExitDlg::CExitDlg_ctor(CExitDlg *this)
     CButton::CButton_BuildAt(pCVar4);
   }
   local_4._0_1_ = 1;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   local_4 = (uint)local_4._1_3_ << 8;
   if (piVar5 != (int *)0x0) {
     (**(code **)(*piVar5 + 8))();
@@ -75858,7 +75877,7 @@ CPauseDlg * __thiscall CPauseDlg::CPauseDlg_Build(CPauseDlg *this,CGame *pGame)
     CStaticText::CStaticText_BuildAt(this_00,0,0xc,0x132,0x23,puVar2,puVar3,shapeFlags,fontResId);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   if (this->pGame->pDirectPlayActive != (undefined *)0x0) {
     this->nBbox_bottom = this->nBbox_bottom + 200;
     _Globals::CStartGame2_BuildLobbyChatPanel();
@@ -75875,7 +75894,7 @@ CPauseDlg * __thiscall CPauseDlg::CPauseDlg_Build(CPauseDlg *this,CGame *pGame)
   }
   local_4._0_1_ = 0;
   this->pBtnPrimary = pCVar1;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar1 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
   if (pCVar1 == (CButton *)0x0) {
@@ -75888,8 +75907,8 @@ CPauseDlg * __thiscall CPauseDlg::CPauseDlg_Build(CPauseDlg *this,CGame *pGame)
   }
   local_4._0_1_ = 0;
   this->pBtnSecondary = pCVar1;
-  _Globals::CDSView__AddChild(this);
-  _Globals::CDSView__Hide((int *)this->pBtnSecondary);
+  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__Hide((CDSView *)this->pBtnSecondary);
   pCVar1 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 4;
   if (pCVar1 != (CButton *)0x0) {
@@ -75898,7 +75917,7 @@ CPauseDlg * __thiscall CPauseDlg::CPauseDlg_Build(CPauseDlg *this,CGame *pGame)
     CButton::CButton_BuildAt(pCVar1);
   }
   local_4._0_1_ = 0;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar1 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 5;
   if (pCVar1 != (CButton *)0x0) {
@@ -75907,10 +75926,10 @@ CPauseDlg * __thiscall CPauseDlg::CPauseDlg_Build(CPauseDlg *this,CGame *pGame)
     CButton::CButton_BuildAt(pCVar1);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   _Globals::CDSView_AcquireKeyboardFocus((int *)this->pBtnPrimary);
   this->wWidgetFlags = this->wWidgetFlags | 0x2c;
-  _Globals::CDSView__Hide((int *)this);
+  CDSView::CDSView__Hide((CDSView *)this);
   ExceptionList = local_c;
   return this;
 }
@@ -76577,7 +76596,7 @@ void __fastcall CGaming::CGaming_OnResumeSyncRoundTimer(int param_1)
                     // UNCERTAIN: CGaming child scheduler slot-4 ack; copies +0x8d→+0x20e then
                     // CGaming_OnTimerCountdown; sole caller CGaming_OnResumeOrStartGame.
   *(undefined2 *)(param_1 + 0x20e) = *(undefined2 *)(param_1 + 0x8d);
-  _Globals::Scheduler_AckSlot((void *)(param_1 + 4),4,-1);
+  CDSUpdatedItem::Scheduler_AckSlot((CDSUpdatedItem *)(param_1 + 4),4,-1);
   _Globals::CGaming_OnTimerCountdown
             (*(void **)(param_1 + 500),*(short *)(param_1 + 0x20e),unaff_ESI,unaff_retaddr);
   return;
@@ -77010,19 +77029,19 @@ void __thiscall CGaming::CGaming_RegisterPreMatchSchedulerHooks(CGaming *this,vo
                     // 4 and 7 and vector at +0x1f8; sole caller CGaming_RunPreMatchModal after
                     // widget vtable+0x78 poll.
   this_00 = &this->field_0x4;
-  pvVar1 = _Globals::Scheduler_GetEventSlot(this_00,4);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)this_00,4);
   if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-    pvVar1 = _Globals::Scheduler_GetEventSlot(this_00,4);
-    _Globals::FUN_0041ad80(param_1,1,pvVar1);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)this_00,4);
+    _Globals::Scheduler_EnqueueEvent(param_1,1,pvVar1);
   }
-  pvVar1 = _Globals::Scheduler_GetEventSlot(this_00,7);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)this_00,7);
   if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-    pvVar1 = _Globals::Scheduler_GetEventSlot(this_00,7);
-    _Globals::FUN_0041ad80(param_1,1,pvVar1);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)this_00,7);
+    _Globals::Scheduler_EnqueueEvent(param_1,1,pvVar1);
   }
   for (pvVar1 = this->pEntitySlots[0x4e]; pvVar1 != (void *)0x0; pvVar1 = (void *)((int)pvVar1 + -1)
       ) {
-    _Globals::FUN_0041ad80
+    _Globals::Scheduler_EnqueueEvent
               (param_1,1,*(undefined4 *)((int)this->pEntitySlots[0x4c] + (int)pvVar1 * 4 + -4));
   }
   return;
@@ -77037,16 +77056,16 @@ short __thiscall CGame::CMenu_DoModalChild(CGame *this,void *param_1,char param_
   void *pvVar2;
   
   if ((param_2 != '\0') && (this->pDirectPlayActive != (undefined *)0x0)) {
-    _Globals::Scheduler_AckSlot(&this->scheduler,0,-1);
+    CDSUpdatedItem::Scheduler_AckSlot(&this->scheduler,0,-1);
   }
   pvVar2 = *(void **)(this->pPad_countdownTail + 3);
   this->pLobbyView = param_1;
-  sVar1 = _Globals::CDSView_DoModal(param_1,pvVar2);
+  sVar1 = CDSView::CDSView_DoModal(param_1,pvVar2);
   this->pLobbyView = (undefined *)0x0;
   if (param_2 != '\0') {
-    pvVar2 = _Globals::Scheduler_GetEventSlot(&this->scheduler,0);
+    pvVar2 = CDSUpdatedItem::Scheduler_GetEventSlot(&this->scheduler,0);
     if ((*(byte *)((int)pvVar2 + 8) & 1) == 0) {
-      _Globals::Scheduler_ArmSlot(&this->scheduler,0);
+      CDSUpdatedItem::Scheduler_ArmSlot(&this->scheduler,0);
     }
   }
   if (sVar1 == -0x7ffd) {
@@ -77078,8 +77097,8 @@ void __fastcall _Globals::CGame_ClearSchedulerChildren(int param_1)
     do {
       iVar1 = iVar2 * 4;
       iVar2 = iVar2 + -1;
-      CBulanek::Scheduler_FreeSlotIfLive
-                ((CBulanek *)(param_1 + 4),
+      CDSUpdatedItem::Scheduler_FreeSlotIfLive
+                ((CDSUpdatedItem *)(param_1 + 4),
                  *(uint *)(*(int *)(*(int *)(param_1 + 0x1f8) + -4 + iVar1) + 0x14));
     } while (iVar2 != 0);
   }
@@ -77135,9 +77154,9 @@ void __thiscall CGaming::CGame_NetSendRoundResult_t0b(CGaming *this,char param_1
                     // Must-match: [0x0B, isWin]. Gate recv +0x30==6.
   uVar2 = 0;
   do {
-    pvVar1 = _Globals::Scheduler_GetEventSlot(&this->field_0x4,uVar2);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)&this->field_0x4,uVar2);
     if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-      _Globals::Scheduler_ArmSlot(&this->field_0x4,uVar2);
+      CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)&this->field_0x4,uVar2);
     }
     uVar2 = uVar2 + 1;
   } while (uVar2 < 8);
@@ -77257,10 +77276,10 @@ CGaming::CGaming_AppendKeyToInputBuffer(CGaming *this,char param_1,char param_2)
     this_00 = &this->field_0x4;
     bVar1 = CGaming_IsSchedulerSlotActive((CGaming *)this_00,6);
     if (bVar1) {
-      _Globals::Scheduler_AckSlot(this_00,6,-1);
+      CDSUpdatedItem::Scheduler_AckSlot((CDSUpdatedItem *)this_00,6,-1);
       return 1;
     }
-    _Globals::Scheduler_SetEventLastFireMs(this_00,6,-1);
+    CDSUpdatedItem::Scheduler_SetEventLastFireMs((CDSUpdatedItem *)this_00,6,-1);
     return 1;
   }
   return 0;
@@ -77304,7 +77323,7 @@ _Globals::CLevelNameList_FindIndex(void *this,undefined4 *param_1,undefined *par
     iVar4 = 0;
     if (0 < param_3) {
       do {
-        iVar2 = CStartGame2::CStartGame2_CompareLevelName
+        iVar2 = CStartGame2::CDsString_CompareHandles
                           ((CStartGame2 *)(*(int *)this + iVar4 * 4),param_1);
         if (iVar2 == 0) {
           return iVar4;
@@ -77406,7 +77425,7 @@ int __thiscall _Globals::CGame_FindResourceByName(void *this,int nameHandle)
                     // nLevelResourceCount @ +0x6e (= chain+0x3d).
     iVar1 = *(int *)(*(int *)((int)this + 0x66) + -4 + iVar4 * 4);
     iVar4 = iVar4 + -1;
-    iVar3 = CStartGame2::CStartGame2_CompareLevelName((CStartGame2 *)(iVar1 + 0x10),&nameHandle);
+    iVar3 = CStartGame2::CDsString_CompareHandles((CStartGame2 *)(iVar1 + 0x10),&nameHandle);
     ppvVar2 = ExceptionList;
   } while (iVar3 != 0);
   local_4 = 0xffffffff;
@@ -77613,7 +77632,7 @@ uint __fastcall CBulanci::CGame_FindLevelScoreInChain(void *param_1)
   pCurrentView = _Globals::CDSChained_GetFirstChildView((CDSChain *)((int)param_1 + 0x95));
   if (pCurrentView != (void *)0x0) {
     do {
-      iVar1 = CStartGame2::CStartGame2_CompareLevelName
+      iVar1 = CStartGame2::CDsString_CompareHandles
                         ((CStartGame2 *)(iVar2 + 0x10),(undefined4 *)((int)pCurrentView + 0x10));
       if (iVar1 == 0) {
         return (uint)pCurrentView;
@@ -77679,7 +77698,7 @@ CStartGame2::CStartGame2_ApplyPlayerRename(CStartGame2 *this,byte param_1,int pa
   local_c = ExceptionList;
   ExceptionList = &local_c;
   local_4 = 0;
-  iVar1 = CStartGame2_CompareLevelName
+  iVar1 = CDsString_CompareHandles
                     ((CStartGame2 *)(this[1].pPad_4d + (uint)param_1 * 0x23 + -0x4b),&param_2);
   if (iVar1 != 0) {
     _Globals::CDsStringAssignFromHandle
@@ -77832,31 +77851,35 @@ int __thiscall _Globals::CLevelNameList_FindIndexWithKey(void *this,int param_1,
 
 
 
-void __fastcall CBulanci::CGame_StartGame(BYTE param_1 [4])
+void __thiscall CGame::CGame_StartGame(CGame *this)
 
 {
-  undefined **this;
-  CDSUpdatedItem *this_00;
+  undefined **this_00;
+  CDSUpdatedItem *this_01;
   byte *pbVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  bool bVar5;
-  uint uVar6;
-  undefined4 *puVar7;
-  void *pvVar8;
+  char cVar2;
+  CDSView *pCVar3;
+  NetSlotBinding *pNVar4;
+  PlayerLobbyRec *pPVar5;
+  undefined4 uVar6;
+  bool bVar7;
+  uint uVar8;
+  undefined4 *puVar9;
+  void *pvVar10;
+  int iVar11;
   uint local_424;
   CGaming local_414;
   int local_a8 [4];
   undefined1 local_98 [88];
   undefined1 local_40 [24];
-  byte local_28;
-  byte bStack_27;
-  byte abStack_26 [6];
-  BYTE local_20 [4];
+  undefined1 local_28;
+  undefined1 uStack_27;
+  undefined2 uStack_26;
+  undefined2 uStack_24;
+  CGame *local_20;
   undefined4 local_1c;
-  byte local_17;
-  byte local_16;
+  undefined1 local_17;
+  undefined1 local_16;
   byte local_15;
   undefined1 *local_14;
   void *local_10;
@@ -77872,149 +77895,150 @@ void __fastcall CBulanci::CGame_StartGame(BYTE param_1 [4])
   local_424 = DAT_004b0e44 ^ (uint)&stack0xfffffffc;
   local_14 = (undefined1 *)&local_424;
   ExceptionList = &local_10;
-  local_8._0_1_ = 0;
-  local_8._1_1_ = 0;
-  local_8._2_1_ = '\0';
-  local_8._3_1_ = '\0';
-  pbVar1 = (byte *)((int)param_1 + 0xd0);
-  pbVar1[0] = 0;
-  pbVar1[1] = 0;
-  pbVar1[2] = 0;
-  pbVar1[3] = 0;
-  *(uint *)((int)param_1 + 0x224) = 0;
-  local_20 = param_1;
-  uVar6 = _Globals::CMenu_GetProfileBindIndex((int)param_1);
-  uVar6 = uVar6 & 0xff;
-  local_1c = (uint)*(byte *)((int)param_1 + 0x36);
+  local_8 = 0;
+  (this->chain).pPad_89[0x16] = 0;
+  (this->chain).pPad_89[0x17] = 0;
+  (this->chain).pPad_89[0x18] = 0;
+  (this->chain).pPad_89[0x19] = 0;
+  this->pSchedTeamScoreScratch[1] = 0;
+  local_20 = this;
+  uVar8 = _Globals::CMenu_GetProfileBindIndex((int)this);
+  uVar8 = uVar8 & 0xff;
+  local_1c = (uint)(byte)(this->chain).field_0x5;
   local_15 = 0;
-  while (local_15 < *(byte *)((int)param_1 + 0x37)) {
-    iVar2 = (local_15 + local_1c) * 0x23 + (int)param_1;
-    iVar3 = (int)param_1 + uVar6 * 6;
-    local_28 = (byte)iVar3;
-    bStack_27 = (byte)((uint)iVar3 >> 8);
-    abStack_26._0_2_ = (undefined2)((uint)iVar3 >> 0x10);
-    _Globals::CDsStringAssignFromHandle((void *)(iVar3 + 0x40),(undefined4 *)(iVar2 + 0xde));
-    uVar6 = uVar6 + 1;
+  while (local_15 < (byte)(this->chain).field_0x6) {
+    iVar11 = local_15 + local_1c;
+    pbVar1 = (this->scheduler).p_pad + uVar8 * 6 + -0x19;
+    local_28 = SUB41(pbVar1,0);
+    uStack_27 = (undefined1)((uint)pbVar1 >> 8);
+    uStack_26 = (undefined2)((uint)pbVar1 >> 0x10);
+    _Globals::CDsStringAssignFromHandle(pbVar1 + 0x40,&this->pPlayerRec[iVar11].pName);
+    uVar8 = uVar8 + 1;
     local_15 = local_15 + 1;
-    *(undefined1 *)(CONCAT22(abStack_26._0_2_,CONCAT11(bStack_27,local_28)) + 0x3e) =
-         *(undefined1 *)(iVar2 + 0xdc);
+    *(BYTE *)(CONCAT22(uStack_26,CONCAT11(uStack_27,local_28)) + 0x3e) =
+         this->pPlayerRec[iVar11].pPad_00[0];
   }
-  if (*(byte *)((int)param_1 + 0xd8) != 1) {
-    *(byte *)((int)param_1 + 0x88) = *(byte *)((int)param_1 + 0x19d);
+  if (this->bTotalSlots != 1) {
+    (this->chain).pOptionBlock[1] = this->bAdminByte;
   }
-  *(uint *)((int)param_1 + (uint)*(byte *)((int)param_1 + 0x19c) * 4 + 0x89) =
-       ((uint *)((int)param_1 + 0x19e))[*(byte *)((int)param_1 + 0x19c)];
-  *(byte *)((int)param_1 + 0x87) = *(byte *)((int)param_1 + 0x19c);
+  *(uint *)((this->chain).pOptionBlock + (uint)this->bGameModeIndex * 4 + 2) =
+       this->pScoreLimitByMode[this->bGameModeIndex];
+  (this->chain).pOptionBlock[0] = this->bGameModeIndex;
   _Globals::CDsStringAssignFromHandle
-            ((undefined **)((int)param_1 + 0x76),(undefined4 *)((int)param_1 + 0xcc));
-  uVar6 = (uint)*(byte *)((int)param_1 + 0xda);
-  while (uVar6 != 0) {
-    *(undefined4 *)((uVar6 - 1) * 0xd + 0x170 + (int)param_1) = 0;
-    uVar6 = uVar6 - 1;
+            (&(this->chain).strConfigTail,(undefined4 *)((this->chain).pPad_89 + 0x12));
+  uVar8 = (uint)this->bHostSlotCursor;
+  while (uVar8 != 0) {
+    pNVar4 = this->pSlotBinding + (uVar8 - 1);
+    pNVar4->pPad_08[0] = '\0';
+    pNVar4->pPad_08[1] = '\0';
+    pNVar4->pPad_08[2] = '\0';
+    pNVar4->pPad_08[3] = '\0';
+    uVar8 = uVar8 - 1;
   }
-  uVar6 = (uint)*(byte *)((int)param_1 + 0xd8);
-  while (uVar6 != 0) {
-    iVar2 = (uVar6 - 1) * 0x23 + (int)param_1;
-    *(undefined4 *)(iVar2 + 0xe6) = 0;
-    *(undefined4 *)(iVar2 + 0xfa) = 0;
-    *(undefined1 *)(iVar2 + 0xfe) = 4;
-    uVar6 = uVar6 - 1;
+  uVar8 = (uint)this->bTotalSlots;
+  while (uVar8 != 0) {
+    pbVar1 = (this->chain).pPad_89 + uVar8 * 0x23 + 9;
+    pbVar1[0] = 0;
+    pbVar1[1] = 0;
+    pbVar1[2] = 0;
+    pbVar1[3] = 0;
+    pPVar5 = this->pPlayerRec + (uVar8 - 1);
+    pPVar5->pPad_1b[3] = 0;
+    pPVar5->pPad_1b[4] = 0;
+    pPVar5->pPad_1b[5] = 0;
+    pPVar5->pPad_1b[6] = 0;
+    this->pPlayerRec[uVar8 - 1].pPad_1b[7] = 4;
+    uVar8 = uVar8 - 1;
   }
-  *(byte *)((int)param_1 + 0x1e9) = 0;
-  if ((*(char *)((int)param_1 + 0x36) == '\0') &&
-     (*(undefined **)((int)param_1 + 0x1dc) != (undefined *)0x0)) {
+  cVar2 = (this->chain).field_0x5;
+  this->pPad_countdownTail[0] = 0;
+  if ((cVar2 == '\0') && (this->pDirectPlayActive != (undefined *)0x0)) {
     local_28 = 9;
-    bStack_27 = 1;
-    abStack_26[0] = 0;
-    abStack_26[1] = 0;
-    abStack_26[2] = 0;
-    abStack_26[3] = 0;
-    _Globals::CDSDirectPlay_Send(*(undefined **)((int)param_1 + 0x1dc),0,&local_28,(uchar *)0x6);
+    uStack_27 = 1;
+    uStack_26 = 0;
+    uStack_24 = 0;
+    _Globals::CDSDirectPlay_Send(this->pDirectPlayActive,0,&local_28,(uchar *)0x6);
   }
-  CGaming_ctor((CBulanci *)&local_414,(CGame *)param_1);
+  CGaming::CGaming_ctor(&local_414,this);
   local_8._0_1_ = 1;
   local_17 = 0;
   local_16 = 0;
-  local_15 = 0;
-  CGameCounterCtor(local_a8);
+  local_15 = '\0';
+  CBulanci::CGameCounterCtor(local_a8);
   local_8._0_1_ = 3;
-  puVar7 = (undefined4 *)_Globals::OperatorNewWithBadAlloc(0x20c);
-  local_28 = (byte)puVar7;
-  bStack_27 = (byte)((uint)puVar7 >> 8);
-  abStack_26._0_2_ = (undefined2)((uint)puVar7 >> 0x10);
+  puVar9 = (undefined4 *)_Globals::OperatorNewWithBadAlloc(0x20c);
+  local_28 = SUB41(puVar9,0);
+  uStack_27 = (undefined1)((uint)puVar9 >> 8);
+  uStack_26 = (undefined2)((uint)puVar9 >> 0x10);
   local_8._0_1_ = 4;
-  if (puVar7 == (undefined4 *)0x0) {
-    puVar7 = (undefined4 *)0x0;
+  if (puVar9 == (undefined4 *)0x0) {
+    puVar9 = (undefined4 *)0x0;
   }
   else {
-    puVar7 = CDirectKeyb::CDirectKeyb__CDirectKeyb_ctor(puVar7);
+    puVar9 = CDirectKeyb::CDirectKeyb__CDirectKeyb_ctor(puVar9);
   }
+  pCVar3 = *(CDSView **)(this->pPad_countdownTail + 3);
   local_8 = CONCAT31(local_8._1_3_,3);
-  *(undefined4 **)((int)param_1 + 0x208) = puVar7;
-  _Globals::CDSView__AddChild(*(undefined4 *)((int)param_1 + 0x1ec),local_a8,0);
+  *(undefined4 **)&this->bPollKeyboard = puVar9;
+  CDSView::CDSView__AddChild(pCVar3,local_a8,0);
   local_17 = 1;
-  _Globals::CDSApp_FrameBody(*(undefined4 *)((int)param_1 + 0x1ec));
-  CGaming_LoadLevelAssetAndMusic(&local_414);
-  uVar6 = local_1c;
-  *(byte *)((int)param_1 + 0x30) = 4;
-  if (*(undefined **)((int)param_1 + 0x1dc) != (undefined *)0x0) {
-    *(undefined1 *)((uint)*(byte *)((int)param_1 + 0xdb) * 0xd + 0x16f + (int)param_1) = 2;
-    local_1c._2_1_ = 0;
-    local_1c._3_1_ = 0;
-    local_1c._1_1_ = *(byte *)((int)param_1 + 0xdb);
-    local_1c._0_1_ = 8;
-    uVar4 = local_1c;
-    local_1c._3_1_ = SUB41(uVar6,3);
-    local_1c._0_3_ = CONCAT12(2,(short)uVar4);
-    _Globals::CDSDirectPlay_Send(*(undefined **)((int)param_1 + 0x1dc),0,&local_1c,(uchar *)0x3);
-    bVar5 = _Globals::CGame_AllSlotsHaveState((void *)param_1,'\x02');
-    if (!bVar5) {
+  _Globals::CDSApp_FrameBody(*(undefined4 *)(this->pPad_countdownTail + 3));
+  CBulanci::CGaming_LoadLevelAssetAndMusic(&local_414);
+  uVar8 = local_1c;
+  this->bNetState = 4;
+  if (this->pDirectPlayActive != (undefined *)0x0) {
+    this->pSlotBinding[this->bLocalSenderSlot].bLoadState = 2;
+    local_1c = CONCAT31((uint3)this->bLocalSenderSlot,8);
+    uVar6 = local_1c;
+    local_1c._3_1_ = SUB41(uVar8,3);
+    local_1c._0_3_ = CONCAT12(2,(short)uVar6);
+    _Globals::CDSDirectPlay_Send(this->pDirectPlayActive,0,&local_1c,(uchar *)0x3);
+    bVar7 = _Globals::CGame_AllSlotsHaveState(this,'\x02');
+    if (!bVar7) {
       _Globals::CMenu_ShowConnectingDialog();
     }
   }
-  this = (undefined **)((int)param_1 + 0x1c);
-  _Globals::FUN_0042f620(this,(int)local_98);
+  this_00 = &this->pEventHub;
+  _Globals::Scheduler_PushHook(this_00,(int)local_98);
+  cVar2 = (this->chain).field_0x5;
   local_16 = 1;
-  *(byte *)((int)param_1 + 0x30) = 5;
-  *(byte *)((int)param_1 + 0x1e8) = 0xff;
-  if (*(char *)((int)param_1 + 0x36) == '\0') {
-    _Globals::Scheduler_AckSlot((CDSUpdatedItem *)((int)param_1 + 4),2,-1);
-    local_15 = 1;
+  this->bNetState = 5;
+  this->bCountdownByte = 0xff;
+  if (cVar2 == '\0') {
+    CDSUpdatedItem::Scheduler_AckSlot(&this->scheduler,2,-1);
+    local_15 = '\x01';
   }
-  CGame::CMenu_DoModalChild((CGame *)param_1,local_a8,'\x01');
-  if (local_15 != 0) {
-    local_15 = 0;
-    _Globals::Scheduler_ArmSlot((CDSUpdatedItem *)((int)param_1 + 4),2);
+  CMenu_DoModalChild(this,local_a8,'\x01');
+  if (local_15 != '\0') {
+    local_15 = '\0';
+    CDSUpdatedItem::Scheduler_ArmSlot(&this->scheduler,2);
   }
   local_16 = 0;
-  _Globals::Scheduler_PopHook(this,(int)local_98);
+  _Globals::Scheduler_PopHook(this_00,(int)local_98);
   local_17 = 0;
-  CMenu::CMenu_DetachChildWithVisibility(*(CMenu **)((int)param_1 + 0x1ec),local_a8);
-  this_00 = (CDSUpdatedItem *)((int)param_1 + 4);
-  *(byte *)((int)param_1 + 0x30) = 6;
-  *(byte *)((int)param_1 + 0x20c) = 1;
+  CMenu::CMenu_DetachChildWithVisibility(*(CMenu **)(this->pPad_countdownTail + 3),local_a8);
+  this_01 = &this->scheduler;
+  this->bNetState = 6;
+  this->bTeamScoreCategory = 1;
   local_15 = 0;
-  local_8._0_1_ = 6;
-  local_8._1_1_ = 0;
-  local_8._2_1_ = '\0';
-  local_8._3_1_ = '\0';
-  _Globals::Scheduler_AckSlot(this_00,7,-1);
-  _Globals::FUN_0042f620(this,(int)&local_414.field_0x10);
+  local_8 = 6;
+  CDSUpdatedItem::Scheduler_AckSlot(this_01,7,-1);
+  _Globals::Scheduler_PushHook(this_00,(int)&local_414.field_0x10);
   local_15 = 1;
-  CGame::CMenu_DoModalChild((CGame *)param_1,&local_414,'\x01');
+  CMenu_DoModalChild(this,&local_414,'\x01');
   local_15 = 0;
-  _Globals::Scheduler_PopHook(this,(int)&local_414.field_0x10);
-  pvVar8 = _Globals::Scheduler_GetEventSlot(this_00,7);
-  if ((*(byte *)((int)pvVar8 + 8) & 1) == 0) {
-    _Globals::Scheduler_ArmSlot(this_00,7);
+  _Globals::Scheduler_PopHook(this_00,(int)&local_414.field_0x10);
+  pvVar10 = CDSUpdatedItem::Scheduler_GetEventSlot(this_01,7);
+  if ((*(byte *)((int)pvVar10 + 8) & 1) == 0) {
+    CDSUpdatedItem::Scheduler_ArmSlot(this_01,7);
   }
-  (**(code **)(**(int **)((int)param_1 + 0x208) + 8))();
-  *(undefined4 *)((int)param_1 + 0x208) = 0;
-  local_8._0_1_ = 2;
-  local_8._1_1_ = 0;
-  local_8._2_1_ = '\0';
-  local_8._3_1_ = '\0';
-  _Globals::CGame_ResetForLobby((int)param_1);
+  (**(code **)(**(int **)&this->bPollKeyboard + 8))();
+  this->bPollKeyboard = 0;
+  this->bDemoRecording = 0;
+  this->pSchedTeamScoreTagBuf[0] = '\0';
+  this->pSchedTeamScoreTagBuf[1] = '\0';
+  local_8 = 2;
+  _Globals::CGame_ResetForLobby((int)this);
   local_8._0_1_ = 8;
   _eh_vector_destructor_iterator_(local_40,4,2,_Globals::eh_dtor_CDSObject_ptr);
   local_8._0_1_ = 1;
@@ -78039,7 +78063,7 @@ void CBulanci::Catch_0041408a(void)
   this = (CGaming *)(iVar1 + 4);
   bVar2 = CGaming::CGaming_IsSchedulerSlotActive(this,6);
   if (!bVar2) {
-    _Globals::Scheduler_ArmSlot(this,6);
+    CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)this,6);
   }
   if (*(char *)(unaff_EBP + -0x11) != '\0') {
     _Globals::Scheduler_PopHook((void *)(iVar1 + 0x1c),unaff_EBP + -0x400);
@@ -78047,7 +78071,7 @@ void CBulanci::Catch_0041408a(void)
   if (*(int *)(iVar1 + 0x208) != 0) {
     bVar2 = CGaming::CGaming_IsSchedulerSlotActive(this,7);
     if (!bVar2) {
-      _Globals::Scheduler_ArmSlot(this,7);
+      CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)this,7);
     }
     (**(code **)(**(int **)(iVar1 + 0x208) + 8))();
     *(undefined4 *)(iVar1 + 0x208) = 0;
@@ -78066,7 +78090,7 @@ void _Globals::Catch_004140fa(void)
   
   iVar1 = *(int *)(unaff_EBP + -0x1c);
   if (*(char *)(unaff_EBP + -0x11) != '\0') {
-    Scheduler_ArmSlot((void *)(iVar1 + 4),2);
+    CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)(iVar1 + 4),2);
   }
   if (*(char *)(unaff_EBP + -0x12) != '\0') {
     Scheduler_PopHook((void *)(iVar1 + 0x1c),unaff_EBP + -0x94);
@@ -78117,10 +78141,10 @@ void __thiscall CGame::CMenu_PickSession(CGame *this,uint *param_1)
   local_18 = this;
   CSessionList::CSessionList_BuildDialog(&local_94);
   local_8 = 0;
-  _Globals::Scheduler_AckSlot(&this->scheduler,1,-1);
+  CDSUpdatedItem::Scheduler_AckSlot(&this->scheduler,1,-1);
   local_8 = CONCAT31(local_8._1_3_,1);
   CMenu_DoModalChild(this,&local_94,'\0');
-  _Globals::Scheduler_ArmSlot(&this->scheduler,1);
+  CDSUpdatedItem::Scheduler_ArmSlot(&this->scheduler,1);
   local_8 = 0;
   pCVar1 = CSessionList::CSessionList_GetPick(&local_94);
   *param_1 = pCVar1->hostIp;
@@ -78140,7 +78164,7 @@ void CMenu::Catch_00414232(void)
 {
   int unaff_EBP;
   
-  _Globals::Scheduler_ArmSlot((void *)(*(int *)(unaff_EBP + -0x14) + 4),1);
+  CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)(*(int *)(unaff_EBP + -0x14) + 4),1);
                     // WARNING: Subroutine does not return
   Runtime::MSVCRT::__CxxThrowException_8(0,(byte *)0x0);
 }
@@ -78238,7 +78262,7 @@ void __thiscall CStartGame2::CGame_NetSendSetLevel_t05(CStartGame2 *this,void *p
     }
     local_b0 = local_ac;
     UVar2 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-    _Globals::FUN_004045f0(&local_b0,pWVar4,UVar2);
+    _Globals::CDsString_AssignFromWideCapped80(&local_b0,pWVar4,UVar2);
     pcVar3 = local_b0;
     do {
       cVar1 = *pcVar3;
@@ -78268,7 +78292,7 @@ CStartGame2::CStartGame2_SetSelectedLevel(CStartGame2 *this,int param_1,void *pa
   local_c = ExceptionList;
   ExceptionList = &local_c;
   local_4 = 0;
-  iVar1 = CStartGame2_CompareLevelName((CStartGame2 *)(this->pPad_be + 0xe),&param_1);
+  iVar1 = CDsString_CompareHandles((CStartGame2 *)(this->pPad_be + 0xe),&param_1);
   if (iVar1 != 0) {
     _Globals::CDsStringAssignFromHandle((CStartGame2 *)(this->pPad_be + 0xe),&param_1);
     this->pPad_be[0x12] = 0;
@@ -78320,8 +78344,9 @@ CGame::CGame_DeferTeamScoreSchedulerEvent
                     // registers scheduler event slot type 2 with 20000ms delay and packs
                     // category/arg bytes at slot+0x18.
   if (param_4 == '\0') {
-    _Globals::Scheduler_RegisterEventSlot(&this->scheduler,0xffffffff,param_3,2);
-    pvVar1 = _Globals::Scheduler_GetEventSlot(&this->scheduler,*(uint *)(extraout_EAX + 0x14));
+    CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->scheduler,0xffffffff,param_3,2);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&this->scheduler,*(uint *)(extraout_EAX + 0x14))
+    ;
     *(uint *)((int)pvVar1 + 0x18) = (uint)CONCAT11(param_1,param_2);
     _Globals::CIntListInsertSortedOrAppend(&this->schedChildSlotVec,extraout_EAX,(undefined *)0x0,1)
     ;
@@ -78348,7 +78373,7 @@ CGame::CGame_NetSendTeamScoreEvent_t16
     if (bVar3 < 3) {
       iVar2 = CGame_FindScheduledEventByKey(this,bVar3,(byte)param_2);
       if (iVar2 != 0) {
-        _Globals::Scheduler_SetEventLastFireMs(&this->scheduler,*(uint *)(iVar2 + 0x14),-1);
+        CDSUpdatedItem::Scheduler_SetEventLastFireMs(&this->scheduler,*(uint *)(iVar2 + 0x14),-1);
         return;
       }
       CGame_DeferTeamScoreSchedulerEvent(this,bVar3,(char)param_2,20000,(char)param_3);
@@ -78414,7 +78439,7 @@ void __thiscall _Globals::CLevelNameList_Resize(void *this,int param_1)
                     // FUN_00414910; stride field at +0xc.
   iVar1 = *(int *)((int)this + 4);
   if (iVar1 < param_1) {
-    pvVar2 = FUN_0042f730(*(void **)this,(uchar *)(param_1 * 4));
+    pvVar2 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 * 4));
     *(void **)this = pvVar2;
     CLevelNameList_ZeroNewElements
               ((undefined4 *)((int)pvVar2 + *(int *)((int)this + 4) * 4),
@@ -78424,7 +78449,7 @@ void __thiscall _Globals::CLevelNameList_Resize(void *this,int param_1)
   }
   if (param_1 < iVar1) {
     CDsStringPtrArray_ReleaseRange((int)((uchar *)(param_1 * 4) + *(int *)this),iVar1 - param_1);
-    pvVar2 = FUN_0042f730(*(void **)this,(uchar *)(param_1 * 4));
+    pvVar2 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 * 4));
     *(void **)this = pvVar2;
     *(int *)((int)this + 4) = param_1;
   }
@@ -78492,7 +78517,7 @@ void __fastcall CGame::CMenu_ShowLobby(CGame *param_1)
   local_8[1] = 0;
   local_8[2] = 0;
   local_8[3] = 0;
-  _Globals::FUN_0042f620(&param_1->pEventHub,(int)local_cc);
+  _Globals::Scheduler_PushHook(&param_1->pEventHub,(int)local_cc);
   local_15 = 1;
   CMenu::CMenu_NetSendLobbySyncAll(param_1);
   CMenu_DoModalChild(param_1,local_dc,'\x01');
@@ -78717,14 +78742,14 @@ CGame * __fastcall CDSObject::CGame_ctor(CGame *this)
   (this->chain).pPad_89[0x18] = 0;
   (this->chain).pPad_89[0x19] = 0;
   _Globals::CGame_ResetForLobby((int)this);
-  _Globals::Scheduler_RegisterEventSlot(this_00,7,1,7);
-  _Globals::Scheduler_RegisterEventSlot(this_00,6,400,7);
-  _Globals::Scheduler_RegisterEventSlot(this_00,5,60000,7);
-  _Globals::Scheduler_RegisterEventSlot(this_00,0,1,7);
-  _Globals::Scheduler_RegisterEventSlot(this_00,1,1000,7);
-  _Globals::Scheduler_RegisterEventSlot(this_00,2,1000,7);
-  _Globals::Scheduler_RegisterEventSlot(this_00,3,0,7);
-  _Globals::Scheduler_RegisterEventSlot(this_00,4,1000,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_00,7,1,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_00,6,400,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_00,5,60000,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_00,0,1,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_00,1,1000,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_00,2,1000,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_00,3,0,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_00,4,1000,7);
   ExceptionList = local_c;
   return this;
 }
@@ -78826,31 +78851,34 @@ void __fastcall CGame::CGame_dtor(undefined4 *param_1)
 
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
-// CMenu::OpenNetworkSession -- bridges 'Start Game' -> CGaming.
+// CMenu_OpenNetworkSession — 'Start Game' bridge, runs for BOTH single-player and multiplayer.
 // 
-// Fires after CStartGame1's radios are all set. Builds a CDSDirectPlay
-// at this+0x1dc and either hosts or joins:
+// Despite the name, this is NOT multiplayer-only.  It's the function called after the user
+// clicks 'Start' in the CStartGame1 (level select) panel, for any game mode.  For multiplayer
+// it also sets up the DirectPlay session; for single-player it just writes the seed and
+// forwards to CGaming creation.
 // 
-// Host path (this+0x62 == 0):
-//   TCP (this+0x65=0): ConnectTCP(&g_TcpipGuid_00486d30,
-//                                 &g_BulanciAppGuid_00481a50, ip)
-//   Lobby (this+0x65=1): ConnectLobby(&g_LobbyGuid_00486d40, ...)
-//   HostSession(computerName)
-//   this+0x30 = 2 (hosting)
+// The PRNG seed write is here:
+//   MOV EAX, [0x004b3bd8]   ; EAX = g_dwElapsedMs (captured at function ENTRY)
+//   MOV [EBX+0xd4], EAX     ; write to CGame+0xd4 (consumed by CGaming_ctor @ 0x41ff90 via srand)
 // 
-// Join path (this+0x62 != 0):
-//   Same DP setup, but pushes a CTcpIpConfig dialog modally first
-//   (FUN_00413030) to pick the host IP, then JoinSession + pushes
-//   CSessionList (via CMenu_PickSession @ 0x00414170) to pick game.
-//   Sends msg type 0x00 (Join) carrying the player profile.
-//   this+0x30 = 1 (joining)
+// Frida trace confirmed (5-run pattern):
+//   run 1: seed=12377 (=g_dwElapsedMs at this function's entry)
+//   run 2: seed=3875
+//   run 3: seed=5494
+//   run 4: seed=4540
+//   run 5: seed=3770  ← also single-player, CMenu_OpenNetworkSession fired
 // 
-// Finally:
-//   Allocates 0x2000-byte CDSEasyMemStream at this+0x1b0 (rx scratch)
-//   this+0x30 = 3 (connected/ready)
-//   Calls CMenu_ShowLobby @ 0x00414790 -> CStartGame2.
+// The seed = g_dwElapsedMs at the moment the user clicks 'Start' in the level select.
+// Click-to-match delta is 2-3 seconds (lobby/network setup, level load).
 // 
-// See main_menu.md §3.2.
+// For multiplayer only, there's also a wire-side sync:
+//   CGame_ProcessNetMessage @ 0x415753 reads *(msg_buf + 0x1B) and stores to CGame+0xd4 —
+//   this is the host propagating its seed to all clients so the match-start srand is identical
+//   on every machine.
+// 
+// For open_bulanci: the seed flow is fully captured by the Frida hooks.  Single-player
+// re-seeds the PRNG at every match start with a known value (g_dwElapsedMs at Start click).
 
 void __fastcall CMenu::CMenu_OpenNetworkSession(CGame *this)
 
@@ -79003,7 +79031,7 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(CGame *this)
       local_4174._112_4_ = local_4174 + 0x74;
       local_4078 = puVar16;
       UVar8 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-      _Globals::FUN_004045f0(local_4174 + 0x70,pWVar11,UVar8);
+      _Globals::CDsString_AssignFromWideCapped80(local_4174 + 0x70,pWVar11,UVar8);
       pCVar12 = (CDSStreamStorage *)local_4174._112_4_;
       puVar13 = local_4074;
       for (iVar10 = 9; iVar10 != 0; iVar10 = iVar10 + -1) {
@@ -79153,21 +79181,17 @@ CGame::CGame_RebuildLevelListFromPlayerRecs(CGame *this,undefined4 *param_1,int 
 
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
-// NET_DISPATCH — CGame::ProcessNetMessage(this, DPID idFrom, void *msg)
-// idFrom==0 (DPlay system): dwType 5→CGame_OnSysMsg_DestroyPlayer; 0x31→CDSDirectXException;
-// 0x101→CDSSimpleException(2000,0x1b)
-// else switch((char)msg[0]) — verified game opcodes (max 0x19 + 0x64; 0x1A-0x63 dropped):
-//   0x00 JoinHost  0x01 RosterReply  0x02 Rename  0x03 SetAvatar  0x04 SlotCount  0x05 SetLevel
-//   0x06 Chat  0x07 Countdown  0x08 SlotState  0x09 SlotNotify  0x0A KickStatus  0x0B RoundResult
-//   0x0C WeaponLoadout  0x0D PlayerState  0x0E PrimaryAction  0x0F ShotSpawn  0x10 Hit
-//   0x11 PlayerDie  0x12 RoundTimer  0x13 WorldEventSpecial  0x14 PickupSpecial  0x15 CustomScript
-//   0x16 TeamScore  0x17 OpposingEvent  0x18 PlaceObject  0x19 PickupWorld  0x64 AdminByte
-// Match cases 0x0A-0x15,0x18-0x19 require CGame+0x30==6 (0x16/0x17 ungated). Live recv:
-// SchedulerDispatch case0→Receive→here. Replay: CGaming_DrainRecordedNetMessages.
-// AUTHORITY (reimpl): host=CGame+0x36==0; human=CBulanek_IsHumanPlayer @0x416720. Recv:
-// 0x0A-0x15,0x18-0x19 need +0x30==6; 0x00 needs +0x36==0; 0x16/0x17 UNGATED (replay isReplay=1).
-// Journal 0x0C-0x19 if CGame+0x209. Echo: lobby 0x02-0x07,0x64 NetSend*(...,0); 0x16/0x17
-// isReplay=1.
+// CGame_ProcessNetMessage — handles incoming DirectPlay messages.  Uses CGame+0xd4 as the PRNG
+// seed store.
+// 
+// At 0x415753 (msg handler 0x11 'RoundTimer' or similar initial sync):
+//   EAX = *(msg_buf + 0x1B)        ; load randSeed from incoming message (host's value)
+//   CGame+0xd4 = EAX               ; copy into local CGame — consumed by CGaming_ctor's srand
+// 
+// This is the wire-side of the seed-sync: the host sets CGame+0xd4 = g_dwElapsedMs at
+// CMenu_OpenNetworkSession (0x414f31), then sends the randSeed in a message; clients
+// receive it via CGame_ProcessNetMessage and write it to their own CGame+0xd4 so the
+// match-start srand produces the same sequence on all players.
 
 void __thiscall CGame::CGame_ProcessNetMessage(CGame *this,int param_1,int *param_2)
 
@@ -79333,7 +79357,7 @@ LAB_00415626:
           iVar16 = 0;
           if (0 < iVar14) {
             do {
-              iVar9 = CStartGame2::CStartGame2_CompareLevelName
+              iVar9 = CStartGame2::CDsString_CompareHandles
                                 ((CStartGame2 *)(*(int *)((this->chain).pPad_89 + 2) + iVar16 * 4),
                                  &local_4bdc);
               this_00 = local_4be4;
@@ -79395,7 +79419,7 @@ LAB_00415626:
           }
           local_4bc8 = local_4bc4;
           UVar10 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-          _Globals::FUN_004045f0(&local_4bc8,pWVar18,UVar10);
+          _Globals::CDsString_AssignFromWideCapped80(&local_4bc8,pWVar18,UVar10);
           puVar19 = local_4bc8;
           puVar21 = local_4bd8;
           for (iVar16 = 9; iVar16 != 0; iVar16 = iVar16 + -1) {
@@ -79536,9 +79560,9 @@ LAB_00415741:
         puVar20 = this->pLobbyView + 0x10;
       }
       _Globals::CDSView_PostMessage_NullSafe(puVar20,0x100,0x8002,0,0);
-      pvVar11 = _Globals::Scheduler_GetEventSlot(&this->scheduler,0);
+      pvVar11 = CDSUpdatedItem::Scheduler_GetEventSlot(&this->scheduler,0);
       if ((*(byte *)((int)pvVar11 + 8) & 1) == 0) {
-        _Globals::Scheduler_ArmSlot(&this->scheduler,0);
+        CDSUpdatedItem::Scheduler_ArmSlot(&this->scheduler,0);
       }
     }
                     // NET_RECV_0x04 SlotCount: +0x19C idx, +0x19E+idx*4 value; UI 0xE0.
@@ -79910,7 +79934,7 @@ void __thiscall CGame::CGame__SchedulerDispatch(CGame *this,uint param_1)
   local_8 = 0;
   if (param_1 == 7) {
     local_14 = &stack0xffffffac;
-    _Globals::Scheduler_SetEventLastFireMs(this,7,-1);
+    CDSUpdatedItem::Scheduler_SetEventLastFireMs((CDSUpdatedItem *)this,7,-1);
     if (this->bPollKeyboard == 0) {
       ExceptionList = local_10;
       return;
@@ -79958,7 +79982,7 @@ LAB_004160d0:
   switch(param_1) {
   case 0:
     local_14 = &stack0xffffffac;
-    _Globals::Scheduler_SetEventLastFireMs(this,0,-1);
+    CDSUpdatedItem::Scheduler_SetEventLastFireMs((CDSUpdatedItem *)this,0,-1);
     local_30 = 0;
     bVar14 = true;
     while (bVar14) {
@@ -79969,7 +79993,7 @@ LAB_004160d0:
       uVar5 = CDSDirectPlay_Receive
                         ((CGame *)this->pDirectPlay,&local_30,this->pDirectPlayActive,&local_2c);
       if (uVar5 == 0x8877001e) {
-        puVar6 = _Globals::FUN_0042f730(this->pDirectPlayActive,local_2c);
+        puVar6 = _Globals::Runtime_ReallocOrThrow(this->pDirectPlayActive,local_2c);
         this->pDirectPlayActive = puVar6;
         this->dwRecvBufSize = (uint)local_2c;
       }
@@ -79996,7 +80020,7 @@ LAB_004161ef:
     break;
   case 1:
     local_14 = &stack0xffffffac;
-    _Globals::Scheduler_SetEventLastFireMs(this,1,-1);
+    CDSUpdatedItem::Scheduler_SetEventLastFireMs((CDSUpdatedItem *)this,1,-1);
                     // scheduler case 1: pActiveCGaming @ CGame+0x1F0 → lobby CSessionList*
                     // (ECX=EDI); in-match slot holds CGaming*
     this_01 = (CSessionList *)this->pActiveCGaming;
@@ -80038,7 +80062,7 @@ LAB_004162bd:
     break;
   case 2:
     local_14 = &stack0xffffffac;
-    _Globals::Scheduler_SetEventLastFireMs(this,2,-1);
+    CDSUpdatedItem::Scheduler_SetEventLastFireMs((CDSUpdatedItem *)this,2,-1);
     *(char *)&this->dwCountdownTick = (char)this->dwCountdownTick + '\x01';
     bVar13 = (byte)this->dwCountdownTick;
     if (bVar13 < 5) {
@@ -80050,7 +80074,7 @@ LAB_004162bd:
     break;
   default:
     local_14 = &stack0xffffffac;
-    pvVar10 = _Globals::Scheduler_GetEventSlot(this,param_1);
+    pvVar10 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)this,param_1);
     local_3c = CONCAT31(local_3c._1_3_,(char)((uint)*(undefined4 *)((int)pvVar10 + 0x18) >> 8));
     CGame_NetSendOpposingEvent_t17
               ((CGame *)&this[-1].bMenuLastSplashFlag,local_3c,*(undefined4 *)((int)pvVar10 + 0x18),
@@ -80098,7 +80122,7 @@ LAB_004163ac:
     }
     local_14 = puVar1;
     this->pSchedTeamScoreScratch[0] = 0;
-    _Globals::Scheduler_ArmSlot(this,6);
+    CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)this,6);
   }
   ExceptionList = local_10;
   return;
@@ -80332,6 +80356,30 @@ undefined4 __fastcall CBulanek::CBulanek_GetDelayedQuipSlot(int param_1)
 
 
 
+// CBulanek::GetHitQuipSlot (verified live via Frida+ghidra, 2026-06).
+// 
+// Returns the audio quip slot to play for this hit.  Pseudocode:
+//     if (this->bSlotKind in [0x20..0x23])      // special player slots
+//         return 0x27;                          // fixed quip slot 0x27
+//     return table_4aef88[*(uint8*)(this+0x124)];  // 12-entry table at 0x4aef88
+// 
+// Verified by disassembly:
+//     004166b0: MOV AL, byte [ECX+0x70]      ; (bSlotKind, or 0x70 = 112, NOT this+0x124)
+//     004166b3: CMP AL, 0x20
+//     004166b5: JC 0x004166c1
+//     004166b7: CMP AL, 0x24
+//     004166b9: JNC 0x004166c1
+//     004166bb: MOV EAX, 0x27
+//     004166c0: RET
+//     004166c1: MOVZX EAX, byte [ECX+0x124]   ; index = bSlotKind (0..3 for ALL players)
+//     004166c8: MOV EAX, dword [EAX*4 + 0x4aef88]
+//     004166cf: RET
+// 
+// IMPORTANT CORRECTION to my earlier RE writeup: the byte at +0x124 is bSlotKind (always 0..3,
+// since AI bots get `slotKind & 3` in the ctor), NOT dwScriptKillScore.  Only the first 4 of the 12
+// table entries are functionally reachable; entries 4..11 are dead bytes from the next struct's
+// data section.  See comment at 0x4aef88.
+
 undefined4 __fastcall CBulanek::CBulanek_GetHitQuipSlot(int param_1)
 
 {
@@ -80343,16 +80391,15 @@ undefined4 __fastcall CBulanek::CBulanek_GetHitQuipSlot(int param_1)
 
 
 
-void __thiscall CBulanek::FUN_004166d0(CBulanek *this,int *param_1)
+void __thiscall CBulanek_GetAnimAnchorPos(void *this,int *param_1)
 
 {
                     // UNCERTAIN: writes param_1[0..1] as sums of this+0x104/0x10c/0x20 and
                     // this+0x108/0x110/0x24; called from CBulanek_ResolveAndBindAnimTrack and
                     // CBulanek_BindDeathTombstoneAnim before anim anchor adjustment.
-  *param_1 = *(int *)(this->pReserved_preAmmo + 8) + *(int *)this->pReserved_preAmmo +
-             this->nOrigin_x;
-  param_1[1] = *(int *)(this->pReserved_preAmmo + 0xc) + *(int *)(this->pReserved_preAmmo + 4) +
-               this->nOrigin_y;
+  *param_1 = *(int *)((int)this + 0x10c) + *(int *)((int)this + 0x104) + *(int *)((int)this + 0x20);
+  param_1[1] = *(int *)((int)this + 0x110) + *(int *)((int)this + 0x108) +
+               *(int *)((int)this + 0x24);
   return;
 }
 
@@ -80427,17 +80474,17 @@ void __thiscall CMina::CMina_RenderAnimFrame(CMina *this,char param_1)
   CBulanci::CDSView_NoOpStub();
   _Globals::TM_RenderFrame(&(this->animBase).vftable_anim_sub,param_1);
   if (param_1 != '\0') {
-    _Globals::Scheduler_RegisterEventSlot(&this->updatedItem,0,2000,2);
+    CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->updatedItem,0,2000,2);
   }
   return;
 }
 
 
 
-void __fastcall CDSApp::CDSView_RenderChildrenClipped(int param_1)
+void __thiscall CDSView::CDSView_RenderChildrenClipped(CDSView *this)
 
 {
-  CPoemScroller *this;
+  tagRECT *this_00;
   undefined4 uVar1;
   undefined4 uVar2;
   int *pCurrentView;
@@ -80448,7 +80495,8 @@ void __fastcall CDSApp::CDSView_RenderChildrenClipped(int param_1)
   int iStack_8;
   int iStack_4;
   
-  pCurrentView = _Globals::CDSChained_GetFirstChildView((CDSChain *)(param_1 + 0x54));
+  pCurrentView = _Globals::CDSChained_GetFirstChildView
+                           ((CDSChain *)&(this->win).pVftable_CDSChain_IDSReferenced);
   if (pCurrentView != (int *)0x0) {
     if (g_pApp == (void *)0xffffff84) {
       iVar3 = 0;
@@ -80456,8 +80504,8 @@ void __fastcall CDSApp::CDSView_RenderChildrenClipped(int param_1)
     else {
       iVar3 = (int)g_pApp + 0x80;
     }
-    this = (CPoemScroller *)(iVar3 + 0x24);
-    tStack_20.left = (LONG)this->pVftable_primary;
+    this_00 = (tagRECT *)(iVar3 + 0x24);
+    tStack_20.left = this_00->left;
     tStack_20.top = *(LONG *)(iVar3 + 0x28);
     tStack_20.right = *(LONG *)(iVar3 + 0x2c);
     tStack_20.bottom = *(LONG *)(iVar3 + 0x30);
@@ -80467,16 +80515,15 @@ void __fastcall CDSApp::CDSView_RenderChildrenClipped(int param_1)
     iStack_4 = DAT_004b3ba8;
     do {
       if ((*(byte *)(pCurrentView + 0x11) & 0x80) != 0) {
-        CPoemScroller::rect_Intersect
-                  ((CPoemScroller *)&DAT_004b3b9c,(tagRECT *)(pCurrentView + 0xc));
+        tagRECT::CDSRect_Intersect((tagRECT *)&DAT_004b3b9c,(tagRECT *)(pCurrentView + 0xc));
         if ((DAT_004b3b9c < DAT_004b3ba4) && (DAT_004b3ba0 < DAT_004b3ba8)) {
           uVar1 = *(undefined4 *)(iVar3 + 4);
           uVar2 = *(undefined4 *)(iVar3 + 8);
-          this->pVftable_primary = (void *)0x0;
+          this_00->left = 0;
           *(undefined4 *)(iVar3 + 0x28) = 0;
           *(undefined4 *)(iVar3 + 0x2c) = uVar1;
           *(undefined4 *)(iVar3 + 0x30) = uVar2;
-          CPoemScroller::rect_Intersect(this,(tagRECT *)&DAT_004b3b9c);
+          tagRECT::CDSRect_Intersect(this_00,(tagRECT *)&DAT_004b3b9c);
           (**(code **)(*pCurrentView + 0x38))();
         }
         DAT_004b3b9c = iStack_10;
@@ -80489,11 +80536,11 @@ void __fastcall CDSApp::CDSView_RenderChildrenClipped(int param_1)
     } while (pCurrentView != (int *)0x0);
     uVar1 = *(undefined4 *)(iVar3 + 8);
     uVar2 = *(undefined4 *)(iVar3 + 4);
-    this->pVftable_primary = (void *)0x0;
+    this_00->left = 0;
     *(undefined4 *)(iVar3 + 0x28) = 0;
     *(undefined4 *)(iVar3 + 0x2c) = uVar2;
     *(undefined4 *)(iVar3 + 0x30) = uVar1;
-    CPoemScroller::rect_Intersect(this,&tStack_20);
+    tagRECT::CDSRect_Intersect(this_00,&tStack_20);
   }
   return;
 }
@@ -80569,10 +80616,10 @@ void __thiscall CGaming::CGaming_OnKeyUp(CGaming *this,char param_1)
 
 
 
-void __thiscall CBulanek::CBulanek_SetCloneFlag(CBulanek *this,undefined1 param_1)
+void __thiscall CGaming::CGaming_SetEntityRegisterMode(CGaming *this,undefined1 param_1)
 
 {
-  *(undefined1 *)((int)&this[2].dwPad_08 + 1) = param_1;
+  this->field_0x341 = param_1;
   return;
 }
 
@@ -80751,7 +80798,7 @@ undefined1 __cdecl CLevelScript::CLevelScriptOpExt_SetInsertMode(CDSScript *para
   undefined1 extraout_DL;
   
   CDSScript::ReadSubExpr(param_1);
-  CBulanek::CBulanek_SetCloneFlag((CBulanek *)param_1[1].nOpcodeCount,extraout_AL);
+  CGaming::CGaming_SetEntityRegisterMode((CGaming *)param_1[1].nOpcodeCount,extraout_AL);
   return extraout_DL;
 }
 
@@ -80774,13 +80821,13 @@ int * __cdecl CLevelScript::CLevelScriptOpExt_HideView(CDSScript *param_1)
 int * __cdecl CLevelScript::CLevelScriptOpExt_ShowView(CDSScript *param_1)
 
 {
-  int *extraout_EAX;
+  CDSView *this;
   
   CDSScript::ReadSubExpr(param_1);
-  if (extraout_EAX != (int *)0x0) {
-    _Globals::CDSView__Hide(extraout_EAX);
+  if (this != (CDSView *)0x0) {
+    CDSView::CDSView__Hide(this);
   }
-  return extraout_EAX;
+  return (int *)this;
 }
 
 
@@ -80850,7 +80897,8 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_RegisterTimer(CLevelScriptCtx
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   CDSScript::ReadSubExpr((CDSScript *)param_1);
-  _Globals::Scheduler_RegisterEventSlot(param_1->pTimer_table,slotIndex,delayMs,eventKind);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot
+            ((CDSUpdatedItem *)param_1->pTimer_table,slotIndex,delayMs,eventKind);
   return *(undefined4 *)(extraout_EAX + 0x14);
 }
 
@@ -80862,7 +80910,7 @@ uint __cdecl CLevelScript::CLevelScriptOpExt_TimerStop(CDSScript *param_1)
   uint extraout_EAX;
   
   CDSScript::ReadSubExpr(param_1);
-  _Globals::Scheduler_AckSlot(&param_1[1].bytecode,extraout_EAX,-1);
+  CDSUpdatedItem::Scheduler_AckSlot((CDSUpdatedItem *)&param_1[1].bytecode,extraout_EAX,-1);
   return extraout_EAX;
 }
 
@@ -80874,7 +80922,7 @@ uint __cdecl CLevelScript::CLevelScriptOpExt_TimerStart(CDSScript *param_1)
   uint extraout_EAX;
   
   CDSScript::ReadSubExpr(param_1);
-  _Globals::Scheduler_ArmSlot(&param_1[1].bytecode,extraout_EAX);
+  CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)&param_1[1].bytecode,extraout_EAX);
   return extraout_EAX;
 }
 
@@ -80886,7 +80934,7 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_TimerRelease(CDSScript *param
   uint extraout_EAX;
   
   CDSScript::ReadSubExpr(param_1);
-  CBulanek::Scheduler_FreeSlotIfLive((CBulanek *)&param_1[1].bytecode,extraout_EAX);
+  CDSUpdatedItem::Scheduler_FreeSlotIfLive((CDSUpdatedItem *)&param_1[1].bytecode,extraout_EAX);
   return 0;
 }
 
@@ -80900,7 +80948,8 @@ uint __cdecl CLevelScript::CLevelScriptOpExt_TimerSetData(CDSScript *param_1)
   
   CDSScript::ReadSubExpr(param_1);
   CDSScript::ReadSubExpr(param_1);
-  _Globals::Scheduler_SetEventDelayMs(&param_1[1].bytecode,extraout_EAX,extraout_EAX_00);
+  CDSUpdatedItem::Scheduler_SetEventDelayMs
+            ((CDSUpdatedItem *)&param_1[1].bytecode,extraout_EAX,extraout_EAX_00);
   return extraout_EAX;
 }
 
@@ -81002,7 +81051,7 @@ undefined4 * __cdecl CLevelScript::CLevelScriptOpExt_SeekAnim(CDSScript *param_1
   if (extraout_EAX != (undefined4 *)0x0) {
     puVar2 = &DAT_004b3768;
     this = (void *)(**(code **)*extraout_EAX)();
-    uVar1 = _Globals::FUN_0042e960(this,puVar2);
+    uVar1 = _Globals::ClassRegEntry_ListContains(this,puVar2);
     if ((char)uVar1 != '\0') {
       _Globals::TM_SeekToFrame(extraout_EAX + 0x2a,extraout_EAX_00);
       return extraout_EAX;
@@ -81333,7 +81382,7 @@ void __thiscall CGameView::CGameView_GetWorldCollisionRect(CGameView *this,int *
 void __fastcall _Globals::CBulanek_ArmFireDelayScheduler(int param_1)
 
 {
-  void *this;
+  CDSUpdatedItem *this;
   byte bVar1;
   int iVar2;
   void *pvVar3;
@@ -81344,16 +81393,16 @@ void __fastcall _Globals::CBulanek_ArmFireDelayScheduler(int param_1)
                     // damage_pipeline.md notes post-damage scheduler arm; no published export name.
   bVar1 = *(byte *)(param_1 + 0x70);
   if (((3 < bVar1) && ((bVar1 < 0x20 || (0x23 < bVar1)))) && ((bVar1 < 0x24 || (0x27 < bVar1)))) {
-    this = (void *)(param_1 + 0x88);
+    this = (CDSUpdatedItem *)(param_1 + 0x88);
                     // _rand: AI fire-delay ms = ((_rand%11)+5)*1000; scheduler slot 2 @
                     // CBulanek+0x88
     iVar2 = Runtime::MSVCRT::_rand();
-    Scheduler_SetEventDelayMs
+    CDSUpdatedItem::Scheduler_SetEventDelayMs
               (this,2,(((int)(iVar2 * 0xb + (iVar2 * 0xb >> 0x1f & 0x7fffU)) >> 0xf) + 5) * 1000);
-    Scheduler_SetEventLastFireMs(this,2,-1);
-    pvVar3 = Scheduler_GetEventSlot(this,2);
+    CDSUpdatedItem::Scheduler_SetEventLastFireMs(this,2,-1);
+    pvVar3 = CDSUpdatedItem::Scheduler_GetEventSlot(this,2);
     if ((*(byte *)((int)pvVar3 + 8) & 1) != 0) {
-      Scheduler_AckSlot(this,2,-1);
+      CDSUpdatedItem::Scheduler_AckSlot(this,2,-1);
     }
   }
   return;
@@ -81364,7 +81413,7 @@ void __fastcall _Globals::CBulanek_ArmFireDelayScheduler(int param_1)
 void __fastcall CBulanek::CBulanek_ArmTournamentSchedulerDelays(int param_1)
 
 {
-  void *this;
+  CDSUpdatedItem *this;
   byte bVar1;
   int iVar2;
   void *pvVar3;
@@ -81373,20 +81422,20 @@ void __fastcall CBulanek::CBulanek_ArmTournamentSchedulerDelays(int param_1)
                     // delay+ack; CBulanek_OnShow + WeaponSchedulerCallback case 3.
   bVar1 = *(byte *)(param_1 + 0x70);
   if (((0x1f < bVar1) && (bVar1 < 0x24)) || ((0x23 < bVar1 && (bVar1 < 0x28)))) {
-    this = (void *)(param_1 + 0x88);
+    this = (CDSUpdatedItem *)(param_1 + 0x88);
     iVar2 = Runtime::MSVCRT::_rand();
-    _Globals::Scheduler_SetEventDelayMs
+    CDSUpdatedItem::Scheduler_SetEventDelayMs
               (this,3,(((int)(iVar2 * 10 + (iVar2 * 10 >> 0x1f & 0x7fffU)) >> 0xf) + 1) * 1000);
-    _Globals::Scheduler_SetEventLastFireMs(this,3,-1);
-    pvVar3 = _Globals::Scheduler_GetEventSlot(this,3);
+    CDSUpdatedItem::Scheduler_SetEventLastFireMs(this,3,-1);
+    pvVar3 = CDSUpdatedItem::Scheduler_GetEventSlot(this,3);
     if ((*(byte *)((int)pvVar3 + 8) & 1) != 0) {
-      _Globals::Scheduler_AckSlot(this,3,-1);
+      CDSUpdatedItem::Scheduler_AckSlot(this,3,-1);
     }
-    _Globals::Scheduler_SetEventDelayMs(this,4,2000);
-    _Globals::Scheduler_SetEventLastFireMs(this,4,-1);
-    pvVar3 = _Globals::Scheduler_GetEventSlot(this,4);
+    CDSUpdatedItem::Scheduler_SetEventDelayMs(this,4,2000);
+    CDSUpdatedItem::Scheduler_SetEventLastFireMs(this,4,-1);
+    pvVar3 = CDSUpdatedItem::Scheduler_GetEventSlot(this,4);
     if ((*(byte *)((int)pvVar3 + 8) & 1) != 0) {
-      _Globals::Scheduler_AckSlot(this,4,-1);
+      CDSUpdatedItem::Scheduler_AckSlot(this,4,-1);
     }
   }
   return;
@@ -81484,7 +81533,8 @@ uint __thiscall _Globals::CBulanek_CanDispatchPlayerAction(void *this,int param_
   if ((param_1 == 5) || (param_1 == 4)) {
     if ((param_2 != '\0') &&
        ((*(int *)((int)this + 0xf8) != 0 &&
-        (pvVar1 = Scheduler_GetEventSlot((void *)(*(int *)((int)this + 0xf8) + 0xc),0),
+        (pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot
+                            ((CDSUpdatedItem *)(*(int *)((int)this + 0xf8) + 0xc),0),
         (*(byte *)((int)pvVar1 + 8) & 1) != 0)))) {
       return 1;
     }
@@ -81511,7 +81561,7 @@ void __fastcall _Globals::CBulanek_DecrementWeaponAmmo(void *param_1)
     *pcVar1 = *pcVar1 + -1;
     if ((*pcVar1 == '\0') && (bVar2 == 0)) {
       *(undefined1 *)((int)param_1 + 0x122) = 0;
-      Scheduler_AckSlot((void *)((int)param_1 + 0x88),0,-1);
+      CDSUpdatedItem::Scheduler_AckSlot((CDSUpdatedItem *)((int)param_1 + 0x88),0,-1);
     }
     CBulanek::CBulanek_RefreshHudWeaponStrip(param_1);
     return;
@@ -81531,9 +81581,9 @@ void __fastcall CBulanek::CBulanek_ResetAmmoAndPlayReload(void *param_1)
   char cVar5;
   undefined1 uVar6;
   
-  pvVar2 = _Globals::Scheduler_GetEventSlot((void *)((int)param_1 + 0x88),0);
+  pvVar2 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)((int)param_1 + 0x88),0);
   if ((*(byte *)((int)pvVar2 + 8) & 1) == 0) {
-    _Globals::Scheduler_ArmSlot((void *)((int)param_1 + 0x88),0);
+    CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)((int)param_1 + 0x88),0);
   }
   uVar1 = _Globals::GetMaxAmmoForKind(0);
   uVar6 = 0;
@@ -81559,18 +81609,18 @@ void __thiscall CBulanek::CBulanek_AdaptDisplaySize(CBulanek *this,uint *param_1
   uint extraout_EDX;
   uint uVar2;
   
-  pvVar1 = _Globals::Scheduler_GetEventSlot(&(this->videoTrackManager).scheduler,0);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&(this->videoTrackManager).scheduler,0);
   uVar2 = extraout_EDX;
   if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
     if (1 < (this->videoTrackManager).nCurrentTrackIdx) {
       this->dwFacingAxisExtent = *param_1;
-      CBulanci::CDSView_AdaptDisplaySize(this);
+      CDSView::CDSView_AdaptDisplaySize(this);
       return;
     }
     uVar2 = param_1[1];
     this->dwFacingAxisExtent = uVar2;
   }
-  CBulanci::CDSView_AdaptDisplaySize(this,uVar2,param_1);
+  CDSView::CDSView_AdaptDisplaySize(this,uVar2,param_1);
   return;
 }
 
@@ -81749,10 +81799,10 @@ void __thiscall CBulanek::CBulanek_SnapPositionToFacingAxis(CBulanek *this)
                     // +0xd4; callers CBulanek_ApplyAction / SetFacingTrack
   _Globals::TM_PauseAndStampClock(&this->videoTrackManager);
   if (1 < (this->videoTrackManager).nCurrentTrackIdx) {
-    CDSView__SetPosition(this,this->dwFacingAxisExtent,this->nOrigin_y);
+    CDSView::CDSView__SetPosition((CDSView *)this,this->dwFacingAxisExtent,this->nOrigin_y);
     return;
   }
-  CDSView__SetPosition(this,this->nOrigin_x,this->dwFacingAxisExtent);
+  CDSView::CDSView__SetPosition((CDSView *)this,this->nOrigin_x,this->dwFacingAxisExtent);
   return;
 }
 
@@ -81874,7 +81924,7 @@ void __fastcall CDeath::CDeath_OnCorpseHideRequestRespawn(int param_1)
                     // if local human posts CDSView__PostMessage 0x200/0xf6 -> CGaming_OnCustomEvent
                     // respawn (FUN_00420480). CDeath2 slot4 @ 0x00417b10 only hides.
   if (((byte)~*(byte *)(*(int *)(param_1 + -8) + 0x44) >> 4 & 1) == 0) {
-    _Globals::CDSView__Hide((int *)(param_1 + -0x8c));
+    CDSView::CDSView__Hide((CDSView *)(param_1 + -0x8c));
     uVar1 = _Globals::CBulanek_IsHumanPlayer(*(int *)(param_1 + 100));
     if ((char)uVar1 != '\0') {
       CDeath_UpdateLastManStandingState(*(CDeath **)(param_1 + 100));
@@ -81907,7 +81957,7 @@ void __fastcall CDeath2::CDeath2_HideViewIfParentShown(CDSUpdatedItem *updatedIt
 
 {
   if (((byte)~*(byte *)(updatedItem[-1].dwEventSlots + 0x44) >> 4 & 1) == 0) {
-    _Globals::CDSView__Hide((int *)&updatedItem[-6].pVftable_IDSEventHandler);
+    CDSView::CDSView__Hide((CDSView *)&updatedItem[-6].pVftable_IDSEventHandler);
   }
   return;
 }
@@ -81984,17 +82034,17 @@ void __thiscall CShot::CShot_Draw(CShot *this)
 
 
 
-void __thiscall CBulanci::FUN_00417c80(CBulanci *this,int param_1)
+void __thiscall CBulanci_SetAmbientAnimMode(void *this,int param_1)
 
 {
   void *pvVar1;
-  undefined **this_00;
+  CDSUpdatedItem *this_00;
   uint uVar2;
   
                     // UNCERTAIN: stores ambient-anim mode at this+0x33c (0=25s / 1=10s scheduler
                     // delay on this+0x68 slot 0); called from CGaming_TickAmbientAnimations and
                     // level teardown FUN_00419e40(0).
-  *(int *)((int)&(this->game).chain.dwProfileCapacityMirror + 2) = param_1;
+  *(int *)((int)this + 0x33c) = param_1;
   if (param_1 == 0) {
     uVar2 = 25000;
   }
@@ -82002,14 +82052,14 @@ void __thiscall CBulanci::FUN_00417c80(CBulanci *this,int param_1)
     if (param_1 != 1) goto LAB_00417cad;
     uVar2 = 10000;
   }
-  _Globals::Scheduler_SetEventDelayMs(&(this->app).pClassName,0,uVar2);
+  CDSUpdatedItem::Scheduler_SetEventDelayMs((CDSUpdatedItem *)((int)this + 0x68),0,uVar2);
 LAB_00417cad:
-  this_00 = &(this->app).pClassName;
-  pvVar1 = _Globals::Scheduler_GetEventSlot(this_00,0);
+  this_00 = (CDSUpdatedItem *)((int)this + 0x68);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(this_00,0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
-    _Globals::Scheduler_AckSlot(this_00,0,-1);
+    CDSUpdatedItem::Scheduler_AckSlot(this_00,0,-1);
   }
-  _Globals::Scheduler_SetEventLastFireMs(this_00,0,-1);
+  CDSUpdatedItem::Scheduler_SetEventLastFireMs(this_00,0,-1);
   return;
 }
 
@@ -82124,7 +82174,7 @@ _Globals::CGaming_OnSlotPlacementEvent
 {
   int *piVar1;
   bool bVar2;
-  CBulanek *this_00;
+  CDSView *this_00;
   int iVar3;
   int iVar4;
   
@@ -82145,8 +82195,8 @@ _Globals::CGaming_OnSlotPlacementEvent
     if ((bVar2) && (param_5 == '\0')) {
       iVar4 = piVar1[1];
       iVar3 = *piVar1;
-      this_00 = (CBulanek *)CGaming_GetObjectAtSlotUnchecked(this,param_1);
-      CBulanek::CDSView__SetPosition(this_00,iVar3,iVar4);
+      this_00 = (CDSView *)CGaming_GetObjectAtSlotUnchecked(this,param_1);
+      CDSView::CDSView__SetPosition(this_00,iVar3,iVar4);
     }
     CBulanek::CBulanek_PostScriptEvent(this,param_1,0xd7,(uint)CONCAT11(param_2,param_3),&param_4);
   }
@@ -82413,10 +82463,7 @@ _Globals::_Globals__SpatialQuery
   int *pCurrentView;
   int *extraout_EAX;
   undefined4 uVar1;
-  void *pvStack_10;
-  void *pvStack_c;
-  int iStack_8;
-  int iStack_4;
+  tagRECT tStack_10;
   
                     // SpatialQuery: walk CDSView entity list from CGaming+0x31c via
                     // CDSChained_GetFirstChildView(head+0x54); advance with entity+0x4c
@@ -82433,11 +82480,11 @@ _Globals::_Globals__SpatialQuery
     }
     if (*(char *)((int)pCurrentView + 0x69) != '\0') {
       (**(code **)(*pCurrentView + 0x70))(param_3);
-      pvStack_10 = (void *)*param_1;
-      pvStack_c = (void *)param_1[1];
-      iStack_8 = param_1[2];
-      iStack_4 = param_1[3];
-      CPoemScroller::rect_Intersect((CPoemScroller *)&pvStack_10,param_3);
+      tStack_10.left = *param_1;
+      tStack_10.top = param_1[1];
+      tStack_10.right = param_1[2];
+      tStack_10.bottom = param_1[3];
+      tagRECT::CDSRect_Intersect(&tStack_10,param_3);
       if ((((*extraout_EAX < extraout_EAX[2]) && (extraout_EAX[1] < extraout_EAX[3])) &&
           ((param_4 != '\0' || (uVar1 = CDSRect_Overlaps(param_2,param_3), (char)uVar1 == '\0'))))
          && ((param_5 == '\0' || (*(char *)((int)pCurrentView + 0x6a) == '\0')))) {
@@ -82465,10 +82512,7 @@ CGaming::CExplosion_CollectEntitiesInBlastRect
   int *extraout_EAX;
   int iVar1;
   tagRECT local_20;
-  void *pvStack_10;
-  void *pvStack_c;
-  int iStack_8;
-  int iStack_4;
+  tagRECT tStack_10;
   
                     // R3 todo8: set_function_this_type CGaming* — ECX from explosion->pGaming
                     // (+0x84); body uses [ECX+0x31c]+0x54 entity view chain.
@@ -82483,11 +82527,11 @@ CGaming::CExplosion_CollectEntitiesInBlastRect
     do {
       if (*(char *)((int)pCurrentView + 0x69) != '\0') {
         (**(code **)(*pCurrentView + 0x70))(&local_20);
-        pvStack_c = (void *)blastRect[1];
-        pvStack_10 = (void *)*blastRect;
-        iStack_8 = blastRect[2];
-        iStack_4 = blastRect[3];
-        CPoemScroller::rect_Intersect((CPoemScroller *)&pvStack_10,&local_20);
+        tStack_10.top = blastRect[1];
+        tStack_10.left = *blastRect;
+        tStack_10.right = blastRect[2];
+        tStack_10.bottom = blastRect[3];
+        tagRECT::CDSRect_Intersect(&tStack_10,&local_20);
         if (((*extraout_EAX < extraout_EAX[2]) && (extraout_EAX[1] < extraout_EAX[3])) &&
            ((includeHidden == '\0' || (*(char *)((int)pCurrentView + 0x6a) == '\0')))) {
           entityBuf[iVar1] = (int)pCurrentView;
@@ -82507,74 +82551,77 @@ CGaming::CExplosion_CollectEntitiesInBlastRect
 // CGaming_InsertEntityByDepth — true owner CGaming (depth lists at this+0x348/+0x34c).
 // Parameters: CGaming *this (ECX; __thiscall this not retypable via MCP), void *entity.
 
-uchar __thiscall CBulanek::CGaming_InsertEntityByDepth(CBulanek *this,void *param_1)
+uchar __thiscall CGaming::CGaming_InsertEntityByDepth(CGaming *this,void *param_1)
 
 {
-  uchar uVar1;
-  int iVar2;
-  int *piVar3;
-  int iVar4;
-  int *piVar5;
-  int *piVar6;
-  undefined *puVar7;
+  void *pvVar1;
+  uchar uVar2;
+  int iVar3;
+  CDSView *pCVar4;
+  int iVar5;
+  CDSView *pCVar6;
+  CDSView *pCVar7;
   
-  iVar2 = (**(code **)(*(int *)param_1 + 0x74))();
-  piVar5 = (int *)0x0;
-  piVar3 = param_1;
-  if (param_1 != this[2].vftable_IDSReferenced) {
+  iVar3 = (**(code **)(*(int *)param_1 + 0x74))();
+  pCVar6 = (CDSView *)0x0;
+  pCVar4 = param_1;
+  if (param_1 != this->pDepthInsertHead) {
     do {
-      if (piVar3[0x13] == 0) {
-        piVar3 = (int *)0x0;
+      pvVar1 = (pCVar4->win).pParent;
+      if (pvVar1 == (void *)0x0) {
+        pCVar4 = (CDSView *)0x0;
       }
       else {
-        piVar3 = (int *)_Globals::FUN_0042f7e0((void *)(piVar3[0x13] + 0x54),(int)piVar3);
+        pCVar4 = (CDSView *)
+                 _Globals::CDSIntrusiveNode_GetNextLinkSkipSentinel
+                           ((void *)((int)pvVar1 + 0x54),(int)pCVar4);
       }
-      iVar4 = (**(code **)(*piVar3 + 0x74))();
-    } while ((iVar2 < iVar4) && (piVar5 = piVar3, piVar3 != (int *)this[2].vftable_IDSReferenced));
-    if (piVar5 != (int *)0x0) {
-      if (piVar5 == (int *)this[2].vftable_IDSReferenced) {
-        this[2].vftable_IDSReferenced = param_1;
+      iVar5 = (**(code **)((int)(pCVar4->win).pVftable_primary + 0x74))();
+    } while ((iVar3 < iVar5) && (pCVar6 = pCVar4, pCVar4 != this->pDepthInsertHead));
+    if (pCVar6 != (CDSView *)0x0) {
+      if (pCVar6 == this->pDepthInsertHead) {
+        this->pDepthInsertHead = param_1;
       }
-      uVar1 = FUN_0042c190(param_1,(int)piVar5);
-      return uVar1;
+      uVar2 = CBulanek::FUN_0042c190(param_1,(int)pCVar6);
+      return uVar2;
     }
   }
   if (*(int *)((int)param_1 + 0x4c) == 0) {
-    piVar5 = (int *)0x0;
+    pCVar6 = (CDSView *)0x0;
   }
   else {
-    piVar5 = _Globals::CDSChained_GetNextSiblingView(param_1);
+    pCVar6 = _Globals::CDSChained_GetNextSiblingView(param_1);
   }
-  uVar1 = (uchar)piVar5;
-  piVar3 = (int *)0x0;
-  if (piVar5 != *(int **)&this[2].wViewFlags) {
+  uVar2 = (uchar)pCVar6;
+  pCVar4 = (CDSView *)0x0;
+  if (pCVar6 != this->pDepthInsertTail) {
     do {
-      piVar6 = (int *)(**(code **)(*piVar5 + 0x74))();
-      if (iVar2 <= (int)piVar6) break;
-      if (piVar5[0x13] == 0) {
-        piVar6 = (int *)0x0;
+      pCVar7 = (CDSView *)(**(code **)((int)(pCVar6->win).pVftable_primary + 0x74))();
+      if (iVar3 <= (int)pCVar7) break;
+      if ((pCVar6->win).pParent == (void *)0x0) {
+        pCVar7 = (CDSView *)0x0;
       }
       else {
-        piVar6 = _Globals::CDSChained_GetNextSiblingView(piVar5);
+        pCVar7 = _Globals::CDSChained_GetNextSiblingView(pCVar6);
       }
-      piVar3 = piVar5;
-      piVar5 = piVar6;
-    } while (piVar6 != *(int **)&this[2].wViewFlags);
-    uVar1 = (uchar)piVar6;
-    if (piVar3 != (int *)0x0) {
-      if (param_1 == this[2].vftable_IDSReferenced) {
+      pCVar4 = pCVar6;
+      pCVar6 = pCVar7;
+    } while (pCVar7 != this->pDepthInsertTail);
+    uVar2 = (uchar)pCVar7;
+    if (pCVar4 != (CDSView *)0x0) {
+      if (param_1 == this->pDepthInsertHead) {
         if (*(int *)((int)param_1 + 0x4c) == 0) {
-          puVar7 = (undefined *)0x0;
+          pCVar6 = (CDSView *)0x0;
         }
         else {
-          puVar7 = _Globals::CDSChained_GetNextSiblingView(param_1);
+          pCVar6 = _Globals::CDSChained_GetNextSiblingView(param_1);
         }
-        this[2].vftable_IDSReferenced = puVar7;
+        this->pDepthInsertHead = pCVar6;
       }
-      uVar1 = FUN_0042c160(param_1,piVar3);
+      uVar2 = CBulanek::FUN_0042c160(param_1,pCVar4);
     }
   }
-  return uVar1;
+  return uVar2;
 }
 
 
@@ -82807,7 +82854,7 @@ void * __cdecl CLevelScript::CLevelScriptOpExt_ResortDepth(CDSScript *param_1)
   
   CDSScript::ReadSubExpr(param_1);
   if (extraout_EAX != (void *)0x0) {
-    CBulanek::CGaming_InsertEntityByDepth((CBulanek *)param_1[1].nOpcodeCount,extraout_EAX);
+    CGaming::CGaming_InsertEntityByDepth((CGaming *)param_1[1].nOpcodeCount,extraout_EAX);
   }
   return extraout_EAX;
 }
@@ -82825,7 +82872,7 @@ CBulanek * __cdecl CLevelScript::CLevelScriptOpExt_TranslateTo(CDSScript *param_
   CDSScript::ReadSubExpr(param_1);
   CDSScript::ReadSubExpr(param_1);
   if (this != (CBulanek *)0x0) {
-    CBulanek::CDSView__SetPosition(this,extraout_EAX,extraout_EAX_00);
+    CDSView::CDSView__SetPosition((CDSView *)this,extraout_EAX,extraout_EAX_00);
   }
   return this;
 }
@@ -82886,7 +82933,8 @@ uint __cdecl CLevelScript::CLevelScriptOpExt_MapSet(CDSScript *param_1)
   
   CDSScript::ReadSubExpr(param_1);
   CDSScript::ReadSubExpr(param_1);
-  pvVar1 = _Globals::Scheduler_GetEventSlot(&param_1[1].bytecode,extraout_EAX);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot
+                     ((CDSUpdatedItem *)&param_1[1].bytecode,extraout_EAX);
   *(undefined4 *)((int)pvVar1 + 0x18) = extraout_EAX_00;
   return extraout_EAX;
 }
@@ -82900,7 +82948,8 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_MapGet(CDSScript *param_1)
   void *pvVar1;
   
   CDSScript::ReadSubExpr(param_1);
-  pvVar1 = _Globals::Scheduler_GetEventSlot(&param_1[1].bytecode,extraout_EAX);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot
+                     ((CDSUpdatedItem *)&param_1[1].bytecode,extraout_EAX);
   return *(undefined4 *)((int)pvVar1 + 0x18);
 }
 
@@ -82918,9 +82967,9 @@ bool __cdecl CLevelScript::CLevelScriptOpExt_IsViewKind(CDSScript *param_1)
   if (extraout_EAX != (undefined4 *)0x0) {
     puVar3 = &DAT_004b3768;
     pvVar1 = (void *)(**(code **)*extraout_EAX)();
-    uVar2 = _Globals::FUN_0042e960(pvVar1,puVar3);
+    uVar2 = _Globals::ClassRegEntry_ListContains(pvVar1,puVar3);
     if ((char)uVar2 != '\0') {
-      pvVar1 = _Globals::Scheduler_GetEventSlot(extraout_EAX + 0x2b,0);
+      pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)(extraout_EAX + 0x2b),0);
       return ((byte)*(undefined4 *)((int)pvVar1 + 8) & 1) != 1;
     }
   }
@@ -83162,7 +83211,7 @@ CGameView * _Globals::CreateObject(void)
 
 
 
-CGameView * __fastcall CGameView::FUN_00418d70(CGameView *param_1)
+CGameView * __fastcall CBulanek_ShellCtor(CGameView *param_1)
 
 {
   int schedulerParam;
@@ -83179,15 +83228,16 @@ CGameView * __fastcall CGameView::FUN_00418d70(CGameView *param_1)
   local_c = ExceptionList;
   ExceptionList = &local_c;
   CDSChained::CDSChained_ctor(&param_1->vftable_primary);
-  param_1->vftable_primary = (undefined *)g_pCGameView_vftable_primary;
-  param_1->vftable_IDSChained = (undefined *)g_pCGameView_vftable_IDSChained;
-  param_1->vftable_IDSReferenced = (undefined *)g_pCGameView_vftable_IDSReferenced_18;
-  param_1->vftable_IDSEventHandler = (undefined *)g_pCGameView_vftable_IDSEventHandler_10;
+  param_1->vftable_primary = (undefined *)CGameView::g_pCGameView_vftable_primary;
+  param_1->vftable_IDSChained = (undefined *)CGameView::g_pCGameView_vftable_IDSChained;
+  param_1->vftable_IDSReferenced = (undefined *)CGameView::g_pCGameView_vftable_IDSReferenced_18;
+  param_1->vftable_IDSEventHandler = (undefined *)CGameView::g_pCGameView_vftable_IDSEventHandler_10
+  ;
   param_1->nCollisionLeft = 0;
   param_1->nCollisionTop = 0;
   param_1->nCollisionRight = 0;
   param_1->nCollisionBottom = 0;
-  CGameView_InitGamingFields(param_1);
+  CGameView::CGameView_InitGamingFields(param_1);
   local_4 = 0;
   CDSUpdatedItem::CDSUpdatedItem_ctor((CDSUpdatedItem *)&param_1->ods_image);
   param_1[1].dwField_08 = ODSImage::vftable;
@@ -83353,8 +83403,8 @@ void __thiscall _Globals::CGameEntity_SetEntityType(void *this,undefined4 param_
                     // +0x68; CShot uses type 0x0F
   *(undefined4 *)((int)this + 0x6c) = param_1;
   *(undefined1 *)((int)this + 0x68) = 1;
-  if ((*(CBulanek **)((int)this + 0x84) != (CBulanek *)0x0) && (*(int *)((int)this + 0x4c) != 0)) {
-    CBulanek::CGaming_InsertEntityByDepth(*(CBulanek **)((int)this + 0x84),this);
+  if ((*(CGaming **)((int)this + 0x84) != (CGaming *)0x0) && (*(int *)((int)this + 0x4c) != 0)) {
+    CGaming::CGaming_InsertEntityByDepth(*(CGaming **)((int)this + 0x84),this);
     return;
   }
   return;
@@ -83369,14 +83419,14 @@ void __thiscall CGameView::CGameView_Update(CGameView *this,int *param_1)
   int iVar2;
   
   if ((this->bActiveInWorld == 0) || (this->pGaming_host == (CGaming *)0x0)) {
-    CBulanci::CDSView_SetRect((CBulanci *)this,param_1);
+    CDSView::CDSView_SetRect((CDSView *)this,param_1);
   }
   else {
     iVar1 = (**(code **)(this->vftable_primary + 0x74))();
-    CBulanci::CDSView_SetRect((CBulanci *)this,param_1);
+    CDSView::CDSView_SetRect((CDSView *)this,param_1);
     iVar2 = (**(code **)(this->vftable_primary + 0x74))();
     if (iVar1 != iVar2) {
-      CBulanek::CGaming_InsertEntityByDepth((CBulanek *)this->pGaming_host,this);
+      CGaming::CGaming_InsertEntityByDepth(this->pGaming_host,this);
       return;
     }
   }
@@ -83565,15 +83615,15 @@ uint __thiscall CBulanek::CBulanek_CheckSlotCollision(CBulanek *this,byte param_
   undefined4 uVar3;
   int iVar4;
   uint unaff_EBX;
-  undefined4 unaff_ESI;
+  LONG unaff_ESI;
   int iVar5;
   uint unaff_retaddr;
-  undefined4 local_140;
+  LONG local_140;
   uint local_13c;
-  undefined4 local_138;
+  LONG local_138;
   uint local_134 [8];
   uint uStack_114;
-  undefined4 uStack_110;
+  LONG LStack_110;
   uint uStack_10c;
   int aiStack_108 [66];
   
@@ -83608,7 +83658,7 @@ uint __thiscall CBulanek::CBulanek_CheckSlotCollision(CBulanek *this,byte param_
         break;
       default:
         uStack_10c = local_13c;
-        uStack_110 = local_140;
+        LStack_110 = local_140;
         uStack_114 = unaff_EBX;
         iVar4 = CGaming::CExplosion_CollectEntitiesInBlastRect
                           ((CGaming *)this->pGamingHostScratch,(int *)&stack0xfffffeb8,aiStack_108,
@@ -83621,7 +83671,7 @@ uint __thiscall CBulanek::CBulanek_CheckSlotCollision(CBulanek *this,byte param_
             local_134[5] = 0;
             local_134[6] = 0;
             (**(code **)(*(int *)aiStack_108[iVar5] + 0x70))(local_134 + 3);
-            _Globals::FUN_00433200(&stack0xfffffeb8,(int *)(local_134 + 3));
+            tagRECT::CDSRect_IntersectInPlace((tagRECT *)&stack0xfffffeb8,(int *)(local_134 + 3));
             iVar5 = iVar5 + 1;
           } while (iVar5 < iVar4);
         }
@@ -83876,7 +83926,7 @@ uint __thiscall CBulanek::CBulanek_SetFacingTrack(CBulanek *this,int track,char 
   if (this->bHitStun != 0) {
     return in_EAX & 0xffffff00;
   }
-  pvVar1 = _Globals::Scheduler_GetEventSlot(&(this->videoTrackManager).scheduler,0);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&(this->videoTrackManager).scheduler,0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
     CBulanek_SnapPositionToFacingAxis(this);
     _Globals::BeginCurrentTrackPlayback(&this->videoTrackManager);
@@ -83886,7 +83936,7 @@ uint __thiscall CBulanek::CBulanek_SetFacingTrack(CBulanek *this,int track,char 
     CBulanek_SetFacingFromByte((CBulanek *)this->pWeapon,(byte)track);
     this->bField_168 = 0;
     _Globals::SetCurrentTrack(&this->videoTrackManager,track,'\x01');
-    Scheduler_FreeSlotIfLive((CBulanek *)&this->scheduler,1);
+    CDSUpdatedItem::Scheduler_FreeSlotIfLive(&this->scheduler,1);
   }
   if (sendNet == '\0') {
     uVar2 = _Globals::CBulanek_IsHumanPlayer((int)this);
@@ -84169,8 +84219,8 @@ LAB_00419c4d:
   }
   (**(code **)(*(int *)((int)param_1 + -0x88) + 0x20))(&local_10);
   if (*(char *)((int)param_1 + 0x20) != '\0') {
-    _Globals::Scheduler_ArmSlot(param_1,0);
-    _Globals::CDSView__Hide((int *)((int)param_1 + -0x88));
+    CDSUpdatedItem::Scheduler_ArmSlot(param_1,0);
+    CDSView::CDSView__Hide((CDSView *)((int)param_1 + -0x88));
   }
   return;
 }
@@ -84262,18 +84312,14 @@ _Globals::CGaming_OnTimerCountdown(void *this,short param_1,undefined4 param_2,i
 
 
 
-void __fastcall CGaming::CGaming_UnregisterRoundHudObjects(CBulanci *param_1)
+void __fastcall CGaming::CGaming_UnregisterRoundHudObjects(CGaming *param_1)
 
 {
-  CGaming_UnregisterAndRemoveObject
-            ((CGaming *)param_1,*(undefined4 *)((int)&(param_1->game).chain.pFirstChild + 3));
-  CGaming_UnregisterAndRemoveObject
-            ((CGaming *)param_1,*(undefined4 *)((int)&(param_1->game).chain.pAuxHeap + 3));
-  CGaming_UnregisterAndRemoveObject
-            ((CGaming *)param_1,*(undefined4 *)((int)&(param_1->game).chain.dwChildCount + 3));
-  CGaming_UnregisterAndRemoveObject
-            ((CGaming *)param_1,*(undefined4 *)((int)&(param_1->game).chain.pProfileList_data + 2));
-  CBulanci::FUN_00417c80(param_1,0);
+  CGaming_UnregisterAndRemoveObject(param_1,*(undefined4 *)&param_1->field_0x324);
+  CGaming_UnregisterAndRemoveObject(param_1,*(undefined4 *)&param_1->field_0x328);
+  CGaming_UnregisterAndRemoveObject(param_1,*(undefined4 *)&param_1->field_0x32c);
+  CGaming_UnregisterAndRemoveObject(param_1,*(undefined4 *)&param_1->field_0x330);
+  CBulanci_SetAmbientAnimMode(param_1,0);
   return;
 }
 
@@ -84285,10 +84331,7 @@ _Globals::CGaming_CheckTraceAreasForEntity
 
 {
   undefined4 uVar1;
-  int local_10;
-  int local_c;
-  int local_8;
-  int local_4;
+  tagRECT local_10;
   
                     // Per-frame trace-area collider test for a player/entity. Detects enter/leave
                     // transitions for rectangles installed by script opcode DefineTraceArea and
@@ -84300,13 +84343,13 @@ _Globals::CGaming_CheckTraceAreasForEntity
     param_3[3] = -1;
   }
   if ((*(byte *)(param_1 + 6) & 4) != 0) {
-    local_10 = param_1[2];
-    local_c = param_1[3];
-    local_8 = param_1[4];
-    local_4 = param_1[5];
-    FUN_00433200(&local_10,param_3);
-    if ((((local_10 == param_1[2]) && (local_c == param_1[3])) && (local_8 == param_1[4])) &&
-       (local_4 == param_1[5])) {
+    local_10.left = param_1[2];
+    local_10.top = param_1[3];
+    local_10.right = param_1[4];
+    local_10.bottom = param_1[5];
+    tagRECT::CDSRect_IntersectInPlace(&local_10,param_3);
+    if ((((local_10.left == param_1[2]) && (local_10.top == param_1[3])) &&
+        (local_10.right == param_1[4])) && (local_10.bottom == param_1[5])) {
       CGaming_DispatchTraceAreaTransitionIfMasked(this,param_2,'\x01',param_1,param_4);
       return;
     }
@@ -84369,8 +84412,7 @@ void __fastcall CMina::CMina_UpdateTraceAreas(CMina *this)
 
 
 void __thiscall
-_Globals::CGaming_OnPlayerCollectItem
-          (void *this,void *param_1,undefined4 param_2,undefined4 param_3)
+CGaming::CGaming_OnPlayerCollectItem(CGaming *this,void *pPickup,void *pCollector,uint weaponKind)
 
 {
   int iVar1;
@@ -84380,11 +84422,11 @@ _Globals::CGaming_OnPlayerCollectItem
   char cVar5;
   undefined1 uVar6;
   
-  CGaming::CGaming_UnregisterAndRemoveObject(this,param_2);
-  CBulanek_NetSendTeamScoreOnCollect(param_1,param_3);
+  CGaming_UnregisterAndRemoveObject(this,pCollector);
+  _Globals::CBulanek_NetSendTeamScoreOnCollect(pPickup,weaponKind);
   iVar3 = 0x22;
-  if (*(char *)((int)param_1 + 0x70) == '\0') {
-    switch(param_3) {
+  if (*(char *)((int)pPickup + 0x70) == '\0') {
+    switch(weaponKind) {
     case 0:
       iVar3 = 0x20;
       break;
@@ -84401,10 +84443,10 @@ _Globals::CGaming_OnPlayerCollectItem
   uVar6 = 0;
   cVar5 = '\x01';
   pvVar4 = (void *)0x0;
-  iVar1 = ComputeSpatialAttenuationDb100((int *)((int)param_1 + 0x20));
-  piVar2 = (int *)TriggerBankSample((undefined *)0x1,0,iVar3,iVar1,pvVar4,cVar5);
-  CDSAudioPlayer_PlayAndRelease(piVar2,uVar6);
-  CBulanci::FUN_00417c80(this,0);
+  iVar1 = _Globals::ComputeSpatialAttenuationDb100((int *)((int)pPickup + 0x20));
+  piVar2 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,iVar3,iVar1,pvVar4,cVar5);
+  _Globals::CDSAudioPlayer_PlayAndRelease(piVar2,uVar6);
+  CBulanci_SetAmbientAnimMode(this,0);
   return;
 }
 
@@ -84456,7 +84498,7 @@ uint __thiscall _Globals::CGaming_TryGetPlayerCoords(void *this,byte param_1,und
 // Random safe spawn rect loop. Calls SpatialQuery(0x00418300) with param_4=1 param_5=0 — skip
 // CDSRect_Overlaps tile gate; include +0x6a entities.
 
-void __thiscall _Globals::CGaming_RespawnPlayerAtSafeLocation(void *this,CBulanek *param_1)
+void __thiscall CGaming::CGaming_RespawnPlayerAtSafeLocation(CGaming *this,CBulanek *param_1)
 
 {
   int iVar1;
@@ -84506,15 +84548,15 @@ void __thiscall _Globals::CGaming_RespawnPlayerAtSafeLocation(void *this,CBulane
     iStack_14 = iVar4 + iVar3;
     iStack_18 = iStack_20 + iVar5;
     iStack_1c = iVar4;
-    piVar2 = _Globals__SpatialQuery(this,&iStack_20,&iStack_20,&local_10,'\x01','\0');
+    piVar2 = _Globals::_Globals__SpatialQuery(this,&iStack_20,&iStack_20,&local_10,'\x01','\0');
   } while (piVar2 != (int *)0x0);
   if (param_1->bSkipSpatialWhenNonZero != 0) {
     local_10.left = param_1->nOrigin_x + (iStack_20 - local_30);
     local_10.top = param_1->nOrigin_y + (iStack_1c - local_2c);
-    CBulanek::CDSView__SetPosition(param_1,local_10.left,local_10.top);
+    CDSView::CDSView__SetPosition((CDSView *)param_1,local_10.left,local_10.top);
     return;
   }
-  CBulanek::CDSView__SetPosition(param_1,iStack_20,iStack_1c);
+  CDSView::CDSView__SetPosition((CDSView *)param_1,iStack_20,iStack_1c);
   return;
 }
 
@@ -84568,10 +84610,7 @@ CGaming::CExplosion_CollectLandminesInBlastRect(CGaming *this,int *blastRect,int
   int iVar1;
   int *extraout_EAX;
   int iVar2;
-  void *pvStack_10;
-  void *pvStack_c;
-  int iStack_8;
-  int iStack_4;
+  tagRECT tStack_10;
   
                     // R3 todo8: CGaming* __thiscall; classId 0x816 (CMina) mine blast query via
                     // same +0x31c view head.
@@ -84582,11 +84621,11 @@ CGaming::CExplosion_CollectLandminesInBlastRect(CGaming *this,int *blastRect,int
     do {
       iVar1 = (**(code **)*pCurrentView)();
       if (*(int *)(iVar1 + 8) == 0x816) {
-        pvStack_10 = (void *)pCurrentView[8];
-        pvStack_c = (void *)pCurrentView[9];
-        iStack_8 = pCurrentView[10];
-        iStack_4 = pCurrentView[0xb];
-        CPoemScroller::rect_Intersect((CPoemScroller *)&pvStack_10,(tagRECT *)blastRect);
+        tStack_10.left = pCurrentView[8];
+        tStack_10.top = pCurrentView[9];
+        tStack_10.right = pCurrentView[10];
+        tStack_10.bottom = pCurrentView[0xb];
+        tagRECT::CDSRect_Intersect(&tStack_10,(tagRECT *)blastRect);
         if ((*extraout_EAX < extraout_EAX[2]) && (extraout_EAX[1] < extraout_EAX[3])) {
           mineBuf[iVar2] = (int)pCurrentView;
           iVar2 = iVar2 + 1;
@@ -84602,45 +84641,37 @@ CGaming::CExplosion_CollectLandminesInBlastRect(CGaming *this,int *blastRect,int
 
 
 
-void __thiscall CBulanek::AddEntity(CBulanek *this,void *entity,char register_flag)
+void __thiscall CGaming::CGaming_AddEntity(CGaming *this,void *entity,char register_flag)
 
 {
   char cVar1;
-  int iVar2;
-  undefined4 uVar3;
   
   if (register_flag != -1) {
-    CBulanek_SetCloneFlag(this,register_flag);
+    CGaming_SetEntityRegisterMode(this,register_flag);
   }
-                    // AddEntity: MOV [entity+0x84], owner CBulanek* (CAnim::pGaming_host /
-                    // gaming_host). Does not write overlap_entity @+0x64 (CDSChained::dwField_64).
-                    // CTeleportPoint_OnEvent consumer @0x0041feff reads +0x64 only.
-  *(CBulanek **)((int)entity + 0x84) = this;
-  cVar1 = *(char *)((int)&this[2].dwPad_08 + 1);
+                    // entity+0x84 = CGaming* pGaming_host (R6 task 6)
+  *(CGaming **)((int)entity + 0x84) = this;
+  cVar1 = this->field_0x341;
   if (cVar1 == '\0') {
-    _Globals::CDSView__AddChild(this[1].pAiTrackHolders[2],entity,this[2].vftable_IDSReferenced);
+    CDSView::CDSView__AddChild((CDSView *)this->pEntityViewRoot,entity,this->pDepthInsertHead);
   }
   else {
     if (cVar1 == '\x01') {
-      uVar3._0_2_ = this[2].wViewFlags;
-      uVar3._2_2_ = this[2].wPad_16;
-      _Globals::CDSView__AddChild(this[1].pAiTrackHolders[2],entity,uVar3);
-      if ((this[2].vftable_IDSReferenced == (undefined *)0x0) ||
-         (this[2].vftable_IDSReferenced[0x68] == '\0')) {
-        this[2].vftable_IDSReferenced = entity;
+      CDSView::CDSView__AddChild((CDSView *)this->pEntityViewRoot,entity,this->pDepthInsertTail);
+      if ((this->pDepthInsertHead == (CDSView *)0x0) ||
+         ((this->pDepthInsertHead->win).bModalFlag == 0)) {
+        this->pDepthInsertHead = entity;
       }
       CGaming_InsertEntityByDepth(this,entity);
       return;
     }
     if (cVar1 == '\x02') {
-      _Globals::CDSView__AddChild(this[1].pAiTrackHolders[2],entity,0);
-      iVar2._0_2_ = this[2].wViewFlags;
-      iVar2._2_2_ = this[2].wPad_16;
-      if (iVar2 == 0) {
-        *(void **)&this[2].wViewFlags = entity;
+      CDSView::CDSView__AddChild((CDSView *)this->pEntityViewRoot,entity,0);
+      if (this->pDepthInsertTail == (CDSView *)0x0) {
+        this->pDepthInsertTail = entity;
       }
-      if (this[2].vftable_IDSReferenced == (undefined *)0x0) {
-        this[2].vftable_IDSReferenced = entity;
+      if (this->pDepthInsertHead == (CDSView *)0x0) {
+        this->pDepthInsertHead = entity;
         return;
       }
     }
@@ -84683,7 +84714,7 @@ void * __cdecl CLevelScript::CLevelScriptOpExt_InsertView(CDSScript *param_1)
   void *entity;
   
   CDSScript::ReadSubExpr(param_1);
-  CBulanek::AddEntity((CBulanek *)param_1[1].nOpcodeCount,entity,-1);
+  CGaming::CGaming_AddEntity((CGaming *)param_1[1].nOpcodeCount,entity,-1);
   return entity;
 }
 
@@ -84929,7 +84960,7 @@ CGameView * _Globals::CreateObject(void)
   pCVar1 = (CGameView *)OperatorNewWithBadAlloc(0x19c);
   local_4 = 0;
   if (pCVar1 != (CGameView *)0x0) {
-    pCVar1 = CGameView::FUN_00418d70(pCVar1);
+    pCVar1 = CBulanek_ShellCtor(pCVar1);
     ExceptionList = local_c;
     return pCVar1;
   }
@@ -85416,7 +85447,7 @@ CGameView::CGameView_OnEvent(CGameView *this,short eventId,undefined4 param_2,un
 
 
 
-void __cdecl _Globals::FUN_0041ad80(void *param_1,undefined4 param_2,undefined4 param_3)
+void __cdecl _Globals::Scheduler_EnqueueEvent(void *param_1,undefined4 param_2,undefined4 param_3)
 
 {
   undefined4 *puVar1;
@@ -85493,33 +85524,33 @@ void __thiscall CBulanek::CBulanek_SchedulerTick(CBulanek *this,void *param_1)
                     // CBulanek_SchedulerTick: player slots 0..5 via &this->scheduler (+0x88);
                     // track-mgr inner scheduler @ videoTrackManager+4; weapon scheduler @
                     // pWeapon+0xC
-  pvVar1 = _Globals::Scheduler_GetEventSlot(&(this->videoTrackManager).scheduler,0);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&(this->videoTrackManager).scheduler,0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-    _Globals::FUN_0041ad80(param_1,0,&this->videoTrackManager);
+    _Globals::Scheduler_EnqueueEvent(param_1,0,&this->videoTrackManager);
   }
   uVar2 = 0;
   this_00 = &this->scheduler;
   do {
-    pvVar1 = _Globals::Scheduler_GetEventSlot(this_00,uVar2);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(this_00,uVar2);
     if (pvVar1 != (void *)0x0) {
-      pvVar1 = _Globals::Scheduler_GetEventSlot(this_00,uVar2);
+      pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(this_00,uVar2);
       if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-        pvVar1 = _Globals::Scheduler_GetEventSlot(this_00,uVar2);
-        _Globals::FUN_0041ad80(param_1,1,pvVar1);
+        pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(this_00,uVar2);
+        _Globals::Scheduler_EnqueueEvent(param_1,1,pvVar1);
       }
     }
     uVar2 = uVar2 + 1;
   } while ((int)uVar2 < 6);
-  pvVar1 = _Globals::Scheduler_GetEventSlot(&(this->pWeapon->trackManager).scheduler,0);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&(this->pWeapon->trackManager).scheduler,0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-    _Globals::FUN_0041ad80(param_1,0,&this->pWeapon->trackManager);
+    _Globals::Scheduler_EnqueueEvent(param_1,0,&this->pWeapon->trackManager);
   }
   return;
 }
 
 
 
-undefined4 __fastcall _Globals::FUN_0041af70(CBulanek *param_1)
+undefined4 __fastcall _Globals::CBulanek_StepMovementAndCollision(CBulanek *param_1)
 
 {
   CWeapon *pCVar1;
@@ -85529,10 +85560,7 @@ undefined4 __fastcall _Globals::FUN_0041af70(CBulanek *param_1)
   int iVar5;
   uint uVar6;
   int iVar7;
-  uint local_40;
-  uint local_3c;
-  undefined *local_38;
-  uint local_34;
+  tagRECT local_40;
   int local_30;
   int local_2c;
   int local_28;
@@ -85548,8 +85576,8 @@ undefined4 __fastcall _Globals::FUN_0041af70(CBulanek *param_1)
                     // CBulanek_ApplyPickupEffect, CWeapon::Update, FUN_0041b180 (IDSEventHandler
                     // slot).
   pCVar1 = param_1->pWeapon;
-  local_38 = pCVar1->pTrackHolder->vftable_IDSChained;
-  local_34 = pCVar1->pTrackHolder->dwPad_08;
+  local_40.right = (LONG)pCVar1->pTrackHolder->vftable_IDSChained;
+  local_40.bottom = pCVar1->pTrackHolder->dwPad_08;
   local_2c = pCVar1->dwParamB - *(int *)(param_1->pReserved_preAmmo + 4);
   local_30 = pCVar1->dwParamA - *(int *)param_1->pReserved_preAmmo;
   local_24 = local_2c + param_1->pActiveAnim->dwChainField_08;
@@ -85560,23 +85588,23 @@ undefined4 __fastcall _Globals::FUN_0041af70(CBulanek *param_1)
   local_10[1] = 0;
   local_10[2] = 0;
   local_10[3] = 0;
-  local_40 = 0;
-  local_3c = 0;
-  local_18 = local_38;
-  local_14 = local_34;
-  FUN_00433200(&local_40,&local_30);
-  iVar7 = local_30 - local_40;
-  *(uint *)(param_1->pReserved_preAmmo + 0x10) = -local_40;
-  *(uint *)(param_1->pReserved_preAmmo + 0x14) = -local_3c;
-  iVar5 = local_2c - local_3c;
+  local_40.left = 0;
+  local_40.top = 0;
+  local_18 = (undefined *)local_40.right;
+  local_14 = local_40.bottom;
+  tagRECT::CDSRect_IntersectInPlace(&local_40,&local_30);
+  iVar7 = local_30 - local_40.left;
+  *(LONG *)(param_1->pReserved_preAmmo + 0x10) = -local_40.left;
+  *(LONG *)(param_1->pReserved_preAmmo + 0x14) = -local_40.top;
+  iVar5 = local_2c - local_40.top;
   uVar2 = (*(int *)(param_1->pPad_postWalkEmbed + 4) + *(int *)(param_1->pReserved_preAmmo + 0xc) +
           param_1->nOrigin_y) - iVar5;
   uVar6 = (param_1->nOrigin_x - iVar7) + *(int *)(param_1->pReserved_preAmmo + 8) +
           *(int *)param_1->pPad_postWalkEmbed;
-  local_34 = (local_34 - local_3c) + uVar2;
-  local_38 = local_38 + (uVar6 - local_40);
-  local_40 = uVar6;
-  local_3c = uVar2;
+  local_40.bottom = (local_40.bottom - local_40.top) + uVar2;
+  local_40.right = local_40.right + (uVar6 - local_40.left);
+  local_40.left = uVar6;
+  local_40.top = uVar2;
   CBulanek::CBulanek_CopyCollisionRectLocal(param_1,local_10);
   *(int *)(param_1->pReserved_preAmmo + 0xc) = iVar5;
   *(int *)(param_1->pReserved_preAmmo + 8) = iVar7;
@@ -85592,18 +85620,18 @@ undefined4 __fastcall _Globals::FUN_0041af70(CBulanek *param_1)
   CBulanek::CBulanek_OffsetCollisionRectByFacing
             (param_1,&param_1->nOrigin_x,local_10,param_1->nInitialTrack);
   param_1->nInitialTrack = (param_1->videoTrackManager).nCurrentTrackIdx;
-  pvVar3 = Scheduler_GetEventSlot(&(param_1->videoTrackManager).scheduler,0);
+  pvVar3 = CDSUpdatedItem::Scheduler_GetEventSlot(&(param_1->videoTrackManager).scheduler,0);
   if ((*(byte *)((int)pvVar3 + 8) & 1) != 0) {
     if (param_1->nInitialTrack < 2) {
-      param_1->dwFacingAxisExtent = local_3c;
+      param_1->dwFacingAxisExtent = local_40.top;
     }
     else {
-      param_1->dwFacingAxisExtent = local_40;
+      param_1->dwFacingAxisExtent = local_40.left;
     }
   }
   CBulanek::CBulanek_OffsetCollisionRectByFacing
-            (param_1,(int *)&local_40,local_20,param_1->nInitialTrack);
-  CBulanek_ClampMoveRectByCollision(param_1,&param_1->nOrigin_x,(int *)&local_40,local_20,local_10);
+            (param_1,&local_40.left,local_20,param_1->nInitialTrack);
+  CBulanek_ClampMoveRectByCollision(param_1,&param_1->nOrigin_x,&local_40.left,local_20,local_10);
   uVar4 = (**(code **)(param_1->vftable_primary + 0x20))(&local_40);
   if ((char)uVar4 == '\0') {
     uVar4 = (**(code **)(param_1->vftable_primary + 0x24))(0,0);
@@ -85616,7 +85644,8 @@ undefined4 __fastcall _Globals::FUN_0041af70(CBulanek *param_1)
 void __fastcall CBulanek::CWeapon_OnSchedulerEvent(int param_1)
 
 {
-  _Globals::FUN_0041af70((CBulanek *)(param_1 + -0xa0));
+                    // MI adjustor: ECX -= 0xA0 -> CBulanek*; delegates to movement step (R6 task 3)
+  _Globals::CBulanek_StepMovementAndCollision((CBulanek *)(param_1 + -0xa0));
   return;
 }
 
@@ -85625,28 +85654,28 @@ void __fastcall CBulanek::CWeapon_OnSchedulerEvent(int param_1)
 // UNCERTAIN: CDSView slot30 — scheduler event hook via FUN_0041ad80; shared by CAnim entity
 // widgets
 
-void __thiscall CAnim::FUN_0041b190(CAnim *this,void *param_1)
+void __thiscall CAnim::CAnim_OnSchedulerEnqueueSlot0(CAnim *this,void *param_1)
 
 {
   void *pvVar1;
   
-  pvVar1 = _Globals::Scheduler_GetEventSlot(&(this->track_manager).scheduler,0);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&(this->track_manager).scheduler,0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-    _Globals::FUN_0041ad80(param_1,0,&this->track_manager);
+    _Globals::Scheduler_EnqueueEvent(param_1,0,&this->track_manager);
   }
   return;
 }
 
 
 
-void __thiscall CAnim::thunk_FUN_0041b190(CAnim *this,void *param_1)
+void __thiscall CAnim::CAnim_OnSchedulerEnqueueSlot0(CAnim *this,void *param_1)
 
 {
   void *pvVar1;
   
-  pvVar1 = _Globals::Scheduler_GetEventSlot(&(this->track_manager).scheduler,0);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&(this->track_manager).scheduler,0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-    _Globals::FUN_0041ad80(param_1,0,&this->track_manager);
+    _Globals::Scheduler_EnqueueEvent(param_1,0,&this->track_manager);
   }
   return;
 }
@@ -85660,10 +85689,10 @@ void __thiscall CShot::CShot_SchedulerTick(CShot *this,void *param_1)
   
                     // Scheduler tick on embedded CDSUpdatedItem at this+0x88
                     // (combat_projectiles.md); arms FUN_0041ad80 when event slot bit0 clear.
-  pvVar1 = _Globals::Scheduler_GetEventSlot(&this->updatedItem,0);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&this->updatedItem,0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-    pvVar1 = _Globals::Scheduler_GetEventSlot(&this->updatedItem,0);
-    _Globals::FUN_0041ad80(param_1,1,pvVar1);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&this->updatedItem,0);
+    _Globals::Scheduler_EnqueueEvent(param_1,1,pvVar1);
   }
   return;
 }
@@ -85675,11 +85704,11 @@ void __thiscall CMina::CMina_OnSchedulerHook(CMina *this,void *param_1)
 {
   void *pvVar1;
   
-  CAnim::FUN_0041b190(&this->animBase,param_1);
-  pvVar1 = _Globals::Scheduler_GetEventSlot(&this->updatedItem,0);
+  CAnim::CAnim_OnSchedulerEnqueueSlot0(&this->animBase,param_1);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&this->updatedItem,0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-    pvVar1 = _Globals::Scheduler_GetEventSlot(&this->updatedItem,0);
-    _Globals::FUN_0041ad80(param_1,1,pvVar1);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&this->updatedItem,0);
+    _Globals::Scheduler_EnqueueEvent(param_1,1,pvVar1);
   }
   return;
 }
@@ -85701,10 +85730,7 @@ CExplosion::CExplosion_DamageAtPoint
   int *extraout_EAX;
   uint uVar3;
   int iVar4;
-  void *pvStack_20;
-  void *pvStack_1c;
-  LONG LStack_18;
-  LONG LStack_14;
+  tagRECT tStack_20;
   tagRECT local_10;
   
                     // DamageAtPoint: CGaming* from this+0x84; ownerSlot byte @ +0xF0 to
@@ -85726,17 +85752,17 @@ CExplosion::CExplosion_DamageAtPoint
       in_EAX = (int *)CONCAT31((int3)((uint)entityBuf >> 8),bVar1);
     } while (bVar1 == 0xff);
     (**(code **)(*piVar2 + 0x70))(&local_10);
-    pvStack_1c = (void *)probeRect->top;
-    pvStack_20 = (void *)probeRect->left;
-    LStack_18 = probeRect->right;
-    LStack_14 = probeRect->bottom;
-    CPoemScroller::rect_Intersect((CPoemScroller *)&pvStack_20,&local_10);
+    tStack_20.top = probeRect->top;
+    tStack_20.left = probeRect->left;
+    tStack_20.right = probeRect->right;
+    tStack_20.bottom = probeRect->bottom;
+    tagRECT::CDSRect_Intersect(&tStack_20,&local_10);
     in_EAX = extraout_EAX;
   } while ((extraout_EAX[2] <= *extraout_EAX) || (extraout_EAX[3] <= extraout_EAX[1]));
   this_00 = this->pGaming;
-  pvStack_20 = (void *)0x0;
-  pvStack_1c = (void *)0x0;
-  uVar3 = _Globals::CGaming_TryGetPlayerCoords(this_00,bVar1,&pvStack_20);
+  tStack_20.left = 0;
+  tStack_20.top = 0;
+  uVar3 = _Globals::CGaming_TryGetPlayerCoords(this_00,bVar1,&tStack_20.left);
   if ((char)uVar3 != '\0') {
     if (rayStep != '\0') {
       octantFlags = octantFlags | 0x80;
@@ -85748,7 +85774,7 @@ LAB_0041b2e2:
     }
     while( true ) {
       _Globals::CGaming_OnSlotPlacementEvent
-                (this_00,bVar1,this->bOwnerSlot,octantFlags,(int *)&pvStack_20,'\x01');
+                (this_00,bVar1,this->bOwnerSlot,octantFlags,&tStack_20.left,'\x01');
       uVar3 = CGaming::CGaming_GetObjectAtSlotSafe(this_00,bVar1);
       iVar4 = iVar4 + 1;
       entityBuf[entityCount] = uVar3;
@@ -85766,8 +85792,8 @@ LAB_0041b2e2:
 void __thiscall CBulanci::CBulanci_RegisterPlayerAndRespawn(CBulanci *this,CBulanek *param_1)
 
 {
-  CBulanek::AddEntity((CBulanek *)this,param_1,'\x01');
-  _Globals::CGaming_RespawnPlayerAtSafeLocation(this,param_1);
+  CGaming::CGaming_AddEntity((CGaming *)this,param_1,'\x01');
+  CGaming::CGaming_RespawnPlayerAtSafeLocation((CGaming *)this,param_1);
   return;
 }
 
@@ -85888,23 +85914,23 @@ void __fastcall CGaming::CGaming_TickAmbientAnimations(CBulanci *param_1)
   case 0:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
               (param_1,*(CBulanek **)((int)&(param_1->game).chain.pFirstChild + 3));
-    CBulanci::FUN_00417c80(param_1,1);
+    CBulanci_SetAmbientAnimMode(param_1,1);
     return;
   case 1:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
               (param_1,*(CBulanek **)((int)&(param_1->game).chain.pAuxHeap + 3));
-    CBulanci::FUN_00417c80(param_1,1);
+    CBulanci_SetAmbientAnimMode(param_1,1);
     return;
   case 2:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
               (param_1,*(CBulanek **)((int)&(param_1->game).chain.dwChildCount + 3));
-    CBulanci::FUN_00417c80(param_1,1);
+    CBulanci_SetAmbientAnimMode(param_1,1);
     return;
   case 3:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
               (param_1,*(CBulanek **)((int)&(param_1->game).chain.pProfileList_data + 2));
   }
-  CBulanci::FUN_00417c80(param_1,1);
+  CBulanci_SetAmbientAnimMode(param_1,1);
   return;
 }
 
@@ -85940,7 +85966,7 @@ void __thiscall CGaming::CGaming_RetestTraceAreasForEntity(CGaming *this,int *pa
 
 
 
-void __thiscall CGaming::FUN_0041b620(CGaming *this,void *param_1)
+void __thiscall CGaming::CGaming_SeedMatchSchedulerEvents(CGaming *this,void *param_1)
 
 {
   void *pvVar1;
@@ -85949,24 +85975,24 @@ void __thiscall CGaming::FUN_0041b620(CGaming *this,void *param_1)
                     // UNCERTAIN: CGaming scheduler queue seed — FUN_0041ad80 on slots 0/1/2 from
                     // game flags at *(this+0x84)+0xd8/0x36; sole caller FUN_0041c290.
   if (this->pOwnerGame->bTotalSlots == 1) {
-    pvVar1 = _Globals::Scheduler_GetEventSlot(&this->field_0x68,0);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)&this->field_0x68,0);
     if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-      pvVar1 = _Globals::Scheduler_GetEventSlot(&this->field_0x68,0);
-      _Globals::FUN_0041ad80(param_1,1,pvVar1);
+      pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)&this->field_0x68,0);
+      _Globals::Scheduler_EnqueueEvent(param_1,1,pvVar1);
     }
   }
   if (((this->pOwnerGame->chain).field_0x5 == '\0') && (2 < (int)this->dwWeaponSpawnerMode)) {
-    pvVar1 = _Globals::Scheduler_GetEventSlot(&this->field_0x68,1);
-    _Globals::FUN_0041ad80(param_1,1,pvVar1);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)&this->field_0x68,1);
+    _Globals::Scheduler_EnqueueEvent(param_1,1,pvVar1);
   }
   if ((this->pOwnerGame->chain).field_0x5 == '\0') {
     this_00 = &this->field_0x68;
-    pvVar1 = _Globals::Scheduler_GetEventSlot(this_00,2);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)this_00,2);
     if ((pvVar1 != (void *)0x0) &&
-       (pvVar1 = _Globals::Scheduler_GetEventSlot(this_00,2), (*(byte *)((int)pvVar1 + 8) & 1) == 0)
-       ) {
-      pvVar1 = _Globals::Scheduler_GetEventSlot(this_00,2);
-      _Globals::FUN_0041ad80(param_1,1,pvVar1);
+       (pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)this_00,2),
+       (*(byte *)((int)pvVar1 + 8) & 1) == 0)) {
+      pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)this_00,2);
+      _Globals::Scheduler_EnqueueEvent(param_1,1,pvVar1);
     }
   }
   return;
@@ -85974,7 +86000,7 @@ void __thiscall CGaming::FUN_0041b620(CGaming *this,void *param_1)
 
 
 
-void __thiscall CBulanci::CGaming_LoadBackgroundMusic(CBulanci *this,CBulanci *param_2)
+void __thiscall CGaming::CGaming_LoadBackgroundMusic(CGaming *this,CBulanci *param_2)
 
 {
   CDSFileStream *pCVar1;
@@ -85990,7 +86016,7 @@ void __thiscall CBulanci::CGaming_LoadBackgroundMusic(CBulanci *this,CBulanci *p
   local_10 = ExceptionList;
   ExceptionList = &local_10;
   local_8 = 0;
-  pCVar1 = CBulanci_CreateCDSFileStream(param_2,(void *)0x1);
+  pCVar1 = CBulanci::CBulanci_CreateCDSFileStream(param_2,(void *)0x1);
   if (pCVar1 == (CDSFileStream *)0x0) {
     param_2 = (CBulanci *)0x0;
   }
@@ -86014,11 +86040,10 @@ void __thiscall CBulanci::CGaming_LoadBackgroundMusic(CBulanci *this,CBulanci *p
   }
   local_8 = CONCAT31(local_8._1_3_,2);
   (**(code **)(piVar4[0xc] + 0x10))(param_2);
-  piVar2 = *(int **)&(this->game).bTotalSlots;
-  if (piVar2 != (int *)0x0) {
-    (**(code **)(*piVar2 + 8))();
+  if (*(int **)&this->field_0x35c != (int *)0x0) {
+    (**(code **)(**(int **)&this->field_0x35c + 8))();
   }
-  *(int **)&(this->game).bTotalSlots = piVar4 + 1;
+  *(int **)&this->field_0x35c = piVar4 + 1;
   _Globals::CDSObject_AddRef(piVar4 + 1);
   pCVar3 = (CDSAudioPlayer *)_Globals::OperatorNewWithBadAlloc(0x58);
   local_8._0_1_ = 3;
@@ -86029,14 +86054,13 @@ void __thiscall CBulanci::CGaming_LoadBackgroundMusic(CBulanci *this,CBulanci *p
     CDSAudioPlayer::CDSAudioPlayer_ctor(pCVar3);
     pCVar3 = extraout_EAX;
   }
-  piVar2 = *(int **)((this->game).chain.pPad_89 + 0x16);
   local_8._0_1_ = 2;
-  if (piVar2 != (int *)0x0) {
-    (**(code **)(*piVar2 + 8))();
+  if (this->pLevelBgmPlayer != (CDSAudioPlayer *)0x0) {
+    (**(code **)((int)this->pLevelBgmPlayer->pVftable_primary + 8))();
   }
-  *(CDSAudioPlayer **)((this->game).chain.pPad_89 + 0x16) = pCVar3;
+  this->pLevelBgmPlayer = pCVar3;
   CDSAudioPlayer::CDSAudioPlayer_Init
-            (pCVar3,*(IDSAudioSource **)&(this->game).bTotalSlots,0,(void *)0x0,(undefined *)0x2);
+            (pCVar3,*(IDSAudioSource **)&this->field_0x35c,0,(void *)0x0,(undefined *)0x2);
   local_8._0_1_ = 1;
   (**(code **)(*piVar4 + 8))();
   local_8 = (uint)local_8._1_3_ << 8;
@@ -86056,8 +86080,8 @@ void CBulanci::Catch_0041b821(void)
   int unaff_EBP;
   
   iVar1 = *(int *)(unaff_EBP + -0x14);
-  _Globals::FUN_0040b540((int *)(iVar1 + 0x35c));
-  _Globals::FUN_0040b540((int *)(iVar1 + 0x354));
+  ReleaseAndClearPointer((int *)(iVar1 + 0x35c));
+  ReleaseAndClearPointer((int *)(iVar1 + 0x354));
                     // WARNING: Subroutine does not return
   Runtime::MSVCRT::__CxxThrowException_8(0,(byte *)0x0);
 }
@@ -86146,7 +86170,7 @@ void __fastcall CGaming::CGaming_dtor(CGaming *param_1)
 
 
 
-void __thiscall _Globals::CGaming_SetMusicAndSoundBank(void *this,undefined4 param_1,uint param_2)
+void __thiscall CGaming::CGaming_SetMusicAndSoundBank(CGaming *this,uint param_1,uint param_2)
 
 {
   undefined4 uVar1;
@@ -86154,20 +86178,20 @@ void __thiscall _Globals::CGaming_SetMusicAndSoundBank(void *this,undefined4 par
                     // Level script SetMusic(mp3Res, bankIndexRes): bankIndex 0x10000/65536 (8-bit),
                     // 0x10001/65537 (bedtime), 0x10002/65538 (steel works), 0x10003/65539 (default
                     // SFX)
-  *(undefined4 *)((int)this + 0x350) = param_1;
+  this->dwMusicResourceId = param_1;
   if (param_2 != 0) {
     uVar1 = CMenu::CMenuGetResourceById((CMenu *)((int)g_pApp + 0x284),param_2);
-    if (*(int **)((int)this + 0x80) != (int *)0x0) {
-      (**(code **)(**(int **)((int)this + 0x80) + 8))();
+    if (*(int **)&this->field_0x80 != (int *)0x0) {
+      (**(code **)(**(int **)&this->field_0x80 + 8))();
     }
-    *(undefined4 *)((int)this + 0x80) = uVar1;
+    *(undefined4 *)&this->field_0x80 = uVar1;
   }
   return;
 }
 
 
 
-void __thiscall CGaming::FUN_0041bab0(CGaming *this,void *param_1)
+void __thiscall CGaming::CGaming_EnqueuePreMatchSchedulerSlots(CGaming *this,void *param_1)
 
 {
   void *pvVar1;
@@ -86180,9 +86204,10 @@ void __thiscall CGaming::FUN_0041bab0(CGaming *this,void *param_1)
   pvVar2 = this[1].pEntitySlots[7];
   while (pvVar2 != (void *)0x0) {
     pvVar2 = (void *)((int)pvVar2 + -1);
-    pvVar1 = _Globals::Scheduler_GetEventSlot((CDSApp *)(this[1].pEntitySlots + 3),(uint)pvVar2);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot
+                       ((CDSUpdatedItem *)(this[1].pEntitySlots + 3),(uint)pvVar2);
     if ((pvVar1 != (void *)0x0) && ((*(byte *)((int)pvVar1 + 8) & 1) == 0)) {
-      _Globals::FUN_0041ad80(param_1,1,pvVar1);
+      _Globals::Scheduler_EnqueueEvent(param_1,1,pvVar1);
     }
   }
   return;
@@ -86198,7 +86223,7 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_SetMusic(int param_1)
   
   uVar1 = CDSScript::ReadI32(param_1);
   uVar2 = CDSScript::ReadI32(param_1);
-  _Globals::CGaming_SetMusicAndSoundBank(*(void **)(param_1 + 0x458),uVar1,uVar2);
+  CGaming::CGaming_SetMusicAndSoundBank(*(CGaming **)(param_1 + 0x458),uVar1,uVar2);
   return 0;
 }
 
@@ -86471,7 +86496,7 @@ undefined4 * _Globals::CreateObject(void)
 // 
 // Library: Visual Studio 2005 Release
 
-undefined4 _Globals::CreateObject(void)
+undefined4 _Globals::CGaming_CreateObject(void)
 
 {
   uint uVar1;
@@ -86532,7 +86557,7 @@ void __fastcall CWeapon::Update(CBulanek *param_1)
       bVar1 = param_1->bField_168;
       *(CBulanek **)(param_1->pPad_postWalkEmbed + 8) = param_1->pWeapon->pTrackHolder;
       if (bVar1 == 0) {
-        _Globals::FUN_0041af70(param_1);
+        _Globals::CBulanek_StepMovementAndCollision(param_1);
         return;
       }
     }
@@ -86542,10 +86567,10 @@ void __fastcall CWeapon::Update(CBulanek *param_1)
 
 
 
-void __fastcall CWeapon::CWeapon_HideAssociatedView(int param_1)
+void __thiscall CWeapon::CWeapon_HideAssociatedView(CWeapon *this)
 
 {
-  if (*(int *)(param_1 + 0x50) != 0) {
+  if (this->pTrackHolder != (CBulanek *)0x0) {
     Update();
   }
   return;
@@ -86701,7 +86726,7 @@ void __thiscall CGaming::CGaming_OnResumeOrStartGame(CGaming *this,char param_1)
       if (this->pOwnerGame->bTotalSlots == 1) {
         delayMs = 10000;
       }
-      _Globals::Scheduler_RegisterEventSlot(&this->field_0x68,1,delayMs,6);
+      CDSUpdatedItem::Scheduler_RegisterEventSlot((CDSUpdatedItem *)&this->field_0x68,1,delayMs,6);
     }
     pCVar1 = this->pOwnerGame;
     if ((pCVar1->chain).field_0x5 == '\0') {
@@ -86710,7 +86735,7 @@ void __thiscall CGaming::CGaming_OnResumeOrStartGame(CGaming *this,char param_1)
                 (&stack0xfffffff0,(undefined4 *)((pCVar1->chain).pPad_89 + 0x12));
       piVar2 = (int *)_Globals::CGame_FindResourceByName(pCVar1,iVar3);
       if (*piVar2 == 0x10144) {
-        _Globals::Scheduler_RegisterEventSlot(&this->field_0x68,2,7000,6);
+        CDSUpdatedItem::Scheduler_RegisterEventSlot((CDSUpdatedItem *)&this->field_0x68,2,7000,6);
       }
     }
   }
@@ -86767,20 +86792,20 @@ void __fastcall CGaming::CGaming_RunPreMatchModal(CGaming *param_1)
   local_130 = 0;
   local_12c = 8;
   local_c = 0;
-  FUN_0041b620(param_1,&local_138);
+  CGaming_SeedMatchSchedulerEvents(param_1,&local_138);
   for (piVar3 = _Globals::CDSChained_GetFirstChildView
                           ((CDSChain *)&param_1->pEntityViewRoot->pVftable_CDSChain_IDSReferenced);
       (piVar3 != (int *)0x0 && ((**(code **)(*piVar3 + 0x78))(&local_138), piVar3[0x13] != 0));
       piVar3 = _Globals::CDSChained_GetNextSiblingView(piVar3)) {
   }
   CGaming_RegisterPreMatchSchedulerHooks((CGaming *)param_1->pOwnerGame,&local_138);
-  FUN_0041bab0((CGaming *)param_1->pLevelScript,&local_138);
+  CGaming_EnqueuePreMatchSchedulerSlots((CGaming *)param_1->pLevelScript,&local_138);
   iVar4 = DAT_004b0214;
   while (dStack_128 = g_dwElapsedMs, iVar6 = local_130, iVar4 != 0) {
     iVar6 = *(int *)(DAT_004b020c + -4 + iVar4 * 4);
     iVar4 = iVar4 + -1;
     if (*(char *)(iVar6 + 0x22) != '\0') {
-      _Globals::FUN_0041ad80(&local_138,2,iVar6);
+      _Globals::Scheduler_EnqueueEvent(&local_138,2,iVar6);
     }
   }
   while (g_dwElapsedMs = dStack_128, iVar6 != 0) {
@@ -86792,7 +86817,8 @@ void __fastcall CGaming::CGaming_RunPreMatchModal(CGaming *param_1)
       dStack_128 = g_dwElapsedMs;
     }
     else if (iVar4 == 1) {
-      _Globals::Scheduler_ArmSlot(*(void **)(piVar3[1] + 0x10),*(uint *)(piVar3[1] + 0x14));
+      CDSUpdatedItem::Scheduler_ArmSlot
+                (*(CDSUpdatedItem **)(piVar3[1] + 0x10),*(uint *)(piVar3[1] + 0x14));
       dStack_128 = g_dwElapsedMs;
     }
     else if (iVar4 == 2) {
@@ -86804,12 +86830,12 @@ void __fastcall CGaming::CGaming_RunPreMatchModal(CGaming *param_1)
     }
   }
   *(undefined4 *)((int)g_pApp + 0x4ac) = 1;
-  _Globals::FUN_0042c700();
+  _Globals::CDSApp_RefreshInputChainHitTest();
   CDSAudioPlayer::CDSAudioPlayer_Play(param_1->pIntroMusicPlayer,1);
-  _Globals::CDSView_DoModal(param_1->pPauseDlg,(void *)0x0);
+  CDSView::CDSView_DoModal((CDSView *)param_1->pPauseDlg,(void *)0x0);
   CDSAudioPlayer::CDSAudioPlayer_Stop(param_1->pIntroMusicPlayer,1);
   *(undefined4 *)((int)g_pApp + 0x4ac) = 0;
-  _Globals::FUN_0042c700();
+  _Globals::CDSApp_RefreshInputChainHitTest();
   iVar4 = local_130;
   while (iVar4 != 0) {
     piVar3 = *(int **)((int)local_138.pSlots + iVar4 * 4 + -4);
@@ -86821,8 +86847,8 @@ void __fastcall CGaming::CGaming_RunPreMatchModal(CGaming *param_1)
     else if (iVar6 == 1) {
                     // snapshot first 0x40 dwords of g_pApp->keyLatchByVk (+0x100) before pre-match
                     // modal
-      _Globals::Scheduler_AckSlot
-                (*(void **)(piVar3[1] + 0x10),*(uint *)(piVar3[1] + 0x14),dStack_128);
+      CDSUpdatedItem::Scheduler_AckSlot
+                (*(CDSUpdatedItem **)(piVar3[1] + 0x10),*(uint *)(piVar3[1] + 0x14),dStack_128);
     }
     else if (iVar6 == 2) {
       piVar2 = (int *)piVar3[1];
@@ -86978,7 +87004,7 @@ void __fastcall CBulanek::CBulanek_ResolveAndBindAnimTrack(CDeath *corpseAnim,vo
   uVar1 = (uint)*(byte *)(corpseAnim->pHost + 0x123);
   puVar3 = CDSImage::GetPaletteBuffer(corpseAnim->pOds_drawable);
   _Globals::CGame_BuildTeamPaletteLut(puVar3,uVar1);
-  FUN_004166d0((CBulanek *)corpseAnim->pHost,(int *)&stack0xffffffd4);
+  CBulanek_GetAnimAnchorPos((void *)corpseAnim->pHost,(int *)&stack0xffffffd4);
                     // Corpse bind: writes net band +0x74..+0x80 (dwM_netStateWord0/1 + nSrc_x/y);
                     // sets bView_state_69 @+0x69. Tombstone bind skips this band.
   corpseAnim->nDraw_pos_y =
@@ -87043,7 +87069,7 @@ void __fastcall CBulanek::CBulanek_BindDeathTombstoneAnim(CDeath2 *tombstone)
   uVar1 = (uint)tombstone->pHost->bTeamColor;
   puVar2 = CDSImage::GetPaletteBuffer(tombstone->pOds_drawable);
   _Globals::CGame_BuildTeamPaletteLut(puVar2,uVar1);
-  FUN_004166d0(tombstone->pHost,(int *)&stack0xffffffe4);
+  CBulanek_GetAnimAnchorPos(tombstone->pHost,(int *)&stack0xffffffe4);
   tombstone->nDraw_pos_y =
        (tombstone->nDraw_pos_y - tombstone->nOrigin_y) + -tombstone->nM_placementOffsetY;
   tombstone->nDraw_pos_x =
@@ -87445,7 +87471,7 @@ CBulanek::CBulanek_CreateRespawnTeleportPair
   }
   uStack_4 = 0xffffffff;
   _Globals::CIntListInsertSortedOrAppend(this[1].pPad_postWalkEmbed,(int)pCVar2,(undefined *)0x0,1);
-  AddEntity(this,pCVar2,'\x01');
+  CGaming::CGaming_AddEntity((CGaming *)this,pCVar2,'\x01');
   pCVar2 = (CTeleportPoint *)_Globals::OperatorNewWithBadAlloc(0xf8);
   uStack_4 = 1;
   if (pCVar2 == (CTeleportPoint *)0x0) {
@@ -87457,13 +87483,13 @@ CBulanek::CBulanek_CreateRespawnTeleportPair
   uStack_4 = 0xffffffff;
   _Globals::CIntListInsertSortedOrAppend
             (this[1].pPad_postWalkEmbed,(int)entity_00,(undefined *)0x0,1);
-  AddEntity(this,entity_00,-1);
+  CGaming::CGaming_AddEntity((CGaming *)this,entity_00,-1);
   if (x == -1) {
-    uVar3 = _Globals::CGaming_RespawnPlayerAtSafeLocation(this,entity_00);
+    uVar3 = CGaming::CGaming_RespawnPlayerAtSafeLocation((CGaming *)this,entity_00);
   }
   else {
     (**(code **)(entity_00->vftable_primary + 0x70))(&local_3c);
-    uVar3 = _Globals::FUN_0042cc30(entity_00,x - local_3c,y - local_38);
+    uVar3 = _Globals::CDSView_OffsetRectAndAdapt(entity_00,x - local_3c,y - local_38);
   }
   ExceptionList = local_c;
   return CONCAT31((int3)((uint)uVar3 >> 8),1);
@@ -87492,15 +87518,15 @@ void __thiscall
 CGame::CGame_OnNetMsg_t18_PlaceWorldPickup(CGame *this,uint param_1,undefined4 param_2,int *param_3)
 
 {
-  CBulanek *this_00;
+  CDSView *this_00;
   
                     // RECV NET_MSG_0x18: kind, world_slot, s16 x,y.
                     // GAMEPLAY_IMPACT: Weapon/mine pickup icon at world slot 101–107.
                     // Must-match: [0x18, kind, world_slot, s16 x, s16 y].
   CGame_DestroyObjectAtSlot(this,(byte)param_2);
-  this_00 = (CBulanek *)_Globals::CGame_SpawnPickupObject(this,param_1,param_2);
-  CBulanek::CDSView__SetPosition(this_00,*param_3,param_3[1]);
-  CBulanek::AddEntity((CBulanek *)this,this_00,'\x01');
+  this_00 = (CDSView *)_Globals::CGame_SpawnPickupObject(this,param_1,param_2);
+  CDSView::CDSView__SetPosition(this_00,*param_3,param_3[1]);
+  CGaming::CGaming_AddEntity((CGaming *)this,this_00,'\x01');
   return;
 }
 
@@ -87521,17 +87547,16 @@ void __thiscall CGame::CGame_OnNetMsg_t13_PlaceSpecialPickup(CGame *this,int *pa
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
 
-void __fastcall CBulanci::CGaming_LoadLevelAssetAndMusic(CBulanci *param_1)
+void __fastcall CBulanci::CGaming_LoadLevelAssetAndMusic(CGaming *param_1)
 
 {
-  int *piVar1;
-  undefined4 uVar2;
-  uint *puVar3;
-  LPCWSTR pWVar4;
-  uint uVar5;
+  undefined4 uVar1;
+  uint *puVar2;
+  LPCWSTR pWVar3;
+  uint uVar4;
   void *this;
-  CDSFileStream *pCVar6;
-  uint uVar7;
+  CDSFileStream *pCVar5;
+  uint uVar6;
   uint uStack_40bc;
   undefined1 local_40ac [146];
   undefined1 local_401a;
@@ -87549,88 +87574,89 @@ void __fastcall CBulanci::CGaming_LoadLevelAssetAndMusic(CBulanci *param_1)
   uStack_40bc = DAT_004b0e44 ^ (uint)local_4008;
   local_4018 = (undefined1 *)&uStack_40bc;
   ExceptionList = &local_4014;
-  piVar1 = *(int **)(param_1->game).pPlayerRec;
   local_40ac._124_4_ = param_1;
-  puVar3 = &uStack_40bc;
+  puVar2 = &uStack_40bc;
   local_8 = uStack_40bc;
-  if (piVar1 != (int *)0x0) {
-    (**(code **)(*piVar1 + 8))();
-    puVar3 = (uint *)local_4018;
+  if (*(int **)param_1->pPad_0x360 != (int *)0x0) {
+    (**(code **)(**(int **)param_1->pPad_0x360 + 8))();
+    puVar2 = (uint *)local_4018;
   }
-  local_4018 = (undefined1 *)puVar3;
-  *(undefined4 *)(param_1->game).pPlayerRec = 0;
-  if (*(int *)((param_1->game).chain.pPad_89 + 0x12) != 0) {
+  local_4018 = (undefined1 *)puVar2;
+  param_1->pPad_0x360[0] = 0;
+  param_1->pPad_0x360[1] = 0;
+  param_1->pPad_0x360[2] = 0;
+  param_1->pPad_0x360[3] = 0;
+  if (param_1->dwMusicResourceId != 0) {
     local_40ac._140_4_ = (LPCWSTR)0x0;
     local_400c = (void *)0x0;
-    FUN_0042d970(local_40ac + 0x88);
+    CBulanci_AssignTempPathWithTrailingBackslash(local_40ac + 0x88);
     local_400c._0_1_ = 1;
     _Globals::CDsStringFormatV(local_40ac + 0x8c,L"%s%s.tmp");
     local_400c._0_1_ = 0;
     if ((int *)local_40ac._136_4_ != (int *)0x0) {
       _Globals::CDsStringReleaseHeader((int *)(local_40ac._136_4_ + -0xc));
     }
-    pWVar4 = (LPCWSTR)local_40ac._140_4_;
+    pWVar3 = (LPCWSTR)local_40ac._140_4_;
     if ((LPCWSTR)local_40ac._140_4_ == (LPCWSTR)0x0) {
-      pWVar4 = (LPCWSTR)PTR_DAT_004af100;
+      pWVar3 = (LPCWSTR)PTR_DAT_004af100;
     }
-    uVar5 = CBulanci_GetPathSuffixCompareIndex(pWVar4);
-    if ((char)uVar5 == '\0') {
+    uVar4 = CBulanci_GetPathSuffixCompareIndex(pWVar3);
+    if ((char)uVar4 == '\0') {
       CLoadingLevel::CLoadingLevel_ctor((CWindow *)local_40ac);
       local_4019 = 0;
       local_400c = (void *)CONCAT31(local_400c._1_3_,5);
-      _Globals::CDSView__AddChild(g_pApp,local_40ac,0);
+      CDSView::CDSView__AddChild(g_pApp,local_40ac,0);
       local_4019 = 1;
       _Globals::CDSApp_FrameBody(g_pApp);
       this = (void *)CMenu::CMenuGetResourceById
-                               ((CMenu *)((int)g_pApp + 0x284),
-                                *(uint *)((param_1->game).chain.pPad_89 + 0x12));
+                               ((CMenu *)((int)g_pApp + 0x284),param_1->dwMusicResourceId);
       local_40ac._136_4_ = (int *)0x0;
       if (this != (void *)0x0) {
         local_40ac._136_4_ = _Globals::CheckedVirtualBaseCast(this,DAT_004b83c4);
       }
-      uVar2 = local_40ac._136_4_;
+      uVar1 = local_40ac._136_4_;
       local_401a = 0;
       local_400c._0_1_ = 7;
-      pCVar6 = CBulanci_CreateCDSFileStream((CBulanci *)(local_40ac + 0x8c),(void *)0xa);
-      if (pCVar6 == (CDSFileStream *)0x0) {
+      pCVar5 = CBulanci_CreateCDSFileStream((CBulanci *)(local_40ac + 0x8c),(void *)0xa);
+      if (pCVar5 == (CDSFileStream *)0x0) {
         local_40ac._128_4_ = (byte *)0x0;
       }
       else {
-        local_40ac._128_4_ = pCVar6->pPad_04 + 8;
+        local_40ac._128_4_ = pCVar5->pPad_04 + 8;
       }
       local_400c = (void *)CONCAT31(local_400c._1_3_,8);
-      (**(code **)(*(int *)local_40ac._128_4_ + 0x14))((uint *)(uVar2 + 4),0xc);
-      uVar5 = *(uint *)(uVar2 + 4);
-      local_40ac._132_4_ = (**(code **)(*(int *)uVar2 + 0x14))();
+      (**(code **)(*(int *)local_40ac._128_4_ + 0x14))((uint *)(uVar1 + 4),0xc);
+      uVar4 = *(uint *)(uVar1 + 4);
+      local_40ac._132_4_ = (**(code **)(*(int *)uVar1 + 0x14))();
       local_401a = 1;
-      while (uVar5 != 0) {
-        uVar7 = uVar5;
-        if (0x3fff < uVar5) {
-          uVar7 = 0x4000;
+      while (uVar4 != 0) {
+        uVar6 = uVar4;
+        if (0x3fff < uVar4) {
+          uVar6 = 0x4000;
         }
-        (**(code **)(*(int *)uVar2 + 0x18))(local_40ac + 0x84,local_4008,uVar7);
-        (**(code **)(*(int *)local_40ac._128_4_ + 0x14))(local_4008,uVar7);
-        uVar5 = uVar5 - uVar7;
+        (**(code **)(*(int *)uVar1 + 0x18))(local_40ac + 0x84,local_4008,uVar6);
+        (**(code **)(*(int *)local_40ac._128_4_ + 0x14))(local_4008,uVar6);
+        uVar4 = uVar4 - uVar6;
         CLoadingLevel_SetProgress
-                  ((CBulanci *)local_40ac,*(int *)(uVar2 + 4) - uVar5,*(int *)(uVar2 + 4));
+                  ((CBulanci *)local_40ac,*(int *)(uVar1 + 4) - uVar4,*(int *)(uVar1 + 4));
         CBulanci_PollEventsAndRunFrame(g_pApp);
-        param_1 = (CBulanci *)local_40ac._124_4_;
+        param_1 = (CGaming *)local_40ac._124_4_;
       }
       local_401a = 0;
-      (**(code **)(*(int *)uVar2 + 0x1c))(local_40ac._132_4_);
+      (**(code **)(*(int *)uVar1 + 0x1c))(local_40ac._132_4_);
       (**(code **)(*(int *)local_40ac._128_4_ + 8))();
       local_400c = (void *)0x6;
       local_4019 = 0;
       CMenu::CMenu_DetachChildWithVisibility(g_pApp,(int *)local_40ac);
-      CGaming_LoadBackgroundMusic(param_1,local_40ac + 0x8c);
+      CGaming::CGaming_LoadBackgroundMusic(param_1,local_40ac + 0x8c);
       local_400c = (void *)CONCAT31(local_400c._1_3_,5);
-      (**(code **)(*(int *)uVar2 + 8))();
+      (**(code **)(*(int *)uVar1 + 8))();
       local_400c = (void *)0x0;
       _Globals::CWindow_dtor((int)local_40ac);
     }
     else {
       local_400c = (void *)CONCAT31(local_400c._1_3_,2);
-      CGaming_LoadBackgroundMusic(param_1,local_40ac + 0x8c);
+      CGaming::CGaming_LoadBackgroundMusic(param_1,local_40ac + 0x8c);
     }
     local_400c = (void *)0xffffffff;
     if ((LPCWSTR)local_40ac._140_4_ != (LPCWSTR)0x0) {
@@ -87705,7 +87731,7 @@ void __thiscall CGaming::CGaming_OnCmd(CGaming *this,ushort param_1,int param_2)
       CGaming_RunPreMatchModal(this);
       return;
     }
-    CDSApp::CDSApp_RouteSyntheticCloseEvent((CDSApp *)this,param_1);
+    CDSView::CDSApp_RouteSyntheticCloseEvent((CDSView *)this,param_1);
   }
   else {
     if (this->wModalExitCode == 0xffff) {
@@ -87976,6 +88002,26 @@ CWeapon * __thiscall CWeapon::CWeapon_ScalarDeletingDtor(CWeapon *this,byte para
 
 
 
+// CBulanek::OnTakeDamage (verified live via Frida+ghidra, 2026-06).
+// 
+// Bullet-hit handler. Plays HIT_THUD (CDSAudioBank slot 36 = sample_36.wav from bank 65874) only
+// when ALL FIVE guards pass:
+//   1. pCorpseAnim == NULL          (offset +0xFC; CMP dword [ESI+0xFC],0)
+//   2. bHitStun == 0                (offset +0x16A; CMP byte [ESI+0x16A],0)
+//   3. pGamingHostScratch != NULL   (offset +0x84)
+//   4. (gamingHost.dwView_flags & 0x10) != 0   (paused bit is *clear*: NOT+TEST+SHR 0x4 masks to
+// bit 4)
+//   5. (this.dwView_flags & 1) == 1   (player live flag, at +0x44, NOT at +0x158 as the decompiler
+// hints)
+// 
+// If all five pass: calls CreateRespawnTeleportPair(0x41d090), then
+// _Globals::TriggerBankSample(0x422430) with hardcoded args (1, 0, 0x24, attenDb, 0, 1), then
+// CDSAudioPlayer_PlayAndRelease(0x4223c0), then sets bHitStun=1 at +0x16A, then
+// CBulanek_ArmFireDelayScheduler(0x417260).
+// 
+// The decompiler's offset annotations (e.g. +0x158 for dwView_flags) are STALE; the live asm uses
+// +0x44. See tools/frida/bulanci_audio_logger.js for the runtime verification.
+
 uint __thiscall CBulanek::CBulanek_OnTakeDamage(CBulanek *this,int param_1,int param_2,char param_3)
 
 {
@@ -88138,7 +88184,7 @@ void __thiscall CShot::CShot_ResolveHit(CShot *this,int param_1,void *param_2)
       entity = CExplosion::CExplosion_Ctor(this_00,this->pWorldRect,this->bOwnerSlotId);
     }
     local_4 = 0xffffffff;
-    CBulanek::AddEntity(*(CBulanek **)(param_1 + 0x84),entity,'\x01');
+    CGaming::CGaming_AddEntity(*(CGaming **)(param_1 + 0x84),entity,'\x01');
     ExceptionList = local_c;
     return;
   }
@@ -88166,10 +88212,7 @@ uint __thiscall CShot::TraceCollision(CShot *this,int *param_1,int *param_2,unde
   int iVar3;
   int *piVar4;
   int iVar5;
-  int local_20;
-  int local_1c;
-  int local_18;
-  int local_14;
+  tagRECT local_20;
   tagRECT local_10;
   
   local_10.left = 0;
@@ -88180,15 +88223,15 @@ uint __thiscall CShot::TraceCollision(CShot *this,int *param_1,int *param_2,unde
   do {
     iVar2 = (*param_1 - *param_2) * iVar5;
     iVar3 = (param_1[1] - param_2[1]) * iVar5;
-    local_20 = (int)(iVar2 + (iVar2 >> 0x1f & 3U)) >> 2;
-    local_18 = param_2[2] + local_20;
-    local_14 = (int)(iVar3 + (iVar3 >> 0x1f & 3U)) >> 2;
-    local_20 = *param_2 + local_20;
-    local_1c = param_2[1] + local_14;
-    local_14 = param_2[3] + local_14;
-    _Globals::FUN_00433200(&local_20,param_2);
+    local_20.left = (int)(iVar2 + (iVar2 >> 0x1f & 3U)) >> 2;
+    local_20.right = param_2[2] + local_20.left;
+    local_20.bottom = (int)(iVar3 + (iVar3 >> 0x1f & 3U)) >> 2;
+    local_20.left = *param_2 + local_20.left;
+    local_20.top = param_2[1] + local_20.bottom;
+    local_20.bottom = param_2[3] + local_20.bottom;
+    tagRECT::CDSRect_IntersectInPlace(&local_20,param_2);
     piVar4 = _Globals::_Globals__SpatialQuery
-                       (this->pGaming_host,&local_20,param_2,&local_10,'\x01','\x01');
+                       (this->pGaming_host,&local_20.left,param_2,&local_10,'\x01','\x01');
     *param_3 = 0xff;
     if (piVar4 != (int *)0x0) {
       param_1 = (int *)CShot_ResolveHit(this,(int)piVar4,this->pGaming_host);
@@ -88265,10 +88308,11 @@ void __thiscall CShot::CShot_Update(CShot *this,int *param_1)
 
 
 
-undefined4 __fastcall _Globals::_Globals__ExplodeMine(int *param_1)
+undefined4 __fastcall _Globals::_Globals__ExplodeMine(CDSView *param_1)
 
 {
   uchar ownerSlot;
+  dword dVar1;
   CExplosion *this;
   void *entity;
   void *local_c;
@@ -88278,16 +88322,17 @@ undefined4 __fastcall _Globals::_Globals__ExplodeMine(int *param_1)
   local_4 = 0xffffffff;
   puStack_8 = &LAB_0047781b;
   local_c = ExceptionList;
-  if ((char)param_1[0x45] == '\0') {
+  if ((char)param_1[2].win.wViewFlags == '\0') {
     return 0;
   }
   ExceptionList = &local_c;
-  *(undefined1 *)(param_1 + 0x45) = 0;
-  CDSView__Hide(param_1);
+  *(undefined1 *)&param_1[2].win.wViewFlags = 0;
+  CDSView::CDSView__Hide(param_1);
   CDSView_PostEntityDetachMessage_f9((int)param_1);
+  dVar1 = param_1[2].win.dwField_08;
   ownerSlot = 0xff;
-  if (param_1[0x42] != 0) {
-    ownerSlot = *(uchar *)(param_1[0x42] + 0x70);
+  if (dVar1 != 0) {
+    ownerSlot = *(uchar *)(dVar1 + 0x70);
   }
   this = (CExplosion *)OperatorNewWithBadAlloc(0xf4);
   local_4 = 0;
@@ -88295,10 +88340,10 @@ undefined4 __fastcall _Globals::_Globals__ExplodeMine(int *param_1)
     entity = (void *)0x0;
   }
   else {
-    entity = CExplosion::CExplosion_Ctor(this,param_1 + 8,ownerSlot);
+    entity = CExplosion::CExplosion_Ctor(this,&(param_1->win).nBbox_left,ownerSlot);
   }
   local_4 = 0xffffffff;
-  CBulanek::AddEntity((CBulanek *)param_1[0x44],entity,'\x01');
+  CGaming::CGaming_AddEntity(param_1[2].win.pVftable_IDSEventHandler,entity,'\x01');
   ExceptionList = local_c;
   return 1;
 }
@@ -88816,16 +88861,16 @@ LAB_0041e5e1:
   this->wViewFlags = this->wViewFlags | 0x200;
                     // Scheduler_RegisterEventSlot(&scheduler, slot, delayMs, eventKind=7)
   this_01 = &this->scheduler;
-  _Globals::Scheduler_RegisterEventSlot
+  CDSUpdatedItem::Scheduler_RegisterEventSlot
             (this_01,0,(-(uint)(this->pGame->bTotalSlots != 1) & 0x15e) + 0x96,7);
   if (bVar2) {
-    _Globals::Scheduler_RegisterEventSlot(this_01,3,0,7);
-    _Globals::Scheduler_RegisterEventSlot(this_01,4,0,7);
+    CDSUpdatedItem::Scheduler_RegisterEventSlot(this_01,3,0,7);
+    CDSUpdatedItem::Scheduler_RegisterEventSlot(this_01,4,0,7);
     delayMs = 100;
     uVar9 = 5;
   }
   else if (bVar3) {
-    _Globals::Scheduler_RegisterEventSlot(this_01,3,0,7);
+    CDSUpdatedItem::Scheduler_RegisterEventSlot(this_01,3,0,7);
     delayMs = 0;
     uVar9 = 4;
   }
@@ -88837,7 +88882,7 @@ LAB_0041e5e1:
     delayMs = 0;
     uVar9 = 2;
   }
-  _Globals::Scheduler_RegisterEventSlot(this_01,uVar9,delayMs,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_01,uVar9,delayMs,7);
   ExceptionList = local_c;
   return this;
 }
@@ -88878,7 +88923,7 @@ void __thiscall CBulanek::CBulanek_ApplyPickupEffect(CBulanek *this,uchar param_
     }
     uStack_4 = 0xffffffff;
     this->pWeapon = pCVar2;
-    _Globals::FUN_0041af70(this);
+    _Globals::CBulanek_StepMovementAndCollision(this);
     uVar3 = _Globals::CBulanek_IsHumanPlayer((int)this);
     if ((char)uVar3 != '\0') {
       CGame_NetSendDamage_t0c((CBulanek *)this->pGame,this->bPlayerSlot,param_1);
@@ -89110,7 +89155,7 @@ CShot::CShot_Ctor(CShot *this,int *param_1,CGameView *param_2,byte param_3,byte 
   this->bExpired = 0;
   this->bPelletMask = 0x1f;
   _Globals::CGameEntity_SetEntityType(this,0xf);
-  _Globals::Scheduler_RegisterEventSlot(this_00,0,0x32,6);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_00,0,0x32,6);
   local_1c.left = 0;
   local_1c.top = 0;
   local_1c.right = 0;
@@ -89119,8 +89164,8 @@ CShot::CShot_Ctor(CShot *this,int *param_1,CGameView *param_2,byte param_3,byte 
   if (piVar3 != (int *)0x0) {
     CShot_ResolveHit(this,(int)piVar3,param_2);
     this->bExpired = 1;
-    _Globals::CDSView__Hide((int *)this);
-    _Globals::Scheduler_ArmSlot(this_00,0);
+    CDSView::CDSView__Hide((CDSView *)this);
+    CDSUpdatedItem::Scheduler_ArmSlot(this_00,0);
   }
   if (2 < this->bWeaponStrength) {
     iVar4 = Runtime::MSVCRT::_rand();
@@ -89239,7 +89284,7 @@ void __thiscall _Globals::CGaming_TickPlayerCollisions(void *this,int *param_1)
   uint uVar1;
   byte bVar2;
   
-  CBulanek::CGaming_InsertEntityByDepth(this,param_1);
+  CGaming::CGaming_InsertEntityByDepth(this,param_1);
   if ((*(byte *)(param_1 + 0x11) & 1) != 0) {
     uVar1 = CBulanek_IsHumanPlayer((int)param_1);
     if ((char)uVar1 != '\0') {
@@ -89256,19 +89301,19 @@ void __thiscall _Globals::CGaming_TickPlayerCollisions(void *this,int *param_1)
     if (*(char *)(*(int *)((int)this + 0x84) + 0xd8) == '\x01') {
       uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,*(uint *)((int)this + 0x324));
       if ((char)uVar1 != '\0') {
-        CGaming_OnPlayerCollectItem(this,param_1,*(undefined4 *)((int)this + 0x324),0);
+        CGaming::CGaming_OnPlayerCollectItem(this,param_1,*(void **)((int)this + 0x324),0);
       }
       uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,*(uint *)((int)this + 0x330));
       if ((char)uVar1 != '\0') {
-        CGaming_OnPlayerCollectItem(this,param_1,*(undefined4 *)((int)this + 0x330),3);
+        CGaming::CGaming_OnPlayerCollectItem(this,param_1,*(void **)((int)this + 0x330),3);
       }
       uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,*(uint *)((int)this + 0x328));
       if ((char)uVar1 != '\0') {
-        CGaming_OnPlayerCollectItem(this,param_1,*(undefined4 *)((int)this + 0x328),1);
+        CGaming::CGaming_OnPlayerCollectItem(this,param_1,*(void **)((int)this + 0x328),1);
       }
       uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,*(uint *)((int)this + 0x32c));
       if ((char)uVar1 != '\0') {
-        CGaming_OnPlayerCollectItem(this,param_1,*(undefined4 *)((int)this + 0x32c),2);
+        CGaming::CGaming_OnPlayerCollectItem(this,param_1,*(void **)((int)this + 0x32c),2);
       }
     }
   }
@@ -89344,7 +89389,7 @@ _Globals::CGaming_SpawnBulletAndPlaySound
     }
     local_4 = (void *)0xffffffff;
     CIntListInsertSortedOrAppend((void *)((int)this + 0x2c8),(int)pvVar2,(undefined *)0x0,1);
-    CBulanek::AddEntity(this,pvVar2,'\x01');
+    CGaming::CGaming_AddEntity(this,pvVar2,'\x01');
   }
   bVar1 = param_4 & 0xf0;
   if (bVar1 == 0x10) {
@@ -89448,9 +89493,21 @@ void __thiscall _Globals::CGaming_TickRoundStateAndScoring(void *this,int *param
 
 
 
-// Algorithm: EOL OperatorNew CBulanek 0x19c + CBulanekCtor. EOL AddEntity +
-// CGaming_RegisterObjectAtSlot(slot). EOL CGaming_RespawnPlayerAtSafeLocation (placement). EOL
-// random facing 0..3 SetFacingTrack.
+// CGaming_SpawnAndInitializePlayer — does OperatorNew(0x19c) + CBulanekCtor + AddEntity +
+// RegisterObjectAtSlot + Respawn + random facing.
+// 
+// CBulanekCtor param order (verified by decompile):
+//   this, pGame, slotKind, pGamingHost, initialTrack=0, pTeamColorOverride, nLives, nSpeedParam,
+// skinPaletteId
+// 
+// Hardcoded initialTrack=0 in this wrapper.
+// 
+// CGaming_SpawnPlayerAtSlot @ 0x420530 calls this with (slot, 0xFFFFFFFF, 1, 100, 0) — nLives=1.
+// CGaming_SpawnPracticeDummy @ 0x41f5d0 calls this with (slot+0x24, param_1, param_2, param_3,
+// param_4) — nLives from caller.
+// 
+// Param_3 (= 7th positional = nLives) is what the Frida nLives override rewrites before ctor body
+// runs.
 
 void __thiscall
 _Globals::CGaming_SpawnAndInitializePlayer
@@ -89459,7 +89516,7 @@ _Globals::CGaming_SpawnAndInitializePlayer
 {
   CBulanek *pCVar1;
   int iVar2;
-  void *this_00;
+  CGaming *this_00;
   char sendNet;
   void *local_c;
   undefined1 *puStack_8;
@@ -89484,9 +89541,9 @@ _Globals::CGaming_SpawnAndInitializePlayer
                         param_5);
   }
   local_4 = 0xffffffff;
-  CBulanek::AddEntity(this,pCVar1,-1);
+  CGaming::CGaming_AddEntity(this,pCVar1,-1);
   CGaming_RegisterObjectAtSlot(this,(int)pCVar1,param_1);
-  CGaming_RespawnPlayerAtSafeLocation(this_00,pCVar1);
+  CGaming::CGaming_RespawnPlayerAtSafeLocation(this_00,pCVar1);
   sendNet = '\0';
                     // _rand initial facing 0..3 -> CBulanek_SetFacingTrack on spawn
   iVar2 = Runtime::MSVCRT::_rand();
@@ -89498,6 +89555,32 @@ _Globals::CGaming_SpawnAndInitializePlayer
 
 
 
+// CGaming_SpawnPracticeDummy — script-driven spawn path. If CGaming_CountOccupiedPlayerSlots < 4:
+// set cloneFlag=1, then SpawnAndInitializePlayer(this, slotKind+0x24, param_1, param_2, param_3,
+// param_4).
+// 
+// Param order to SpawnAndInitializePlayer:
+//   slotKind = extraout_DL + 0x24  (auto-allocated slot 0x24..0x27)
+//   param_1  = pTeamColorOverride
+//   param_2  = nLives            <-- the script-configurable one
+//   param_3  = nSpeedParam
+//   param_4  = skinPaletteId
+// 
+// This is the ONLY path that lets the level script set a non-1 nLives.  Wired to the
+// InsertOpponent script opcode via CLevelScriptOpExt_InsertOpponent @ 0x41f730.
+// 
+// The InsertOpponent call site in scripts reads 4 subexpressions from the bytecode:
+//   InsertOpponent(teamColor, nLives, nSpeed, skinId)
+// 
+// Real-world examples (from unpacked/.../Script.script.asm):
+//   InsertOpponent(7, 1, 100, 5)  // nLives=1 (deathmatch)
+//   InsertOpponent(7, 3, 120, 5)  // nLives=3 (tournament — used in tutorial)
+//   InsertOpponent(7, 2, 120, 1)  // nLives=2 (medium tournament)
+// 
+// So the 'Typ hry' label in the main menu (0x0860F4 'Délka hry ve vterinách:' /
+// 0x08610A 'Pocet zásahu k vyhre:') is informational: the per-level script picks the mode
+// at level-load time and these strings describe whatever was configured.
+
 void __thiscall
 _Globals::CGaming_SpawnPracticeDummy(void *this,void *param_1,int param_2,int param_3,int param_4)
 
@@ -89507,7 +89590,7 @@ _Globals::CGaming_SpawnPracticeDummy(void *this,void *param_1,int param_2,int pa
   
   iVar1 = CGaming_CountOccupiedPlayerSlots((int)this);
   if (iVar1 < 4) {
-    CBulanek::CBulanek_SetCloneFlag(this,1);
+    CGaming::CGaming_SetEntityRegisterMode(this,1);
     CGaming_SpawnAndInitializePlayer(this,extraout_DL + 0x24,param_1,param_2,param_3,param_4);
   }
   return;
@@ -89637,7 +89720,7 @@ void __thiscall _Globals::CGaming_RespawnPlayer(void *this,char param_1,byte par
       CBulanek::CBulanek_ApplyPickupEffect
                 (this,(int)(iVar1 * 0x65 + (iVar1 * 0x65 >> 0x1f & 0x7fffU)) >> 0xf < 10);
     }
-    CGaming_RespawnPlayerAtSafeLocation(*(void **)((int)this + 0x84),this);
+    CGaming::CGaming_RespawnPlayerAtSafeLocation(*(CGaming **)((int)this + 0x84),this);
     CBulanek::CBulanek_SetFacingTrack(this,(uint)param_2,'\0');
     CGame_NetSendHit_t10
               (*(void **)((int)this + 0xf4),*(undefined1 *)((int)this + 0x70),param_2,
@@ -89645,7 +89728,7 @@ void __thiscall _Globals::CGaming_RespawnPlayer(void *this,char param_1,byte par
     CBulanek_ArmFireDelayScheduler((int)this);
   }
   else {
-    CBulanek::CDSView__SetPosition(this,*param_3,param_3[1]);
+    CDSView::CDSView__SetPosition(this,*param_3,param_3[1]);
     CBulanek::CBulanek_SetFacingTrack(this,(uint)param_2,'\0');
   }
   uVar6 = 0;
@@ -89657,9 +89740,9 @@ void __thiscall _Globals::CGaming_RespawnPlayer(void *this,char param_1,byte par
   CDSAudioPlayer_PlayAndRelease(piVar3,uVar6);
   if ((0x1f < *(byte *)((int)this + 0x70)) && (*(byte *)((int)this + 0x70) < 0x24)) {
     *(undefined4 *)((int)this + 0x140) = 0;
-    pvVar4 = Scheduler_GetEventSlot((void *)((int)this + 0x88),5);
+    pvVar4 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)((int)this + 0x88),5);
     if ((*(byte *)((int)pvVar4 + 8) & 1) != 0) {
-      Scheduler_AckSlot((void *)((int)this + 0x88),5,-1);
+      CDSUpdatedItem::Scheduler_AckSlot((CDSUpdatedItem *)((int)this + 0x88),5,-1);
     }
     (**(code **)(*(int *)this + 0x24))(0,0);
   }
@@ -89673,7 +89756,7 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
 {
   CDSUpdatedItem *this_00;
   byte bVar1;
-  CBulanek *this_01;
+  CGaming *this_01;
   char cVar2;
   void *pvVar3;
   undefined4 uVar4;
@@ -89708,26 +89791,26 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
   this->nDrawAlphaPercent = 100;
   if ((0x1f < bVar1) && (bVar1 < 0x24)) {
     this_00 = &this->scheduler;
-    pvVar3 = _Globals::Scheduler_GetEventSlot(this_00,5);
+    pvVar3 = CDSUpdatedItem::Scheduler_GetEventSlot(this_00,5);
     if ((pvVar3 != (void *)0x0) &&
-       (pvVar3 = _Globals::Scheduler_GetEventSlot(this_00,5), (*(byte *)((int)pvVar3 + 8) & 1) == 0)
-       ) {
-      _Globals::Scheduler_ArmSlot(this_00,5);
+       (pvVar3 = CDSUpdatedItem::Scheduler_GetEventSlot(this_00,5),
+       (*(byte *)((int)pvVar3 + 8) & 1) == 0)) {
+      CDSUpdatedItem::Scheduler_ArmSlot(this_00,5);
     }
   }
-  _Globals::CDSView__Hide((int *)this);
-  this_01 = (CBulanek *)this->pGamingHostScratch;
+  CDSView::CDSView__Hide((CDSView *)this);
+  this_01 = (CGaming *)this->pGamingHostScratch;
   this->bSkipSpatialWhenNonZero = 0;
   this->bPendingKillerSlot = param_1;
   iVar9 = 0x17;
-  uVar4 = CBulanek_GetKillerGenderByteAtSlot(this_01,param_1);
+  uVar4 = CBulanek_GetKillerGenderByteAtSlot((CBulanek *)this_01,param_1);
   if ((char)uVar4 == '\x01') {
     iVar9 = 0x16;
   }
   this->dwDeathCount = this->dwDeathCount + 1;
   CBulanek_ReleaseAudioPlayerRef((int *)&this->pHitQuipPlayer);
   if ((char)param_2 < '\0') {
-    CBulanek_PostScriptEvent(this_01,this->bPendingKillerSlot,0xdb,0,0);
+    CBulanek_PostScriptEvent((CBulanek *)this_01,this->bPendingKillerSlot,0xdb,0,0);
     this->bPendingKillerSlot = 0xff;
   }
   else {
@@ -89754,7 +89837,7 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
   pCStack00000010 = (CDeath *)uVar10;
   this->pCorpseAnim = (CBulAnim *)corpseAnim;
   CBulanek_ResolveAndBindAnimTrack(corpseAnim,(void *)((ulonglong)uVar10 >> 0x20));
-  AddEntity(this_01,this->pCorpseAnim,'\x01');
+  CGaming::CGaming_AddEntity(this_01,this->pCorpseAnim,'\x01');
   if ((0x1f < this->bPlayerSlot) && (this->bPlayerSlot < 0x24)) {
     pCStack00000010 = (CDeath *)_Globals::OperatorNewWithBadAlloc(0xfc);
     if (pCStack00000010 == (CDeath *)0x0) {
@@ -89765,14 +89848,14 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
     }
     this->pDeath2Tombstone = tombstone;
     CBulanek_BindDeathTombstoneAnim(tombstone);
-    AddEntity(this_01,this->pDeath2Tombstone,'\x01');
+    CGaming::CGaming_AddEntity(this_01,this->pDeath2Tombstone,'\x01');
   }
   _Globals::CTeleportPoint_TryActivateFromOverlap((uint)this);
   bVar1 = this->bPlayerSlot;
   if (((3 < bVar1) && ((bVar1 < 0x20 || (0x23 < bVar1)))) && ((bVar1 < 0x24 || (0x27 < bVar1)))) {
-    pvVar3 = _Globals::Scheduler_GetEventSlot(&this->scheduler,2);
+    pvVar3 = CDSUpdatedItem::Scheduler_GetEventSlot(&this->scheduler,2);
     if ((*(byte *)((int)pvVar3 + 8) & 1) == 0) {
-      _Globals::Scheduler_ArmSlot(&this->scheduler,2);
+      CDSUpdatedItem::Scheduler_ArmSlot(&this->scheduler,2);
     }
   }
   if (((this->pAiTrackHolders[0] == (void *)0x0) &&
@@ -89809,7 +89892,7 @@ void __thiscall CBulanek::CBulanek_Update(CBulanek *this,int *rect)
   undefined4 local_8;
   undefined4 local_4;
   
-  CBulanci::CDSView_SetRect((CBulanci *)this,rect);
+  CDSView::CDSView_SetRect((CDSView *)this,rect);
   if (this->pGamingHostScratch != (undefined *)0x0) {
     _Globals::CGaming_TickPlayerCollisions(this->pGamingHostScratch,(int *)this);
   }
@@ -89912,7 +89995,7 @@ void __thiscall CWeapon::CWeapon_FirePistol(CWeapon *this)
                                          this->pOwner->bPlayerSlot,0,0);
     }
     local_4 = 0xffffffff;
-    CBulanek::AddEntity((CBulanek *)this->pWorld,entity,'\x01');
+    CGaming::CGaming_AddEntity(this->pWorld,entity,'\x01');
     ExceptionList = local_c;
     return;
   }
@@ -89959,7 +90042,7 @@ void __fastcall _Globals::CWeapon_FireGrenade(CWeapon *param_1)
                                        param_1->pOwner->bPlayerSlot,1,0);
   }
   local_4 = 0xffffffff;
-  CBulanek::AddEntity((CBulanek *)param_1->pWorld,entity,'\x01');
+  CGaming::CGaming_AddEntity(param_1->pWorld,entity,'\x01');
   ExceptionList = local_c;
   return;
 }
@@ -90003,7 +90086,7 @@ CTeleportPoint::CTeleportPoint_OnEvent(CTeleportPoint *this,uint event_id,short 
       iVar1 = this_00->nOrigin_y;
       iVar2 = this_00->nOrigin_x;
       *(undefined1 *)((int)&this[-1].canim_base.track_manager.nCurrentTrackIdx + 1) = 0;
-      CBulanek::CDSView__SetPosition(this_00,iVar2 - unaff_ESI,iVar1 - unaff_EBX);
+      CDSView::CDSView__SetPosition((CDSView *)this_00,iVar2 - unaff_ESI,iVar1 - unaff_EBX);
       TriggerTeleportFX((CTeleportPoint *)(this->canim_base).pOverlap_entity);
       in_EAX = extraout_EAX;
     }
@@ -90028,32 +90111,51 @@ CTeleportPoint::CTeleportPoint_OnEvent(CTeleportPoint *this,uint event_id,short 
 
 
 
-// CGaming_ctor — match-modal coordinator 0x36C on stack.
-// Parameters:
-//   this (ECX): CGaming*
-//   ownerGame: CGame* embedded owner (CBulanci+0x284 game facet)
-// Pause: OperatorNew(0x7c) + CPauseDlg_Build @0x00420423 -> CGaming+0x334.
+// CGaming_ctor — match-modal coordinator (CGaming ~0x36C bytes on stack at call site).
+// 
+// Near the end of ctor body, the PRNG is RE-SEEDED for this match:
+//   asm:  MOV ECX,[ESI+0x84]   ; ECX = this+0x84 (set inside ctor body from ownerGame param)
+//         MOV EAX,[ECX+0xd4]   ; EAX = *(ownerGame + 0xd4) = match seed
+//         PUSH EAX
+//         CALL _srand
+// 
+// The Frida trace (n=11) confirmed: the actual seed at srand time matches `args[0]+0xd4`
+// (= the explicit `ownerGame` parameter + 0xd4).  args[0]+0xd4 is the same as [this+0x84]+0xd4
+// at srand-time, because this+0x84 has just been written with the ownerGame ptr by the ctor body.
+// 
+// CGame+0xd4 holds the per-match seed.  Two writers (verified via
+// search_instructions operand '+0xd4' in CGame context):
+//   1) CMenu_OpenNetworkSession @ 0x414f31 (host 'Start Game' click, multiplayer):
+//      *(CGame+0xd4) = g_dwElapsedMs;
+//   2) CGame_ProcessNetMessage @ 0x415753 (incoming net message):
+//      *(CGame+0xd4) = *(msg + 0x1B);  -- host's seed propagated to clients
+// 
+// Note: in single-player runs, CMenu_OpenNetworkSession does NOT fire (it sets up DirectPlay,
+// which is multiplayer-only).  The single-player equivalent writer of CGame+0xd4 has not
+// been identified yet — Frida trace shows the seed (e.g. 3875 = g_dwElapsedMs 3.875s after
+// launch) is set SOMEWHERE before CGaming_ctor is called.
+// 
+// See plate comments at 0x402b20 (initial srand) and 0x414f31 (seed write site) for the
+// full chain.
 
-CGaming * __thiscall CBulanci::CGaming_ctor(CBulanci *this,CGame *ownerGame)
+CGaming * __thiscall CGaming::CGaming_ctor(CGaming *this,CGame *ownerGame)
 
 {
-  undefined **this_00;
-  undefined1 *puVar1;
-  ushort *puVar2;
-  int *piVar3;
-  int *piVar4;
-  CGame *pCVar5;
-  void *pvVar6;
-  undefined4 uVar7;
-  undefined *puVar8;
-  CDSChained *pCVar9;
-  uint *puVar10;
+  int *piVar1;
+  CGame *this_00;
+  CDSAudioPlayer *pCVar2;
+  undefined4 uVar3;
+  undefined *puVar4;
+  CDSChained *pCVar5;
+  uint *puVar6;
+  CLevelScript *pCVar7;
   CBulanci *this_01;
-  CPauseDlg *pCVar11;
-  int iVar12;
+  void *pvVar8;
+  CPauseDlg *pCVar9;
+  int nameHandle;
   uint uStack_40;
   int local_30 [4];
-  CBulanci *local_20;
+  CGaming *local_20;
   void *local_1c;
   undefined4 *local_18;
   undefined1 *local_14;
@@ -90070,255 +90172,189 @@ CGaming * __thiscall CBulanci::CGaming_ctor(CBulanci *this,CGame *ownerGame)
   local_14 = (undefined1 *)&uStack_40;
   ExceptionList = &local_10;
   local_20 = this;
-  CDSChained::CDSChained_ctor((undefined4 *)this);
-  this_00 = &(this->app).pClassName;
+  CDSChained::CDSChained_ctor(&this->pVftable_primary);
   local_8 = 0;
-  CDSUpdatedItem::CDSUpdatedItem_ctor((CDSUpdatedItem *)this_00);
-  (this->app).vftable_primary = (undefined *)&g_pCGaming_vftable_primary;
-  (this->app).vftable_sub04 = (undefined *)CGaming::g_pCGaming_vftable_IDSChained;
-  (this->app).vftable_sub10 = (undefined *)&CGaming::g_pCGaming_vftable_IDSUpdated_0x68;
-  (this->app).vftable_sub18 = (undefined *)CGaming::g_pCGaming_vftable_IDSReferenced_0x18;
-  *this_00 = (undefined *)&CGaming::g_pCGaming_vftable_IDSEventHandler_0x10;
-  (this->app).backBuffer.embeddedImage.pVf_primary = (void *)0x0;
+  CDSUpdatedItem::CDSUpdatedItem_ctor((CDSUpdatedItem *)&this->field_0x68);
+  this->pVftable_primary = &::g_pCGaming_vftable_primary;
+  *(undefined ***)&this->field_0x4 = g_pCGaming_vftable_IDSChained;
+  *(CGaming_CDSView_vftable **)&this->field_0x10 = &g_pCGaming_vftable_IDSUpdated_0x68;
+  *(undefined ***)&this->field_0x18 = g_pCGaming_vftable_IDSReferenced_0x18;
+  *(CGaming_CDSView_vftable **)&this->field_0x68 = &g_pCGaming_vftable_IDSEventHandler_0x10;
+  *(undefined4 *)&this->field_0x80 = 0;
   local_8._0_1_ = 2;
   _eh_vector_constructor_iterator_
-            (&(this->app).backBuffer.embeddedImage.nM_height,4,0x10,eh_ctor_ZeroDword,
-             _Globals::eh_dtor_CDSObject_ptr);
-  pCVar5 = &this->game;
-  (pCVar5->chain).pKeyBindings[6] = '\0';
-  (pCVar5->chain).pKeyBindings[7] = '\0';
-  (pCVar5->chain).pKeyBindings[8] = '\0';
-  (pCVar5->chain).pKeyBindings[9] = '\0';
-  pCVar5 = &this->game;
-  (pCVar5->chain).pKeyBindings[10] = '\0';
-  (pCVar5->chain).pKeyBindings[0xb] = '\0';
-  (pCVar5->chain).pKeyBindings[0xc] = '\0';
-  (pCVar5->chain).pKeyBindings[0xd] = '\0';
-  pCVar5 = &this->game;
-  (pCVar5->chain).pKeyBindings[0xe] = '\0';
-  (pCVar5->chain).pKeyBindings[0xf] = '\0';
-  (pCVar5->chain).pKeyBindings[0x10] = '\0';
-  (pCVar5->chain).pKeyBindings[0x11] = '\0';
-  pCVar5 = &this->game;
-  (pCVar5->chain).pKeyBindings[0x12] = '\b';
-  (pCVar5->chain).pKeyBindings[0x13] = '\0';
-  (pCVar5->chain).pKeyBindings[0x14] = '\0';
-  (pCVar5->chain).pKeyBindings[0x15] = '\0';
-  pCVar5 = &this->game;
-  (pCVar5->chain).pKeyBindings[0x16] = '\0';
-  (pCVar5->chain).pKeyBindings[0x17] = '\0';
-  (pCVar5->chain).pKeyBindings[0x18] = '\0';
-  (pCVar5->chain).pKeyBindings[0x19] = '\0';
-  pCVar5 = &this->game;
-  (pCVar5->chain).pKeyBindings[0x1a] = '\0';
-  (pCVar5->chain).pKeyBindings[0x1b] = '\0';
-  (pCVar5->chain).pKeyBindings[0x1c] = '\0';
-  (pCVar5->chain).pKeyBindings[0x1d] = '\0';
-  pCVar5 = &this->game;
-  (pCVar5->chain).pKeyBindings[0x1e] = '\0';
-  (pCVar5->chain).pKeyBindings[0x1f] = '\0';
-  (pCVar5->chain).pKeyBindings[0x20] = '\0';
-  (pCVar5->chain).pKeyBindings[0x21] = '\0';
-  *(undefined4 *)((this->game).chain.pKeyBindings + 0x22) = 8;
-  *(undefined4 *)((int)&(this->game).chain.dwOptionsDword + 2) = 0;
-  *(undefined4 *)((int)&(this->game).chain.pLevelResourceTable + 2) = 0;
-  *(undefined4 *)((int)&(this->game).chain.dwLevelResourceCapacity + 2) = 0;
-  *(undefined4 *)((int)&(this->game).chain.dwLevelResourceCount + 2) = 8;
-  *(undefined4 *)((int)&(this->game).chain.dwProfileCapacity + 2) = 0;
-  *(undefined4 *)((int)&(this->game).chain.strConfigTail + 2) = 0;
-  *(undefined4 *)((int)&(this->game).chain.nPanBindingIndex + 2) = 0;
-  *(undefined4 *)((int)&(this->game).chain.nReservedAudioDword1 + 2) = 8;
-  pCVar5 = &this->game;
-  (pCVar5->chain).pOptionBlock[5] = 0;
-  (pCVar5->chain).pOptionBlock[6] = 0;
-  (pCVar5->chain).pOptionBlock[7] = 0;
-  (pCVar5->chain).pOptionBlock[8] = 0;
-  pCVar5 = &this->game;
-  (pCVar5->chain).pPad_89[6] = 0;
-  (pCVar5->chain).pPad_89[7] = 0;
-  (pCVar5->chain).pPad_89[8] = 0;
-  (pCVar5->chain).pPad_89[9] = 0;
-  pCVar5 = &this->game;
-  (pCVar5->chain).pPad_89[0x16] = 0;
-  (pCVar5->chain).pPad_89[0x17] = 0;
-  (pCVar5->chain).pPad_89[0x18] = 0;
-  (pCVar5->chain).pPad_89[0x19] = 0;
-  *(undefined4 *)&(this->game).chain.bPad_end = 0;
-  (this->game).bTotalSlots = 0;
-  (this->game).bJoinedSlotCount = 0;
-  (this->game).bHostSlotCursor = 0;
-  (this->game).bLocalSenderSlot = 0;
-  *(undefined4 *)(this->game).pPlayerRec = 0;
-  (this->app).nRect_left = 0;
-  (this->app).nRect_top = 0;
+            (&this->field_0x88,4,0x10,eh_ctor_ZeroDword,_Globals::eh_dtor_CDSObject_ptr);
+  (this->bulletSlotVec).pSlots = (void *)0x0;
+  (this->bulletSlotVec).nCapacity = 0;
+  *(undefined4 *)&this->field_0x2d0 = 0;
+  *(undefined4 *)&this->field_0x2d4 = 8;
+  *(undefined4 *)&this->field_0x2d8 = 0;
+  *(undefined4 *)&this->field_0x2dc = 0;
+  *(undefined4 *)&this->field_0x2e0 = 0;
+  *(undefined4 *)&this->field_0x2e4 = 8;
+  *(undefined4 *)&this->field_0x2e8 = 0;
+  *(undefined4 *)&this->field_0x2ec = 0;
+  *(undefined4 *)&this->field_0x2f0 = 0;
+  *(undefined4 *)&this->field_0x2f4 = 8;
+  *(undefined4 *)&this->field_0x2f8 = 0;
+  *(undefined4 *)&this->field_0x2fc = 0;
+  *(undefined4 *)&this->field_0x300 = 0;
+  *(undefined4 *)&this->field_0x304 = 8;
+  *(undefined4 *)&this->field_0x310 = 0;
+  this->pLevelScript = (CLevelScript *)0x0;
+  this->pLevelBgmPlayer = (CDSAudioPlayer *)0x0;
+  this->pIntroMusicPlayer = (CDSAudioPlayer *)0x0;
+  *(undefined4 *)&this->field_0x35c = 0;
+  this->pPad_0x360[0] = 0;
+  this->pPad_0x360[1] = 0;
+  this->pPad_0x360[2] = 0;
+  this->pPad_0x360[3] = 0;
+  *(undefined4 *)&this->field_0x20 = 0;
+  *(undefined4 *)&this->field_0x24 = 0;
   local_8 = CONCAT31(local_8._1_3_,0xd);
-  (this->app).nRect_right = 800;
-  (this->app).nRect_bottom = 600;
-  Runtime::MSVCRT::_memset(&(this->app).backBuffer.embeddedImage.pDirectDrawSurface,0,0x200);
-  (this->app).backBuffer.embeddedImage.nM_width = (int)ownerGame;
-  pCVar5 = &this->game;
-  (pCVar5->chain).pOptionBlock[1] = 0;
-  (pCVar5->chain).pOptionBlock[2] = 0;
-  (pCVar5->chain).pOptionBlock[3] = 0;
-  (pCVar5->chain).pOptionBlock[4] = 0;
-  (this->game).chain.pOptionBlock[9] = 1;
-  pCVar5 = &this->game;
-  (pCVar5->chain).pPad_89[0xe] = 0;
-  (pCVar5->chain).pPad_89[0xf] = 0;
-  (pCVar5->chain).pPad_89[0x10] = 0;
-  (pCVar5->chain).pPad_89[0x11] = 0;
-  pCVar5 = &this->game;
-  (pCVar5->chain).pPad_89[10] = 0;
-  (pCVar5->chain).pPad_89[0xb] = 0;
-  (pCVar5->chain).pPad_89[0xc] = 0;
-  (pCVar5->chain).pPad_89[0xd] = 0;
-  *(undefined2 *)((int)&(this->game).pPlayerRec[0].pName + 2) = 0xffff;
-  puVar1 = (this->app).pMiPad_after_vftable_sub10;
-  *(ushort *)puVar1 = *(ushort *)puVar1 | 0x77f;
-  iVar12 = (this->app).backBuffer.embeddedImage.nM_width;
-  puVar2 = &(this->app).wFlags2;
-  *puVar2 = *puVar2 | 1;
-  FUN_004477df(*(ulong *)(iVar12 + 0xd4));
-  *(undefined4 *)((int)&(this->game).pPlayerRec[0].pBinding + 2) = 2;
+  *(undefined4 *)&this->field_0x28 = 800;
+  *(undefined4 *)&this->field_0x2c = 600;
+  Runtime::MSVCRT::_memset(this->pEntitySlots,0,0x200);
+  this->pOwnerGame = ownerGame;
+  *(undefined4 *)&this->field_0x30c = 0;
+  this->field_0x314 = 1;
+  this->pDepthInsertTail = (CDSView *)0x0;
+  this->pDepthInsertHead = (CDSView *)0x0;
+  this->wModalExitCode = 0xffff;
+  *(ushort *)&this->field_0x14 = *(ushort *)&this->field_0x14 | 0x77f;
+  *(ushort *)&this->field_0x46 = *(ushort *)&this->field_0x46 | 1;
+  Runtime_MSVCRT__srand(*(ulong *)&(this->pOwnerGame->chain).bPad_end);
+  this->dwWeaponSpawnerMode = 2;
   if (((ownerGame->chain).bRegistryCommitFlag != 0) && (ownerGame->bAdminByte == 1)) {
-    *(undefined4 *)((int)&(this->game).pPlayerRec[0].pBinding + 2) = 6;
+    this->dwWeaponSpawnerMode = 6;
   }
-  piVar3 = *(int **)((int)g_pApp + 0x70);
-  *(undefined4 *)((int)&(this->game).chain.dwProfileList_count + 2) = 0;
-  pvVar6 = CDSAudioPlayer_CreateFromResource((undefined *)0x2,0x1014b,0,(void *)0x0,'\0');
-  piVar4 = *(int **)&(this->game).chain.bPad_end;
-  if (piVar4 != (int *)0x0) {
-    (**(code **)(*piVar4 + 8))();
+  piVar1 = *(int **)((int)g_pApp + 0x70);
+  this->nRoundEndWait = 0;
+  pCVar2 = CBulanci::CDSAudioPlayer_CreateFromResource((undefined *)0x2,0x1014b,0,(void *)0x0,'\0');
+  if (this->pIntroMusicPlayer != (CDSAudioPlayer *)0x0) {
+    (**(code **)((int)this->pIntroMusicPlayer->pVftable_primary + 8))();
   }
-  *(void **)&(this->game).chain.bPad_end = pvVar6;
+  this->pIntroMusicPlayer = pCVar2;
                     // CDSResourcePool::Load(0x10003) — res 65539 AudioBankIndex → bank 65873
                     // default level SFX (fallback when script SetMusic bank arg is 0)
-  uVar7 = (**(code **)(*piVar3 + 0x10))();
+  uVar3 = (**(code **)(*piVar1 + 0x10))();
   if (DAT_004b3730 != (int *)0x0) {
     (**(code **)(*DAT_004b3730 + 8))();
   }
-  ownerGame = (CGame *)&(this->app).backBuffer.embeddedImage.nM_height;
+  ownerGame = (CGame *)&this->field_0x88;
                     // Load next BitmapSpecial from g_adwCGaming_PreloadResourceIds into
                     // CGaming+0x88[slot] (e.g. 0x10032..0x10034 HUD strips).
   local_18 = &g_dwCgamingPreloadResourceIds;
-  DAT_004b3730 = (int *)uVar7;
+  DAT_004b3730 = (int *)uVar3;
   do {
                     // slot 15/16: load 0x1004f gaming_hud_glyph (4×9) into CGaming HUD bitmap ring
-    local_1c = (void *)(**(code **)(*piVar3 + 0x10))(*local_18);
+    local_1c = (void *)(**(code **)(*piVar1 + 0x10))(*local_18);
     if ((int *)ownerGame->pVptr_IDSReferenced != (int *)0x0) {
       (**(code **)(*(int *)ownerGame->pVptr_IDSReferenced + 8))();
     }
     if (local_1c != (void *)0x0) {
-      puVar8 = (undefined *)_Globals::CheckedVirtualBaseCast(local_1c,DAT_004b826c);
-      ownerGame->pVptr_IDSReferenced = puVar8;
+      puVar4 = (undefined *)_Globals::CheckedVirtualBaseCast(local_1c,DAT_004b826c);
+      ownerGame->pVptr_IDSReferenced = puVar4;
     }
     ownerGame = (CGame *)&ownerGame->scheduler;
     local_18 = local_18 + 1;
   } while ((int)local_18 < 0x4829a8);
-  pCVar5 = &this->game;
-  (pCVar5->chain).pPad_89[0x12] = 0;
-  (pCVar5->chain).pPad_89[0x13] = 0;
-  (pCVar5->chain).pPad_89[0x14] = 0;
-  (pCVar5->chain).pPad_89[0x15] = 0;
-  *(undefined4 *)((int)&(this->game).chain.pFirstChild + 3) = 0;
-  *(undefined4 *)((int)&(this->game).chain.pAuxHeap + 3) = 0;
-  *(undefined4 *)((int)&(this->game).chain.dwChildCount + 3) = 0;
-  *(undefined4 *)((int)&(this->game).chain.pProfileList_data + 2) = 0;
-  *(undefined4 *)((int)&(this->game).chain.dwProfileCapacityMirror + 2) = 0;
-  pCVar9 = (CDSChained *)_Globals::OperatorNewWithBadAlloc(0x68);
+  this->dwMusicResourceId = 0;
+  *(undefined4 *)&this->field_0x324 = 0;
+  *(undefined4 *)&this->field_0x328 = 0;
+  *(undefined4 *)&this->field_0x32c = 0;
+  *(undefined4 *)&this->field_0x330 = 0;
+  *(undefined4 *)&this->field_0x33c = 0;
+  pCVar5 = (CDSChained *)_Globals::OperatorNewWithBadAlloc(0x68);
   local_8._0_1_ = 0xe;
-  if (pCVar9 == (CDSChained *)0x0) {
-    pCVar9 = (CDSChained *)0x0;
+  if (pCVar5 == (CDSChained *)0x0) {
+    pCVar5 = (CDSChained *)0x0;
   }
   else {
     local_30[0] = 0;
     local_30[1] = 0;
     local_30[2] = 800;
     local_30[3] = 0x203;
-    pCVar9 = CDSChained::CDSChained_InitWithRect(pCVar9,local_30);
+    pCVar5 = CDSChained::CDSChained_InitWithRect(pCVar5,local_30);
   }
                     // R5 w25: pEntityViewRoot @ CGaming+0x31c — HUD panel CDSChained; blast/clear
                     // walk +0x54 child chain
-  *(CDSChained **)((int)&(this->game).chain.pVftable_IDSReferenced + 3) = pCVar9;
-  pCVar9->wViewFlags = pCVar9->wViewFlags | 0x400;
-  pvVar6 = (void *)(this->app).backBuffer.embeddedImage.nM_width;
-  *(undefined4 *)((int)&(this->game).chain.pVftable_IDSChained + 3) = 0;
+  this->pEntityViewRoot = pCVar5;
+  pCVar5->wViewFlags = pCVar5->wViewFlags | 0x400;
+  this_00 = this->pOwnerGame;
+  *(undefined4 *)&this->field_0x320 = 0;
   local_8 = CONCAT31(local_8._1_3_,0xd);
-  iVar12 = 0;
-  _Globals::CDsStringAssignFromHandle(&stack0xffffffb4,(undefined4 *)((int)pvVar6 + 0xcc));
-  puVar10 = (uint *)_Globals::CGame_FindResourceByName(pvVar6,iVar12);
-  iVar12 = CMenu::CMenuGetResourceById((CMenu *)((int)g_pApp + 0x284),*puVar10);
-  piVar3 = *(int **)((this->game).chain.pPad_89 + 6);
-  if (piVar3 != (int *)0x0) {
-    (**(code **)(*piVar3 + 8))();
+  nameHandle = 0;
+  _Globals::CDsStringAssignFromHandle
+            (&stack0xffffffb4,(undefined4 *)((this_00->chain).pPad_89 + 0x12));
+  puVar6 = (uint *)_Globals::CGame_FindResourceByName(this_00,nameHandle);
+  pCVar7 = (CLevelScript *)CMenu::CMenuGetResourceById((CMenu *)((int)g_pApp + 0x284),*puVar6);
+  if (this->pLevelScript != (CLevelScript *)0x0) {
+    (**(code **)(*(int *)this->pLevelScript + 8))();
   }
-  *(int *)((this->game).chain.pPad_89 + 6) = iVar12;
+  this->pLevelScript = pCVar7;
                     // CGaming_ctor: ClearSubObjStash on level script loaded from menu
                     // (script+0x438) before CopyNetSessionFields.
-  _Globals::IDSChainedTail_ClearSubObjStash(iVar12 + 0x438);
-  CBulanci_CopyNetSessionFields
-            (*(CBulanci **)((this->game).chain.pPad_89 + 6),this,
-             (CDSDirectPlay *)(this->app).backBuffer.embeddedImage.nM_width);
-  CDSScript::CallExport(*(CDSScript **)((this->game).chain.pPad_89 + 6),1,0,(void *)0x0);
+  _Globals::IDSChainedTail_ClearSubObjStash((int)&pCVar7->field_0x438);
+  CBulanci::CBulanci_CopyNetSessionFields
+            ((CBulanci *)this->pLevelScript,this,(CDSDirectPlay *)this->pOwnerGame);
+  CDSScript::CallExport((CDSScript *)this->pLevelScript,1,0,(void *)0x0);
   local_8 = CONCAT31(local_8._1_3_,0xf);
-  if (*(int *)((int)&(this->game).pPlayerRec[0].pBinding + 2) == 2) {
+  if (this->dwWeaponSpawnerMode == 2) {
     _Globals::CGaming_SpawnSpecialPickupIfAllowed(this,'\x01');
   }
-  if (*(char *)((this->app).backBuffer.embeddedImage.nM_width + 0xd8) == '\x01') {
+  if (this->pOwnerGame->bTotalSlots == 1) {
                     // CDSResourceId 0x10125 — training_ambient_anim_0 (BitmapSprite →
                     // CGaming+0x324); solo mode when CBulanci+0xd8==1.
-    CBulanci_AllocAnimFromSprite
-              (this,(undefined4 *)((int)&(this->game).chain.pFirstChild + 3),0x10125,'\0');
+    CBulanci::CBulanci_AllocAnimFromSprite
+              ((CBulanci *)this,(undefined4 *)&this->field_0x324,0x10125,'\0');
                     // CDSResourceId 0x10126 — training_ambient_anim_1 (BitmapSprite →
                     // CGaming+0x328); gABulanekSitAnimSheet[0].
-    CBulanci_AllocAnimFromSprite
-              (this,(undefined4 *)((int)&(this->game).chain.pAuxHeap + 3),0x10126,'\0');
+    CBulanci::CBulanci_AllocAnimFromSprite
+              ((CBulanci *)this,(undefined4 *)&this->field_0x328,0x10126,'\0');
                     // gaming_ambient_insects (0x100dd) -> CBulanci+0x32c ambient overlay
-    CBulanci_AllocAnimFromSprite
-              (this,(undefined4 *)((int)&(this->game).chain.dwChildCount + 3),0x100dd,'\0');
+    CBulanci::CBulanci_AllocAnimFromSprite
+              ((CBulanci *)this,(undefined4 *)&this->field_0x32c,0x100dd,'\0');
                     // gaming_ambient_sky_glow (0x100dc) -> CBulanci+0x330 ambient overlay
-    CBulanci_AllocAnimFromSprite
-              (this,(undefined4 *)((int)&(this->game).chain.pProfileList_data + 2),0x100dc,'\0');
-    _Globals::Scheduler_RegisterEventSlot(&(this->app).pClassName,0,0,6);
-    FUN_00417c80(this,0);
+    CBulanci::CBulanci_AllocAnimFromSprite
+              ((CBulanci *)this,(undefined4 *)&this->field_0x330,0x100dc,'\0');
+    CDSUpdatedItem::Scheduler_RegisterEventSlot((CDSUpdatedItem *)&this->field_0x68,0,0,6);
+    CBulanci_SetAmbientAnimMode(this,0);
   }
-  _Globals::CDSView__AddChild
-            (this,*(undefined4 *)((int)&(this->game).chain.pVftable_IDSReferenced + 3));
+  CDSView::CDSView__AddChild((CDSView *)this,this->pEntityViewRoot);
   this_01 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0xfc);
   local_8._0_1_ = 0x10;
   if (this_01 == (CBulanci *)0x0) {
-    uVar7 = 0;
+    uVar3 = 0;
   }
   else {
-    uVar7 = CPanelCtor(this_01,(this->app).backBuffer.embeddedImage.nM_width);
+    uVar3 = CBulanci::CPanelCtor(this_01,this->pOwnerGame);
   }
   local_8 = CONCAT31(local_8._1_3_,0xf);
-  *(undefined4 *)((int)&(this->game).chain.pVftable_IDSChained + 3) = uVar7;
-  _Globals::CDSView__AddChild(this,uVar7);
+  *(undefined4 *)&this->field_0x320 = uVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,uVar3);
   ownerGame = (CGame *)0x0;
-  while ((byte)ownerGame < *(byte *)((this->app).backBuffer.embeddedImage.nM_width + 0xd8)) {
-    pvVar6 = (void *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,(byte)ownerGame);
-    _Globals::CGamingHud_UpdatePlayerAmmoStrip
-              (*(void **)((int)&(this->game).chain.pVftable_IDSChained + 3),pvVar6);
+  while ((byte)ownerGame < this->pOwnerGame->bTotalSlots) {
+    pvVar8 = (void *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,(byte)ownerGame);
+    _Globals::CGamingHud_UpdatePlayerAmmoStrip(*(void **)&this->field_0x320,pvVar8);
     ownerGame = (CGame *)(uint)(byte)((byte)ownerGame + 1);
   }
   local_8 = 0xd;
-  pCVar11 = (CPauseDlg *)_Globals::OperatorNewWithBadAlloc(0x7c);
+  pCVar9 = (CPauseDlg *)_Globals::OperatorNewWithBadAlloc(0x7c);
   local_8._0_1_ = 0x12;
-  if (pCVar11 == (CPauseDlg *)0x0) {
-    pCVar11 = (CPauseDlg *)0x0;
+  if (pCVar9 == (CPauseDlg *)0x0) {
+    pCVar9 = (CPauseDlg *)0x0;
   }
   else {
                     // CPauseDlg_Build((CPauseDlg*)OperatorNew(0x7c), ownerGame); result ->
                     // CGaming+0x334 pPauseDlg. ECX at entry = heap CPauseDlg*, not CBulanci*.
-    pCVar11 = CPauseDlg::CPauseDlg_Build
-                        (pCVar11,(CGame *)(this->app).backBuffer.embeddedImage.nM_width);
+    pCVar9 = CPauseDlg::CPauseDlg_Build(pCVar9,this->pOwnerGame);
   }
   local_8 = CONCAT31(local_8._1_3_,0xd);
-  *(CPauseDlg **)((int)&(this->game).chain.dwProfileList_capacity + 2) = pCVar11;
-  _Globals::CDSView__AddChild(this,pCVar11);
+  this->pPauseDlg = pCVar9;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar9);
   ExceptionList = local_10;
-  return (CGaming *)this;
+  return this;
 }
 
 
@@ -90388,8 +90424,30 @@ void __thiscall CGame::CGaming_OnNetMsg_t10_Hit(CGame *this,byte param_1,byte pa
 
 
 
-// Algorithm: EOL thin wrapper — CGaming_SpawnAndInitializePlayer(this, slot, 0xFFFFFFFF, 1, 100,
-// 0). Used by SpawnCoopPartnerSlots and SpawnPlayerAndCampaignSlots.
+// CGaming_SpawnPlayerAtSlot — thin wrapper that hardcodes nLives=1 (deathmatch).
+// Calls CGaming_SpawnAndInitializePlayer(this, slotKind, 0xFFFFFFFF, 1, 100, 0) where the 4th arg
+// is nLives.
+// 
+// Two callers, BOTH going through this hardcoded path:
+//   * CGaming_SpawnCoopPartnerSlots @ 0x420550  (4 coop slots 0x20..0x23)
+//   * CBulanek_SpawnPlayerAndCampaignSlots @ 0x4205a0  (human slots 0..N-1 + AI campaign
+// 0x7d..0x7f)
+// 
+// For tournament/lives-based mode, callers must go through CGaming_SpawnPracticeDummy instead
+// (which takes nLives from its caller).  SpawnPracticeDummy is wired to the script opcode
+// InsertOpponent via CLevelScriptOpExt_InsertOpponent @ 0x41f730.
+// 
+// Sample level scripts that use InsertOpponent (see unpacked/..._eap/*_2026_Script.script.asm):
+//   tutorial_eap: nLives=3 (player 0), 2 (others)  -- TOURNAMENT MODE
+//   Valka_eap:    nLives=1 (deathmatch)
+//   nebezpecna_zona_eap: nLives=1 (deathmatch)
+// 
+// The 6 built-in menu levels (type 1..6 in overlay/) have 0 InsertOpponent calls and
+// therefore always use this hardcoded nLives=1 path (i.e. deathmatch).
+// 
+// Frida override: hook CBulanekCtor @ 0x41e4b0 and rewrite args[5] (= nLives) before
+// the ctor body stores it into this->nLivesRemaining @ +0x18C.  See
+// scripts/frida/bulanci_audio_logger.js.
 
 void __thiscall _Globals::CGaming_SpawnPlayerAtSlot(void *this,byte param_1)
 
@@ -90409,23 +90467,23 @@ void __thiscall _Globals::CGaming_SpawnPlayerAtSlot(void *this,byte param_1)
 void __fastcall _Globals::CGaming_SpawnCoopPartnerSlots(void *param_1)
 
 {
-  int *piVar1;
-  int iVar2;
-  undefined4 *puVar3;
+  CDSView *this;
+  int iVar1;
+  undefined4 *puVar2;
   
-  iVar2 = 0;
-  puVar3 = (undefined4 *)((int)param_1 + 0x148);
+  iVar1 = 0;
+  puVar2 = (undefined4 *)((int)param_1 + 0x148);
   do {
-    CGaming_SpawnPlayerAtSlot(param_1,(char)iVar2 + 0x20);
-    if (0 < iVar2) {
-      piVar1 = (int *)*puVar3;
-      CDSView__Hide(piVar1);
-      *(undefined1 *)((int)piVar1 + 0x69) = 0;
-      CGaming_TickRoundStateAndScoring(param_1,piVar1);
+    CGaming_SpawnPlayerAtSlot(param_1,(char)iVar1 + 0x20);
+    if (0 < iVar1) {
+      this = (CDSView *)*puVar2;
+      CDSView::CDSView__Hide(this);
+      (this->win).pPad_69[0] = 0;
+      CGaming_TickRoundStateAndScoring(param_1,(int *)this);
     }
-    iVar2 = iVar2 + 1;
-    puVar3 = puVar3 + 1;
-  } while (iVar2 < 4);
+    iVar1 = iVar1 + 1;
+    puVar2 = puVar2 + 1;
+  } while (iVar1 < 4);
   return;
 }
 
@@ -90444,7 +90502,7 @@ void __fastcall _Globals::CBulanek_SpawnPlayerAndCampaignSlots(CBulanek *param_1
   
                     // InsertBulanci: spawn slots 0..(CBulanci+0xd8-1); if solo also slots
                     // 0x7d..0x7f campaign AI.
-  CBulanek::CBulanek_SetCloneFlag(param_1,1);
+  CGaming::CGaming_SetEntityRegisterMode((CGaming *)param_1,1);
   bVar1 = param_1->pGamingHostScratch[0xd8];
   bVar2 = 0;
   if (bVar1 != 0) {
@@ -90567,7 +90625,8 @@ void __fastcall _Globals::CBulanek_TriggerPrimaryActionAndBroadcast(int param_1)
   uint uVar2;
   
   if ((*(byte *)(param_1 + 0x44) & 1) != 0) {
-    pvVar1 = Scheduler_GetEventSlot((void *)(*(int *)(param_1 + 0xf8) + 0xc),0);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot
+                       ((CDSUpdatedItem *)(*(int *)(param_1 + 0xf8) + 0xc),0);
     if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
       CBulanek_DispatchCurrentWeaponAction(*(CWeapon **)(param_1 + 0xf8));
       uVar2 = CBulanek_IsHumanPlayer(param_1);
@@ -90653,7 +90712,7 @@ CGame::CGaming_OnNetMsg_t0d_PlayerState(CGame *this,byte param_1,byte param_2,in
                     // Must-match: 7 bytes.
   this_00 = (CBulanek *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,param_1);
   if (param_2 < 4) {
-    CBulanek::CDSView__SetPosition(this_00,*param_3,param_3[1]);
+    CDSView::CDSView__SetPosition((CDSView *)this_00,*param_3,param_3[1]);
     CBulanek::CBulanek_ApplyAction(this_00,(uint)param_2,'\x01');
     return;
   }
@@ -90663,7 +90722,7 @@ CGame::CGaming_OnNetMsg_t0d_PlayerState(CGame *this,byte param_1,byte param_2,in
   else {
     CBulanek::CBulanek_SetFacingTrack(this_00,param_2 - 8,'\0');
   }
-  CBulanek::CDSView__SetPosition(this_00,*param_3,param_3[1]);
+  CDSView::CDSView__SetPosition((CDSView *)this_00,*param_3,param_3[1]);
   return;
 }
 
@@ -90693,12 +90752,12 @@ void __fastcall CBulanek::CBulanek_TryBotRandomAction(CBulanek *param_1)
   
   uVar1 = _Globals::CBulanek_IsHumanPlayer((int)param_1);
   if (((char)uVar1 != '\0') &&
-     (pvVar2 = _Globals::Scheduler_GetEventSlot(&(param_1->pWeapon->trackManager).scheduler,0),
-     (*(byte *)((int)pvVar2 + 8) & 1) != 0)) {
+     (pvVar2 = CDSUpdatedItem::Scheduler_GetEventSlot(&(param_1->pWeapon->trackManager).scheduler,0)
+     , (*(byte *)((int)pvVar2 + 8) & 1) != 0)) {
                     // CBulanek_TryBotRandomAction: _rand idle (no fire-delay slot) vs weapon branch
     iVar3 = Runtime::MSVCRT::_rand();
     if (((int)(iVar3 * 0xd + (iVar3 * 0xd >> 0x1f & 0x7fffU)) >> 0xf == 0) &&
-       (pvVar2 = _Globals::Scheduler_GetEventSlot(&(param_1->videoTrackManager).scheduler,0),
+       (pvVar2 = CDSUpdatedItem::Scheduler_GetEventSlot(&(param_1->videoTrackManager).scheduler,0),
        (*(byte *)((int)pvVar2 + 8) & 1) == 0)) {
       CBulanek_ApplyAction(param_1,(param_1->videoTrackManager).nCurrentTrackIdx,'\0');
       return;
@@ -90735,7 +90794,7 @@ void __thiscall CBulanek::CBulanek_WeaponSchedulerCallback(CBulanek *this,uint s
     pcVar1 = (char *)((int)&(this->scheduler).dwEventSlots + 2);
     *pcVar1 = *pcVar1 + '\x01';
     if (*(char *)((int)&(this->scheduler).dwEventSlots + 2) == '\x10') {
-      _Globals::Scheduler_ArmSlot(this,0);
+      CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)this,0);
       uVar6 = _Globals::CBulanek_IsHumanPlayer((int)(this[-1].pReserved_preAmmo + 0x10));
       if ((char)uVar6 != '\0') {
         CBulanek_ResetAmmoAndPlayReload(this[-1].pReserved_preAmmo + 0x10);
@@ -90753,14 +90812,16 @@ void __thiscall CBulanek::CBulanek_WeaponSchedulerCallback(CBulanek *this,uint s
     _Globals::CBulanek_TriggerPrimaryActionAndBroadcast((int)(this[-1].pReserved_preAmmo + 0x10));
     return;
   case 2:
-    pvVar4 = _Globals::Scheduler_GetEventSlot((void *)(*(int *)&this->bPlayerSlot + 0xc),0);
+    pvVar4 = CDSUpdatedItem::Scheduler_GetEventSlot
+                       ((CDSUpdatedItem *)(*(int *)&this->bPlayerSlot + 0xc),0);
     if ((*(byte *)((int)pvVar4 + 8) & 1) != 0) {
       CBulanek_OnTakeDamage((CBulanek *)(this[-1].pReserved_preAmmo + 0x10),-1,-1,'\0');
       return;
     }
     break;
   case 3:
-    pvVar4 = _Globals::Scheduler_GetEventSlot((void *)(*(int *)&this->bPlayerSlot + 0xc),0);
+    pvVar4 = CDSUpdatedItem::Scheduler_GetEventSlot
+                       ((CDSUpdatedItem *)(*(int *)&this->bPlayerSlot + 0xc),0);
     if ((*(byte *)((int)pvVar4 + 8) & 1) != 0) {
       pCVar8 = (CBulanek *)(this[-1].pReserved_preAmmo + 0x10);
       uVar5 = CBulanek_IsInKnockdownAnimBand((int)pCVar8);
@@ -90791,7 +90852,7 @@ void __thiscall CBulanek::CBulanek_WeaponSchedulerCallback(CBulanek *this,uint s
           local_8 = (uint)(longlong)
                           ROUND((1.0 / ((double)*(int *)(this->pReserved_preAmmo + 8) / 100.0)) *
                                 200.0);
-          _Globals::Scheduler_RegisterEventSlot(this,1,local_8,2);
+          CDSUpdatedItem::Scheduler_RegisterEventSlot((CDSUpdatedItem *)this,1,local_8,2);
           return;
         }
         iVar7 = iVar7 + 1;
@@ -90804,7 +90865,7 @@ void __thiscall CBulanek::CBulanek_WeaponSchedulerCallback(CBulanek *this,uint s
     *ppvVar2 = (void *)((int)*ppvVar2 + 10);
     if (100 < (int)(this->videoTrackManager).scheduler.pEventSlots) {
       (this->videoTrackManager).scheduler.pEventSlots = &DAT_00000064;
-      _Globals::Scheduler_ArmSlot(this,5);
+      CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)this,5);
     }
     (**(code **)(*(int *)(this[-1].pReserved_preAmmo + 0x10) + 0x24))(0,0);
     return;
@@ -90980,18 +91041,18 @@ switchD_00420d73_caseD_2:
           uVar6 = 2;
           if ((char)uVar2 != '\0') {
             local_8 = (uint)(longlong)ROUND((1.0 / ((double)this->nSpeedParam / 100.0)) * 200.0);
-            _Globals::Scheduler_RegisterEventSlot(&this->scheduler,1,local_8,2);
+            CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->scheduler,1,local_8,2);
             return;
           }
-          iVar3 = _Globals::FUN_0040ace0(0,3);
-          _Globals::Scheduler_RegisterEventSlot(&this->scheduler,1,iVar3 * 500,uVar6);
+          iVar3 = RandInRange(0,3);
+          CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->scheduler,1,iVar3 * 500,uVar6);
           return;
         }
       }
       break;
     case 0xf3:
       if (this->dwPickupFacingLatch != 0) {
-        Scheduler_FreeSlotIfLive((CBulanek *)&this->scheduler,1);
+        CDSUpdatedItem::Scheduler_FreeSlotIfLive(&this->scheduler,1);
         this->dwPickupFacingLatch = 0;
         return;
       }
@@ -91046,7 +91107,7 @@ void __thiscall CWeapon::CWeapon_Fire(CWeapon *this,undefined4 param_1,ushort pa
       pvVar6 = (void *)CMina::CMina_Ctor(pCVar5,this->pTrackHolder);
     }
     local_4 = 0xffffffff;
-    CBulanek::AddEntity(this->pOwner,pvVar6,'\x01');
+    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pvVar6,'\x01');
     _Globals::CBulanek_DecrementWeaponAmmo(this->pTrackHolder);
     if (3 < this->pTrackHolder->bPlayerSlot) {
       CBulanek::CBulanek_OnTakeDamage(this->pTrackHolder,-1,-1,'\0');
@@ -91069,7 +91130,7 @@ void __thiscall CWeapon::CWeapon_Fire(CWeapon *this,undefined4 param_1,ushort pa
                                          this->pTrackHolder->bPlayerSlot,(char)param_2 + 3,0);
     }
     local_4 = 0xffffffff;
-    CBulanek::AddEntity(this->pOwner,pvVar6,'\x01');
+    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pvVar6,'\x01');
     SetAmmo((CWeapon *)&this[-1].pHudIconB,4 - (uint)(param_2 < 3));
   }
   bVar1 = (byte)this->dwParamB;
@@ -91090,7 +91151,7 @@ void __thiscall CWeapon::CWeapon_Fire(CWeapon *this,undefined4 param_1,ushort pa
                                          this->pTrackHolder->bPlayerSlot,2,0);
     }
     local_4 = 0xffffffff;
-    CBulanek::AddEntity(this->pOwner,pvVar6,'\x01');
+    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pvVar6,'\x01');
     SetAmmo((CWeapon *)&this[-1].pHudIconB,7);
     ExceptionList = local_c;
     return;
@@ -91119,7 +91180,7 @@ void __thiscall CWeapon::CWeapon_Fire(CWeapon *this,undefined4 param_1,ushort pa
         ExceptionList = local_c;
         return;
       }
-      iVar10 = _Globals::FUN_0040ace0(0,99);
+      iVar10 = RandInRange(0,99);
       if (iVar10 < 0x28) {
         CBulanek::CBulanek_OnTakeDamage(this->pTrackHolder,-1,-1,'\0');
       }
@@ -91131,7 +91192,7 @@ void __thiscall CWeapon::CWeapon_Fire(CWeapon *this,undefined4 param_1,ushort pa
 
 
 
-void __thiscall CDSApp::CDSApp_RouteSyntheticCloseEvent(CDSApp *this,ushort param_1)
+void __thiscall CDSView::CDSApp_RouteSyntheticCloseEvent(CDSView *this,ushort param_1)
 
 {
   if ((param_1 & 0x8000) != 0) {
@@ -91342,7 +91403,7 @@ void * __cdecl CHelpScript::HhAddChildToParentView(CHelpScript *script)
                     // R4 todo11: cdecl script* @ [ESP+0xc]; ReadSubExpr(&script->script);
                     // AddChild(script->pBoundView, child, 0)
   CDSScript::ReadSubExpr(&script->script);
-  _Globals::CDSView__AddChild(script->pBoundView,extraout_EAX,0);
+  CDSView::CDSView__AddChild(script->pBoundView,extraout_EAX,0);
   return extraout_EAX;
 }
 
@@ -91719,7 +91780,7 @@ void __thiscall CHelpDlg::CHelpDlg_LoadHelpPage(CHelpDlg *this,int pageIndex)
       CHelpScript::CDSScript_SetBoundParentView((CHelpScript *)this->pActiveScript,pCVar6);
       pageIndex = 1;
       CDSScript::CallExport(this->pActiveScript,0,1,&pageIndex);
-      _Globals::CDSView__AddChild(this,this->pHelpView,this->pIconFirst);
+      CDSView::CDSView__AddChild((CDSView *)this,this->pHelpView,this->pIconFirst);
     }
     iVar8 = 4;
     pCVar7 = this + 1;
@@ -91727,7 +91788,7 @@ void __thiscall CHelpDlg::CHelpDlg_LoadHelpPage(CHelpDlg *this,int pageIndex)
       pCVar3 = pCVar7 + -1;
       pCVar7 = (CHelpDlg *)&pCVar7[-1].pIconLast;
       iVar8 = iVar8 + -1;
-      _Globals::CDSView_SetAsDefaultFocusChild((int *)pCVar3->pIconLast);
+      CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)pCVar3->pIconLast);
     } while (iVar8 != 0);
     if (0 < this->nM_currentPage) {
       _Globals::CDSView_EnableWidget((int *)this->pIconFirst);
@@ -91761,7 +91822,7 @@ void __thiscall CHelpDlg::CHelpDlg_OnSyntheticPageNav(CHelpDlg *this,ushort para
     CHelpDlg_LoadHelpPage(this,(this->m_pageIds).nM_count + -1);
     return;
   default:
-    CDSApp::CDSApp_RouteSyntheticCloseEvent((CDSApp *)this,param_1);
+    CDSView::CDSApp_RouteSyntheticCloseEvent((CDSView *)this,param_1);
     return;
   }
 }
@@ -91844,7 +91905,7 @@ CHelpDlg * __fastcall CHelpDlg::CHelpDlgCtor(CHelpDlg *this)
   }
   local_4._0_1_ = 2;
   this->pIconFirst = pCVar4;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 4;
   if (pCVar4 == (CIcon *)0x0) {
@@ -91856,7 +91917,7 @@ CHelpDlg * __fastcall CHelpDlg::CHelpDlgCtor(CHelpDlg *this)
   }
   local_4._0_1_ = 2;
   this->pIconPrev = pCVar4;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 5;
   if (pCVar4 == (CIcon *)0x0) {
@@ -91867,7 +91928,7 @@ CHelpDlg * __fastcall CHelpDlg::CHelpDlgCtor(CHelpDlg *this)
   }
   local_4._0_1_ = 2;
   this->pIconNext = pCVar4;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 6;
   if (pCVar4 == (CIcon *)0x0) {
@@ -91880,7 +91941,7 @@ CHelpDlg * __fastcall CHelpDlg::CHelpDlgCtor(CHelpDlg *this)
   }
   local_4 = CONCAT31(local_4._1_3_,2);
   this->pIconLast = pCVar4;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   CHelpDlg_LoadHelpPage(this,0);
   ExceptionList = local_c;
   return this;
@@ -92156,34 +92217,36 @@ void __cdecl _Globals::CDSAudio_SetPanPreview(int panBindingIndex)
 
 
 
-// PlayBankSample(flags, AudioBankIndex* bank, slot, preDelay,
-//                eventTarget, looping)
+// _Globals::TriggerBankSample (verified live via Frida+ghidra, 2026-06).
 // 
-// Menu/UI helper that builds a short-lived CDSAudioPlayer playing
-// one sample from the global AudioBankIndex.
+// Plays one audio sample from a bank.  Signature (cdecl):
+//     TriggerBankSample(category, bankPtr, slot, attenDb, evtTgt, loopArm)
+//     category:  u8
+//     bankPtr:   i32   (0 = use default bank)
+//     slot:      i32   (0..40 for bank 65874)
+//     attenDb:   i32
+//     evtTgt:    void* (CDSEventHandler* for completion callback, 0 = one-shot)
+//     loopArm:   u8   (typically 1)
 // 
-//   flags:        oring of audio-player flags (usually 0x1)
-//   bank:         AudioBankIndex pointer; 0 => default to g_pApp+0x4c0
-//                 (resource 0x10004, partner bank 0x10152, 41 samples,
-//                 mono 16-bit @ 22050 Hz).
-//   slot:         index into bank->slots[] (i.e. &bank[0x18][idx*4]).
-//   preDelay:     reserved (always 0 at call sites).
-//   eventTarget:  IDSEventHandler* to receive event id 1 on playback
-//                 completion; pass 0 for a one-shot SFX with no
-//                 completion callback.
-//   looping:      passed as the 'param_5' bit2 flag inside FUN_0043a760;
-//                 callers always pass 1 to enable proper buffer
-//                 arming.
+// Default-bank resolution (verified asm):
+//     00422430: MOV EAX, [ESP+0x8]            ; bankPtr arg
+//     00422434: TEST EAX, EAX
+//     00422436: JNZ 0x00422443
+//     00422438: MOV EAX, [0x004b3b88]         ; EAX = *g_pApp (two-stage deref)
+//     0042243d: MOV EAX, [EAX+0x4c0]          ; EAX = *(g_pApp + 0x4c0) = default bank
+//     00422443: MOV ECX, [EAX+0x18]           ; ECX = bank->slotVector
+//     00422446: MOV EDX, [ESP+0xc]            ; slot
+//     0042244a: MOV EAX, [ECX+EDX*4]          ; EAX = bank->slots[slot] (IDSAudioSource*)
+//     ...
+//     00422462: CALL CDSAudioPlayer_Create    ; at 0x422310
 // 
-// Known menu call sites (slot -> meaning):
-//   0x1b (Start)  : Cmd_Dispatch 0xc9 @ 0x00425baf, eventTarget=0
-//   0x18 (Hist)   : Cmd_Dispatch 0xca @ 0x00425b03, eventTarget=0
-//   0x19 (Quit)   : Cmd_Dispatch 0xcb @ 0x00425a3d, eventTarget=0
-//   0x1a (X exit) : DispatchHotkey  @ 0x00425340, eventTarget=this+0x10
-//   0x1c (F12)    : DispatchHotkey  @ 0x00425340, eventTarget=this+0x10
+// KEY GLOBAL: g_pApp is at 0x004b3b88.  Reading the default bank requires:
+//     const p = Memory.readPointer(ptr('0x4b3b88'));
+//     const bank = Memory.readPointer(p.add(0x4c0));
+// NOT: Memory.readPointer(ptr('0x4b3b88').add(0x4c0))  -- that's the wrong address.
 // 
-// See main_menu.md §10 for the per-slot voice-cue mapping with WAVs
-// at ghidra_analysis/slot_0x1[8-c].wav.
+// Hit-thud call from OnTakeDamage: TriggerBankSample(1, 0, 0x24, attenDb, 0, 1).  The hardcoded
+// 0x24=36 is sample_36.wav from bank 65874.
 
 void __cdecl
 _Globals::TriggerBankSample
@@ -92334,7 +92397,7 @@ CHistoryView::CHistoryView_OnEvent
           (CHistoryView *this,short param_1,undefined4 param_2,undefined4 param_3)
 
 {
-  CBulanci::CDSApp_BroadcastSyntheticEventToChildren((CBulanci *)this,param_1,param_2,param_3);
+  CDSView::CDSApp_BroadcastSyntheticEventToChildren((CDSView *)this,param_1,param_2,param_3);
   if (param_1 == 0xf0) {
     _Globals::CMenu_EnableBackgroundState(*(void **)((int)(this->chain).pParent + 0x4c),'\0');
     return;
@@ -93057,7 +93120,7 @@ void __thiscall CHistoryDlg::CHistoryDlg_LoadHistoryPage(CHistoryDlg *this,int p
       CHelpScript::CDSScript_SetBoundParentView((CHelpScript *)this->pActiveScript,pCVar6);
       pageIndex = 1;
       CDSScript::CallExport(this->pActiveScript,0,1,&pageIndex);
-      _Globals::CDSView__AddChild(this,this->pHistoryView,this->pIconFirst);
+      CDSView::CDSView__AddChild((CDSView *)this,this->pHistoryView,this->pIconFirst);
     }
     iVar8 = 4;
     pCVar7 = this + 1;
@@ -93065,7 +93128,7 @@ void __thiscall CHistoryDlg::CHistoryDlg_LoadHistoryPage(CHistoryDlg *this,int p
       pCVar3 = pCVar7 + -1;
       pCVar7 = (CHistoryDlg *)&pCVar7[-1].pIconLast;
       iVar8 = iVar8 + -1;
-      _Globals::CDSView_SetAsDefaultFocusChild((int *)pCVar3->pIconLast);
+      CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)pCVar3->pIconLast);
     } while (iVar8 != 0);
     if (0 < this->nM_currentPage) {
       _Globals::CDSView_EnableWidget((int *)this->pIconFirst);
@@ -93099,7 +93162,7 @@ void __thiscall CHistoryDlg::CHistoryDlg_OnEvent(CHistoryDlg *this,ushort param_
     CHistoryDlg_LoadHistoryPage(this,(this->m_pageIds).nM_count + -1);
     return;
   default:
-    CDSApp::CDSApp_RouteSyntheticCloseEvent((CDSApp *)this,param_1);
+    CDSView::CDSApp_RouteSyntheticCloseEvent((CDSView *)this,param_1);
     return;
   }
 }
@@ -93179,7 +93242,7 @@ CHistoryDlg * __fastcall CHistoryDlg::CHistoryDlg_ctor(CHistoryDlg *this)
   }
   local_4._0_1_ = 2;
   this->pIconFirst = pCVar4;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 4;
   if (pCVar4 == (CIcon *)0x0) {
@@ -93190,7 +93253,7 @@ CHistoryDlg * __fastcall CHistoryDlg::CHistoryDlg_ctor(CHistoryDlg *this)
   }
   local_4._0_1_ = 2;
   this->pIconPrev = pCVar4;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 5;
   if (pCVar4 == (CIcon *)0x0) {
@@ -93201,7 +93264,7 @@ CHistoryDlg * __fastcall CHistoryDlg::CHistoryDlg_ctor(CHistoryDlg *this)
   }
   local_4._0_1_ = 2;
   this->pIconNext = pCVar4;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 6;
   if (pCVar4 == (CIcon *)0x0) {
@@ -93212,7 +93275,7 @@ CHistoryDlg * __fastcall CHistoryDlg::CHistoryDlg_ctor(CHistoryDlg *this)
   }
   local_4 = CONCAT31(local_4._1_3_,2);
   this->pIconLast = pCVar4;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   ExceptionList = local_c;
   return this;
 }
@@ -93466,8 +93529,8 @@ undefined * CMovieView::Catch_00423787(void)
   
   (**(code **)(**(int **)(unaff_EBP + -0x18) + 8))();
   iVar1 = *(int *)(unaff_EBP + -0x14);
-  _Globals::FUN_0040b540((int *)(iVar1 + 0x7c));
-  _Globals::FUN_0040b540((int *)(iVar1 + 0x78));
+  ReleaseAndClearPointer((int *)(iVar1 + 0x7c));
+  ReleaseAndClearPointer((int *)(iVar1 + 0x78));
   return &DAT_004237aa;
 }
 
@@ -93684,7 +93747,7 @@ void __thiscall CMenu::CMenu_CloseCurrentSubScreen(CMenu *this,char param_1)
   
   if (((param_1 != '\0') && (iVar3 = this->nPushedSubScreenId, -1 < iVar3)) && (iVar3 < 6)) {
     _Globals::CDSView__Show(*(int **)(this->pPad_a8_af + iVar3 * 8 + -0x18));
-    _Globals::CDSView__Hide(*(int **)(this->pPad_a8_af + this->nPushedSubScreenId * 8 + -0x14));
+    CDSView::CDSView__Hide(*(CDSView **)(this->pPad_a8_af + this->nPushedSubScreenId * 8 + -0x14));
   }
   pCVar1 = this->pCurSubScreen;
   if (pCVar1 != (CDSView *)0x0) {
@@ -93875,11 +93938,12 @@ CRuch * __fastcall CRuch::CRuch_ctor(CRuch *this)
   *(undefined4 *)&this->field_0x24 = 0;
   *(int *)&this->field_0x28 = iVar5 + 1;
   *(int *)&this->field_0x2c = iVar1 - iVar3;
-  _Globals::CDSView__Hide((int *)this);
+  CDSView::CDSView__Hide((CDSView *)this);
   eventKind = 6;
   iVar5 = Runtime::MSVCRT::_rand();
-  _Globals::Scheduler_RegisterEventSlot
-            (this_00,0,(int)(iVar5 * 0xfa1 + (iVar5 * 0xfa1 >> 0x1f & 0x7fffU)) >> 0xf,eventKind);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot
+            ((CDSUpdatedItem *)this_00,0,
+             (int)(iVar5 * 0xfa1 + (iVar5 * 0xfa1 >> 0x1f & 0x7fffU)) >> 0xf,eventKind);
   ExceptionList = local_c;
   return this;
 }
@@ -94005,20 +94069,20 @@ void __fastcall CRuch::CRuch_OnScheduledTick(void *param_1)
   
   if ((*(byte *)((int)param_1 + -0x24) & 1) != 0) {
     iVar2 = Runtime::MSVCRT::_rand();
-    _Globals::Scheduler_SetEventDelayMs
+    CDSUpdatedItem::Scheduler_SetEventDelayMs
               (param_1,0,(int)(iVar2 * 0xfa1 + (iVar2 * 0xfa1 >> 0x1f & 0x7fffU)) >> 0xf);
-    _Globals::CDSView__Hide((int *)((int)param_1 + -0x68));
+    CDSView::CDSView__Hide((CDSView *)((int)param_1 + -0x68));
     iVar2 = *(int *)((int)g_pApp + 0x28);
     iVar1 = *(int *)((int)g_pApp + 0x20);
     iVar4 = 0;
     iVar3 = Runtime::MSVCRT::_rand();
     iVar3 = iVar3 * (iVar2 - iVar1);
-    CBulanek::CDSView__SetPosition
-              ((CBulanek *)((int)param_1 + -0x68),(int)(iVar3 + (iVar3 >> 0x1f & 0x7fffU)) >> 0xf,
+    CDSView::CDSView__SetPosition
+              ((CDSView *)((int)param_1 + -0x68),(int)(iVar3 + (iVar3 >> 0x1f & 0x7fffU)) >> 0xf,
                iVar4);
     return;
   }
-  _Globals::Scheduler_SetEventDelayMs(param_1,0,100);
+  CDSUpdatedItem::Scheduler_SetEventDelayMs(param_1,0,100);
   _Globals::CDSView__Show((int *)((int)param_1 + -0x68));
   return;
 }
@@ -94065,18 +94129,18 @@ void __thiscall CBulanci::CRuch_EnableDisable(CBulanci *this,char param_1)
   undefined **ppuVar2;
   
   if (param_1 == '\0') {
-    _Globals::CDSView__Hide((int *)this);
+    CDSView::CDSView__Hide((CDSView *)this);
     ppuVar2 = &(this->app).pClassName;
-    pvVar1 = _Globals::Scheduler_GetEventSlot(ppuVar2,0);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)ppuVar2,0);
     if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
-      _Globals::Scheduler_ArmSlot(ppuVar2,0);
+      CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)ppuVar2,0);
     }
   }
   else {
     ppuVar2 = &(this->app).pClassName;
-    pvVar1 = _Globals::Scheduler_GetEventSlot(ppuVar2,0);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)ppuVar2,0);
     if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
-      _Globals::Scheduler_AckSlot(ppuVar2,0,-1);
+      CDSUpdatedItem::Scheduler_AckSlot((CDSUpdatedItem *)ppuVar2,0,-1);
       return;
     }
   }
@@ -94090,7 +94154,7 @@ void __fastcall CSwitch::CSwitch_PlayIdleTrack(int param_1)
 {
   void *pvVar1;
   
-  pvVar1 = _Globals::Scheduler_GetEventSlot((void *)(param_1 + 0x80),0);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)(param_1 + 0x80),0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
     _Globals::SetCurrentTrack((CDSVideoPlayer *)(param_1 + 0x7c),1,'\x01');
     CDSVideoPlayer::TM_Play((CDSVideoPlayer *)(param_1 + 0x7c),'\0');
@@ -94130,7 +94194,7 @@ void __fastcall _Globals::CSwitch_PlayHoverTrack(int param_1)
                     // CSwitch owns its own scheduler at this+0x80.
                     // 
                     // See ghidra_analysis/gameplay/main_menu_hover_audio.md.
-  pvVar1 = Scheduler_GetEventSlot((void *)(param_1 + 0x80),0);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)(param_1 + 0x80),0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
     SetCurrentTrack((CDSVideoPlayer *)(param_1 + 0x7c),0,'\x01');
     CDSVideoPlayer::TM_Play((CDSVideoPlayer *)(param_1 + 0x7c),'\0');
@@ -94207,9 +94271,9 @@ void __thiscall _Globals::CMenu_EnableBackgroundState(void *this,char enabled)
     if ((enabled != '\0') && (*(char *)(*(int *)((int)this + 0xc0) + 0x22) == '\0')) {
       CDSAudioPlayer::CDSAudioPlayer_Play(*(CDSAudioPlayer **)((int)this + 0xc0),1);
     }
-    pvVar1 = Scheduler_GetEventSlot((void *)((int)this + 0x68),0);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)((int)this + 0x68),0);
     if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
-      Scheduler_AckSlot((void *)((int)this + 0x68),0,-1);
+      CDSUpdatedItem::Scheduler_AckSlot((CDSUpdatedItem *)((int)this + 0x68),0,-1);
     }
     if (*(char *)((int)this + 0xe2) == '\0') {
       CBulanci::CMenu_EnableAllRuch(this,'\0');
@@ -94220,7 +94284,7 @@ void __thiscall _Globals::CMenu_EnableBackgroundState(void *this,char enabled)
 
 
 
-void __fastcall CMenu::CMenu_OnMusicFadeTick(void *param_1)
+void __fastcall CMenu::CMenu_OnMusicFadeTick(CDSUpdatedItem *param_1)
 
 {
   void *this;
@@ -94232,16 +94296,16 @@ void __fastcall CMenu::CMenu_OnMusicFadeTick(void *param_1)
                     // != 0, increments by 1 up to 100, then arms/pauses slot and enables all CRuch
                     // actors. Curve is linear in integer percent; DirectSound maps percent to dB
                     // later.
-  this = *(void **)((int)param_1 + 0x58);
-  if (*(char *)((int)param_1 + 0x7a) == '\0') {
+  this = (void *)param_1[3].dwEventSlots;
+  if (*(char *)((int)&param_1[5].pVftable_IDSUpdated + 2) == '\0') {
     uVar1 = *(int *)((int)this + 0x54) - 1;
     if ((int)uVar1 < 0x46) {
       uVar1 = 0x46;
     }
     _Globals::CDSAudioPlayer_SetVolumePercent(this,uVar1);
     if (uVar1 == 0x46) {
-      _Globals::Scheduler_ArmSlot(param_1,0);
-      CDSAudioPlayer::CDSAudioPlayer_Stop(*(CDSAudioPlayer **)((int)param_1 + 0x58),1);
+      CDSUpdatedItem::Scheduler_ArmSlot(param_1,0);
+      CDSAudioPlayer::CDSAudioPlayer_Stop((CDSAudioPlayer *)param_1[3].dwEventSlots,1);
     }
   }
   else {
@@ -94251,8 +94315,8 @@ void __fastcall CMenu::CMenu_OnMusicFadeTick(void *param_1)
     }
     _Globals::CDSAudioPlayer_SetVolumePercent(this,uVar1);
     if (uVar1 == 100) {
-      _Globals::Scheduler_ArmSlot(param_1,0);
-      CBulanci::CMenu_EnableAllRuch((CBulanci *)((int)param_1 + -0x68),'\x01');
+      CDSUpdatedItem::Scheduler_ArmSlot(param_1,0);
+      CBulanci::CMenu_EnableAllRuch((CBulanci *)&param_1[-5].dwEventSlots,'\x01');
       return;
     }
   }
@@ -94305,7 +94369,7 @@ void __fastcall CPoemScroller::CPoemScroller_Render(int param_1)
     CPoemScroller_SetBlitMask(pCVar1,*(int *)(param_1 + 0x118));
     BlitDispatch(local_34,&local_20,(CPoemScroller *)(-(uint)(param_1 != -0xb8) & (uint)pCVar1),
                  (int *)0x0,(uint *)0x0);
-    FUN_00436760((int)pCVar1);
+    CPoemScroller_ClearBlitMask((int)pCVar1);
   }
   iVar3 = *(int *)(param_1 + 0xac);
   local_30 = iVar3;
@@ -94344,7 +94408,7 @@ void __fastcall CPoemScroller::CPoemScroller_Render(int param_1)
     CPoemScroller_SetBlitMask(pCVar1,*(int *)(param_1 + 0x11c));
     BlitDispatch(local_34,&local_20,(CPoemScroller *)(-(uint)(param_1 != -0xb8) & (uint)pCVar1),
                  (int *)0x0,(uint *)0x0);
-    FUN_00436760((int)pCVar1);
+    CPoemScroller_ClearBlitMask((int)pCVar1);
   }
   return;
 }
@@ -94749,7 +94813,7 @@ void __fastcall CGunMouse::CGunMouse_Draw(CGunMouse *this)
     }
     CPoemScroller::BlitDispatch
               (pCVar4,&local_40,(CPoemScroller *)this->m_dotSpriteInfo,(int *)0x0,(uint *)0x0);
-    _Globals::CDSApp_AddDirtyRect(this_01,&local_40);
+    CDSApp::CDSApp_AddDirtyRect(this_01,&local_40);
   }
   if (this_01 == (void *)0xffffff84) {
     pCVar4 = (CPoemScroller *)0x0;
@@ -94781,9 +94845,9 @@ void __fastcall CGunMouse::CGunMouse_Draw(CGunMouse *this)
   CPoemScroller::CDSImage_DrawVerticalLine(local_44,local_10,local_24,local_4,0xff0000,0x808080);
   CPoemScroller::BlitDispatch
             (local_44,&local_30,(CPoemScroller *)this->m_armSpriteInfo,(int *)0x0,(uint *)0x0);
-  _Globals::CDSApp_AddDirtyRect(this_01,&local_20);
-  _Globals::CDSApp_AddDirtyRect(this_01,&local_10);
-  _Globals::CDSApp_AddDirtyRect(this_01,&local_30);
+  CDSApp::CDSApp_AddDirtyRect(this_01,&local_20);
+  CDSApp::CDSApp_AddDirtyRect(this_01,&local_10);
+  CDSApp::CDSApp_AddDirtyRect(this_01,&local_30);
   return;
 }
 
@@ -94891,9 +94955,9 @@ void __fastcall CGunMouse::CGunMouse_Erase(int param_1)
     pCVar3 = (CPoemScroller *)((int)this + 0x80);
   }
   CPoemScroller::BlitDispatch(pCVar3,&local_40,pCVar2,(int *)0x0,(uint *)0x0);
-  _Globals::CDSApp_AddDirtyRect(this,&local_20);
-  _Globals::CDSApp_AddDirtyRect(this,local_10);
-  _Globals::CDSApp_AddDirtyRect(this,&local_40);
+  CDSApp::CDSApp_AddDirtyRect(this,&local_20);
+  CDSApp::CDSApp_AddDirtyRect(this,local_10);
+  CDSApp::CDSApp_AddDirtyRect(this,&local_40);
   if (*(char *)(param_1 + 0x206) != '\0') {
     local_30 = (*(int *)(param_1 + 0x198) - *(int *)(*(int *)(param_1 + 0x1fc) + 4) / 2) +
                *(int *)(param_1 + 0x1a0);
@@ -94914,7 +94978,7 @@ void __fastcall CGunMouse::CGunMouse_Erase(int param_1)
       pCVar3 = (CPoemScroller *)((int)this + 0x80);
     }
     CPoemScroller::BlitDispatch(pCVar3,&local_30,pCVar2,(int *)0x0,(uint *)0x0);
-    _Globals::CDSApp_AddDirtyRect(this,&local_30);
+    CDSApp::CDSApp_AddDirtyRect(this,&local_30);
     *(undefined4 *)(param_1 + 0x1a0) = *(undefined4 *)(param_1 + 0x1a8);
     *(undefined4 *)(param_1 + 0x1a4) = *(undefined4 *)(param_1 + 0x1ac);
     *(undefined1 *)(param_1 + 0x204) = 0;
@@ -95222,7 +95286,7 @@ void __thiscall CMenu::CMenu_OnEvent(CMenu *this,ushort param_1)
     this->pDeferredExitVoicePlayer = (CDSAudioPlayer *)0x0;
     return;
   }
-  CDSApp::CDSApp_RouteSyntheticCloseEvent((CDSApp *)this,param_1);
+  CDSView::CDSApp_RouteSyntheticCloseEvent((CDSView *)this,param_1);
   return;
 }
 
@@ -95297,7 +95361,7 @@ void __fastcall _Globals::CPoemScroller_ReleaseOwnedResources(int param_1)
                     // UNCERTAIN: CPoemScroller teardown helper — Scheduler_ArmSlot(+0x68,0),
                     // Release on +0xa8 and vector at +0x80; called from Destructor and
                     // CatchExceptionHelper.
-  Scheduler_ArmSlot((void *)(param_1 + 0x68),0);
+  CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)(param_1 + 0x68),0);
   if (*(int **)(param_1 + 0xa8) != (int *)0x0) {
     (**(code **)(**(int **)(param_1 + 0xa8) + 8))();
   }
@@ -95317,7 +95381,7 @@ void __thiscall _Globals::CDSVec_ResizeIntPair(void *this,int param_1)
   void *pvVar1;
   
   if (*(int *)((int)this + 4) < param_1) {
-    pvVar1 = FUN_0042f730(*(void **)this,(uchar *)(param_1 * 8));
+    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 * 8));
     *(void **)this = pvVar1;
     CDSVec_ZeroNewIntPairs
               ((undefined4 *)((int)pvVar1 + *(int *)((int)this + 4) * 8),
@@ -95326,7 +95390,7 @@ void __thiscall _Globals::CDSVec_ResizeIntPair(void *this,int param_1)
     return;
   }
   if (param_1 < *(int *)((int)this + 4)) {
-    pvVar1 = FUN_0042f730(*(void **)this,(uchar *)(param_1 * 8));
+    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 * 8));
     *(void **)this = pvVar1;
     *(int *)((int)this + 4) = param_1;
   }
@@ -95443,7 +95507,7 @@ void __thiscall CSwitch::CSwitch_OnMouseClick(CSwitch *this,undefined4 param_1,b
   char cVar1;
   
   if ((param_2 & 1) != 0) {
-    _Globals::FUN_0042cf60((int *)this);
+    CDSView::CDSView_OnMouseUpModalInputRefresh((CDSView *)this);
     cVar1 = (**(code **)((int)this->pVftable_primary + 0x1c))((int)g_pApp + 0xf0);
     if (cVar1 != '\0') {
       _Globals::Button_Click(this);
@@ -95487,7 +95551,7 @@ void __thiscall CBulanci::CMenu_SetDayNightBg(CBulanci *this,char param_1)
     return;
   }
   CMenu_LoadBackgroundMusic(this,0x10149);
-  _Globals::CDSView__Hide((this->app).backBuffer.embeddedImage.pDirectDrawSurface);
+  CDSView::CDSView__Hide((this->app).backBuffer.embeddedImage.pDirectDrawSurface);
   return;
 }
 
@@ -95553,7 +95617,7 @@ void __thiscall CMenu::CMenu_DispatchHotkey(CMenu *this,ushort modalExitCode,int
     ppCVar2 = &this->pBtnStart;
     iVar3 = 3;
     do {
-      _Globals::CDSView_SetAsDefaultFocusChild((int *)*ppCVar2);
+      CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)*ppCVar2);
       ppCVar2 = ppCVar2 + 1;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
@@ -95954,7 +96018,7 @@ void __thiscall CMenu::CMenu_LoadBackgroundResource(CMenu *this,undefined4 param
   }
   this->pSubScreenBgBitmap = pCVar1;
   local_c = (void *)((uint)local_c._1_3_ << 8);
-  _Globals::CDSView__AddChild(this,pCVar1,this->pTitleBitmap->dwField_0c);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,this->pTitleBitmap->dwField_0c);
   local_c = (void *)0xffffffff;
   if (trackParams != (int *)0x0) {
     (**(code **)(*trackParams + 8))();
@@ -96021,7 +96085,7 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
     if (param_1 != 0xc9) {
       if (param_1 == 0xca) {
         CMenu_CloseCurrentSubScreen(this,'\x01');
-        _Globals::CDSView__Hide((int *)this->pIconHistoryNormal);
+        CDSView::CDSView__Hide((CDSView *)this->pIconHistoryNormal);
         _Globals::CDSView__Show((int *)this->pIconHistoryHighlight);
         CMenu_LoadBackgroundResource(this,0x1013e);
         pCVar4 = (CHistoryDlg *)_Globals::OperatorNewWithBadAlloc(0x9c);
@@ -96035,7 +96099,7 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
         this->pCurSubScreen = (CDSView *)pCVar4;
         local_4 = (void *)0xffffffff;
         CHistoryDlg::CHistoryDlg_LoadHistoryPage(pCVar4,*(int *)((int)g_pApp + 0x306));
-        _Globals::CDSView__AddChild(this,this->pCurSubScreen,this->pRuch0);
+        CDSView::CDSView__AddChild((CDSView *)this,this->pCurSubScreen,this->pRuch0);
         uVar6 = 0;
         piVar3 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x18,0,(void *)0x0,'\x01');
         _Globals::CDSAudioPlayer_PlayAndRelease(piVar3,uVar6);
@@ -96045,7 +96109,7 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
       }
       if (param_1 == 0xcb) {
         CMenu_CloseCurrentSubScreen(this,'\x01');
-        _Globals::CDSView__Hide((int *)this->pIconQuitNormal);
+        CDSView::CDSView__Hide((CDSView *)this->pIconQuitNormal);
         _Globals::CDSView__Show((int *)this->pIconQuitHighlight);
         CMenu_LoadBackgroundResource(this,0x1013d);
         this_00 = (CExitDlg *)_Globals::OperatorNewWithBadAlloc(0x7c);
@@ -96058,7 +96122,7 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
         }
         local_4 = (void *)0xffffffff;
         this->pCurSubScreen = pCVar2;
-        _Globals::CDSView__AddChild(this,pCVar2,this->pRuch0);
+        CDSView::CDSView__AddChild((CDSView *)this,pCVar2,this->pRuch0);
         uVar6 = 0;
         piVar3 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x19,0,(void *)0x0,'\x01');
         _Globals::CDSAudioPlayer_PlayAndRelease(piVar3,uVar6);
@@ -96067,12 +96131,12 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
         return;
       }
 LAB_00425c48:
-      CDSApp::CDSApp_RouteSyntheticCloseEvent((CDSApp *)this,param_1);
+      CDSView::CDSApp_RouteSyntheticCloseEvent((CDSView *)this,param_1);
       ExceptionList = local_c;
       return;
     }
     CMenu_CloseCurrentSubScreen(this,'\x01');
-    _Globals::CDSView__Hide((int *)this->pIconStartNormal);
+    CDSView::CDSView__Hide((CDSView *)this->pIconStartNormal);
     _Globals::CDSView__Show((int *)this->pIconStartHighlight);
     CMenu_LoadBackgroundResource(this,0x1013c);
     pCVar5 = (CStartGame1 *)_Globals::OperatorNewWithBadAlloc(0xa8);
@@ -96085,7 +96149,7 @@ LAB_00425c48:
     }
     local_4 = (void *)0xffffffff;
     this->pCurSubScreen = (CDSView *)pCVar5;
-    _Globals::CDSView__AddChild(this,pCVar5,this->pRuch0);
+    CDSView::CDSView__AddChild((CDSView *)this,pCVar5,this->pRuch0);
     uVar6 = 0;
     piVar3 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x1b,0,(void *)0x0,'\x01');
     _Globals::CDSAudioPlayer_PlayAndRelease(piVar3,uVar6);
@@ -96542,8 +96606,8 @@ CPoemScroller * __fastcall CPoemScroller::CPoemScroller_Constructor(CPoemScrolle
     }
   }
   local_8 = 6;
-  _Globals::Scheduler_RegisterEventSlot(&this->scheduler,0,0x78,6);
-  _Globals::Scheduler_SetEventLastFireMs(&this->scheduler,0,g_dwElapsedMs + 3000);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->scheduler,0,0x78,6);
+  CDSUpdatedItem::Scheduler_SetEventLastFireMs(&this->scheduler,0,g_dwElapsedMs + 3000);
   PickNextPoem(this);
   ExceptionList = local_10;
   return this;
@@ -96735,7 +96799,7 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   }
   local_c._0_1_ = 4;
   this->pTitleBitmap = pCVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar3 = (CSwitch *)_Globals::OperatorNewWithBadAlloc(200);
   local_c._0_1_ = 6;
   if (pCVar3 == (CSwitch *)0x0) {
@@ -96746,7 +96810,7 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   }
   local_c._0_1_ = 4;
   this->pBtnStart = pCVar3;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar3 = (CSwitch *)_Globals::OperatorNewWithBadAlloc(200);
   local_c._0_1_ = 7;
   if (pCVar3 == (CSwitch *)0x0) {
@@ -96757,7 +96821,7 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   }
   local_c._0_1_ = 4;
   this->pBtnHistory = pCVar3;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar3 = (CSwitch *)_Globals::OperatorNewWithBadAlloc(200);
   local_c._0_1_ = 8;
   if (pCVar3 == (CSwitch *)0x0) {
@@ -96768,7 +96832,7 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   }
   local_c._0_1_ = 4;
   this->pBtnQuit = pCVar3;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   local_c._0_1_ = 9;
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 10;
@@ -96786,7 +96850,7 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   }
   local_c._0_1_ = 9;
   this->pIconStartNormal = pCVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0xb;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -96806,7 +96870,7 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   }
   local_c._0_1_ = 9;
   this->pIconStartHighlight = pCVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0xc;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -96824,7 +96888,7 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   }
   local_c._0_1_ = 9;
   this->pIconHistoryNormal = pCVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0xd;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -96842,7 +96906,7 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   }
   local_c._0_1_ = 9;
   this->pIconHistoryHighlight = pCVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0xe;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -96862,7 +96926,7 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   }
   local_c._0_1_ = 9;
   this->pIconQuitNormal = pCVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0xf;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -96881,10 +96945,10 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   }
   local_c._0_1_ = 9;
   this->pIconQuitHighlight = pCVar2;
-  _Globals::CDSView__AddChild(this);
-  _Globals::CDSView__Hide((int *)this->pIconStartHighlight);
-  _Globals::CDSView__Hide((int *)this->pIconHistoryHighlight);
-  _Globals::CDSView__Hide((int *)this->pIconQuitHighlight);
+  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__Hide((CDSView *)this->pIconStartHighlight);
+  CDSView::CDSView__Hide((CDSView *)this->pIconHistoryHighlight);
+  CDSView::CDSView__Hide((CDSView *)this->pIconQuitHighlight);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0x10;
   if (pCVar2 == (CDSBitmap *)0x0) {
@@ -96902,14 +96966,14 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   }
   local_c._0_1_ = 9;
   this->pHeroBitmap = pCVar2;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   this_00 = (CPoemScroller *)_Globals::OperatorNewWithBadAlloc(0x128);
   local_c._0_1_ = 0x11;
   if (this_00 != (CPoemScroller *)0x0) {
     CPoemScroller::CPoemScroller_Constructor(this_00);
   }
   local_c._0_1_ = 9;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   this_01 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_c._0_1_ = 0x12;
   if (this_01 != (CStaticText *)0x0) {
@@ -96921,7 +96985,7 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
     CStaticText::CStaticText_BuildAtAuto(this_01,0xe6,0x23f,puVar8,(uint)puVar9,uVar10);
   }
   local_c = (void *)CONCAT31(local_c._1_3_,9);
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   ppCVar7 = &this->pRuch0;
   *ppCVar7 = (CRuch *)0x0;
   this->pRuch1 = (CRuch *)0x0;
@@ -96939,13 +97003,13 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
     }
     local_c = (void *)CONCAT31(local_c._1_3_,9);
     *ppCVar7 = pCVar4;
-    _Globals::CDSView__AddChild(this);
+    CDSView::CDSView__AddChild((CDSView *)this);
     ppCVar7 = ppCVar7 + 1;
     iVar6 = iVar6 + -1;
   } while (iVar6 != 0);
   CBulanci::CMenu_EnableAllRuch((CBulanci *)this,'\0');
   this->bBgMusicEnabled = 0;
-  _Globals::Scheduler_RegisterEventSlot(&this->updatedItem,0,0x78,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->updatedItem,0,0x78,7);
   CBulanci::CMenu_PollDayNight((CBulanci *)this,'\x01');
   if (local_4 < 3) {
                     // splash auto-click: indexes pBtnStart..pBtnQuit via pad_a8_af+8 (no stores to
@@ -96985,11 +97049,11 @@ void __thiscall CPanel::CPanel_OnEvent(CPanel *this,short eventId)
       uVar2 = _Globals::CGameGetPlayerMidGameStatusByte(this->pGame_host,bVar1);
       uVar4 = (uint)bVar3;
       if ((char)uVar2 == '\0') {
-        _Globals::CDSView__Hide(*(int **)(this->p_pad_e0 + uVar4 * 4 + 0xc));
-        _Globals::CDSView__Hide(*(int **)(this->p_pad_db + uVar4 * 4 + 1));
+        CDSView::CDSView__Hide(*(CDSView **)(this->p_pad_e0 + uVar4 * 4 + 0xc));
+        CDSView::CDSView__Hide(*(CDSView **)(this->p_pad_db + uVar4 * 4 + 1));
       }
       else {
-        _Globals::CDSView__Show(*(int **)(this->p_pad_e0 + uVar4 * 4 + 0xc));
+        _Globals::CDSView__Show((int *)*(CDSView **)(this->p_pad_e0 + uVar4 * 4 + 0xc));
         _Globals::CDSView__Show(*(int **)(this->p_pad_db + uVar4 * 4 + 1));
       }
       bVar3 = bVar3 + 1;
@@ -97198,7 +97262,7 @@ void __fastcall CNumCounter::CNumCounter_OnTimerTick(void *param_1)
   CNumCounter_UpdateDigit(this,1,(undefined1 *)((int)&uStack_4 + 3));
   CNumCounter_UpdateDigit(this_00,2,(undefined1 *)((int)&uStack_4 + 3));
   if (uStack_4._3_1_ == '\0') {
-    _Globals::Scheduler_ArmSlot(param_1,0);
+    CDSUpdatedItem::Scheduler_ArmSlot(param_1,0);
     return;
   }
   (**(code **)(*extraout_ECX + 0x24))(0);
@@ -97246,7 +97310,7 @@ void __thiscall CBulanci::CNumCounter_SetValue(CBulanci *this,uint value,char an
   else if ((((int)pvVar4 - (this->app).backBuffer.embeddedImage.nM_stride != 0) ||
            ((int)pvVar5 - (this->app).backBuffer.embeddedImage.nM_paletteMarker != 0)) ||
           (iVar3 - *(int *)&(this->app).backBuffer.embeddedImage.bM_fillByte != 0)) {
-    _Globals::Scheduler_AckSlot(&(this->app).pClassName,0,-1);
+    CDSUpdatedItem::Scheduler_AckSlot((CDSUpdatedItem *)&(this->app).pClassName,0,-1);
     return;
   }
   return;
@@ -98254,7 +98318,7 @@ CBulanci * __thiscall CBulanci::CNumCounterCtor(CBulanci *this,int param_1,int p
        *(int *)((int)(this->app).backBuffer.embeddedImage.pVf_primary + 4) * 3 + 4 +
        (this->app).nRect_left;
   (this->app).nRect_bottom = iVar2 + param_2;
-  _Globals::Scheduler_RegisterEventSlot(&(this->app).pClassName,0,100,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot((CDSUpdatedItem *)&(this->app).pClassName,0,100,7);
   *(undefined1 *)&(this->app).backBuffer.embeddedImage.nM_height = 1;
   CNumCounter_SetValue(this,param_3,'\0');
   ExceptionList = local_c;
@@ -98352,7 +98416,7 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
     CDSBitmap::CDSBitmap_ctor(local_4,0,0,piVar16);
   }
   local_c = (CDSStreamStorage *)CONCAT31(local_c._1_3_,2);
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   iVar9 = piVar16[2];
   (this->app).nRect_left = 0;
   (this->app).nRect_top = 600 - iVar9;
@@ -98416,12 +98480,12 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
                             (pCVar10,iVar9 + 4,9,iVar9 + 0x5c,0x16,puVar19,puVar20,uVar21,uVar22);
       }
       *(CStaticText **)((this->app).pPad_e5 + uVar18 * 4 + -0x19) = pCVar10;
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       pCVar12 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
       if (pCVar12 != (CDSBitmap *)0x0) {
         CDSBitmap::CDSBitmap_ctor(pCVar12,gAPanelColumnXOffsets[uVar18] + 5,0x28,piVar16);
       }
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       pCVar13 = (CBulPicture *)_Globals::OperatorNewWithBadAlloc(0x470);
       uVar21 = uVar23;
       if (pCVar13 == (CBulPicture *)0x0) {
@@ -98437,13 +98501,13 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
       CBulPicture::CBulPicture_ApplyTeamPalette
                 (*(CBulPicture **)
                   ((this->app).backBuffer.embeddedImage.pM_slotVector + uVar18 * 4 + 4),bVar6);
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       *(undefined4 *)((this->app).backBuffer.embeddedImage.pPad_19 + uVar18 * 4 + -1) = 0;
       this_00 = (CSpells *)_Globals::OperatorNewWithBadAlloc(0x80);
       if (this_00 != (CSpells *)0x0) {
         CSpells::CSpells_ctor(this_00,gAPanelColumnXOffsets[uVar18] + 6,0x29);
       }
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       iVar9 = *(int *)((this->app).backBuffer.embeddedImage.pM_slotVector + uVar18 * 4 + 4);
       piVar17 = (int *)(iVar9 + 0x20);
       this_01 = (CDSChained *)_Globals::OperatorNewWithBadAlloc(0x6c);
@@ -98459,12 +98523,12 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
         this_01[1].pVftable_primary = (void *)0xffffff;
       }
       *(CDSChained **)((this->app).pKeyDownBitmap + uVar18 * 4 + -4) = this_01;
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       piVar4 = *(int **)((this->app).pKeyDownBitmap + uVar18 * 4 + -4);
       pcVar5 = *(code **)(*piVar4 + 0x24);
       piVar4[0x1a] = 0x9f9f9f;
       (*pcVar5)();
-      _Globals::CDSView__Hide(*(int **)((this->app).pKeyDownBitmap + uVar18 * 4 + -4));
+      CDSView::CDSView__Hide(*(CDSView **)((this->app).pKeyDownBitmap + uVar18 * 4 + -4));
       pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
       if (pCVar10 == (CStaticText *)0x0) {
         pCVar10 = (CStaticText *)0x0;
@@ -98482,11 +98546,11 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
                              *(undefined4 *)(iVar9 + 0x2c),puVar19,puVar20,uVar23,uVar22);
       }
       *(CStaticText **)((this->app).pPad_e5 + uVar18 * 4 + -9) = pCVar10;
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       CStaticText::CStaticText_SetStyle
                 (*(CStaticText **)((this->app).pPad_e5 + uVar18 * 4 + -9),&DAT_004b39fc,2);
       *(undefined1 *)(*(int *)((this->app).pPad_e5 + uVar18 * 4 + -9) + 0x94) = 1;
-      _Globals::CDSView__Hide(*(int **)((this->app).pPad_e5 + uVar18 * 4 + -9));
+      CDSView::CDSView__Hide(*(CDSView **)((this->app).pPad_e5 + uVar18 * 4 + -9));
       pCVar14 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0x7c);
       if (pCVar14 == (CBulanci *)0x0) {
         pCVar15 = (CShotCounter *)0x0;
@@ -98496,7 +98560,7 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
       }
       *(CShotCounter **)((this->app).backBuffer.embeddedImage.pPad_19 + uVar18 * 4 + -0x21) =
            pCVar15;
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       pCVar12 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
       if (pCVar12 == (CDSBitmap *)0x0) {
         pCVar12 = (CDSBitmap *)0x0;
@@ -98509,7 +98573,7 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
                              (int *)pCVar8);
       }
       *(CDSBitmap **)((this->app).backBuffer.embeddedImage.pPad_19 + uVar18 * 4 + -0x11) = pCVar12;
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       pCVar14 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0xa8);
       if (pCVar14 == (CBulanci *)0x0) {
         uVar22 = 0;
@@ -98519,7 +98583,7 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
         uVar22 = CNumCounterCtor(pCVar14,*(int *)(iVar9 + 0x28) + 3,*(int *)(iVar9 + 0x24),uVar23);
       }
       *(undefined4 *)((this->app).backBuffer.embeddedImage.pPad_19 + uVar18 * 4 + 0xf) = uVar22;
-      _Globals::CDSView__AddChild(this);
+      CDSView::CDSView__AddChild((CDSView *)this);
       bVar6 = (char)uVar21 + 1;
       uVar23 = CONCAT31((int3)(uVar21 >> 8),bVar6);
     } while (bVar6 < *(byte *)&(this->app).pRegistryPath);
@@ -98546,7 +98610,7 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
                         (pCVar10,0x166,0x2d,0x1bc,0x5f,puVar19,puVar20,uVar23,uVar22);
   }
   *(CStaticText **)(this->app).backBuffer.embeddedImage.pM_slotVector = pCVar10;
-  _Globals::CDSView__AddChild(this);
+  CDSView::CDSView__AddChild((CDSView *)this);
   CStaticText::CStaticText_SetStyle
             (*(CStaticText **)(this->app).backBuffer.embeddedImage.pM_slotVector,&DAT_004b39ec,4);
   puVar2 = (this->app).pMiPad_after_vftable_sub10;
@@ -100099,7 +100163,7 @@ uint __fastcall _Globals::FUN_004298d0(int param_1)
   if ((int)uVar1 < 0) {
     return uVar1 & 0xffffff00;
   }
-  uVar2 = FUN_00436d90((void *)(param_1 + 4),(int)&uStack_80);
+  uVar2 = CDSImage_BindFromSurfaceDesc((void *)(param_1 + 4),(int)&uStack_80);
   return CONCAT31((int3)((uint)uVar2 >> 8),1);
 }
 
@@ -100422,7 +100486,7 @@ undefined2 __fastcall CBulanci::CDSApp_Run(void *param_1)
 {
   undefined2 uVar1;
   
-  uVar1 = _Globals::CDSView_DoModal(param_1,(void *)0x0);
+  uVar1 = CDSView::CDSView_DoModal(param_1,(void *)0x0);
   _Globals::CDSView_SetActive(param_1,0);
   _Globals::CDSView_SetModalEligible(param_1,0);
   return uVar1;
@@ -100504,7 +100568,7 @@ void __thiscall CDSApp::CDSApp_DispatchInputEvent(CDSApp *this,CDSEventRecord *p
     this->pPad_e5[2] = uVar6;
     if ((param_1->wMsg_id & 8) != 0) {
       if (g_pModalFocus != (void *)0x0) {
-        _Globals::FUN_0042c880(g_pModalFocus);
+        _Globals::CDSView_UpdateInputChainOnMouseMove(g_pModalFocus);
       }
       if (g_pInputChainHead == (void *)0x0) {
         return;
@@ -100812,7 +100876,7 @@ CBulanci::CBulanci_ResizeClientAndDisplayMode
                     // UNCERTAIN: CDSView::SetSize + IDirectX mode enum fallback 6→5→4; callers
                     // CBulanci_OnCreate, CDSApp_SetWindowed (main_menu adapt display mode)
   CDSApp_ReleaseBackBufferAndSurface((int)this);
-  CDSView__SetSize(this,(int)param_1,param_2);
+  CDSView::CDSView__SetSize((CDSView *)this,(int)param_1,param_2);
   CDSApp_RefreshBlitDestRect((int)this);
   (this->app).nMouseX = param_3;
   if ((this->app).bWindowed == 0) {
@@ -101090,7 +101154,7 @@ void __thiscall _Globals::CDSApp_DirtyRectList_SetSize(void *this,int param_1)
   void *pvVar1;
   
   if (*(int *)((int)this + 4) < param_1) {
-    pvVar1 = FUN_0042f730(*(void **)this,(uchar *)(param_1 << 4));
+    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 << 4));
     *(void **)this = pvVar1;
     TArray16_ZeroRange((undefined4 *)(*(int *)((int)this + 4) * 0x10 + (int)pvVar1),
                        param_1 - *(int *)((int)this + 4));
@@ -101098,7 +101162,7 @@ void __thiscall _Globals::CDSApp_DirtyRectList_SetSize(void *this,int param_1)
     return;
   }
   if (param_1 < *(int *)((int)this + 4)) {
-    pvVar1 = FUN_0042f730(*(void **)this,(uchar *)(param_1 << 4));
+    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 << 4));
     *(void **)this = pvVar1;
     *(int *)((int)this + 4) = param_1;
   }
@@ -101322,6 +101386,8 @@ void __thiscall
 CDSImageMouse::CDSImageMouse_ScalarDeletingDtor_thunk(CDSImageMouse *this,byte param_1)
 
 {
+                    // CDSImageMouse_ScalarDeletingDtor_thunk — NOT CDSChain_AdjustThisOffset (R6
+                    // task 14)
   CDSImageMouse_vDtor((CDSImageMouse *)&this[-1].nM_dirtyBottom,param_1);
   return;
 }
@@ -101434,7 +101500,7 @@ void __thiscall _Globals::CDSApp_SetPendingChildView(void *this,int param_1)
 
 
 
-void __fastcall _Globals::FUN_0042ae40(void *param_1)
+void __fastcall _Globals::CDSApp_DirtyRectList_Clear(void *param_1)
 
 {
                     // UNCERTAIN: EH unwind helper — zeros +8 then FUN_0042a910(this,0) (0x10-byte
@@ -101446,7 +101512,8 @@ void __fastcall _Globals::FUN_0042ae40(void *param_1)
 
 
 
-int __thiscall _Globals::FUN_0042ae50(void *this,int *param_1,undefined *param_2,int param_3)
+int __thiscall
+_Globals::CDSApp_DirtyRectList_UpsertRect(void *this,int *param_1,undefined *param_2,int param_3)
 
 {
   int iVar1;
@@ -101915,7 +101982,7 @@ void __fastcall CDSApp::CDSApp_dtor(int *param_1)
     DestroyWindow((HWND)g_pHwnd);
   }
   _Globals::CDSApp_SetPendingChildView(param_1,0);
-  FUN_0042f530();
+  CBulanci_ReleaseResourceIndexSlots();
   if (param_1 != (int *)0x0) {
     (**(code **)(*param_1 + 4))(1);
   }
@@ -101924,12 +101991,12 @@ void __fastcall CDSApp::CDSApp_dtor(int *param_1)
 
 
 
-void __thiscall _Globals::CDSApp_AddDirtyRectCoalesced(void *this,int *param_1,int *param_2)
+void __thiscall CDSApp::CDSApp_AddDirtyRectCoalesced(CDSApp *this,int *param_1,int *param_2)
 
 {
-  void *pvVar1;
-  void *pvVar2;
-  void *pvVar3;
+  int iVar1;
+  int iVar2;
+  int iVar3;
   int iVar4;
   int iVar5;
   int iVar6;
@@ -101940,25 +102007,18 @@ void __thiscall _Globals::CDSApp_AddDirtyRectCoalesced(void *this,int *param_1,i
   int iVar11;
   int *piVar12;
   int iVar13;
-  void *pvVar14;
   uint local_48;
   int local_44;
   int local_40;
   tagRECT local_30;
-  void *local_20;
-  void *local_1c;
-  void *local_18;
-  int local_14;
-  void *local_10;
-  int local_c;
-  void *local_8;
-  int local_4;
+  tagRECT local_20;
+  tagRECT local_10;
   
   local_30.left = *param_2;
   local_30.top = param_2[1];
   local_30.right = param_2[2];
   local_30.bottom = param_2[3];
-  CPoemScroller::rect_Intersect((CPoemScroller *)&local_30,(tagRECT *)((int)this + 0x20));
+  tagRECT::CDSRect_Intersect(&local_30,(tagRECT *)&this->nRect_left);
   if ((local_30.left < local_30.right) && (local_30.top < local_30.bottom)) {
     iVar5 = local_30.right - local_30.left;
     iVar9 = local_30.bottom - local_30.top;
@@ -101968,50 +102028,50 @@ void __thiscall _Globals::CDSApp_AddDirtyRectCoalesced(void *this,int *param_1,i
     local_48 = 0xffffffff;
     if (iVar11 != 0) {
       iVar6 = iVar11 << 4;
-      pvVar14 = (void *)local_30.left;
+      iVar10 = local_30.left;
       do {
         iVar6 = iVar6 + -0x10;
-        pvVar1 = *(void **)(*param_1 + 8 + iVar6);
+        iVar8 = *(int *)(*param_1 + 8 + iVar6);
         piVar12 = (int *)(*param_1 + iVar6);
-        pvVar2 = (void *)*piVar12;
+        iVar13 = *piVar12;
         iVar11 = iVar11 + -1;
         uVar7 = local_48;
-        iVar10 = local_44;
+        iVar3 = local_44;
         iVar4 = iVar11;
-        if ((int)pvVar2 < (int)pvVar1) {
-          pvVar3 = (void *)piVar12[1];
-          iVar8 = piVar12[3];
-          if ((int)pvVar3 < iVar8) {
-            if ((((pvVar14 == pvVar2) && (pvVar3 == (void *)local_30.top)) &&
-                (pvVar1 == (void *)local_30.right)) && (iVar8 == local_30.bottom)) {
+        if (iVar13 < iVar8) {
+          iVar1 = piVar12[1];
+          iVar2 = piVar12[3];
+          if (iVar1 < iVar2) {
+            if ((((iVar10 == iVar13) && (iVar1 == local_30.top)) && (iVar8 == local_30.right)) &&
+               (iVar2 == local_30.bottom)) {
               return;
             }
-            if ((((int)pvVar2 <= (int)pvVar14) && ((int)pvVar3 <= local_30.top)) &&
-               ((local_30.right <= (int)pvVar1 && (local_30.bottom <= iVar8)))) {
+            if (((iVar13 <= iVar10) && (iVar1 <= local_30.top)) &&
+               ((local_30.right <= iVar8 && (local_30.bottom <= iVar2)))) {
               return;
             }
             iVar4 = local_40;
-            if ((((int)pvVar2 < (int)pvVar14) || ((int)pvVar3 < local_30.top)) ||
-               ((local_30.right < (int)pvVar1 || (local_30.bottom < iVar8)))) {
-              local_20 = pvVar2;
-              local_1c = pvVar3;
-              local_18 = pvVar1;
-              local_14 = iVar8;
-              CPoemScroller::rect_Intersect((CPoemScroller *)&local_20,&local_30);
-              if (((int)local_20 < (int)local_18) && ((int)local_1c < local_14)) {
-                local_c = piVar12[1];
-                local_10 = (void *)*piVar12;
-                local_8 = (void *)piVar12[2];
-                local_4 = piVar12[3];
-                FUN_00433200(&local_10,&local_30.left);
-                if (((int)local_10 < (int)local_8) && (local_c < local_4)) {
-                  iVar10 = (local_4 - local_c) * ((int)local_8 - (int)local_10);
+            if (((iVar13 < iVar10) || (iVar1 < local_30.top)) ||
+               ((local_30.right < iVar8 || (local_30.bottom < iVar2)))) {
+              local_20.left = iVar13;
+              local_20.top = iVar1;
+              local_20.right = iVar8;
+              local_20.bottom = iVar2;
+              tagRECT::CDSRect_Intersect(&local_20,&local_30);
+              if ((local_20.left < local_20.right) && (local_20.top < local_20.bottom)) {
+                local_10.top = piVar12[1];
+                local_10.left = *piVar12;
+                local_10.right = piVar12[2];
+                local_10.bottom = piVar12[3];
+                tagRECT::CDSRect_IntersectInPlace(&local_10,&local_30.left);
+                if ((local_10.left < local_10.right) && (local_10.top < local_10.bottom)) {
+                  iVar10 = (local_10.bottom - local_10.top) * (local_10.right - local_10.left);
                 }
                 else {
                   iVar10 = 0;
                 }
-                if (((int)local_20 < (int)local_18) && ((int)local_1c < local_14)) {
-                  iVar8 = (local_14 - (int)local_1c) * ((int)local_18 - (int)local_20);
+                if ((local_20.left < local_20.right) && (local_20.top < local_20.bottom)) {
+                  iVar8 = (local_20.bottom - local_20.top) * (local_20.right - local_20.left);
                 }
                 else {
                   iVar8 = 0;
@@ -102025,59 +102085,59 @@ LAB_0042b812:
                   iVar13 = 0;
                 }
                 uVar7 = ((iVar8 - iVar13) - iVar5 * iVar9) + iVar10;
-                pvVar14 = (void *)local_30.left;
-                iVar10 = iVar11;
+                iVar10 = local_30.left;
+                iVar3 = iVar11;
                 if (uVar7 < local_48) goto LAB_0042b6c2;
               }
             }
             else {
-              piVar12[2] = (int)pvVar2;
+              piVar12[2] = iVar13;
             }
-            pvVar14 = (void *)local_30.left;
+            iVar10 = local_30.left;
             uVar7 = local_48;
-            iVar10 = local_44;
+            iVar3 = local_44;
           }
         }
 LAB_0042b6c2:
         local_40 = iVar4;
-        local_44 = iVar10;
+        local_44 = iVar3;
         local_48 = uVar7;
       } while (iVar11 != 0);
       if (-1 < local_44) {
         piVar12 = (int *)(local_44 * 0x10 + *param_1);
         if (local_48 < 0x1389) {
 LAB_0042b72a:
-          FUN_00433200(&local_30,piVar12);
+          tagRECT::CDSRect_IntersectInPlace(&local_30,piVar12);
           piVar12[2] = *piVar12;
           CDSApp_AddDirtyRectCoalesced(this,param_1,&local_30.left);
           return;
         }
-        CDSRect_Assign(&local_10,piVar12);
-        FUN_00433200(&local_10,&local_30.left);
-        uVar7 = FUN_00429880((int *)&local_10);
-        pvVar14 = (void *)local_30.left;
+        _Globals::CDSRect_Assign(&local_10,piVar12);
+        tagRECT::CDSRect_IntersectInPlace(&local_10,&local_30.left);
+        uVar7 = _Globals::FUN_00429880(&local_10.left);
+        iVar10 = local_30.left;
         if ((local_48 * 100) / uVar7 < 0x28) goto LAB_0042b72a;
       }
       if (-1 < local_40) {
         piVar12 = (int *)(local_40 * 0x10 + *param_1);
-        *piVar12 = (int)pvVar14;
+        *piVar12 = iVar10;
         piVar12[1] = local_30.top;
         piVar12[2] = local_30.right;
         piVar12[3] = local_30.bottom;
         return;
       }
     }
-    FUN_0042ae50(param_1,&local_30.left,(undefined *)0x0,1);
+    _Globals::CDSApp_DirtyRectList_UpsertRect(param_1,&local_30.left,(undefined *)0x0,1);
   }
   return;
 }
 
 
 
-void __thiscall _Globals::CDSApp_AddDirtyRect(void *this,int *param_1)
+void __thiscall CDSApp::CDSApp_AddDirtyRect(CDSApp *this,int *param_1)
 
 {
-  CDSApp_AddDirtyRectCoalesced(this,(int *)((int)this + 0x264),param_1);
+  CDSApp_AddDirtyRectCoalesced(this,(int *)(this->pPad_260 + 4),param_1);
   return;
 }
 
@@ -102086,7 +102146,7 @@ void __thiscall _Globals::CDSApp_AddDirtyRect(void *this,int *param_1)
 void __thiscall CBulanci::CBulanci_BlitAnimFrameToView(CBulanci *this,int *param_1)
 
 {
-  _Globals::CDSApp_AddDirtyRectCoalesced(this,(int *)&(this->app).pDirtyRectArray,param_1);
+  CDSApp::CDSApp_AddDirtyRectCoalesced(&this->app,(int *)&(this->app).pDirtyRectArray,param_1);
   return;
 }
 
@@ -102211,7 +102271,7 @@ void __fastcall CDSImageMouse::CDSImageMouse_Draw(CDSImageMouse *this)
   }
   CPoemScroller::BlitDispatch
             (pCVar4,piVar1,(CPoemScroller *)this->pCursorSprite,(int *)0x0,(uint *)0x0);
-  _Globals::CDSApp_AddDirtyRect(this_01,piVar1);
+  CDSApp::CDSApp_AddDirtyRect(this_01,piVar1);
   return;
 }
 
@@ -102238,7 +102298,7 @@ void __fastcall CDSImageMouse::CDSImageMouse_Erase(CDSImageMouse *this)
     this_01 = (CPoemScroller *)((int)g_pApp + 0x80);
   }
   CPoemScroller::BlitDispatch(this_01,&this->nM_dirtyLeft,pCVar1,(int *)0x0,(uint *)0x0);
-  _Globals::CDSApp_AddDirtyRect(this_00,&this->nM_dirtyLeft);
+  CDSApp::CDSApp_AddDirtyRect(this_00,&this->nM_dirtyLeft);
   return;
 }
 
@@ -102389,11 +102449,11 @@ void __fastcall _Globals::CDSApp_RenderFrame(int *param_1)
     DAT_004b3ba8 = param_1[0xb];
     iVar4 = param_1[0x22];
     iVar5 = param_1[0x21];
-    ((CPoemScroller *)(param_1 + 0x29))->pVftable_primary = (void *)0x0;
+    ((tagRECT *)(param_1 + 0x29))->left = 0;
     param_1[0x2a] = 0;
     param_1[0x2b] = iVar5;
     param_1[0x2c] = iVar4;
-    CPoemScroller::rect_Intersect((CPoemScroller *)(param_1 + 0x29),(tagRECT *)&DAT_004b3b9c);
+    tagRECT::CDSRect_Intersect((tagRECT *)(param_1 + 0x29),(tagRECT *)&DAT_004b3b9c);
     CDSApp_FlushDirtyRectsIfFlagged(param_1);
     return;
   }
@@ -102741,8 +102801,8 @@ void __thiscall CBulanek::FUN_0042c160(CBulanek *this,void *param_1)
                     // UNCERTAIN: inserts entity into sibling list at (*(this+0x4c)+0x54) before
                     // anchor via FUN_0042fa20; sole caller CGaming_InsertEntityByDepth @
                     // 0x00418589.
-  CDSChained_InsertBeforeWithHeadFixup
-            ((CBulanek *)(*(int *)(this->pChain_pad_48 + 4) + 0x54),this,param_1);
+  CDSChain::CDSChained_InsertBeforeWithHeadFixup
+            ((CDSChain *)(*(int *)(this->pChain_pad_48 + 4) + 0x54),this,param_1);
   (**(code **)(this->vftable_primary + 0x24))(0,0);
   return;
 }
@@ -102754,8 +102814,8 @@ void __thiscall CBulanek::FUN_0042c190(CBulanek *this,int param_1)
 {
                     // UNCERTAIN: unlinks entity from sibling list at (*(this+0x4c)+0x54) via
                     // FUN_0042fa50; sole caller CGaming_InsertEntityByDepth @ 0x00418507.
-  CDSChained_RemoveWithHeadFixup
-            ((CBulanek *)(*(int *)(this->pChain_pad_48 + 4) + 0x54),this,param_1);
+  CDSChain::CDSChained_RemoveWithHeadFixup
+            ((CDSChain *)(*(int *)(this->pChain_pad_48 + 4) + 0x54),this,param_1);
   (**(code **)(this->vftable_primary + 0x24))(0,0);
   return;
 }
@@ -102775,7 +102835,7 @@ int * __thiscall _Globals::FUN_0042c1c0(void *this,undefined4 param_1)
     return DAT_004b3b94;
   }
   do {
-    piVar2 = (int *)FUN_0042f7d0((int *)((int)this + 0x54));
+    piVar2 = (int *)CDSIntrusiveNode_GetLinkNext((int *)((int)this + 0x54));
     while( true ) {
       if (piVar2 == (int *)0x0) {
         return this;
@@ -102786,7 +102846,8 @@ int * __thiscall _Globals::FUN_0042c1c0(void *this,undefined4 param_1)
         piVar2 = (int *)0x0;
       }
       else {
-        piVar2 = (int *)FUN_0042f7e0((void *)(piVar2[0x13] + 0x54),(int)piVar2);
+        piVar2 = (int *)CDSIntrusiveNode_GetNextLinkSkipSentinel
+                                  ((void *)(piVar2[0x13] + 0x54),(int)piVar2);
       }
     }
     this = piVar2;
@@ -102958,20 +103019,20 @@ undefined4 __thiscall CBulanci::CDSView_IsModalDoneRecursive(CBulanci *this,unde
 
 // Parameters: CDSView *this (ECX). Uses this+0x4c parent frame ptr for bounds when non-null.
 
-void __thiscall CBulanci::CDSView_GetParentBounds(CBulanci *this,undefined4 *param_1,int *param_2)
+void __thiscall CDSView::CDSView_GetParentBounds(CDSView *this,undefined4 *param_1,int *param_2)
 
 {
-  undefined *puVar1;
+  void *pvVar1;
   int iVar2;
   int iVar3;
   
   *param_1 = 0;
   param_1[1] = 0;
-  puVar1 = (this->app).pParentModal;
-  if (puVar1 != (undefined *)0x0) {
-    iVar2 = *(int *)(puVar1 + 0x2c);
-    iVar3 = *(int *)(puVar1 + 0x24);
-    *param_2 = *(int *)(puVar1 + 0x28) - *(int *)(puVar1 + 0x20);
+  pvVar1 = (this->win).pParent;
+  if (pvVar1 != (void *)0x0) {
+    iVar2 = *(int *)((int)pvVar1 + 0x2c);
+    iVar3 = *(int *)((int)pvVar1 + 0x24);
+    *param_2 = *(int *)((int)pvVar1 + 0x28) - *(int *)((int)pvVar1 + 0x20);
     param_2[1] = iVar2 - iVar3;
     return;
   }
@@ -102984,7 +103045,7 @@ void __thiscall CBulanci::CDSView_GetParentBounds(CBulanci *this,undefined4 *par
 
 // CDSView primary vfn[11] SetRect — assign bbox +0x20..2c; propagate anchor reflow to children.
 
-void __thiscall CBulanci::CDSView_SetRect(CBulanci *this,int *rect)
+void __thiscall CDSView::CDSView_SetRect(CDSView *this,int *rect)
 
 {
   int *pCurrentView;
@@ -102995,16 +103056,17 @@ void __thiscall CBulanci::CDSView_SetRect(CBulanci *this,int *rect)
   undefined4 local_8;
   undefined4 local_4;
   
-  local_14 = (((this->app).nRect_top - (this->app).nRect_bottom) + rect[3]) - rect[1];
-  local_18 = ((rect[2] - (this->app).nRect_right) - *rect) + (this->app).nRect_left;
-  (this->app).nRect_left = *rect;
-  (this->app).nRect_top = rect[1];
-  (this->app).nRect_right = rect[2];
-  (this->app).nRect_bottom = rect[3];
-  if (((this->app).wFlags1 & 0x40) != 0) {
-    CDSView__UpdateScreenCoordinates(this,local_14 == 0 && local_18 == 0);
+  local_14 = (((this->win).nBbox_top - (this->win).nBbox_bottom) + rect[3]) - rect[1];
+  local_18 = ((rect[2] - (this->win).nBbox_right) - *rect) + (this->win).nBbox_left;
+  (this->win).nBbox_left = *rect;
+  (this->win).nBbox_top = rect[1];
+  (this->win).nBbox_right = rect[2];
+  (this->win).nBbox_bottom = rect[3];
+  if (((this->win).wViewStateFlags & 0x40) != 0) {
+    CBulanci::CDSView__UpdateScreenCoordinates((CBulanci *)this,local_14 == 0 && local_18 == 0);
   }
-  pCurrentView = _Globals::CDSChained_GetFirstChildView((CDSChain *)&(this->app).pChildChain);
+  pCurrentView = _Globals::CDSChained_GetFirstChildView
+                           ((CDSChain *)&(this->win).pVftable_CDSChain_IDSReferenced);
   if ((pCurrentView != (int *)0x0) && (local_14 != 0 || local_18 != 0)) {
     local_10 = 0;
     local_c = 0;
@@ -103025,7 +103087,7 @@ void __thiscall CBulanci::CDSView_SetRect(CBulanci *this,int *rect)
 
 
 void __thiscall
-CBulanci::CBulanci_AdjustAnchoredEdge(CBulanci *this,int *param_1,int param_2,int param_3)
+CBulanci::CDSView_AdjustAnchoredEdge(CBulanci *this,int *param_1,int param_2,int param_3)
 
 {
   if (((this->app).wAnchorBits & 0x10) != 0) {
@@ -103038,43 +103100,39 @@ CBulanci::CBulanci_AdjustAnchoredEdge(CBulanci *this,int *param_1,int param_2,in
 
 
 
-void __thiscall CBulanci::CDSView_ComputeAnchoredRect(CBulanci *this,int *outRect,int *anchorDelta)
+void __thiscall CDSView::CDSView_ComputeAnchoredRect(CDSView *this,int *outRect,int *anchorDelta)
 
 {
-  undefined *puVar1;
+  void *pvVar1;
   int iVar2;
   int iVar3;
-  int iVar4;
-  int iVar5;
   int local_10 [4];
   
-  puVar1 = (this->app).pParentModal;
-  iVar2 = *(int *)(puVar1 + 0x2c);
-  iVar3 = *(int *)(puVar1 + 0x24);
-  iVar4 = *(int *)(puVar1 + 0x28);
-  iVar5 = *(int *)(puVar1 + 0x20);
-  *outRect = (this->app).nRect_left;
-  outRect[1] = (this->app).nRect_top;
-  outRect[2] = (this->app).nRect_right;
-  outRect[3] = (this->app).nRect_bottom;
-  if (((this->app).wAnchorBits & 1) != 0) {
-    CBulanci_AdjustAnchoredEdge(this,outRect,iVar4 - iVar5,*anchorDelta);
+  pvVar1 = (this->win).pParent;
+  iVar2 = *(int *)((int)pvVar1 + 0x2c) - *(int *)((int)pvVar1 + 0x24);
+  iVar3 = *(int *)((int)pvVar1 + 0x28) - *(int *)((int)pvVar1 + 0x20);
+  *outRect = (this->win).nBbox_left;
+  outRect[1] = (this->win).nBbox_top;
+  outRect[2] = (this->win).nBbox_right;
+  outRect[3] = (this->win).nBbox_bottom;
+  if (((this->win).wChainCounter_48 & 1) != 0) {
+    CBulanci::CDSView_AdjustAnchoredEdge((CBulanci *)this,outRect,iVar3,*anchorDelta);
   }
-  if (((this->app).wAnchorBits & 4) != 0) {
-    CBulanci_AdjustAnchoredEdge(this,outRect + 2,iVar4 - iVar5,*anchorDelta);
+  if (((this->win).wChainCounter_48 & 4) != 0) {
+    CBulanci::CDSView_AdjustAnchoredEdge((CBulanci *)this,outRect + 2,iVar3,*anchorDelta);
   }
-  if (((this->app).wAnchorBits & 2) != 0) {
-    CBulanci_AdjustAnchoredEdge(this,outRect + 1,iVar2 - iVar3,anchorDelta[1]);
+  if (((this->win).wChainCounter_48 & 2) != 0) {
+    CBulanci::CDSView_AdjustAnchoredEdge((CBulanci *)this,outRect + 1,iVar2,anchorDelta[1]);
   }
-  if (((this->app).wAnchorBits & 8) != 0) {
-    CBulanci_AdjustAnchoredEdge(this,outRect + 3,iVar2 - iVar3,anchorDelta[1]);
+  if (((this->win).wChainCounter_48 & 8) != 0) {
+    CBulanci::CDSView_AdjustAnchoredEdge((CBulanci *)this,outRect + 3,iVar2,anchorDelta[1]);
   }
   local_10[0] = 0;
   local_10[1] = 0;
   local_10[2] = 0;
   local_10[3] = 0;
-  (**(code **)((this->app).vftable_primary + 0x30))(local_10,local_10 + 2);
-  CDSRect_ClampToBounds((CBulanci *)outRect,(int *)&stack0xffffffe8,local_10);
+  (**(code **)((int)(this->win).pVftable_primary + 0x30))(local_10,local_10 + 2);
+  CBulanci::CDSRect_ClampToBounds((CBulanci *)outRect,(int *)&stack0xffffffe8,local_10);
   return;
 }
 
@@ -103094,7 +103152,8 @@ uint __thiscall CWindow::CWindow_FindNextFocusable(CWindow *this,char param_1)
                          ((CDSChain *)&this->pVftable_CDSChain_IDSReferenced);
     }
     else {
-      pvVar1 = (void *)_Globals::FUN_0042f7d0(&this->pVftable_CDSChain_IDSReferenced);
+      pvVar1 = (void *)_Globals::CDSIntrusiveNode_GetLinkNext
+                                 (&this->pVftable_CDSChain_IDSReferenced);
     }
     pvVar2 = pvVar1;
     if (pvVar1 == (void *)0x0) {
@@ -103131,7 +103190,7 @@ void __fastcall _Globals::CMenu_ClearAllChildren(CMenu *param_1)
 
 
 
-void _Globals::FUN_0042c700(void)
+void _Globals::CDSApp_RefreshInputChainHitTest(void)
 
 {
   int *piVar1;
@@ -103163,8 +103222,8 @@ LAB_0042c730:
 
 
 void __thiscall
-CBulanci::CDSApp_BroadcastSyntheticEventToChildren
-          (CBulanci *this,undefined2 param_1,undefined4 param_2,undefined4 param_3)
+CDSView::CDSApp_BroadcastSyntheticEventToChildren
+          (CDSView *this,undefined2 param_1,undefined4 param_2,undefined4 param_3)
 
 {
   void *pCurrentView;
@@ -103178,7 +103237,8 @@ CBulanci::CDSApp_BroadcastSyntheticEventToChildren
   local_10 = 0x200;
   local_8 = param_2;
   local_4 = param_3;
-  for (pCurrentView = _Globals::CDSChained_GetFirstChildView((CDSChain *)&(this->app).pChildChain);
+  for (pCurrentView = _Globals::CDSChained_GetFirstChildView
+                                ((CDSChain *)&(this->win).pVftable_CDSChain_IDSReferenced);
       (pCurrentView != (void *)0x0 &&
       (_Globals::FUN_0042ec90((void *)((int)pCurrentView + 0x10),&local_14),
       *(int *)((int)pCurrentView + 0x4c) != 0));
@@ -103189,7 +103249,7 @@ CBulanci::CDSApp_BroadcastSyntheticEventToChildren
 
 
 
-void __thiscall CDSApp::CDSApp_RouteSyntheticCloseEvent(CDSApp *this,ushort param_1)
+void __thiscall CDSView::CDSApp_RouteSyntheticCloseEvent(CDSView *this,ushort param_1)
 
 {
   if ((param_1 & 0x8000) != 0) {
@@ -103226,7 +103286,7 @@ void __fastcall _Globals::CDSApp_SetInputChainHead(int *param_1)
     }
   }
   g_pInputChainHead = piVar3;
-  FUN_0042c700();
+  CDSApp_RefreshInputChainHitTest();
   return;
 }
 
@@ -103244,7 +103304,7 @@ void __fastcall _Globals::CControl_ClaimModalFocusOnPress(int *param_1)
 
 
 
-void __fastcall _Globals::FUN_0042c880(int *param_1)
+void __fastcall _Globals::CDSView_UpdateInputChainOnMouseMove(int *param_1)
 
 {
   int iVar1;
@@ -103303,7 +103363,7 @@ byte __fastcall _Globals::CDSView_AcquireKeyboardFocus(int *param_1)
 
 
 
-void __fastcall _Globals::FUN_0042c960(int *param_1)
+void __fastcall _Globals::CDSView__Show_UpdateFocusChain(int *param_1)
 
 {
   char cVar1;
@@ -103314,7 +103374,7 @@ void __fastcall _Globals::FUN_0042c960(int *param_1)
   if ((g_pApp != (void *)0x0) && (DAT_004b3b94 == 0)) {
     cVar1 = (**(code **)(*param_1 + 0x1c))((int)g_pApp + 0xf0);
     if (cVar1 != '\0') {
-      FUN_0042c880(param_1);
+      CDSView_UpdateInputChainOnMouseMove(param_1);
       return;
     }
   }
@@ -103333,7 +103393,7 @@ void __fastcall _Globals::CDSView__Show(int *param_1)
         (g_pApp == param_1)))) {
       CDSView_SetActive(param_1,1);
       if ((*(byte *)(param_1 + 0x11) & 4) == 0) {
-        FUN_0042c960(param_1);
+        CDSView__Show_UpdateFocusChain(param_1);
       }
       (**(code **)(*param_1 + 0x24))(0,0);
     }
@@ -103354,7 +103414,7 @@ undefined2 __fastcall _Globals::CDSView_EnableWidget(int *param_1)
     uVar2 = uVar1 & 0xfffb;
     *(short *)(param_1 + 0x11) = (short)uVar2;
     if ((char)uVar2 < '\0') {
-      FUN_0042c960(param_1);
+      CDSView__Show_UpdateFocusChain(param_1);
       uVar2 = (**(code **)(*param_1 + 0x24))(0,0);
     }
     return (short)CONCAT31((int3)(uVar2 >> 8),1);
@@ -103371,11 +103431,7 @@ CDSView::CDSView_InvalidateRectClipped(CDSView *this,int *param_1,undefined4 par
 
 {
   ushort uVar1;
-  int iVar2;
-  void *local_10;
-  void *local_c;
-  int local_8;
-  int local_4;
+  tagRECT local_10;
   
   uVar1 = (this->win).wViewStateFlags;
   if (((uVar1 & 0x40) != 0) && (((char)param_2 != '\0' || ((char)uVar1 < '\0')))) {
@@ -103383,14 +103439,14 @@ CDSView::CDSView_InvalidateRectClipped(CDSView *this,int *param_1,undefined4 par
       (**(code **)(*(int *)(this->win).pParent + 0x24))(&(this->win).nBbox_left,param_2);
       return;
     }
-    local_8 = (this->win).nBbox_left;
-    local_10 = (void *)(*param_1 + local_8);
-    iVar2 = (this->win).nBbox_top;
-    local_8 = param_1[2] + local_8;
-    local_4 = param_1[3] + iVar2;
-    local_c = (void *)(param_1[1] + iVar2);
-    CPoemScroller::rect_Intersect((CPoemScroller *)&local_10,(tagRECT *)&(this->win).nBbox_left);
-    if (((int)local_10 < local_8) && ((int)local_c < local_4)) {
+    local_10.right = (this->win).nBbox_left;
+    local_10.left = *param_1 + local_10.right;
+    local_10.top = (this->win).nBbox_top;
+    local_10.right = param_1[2] + local_10.right;
+    local_10.bottom = param_1[3] + local_10.top;
+    local_10.top = param_1[1] + local_10.top;
+    tagRECT::CDSRect_Intersect(&local_10,(tagRECT *)&(this->win).nBbox_left);
+    if ((local_10.left < local_10.right) && (local_10.top < local_10.bottom)) {
       (**(code **)(*(int *)(this->win).pParent + 0x24))(&local_10,param_2);
     }
   }
@@ -103402,7 +103458,7 @@ CDSView::CDSView_InvalidateRectClipped(CDSView *this,int *param_1,undefined4 par
 // CDSView primary vfn[8] AdaptDisplaySize — resize path; CDSView__SetSize dispatches here
 // (+0x20).
 
-undefined4 __fastcall CBulanci::CDSView_AdaptDisplaySize(int *param_1)
+undefined4 __fastcall CDSView::CDSView_AdaptDisplaySize(int *param_1)
 
 {
   uint uVar1;
@@ -103418,7 +103474,7 @@ undefined4 __fastcall CBulanci::CDSView_AdaptDisplaySize(int *param_1)
   local_4 = (CBulanci *)0x0;
   (**(code **)(*param_1 + 0x30))(local_10,local_10 + 2);
   pCVar3 = local_4;
-  CDSRect_ClampToBounds(local_4,(int *)&stack0xffffffe8,local_10);
+  CBulanci::CDSRect_ClampToBounds(local_4,(int *)&stack0xffffffe8,local_10);
   if (((((pCVar3->app).vftable_primary == (undefined *)param_1[8]) &&
        ((pCVar3->app).vftable_sub04 == (undefined *)param_1[9])) &&
       (*(int *)(pCVar3->app).pMiPad_after_vftable_sub04 == param_1[10])) &&
@@ -103435,7 +103491,7 @@ undefined4 __fastcall CBulanci::CDSView_AdaptDisplaySize(int *param_1)
     _Globals::CDSView_SetActive(param_1,1);
     uVar4 = (**(code **)(*param_1 + 0x24))(0,0);
     if (g_pModalFocus != (void *)0x0) {
-      uVar4 = _Globals::FUN_0042c880(g_pModalFocus);
+      uVar4 = _Globals::CDSView_UpdateInputChainOnMouseMove(g_pModalFocus);
     }
   }
   return CONCAT31((int3)((uint)uVar4 >> 8),1);
@@ -103443,7 +103499,7 @@ undefined4 __fastcall CBulanci::CDSView_AdaptDisplaySize(int *param_1)
 
 
 
-void __thiscall CScroller::FUN_0042cbb0(CScroller *this,int param_1,int param_2)
+void __thiscall CScroller::CScroller_OffsetChildViewRect(CScroller *this,int param_1,int param_2)
 
 {
   undefined4 local_10;
@@ -103466,7 +103522,7 @@ void __thiscall CScroller::FUN_0042cbb0(CScroller *this,int param_1,int param_2)
 // CDSView__SetSize — NOT a vtable slot. Builds rect from this+0x20/+0x24 origin; calls primary
 // vfn[8] AdaptDisplaySize (+0x20).
 
-void __thiscall CBulanci::CDSView__SetSize(CBulanci *this,int param_1,int param_2)
+void __thiscall CDSView::CDSView__SetSize(CDSView *this,int param_1,int param_2)
 
 {
   int local_10;
@@ -103474,17 +103530,17 @@ void __thiscall CBulanci::CDSView__SetSize(CBulanci *this,int param_1,int param_
   int local_8;
   int local_4;
   
-  local_c = (this->app).nRect_top;
-  local_10 = (this->app).nRect_left;
+  local_c = (this->win).nBbox_top;
+  local_10 = (this->win).nBbox_left;
   local_4 = local_c + param_2;
   local_8 = local_10 + param_1;
-  (**(code **)((this->app).vftable_primary + 0x20))(&local_10);
+  (**(code **)((int)(this->win).pVftable_primary + 0x20))(&local_10);
   return;
 }
 
 
 
-void __thiscall _Globals::FUN_0042cc30(void *this,int param_1,int param_2)
+void __thiscall _Globals::CDSView_OffsetRectAndAdapt(void *this,int param_1,int param_2)
 
 {
   int local_10;
@@ -103506,7 +103562,7 @@ void __thiscall _Globals::FUN_0042cc30(void *this,int param_1,int param_2)
 
 
 
-void __thiscall CBulanek::CDSView__SetPosition(CBulanek *this,int param_1,int param_2)
+void __thiscall CDSView::CDSView__SetPosition(CDSView *this,int param_1,int param_2)
 
 {
   int local_10;
@@ -103514,11 +103570,11 @@ void __thiscall CBulanek::CDSView__SetPosition(CBulanek *this,int param_1,int pa
   int local_8;
   int local_4;
   
-  local_4 = (this->nSpatial_bucket_y - this->nOrigin_y) + param_2;
-  local_8 = this->nSpatial_bucket_x + (param_1 - this->nOrigin_x);
+  local_4 = ((this->win).nBbox_bottom - (this->win).nBbox_top) + param_2;
+  local_8 = (this->win).nBbox_right + (param_1 - (this->win).nBbox_left);
   local_10 = param_1;
   local_c = param_2;
-  (**(code **)(this->vftable_primary + 0x20))(&local_10);
+  (**(code **)((int)(this->win).pVftable_primary + 0x20))(&local_10);
   return;
 }
 
@@ -103543,10 +103599,10 @@ byte __thiscall CWindow::CWindow_FocusSibling(CWindow *this,char param_1)
 // CDSView primary vfn[14] RenderChildrenClipped — walk child_chain @+0x54; clip; call
 // child->vfn[14] (+0x38). CWindow overrides slot14 with CWindow_Render.
 
-void __fastcall CDSApp::CDSView_RenderChildrenClipped(int param_1)
+void __thiscall CDSView::CDSView_RenderChildrenClipped(CDSView *this)
 
 {
-  CPoemScroller *this;
+  tagRECT *this_00;
   undefined4 uVar1;
   undefined4 uVar2;
   int *pCurrentView;
@@ -103557,7 +103613,8 @@ void __fastcall CDSApp::CDSView_RenderChildrenClipped(int param_1)
   int local_8;
   int local_4;
   
-  pCurrentView = _Globals::CDSChained_GetFirstChildView((CDSChain *)(param_1 + 0x54));
+  pCurrentView = _Globals::CDSChained_GetFirstChildView
+                           ((CDSChain *)&(this->win).pVftable_CDSChain_IDSReferenced);
   if (pCurrentView != (int *)0x0) {
     if (g_pApp == (void *)0xffffff84) {
       iVar3 = 0;
@@ -103565,8 +103622,8 @@ void __fastcall CDSApp::CDSView_RenderChildrenClipped(int param_1)
     else {
       iVar3 = (int)g_pApp + 0x80;
     }
-    this = (CPoemScroller *)(iVar3 + 0x24);
-    local_20.left = (LONG)this->pVftable_primary;
+    this_00 = (tagRECT *)(iVar3 + 0x24);
+    local_20.left = this_00->left;
     local_20.top = *(LONG *)(iVar3 + 0x28);
     local_20.right = *(LONG *)(iVar3 + 0x2c);
     local_20.bottom = *(LONG *)(iVar3 + 0x30);
@@ -103576,16 +103633,15 @@ void __fastcall CDSApp::CDSView_RenderChildrenClipped(int param_1)
     local_4 = DAT_004b3ba8;
     do {
       if ((*(byte *)(pCurrentView + 0x11) & 0x80) != 0) {
-        CPoemScroller::rect_Intersect
-                  ((CPoemScroller *)&DAT_004b3b9c,(tagRECT *)(pCurrentView + 0xc));
+        tagRECT::CDSRect_Intersect((tagRECT *)&DAT_004b3b9c,(tagRECT *)(pCurrentView + 0xc));
         if ((DAT_004b3b9c < DAT_004b3ba4) && (DAT_004b3ba0 < DAT_004b3ba8)) {
           uVar1 = *(undefined4 *)(iVar3 + 4);
           uVar2 = *(undefined4 *)(iVar3 + 8);
-          this->pVftable_primary = (void *)0x0;
+          this_00->left = 0;
           *(undefined4 *)(iVar3 + 0x28) = 0;
           *(undefined4 *)(iVar3 + 0x2c) = uVar1;
           *(undefined4 *)(iVar3 + 0x30) = uVar2;
-          CPoemScroller::rect_Intersect(this,(tagRECT *)&DAT_004b3b9c);
+          tagRECT::CDSRect_Intersect(this_00,(tagRECT *)&DAT_004b3b9c);
           (**(code **)(*pCurrentView + 0x38))();
         }
         DAT_004b3b9c = local_10;
@@ -103598,11 +103654,11 @@ void __fastcall CDSApp::CDSView_RenderChildrenClipped(int param_1)
     } while (pCurrentView != (int *)0x0);
     uVar1 = *(undefined4 *)(iVar3 + 8);
     uVar2 = *(undefined4 *)(iVar3 + 4);
-    this->pVftable_primary = (void *)0x0;
+    this_00->left = 0;
     *(undefined4 *)(iVar3 + 0x28) = 0;
     *(undefined4 *)(iVar3 + 0x2c) = uVar2;
     *(undefined4 *)(iVar3 + 0x30) = uVar1;
-    CPoemScroller::rect_Intersect(this,&local_20);
+    tagRECT::CDSRect_Intersect(this_00,&local_20);
   }
   return;
 }
@@ -103677,16 +103733,19 @@ void __fastcall CDSView::CDSView_dtor(undefined4 *param_1,undefined4 param_2)
 
 
 
-void __fastcall CDSView::CDSView_OnLButtonDownAcquireFocus(int *param_1)
+void __thiscall CDSView::CDSView_OnLButtonDownAcquireFocus(CDSView *this)
 
 {
-  _Globals::CDSView_AcquireKeyboardFocus(param_1);
+  _Globals::CDSView_AcquireKeyboardFocus((int *)this);
   return;
 }
 
 
 
-void __fastcall _Globals::FUN_0042cf60(int *param_1)
+// R6: mouse-up on modal view — clear clip focus DAT_004b3b94; vfn+0x1c hit-test; miss ->
+// CDSView_UpdateInputChainOnMouseMove(g_pModalFocus)
+
+void __thiscall CDSView::CDSView_OnMouseUpModalInputRefresh(CDSView *this)
 
 {
   char cVar1;
@@ -103695,9 +103754,9 @@ void __fastcall _Globals::FUN_0042cf60(int *param_1)
                     // at g_pApp+0xf0, calls FUN_0042c880(g_pModalFocus). Modal dismiss helper; no
                     // mapping.csv export name.
   if ((g_pApp != (void *)0x0) && (DAT_004b3b94 = 0, g_pModalFocus != (void *)0x0)) {
-    cVar1 = (**(code **)(*param_1 + 0x1c))((int)g_pApp + 0xf0);
+    cVar1 = (**(code **)((int)(this->win).pVftable_primary + 0x1c))((int)g_pApp + 0xf0);
     if (cVar1 == '\0') {
-      FUN_0042c880(g_pModalFocus);
+      _Globals::CDSView_UpdateInputChainOnMouseMove(g_pModalFocus);
       return;
     }
   }
@@ -103706,36 +103765,42 @@ void __fastcall _Globals::FUN_0042cf60(int *param_1)
 
 
 
-void __fastcall _Globals::FUN_0042cfa0(int *param_1)
+// R6: walk child chain for view with wViewStateFlags&8 then call OnMouseUpModalInputRefresh
+
+void __thiscall CDSView::CDSView_RefreshModalFocusFromChildren(CDSView *this)
 
 {
                     // UNCERTAIN: walks widget chain from param_1 until DAT_004b3b94 match (+0x44
                     // flag 0x8); then FUN_0042cf60. Called from FUN_0042cff0 on CDSView::Hide when
                     // +0x44&8. Modal/volume focus teardown — export name not verified.
-  if (DAT_004b3b94 != param_1) {
+  if (DAT_004b3b94 != this) {
     do {
-      param_1 = CDSChained_GetFirstChildView((CDSChain *)(param_1 + 0x15));
+      this = _Globals::CDSChained_GetFirstChildView
+                       ((CDSChain *)&(this->win).pVftable_CDSChain_IDSReferenced);
       while( true ) {
-        if (param_1 == (int *)0x0) {
+        if (this == (CDSView *)0x0) {
           return;
         }
-        if ((*(byte *)(param_1 + 0x11) & 8) != 0) break;
-        if (param_1[0x13] == 0) {
-          param_1 = (int *)0x0;
+        if (((this->win).wViewStateFlags & 8) != 0) break;
+        if ((this->win).pParent == (void *)0x0) {
+          this = (CDSView *)0x0;
         }
         else {
-          param_1 = CDSChained_GetNextSiblingView(param_1);
+          this = _Globals::CDSChained_GetNextSiblingView(this);
         }
       }
-    } while (DAT_004b3b94 != param_1);
+    } while (DAT_004b3b94 != this);
   }
-  FUN_0042cf60(param_1);
+  CDSView_OnMouseUpModalInputRefresh(this);
   return;
 }
 
 
 
-void __fastcall _Globals::FUN_0042cff0(int *param_1)
+// R6: hide/default-focus teardown when wViewStateFlags&8; callers CDSView__Hide,
+// SetAsDefaultFocusChild
+
+void __thiscall CDSView::CDSView_TeardownModalFocusChain(CDSView *this)
 
 {
   char cVar1;
@@ -103743,14 +103808,14 @@ void __fastcall _Globals::FUN_0042cff0(int *param_1)
                     // UNCERTAIN: restores g_pModalFocus via FUN_0042c880 when hidden view had
                     // modal-focus flag (+0x44 bit 8). Callers CDSView__Hide and FUN_0042d080 — no
                     // established CDSView export name.
-  if ((g_pApp != (void *)0x0) && ((*(byte *)(param_1 + 0x11) & 8) != 0)) {
+  if ((g_pApp != (void *)0x0) && (((this->win).wViewStateFlags & 8) != 0)) {
     if (DAT_004b3b94 != 0) {
-      FUN_0042cfa0(param_1);
+      CDSView_RefreshModalFocusFromChildren(this);
     }
     if (g_pModalFocus != (void *)0x0) {
-      cVar1 = (**(code **)(*param_1 + 0x1c))((int)g_pApp + 0xf0);
+      cVar1 = (**(code **)((int)(this->win).pVftable_primary + 0x1c))((int)g_pApp + 0xf0);
       if (cVar1 != '\0') {
-        FUN_0042c880(g_pModalFocus);
+        _Globals::CDSView_UpdateInputChainOnMouseMove(g_pModalFocus);
         return;
       }
     }
@@ -103760,40 +103825,39 @@ void __fastcall _Globals::FUN_0042cff0(int *param_1)
 
 
 
-void __fastcall _Globals::CDSView__Hide(int *param_1)
+void __thiscall CDSView::CDSView__Hide(CDSView *this)
 
 {
   ushort uVar1;
   
-  if (((*(ushort *)(param_1 + 0x11) & 1) != 0) &&
-     (uVar1 = *(ushort *)(param_1 + 0x11) & 0xfffe, *(ushort *)(param_1 + 0x11) = uVar1,
-     (char)uVar1 < '\0')) {
-    CDSView_SetActive(param_1,0);
-    FUN_0042cff0(param_1);
-    (**(code **)(*param_1 + 0x24))(0,1);
+  uVar1 = (this->win).wViewStateFlags;
+  if (((uVar1 & 1) != 0) &&
+     (uVar1 = uVar1 & 0xfffe, (this->win).wViewStateFlags = uVar1, (char)uVar1 < '\0')) {
+    _Globals::CDSView_SetActive(this,0);
+    CDSView_TeardownModalFocusChain(this);
+    (**(code **)((int)(this->win).pVftable_primary + 0x24))(0,1);
   }
   return;
 }
 
 
 
-undefined2 __fastcall _Globals::CDSView_SetAsDefaultFocusChild(int *param_1)
+void __thiscall CDSView::CDSView_SetAsDefaultFocusChild(CDSView *this)
 
 {
   ushort uVar1;
-  uint uVar2;
   
-  uVar1 = *(ushort *)(param_1 + 0x11);
+  uVar1 = (this->win).wViewStateFlags;
   if ((uVar1 & 4) == 0) {
-    uVar2 = uVar1 | 4;
-    *(short *)(param_1 + 0x11) = (short)uVar2;
-    if ((char)uVar2 < '\0') {
-      FUN_0042cff0(param_1);
-      uVar2 = (**(code **)(*param_1 + 0x24))(0,0);
+    uVar1 = uVar1 | 4;
+    (this->win).wViewStateFlags = uVar1;
+    if ((char)uVar1 < '\0') {
+      CDSView_TeardownModalFocusChain(this);
+      (**(code **)((int)(this->win).pVftable_primary + 0x24))(0,0);
     }
-    return (short)CONCAT31((int3)(uVar2 >> 8),1);
+    return;
   }
-  return uVar1 & 0xff00;
+  return;
 }
 
 
@@ -103801,36 +103865,38 @@ undefined2 __fastcall _Globals::CDSView_SetAsDefaultFocusChild(int *param_1)
 // CDSView__AddChild — NOT a vtable slot. Centers child via SetPosition when anchor flags set;
 // AddChildInternal; optional Show/Hide; default keyboard focus.
 
-void __thiscall _Globals::CDSView__AddChild(void *this,CBulanek *param_2,undefined4 param_3)
+void __thiscall CDSView::CDSView__AddChild(CDSView *this,CDSView *param_2,undefined4 param_3)
 
 {
-  byte bVar1;
-  int iVar2;
+  ushort uVar1;
+  byte bVar2;
   int iVar3;
+  int iVar4;
   
-  if ((param_2->dwView_flags & 0xc0000) != 0) {
-    iVar2 = param_2->nOrigin_x;
-    iVar3 = param_2->nOrigin_y;
-    if ((param_2->dwView_flags & 0x40000) != 0) {
-      iVar2 = ((*(int *)((int)this + 0x28) - *(int *)((int)this + 0x20)) -
-              (param_2->nSpatial_bucket_x - iVar2)) / 2;
+  uVar1 = (param_2->win).wWidgetFlags;
+  if ((uVar1 & 0xc) != 0) {
+    iVar3 = (param_2->win).nBbox_left;
+    iVar4 = (param_2->win).nBbox_top;
+    if ((uVar1 & 4) != 0) {
+      iVar3 = (((this->win).nBbox_right - (this->win).nBbox_left) -
+              ((param_2->win).nBbox_right - iVar3)) / 2;
     }
-    if ((param_2->dwView_flags & 0x80000) != 0) {
-      iVar3 = ((*(int *)((int)this + 0x2c) - *(int *)((int)this + 0x24)) -
-              (param_2->nSpatial_bucket_y - iVar3)) / 2;
+    if (((param_2->win).wWidgetFlags & 8) != 0) {
+      iVar4 = (((this->win).nBbox_bottom - (this->win).nBbox_top) -
+              ((param_2->win).nBbox_bottom - iVar4)) / 2;
     }
-    CBulanek::CDSView__SetPosition(param_2,iVar2,iVar3);
+    CDSView__SetPosition(param_2,iVar3,iVar4);
   }
-  bVar1 = (byte)param_2->dwView_flags & 1;
-  if (bVar1 != 0) {
-    CDSView__Hide((int *)param_2);
+  bVar2 = (byte)(param_2->win).wViewStateFlags & 1;
+  if (bVar2 != 0) {
+    CDSView__Hide(param_2);
   }
-  CDSView__AddChildInternal(this,param_2,param_3);
-  if (bVar1 != 0) {
-    CDSView__Show((int *)param_2);
+  _Globals::CDSView__AddChildInternal(this,param_2,param_3);
+  if (bVar2 != 0) {
+    _Globals::CDSView__Show((int *)param_2);
   }
-  if (*(int *)((int)this + 0x50) == 0) {
-    CDSView_AcquireKeyboardFocus((int *)param_2);
+  if ((this->win).dwChainField_50 == 0) {
+    _Globals::CDSView_AcquireKeyboardFocus((int *)param_2);
   }
   return;
 }
@@ -103850,7 +103916,7 @@ void __thiscall CMenu::CMenu_DetachChildWithVisibility(CMenu *this,int *param_1)
   }
   bVar1 = *(byte *)(param_1 + 0x11);
   if ((bVar1 & 1) != 0) {
-    _Globals::CDSView__Hide(param_1);
+    CDSView::CDSView__Hide((CDSView *)param_1);
   }
   CMenu_DetachChild(this,param_1);
   if ((bVar1 & 1) != 0) {
@@ -103863,54 +103929,61 @@ void __thiscall CMenu::CMenu_DetachChildWithVisibility(CMenu *this,int *param_1)
 
 // WARNING: Removing unreachable block (ram,0x0042d2b5)
 
-undefined2 __thiscall _Globals::CDSView_DoModal(void *this,void *param_1)
+undefined2 __thiscall CDSView::CDSView_DoModal(CDSView *this,void *param_1)
 
 {
-  char cVar1;
-  byte bVar2;
+  ushort *puVar1;
+  void *pvVar2;
+  char cVar3;
+  byte bVar4;
   void *unaff_EBX;
-  int *piVar3;
+  int *piVar5;
   
+                    // Modal exit code at +0x4a (not wChainCounter_4a); R6 task 18
   if (g_pApp != (void *)0x0) {
-    if ((param_1 == (void *)0x0) || (*(int *)((int)this + 0x4c) != 0)) {
-      if ((*(int *)((int)this + 0x4c) == 0) ||
-         ((*(byte *)(*(int *)((int)this + 0x4c) + 0x44) & 0x80) != 0)) goto LAB_0042d1ef;
+    if ((param_1 == (void *)0x0) || ((this->win).pParent != (void *)0x0)) {
+      pvVar2 = (this->win).pParent;
+      if ((pvVar2 == (void *)0x0) || ((*(byte *)((int)pvVar2 + 0x44) & 0x80) != 0))
+      goto LAB_0042d1ef;
     }
     else if ((*(byte *)((int)param_1 + 0x44) & 0x80) != 0) {
       CDSView__AddChild(param_1,this,0);
 LAB_0042d1ef:
-      if (*(int *)((int)this + 0x4c) == 0) {
-        piVar3 = (int *)0x0;
+      pvVar2 = (this->win).pParent;
+      if (pvVar2 == (void *)0x0) {
+        piVar5 = (int *)0x0;
       }
       else {
-        piVar3 = *(int **)(*(int *)((int)this + 0x4c) + 0x50);
+        piVar5 = *(int **)((int)pvVar2 + 0x50);
       }
-      bVar2 = *(byte *)((int)this + 0x44) & 1;
+      bVar4 = (byte)(this->win).wViewStateFlags & 1;
       g_pModalFocus = this;
-      CDSView_AcquireKeyboardFocus(this);
-      *(ushort *)((int)this + 0x44) = *(ushort *)((int)this + 0x44) | 0x10;
-      if (bVar2 == 0) {
-        CDSView__Show(this);
+      _Globals::CDSView_AcquireKeyboardFocus((int *)this);
+      puVar1 = &(this->win).wViewStateFlags;
+      *puVar1 = *puVar1 | 0x10;
+      if (bVar4 == 0) {
+        _Globals::CDSView__Show((int *)this);
       }
-      (**(code **)(*(int *)this + 0x24))(0);
+      (**(code **)((int)(this->win).pVftable_primary + 0x24))(0);
       do {
-        *(undefined2 *)((int)this + 0x4a) = 0;
+        (this->win).wChainCounter_4a = 0;
         do {
-          CDSApp_PumpTick(g_pApp);
-        } while (*(short *)((int)this + 0x4a) == 0);
-      } while (((*(byte *)((int)this + 0x46) & 0x40) != 0) &&
-              (cVar1 = (**(code **)(*(int *)this + 0x34))(*(undefined2 *)((int)this + 0x4a)),
-              cVar1 == '\0'));
-      (**(code **)(*(int *)this + 0x24))(0,0);
-      if (bVar2 == 0) {
+          _Globals::CDSApp_PumpTick(g_pApp);
+        } while ((this->win).wChainCounter_4a == 0);
+      } while ((((this->win).wWidgetFlags & 0x40) != 0) &&
+              (cVar3 = (**(code **)((int)(this->win).pVftable_primary + 0x34))
+                                 ((this->win).wChainCounter_4a), cVar3 == '\0'));
+      (**(code **)((int)(this->win).pVftable_primary + 0x24))(0,0);
+      if (bVar4 == 0) {
         CDSView__Hide(this);
       }
       g_pModalFocus = unaff_EBX;
-      *(ushort *)((int)this + 0x44) = *(ushort *)((int)this + 0x44) & 0xffef;
-      if (piVar3 != (int *)0x0) {
-        CDSView_AcquireKeyboardFocus(piVar3);
+      puVar1 = &(this->win).wViewStateFlags;
+      *puVar1 = *puVar1 & 0xffef;
+      if (piVar5 != (int *)0x0) {
+        _Globals::CDSView_AcquireKeyboardFocus(piVar5);
       }
-      return *(undefined2 *)((int)this + 0x4a);
+      return (this->win).wChainCounter_4a;
     }
   }
   return 0x8003;
@@ -104037,31 +104110,32 @@ void __thiscall _Globals::CDsStringSetLengthAndTerminate(void *this,int param_1)
 
 
 
-int __thiscall CBulanci::CBulanci_CompareWideString(CBulanci *this,ushort *param_1)
+int __cdecl CBulanci::CDsString_CompareHandles(void *param_1)
 
 {
   ushort uVar1;
   ushort *puVar2;
+  undefined4 *in_ECX;
   bool bVar3;
   
-  if (param_1 == (ushort *)0x0) {
-    param_1 = (ushort *)PTR_DAT_004afce0;
+  if (param_1 == (void *)0x0) {
+    param_1 = PTR_DAT_004afce0;
   }
-  puVar2 = (ushort *)(this->app).vftable_primary;
-  if (puVar2 == (ushort *)0x0) {
+  puVar2 = (ushort *)*in_ECX;
+  if ((ushort *)*in_ECX == (ushort *)0x0) {
     puVar2 = (ushort *)PTR_DAT_004afce0;
   }
   while( true ) {
     uVar1 = *puVar2;
-    bVar3 = uVar1 < *param_1;
-    if (uVar1 != *param_1) break;
+    bVar3 = uVar1 < *(ushort *)param_1;
+    if (uVar1 != *(ushort *)param_1) break;
     if (uVar1 == 0) {
       return 0;
     }
     uVar1 = puVar2[1];
-    bVar3 = uVar1 < param_1[1];
-    if (uVar1 != param_1[1]) break;
-    param_1 = param_1 + 2;
+    bVar3 = uVar1 < *(ushort *)((int)param_1 + 2);
+    if (uVar1 != *(ushort *)((int)param_1 + 2)) break;
+    param_1 = (void *)((int)param_1 + 4);
     puVar2 = puVar2 + 2;
     if (uVar1 == 0) {
       return 0;
@@ -104187,6 +104261,7 @@ CBulanci * __thiscall CBulanci::CDsStringAssignFromLiteral(CBulanci *this,short 
   int iVar5;
   int *piVar6;
   
+                    // ECX = wchar_t** handle slot (CDSString); not CBulanci* (R6 task 19)
   psVar4 = param_1;
   if (param_1 == (short *)0x0) {
     psVar4 = (short *)PTR_DAT_004afce0;
@@ -104342,10 +104417,10 @@ void * __cdecl _Globals::CDsStringFormatV(void *param_1,wchar_t *param_2)
 
 
 
-void __thiscall CStartGame2::CStartGame2_CompareLevelName(CStartGame2 *this,undefined4 *param_1)
+void __thiscall CStartGame2::CDsString_CompareHandles(CStartGame2 *this,undefined4 *param_1)
 
 {
-  CBulanci::CBulanci_CompareWideString((CBulanci *)this,(ushort *)*param_1);
+  CBulanci::CDsString_CompareHandles((void *)*param_1);
   return;
 }
 
@@ -104513,7 +104588,7 @@ CDSFileStream * __thiscall CBulanci::CBulanci_CreateCDSFileStream(CBulanci *this
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
 
-CBulanci * __cdecl CBulanci::FUN_0042d970(CBulanci *param_1)
+CBulanci * __cdecl CBulanci::CBulanci_AssignTempPathWithTrailingBackslash(CBulanci *param_1)
 
 {
   undefined *puVar1;
@@ -104531,9 +104606,7 @@ CBulanci * __cdecl CBulanci::FUN_0042d970(CBulanci *param_1)
   undefined1 *puStack_8;
   undefined4 local_4;
   
-                    // UNCERTAIN: GetTempPathW(0x4000) → CDsStringAssignFromLiteral; ensure
-                    // trailing backslash; FUN_0042d310 verifies directory exists — callers
-                    // CGaming_LoadLevelAssetAndMusic @ 0x0041d357 and CBulanci_dtor.
+                    // Temp path into caller handle slot via GetTempPathW (R6 task 19)
   puStack_8 = &LAB_00479422;
   local_c = ExceptionList;
   local_10 = DAT_004b0e44 ^ (uint)awStack_801c;
@@ -104590,7 +104663,7 @@ CBulanci * __cdecl CBulanci::FUN_0042d970(CBulanci *param_1)
 
 
 
-void __thiscall CBulanci::FUN_0042dab0(CBulanci *this,LPCSTR param_1,UINT param_2)
+void __thiscall CBulanci::CDsString_AssignFromMultiByte(CBulanci *this,LPCSTR param_1,UINT param_2)
 
 {
   int iVar1;
@@ -104599,8 +104672,7 @@ void __thiscall CBulanci::FUN_0042dab0(CBulanci *this,LPCSTR param_1,UINT param_
   size_t cbMultiByte;
   bool bVar3;
   
-                    // UNCERTAIN: CBulanci MBCS→wide string assign (CDsString_EnsureCapacityWide +
-                    // MultiByteToWideChar); caller FUN_0042e2f0 stream read.
+                    // MultiByteToWideChar into CDSString handle (R6 task 19)
   if (param_1 == (LPCSTR)0x0) {
     (this->app).vftable_primary = (undefined *)0x0;
     return;
@@ -104631,7 +104703,7 @@ void __thiscall CBulanci::FUN_0042dab0(CBulanci *this,LPCSTR param_1,UINT param_
 
 
 
-void __thiscall _Globals::FUN_0042db60(void *this,LPCWSTR param_1,UINT param_2)
+void __thiscall _Globals::CDsString_WideToMultiByteBuffer(void *this,LPCWSTR param_1,UINT param_2)
 
 {
   int iVar1;
@@ -104685,7 +104757,7 @@ int * __fastcall CBulanci::CBulanci_WideStringToLowerInPlace(int *param_1)
 
 
 
-int * __fastcall _Globals::FUN_0042dc50(int *param_1)
+int * __fastcall _Globals::CDsString_ClearInPlace(int *param_1)
 
 {
                     // UNCERTAIN: clears CDsString at *param_1 — FUN_0042d850 then
@@ -104730,7 +104802,7 @@ CBulanci::CDsString_SplitPathBackslashDot
   }
   if (iVar4 < 0) {
     if (param_2 != (CBulanci *)0x0) {
-      _Globals::FUN_0042dc50((int *)param_2);
+      _Globals::CDsString_ClearInPlace((int *)param_2);
     }
     if (iVar3 < 0) {
       if (this_00 != (void *)0x0) {
@@ -104781,7 +104853,7 @@ LAB_0042de8e:
         ExceptionList = local_c;
         return;
       }
-      _Globals::FUN_0042dc50(param_4);
+      _Globals::CDsString_ClearInPlace(param_4);
       ExceptionList = local_c;
       return;
     }
@@ -104813,7 +104885,8 @@ LAB_0042de8e:
 
 
 
-void __thiscall CBulanci::FUN_0042dec0(CBulanci *this,int *param_1,void *param_2)
+void __thiscall
+CBulanci::CBulanci_SplitPathDirectoryAndBase(CBulanci *this,int *param_1,void *param_2)
 
 {
   int *this_00;
@@ -104833,7 +104906,7 @@ void __thiscall CBulanci::FUN_0042dec0(CBulanci *this,int *param_1,void *param_2
   this_00 = param_1;
   if (iVar1 < 0) {
     if (param_1 != (int *)0x0) {
-      _Globals::FUN_0042dc50(param_1);
+      _Globals::CDsString_ClearInPlace(param_1);
     }
     if (param_2 != (void *)0x0) {
       _Globals::CDsStringAssignFromHandle(param_2,(undefined4 *)this);
@@ -104868,7 +104941,8 @@ void __thiscall CBulanci::FUN_0042dec0(CBulanci *this,int *param_1,void *param_2
 
 
 
-void * __thiscall CBulanci::FUN_0042dfc0(CBulanci *this,short *param_1,short *param_2)
+void * __thiscall
+CBulanci::CBulanci_JoinPathDirectoryAndBase(CBulanci *this,short *param_1,short *param_2)
 
 {
   int *piVar1;
@@ -104889,7 +104963,7 @@ void * __thiscall CBulanci::FUN_0042dfc0(CBulanci *this,short *param_1,short *pa
   local_14 = (undefined *)0x0;
   local_10 = (undefined *)0x0;
   local_4 = (undefined *)0x1;
-  FUN_0042dec0(this,(int *)&local_14,&local_10);
+  CBulanci_SplitPathDirectoryAndBase(this,(int *)&local_14,&local_10);
   if (param_1 != (short *)0x0) {
     CDsStringAssignFromLiteral((CBulanci *)&local_14,param_1);
   }
@@ -104930,7 +105004,7 @@ int * __thiscall CBulanci::CBulanci_GetPathBasename(CBulanci *this,int *param_1)
   ExceptionList = &local_c;
   *param_1 = 0;
   local_4 = 0;
-  FUN_0042dec0(this,param_1,(void *)0x0);
+  CBulanci_SplitPathDirectoryAndBase(this,param_1,(void *)0x0);
   ExceptionList = local_c;
   return param_1;
 }
@@ -104958,7 +105032,7 @@ int * __thiscall _Globals::CDsString_ReadWStringFromStream(void *this,int *param
   ExceptionList = &local_c;
   (**(code **)(*param_1 + 0x10))(&param_1,4);
   if (iStack_4 == 0) {
-    piVar2 = FUN_0042dc50(this);
+    piVar2 = CDsString_ClearInPlace(this);
     ExceptionList = unaff_EBX;
     return piVar2;
   }
@@ -105015,7 +105089,7 @@ void * __thiscall CBulanci::CBulanci_FormatPathPair(CBulanci *this,short *param_
   if (local_10 != (short *)0x0) {
     psVar3 = local_10;
   }
-  pvVar4 = FUN_0042dfc0(this,psVar3,psVar5);
+  pvVar4 = CBulanci_JoinPathDirectoryAndBase(this,psVar3,psVar5);
   local_4 = (uint)local_4._1_3_ << 8;
   if (psVar1 != (short *)0x0) {
     _Globals::CDsStringReleaseHeader(psVar1 + -6);
@@ -105032,7 +105106,7 @@ void * __thiscall CBulanci::CBulanci_FormatPathPair(CBulanci *this,short *param_
 
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 
-int * __thiscall CBulanci::FUN_0042e2f0(CBulanci *this,int *param_1)
+int * __thiscall CBulanci::CDsString_ReadNarrowLengthPrefixedFromStream(CBulanci *this,int *param_1)
 
 {
   uint uVar1;
@@ -105057,7 +105131,7 @@ int * __thiscall CBulanci::FUN_0042e2f0(CBulanci *this,int *param_1)
   ExceptionList = &local_c;
   (**(code **)(*param_1 + 0x10))(local_8018,4);
   if (unaff_ESI == 0) {
-    piVar2 = _Globals::FUN_0042dc50((int *)this);
+    piVar2 = _Globals::CDsString_ClearInPlace((int *)this);
   }
   else {
     pCVar3 = _Globals::Runtime_MallocOrThrow(&DAT_004b7c94,(uchar *)(unaff_ESI + 1));
@@ -105065,7 +105139,7 @@ int * __thiscall CBulanci::FUN_0042e2f0(CBulanci *this,int *param_1)
     (**(code **)(*param_1 + 0x10))(pCVar3,unaff_ESI);
     pCVar3[uVar1] = '\0';
     UVar4 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-    FUN_0042dab0(local_8018,pCVar3,UVar4);
+    CDsString_AssignFromMultiByte(local_8018,pCVar3,UVar4);
     local_c = (void *)CONCAT31(local_c._1_3_,1);
     piVar2 = (int *)CDsStringAssignFromLiteral(this,(short *)local_8018[0].app.vftable_primary);
     if ((undefined **)local_8018[0].app.vftable_primary != &local_8018[0].app.vftable_sub04) {
@@ -105085,7 +105159,7 @@ int * __thiscall CBulanci::FUN_0042e2f0(CBulanci *this,int *param_1)
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 // WARNING: Removing unreachable block (ram,0x0042e4b1)
 
-void __thiscall CBulanci::FUN_0042e400(CBulanci *this,int *param_1)
+void __thiscall CBulanci::CDsString_WriteNarrowLengthPrefixedToStream(CBulanci *this,int *param_1)
 
 {
   undefined *puVar1;
@@ -105121,7 +105195,7 @@ void __thiscall CBulanci::FUN_0042e400(CBulanci *this,int *param_1)
       pWVar3 = (LPCWSTR)PTR_DAT_004afce0;
     }
     UVar2 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-    _Globals::FUN_0042db60(&stack0xffffbfe8,pWVar3,UVar2);
+    _Globals::CDsString_WideToMultiByteBuffer(&stack0xffffbfe8,pWVar3,UVar2);
     local_c = (void *)0x0;
     (**(code **)(*param_1 + 0x14))(local_4014,unaff_EDI);
   }
@@ -105169,7 +105243,7 @@ void __thiscall _Globals::FUN_0042e4e0(void *this,int *param_1)
   }
   local_4010 = local_400c;
   UVar3 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-  FUN_0042db60(&local_4010,pWVar5,UVar3);
+  CDsString_WideToMultiByteBuffer(&local_4010,pWVar5,UVar3);
   uStack_4 = 0;
   if (*(int *)this == 0) {
     uVar4 = 0;
@@ -105196,7 +105270,7 @@ void __thiscall _Globals::FUN_0042e4e0(void *this,int *param_1)
     pWVar6 = unaff_retaddr;
   }
   UVar3 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-  FUN_004045f0(&stack0xffffbf64,pWVar6,UVar3);
+  CDsString_AssignFromWideCapped80(&stack0xffffbf64,pWVar6,UVar3);
   local_c = (void *)0x1;
   (**(code **)(*param_1 + 0x14))(&stack0xffffbf68,(int)pWVar5 - (int)pWVar1 >> 1);
   if (_Memory != &stack0xffffbf60) {
@@ -105267,12 +105341,12 @@ void CBulanci::PackTimeToDword(uint *param_1,uint param_2,uint param_3,uint para
 
 
 
-int __fastcall CBulanci::CBulanci_PackedTimeToMs(int *param_1)
+int __fastcall CBulanci::CBulanci_PackedTimeToMs(int *pPackedTime)
 
 {
   int iVar1;
   
-  iVar1 = *param_1;
+  iVar1 = *pPackedTime;
   return (((iVar1 << 0xe) >> 0x19) + (((iVar1 << 7) >> 0x19) + (iVar1 >> 0x19) * 0x3c) * 0x3c) *
          1000 + ((iVar1 << 0x15) >> 0x15);
 }
@@ -105402,7 +105476,7 @@ _Globals::HandleClassRegister(void *this,undefined4 param_1,undefined4 param_2,u
 
 
 
-uint __thiscall _Globals::FUN_0042e960(void *this,void *param_1)
+uint __thiscall _Globals::ClassRegEntry_ListContains(void *this,void *param_1)
 
 {
   void *in_EAX;
@@ -105526,26 +105600,26 @@ void __fastcall _Globals::CDSObject_AddRef(int *pObject)
 
 
 
-bool __thiscall _Globals::Scheduler_IsSlotLive(void *this,uint param_1)
+bool __thiscall CDSUpdatedItem::Scheduler_IsSlotLive(CDSUpdatedItem *this,uint param_1)
 
 {
-  if (*(uint *)((int)this + 0x10) <= param_1) {
+  if (this->dwEventSlots <= param_1) {
     return false;
   }
-  return *(int *)(*(int *)((int)this + 0xc) + param_1 * 4) != 0;
+  return *(int *)((int)this->pEventSlots + param_1 * 4) != 0;
 }
 
 
 
-void __thiscall CBulanek::Scheduler_FreeSlotIfLive(CBulanek *this,uint param_1)
+void __thiscall CDSUpdatedItem::Scheduler_FreeSlotIfLive(CDSUpdatedItem *this,uint param_1)
 
 {
   bool bVar1;
   
-  bVar1 = _Globals::Scheduler_IsSlotLive(this,param_1);
+  bVar1 = Scheduler_IsSlotLive(this,param_1);
   if (bVar1) {
-    _Globals::Runtime_Free(&DAT_004b7c94,*(void **)(this->dwPad_0c + param_1 * 4));
-    *(undefined4 *)(this->dwPad_0c + param_1 * 4) = 0;
+    _Globals::Runtime_Free(&DAT_004b7c94,*(void **)((int)this->pEventSlots + param_1 * 4));
+    *(undefined4 *)((int)this->pEventSlots + param_1 * 4) = 0;
   }
   return;
 }
@@ -105560,7 +105634,7 @@ void __fastcall CDSObject::CDSUpdatedItem_ReleaseSchedulerAndAudioBank(CBulanek 
   puVar1 = param_1->vftable_IDSReferenced;
   while (puVar1 != (undefined *)0x0) {
     puVar1 = puVar1 + -1;
-    CBulanek::Scheduler_FreeSlotIfLive(param_1,(uint)puVar1);
+    CDSUpdatedItem::Scheduler_FreeSlotIfLive((CDSUpdatedItem *)param_1,(uint)puVar1);
   }
   CDSPtrSlotVec::CDSPtrSlotVec_Resize((CDSPtrSlotVec *)&param_1->dwPad_0c,0);
   return;
@@ -105568,48 +105642,48 @@ void __fastcall CDSObject::CDSUpdatedItem_ReleaseSchedulerAndAudioBank(CBulanek 
 
 
 
-void __fastcall _Globals::Scheduler_DispatchDueEvents(int *param_1)
+void __fastcall _Globals::Scheduler_DispatchDueEvents(CDSUpdatedItem *this)
 
 {
   byte bVar1;
   uint *puVar2;
-  int iVar3;
+  uint uVar3;
   
-  iVar3 = param_1[4];
+  uVar3 = this->dwEventSlots;
 joined_r0x0042eb39:
   do {
     do {
-      if (iVar3 == 0) {
+      if (uVar3 == 0) {
         return;
       }
-      puVar2 = *(uint **)(param_1[3] + -4 + iVar3 * 4);
-      iVar3 = iVar3 + -1;
+      puVar2 = *(uint **)((int)this->pEventSlots + uVar3 * 4 + -4);
+      uVar3 = uVar3 - 1;
     } while (puVar2 == (uint *)0x0);
     bVar1 = (byte)puVar2[2];
     while( true ) {
       if (((bVar1 & 1) != 0) || (g_dwElapsedMs < puVar2[1] + *puVar2)) goto joined_r0x0042eb39;
       *puVar2 = puVar2[1] + *puVar2;
-      (**(code **)(*param_1 + 0x10))(iVar3);
+      (**(code **)((int)this->pVftable_IDSUpdated + 0x10))(uVar3);
       if ((puVar2[2] & 4) == 0) break;
       bVar1 = (byte)puVar2[2];
     }
-    Runtime_Free(&DAT_004b7c94,*(void **)(param_1[3] + iVar3 * 4));
-    *(undefined4 *)(param_1[3] + iVar3 * 4) = 0;
+    Runtime_Free(&DAT_004b7c94,*(void **)((int)this->pEventSlots + uVar3 * 4));
+    *(undefined4 *)((int)this->pEventSlots + uVar3 * 4) = 0;
   } while( true );
 }
 
 
 
-void __thiscall _Globals::Scheduler_EnsureCapacity(void *this,uint param_1)
+void __thiscall CDSUpdatedItem::Scheduler_EnsureCapacity(CDSUpdatedItem *this,uint param_1)
 
 {
   uint uVar1;
   
-  uVar1 = *(uint *)((int)this + 0x10);
+  uVar1 = this->dwEventSlots;
   if (uVar1 < param_1) {
-    CDSPtrSlotVec::CDSPtrSlotVec_Resize((CDSPtrSlotVec *)((int)this + 0xc),param_1);
+    CDSPtrSlotVec::CDSPtrSlotVec_Resize((CDSPtrSlotVec *)&this->pEventSlots,param_1);
     for (; (int)uVar1 < (int)param_1; uVar1 = uVar1 + 1) {
-      *(undefined4 *)((int)((CDSPtrSlotVec *)((int)this + 0xc))->pSlots + uVar1 * 4) = 0;
+      *(undefined4 *)((int)this->pEventSlots + uVar1 * 4) = 0;
     }
   }
   return;
@@ -105631,7 +105705,7 @@ void _Globals::CDSApp_PulseTasks(void)
       iVar1 = *(int *)(*(int *)((int)pvVar2 + 8) + iVar3 * 4);
       if (iVar1 != 0) {
         *(undefined1 *)(*(int *)(iVar1 + 4) + 0x14) = 1;
-        Scheduler_DispatchDueEvents(*(int **)(iVar1 + 4));
+        Scheduler_DispatchDueEvents(*(CDSUpdatedItem **)(iVar1 + 4));
         *(undefined1 *)(*(int *)(iVar1 + 4) + 0x14) = 0;
         pvVar2 = g_pTaskList;
       }
@@ -105814,7 +105888,7 @@ void __thiscall _Globals::CDSQueue_SetCapacity(void *this,int param_1)
   void *pvVar1;
   
   if (*(int *)((int)this + 4) < param_1) {
-    pvVar1 = FUN_0042f730(*(void **)this,(uchar *)(param_1 * 0x14));
+    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 * 0x14));
     *(void **)this = pvVar1;
     FUN_0042ea40((int)((int)pvVar1 + *(int *)((int)this + 4) * 0x14),
                  param_1 - *(int *)((int)this + 4));
@@ -105822,7 +105896,7 @@ void __thiscall _Globals::CDSQueue_SetCapacity(void *this,int param_1)
     return;
   }
   if (param_1 < *(int *)((int)this + 4)) {
-    pvVar1 = FUN_0042f730(*(void **)this,(uchar *)(param_1 * 0x14));
+    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 * 0x14));
     *(void **)this = pvVar1;
     *(int *)((int)this + 4) = param_1;
   }
@@ -106048,14 +106122,14 @@ void __fastcall CDSObject::CDSUpdatedItem_dtor(CBulanek *param_1)
 
 
 
-void * __thiscall _Globals::Scheduler_GetEventSlot(void *this,uint param_1)
+void * __thiscall CDSUpdatedItem::Scheduler_GetEventSlot(CDSUpdatedItem *this,uint param_1)
 
 {
   bool bVar1;
   
   bVar1 = Scheduler_IsSlotLive(this,param_1);
   if (bVar1) {
-    return *(void **)(*(int *)((int)this + 0xc) + param_1 * 4);
+    return *(void **)((int)this->pEventSlots + param_1 * 4);
   }
   return (void *)0x0;
 }
@@ -106063,21 +106137,22 @@ void * __thiscall _Globals::Scheduler_GetEventSlot(void *this,uint param_1)
 
 
 void __thiscall
-_Globals::Scheduler_RegisterEventSlot(void *this,uint slotIndex,uint delayMs,uint eventKind)
+CDSUpdatedItem::Scheduler_RegisterEventSlot
+          (CDSUpdatedItem *this,uint slotIndex,uint delayMs,uint eventKind)
 
 {
-  int iVar1;
+  void *pvVar1;
   uint *puVar2;
   uint uVar3;
   
   if (slotIndex == 0xffffffff) {
-    slotIndex = *(uint *)((int)this + 0x10);
+    slotIndex = this->dwEventSlots;
   }
   Scheduler_EnsureCapacity(this,slotIndex + 1);
-  CBulanek::Scheduler_FreeSlotIfLive(this,slotIndex);
-  iVar1 = *(int *)((int)this + 0xc);
-  puVar2 = Runtime_MallocOrThrow(&DAT_004b7c94,(uchar *)0x1c);
-  *(uint **)(iVar1 + slotIndex * 4) = puVar2;
+  Scheduler_FreeSlotIfLive(this,slotIndex);
+  pvVar1 = this->pEventSlots;
+  puVar2 = _Globals::Runtime_MallocOrThrow(&DAT_004b7c94,(uchar *)0x1c);
+  *(uint **)((int)pvVar1 + slotIndex * 4) = puVar2;
   uVar3 = -(uint)((eventKind & 2) != 0) & g_dwElapsedMs;
   puVar2[2] = eventKind;
   *puVar2 = uVar3;
@@ -106096,7 +106171,8 @@ _Globals::Scheduler_RegisterEventSlot(void *this,uint slotIndex,uint delayMs,uin
 
 // CEdit_OnKeyDown success path: reset embed CDSUpdatedItem timer slot 0 at this+0x68.
 
-void __thiscall _Globals::Scheduler_SetEventLastFireMs(void *this,uint param_1,int param_2)
+void __thiscall
+CDSUpdatedItem::Scheduler_SetEventLastFireMs(CDSUpdatedItem *this,uint param_1,int param_2)
 
 {
   bool bVar1;
@@ -106115,7 +106191,8 @@ void __thiscall _Globals::Scheduler_SetEventLastFireMs(void *this,uint param_1,i
 
 
 
-void __thiscall _Globals::Scheduler_SetEventDelayMs(void *this,uint param_1,uint param_2)
+void __thiscall
+CDSUpdatedItem::Scheduler_SetEventDelayMs(CDSUpdatedItem *this,uint param_1,uint param_2)
 
 {
   bool bVar1;
@@ -106131,7 +106208,7 @@ void __thiscall _Globals::Scheduler_SetEventDelayMs(void *this,uint param_1,uint
 
 
 
-void __thiscall _Globals::Scheduler_ArmSlot(void *this,uint param_1)
+void __thiscall CDSUpdatedItem::Scheduler_ArmSlot(CDSUpdatedItem *this,uint param_1)
 
 {
   bool bVar1;
@@ -106162,7 +106239,7 @@ void __thiscall _Globals::Scheduler_ArmSlot(void *this,uint param_1)
 
 
 
-void __thiscall _Globals::Scheduler_AckSlot(void *this,uint param_1,int param_2)
+void __thiscall CDSUpdatedItem::Scheduler_AckSlot(CDSUpdatedItem *this,uint param_1,int param_2)
 
 {
   dword *pdVar1;
@@ -106336,7 +106413,7 @@ CBulanci::CBulanci_AssignResourceIndexSlot
 
 
 
-void CDSApp::FUN_0042f530(void)
+void CDSApp::CBulanci_ReleaseResourceIndexSlots(void)
 
 {
   int iVar1;
@@ -106411,7 +106488,7 @@ void __thiscall _Globals::Scheduler_PopHook(void *this,int param_1)
 
 
 
-void __thiscall _Globals::FUN_0042f620(void *this,int param_1)
+void __thiscall _Globals::Scheduler_PushHook(void *this,int param_1)
 
 {
                     // UNCERTAIN: __thiscall wrapper -> CIntListInsertSortedOrAppend(this+4, value,
@@ -106504,7 +106581,7 @@ void __thiscall _Globals::Runtime_Free(void *this,void *param_1)
 
 
 
-void * _Globals::FUN_0042f730(void *param_1,uchar *param_2)
+void * _Globals::Runtime_ReallocOrThrow(void *param_1,uchar *param_2)
 
 {
   void *pvVar1;
@@ -106576,7 +106653,7 @@ void * __fastcall _Globals::CDSChained_GetFirstChildView(CDSChain *pChain)
 
 
 
-uint __thiscall _Globals::FUN_0042f7d0(void *this)
+uint __thiscall _Globals::CDSIntrusiveNode_GetLinkNext(void *this)
 
 {
                     // UNCERTAIN: __thiscall returns *(this+8). CWindow_FindNextFocusable /
@@ -106587,7 +106664,7 @@ uint __thiscall _Globals::FUN_0042f7d0(void *this)
 
 
 
-uint __thiscall _Globals::FUN_0042f7e0(void *this,int param_1)
+uint __thiscall _Globals::CDSIntrusiveNode_GetNextLinkSkipSentinel(void *this,int param_1)
 
 {
                     // UNCERTAIN: returns 0 or *(entity+8) when subobj+8 differs;
@@ -106649,7 +106726,7 @@ void __thiscall _Globals::CDSChained_ResetHeadOrSpliceBefore(void *this,int para
 
 
 
-void __thiscall CBulanek::CDSChained_InsertBeforeAnchor(CBulanek *this,void *param_1,int param_2)
+void __thiscall CDSChain::CDSChained_InsertBeforeAnchor(CDSChain *this,void *param_1,int param_2)
 
 {
   CDSChained *this_00;
@@ -106663,7 +106740,7 @@ void __thiscall CBulanek::CDSChained_InsertBeforeAnchor(CBulanek *this,void *par
 
 
 
-void __thiscall CBulanek::CDSChained_UnlinkAndSpliceNode(CBulanek *this,int param_1)
+void __thiscall CDSChain::CDSChained_UnlinkAndSpliceNode(CDSChain *this,int param_1)
 
 {
   void *this_00;
@@ -106687,7 +106764,7 @@ void __fastcall CDSChained::CDSChained_InitIDSReferencedVtable(undefined4 *param
 
 
 
-void * __thiscall CBulanci::CDSChain_GetChildAtIndex(CBulanci *this,int param_1)
+void * __thiscall CDSChain::CDSChain_GetChildAtIndex(CDSChain *this,int param_1)
 
 {
   void *pvVar1;
@@ -106697,15 +106774,14 @@ void * __thiscall CBulanci::CDSChain_GetChildAtIndex(CBulanci *this,int param_1)
                     // UNCERTAIN: indexed access on intrusive list head (fields +0xc/+0x10); sole
                     // caller CLevelScore_AddPlayerScore @ this+0x14 when pruning scores >6 — no
                     // published list accessor name
-  if ((param_1 < 0) || ((int)(this->app).vftable_sub10 < param_1)) {
+  if ((param_1 < 0) || ((int)this->dwChildCount < param_1)) {
     CDSSimpleException::CDSSimpleException_Throw(0x17,0x1a);
   }
-  iVar2 = *(int *)((this->app).pMiPad_after_vftable_sub04 + 4);
-  if (iVar2 != 0) {
-    return *(void **)(iVar2 + param_1 * 4);
+  if (this->pAuxHeap != (void *)0x0) {
+    return *(void **)((int)this->pAuxHeap + param_1 * 4);
   }
-  if (param_1 < (int)(this->app).vftable_sub10 >> 1) {
-    pvVar1 = _Globals::CDSChained_GetFirstChildView((CDSChain *)this);
+  if (param_1 < (int)this->dwChildCount >> 1) {
+    pvVar1 = _Globals::CDSChained_GetFirstChildView(this);
     if (param_1 != 0) {
       do {
         param_1 = param_1 + -1;
@@ -106715,7 +106791,7 @@ void * __thiscall CBulanci::CDSChain_GetChildAtIndex(CBulanci *this,int param_1)
     }
   }
   else {
-    pvVar1 = (void *)_Globals::FUN_0042f7d0(this);
+    pvVar1 = (void *)_Globals::CDSIntrusiveNode_GetLinkNext(this);
     if (param_1 + 1 < extraout_EDX) {
       iVar2 = extraout_EDX - (param_1 + 1);
       do {
@@ -106840,18 +106916,18 @@ _Globals::CDSChained_InsertChildAtAnchor(void *this,void *pChain,void *pChild,vo
 
 
 void __thiscall
-CBulanek::CDSChained_InsertBeforeWithHeadFixup(CBulanek *this,CBulanek *param_1,void *param_2)
+CDSChain::CDSChained_InsertBeforeWithHeadFixup(CDSChain *this,CBulanek *param_1,void *param_2)
 
 {
-  uint extraout_ECX;
+  undefined *extraout_ECX;
   int unaff_EDI;
   
                     // UNCERTAIN: list insert-before at index param_2 (FUN_0042f880); updates head
                     // at +0x8 when inserting at front; called from FUN_0042c160.
-  CDSChain::CDSChain_ReleaseAuxHeap((CDSChain *)this);
-  CDSChained_InsertBeforeAnchor(param_1,param_2,unaff_EDI);
-  if (param_2 == (void *)this->dwPad_08) {
-    this->dwPad_08 = extraout_ECX;
+  CDSChain_ReleaseAuxHeap(this);
+  CDSChained_InsertBeforeAnchor((CDSChain *)param_1,param_2,unaff_EDI);
+  if (param_2 == this->pFirstChild) {
+    this->pFirstChild = extraout_ECX;
   }
   return;
 }
@@ -106859,16 +106935,16 @@ CBulanek::CDSChained_InsertBeforeWithHeadFixup(CBulanek *this,CBulanek *param_1,
 
 
 void __thiscall
-CBulanek::CDSChained_RemoveWithHeadFixup(CBulanek *this,CBulanek *param_1,int param_2)
+CDSChain::CDSChained_RemoveWithHeadFixup(CDSChain *this,CBulanek *param_1,int param_2)
 
 {
                     // UNCERTAIN: list unlink node param_1 at index param_2 (FUN_0042f890); fixes
                     // head at +0x8 if removing head; called from FUN_0042c190.
-  CDSChain::CDSChain_ReleaseAuxHeap((CDSChain *)this);
-  if (param_1 == (CBulanek *)this->dwPad_08) {
-    this->dwPad_08 = param_1->dwPad_08;
+  CDSChain_ReleaseAuxHeap(this);
+  if (param_1 == (CBulanek *)this->pFirstChild) {
+    this->pFirstChild = (undefined *)param_1->dwPad_08;
   }
-  CDSChained_UnlinkAndSpliceNode(param_1,param_2);
+  CDSChained_UnlinkAndSpliceNode((CDSChain *)param_1,param_2);
   return;
 }
 
@@ -106895,32 +106971,30 @@ void __thiscall CDSChain::CDSChained_ClearChildren(CDSChain *this,char param_1)
 
 
 void __thiscall
-CBulanci::CDSChain_SortChildrenWithComparator(CBulanci *this,_PtFuncCompare *param_1)
+CLevelScore::CDSChain_SortChildrenWithComparator(CLevelScore *this,_PtFuncCompare *param_1)
 
 {
-  undefined *puVar1;
   void *_Base;
   void *pCurrentView;
-  int iVar2;
+  int iVar1;
   
                     // UNCERTAIN: qsort snapshot/rebuild of keyed list at this+0x10 via
                     // FUN_0042f7c0/FUN_0042f920; sole caller CLevelScore_AddPlayerScore with
                     // CScoreItem_CompareByNetScore; not a published CBulanci/CLevelScore export
                     // name.
-  puVar1 = (this->app).vftable_sub10;
-  if (1 < (int)puVar1) {
-    _Base = _Globals::Runtime_MallocOrThrow(&DAT_004b7c94,(uchar *)((int)puVar1 * 4));
+  if (1 < (int)this->m_levelName) {
+    _Base = _Globals::Runtime_MallocOrThrow(&DAT_004b7c94,(uchar *)((int)this->m_levelName * 4));
     pCurrentView = _Globals::CDSChained_GetFirstChildView((CDSChain *)this);
-    iVar2 = 0;
+    iVar1 = 0;
     for (; pCurrentView != (void *)0x0;
         pCurrentView = _Globals::CDSChained_GetNextSiblingView(pCurrentView)) {
-      *(void **)((int)_Base + iVar2 * 4) = pCurrentView;
-      iVar2 = iVar2 + 1;
+      *(void **)((int)_Base + iVar1 * 4) = pCurrentView;
+      iVar1 = iVar1 + 1;
     }
-    _qsort(_Base,(size_t)(this->app).vftable_sub10,4,param_1);
+    CBulanci::_qsort(_Base,(size_t)this->m_levelName,4,param_1);
     CDSChain::CDSChained_ClearChildren((CDSChain *)this,'\0');
-    for (; iVar2 != 0; iVar2 = iVar2 + -1) {
-      CDSChained_PrependChild(this,*(void **)((int)_Base + iVar2 * 4 + -4));
+    for (; iVar1 != 0; iVar1 = iVar1 + -1) {
+      CDSChained_PrependChild(this,*(void **)((int)_Base + iVar1 * 4 + -4));
     }
     _Globals::Runtime_Free(&DAT_004b7c94,_Base);
   }
@@ -107580,31 +107654,30 @@ void __thiscall IDSStream::ReadBytes(IDSStream *this,void *buf,uint count)
 // local cursor.  Throws errno 2 (win32 0x26) when bounded and the
 // write would overflow the cap.
 
-void __thiscall CDSFilterStream::WriteBytes(CDSFilterStream *this,void *buf,uint count)
+void __thiscall IDSStream::WriteBytes(IDSStream *this,void *buf,uint count)
 
 {
-  undefined **ppuVar1;
-  undefined *puVar2;
-  uint uVar3;
+  uint *puVar1;
+  uint uVar2;
+  int iVar3;
   int iVar4;
   
+                    // IDSStream vtable slot WriteBytes; filter outer face +0x0c (R6 task 25)
   if (count != 0) {
-    uVar3 = this->dwWindowBaseLo;
-    if (-1 < (int)uVar3) {
-      iVar4 = this->dwIdsStream_state + (uint)CARRY4(count,(uint)this->pVftable_IDSStream);
-      if (((int)uVar3 <= iVar4) &&
-         (((int)uVar3 < iVar4 || ((undefined *)this->dwCursorHi < this->pVftable_IDSStream + count))
-         )) {
+    iVar3 = this->nSizeCapHi;
+    if (-1 < iVar3) {
+      iVar4 = this->dwCursorHi + (uint)CARRY4(count,this->dwCursorLo);
+      if ((iVar3 <= iVar4) && ((iVar3 < iVar4 || (this->dwSizeCapLo < count + this->dwCursorLo)))) {
                     // WARNING: Subroutine does not return
         _Globals::ThrowStreamErrorNoReturn
-                  (2,(int *)(-(uint)(this != (CDSFilterStream *)0xc) & (uint)this),0x26);
+                  (2,(int *)(-(uint)(this != (IDSStream *)0xc) & (uint)this),0x26);
       }
     }
-    (**(code **)(*(int *)this->dwWindowBaseHi + 0x14))(buf,count);
-    ppuVar1 = &this->pVftable_IDSStream;
-    puVar2 = *ppuVar1;
-    *ppuVar1 = *ppuVar1 + count;
-    this->dwIdsStream_state = this->dwIdsStream_state + (uint)CARRY4((uint)puVar2,count);
+    (**(code **)(*(int *)this->pInnerStream + 0x14))(buf,count);
+    puVar1 = &this->dwCursorLo;
+    uVar2 = *puVar1;
+    *puVar1 = *puVar1 + count;
+    this->dwCursorHi = this->dwCursorHi + (uint)CARRY4(uVar2,count);
   }
   return;
 }
@@ -107622,8 +107695,7 @@ void __thiscall CDSFilterStream::WriteBytes(CDSFilterStream *this,void *buf,uint
 // Forwards to inner->Seek (vftable[0x28/4 = slot 10]) with absolute origin,
 // then mirrors the new position into the local cursor at this+0xc/+0x10.
 
-void __thiscall
-CDSFilterStream::SeekPosition(CDSFilterStream *this,uint param_1,int param_2,int param_3)
+void __thiscall IDSStream::SeekPosition(IDSStream *this,uint param_1,int param_2,int param_3)
 
 {
   longlong lVar1;
@@ -107632,36 +107704,34 @@ CDSFilterStream::SeekPosition(CDSFilterStream *this,uint param_1,int param_2,int
   
   lVar1 = CONCAT44(param_2,param_1);
   if (param_3 == 0) {
-    lVar1 = CONCAT44(this->dwCursorLo + param_2 +
-                     (uint)CARRY4((uint)this->pVftable_IDSChained,param_1),
-                     this->pVftable_IDSChained + param_1);
+    lVar1 = CONCAT44(this->dwWindowBaseHi + param_2 + (uint)CARRY4(this->dwWindowBaseLo,param_1),
+                     this->dwWindowBaseLo + param_1);
   }
   else if (param_3 == 1) {
-    lVar1 = CONCAT44(this->dwIdsStream_state + param_2 +
-                     (uint)CARRY4((uint)this->pVftable_IDSStream,param_1),
-                     this->pVftable_IDSStream + param_1);
+    lVar1 = CONCAT44(this->dwCursorHi + param_2 + (uint)CARRY4(this->dwCursorLo,param_1),
+                     this->dwCursorLo + param_1);
   }
   else if (param_3 == 2) {
-    lVar3 = (**(code **)(this->pVftable_IDSReferenced + 0x1c))();
+    lVar3 = (**(code **)((int)this->pVftable + 0x1c))();
     lVar1 = lVar3 - lVar1;
   }
   iVar2 = (int)((ulonglong)lVar1 >> 0x20);
-  if ((iVar2 <= (int)this->dwCursorLo) &&
-     ((iVar2 < (int)this->dwCursorLo || ((undefined *)lVar1 < this->pVftable_IDSChained)))) {
+  if ((iVar2 <= (int)this->dwWindowBaseHi) &&
+     ((iVar2 < (int)this->dwWindowBaseHi || ((uint)lVar1 < this->dwWindowBaseLo)))) {
                     // WARNING: Subroutine does not return
     _Globals::ThrowStreamErrorNoReturn
-              (3,(int *)(-(uint)(this != (CDSFilterStream *)0xc) & (uint)this),0x83);
+              (3,(int *)(-(uint)(this != (IDSStream *)0xc) & (uint)this),0x83);
   }
-  lVar3._0_4_ = this->dwCursorHi;
-  lVar3._4_4_ = this->dwWindowBaseLo;
-  if ((-1 < (int)this->dwWindowBaseLo) && (lVar3 < lVar1)) {
+  lVar3._0_4_ = this->dwSizeCapLo;
+  lVar3._4_4_ = this->nSizeCapHi;
+  if ((-1 < this->nSizeCapHi) && (lVar3 < lVar1)) {
                     // WARNING: Subroutine does not return
     _Globals::ThrowStreamErrorNoReturn
-              (3,(int *)(-(uint)(this != (CDSFilterStream *)0xc) & (uint)this),0x26);
+              (3,(int *)(-(uint)(this != (IDSStream *)0xc) & (uint)this),0x26);
   }
-  (**(code **)(*(int *)this->dwWindowBaseHi + 0x28))(lVar1,0);
-  this->pVftable_IDSStream = (undefined *)(int)lVar1;
-  this->dwIdsStream_state = (int)((ulonglong)lVar1 >> 0x20);
+  (**(code **)(*(int *)this->pInnerStream + 0x28))(lVar1,0);
+  this->dwCursorLo = (int)lVar1;
+  this->dwCursorHi = (int)((ulonglong)lVar1 >> 0x20);
   return;
 }
 
@@ -107673,29 +107743,28 @@ CDSFilterStream::SeekPosition(CDSFilterStream *this,uint param_1,int param_2,int
 // Forwards to inner->Lock (vftable[0x2c/4 = slot 11]) at this+0x24.
 
 void __thiscall
-CDSFilterStream::LockRegion
-          (CDSFilterStream *this,undefined *param_1,int param_2,uint param_3,int param_4)
+IDSStream::LockRegion(IDSStream *this,undefined *param_1,int param_2,uint param_3,int param_4)
 
 {
-  uint uVar1;
+  int iVar1;
   int iVar2;
   
-  if (((int)this->dwCursorLo <= param_2) &&
-     (((int)this->dwCursorLo < param_2 || (this->pVftable_IDSChained <= param_1)))) {
-    uVar1 = this->dwWindowBaseLo;
-    if (-1 < (int)uVar1) {
+  if (((int)this->dwWindowBaseHi <= param_2) &&
+     (((int)this->dwWindowBaseHi < param_2 || ((undefined *)this->dwWindowBaseLo <= param_1)))) {
+    iVar1 = this->nSizeCapHi;
+    if (-1 < iVar1) {
       iVar2 = param_2 + param_4 + (uint)CARRY4((uint)param_1,param_3);
-      if (((int)uVar1 < iVar2) ||
-         (((int)uVar1 <= iVar2 && ((undefined *)this->dwCursorHi < param_1 + param_3))))
+      if ((iVar1 < iVar2) ||
+         ((iVar1 <= iVar2 && ((undefined *)this->dwSizeCapLo < param_1 + param_3))))
       goto LAB_0043061a;
     }
-    (**(code **)(*(int *)this->dwWindowBaseHi + 0x2c))(param_1,param_2,param_3,param_4);
+    (**(code **)(*(int *)this->pInnerStream + 0x2c))(param_1,param_2,param_3,param_4);
     return;
   }
 LAB_0043061a:
                     // WARNING: Subroutine does not return
-  _Globals::ThrowStreamErrorNoReturn
-            (5,(int *)(-(uint)(this != (CDSFilterStream *)0xc) & (uint)this),0xa7);
+  _Globals::ThrowStreamErrorNoReturn(5,(int *)(-(uint)(this != (IDSStream *)0xc) & (uint)this),0xa7)
+  ;
 }
 
 
@@ -107706,29 +107775,28 @@ LAB_0043061a:
 // Forwards to inner->Unlock (vftable[0x30/4 = slot 12]) at this+0x24.
 
 void __thiscall
-CDSFilterStream::UnlockRegion
-          (CDSFilterStream *this,undefined *param_1,int param_2,uint param_3,int param_4)
+IDSStream::UnlockRegion(IDSStream *this,undefined *param_1,int param_2,uint param_3,int param_4)
 
 {
-  uint uVar1;
+  int iVar1;
   int iVar2;
   
-  if (((int)this->dwCursorLo <= param_2) &&
-     (((int)this->dwCursorLo < param_2 || (this->pVftable_IDSChained <= param_1)))) {
-    uVar1 = this->dwWindowBaseLo;
-    if (-1 < (int)uVar1) {
+  if (((int)this->dwWindowBaseHi <= param_2) &&
+     (((int)this->dwWindowBaseHi < param_2 || ((undefined *)this->dwWindowBaseLo <= param_1)))) {
+    iVar1 = this->nSizeCapHi;
+    if (-1 < iVar1) {
       iVar2 = param_2 + param_4 + (uint)CARRY4((uint)param_1,param_3);
-      if (((int)uVar1 < iVar2) ||
-         (((int)uVar1 <= iVar2 && ((undefined *)this->dwCursorHi < param_1 + param_3))))
+      if ((iVar1 < iVar2) ||
+         ((iVar1 <= iVar2 && ((undefined *)this->dwSizeCapLo < param_1 + param_3))))
       goto LAB_0043069a;
     }
-    (**(code **)(*(int *)this->dwWindowBaseHi + 0x30))(param_1,param_2,param_3,param_4);
+    (**(code **)(*(int *)this->pInnerStream + 0x30))(param_1,param_2,param_3,param_4);
     return;
   }
 LAB_0043069a:
                     // WARNING: Subroutine does not return
-  _Globals::ThrowStreamErrorNoReturn
-            (6,(int *)(-(uint)(this != (CDSFilterStream *)0xc) & (uint)this),0x9e);
+  _Globals::ThrowStreamErrorNoReturn(6,(int *)(-(uint)(this != (IDSStream *)0xc) & (uint)this),0x9e)
+  ;
 }
 
 
@@ -107772,7 +107840,7 @@ CDSEasyMemStream::CDSEasyMemStream_EnsureCapacity(CDSEasyMemStream *this,int req
     uVar1 = this->dwGrowth_chunk;
     puVar4 = (uchar *)(((int)((uVar1 - 1) + required_size) / (int)uVar1) * uVar1);
     if (this->dwRing_head_offset == 0) {
-      puVar2 = _Globals::FUN_0042f730(this->backing_heap,puVar4);
+      puVar2 = _Globals::Runtime_ReallocOrThrow(this->backing_heap,puVar4);
       this->backing_heap = puVar2;
       this->dwCapacity_field = (uint)puVar4;
     }
@@ -107997,12 +108065,10 @@ CBulanci * CDSEasyMemStream::GetStreamName(CBulanci *param_1)
 
 
 
-void __fastcall _Globals::FUN_00430a70(int param_1)
+void __fastcall _Globals::CDSEasyMemStream_GuardReadable(int param_1)
 
 {
-                    // UNCERTAIN: if (*(this+0x28)==0) ThrowStreamErrorNoReturn(8, this+0xc, 0);
-                    // sole caller FUN_00430e70 (IDSStream slice -> CDSEasyMemStream) — stream
-                    // readable guard, symbol not in mapping.csv.
+                    // CDSEasyMemStream readable guard: null backing -> stream errno 8
   if (*(int *)(param_1 + 0x28) == 0) {
                     // WARNING: Subroutine does not return
     ThrowStreamErrorNoReturn(8,(int *)(param_1 + 0xc),0);
@@ -108317,7 +108383,7 @@ _Globals::CDSEasyMemStream_CreateFromStreamSlice
   }
   (**(code **)(pCVar5->vf_IDSStream + 0x24))(unaff_retaddr,(int)unaff_retaddr >> 0x1f);
   iVar3 = *(int *)this;
-  uVar2 = FUN_00430a70((int)pCVar5);
+  uVar2 = CDSEasyMemStream_GuardReadable((int)pCVar5);
   (**(code **)(iVar3 + 0x10))(uVar2,unaff_retaddr);
   ExceptionList = (void *)seekOrigin;
   return pCVar5;
@@ -108381,7 +108447,7 @@ void __thiscall CDSCollection::CDSCollection_Resize(CDSCollection *this,int para
       }
       this->nM_count = param_1;
     }
-    ppvVar2 = _Globals::FUN_0042f730(this->pM_items,(uchar *)(param_1 * 4));
+    ppvVar2 = _Globals::Runtime_ReallocOrThrow(this->pM_items,(uchar *)(param_1 * 4));
     this->pM_items = ppvVar2;
     this->nM_capacity = param_1;
   }
@@ -110525,7 +110591,7 @@ void __thiscall CDSFlxFile::DecodeFrame(CDSFlxFile *this,uint *pFrameCursor,CDSI
                     // FLX DecodeFrame opcode 0x0C: BroadcastFrameTimeHint(consumer, u16) —
                     // side-channel FrameTimeHint to ODSImage subscribers; does not set track-mgr
                     // frameDelayOverrideMs (+0x44).
-        _Globals::BroadcastFrameTimeHint(param_3,(uint)*puVar1);
+        CDSImage::BroadcastFrameTimeHint(param_3,(uint)*puVar1);
         break;
       case '\r':
         param_3->bM_fillByte = *(byte *)puVar1;
@@ -110904,7 +110970,7 @@ void __fastcall _Globals::CBulanci_CloseFindHandle(int param_1)
 
 
 
-void __thiscall _Globals::FUN_00433200(void *this,int *param_1)
+void __thiscall tagRECT::CDSRect_IntersectInPlace(tagRECT *this,int *param_1)
 
 {
   int iVar1;
@@ -110913,43 +110979,41 @@ void __thiscall _Globals::FUN_00433200(void *this,int *param_1)
   int iVar4;
   int iVar5;
   
-                    // UNCERTAIN: __thiscall rect helper — if both rects valid (L<R,T<B) clips
-                    // this to intersection with param_1 else copies param_1; xrefs
-                    // collision/dirty-rect paths; sibling CPoemScroller::rect_Intersect @ 0x433280.
+                    // ECX=dest RECT*; in-place intersect (pair with CDSRect_Intersect@0x33280)
   iVar5 = *param_1;
   if ((iVar5 < param_1[2]) && (param_1[1] < param_1[3])) {
-    iVar1 = *(int *)((int)this + 8);
-    iVar2 = *(int *)this;
+    iVar1 = this->right;
+    iVar2 = this->left;
     if (iVar2 < iVar1) {
-      iVar3 = *(int *)((int)this + 4);
-      iVar4 = *(int *)((int)this + 0xc);
+      iVar3 = this->top;
+      iVar4 = this->bottom;
       if (iVar3 < iVar4) {
         if (iVar2 <= iVar5) {
           iVar5 = iVar2;
         }
-        *(int *)this = iVar5;
+        this->left = iVar5;
         iVar5 = param_1[1];
         if (iVar3 <= param_1[1]) {
           iVar5 = iVar3;
         }
-        *(int *)((int)this + 4) = iVar5;
+        this->top = iVar5;
         iVar5 = param_1[2];
         if (param_1[2] < iVar1) {
           iVar5 = iVar1;
         }
-        *(int *)((int)this + 8) = iVar5;
+        this->right = iVar5;
         iVar5 = param_1[3];
         if (param_1[3] < iVar4) {
           iVar5 = iVar4;
         }
-        *(int *)((int)this + 0xc) = iVar5;
+        this->bottom = iVar5;
         return;
       }
     }
-    *(int *)this = iVar5;
-    *(int *)((int)this + 4) = param_1[1];
-    *(int *)((int)this + 8) = param_1[2];
-    *(int *)((int)this + 0xc) = param_1[3];
+    this->left = iVar5;
+    this->top = param_1[1];
+    this->right = param_1[2];
+    this->bottom = param_1[3];
     return;
   }
   return;
@@ -110957,32 +111021,32 @@ void __thiscall _Globals::FUN_00433200(void *this,int *param_1)
 
 
 
-void __thiscall CPoemScroller::rect_Intersect(CPoemScroller *this,tagRECT *param_1)
+void __thiscall tagRECT::CDSRect_Intersect(tagRECT *this,tagRECT *param_1)
 
 {
-  void *pvVar1;
-  int iVar2;
+  int iVar1;
   
-  pvVar1 = (void *)param_1->left;
-  if ((int)param_1->left < (int)this->pVftable_primary) {
-    pvVar1 = this->pVftable_primary;
+                    // Stack RECT* intersect; callers pass RECT not CPoemScroller (R6 task 31)
+  iVar1 = param_1->left;
+  if (param_1->left < this->left) {
+    iVar1 = this->left;
   }
-  this->pVftable_primary = pvVar1;
-  pvVar1 = (void *)param_1->top;
-  if ((int)param_1->top < (int)this->pVftable_IDSChained_04) {
-    pvVar1 = this->pVftable_IDSChained_04;
+  this->left = iVar1;
+  iVar1 = param_1->top;
+  if (param_1->top < this->top) {
+    iVar1 = this->top;
   }
-  this->pVftable_IDSChained_04 = pvVar1;
-  iVar2 = param_1->right;
-  if (this->nField_08 <= param_1->right) {
-    iVar2 = this->nField_08;
+  this->top = iVar1;
+  iVar1 = param_1->right;
+  if (this->right <= param_1->right) {
+    iVar1 = this->right;
   }
-  this->nField_08 = iVar2;
-  if (param_1->bottom < this->nField_0c) {
-    this->nField_0c = param_1->bottom;
+  this->right = iVar1;
+  if (param_1->bottom < this->bottom) {
+    this->bottom = param_1->bottom;
     return;
   }
-  this->nField_0c = this->nField_0c;
+  this->bottom = this->bottom;
   return;
 }
 
@@ -111465,7 +111529,7 @@ CDSStreamStorage::CDSStreamStorage_GetStreamEntry(CDSStreamStorage *this,int ind
 
 
 
-void __fastcall _Globals::FUN_004339e0(undefined4 *param_1)
+void __fastcall _Globals::Eh_LeaveCriticalSection(undefined4 *param_1)
 
 {
                     // UNCERTAIN: SEH unwind helper —
@@ -111915,9 +111979,10 @@ CDSStreamStorage::CDSStreamStorage_AppendOrReuseStream
   int *piVar1;
   int iVar2;
   uint uVar3;
+  void *extraout_EAX;
   void *pvVar4;
-  void *pvVar5;
-  uint uVar6;
+  uint uVar5;
+  void *pvVar6;
   undefined8 uVar7;
   uint uStack_1c;
   undefined4 uStack_14;
@@ -111949,9 +112014,9 @@ CDSStreamStorage::CDSStreamStorage_AppendOrReuseStream
         ppEventHandlerVtable = &this->pVftable_IDSStorage;
       }
     }
-    pvVar5 = CDSStreamStorage_GetThreadLoaderNode(this);
-    iVar2 = *(int *)((int)pvVar5 + 0x14);
-    *(int *)((int)pvVar5 + 0x14) = iVar2 + 1;
+    pvVar4 = CDSStreamStorage_GetThreadLoaderNode(this);
+    iVar2 = *(int *)((int)pvVar4 + 0x14);
+    *(int *)((int)pvVar4 + 0x14) = iVar2 + 1;
     if (iVar2 != 0) {
       uVar7 = (**(code **)(*(int *)this->pRootSafeStream + 0x20))(uVar3);
     }
@@ -111965,15 +112030,15 @@ CDSStreamStorage::CDSStreamStorage_AppendOrReuseStream
       CDSSimpleException::CDSSimpleException_Throw(9,0xb);
     }
     uVar3 = *(uint *)((int)&entry->streamExtent + 4);
-    uVar6 = uVar3 + this->dwStreamBaseOffsetLo;
+    uVar5 = uVar3 + this->dwStreamBaseOffsetLo;
                     // MOV EDX,[entry+0x20]: CDSStrmResInfo::dwFilterSliceAddend →
                     // CreateFilterSafeStream sliceExtentLo.
-    pvVar4 = CDSStreamStorage_CreateFilterSafeStream
-                       ((CDSStreamStorage *)entry,(int *)this->pRootSafeStream,uVar6 + 4,
+    pvVar6 = CDSStreamStorage_CreateFilterSafeStream
+                       ((CDSStreamStorage *)entry,(int *)this->pRootSafeStream,uVar5 + 4,
                         entry->dwStreamFlags + this->dwStreamBaseOffsetHi +
-                        (uint)CARRY4(uVar3,this->dwStreamBaseOffsetLo) + (uint)(0xfffffffb < uVar6),
+                        (uint)CARRY4(uVar3,this->dwStreamBaseOffsetLo) + (uint)(0xfffffffb < uVar5),
                         entry->dwFilterSliceAddend,0,(uint)ppEventHandlerVtable);
-    piVar1 = (int *)((int)pvVar5 + 0x14);
+    piVar1 = (int *)((int)pvVar4 + 0x14);
     *piVar1 = *piVar1 + -1;
     if (*piVar1 != 0) {
       (**(code **)(*(int *)this->pRootSafeStream + 0x28))(uVar7,0);
@@ -111981,11 +112046,12 @@ CDSStreamStorage::CDSStreamStorage_AppendOrReuseStream
     LeaveCriticalSection((LPCRITICAL_SECTION)lpCriticalSection);
   }
   else {
-    pvVar4 = (void *)CDSStreamStorage_AddRefHeldObject((int)entry);
+    CDSStreamStorage_AddRefHeldObject(entry);
     LeaveCriticalSection((LPCRITICAL_SECTION)lpCriticalSection);
+    pvVar6 = extraout_EAX;
   }
   ExceptionList = local_c;
-  return pvVar4;
+  return pvVar6;
 }
 
 
@@ -112024,31 +112090,33 @@ CDSStreamStorage * CDSStreamStorage_CreateObject(void)
 
 
 
-void __thiscall
-CDSStreamStorage::CDSStreamStorage_OpenStream(CDSStreamStorage *this,void *param_1,void **param_2)
+uchar __thiscall
+CDSStreamStorage::CDSStreamStorage_OpenStream(CDSStreamStorage *this,uint param_1,void *param_2)
 
 {
   ULONG_PTR *this_00;
   CDSStrmResInfo *entry;
+  void *pvVar1;
   
   this_00 = &this[-1].lock.SpinCount;
-  entry = CDSStreamStorage_CloseStreamByKey((CDSStreamStorage *)this_00,param_1);
-  CDSStreamStorage_AppendOrReuseStream((CDSStreamStorage *)this_00,entry,param_2);
-  return;
+  entry = CDSStreamStorage_CloseStreamByKey((CDSStreamStorage *)this_00,(void *)param_1);
+  pvVar1 = CDSStreamStorage_AppendOrReuseStream((CDSStreamStorage *)this_00,entry,param_2);
+  return (uchar)pvVar1;
 }
 
 
 
-void __thiscall
-CDSStreamStorage::CDSStreamStorage_GetStreamByIndex
-          (CDSStreamStorage *this,int param_1,void **param_2)
+uchar __thiscall
+CDSStreamStorage::CDSStreamStorage_GetStreamByIndex(CDSStreamStorage *this,int index,void *out)
 
 {
-  CDSStreamStorage_AppendOrReuseStream
-            ((CDSStreamStorage *)&this[-1].lock.SpinCount,
-             *(CDSStrmResInfo **)((int)(this->collection).pM_pVtable_IDSChained + param_1 * 4),
-             param_2);
-  return;
+  void *pvVar1;
+  
+  pvVar1 = CDSStreamStorage_AppendOrReuseStream
+                     ((CDSStreamStorage *)&this[-1].lock.SpinCount,
+                      *(CDSStrmResInfo **)
+                       ((int)(this->collection).pM_pVtable_IDSChained + index * 4),out);
+  return (uchar)pvVar1;
 }
 
 
@@ -112119,7 +112187,7 @@ void CBulanci::Catch_0043420c(void)
 {
   int unaff_EBP;
   
-  _Globals::FUN_0040b540((int *)(*(int *)(unaff_EBP + -0x14) + 0x18));
+  ReleaseAndClearPointer((int *)(*(int *)(unaff_EBP + -0x14) + 0x18));
                     // WARNING: Subroutine does not return
   Runtime::MSVCRT::__CxxThrowException_8(0,(byte *)0x0);
 }
@@ -112241,14 +112309,14 @@ CDSResourceException::CDSResourceException_What(CDSResourceException *this,wchar
 
 
 
-undefined4 __fastcall CDSStreamStorage::CDSStreamStorage_AddRefHeldObject(int param_1)
+void __fastcall CDSStreamStorage::CDSStreamStorage_AddRefHeldObject(void *param_1)
 
 {
   int iVar1;
   
-  iVar1 = _Globals::CheckedVirtualBaseCast(*(void **)(param_1 + 0x14),1);
+  iVar1 = _Globals::CheckedVirtualBaseCast(*(void **)((int)param_1 + 0x14),1);
   *(int *)(iVar1 + 4) = *(int *)(iVar1 + 4) + 1;
-  return *(undefined4 *)(param_1 + 0x14);
+  return;
 }
 
 
@@ -112374,7 +112442,7 @@ void __fastcall _Globals::eh_dtor_CDSObject_ptr(int **ppOwned)
 // 
 // Library: Visual Studio 2005 Release
 
-CDSResourceException * _Globals::CreateObject(void)
+CDSResourceException * _Globals::CDSResourceException_CreateObject(void)
 
 {
   CDSResourceException *pCVar1;
@@ -113831,8 +113899,8 @@ void CBulanci::Catch_004359f3(void)
   iVar1 = *(int *)(unaff_EBP + -0x14);
   _Globals::Runtime_FreePointerFieldZero((undefined4 *)(iVar1 + 0x28));
   _Globals::Runtime_FreePointerFieldZero((undefined4 *)(iVar1 + 0x2c));
-  _Globals::FUN_0040b540((int *)(iVar1 + 0x20));
-  _Globals::FUN_0040b540((int *)(iVar1 + 0x24));
+  ReleaseAndClearPointer((int *)(iVar1 + 0x20));
+  ReleaseAndClearPointer((int *)(iVar1 + 0x24));
                     // WARNING: Subroutine does not return
   Runtime::MSVCRT::__CxxThrowException_8(0,(byte *)0x0);
 }
@@ -113927,8 +113995,8 @@ void CDSGZipStream::Catch_00435b6d(void)
   iVar1 = *(int *)(unaff_EBP + -0x14);
   _Globals::Runtime_FreePointerFieldZero((undefined4 *)(iVar1 + 0x28));
   _Globals::Runtime_FreePointerFieldZero((undefined4 *)(iVar1 + 0x2c));
-  _Globals::FUN_0040b540((int *)(iVar1 + 0x20));
-  _Globals::FUN_0040b540((int *)(iVar1 + 0x24));
+  ReleaseAndClearPointer((int *)(iVar1 + 0x20));
+  ReleaseAndClearPointer((int *)(iVar1 + 0x24));
                     // WARNING: Subroutine does not return
   Runtime::MSVCRT::__CxxThrowException_8(0,(byte *)0x0);
 }
@@ -114033,7 +114101,8 @@ byte __cdecl _Globals::SampleSourcePixel_Indexed4(uint param_1,int param_2,int p
 
 
 
-undefined1 __cdecl _Globals::FUN_00435db0(int param_1,int param_2,int param_3,int param_4)
+undefined1 __cdecl
+_Globals::SampleSourcePixel_Indexed8(int param_1,int param_2,int param_3,int param_4)
 
 {
                     // UNCERTAIN: byte sample getter *(base + y*stride + x); DATA slot in table @
@@ -114063,7 +114132,8 @@ uint __cdecl _Globals::CDSImage_GetPixel24(int param_1,int param_2,int param_3,i
 
 
 
-undefined4 __cdecl _Globals::FUN_00435e20(int param_1,int param_2,int param_3,int param_4)
+undefined4 __cdecl
+_Globals::Blit_ReadDstPixel_32bpp(int param_1,int param_2,int param_3,int param_4)
 
 {
                     // UNCERTAIN: 2D int32 load *(base+row*stride+col*4); DATA xref
@@ -114521,68 +114591,65 @@ void __thiscall
 CPoemScroller::CPoemScroller_FillRect(CPoemScroller *this,int *param_1,uint param_2,int param_3)
 
 {
-  int iVar1;
+  void *pvVar1;
   void *pvVar2;
   int extraout_EDX;
-  void *pvVar3;
-  void *pvVar4;
-  void *pvVar5;
-  void *local_10;
-  void *local_c;
-  void *local_8;
-  int local_4;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  tagRECT local_10;
   
   if (param_1 == (int *)0x0) {
-    local_8 = this->pVftable_IDSChained_04;
-    local_10 = (void *)0x0;
-    local_c = (void *)0x0;
-    local_4 = this->nField_08;
+    local_10.right = (LONG)this->pVftable_IDSChained_04;
+    local_10.left = 0;
+    local_10.top = 0;
+    local_10.bottom = this->nField_08;
   }
   else {
-    local_10 = (void *)*param_1;
-    local_c = (void *)param_1[1];
-    local_8 = (void *)param_1[2];
-    local_4 = param_1[3];
+    local_10.left = *param_1;
+    local_10.top = param_1[1];
+    local_10.right = param_1[2];
+    local_10.bottom = param_1[3];
   }
-  rect_Intersect((CPoemScroller *)&local_10,(tagRECT *)&this->nBounds_top);
-  if (((int)local_10 < (int)local_8) && ((int)local_c < local_4)) {
-    iVar1 = this->nField_0c;
-    if (iVar1 != 4) {
-      if (iVar1 == 5) {
-        pvVar2 = this->pVftable_IDSEventHandler;
-        pvVar3 = CDSImage::GetColorPlane((CDSImage *)this);
-        BlitAlphaFill_BGR24((int *)&local_10,(int)pvVar3,(int)pvVar2,param_2,param_3);
+  tagRECT::CDSRect_Intersect(&local_10,(tagRECT *)&this->nBounds_top);
+  if ((local_10.left < local_10.right) && (local_10.top < local_10.bottom)) {
+    iVar5 = this->nField_0c;
+    if (iVar5 != 4) {
+      if (iVar5 == 5) {
+        pvVar1 = this->pVftable_IDSEventHandler;
+        pvVar2 = CDSImage::GetColorPlane((CDSImage *)this);
+        BlitAlphaFill_BGR24(&local_10.left,(int)pvVar2,(int)pvVar1,param_2,param_3);
         return;
       }
-      pvVar2 = local_8;
-      pvVar3 = local_c;
-      pvVar4 = local_10;
-      if (iVar1 == 6) {
-        pvVar2 = this->pVftable_IDSEventHandler;
-        pvVar3 = CDSImage::GetColorPlane((CDSImage *)this);
-        CPoemScroller_FillRect32bpp((int *)&local_10,(int)pvVar3,(int)pvVar2,param_2,param_3);
+      pvVar1 = (void *)local_10.right;
+      iVar3 = local_10.top;
+      iVar4 = local_10.left;
+      if (iVar5 == 6) {
+        pvVar1 = this->pVftable_IDSEventHandler;
+        pvVar2 = CDSImage::GetColorPlane((CDSImage *)this);
+        CPoemScroller_FillRect32bpp(&local_10.left,(int)pvVar2,(int)pvVar1,param_2,param_3);
         return;
       }
       do {
-        pvVar5 = pvVar4;
-        if ((int)pvVar4 < (int)pvVar2) {
+        iVar5 = iVar4;
+        if (iVar4 < (int)pvVar1) {
           do {
-            pvVar2 = CDSImage::GetColorPlane((CDSImage *)this);
+            pvVar1 = CDSImage::GetColorPlane((CDSImage *)this);
             (*(code *)(&PTR_LAB_004b0074)[extraout_EDX * 2])
-                      (pvVar4,pvVar3,param_2,this->pVftable_IDSEventHandler,pvVar2);
-            pvVar4 = (void *)((int)pvVar4 + 1);
-            pvVar2 = local_8;
-            pvVar5 = local_10;
-          } while ((int)pvVar4 < (int)local_8);
+                      (iVar4,iVar3,param_2,this->pVftable_IDSEventHandler,pvVar1);
+            iVar4 = iVar4 + 1;
+            pvVar1 = (void *)local_10.right;
+            iVar5 = local_10.left;
+          } while (iVar4 < local_10.right);
         }
-        pvVar3 = (void *)((int)pvVar3 + 1);
-        pvVar4 = pvVar5;
-      } while ((int)pvVar3 < local_4);
+        iVar3 = iVar3 + 1;
+        iVar4 = iVar5;
+      } while (iVar3 < local_10.bottom);
       return;
     }
-    pvVar2 = this->pVftable_IDSEventHandler;
-    pvVar3 = CDSImage::GetColorPlane((CDSImage *)this);
-    BlitAlphaFill_RGB565((int *)&local_10,(int)pvVar3,(int)pvVar2,param_2,param_3);
+    pvVar1 = this->pVftable_IDSEventHandler;
+    pvVar2 = CDSImage::GetColorPlane((CDSImage *)this);
+    BlitAlphaFill_RGB565(&local_10.left,(int)pvVar2,(int)pvVar1,param_2,param_3);
   }
   return;
 }
@@ -114599,7 +114666,7 @@ void __fastcall _Globals::CDSBackBuffer_ClearPreFlipFields(CDSImage_BackBufferEm
 
 
 
-void __fastcall CPoemScroller::FUN_00436760(int param_1)
+void __fastcall CPoemScroller::CPoemScroller_ClearBlitMask(int param_1)
 
 {
                     // UNCERTAIN: clears *(this+0x20) after poem scroller blit; field role unknown.
@@ -114716,14 +114783,11 @@ CPoemScroller::BlitDispatch
   void *pvVar13;
   void *pvVar14;
   uint local_24;
-  void *local_20;
-  void *local_1c;
-  void *local_18;
-  int local_14;
+  tagRECT local_20;
   tagRECT local_10;
   
   local_24 = param_2->nBounds_left;
-  local_20 = (void *)0x0;
+  local_20.left = 0;
   if (param_1 == (int *)0x0) {
     local_10.right = (LONG)this->pVftable_IDSChained_04;
     local_10.bottom = this->nField_08;
@@ -114737,15 +114801,15 @@ CPoemScroller::BlitDispatch
     local_10.bottom = param_1[3];
   }
   if (param_3 == (int *)0x0) {
-    local_18 = param_2->pVftable_IDSChained_04;
-    local_14 = param_2->nField_08;
-    local_1c = (void *)0x0;
+    local_20.right = (LONG)param_2->pVftable_IDSChained_04;
+    local_20.bottom = param_2->nField_08;
+    local_20.top = 0;
   }
   else {
-    local_1c = (void *)param_3[1];
-    local_20 = (void *)*param_3;
-    local_18 = (void *)param_3[2];
-    local_14 = param_3[3];
+    local_20.top = param_3[1];
+    local_20.left = *param_3;
+    local_20.right = param_3[2];
+    local_20.bottom = param_3[3];
   }
   if (local_10.right <= local_10.left) {
     return;
@@ -114753,50 +114817,50 @@ CPoemScroller::BlitDispatch
   if (local_10.bottom <= local_10.top) {
     return;
   }
-  if ((int)local_18 <= (int)local_20) {
+  if (local_20.right <= local_20.left) {
     return;
   }
-  if (local_14 <= (int)local_1c) {
+  if (local_20.bottom <= local_20.top) {
     return;
   }
-  if ((int)local_18 - (int)local_20 != local_10.right - local_10.left) {
+  if (local_20.right - local_20.left != local_10.right - local_10.left) {
     return;
   }
-  if (local_14 - (int)local_1c != local_10.bottom - local_10.top) {
+  if (local_20.bottom - local_20.top != local_10.bottom - local_10.top) {
     return;
   }
-  iVar10 = local_10.top - (int)local_1c;
-  iVar11 = local_10.left - (int)local_20;
-  rect_Intersect((CPoemScroller *)&local_20,(tagRECT *)&param_2->nBounds_top);
+  iVar10 = local_10.top - local_20.top;
+  iVar11 = local_10.left - local_20.left;
+  tagRECT::CDSRect_Intersect(&local_20,(tagRECT *)&param_2->nBounds_top);
   if (extraout_EAX[2] <= *extraout_EAX) {
     return;
   }
   if (extraout_EAX[3] <= extraout_EAX[1]) {
     return;
   }
-  rect_Intersect((CPoemScroller *)&local_10,(tagRECT *)&this->nBounds_top);
+  tagRECT::CDSRect_Intersect(&local_10,(tagRECT *)&this->nBounds_top);
   uVar3 = DeletingDestructorThunk_18(extraout_EAX_00);
   if ((char)uVar3 != '\0') {
     return;
   }
-  local_20 = (void *)((int)local_20 + iVar11);
-  local_1c = (void *)((int)local_1c + iVar10);
-  local_18 = (void *)((int)local_18 + iVar11);
-  local_14 = local_14 + iVar10;
-  rect_Intersect((CPoemScroller *)&local_20,&local_10);
+  local_20.left = local_20.left + iVar11;
+  local_20.top = local_20.top + iVar10;
+  local_20.right = local_20.right + iVar11;
+  local_20.bottom = local_20.bottom + iVar10;
+  tagRECT::CDSRect_Intersect(&local_20,&local_10);
   uVar3 = DeletingDestructorThunk_18(extraout_EAX_01);
   if ((char)uVar3 != '\0') {
     return;
   }
-  local_10.right = (LONG)local_18;
-  local_10.top = (LONG)local_1c;
-  local_18 = (void *)((int)local_18 + -iVar11);
-  local_10.left = (LONG)local_20;
-  local_20 = (void *)((int)local_20 + -iVar11);
+  local_10.right = local_20.right;
+  local_10.top = local_20.top;
+  local_20.right = local_20.right + -iVar11;
+  local_10.left = local_20.left;
+  local_20.left = local_20.left + -iVar11;
   pvVar5 = *(void **)&param_2->wViewFlags;
-  local_1c = (void *)((int)local_1c + -iVar10);
-  local_10.bottom = local_14;
-  local_14 = local_14 + -iVar10;
+  local_20.top = local_20.top + -iVar10;
+  local_10.bottom = local_20.bottom;
+  local_20.bottom = local_20.bottom + -iVar10;
   iVar10 = this->nField_0c + param_2->nField_0c * 8;
   pvVar4 = CDSImage::GetPaletteBuffer((CDSImage *)param_2);
   bVar12 = false;
@@ -114871,7 +114935,7 @@ LAB_00436ba3:
   }
 LAB_00436a85:
   if ((*(int *)(&BlitTable_Opaque + iVar10 * 4) == 0) || (bVar12)) {
-    BlitOpaqueFallback(this,&local_10.left,param_2,(int *)&local_20);
+    BlitOpaqueFallback(this,&local_10.left,param_2,&local_20.left);
     return;
   }
   pvVar5 = CDSImage::GetPaletteBuffer((CDSImage *)this);
@@ -114924,7 +114988,7 @@ void __thiscall _Globals::FUN_00436d20(void *this,undefined4 *param_1)
                     // FUN_00436f20. Not the main CDSAudioBank_Deserialize path.
   CDSPtrSlotVec::CDSPtrSlotVec_Resize(this,param_1[1]);
   if (*(int *)((int)this + 4) != 0) {
-    FUN_00403240(*(undefined4 **)this,(undefined4 *)*param_1,*(int *)((int)this + 4));
+    MemMoveDword(*(undefined4 **)this,(undefined4 *)*param_1,*(int *)((int)this + 4));
   }
   return;
 }
@@ -114947,7 +115011,7 @@ void __thiscall CDSImage::CDSImage__FreeBuffers(CDSImage *this)
 
 
 
-void __thiscall _Globals::FUN_00436d90(void *this,int param_1)
+void __thiscall _Globals::CDSImage_BindFromSurfaceDesc(void *this,int param_1)
 
 {
   undefined4 uVar1;
@@ -114995,13 +115059,13 @@ void __thiscall CPoemScroller::CPoemScroller_SetBlitMask(CPoemScroller *this,int
 
 
 
-void __thiscall _Globals::NotifyDirtyRect(void *this,undefined4 param_1,undefined4 param_2)
+void __thiscall CDSImage::NotifyDirtyRect(CDSImage *this,undefined4 param_1,undefined4 param_2)
 
 {
   int iVar1;
   
-  for (iVar1 = *(int *)((int)this + 0x40); iVar1 != 0; iVar1 = iVar1 + -1) {
-    (**(code **)**(undefined4 **)(*(int *)((int)this + 0x38) + -4 + iVar1 * 4))
+  for (iVar1 = this->nM_slotCount; iVar1 != 0; iVar1 = iVar1 + -1) {
+    (**(code **)**(undefined4 **)((int)(this->m_slotVector).pSlots + iVar1 * 4 + -4))
               (this,param_1,param_2);
   }
   return;
@@ -115049,15 +115113,16 @@ void __thiscall CDSFlxFile::NotifyRegionList(CDSFlxFile *this,undefined4 param_1
 // FLX DecodeFrame opcode 0x0C fan-out: walk CDSImage.m_slotVector; dispatch subscriber
 // vfn[4]@+0x10(consumer,u16)
 
-void __thiscall _Globals::BroadcastFrameTimeHint(void *this,uint param_1)
+void __thiscall CDSImage::BroadcastFrameTimeHint(CDSImage *this,uint param_1)
 
 {
   int iVar1;
   
                     // R5 w31: walk CDSImage+0x38 pSlots, m_slotCount@+0x40; subscriber vfn+0x10
                     // (ODSImage+4).
-  for (iVar1 = *(int *)((int)this + 0x40); iVar1 != 0; iVar1 = iVar1 + -1) {
-    (**(code **)(**(int **)(*(int *)((int)this + 0x38) + -4 + iVar1 * 4) + 0x10))(this,param_1);
+  for (iVar1 = this->nM_slotCount; iVar1 != 0; iVar1 = iVar1 + -1) {
+    (**(code **)(**(int **)((int)(this->m_slotVector).pSlots + iVar1 * 4 + -4) + 0x10))
+              (this,param_1);
   }
   return;
 }
@@ -115172,7 +115237,7 @@ void __fastcall _Globals::NotifyDirtyAll(void *param_1)
   local_10 = 0;
   local_c = 0;
   local_8 = *(undefined4 *)((int)param_1 + 4);
-  NotifyDirtyRect(param_1,&local_10,1);
+  CDSImage::NotifyDirtyRect(param_1,&local_10,1);
   return;
 }
 
@@ -115564,10 +115629,12 @@ void _Globals::TextShaper_LayOutAndRender
   uint uStack_10450;
   byte bStack_1044c;
   undefined3 uStack_1044b;
-  undefined1 auStack_10448 [40];
-  void *pvStack_10420;
-  int iStack_1041c;
-  int iStack_10418;
+  tagRECT tStack_10448;
+  uint uStack_10438;
+  uint uStack_10434;
+  undefined4 uStack_10430;
+  uint uStack_10428;
+  tagRECT tStack_10424;
   int aiStack_10414 [2];
   tagRECT atStack_1040c [4095];
   undefined1 *local_414;
@@ -115693,16 +115760,16 @@ void _Globals::TextShaper_LayOutAndRender
       else if (uVar5 == 2) {
         uStack_10464 = ptStack_10470->right - iStack_1046c;
       }
-      auStack_10448._8_4_ = pCStack_1045c->nBounds_bottom;
-      auStack_10448._4_4_ = pCStack_1045c->nBounds_right;
-      auStack_10448._0_4_ = pCStack_1045c->nBounds_top;
-      auStack_10448._12_4_ = *(undefined4 *)pCStack_1045c->pPad_30_67;
+      tStack_10448.right = pCStack_1045c->nBounds_bottom;
+      tStack_10448.top = pCStack_1045c->nBounds_right;
+      tStack_10448.left = pCStack_1045c->nBounds_top;
+      tStack_10448.bottom = *(LONG *)pCStack_1045c->pPad_30_67;
       this = &pCStack_1045c->nBounds_top;
-      auStack_10448._36_4_ = auStack_10448._0_4_;
-      pvStack_10420 = (void *)auStack_10448._4_4_;
-      iStack_1041c = auStack_10448._8_4_;
-      iStack_10418 = auStack_10448._12_4_;
-      CPoemScroller::rect_Intersect((CPoemScroller *)auStack_10448,ptStack_10470);
+      tStack_10424.left = tStack_10448.left;
+      tStack_10424.top = tStack_10448.top;
+      tStack_10424.right = tStack_10448.right;
+      tStack_10424.bottom = tStack_10448.bottom;
+      tagRECT::CDSRect_Intersect(&tStack_10448,ptStack_10470);
       pCVar9 = pCStack_1045c;
       iVar10 = pCStack_1045c->nField_08;
       pvVar2 = pCStack_1045c->pVftable_IDSChained_04;
@@ -115710,13 +115777,13 @@ void _Globals::TextShaper_LayOutAndRender
       pCVar3->nBounds_right = 0;
       *(int *)pCVar3->pPad_30_67 = iVar10;
       pCVar3->nBounds_bottom = (int)pvVar2;
-      CPoemScroller::rect_Intersect((CPoemScroller *)this,(tagRECT *)auStack_10448);
-      auStack_10448._32_4_ = param_4[3];
-      auStack_10448._16_4_ = (void *)0x9;
-      auStack_10448._24_4_ = (void *)0x0;
+      tagRECT::CDSRect_Intersect((tagRECT *)this,&tStack_10448);
+      uStack_10428 = param_4[3];
+      uStack_10438 = 9;
+      uStack_10430 = 0;
       if (param_4[4] != 0xffffffff) {
-        auStack_10448._16_4_ = (void *)0xd;
-        auStack_10448._20_4_ = param_4[4];
+        uStack_10438 = 0xd;
+        uStack_10434 = param_4[4];
       }
       if (0 < (int)uStack_10468) {
         ptVar6 = atStack_1040c;
@@ -115753,7 +115820,7 @@ void _Globals::TextShaper_LayOutAndRender
                 break;
               default:
                 CDSFont__DrawChar(pvStack_10460,bVar1,pCStack_1045c,(int *)&uStack_10468,iVar7,
-                                  (byte *)param_4,(uint *)(auStack_10448 + 0x10));
+                                  (byte *)param_4,&uStack_10438);
                 ptVar6 = ptStack_10470;
                 iStack_10458 = iVar10;
                 break;
@@ -115761,7 +115828,7 @@ void _Globals::TextShaper_LayOutAndRender
                 iVar10 = 4;
                 do {
                   CDSFont__DrawChar(pvStack_10460,0x20,pCStack_1045c,(int *)&uStack_10468,iVar7,
-                                    (byte *)param_4,(uint *)(auStack_10448 + 0x10));
+                                    (byte *)param_4,&uStack_10438);
                   iVar10 = iVar10 + -1;
                   ptVar6 = ptStack_10470;
                 } while (iVar10 != 0);
@@ -115784,7 +115851,7 @@ void _Globals::TextShaper_LayOutAndRender
       pCVar3->nBounds_right = 0;
       pCVar3->nBounds_bottom = (int)pvVar2;
       *(int *)pCVar3->pPad_30_67 = iVar10;
-      CPoemScroller::rect_Intersect((CPoemScroller *)this,(tagRECT *)(auStack_10448 + 0x24));
+      tagRECT::CDSRect_Intersect((tagRECT *)this,&tStack_10424);
     }
   }
   if (local_414 != local_410) {
@@ -116792,7 +116859,7 @@ void __thiscall CBulAnim::IDSAnim_BindUserData(CBulAnim *this,undefined4 param_1
 
 {
   if (this->pVftable_IDSChained != (void *)0x0) {
-    _Globals::FUN_0042cc30(this->pVftable_IDSChained,*param_2,param_2[1]);
+    _Globals::CDSView_OffsetRectAndAdapt(this->pVftable_IDSChained,*param_2,param_2[1]);
     return;
   }
   return;
@@ -116823,7 +116890,7 @@ void __fastcall _Globals::TM_RewindCurrent(int param_1)
 {
   void *pvVar1;
   
-  pvVar1 = Scheduler_GetEventSlot((void *)(param_1 + 0x14),0);
+  pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)(param_1 + 0x14),0);
   if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
     TM_PauseAndStampClock((CDSVideoPlayer *)(param_1 + 0x10));
     return;
@@ -116880,7 +116947,7 @@ void __thiscall CBulAnim::SetPalette(CBulAnim *this,uint *param_1)
 
 
 
-void __thiscall ODSImage::SetOwner(ODSImage *this,CBulanci *param_2)
+void __thiscall ODSImage::SetOwner(ODSImage *this,CDSView *param_2)
 
 {
   CDSImage *pCVar1;
@@ -116888,11 +116955,11 @@ void __thiscall ODSImage::SetOwner(ODSImage *this,CBulanci *param_2)
                     // R4 todo48: pOwner stays CBulanci* — embedder is
                     // CBitmap/CGameView/CDSBitmap/CAnim shell (+0x20/+0x24 SetSize, +0x30 blit).
                     // Ghidra CDSView@128B (CWindow@0) REJECTED: wrong layout vs consumers.
-  if (param_2 != (CBulanci *)0x0) {
+  if (param_2 != (CDSView *)0x0) {
     this->pOwner = param_2;
     pCVar1 = this->pDrawable;
     if (pCVar1 != (CDSImage *)0x0) {
-      CBulanci::CDSView__SetSize(param_2,pCVar1->nM_width,pCVar1->nM_height);
+      CDSView::CDSView__SetSize(param_2,pCVar1->nM_width,pCVar1->nM_height);
     }
   }
   return;
@@ -116980,9 +117047,9 @@ void __thiscall ODSImage::ODSImage__SetImage(ODSImage *this,CDSImage *pDrawable)
     this->pDrawable = pObject;
     _Globals::CIntListInsertSortedOrAppend
               (&pObject->m_slotVector,(int)&this->pVf_odsimage,(undefined *)0x0,1);
-    if ((CBulanci *)this->pOwner != (CBulanci *)0x0) {
-      CBulanci::CDSView__SetSize
-                ((CBulanci *)this->pOwner,this->pDrawable->nM_width,this->pDrawable->nM_height);
+    if ((CDSView *)this->pOwner != (CDSView *)0x0) {
+      CDSView::CDSView__SetSize
+                ((CDSView *)this->pOwner,this->pDrawable->nM_width,this->pDrawable->nM_height);
     }
   }
   if ((this->pOwner != 0) && (bVar2)) {
@@ -117480,11 +117547,11 @@ void __fastcall _Globals::TM_PauseAndStampClock(CDSVideoPlayer *this)
   if (this->bPaused == 0) {
                     // dwSchedulerCookie @ +0x40: wall-clock ms stamp when pausing (g_dwElapsedMs);
                     // ctor init 0xffffffff; consumed by scheduler slot-0 arm/cancel path.
-    pvVar1 = Scheduler_GetEventSlot(&this->scheduler,0);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&this->scheduler,0);
     if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
       this->dwSchedulerCookie = g_dwElapsedMs;
-      Scheduler_ArmSlot(&this->scheduler,0);
-      BroadcastFrameTimeHint(this->pRenderTarget,0xffff);
+      CDSUpdatedItem::Scheduler_ArmSlot(&this->scheduler,0);
+      CDSImage::BroadcastFrameTimeHint(this->pRenderTarget,0xffff);
     }
   }
   return;
@@ -117500,10 +117567,10 @@ void __fastcall CGaming::CGaming_ArmTrackMgrSchedulerIfUnpaused(CDSVideoPlayer *
                     // UNCERTAIN: pre-match modal queue type-0; Scheduler_ArmSlot when +0x35 clear;
                     // caller CGaming_RunPreMatchModal.
   if (trackMgr->bPaused == 0) {
-    pvVar1 = _Globals::Scheduler_GetEventSlot(&trackMgr->scheduler,0);
+    pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot(&trackMgr->scheduler,0);
     if ((*(byte *)((int)pvVar1 + 8) & 1) == 0) {
       trackMgr->dwSchedulerCookie = g_dwElapsedMs;
-      _Globals::Scheduler_ArmSlot(&trackMgr->scheduler,0);
+      CDSUpdatedItem::Scheduler_ArmSlot(&trackMgr->scheduler,0);
     }
   }
   return;
@@ -117517,13 +117584,13 @@ void __thiscall _Globals::TM_ClearTracks(void *this,int param_1)
   void *pvVar1;
   
   if (*(int *)((int)this + 4) < param_1) {
-    pvVar1 = FUN_0042f730(*(void **)this,(uchar *)(param_1 * 8));
+    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 * 8));
     *(int *)((int)this + 4) = param_1;
     *(void **)this = pvVar1;
     return;
   }
   if (param_1 < *(int *)((int)this + 4)) {
-    pvVar1 = FUN_0042f730(*(void **)this,(uchar *)(param_1 * 8));
+    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 * 8));
     *(int *)((int)this + 4) = param_1;
     *(void **)this = pvVar1;
   }
@@ -117552,7 +117619,7 @@ void __thiscall CDSVideoPlayer::TM_Play(CDSVideoPlayer *this,uchar oneshot)
   if (this->bPaused == 0) {
     _Globals::TM_PauseAndStampClock(this);
     this->bPlayFlags = oneshot;
-    _Globals::Scheduler_AckSlot(&this->scheduler,0,-1);
+    CDSUpdatedItem::Scheduler_AckSlot(&this->scheduler,0,-1);
   }
   return;
 }
@@ -117564,7 +117631,7 @@ void __fastcall CGaming::CGaming_PauseClockIfActive(CDSVideoPlayer *param_1)
 {
   if (param_1->bPaused == 0) {
     _Globals::TM_PauseAndStampClock(param_1);
-    _Globals::Scheduler_AckSlot(&param_1->scheduler,0,param_1->dwSchedulerCookie);
+    CDSUpdatedItem::Scheduler_AckSlot(&param_1->scheduler,0,param_1->dwSchedulerCookie);
   }
   return;
 }
@@ -117600,13 +117667,13 @@ void __fastcall _Globals::TM_AdvanceFrame(CDSVideoPlayer *this)
   if (this->bPaused == 0) {
     if (this->nFrameDelayOverrideMs == 0xffffffff) {
       iVar2 = *(int *)((int)pvVar1 + 4);
-      Scheduler_SetEventDelayMs
+      CDSUpdatedItem::Scheduler_SetEventDelayMs
                 (&this->scheduler,0,
                  ((this->dwCurrentFrameIdx + 1) * *(int *)(iVar2 + 0x10)) / *(uint *)(iVar2 + 0x14)
                  - (*(int *)(iVar2 + 0x10) * this->dwCurrentFrameIdx) / *(uint *)(iVar2 + 0x14));
     }
     else {
-      Scheduler_SetEventDelayMs(&this->scheduler,0,this->nFrameDelayOverrideMs);
+      CDSUpdatedItem::Scheduler_SetEventDelayMs(&this->scheduler,0,this->nFrameDelayOverrideMs);
     }
   }
                     // CDSAnimSequence::AdvanceFrame — ClassID-52 FLX: seq is CDSFlxFile meta face
@@ -117736,7 +117803,7 @@ void __fastcall _Globals::BeginCurrentTrackPlayback(CDSVideoPlayer *this)
   (**(code **)(**(int **)((int)pvVar1 + 4) + 0x18))(pvVar1,this->pRenderTarget);
   this->dwCurrentFrameIdx = 0;
   if (this->bPaused == 0) {
-    Scheduler_SetEventLastFireMs(&this->scheduler,0,-1);
+    CDSUpdatedItem::Scheduler_SetEventLastFireMs(&this->scheduler,0,-1);
     TM_AdvanceFrame(this);
     return;
   }
@@ -117842,7 +117909,7 @@ CDSVideoPlayer::ConstructTrackManager(CDSVideoPlayer *this,int schedulerParam)
   this->pNotifyCookie = (void *)0x0;
   this->dwSchedulerCookie = 0xffffffff;
   this->nFrameDelayOverrideMs = -1;
-  _Globals::Scheduler_RegisterEventSlot(this_00,0,0,7);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this_00,0,0,7);
   ExceptionList = local_c;
   return this;
 }
@@ -120603,7 +120670,7 @@ void __thiscall CDSDsmFile::HandleQueueResize(CDSDsmFile *this,int param_1)
     puVar3 = (uchar *)(((iVar1 + -1 + param_1) / iVar1) * iVar1);
     if ((*(int *)(this->headerStructA + 8) == 0) ||
        ((int)this->vtable2 < *(int *)this->headerStructA)) {
-      puVar2 = _Globals::FUN_0042f730(this->vtable3,puVar3);
+      puVar2 = _Globals::Runtime_ReallocOrThrow(this->vtable3,puVar3);
       this->vtable3 = puVar2;
     }
     else {
@@ -120830,7 +120897,7 @@ undefined4 * __fastcall CDSObject::CDSDirectSound_ctor(undefined4 *param_1)
   g_pDirectSoundSingleton = param_1;
   *(ushort *)(param_1 + 8) = *(ushort *)(param_1 + 8) | 0x200;
   local_4 = CONCAT31(local_4._1_3_,3);
-  _Globals::Scheduler_RegisterEventSlot(this,0,0x50,6);
+  CDSUpdatedItem::Scheduler_RegisterEventSlot(this,0,0x50,6);
   pvVar1 = CreateEventW((LPSECURITY_ATTRIBUTES)0x0,0,0,(LPCWSTR)0x0);
   param_1[0x14] = pvVar1;
   if (pvVar1 == (HANDLE)0xffffffff) {
@@ -130118,7 +130185,7 @@ void __fastcall _Globals::CDSSafeStream_ClearThreadSlices(CDSSafeStream *param_1
   EnterCriticalSection((LPCRITICAL_SECTION)&param_1->lock);
   local_4 = 0;
   CDSChain::CDSChained_ClearChildren((CDSChain *)&param_1->vf_chain_IDSReferenced,'\x01');
-  FUN_0042dc50((int *)&param_1->m_streamName);
+  CDsString_ClearInPlace((int *)&param_1->m_streamName);
   LeaveCriticalSection((LPCRITICAL_SECTION)&param_1->lock);
   ExceptionList = local_c;
   return;
@@ -131056,14 +131123,14 @@ void * __cdecl Runtime::MSVCRT::__recalloc(void *_Memory,size_t _Count,size_t _S
 
 
 
-void __cdecl CBulanci::FUN_004477df(ulong param_1)
+void __cdecl Runtime_MSVCRT__srand(ulong dwSeed)
 
 {
   _ptiddata p_Var1;
   
                     // UNCERTAIN: MSVC __getptd()->_holdrand seed setter for thread RNG.
   p_Var1 = Runtime::MSVCRT::__getptd();
-  p_Var1->_holdrand = param_1;
+  p_Var1->_holdrand = dwSeed;
   return;
 }
 
@@ -149429,7 +149496,7 @@ void __cdecl _Globals::III_scalefactors(int param_1,byte param_2)
 
 
 
-void __cdecl _Globals::III_scalefactors(byte *param_1,int *param_2)
+void __cdecl _Globals::III_exponents(byte *param_1,int *param_2)
 
 {
   byte bVar1;
@@ -149447,6 +149514,7 @@ void __cdecl _Globals::III_scalefactors(byte *param_1,int *param_2)
   int *piVar12;
   int local_c;
   
+                    // R6: was III_scalefactors; body is III_exponents (libmad layer3.c)
   bVar1 = *(byte *)(in_EAX + 8);
   iVar4 = *(ushort *)(in_EAX + 4) - 0xd2;
   sVar5 = ((bVar1 & 2) != 0) + 1;
@@ -149591,7 +149659,7 @@ undefined4 __cdecl _Globals::III_huffdecode(uint *param_1,ushort *param_2,byte *
   if ((int)uVar4 < 0) {
     return 0x236;
   }
-  III_scalefactors(param_3,&local_9c);
+  III_exponents(param_3,&local_9c);
   local_ec = *in_EAX;
   local_e8 = in_EAX[1];
   CDSMpx::mad_bit_skip(in_EAX,uVar4);
@@ -149884,7 +149952,7 @@ LAB_0045a70d:
 
 // libmad III_decode granule helper (block type 0/1)
 
-void __thiscall _Globals::FUN_0045a9d0(void *this,int param_1,byte *param_2)
+void __thiscall _Globals::III_reorder(void *this,int param_1,byte *param_2)
 
 {
   int iVar1;
@@ -149946,7 +150014,7 @@ void __thiscall _Globals::FUN_0045a9d0(void *this,int param_1,byte *param_2)
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
 // libmad III_decode granule helper (block type 2)
 
-undefined4 __fastcall _Globals::FUN_0045ab00(int param_1,int param_2,int param_3,byte *param_4)
+undefined4 __fastcall _Globals::III_stereo(int param_1,int param_2,int param_3,byte *param_4)
 
 {
   byte bVar1;
@@ -150312,7 +150380,7 @@ void __fastcall _Globals::fastsdct(int *param_1)
 
 
 
-void __cdecl _Globals::jpeg_fdct_ifast(int param_1,int *param_2)
+void __cdecl _Globals::imdct36(int param_1,int *param_2)
 
 {
   int iVar1;
@@ -150325,6 +150393,7 @@ void __cdecl _Globals::jpeg_fdct_ifast(int param_1,int *param_2)
   int *piVar8;
   int local_2c [11];
   
+                    // R6: was jpeg_fdct_ifast; body is libmad imdct36
   piVar4 = (int *)(param_1 + 8);
   piVar8 = (int *)(param_1 + 0x40);
   piVar3 = piVar4;
@@ -150403,7 +150472,7 @@ void __cdecl _Globals::dctIV(int *param_1)
     iVar2 = iVar2 + 0xc;
     piVar3 = piVar3 + 3;
   } while (iVar2 < 0x48);
-  jpeg_fdct_ifast((int)local_48,param_1);
+  imdct36((int)local_48,param_1);
   *param_1 = *param_1 / 2;
   piVar3 = param_1 + 2;
   iVar2 = 4;
@@ -150576,7 +150645,7 @@ void __thiscall _Globals::FUN_0045b530(void *this,int param_1)
 
 
 
-void __cdecl _Globals::jpeg_fdct_islow(int param_1)
+void __cdecl _Globals::III_imdct_s(int param_1)
 
 {
   int *piVar1;
@@ -150600,6 +150669,7 @@ void __cdecl _Globals::jpeg_fdct_islow(int param_1)
   int local_30 [6];
   int local_18 [6];
   
+                    // R6: was jpeg_fdct_islow; body is libmad III_imdct_s
   piVar10 = local_78;
   local_94 = 3;
   do {
@@ -150686,7 +150756,7 @@ void __cdecl _Globals::jpeg_fdct_islow(int param_1)
 
 // libmad III_decode mid/side stereo path
 
-void __fastcall _Globals::FUN_0045ba90(int param_1,int param_2,int param_3)
+void __fastcall _Globals::III_overlap(int param_1,int param_2,int param_3)
 
 {
   int in_EAX;
@@ -150727,7 +150797,7 @@ void __fastcall _Globals::FUN_0045ba90(int param_1,int param_2,int param_3)
 
 // libmad III_decode intensity stereo path
 
-void _Globals::FUN_0045bb40(void)
+void _Globals::III_freqinver(void)
 
 {
   int *piVar1;
@@ -150790,6 +150860,7 @@ int __cdecl _Globals::III_decode(int *param_1,int param_2,int param_3,uint param
   int aiStack_904 [576];
   undefined4 uStack_4;
   
+                    // libmad III_decode (not 0x45d030; that is CDSMpx_MadTimerAccumulate)
   uStack_4 = 0x45bbba;
   uVar10 = *(uint *)(param_2 + 0x14);
   uVar8 = *(uint *)(param_2 + 0x1c) & 0x4000;
@@ -150847,7 +150918,7 @@ int __cdecl _Globals::III_decode(int *param_1,int param_2,int param_3,uint param
         } while (uVar10 < param_4);
       }
       if (((*(int *)(param_2 + 4) == 2) && (*(int *)(param_2 + 8) != 0)) &&
-         (iVar3 = FUN_0045ab00((int)local_1200,param_2,iVar12,local_129c[0]), iVar3 != 0)) {
+         (iVar3 = III_stereo((int)local_1200,param_2,iVar12,local_129c[0]), iVar3 != 0)) {
         return iVar3;
       }
       local_12a8 = 0;
@@ -150859,7 +150930,7 @@ int __cdecl _Globals::III_decode(int *param_1,int param_2,int param_3,uint param
         do {
           if (pbVar13[1] == 2) {
             iVar12 = (int)local_1200 + local_12c0;
-            FUN_0045a9d0(pbVar13 + -8,iVar12,local_129c[local_12a8]);
+            III_reorder(pbVar13 + -8,iVar12,local_129c[local_12a8]);
             if ((*pbVar13 & 8) != 0) goto LAB_0045be08;
           }
           else {
@@ -150870,8 +150941,8 @@ LAB_0045be08:
           if ((pbVar13[1] == 2) && ((*pbVar13 & 8) == 0)) {
             uVar10 = 0;
             do {
-              jpeg_fdct_islow((int)local_1290);
-              FUN_0045ba90((int)local_1290,uVar10,iVar3);
+              III_imdct_s((int)local_1290);
+              III_overlap((int)local_1290,uVar10,iVar3);
               uVar10 = uVar10 + 1;
             } while (uVar10 < 2);
           }
@@ -150883,11 +150954,11 @@ LAB_0045be08:
             uVar10 = 0;
             do {
               FUN_0045b530(local_1290,local_12c8);
-              FUN_0045ba90((int)local_1290,uVar10,iVar3);
+              III_overlap((int)local_1290,uVar10,iVar3);
               uVar10 = uVar10 + 1;
             } while (uVar10 < 2);
           }
-          FUN_0045bb40();
+          III_freqinver();
           uVar10 = 0x240;
           piVar6 = (int *)((int)aiStack_904 + local_12c0);
           do {
@@ -150900,10 +150971,10 @@ LAB_0045be08:
           if (pbVar13[1] == 2) {
             if (2 < local_12c8) {
               do {
-                jpeg_fdct_islow((int)local_1290);
-                FUN_0045ba90((int)local_1290,uVar8,iVar3);
+                III_imdct_s((int)local_1290);
+                III_overlap((int)local_1290,uVar8,iVar3);
                 if ((uVar8 & 1) != 0) {
-                  FUN_0045bb40();
+                  III_freqinver();
                 }
                 uVar8 = uVar8 + 1;
               } while (uVar8 < local_12c8);
@@ -150912,9 +150983,9 @@ LAB_0045be08:
           else if (2 < local_12c8) {
             do {
               FUN_0045b530(local_1290,(uint)pbVar13[1]);
-              FUN_0045ba90((int)local_1290,uVar8,iVar3);
+              III_overlap((int)local_1290,uVar8,iVar3);
               if ((uVar8 & 1) != 0) {
-                FUN_0045bb40();
+                III_freqinver();
               }
               uVar8 = uVar8 + 1;
             } while (uVar8 < local_12c8);
@@ -150933,7 +151004,7 @@ LAB_0045be08:
                 puVar9 = puVar9 + 0x20;
               } while (uVar10 < 0x12);
               if ((local_12c8 & 1) != 0) {
-                FUN_0045bb40();
+                III_freqinver();
               }
               local_12c8 = local_12c8 + 1;
               iVar12 = iVar12 + 0x48;
@@ -151801,9 +151872,7 @@ void __cdecl CDSMpx::CDSMpx_MadTimerAccumulate(int *param_1,int param_2,uint par
 {
   uint uVar1;
   
-                    // UNCERTAIN: scales byte offset to MAD-style timer (sample rates 8–48 kHz,
-                    // denom 0x15074d00); sole caller CDSMpx::SeekToValidFrame — not libmad
-                    // III_decode (see mpx_audio_format.md vs MCP decompile)
+                    // CDSMpx_MadTimerAccumulate seek helper; NOT III_decode
   *param_1 = param_2;
   if ((param_4 <= param_3) && (param_4 != 0)) {
     uVar1 = param_3 / param_4;
@@ -153494,7 +153563,7 @@ undefined4 __cdecl _Globals::jpeg_start_decompress(int *param_1)
   int iVar2;
   
   if (param_1[5] == 0xca) {
-    uVar1 = FUN_004604d0((int)param_1);
+    uVar1 = jinit_d_post_controller((int)param_1);
     if ((char)param_1[0x10] != '\0') {
       param_1[5] = 0xcf;
       return CONCAT31((int3)((uint)uVar1 >> 8),1);
@@ -153577,7 +153646,7 @@ void __cdecl CDSJpegImage::jpeg_CreateCompress(int *param_1,int param_2,int para
 
 // libjpeg: start_compress helper; caller jpeg_start_compress
 
-void __cdecl CDSJpegImage::FUN_0045ed80(int param_1,undefined1 param_2)
+void __cdecl CDSJpegImage::jpeg_suppress_tables(int param_1,undefined1 param_2)
 
 {
   int *piVar1;
@@ -153682,7 +153751,7 @@ void __cdecl CDSJpegImage::jpeg_start_compress(int *param_1,char param_2)
     (**(code **)*param_1)(param_1);
   }
   if (param_2 != '\0') {
-    FUN_0045ed80((int)param_1,0);
+    jpeg_suppress_tables((int)param_1,0);
   }
   (**(code **)(*param_1 + 4))(param_1);
   (**(code **)(param_1[6] + 8))(param_1);
@@ -153725,7 +153794,7 @@ void __cdecl CDSJpegImage::jpeg_write_scanlines(int *param_1,undefined4 param_2,
 
 
 void __cdecl
-CDSJpegImage::FUN_0045efe0(int *param_1,int param_2,int param_3,int param_4,char param_5)
+CDSJpegImage::jpeg_add_quant_table(int *param_1,int param_2,int param_3,int param_4,char param_5)
 
 {
   int iVar1;
@@ -153807,13 +153876,13 @@ CDSJpegImage::FUN_0045efe0(int *param_1,int param_2,int param_3,int param_4,char
 
 // libjpeg: set_quality helper; caller jpeg_set_quality
 
-void __cdecl CDSJpegImage::FUN_0045f1b0(int *param_1,int param_2,char param_3)
+void __cdecl CDSJpegImage::jpeg_set_linear_quality(int *param_1,int param_2,char param_3)
 
 {
                     // UNCERTAIN: jpeg_set_quality helper — scales std lum/chrom tables via
                     // FUN_0045efe0 @ 0x49d898/0x49d798; not listed in jpeg_decoder.md IJG table.
-  FUN_0045efe0(param_1,0,0x49d898,param_2,param_3);
-  FUN_0045efe0(param_1,1,0x49d798,param_2,param_3);
+  jpeg_add_quant_table(param_1,0,0x49d898,param_2,param_3);
+  jpeg_add_quant_table(param_1,1,0x49d798,param_2,param_3);
   return;
 }
 
@@ -153844,7 +153913,7 @@ void __cdecl CDSJpegImage::jpeg_set_quality(int *param_1,int param_2,char param_
   int iVar1;
   
   iVar1 = jpeg_quality_scaling(param_2);
-  FUN_0045f1b0(param_1,iVar1,param_3);
+  jpeg_set_linear_quality(param_1,iVar1,param_3);
   return;
 }
 
@@ -154186,7 +154255,7 @@ int __cdecl _Globals::jdiv_round_up(int param_1,int param_2)
 
 // libjpeg: jinit controller sizing helper (d-coef/main/upsampler)
 
-int __cdecl _Globals::FUN_0045f7f0(int param_1,int param_2)
+int __cdecl _Globals::jround_up(int param_1,int param_2)
 
 {
   int iVar1;
@@ -154550,7 +154619,7 @@ void __cdecl _Globals::jinit_input_controller(int param_1)
 
 
 
-uint __fastcall _Globals::FUN_0045feb0(undefined4 param_1,int param_2)
+uint __fastcall _Globals::use_merged_upsample(undefined4 param_1,int param_2)
 
 {
   int iVar1;
@@ -154578,7 +154647,7 @@ uint __fastcall _Globals::FUN_0045feb0(undefined4 param_1,int param_2)
 
 
 
-void __cdecl _Globals::FUN_0045ff30(int *param_1)
+void __cdecl _Globals::jinit_d_main_controller(int *param_1)
 
 {
   int *piVar1;
@@ -154678,7 +154747,7 @@ void __cdecl _Globals::FUN_0045ff30(int *param_1)
     iVar2 = piVar1[0x19];
   }
   piVar1[0x1a] = iVar2;
-  uVar4 = FUN_0045feb0(piVar5,(int)piVar1);
+  uVar4 = use_merged_upsample(piVar5,(int)piVar1);
   if ((char)uVar4 == '\0') {
     piVar1[0x1b] = 1;
     return;
@@ -154688,6 +154757,8 @@ void __cdecl _Globals::FUN_0045ff30(int *param_1)
 }
 
 
+
+// R6 task43: main-controller range-limit table init (jdmainct.c)
 
 void _Globals::FUN_00460160(void)
 
@@ -154723,6 +154794,8 @@ void _Globals::FUN_00460160(void)
 
 
 
+// R6 task43: tail of jinit_d_post_controller init (decompress master)
+
 void _Globals::FUN_00460200(void)
 
 {
@@ -154737,10 +154810,10 @@ void _Globals::FUN_00460200(void)
                     // global_state==0xCA; chains FUN_0045ff30 sampling setup and FUN_00460160
                     // Huffman workspace init. Exact IJG export (jdmaster.c) not verified.
   iVar1 = unaff_ESI[0x60];
-  FUN_0045ff30(unaff_ESI);
+  jinit_d_main_controller(unaff_ESI);
   FUN_00460160();
   *(undefined4 *)(iVar1 + 0xc) = 0;
-  uVar2 = FUN_0045feb0(extraout_ECX,(int)unaff_ESI);
+  uVar2 = use_merged_upsample(extraout_ECX,(int)unaff_ESI);
   *(char *)(iVar1 + 0x10) = (char)uVar2;
   *(undefined4 *)(iVar1 + 0x14) = 0;
   *(undefined4 *)(iVar1 + 0x18) = 0;
@@ -154771,7 +154844,7 @@ LAB_0046026e:
     *(undefined1 *)(unaff_ESI + 0x16) = 1;
   }
   if ((char)unaff_ESI[0x16] != '\0') {
-    FUN_00467460(unaff_ESI);
+    jinit_merged_upsampler(unaff_ESI);
     *(int *)(iVar1 + 0x14) = unaff_ESI[0x6a];
   }
   if ((*(char *)((int)unaff_ESI + 0x5a) != '\0') || (*(char *)((int)unaff_ESI + 0x59) != '\0')) {
@@ -154785,7 +154858,7 @@ LAB_004602a5:
       jinit_upsampler(unaff_ESI);
     }
     else {
-      jinit_color_deconverter((int)unaff_ESI);
+      jinit_merged_upsampler((int)unaff_ESI);
     }
     jinit_d_main_controller((int)unaff_ESI,*(char *)((int)unaff_ESI + 0x5a));
   }
@@ -154865,7 +154938,7 @@ void __cdecl _Globals::post_process_1pass(int *param_1)
 
 // libjpeg: start_decompress helper
 
-void __cdecl _Globals::FUN_004604d0(int param_1)
+void __cdecl _Globals::jinit_d_post_controller(int param_1)
 
 {
   undefined4 *puVar1;
@@ -155196,9 +155269,10 @@ void _Globals::emit_adobe_app14(void)
 
 
 
-void __cdecl _Globals::emit_dri(int *param_1,undefined1 param_2,uint param_3)
+void __cdecl _Globals::write_marker_header(int *param_1,undefined1 param_2,uint param_3)
 
 {
+                    // R6: duplicate emit_dri label; IJG write_marker_header
   if (0xfffd < param_3) {
     *(undefined4 *)(*param_1 + 8) = 0xb;
     (**(code **)*param_1)(param_1);
@@ -155212,7 +155286,7 @@ void __cdecl _Globals::emit_dri(int *param_1,undefined1 param_2,uint param_3)
 
 // libjpeg: marker writer helper; caller jinit_marker_writer
 
-void __cdecl _Globals::FUN_00460ad0(int param_1)
+void __cdecl _Globals::write_file_header(int param_1)
 
 {
   int iVar1;
@@ -155236,7 +155310,7 @@ void __cdecl _Globals::FUN_00460ad0(int param_1)
 
 
 
-void __cdecl _Globals::start_pass_huff(void *param_1)
+void __cdecl _Globals::write_scan_header(void *param_1)
 
 {
   int iVar1;
@@ -155244,6 +155318,7 @@ void __cdecl _Globals::start_pass_huff(void *param_1)
   int *piVar3;
   int iVar4;
   
+                    // R6: was start_pass_huff; IJG write_scan_header (jcmarker.c)
   iVar1 = *(int *)((int)param_1 + 0x14c);
   if ((*(char *)((int)param_1 + 0xb1) == '\0') && (iVar4 = 0, 0 < *(int *)((int)param_1 + 0xe4))) {
     piVar3 = (int *)((int)param_1 + 0xe8);
@@ -155321,12 +155396,12 @@ void __cdecl CDSJpegImage::jinit_marker_writer(int param_1)
                     // ghidra_analysis/formats/jpeg_decoder.md
   puVar1 = (undefined4 *)(*(code *)**(undefined4 **)(param_1 + 4))(param_1,1,0x20);
   *(undefined4 **)(param_1 + 0x14c) = puVar1;
-  *puVar1 = _Globals::FUN_00460ad0;
+  *puVar1 = _Globals::write_file_header;
   puVar1[1] = &LAB_00460b20;
-  puVar1[2] = _Globals::start_pass_huff;
+  puVar1[2] = _Globals::write_scan_header;
   puVar1[3] = &LAB_00460cc0;
   puVar1[4] = _Globals::write_tables_only;
-  puVar1[5] = _Globals::emit_dri;
+  puVar1[5] = _Globals::write_marker_header;
   puVar1[6] = &LAB_00460ab0;
   puVar1[7] = 0;
   return;
@@ -155366,8 +155441,8 @@ void __cdecl CDSJpegImage::jinit_compress_master(int *param_1)
   else {
     cVar1 = '\x01';
   }
-  FUN_00467dc0((int)param_1,cVar1);
-  FUN_00467600(param_1,'\0');
+  jinit_c_coef_controller((int)param_1,cVar1);
+  jinit_c_main_controller(param_1,'\0');
   jinit_marker_writer((int)param_1);
   (**(code **)(param_1[1] + 0x18))(param_1);
   (**(code **)param_1[0x53])(param_1);
@@ -155589,6 +155664,8 @@ void __cdecl _Globals::FUN_00461160(int param_1)
 }
 
 
+
+// R6 task44: decompress buffer init; caller jinit_d_post path @0x460354
 
 void __cdecl _Globals::FUN_00461460(int *param_1,char param_2)
 
@@ -155960,8 +156037,8 @@ void __cdecl _Globals::jinit_d_coef_controller(undefined4 *param_1,char param_2)
           iVar7 = iVar4 * 3;
         }
         iVar1 = puVar2[1];
-        iVar4 = FUN_0045f7f0(piVar8[5],iVar4);
-        iVar5 = FUN_0045f7f0(piVar8[4],piVar8[-1]);
+        iVar4 = jround_up(piVar8[5],iVar4);
+        iVar5 = jround_up(piVar8[4],piVar8[-1]);
         uVar6 = (**(code **)(iVar1 + 0x14))(puVar2,1,1,iVar5,iVar4,iVar7);
         *param_1 = uVar6;
         _param_2 = _param_2 + 1;
@@ -157165,7 +157242,7 @@ void __cdecl _Globals::FUN_00463ee0(int param_1)
 
 
 void __cdecl
-_Globals::FUN_00463fe0
+_Globals::process_data_simple_main
           (int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
           int *param_6)
 
@@ -157205,7 +157282,7 @@ _Globals::FUN_00463fe0
 
 
 
-void __cdecl _Globals::FUN_00464090(int param_1)
+void __cdecl _Globals::process_data_context_main(int param_1)
 
 {
   int iVar1;
@@ -157267,7 +157344,7 @@ void __cdecl _Globals::jinit_d_main_controller(int param_1,char param_2)
     puVar2[4] = iVar5;
     if (param_2 != '\0') {
       iVar1 = *(int *)(param_1 + 4);
-      iVar3 = FUN_0045f7f0(*(int *)(param_1 + 0x60),iVar5);
+      iVar3 = jround_up(*(int *)(param_1 + 0x60),iVar5);
       uVar4 = (**(code **)(iVar1 + 0x10))
                         (param_1,1,0,*(int *)(param_1 + 100) * *(int *)(param_1 + 0x5c),iVar3,iVar5)
       ;
@@ -157523,7 +157600,7 @@ LAB_004648f0:
         }
         iVar9 = param_1[0x45];
         iVar1 = param_1[1];
-        iVar4 = FUN_0045f7f0(param_1[0x17],param_1[0x44]);
+        iVar4 = jround_up(param_1[0x17],param_1[0x44]);
         uVar6 = (**(code **)(iVar1 + 8))(param_1,1,iVar4,iVar9);
         puVar8[-10] = uVar6;
       }
@@ -157925,13 +158002,14 @@ void __cdecl _Globals::FUN_00465180(int param_1,int *param_2,int param_3,undefin
 
 
 
-void __cdecl _Globals::jinit_color_deconverter(int param_1)
+void __cdecl _Globals::jinit_merged_upsampler(int param_1)
 
 {
   undefined4 *puVar1;
   undefined4 uVar2;
   int iVar3;
   
+                    // R6: manifest jinit_color_deconverter dup; body is jinit_merged_upsampler
   puVar1 = (undefined4 *)(*(code *)**(undefined4 **)(param_1 + 4))(param_1,1,0x30);
   *(undefined4 **)(param_1 + 0x1a0) = puVar1;
   *puVar1 = &LAB_00465060;
@@ -158008,7 +158086,7 @@ int * __fastcall _Globals::find_biggest_volume(int param_1,int param_2)
 
 
 
-void __thiscall _Globals::FUN_00465650(void *this,int *param_1)
+void __thiscall _Globals::update_box(void *this,int *param_1)
 
 {
   short sVar1;
@@ -158274,8 +158352,8 @@ int __cdecl _Globals::median_cut(void *param_1,int param_2,int param_3,int param
       piVar1[5] = iVar3;
       piVar5[1] = iVar3 + 1;
     }
-    FUN_00465650(param_1,piVar1);
-    FUN_00465650(param_1,piVar5 + -3);
+    update_box(param_1,piVar1);
+    update_box(param_1,piVar5 + -3);
     local_4 = local_4 + 2;
     param_3 = param_3 + 1;
     piVar5 = piVar5 + 8;
@@ -158285,7 +158363,7 @@ int __cdecl _Globals::median_cut(void *param_1,int param_2,int param_3,int param
 
 
 
-void __cdecl _Globals::FUN_00465bb0(int param_1,int param_2)
+void __cdecl _Globals::fill_inverse_cmap(int param_1,int param_2)
 
 {
   int iVar1;
@@ -158377,11 +158455,11 @@ void __cdecl _Globals::select_colors(int param_1)
   piVar1[3] = 0x3f;
   piVar1[4] = 0;
   piVar1[5] = 0x1f;
-  FUN_00465650(unaff_EDI,piVar1);
+  update_box(unaff_EDI,piVar1);
   iVar2 = median_cut(unaff_EDI,(int)piVar1,1,param_1);
   if (0 < iVar2) {
     do {
-      FUN_00465bb0((int)unaff_EDI,iVar3);
+      fill_inverse_cmap((int)unaff_EDI,iVar3);
       iVar3 = iVar3 + 1;
     } while (iVar3 < iVar2);
   }
@@ -158396,7 +158474,7 @@ void __cdecl _Globals::select_colors(int param_1)
 // param_4 buffer; returns count. Called from FUN_004660f0 before FUN_00465f70 dither pass. No
 // established symbol name in docs.
 
-void __thiscall _Globals::FUN_00465da0(void *this,int param_1,int param_2,int param_3)
+void __thiscall _Globals::init_error_limit(void *this,int param_1,int param_2,int param_3)
 
 {
   int iVar1;
@@ -158512,7 +158590,7 @@ LAB_00465ef3:
 // h2v2_merged_upsample. Pair with FUN_00465da0.
 
 void __cdecl
-_Globals::FUN_00465f70
+_Globals::prescan_quantize
           (int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,byte *param_7)
 
 {
@@ -158602,7 +158680,7 @@ _Globals::FUN_00465f70
 // UNCERTAIN: lazy 8x8 quant lookup tile fill for h2v2_merged_upsample; calls FUN_00465da0 +
 // FUN_00465f70 — no IJG export (batch 22).
 
-void __thiscall _Globals::FUN_004660f0(void *this,int param_1,int param_2,int param_3)
+void __thiscall _Globals::start_pass_1_quant(void *this,int param_1,int param_2,int param_3)
 
 {
   byte *pbVar1;
@@ -158625,8 +158703,8 @@ void __thiscall _Globals::FUN_004660f0(void *this,int param_1,int param_2,int pa
   iVar6 = (param_2 >> 2) * 0x20 + 4;
   this_00 = (void *)(((int)this >> 3) * 0x20 + 2);
   local_18c = param_1;
-  iVar2 = FUN_00465da0(this_00,iVar6,iVar5,(int)local_104);
-  FUN_00465f70(local_18c,iVar6,(int)this_00,iVar5,iVar2,(int)local_104,local_184);
+  iVar2 = init_error_limit(this_00,iVar6,iVar5,(int)local_104);
+  prescan_quantize(local_18c,iVar6,(int)this_00,iVar5,iVar2,(int)local_104,local_184);
   pbVar4 = local_184;
   piVar7 = (int *)(local_188 + (param_2 >> 2) * 0x10);
   iVar2 = 4;
@@ -158683,8 +158761,8 @@ void __cdecl _Globals::color_quantize3(int param_1,int param_2,int *param_3,int 
                           ((int)(uint)(*pbVar1 >> 2) * 0x20 + (uint)(*pbVar2 >> 3)) * 2);
         pbVar10 = pbVar10 + 3;
         if (*psVar3 == 0) {
-          FUN_004660f0((void *)(uint)(*pbVar1 >> 2),param_1,(uint)(bVar5 >> 3),(uint)(*pbVar2 >> 3))
-          ;
+          start_pass_1_quant((void *)(uint)(*pbVar1 >> 2),param_1,(uint)(bVar5 >> 3),
+                             (uint)(*pbVar2 >> 3));
         }
         *pcVar9 = (char)*psVar3 + -1;
         pcVar9 = pcVar9 + 1;
@@ -158788,7 +158866,7 @@ void __cdecl _Globals::h2v2_merged_upsample(int param_1,int param_2,int *param_3
         iVar17 = (int)uVar18 >> 3;
         iVar12 = *(int *)(iVar4 + iVar17 * 4);
         if (*(short *)(iVar12 + iVar15 * 2) == 0) {
-          FUN_004660f0(this,param_1,iVar17,iVar13);
+          start_pass_1_quant(this,param_1,iVar17,iVar13);
         }
         iVar12 = *(ushort *)(iVar12 + iVar15 * 2) - 1;
         *local_5c = (char)iVar12;
@@ -158825,7 +158903,7 @@ void __cdecl _Globals::h2v2_merged_upsample(int param_1,int param_2,int *param_3
 
 // libjpeg: 2-pass quantizer pass-1 helper
 
-void _Globals::FUN_004665c0(void)
+void _Globals::init_inverse_cmap(void)
 
 {
   int in_EAX;
@@ -158880,7 +158958,7 @@ void _Globals::FUN_004665c0(void)
 
 // libjpeg: 2-pass quantizer pass-2 helper
 
-void __cdecl _Globals::FUN_004666a0(int *param_1,char param_2)
+void __cdecl _Globals::start_pass_2(int *param_1,char param_2)
 
 {
   int iVar1;
@@ -158924,7 +159002,7 @@ void __cdecl _Globals::FUN_004666a0(int *param_1,char param_2)
       }
       IJG_jzero_far(*(void **)(iVar1 + 0x20),len);
       if (*(int *)(iVar1 + 0x28) == 0) {
-        FUN_004665c0();
+        init_inverse_cmap();
       }
       *(undefined1 *)(iVar1 + 0x24) = 0;
     }
@@ -158956,7 +159034,7 @@ void __cdecl _Globals::jinit_2pass_quantizer(int *param_1)
   
   puVar1 = (undefined4 *)(**(code **)param_1[1])(param_1,1,0x2c);
   param_1[0x6a] = (int)puVar1;
-  *puVar1 = FUN_004666a0;
+  *puVar1 = start_pass_2;
   puVar1[3] = &LAB_004667c0;
   puVar1[8] = 0;
   puVar1[10] = 0;
@@ -158998,7 +159076,7 @@ void __cdecl _Globals::jinit_2pass_quantizer(int *param_1)
   if (param_1[0x13] == 2) {
     uVar2 = (**(code **)(param_1[1] + 4))(param_1,1,(param_1[0x17] + 2) * 6);
     puVar1[8] = uVar2;
-    FUN_004665c0();
+    init_inverse_cmap();
     return;
   }
   return;
@@ -159331,7 +159409,7 @@ LAB_00466d7f:
 
 
 
-void __cdecl _Globals::FUN_00466e40(int param_1,int param_2,int *param_3,int param_4)
+void __cdecl _Globals::color_quantize(int param_1,int param_2,int *param_3,int param_4)
 
 {
   int *piVar1;
@@ -159630,7 +159708,7 @@ void __cdecl _Globals::FUN_00467340(int *param_1)
       *(undefined1 **)(iVar1 + 4) = &LAB_00466d90;
       return;
     }
-    *(code **)(iVar1 + 4) = FUN_00466e40;
+    *(code **)(iVar1 + 4) = color_quantize;
     return;
   }
   if (iVar3 == 1) {
@@ -159692,7 +159770,7 @@ void __thiscall CDSApp::CDSApp_PreCreateHook(CDSApp *this)
 
 
 
-void __cdecl _Globals::FUN_00467460(int *param_1)
+void __cdecl _Globals::jinit_merged_upsampler(int *param_1)
 
 {
   undefined4 *puVar1;
@@ -159729,7 +159807,7 @@ void __cdecl _Globals::FUN_00467460(int *param_1)
 
 // libjpeg: jinit_compress_master helper
 
-void __cdecl CDSJpegImage::FUN_00467600(int *param_1,char param_2)
+void __cdecl CDSJpegImage::jinit_c_main_controller(int *param_1,char param_2)
 
 {
   undefined4 *puVar1;
@@ -160159,7 +160237,7 @@ void __cdecl _Globals::FUN_00467d10(int *param_1,int param_2)
 
 // libjpeg: jinit_compress_master (master selection)
 
-void __cdecl CDSJpegImage::FUN_00467dc0(int param_1,char param_2)
+void __cdecl CDSJpegImage::jinit_c_coef_controller(int param_1,char param_2)
 
 {
   int iVar1;
@@ -160197,8 +160275,8 @@ void __cdecl CDSJpegImage::FUN_00467dc0(int param_1,char param_2)
     do {
       iVar6 = *piVar7;
       iVar1 = *(int *)(param_1 + 4);
-      iVar3 = _Globals::FUN_0045f7f0(piVar7[5],iVar6);
-      iVar4 = _Globals::FUN_0045f7f0(piVar7[4],piVar7[-1]);
+      iVar3 = _Globals::jround_up(piVar7[5],iVar6);
+      iVar4 = _Globals::jround_up(piVar7[4],piVar7[-1]);
       uVar5 = (**(code **)(iVar1 + 0x14))(param_1,1,0,iVar4,iVar3,iVar6);
       *puVar2 = uVar5;
       _param_2 = _param_2 + 1;
@@ -160318,7 +160396,7 @@ void __cdecl _Globals::jpeg_make_c_derived_tbl(int *param_1,char param_2,int par
 
 // libjpeg: emit_bits (short) helper
 
-undefined1 _Globals::FUN_004680f0(void)
+undefined1 _Globals::emit_byte_s(void)
 
 {
   undefined4 *puVar1;
@@ -160376,7 +160454,7 @@ undefined4 __thiscall _Globals::emit_bits_s(void *this,uint param_1)
     piVar1 = (int *)((int)this + 4);
     *piVar1 = *piVar1 + -1;
     if (*piVar1 == 0) {
-      cVar2 = FUN_004680f0();
+      cVar2 = emit_byte_s();
       uVar3 = CONCAT31(extraout_var,cVar2);
       if (cVar2 == '\0') goto LAB_004681c8;
     }
@@ -160386,7 +160464,7 @@ undefined4 __thiscall _Globals::emit_bits_s(void *this,uint param_1)
       piVar1 = (int *)((int)this + 4);
       *piVar1 = *piVar1 + -1;
       if (*piVar1 == 0) {
-        cVar2 = FUN_004680f0();
+        cVar2 = emit_byte_s();
         uVar3 = CONCAT31(extraout_var_00,cVar2);
         if (cVar2 == '\0') {
 LAB_004681c8:
@@ -160401,7 +160479,7 @@ LAB_004681c8:
 
 
 
-undefined4 _Globals::FUN_004681d0(void)
+undefined4 _Globals::flush_bits_s(void)
 
 {
   undefined4 uVar1;
@@ -160515,7 +160593,7 @@ uint __cdecl _Globals::FUN_004683a0(char param_1)
                     // UNCERTAIN: Called from encode_mcu when restart_interval and coef +0x24==0;
                     // emits byte (param-0x30) via entropy buffer — libjpeg jchuff.c emit_restart
                     // candidate (not COFF-verified).
-  uVar2 = FUN_004681d0();
+  uVar2 = flush_bits_s();
   if ((char)uVar2 == '\0') {
 LAB_004683b4:
     return uVar2 & 0xffffff00;
@@ -160525,7 +160603,7 @@ LAB_004683b4:
   piVar4 = in_EAX + 1;
   *piVar4 = *piVar4 + -1;
   if (*piVar4 == 0) {
-    cVar1 = FUN_004680f0();
+    cVar1 = emit_byte_s();
     uVar2 = CONCAT31(extraout_var,cVar1);
     if (cVar1 == '\0') goto LAB_004683b4;
   }
@@ -160534,7 +160612,7 @@ LAB_004683b4:
   piVar4 = in_EAX + 1;
   *piVar4 = *piVar4 + -1;
   if (*piVar4 == 0) {
-    cVar1 = FUN_004680f0();
+    cVar1 = emit_byte_s();
     uVar2 = CONCAT31(extraout_var_00,cVar1);
     if (cVar1 == '\0') goto LAB_004683b4;
   }
@@ -160650,7 +160728,7 @@ void __cdecl _Globals::FUN_00468590(int *param_1)
   uVar7 = *(undefined4 *)(iVar3 + 0x18);
   uVar8 = *(undefined4 *)(iVar3 + 0x1c);
   uVar9 = *(undefined4 *)(iVar3 + 0x20);
-  uVar10 = FUN_004681d0();
+  uVar10 = flush_bits_s();
   if ((char)uVar10 == '\0') {
     *(undefined4 *)(*param_1 + 8) = 0x18;
     (**(code **)*param_1)(param_1);
@@ -161065,7 +161143,7 @@ void __cdecl CDSJpegImage::jinit_huff_encoder(int param_1)
 
 // libjpeg: emit_bits/restart helper
 
-void _Globals::FUN_00468dd0(void)
+void _Globals::emit_byte_e(void)
 
 {
   undefined4 *puVar1;
@@ -161119,7 +161197,7 @@ void __thiscall _Globals::emit_bits_e(void *this,uint param_1)
         piVar1 = (int *)((int)this + 0x14);
         *piVar1 = *piVar1 + -1;
         if (*piVar1 == 0) {
-          FUN_00468dd0();
+          emit_byte_e();
         }
         if (((int)uVar4 >> 0x10 & 0xffU) == 0xff) {
           **(undefined1 **)((int)this + 0x10) = 0;
@@ -161127,7 +161205,7 @@ void __thiscall _Globals::emit_bits_e(void *this,uint param_1)
           piVar1 = (int *)((int)this + 0x14);
           *piVar1 = *piVar1 + -1;
           if (*piVar1 == 0) {
-            FUN_00468dd0();
+            emit_byte_e();
           }
         }
         uVar4 = uVar4 << 8;
@@ -161144,7 +161222,7 @@ void __thiscall _Globals::emit_bits_e(void *this,uint param_1)
 
 // libjpeg: emit_restart wrapper
 
-void _Globals::FUN_00468ed0(void)
+void _Globals::flush_bits_e(void)
 
 {
   void *unaff_ESI;
@@ -161186,7 +161264,7 @@ int __fastcall _Globals::emit_ac_symbol(void *param_1)
 
 // libjpeg: emit_eobrun helper
 
-void __fastcall _Globals::FUN_00468f20(char *param_1)
+void __fastcall _Globals::emit_buffered_bits(char *param_1)
 
 {
   int in_EAX;
@@ -161234,7 +161312,7 @@ void _Globals::emit_eobrun(void)
       emit_bits_e(in_EAX,*(uint *)((int)in_EAX + 0x38));
     }
     *(undefined4 *)((int)in_EAX + 0x38) = 0;
-    FUN_00468f20(*(char **)((int)in_EAX + 0x40));
+    emit_buffered_bits(*(char **)((int)in_EAX + 0x40));
     *(undefined4 *)((int)in_EAX + 0x3c) = 0;
   }
   return;
@@ -161252,20 +161330,20 @@ void __cdecl _Globals::emit_restart(char param_1)
   
   emit_eobrun();
   if (*(char *)(in_EAX + 0xc) == '\0') {
-    FUN_00468ed0();
+    flush_bits_e();
     **(undefined1 **)(in_EAX + 0x10) = 0xff;
     *(int *)(in_EAX + 0x10) = *(int *)(in_EAX + 0x10) + 1;
     piVar1 = (int *)(in_EAX + 0x14);
     *piVar1 = *piVar1 + -1;
     if (*piVar1 == 0) {
-      FUN_00468dd0();
+      emit_byte_e();
     }
     **(char **)(in_EAX + 0x10) = param_1 + -0x30;
     *(int *)(in_EAX + 0x10) = *(int *)(in_EAX + 0x10) + 1;
     piVar1 = (int *)(in_EAX + 0x14);
     *piVar1 = *piVar1 + -1;
     if (*piVar1 == 0) {
-      FUN_00468dd0();
+      emit_byte_e();
     }
   }
   if (*(int *)(*(int *)(in_EAX + 0x20) + 300) == 0) {
@@ -168921,7 +168999,7 @@ void _Globals::Unwind_004749f0(void)
 {
   int unaff_EBP;
   
-  FUN_004045d0((undefined4 *)(unaff_EBP + -0x94));
+  FreeIfNotInline((undefined4 *)(unaff_EBP + -0x94));
   return;
 }
 
@@ -170882,7 +170960,7 @@ void _Globals::Unwind_00475b70(void)
 {
   int unaff_EBP;
   
-  FUN_004045d0((undefined4 *)(unaff_EBP + -0x110));
+  FreeIfNotInline((undefined4 *)(unaff_EBP + -0x110));
   return;
 }
 
@@ -172504,7 +172582,7 @@ void _Globals::Unwind_00476a09(void)
 {
   int unaff_EBP;
   
-  FUN_004045d0((undefined4 *)(unaff_EBP + -0x4a40));
+  FreeIfNotInline((undefined4 *)(unaff_EBP + -0x4a40));
   return;
 }
 
@@ -172537,7 +172615,7 @@ void _Globals::Unwind_00476a38(void)
 {
   int unaff_EBP;
   
-  FUN_004045d0((undefined4 *)(unaff_EBP + -0x4b44));
+  FreeIfNotInline((undefined4 *)(unaff_EBP + -0x4b44));
   return;
 }
 
@@ -172548,7 +172626,7 @@ void _Globals::Unwind_00476a43(void)
 {
   int unaff_EBP;
   
-  FUN_004045d0((undefined4 *)(unaff_EBP + -0x493c));
+  FreeIfNotInline((undefined4 *)(unaff_EBP + -0x493c));
   return;
 }
 
@@ -172840,7 +172918,7 @@ void _Globals::Unwind_00476e78(void)
 {
   int unaff_EBP;
   
-  FUN_0040ad10(*(int *)(unaff_EBP + -0x10) + 0x98);
+  Unwind_CDSVideoPlayer_TM(*(int *)(unaff_EBP + -0x10) + 0x98);
   return;
 }
 
@@ -172862,7 +172940,7 @@ void _Globals::Unwind_00476eb8(void)
 {
   int unaff_EBP;
   
-  FUN_0040ad10(*(int *)(unaff_EBP + -0x10) + 0x98);
+  Unwind_CDSVideoPlayer_TM(*(int *)(unaff_EBP + -0x10) + 0x98);
   return;
 }
 
@@ -176744,7 +176822,7 @@ void _Globals::Unwind_004791fe(void)
 {
   int unaff_EBP;
   
-  FUN_0042ae40((void *)(*(int *)(unaff_EBP + -0x14) + 0x254));
+  CDSApp_DirtyRectList_Clear((void *)(*(int *)(unaff_EBP + -0x14) + 0x254));
   return;
 }
 
@@ -176755,7 +176833,7 @@ void _Globals::Unwind_0047920c(void)
 {
   int unaff_EBP;
   
-  FUN_0042ae40((void *)(*(int *)(unaff_EBP + -0x14) + 0x264));
+  CDSApp_DirtyRectList_Clear((void *)(*(int *)(unaff_EBP + -0x14) + 0x264));
   return;
 }
 
@@ -176865,7 +176943,7 @@ void _Globals::Unwind_0047929e(void)
 {
   int unaff_EBP;
   
-  FUN_0042ae40((void *)(*(int *)(unaff_EBP + -0x14) + 0x254));
+  CDSApp_DirtyRectList_Clear((void *)(*(int *)(unaff_EBP + -0x14) + 0x254));
   return;
 }
 
@@ -176876,7 +176954,7 @@ void _Globals::Unwind_004792ac(void)
 {
   int unaff_EBP;
   
-  FUN_0042ae40((void *)(*(int *)(unaff_EBP + -0x14) + 0x264));
+  CDSApp_DirtyRectList_Clear((void *)(*(int *)(unaff_EBP + -0x14) + 0x264));
   return;
 }
 
@@ -177165,7 +177243,7 @@ void _Globals::Unwind_004795ab(void)
 {
   int unaff_EBP;
   
-  FUN_004045d0((undefined4 *)(unaff_EBP + -0x8010));
+  FreeIfNotInline((undefined4 *)(unaff_EBP + -0x8010));
   return;
 }
 
@@ -177176,7 +177254,7 @@ void _Globals::Unwind_004795e0(void)
 {
   int unaff_EBP;
   
-  FUN_004045d0((undefined4 *)(unaff_EBP + -0x4010));
+  FreeIfNotInline((undefined4 *)(unaff_EBP + -0x4010));
   return;
 }
 
@@ -177187,7 +177265,7 @@ void _Globals::Unwind_00479610(void)
 {
   int unaff_EBP;
   
-  FUN_004045d0((undefined4 *)(unaff_EBP + -0x4010));
+  FreeIfNotInline((undefined4 *)(unaff_EBP + -0x4010));
   return;
 }
 
@@ -177198,7 +177276,7 @@ void _Globals::Unwind_0047961b(void)
 {
   int unaff_EBP;
   
-  FUN_004045d0((undefined4 *)(unaff_EBP + -0x4094));
+  FreeIfNotInline((undefined4 *)(unaff_EBP + -0x4094));
   return;
 }
 
@@ -177981,7 +178059,7 @@ void _Globals::Unwind_00479f00(void)
 {
   int unaff_EBP;
   
-  FUN_004339e0((undefined4 *)(unaff_EBP + -0x18));
+  Eh_LeaveCriticalSection((undefined4 *)(unaff_EBP + -0x18));
   return;
 }
 
@@ -178339,7 +178417,7 @@ void _Globals::Unwind_0047a2f0(void)
 {
   int unaff_EBP;
   
-  FUN_004045d0((undefined4 *)(unaff_EBP + -0x414));
+  FreeIfNotInline((undefined4 *)(unaff_EBP + -0x414));
   return;
 }
 
@@ -178603,7 +178681,7 @@ void _Globals::Unwind_0047a668(void)
 {
   int unaff_EBP;
   
-  FUN_0040ad10(*(int *)(unaff_EBP + -0x10) + 0x78);
+  Unwind_CDSVideoPlayer_TM(*(int *)(unaff_EBP + -0x10) + 0x78);
   return;
 }
 
@@ -178625,7 +178703,7 @@ void _Globals::Unwind_0047a698(void)
 {
   int unaff_EBP;
   
-  FUN_0040ad10(*(int *)(unaff_EBP + -0x10) + 0x78);
+  Unwind_CDSVideoPlayer_TM(*(int *)(unaff_EBP + -0x10) + 0x78);
   return;
 }
 
@@ -178796,7 +178874,7 @@ void _Globals::Unwind_0047a883(void)
 {
   int unaff_EBP;
   
-  FUN_004339e0((undefined4 *)(unaff_EBP + -0x10));
+  Eh_LeaveCriticalSection((undefined4 *)(unaff_EBP + -0x10));
   return;
 }
 
@@ -178807,7 +178885,7 @@ void _Globals::Unwind_0047a8b0(void)
 {
   int unaff_EBP;
   
-  FUN_004339e0((undefined4 *)(unaff_EBP + 0x10));
+  Eh_LeaveCriticalSection((undefined4 *)(unaff_EBP + 0x10));
   return;
 }
 
@@ -179260,7 +179338,7 @@ void _Globals::Unwind_0047adf0(void)
 {
   int unaff_EBP;
   
-  FUN_004339e0((undefined4 *)(unaff_EBP + -0x10));
+  Eh_LeaveCriticalSection((undefined4 *)(unaff_EBP + -0x10));
   return;
 }
 
@@ -179337,7 +179415,7 @@ void _Globals::Unwind_0047aed0(void)
 {
   int unaff_EBP;
   
-  FUN_004339e0((undefined4 *)(unaff_EBP + -0x10));
+  Eh_LeaveCriticalSection((undefined4 *)(unaff_EBP + -0x10));
   return;
 }
 
@@ -179359,7 +179437,7 @@ void _Globals::Unwind_0047af30(void)
 {
   int unaff_EBP;
   
-  FUN_004339e0((undefined4 *)(unaff_EBP + -0x10));
+  Eh_LeaveCriticalSection((undefined4 *)(unaff_EBP + -0x10));
   return;
 }
 
@@ -179370,7 +179448,7 @@ void _Globals::Unwind_0047af60(void)
 {
   int unaff_EBP;
   
-  FUN_004339e0((undefined4 *)(unaff_EBP + -0x10));
+  Eh_LeaveCriticalSection((undefined4 *)(unaff_EBP + -0x10));
   return;
 }
 
@@ -179402,7 +179480,7 @@ void _Globals::CBulanci_RegisterAppDescriptor(void)
 
 {
   HandleClassRegister(&g_AppDescriptor,2000,&g_AppClassTable,CBulanci_CreateObject);
-  Runtime::MSVCRT::_atexit(FUN_0047de40);
+  Runtime::MSVCRT::_atexit(atexit_stub_0047de40);
   return;
 }
 
@@ -179415,7 +179493,7 @@ void CMsgDialog_StaticClassRegister(void)
                     // parent=&g_pCWindow_ClassRegEntry, factory=CMsgDialog_Allocate)
   _Globals::HandleClassRegister
             (&g_CMsgDialog_ClassRegEntry,0x7e5,&DAT_004b335c,CMsgDialog::CMsgDialog_Allocate);
-  Runtime::MSVCRT::_atexit(FUN_0047e030);
+  Runtime::MSVCRT::_atexit(CMsgDialog_StaticClassRegister_atexit);
   return;
 }
 
@@ -179431,7 +179509,7 @@ void CPauseDlg_StaticClassRegister(void)
                     // parent=0x4b335c, factory=CPauseDlg_Allocate).
   _Globals::HandleClassRegister
             (&g_CPauseDlg_classMeta,0x808,&DAT_004b335c,CPauseDlg::CPauseDlg_Allocate);
-  Runtime::MSVCRT::_atexit(FUN_0047e150);
+  Runtime::MSVCRT::_atexit(CPauseDlg_StaticClassRegister_atexit);
   return;
 }
 
@@ -179477,7 +179555,7 @@ void CDSMouse_StaticClassRegister(void)
 {
   _Globals::HandleClassRegister(&g_CDSMouse_classMeta,0x1d,&g_pCDSDsmFileClassName,CDSMouse_Factory)
   ;
-  Runtime::MSVCRT::_atexit(FUN_0047e5c0);
+  Runtime::MSVCRT::_atexit(CDSMouse_StaticClassRegister_atexit);
   return;
 }
 
@@ -179488,7 +179566,7 @@ void CDSMouse_StaticInterfaceRegister(void)
 {
   _Globals::HandleInterfaceRegister
             (&DAT_004b3b68,0x4b3b54,&DAT_004b7c20,CDSAudioBank_TypeinfoAdjust_4);
-  Runtime::MSVCRT::_atexit(FUN_0047e5d0);
+  Runtime::MSVCRT::_atexit(atexit_stub_0047e5d0);
   return;
 }
 
@@ -179499,7 +179577,7 @@ void CDSImageMouse_StaticClassRegister(void)
 {
   _Globals::HandleClassRegister(&DAT_004b3b74,0x35,&g_CDSMouse_classMeta,CDSImageMouse_CreateObject)
   ;
-  Runtime::MSVCRT::_atexit(FUN_0047e5e0);
+  Runtime::MSVCRT::_atexit(CDSImageMouse_StaticClassRegister_atexit);
   return;
 }
 
@@ -179513,7 +179591,7 @@ void CDSJpegImage_StaticClassRegister(void)
 {
   _Globals::HandleClassRegister
             (&DAT_004b7d80,0x15,&g_pCDSDsmFileClassName,CDSJpegImage_CreateObject);
-  Runtime::MSVCRT::_atexit(FUN_0047e810);
+  Runtime::MSVCRT::_atexit(CDSJpegImage_StaticClassRegister_atexit);
   return;
 }
 
@@ -179546,7 +179624,7 @@ void CDSFileStream_StaticClassRegister(void)
 
 {
   _Globals::HandleClassRegister(&DAT_004b7e78,3,&g_pCDSDsmFileClassName,&LAB_00433880);
-  Runtime::MSVCRT::_atexit(FUN_0047e930);
+  Runtime::MSVCRT::_atexit(Class_3_StaticClassRegister_atexit);
   return;
 }
 
@@ -179581,7 +179659,7 @@ void CDSResourceSign::RegisterCDSResourceSignAsClass94(void)
   _Globals::HandleClassRegister
             (&g_pCDSResourceSignClassNode,0x5e,&g_pCDSDsmFileClassName,
              _Globals::InitializeAndAllocate);
-  Runtime::MSVCRT::_atexit(FUN_0047ea10);
+  Runtime::MSVCRT::_atexit(atexit_stub_0047ea10);
   return;
 }
 
@@ -179592,7 +179670,7 @@ void CDSResourceSign::RegisterCDSResourceSignAuxClass1(void)
 {
   _Globals::HandleInterfaceRegister
             (&DAT_004b7f5c,0x4b7f48,&DAT_004b7cd8,CDSAudioBank_TypeinfoAdjust_4);
-  Runtime::MSVCRT::_atexit(FUN_0047ea20);
+  Runtime::MSVCRT::_atexit(atexit_stub_0047ea20);
   return;
 }
 
@@ -179602,7 +179680,7 @@ void CDSResourceSign::RegisterCDSResourceSignAuxClass2(void)
 
 {
   _Globals::HandleInterfaceRegister(&DAT_004b7f68,0x4b7f48,&DAT_004b7f04,&LAB_00434230);
-  Runtime::MSVCRT::_atexit(FUN_0047ea30);
+  Runtime::MSVCRT::_atexit(atexit_stub_0047ea30);
   return;
 }
 
@@ -179612,7 +179690,7 @@ void CDSResourceSign::RegisterCDSResourceSignAuxClass3(void)
 
 {
   _Globals::HandleInterfaceRegister(&LAB_004b7f74,0x4b7f48,&DAT_004b7c20,&LAB_00434240);
-  Runtime::MSVCRT::_atexit(FUN_0047ea40);
+  Runtime::MSVCRT::_atexit(atexit_stub_0047ea40);
   return;
 }
 
@@ -179707,13 +179785,13 @@ void CDSQueueStream_StaticClassRegister(void)
 {
   _Globals::HandleClassRegister
             (&DAT_004b847c,0x4b,&g_pCDSDsmFileClassName,CDSQueueStream_CreateObject);
-  Runtime::MSVCRT::_atexit(FUN_0047ed60);
+  Runtime::MSVCRT::_atexit(Class_0x4b_StaticClassRegister_atexit);
   return;
 }
 
 
 
-void FUN_0047de40(void)
+void atexit_stub_0047de40(void)
 
 {
                     // UNCERTAIN: Empty atexit stub. Runtime::MSVCRT::_atexit from
@@ -179724,7 +179802,7 @@ void FUN_0047de40(void)
 
 
 
-void FUN_0047de50(void)
+void CScrollBar_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b020:
@@ -179735,7 +179813,7 @@ void FUN_0047de50(void)
 
 
 
-void FUN_0047de60(void)
+void atexit_stub_0047de60(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b050:
@@ -179747,7 +179825,7 @@ void FUN_0047de60(void)
 
 
 
-void FUN_0047de70(void)
+void CRadio_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b080:
@@ -179758,7 +179836,7 @@ void FUN_0047de70(void)
 
 
 
-void FUN_0047de80(void)
+void CStaticText_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b0b0:
@@ -179769,7 +179847,7 @@ void FUN_0047de80(void)
 
 
 
-void FUN_0047de90(void)
+void CWindow_0x7d8_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b0e0:
@@ -179780,7 +179858,7 @@ void FUN_0047de90(void)
 
 
 
-void FUN_0047dea0(void)
+void CButton_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b110:
@@ -179791,7 +179869,7 @@ void FUN_0047dea0(void)
 
 
 
-void FUN_0047deb0(void)
+void CScroller_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b140:
@@ -179803,7 +179881,7 @@ void FUN_0047deb0(void)
 
 
 
-void FUN_0047dec0(void)
+void atexit_stub_0047dec0(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b170:
@@ -179815,7 +179893,7 @@ void FUN_0047dec0(void)
 
 
 
-void FUN_0047ded0(void)
+void CListViewer_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b1a0:
@@ -179827,7 +179905,7 @@ void FUN_0047ded0(void)
 
 
 
-void FUN_0047dee0(void)
+void CItemInfo_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b1d0:
@@ -179839,7 +179917,7 @@ void FUN_0047dee0(void)
 
 
 
-void FUN_0047def0(void)
+void CListBoxItem_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b200:
@@ -179851,7 +179929,7 @@ void FUN_0047def0(void)
 
 
 
-void FUN_0047df00(void)
+void CListBox_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b230:
@@ -179863,7 +179941,7 @@ void FUN_0047df00(void)
 
 
 
-void FUN_0047df10(void)
+void CEdit_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET no-op; sole xref PUSH @ 0x0047b279 registers via
@@ -179874,7 +179952,7 @@ void FUN_0047df10(void)
 
 
 
-void FUN_0047df20(void)
+void CEdit_StaticInterfaceRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET no-op; sole xref PUSH @ 0x0047b2a9 registers via
@@ -179885,7 +179963,7 @@ void FUN_0047df20(void)
 
 
 
-void FUN_0047df30(void)
+void CNumEdit_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET no-op; sole xref PUSH @ 0x0047b2d9 registers via
@@ -179896,7 +179974,7 @@ void FUN_0047df30(void)
 
 
 
-void FUN_0047df40(void)
+void CBlackView_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET no-op; sole xref PUSH @ 0x0047b309 registers via
@@ -179907,7 +179985,7 @@ void FUN_0047df40(void)
 
 
 
-void FUN_0047df50(void)
+void CIcon_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET no-op; sole xref PUSH @ 0x0047b339 registers via
@@ -179917,7 +179995,7 @@ void FUN_0047df50(void)
 
 
 
-void FUN_0047df60(void)
+void CPoem_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET no-op; sole xref PUSH @ 0x0047b369 registers via
@@ -179927,7 +180005,7 @@ void FUN_0047df60(void)
 
 
 
-void FUN_0047df70(void)
+void CPoem_StaticInterfaceRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET no-op; sole xref PUSH @ 0x0047b399 registers via
@@ -179938,7 +180016,7 @@ void FUN_0047df70(void)
 
 
 
-void FUN_0047df80(void)
+void atexit_stub_0047df80(void)
 
 {
                     // UNCERTAIN: 1-byte RET no-op; sole xref PUSH @ 0x0047b3c9 registers via
@@ -179949,7 +180027,7 @@ void FUN_0047df80(void)
 
 
 
-void FUN_0047df90(void)
+void atexit_stub_0047df90(void)
 
 {
                     // UNCERTAIN: 1-byte RET no-op; sole xref PUSH @ 0x0047b3f9 registers via
@@ -179960,7 +180038,7 @@ void FUN_0047df90(void)
 
 
 
-void FUN_0047dfa0(void)
+void CDSScript_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET no-op; sole xref PUSH @ 0x0047b429 registers via
@@ -179971,7 +180049,7 @@ void FUN_0047dfa0(void)
 
 
 
-void FUN_0047dfb0(void)
+void atexit_stub_0047dfb0(void)
 
 {
                     // UNCERTAIN: 1-byte RET empty vfunc stub; sole DATA ref static-init PUSH @
@@ -179982,7 +180060,7 @@ void FUN_0047dfb0(void)
 
 
 
-void FUN_0047dfc0(void)
+void atexit_stub_0047dfc0(void)
 
 {
                     // UNCERTAIN: 1-byte RET empty vfunc stub; sole DATA ref static-init PUSH @
@@ -179993,7 +180071,7 @@ void FUN_0047dfc0(void)
 
 
 
-void FUN_0047dfd0(void)
+void atexit_stub_0047dfd0(void)
 
 {
                     // UNCERTAIN: 1-byte RET empty vfunc stub; sole DATA ref static-init PUSH @
@@ -180004,7 +180082,7 @@ void FUN_0047dfd0(void)
 
 
 
-void FUN_0047dfe0(void)
+void Class_2066_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET empty vfunc stub; sole DATA ref static-init PUSH @
@@ -180015,7 +180093,7 @@ void FUN_0047dfe0(void)
 
 
 
-void FUN_0047dff0(void)
+void Class_2067_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET empty vfunc stub; sole DATA ref static-init PUSH @
@@ -180026,7 +180104,7 @@ void FUN_0047dff0(void)
 
 
 
-void FUN_0047e000(void)
+void Class_2018_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET empty vfunc stub; sole DATA ref static-init PUSH @
@@ -180037,7 +180115,7 @@ void FUN_0047e000(void)
 
 
 
-void FUN_0047e010(void)
+void Class_2019_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET empty vfunc stub; sole DATA ref static-init PUSH @
@@ -180048,7 +180126,7 @@ void FUN_0047e010(void)
 
 
 
-void FUN_0047e020(void)
+void Class_0x7e4_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET empty vfunc stub; sole DATA ref static-init PUSH @
@@ -180059,7 +180137,7 @@ void FUN_0047e020(void)
 
 
 
-void FUN_0047e030(void)
+void CMsgDialog_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET empty vfunc stub; sole DATA ref static-init PUSH @
@@ -180070,7 +180148,7 @@ void FUN_0047e030(void)
 
 
 
-void FUN_0047e040(void)
+void Class_0x7d9_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET empty vfunc stub; sole DATA ref static-init PUSH @
@@ -180081,7 +180159,7 @@ void FUN_0047e040(void)
 
 
 
-void FUN_0047e050(void)
+void CStartGame1_StaticInterfaceRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b620:
@@ -180091,7 +180169,7 @@ void FUN_0047e050(void)
 
 
 
-void FUN_0047e060(void)
+void CColorSet_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b650:
@@ -180101,7 +180179,7 @@ void FUN_0047e060(void)
 
 
 
-void FUN_0047e070(void)
+void CWindow_0x7e7_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b680:
@@ -180112,7 +180190,7 @@ void FUN_0047e070(void)
 
 
 
-void FUN_0047e080(void)
+void atexit_stub_0047e080(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b6b0:
@@ -180122,7 +180200,7 @@ void FUN_0047e080(void)
 
 
 
-void FUN_0047e090(void)
+void CBulPicture_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b6e0:
@@ -180132,7 +180210,7 @@ void FUN_0047e090(void)
 
 
 
-void FUN_0047e0a0(void)
+void CBulAnim_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b710:
@@ -180142,7 +180220,7 @@ void FUN_0047e0a0(void)
 
 
 
-void FUN_0047e0b0(void)
+void CKeybShow_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b740:
@@ -180152,7 +180230,7 @@ void FUN_0047e0b0(void)
 
 
 
-void FUN_0047e0c0(void)
+void CGameTypeDlg_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b770:
@@ -180162,7 +180240,7 @@ void FUN_0047e0c0(void)
 
 
 
-void FUN_0047e0d0(void)
+void CChatEdit_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b7a0:
@@ -180172,7 +180250,7 @@ void FUN_0047e0d0(void)
 
 
 
-void FUN_0047e0e0(void)
+void CGameCounter_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (RET only). Static-init @ 0x0047b7d0:
@@ -180182,7 +180260,7 @@ void FUN_0047e0e0(void)
 
 
 
-void FUN_0047e0f0(void)
+void CProgressBar_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; sole xref push before MSVCRT::_atexit @
@@ -180193,7 +180271,7 @@ void FUN_0047e0f0(void)
 
 
 
-void FUN_0047e100(void)
+void CLoadingLevel_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; xref @ 0x0047b849 after
@@ -180204,7 +180282,7 @@ void FUN_0047e100(void)
 
 
 
-void FUN_0047e110(void)
+void CScore_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; xref @ 0x0047b879 after
@@ -180215,7 +180293,7 @@ void FUN_0047e110(void)
 
 
 
-void FUN_0047e120(void)
+void CColorSwitch_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; xref @ 0x0047b8a9 after
@@ -180226,7 +180304,7 @@ void FUN_0047e120(void)
 
 
 
-void FUN_0047e130(void)
+void CExitDlg_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; xref @ 0x0047b8d9 after
@@ -180237,7 +180315,7 @@ void FUN_0047e130(void)
 
 
 
-void FUN_0047e140(void)
+void CChatList_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; xref @ 0x0047b909 after
@@ -180248,7 +180326,7 @@ void FUN_0047e140(void)
 
 
 
-void FUN_0047e150(void)
+void CPauseDlg_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; xref @ 0x0047b939 after
@@ -180259,7 +180337,7 @@ void FUN_0047e150(void)
 
 
 
-void FUN_0047e160(void)
+void CSetupDlg_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; xref @ 0x0047b969 after
@@ -180270,7 +180348,7 @@ void FUN_0047e160(void)
 
 
 
-void FUN_0047e170(void)
+void CVolume_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; xref @ 0x0047b999 after
@@ -180281,7 +180359,7 @@ void FUN_0047e170(void)
 
 
 
-void FUN_0047e180(void)
+void CLevelList_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; xref @ 0x0047b9c9 after
@@ -180292,7 +180370,7 @@ void FUN_0047e180(void)
 
 
 
-void FUN_0047e190(void)
+void CAdvertising_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op RET tail; registered from static-init @
@@ -180303,7 +180381,7 @@ void FUN_0047e190(void)
 
 
 
-void FUN_0047e1a0(void)
+void atexit_stub_0047e1a0(void)
 
 {
                     // UNCERTAIN: _atexit no-op RET tail; registered @ 0x0047ba29 after
@@ -180313,7 +180391,7 @@ void FUN_0047e1a0(void)
 
 
 
-void FUN_0047e1b0(void)
+void CDirectKeyb_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: _atexit no-op RET tail; registered @ 0x0047ba59 after
@@ -180324,7 +180402,7 @@ void FUN_0047e1b0(void)
 
 
 
-void FUN_0047e1c0(void)
+void CGame_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; sole xref PUSH @ 0x0047ba89 → _atexit. Preceded
@@ -180335,7 +180413,7 @@ void FUN_0047e1c0(void)
 
 
 
-void FUN_0047e1d0(void)
+void atexit_stub_0047e1d0(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; sole xref PUSH @ 0x0047bab9 → _atexit. Preceded
@@ -180346,7 +180424,7 @@ void FUN_0047e1d0(void)
 
 
 
-void FUN_0047e1e0(void)
+void atexit_stub_0047e1e0(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; sole xref PUSH @ 0x0047bae9 → _atexit. Preceded
@@ -180357,7 +180435,7 @@ void FUN_0047e1e0(void)
 
 
 
-void FUN_0047e1f0(void)
+void CGameView_0x7ec_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; sole xref PUSH @ 0x0047bb29 → _atexit. Preceded
@@ -180368,7 +180446,7 @@ void FUN_0047e1f0(void)
 
 
 
-void FUN_0047e200(void)
+void atexit_stub_0047e200(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; sole xref PUSH @ 0x0047bb59 → _atexit. Preceded
@@ -180379,7 +180457,7 @@ void FUN_0047e200(void)
 
 
 
-void FUN_0047e210(void)
+void ODSImage_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; sole xref PUSH @ 0x0047bb89 → _atexit. Preceded
@@ -180390,7 +180468,7 @@ void FUN_0047e210(void)
 
 
 
-void FUN_0047e220(void)
+void CAnim_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; sole xref PUSH @ 0x0047bbb9 → _atexit. Preceded
@@ -180401,7 +180479,7 @@ void FUN_0047e220(void)
 
 
 
-void FUN_0047e230(void)
+void atexit_stub_0047e230(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; sole xref PUSH @ 0x0047bbe9 → _atexit. Preceded
@@ -180412,7 +180490,7 @@ void FUN_0047e230(void)
 
 
 
-void FUN_0047e240(void)
+void CGaming_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; sole xref PUSH @ 0x0047bc19 → _atexit. Preceded
@@ -180423,7 +180501,7 @@ void FUN_0047e240(void)
 
 
 
-void FUN_0047e250(void)
+void atexit_stub_0047e250(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; sole xref PUSH @ 0x0047bc49 → _atexit. Preceded
@@ -180434,7 +180512,7 @@ void FUN_0047e250(void)
 
 
 
-void FUN_0047e260(void)
+void CObstacle_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET; xref @ 0x0047bc60 static-init:
@@ -180445,7 +180523,7 @@ void FUN_0047e260(void)
 
 
 
-void FUN_0047e270(void)
+void CShot_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET; xref @ 0x0047bc90 static-init:
@@ -180456,7 +180534,7 @@ void FUN_0047e270(void)
 
 
 
-void FUN_0047e280(void)
+void atexit_stub_0047e280(void)
 
 {
                     // UNCERTAIN: 1-byte RET; xref @ 0x0047bcc0 static-init:
@@ -180467,7 +180545,7 @@ void FUN_0047e280(void)
 
 
 
-void FUN_0047e290(void)
+void CDeath_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET; xref @ 0x0047bcf0 static-init:
@@ -180478,7 +180556,7 @@ void FUN_0047e290(void)
 
 
 
-void FUN_0047e2a0(void)
+void CDeath2_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET; xref @ 0x0047bd20 static-init:
@@ -180489,7 +180567,7 @@ void FUN_0047e2a0(void)
 
 
 
-void FUN_0047e2b0(void)
+void CGameView_0x801_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET; xref @ 0x0047bd50 static-init:
@@ -180500,7 +180578,7 @@ void FUN_0047e2b0(void)
 
 
 
-void FUN_0047e2c0(void)
+void CBitmap_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET; xref @ 0x0047bd80 static-init:
@@ -180511,7 +180589,7 @@ void FUN_0047e2c0(void)
 
 
 
-void FUN_0047e2d0(void)
+void atexit_stub_0047e2d0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail; static-init @ 0x0047bdb0 pushes to
@@ -180522,7 +180600,7 @@ void FUN_0047e2d0(void)
 
 
 
-void FUN_0047e2e0(void)
+void CTeleportPoint_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail; static-init @ 0x0047bde0
@@ -180533,7 +180611,7 @@ void FUN_0047e2e0(void)
 
 
 
-void FUN_0047e2f0(void)
+void CMina_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail; static-init @ 0x0047be10
@@ -180544,7 +180622,7 @@ void FUN_0047e2f0(void)
 
 
 
-void FUN_0047e300(void)
+void CMina_TypeinfoAdjust0xF0_StaticInterfaceRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail; static-init @ 0x0047be40
@@ -180555,7 +180633,7 @@ void FUN_0047e300(void)
 
 
 
-void FUN_0047e310(void)
+void CExplosion_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail; static-init @ 0x0047be70
@@ -180566,7 +180644,7 @@ void FUN_0047e310(void)
 
 
 
-void FUN_0047e320(void)
+void CGaming_StaticDtor(void)
 
 {
                     // UNCERTAIN: Release() on global DAT_004b3730 when non-null; sole DATA xref
@@ -180583,7 +180661,7 @@ void FUN_0047e320(void)
 
 
 
-void FUN_0047e340(void)
+void CHelpDlg_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail; static-init @ 0x0047bea0
@@ -180594,7 +180672,7 @@ void FUN_0047e340(void)
 
 
 
-void FUN_0047e350(void)
+void CHelpScript_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail; static-init @ 0x0047bed0
@@ -180605,7 +180683,7 @@ void FUN_0047e350(void)
 
 
 
-void FUN_0047e360(void)
+void CHelpScript_TypeinfoAdjust0x430_StaticInterfaceRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail; static-init @ 0x0047bf00
@@ -180616,7 +180694,7 @@ void FUN_0047e360(void)
 
 
 
-void FUN_0047e370(void)
+void CHelpScript_TypeinfoAdjust0x438_StaticInterfaceRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail; static-init @ 0x0047bf30
@@ -180627,7 +180705,7 @@ void FUN_0047e370(void)
 
 
 
-void FUN_0047e380(void)
+void CHelpView_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail; static-init @ 0x0047bf60
@@ -180638,7 +180716,7 @@ void FUN_0047e380(void)
 
 
 
-void FUN_0047e390(void)
+void Class_0x803_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub (single RET). PUSH @ 0x0047bfa9 from
@@ -180649,7 +180727,7 @@ void FUN_0047e390(void)
 
 
 
-void FUN_0047e3a0(void)
+void CHistoryScript_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub (single RET). PUSH @ 0x0047bfd9 from
@@ -180660,7 +180738,7 @@ void FUN_0047e3a0(void)
 
 
 
-void FUN_0047e3b0(void)
+void atexit_stub_0047e3b0(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub (single RET). PUSH @ 0x0047c009 from
@@ -180671,7 +180749,7 @@ void FUN_0047e3b0(void)
 
 
 
-void FUN_0047e3c0(void)
+void atexit_stub_0047e3c0(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub (single RET). PUSH @ 0x0047c039 from
@@ -180682,7 +180760,7 @@ void FUN_0047e3c0(void)
 
 
 
-void FUN_0047e3d0(void)
+void CMovieView_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub (single RET). PUSH @ 0x0047c069 from
@@ -180693,7 +180771,7 @@ void FUN_0047e3d0(void)
 
 
 
-void FUN_0047e3e0(void)
+void CDSChained_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub (single RET). PUSH @ 0x0047c099 from
@@ -180704,7 +180782,7 @@ void FUN_0047e3e0(void)
 
 
 
-void FUN_0047e3f0(void)
+void CGunMouse_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub (single RET). PUSH @ 0x0047c0c9 from
@@ -180715,7 +180793,7 @@ void FUN_0047e3f0(void)
 
 
 
-void FUN_0047e400(void)
+void Class_2002_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub (single RET). PUSH @ 0x0047c0f9 from
@@ -180726,7 +180804,7 @@ void FUN_0047e400(void)
 
 
 
-void FUN_0047e410(void)
+void atexit_stub_0047e410(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub (single RET). PUSH @ 0x0047c129 from
@@ -180737,7 +180815,7 @@ void FUN_0047e410(void)
 
 
 
-void FUN_0047e420(void)
+void Class_2003_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub (single RET). PUSH @ 0x0047c159 from
@@ -180748,7 +180826,7 @@ void FUN_0047e420(void)
 
 
 
-void FUN_0047e430(void)
+void CMenu_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit noop; DATA ref @0x47c189 ->
@@ -180760,7 +180838,7 @@ void FUN_0047e430(void)
 
 
 
-void FUN_0047e440(void)
+void CPoemScroller_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit noop; DATA ref @0x47c1b9 -> _atexit after
@@ -180771,7 +180849,7 @@ void FUN_0047e440(void)
 
 
 
-void FUN_0047e450(void)
+void atexit_stub_0047e450(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit noop; DATA ref @0x47c1e9 -> _atexit after
@@ -180781,7 +180859,7 @@ void FUN_0047e450(void)
 
 
 
-void FUN_0047e460(void)
+void CPanel_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit noop; DATA ref @0x47c219 -> _atexit after
@@ -180792,7 +180870,7 @@ void FUN_0047e460(void)
 
 
 
-void FUN_0047e470(void)
+void CShotCounter_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit noop; DATA ref @0x47c249 -> _atexit after
@@ -180803,7 +180881,7 @@ void FUN_0047e470(void)
 
 
 
-void FUN_0047e480(void)
+void CSpells_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit noop; DATA ref @0x47c279 -> _atexit after
@@ -180813,7 +180891,7 @@ void FUN_0047e480(void)
 
 
 
-void FUN_0047e490(void)
+void Class_0x7f5_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit noop; DATA ref @0x47c2a9 -> _atexit after
@@ -180824,7 +180902,7 @@ void FUN_0047e490(void)
 
 
 
-void FUN_0047e4a0(void)
+void atexit_stub_0047e4a0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit noop; DATA ref @0x47c2d9 -> _atexit after
@@ -180843,7 +180921,7 @@ void CDSStaticTexts_StaticDtor(void)
 
 
 
-void FUN_0047e4c0(void)
+void Class_0x4c_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit noop; DATA ref @0x47c316 -> _atexit after
@@ -180854,7 +180932,7 @@ void FUN_0047e4c0(void)
 
 
 
-void FUN_0047e4d0(void)
+void atexit_stub_0047e4d0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit noop; DATA ref @0x47c349 -> _atexit after
@@ -180865,7 +180943,7 @@ void FUN_0047e4d0(void)
 
 
 
-void FUN_0047e4e0(void)
+void atexit_stub_0047e4e0(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (single RET). Preceded by
@@ -180875,7 +180953,7 @@ void FUN_0047e4e0(void)
 
 
 
-void FUN_0047e4f0(void)
+void atexit_stub_0047e4f0(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (single RET). Preceded by
@@ -180885,7 +180963,7 @@ void FUN_0047e4f0(void)
 
 
 
-void FUN_0047e500(void)
+void atexit_stub_0047e500(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (single RET). Preceded by
@@ -180895,7 +180973,7 @@ void FUN_0047e500(void)
 
 
 
-void FUN_0047e510(void)
+void atexit_stub_0047e510(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (single RET). Preceded by
@@ -180905,7 +180983,7 @@ void FUN_0047e510(void)
 
 
 
-void FUN_0047e520(void)
+void Class_0x44_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (single RET). Preceded by
@@ -180915,7 +180993,7 @@ void FUN_0047e520(void)
 
 
 
-void FUN_0047e530(void)
+void atexit_stub_0047e530(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (single RET). Preceded by
@@ -180925,7 +181003,7 @@ void FUN_0047e530(void)
 
 
 
-void FUN_0047e540(void)
+void atexit_stub_0047e540(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (single RET). Preceded by
@@ -180965,7 +181043,7 @@ void CDSAudioBank_TypeinfoAdjust12_StaticRegister_atexit(void)
 
 
 
-void FUN_0047e580(void)
+void atexit_stub_0047e580(void)
 
 {
                     // UNCERTAIN: atexit-registered 1-byte RET stub (no-op). Static init @
@@ -180976,7 +181054,7 @@ void FUN_0047e580(void)
 
 
 
-void FUN_0047e590(void)
+void Class_0x18_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit-registered 1-byte RET stub (no-op). Static init @
@@ -180987,7 +181065,7 @@ void FUN_0047e590(void)
 
 
 
-void FUN_0047e5a0(void)
+void Class_0x19_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit-registered 1-byte RET stub (no-op). Static init @
@@ -180998,7 +181076,7 @@ void FUN_0047e5a0(void)
 
 
 
-void FUN_0047e5b0(void)
+void atexit_stub_0047e5b0(void)
 
 {
                     // UNCERTAIN: atexit-registered 1-byte RET stub (no-op). Static init @
@@ -181009,7 +181087,7 @@ void FUN_0047e5b0(void)
 
 
 
-void FUN_0047e5c0(void)
+void CDSMouse_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit-registered 1-byte RET stub (no-op). Static init @
@@ -181020,7 +181098,7 @@ void FUN_0047e5c0(void)
 
 
 
-void FUN_0047e5d0(void)
+void atexit_stub_0047e5d0(void)
 
 {
                     // UNCERTAIN: atexit-registered 1-byte RET stub (no-op). Static init @
@@ -181031,7 +181109,7 @@ void FUN_0047e5d0(void)
 
 
 
-void FUN_0047e5e0(void)
+void CDSImageMouse_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit-registered 1-byte RET stub (no-op). Static init @
@@ -181041,7 +181119,7 @@ void FUN_0047e5e0(void)
 
 
 
-void FUN_0047e5f0(void)
+void Class_0x17_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit-registered 1-byte RET stub (no-op). Static init @
@@ -181052,7 +181130,7 @@ void FUN_0047e5f0(void)
 
 
 
-void FUN_0047e600(void)
+void atexit_stub_0047e600(void)
 
 {
                     // UNCERTAIN: atexit-registered 1-byte RET stub (no-op). Static init @
@@ -181063,7 +181141,7 @@ void FUN_0047e600(void)
 
 
 
-void FUN_0047e610(void)
+void atexit_stub_0047e610(void)
 
 {
                     // UNCERTAIN: atexit-registered 1-byte RET stub (no-op). Static init @
@@ -181074,7 +181152,7 @@ void FUN_0047e610(void)
 
 
 
-void FUN_0047e620(void)
+void Class_1_e620_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC atexit no-op dtor stub (single RET); PUSH @ 0x0047c730 →
@@ -181085,7 +181163,7 @@ void FUN_0047e620(void)
 
 
 
-void FUN_0047e630(void)
+void Class_0_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC atexit no-op dtor stub (single RET); PUSH @ 0x0047c75c →
@@ -181096,7 +181174,7 @@ void FUN_0047e630(void)
 
 
 
-void FUN_0047e640(void)
+void Class_1_e640_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC atexit no-op dtor stub (single RET); PUSH @ 0x0047c77c →
@@ -181107,7 +181185,7 @@ void FUN_0047e640(void)
 
 
 
-void FUN_0047e650(void)
+void Class_2_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC atexit no-op dtor stub (single RET); PUSH @ 0x0047c79c →
@@ -181118,7 +181196,7 @@ void FUN_0047e650(void)
 
 
 
-void FUN_0047e660(void)
+void Class_0x3_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC atexit no-op dtor stub (single RET); PUSH @ 0x0047c7bc →
@@ -181129,7 +181207,7 @@ void FUN_0047e660(void)
 
 
 
-void FUN_0047e670(void)
+void Class_0x4_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC atexit no-op dtor stub (single RET); PUSH @ 0x0047c7dc →
@@ -181140,7 +181218,7 @@ void FUN_0047e670(void)
 
 
 
-void FUN_0047e680(void)
+void Class_0x5_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC atexit no-op dtor stub (single RET); PUSH @ 0x0047c7fc →
@@ -181151,7 +181229,7 @@ void FUN_0047e680(void)
 
 
 
-void FUN_0047e690(void)
+void Class_0xb_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC atexit no-op dtor stub (single RET); PUSH @ 0x0047c81c →
@@ -181162,7 +181240,7 @@ void FUN_0047e690(void)
 
 
 
-void FUN_0047e6a0(void)
+void Class_0x11_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC atexit no-op dtor stub (single RET); PUSH @ 0x0047c83c →
@@ -181173,7 +181251,7 @@ void FUN_0047e6a0(void)
 
 
 
-void FUN_0047e6b0(void)
+void Class_8_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC atexit no-op dtor stub (single RET); PUSH @ 0x0047c85c →
@@ -181184,7 +181262,7 @@ void FUN_0047e6b0(void)
 
 
 
-void FUN_0047e6c0(void)
+void atexit_stub_0047e6c0(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub (not a real function); _atexit-registered from
@@ -181194,7 +181272,7 @@ void FUN_0047e6c0(void)
 
 
 
-void FUN_0047e6d0(void)
+void atexit_stub_0047e6d0(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; _atexit from IDSTexts-implements registration @
@@ -181204,7 +181282,7 @@ void FUN_0047e6d0(void)
 
 
 
-void FUN_0047e6e0(void)
+void atexit_stub_0047e6e0(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; _atexit from class-registry static init @
@@ -181214,7 +181292,7 @@ void FUN_0047e6e0(void)
 
 
 
-void FUN_0047e6f0(void)
+void CBulanci_ClearResourceIndexSlots_atexit(void)
 
 {
                     // UNCERTAIN: atexit thunk — CDSAudioBank::FUN_00406340(&DAT_004b7c10, 0).
@@ -181226,7 +181304,7 @@ void FUN_0047e6f0(void)
 
 
 
-void FUN_0047e700(void)
+void atexit_stub_0047e700(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; _atexit from static init @ 0x47c900 — no-op
@@ -181236,7 +181314,7 @@ void FUN_0047e700(void)
 
 
 
-void FUN_0047e710(void)
+void atexit_stub_0047e710(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; _atexit from static init @ 0x47c926
@@ -181246,7 +181324,7 @@ void FUN_0047e710(void)
 
 
 
-void FUN_0047e720(void)
+void atexit_stub_0047e720(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; _atexit from static init @ 0x47c959
@@ -181256,7 +181334,7 @@ void FUN_0047e720(void)
 
 
 
-void FUN_0047e730(void)
+void atexit_stub_0047e730(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; _atexit from static init @ 0x47c986
@@ -181266,7 +181344,7 @@ void FUN_0047e730(void)
 
 
 
-void FUN_0047e740(void)
+void atexit_stub_0047e740(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; _atexit from static init @ 0x47c9b9
@@ -181276,7 +181354,7 @@ void FUN_0047e740(void)
 
 
 
-void FUN_0047e750(void)
+void atexit_stub_0047e750(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; _atexit from static init @ 0x47c9dc
@@ -181286,7 +181364,7 @@ void FUN_0047e750(void)
 
 
 
-void FUN_0047e760(void)
+void atexit_stub_0047e760(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; _atexit from static init @ 0x47c9fc
@@ -181296,7 +181374,7 @@ void FUN_0047e760(void)
 
 
 
-void FUN_0047e770(void)
+void atexit_stub_0047e770(void)
 
 {
                     // UNCERTAIN: empty atexit tail stub (single RET); registered from static-init
@@ -181306,7 +181384,7 @@ void FUN_0047e770(void)
 
 
 
-void FUN_0047e780(void)
+void atexit_stub_0047e780(void)
 
 {
                     // UNCERTAIN: empty atexit tail stub (single RET); registered from static-init
@@ -181316,7 +181394,7 @@ void FUN_0047e780(void)
 
 
 
-void FUN_0047e790(void)
+void atexit_stub_0047e790(void)
 
 {
                     // UNCERTAIN: empty atexit tail stub (single RET); registered from static-init
@@ -181326,7 +181404,7 @@ void FUN_0047e790(void)
 
 
 
-void FUN_0047e7a0(void)
+void atexit_stub_0047e7a0(void)
 
 {
                     // UNCERTAIN: empty atexit tail stub (single RET); registered from static-init
@@ -181336,7 +181414,7 @@ void FUN_0047e7a0(void)
 
 
 
-void FUN_0047e7b0(void)
+void atexit_stub_0047e7b0(void)
 
 {
                     // UNCERTAIN: empty atexit tail stub (single RET); registered from static-init
@@ -181346,7 +181424,7 @@ void FUN_0047e7b0(void)
 
 
 
-void FUN_0047e7c0(void)
+void atexit_stub_0047e7c0(void)
 
 {
                     // UNCERTAIN: empty atexit tail stub (single RET); registered from static-init
@@ -181356,7 +181434,7 @@ void FUN_0047e7c0(void)
 
 
 
-void FUN_0047e7d0(void)
+void atexit_stub_0047e7d0(void)
 
 {
                     // UNCERTAIN: empty atexit tail stub (single RET); registered from static-init
@@ -181366,7 +181444,7 @@ void FUN_0047e7d0(void)
 
 
 
-void FUN_0047e7e0(void)
+void atexit_stub_0047e7e0(void)
 
 {
                     // UNCERTAIN: empty atexit tail stub (single RET); registered from static-init
@@ -181376,7 +181454,7 @@ void FUN_0047e7e0(void)
 
 
 
-void FUN_0047e7f0(void)
+void atexit_stub_0047e7f0(void)
 
 {
                     // UNCERTAIN: empty atexit tail stub (single RET); registered from static-init
@@ -181386,7 +181464,7 @@ void FUN_0047e7f0(void)
 
 
 
-void FUN_0047e800(void)
+void atexit_stub_0047e800(void)
 
 {
                     // UNCERTAIN: empty atexit tail stub (single RET); registered from static-init
@@ -181396,7 +181474,7 @@ void FUN_0047e800(void)
 
 
 
-void FUN_0047e810(void)
+void CDSJpegImage_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit no-op dtor stub (RET); registered from static-init thunk @
@@ -181407,7 +181485,7 @@ void FUN_0047e810(void)
 
 
 
-void FUN_0047e820(void)
+void CDSAudioBank_TypeinfoAdjust_e820_StaticInterfaceRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit no-op dtor stub (RET); registered from static-init thunk @
@@ -181418,7 +181496,7 @@ void FUN_0047e820(void)
 
 
 
-void FUN_0047e830(void)
+void atexit_stub_0047e830(void)
 
 {
                     // UNCERTAIN: atexit no-op dtor stub (RET); registered from static-init thunk @
@@ -181429,7 +181507,7 @@ void FUN_0047e830(void)
 
 
 
-void FUN_0047e840(void)
+void atexit_stub_0047e840(void)
 
 {
                     // UNCERTAIN: atexit no-op dtor stub (RET); registered from static-init thunk @
@@ -181440,7 +181518,7 @@ void FUN_0047e840(void)
 
 
 
-void FUN_0047e850(void)
+void atexit_stub_0047e850(void)
 
 {
                     // UNCERTAIN: atexit no-op dtor stub (RET); registered from static-init thunk @
@@ -181451,7 +181529,7 @@ void FUN_0047e850(void)
 
 
 
-void FUN_0047e860(void)
+void Class_0x16_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit no-op dtor stub (RET); registered from static-init thunk @
@@ -181462,7 +181540,7 @@ void FUN_0047e860(void)
 
 
 
-void FUN_0047e870(void)
+void atexit_stub_0047e870(void)
 
 {
                     // UNCERTAIN: atexit no-op dtor stub (RET); registered from static-init thunk @
@@ -181473,7 +181551,7 @@ void FUN_0047e870(void)
 
 
 
-void FUN_0047e880(void)
+void atexit_stub_0047e880(void)
 
 {
                     // UNCERTAIN: atexit no-op dtor stub (RET); registered from static-init thunk @
@@ -181484,7 +181562,7 @@ void FUN_0047e880(void)
 
 
 
-void FUN_0047e890(void)
+void atexit_stub_0047e890(void)
 
 {
                     // UNCERTAIN: atexit no-op dtor stub (RET); registered from static-init thunk @
@@ -181495,7 +181573,7 @@ void FUN_0047e890(void)
 
 
 
-void FUN_0047e8a0(void)
+void atexit_stub_0047e8a0(void)
 
 {
                     // UNCERTAIN: atexit no-op dtor stub (RET); registered from static-init thunk @
@@ -181506,7 +181584,7 @@ void FUN_0047e8a0(void)
 
 
 
-void FUN_0047e8b0(void)
+void CDSFlxFile_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; push before _atexit @ 0x447e72 from static-init @
@@ -181517,7 +181595,7 @@ void FUN_0047e8b0(void)
 
 
 
-void FUN_0047e8c0(void)
+void CDSAudioBank_TypeinfoAdjust_e8c0_StaticInterfaceRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; push before _atexit @ 0x447e72 from static-init @
@@ -181527,7 +181605,7 @@ void FUN_0047e8c0(void)
 
 
 
-void FUN_0047e8d0(void)
+void atexit_stub_0047e8d0(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; push before _atexit @ 0x447e72 from static-init @
@@ -181537,7 +181615,7 @@ void FUN_0047e8d0(void)
 
 
 
-void FUN_0047e8e0(void)
+void atexit_stub_0047e8e0(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; push before _atexit @ 0x447e72 from static-init @
@@ -181547,7 +181625,7 @@ void FUN_0047e8e0(void)
 
 
 
-void FUN_0047e8f0(void)
+void atexit_stub_0047e8f0(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; push before _atexit @ 0x447e72 from static-init @
@@ -181577,7 +181655,7 @@ void CDSMpxStream_TypeinfoAdjust4_StaticRegister_atexit(void)
 
 
 
-void FUN_0047e920(void)
+void atexit_stub_0047e920(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; push before _atexit @ 0x447e72 from static-init @
@@ -181587,7 +181665,7 @@ void FUN_0047e920(void)
 
 
 
-void FUN_0047e930(void)
+void Class_3_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; push before _atexit @ 0x447e72 from static-init @
@@ -181597,7 +181675,7 @@ void FUN_0047e930(void)
 
 
 
-void FUN_0047e940(void)
+void atexit_stub_0047e940(void)
 
 {
                     // UNCERTAIN: 1-byte RET stub; push before _atexit @ 0x447e72 from static-init @
@@ -181607,7 +181685,7 @@ void FUN_0047e940(void)
 
 
 
-void FUN_0047e950(void)
+void atexit_stub_0047e950(void)
 
 {
                     // UNCERTAIN: atexit placeholder (RET only). Static-init @ 0x0047cfb0 —
@@ -181618,7 +181696,7 @@ void FUN_0047e950(void)
 
 
 
-void FUN_0047e960(void)
+void atexit_stub_0047e960(void)
 
 {
                     // UNCERTAIN: atexit placeholder (RET only). Static-init @ 0x0047cfe0 —
@@ -181629,7 +181707,7 @@ void FUN_0047e960(void)
 
 
 
-void FUN_0047e970(void)
+void Class_11_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit placeholder (RET only). Static-init @ 0x0047d010 —
@@ -181640,7 +181718,7 @@ void FUN_0047e970(void)
 
 
 
-void FUN_0047e980(void)
+void atexit_stub_0047e980(void)
 
 {
                     // UNCERTAIN: atexit placeholder (RET only). Static-init @ 0x0047d040 —
@@ -181651,7 +181729,7 @@ void FUN_0047e980(void)
 
 
 
-void FUN_0047e990(void)
+void atexit_stub_0047e990(void)
 
 {
                     // UNCERTAIN: atexit placeholder (RET only). Static-init @ 0x0047d070 —
@@ -181662,7 +181740,7 @@ void FUN_0047e990(void)
 
 
 
-void FUN_0047e9a0(void)
+void CDSStrmStgLoadingInfo_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit placeholder (RET only). Static-init @ 0x0047d0a0 —
@@ -181673,7 +181751,7 @@ void FUN_0047e9a0(void)
 
 
 
-void FUN_0047e9b0(void)
+void CDSStrmResInfo_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit placeholder (RET only). Static-init @ 0x0047d0d0 —
@@ -181684,7 +181762,7 @@ void FUN_0047e9b0(void)
 
 
 
-void FUN_0047e9c0(void)
+void Class_9_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit placeholder (RET only). Static-init @ 0x0047d100 —
@@ -181694,7 +181772,7 @@ void FUN_0047e9c0(void)
 
 
 
-void FUN_0047e9d0(void)
+void Class_10_StaticInterfaceRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit placeholder (RET only). Static-init @ 0x0047d120 —
@@ -181705,7 +181783,7 @@ void FUN_0047e9d0(void)
 
 
 
-void FUN_0047e9e0(void)
+void Class_10_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: atexit placeholder (RET only). Static-init @ 0x0047d140 —
@@ -181715,7 +181793,7 @@ void FUN_0047e9e0(void)
 
 
 
-void FUN_0047e9f0(void)
+void Class_0x58_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: RET-only MSVC _atexit placeholder; registered @ 0x0047D186 after
@@ -181726,7 +181804,7 @@ void FUN_0047e9f0(void)
 
 
 
-void FUN_0047ea00(void)
+void atexit_stub_0047ea00(void)
 
 {
                     // UNCERTAIN: RET-only MSVC _atexit placeholder; registered @ 0x0047D1B9 after
@@ -181736,7 +181814,7 @@ void FUN_0047ea00(void)
 
 
 
-void FUN_0047ea10(void)
+void atexit_stub_0047ea10(void)
 
 {
                     // UNCERTAIN: RET-only MSVC _atexit placeholder; registered by
@@ -181746,7 +181824,7 @@ void FUN_0047ea10(void)
 
 
 
-void FUN_0047ea20(void)
+void atexit_stub_0047ea20(void)
 
 {
                     // UNCERTAIN: RET-only MSVC _atexit placeholder; registered by
@@ -181756,7 +181834,7 @@ void FUN_0047ea20(void)
 
 
 
-void FUN_0047ea30(void)
+void atexit_stub_0047ea30(void)
 
 {
                     // UNCERTAIN: RET-only MSVC _atexit placeholder; registered by
@@ -181766,7 +181844,7 @@ void FUN_0047ea30(void)
 
 
 
-void FUN_0047ea40(void)
+void atexit_stub_0047ea40(void)
 
 {
                     // UNCERTAIN: RET-only MSVC _atexit placeholder; registered by
@@ -181788,7 +181866,7 @@ void StaticDtor_CDSMemoryExceptionSingleton_atexit(void)
 
 
 
-void FUN_0047ea60(void)
+void Class_4_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: RET-only MSVC _atexit placeholder; registered @ 0x0047D2C3 after
@@ -181798,7 +181876,7 @@ void FUN_0047ea60(void)
 
 
 
-void FUN_0047ea70(void)
+void CDSMemoryException_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: RET-only MSVC _atexit placeholder; registered @ 0x0047D2E6 after
@@ -181809,7 +181887,7 @@ void FUN_0047ea70(void)
 
 
 
-void FUN_0047ea80(void)
+void Class_26_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: RET-only MSVC _atexit placeholder; registered @ 0x0047D316 after
@@ -181820,7 +181898,7 @@ void FUN_0047ea80(void)
 
 
 
-void FUN_0047ea90(void)
+void Class_6_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: RET-only MSVC _atexit placeholder; registered @ 0x0047D346 after
@@ -181831,7 +181909,7 @@ void FUN_0047ea90(void)
 
 
 
-void FUN_0047eaa0(void)
+void Class_0x23_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; sole xref DATA push @ 0x0047d376
@@ -181842,7 +181920,7 @@ void FUN_0047eaa0(void)
 
 
 
-void FUN_0047eab0(void)
+void atexit_stub_0047eab0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; sole xref DATA push @ 0x0047d3a9;
@@ -181853,7 +181931,7 @@ void FUN_0047eab0(void)
 
 
 
-void FUN_0047eac0(void)
+void atexit_stub_0047eac0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; sole xref DATA push @ 0x0047d3d9;
@@ -181863,7 +181941,7 @@ void FUN_0047eac0(void)
 
 
 
-void FUN_0047ead0(void)
+void atexit_stub_0047ead0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; sole xref DATA push @ 0x0047d409;
@@ -181873,7 +181951,7 @@ void FUN_0047ead0(void)
 
 
 
-void FUN_0047eae0(void)
+void Class_0x24_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; sole xref DATA push @ 0x0047d436;
@@ -181883,7 +181961,7 @@ void FUN_0047eae0(void)
 
 
 
-void FUN_0047eaf0(void)
+void atexit_stub_0047eaf0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; sole xref DATA push @ 0x0047d469;
@@ -181893,7 +181971,7 @@ void FUN_0047eaf0(void)
 
 
 
-void FUN_0047eb00(void)
+void Class_0xd_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; sole xref DATA push @ 0x0047d48c;
@@ -181903,7 +181981,7 @@ void FUN_0047eb00(void)
 
 
 
-void FUN_0047eb10(void)
+void Class_0x1c_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; sole xref DATA push @ 0x0047d4b6;
@@ -181913,7 +181991,7 @@ void FUN_0047eb10(void)
 
 
 
-void FUN_0047eb20(void)
+void atexit_stub_0047eb20(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; sole xref DATA push @ 0x0047d4e9;
@@ -181923,7 +182001,7 @@ void FUN_0047eb20(void)
 
 
 
-void FUN_0047eb30(void)
+void atexit_stub_0047eb30(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; sole xref DATA push @ 0x0047d519;
@@ -181933,7 +182011,7 @@ void FUN_0047eb30(void)
 
 
 
-void FUN_0047eb40(void)
+void atexit_stub_0047eb40(void)
 
 {
                     // UNCERTAIN: atexit-registered empty dtor stub (RET only). Single DATA xref
@@ -181944,7 +182022,7 @@ void FUN_0047eb40(void)
 
 
 
-void FUN_0047eb50(void)
+void atexit_stub_0047eb50(void)
 
 {
                     // UNCERTAIN: atexit-registered empty dtor stub (RET only). Single DATA xref
@@ -181955,7 +182033,7 @@ void FUN_0047eb50(void)
 
 
 
-void FUN_0047eb60(void)
+void atexit_stub_0047eb60(void)
 
 {
                     // UNCERTAIN: atexit-registered empty dtor stub (RET only). Single DATA xref
@@ -181966,7 +182044,7 @@ void FUN_0047eb60(void)
 
 
 
-void FUN_0047eb70(void)
+void atexit_stub_0047eb70(void)
 
 {
                     // UNCERTAIN: atexit-registered empty dtor stub (RET only). Single DATA xref
@@ -181977,7 +182055,7 @@ void FUN_0047eb70(void)
 
 
 
-void FUN_0047eb80(void)
+void atexit_stub_0047eb80(void)
 
 {
                     // UNCERTAIN: atexit-registered empty dtor stub (RET only). Single DATA xref
@@ -181988,7 +182066,7 @@ void FUN_0047eb80(void)
 
 
 
-void FUN_0047eb90(void)
+void atexit_stub_0047eb90(void)
 
 {
                     // UNCERTAIN: atexit-registered empty dtor stub (RET only). Single DATA xref
@@ -181999,7 +182077,7 @@ void FUN_0047eb90(void)
 
 
 
-void FUN_0047eba0(void)
+void atexit_stub_0047eba0(void)
 
 {
                     // UNCERTAIN: atexit-registered empty dtor stub (RET only). Single DATA xref
@@ -182010,7 +182088,7 @@ void FUN_0047eba0(void)
 
 
 
-void FUN_0047ebb0(void)
+void atexit_stub_0047ebb0(void)
 
 {
                     // UNCERTAIN: atexit-registered empty dtor stub (RET only). Single DATA xref
@@ -182021,7 +182099,7 @@ void FUN_0047ebb0(void)
 
 
 
-void FUN_0047ebc0(void)
+void atexit_stub_0047ebc0(void)
 
 {
                     // UNCERTAIN: atexit-registered empty dtor stub (RET only). Single DATA xref
@@ -182032,7 +182110,7 @@ void FUN_0047ebc0(void)
 
 
 
-void FUN_0047ebd0(void)
+void atexit_stub_0047ebd0(void)
 
 {
                     // UNCERTAIN: atexit-registered empty dtor stub (RET only). Single DATA xref
@@ -182043,7 +182121,7 @@ void FUN_0047ebd0(void)
 
 
 
-void FUN_0047ebe0(void)
+void atexit_stub_0047ebe0(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (single RET); CDSAnim meta @ DAT_004b832c
@@ -182053,7 +182131,7 @@ void FUN_0047ebe0(void)
 
 
 
-void FUN_0047ebf0(void)
+void atexit_stub_0047ebf0(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (single RET); ECX=DAT_004b8340 @
@@ -182083,7 +182161,7 @@ void CDSVideoPlayer_TypeinfoAdjust4_StaticRegister_atexit(void)
 
 
 
-void FUN_0047ec20(void)
+void atexit_stub_0047ec20(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (single RET); g_pCDSDsmFileMetaA @
@@ -182093,7 +182171,7 @@ void FUN_0047ec20(void)
 
 
 
-void FUN_0047ec30(void)
+void CDSAudioPlayer_StaticLockDestructor(void)
 
 {
                     // UNCERTAIN: atexit thunk — DeleteCriticalSection(&DAT_004b8388).
@@ -182105,7 +182183,7 @@ void FUN_0047ec30(void)
 
 
 
-void FUN_0047ec40(void)
+void atexit_stub_0047ec40(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (single RET); CDSAudioPlayer meta @
@@ -182115,7 +182193,7 @@ void FUN_0047ec40(void)
 
 
 
-void FUN_0047ec50(void)
+void atexit_stub_0047ec50(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (single RET); ECX=DAT_004b83b4 @
@@ -182125,7 +182203,7 @@ void FUN_0047ec50(void)
 
 
 
-void FUN_0047ec60(void)
+void CDSWav_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (single RET); CDSWav class-meta @
@@ -182135,7 +182213,7 @@ void FUN_0047ec60(void)
 
 
 
-void FUN_0047ec70(void)
+void CDSDirectSound_ClearActiveVoices_atexit(void)
 
 {
                     // UNCERTAIN: vtable thunk; clears DAT_004b0214,
@@ -182147,7 +182225,7 @@ void FUN_0047ec70(void)
 
 
 
-void FUN_0047ec90(void)
+void CDSDirectSound_ClearVoiceQueue_atexit(void)
 
 {
                     // UNCERTAIN: vtable thunk; clears DAT_004b0224,
@@ -182159,7 +182237,7 @@ void FUN_0047ec90(void)
 
 
 
-void FUN_0047ecb0(void)
+void CDSDirectPlay_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (single RET); CDSDirectPlay GetTypeID
@@ -182169,7 +182247,7 @@ void FUN_0047ecb0(void)
 
 
 
-void FUN_0047ecc0(void)
+void CDSDirectPlaySender_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit placeholder (single RET); CDSDirectPlaySender meta @
@@ -182179,7 +182257,7 @@ void FUN_0047ecc0(void)
 
 
 
-void FUN_0047ecd0(void)
+void CDSAudioBank_TypeinfoAdjust_ecd0_StaticInterfaceRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub (RET only); static-init @ 0x0047d8f0
@@ -182190,7 +182268,7 @@ void FUN_0047ecd0(void)
 
 
 
-void FUN_0047ece0(void)
+void CDSDirectXException_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub; static-init @ 0x0047d920
@@ -182201,7 +182279,7 @@ void FUN_0047ece0(void)
 
 
 
-void FUN_0047ecf0(void)
+void Class_0x29_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub; static-init @ 0x0047d950
@@ -182212,7 +182290,7 @@ void FUN_0047ecf0(void)
 
 
 
-void FUN_0047ed00(void)
+void CDSAudioBank_TypeinfoAdjust_ed00_StaticInterfaceRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub; static-init @ 0x0047d980
@@ -182267,7 +182345,7 @@ void CDSWavStream_TypeinfoAdjust34_StaticRegister_atexit(void)
 
 
 
-void FUN_0047ed50(void)
+void Class_0x4a_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub; static-init @ 0x0047da70
@@ -182278,7 +182356,7 @@ void FUN_0047ed50(void)
 
 
 
-void FUN_0047ed60(void)
+void Class_0x4b_StaticClassRegister_atexit(void)
 
 {
                     // UNCERTAIN: MSVC _atexit no-op dtor stub; static-init @ 0x0047daa0
@@ -182289,7 +182367,7 @@ void FUN_0047ed60(void)
 
 
 
-void FUN_0047ed70(void)
+void atexit_stub_0047ed70(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; push+FUN_00447e72 @ 0x0047dae9;
@@ -182299,7 +182377,7 @@ void FUN_0047ed70(void)
 
 
 
-void FUN_0047ed80(void)
+void atexit_stub_0047ed80(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; push+FUN_00447e72 @ 0x0047db19;
@@ -182309,7 +182387,7 @@ void FUN_0047ed80(void)
 
 
 
-void FUN_0047ed90(void)
+void atexit_stub_0047ed90(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; push+FUN_00447e72 @ 0x0047db46;
@@ -182319,7 +182397,7 @@ void FUN_0047ed90(void)
 
 
 
-void FUN_0047eda0(void)
+void atexit_stub_0047eda0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; push+FUN_00447e72 @ 0x0047db76;
@@ -182329,7 +182407,7 @@ void FUN_0047eda0(void)
 
 
 
-void FUN_0047edb0(void)
+void atexit_stub_0047edb0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; push+FUN_00447e72 @ 0x0047dba9;
@@ -182339,7 +182417,7 @@ void FUN_0047edb0(void)
 
 
 
-void FUN_0047edc0(void)
+void atexit_stub_0047edc0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; push+FUN_00447e72 @ 0x0047dbd9;
@@ -182349,7 +182427,7 @@ void FUN_0047edc0(void)
 
 
 
-void FUN_0047edd0(void)
+void atexit_stub_0047edd0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; push+FUN_00447e72 @ 0x0047dc09;
@@ -182359,7 +182437,7 @@ void FUN_0047edd0(void)
 
 
 
-void FUN_0047ede0(void)
+void atexit_stub_0047ede0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; push+FUN_00447e72 @ 0x0047dc33;
@@ -182369,7 +182447,7 @@ void FUN_0047ede0(void)
 
 
 
-void FUN_0047edf0(void)
+void atexit_stub_0047edf0(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; push+FUN_00447e72 @ 0x0047dc56;
@@ -182379,7 +182457,7 @@ void FUN_0047edf0(void)
 
 
 
-void FUN_0047ee00(void)
+void atexit_stub_0047ee00(void)
 
 {
                     // UNCERTAIN: 1-byte RET atexit tail stub; push+FUN_00447e72 @ 0x0047dc89;
@@ -182389,7 +182467,7 @@ void FUN_0047ee00(void)
 
 
 
-void FUN_0047ee10(void)
+void atexit_stub_0047ee10(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (PUSH before CALL
@@ -182399,7 +182477,7 @@ void FUN_0047ee10(void)
 
 
 
-void FUN_0047ee20(void)
+void atexit_stub_0047ee20(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (PUSH before CALL
@@ -182409,7 +182487,7 @@ void FUN_0047ee20(void)
 
 
 
-void FUN_0047ee30(void)
+void atexit_stub_0047ee30(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (PUSH before CALL
@@ -182419,7 +182497,7 @@ void FUN_0047ee30(void)
 
 
 
-void FUN_0047ee40(void)
+void atexit_stub_0047ee40(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (PUSH before CALL
@@ -182429,7 +182507,7 @@ void FUN_0047ee40(void)
 
 
 
-void FUN_0047ee50(void)
+void atexit_stub_0047ee50(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (PUSH before CALL
@@ -182439,7 +182517,7 @@ void FUN_0047ee50(void)
 
 
 
-void FUN_0047ee60(void)
+void atexit_stub_0047ee60(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (PUSH before CALL
@@ -182449,7 +182527,7 @@ void FUN_0047ee60(void)
 
 
 
-void FUN_0047ee70(void)
+void atexit_stub_0047ee70(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (PUSH before CALL
@@ -182459,7 +182537,7 @@ void FUN_0047ee70(void)
 
 
 
-void FUN_0047ee80(void)
+void atexit_stub_0047ee80(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (PUSH before CALL
@@ -182469,7 +182547,7 @@ void FUN_0047ee80(void)
 
 
 
-void FUN_0047ee90(void)
+void atexit_stub_0047ee90(void)
 
 {
                     // UNCERTAIN: atexit-registered no-op static dtor stub (PUSH before CALL

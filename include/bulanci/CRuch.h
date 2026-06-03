@@ -27,7 +27,7 @@ public:
 	/* 423DA0 */ uchar CRuch_ScalarDeletingDtor_thunk_Sub10(uchar param_1);
 	// !DECL 0x00423da0 END
 	// !DECL 0x00423dc0 BEGIN
-	/* 423DC0 */ uchar CRuch_ScalarDeletingDtor(uchar param_1);
+	/* 423DC0 */ void* CRuch_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00423dc0 END
 	// !DECL 0x00423de0 BEGIN
 	/* 423DE0 */ uchar CRuch_OnScheduledTick(void* param_1);

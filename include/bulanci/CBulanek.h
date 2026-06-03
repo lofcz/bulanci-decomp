@@ -29,20 +29,14 @@ public:
 	// !DECL 0x004166b0 BEGIN
 	/* 4166B0 */ uint CBulanek_GetHitQuipSlot(int param_1);
 	// !DECL 0x004166b0 END
-	// !DECL 0x004166d0 BEGIN
-	/* 4166D0 */ uchar FUN_004166d0(int* param_1);
-	// !DECL 0x004166d0 END
 	// !DECL 0x00416700 BEGIN
-	/* 416700 */ uchar FUN_00416700(void* param_1);
+	/* 416700 */ uchar CBulanek_RefreshHudWeaponStrip(void* param_1);
 	// !DECL 0x00416700 END
 	// !DECL 0x00416830 BEGIN
 	/* 416830 */ uchar CBulanek_PostScriptEvent(uchar param_1, ushort param_2, uint param_3, uint param_4);
 	// !DECL 0x00416830 END
-	// !DECL 0x004168c0 BEGIN
-	/* 4168C0 */ uchar CBulanek_SetCloneFlag(uchar param_1);
-	// !DECL 0x004168c0 END
 	// !DECL 0x004172d0 BEGIN
-	/* 4172D0 */ uchar FUN_004172d0(int param_1);
+	/* 4172D0 */ uchar CBulanek_ArmTournamentSchedulerDelays(int param_1);
 	// !DECL 0x004172d0 END
 	// !DECL 0x00417380 BEGIN
 	/* 417380 */ uchar CBulanek_OnShow(char param_1);
@@ -60,7 +54,7 @@ public:
 	/* 4175F0 */ uchar CBulanek_AdaptDisplaySize(uint* param_1);
 	// !DECL 0x004175f0 END
 	// !DECL 0x00417640 BEGIN
-	/* 417640 */ void CBulanek_Draw(void* param_1);
+	/* 417640 */ void CBulanek_Draw();
 	// !DECL 0x00417640 END
 	// !DECL 0x004178d0 BEGIN
 	/* 4178D0 */ uchar CBulanek_SetAnimStateAndNotify(uint param_1, uint* param_2);
@@ -69,7 +63,7 @@ public:
 	/* 4178F0 */ uchar CBulanek_UpdateStateFromParams(uint param_1, uint param_2, int param_3);
 	// !DECL 0x004178f0 END
 	// !DECL 0x00417910 BEGIN
-	/* 417910 */ uchar FUN_00417910(uchar param_1);
+	/* 417910 */ void CBulanek_SnapPositionToFacingAxis();
 	// !DECL 0x00417910 END
 	// !DECL 0x004179e0 BEGIN
 	/* 4179E0 */ uchar CBulanek_SetFacingFromByte(uchar param_1);
@@ -80,12 +74,6 @@ public:
 	// !DECL 0x00417f80 BEGIN
 	/* 417F80 */ uint CBulanek_GetKillerGenderByteAtSlot(uchar param_1);
 	// !DECL 0x00417f80 END
-	// !DECL 0x004180e0 BEGIN
-	/* 4180E0 */ uchar FUN_004180e0(int param_1);
-	// !DECL 0x004180e0 END
-	// !DECL 0x004184a0 BEGIN
-	/* 4184A0 */ uchar CGaming_InsertEntityByDepth(void* param_1);
-	// !DECL 0x004184a0 END
 	// !DECL 0x00418e90 BEGIN
 	/* 418E90 */ uchar* CBulanek_GetClassTable();
 	// !DECL 0x00418e90 END
@@ -119,17 +107,8 @@ public:
 	// !DECL 0x004197b0 BEGIN
 	/* 4197B0 */ uint CBulanek_SetFacingTrack(int param_1, char param_2);
 	// !DECL 0x004197b0 END
-	// !DECL 0x00419a00 BEGIN
-	/* 419A00 */ uchar CDeath_ctor(uint param_1, uint param_2, uint param_3);
-	// !DECL 0x00419a00 END
-	// !DECL 0x00419aa0 BEGIN
-	/* 419AA0 */ uchar CDeath2_ctor(uint param_1);
-	// !DECL 0x00419aa0 END
-	// !DECL 0x0041a390 BEGIN
-	/* 41A390 */ void AddEntity(void* param_1, uchar param_2);
-	// !DECL 0x0041a390 END
 	// !DECL 0x0041adb0 BEGIN
-	/* 41ADB0 */ uchar CBulanek_dtor(uchar param_1);
+	/* 41ADB0 */ uchar CBulanek_dtor(uint* param_1);
 	// !DECL 0x0041adb0 END
 	// !DECL 0x0041aed0 BEGIN
 	/* 41AED0 */ uchar CBulanek_SchedulerTick(void* param_1);
@@ -138,13 +117,13 @@ public:
 	/* 41B180 */ uchar CWeapon_OnSchedulerEvent(int param_1);
 	// !DECL 0x0041b180 END
 	// !DECL 0x0041bc20 BEGIN
-	/* 41BC20 */ uchar CBulanek_DtorScalar(uchar param_1);
+	/* 41BC20 */ void* CBulanek_DtorScalar(uchar param_1);
 	// !DECL 0x0041bc20 END
 	// !DECL 0x0041c610 BEGIN
-	/* 41C610 */ uchar CBulanek_ResolveAndBindAnimTrack(void* param_1);
+	/* 41C610 */ void CBulanek_ResolveAndBindAnimTrack(CDeath* param_1, void* param_2);
 	// !DECL 0x0041c610 END
 	// !DECL 0x0041c860 BEGIN
-	/* 41C860 */ void CBulanek_BindDeathTombstoneAnim(void* param_1);
+	/* 41C860 */ void CBulanek_BindDeathTombstoneAnim(CDeath2* param_1);
 	// !DECL 0x0041c860 END
 	// !DECL 0x0041d090 BEGIN
 	/* 41D090 */ uint CBulanek_CreateRespawnTeleportPair(int* param_1, int param_2, int param_3, char param_4);
@@ -153,13 +132,13 @@ public:
 	/* 41DB00 */ uint CBulanek_OnTakeDamage(int param_1, int param_2, char param_3);
 	// !DECL 0x0041db00 END
 	// !DECL 0x0041ea90 BEGIN
-	/* 41EA90 */ uchar CBulanek_ApplyPickupEffect(ODSImage param_1);
+	/* 41EA90 */ uchar CBulanek_ApplyPickupEffect(uchar param_1);
 	// !DECL 0x0041ea90 END
 	// !DECL 0x0041eca0 BEGIN
-	/* 41ECA0 */ uchar CBulanek_CycleWeaponPickup(uchar param_1);
+	/* 41ECA0 */ uchar CBulanek_CycleWeaponPickup(void* param_1);
 	// !DECL 0x0041eca0 END
 	// !DECL 0x0041ed10 BEGIN
-	/* 41ED10 */ uchar FUN_0041ed10(uchar param_1);
+	/* 41ED10 */ uchar CBulanek_OnEvent_tD9_SyncWeaponFromSpawner(void* param_1);
 	// !DECL 0x0041ed10 END
 	// !DECL 0x0041f900 BEGIN
 	/* 41F900 */ uchar CBulanek_OnDeath(uchar param_1, uchar param_2);
@@ -171,46 +150,26 @@ public:
 	/* 420910 */ uchar CBulanek_ApplyAction(int param_1, char param_2);
 	// !DECL 0x00420910 END
 	// !DECL 0x00420a90 BEGIN
-	/* 420A90 */ uchar CBulanek_TryBotRandomAction(uchar param_1);
+	/* 420A90 */ uchar CBulanek_TryBotRandomAction(void* param_1);
 	// !DECL 0x00420a90 END
 	// !DECL 0x00420b30 BEGIN
 	/* 420B30 */ void CBulanek_WeaponSchedulerCallback(uint param_1);
 	// !DECL 0x00420b30 END
 	// !DECL 0x00420d40 BEGIN
-	/* 420D40 */ uchar CBulanek_OnEvent(ushort param_1, uint* param_2, uint* param_3);
+	/* 420D40 */ void CBulanek_OnEvent(ushort param_1, uint* param_2, uint* param_3);
 	// !DECL 0x00420d40 END
 	// !DECL 0x00422470 BEGIN
-	/* 422470 */ static uchar FUN_00422470(int* param_1);
+	/* 422470 */ static void CBulanek_ReleaseAudioPlayerRef(int* param_1);
 	// !DECL 0x00422470 END
-	// !DECL 0x0042c160 BEGIN
-	/* 42C160 */ uchar FUN_0042c160(int param_1);
-	// !DECL 0x0042c160 END
-	// !DECL 0x0042c190 BEGIN
-	/* 42C190 */ uchar FUN_0042c190(int param_1);
-	// !DECL 0x0042c190 END
-	// !DECL 0x0042eac0 BEGIN
-	/* 42EAC0 */ void Scheduler_FreeSlotIfLive(uint param_1);
-	// !DECL 0x0042eac0 END
-	// !DECL 0x0042f880 BEGIN
-	/* 42F880 */ uchar FUN_0042f880(int param_1);
-	// !DECL 0x0042f880 END
-	// !DECL 0x0042f890 BEGIN
-	/* 42F890 */ uchar FUN_0042f890(int param_1);
-	// !DECL 0x0042f890 END
-	// !DECL 0x0042fa20 BEGIN
-	/* 42FA20 */ uchar FUN_0042fa20(uchar param_1, int param_2);
-	// !DECL 0x0042fa20 END
-	// !DECL 0x0042fa50 BEGIN
-	/* 42FA50 */ uchar FUN_0042fa50(uchar param_1, int param_2);
-	// !DECL 0x0042fa50 END
+
+	// !DECL 0x0041e4b0 BEGIN
+	/* 41E4B0 */ uchar CBulanekCtor(CGame* param_1, uchar param_2, void* param_3, int param_4, void* param_5, int param_6, int param_7, int param_8);
+	// !DECL 0x0041e4b0 END
 };
 
 
 class CDSView {
 public:
-	// !DECL 0x0042cc80 BEGIN
-	/* 42CC80 */ uchar SetPosition(int param_1, int param_2);
-	// !DECL 0x0042cc80 END
 };
 
 #endif

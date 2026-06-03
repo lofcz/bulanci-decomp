@@ -27,16 +27,16 @@ public:
 	/* 422AE0 */ void* CHistoryScript_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00422ae0 END
 	// !DECL 0x00422b00 BEGIN
-	/* 422B00 */ static uchar HhBuildStaticTextAuto(int param_1);
+	/* 422B00 */ static uchar HhBuildStaticTextAuto(CDSScript* param_1);
 	// !DECL 0x00422b00 END
 	// !DECL 0x00422bc0 BEGIN
-	/* 422BC0 */ static uchar HhBuildStaticTextSized(int param_1);
+	/* 422BC0 */ static uchar HhBuildStaticTextSized(CDSScript* param_1);
 	// !DECL 0x00422bc0 END
 	// !DECL 0x00423530 BEGIN
-	/* 423530 */ static CDSBitmap* HhBuildHistoryBitmapWidget(int param_1);
+	/* 423530 */ static CDSBitmap* HhBuildHistoryBitmapWidget(CDSScript* param_1);
 	// !DECL 0x00423530 END
 	// !DECL 0x00423820 BEGIN
-	/* 423820 */ static uint HBuildHistoryMovieWidget(int param_1);
+	/* 423820 */ static uint HBuildHistoryMovieWidget(CDSScript* param_1);
 	// !DECL 0x00423820 END
 };
 

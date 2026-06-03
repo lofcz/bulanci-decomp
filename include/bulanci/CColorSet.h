@@ -21,16 +21,16 @@ public:
 	/* 40B7B0 */ uchar CColorSet_ScalarDeletingDtor_thunk_Sub4(uchar param_1);
 	// !DECL 0x0040b7b0 END
 	// !DECL 0x0040b7c0 BEGIN
-	/* 40B7C0 */ void CColorSet_dtor(void* param_1);
+	/* 40B7C0 */ void CColorSet_dtor(uchar param_1);
 	// !DECL 0x0040b7c0 END
 	// !DECL 0x0040cc60 BEGIN
 	/* 40CC60 */ void CColorSet_SetColorIndex(uchar param_1);
 	// !DECL 0x0040cc60 END
 	// !DECL 0x0040ccc0 BEGIN
-	/* 40CCC0 */ uchar CColorSet_LoadData(void* param_1);
+	/* 40CCC0 */ uchar CColorSet_LoadData(uchar* param_1);
 	// !DECL 0x0040ccc0 END
 	// !DECL 0x0040e9f0 BEGIN
-	/* 40E9F0 */ uint* CColorSet_Allocate();
+	/* 40E9F0 */ void* CColorSet_Allocate();
 	// !DECL 0x0040e9f0 END
 	// !DECL 0x0040ea80 BEGIN
 	/* 40EA80 */ void* CColorSet_vDtor(uchar param_1);
@@ -38,6 +38,10 @@ public:
 	// !DECL 0x0040f580 BEGIN
 	/* 40F580 */ uchar CColorSet_OnMouseDown(int* param_1);
 	// !DECL 0x0040f580 END
+
+	// !DECL 0x0040ffd0 BEGIN
+	/* 40FFD0 */ void* CColorSet_ctor_slotPillar(int param_1, int param_2, uchar param_3);
+	// !DECL 0x0040ffd0 END
 };
 
 #endif

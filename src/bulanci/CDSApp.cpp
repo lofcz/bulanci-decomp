@@ -7,17 +7,13 @@ uint CDSApp::CDSView_GetDataKindStubZero(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00429db0 BEGIN
 /* 429DB0-429F6D 001BD */
-uchar CDSApp::CDSApp_DispatchInputEvent(int param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_DispatchInputEvent(CDSEventRecord* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00429db0 END
 
-// !FUNC 0x0042a210 BEGIN
-/* 42A210-42A324 00114 */
-void CDSApp::CDSApp_OnCreate(void* param_1) { STUB_BODY(); }
-// !FUNC 0x0042a210 END
 
 // !FUNC 0x0042afd0 BEGIN
 /* 42AFD0-42B123 00153 */
-uint* CDSApp::FUN_0042afd0(uint* param_1) { STUB_BODY(); return 0; }
+void* CDSApp::CDSApp_InitCreateObjectShell() { STUB_BODY(); return 0; }
 // !FUNC 0x0042afd0 END
 
 // !FUNC 0x0042b130 BEGIN
@@ -44,7 +40,7 @@ uchar CDSApp::CDSApp_Chain_GetTypeInfo(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042b3d0 BEGIN
 /* 42B3D0-42B477 000A7 */
-uchar CDSApp::FUN_0042b3d0(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::CDSApp_ShutdownFromScalarDtor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042b3d0 END
 
 // !FUNC 0x0042b477 BEGIN
@@ -54,12 +50,12 @@ uchar* CDSApp::Catch_0042b477() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042b48c BEGIN
 /* 42B48C-42B55F 000D3 */
-uchar CDSApp::FUN_0042b48c() { STUB_BODY(); return 0; }
+void CDSApp::CDSApp_ReleaseMembers() { STUB_BODY(); }
 // !FUNC 0x0042b48c END
 
 // !FUNC 0x0042b560 BEGIN
 /* 42B560-42B592 00032 */
-void CDSApp::CDSApp_dtor(void* param_1) { STUB_BODY(); }
+void CDSApp::CDSApp_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0042b560 END
 
 // !FUNC 0x0042b8e0 BEGIN
@@ -82,15 +78,7 @@ uchar CDSApp::CDSApp_EventHandlerDtorBody(int param_1) { STUB_BODY(); return 0; 
 void* CDSApp::CDSApp_DtorScalar(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042b980 END
 
-// !FUNC 0x0042c7d0 BEGIN
-/* 42C7D0-42C7E4 00014 */
-uchar CDSApp::CDSApp_RouteSyntheticCloseEvent(ushort param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0042c7d0 END
 
-// !FUNC 0x0042ccf0 BEGIN
-/* 42CCF0-42CE30 00140 */
-void CDSApp::CDSView_RenderChildrenClipped(void* param_1) { STUB_BODY(); }
-// !FUNC 0x0042ccf0 END
 
 // !FUNC 0x0042e770 BEGIN
 /* 42E770-42E786 00016 */
@@ -99,12 +87,12 @@ uchar CDSApp::CDSApp_InitClock() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042f530 BEGIN
 /* 42F530-42F590 00060 */
-uchar CDSApp::FUN_0042f530() { STUB_BODY(); return 0; }
+uchar CDSApp::CBulanci_ReleaseResourceIndexSlots() { STUB_BODY(); return 0; }
 // !FUNC 0x0042f530 END
 
 // !FUNC 0x00437fb0 BEGIN
 /* 437FB0-437FDF 0002F */
-uchar CDSApp::RegWriteDword(int param_1) { STUB_BODY(); return 0; }
+uchar CDSApp::RegWriteDword(WCHAR* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00437fb0 END
 
 // !FUNC 0x0043c9f0 BEGIN
@@ -117,10 +105,6 @@ uchar CDSApp::CDSApp_FillPCMWaveFormat(ushort* param_1, ushort param_2, int para
 int CDSApp::CDSApp_CreateSoundBuffer(ushort param_1, int param_2, ushort param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x0043cb20 END
 
-// !FUNC 0x0043cbc0 BEGIN
-/* 43CBC0-43CCB0 000F0 */
-uchar CDSApp::CDSDirectSound_InitPrimary(uint param_1, ushort param_2, int param_3, ushort param_4) { STUB_BODY(); return 0; }
-// !FUNC 0x0043cbc0 END
 
 // !FUNC 0x004465b0 BEGIN
 /* 4465B0-4465CF 0001F */
@@ -131,4 +115,24 @@ uchar CDSApp::CDSApp_FreeAlphaBlendLut() { STUB_BODY(); return 0; }
 /* 467430-467431 00001 */
 void CDSApp::CDSApp_PreCreateHook() { STUB_BODY(); }
 // !FUNC 0x00467430 END
+
+// !FUNC 0x00429bd0 BEGIN
+/* 429BD0-429BF6 00026 */
+bool CDSApp::CDSApp_RestoreLostSurfaces() { STUB_BODY(); return 0; }
+// !FUNC 0x00429bd0 END
+
+// !FUNC 0x0042b170 BEGIN
+/* 42B170-42B39B 0022B */
+void CDSApp::CDSApp_ctor(short* param_1, short* param_2) { STUB_BODY(); }
+// !FUNC 0x0042b170 END
+
+// !FUNC 0x0042b5a0 BEGIN
+/* 42B5A0-42B895 002F5 */
+uchar CDSApp::CDSApp_AddDirtyRectCoalesced(int* param_1, int* param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x0042b5a0 END
+
+// !FUNC 0x0042b8a0 BEGIN
+/* 42B8A0-42B8B4 00014 */
+uchar CDSApp::CDSApp_AddDirtyRect(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0042b8a0 END
 

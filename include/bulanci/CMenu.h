@@ -9,7 +9,7 @@ public:
 	/* 401050 */ int CMenu_GetAppSubstruct();
 	// !DECL 0x00401050 END
 	// !DECL 0x00401af0 BEGIN
-	/* 401AF0 */ void CMenu_OnSubScreenBack(CBulanci* param_1);
+	/* 401AF0 */ void CMenu_OnSubScreenBack(uchar param_1);
 	// !DECL 0x00401af0 END
 	// !DECL 0x00401b70 BEGIN
 	/* 401B70 */ uchar* Catch_00401b70();
@@ -17,18 +17,6 @@ public:
 	// !DECL 0x00401bb4 BEGIN
 	/* 401BB4 */ uchar CMenu_HideAllButtons();
 	// !DECL 0x00401bb4 END
-	// !DECL 0x0040b6d0 BEGIN
-	/* 40B6D0 */ uchar CListBoxItem_ctorWithAssoc(int param_1, uint param_2);
-	// !DECL 0x0040b6d0 END
-	// !DECL 0x0040d360 BEGIN
-	/* 40D360 */ uchar CLevelList_AddItem(int param_1);
-	// !DECL 0x0040d360 END
-	// !DECL 0x0040ffd0 BEGIN
-	/* 40FFD0 */ void* CColorSet_ctor_slotPillar(uint param_1, uint param_2, uchar param_3);
-	// !DECL 0x0040ffd0 END
-	// !DECL 0x004104f0 BEGIN
-	/* 4104F0 */ uchar CStartGame2_ctor(uchar param_1);
-	// !DECL 0x004104f0 END
 	// !DECL 0x00412720 BEGIN
 	/* 412720 */ uchar CMenu_InitPlayerSlotFromDefaults(int param_1);
 	// !DECL 0x00412720 END
@@ -41,32 +29,23 @@ public:
 	// !DECL 0x004127d0 BEGIN
 	/* 4127D0 */ uchar CMenu_ThrowModalDone(int param_1);
 	// !DECL 0x004127d0 END
-	// !DECL 0x00413030 BEGIN
-	/* 413030 */ short CMenu_DoModalChild(void* param_1, char param_2);
-	// !DECL 0x00413030 END
 	// !DECL 0x00413620 BEGIN
-	/* 413620 */ uchar FUN_00413620(int param_1);
+	/* 413620 */ uchar CGame_CopyPlayerBindingsFromProfile(int param_1);
 	// !DECL 0x00413620 END
 	// !DECL 0x00413b20 BEGIN
 	/* 413B20 */ uchar CMenuGetResourceById(uint param_1);
 	// !DECL 0x00413b20 END
-	// !DECL 0x00414170 BEGIN
-	/* 414170 */ uchar CMenu_PickSession(uint* param_1);
-	// !DECL 0x00414170 END
 	// !DECL 0x00414232 BEGIN
 	/* 414232 */ uchar Catch_00414232();
 	// !DECL 0x00414232 END
 	// !DECL 0x00414640 BEGIN
-	/* 414640 */ uchar CMenu_NetSendKickAll(uchar param_1);
+	/* 414640 */ uchar CMenu_NetSendLobbySyncAll(uchar param_1);
 	// !DECL 0x00414640 END
-	// !DECL 0x00414790 BEGIN
-	/* 414790 */ void CMenu_ShowLobby(uchar param_1);
-	// !DECL 0x00414790 END
 	// !DECL 0x00414847 BEGIN
 	/* 414847 */ uchar Catch_00414847();
 	// !DECL 0x00414847 END
 	// !DECL 0x00414dd0 BEGIN
-	/* 414DD0 */ uchar CMenu_OpenNetworkSession(uchar param_1);
+	/* 414DD0 */ void CMenu_OpenNetworkSession(CGame* param_1);
 	// !DECL 0x00414dd0 END
 	// !DECL 0x0041520d BEGIN
 	/* 41520D */ uchar Catch_0041520d();
@@ -78,10 +57,10 @@ public:
 	/* 423FA0 */ uchar CMenu_SetButtonsHidden(char param_1);
 	// !DECL 0x00423fa0 END
 	// !DECL 0x00424080 BEGIN
-	/* 424080 */ void CMenu_OnMusicFadeTick(CDSUpdatedItem* param_1);
+	/* 424080 */ void CMenu_OnMusicFadeTick(uchar param_1);
 	// !DECL 0x00424080 END
 	// !DECL 0x00424520 BEGIN
-	/* 424520 */ void* CMenu_ctor(void* param_1);
+	/* 424520 */ uchar CMenu_ctor(uchar param_1);
 	// !DECL 0x00424520 END
 	// !DECL 0x004245b0 BEGIN
 	/* 4245B0 */ uchar* CMenu_GetSingleton();
@@ -120,10 +99,10 @@ public:
 	/* 425970 */ uchar CMenu_CmdDispatch(ushort param_1);
 	// !DECL 0x00425970 END
 	// !DECL 0x0042c000 BEGIN
-	/* 42C000 */ void CMenu_DetachChild(CDSView* param_1);
+	/* 42C000 */ void CMenu_DetachChild(uchar param_1);
 	// !DECL 0x0042c000 END
 	// !DECL 0x0042d160 BEGIN
-	/* 42D160 */ uchar FUN_0042d160(int* param_1);
+	/* 42D160 */ uchar CMenu_DetachChildWithVisibility(int* param_1);
 	// !DECL 0x0042d160 END
 	// !DECL 0x0043aba0 BEGIN
 	/* 43ABA0 */ uchar CDSDirectPlaySender_Bind(uint param_1, uint param_2);
@@ -149,6 +128,10 @@ public:
 	// !DECL 0x0043b620 BEGIN
 	/* 43B620 */ uchar CDSDirectPlay_ConnectLobby(uint* param_1, uint* param_2);
 	// !DECL 0x0043b620 END
+
+	// !DECL 0x004265e0 BEGIN
+	/* 4265E0 */ uchar CMenu_ctor_with_ui(uint param_1, uchar param_2);
+	// !DECL 0x004265e0 END
 };
 
 #endif

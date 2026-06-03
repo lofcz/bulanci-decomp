@@ -5,29 +5,20 @@
 
 class CListViewer {
 public:
-	// !DECL 0x00404180 BEGIN
-	/* 404180 */ uchar FUN_00404180(int* param_1);
-	// !DECL 0x00404180 END
 	// !DECL 0x004041e0 BEGIN
 	/* 4041E0 */ uchar CListViewer_GetContentAreaSize(int* param_1);
 	// !DECL 0x004041e0 END
-	// !DECL 0x00404240 BEGIN
-	/* 404240 */ uchar FUN_00404240(int* param_1);
-	// !DECL 0x00404240 END
 	// !DECL 0x00404290 BEGIN
-	/* 404290 */ uchar FUN_00404290(int param_1, int* param_2);
+	/* 404290 */ uchar CListViewer_IndexToItemRect(int param_1, int* param_2);
 	// !DECL 0x00404290 END
-	// !DECL 0x004044f0 BEGIN
-	/* 4044F0 */ uchar FUN_004044f0(int* param_1, int* param_2);
-	// !DECL 0x004044f0 END
 	// !DECL 0x00405b30 BEGIN
-	/* 405B30 */ uint CListViewer_HitTestItem(int param_1, int param_2);
+	/* 405B30 */ void* CListViewer_HitTestItem(int param_1, int param_2);
 	// !DECL 0x00405b30 END
 	// !DECL 0x00405dd0 BEGIN
 	/* 405DD0 */ uchar CListViewer_OnMouseClick(int* param_1);
 	// !DECL 0x00405dd0 END
 	// !DECL 0x00405df0 BEGIN
-	/* 405DF0 */ uchar CListViewer_RefreshHitTestAtScroll(uchar param_1);
+	/* 405DF0 */ uchar CListViewer_RefreshHitTestAtScroll(void* param_1);
 	// !DECL 0x00405df0 END
 	// !DECL 0x00405e10 BEGIN
 	/* 405E10 */ void* CListViewer_AddItem(void* param_1);
@@ -60,10 +51,10 @@ public:
 	/* 4081A0 */ uchar CListViewer_OnFocusSelectItem(int* param_1);
 	// !DECL 0x004081a0 END
 	// !DECL 0x00408330 BEGIN
-	/* 408330 */ uchar CListViewer_vDtor(uchar param_1);
+	/* 408330 */ void* CListViewer_vDtor(uchar param_1);
 	// !DECL 0x00408330 END
 	// !DECL 0x00408c00 BEGIN
-	/* 408C00 */ uchar CListViewer_BuildAt(int param_1, int param_2, uint param_3, int param_4, uint param_5, uint param_6, uint param_7);
+	/* 408C00 */ void* CListViewer_BuildAt(int param_1, int param_2, uint param_3, int param_4, int param_5, int param_6, uint param_7);
 	// !DECL 0x00408c00 END
 };
 

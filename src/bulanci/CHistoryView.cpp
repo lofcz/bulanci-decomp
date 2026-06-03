@@ -7,7 +7,7 @@ uchar CHistoryView::CHistoryView_OnEvent(short param_1, uint param_2, uint param
 
 // !FUNC 0x00422a70 BEGIN
 /* 422A70-422AC2 00052 */
-CDSChained* CHistoryView::CHistoryView_ctor(CDSChained* param_1) { STUB_BODY(); return 0; }
+void* CHistoryView::CHistoryView_ctor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00422a70 END
 
 // !FUNC 0x00422ad0 BEGIN

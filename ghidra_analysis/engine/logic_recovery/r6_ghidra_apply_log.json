@@ -1,0 +1,614 @@
+{
+  "ok": 84,
+  "fail": 3,
+  "entries": [
+    {
+      "op": "rename",
+      "addr": "0x0041af70",
+      "name": "CBulanek_StepMovementAndCollision",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0041af70 from 'FUN_0041af70' to 'CBulanek_StepMovementAndCollision'\", \"warnings\": [\"Function name 'CBulanek_StepMovementAndCollision' \\u2014 main part 'CBulanek_StepMovementAndCollision' is not PascalCase. Expected: CbulanekStepmovementandcollision\", \"Function name 'CBulanek_StepMovementAndCollision' \\u2014 main part 'CBulanek_StepMovementAndCollision' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0041a390",
+      "name": "CGaming_AddEntity",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0041a390 from 'AddEntity' to 'CGaming_AddEntity'\", \"warnings\": [\"Function name 'CGaming_AddEntity' \\u2014 main part 'CGaming_AddEntity' is not PascalCase. Expected: CgamingAddentity\", \"Function name 'CGaming_AddEntity' \\u2014 main part 'CGaming_AddEntity' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x004168c0",
+      "name": "CGaming_SetEntityRegisterMode",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x004168c0 from 'CBulanek_SetCloneFlag' to 'CGaming_SetEntityRegisterMode'\", \"warnings\": [\"Function name 'CGaming_SetEntityRegisterMode' \\u2014 main part 'CGaming_SetEntityRegisterMode' is not PascalCase. Expected: CgamingSetentityregistermode\", \"Function name 'CGaming_SetEntityRegisterMode' \\u2014 main part 'CGaming_SetEntityRegisterMode' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0041a020",
+      "name": "CGaming_OnPlayerCollectItem",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0041a020 from 'CGaming_OnPlayerCollectItem' to 'CGaming_OnPlayerCollectItem'\", \"warnings\": [\"Function name 'CGaming_OnPlayerCollectItem' \\u2014 main part 'CGaming_OnPlayerCollectItem' is not PascalCase. Expected: CgamingOnplayercollectitem\", \"Function name 'CGaming_OnPlayerCollectItem' \\u2014 main part 'CGaming_OnPlayerCollectItem' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0041be70",
+      "name": "CGaming_CreateObject",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0041be70 from 'CreateObject' to 'CGaming_CreateObject'\", \"warnings\": [\"Function name 'CGaming_CreateObject' \\u2014 main part 'CGaming_CreateObject' is not PascalCase. Expected: CgamingCreateobject\", \"Function name 'CGaming_CreateObject' \\u2014 main part 'CGaming_CreateObject' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0041b620",
+      "name": "CGaming_SeedMatchSchedulerEvents",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0041b620 from 'FUN_0041b620' to 'CGaming_SeedMatchSchedulerEvents'\", \"warnings\": [\"Function name 'CGaming_SeedMatchSchedulerEvents' \\u2014 main part 'CGaming_SeedMatchSchedulerEvents' is not PascalCase. Expected: CgamingSeedmatchschedulerevents\", \"Function name 'CGaming_SeedMatchSchedulerEvents' \\u2014 main part 'CGaming_SeedMatchSchedulerEvents' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0041bab0",
+      "name": "CGaming_EnqueuePreMatchSchedulerSlots",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0041bab0 from 'FUN_0041bab0' to 'CGaming_EnqueuePreMatchSchedulerSlots'\", \"warnings\": [\"Function name 'CGaming_EnqueuePreMatchSchedulerSlots' \\u2014 main part 'CGaming_EnqueuePreMatchSchedulerSlots' is not PascalCase. Expected: CgamingEnqueueprematchschedulerslots\", \"Function name 'CGaming_EnqueuePreMatchSchedulerSlots' \\u2014 main part 'CGaming_EnqueuePreMatchSchedulerSlots' contains underscores. Use PascalCase after the module pr"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042ae50",
+      "name": "CDSApp_DirtyRectList_UpsertRect",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042ae50 from 'FUN_0042ae50' to 'CDSApp_DirtyRectList_UpsertRect'\", \"warnings\": [\"Function name 'CDSApp_DirtyRectList_UpsertRect' \\u2014 main part 'CDSApp_DirtyRectList_UpsertRect' is not PascalCase. Expected: CdsappDirtyrectlistUpsertrect\", \"Function name 'CDSApp_DirtyRectList_UpsertRect' \\u2014 main part 'CDSApp_DirtyRectList_UpsertRect' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042ae40",
+      "name": "CDSApp_DirtyRectList_Clear",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042ae40 from 'FUN_0042ae40' to 'CDSApp_DirtyRectList_Clear'\", \"warnings\": [\"Function name 'CDSApp_DirtyRectList_Clear' \\u2014 main part 'CDSApp_DirtyRectList_Clear' is not PascalCase. Expected: CdsappDirtyrectlistClear\", \"Function name 'CDSApp_DirtyRectList_Clear' \\u2014 main part 'CDSApp_DirtyRectList_Clear' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042f7d0",
+      "name": "CDSIntrusiveNode_GetLinkNext",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042f7d0 from 'FUN_0042f7d0' to 'CDSIntrusiveNode_GetLinkNext'\", \"warnings\": [\"Function name 'CDSIntrusiveNode_GetLinkNext' \\u2014 main part 'CDSIntrusiveNode_GetLinkNext' is not PascalCase. Expected: CdsintrusivenodeGetlinknext\", \"Function name 'CDSIntrusiveNode_GetLinkNext' \\u2014 main part 'CDSIntrusiveNode_GetLinkNext' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042f7e0",
+      "name": "CDSIntrusiveNode_GetNextLinkSkipSentinel",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042f7e0 from 'FUN_0042f7e0' to 'CDSIntrusiveNode_GetNextLinkSkipSentinel'\", \"warnings\": [\"Function name 'CDSIntrusiveNode_GetNextLinkSkipSentinel' \\u2014 main part 'CDSIntrusiveNode_GetNextLinkSkipSentinel' is not PascalCase. Expected: CdsintrusivenodeGetnextlinkskipsentinel\", \"Function name 'CDSIntrusiveNode_GetNextLinkSkipSentinel' \\u2014 main part 'CDSIntrusiveNode_GetNextLinkSkipSentinel' contains underscores. Use PascalCase a"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042f620",
+      "name": "Scheduler_PushHook",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042f620 from 'Scheduler_PushHook' to 'Scheduler_PushHook'\", \"warnings\": [\"Function name 'Scheduler_PushHook' \\u2014 main part 'Scheduler_PushHook' is not PascalCase. Expected: SchedulerPushhook\", \"Function name 'Scheduler_PushHook' \\u2014 main part 'Scheduler_PushHook' contains underscores. Use PascalCase after the module prefix.\", \"Function name 'Scheduler_PushHook' does not start with a recognized verb. First word 'Scheduler_' n"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042f530",
+      "name": "CBulanci_ReleaseResourceIndexSlots",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042f530 from 'CBulanci_ReleaseResourceIndexSlots' to 'CBulanci_ReleaseResourceIndexSlots'\", \"warnings\": [\"Function name 'CBulanci_ReleaseResourceIndexSlots' \\u2014 main part 'CBulanci_ReleaseResourceIndexSlots' is not PascalCase. Expected: CbulanciReleaseresourceindexslots\", \"Function name 'CBulanci_ReleaseResourceIndexSlots' \\u2014 main part 'CBulanci_ReleaseResourceIndexSlots' contains underscores. Use PascalCase after the modul"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042f730",
+      "name": "Runtime_ReallocOrThrow",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042f730 from 'Runtime_ReallocOrThrow' to 'Runtime_ReallocOrThrow'\", \"warnings\": [\"Function name 'Runtime_ReallocOrThrow' \\u2014 main part 'Runtime_ReallocOrThrow' is not PascalCase. Expected: RuntimeReallocorthrow\", \"Function name 'Runtime_ReallocOrThrow' \\u2014 main part 'Runtime_ReallocOrThrow' contains underscores. Use PascalCase after the module prefix.\", \"Function name 'Runtime_ReallocOrThrow' does not start with a recognized"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00433200",
+      "name": "CDSRect_IntersectInPlace",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00433200 from 'FUN_00433200' to 'CDSRect_IntersectInPlace'\", \"warnings\": [\"Function name 'CDSRect_IntersectInPlace' \\u2014 main part 'CDSRect_IntersectInPlace' is not PascalCase. Expected: CdsrectIntersectinplace\", \"Function name 'CDSRect_IntersectInPlace' \\u2014 main part 'CDSRect_IntersectInPlace' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042c540",
+      "name": "CDSView_AdjustAnchoredEdge",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042c540 from 'CBulanci_AdjustAnchoredEdge' to 'CDSView_AdjustAnchoredEdge'\", \"warnings\": [\"Function name 'CDSView_AdjustAnchoredEdge' \\u2014 main part 'CDSView_AdjustAnchoredEdge' is not PascalCase. Expected: CdsviewAdjustanchorededge\", \"Function name 'CDSView_AdjustAnchoredEdge' \\u2014 main part 'CDSView_AdjustAnchoredEdge' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042c700",
+      "name": "CDSApp_RefreshInputChainHitTest",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042c700 from 'FUN_0042c700' to 'CDSApp_RefreshInputChainHitTest'\", \"warnings\": [\"Function name 'CDSApp_RefreshInputChainHitTest' \\u2014 main part 'CDSApp_RefreshInputChainHitTest' is not PascalCase. Expected: CdsappRefreshinputchainhittest\", \"Function name 'CDSApp_RefreshInputChainHitTest' \\u2014 main part 'CDSApp_RefreshInputChainHitTest' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042c880",
+      "name": "CDSView_UpdateInputChainOnMouseMove",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042c880 from 'FUN_0042c880' to 'CDSView_UpdateInputChainOnMouseMove'\", \"warnings\": [\"Function name 'CDSView_UpdateInputChainOnMouseMove' \\u2014 main part 'CDSView_UpdateInputChainOnMouseMove' is not PascalCase. Expected: CdsviewUpdateinputchainonmousemove\", \"Function name 'CDSView_UpdateInputChainOnMouseMove' \\u2014 main part 'CDSView_UpdateInputChainOnMouseMove' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042c960",
+      "name": "CDSView__Show_UpdateFocusChain",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042c960 from 'FUN_0042c960' to 'CDSView__Show_UpdateFocusChain'\", \"warnings\": [\"Function name 'CDSView__Show_UpdateFocusChain' \\u2014 main part 'CDSView__Show_UpdateFocusChain' is not PascalCase. Expected: CdsviewShowUpdatefocuschain\", \"Function name 'CDSView__Show_UpdateFocusChain' \\u2014 main part 'CDSView__Show_UpdateFocusChain' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042cc30",
+      "name": "CDSView_OffsetRectAndAdapt",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042cc30 from 'FUN_0042cc30' to 'CDSView_OffsetRectAndAdapt'\", \"warnings\": [\"Function name 'CDSView_OffsetRectAndAdapt' \\u2014 main part 'CDSView_OffsetRectAndAdapt' is not PascalCase. Expected: CdsviewOffsetrectandadapt\", \"Function name 'CDSView_OffsetRectAndAdapt' \\u2014 main part 'CDSView_OffsetRectAndAdapt' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042cbb0",
+      "name": "CScroller_OffsetChildViewRect",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042cbb0 from 'FUN_0042cbb0' to 'CScroller_OffsetChildViewRect'\", \"warnings\": [\"Function name 'CScroller_OffsetChildViewRect' \\u2014 main part 'CScroller_OffsetChildViewRect' is not PascalCase. Expected: CscrollerOffsetchildviewrect\", \"Function name 'CScroller_OffsetChildViewRect' \\u2014 main part 'CScroller_OffsetChildViewRect' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042e960",
+      "name": "ClassRegEntry_ListContains",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042e960 from 'FUN_0042e960' to 'ClassRegEntry_ListContains'\", \"warnings\": [\"Function name 'ClassRegEntry_ListContains' \\u2014 main part 'ClassRegEntry_ListContains' is not PascalCase. Expected: ClassregentryListcontains\", \"Function name 'ClassRegEntry_ListContains' \\u2014 main part 'ClassRegEntry_ListContains' contains underscores. Use PascalCase after the module prefix.\", \"Function name 'ClassRegEntry_ListContains' does not start"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042e2f0",
+      "name": "CDsString_ReadNarrowLengthPrefixedFromStream",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042e2f0 from 'FUN_0042e2f0' to 'CDsString_ReadNarrowLengthPrefixedFromStream'\", \"warnings\": [\"Function name 'CDsString_ReadNarrowLengthPrefixedFromStream' \\u2014 main part 'CDsString_ReadNarrowLengthPrefixedFromStream' is not PascalCase. Expected: CdsstringReadnarrowlengthprefixedfromstream\", \"Function name 'CDsString_ReadNarrowLengthPrefixedFromStream' \\u2014 main part 'CDsString_ReadNarrowLengthPrefixedFromStream' contains under"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042e400",
+      "name": "CDsString_WriteNarrowLengthPrefixedToStream",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042e400 from 'FUN_0042e400' to 'CDsString_WriteNarrowLengthPrefixedToStream'\", \"warnings\": [\"Function name 'CDsString_WriteNarrowLengthPrefixedToStream' \\u2014 main part 'CDsString_WriteNarrowLengthPrefixedToStream' is not PascalCase. Expected: CdsstringWritenarrowlengthprefixedtostream\", \"Function name 'CDsString_WriteNarrowLengthPrefixedToStream' \\u2014 main part 'CDsString_WriteNarrowLengthPrefixedToStream' contains underscores"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00430a70",
+      "name": "CDSEasyMemStream_GuardReadable",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00430a70 from 'FUN_00430a70' to 'CDSEasyMemStream_GuardReadable'\", \"warnings\": [\"Function name 'CDSEasyMemStream_GuardReadable' \\u2014 main part 'CDSEasyMemStream_GuardReadable' is not PascalCase. Expected: CdseasymemstreamGuardreadable\", \"Function name 'CDSEasyMemStream_GuardReadable' \\u2014 main part 'CDSEasyMemStream_GuardReadable' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00436760",
+      "name": "CPoemScroller_ClearBlitMask",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00436760 from 'FUN_00436760' to 'CPoemScroller_ClearBlitMask'\", \"warnings\": [\"Function name 'CPoemScroller_ClearBlitMask' \\u2014 main part 'CPoemScroller_ClearBlitMask' is not PascalCase. Expected: CpoemscrollerClearblitmask\", \"Function name 'CPoemScroller_ClearBlitMask' \\u2014 main part 'CPoemScroller_ClearBlitMask' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00436d90",
+      "name": "CDSImage_BindFromSurfaceDesc",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00436d90 from 'FUN_00436d90' to 'CDSImage_BindFromSurfaceDesc'\", \"warnings\": [\"Function name 'CDSImage_BindFromSurfaceDesc' \\u2014 main part 'CDSImage_BindFromSurfaceDesc' is not PascalCase. Expected: CdsimageBindfromsurfacedesc\", \"Function name 'CDSImage_BindFromSurfaceDesc' \\u2014 main part 'CDSImage_BindFromSurfaceDesc' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00429f70",
+      "name": "CGaming_SyncKeyLatchAfterModal",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00429f70 from 'CGaming_SyncKeyLatchAfterModal' to 'CGaming_SyncKeyLatchAfterModal'\", \"warnings\": [\"Function name 'CGaming_SyncKeyLatchAfterModal' \\u2014 main part 'CGaming_SyncKeyLatchAfterModal' is not PascalCase. Expected: CgamingSynckeylatchaftermodal\", \"Function name 'CGaming_SyncKeyLatchAfterModal' \\u2014 main part 'CGaming_SyncKeyLatchAfterModal' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042dab0",
+      "name": "CDsString_AssignFromMultiByte",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042dab0 from 'FUN_0042dab0' to 'CDsString_AssignFromMultiByte'\", \"warnings\": [\"Function name 'CDsString_AssignFromMultiByte' \\u2014 main part 'CDsString_AssignFromMultiByte' is not PascalCase. Expected: CdsstringAssignfrommultibyte\", \"Function name 'CDsString_AssignFromMultiByte' \\u2014 main part 'CDsString_AssignFromMultiByte' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042db60",
+      "name": "CDsString_WideToMultiByteBuffer",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042db60 from 'CDsString_AssignFromWideCapped4000' to 'CDsString_WideToMultiByteBuffer'\", \"warnings\": [\"Function name 'CDsString_WideToMultiByteBuffer' \\u2014 main part 'CDsString_WideToMultiByteBuffer' is not PascalCase. Expected: CdsstringWidetomultibytebuffer\", \"Function name 'CDsString_WideToMultiByteBuffer' \\u2014 main part 'CDsString_WideToMultiByteBuffer' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042dc50",
+      "name": "CDsString_ClearInPlace",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042dc50 from 'FUN_0042dc50' to 'CDsString_ClearInPlace'\", \"warnings\": [\"Function name 'CDsString_ClearInPlace' \\u2014 main part 'CDsString_ClearInPlace' is not PascalCase. Expected: CdsstringClearinplace\", \"Function name 'CDsString_ClearInPlace' \\u2014 main part 'CDsString_ClearInPlace' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042dec0",
+      "name": "CBulanci_SplitPathDirectoryAndBase",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042dec0 from 'FUN_0042dec0' to 'CBulanci_SplitPathDirectoryAndBase'\", \"warnings\": [\"Function name 'CBulanci_SplitPathDirectoryAndBase' \\u2014 main part 'CBulanci_SplitPathDirectoryAndBase' is not PascalCase. Expected: CbulanciSplitpathdirectoryandbase\", \"Function name 'CBulanci_SplitPathDirectoryAndBase' \\u2014 main part 'CBulanci_SplitPathDirectoryAndBase' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042dfc0",
+      "name": "CBulanci_JoinPathDirectoryAndBase",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042dfc0 from 'FUN_0042dfc0' to 'CBulanci_JoinPathDirectoryAndBase'\", \"warnings\": [\"Function name 'CBulanci_JoinPathDirectoryAndBase' \\u2014 main part 'CBulanci_JoinPathDirectoryAndBase' is not PascalCase. Expected: CbulanciJoinpathdirectoryandbase\", \"Function name 'CBulanci_JoinPathDirectoryAndBase' \\u2014 main part 'CBulanci_JoinPathDirectoryAndBase' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0042d970",
+      "name": "CBulanci_AssignTempPathWithTrailingBackslash",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042d970 from 'FUN_0042d970' to 'CBulanci_AssignTempPathWithTrailingBackslash'\", \"warnings\": [\"Function name 'CBulanci_AssignTempPathWithTrailingBackslash' \\u2014 main part 'CBulanci_AssignTempPathWithTrailingBackslash' is not PascalCase. Expected: CbulanciAssigntemppathwithtrailingbackslash\", \"Function name 'CBulanci_AssignTempPathWithTrailingBackslash' \\u2014 main part 'CBulanci_AssignTempPathWithTrailingBackslash' contains under"
+    },
+    {
+      "op": "rename",
+      "addr": "0x004680f0",
+      "name": "emit_byte_s",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x004680f0 from 'FUN_004680f0' to 'emit_byte_s'\", \"warnings\": [\"Function name 'emit_byte_s' \\u2014 main part 'emit_byte_s' is not PascalCase. Expected: EmitByteS\", \"Function name 'emit_byte_s' \\u2014 main part 'emit_byte_s' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x004681d0",
+      "name": "flush_bits_s",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x004681d0 from 'FUN_004681d0' to 'flush_bits_s'\", \"warnings\": [\"Function name 'flush_bits_s' \\u2014 main part 'flush_bits_s' is not PascalCase. Expected: FlushBitsS\", \"Function name 'flush_bits_s' \\u2014 main part 'flush_bits_s' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0041a390",
+      "cls": "CGaming",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CGaming_AddEntity into class CGaming; 'this' types as CGaming * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x004168c0",
+      "cls": "CGaming",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CGaming_SetEntityRegisterMode into class CGaming; 'this' types as CGaming * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x004184a0",
+      "cls": "CGaming",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CGaming_InsertEntityByDepth into class CGaming; 'this' types as CGaming * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0041a020",
+      "cls": "CGaming",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CGaming_OnPlayerCollectItem into class CGaming; 'this' types as CGaming * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0041a140",
+      "cls": "CGaming",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CGaming_RespawnPlayerAtSafeLocation into class CGaming; 'this' types as CGaming * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0041b500",
+      "cls": "CGaming",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed CGaming_TickAmbientAnimations in class CGaming; 'this' types as undefined (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0041bab0",
+      "cls": "CGaming",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed CGaming_EnqueuePreMatchSchedulerSlots in class CGaming; 'this' types as CGaming * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0041b620",
+      "cls": "CGaming",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed CGaming_SeedMatchSchedulerEvents in class CGaming; 'this' types as CGaming * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042f1e0",
+      "cls": "CDSUpdatedItem",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed Scheduler_GetEventSlot in class CDSUpdatedItem; 'this' types as CDSUpdatedItem * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042f210",
+      "cls": "CDSUpdatedItem",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed Scheduler_RegisterEventSlot in class CDSUpdatedItem; 'this' types as CDSUpdatedItem * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042f290",
+      "cls": "CDSUpdatedItem",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed Scheduler_SetEventLastFireMs in class CDSUpdatedItem; 'this' types as CDSUpdatedItem * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042f2d0",
+      "cls": "CDSUpdatedItem",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed Scheduler_SetEventDelayMs in class CDSUpdatedItem; 'this' types as CDSUpdatedItem * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042f300",
+      "cls": "CDSUpdatedItem",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed Scheduler_ArmSlot in class CDSUpdatedItem; 'this' types as CDSUpdatedItem * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042f330",
+      "cls": "CDSUpdatedItem",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed Scheduler_AckSlot in class CDSUpdatedItem; 'this' types as CDSUpdatedItem * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042eaa0",
+      "cls": "CDSUpdatedItem",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved Scheduler_IsSlotLive into class CDSUpdatedItem; 'this' types as CDSUpdatedItem * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042eac0",
+      "cls": "CDSUpdatedItem",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved Scheduler_FreeSlotIfLive into class CDSUpdatedItem; 'this' types as CDSUpdatedItem * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042eb00",
+      "cls": "CDSUpdatedItem",
+      "ok": true,
+      "msg": "{\"error\": \"CDSUpdatedItem_ReleaseSchedulerAndAudioBank has no implicit 'this' parameter (calling convention '__fastcall'). Set it to __thiscall with set_function_prototype, then retry.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042ebb0",
+      "cls": "CDSUpdatedItem",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved Scheduler_EnsureCapacity into class CDSUpdatedItem; 'this' types as CDSUpdatedItem * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042eb30",
+      "cls": "CDSUpdatedItem",
+      "ok": true,
+      "msg": "{\"error\": \"Scheduler_DispatchDueEvents has no implicit 'this' parameter (calling convention '__fastcall'). Set it to __thiscall with set_function_prototype, then retry.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042b5a0",
+      "cls": "CDSApp",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSApp_AddDirtyRectCoalesced into class CDSApp; 'this' types as CDSApp * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042b8a0",
+      "cls": "CDSApp",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSApp_AddDirtyRect into class CDSApp; 'this' types as CDSApp * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042bc00",
+      "cls": "CDSApp",
+      "ok": true,
+      "msg": "{\"error\": \"CDSApp_RenderFrame has no implicit 'this' parameter (calling convention '__fastcall'). Set it to __thiscall with set_function_prototype, then retry.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042bda0",
+      "cls": "CDSApp",
+      "ok": true,
+      "msg": "{\"error\": \"CDSApp_FrameBody has no implicit 'this' parameter (calling convention '__fastcall'). Set it to __thiscall with set_function_prototype, then retry.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042be60",
+      "cls": "CDSApp",
+      "ok": true,
+      "msg": "{\"error\": \"CDSApp_PumpTick has no implicit 'this' parameter (calling convention '__fastcall'). Set it to __thiscall with set_function_prototype, then retry.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042bbe0",
+      "cls": "CDSApp",
+      "ok": true,
+      "msg": "{\"error\": \"CDSApp_FlushDirtyRectsIfFlagged has no implicit 'this' parameter (calling convention '__fastcall'). Set it to __thiscall with set_function_prototype, then retry.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042c430",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSView_GetParentBounds into class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042c480",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSView_SetRect into class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042c580",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSView_ComputeAnchoredRect into class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042c770",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSApp_BroadcastSyntheticEventToChildren into class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042c7d0",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSApp_RouteSyntheticCloseEvent into class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042cae0",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSView_AdaptDisplaySize into class CDSView; 'this' types as undefined (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042cbf0",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSView::SetSize into class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042cc80",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSView::SetPosition into class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042ccf0",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed CDSView_RenderChildrenClipped in class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042cea0",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed CDSView_dtor in class CDSView; 'this' types as undefined (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042cf50",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed CDSView_OnLButtonDownAcquireFocus in class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042d1a0",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed CDSView_DoModal in class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042f880",
+      "cls": "CDSChain",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSChained_InsertBeforeAnchor into class CDSChain; 'this' types as CDSChain * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042f890",
+      "cls": "CDSChain",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSChained_UnlinkAndSpliceNode into class CDSChain; 'this' types as CDSChain * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042fa20",
+      "cls": "CDSChain",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSChained_InsertBeforeWithHeadFixup into class CDSChain; 'this' types as CDSChain * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042fa50",
+      "cls": "CDSChain",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSChained_RemoveWithHeadFixup into class CDSChain; 'this' types as CDSChain * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x00436e40",
+      "cls": "CDSImage",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved NotifyDirtyRect into class CDSImage; 'this' types as CDSImage * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x00436ef0",
+      "cls": "CDSImage",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved BroadcastFrameTimeHint into class CDSImage; 'this' types as CDSImage * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0041bf70",
+      "cls": "CWeapon",
+      "ok": true,
+      "msg": "{\"error\": \"CWeapon_HideAssociatedView has no implicit 'this' parameter (calling convention '__fastcall'). Set it to __thiscall with set_function_prototype, then retry.\"}"
+    },
+    {
+      "op": "this_type",
+      "addr": "0x00429db0",
+      "cls": "CDSApp",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed CDSApp_DispatchInputEvent in class CDSApp; 'this' types as CDSApp * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "prototype",
+      "addr": "0x0041a390",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "op": "prototype",
+      "addr": "0x0041a020",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "op": "prototype",
+      "addr": "0x0042eb30",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "op": "comment",
+      "addr": "0x0041a3a6",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0041a3a6\"}"
+    },
+    {
+      "op": "comment",
+      "addr": "0x0041b180",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0041b180\"}"
+    },
+    {
+      "op": "comment",
+      "addr": "0x0042aca0",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0042aca0\"}"
+    },
+    {
+      "op": "save_program",
+      "ok": true,
+      "msg": "{\"error\": \"Unable to lock due to active transaction\"}"
+    }
+  ]
+}

@@ -7,7 +7,7 @@ uchar CGunMouse::CGunMouse_Deactivate(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00423900 BEGIN
 /* 423900-42394F 0004F */
-void CGunMouse::CGunMouse_OnMouseMove(uint param_1, int* param_2) { STUB_BODY(); }
+void CGunMouse::CGunMouse_OnMouseMove(int param_1, int param_2) { STUB_BODY(); }
 // !FUNC 0x00423900 END
 
 // !FUNC 0x00423ac0 BEGIN
@@ -17,7 +17,7 @@ uchar CGunMouse::CGunMouse_CoordRing_Clear(int param_1) { STUB_BODY(); return 0;
 
 // !FUNC 0x00423b50 BEGIN
 /* 423B50-423BC1 00071 */
-uchar CGunMouse::CGunMouse_Activate(void* param_1) { STUB_BODY(); return 0; }
+uchar CGunMouse::CGunMouse_Activate(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423b50 END
 
 // !FUNC 0x00423bd0 BEGIN
@@ -27,12 +27,12 @@ uchar CGunMouse::CGunMouse_OnAnimTick(uint param_1, short param_2) { STUB_BODY()
 
 // !FUNC 0x00424370 BEGIN
 /* 424370-4243AB 0003B */
-uint CGunMouse::CGunMouse_CoordRing_Push(uint* param_1) { STUB_BODY(); return 0; }
+void CGunMouse::CGunMouse_CoordRing_Push(CGunMouseCoordQueue* param_1, int* param_2) { STUB_BODY(); }
 // !FUNC 0x00424370 END
 
 // !FUNC 0x004243b0 BEGIN
 /* 4243B0-4243F1 00041 */
-uint CGunMouse::CGunMouse_CoordRing_Pop(uint* param_1) { STUB_BODY(); return 0; }
+void CGunMouse::CGunMouse_CoordRing_Pop(CGunMouseCoordQueue* param_1, int* param_2) { STUB_BODY(); }
 // !FUNC 0x004243b0 END
 
 // !FUNC 0x00424610 BEGIN
@@ -42,12 +42,12 @@ void CGunMouse::CGunMouse_Draw(void* param_1) { STUB_BODY(); }
 
 // !FUNC 0x004249b0 BEGIN
 /* 4249B0-424BC0 00210 */
-void CGunMouse::CGunMouse_Erase(void* param_1) { STUB_BODY(); }
+void CGunMouse::CGunMouse_Erase(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x004249b0 END
 
 // !FUNC 0x00425730 BEGIN
 /* 425730-425846 00116 */
-void CGunMouse::CGunMouse_dtor(void* param_1) { STUB_BODY(); }
+void CGunMouse::CGunMouse_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00425730 END
 
 // !FUNC 0x00425850 BEGIN

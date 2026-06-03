@@ -27,7 +27,7 @@ public:
 	/* 4099B0 */ uint GetStreamName(uint param_1);
 	// !DECL 0x004099b0 END
 	// !DECL 0x004099d0 BEGIN
-	/* 4099D0 */ uchar CDSGZipStream_ScalarDeletingDtor_004099d0(uchar param_1);
+	/* 4099D0 */ void* CDSGZipStream_ScalarDeletingDtor_004099d0(uchar param_1);
 	// !DECL 0x004099d0 END
 	// !DECL 0x00434f90 BEGIN
 	/* 434F90 */ uchar IDSStream_UnlockRegion_ThrowUnsupported(CDSFilterStream* param_1);
@@ -45,19 +45,19 @@ public:
 	/* 435390 */ int TellPosition(uint param_1);
 	// !DECL 0x00435390 END
 	// !DECL 0x004353c0 BEGIN
-	/* 4353C0 */ uchar SeekPosition(uint param_1, uint param_2, int param_3);
+	/* 4353C0 */ uchar SeekPosition(uchar* param_1, uint param_2, int param_3);
 	// !DECL 0x004353c0 END
 	// !DECL 0x00435a20 BEGIN
 	/* 435A20 */ uchar CDSGZipStream_InitFromOpenInfo(int param_1);
 	// !DECL 0x00435a20 END
 	// !DECL 0x00435ae0 BEGIN
-	/* 435AE0 */ uchar CDSGZipStream_ctor(int param_1);
+	/* 435AE0 */ void* CDSGZipStream_ctor(int param_1);
 	// !DECL 0x00435ae0 END
 	// !DECL 0x00435b6d BEGIN
 	/* 435B6D */ uchar Catch_00435b6d();
 	// !DECL 0x00435b6d END
 	// !DECL 0x00435ba0 BEGIN
-	/* 435BA0 */ uchar CDSGZipStream_ChainedNewInstance(int param_1);
+	/* 435BA0 */ void* CDSGZipStream_ChainedNewInstance(int param_1);
 	// !DECL 0x00435ba0 END
 	// !DECL 0x0043bff0 BEGIN
 	/* 43BFF0 */ uchar IDSStream_LockRegion_ThrowUnsupported(CDSFilterStream* param_1);

@@ -5,29 +5,23 @@
 
 class CExplosion {
 public:
-	// !DECL 0x004183d0 BEGIN
-	/* 4183D0 */ int CollectEntitiesInBlastRect(uint* param_1, int param_2, char param_3);
-	// !DECL 0x004183d0 END
-	// !DECL 0x0041a2f0 BEGIN
-	/* 41A2F0 */ int CollectLandminesInBlastRect(int* param_1, int param_2);
-	// !DECL 0x0041a2f0 END
 	// !DECL 0x0041aad0 BEGIN
-	/* 41AAD0 */ uchar CExplosion_InitVtables(uchar param_1);
+	/* 41AAD0 */ uint* CExplosion_InitVtables(uint* param_1);
 	// !DECL 0x0041aad0 END
 	// !DECL 0x0041ab20 BEGIN
 	/* 41AB20 */ uchar* CExplosion_GetClassTable();
 	// !DECL 0x0041ab20 END
 	// !DECL 0x0041b250 BEGIN
-	/* 41B250 */ uint DamageAtPoint(int* param_1, int param_2, int param_3, char param_4, uchar param_5);
+	/* 41B250 */ uint CExplosion_DamageAtPoint(tagRECT* param_1, int* param_2, int param_3, char param_4, uchar param_5);
 	// !DECL 0x0041b250 END
 	// !DECL 0x0041ce30 BEGIN
-	/* 41CE30 */ void* CExplosion_Ctor(uint param_1, int param_2);
+	/* 41CE30 */ void* CExplosion_Ctor(void* param_1, uchar param_2);
 	// !DECL 0x0041ce30 END
 	// !DECL 0x0041e140 BEGIN
-	/* 41E140 */ uchar ApplyAreaDamage(void* param_1);
+	/* 41E140 */ void CExplosion_ApplyAreaDamage();
 	// !DECL 0x0041e140 END
 	// !DECL 0x0041efe0 BEGIN
-	/* 41EFE0 */ uchar OnEvent(uint param_1, short param_2);
+	/* 41EFE0 */ uchar CExplosion_OnEvent(uint param_1, short param_2);
 	// !DECL 0x0041efe0 END
 };
 

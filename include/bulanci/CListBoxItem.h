@@ -17,6 +17,10 @@ public:
 	// !DECL 0x0040b640 BEGIN
 	/* 40B640 */ void* CListBoxItem_ctor(wchar_t* param_1);
 	// !DECL 0x0040b640 END
+
+	// !DECL 0x0040b6d0 BEGIN
+	/* 40B6D0 */ void* CListBoxItem_ctorWithAssoc(wchar_t* param_1, void* param_2);
+	// !DECL 0x0040b6d0 END
 };
 
 #endif

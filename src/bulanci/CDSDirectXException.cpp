@@ -7,7 +7,7 @@ uint CDSDirectXException::CDSDirectXException_LookupStringIdForHresult(int param
 
 // !FUNC 0x0043b720 BEGIN
 /* 43B720-43B74E 0002E */
-int CDSDirectXException::FUN_0043b720(int param_1, int param_2) { STUB_BODY(); return 0; }
+int CDSDirectXException::CDSDirectXException_ResolveMessageStringId(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0043b720 END
 
 // !FUNC 0x0043b750 BEGIN
@@ -29,12 +29,12 @@ uchar* CDSDirectXException::CDSDirectXException_What(wchar_t* param_1) { STUB_BO
 
 // !FUNC 0x0043b820 BEGIN
 /* 43B820-43B8A5 00085 */
-uchar CDSDirectXException::CDSDirectXException_ThrowFromHresult(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+void CDSDirectXException::CDSDirectXException_ThrowFromHresult(uint param_1, uint param_2) { STUB_BODY(); }
 // !FUNC 0x0043b820 END
 
 // !FUNC 0x0043b8b0 BEGIN
 /* 43B8B0-43B928 00078 */
-uint* CDSDirectXException::FUN_0043b8b0() { STUB_BODY(); return 0; }
+uchar CDSDirectXException::CDSDirectXException_AllocEmpty() { STUB_BODY(); return 0; }
 // !FUNC 0x0043b8b0 END
 
 // !FUNC 0x0043b930 BEGIN

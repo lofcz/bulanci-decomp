@@ -5,14 +5,10 @@
 uint CPauseDlg::CPauseDlg_OnKeyDown(char param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ac20 END
 
-// !FUNC 0x0040ac50 BEGIN
-/* 40AC50-40AC9A 0004A */
-uchar CPauseDlg::FUN_0040ac50(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0040ac50 END
 
 // !FUNC 0x0040b2f0 BEGIN
 /* 40B2F0-40B401 00111 */
-uchar CPauseDlg::CPauseDlg_OnNotify(short param_1, char param_2, int param_3) { STUB_BODY(); return 0; }
+uchar CPauseDlg::CPauseDlg_OnNotify(short param_1, uchar param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b2f0 END
 
 // !FUNC 0x0040b410 BEGIN
@@ -31,4 +27,9 @@ uchar* CPauseDlg::CPauseDlg_GetClassTable() {
 /* 40F090-40F11D 0008D */
 uint* CPauseDlg::CPauseDlg_Allocate() { STUB_BODY(); return 0; }
 // !FUNC 0x0040f090 END
+
+// !FUNC 0x00411df0 BEGIN
+/* 411DF0-4120E6 002F6 */
+void* CPauseDlg::CPauseDlg_Build(CGame* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00411df0 END
 

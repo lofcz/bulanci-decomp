@@ -2,12 +2,12 @@
 
 // !FUNC 0x004289a0 BEGIN
 /* 4289A0-428A1E 0007E */
-void* CDSDsmFile::InitializeQueueStreamView(int param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
+void* CDSDsmFile::InitializeQueueStreamView(int param_1, uchar* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004289a0 END
 
 // !FUNC 0x00428ad0 BEGIN
-/* 428AD0-428C3D 0016D */
-uchar CDSDsmFile::HandleResourceRead(int* param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
+/* 428AD0-428C29 00159 */
+uchar CDSDsmFile::CDSDsmFile_HandleResourceRead(int* param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00428ad0 END
 
 // !FUNC 0x00428c40 BEGIN
@@ -101,7 +101,7 @@ void CDSDsmFile::HandleDestructInstance(void* param_1) { STUB_BODY(); }
 
 // !FUNC 0x00428f80 BEGIN
 /* 428F80-428FE4 00064 */
-void CDSDsmFile::HandleOpenStream(CDSFilterStream* param_1) { STUB_BODY(); }
+void CDSDsmFile::HandleOpenStream(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00428f80 END
 
 // !FUNC 0x00428ff0 BEGIN
@@ -146,12 +146,12 @@ uchar CDSDsmFile::CDSChain_AdjustThisOffset_ThisMinus38(int param_1) { STUB_BODY
 
 // !FUNC 0x00439ac0 BEGIN
 /* 439AC0-439B3A 0007A */
-CDSObject* CDSDsmFile::InitializeChildObject(void* param_1) { STUB_BODY(); return 0; }
+uchar CDSDsmFile::InitializeChildObject(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00439ac0 END
 
 // !FUNC 0x0043bde0 BEGIN
-/* 43BDE0-43BE78 00098 */
-uchar CDSDsmFile::InitializeSourceRegion(int param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
+/* 43BDE0-43BE75 00095 */
+uchar CDSDsmFile::InitializeSourceRegion(int param_1, uchar* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0043bde0 END
 
 // !FUNC 0x0043be78 BEGIN

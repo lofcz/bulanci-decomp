@@ -9,7 +9,7 @@ uchar* CDSStreamStorage::CDSStreamStorage_GetTypeInfo() {
 
 // !FUNC 0x00401860 BEGIN
 /* 401860-401868 00008 */
-uchar CDSStreamStorage::CDSStreamStorage_CloseStream(uint param_1) { STUB_BODY(); return 0; }
+uchar CDSStreamStorage::CDSStreamStorage_CloseStream(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401860 END
 
 // !FUNC 0x00401870 BEGIN
@@ -49,10 +49,6 @@ uchar CDSStreamStorage::CDSStreamStorage_DtorBody(int param_1) { STUB_BODY(); re
 uchar CDSStreamStorage::CDSStreamStorage_ReleaseChild_thunk_Sub8(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401900 END
 
-// !FUNC 0x00431170 BEGIN
-/* 431170-431205 00095 */
-int CDSStreamStorage::CDSStreamStorage_FindKeyIndex(int param_1, uchar* param_2) { STUB_BODY(); return 0; }
-// !FUNC 0x00431170 END
 
 // !FUNC 0x004339c0 BEGIN
 /* 4339C0-4339C4 00004 */
@@ -63,27 +59,27 @@ uint CDSStreamStorage::CDSStreamStorage_GetStreamCount() {
 
 // !FUNC 0x004339d0 BEGIN
 /* 4339D0-4339DD 0000D */
-uint CDSStreamStorage::CDSStreamStorage_GetStreamEntry(int param_1) { STUB_BODY(); return 0; }
+void* CDSStreamStorage::CDSStreamStorage_GetStreamEntry(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004339d0 END
 
 // !FUNC 0x00433cb0 BEGIN
 /* 433CB0-433D53 000A3 */
-uint CDSStreamStorage::CDSStreamStorage_CloseStreamByKey(uint param_1) { STUB_BODY(); return 0; }
+void* CDSStreamStorage::CDSStreamStorage_CloseStreamByKey(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433cb0 END
 
 // !FUNC 0x00433e60 BEGIN
 /* 433E60-433EFF 0009F */
-void CDSStreamStorage::CDSStreamStorage_dtor(void* param_1) { STUB_BODY(); }
+void CDSStreamStorage::CDSStreamStorage_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00433e60 END
 
 // !FUNC 0x00433f00 BEGIN
 /* 433F00-433F68 00068 */
-uint* CDSStreamStorage::FUN_00433f00(int param_1) { STUB_BODY(); return 0; }
+void* CDSStreamStorage::CDSStreamStorage_GetThreadLoaderNode() { STUB_BODY(); return 0; }
 // !FUNC 0x00433f00 END
 
 // !FUNC 0x00433f70 BEGIN
 /* 433F70-4340B8 00148 */
-void* CDSStreamStorage::FUN_00433f70(void* param_1, void* param_2) { STUB_BODY(); return 0; }
+void* CDSStreamStorage::CDSStreamStorage_AppendOrReuseStream(CDSStrmResInfo* param_1, void** param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00433f70 END
 
 // !FUNC 0x00434110 BEGIN
@@ -98,13 +94,9 @@ uchar CDSStreamStorage::CDSStreamStorage_GetStreamByIndex(int param_1, void* par
 
 // !FUNC 0x00434380 BEGIN
 /* 434380-434396 00016 */
-uint CDSStreamStorage::CDSStreamStorage_AddRefHeldObject(int param_1) { STUB_BODY(); return 0; }
+void CDSStreamStorage::CDSStreamStorage_AddRefHeldObject(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00434380 END
 
-// !FUNC 0x00434400 BEGIN
-/* 434400-434428 00028 */
-void* CDSStreamStorage::CDSResourceException_ctor(uint param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00434400 END
 
 // !FUNC 0x00434600 BEGIN
 /* 434600-434608 00008 */
@@ -113,16 +105,26 @@ uchar CDSStreamStorage::CDSChain_AdjustThisOffset_ThisMinus4(int param_1) { STUB
 
 // !FUNC 0x004346f0 BEGIN
 /* 4346F0-434758 00068 */
-uchar CDSStreamStorage::FUN_004346f0(uint param_1) { STUB_BODY(); return 0; }
+void CDSStreamStorage::CDSResourceException_ThrowFromResourceId(uint param_1) { STUB_BODY(); }
 // !FUNC 0x004346f0 END
 
 // !FUNC 0x00434760 BEGIN
 /* 434760-4348CA 0016A */
-void* CDSStreamStorage::FUN_00434760(int* param_1, uint param_2, int param_3, uint param_4, int param_5, uint param_6) { STUB_BODY(); return 0; }
+void* CDSStreamStorage::CDSStreamStorage_CreateFilterSafeStream(int* param_1, uint param_2, int param_3, uint param_4, int param_5, uint param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x00434760 END
 
 // !FUNC 0x004348ca BEGIN
 /* 4348CA-4348DD 00013 */
 uchar CDSStreamStorage::Catch_004348ca() { STUB_BODY(); return 0; }
 // !FUNC 0x004348ca END
+
+// !FUNC 0x00401790 BEGIN
+/* 401790-401841 000B1 */
+void* CDSStreamStorage::CDSStreamStorage_ctor(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00401790 END
+
+// !FUNC 0x00434160 BEGIN
+/* 434160-43420C 000AC */
+void CDSStreamStorage::CDSStreamStorage_InitRootSafeStream(int* param_1) { STUB_BODY(); }
+// !FUNC 0x00434160 END
 

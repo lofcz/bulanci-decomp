@@ -44,7 +44,7 @@ uchar CShot::CShot_ComputePelletRect(int* param_1, int* param_2, int param_3) { 
 
 // !FUNC 0x00417bd0 BEGIN
 /* 417BD0-417C71 000A1 */
-uchar CShot::CShot_Draw(uchar param_1) { STUB_BODY(); return 0; }
+void CShot::CShot_Draw() { STUB_BODY(); }
 // !FUNC 0x00417bd0 END
 
 // !FUNC 0x00418ed0 BEGIN
@@ -54,7 +54,7 @@ uchar CShot::CShot_ReleaseViaVtable_thunk_Sub88(int param_1) { STUB_BODY(); retu
 
 // !FUNC 0x00419b40 BEGIN
 /* 419B40-419C87 00147 */
-uchar CShot::FUN_00419b40(void* param_1) { STUB_BODY(); return 0; }
+uchar CShot::CShot_OnTrackTick_AdvanceFacingRect(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00419b40 END
 
 // !FUNC 0x0041a980 BEGIN
@@ -79,6 +79,11 @@ uchar CShot::CShot_Update(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041edf0 BEGIN
 /* 41EDF0-41EFAB 001BB */
-uint CShot::CShot_Ctor(uint* param_1, CGameView* param_2, uchar param_3, uchar param_4, uchar param_5, int param_6) { STUB_BODY(); return 0; }
+uchar CShot::CShot_Ctor(int* param_1, CGameView* param_2, uchar param_3, uchar param_4, uchar param_5, int param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x0041edf0 END
+
+// !FUNC 0x0041dd70 BEGIN
+/* 41DD70-41DE5C 000EC */
+uchar CShot::CShot_ResolveHit(int param_1, void* param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x0041dd70 END
 

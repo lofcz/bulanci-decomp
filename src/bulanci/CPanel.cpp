@@ -49,6 +49,6 @@ void CPanel::CPanel_Render(char param_1) { STUB_BODY(); }
 
 // !FUNC 0x00427c10 BEGIN
 /* 427C10-427C2E 0001E */
-uchar CPanel::CPanel_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CPanel::CPanel_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00427c10 END
 

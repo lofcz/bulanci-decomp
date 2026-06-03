@@ -9,7 +9,7 @@ public:
 	/* 40B770 */ uchar* CSessionItem_GetTypeDescriptor();
 	// !DECL 0x0040b770 END
 	// !DECL 0x0040e8b0 BEGIN
-	/* 40E8B0 */ void* CSessionItem_Initialize(int param_1);
+	/* 40E8B0 */ void* CSessionItem_Initialize(DPEnumSessionInfo* param_1);
 	// !DECL 0x0040e8b0 END
 };
 

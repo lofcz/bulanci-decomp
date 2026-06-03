@@ -15,13 +15,13 @@ public:
 	/* 434A30 */ uchar* CDSException_GetTypeInfo();
 	// !DECL 0x00434a30 END
 	// !DECL 0x00434a40 BEGIN
-	/* 434A40 */ uchar CDSException_InitFields(uint param_1, uint param_2, int param_3);
+	/* 434A40 */ void CDSException_InitFields(uint param_1, uint param_2, uchar param_3);
 	// !DECL 0x00434a40 END
 	// !DECL 0x00434ae0 BEGIN
 	/* 434AE0 */ void* CDSException_DtorScalar(uchar param_1);
 	// !DECL 0x00434ae0 END
 	// !DECL 0x00434b80 BEGIN
-	/* 434B80 */ wchar_t* CDSException_GetMessageW(void* param_1);
+	/* 434B80 */ wchar_t* CDSException_GetMessageW();
 	// !DECL 0x00434b80 END
 	// !DECL 0x00448a6d BEGIN
 	/* 448A6D */ uchar _purecall();

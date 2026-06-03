@@ -12,7 +12,7 @@ public:
 	/* 40AA40 */ uchar CColorSwitch_SetSelected(uchar param_1);
 	// !DECL 0x0040aa40 END
 	// !DECL 0x0040aa60 BEGIN
-	/* 40AA60 */ uchar CColorSwitch_SetSelectedFromPtr(uchar param_1);
+	/* 40AA60 */ uchar CColorSwitch_SetSelectedFromPtr(uchar* param_1);
 	// !DECL 0x0040aa60 END
 	// !DECL 0x0040b950 BEGIN
 	/* 40B950 */ uchar* CColorSwitch_GetTypeDescriptor();
@@ -39,10 +39,10 @@ public:
 	/* 40EBF0 */ uint* CColorSwitch_ctor();
 	// !DECL 0x0040ebf0 END
 	// !DECL 0x0040ec80 BEGIN
-	/* 40EC80 */ uchar CColorSwitch_vDtor(uchar param_1);
+	/* 40EC80 */ void* CColorSwitch_vDtor(uchar param_1);
 	// !DECL 0x0040ec80 END
 	// !DECL 0x004100d0 BEGIN
-	/* 4100D0 */ uchar CColorSwitch_BuildAt(uint param_1, uint param_2, uint param_3);
+	/* 4100D0 */ void* CColorSwitch_BuildAt(uint param_1, uint param_2, void* param_3);
 	// !DECL 0x004100d0 END
 };
 

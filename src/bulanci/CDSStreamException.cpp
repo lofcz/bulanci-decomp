@@ -9,17 +9,17 @@ uchar* CDSStreamException::CDSStreamException_GetClassRegistry() {
 
 // !FUNC 0x00430000 BEGIN
 /* 430000-43007E 0007E */
-uchar CDSStreamException::CDSStreamException_dtor(uint* param_1) { STUB_BODY(); return 0; }
+void CDSStreamException::CDSStreamException_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00430000 END
 
 // !FUNC 0x004300f0 BEGIN
 /* 4300F0-4301A6 000B6 */
-void* CDSStreamException::CDSStreamException_ctor(uint param_1, int* param_2) { STUB_BODY(); return 0; }
+void CDSStreamException::CDSStreamException_ctor() { STUB_BODY(); }
 // !FUNC 0x004300f0 END
 
 // !FUNC 0x004301b0 BEGIN
 /* 4301B0-430264 000B4 */
-void* CDSStreamException::CDSStreamException_ctor_win32(uint param_1, int* param_2, uint param_3) { STUB_BODY(); return 0; }
+uchar CDSStreamException::CDSStreamException_ctor_win32(uint param_1, int* param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004301b0 END
 
 // !FUNC 0x00430360 BEGIN
@@ -29,7 +29,7 @@ uchar* CDSStreamException::CDSStreamException_FormatMessage(wchar_t* param_1) { 
 
 // !FUNC 0x00430a90 BEGIN
 /* 430A90-430B11 00081 */
-uint* CDSStreamException::FUN_00430a90() { STUB_BODY(); return 0; }
+uchar CDSStreamException::CDSStreamException_AllocateDefault() { STUB_BODY(); return 0; }
 // !FUNC 0x00430a90 END
 
 // !FUNC 0x00430b20 BEGIN

@@ -9,7 +9,8 @@
 | Claim | Address | Evidence |
 |-------|---------|----------|
 | `sizeof(CGaming) == 0x36C` | `0x00413ce0` region | `CGame_StartGame` stack locals 16+860; `CGaming_dtor(local_414)` |
-| ctor | `0x00420380` | `CGaming_ctor` — MI vtables, slot array zero, `CGame*` owner @ `+0x84`, level script `OnInit` |
+| partial ctor (CreateObject) | `0x0041ab70` | `CGaming_Ctor` — `OperatorNew(0x36C)` path via `CreateObject@0x0041beb0`; MI vtables, `CDSUpdatedItem` @ `+0x68`, `apHudBitmaps[16]` @ `+0x88`, four `CDSPtrSlotVec` @ `+0x2C8..+0x2F8`; **no** level script / HUD preload / owner wiring (R6 task 08 disasm) |
+| full ctor (stack) | `0x00420380` | `CGaming_ctor` — complete shell: `CGame*` owner @ `+0x84`, level script `OnInit`, panels, audio, entity root |
 | Entity slots | `0x004168d0` / `0x00482062` | `CGaming_GetObjectAtSlotUnchecked`: `[this + slot*4 + 0xC8]`; ctor `memset` **0x200** @ `ESI+0xC8` |
 
 ## Layout table (proven offsets)
@@ -58,6 +59,7 @@
 | `+0x330` | 4 | `CBulAnim *` | `pAmbientSky` | `+0x330` + res `0x100dc` @ `0x0042035d` |
 | `+0x334` | 4 | `CPauseDlg *` | `pPauseDlg` | `OperatorNew(0x7c)` → `CPauseDlg_Build` → `MOV [ESI+0x334],EAX` @ `0x00420434` |
 | `+0x338` | 4 | `int` | `nRoundEndWait` | `CGaming_IsRoundEndTransitionComplete@0x004168e0` `[param_1+0x338]==0`; `OnCmd` `ADD [ESI+0x338],1` @ `0x0041d63b` |
+| `+0x341` | 1 | `byte` | `bEntityRegisterMode` | **R6 logic todo 6:** `MOVZX EAX,byte [ESI+0x341]` @ `CGaming_AddEntity@0x0041a3ac` branches `0/1/2`; writer `CGaming_SetEntityRegisterMode@0x004168c0` (`MOV [ECX+0x341],AL`); also `CGaming_SpawnPracticeDummy@0x0041f583` sets `1` before spawn |
 | `+0x33C` | 4 | `pointer` | `pPad_33c` | ctor zero @ `0x00420227` — no consumer located |
 | `+0x344` | 4 | `CLevelScript *` | `pLevelScript` | ctor store menu script @ `0x004202c9`; `OnResumeOrStartGame` `CallExport(...,10,...)` @ `0x0041c157`; dtor `CallExport(...,2,...)` @ `0x0041b8a0` |
 | `+0x348` | 4 | `CDSView *` | `pDepthInsertHead` | `CGaming_InsertEntityByDepth` / `AddEntity` compare-update @ `0x004184fe`, `0x0041a3e8` |
@@ -85,11 +87,15 @@
 
 | Symbol | Address |
 |--------|---------|
-| `CGaming_ctor` | `0x00420380` |
+| `CGaming_Ctor` (partial / CreateObject) | `0x0041ab70` |
+| `CGaming_ctor` (full / stack) | `0x00420380` |
 | `CGaming_GetObjectAtSlotSafe` | `0x00416810` |
 | `CGaming_GetObjectAtSlotUnchecked` | `0x004168d0` |
 | `CGaming_RegisterObjectAtSlot` | `0x00482074` |
 | `CGaming_OnSchedulerTimer` | `0x0041f050` |
+| `CGaming_OnPlayerCollectItem` | `0x0041a020` — unregister pickup, `CBulanek_NetSendTeamScoreOnCollect`, quip slot from `weaponKind` when collector `bPlayerSlot==0` (R6 logic task 10) |
+| `CGaming_TickPlayerCollisions` | `0x0041f0c0` — calls `OnPlayerCollectItem` (4 sites @ `0x0041f154`..`0x0041f1bd`) |
+| `CGaming_RespawnPlayerAtSafeLocation` | `0x0041a140` — random 800×516 placement; `SpatialQuery(p4=1,p5=0)` loop; callers include `SpawnAndInitializePlayer`, `RespawnPlayer`, `CreateRespawnTeleportPair` |
 | `CGame__SchedulerDispatch` | `0x00416030` (on **`pOwnerGame`**) |
 | `CExplosion_CollectEntitiesInBlastRect` | `0x004183d0` |
 | `CGaming_ClearAllEntities` | `0x00419d20` |

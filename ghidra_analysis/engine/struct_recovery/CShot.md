@@ -51,6 +51,7 @@
 | Symbol | Address |
 |--------|---------|
 | `CShot_Ctor` | `0x0041edf0` |
+| `CShot_SchedulerTick` | `0x0041b1d0` | Primary vtable slot 30; `Scheduler_GetEventSlot(&updatedItem,0)`; enqueue when slot `+8` bit0 clear |
 | `CShot::Update` | `0x0041df60` |
 | `CShot_Draw` | `0x00417bd0` |
 | `CShot::TraceCollision` | `0x0041de60` |

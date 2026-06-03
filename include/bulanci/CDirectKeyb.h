@@ -17,6 +17,13 @@ public:
 	// !DECL 0x00412440 BEGIN
 	/* 412440 */ void* CDirectKeyb_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00412440 END
+
+	// !DECL 0x00412160 BEGIN
+	/* 412160 */ void CDirectKeyb_PollKeyboard();
+	// !DECL 0x00412160 END
+	// !DECL 0x004121a0 BEGIN
+	/* 4121A0 */ char CDirectKeyb_GetKeyEdge(uchar param_1);
+	// !DECL 0x004121a0 END
 };
 
 #endif

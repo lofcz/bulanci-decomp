@@ -162,7 +162,7 @@ These represent core execution engines, lifecycle managers, hardware wrappers, a
 
 **Round-3 focus:** CBulanek tail rename + ctor decompiler (41–42), `CLevelScore`/`CListBoxItem` Ghidra verify (14), `CDSChain_full` sentinel (27), MCP ECX bundle (28), ~~`CDSAudioVideoPlayer` nested track (25)~~ **done** — `videoTrackManager` → `CDSVideoPlayer` @ +0x08 (R3 todo 25), gameplay dialog/`CWindow` embeds (slices 00–19).
 
-**Ghidra MCP (2026-05-30):** Structure resize and member-function `this` typing — upstream [STRUCT_RESIZE_WORKFLOW](https://github.com/bethington/ghidra-mcp/blob/main/docs/STRUCT_RESIZE_WORKFLOW.md) (`resize_struct`, `recreate_struct`, `set_function_this_type`, …).
+**Ghidra MCP:** Project guide [`engine/GHIDRA_MCP.md`](engine/GHIDRA_MCP.md) (Cursor `user-ghidra-mcp`, HTTP client, prototype/`this` rules). Upstream: [STRUCT_RESIZE_WORKFLOW](https://github.com/bethington/ghidra-mcp/blob/main/docs/STRUCT_RESIZE_WORKFLOW.md), [THIS_POINTER_TYPING](https://github.com/bethington/ghidra-mcp/blob/main/docs/THIS_POINTER_TYPING.md).
 
 | Band | ids | Priority highlights |
 |------|-----|---------------------|

@@ -39,7 +39,7 @@ uchar CRuch::CRuch_ScalarDeletingDtor_thunk_Sub10(uchar param_1) { STUB_BODY(); 
 
 // !FUNC 0x00423dc0 BEGIN
 /* 423DC0-423DDE 0001E */
-uchar CRuch::CRuch_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CRuch::CRuch_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423dc0 END
 
 // !FUNC 0x00423de0 BEGIN

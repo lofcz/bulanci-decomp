@@ -2,7 +2,7 @@
 
 // !FUNC 0x00403520 BEGIN
 /* 403520-403526 00006 */
-uchar* CBlackView::GetClassTable() {
+uchar* CBlackView::CBlackView_GetClassTable() {
     return reinterpret_cast<uchar*>(&DAT_004b3428);
 }
 // !FUNC 0x00403520 END

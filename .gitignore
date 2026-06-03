@@ -95,3 +95,5 @@ target/.rustc_info.json
 open_bulanci/web/bulanci_client.js
 open_bulanci/web/bulanci_client.wasm
 /ghidra_analysis/asset_catalog/gallery/dist
+/ghidra_analysis/build
+vc80.pdb

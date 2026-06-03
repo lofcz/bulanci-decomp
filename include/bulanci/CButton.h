@@ -44,7 +44,7 @@ public:
 	/* 4056B0 */ void CButton_Render(uchar param_1);
 	// !DECL 0x004056b0 END
 	// !DECL 0x00406670 BEGIN
-	/* 406670 */ uchar CButton_vDtor(uchar param_1);
+	/* 406670 */ void* CButton_vDtor(uchar param_1);
 	// !DECL 0x00406670 END
 	// !DECL 0x004087f0 BEGIN
 	/* 4087F0 */ uint* CButton_BuildAt(int param_1, ushort param_2, uchar param_3, uint param_4, uint param_5, uint param_6, uint* param_7);

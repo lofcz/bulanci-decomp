@@ -6,7 +6,7 @@
 class CDSFileStream {
 public:
 	// !DECL 0x00401540 BEGIN
-	/* 401540 */ uchar CDSFileStream_Ctor(int param_1, uchar* param_2);
+	/* 401540 */ void* CDSFileStream_Ctor(int param_1, uchar* param_2);
 	// !DECL 0x00401540 END
 	// !DECL 0x00401600 BEGIN
 	/* 401600 */ uchar* CDSFileStream_GetClassTable();
@@ -42,7 +42,7 @@ public:
 	/* 401740 */ uint* GetStreamName(uint* param_1);
 	// !DECL 0x00401740 END
 	// !DECL 0x00401770 BEGIN
-	/* 401770 */ uchar CDSFileStream_ScalarDeletingDtor(uchar param_1);
+	/* 401770 */ void* CDSFileStream_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00401770 END
 	// !DECL 0x00409260 BEGIN
 	/* 409260 */ uchar IDSStream_ReleaseRefcount_thunk_Sub4(int param_1);
@@ -90,7 +90,7 @@ public:
 	/* 433720 */ void FlushStream();
 	// !DECL 0x00433720 END
 	// !DECL 0x00433750 BEGIN
-	/* 433750 */ uchar CDSFileStream_Open(int param_1, DWORD param_2);
+	/* 433750 */ uchar CDSFileStream_Open(WCHAR* param_1, void* param_2);
 	// !DECL 0x00433750 END
 	// !DECL 0x004338d0 BEGIN
 	/* 4338D0 */ uchar CDSFileStream_CreateInstance(int param_1);

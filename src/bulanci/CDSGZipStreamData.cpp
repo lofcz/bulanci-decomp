@@ -14,7 +14,7 @@ uchar CDSGZipStreamData::CDSGZipStreamData_ScalarDeletingDtor_thunk_Sub4(uchar p
 
 // !FUNC 0x00434fc0 BEGIN
 /* 434FC0-435026 00066 */
-uchar CDSGZipStreamData::CDSGZipStreamData_dtor(uint* param_1) { STUB_BODY(); return 0; }
+void CDSGZipStreamData::CDSGZipStreamData_dtor(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00434fc0 END
 
 // !FUNC 0x00435030 BEGIN

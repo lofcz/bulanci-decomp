@@ -94,42 +94,42 @@ uchar CLevelScript::CLevelScript_Serialize(int* param_1) { STUB_BODY(); return 0
 
 // !FUNC 0x00416ab0 BEGIN
 /* 416AB0-416AD3 00023 */
-int CLevelScript::CLevelScriptOpExt_SetActive(int param_1) { STUB_BODY(); return 0; }
+int CLevelScript::CLevelScriptOpExt_SetActive(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416ab0 END
 
 // !FUNC 0x00416ae0 BEGIN
 /* 416AE0-416B07 00027 */
-uchar CLevelScript::CLevelScriptOpExt_SetInsertMode(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScriptOpExt_SetInsertMode(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416ae0 END
 
 // !FUNC 0x00416b10 BEGIN
 /* 416B10-416B2B 0001B */
-int* CLevelScript::CLevelScriptOpExt_HideView(int param_1) { STUB_BODY(); return 0; }
+int* CLevelScript::CLevelScriptOpExt_HideView(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416b10 END
 
 // !FUNC 0x00416b30 BEGIN
 /* 416B30-416B4B 0001B */
-int* CLevelScript::CLevelScriptOpExt_ShowView(int param_1) { STUB_BODY(); return 0; }
+int* CLevelScript::CLevelScriptOpExt_ShowView(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416b30 END
 
 // !FUNC 0x00416b50 BEGIN
 /* 416B50-416B6A 0001A */
-uchar CLevelScript::CLevelScriptOpExt_GetSlot(int param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScriptOpExt_GetSlot(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416b50 END
 
 // !FUNC 0x00416b70 BEGIN
 /* 416B70-416BA5 00035 */
-int CLevelScript::CLevelScriptOpExt_SetAnim(int param_1) { STUB_BODY(); return 0; }
+int CLevelScript::CLevelScriptOpExt_SetAnim(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416b70 END
 
 // !FUNC 0x00416bb0 BEGIN
 /* 416BB0-416BCB 0001B */
-int CLevelScript::CLevelScriptOpExt_AnimResume(int param_1) { STUB_BODY(); return 0; }
+int CLevelScript::CLevelScriptOpExt_AnimResume(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416bb0 END
 
 // !FUNC 0x00416bd0 BEGIN
 /* 416BD0-416BF7 00027 */
-int CLevelScript::CLevelScriptOpExt_SetAnimFrame(int param_1) { STUB_BODY(); return 0; }
+int CLevelScript::CLevelScriptOpExt_SetAnimFrame(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416bd0 END
 
 // !FUNC 0x00416c00 BEGIN
@@ -139,22 +139,22 @@ uint CLevelScript::CLevelScriptOpExt_RegisterTimer(CLevelScriptCtx* param_1) { S
 
 // !FUNC 0x00416c40 BEGIN
 /* 416C40-416C62 00022 */
-uint CLevelScript::CLevelScriptOpExt_TimerStop(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_TimerStop(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416c40 END
 
 // !FUNC 0x00416c70 BEGIN
 /* 416C70-416C90 00020 */
-uint CLevelScript::CLevelScriptOpExt_TimerStart(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_TimerStart(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416c70 END
 
 // !FUNC 0x00416c90 BEGIN
 /* 416C90-416CAC 0001C */
-uint CLevelScript::CLevelScriptOpExt_TimerRelease(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_TimerRelease(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416c90 END
 
 // !FUNC 0x00416cb0 BEGIN
 /* 416CB0-416CD8 00028 */
-uint CLevelScript::CLevelScriptOpExt_TimerSetData(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_TimerSetData(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416cb0 END
 
 // !FUNC 0x00416d30 BEGIN
@@ -164,12 +164,12 @@ bool CLevelScript::CLevelScriptOpExt_IsServer(int param_1) { STUB_BODY(); return
 
 // !FUNC 0x00416d50 BEGIN
 /* 416D50-416D70 00020 */
-int* CLevelScript::CLevelScriptOpExt_StrmSend(int param_1) { STUB_BODY(); return 0; }
+int* CLevelScript::CLevelScriptOpExt_StrmSend(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416d50 END
 
 // !FUNC 0x00416d70 BEGIN
 /* 416D70-416D90 00020 */
-int* CLevelScript::CLevelScriptOpExt_SetCommStrm(int param_1) { STUB_BODY(); return 0; }
+int* CLevelScript::CLevelScriptOpExt_SetCommStrm(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416d70 END
 
 // !FUNC 0x00416d90 BEGIN
@@ -179,62 +179,62 @@ char CLevelScript::CLevelScriptOpExt_IsNet(int param_1) { STUB_BODY(); return 0;
 
 // !FUNC 0x00416dc0 BEGIN
 /* 416DC0-416DF0 00030 */
-int CLevelScript::CLevelScriptOpExt_PlayAnim(int param_1) { STUB_BODY(); return 0; }
+int CLevelScript::CLevelScriptOpExt_PlayAnim(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416dc0 END
 
 // !FUNC 0x00416df0 BEGIN
 /* 416DF0-416E3A 0004A */
-uint* CLevelScript::CLevelScriptOpExt_SeekAnim(int param_1) { STUB_BODY(); return 0; }
+uint* CLevelScript::CLevelScriptOpExt_SeekAnim(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416df0 END
 
 // !FUNC 0x00416e40 BEGIN
 /* 416E40-416E80 00040 */
-CDSCollection* CLevelScript::CLevelScriptOpExt_CollResize(int param_1) { STUB_BODY(); return 0; }
+CDSCollection* CLevelScript::CLevelScriptOpExt_CollResize(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416e40 END
 
 // !FUNC 0x00416e80 BEGIN
 /* 416E80-416ED3 00053 */
-void* CLevelScript::CLevelScriptOpExt_CollRemove(int param_1) { STUB_BODY(); return 0; }
+void* CLevelScript::CLevelScriptOpExt_CollRemove(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416e80 END
 
 // !FUNC 0x00416ee0 BEGIN
 /* 416EE0-416EF9 00019 */
-uint CLevelScript::CLevelScriptOpExt_FreeObject(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_FreeObject(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416ee0 END
 
 // !FUNC 0x00416f00 BEGIN
 /* 416F00-416F23 00023 */
-int CLevelScript::CLevelScriptOpExt_EnableFireThrough(int param_1) { STUB_BODY(); return 0; }
+int CLevelScript::CLevelScriptOpExt_EnableFireThrough(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00416f00 END
 
 // !FUNC 0x00418770 BEGIN
 /* 418770-418798 00028 */
-int CLevelScript::CLevelScriptOpExt_BindToSlot(int param_1) { STUB_BODY(); return 0; }
+int CLevelScript::CLevelScriptOpExt_BindToSlot(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418770 END
 
 // !FUNC 0x004187a0 BEGIN
 /* 4187A0-4187F9 00059 */
-int CLevelScript::CLevelScriptOpExt_SetObstacleBounds(int param_1) { STUB_BODY(); return 0; }
+int CLevelScript::CLevelScriptOpExt_SetObstacleBounds(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004187a0 END
 
 // !FUNC 0x00418800 BEGIN
 /* 418800-4188A1 000A1 */
-CObstacle* CLevelScript::CLevelScriptOpExt_CreateObstacle(int param_1) { STUB_BODY(); return 0; }
+CObstacle* CLevelScript::CLevelScriptOpExt_CreateObstacle(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418800 END
 
 // !FUNC 0x004188b0 BEGIN
 /* 4188B0-4188D4 00024 */
-uchar CLevelScript::CLevelScriptOpExt_ResortDepth(int param_1) { STUB_BODY(); return 0; }
+void* CLevelScript::CLevelScriptOpExt_ResortDepth(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004188b0 END
 
 // !FUNC 0x004188e0 BEGIN
 /* 4188E0-418913 00033 */
-uchar CLevelScript::CLevelScriptOpExt_TranslateTo(int param_1) { STUB_BODY(); return 0; }
+CBulanek* CLevelScript::CLevelScriptOpExt_TranslateTo(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004188e0 END
 
 // !FUNC 0x00418920 BEGIN
 /* 418920-418942 00022 */
-uint CLevelScript::CLevelScriptOpExt_EvalSeq3(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_EvalSeq3(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418920 END
 
 // !FUNC 0x00418950 BEGIN
@@ -244,22 +244,22 @@ uint CLevelScript::CLevelScriptOpExt_SpawnAtView(void* param_1) { STUB_BODY(); r
 
 // !FUNC 0x00418980 BEGIN
 /* 418980-4189A8 00028 */
-int CLevelScript::CLevelScriptOpExt_SetAnimDirection(int param_1) { STUB_BODY(); return 0; }
+int CLevelScript::CLevelScriptOpExt_SetAnimDirection(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418980 END
 
 // !FUNC 0x004189b0 BEGIN
 /* 4189B0-4189DE 0002E */
-uint CLevelScript::CLevelScriptOpExt_MapSet(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_MapSet(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004189b0 END
 
 // !FUNC 0x004189e0 BEGIN
 /* 4189E0-4189FD 0001D */
-uint CLevelScript::CLevelScriptOpExt_MapGet(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_MapGet(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004189e0 END
 
 // !FUNC 0x00418a00 BEGIN
 /* 418A00-418A48 00048 */
-bool CLevelScript::CLevelScriptOpExt_IsViewKind(int param_1) { STUB_BODY(); return 0; }
+bool CLevelScript::CLevelScriptOpExt_IsViewKind(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418a00 END
 
 // !FUNC 0x00418a50 BEGIN
@@ -269,22 +269,22 @@ uint* CLevelScript::CLevelScriptOpExt_NewCollection() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00418a90 BEGIN
 /* 418A90-418AA2 00012 */
-uint CLevelScript::CLevelScriptOpExt_GetField0C(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_GetField0C(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418a90 END
 
 // !FUNC 0x00418ab0 BEGIN
 /* 418AB0-418AD8 00028 */
-uint CLevelScript::CLevelScriptOpExt_ArrayGet(int param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_ArrayGet(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418ab0 END
 
 // !FUNC 0x00418ae0 BEGIN
 /* 418AE0-418B16 00036 */
-int CLevelScript::CLevelScriptOpExt_ArraySet(int param_1) { STUB_BODY(); return 0; }
+int CLevelScript::CLevelScriptOpExt_ArraySet(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418ae0 END
 
 // !FUNC 0x00418b20 BEGIN
 /* 418B20-418B60 00040 */
-void* CLevelScript::CLevelScriptOpExt_CollInsert(CDSScript* param_1) { STUB_BODY(); return 0; }
+void* CLevelScript::CLevelScriptOpExt_CollInsert(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00418b20 END
 
 // !FUNC 0x00418b60 BEGIN
@@ -294,12 +294,12 @@ uchar CLevelScript::CLevelScriptOpExt_GetImage(int param_1) { STUB_BODY(); retur
 
 // !FUNC 0x0041a470 BEGIN
 /* 41A470-41A493 00023 */
-void* CLevelScript::CLevelScriptOpExt_SetOrderAxis(int param_1) { STUB_BODY(); return 0; }
+void* CLevelScript::CLevelScriptOpExt_SetOrderAxis(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a470 END
 
 // !FUNC 0x0041a4a0 BEGIN
 /* 41A4A0-41A4C5 00025 */
-uchar CLevelScript::CLevelScriptOpExt_InsertView(int param_1) { STUB_BODY(); return 0; }
+void* CLevelScript::CLevelScriptOpExt_InsertView(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a4a0 END
 
 // !FUNC 0x0041a4d0 BEGIN
@@ -314,7 +314,7 @@ uint CLevelScript::CLevelScriptOpExt_SetMusic(int param_1) { STUB_BODY(); return
 
 // !FUNC 0x0041bb30 BEGIN
 /* 41BB30-41BB75 00045 */
-uint CLevelScript::CLevelScriptOpExt_DefineDangerZone(CDSScript* param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_DefineDangerZone(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bb30 END
 
 // !FUNC 0x0041bb80 BEGIN
@@ -325,27 +325,27 @@ uint CLevelScript::CLevelScriptOpExt_DefineTraceArea(void* param_1) { STUB_BODY(
 
 // !FUNC 0x0041d820 BEGIN
 /* 41D820-41D8E9 000C9 */
-CGameView* CLevelScript::CLevelScriptOpExt_CreateImage(int param_1) { STUB_BODY(); return 0; }
+CGameView* CLevelScript::CLevelScriptOpExt_CreateImage(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041d820 END
 
 // !FUNC 0x0041d8f0 BEGIN
 /* 41D8F0-41D988 00098 */
-uint CLevelScript::CLevelScriptOpExt_LoadPreface(CDSScript* param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_LoadPreface(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041d8f0 END
 
 // !FUNC 0x0041d990 BEGIN
 /* 41D990-41DA42 000B2 */
-int CLevelScript::CLevelScriptOpExt_SetViewImage(int param_1) { STUB_BODY(); return 0; }
+int CLevelScript::CLevelScriptOpExt_SetViewImage(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041d990 END
 
 // !FUNC 0x0041da50 BEGIN
 /* 41DA50-41DADE 0008E */
-CMina* CLevelScript::CLevelScriptOpExt_CreateMine(void* param_1) { STUB_BODY(); return 0; }
+uchar CLevelScript::CLevelScriptOpExt_CreateMine(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041da50 END
 
 // !FUNC 0x0041e3e0 BEGIN
 /* 41E3E0-41E42D 0004D */
-uint CLevelScript::CLevelScriptOpExt_KillObject(CDSScript* param_1) { STUB_BODY(); return 0; }
+uint CLevelScript::CLevelScriptOpExt_KillObject(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041e3e0 END
 
 // !FUNC 0x0041e430 BEGIN

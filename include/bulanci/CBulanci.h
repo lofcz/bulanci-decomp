@@ -26,16 +26,13 @@ public:
 	/* 4013B0 */ uchar CBulanci_DirEnumCtx_ctor(int param_1);
 	// !DECL 0x004013b0 END
 	// !DECL 0x004014b0 BEGIN
-	/* 4014B0 */ uchar FUN_004014b0(uchar param_1);
+	/* 4014B0 */ short** CBulanci_DirEnumCtx_FormatCurrentPath(short** param_1);
 	// !DECL 0x004014b0 END
-	// !DECL 0x00401790 BEGIN
-	/* 401790 */ uchar CDSStreamStorage_ctor(int* param_1);
-	// !DECL 0x00401790 END
 	// !DECL 0x00401970 BEGIN
-	/* 401970 */ void CBulanci_SetCmdLine(void* param_1);
+	/* 401970 */ void CBulanci_SetCmdLine(uchar param_1, void* param_2);
 	// !DECL 0x00401970 END
 	// !DECL 0x00401be0 BEGIN
-	/* 401BE0 */ void CBulanci_StartGameAndShowPostMatchScore(void* param_1);
+	/* 401BE0 */ void CBulanci_StartGameAndShowPostMatchScore(uchar param_1);
 	// !DECL 0x00401be0 END
 	// !DECL 0x00401c30 BEGIN
 	/* 401C30 */ uchar* Catch_00401c30();
@@ -44,19 +41,19 @@ public:
 	/* 401C59 */ bool CBulanci_ShowPostMatchScoreModal();
 	// !DECL 0x00401c59 END
 	// !DECL 0x00401d80 BEGIN
-	/* 401D80 */ uchar CBulanci_OpenPackStream(int param_1, int param_2);
+	/* 401D80 */ CDSStreamStorage* CBulanci_OpenPackStream(void* param_1, void* param_2);
 	// !DECL 0x00401d80 END
 	// !DECL 0x0040214f BEGIN
 	/* 40214F */ uint Catch_0040214f();
 	// !DECL 0x0040214f END
 	// !DECL 0x00402180 BEGIN
-	/* 402180 */ void CBulanci_InitResourceBank(void* param_1);
+	/* 402180 */ void CBulanci_InitResourceBank(uchar param_1);
 	// !DECL 0x00402180 END
 	// !DECL 0x00402490 BEGIN
 	/* 402490 */ uchar CBulanci_OnEvent_MenuStateMachine(ushort param_1, uint param_2);
 	// !DECL 0x00402490 END
 	// !DECL 0x004026f0 BEGIN
-	/* 4026F0 */ uchar CBulanci_ctor(uchar param_1);
+	/* 4026F0 */ void* CBulanci_ctor(void* param_1);
 	// !DECL 0x004026f0 END
 	// !DECL 0x00402830 BEGIN
 	/* 402830 */ uchar* CBulanci_GetAppDescriptor();
@@ -83,19 +80,19 @@ public:
 	/* 4028A0 */ uint CDSView_HitTest(int* param_1);
 	// !DECL 0x004028a0 END
 	// !DECL 0x004028d0 BEGIN
-	/* 4028D0 */ uchar FUN_004028d0(uint* param_1);
+	/* 4028D0 */ void CBulanci_DestroyEmbedFields();
 	// !DECL 0x004028d0 END
 	// !DECL 0x00402990 BEGIN
-	/* 402990 */ CDSAudioBank* CBulanci_BuildBitmapCache(int param_1, int param_2, int* param_3);
+	/* 402990 */ CDSPtrSlotVec* CBulanci_BuildBitmapCache(int param_1, int param_2, int* param_3);
 	// !DECL 0x00402990 END
 	// !DECL 0x00402b00 BEGIN
 	/* 402B00 */ uchar CBulanci_DtorScalar(uchar param_1);
 	// !DECL 0x00402b00 END
 	// !DECL 0x00402b20 BEGIN
-	/* 402B20 */ uchar CBulanci_OnCreate(uchar param_1);
+	/* 402B20 */ uchar CBulanci_OnCreate(uint param_1);
 	// !DECL 0x00402b20 END
 	// !DECL 0x00402bc0 BEGIN
-	/* 402BC0 */ uchar FUN_00402bc0(CDSAudioBank* param_1);
+	/* 402BC0 */ uchar CBulanci_ReleaseAudioBank(CDSPtrSlotVec* param_1);
 	// !DECL 0x00402bc0 END
 	// !DECL 0x00402c30 BEGIN
 	/* 402C30 */ uchar CBulanci_dtor(uchar param_1);
@@ -115,20 +112,11 @@ public:
 	// !DECL 0x004049d0 BEGIN
 	/* 4049D0 */ uchar CDSChain_AdjustThisOffset_ThisMinus14(int param_1);
 	// !DECL 0x004049d0 END
-	// !DECL 0x00409080 BEGIN
-	/* 409080 */ uint FUN_00409080(int param_1);
-	// !DECL 0x00409080 END
-	// !DECL 0x00409620 BEGIN
-	/* 409620 */ void CLevelScore_InitializeDefaultScores(void* param_1);
-	// !DECL 0x00409620 END
 	// !DECL 0x004096d0 BEGIN
-	/* 4096D0 */ uchar FUN_004096d0(void* param_1, int* param_2, int* param_3, uint* param_4, char param_5);
+	/* 4096D0 */ void CScore_AllocStaticTextAt(CScoreItem* param_1, int* param_2, int* param_3, uint* param_4, char param_5, char param_6);
 	// !DECL 0x004096d0 END
-	// !DECL 0x00409b10 BEGIN
-	/* 409B10 */ uint* CLevelScore_AddPlayerScore(uint* param_1, uint param_2, uint param_3);
-	// !DECL 0x00409b10 END
 	// !DECL 0x00409bc0 BEGIN
-	/* 409BC0 */ uchar FUN_00409bc0(void* param_1, int* param_2, int* param_3, uint param_4, char param_5);
+	/* 409BC0 */ void CScore_RenderHighScoreRow(CScoreItem* param_1, int* param_2, int* param_3, char* param_4, char param_5);
 	// !DECL 0x00409bc0 END
 	// !DECL 0x00409cd0 BEGIN
 	/* 409CD0 */ void SaveConfigToRegistry(CBulanciConfigStore* param_1);
@@ -137,32 +125,20 @@ public:
 	/* 409F0D */ uint Catch_00409f0d();
 	// !DECL 0x00409f0d END
 	// !DECL 0x00409f60 BEGIN
-	/* 409F60 */ void CBulanci_EnumerateLevelScripts(void* param_1);
+	/* 409F60 */ void CBulanci_EnumerateLevelScripts(CDSChain_full* param_1, CDSStreamStorage* param_2);
 	// !DECL 0x00409f60 END
 	// !DECL 0x0040a0b0 BEGIN
-	/* 40A0B0 */ uchar FUN_0040a0b0(int param_1);
+	/* 40A0B0 */ void CBulanci_BuildLevelResourceTable(CDSChain_full* param_1);
 	// !DECL 0x0040a0b0 END
 	// !DECL 0x0040a290 BEGIN
 	/* 40A290 */ void CBulanci_InstallFactoryDefaults(uchar* param_1);
 	// !DECL 0x0040a290 END
-	// !DECL 0x0040ab90 BEGIN
-	/* 40AB90 */ uchar FUN_0040ab90(uint param_1, uint param_2);
-	// !DECL 0x0040ab90 END
 	// !DECL 0x0040abc0 BEGIN
 	/* 40ABC0 */ uchar CLoadingLevel_SetProgress(uint param_1, uint param_2);
 	// !DECL 0x0040abc0 END
-	// !DECL 0x004101d0 BEGIN
-	/* 4101D0 */ uchar CBulPicture_ctor(uint param_1, uint param_2, uint param_3, uint param_4);
-	// !DECL 0x004101d0 END
 	// !DECL 0x00410e20 BEGIN
-	/* 410E20 */ CGameCounter* CGameCounterCtor(CGameCounter* param_1);
+	/* 410E20 */ uchar CGameCounterCtor(uchar param_1);
 	// !DECL 0x00410e20 END
-	// !DECL 0x00411010 BEGIN
-	/* 411010 */ void* CScoreCtor(CGame* param_1);
-	// !DECL 0x00411010 END
-	// !DECL 0x00411df0 BEGIN
-	/* 411DF0 */ uchar CPauseDlg_Build(uint param_1);
-	// !DECL 0x00411df0 END
 	// !DECL 0x00412680 BEGIN
 	/* 412680 */ int CGameGetPlayerScoreForMode(uchar param_1);
 	// !DECL 0x00412680 END
@@ -170,32 +146,20 @@ public:
 	/* 4126E0 */ int CGameGetPlayerScoreForRanking(uchar param_1);
 	// !DECL 0x004126e0 END
 	// !DECL 0x00413940 BEGIN
-	/* 413940 */ uint CGame_FindLevelScoreInChain(CGame* param_1);
+	/* 413940 */ uint CGame_FindLevelScoreInChain(uchar param_1);
 	// !DECL 0x00413940 END
-	// !DECL 0x00413ce0 BEGIN
-	/* 413CE0 */ void CGame_StartGame(CMenu* param_1);
-	// !DECL 0x00413ce0 END
 	// !DECL 0x0041408a BEGIN
 	/* 41408A */ uchar Catch_0041408a();
 	// !DECL 0x0041408a END
-	// !DECL 0x00414280 BEGIN
-	/* 414280 */ void CGame_GetOrCreateLevelScore(CGame* param_1);
-	// !DECL 0x00414280 END
 	// !DECL 0x00416770 BEGIN
 	/* 416770 */ uchar CDSView_OnMouseStub();
 	// !DECL 0x00416770 END
 	// !DECL 0x00416a70 BEGIN
-	/* 416A70 */ uchar CBulanci_CopyNetSessionFields(uint param_1, uint param_2);
+	/* 416A70 */ uchar CBulanci_CopyNetSessionFields(uint param_1, CDSDirectPlay* param_2);
 	// !DECL 0x00416a70 END
-	// !DECL 0x00417c80 BEGIN
-	/* 417C80 */ uchar FUN_00417c80(int param_1);
-	// !DECL 0x00417c80 END
 	// !DECL 0x0041b390 BEGIN
-	/* 41B390 */ uchar CBulanci_RegisterPlayerAndRespawn(uchar param_1);
+	/* 41B390 */ uchar CBulanci_RegisterPlayerAndRespawn(CBulanek* param_1);
 	// !DECL 0x0041b390 END
-	// !DECL 0x0041b6d0 BEGIN
-	/* 41B6D0 */ uchar CGaming_LoadBackgroundMusic(uchar param_1);
-	// !DECL 0x0041b6d0 END
 	// !DECL 0x0041b821 BEGIN
 	/* 41B821 */ uchar Catch_0041b821();
 	// !DECL 0x0041b821 END
@@ -203,7 +167,7 @@ public:
 	/* 41CFB0 */ uchar CBulanci_AllocAnimFromSprite(uint* param_1, uint param_2, char param_3);
 	// !DECL 0x0041cfb0 END
 	// !DECL 0x0041d2e0 BEGIN
-	/* 41D2E0 */ void CGaming_LoadLevelAssetAndMusic(CGaming* param_1);
+	/* 41D2E0 */ void CGaming_LoadLevelAssetAndMusic(uchar param_1);
 	// !DECL 0x0041d2e0 END
 	// !DECL 0x0041d580 BEGIN
 	/* 41D580 */ uchar Catch_0041d580();
@@ -211,14 +175,11 @@ public:
 	// !DECL 0x0041d59d BEGIN
 	/* 41D59D */ uint Catch_0041d59d();
 	// !DECL 0x0041d59d END
-	// !DECL 0x0041ff90 BEGIN
-	/* 41FF90 */ CGaming* CGaming_ctor(void* param_1);
-	// !DECL 0x0041ff90 END
 	// !DECL 0x00420455 BEGIN
 	/* 420455 */ uchar Catch_00420455();
 	// !DECL 0x00420455 END
 	// !DECL 0x00422550 BEGIN
-	/* 422550 */ static void* CDSAudioPlayer_CreateFromResource(uchar* param_1, uint param_2, int param_3, uint param_4, char param_5);
+	/* 422550 */ static void* CDSAudioPlayer_CreateFromResource(uchar* param_1, uint param_2, int param_3, void* param_4, char param_5);
 	// !DECL 0x00422550 END
 	// !DECL 0x00423ea0 BEGIN
 	/* 423EA0 */ uchar CRuch_EnableDisable(char param_1);
@@ -226,27 +187,18 @@ public:
 	// !DECL 0x00423f70 BEGIN
 	/* 423F70 */ uchar CMenu_EnableAllRuch(char param_1);
 	// !DECL 0x00423f70 END
-	// !DECL 0x00424bc0 BEGIN
-	/* 424BC0 */ void* CSwitch_ctor(uint param_1, uint param_2, uchar param_3, ushort param_4);
-	// !DECL 0x00424bc0 END
 	// !DECL 0x004252a0 BEGIN
 	/* 4252A0 */ void CMenu_LoadBackgroundMusic(uint param_1);
 	// !DECL 0x004252a0 END
 	// !DECL 0x004252f0 BEGIN
-	/* 4252F0 */ uchar CMenu_SetDayNightBg(uchar param_1);
+	/* 4252F0 */ uchar CMenu_SetDayNightBg(char param_1);
 	// !DECL 0x004252f0 END
 	// !DECL 0x00425400 BEGIN
 	/* 425400 */ uchar CMenu_PollDayNight(char param_1);
 	// !DECL 0x00425400 END
-	// !DECL 0x004265e0 BEGIN
-	/* 4265E0 */ CMenu* CMenu_ctor_with_ui(uint param_1, uchar param_2);
-	// !DECL 0x004265e0 END
 	// !DECL 0x00427100 BEGIN
 	/* 427100 */ void CNumCounter_SetValue(uint param_1, char param_2);
 	// !DECL 0x00427100 END
-	// !DECL 0x00427d40 BEGIN
-	/* 427D40 */ void* CSpellsCtor(int param_1, int param_2);
-	// !DECL 0x00427d40 END
 	// !DECL 0x00427e30 BEGIN
 	/* 427E30 */ CShotCounter* CShotCounterCtor(int param_1, uint param_2);
 	// !DECL 0x00427e30 END
@@ -260,13 +212,13 @@ public:
 	/* 429990 */ uchar CDSApp_InitDirectDraw(uint param_1);
 	// !DECL 0x00429990 END
 	// !DECL 0x00429a40 BEGIN
-	/* 429A40 */ uchar FUN_00429a40(int param_1);
+	/* 429A40 */ uchar CDSApp_ReleaseBackBufferAndSurface(int param_1);
 	// !DECL 0x00429a40 END
 	// !DECL 0x00429a80 BEGIN
-	/* 429A80 */ uchar FUN_00429a80(int param_1);
+	/* 429A80 */ uchar CDSApp_RefreshBlitDestRect(int param_1);
 	// !DECL 0x00429a80 END
 	// !DECL 0x00429af0 BEGIN
-	/* 429AF0 */ int FUN_00429af0(int param_1, int param_2, int param_3);
+	/* 429AF0 */ int CDSApp_CreateDirectInputDevice(int param_1, int param_2, int param_3);
 	// !DECL 0x00429af0 END
 	// !DECL 0x00429b90 BEGIN
 	/* 429B90 */ uchar CBulanci_ReleasePrimarySurface(int param_1);
@@ -284,10 +236,10 @@ public:
 	/* 42A000 */ uint CDSView_OnKeyDown(char param_1, char param_2);
 	// !DECL 0x0042a000 END
 	// !DECL 0x0042a1c0 BEGIN
-	/* 42A1C0 */ uchar CBulanci_RebuildBackBufferSurface(CDSBackBuffer* param_1);
+	/* 42A1C0 */ uchar CBulanci_RebuildBackBufferSurface(uchar param_1);
 	// !DECL 0x0042a1c0 END
 	// !DECL 0x0042a330 BEGIN
-	/* 42A330 */ uchar FUN_0042a330(int* param_1, int param_2, int param_3, int* param_4);
+	/* 42A330 */ uchar CBulanci_ResizeClientAndDisplayMode(int* param_1, int param_2, int param_3, int* param_4);
 	// !DECL 0x0042a330 END
 	// !DECL 0x0042a500 BEGIN
 	/* 42A500 */ uchar CDSApp_SetWindowed(uchar param_1);
@@ -298,20 +250,17 @@ public:
 	// !DECL 0x0042a660 BEGIN
 	/* 42A660 */ uint CDSApp_WndProcDispatch(uint param_1, ushort param_2, uint param_3);
 	// !DECL 0x0042a660 END
-	// !DECL 0x0042b170 BEGIN
-	/* 42B170 */ uchar CDSApp_ctor(short* param_1, short* param_2);
-	// !DECL 0x0042b170 END
 	// !DECL 0x0042b39b BEGIN
 	/* 42B39B */ uchar* Catch_0042b39b();
 	// !DECL 0x0042b39b END
 	// !DECL 0x0042b3ae BEGIN
-	/* 42B3AE */ uchar FUN_0042b3ae();
+	/* 42B3AE */ uchar CDSApp_ctor_UnwindEpilogue();
 	// !DECL 0x0042b3ae END
 	// !DECL 0x0042b8c0 BEGIN
 	/* 42B8C0 */ uchar CBulanci_BlitAnimFrameToView(int* param_1);
 	// !DECL 0x0042b8c0 END
 	// !DECL 0x0042bd70 BEGIN
-	/* 42BD70 */ uchar CDSView_Invalidate(uchar param_1, char param_2);
+	/* 42BD70 */ uchar CDSView_Invalidate(int* param_1, char param_2);
 	// !DECL 0x0042bd70 END
 	// !DECL 0x0042be90 BEGIN
 	/* 42BE90 */ uchar CBulanci_PollEventsAndRunFrame(uchar param_1);
@@ -323,7 +272,7 @@ public:
 	/* 42C100 */ uint CDSView_OnChar(int param_1);
 	// !DECL 0x0042c100 END
 	// !DECL 0x0042c2e0 BEGIN
-	/* 42C2E0 */ int CDSView_GetDataSize(void* param_1);
+	/* 42C2E0 */ int CDSView_GetDataSize(uchar param_1);
 	// !DECL 0x0042c2e0 END
 	// !DECL 0x0042c320 BEGIN
 	/* 42C320 */ void CDSView_SaveData(int param_1);
@@ -334,32 +283,17 @@ public:
 	// !DECL 0x0042c3e0 BEGIN
 	/* 42C3E0 */ uint CDSView_IsModalDoneRecursive(uint param_1);
 	// !DECL 0x0042c3e0 END
-	// !DECL 0x0042c430 BEGIN
-	/* 42C430 */ void CDSView_GetParentBounds(uint* param_1, int* param_2);
-	// !DECL 0x0042c430 END
-	// !DECL 0x0042c480 BEGIN
-	/* 42C480 */ uchar CDSView_SetRect(int* param_1);
-	// !DECL 0x0042c480 END
 	// !DECL 0x0042c540 BEGIN
-	/* 42C540 */ uchar CBulanci_AdjustAnchoredEdge(int* param_1, int param_2, int param_3);
+	/* 42C540 */ uchar CDSView_AdjustAnchoredEdge(int* param_1, int param_2, int param_3);
 	// !DECL 0x0042c540 END
-	// !DECL 0x0042c580 BEGIN
-	/* 42C580 */ void CDSView_ComputeAnchoredRect(int* param_1, int* param_2);
-	// !DECL 0x0042c580 END
-	// !DECL 0x0042c770 BEGIN
-	/* 42C770 */ uchar CDSApp_BroadcastSyntheticEventToChildren(ushort param_1, uint param_2, uint param_3);
-	// !DECL 0x0042c770 END
-	// !DECL 0x0042cae0 BEGIN
-	/* 42CAE0 */ uint CDSView_AdaptDisplaySize(void* param_1);
-	// !DECL 0x0042cae0 END
 	// !DECL 0x0042d310 BEGIN
-	/* 42D310 */ static uint CBulanci_NormalizePathForExistenceCheck(int param_1);
+	/* 42D310 */ static uint CBulanci_NormalizePathForExistenceCheck(WCHAR* param_1);
 	// !DECL 0x0042d310 END
 	// !DECL 0x0042d330 BEGIN
-	/* 42D330 */ static uint CBulanci_GetPathSuffixCompareIndex(int param_1);
+	/* 42D330 */ static uint CBulanci_GetPathSuffixCompareIndex(WCHAR* param_1);
 	// !DECL 0x0042d330 END
 	// !DECL 0x0042d3f0 BEGIN
-	/* 42D3F0 */ int CBulanci_CompareWideString(ushort* param_1);
+	/* 42D3F0 */ static int CDsString_CompareHandles(void* param_1);
 	// !DECL 0x0042d3f0 END
 	// !DECL 0x0042d510 BEGIN
 	/* 42D510 */ uchar CDsStringAssignFromLiteral(short* param_1);
@@ -371,13 +305,13 @@ public:
 	/* 42D7F0 */ uint* CDsString_SubstringWide(uint* param_1, int param_2, int param_3);
 	// !DECL 0x0042d7f0 END
 	// !DECL 0x0042d8c0 BEGIN
-	/* 42D8C0 */ uchar FUN_0042d8c0(DWORD param_1);
+	/* 42D8C0 */ CDSFileStream* CBulanci_CreateCDSFileStream(void* param_1);
 	// !DECL 0x0042d8c0 END
 	// !DECL 0x0042d970 BEGIN
-	/* 42D970 */ static uchar FUN_0042d970(uchar param_1);
+	/* 42D970 */ static uchar CBulanci_AssignTempPathWithTrailingBackslash(uchar param_1);
 	// !DECL 0x0042d970 END
 	// !DECL 0x0042dab0 BEGIN
-	/* 42DAB0 */ uchar FUN_0042dab0(int param_1, int param_2);
+	/* 42DAB0 */ uchar CDsString_AssignFromMultiByte(CHAR* param_1, int param_2);
 	// !DECL 0x0042dab0 END
 	// !DECL 0x0042dc30 BEGIN
 	/* 42DC30 */ int* CBulanci_WideStringToLowerInPlace(int* param_1);
@@ -386,10 +320,10 @@ public:
 	/* 42DC70 */ uchar CDsString_SplitPathBackslashDot(uchar param_1, void* param_2, int* param_3);
 	// !DECL 0x0042dc70 END
 	// !DECL 0x0042dec0 BEGIN
-	/* 42DEC0 */ uchar FUN_0042dec0(int* param_1, void* param_2);
+	/* 42DEC0 */ uchar CBulanci_SplitPathDirectoryAndBase(int* param_1, void* param_2);
 	// !DECL 0x0042dec0 END
 	// !DECL 0x0042dfc0 BEGIN
-	/* 42DFC0 */ void* FUN_0042dfc0(short* param_1, short* param_2);
+	/* 42DFC0 */ void* CBulanci_JoinPathDirectoryAndBase(short* param_1, short* param_2);
 	// !DECL 0x0042dfc0 END
 	// !DECL 0x0042e0e0 BEGIN
 	/* 42E0E0 */ int* CBulanci_GetPathBasename(int* param_1);
@@ -398,10 +332,10 @@ public:
 	/* 42E230 */ void* CBulanci_FormatPathPair(short* param_1, short* param_2);
 	// !DECL 0x0042e230 END
 	// !DECL 0x0042e2f0 BEGIN
-	/* 42E2F0 */ uchar FUN_0042e2f0(int* param_1);
+	/* 42E2F0 */ uchar CDsString_ReadNarrowLengthPrefixedFromStream(int* param_1);
 	// !DECL 0x0042e2f0 END
 	// !DECL 0x0042e400 BEGIN
-	/* 42E400 */ uchar FUN_0042e400(int* param_1);
+	/* 42E400 */ uchar CDsString_WriteNarrowLengthPrefixedToStream(int* param_1);
 	// !DECL 0x0042e400 END
 	// !DECL 0x0042e6c0 BEGIN
 	/* 42E6C0 */ uchar PackTimeToDword(uint* param_1, uint param_2, uint param_3, uint param_4);
@@ -427,32 +361,17 @@ public:
 	// !DECL 0x0042f4b0 BEGIN
 	/* 42F4B0 */ static uchar CBulanci_AssignResourceIndexSlot(int param_1, uint param_2, uint param_3, uint param_4);
 	// !DECL 0x0042f4b0 END
-	// !DECL 0x0042f8b0 BEGIN
-	/* 42F8B0 */ uint FUN_0042f8b0(int param_1);
-	// !DECL 0x0042f8b0 END
-	// !DECL 0x0042f940 BEGIN
-	/* 42F940 */ uchar FUN_0042f940(int param_1, char param_2);
-	// !DECL 0x0042f940 END
-	// !DECL 0x0042f980 BEGIN
-	/* 42F980 */ uchar FUN_0042f980(void* param_1);
-	// !DECL 0x0042f980 END
-	// !DECL 0x0042fae0 BEGIN
-	/* 42FAE0 */ uchar FUN_0042fae0(_PtFuncCompare* param_1);
-	// !DECL 0x0042fae0 END
 	// !DECL 0x004332d0 BEGIN
 	/* 4332D0 */ void CDSRect_ClampToBounds(int* param_1, int* param_2);
 	// !DECL 0x004332d0 END
 	// !DECL 0x00433320 BEGIN
-	/* 433320 */ uchar CBulanci_OpenFindFirst(int param_1);
+	/* 433320 */ uchar CBulanci_OpenFindFirst(WCHAR* param_1);
 	// !DECL 0x00433320 END
-	// !DECL 0x00434160 BEGIN
-	/* 434160 */ uchar FUN_00434160(int* param_1);
-	// !DECL 0x00434160 END
 	// !DECL 0x0043420c BEGIN
 	/* 43420C */ uchar Catch_0043420c();
 	// !DECL 0x0043420c END
 	// !DECL 0x004356e0 BEGIN
-	/* 4356E0 */ void CDSGZipStream_Open(int* param_1, uint param_2);
+	/* 4356E0 */ void CDSGZipStream_Open(int* param_1, int param_2);
 	// !DECL 0x004356e0 END
 	// !DECL 0x00435960 BEGIN
 	/* 435960 */ CDSGZipStream* CDSGZipStream_Ctor(int* param_1, uint param_2);
@@ -461,16 +380,16 @@ public:
 	/* 4359F3 */ uchar Catch_004359f3();
 	// !DECL 0x004359f3 END
 	// !DECL 0x00437e20 BEGIN
-	/* 437E20 */ uchar RegOpenKey(int param_1, int param_2, uchar* param_3);
+	/* 437E20 */ uchar RegOpenKey(HKEY__* param_1, WCHAR* param_2, uchar* param_3);
 	// !DECL 0x00437e20 END
 	// !DECL 0x00437f40 BEGIN
-	/* 437F40 */ uint RegQueryDword(int param_1);
+	/* 437F40 */ uint RegQueryDword(WCHAR* param_1);
 	// !DECL 0x00437f40 END
 	// !DECL 0x00437fe0 BEGIN
 	/* 437FE0 */ uchar RegWriteBinaryStream(uint param_1, int* param_2);
 	// !DECL 0x00437fe0 END
 	// !DECL 0x00438160 BEGIN
-	/* 438160 */ uchar RegQueryBinaryStream(LPCWSTR valueName, int* stream);
+	/* 438160 */ uchar RegQueryBinaryStream(WCHAR* param_1, int* param_2);
 	// !DECL 0x00438160 END
 	// !DECL 0x00438340 BEGIN
 	/* 438340 */ uchar CDSView_NoOpStub();
@@ -484,9 +403,6 @@ public:
 	// !DECL 0x00446550 BEGIN
 	/* 446550 */ uchar InitAlphaBlendLut();
 	// !DECL 0x00446550 END
-	// !DECL 0x004477df BEGIN
-	/* 4477DF */ static uchar FUN_004477df(ulong param_1);
-	// !DECL 0x004477df END
 	// !DECL 0x004482f0 BEGIN
 	/* 4482F0 */ static uchar swap();
 	// !DECL 0x004482f0 END
@@ -499,6 +415,22 @@ public:
 	// !DECL 0x0044877d BEGIN
 	/* 44877D */ static wchar_t* _wcsrchr(wchar_t* param_1, wchar_t param_2);
 	// !DECL 0x0044877d END
+
+	// !DECL 0x0040a440 BEGIN
+	/* 40A440 */ void CDSChain_LoadConfigFromRegistry(CDSChain_full* param_1);
+	// !DECL 0x0040a440 END
+	// !DECL 0x0040a62f BEGIN
+	/* 40A62F */ uchar* Catch_0040a62f();
+	// !DECL 0x0040a62f END
+	// !DECL 0x0040a650 BEGIN
+	/* 40A650 */ static void CDSChain_LoadConfigFromRegistry_finally();
+	// !DECL 0x0040a650 END
+	// !DECL 0x0042a210 BEGIN
+	/* 42A210 */ void CDSApp_OnCreate();
+	// !DECL 0x0042a210 END
+	// !DECL 0x0042a550 BEGIN
+	/* 42A550 */ uint CBulanci_HandleDirtyRectBitBltHresult(int param_1);
+	// !DECL 0x0042a550 END
 };
 
 
@@ -507,9 +439,6 @@ public:
 	// !DECL 0x0042bf40 BEGIN
 	/* 42BF40 */ uchar UpdateScreenCoordinates(char param_1);
 	// !DECL 0x0042bf40 END
-	// !DECL 0x0042cbf0 BEGIN
-	/* 42CBF0 */ uchar SetSize(int param_1, int param_2);
-	// !DECL 0x0042cbf0 END
 };
 
 #endif

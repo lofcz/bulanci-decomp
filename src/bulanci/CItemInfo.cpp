@@ -14,3 +14,8 @@ uint CItemInfo::CDSObject_GetThis() {
 }
 // !FUNC 0x00434b10 END
 
+// !FUNC 0x00404c50 BEGIN
+/* 404C50-404C70 00020 */
+void* CItemInfo::CreateObject() { STUB_BODY(); return 0; }
+// !FUNC 0x00404c50 END
+

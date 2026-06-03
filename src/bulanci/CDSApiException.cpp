@@ -14,12 +14,12 @@ uchar CDSApiException::CDSApiException_dtor(uint* param_1) { STUB_BODY(); return
 
 // !FUNC 0x00434c70 BEGIN
 /* 434C70-434CF4 00084 */
-uchar* CDSApiException::CDSApiException_What(wchar_t* param_1) { STUB_BODY(); return 0; }
+wchar_t* CDSApiException::CDSApiException_What(wchar_t* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00434c70 END
 
 // !FUNC 0x00434d00 BEGIN
 /* 434D00-434D4C 0004C */
-uchar CDSApiException::CDSApiException_ThrowFromGetLastError() { STUB_BODY(); return 0; }
+void CDSApiException::CDSApiException_ThrowFromGetLastError() { STUB_BODY(); }
 // !FUNC 0x00434d00 END
 
 // !FUNC 0x00434d50 BEGIN

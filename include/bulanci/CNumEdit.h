@@ -11,7 +11,7 @@ struct localeinfo_struct;
 class CNumEdit {
 public:
 	// !DECL 0x004031a0 BEGIN
-	/* 4031A0 */ uchar CNumEdit_GetValue(uint* param_1);
+	/* 4031A0 */ uchar CNumEdit_GetValue(int* param_1);
 	// !DECL 0x004031a0 END
 	// !DECL 0x00404550 BEGIN
 	/* 404550 */ uint CNumEdit_ValidateRange(short param_1);
@@ -47,7 +47,7 @@ public:
 	/* 44ED15 */ static long _wcstol(wchar_t* param_1, wchar_t** param_2, int param_3);
 	// !DECL 0x0044ed15 END
 	// !DECL 0x0044ed3e BEGIN
-	/* 44ED3E */ static int _iswctype_l(int param_1, int param_2, int param_3);
+	/* 44ED3E */ static int _iswctype_l(int param_1, int param_2, localeinfo_struct* param_3);
 	// !DECL 0x0044ed3e END
 	// !DECL 0x00451606 BEGIN
 	/* 451606 */ static int _wchartodigit(ushort param_1);

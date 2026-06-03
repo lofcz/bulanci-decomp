@@ -26,7 +26,7 @@ uchar CStartGame1::CStartGame1_UpdateModalChildVisibility(int param_1) { STUB_BO
 
 // !FUNC 0x0040ae30 BEGIN
 /* 40AE30-40AE8C 0005C */
-uchar CStartGame1::CStartGame1_OnRadioChange(short param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_OnRadioChange(short param_1, void* param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ae30 END
 
 // !FUNC 0x0040ae90 BEGIN
@@ -73,12 +73,12 @@ uchar CStartGame1::CStartGame1_AdjustOffsetDtor(uchar param_1) { STUB_BODY(); re
 
 // !FUNC 0x0040f500 BEGIN
 /* 40F500-40F55A 0005A */
-uchar CStartGame1::CStartGame1_dtor(uchar param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1_dtor(int param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f500 END
 
 // !FUNC 0x0040f560 BEGIN
 /* 40F560-40F57E 0001E */
-uchar CStartGame1::CStartGame1_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CStartGame1::CStartGame1_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f560 END
 
 // !FUNC 0x00403d20 BEGIN
@@ -93,11 +93,11 @@ uchar CStartGame1::CStartGame1::ApplyLocalPlayersConstraints(int param_1) { STUB
 
 // !FUNC 0x0040a9d0 BEGIN
 /* 40A9D0-40A9E3 00013 */
-uchar CStartGame1::CStartGame1::OnTotalPlayersChange(int param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1::OnTotalPlayersChange(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040a9d0 END
 
 // !FUNC 0x0040a9f0 BEGIN
 /* 40A9F0-40A9F8 00008 */
-uchar CStartGame1::CStartGame1::OnLocalPlayersChange(int param_1) { STUB_BODY(); return 0; }
+uchar CStartGame1::CStartGame1::OnLocalPlayersChange(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040a9f0 END
 

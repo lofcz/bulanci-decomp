@@ -24,7 +24,7 @@ uchar* CHelpDlg::CHelpDlg_GetClassTable() {
 
 // !FUNC 0x004220b0 BEGIN
 /* 4220B0-4220B8 00008 */
-uchar CHelpDlg::CHelpDlg_ScalarDeletingDtor_thunk(uchar param_1) { STUB_BODY(); return 0; }
+uchar CHelpDlg::CHelpDlg_ScalarDeletingDtor_thunk_Sub18(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004220b0 END
 
 // !FUNC 0x004220c0 BEGIN
@@ -34,12 +34,12 @@ uchar CHelpDlg::CHelpDlg_AdjustorThunk04_Dtor(uchar param_1) { STUB_BODY(); retu
 
 // !FUNC 0x004220d0 BEGIN
 /* 4220D0-4220D8 00008 */
-uchar CHelpDlg::CHelpDlg_ScalarDeletingDtor_thunk_004220d0(uchar param_1) { STUB_BODY(); return 0; }
+uchar CHelpDlg::CHelpDlg_ScalarDeletingDtor_thunk_Sub10(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004220d0 END
 
 // !FUNC 0x004220e0 BEGIN
 /* 4220E0-422192 000B2 */
-void CHelpDlg::CHelpDlg_dtor(void* param_1) { STUB_BODY(); }
+void CHelpDlg::CHelpDlg_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x004220e0 END
 
 // !FUNC 0x004222f0 BEGIN

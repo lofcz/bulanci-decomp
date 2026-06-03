@@ -1,0 +1,394 @@
+{
+  "ok": 49,
+  "fail": 11,
+  "entries": [
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0041ad80 from 'Scheduler_EnqueueEvent' to 'CGaming_SchedulerDispatch_AppendNode'\", \"warnings\": [\"Function name 'CGaming_SchedulerDispatch_AppendNode' \\u2014 main part 'CGaming_SchedulerDispatch_AppendNode' is not PascalCase. Expected: CgamingSchedulerdispatchAppendnode\", \"Function name 'CGaming_SchedulerDispatch_AppendNode' \\u2014 main part 'CGaming_SchedulerDispatch_AppendNode' contains underscores. Use PascalCase after the module",
+      "addr": "0x0041ad80",
+      "name": "CGaming_SchedulerDispatch_AppendNode"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0041b190 from 'FUN_0041b190' to 'CAnim_OnSchedulerEnqueueSlot0'\", \"warnings\": [\"Function name 'CAnim_OnSchedulerEnqueueSlot0' \\u2014 main part 'CAnim_OnSchedulerEnqueueSlot0' is not PascalCase. Expected: CanimOnschedulerenqueueslot0\", \"Function name 'CAnim_OnSchedulerEnqueueSlot0' \\u2014 main part 'CAnim_OnSchedulerEnqueueSlot0' contains underscores. Use PascalCase after the module prefix.\"]}",
+      "addr": "0x0041b190",
+      "name": "CAnim_OnSchedulerEnqueueSlot0"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00433280 from 'rect_Intersect' to 'CDSRect_Intersect'\", \"warnings\": [\"Function name 'CDSRect_Intersect' \\u2014 main part 'CDSRect_Intersect' is not PascalCase. Expected: CdsrectIntersect\", \"Function name 'CDSRect_Intersect' \\u2014 main part 'CDSRect_Intersect' contains underscores. Use PascalCase after the module prefix.\"]}",
+      "addr": "0x00433280",
+      "name": "CDSRect_Intersect"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x004339e0 from 'FUN_004339e0' to 'Eh_LeaveCriticalSection'\", \"warnings\": [\"Function name 'Eh_LeaveCriticalSection' \\u2014 main part 'Eh_LeaveCriticalSection' is not PascalCase. Expected: EhLeavecriticalsection\", \"Function name 'Eh_LeaveCriticalSection' \\u2014 main part 'Eh_LeaveCriticalSection' contains underscores. Use PascalCase after the module prefix.\", \"Function name 'Eh_LeaveCriticalSection' does not start with a recognized ve",
+      "addr": "0x004339e0",
+      "name": "Eh_LeaveCriticalSection"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00434110 from 'CDSStreamStorage_OpenStream' to 'CDSStreamStorage_OpenStream'\", \"warnings\": [\"Function name 'CDSStreamStorage_OpenStream' \\u2014 main part 'CDSStreamStorage_OpenStream' is not PascalCase. Expected: CdsstreamstorageOpenstream\", \"Function name 'CDSStreamStorage_OpenStream' \\u2014 main part 'CDSStreamStorage_OpenStream' contains underscores. Use PascalCase after the module prefix.\"]}",
+      "addr": "0x00434110",
+      "name": "CDSStreamStorage_OpenStream"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00434140 from 'CDSStreamStorage_GetStreamByIndex' to 'CDSStreamStorage_GetStreamByIndex'\", \"warnings\": [\"Function name 'CDSStreamStorage_GetStreamByIndex' \\u2014 main part 'CDSStreamStorage_GetStreamByIndex' is not PascalCase. Expected: CdsstreamstorageGetstreambyindex\", \"Function name 'CDSStreamStorage_GetStreamByIndex' \\u2014 main part 'CDSStreamStorage_GetStreamByIndex' contains underscores. Use PascalCase after the module prefi",
+      "addr": "0x00434140",
+      "name": "CDSStreamStorage_GetStreamByIndex"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00434380 from 'CDSStreamStorage_AddRefHeldObject' to 'CDSStreamStorage_AddRefHeldObject'\", \"warnings\": [\"Function name 'CDSStreamStorage_AddRefHeldObject' \\u2014 main part 'CDSStreamStorage_AddRefHeldObject' is not PascalCase. Expected: CdsstreamstorageAddrefheldobject\", \"Function name 'CDSStreamStorage_AddRefHeldObject' \\u2014 main part 'CDSStreamStorage_AddRefHeldObject' contains underscores. Use PascalCase after the module prefi",
+      "addr": "0x00434380",
+      "name": "CDSStreamStorage_AddRefHeldObject"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x004344d0 from 'CreateObject' to 'CDSResourceException_CreateObject'\", \"warnings\": [\"Function name 'CDSResourceException_CreateObject' \\u2014 main part 'CDSResourceException_CreateObject' is not PascalCase. Expected: CdsresourceexceptionCreateobject\", \"Function name 'CDSResourceException_CreateObject' \\u2014 main part 'CDSResourceException_CreateObject' contains underscores. Use PascalCase after the module prefix.\"]}",
+      "addr": "0x004344d0",
+      "name": "CDSResourceException_CreateObject"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00435db0 from 'SampleSourcePixel_Indexed8' to 'SampleSourcePixel_Indexed8'\", \"warnings\": [\"Function name 'SampleSourcePixel_Indexed8' \\u2014 main part 'SampleSourcePixel_Indexed8' is not PascalCase. Expected: SamplesourcepixelIndexed8\", \"Function name 'SampleSourcePixel_Indexed8' \\u2014 main part 'SampleSourcePixel_Indexed8' contains underscores. Use PascalCase after the module prefix.\", \"Function name 'SampleSourcePixel_Indexed8' ",
+      "addr": "0x00435db0",
+      "name": "SampleSourcePixel_Indexed8"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00435e20 from 'Blit_ReadDstPixel_32bpp' to 'Blit_ReadDstPixel_32bpp'\", \"warnings\": [\"Function name 'Blit_ReadDstPixel_32bpp' \\u2014 main part 'Blit_ReadDstPixel_32bpp' is not PascalCase. Expected: BlitReaddstpixel32bpp\", \"Function name 'Blit_ReadDstPixel_32bpp' \\u2014 main part 'Blit_ReadDstPixel_32bpp' contains underscores. Use PascalCase after the module prefix.\", \"Function name 'Blit_ReadDstPixel_32bpp' does not start with a rec",
+      "addr": "0x00435e20",
+      "name": "Blit_ReadDstPixel_32bpp"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00462f80 from 'process_restart' to 'process_restart'\", \"warnings\": [\"Function name 'process_restart' \\u2014 main part 'process_restart' is not PascalCase. Expected: ProcessRestart\", \"Function name 'process_restart' \\u2014 main part 'process_restart' contains underscores. Use PascalCase after the module prefix.\"]}",
+      "addr": "0x00462f80",
+      "name": "process_restart"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042cf60 from 'FUN_0042cf60' to 'CDSView_OnMouseUpModalInputRefresh'\", \"warnings\": [\"Function name 'CDSView_OnMouseUpModalInputRefresh' \\u2014 main part 'CDSView_OnMouseUpModalInputRefresh' is not PascalCase. Expected: CdsviewOnmouseupmodalinputrefresh\", \"Function name 'CDSView_OnMouseUpModalInputRefresh' \\u2014 main part 'CDSView_OnMouseUpModalInputRefresh' contains underscores. Use PascalCase after the module prefix.\"]}",
+      "addr": "0x0042cf60",
+      "name": "CDSView_OnMouseUpModalInputRefresh"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042cfa0 from 'FUN_0042cfa0' to 'CDSView_RefreshModalFocusFromChildren'\", \"warnings\": [\"Function name 'CDSView_RefreshModalFocusFromChildren' \\u2014 main part 'CDSView_RefreshModalFocusFromChildren' is not PascalCase. Expected: CdsviewRefreshmodalfocusfromchildren\", \"Function name 'CDSView_RefreshModalFocusFromChildren' \\u2014 main part 'CDSView_RefreshModalFocusFromChildren' contains underscores. Use PascalCase after the module pr",
+      "addr": "0x0042cfa0",
+      "name": "CDSView_RefreshModalFocusFromChildren"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042cff0 from 'FUN_0042cff0' to 'CDSView_TeardownModalFocusChain'\", \"warnings\": [\"Function name 'CDSView_TeardownModalFocusChain' \\u2014 main part 'CDSView_TeardownModalFocusChain' is not PascalCase. Expected: CdsviewTeardownmodalfocuschain\", \"Function name 'CDSView_TeardownModalFocusChain' \\u2014 main part 'CDSView_TeardownModalFocusChain' contains underscores. Use PascalCase after the module prefix.\"]}",
+      "addr": "0x0042cff0",
+      "name": "CDSView_TeardownModalFocusChain"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042d3f0 from 'CBulanci_CompareWideString' to 'CDsString_CompareHandles'\", \"warnings\": [\"Function name 'CDsString_CompareHandles' \\u2014 main part 'CDsString_CompareHandles' is not PascalCase. Expected: CdsstringComparehandles\", \"Function name 'CDsString_CompareHandles' \\u2014 main part 'CDsString_CompareHandles' contains underscores. Use PascalCase after the module prefix.\"]}",
+      "addr": "0x0042d3f0",
+      "name": "CDsString_CompareHandles"
+    },
+    {
+      "op": "rename",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0042d7a0 from 'CStartGame2_CompareLevelName' to 'CDsString_CompareHandles'\", \"warnings\": [\"Function name 'CDsString_CompareHandles' \\u2014 main part 'CDsString_CompareHandles' is not PascalCase. Expected: CdsstringComparehandles\", \"Function name 'CDsString_CompareHandles' \\u2014 main part 'CDsString_CompareHandles' contains underscores. Use PascalCase after the module prefix.\"]}",
+      "addr": "0x0042d7a0",
+      "name": "CDsString_CompareHandles"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CGaming_LoadBackgroundMusic into class CGaming; 'this' types as CGaming * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x0041b6d0",
+      "cls": "CGaming"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CGaming_SetMusicAndSoundBank into class CGaming; 'this' types as CGaming * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x0041ba60",
+      "cls": "CGaming"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed CGaming_RespawnPlayerAtSafeLocation in class CGaming; 'this' types as CGaming * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x0041a140",
+      "cls": "CGaming"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed CGaming_TickAmbientAnimations in class CGaming; 'this' types as undefined (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x0041b500",
+      "cls": "CGaming"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Confirmed CDSApp_OnCreate in class CBulanci; 'this' types as CBulanci * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x0042a210",
+      "cls": "CBulanci"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSChain_GetChildAtIndex into class CDSChain; 'this' types as CDSChain * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x0042f8b0",
+      "cls": "CDSChain"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSChain_SortChildrenWithComparator into class CLevelScore; 'this' types as CLevelScore * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x0042fae0",
+      "cls": "CLevelScore"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSRect_IntersectInPlace into class tagRECT; 'this' types as tagRECT * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x00433200",
+      "cls": "tagRECT"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved CDSRect_Intersect into class tagRECT; 'this' types as tagRECT * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x00433280",
+      "cls": "tagRECT"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved WriteBytes into class IDSStream; 'this' types as IDSStream * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x00430490",
+      "cls": "IDSStream"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved SeekPosition into class IDSStream; 'this' types as IDSStream * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x00430500",
+      "cls": "IDSStream"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved LockRegion into class IDSStream; 'this' types as IDSStream * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x004305c0",
+      "cls": "IDSStream"
+    },
+    {
+      "op": "this_type",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Moved UnlockRegion into class IDSStream; 'this' types as IDSStream * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}",
+      "addr": "0x00430640",
+      "cls": "IDSStream"
+    },
+    {
+      "op": "prototype",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)",
+      "addr": "0x0042cf50"
+    },
+    {
+      "op": "prototype",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)",
+      "addr": "0x0042cf60"
+    },
+    {
+      "op": "prototype",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)",
+      "addr": "0x0042cfa0"
+    },
+    {
+      "op": "prototype",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)",
+      "addr": "0x0042cff0"
+    },
+    {
+      "op": "prototype",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)",
+      "addr": "0x0042d040"
+    },
+    {
+      "op": "prototype",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)",
+      "addr": "0x0042d080"
+    },
+    {
+      "op": "prototype",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)",
+      "addr": "0x0042ccf0"
+    },
+    {
+      "op": "prototype",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)",
+      "addr": "0x0042d3f0"
+    },
+    {
+      "op": "prototype",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)",
+      "addr": "0x00434110"
+    },
+    {
+      "op": "prototype",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)",
+      "addr": "0x00434140"
+    },
+    {
+      "op": "prototype",
+      "ok": false,
+      "msg": "Expecting value: line 1 column 1 (char 0)",
+      "addr": "0x00434380"
+    },
+    {
+      "op": "decompiler_comment",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0042d1a0\"}",
+      "addr": "0x0042d1a0"
+    },
+    {
+      "op": "decompiler_comment",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x00433200\"}",
+      "addr": "0x00433200"
+    },
+    {
+      "op": "decompiler_comment",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x00433280\"}",
+      "addr": "0x00433280"
+    },
+    {
+      "op": "decompiler_comment",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x00430490\"}",
+      "addr": "0x00430490"
+    },
+    {
+      "op": "decompiler_comment",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x00430a70\"}",
+      "addr": "0x00430a70"
+    },
+    {
+      "op": "plate_comment",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set plate comment for function at 0x0042cf60\", \"warnings\": [\"Plate comment missing Algorithm section\", \"Plate comment missing Parameters section\", \"Plate comment missing Returns section\"]}",
+      "addr": "0x0042cf60"
+    },
+    {
+      "op": "plate_comment",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set plate comment for function at 0x0042cfa0\", \"warnings\": [\"Plate comment missing Algorithm section\", \"Plate comment missing Parameters section\", \"Plate comment missing Returns section\"]}",
+      "addr": "0x0042cfa0"
+    },
+    {
+      "op": "plate_comment",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set plate comment for function at 0x0042cff0\", \"warnings\": [\"Plate comment missing Algorithm section\", \"Plate comment missing Parameters section\", \"Plate comment missing Returns section\"]}",
+      "addr": "0x0042cff0"
+    },
+    {
+      "op": "force_decompile",
+      "ok": true,
+      "msg": "{\"error\": \"Function address is required\"}",
+      "addr": "0x0042ccf0"
+    },
+    {
+      "op": "force_decompile",
+      "ok": true,
+      "msg": "{\"error\": \"Function address is required\"}",
+      "addr": "0x0042d0b0"
+    },
+    {
+      "op": "force_decompile",
+      "ok": true,
+      "msg": "{\"error\": \"Function address is required\"}",
+      "addr": "0x0042d1a0"
+    },
+    {
+      "op": "force_decompile",
+      "ok": true,
+      "msg": "{\"error\": \"Function address is required\"}",
+      "addr": "0x0042cff0"
+    },
+    {
+      "op": "force_decompile",
+      "ok": true,
+      "msg": "{\"error\": \"Function address is required\"}",
+      "addr": "0x0042d3f0"
+    },
+    {
+      "op": "force_decompile",
+      "ok": true,
+      "msg": "{\"error\": \"Function address is required\"}",
+      "addr": "0x00430490"
+    },
+    {
+      "op": "force_decompile",
+      "ok": true,
+      "msg": "{\"error\": \"Function address is required\"}",
+      "addr": "0x00430500"
+    },
+    {
+      "op": "force_decompile",
+      "ok": true,
+      "msg": "{\"error\": \"Function address is required\"}",
+      "addr": "0x00433200"
+    },
+    {
+      "op": "force_decompile",
+      "ok": true,
+      "msg": "{\"error\": \"Function address is required\"}",
+      "addr": "0x00433280"
+    },
+    {
+      "op": "force_decompile",
+      "ok": true,
+      "msg": "{\"error\": \"Function address is required\"}",
+      "addr": "0x00434110"
+    },
+    {
+      "op": "force_decompile",
+      "ok": true,
+      "msg": "{\"error\": \"Function address is required\"}",
+      "addr": "0x00434140"
+    },
+    {
+      "op": "save_program",
+      "ok": true,
+      "msg": "{\"success\": true, \"program\": \"bulanci.exe\", \"message\": \"Program saved successfully\"}"
+    }
+  ]
+}

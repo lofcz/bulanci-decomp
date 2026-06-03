@@ -1,0 +1,89 @@
+{
+  "ok": 13,
+  "fail": 0,
+  "entries": [
+    {
+      "op": "this_type_void",
+      "addr": "0x0042d510",
+      "ok": true,
+      "msg": "{\"error\": \"'this' must point to a structure/class type; 'void' is not a structure. Ghidra derives the 'this' type from a same-named struct.\"}"
+    },
+    {
+      "op": "this_type_void",
+      "addr": "0x0042d7b0",
+      "ok": true,
+      "msg": "{\"error\": \"'this' must point to a structure/class type; 'void' is not a structure. Ghidra derives the 'this' type from a same-named struct.\"}"
+    },
+    {
+      "op": "this_type_void",
+      "addr": "0x0042d7f0",
+      "ok": true,
+      "msg": "{\"error\": \"'this' must point to a structure/class type; 'void' is not a structure. Ghidra derives the 'this' type from a same-named struct.\"}"
+    },
+    {
+      "op": "this_type_void",
+      "addr": "0x0042d8c0",
+      "ok": true,
+      "msg": "{\"error\": \"'this' must point to a structure/class type; 'void' is not a structure. Ghidra derives the 'this' type from a same-named struct.\"}"
+    },
+    {
+      "op": "this_type_void",
+      "addr": "0x0042d970",
+      "ok": true,
+      "msg": "{\"error\": \"'this' must point to a structure/class type; 'void' is not a structure. Ghidra derives the 'this' type from a same-named struct.\"}"
+    },
+    {
+      "op": "this_type_void",
+      "addr": "0x0042dab0",
+      "ok": true,
+      "msg": "{\"error\": \"'this' must point to a structure/class type; 'void' is not a structure. Ghidra derives the 'this' type from a same-named struct.\"}"
+    },
+    {
+      "op": "this_type_void",
+      "addr": "0x0042dc50",
+      "ok": true,
+      "msg": "{\"error\": \"'this' must point to a structure/class type; 'void' is not a structure. Ghidra derives the 'this' type from a same-named struct.\"}"
+    },
+    {
+      "op": "this_type_void",
+      "addr": "0x0042dc70",
+      "ok": true,
+      "msg": "{\"error\": \"'this' must point to a structure/class type; 'void' is not a structure. Ghidra derives the 'this' type from a same-named struct.\"}"
+    },
+    {
+      "op": "this_type_void",
+      "addr": "0x0042dec0",
+      "ok": true,
+      "msg": "{\"error\": \"'this' must point to a structure/class type; 'void' is not a structure. Ghidra derives the 'this' type from a same-named struct.\"}"
+    },
+    {
+      "op": "this_type_void",
+      "addr": "0x0042dfc0",
+      "ok": true,
+      "msg": "{\"error\": \"'this' must point to a structure/class type; 'void' is not a structure. Ghidra derives the 'this' type from a same-named struct.\"}"
+    },
+    {
+      "op": "comment",
+      "addr": "0x0042d510",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0042d510\"}"
+    },
+    {
+      "op": "comment",
+      "addr": "0x0042d970",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0042d970\"}"
+    },
+    {
+      "op": "comment",
+      "addr": "0x0042dab0",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0042dab0\"}"
+    },
+    {
+      "op": "save_program",
+      "ok": true,
+      "msg": "{\"success\": true, \"program\": \"bulanci.exe\", \"message\": \"Program saved successfully\"}"
+    }
+  ]
+}

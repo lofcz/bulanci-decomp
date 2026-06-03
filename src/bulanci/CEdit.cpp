@@ -49,7 +49,7 @@ void CEdit::CEdit_dtor(uchar param_1) { STUB_BODY(); }
 
 // !FUNC 0x00406100 BEGIN
 /* 406100-406225 00125 */
-void CEdit::CEdit_Render(CDSView* param_1) { STUB_BODY(); }
+void CEdit::CEdit_Render(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00406100 END
 
 // !FUNC 0x00406230 BEGIN
@@ -84,7 +84,7 @@ void CEdit::CEdit_OnFocusEvent(short param_1, void* param_2) { STUB_BODY(); }
 
 // !FUNC 0x00407760 BEGIN
 /* 407760-4078ED 0018D */
-uchar CEdit::CEdit_BuildAt(uint param_1, uint param_2, uint param_3, uint param_4, uint param_5, uint param_6, uint param_7, uint param_8) { STUB_BODY(); return 0; }
+void* CEdit::CEdit_BuildAt(uint param_1, uint param_2, uint param_3, uint param_4, uint param_5, uint param_6, uint param_7, uint param_8) { STUB_BODY(); return 0; }
 // !FUNC 0x00407760 END
 
 // !FUNC 0x004078f0 BEGIN
@@ -109,6 +109,6 @@ uchar CEdit::CEdit_ScalarDeletingDtor_thunk(uchar param_1) { STUB_BODY(); return
 
 // !FUNC 0x0040ba10 BEGIN
 /* 40BA10-40BA2E 0001E */
-uchar CEdit::CEdit_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CEdit::CEdit_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ba10 END
 

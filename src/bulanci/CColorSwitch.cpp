@@ -12,7 +12,7 @@ uchar CColorSwitch::CColorSwitch_SetSelected(uchar param_1) { STUB_BODY(); retur
 
 // !FUNC 0x0040aa60 BEGIN
 /* 40AA60-40AA70 00010 */
-uchar CColorSwitch::CColorSwitch_SetSelectedFromPtr(uchar param_1) { STUB_BODY(); return 0; }
+uchar CColorSwitch::CColorSwitch_SetSelectedFromPtr(uchar* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040aa60 END
 
 // !FUNC 0x0040b950 BEGIN
@@ -43,7 +43,7 @@ void CColorSwitch::CColorSwitch_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0040b990 END
 
 // !FUNC 0x0040ccd0 BEGIN
-/* 40CCD0-40CDFA 0012A */
+/* 40CCD0-40CDF3 00123 */
 void CColorSwitch::CColorSwitch_Render(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0040ccd0 END
 
@@ -59,11 +59,11 @@ uint* CColorSwitch::CColorSwitch_ctor() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040ec80 BEGIN
 /* 40EC80-40EC9E 0001E */
-uchar CColorSwitch::CColorSwitch_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CColorSwitch::CColorSwitch_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ec80 END
 
 // !FUNC 0x004100d0 BEGIN
 /* 4100D0-4101C8 000F8 */
-uchar CColorSwitch::CColorSwitch_BuildAt(uint param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
+void* CColorSwitch::CColorSwitch_BuildAt(uint param_1, uint param_2, void* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004100d0 END
 

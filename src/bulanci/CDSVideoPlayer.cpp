@@ -27,3 +27,21 @@ uchar CDSVideoPlayer::CDSVideoPlayer_TM_Destructor(uint* param_1) { STUB_BODY();
 void* CDSVideoPlayer::CDSVideoPlayer_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00439fc0 END
 
+// !FUNC 0x00439710 BEGIN
+/* 439710-43971A 0000A */
+uchar CDSVideoPlayer::CDSVideoPlayer_SetNotifyCookie(uint param_1) {
+    *reinterpret_cast<uint*>(reinterpret_cast<char*>(this) + 0x3c) = param_1;
+    return static_cast<uchar>(param_1);
+}
+// !FUNC 0x00439710 END
+
+// !FUNC 0x00439940 BEGIN
+/* 439940-439965 00025 */
+void CDSVideoPlayer::TM_Play(uchar param_1) { STUB_BODY(); }
+// !FUNC 0x00439940 END
+
+// !FUNC 0x00439c70 BEGIN
+/* 439C70-439D06 00096 */
+void* CDSVideoPlayer::ConstructTrackManager(void* param_1, int param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x00439c70 END
+

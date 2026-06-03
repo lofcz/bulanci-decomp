@@ -1,8 +1,8 @@
 #include "CMovieView.h"
 
 // !FUNC 0x00422630 BEGIN
-/* 422630-422666 00036 */
-void CMovieView::StopPlayback(void* param_1) { STUB_BODY(); }
+/* 422630-422663 00033 */
+void CMovieView::StopPlayback(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00422630 END
 
 // !FUNC 0x00422840 BEGIN
@@ -12,7 +12,7 @@ uchar CMovieView::OnMovieStop(char param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00422860 BEGIN
 /* 422860-4228E2 00082 */
-uchar CMovieView::OnEvent(short param_1, void* param_2) { STUB_BODY(); return 0; }
+void CMovieView::OnEvent(short param_1, void* param_2) { STUB_BODY(); }
 // !FUNC 0x00422860 END
 
 // !FUNC 0x00422a20 BEGIN
@@ -40,7 +40,7 @@ uchar CMovieView::ScalarDeletingDtor_Thunk_24(uchar param_1) { STUB_BODY(); retu
 
 // !FUNC 0x00422cb0 BEGIN
 /* 422CB0-422D4A 0009A */
-uchar CMovieView::Cleanup(uchar param_1) { STUB_BODY(); return 0; }
+uchar CMovieView::Cleanup(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00422cb0 END
 
 // !FUNC 0x00422d50 BEGIN
@@ -50,7 +50,7 @@ uchar CMovieView::StartPlayback(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00422e30 BEGIN
 /* 422E30-422ED4 000A4 */
-uchar CMovieView::CMovieView_CreateObject() { STUB_BODY(); return 0; }
+uint* CMovieView::CMovieView_CreateObject() { STUB_BODY(); return 0; }
 // !FUNC 0x00422e30 END
 
 // !FUNC 0x00422ee0 BEGIN
@@ -65,7 +65,7 @@ uchar CMovieView::TogglePlayback(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004236a0 BEGIN
 /* 4236A0-423787 000E7 */
-uchar CMovieView::Constructor(uint param_1, uint param_2, uint param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
+void CMovieView::CMovieView_Constructor(int param_1, int param_2, uint param_3, uint param_4, uint param_5) { STUB_BODY(); }
 // !FUNC 0x004236a0 END
 
 // !FUNC 0x00423787 BEGIN
@@ -75,6 +75,6 @@ uchar* CMovieView::Catch_00423787() { STUB_BODY(); return 0; }
 
 // !FUNC 0x004237b0 BEGIN
 /* 4237B0-423811 00061 */
-uchar CMovieView::InitTrackSequence() { STUB_BODY(); return 0; }
+void CMovieView::CMovieView_InitTrackSequence() { STUB_BODY(); }
 // !FUNC 0x004237b0 END
 

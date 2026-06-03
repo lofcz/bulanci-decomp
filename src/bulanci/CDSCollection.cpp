@@ -19,7 +19,7 @@ uchar CDSCollection::CDSCollection_ScalarDeletingDtorThunk(uchar param_1) { STUB
 
 // !FUNC 0x0042fd40 BEGIN
 /* 42FD40-42FDD1 00091 */
-void* CDSCollection::CDSCollection_DeserializeElement(CDSStreamStorage* param_1) { STUB_BODY(); return 0; }
+void* CDSCollection::CDSCollection_DeserializeElement(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042fd40 END
 
 // !FUNC 0x0042fdd1 BEGIN
@@ -48,7 +48,17 @@ uchar CDSCollection::CDSCollection_ctor(void* param_1) { STUB_BODY(); return 0; 
 // !FUNC 0x00431260 END
 
 // !FUNC 0x00431360 BEGIN
-/* 431360-431421 000C1 */
-void CDSCollection::CDSCollection_Load(CDSStreamStorage* param_1) { STUB_BODY(); }
+/* 431360-431409 000A9 */
+void CDSCollection::CDSCollection_Load(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00431360 END
+
+// !FUNC 0x00431170 BEGIN
+/* 431170-431205 00095 */
+int CDSCollection::CDSCollection_FindKeyIndex(int param_1, void* param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x00431170 END
+
+// !FUNC 0x004312c0 BEGIN
+/* 4312C0-431351 00091 */
+int CDSCollection::CDSCollection_InsertKeyed(int param_1, void* param_2, char param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x004312c0 END
 

@@ -27,7 +27,7 @@ public:
 	/* 423460 */ uchar CHistoryDlg_ScalarDeletingDtor_thunk_Sub10(uchar param_1);
 	// !DECL 0x00423460 END
 	// !DECL 0x00423470 BEGIN
-	/* 423470 */ void CHistoryDlg_dtor(void* param_1);
+	/* 423470 */ void CHistoryDlg_dtor(uchar param_1);
 	// !DECL 0x00423470 END
 	// !DECL 0x00423680 BEGIN
 	/* 423680 */ void* CHistoryDlg_ScalarDeletingDtor(uchar param_1);

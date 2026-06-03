@@ -12,7 +12,7 @@ LONG* _LocaleUpdate::_updatetlocinfoEx_nolock() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044cf0b BEGIN
 /* 44CF0B-44CF75 0006A */
-int _LocaleUpdate::_updatetlocinfo() { STUB_BODY(); return 0; }
+threadlocaleinfostruct* _LocaleUpdate::_updatetlocinfo() { STUB_BODY(); return 0; }
 // !FUNC 0x0044cf0b END
 
 // !FUNC 0x0044cf75 BEGIN

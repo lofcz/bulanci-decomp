@@ -81,7 +81,8 @@ out automatically as `&DAT_*` patches.
 | `0x0045cf80` | 21 B  | `layer3.c::III_sideinfo` helper (tiny scalar) | PORT-READY |
 | `0x0045cfa0` | 32 B  | `layer3.c::III_scalefactors_lsf` (LSF scalefactor stub) | PORT-READY |
 | `0x0045cfc0` | 106 B | `layer3.c::III_requantize` (`pow(2, ...) * (sample)^(4/3)` chain) | PORT-READY (uses `rq_table.dat` -- the 485 KB requantization table at one of the larger .rdata blobs in bulanci.exe; locate during port) |
-| `0x0045d030` | 310 B | `layer3.c::III_decode` (Huffman + dequant + reorder + alias-reduction) | DRIVER |
+| `0x0045bbb0` | 1348 B | `layer3.c::III_decode` (Huffman + dequant + reorder + alias + IMDCT + overlap) | DRIVER (R6 task 39; was mis-attributed to `0x0045d030` in older notes) |
+| `0x0045d030` | 498 B | **Bulanci** `CDSMpx_MadTimerAccumulate` (MAD seek / timer scan; **not** `III_decode`) | GAME (R5 worker 15; caller `SeekToValidFrame`) |
 
 `layer3.c` is by far the heaviest of the upstream files (70 KB source).
 Most of its volume is huffman decoders that index `huffman.c` tables --

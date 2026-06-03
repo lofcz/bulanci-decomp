@@ -12,10 +12,6 @@ uchar* CBitmap::CBitmap_GetClassTable() {
 }
 // !FUNC 0x00419120 END
 
-// !FUNC 0x00419130 BEGIN
-/* 419130-41913B 0000B */
-uchar CBitmap::CBitmap_OnDraw(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00419130 END
 
 // !FUNC 0x00419140 BEGIN
 /* 419140-41915E 0001E */
@@ -42,8 +38,4 @@ uchar CBitmap::CBitmap_ScalarDeletingDtor_thunk_Sub10(uchar param_1) { STUB_BODY
 uchar CBitmap::CBitmap_ScalarDeletingDtor_thunk_Sub18(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00419190 END
 
-// !FUNC 0x00419280 BEGIN
-/* 419280-4192AD 0002D */
-uchar CBitmap::CBitmap_FireOnBitmapEvtFromView(uint param_1, ushort param_2) { STUB_BODY(); return 0; }
-// !FUNC 0x00419280 END
 

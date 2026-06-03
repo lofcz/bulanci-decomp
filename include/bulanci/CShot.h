@@ -30,13 +30,13 @@ public:
 	/* 417B30 */ uchar CShot_ComputePelletRect(int* param_1, int* param_2, int param_3);
 	// !DECL 0x00417b30 END
 	// !DECL 0x00417bd0 BEGIN
-	/* 417BD0 */ uchar CShot_Draw(uchar param_1);
+	/* 417BD0 */ void CShot_Draw();
 	// !DECL 0x00417bd0 END
 	// !DECL 0x00418ed0 BEGIN
 	/* 418ED0 */ uchar CShot_ReleaseViaVtable_thunk_Sub88(int param_1);
 	// !DECL 0x00418ed0 END
 	// !DECL 0x00419b40 BEGIN
-	/* 419B40 */ uchar FUN_00419b40(void* param_1);
+	/* 419B40 */ uchar CShot_OnTrackTick_AdvanceFacingRect(void* param_1);
 	// !DECL 0x00419b40 END
 	// !DECL 0x0041a980 BEGIN
 	/* 41A980 */ uchar CDSChain_AdjustThisOffset_ThisMinus84(int param_1);
@@ -51,8 +51,12 @@ public:
 	/* 41DF60 */ uchar CShot_Update(int* param_1);
 	// !DECL 0x0041df60 END
 	// !DECL 0x0041edf0 BEGIN
-	/* 41EDF0 */ uint CShot_Ctor(uint* param_1, CGameView* param_2, uchar param_3, uchar param_4, uchar param_5, int param_6);
+	/* 41EDF0 */ uchar CShot_Ctor(int* param_1, CGameView* param_2, uchar param_3, uchar param_4, uchar param_5, int param_6);
 	// !DECL 0x0041edf0 END
+
+	// !DECL 0x0041dd70 BEGIN
+	/* 41DD70 */ uchar CShot_ResolveHit(int param_1, void* param_2);
+	// !DECL 0x0041dd70 END
 };
 
 #endif

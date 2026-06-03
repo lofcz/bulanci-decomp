@@ -7,7 +7,7 @@ uchar CDSFilterStream::FlushStream(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042ffa0 BEGIN
 /* 42FFA0-42FFD5 00035 */
-longlong CDSFilterStream::GetSize(void* param_1) { STUB_BODY(); return 0; }
+longlong CDSFilterStream::GetSize(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042ffa0 END
 
 // !FUNC 0x00430080 BEGIN
@@ -47,30 +47,10 @@ uint CDSFilterStream::GetStreamName(uint param_1) { STUB_BODY(); return 0; }
 uchar CDSFilterStream::CDSFilterStream_ReleaseInnerStream(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00430400 END
 
-// !FUNC 0x00430420 BEGIN
-/* 430420-430485 00065 */
-void CDSFilterStream::ReadBytes(void* param_1, uint param_2) { STUB_BODY(); }
-// !FUNC 0x00430420 END
 
-// !FUNC 0x00430490 BEGIN
-/* 430490-4304F5 00065 */
-void CDSFilterStream::WriteBytes(void* param_1, uint param_2) { STUB_BODY(); }
-// !FUNC 0x00430490 END
 
-// !FUNC 0x00430500 BEGIN
-/* 430500-4305BE 000BE */
-uchar CDSFilterStream::SeekPosition(uint param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
-// !FUNC 0x00430500 END
 
-// !FUNC 0x004305c0 BEGIN
-/* 4305C0-430630 00070 */
-uchar CDSFilterStream::LockRegion(uint param_1, int param_2, uint param_3, int param_4) { STUB_BODY(); return 0; }
-// !FUNC 0x004305c0 END
 
-// !FUNC 0x00430640 BEGIN
-/* 430640-4306B0 00070 */
-uchar CDSFilterStream::UnlockRegion(uint param_1, int param_2, uint param_3, int param_4) { STUB_BODY(); return 0; }
-// !FUNC 0x00430640 END
 
 // !FUNC 0x00430b90 BEGIN
 /* 430B90-430C0A 0007A */
@@ -94,7 +74,7 @@ uchar CDSFilterStream::RaiseUnsupportedOperation(uint param_1) { STUB_BODY(); re
 
 // !FUNC 0x00430ca0 BEGIN
 /* 430CA0-430CFB 0005B */
-uchar CDSFilterStream::CDSFilterStream_BindSource(int* param_1, uint param_2, uint param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
+void CDSFilterStream::CDSFilterStream_BindSource(int* param_1, uint param_2, uint param_3, uint param_4, uint param_5) { STUB_BODY(); }
 // !FUNC 0x00430ca0 END
 
 // !FUNC 0x00430d00 BEGIN

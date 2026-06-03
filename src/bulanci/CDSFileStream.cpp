@@ -32,7 +32,7 @@ inline int* SelfOrNull(CDSFileStream* self) {
 
 // !FUNC 0x00401540 BEGIN
 /* 401540-4015FC 000BC */
-uchar CDSFileStream::CDSFileStream_Ctor(int param_1, uchar* param_2) { STUB_BODY(); return 0; }
+void* CDSFileStream::CDSFileStream_Ctor(int param_1, uchar* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00401540 END
 
 // !FUNC 0x00401600 BEGIN
@@ -100,7 +100,7 @@ uint* CDSFileStream::GetStreamName(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00401770 BEGIN
 /* 401770-40178E 0001E */
-uchar CDSFileStream::CDSFileStream_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CDSFileStream::CDSFileStream_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401770 END
 
 // !FUNC 0x00409260 BEGIN
@@ -371,7 +371,7 @@ void CDSFileStream::FlushStream() {
 
 // !FUNC 0x00433750 BEGIN
 /* 433750-433877 00127 */
-uchar CDSFileStream::CDSFileStream_Open(int param_1, DWORD param_2) { STUB_BODY(); return 0; }
+uchar CDSFileStream::CDSFileStream_Open(WCHAR* param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00433750 END
 
 // !FUNC 0x004338d0 BEGIN

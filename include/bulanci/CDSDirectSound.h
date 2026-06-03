@@ -5,9 +5,6 @@
 
 class CDSDirectSound {
 public:
-	// !DECL 0x0043a350 BEGIN
-	/* 43A350 */ uchar FUN_0043a350(int param_1);
-	// !DECL 0x0043a350 END
 	// !DECL 0x0043a483 BEGIN
 	/* 43A483 */ uchar Catch_0043a483();
 	// !DECL 0x0043a483 END
@@ -39,8 +36,12 @@ public:
 	/* 43CD00 */ void CDSDirectSound_WorkerThreadLoop(void* param_1);
 	// !DECL 0x0043cd00 END
 	// !DECL 0x0043cdc0 BEGIN
-	/* 43CDC0 */ uchar CDSDirectSound_OnMouseButtonDown(int* param_1);
+	/* 43CDC0 */ uchar CDSDirectSound_OnPlaybackCompleteMessage(int* param_1);
 	// !DECL 0x0043cdc0 END
+
+	// !DECL 0x0043cbc0 BEGIN
+	/* 43CBC0 */ void CDSDirectSound_InitPrimary(void* param_1, ushort param_2, int param_3, ushort param_4);
+	// !DECL 0x0043cbc0 END
 };
 
 #endif

@@ -2,7 +2,7 @@
 
 // !FUNC 0x0041a920 BEGIN
 /* 41A920-41A965 00045 */
-uchar CTeleportPoint::CTeleportPoint_InitVtables(uchar param_1) { STUB_BODY(); return 0; }
+uint* CTeleportPoint::CTeleportPoint_InitVtables(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a920 END
 
 // !FUNC 0x0041a970 BEGIN
@@ -14,7 +14,7 @@ uchar* CTeleportPoint::CTeleportPoint_GetClassTable() {
 
 // !FUNC 0x0041c9a0 BEGIN
 /* 41C9A0-41CB62 001C2 */
-void* CTeleportPoint::CTeleportPoint_Ctor(int* param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
+void* CTeleportPoint::CTeleportPoint_Ctor(void* param_1, uchar param_2, uchar param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0041c9a0 END
 
 // !FUNC 0x0041fca0 BEGIN
@@ -24,6 +24,6 @@ void CTeleportPoint::TriggerTeleportFX(void* param_1) { STUB_BODY(); }
 
 // !FUNC 0x0041fed0 BEGIN
 /* 41FED0-41FF8E 000BE */
-uchar CTeleportPoint::OnEvent(uint param_1, short param_2) { STUB_BODY(); return 0; }
+uchar CTeleportPoint::CTeleportPoint_OnEvent(uint param_1, short param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041fed0 END
 

@@ -9,7 +9,7 @@ public:
 	/* 42FF90 */ uchar FlushStream(int param_1);
 	// !DECL 0x0042ff90 END
 	// !DECL 0x0042ffa0 BEGIN
-	/* 42FFA0 */ longlong GetSize(void* param_1);
+	/* 42FFA0 */ longlong GetSize(uchar param_1);
 	// !DECL 0x0042ffa0 END
 	// !DECL 0x00430080 BEGIN
 	/* 430080 */ uchar* CDSFilterStream_GetTypeInfo();
@@ -32,21 +32,6 @@ public:
 	// !DECL 0x00430400 BEGIN
 	/* 430400 */ uchar CDSFilterStream_ReleaseInnerStream(int param_1);
 	// !DECL 0x00430400 END
-	// !DECL 0x00430420 BEGIN
-	/* 430420 */ void ReadBytes(void* param_1, uint param_2);
-	// !DECL 0x00430420 END
-	// !DECL 0x00430490 BEGIN
-	/* 430490 */ void WriteBytes(void* param_1, uint param_2);
-	// !DECL 0x00430490 END
-	// !DECL 0x00430500 BEGIN
-	/* 430500 */ uchar SeekPosition(uint param_1, int param_2, int param_3);
-	// !DECL 0x00430500 END
-	// !DECL 0x004305c0 BEGIN
-	/* 4305C0 */ uchar LockRegion(uint param_1, int param_2, uint param_3, int param_4);
-	// !DECL 0x004305c0 END
-	// !DECL 0x00430640 BEGIN
-	/* 430640 */ uchar UnlockRegion(uint param_1, int param_2, uint param_3, int param_4);
-	// !DECL 0x00430640 END
 	// !DECL 0x00430b90 BEGIN
 	/* 430B90 */ uchar CDSFilterStream_dtor(uint* param_1);
 	// !DECL 0x00430b90 END
@@ -60,7 +45,7 @@ public:
 	/* 430C90 */ uchar RaiseUnsupportedOperation(uint param_1);
 	// !DECL 0x00430c90 END
 	// !DECL 0x00430ca0 BEGIN
-	/* 430CA0 */ uchar CDSFilterStream_BindSource(int* param_1, uint param_2, uint param_3, uint param_4, uint param_5);
+	/* 430CA0 */ void CDSFilterStream_BindSource(int* param_1, uint param_2, uint param_3, uint param_4, uint param_5);
 	// !DECL 0x00430ca0 END
 	// !DECL 0x00430d00 BEGIN
 	/* 430D00 */ uchar SetStreamSize(uint param_1, uint param_2);

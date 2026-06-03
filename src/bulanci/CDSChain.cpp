@@ -133,30 +133,11 @@ void* CDSChain::CDSChain_Referenced_DtorScalar(uchar param_1) { STUB_BODY(); ret
 uchar CDSChain::CDSChain_OnChainEvent(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401260 END
 
-// !FUNC 0x0040a440 BEGIN
-/* 40A440-40A62E — CDSChain_LoadConfigFromRegistry(CDSChain_full *this).
-   Spec: ghidra_analysis/engine/struct_recovery/CDSChain_LoadConfigFromRegistry.md */
-void CDSChain::CDSChain_LoadConfigFromRegistry() {
-	auto* chain = reinterpret_cast<uchar*>(this);
-	try {
-		LoadConfigFromRegistryBody(chain);
-	} catch (...) {
-		/* @0x0040a62f — original: virtual release on stack CDSGZipStream* @ [EBP+0x48] */
-		CBulanci::CBulanci_InstallFactoryDefaults(chain);
-		chain[kOffField78] = 1;
-		_Globals::CDSAudio_SetPanPreview(*reinterpret_cast<int*>(chain + kOffPanBinding));
-	}
-}
-// !FUNC 0x0040a440 END
 
-// !FUNC 0x0040a62f BEGIN
-/* 40A62F-40A64C — MSVC SEH catch slice; logic folded into CDSChain_LoadConfigFromRegistry */
-uchar* CDSChain::Catch_0040a62f() { STUB_BODY(); return 0; }
-// !FUNC 0x0040a62f END
 
 // !FUNC 0x0040a680 BEGIN
 /* 40A680-40A724 000A4 */
-void* CDSChain::CDSChain_ctor(void* param_1) { STUB_BODY(); return 0; }
+CDSChain_full* CDSChain::CDSChain_ctor(CDSChain_full* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040a680 END
 
 // !FUNC 0x0041aa40 BEGIN
@@ -171,10 +152,6 @@ int CDSChain::CDSChain_AdjustThisOffset() {
 }
 // !FUNC 0x0042ac90 END
 
-// !FUNC 0x0042fb70 BEGIN
-/* 42FB70-42FC2F 000BF */
-uchar CDSChain::CDSChain_Append(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0042fb70 END
 
 // !FUNC 0x0042fc30 BEGIN
 /* 42FC30-42FC97 00067 */
@@ -183,6 +160,47 @@ uchar CDSChain::CDSChain_Remove(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042fcd0 BEGIN
 /* 42FCD0-42FD2B 0005B */
-uchar CDSChain::CDSChain_dtor(uint* param_1) { STUB_BODY(); return 0; }
+void CDSChain::CDSChain_dtor(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0042fcd0 END
+
+
+// !FUNC 0x0042f800 BEGIN
+/* 42F800-42F813 00013 */
+void CDSChain::CDSChain_ReleaseAuxHeap(void* param_1) { STUB_BODY(); }
+// !FUNC 0x0042f800 END
+
+// !FUNC 0x0042f880 BEGIN
+/* 42F880-42F88A 0000A */
+uchar CDSChain::CDSChained_InsertBeforeAnchor(void* param_1, int param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x0042f880 END
+
+// !FUNC 0x0042f890 BEGIN
+/* 42F890-42F89A 0000A */
+uchar CDSChain::CDSChained_UnlinkAndSpliceNode(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0042f890 END
+
+// !FUNC 0x0042f8b0 BEGIN
+/* 42F8B0-42F91D 0006D */
+void* CDSChain::CDSChain_GetChildAtIndex(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0042f8b0 END
+
+// !FUNC 0x0042f940 BEGIN
+/* 42F940-42F980 00040 */
+void CDSChain::CDSChain_RemoveListNode(void* param_1, void* param_2, char param_3) { STUB_BODY(); }
+// !FUNC 0x0042f940 END
+
+// !FUNC 0x0042fa20 BEGIN
+/* 42FA20-42FA44 00024 */
+uchar CDSChain::CDSChained_InsertBeforeWithHeadFixup(CBulanek* param_1, void* param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x0042fa20 END
+
+// !FUNC 0x0042fa50 BEGIN
+/* 42FA50-42FA75 00025 */
+uchar CDSChain::CDSChained_RemoveWithHeadFixup(CBulanek* param_1, int param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x0042fa50 END
+
+// !FUNC 0x0042fab0 BEGIN
+/* 42FAB0-42FAD7 00027 */
+void CDSChain::CDSChained_ClearChildren(char param_1) { STUB_BODY(); }
+// !FUNC 0x0042fab0 END
 

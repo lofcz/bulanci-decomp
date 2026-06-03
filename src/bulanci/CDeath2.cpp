@@ -7,7 +7,7 @@ uchar CDeath2::CDeath2_UpdateStateFromParams(uint param_1, uint param_2, int par
 
 // !FUNC 0x00417b10 BEGIN
 /* 417B10-417B2E 0001E */
-uchar CDeath2::CDeath2_HideViewIfParentShown(int param_1) { STUB_BODY(); return 0; }
+void CDeath2::CDeath2_HideViewIfParentShown(CDSUpdatedItem* param_1) { STUB_BODY(); }
 // !FUNC 0x00417b10 END
 
 // !FUNC 0x00419b00 BEGIN
@@ -19,6 +19,11 @@ uchar* CDeath2::CDeath2_GetClassTable() {
 
 // !FUNC 0x0041a8c0 BEGIN
 /* 41A8C0-41A913 00053 */
-uchar CDeath2::CDeath2_SubobjectCtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CDeath2::CDeath2_SubobjectCtor() { STUB_BODY(); return 0; }
 // !FUNC 0x0041a8c0 END
+
+// !FUNC 0x00419aa0 BEGIN
+/* 419AA0-419AFF 0005F */
+void* CDeath2::CDeath2_ctor(CBulanek* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00419aa0 END
 

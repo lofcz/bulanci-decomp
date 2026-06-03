@@ -14,12 +14,12 @@ uchar* CLevelScore::GetClassIdentifier() {
 
 // !FUNC 0x00409320 BEGIN
 /* 409320-409328 00008 */
-uchar CLevelScore::DeletingDestructorThunk_4(uchar param_1) { STUB_BODY(); return 0; }
+uchar CLevelScore::CLevelScore_ScalarDeletingDtor_thunk_n0x4(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409320 END
 
 // !FUNC 0x00409330 BEGIN
 /* 409330-40939C 0006C */
-uchar CLevelScore::CLevelScore_dtor(uint* param_1) { STUB_BODY(); return 0; }
+void CLevelScore::CLevelScore_dtor() { STUB_BODY(); }
 // !FUNC 0x00409330 END
 
 // !FUNC 0x00409690 BEGIN
@@ -31,4 +31,19 @@ void CLevelScore::Serialize(int* param_1) { STUB_BODY(); }
 /* 409A40-409A5E 0001E */
 void* CLevelScore::CLevelScore_scalar_deleting_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00409a40 END
+
+// !FUNC 0x00409620 BEGIN
+/* 409620-40968D 0006D */
+void CLevelScore::CLevelScore_InitializeDefaultScores() { STUB_BODY(); }
+// !FUNC 0x00409620 END
+
+// !FUNC 0x00409b10 BEGIN
+/* 409B10-409BB9 000A9 */
+CDSChain* CLevelScore::CLevelScore_AddPlayerScore(uint* param_1, uchar* param_2, uchar* param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x00409b10 END
+
+// !FUNC 0x0042fae0 BEGIN
+/* 42FAE0-42FB64 00084 */
+uchar CLevelScore::CDSChain_SortChildrenWithComparator(_PtFuncCompare* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0042fae0 END
 

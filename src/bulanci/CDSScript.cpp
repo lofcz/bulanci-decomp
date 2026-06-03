@@ -2,7 +2,7 @@
 
 // !FUNC 0x00438310 BEGIN
 /* 438310-43833E 0002E */
-uchar CDSScript::InstallOpcodeTable(int param_1, void* param_2, int param_3) { STUB_BODY(); return 0; }
+void CDSScript::CDSScript_InstallOpcodeTable(int param_1, void* param_2, int param_3) { STUB_BODY(); }
 // !FUNC 0x00438310 END
 
 // !FUNC 0x00438350 BEGIN
@@ -17,7 +17,7 @@ ushort CDSScript::ReadU16(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00438380 BEGIN
 /* 438380-438390 00010 */
-uint CDSScript::ReadU8(int param_1) { STUB_BODY(); return 0; }
+uint CDSScript::ReadU8(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00438380 END
 
 // !FUNC 0x00438390 BEGIN
@@ -39,12 +39,12 @@ uchar CDSScript::CDSScript_AdjustOffsetDtor(uchar param_1) { STUB_BODY(); return
 
 // !FUNC 0x00438400 BEGIN
 /* 438400-43848F 0008F */
-uchar CDSScript::CDSScript_dtor(uint* param_1) { STUB_BODY(); return 0; }
+void CDSScript::CDSScript_dtor(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00438400 END
 
 // !FUNC 0x004384c0 BEGIN
 /* 4384C0-4384D7 00017 */
-uchar CDSScript::ReadSubExpr(int param_1) { STUB_BODY(); return 0; }
+void CDSScript::ReadSubExpr(void* param_1) { STUB_BODY(); }
 // !FUNC 0x004384c0 END
 
 // !FUNC 0x00438c40 BEGIN

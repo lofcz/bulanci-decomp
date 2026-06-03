@@ -54,11 +54,11 @@ void CIcon::CIcon_dtor(void* param_1) { STUB_BODY(); }
 
 // !FUNC 0x004065e0 BEGIN
 /* 4065E0-4065FE 0001E */
-uchar CIcon::CIcon_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CIcon::CIcon_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004065e0 END
 
 // !FUNC 0x004086e0 BEGIN
 /* 4086E0-4087EA 0010A */
-uchar CIcon::CIcon_BuildAt(uint param_1, uint param_2, ushort param_3, int param_4) { STUB_BODY(); return 0; }
+void* CIcon::CIcon_BuildAt(int param_1, int param_2, ushort param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x004086e0 END
 

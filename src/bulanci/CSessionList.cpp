@@ -17,3 +17,18 @@ uchar* CSessionList::CSessionList_GetTypeDescriptor() {
 }
 // !FUNC 0x0040c530 END
 
+// !FUNC 0x0040c550 BEGIN
+/* 40C550-40C568 00018 */
+CSessionItem* CSessionList::CSessionList_GetPick(void* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x0040c550 END
+
+// !FUNC 0x0040c570 BEGIN
+/* 40C570-40C5C6 00056 */
+void CSessionList::CSessionList_SelectBySessionGuid(uchar* param_1) { STUB_BODY(); }
+// !FUNC 0x0040c570 END
+
+// !FUNC 0x0040c5d0 BEGIN
+/* 40C5D0-40C646 00076 */
+void CSessionList::CSessionList_SetStatusFromStringHandle(int param_1) { STUB_BODY(); }
+// !FUNC 0x0040c5d0 END
+

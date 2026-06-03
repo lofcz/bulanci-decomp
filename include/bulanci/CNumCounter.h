@@ -36,7 +36,7 @@ public:
 	/* 427740 */ void CNumCounter_Render(uchar param_1);
 	// !DECL 0x00427740 END
 	// !DECL 0x00427af0 BEGIN
-	/* 427AF0 */ uchar CNumCounter_vDtor(uchar param_1);
+	/* 427AF0 */ void* CNumCounter_vDtor(uchar param_1);
 	// !DECL 0x00427af0 END
 };
 

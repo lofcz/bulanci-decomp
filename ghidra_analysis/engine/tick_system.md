@@ -22,7 +22,7 @@ void CDSApp_UpdateClock(void) {
 
 ---
 
-## The Modal Message Pump (`CDSView_DoModal @ 0x0042d240`)
+## The Modal Message Pump (`CDSView_DoModal @ 0x0042d1a0`)
 
 Bulánci is designed around a hierarchical, modal view-state architecture where almost every active screen—from the main menu (`CMenu`) to the gameplay coordinator (`CGaming`) and individual config/message dialogs—is a `CDSView` (or derived class).
 

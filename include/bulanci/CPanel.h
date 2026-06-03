@@ -33,7 +33,7 @@ public:
 	/* 427640 */ void CPanel_Render(char param_1);
 	// !DECL 0x00427640 END
 	// !DECL 0x00427c10 BEGIN
-	/* 427C10 */ uchar CPanel_vDtor(uchar param_1);
+	/* 427C10 */ void* CPanel_vDtor(uchar param_1);
 	// !DECL 0x00427c10 END
 };
 

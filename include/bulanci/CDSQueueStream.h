@@ -42,7 +42,7 @@ public:
 	/* 43BF10 */ uchar SetStreamSize(uint param_1, uint param_2);
 	// !DECL 0x0043bf10 END
 	// !DECL 0x0043bf80 BEGIN
-	/* 43BF80 */ uchar SeekPosition(int param_1, uint param_2, int param_3);
+	/* 43BF80 */ uchar SeekPosition(uint param_1, uint param_2, int param_3);
 	// !DECL 0x0043bf80 END
 	// !DECL 0x0043c000 BEGIN
 	/* 43C000 */ void ReadBytes(void* param_1, size_t param_2);

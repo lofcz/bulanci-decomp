@@ -11,9 +11,6 @@ public:
 	// !DECL 0x00419120 BEGIN
 	/* 419120 */ uchar* CBitmap_GetClassTable();
 	// !DECL 0x00419120 END
-	// !DECL 0x00419130 BEGIN
-	/* 419130 */ uchar CBitmap_OnDraw(int param_1);
-	// !DECL 0x00419130 END
 	// !DECL 0x00419140 BEGIN
 	/* 419140 */ void* CBitmap_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00419140 END
@@ -29,9 +26,6 @@ public:
 	// !DECL 0x00419190 BEGIN
 	/* 419190 */ uchar CBitmap_ScalarDeletingDtor_thunk_Sub18(uchar param_1);
 	// !DECL 0x00419190 END
-	// !DECL 0x00419280 BEGIN
-	/* 419280 */ uchar CBitmap_FireOnBitmapEvtFromView(uint param_1, ushort param_2);
-	// !DECL 0x00419280 END
 };
 
 #endif

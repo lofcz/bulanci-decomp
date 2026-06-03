@@ -26,6 +26,9 @@ import ghidra_helpers
 from project import DecompUnit
 
 SCRIPT_PATH = Path(os.path.realpath(__file__)).parent
+# Headless compiles every .java on -scriptPath together; keep this folder
+# minimal so optional maintenance scripts in scripts/ghidra/ do not break export.
+PIPELINE_SCRIPT_PATH = SCRIPT_PATH / "ghidra" / "pipeline"
 
 
 def _post_scripts(unit: DecompUnit) -> list[list[str]]:
@@ -72,6 +75,7 @@ def _export_via_existing(repo_root: Path, unit: DecompUnit) -> None:
         process=Path(unit.filePath).name,
         analysis=False,
         post_scripts=_post_scripts(unit),
+        script_path=PIPELINE_SCRIPT_PATH,
     )
 
 
@@ -87,6 +91,7 @@ def _export_via_tempdir(unit: DecompUnit) -> None:
             import_file=str(unit.filePath),
             analysis=True,
             post_scripts=_post_scripts(unit),
+            script_path=PIPELINE_SCRIPT_PATH,
         )
 
 

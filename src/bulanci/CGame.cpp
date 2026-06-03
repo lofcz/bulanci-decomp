@@ -2,7 +2,7 @@
 
 // !FUNC 0x00401d00 BEGIN
 /* 401D00-401D21 00021 */
-void* CGame::CGame_InitWidePathFromMbcs(int param_1) { STUB_BODY(); return 0; }
+void* CGame::CGame_InitWidePathFromMbcs(CHAR* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401d00 END
 
 // !FUNC 0x0040a840 BEGIN
@@ -10,25 +10,9 @@ void* CGame::CGame_InitWidePathFromMbcs(int param_1) { STUB_BODY(); return 0; }
 uchar CGame::CGame_FocusLobbyScroller(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040a840 END
 
-// !FUNC 0x0040c570 BEGIN
-/* 40C570-40C5C6 00056 */
-void CGame::CSessionList_SelectBySessionGuid(uchar* param_1) { STUB_BODY(); }
-// !FUNC 0x0040c570 END
 
-// !FUNC 0x0040c5d0 BEGIN
-/* 40C5D0-40C646 00076 */
-void CGame::CSessionList_SetStatusFromStringHandle(int param_1) { STUB_BODY(); }
-// !FUNC 0x0040c5d0 END
 
-// !FUNC 0x00412160 BEGIN
-/* 412160-4121A0 00040 */
-void CGame::CDirectKeyb_PollKeyboard(CDirectKeyb* param_1) { STUB_BODY(); }
-// !FUNC 0x00412160 END
 
-// !FUNC 0x004121a0 BEGIN
-/* 4121A0-4121C8 00028 */
-char CGame::CDirectKeyb_GetKeyEdge(uchar param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x004121a0 END
 
 // !FUNC 0x00412800 BEGIN
 /* 412800-41284F 0004F */
@@ -67,12 +51,12 @@ uchar CGame::CGame_NetSendOpposingEvent_t17(uint param_1, uint param_2, uint par
 
 // !FUNC 0x00413b90 BEGIN
 /* 413B90-413C41 000B1 */
-uchar CGame::NetSendChat(uchar param_1, int* param_2, void* param_3) { STUB_BODY(); return 0; }
+uchar CGame::CGame_NetSendChat_t06(uchar param_1, int* param_2, void* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00413b90 END
 
 // !FUNC 0x004144f0 BEGIN
 /* 4144F0-414546 00056 */
-uchar CGame::FUN_004144f0(uchar param_1, uchar param_2, uint param_3, char param_4) { STUB_BODY(); return 0; }
+uchar CGame::CGame_DeferTeamScoreSchedulerEvent(uchar param_1, uchar param_2, uint param_3, char param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x004144f0 END
 
 // !FUNC 0x00414550 BEGIN
@@ -106,7 +90,7 @@ uchar* CGame::CGame_GetTypeInfo_EventHandler() {
 
 // !FUNC 0x00414ca0 BEGIN
 /* 414CA0-414DCC 0012C */
-void CGame::CGame_dtor(void* param_1) { STUB_BODY(); }
+void CGame::CGame_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00414ca0 END
 
 // !FUNC 0x00415220 BEGIN
@@ -115,7 +99,7 @@ uchar CGame::CGame_RebuildLevelListFromPlayerRecs(uint* param_1, int param_2) { 
 // !FUNC 0x00415220 END
 
 // !FUNC 0x00415290 BEGIN
-/* 415290-415E11 00B81 */
+/* 415290-415E0A 00B7A */
 uchar CGame::CGame_ProcessNetMessage(int param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00415290 END
 
@@ -132,12 +116,12 @@ uint CGame::Catch_00416407() { STUB_BODY(); return 0; }
 
 // !FUNC 0x004169a0 BEGIN
 /* 4169A0-416A03 00063 */
-uchar CGame::FUN_004169a0(uchar param_1, uchar param_2, uchar param_3) { STUB_BODY(); return 0; }
+uchar CGame::CGame_PostTeamScoreHudEvent_0xEE(uchar param_1, uchar param_2, uchar param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004169a0 END
 
 // !FUNC 0x00416a10 BEGIN
 /* 416A10-416A68 00058 */
-uchar CGame::FUN_00416a10(uchar param_1, uchar param_2, uchar param_3) { STUB_BODY(); return 0; }
+uchar CGame::CGame_PostOpposingHudEvent_0xEF(uchar param_1, uchar param_2, uchar param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00416a10 END
 
 // !FUNC 0x004180c0 BEGIN
@@ -167,7 +151,7 @@ uchar CGame::CGame_OnNetMsg_t13_PlaceSpecialPickup(int* param_1) { STUB_BODY(); 
 
 // !FUNC 0x0041f010 BEGIN
 /* 41F010-41F02E 0001E */
-uchar CGame::CGame_OnNetMsg_t19_PlayerPickedUpWorldObj(uchar param_1, ODSImage param_2, uchar param_3) { STUB_BODY(); return 0; }
+uchar CGame::CGame_OnNetMsg_t19_PlayerPickedUpWorldObj(uchar param_1, uchar param_2, uchar param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f010 END
 
 // !FUNC 0x0041f030 BEGIN
@@ -202,7 +186,7 @@ uchar CGame::CDSChain_AdjustThisOffset_ThisMinus18(int param_1) { STUB_BODY(); r
 // !FUNC 0x00428e20 END
 
 // !FUNC 0x0042eff0 BEGIN
-/* 42EFF0-42F055 00065 */
+/* 42EFF0-42F052 00062 */
 uchar CGame::BroadcastEvent(ushort param_1, uint param_2, uint param_3, void* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0042eff0 END
 
@@ -220,4 +204,29 @@ void CGame::CDSDirectPlay_EnumSessions() { STUB_BODY(); }
 /* 43CA40-43CA48 00008 */
 uchar CGame::CDSObject_ReleaseViaVtable_ThisMinus1c(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043ca40 END
+
+// !FUNC 0x00413030 BEGIN
+/* 413030-4130DD 000AD */
+short CGame::CMenu_DoModalChild(void* param_1, char param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x00413030 END
+
+// !FUNC 0x00413ce0 BEGIN
+/* 413CE0-41408A 003AA */
+void CGame::CGame_StartGame() { STUB_BODY(); }
+// !FUNC 0x00413ce0 END
+
+// !FUNC 0x00414170 BEGIN
+/* 414170-414232 000C2 */
+uchar CGame::CMenu_PickSession(uint* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00414170 END
+
+// !FUNC 0x00414280 BEGIN
+/* 414280-414331 000B1 */
+void CGame::CGame_GetOrCreateLevelScore() { STUB_BODY(); }
+// !FUNC 0x00414280 END
+
+// !FUNC 0x00414790 BEGIN
+/* 414790-414847 000B7 */
+void CGame::CMenu_ShowLobby(uchar param_1) { STUB_BODY(); }
+// !FUNC 0x00414790 END
 

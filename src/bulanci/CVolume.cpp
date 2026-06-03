@@ -49,7 +49,7 @@ uint* CVolume::CVolume_Allocate() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040fa70 BEGIN
 /* 40FA70-40FAFD 0008D */
-uchar CVolume::CVolume_dtor(uchar param_1) { STUB_BODY(); return 0; }
+uchar CVolume::CVolume_dtor(uint* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040fa70 END
 
 // !FUNC 0x0040fb00 BEGIN

@@ -21,7 +21,7 @@ public:
 	/* 403CC0 */ void CRadio_SetSelected(uchar param_1);
 	// !DECL 0x00403cc0 END
 	// !DECL 0x00403d10 BEGIN
-	/* 403D10 */ uchar CRadio_LoadData(uchar param_1);
+	/* 403D10 */ uchar CRadio_LoadData(uchar* param_1);
 	// !DECL 0x00403d10 END
 	// !DECL 0x00405240 BEGIN
 	/* 405240 */ uchar CRadio_OnMouseUp(uint param_1, uchar param_2);
@@ -45,14 +45,18 @@ public:
 	/* 407500 */ void CRadio_dtor(uchar param_1);
 	// !DECL 0x00407500 END
 	// !DECL 0x00407f30 BEGIN
-	/* 407F30 */ uchar CRadio_vDtor(uchar param_1);
+	/* 407F30 */ void* CRadio_vDtor(uchar param_1);
 	// !DECL 0x00407f30 END
 	// !DECL 0x00408540 BEGIN
-	/* 408540 */ uchar CRadio_BuildAt(uint param_1, uint param_2);
+	/* 408540 */ void* CRadio_BuildAt(int param_1, uint param_2);
 	// !DECL 0x00408540 END
 	// !DECL 0x0040aa00 BEGIN
-	/* 40AA00 */ uchar CRadio_SaveData(uchar param_1);
+	/* 40AA00 */ uchar CRadio_SaveData(uchar* param_1);
 	// !DECL 0x0040aa00 END
+
+	// !DECL 0x004075f0 BEGIN
+	/* 4075F0 */ uchar CRadio_AddOption(WCHAR* param_1, uint param_2);
+	// !DECL 0x004075f0 END
 };
 
 #endif

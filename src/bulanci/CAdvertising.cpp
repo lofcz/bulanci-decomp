@@ -17,7 +17,7 @@ uchar CAdvertising::OnTimerTick(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040b4d0 BEGIN
 /* 40B4D0-40B4F8 00028 */
-uchar CAdvertising::OnLButtonDown(int* param_1) { STUB_BODY(); return 0; }
+void CAdvertising::OnLButtonDown(int param_1, int param_2, uint param_3) { STUB_BODY(); }
 // !FUNC 0x0040b4d0 END
 
 // !FUNC 0x0040b500 BEGIN
@@ -27,7 +27,7 @@ uint CAdvertising::OnKeyDown(char param_1, char param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x0040e5f0 BEGIN
 /* 40E5F0-40E706 00116 */
-void* CAdvertising::CAdvertising_ctor(void* param_1) { STUB_BODY(); return 0; }
+void* CAdvertising::CAdvertising_ctor() { STUB_BODY(); return 0; }
 // !FUNC 0x0040e5f0 END
 
 // !FUNC 0x0040e710 BEGIN
@@ -62,4 +62,9 @@ void* CAdvertising::CAdvertising_ScalarDeletingDtor(uchar param_1) { STUB_BODY()
 /* 40FE30-40FF1C 000EC */
 uchar CAdvertising::LoadSplashImage(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040fe30 END
+
+// !FUNC 0x00401a10 BEGIN
+/* 401A10-401A6A 0005A */
+void CAdvertising::CAdvertising_dtor() { STUB_BODY(); }
+// !FUNC 0x00401a10 END
 

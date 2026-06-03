@@ -14,6 +14,10 @@ public:
 	// !DECL 0x0042adb0 BEGIN
 	/* 42ADB0 */ void* CDSBackBuffer_DtorScalar(uchar param_1);
 	// !DECL 0x0042adb0 END
+
+	// !DECL 0x0042ad40 BEGIN
+	/* 42AD40 */ void CDSBackBuffer_dtor(void* param_1);
+	// !DECL 0x0042ad40 END
 };
 
 #endif

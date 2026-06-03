@@ -37,6 +37,7 @@ def runAnalyze(
     pre_scripts=None,
     post_scripts=None,
     read_only=True,
+    script_path: Path | None = None,
 ):
     """Invoke Ghidra's `analyzeHeadless` against a project.
 
@@ -64,19 +65,34 @@ def runAnalyze(
         commonAnalyzeHeadlessArgs += ["-readOnly"]
     commonAnalyzeHeadlessArgs += [
         "-scriptPath",
-        str(SCRIPT_PATH / "ghidra"),
+        str(script_path or (SCRIPT_PATH / "ghidra")),
     ]
 
     if not analysis:
         commonAnalyzeHeadlessArgs += ["-noanalysis"]
 
+    def _resolve_script_entry(entry: list | str) -> list | str:
+        """Prefer repo ``scripts/ghidra/*.java`` over a same-named user script."""
+        if isinstance(entry, list) and entry:
+            name = entry[0]
+            if isinstance(name, str) and name.endswith(".java"):
+                base = script_path or (SCRIPT_PATH / "ghidra")
+                repo_script = base / name
+                if not repo_script.is_file():
+                    repo_script = SCRIPT_PATH / "ghidra" / name
+                if repo_script.is_file():
+                    return [str(repo_script.resolve()), *entry[1:]]
+        return entry
+
     for pre_script in pre_scripts:
+        pre_script = _resolve_script_entry(pre_script)
         if isinstance(pre_script, list):
             commonAnalyzeHeadlessArgs += ["-prescript"] + pre_script
         elif isinstance(pre_script, str):
             commonAnalyzeHeadlessArgs += ["-prescript", pre_script]
 
     for post_script in post_scripts:
+        post_script = _resolve_script_entry(post_script)
         if isinstance(post_script, list):
             commonAnalyzeHeadlessArgs += ["-postscript"] + post_script
         elif isinstance(post_script, str):

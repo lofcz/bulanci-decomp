@@ -12,10 +12,10 @@ public:
 	/* 402EE0 */ static uchar CScrollBar_BlitHorizontalTrack(CPoemScroller* param_1, int param_2, int param_3, int param_4, int param_5);
 	// !DECL 0x00402ee0 END
 	// !DECL 0x00402f60 BEGIN
-	/* 402F60 */ void CScrollBar_OnMouseMove(uchar param_1);
+	/* 402F60 */ void CScrollBar_OnMouseMove();
 	// !DECL 0x00402f60 END
 	// !DECL 0x00403530 BEGIN
-	/* 403530 */ void CScrollBar_Render(uchar param_1);
+	/* 403530 */ void CScrollBar_Render();
 	// !DECL 0x00403530 END
 	// !DECL 0x00403860 BEGIN
 	/* 403860 */ int CScrollBar_HitTest(int* param_1);
@@ -24,7 +24,7 @@ public:
 	/* 403980 */ uchar CScrollBar_OnKeyDown(int* param_1);
 	// !DECL 0x00403980 END
 	// !DECL 0x00403a80 BEGIN
-	/* 403A80 */ void CScrollBar_OnTimerTick(uchar param_1);
+	/* 403A80 */ void CScrollBar_OnTimerTick();
 	// !DECL 0x00403a80 END
 	// !DECL 0x00404790 BEGIN
 	/* 404790 */ uchar CScrollBar_ctor(uchar param_1);
@@ -51,10 +51,10 @@ public:
 	/* 406430 */ uchar CScrollBar_vDtor(uchar param_1);
 	// !DECL 0x00406430 END
 	// !DECL 0x00406770 BEGIN
-	/* 406770 */ void CScrollBar_Invalidate(CDSUpdatedItem* param_1);
+	/* 406770 */ void CScrollBar_Invalidate(uchar param_1);
 	// !DECL 0x00406770 END
 	// !DECL 0x00407460 BEGIN
-	/* 407460 */ uchar CScrollBar_OnMouseDown(int* param_1, short param_2);
+	/* 407460 */ void CScrollBar_OnMouseDown(int* param_1, short param_2);
 	// !DECL 0x00407460 END
 	// !DECL 0x004074c0 BEGIN
 	/* 4074C0 */ uchar CScrollBar_OnMouseUp(uint param_1, uchar param_2);
@@ -62,6 +62,13 @@ public:
 	// !DECL 0x00408370 BEGIN
 	/* 408370 */ uchar CScrollBar_BuildAt(int param_1, int param_2, int param_3, int param_4, uint* param_5);
 	// !DECL 0x00408370 END
+
+	// !DECL 0x00404f70 BEGIN
+	/* 404F70 */ int CScrollBar_SetValue(int param_1);
+	// !DECL 0x00404f70 END
+	// !DECL 0x004051d0 BEGIN
+	/* 4051D0 */ void CScrollBar_SetScrollRange(int param_1, int param_2);
+	// !DECL 0x004051d0 END
 };
 
 #endif

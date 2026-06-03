@@ -11,15 +11,6 @@ public:
 	// !DECL 0x004091f0 BEGIN
 	/* 4091F0 */ uchar* CDSEasyMemStream_GetTypeInfo();
 	// !DECL 0x004091f0 END
-	// !DECL 0x00409200 BEGIN
-	/* 409200 */ uchar CloseStream(int param_1);
-	// !DECL 0x00409200 END
-	// !DECL 0x00409220 BEGIN
-	/* 409220 */ longlong GetSize();
-	// !DECL 0x00409220 END
-	// !DECL 0x00409230 BEGIN
-	/* 409230 */ longlong TellPosition();
-	// !DECL 0x00409230 END
 	// !DECL 0x00409240 BEGIN
 	/* 409240 */ uchar CDSEasyMemStream_ScalarDeletingDtor_thunk_Sub4(uchar param_1);
 	// !DECL 0x00409240 END
@@ -36,25 +27,13 @@ public:
 	/* 4306C0 */ uchar ReleaseBackingBuffer(int param_1);
 	// !DECL 0x004306c0 END
 	// !DECL 0x004306e0 BEGIN
-	/* 4306E0 */ uchar FUN_004306e0(int param_1);
+	/* 4306E0 */ void CDSEasyMemStream_EnsureCapacity(int param_1);
 	// !DECL 0x004306e0 END
-	// !DECL 0x004307f0 BEGIN
-	/* 4307F0 */ uchar ReadBytes(void* param_1, size_t param_2);
-	// !DECL 0x004307f0 END
-	// !DECL 0x004308c0 BEGIN
-	/* 4308C0 */ uchar WriteBytes(void* param_1, size_t param_2);
-	// !DECL 0x004308c0 END
-	// !DECL 0x00430980 BEGIN
-	/* 430980 */ uchar SeekPosition(int param_1, uint param_2, int param_3);
-	// !DECL 0x00430980 END
-	// !DECL 0x004309f0 BEGIN
-	/* 4309F0 */ uchar SetStreamSize(uint param_1, uint param_2);
-	// !DECL 0x004309f0 END
 	// !DECL 0x00430a40 BEGIN
 	/* 430A40 */ uchar GetStreamName(uchar param_1);
 	// !DECL 0x00430a40 END
 	// !DECL 0x00430d60 BEGIN
-	/* 430D60 */ uchar FUN_00430d60(uchar* param_1, uint param_2);
+	/* 430D60 */ void CDSEasyMemStream_InitBackingBuffer(uchar* param_1, uint param_2);
 	// !DECL 0x00430d60 END
 	// !DECL 0x00430db0 BEGIN
 	/* 430DB0 */ uchar LockRegion(CDSFilterStream* param_1);

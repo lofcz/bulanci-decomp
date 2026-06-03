@@ -14,7 +14,7 @@ uint* CDSChained::CDSChained_ctor(uint* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040b560 BEGIN
 /* 40B560-40B637 000D7 */
-void* CDSChained::FUN_0040b560(uint* param_1) { STUB_BODY(); return 0; }
+void* CDSChained::CDSChained_InitWithRect(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b560 END
 
 // !FUNC 0x0042beb0 BEGIN
@@ -36,4 +36,9 @@ uchar CDSChained::CDSChained_ScalarDeletingDtor_thunk(uchar param_1) { STUB_BODY
 /* 433DD0-433DEE 0001E */
 void* CDSChained::CDSChained_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433dd0 END
+
+// !FUNC 0x0042f820 BEGIN
+/* 42F820-42F844 00024 */
+void CDSChained::CDSChained_InsertListNode(void* param_1, int param_2) { STUB_BODY(); }
+// !FUNC 0x0042f820 END
 

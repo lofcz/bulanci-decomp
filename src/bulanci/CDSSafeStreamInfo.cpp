@@ -19,7 +19,7 @@ uchar CDSSafeStreamInfo::CDSSafeStreamInfo_dtor(uint* param_1) { STUB_BODY(); re
 
 // !FUNC 0x00446ea0 BEGIN
 /* 446EA0-446F83 000E3 */
-uchar CDSSafeStreamInfo::FUN_00446ea0(int* param_1) { STUB_BODY(); return 0; }
+void CDSSafeStreamInfo::CDSSafeStream_RegisterThreadSlice(int* param_1) { STUB_BODY(); }
 // !FUNC 0x00446ea0 END
 
 // !FUNC 0x00447080 BEGIN

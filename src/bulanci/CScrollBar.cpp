@@ -12,12 +12,12 @@ uchar CScrollBar::CScrollBar_BlitHorizontalTrack(CPoemScroller* param_1, int par
 
 // !FUNC 0x00402f60 BEGIN
 /* 402F60-402FA9 00049 */
-void CScrollBar::CScrollBar_OnMouseMove(uchar param_1) { STUB_BODY(); }
+void CScrollBar::CScrollBar_OnMouseMove() { STUB_BODY(); }
 // !FUNC 0x00402f60 END
 
 // !FUNC 0x00403530 BEGIN
 /* 403530-403860 00330 */
-void CScrollBar::CScrollBar_Render(uchar param_1) { STUB_BODY(); }
+void CScrollBar::CScrollBar_Render() { STUB_BODY(); }
 // !FUNC 0x00403530 END
 
 // !FUNC 0x00403860 BEGIN
@@ -32,7 +32,7 @@ uchar CScrollBar::CScrollBar_OnKeyDown(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00403a80 BEGIN
 /* 403A80-403AB3 00033 */
-void CScrollBar::CScrollBar_OnTimerTick(uchar param_1) { STUB_BODY(); }
+void CScrollBar::CScrollBar_OnTimerTick() { STUB_BODY(); }
 // !FUNC 0x00403a80 END
 
 // !FUNC 0x00404790 BEGIN
@@ -79,12 +79,12 @@ uchar CScrollBar::CScrollBar_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00406770 BEGIN
 /* 406770-4067C0 00050 */
-void CScrollBar::CScrollBar_Invalidate(CDSUpdatedItem* param_1) { STUB_BODY(); }
+void CScrollBar::CScrollBar_Invalidate(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00406770 END
 
 // !FUNC 0x00407460 BEGIN
 /* 407460-4074BA 0005A */
-uchar CScrollBar::CScrollBar_OnMouseDown(int* param_1, short param_2) { STUB_BODY(); return 0; }
+void CScrollBar::CScrollBar_OnMouseDown(int* param_1, short param_2) { STUB_BODY(); }
 // !FUNC 0x00407460 END
 
 // !FUNC 0x004074c0 BEGIN
@@ -96,4 +96,14 @@ uchar CScrollBar::CScrollBar_OnMouseUp(uint param_1, uchar param_2) { STUB_BODY(
 /* 408370-40853F 001CF */
 uchar CScrollBar::CScrollBar_BuildAt(int param_1, int param_2, int param_3, int param_4, uint* param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00408370 END
+
+// !FUNC 0x00404f70 BEGIN
+/* 404F70-404FD5 00065 */
+int CScrollBar::CScrollBar_SetValue(int param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00404f70 END
+
+// !FUNC 0x004051d0 BEGIN
+/* 4051D0-40523E 0006E */
+void CScrollBar::CScrollBar_SetScrollRange(int param_1, int param_2) { STUB_BODY(); }
+// !FUNC 0x004051d0 END
 

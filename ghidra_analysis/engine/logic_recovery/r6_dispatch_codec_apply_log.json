@@ -1,0 +1,504 @@
+{
+  "ok": 64,
+  "fail": 8,
+  "entries": [
+    {
+      "op": "rename",
+      "addr": "0x0045a060",
+      "name": "III_exponents",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045a060 from 'III_scalefactors' to 'III_exponents'\", \"warnings\": [\"Function name 'III_exponents' \\u2014 main part 'III_exponents' is not PascalCase. Expected: IiiExponents\", \"Function name 'III_exponents' \\u2014 main part 'III_exponents' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045a9d0",
+      "name": "III_reorder",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045a9d0 from 'FUN_0045a9d0' to 'III_reorder'\", \"warnings\": [\"Function name 'III_reorder' \\u2014 main part 'III_reorder' is not PascalCase. Expected: IiiReorder\", \"Function name 'III_reorder' \\u2014 main part 'III_reorder' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045ab00",
+      "name": "III_stereo",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045ab00 from 'FUN_0045ab00' to 'III_stereo'\", \"warnings\": [\"Function name 'III_stereo' \\u2014 main part 'III_stereo' is not PascalCase. Expected: IiiStereo\", \"Function name 'III_stereo' \\u2014 main part 'III_stereo' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045b250",
+      "name": "imdct36",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045b250 from 'jpeg_fdct_ifast' to 'imdct36'\", \"warnings\": [\"Function name 'imdct36' \\u2014 main part 'imdct36' is not PascalCase. Expected: Imdct36\", \"Function name 'imdct36' is too short (main part 'imdct36' is 7 chars, minimum 8).\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045b7a0",
+      "name": "III_imdct_s",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045b7a0 from 'jpeg_fdct_islow' to 'III_imdct_s'\", \"warnings\": [\"Function name 'III_imdct_s' \\u2014 main part 'III_imdct_s' is not PascalCase. Expected: IiiImdctS\", \"Function name 'III_imdct_s' \\u2014 main part 'III_imdct_s' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045ba90",
+      "name": "III_overlap",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045ba90 from 'FUN_0045ba90' to 'III_overlap'\", \"warnings\": [\"Function name 'III_overlap' \\u2014 main part 'III_overlap' is not PascalCase. Expected: IiiOverlap\", \"Function name 'III_overlap' \\u2014 main part 'III_overlap' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045bb40",
+      "name": "III_freqinver",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045bb40 from 'FUN_0045bb40' to 'III_freqinver'\", \"warnings\": [\"Function name 'III_freqinver' \\u2014 main part 'III_freqinver' is not PascalCase. Expected: IiiFreqinver\", \"Function name 'III_freqinver' \\u2014 main part 'III_freqinver' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045dde0",
+      "name": "save_marker",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045dde0 from 'save_marker' to 'save_marker'\", \"warnings\": [\"Function name 'save_marker' \\u2014 main part 'save_marker' is not PascalCase. Expected: SaveMarker\", \"Function name 'save_marker' \\u2014 main part 'save_marker' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045df60",
+      "name": "skip_variable",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045df60 from 'skip_variable' to 'skip_variable'\", \"warnings\": [\"Function name 'skip_variable' \\u2014 main part 'skip_variable' is not PascalCase. Expected: SkipVariable\", \"Function name 'skip_variable' \\u2014 main part 'skip_variable' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045dfe0",
+      "name": "next_marker",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045dfe0 from 'next_marker' to 'next_marker'\", \"warnings\": [\"Function name 'next_marker' \\u2014 main part 'next_marker' is not PascalCase. Expected: NextMarker\", \"Function name 'next_marker' \\u2014 main part 'next_marker' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045e0c0",
+      "name": "first_marker",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045e0c0 from 'first_marker' to 'first_marker'\", \"warnings\": [\"Function name 'first_marker' \\u2014 main part 'first_marker' is not PascalCase. Expected: FirstMarker\", \"Function name 'first_marker' \\u2014 main part 'first_marker' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045e170",
+      "name": "read_markers",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045e170 from 'read_markers' to 'read_markers'\", \"warnings\": [\"Function name 'read_markers' \\u2014 main part 'read_markers' is not PascalCase. Expected: ReadMarkers\", \"Function name 'read_markers' \\u2014 main part 'read_markers' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045e4d0",
+      "name": "read_restart_marker",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045e4d0 from 'read_restart_marker' to 'read_restart_marker'\", \"warnings\": [\"Function name 'read_restart_marker' \\u2014 main part 'read_restart_marker' is not PascalCase. Expected: ReadRestartMarker\", \"Function name 'read_restart_marker' \\u2014 main part 'read_restart_marker' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045e540",
+      "name": "jpeg_resync_to_restart",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045e540 from 'jpeg_resync_to_restart' to 'jpeg_resync_to_restart'\", \"warnings\": [\"Function name 'jpeg_resync_to_restart' \\u2014 main part 'jpeg_resync_to_restart' is not PascalCase. Expected: JpegResyncToRestart\", \"Function name 'jpeg_resync_to_restart' \\u2014 main part 'jpeg_resync_to_restart' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045e5f0",
+      "name": "reset_marker_reader",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045e5f0 from 'reset_marker_reader' to 'reset_marker_reader'\", \"warnings\": [\"Function name 'reset_marker_reader' \\u2014 main part 'reset_marker_reader' is not PascalCase. Expected: ResetMarkerReader\", \"Function name 'reset_marker_reader' \\u2014 main part 'reset_marker_reader' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045e620",
+      "name": "jinit_marker_reader",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045e620 from 'jinit_marker_reader' to 'jinit_marker_reader'\", \"warnings\": [\"Function name 'jinit_marker_reader' \\u2014 main part 'jinit_marker_reader' is not PascalCase. Expected: JinitMarkerReader\", \"Function name 'jinit_marker_reader' \\u2014 main part 'jinit_marker_reader' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045e6a0",
+      "name": "jpeg_CreateDecompress",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045e6a0 from 'jpeg_CreateDecompress' to 'jpeg_CreateDecompress'\", \"warnings\": [\"Function name 'jpeg_CreateDecompress' \\u2014 main part 'jpeg_CreateDecompress' is not PascalCase. Expected: JpegCreatedecompress\", \"Function name 'jpeg_CreateDecompress' \\u2014 main part 'jpeg_CreateDecompress' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045e7a0",
+      "name": "default_decompress_parms",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045e7a0 from 'default_decompress_parms' to 'default_decompress_parms'\", \"warnings\": [\"Function name 'default_decompress_parms' \\u2014 main part 'default_decompress_parms' is not PascalCase. Expected: DefaultDecompressParms\", \"Function name 'default_decompress_parms' \\u2014 main part 'default_decompress_parms' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045e8d0",
+      "name": "jpeg_consume_input",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045e8d0 from 'jpeg_consume_input' to 'jpeg_consume_input'\", \"warnings\": [\"Function name 'jpeg_consume_input' \\u2014 main part 'jpeg_consume_input' is not PascalCase. Expected: JpegConsumeInput\", \"Function name 'jpeg_consume_input' \\u2014 main part 'jpeg_consume_input' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045e9a0",
+      "name": "jpeg_finish_decompress",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045e9a0 from 'jpeg_finish_decompress' to 'jpeg_finish_decompress'\", \"warnings\": [\"Function name 'jpeg_finish_decompress' \\u2014 main part 'jpeg_finish_decompress' is not PascalCase. Expected: JpegFinishDecompress\", \"Function name 'jpeg_finish_decompress' \\u2014 main part 'jpeg_finish_decompress' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045ea70",
+      "name": "jpeg_read_header",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045ea70 from 'jpeg_read_header' to 'jpeg_read_header'\", \"warnings\": [\"Function name 'jpeg_read_header' \\u2014 main part 'jpeg_read_header' is not PascalCase. Expected: JpegReadHeader\", \"Function name 'jpeg_read_header' \\u2014 main part 'jpeg_read_header' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045eaf0",
+      "name": "output_pass_setup",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045eaf0 from 'output_pass_setup' to 'output_pass_setup'\", \"warnings\": [\"Function name 'output_pass_setup' \\u2014 main part 'output_pass_setup' is not PascalCase. Expected: OutputPassSetup\", \"Function name 'output_pass_setup' \\u2014 main part 'output_pass_setup' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045eba0",
+      "name": "jpeg_read_scanlines",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045eba0 from 'jpeg_read_scanlines' to 'jpeg_read_scanlines'\", \"warnings\": [\"Function name 'jpeg_read_scanlines' \\u2014 main part 'jpeg_read_scanlines' is not PascalCase. Expected: JpegReadScanlines\", \"Function name 'jpeg_read_scanlines' \\u2014 main part 'jpeg_read_scanlines' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045ec10",
+      "name": "jpeg_start_decompress",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045ec10 from 'jpeg_start_decompress' to 'jpeg_start_decompress'\", \"warnings\": [\"Function name 'jpeg_start_decompress' \\u2014 main part 'jpeg_start_decompress' is not PascalCase. Expected: JpegStartDecompress\", \"Function name 'jpeg_start_decompress' \\u2014 main part 'jpeg_start_decompress' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045ed80",
+      "name": "jpeg_suppress_tables",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045ed80 from 'FUN_0045ed80' to 'jpeg_suppress_tables'\", \"warnings\": [\"Function name 'jpeg_suppress_tables' \\u2014 main part 'jpeg_suppress_tables' is not PascalCase. Expected: JpegSuppressTables\", \"Function name 'jpeg_suppress_tables' \\u2014 main part 'jpeg_suppress_tables' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045efe0",
+      "name": "jpeg_add_quant_table",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045efe0 from 'FUN_0045efe0' to 'jpeg_add_quant_table'\", \"warnings\": [\"Function name 'jpeg_add_quant_table' \\u2014 main part 'jpeg_add_quant_table' is not PascalCase. Expected: JpegAddQuantTable\", \"Function name 'jpeg_add_quant_table' \\u2014 main part 'jpeg_add_quant_table' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045f1b0",
+      "name": "jpeg_set_linear_quality",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045f1b0 from 'FUN_0045f1b0' to 'jpeg_set_linear_quality'\", \"warnings\": [\"Function name 'jpeg_set_linear_quality' \\u2014 main part 'jpeg_set_linear_quality' is not PascalCase. Expected: JpegSetLinearQuality\", \"Function name 'jpeg_set_linear_quality' \\u2014 main part 'jpeg_set_linear_quality' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045f7f0",
+      "name": "jround_up",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045f7f0 from 'FUN_0045f7f0' to 'jround_up'\", \"warnings\": [\"Function name 'jround_up' \\u2014 main part 'jround_up' is not PascalCase. Expected: JroundUp\", \"Function name 'jround_up' \\u2014 main part 'jround_up' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045feb0",
+      "name": "use_merged_upsample",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045feb0 from 'FUN_0045feb0' to 'use_merged_upsample'\", \"warnings\": [\"Function name 'use_merged_upsample' \\u2014 main part 'use_merged_upsample' is not PascalCase. Expected: UseMergedUpsample\", \"Function name 'use_merged_upsample' \\u2014 main part 'use_merged_upsample' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x0045ff30",
+      "name": "jinit_d_main_controller",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x0045ff30 from 'FUN_0045ff30' to 'jinit_d_main_controller'\", \"warnings\": [\"Function name 'jinit_d_main_controller' \\u2014 main part 'jinit_d_main_controller' is not PascalCase. Expected: JinitDMainController\", \"Function name 'jinit_d_main_controller' \\u2014 main part 'jinit_d_main_controller' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x004604d0",
+      "name": "jinit_d_post_controller",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x004604d0 from 'FUN_004604d0' to 'jinit_d_post_controller'\", \"warnings\": [\"Function name 'jinit_d_post_controller' \\u2014 main part 'jinit_d_post_controller' is not PascalCase. Expected: JinitDPostController\", \"Function name 'jinit_d_post_controller' \\u2014 main part 'jinit_d_post_controller' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x004604a0",
+      "name": "start_pass_dpost",
+      "ok": false,
+      "msg": "{\"error\": \"No function found for 0x004604a0\"}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00460ad0",
+      "name": "write_file_header",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00460ad0 from 'FUN_00460ad0' to 'write_file_header'\", \"warnings\": [\"Function name 'write_file_header' \\u2014 main part 'write_file_header' is not PascalCase. Expected: WriteFileHeader\", \"Function name 'write_file_header' \\u2014 main part 'write_file_header' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00460bf0",
+      "name": "write_scan_header",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00460bf0 from 'start_pass_huff' to 'write_scan_header'\", \"warnings\": [\"Function name 'write_scan_header' \\u2014 main part 'write_scan_header' is not PascalCase. Expected: WriteScanHeader\", \"Function name 'write_scan_header' \\u2014 main part 'write_scan_header' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00460a70",
+      "name": "write_marker_header",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00460a70 from 'emit_dri' to 'write_marker_header'\", \"warnings\": [\"Function name 'write_marker_header' \\u2014 main part 'write_marker_header' is not PascalCase. Expected: WriteMarkerHeader\", \"Function name 'write_marker_header' \\u2014 main part 'write_marker_header' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00460b20",
+      "name": "write_frame_header",
+      "ok": false,
+      "msg": "{\"error\": \"No function found for 0x00460b20\"}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00460cc0",
+      "name": "write_file_trailer",
+      "ok": false,
+      "msg": "{\"error\": \"No function found for 0x00460cc0\"}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00460ab0",
+      "name": "write_marker_byte",
+      "ok": false,
+      "msg": "{\"error\": \"No function found for 0x00460ab0\"}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00463fe0",
+      "name": "process_data_simple_main",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00463fe0 from 'FUN_00463fe0' to 'process_data_simple_main'\", \"warnings\": [\"Function name 'process_data_simple_main' \\u2014 main part 'process_data_simple_main' is not PascalCase. Expected: ProcessDataSimpleMain\", \"Function name 'process_data_simple_main' \\u2014 main part 'process_data_simple_main' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00464090",
+      "name": "process_data_context_main",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00464090 from 'FUN_00464090' to 'process_data_context_main'\", \"warnings\": [\"Function name 'process_data_context_main' \\u2014 main part 'process_data_context_main' is not PascalCase. Expected: ProcessDataContextMain\", \"Function name 'process_data_context_main' \\u2014 main part 'process_data_context_main' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00464130",
+      "name": "start_pass_main",
+      "ok": false,
+      "msg": "{\"error\": \"No function found for 0x00464130\"}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x004654f0",
+      "name": "jinit_merged_upsampler",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x004654f0 from 'jinit_color_deconverter' to 'jinit_merged_upsampler'\", \"warnings\": [\"Function name 'jinit_merged_upsampler' \\u2014 main part 'jinit_merged_upsampler' is not PascalCase. Expected: JinitMergedUpsampler\", \"Function name 'jinit_merged_upsampler' \\u2014 main part 'jinit_merged_upsampler' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00465650",
+      "name": "update_box",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00465650 from 'FUN_00465650' to 'update_box'\", \"warnings\": [\"Function name 'update_box' \\u2014 main part 'update_box' is not PascalCase. Expected: UpdateBox\", \"Function name 'update_box' \\u2014 main part 'update_box' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00465bb0",
+      "name": "fill_inverse_cmap",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00465bb0 from 'FUN_00465bb0' to 'fill_inverse_cmap'\", \"warnings\": [\"Function name 'fill_inverse_cmap' \\u2014 main part 'fill_inverse_cmap' is not PascalCase. Expected: FillInverseCmap\", \"Function name 'fill_inverse_cmap' \\u2014 main part 'fill_inverse_cmap' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00465570",
+      "name": "accumulate_histogram",
+      "ok": false,
+      "msg": "{\"error\": \"No function found for 0x00465570\"}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00465da0",
+      "name": "init_error_limit",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00465da0 from 'FUN_00465da0' to 'init_error_limit'\", \"warnings\": [\"Function name 'init_error_limit' \\u2014 main part 'init_error_limit' is not PascalCase. Expected: InitErrorLimit\", \"Function name 'init_error_limit' \\u2014 main part 'init_error_limit' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00465f70",
+      "name": "prescan_quantize",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00465f70 from 'FUN_00465f70' to 'prescan_quantize'\", \"warnings\": [\"Function name 'prescan_quantize' \\u2014 main part 'prescan_quantize' is not PascalCase. Expected: PrescanQuantize\", \"Function name 'prescan_quantize' \\u2014 main part 'prescan_quantize' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x004660f0",
+      "name": "start_pass_1_quant",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x004660f0 from 'FUN_004660f0' to 'start_pass_1_quant'\", \"warnings\": [\"Function name 'start_pass_1_quant' \\u2014 main part 'start_pass_1_quant' is not PascalCase. Expected: StartPass1Quant\", \"Function name 'start_pass_1_quant' \\u2014 main part 'start_pass_1_quant' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x004665c0",
+      "name": "init_inverse_cmap",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x004665c0 from 'FUN_004665c0' to 'init_inverse_cmap'\", \"warnings\": [\"Function name 'init_inverse_cmap' \\u2014 main part 'init_inverse_cmap' is not PascalCase. Expected: InitInverseCmap\", \"Function name 'init_inverse_cmap' \\u2014 main part 'init_inverse_cmap' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x004666a0",
+      "name": "start_pass_2",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x004666a0 from 'FUN_004666a0' to 'start_pass_2'\", \"warnings\": [\"Function name 'start_pass_2' \\u2014 main part 'start_pass_2' is not PascalCase. Expected: StartPass2\", \"Function name 'start_pass_2' \\u2014 main part 'start_pass_2' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00466670",
+      "name": "new_color_map",
+      "ok": false,
+      "msg": "{\"error\": \"No function found for 0x00466670\"}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x004667c0",
+      "name": "finish_pass_1",
+      "ok": false,
+      "msg": "{\"error\": \"No function found for 0x004667c0\"}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00466e40",
+      "name": "color_quantize",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00466e40 from 'FUN_00466e40' to 'color_quantize'\", \"warnings\": [\"Function name 'color_quantize' \\u2014 main part 'color_quantize' is not PascalCase. Expected: ColorQuantize\", \"Function name 'color_quantize' \\u2014 main part 'color_quantize' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00467460",
+      "name": "jinit_merged_upsampler",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00467460 from 'FUN_00467460' to 'jinit_merged_upsampler'\", \"warnings\": [\"Function name 'jinit_merged_upsampler' \\u2014 main part 'jinit_merged_upsampler' is not PascalCase. Expected: JinitMergedUpsampler\", \"Function name 'jinit_merged_upsampler' \\u2014 main part 'jinit_merged_upsampler' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00467600",
+      "name": "jinit_c_main_controller",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00467600 from 'FUN_00467600' to 'jinit_c_main_controller'\", \"warnings\": [\"Function name 'jinit_c_main_controller' \\u2014 main part 'jinit_c_main_controller' is not PascalCase. Expected: JinitCMainController\", \"Function name 'jinit_c_main_controller' \\u2014 main part 'jinit_c_main_controller' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00467dc0",
+      "name": "jinit_c_coef_controller",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00467dc0 from 'FUN_00467dc0' to 'jinit_c_coef_controller'\", \"warnings\": [\"Function name 'jinit_c_coef_controller' \\u2014 main part 'jinit_c_coef_controller' is not PascalCase. Expected: JinitCCoefController\", \"Function name 'jinit_c_coef_controller' \\u2014 main part 'jinit_c_coef_controller' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00468dd0",
+      "name": "emit_byte_e",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00468dd0 from 'FUN_00468dd0' to 'emit_byte_e'\", \"warnings\": [\"Function name 'emit_byte_e' \\u2014 main part 'emit_byte_e' is not PascalCase. Expected: EmitByteE\", \"Function name 'emit_byte_e' \\u2014 main part 'emit_byte_e' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00468ed0",
+      "name": "flush_bits_e",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00468ed0 from 'FUN_00468ed0' to 'flush_bits_e'\", \"warnings\": [\"Function name 'flush_bits_e' \\u2014 main part 'flush_bits_e' is not PascalCase. Expected: FlushBitsE\", \"Function name 'flush_bits_e' \\u2014 main part 'flush_bits_e' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00468ef0",
+      "name": "emit_ac_symbol",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00468ef0 from 'emit_ac_symbol' to 'emit_ac_symbol'\", \"warnings\": [\"Function name 'emit_ac_symbol' \\u2014 main part 'emit_ac_symbol' is not PascalCase. Expected: EmitAcSymbol\", \"Function name 'emit_ac_symbol' \\u2014 main part 'emit_ac_symbol' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00468f50",
+      "name": "emit_eobrun",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00468f50 from 'emit_eobrun' to 'emit_eobrun'\", \"warnings\": [\"Function name 'emit_eobrun' \\u2014 main part 'emit_eobrun' is not PascalCase. Expected: EmitEobrun\", \"Function name 'emit_eobrun' \\u2014 main part 'emit_eobrun' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "rename",
+      "addr": "0x00468f20",
+      "name": "emit_buffered_bits",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Success: Renamed function at 0x00468f20 from 'FUN_00468f20' to 'emit_buffered_bits'\", \"warnings\": [\"Function name 'emit_buffered_bits' \\u2014 main part 'emit_buffered_bits' is not PascalCase. Expected: EmitBufferedBits\", \"Function name 'emit_buffered_bits' \\u2014 main part 'emit_buffered_bits' contains underscores. Use PascalCase after the module prefix.\"]}"
+    },
+    {
+      "op": "decompiler_comment",
+      "addr": "0x0045a060",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0045a060\"}"
+    },
+    {
+      "op": "decompiler_comment",
+      "addr": "0x0045b250",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0045b250\"}"
+    },
+    {
+      "op": "decompiler_comment",
+      "addr": "0x0045b7a0",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0045b7a0\"}"
+    },
+    {
+      "op": "decompiler_comment",
+      "addr": "0x0045bbb0",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0045bbb0\"}"
+    },
+    {
+      "op": "decompiler_comment",
+      "addr": "0x0045d030",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x0045d030\"}"
+    },
+    {
+      "op": "decompiler_comment",
+      "addr": "0x00460bf0",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x00460bf0\"}"
+    },
+    {
+      "op": "decompiler_comment",
+      "addr": "0x00460a70",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x00460a70\"}"
+    },
+    {
+      "op": "decompiler_comment",
+      "addr": "0x004654f0",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set comment at 0x004654f0\"}"
+    },
+    {
+      "op": "plate_comment",
+      "addr": "0x00460200",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set plate comment for function at 0x00460200\", \"warnings\": [\"Plate comment missing Algorithm section\", \"Plate comment missing Parameters section\", \"Plate comment missing Returns section\"]}"
+    },
+    {
+      "op": "plate_comment",
+      "addr": "0x00460160",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set plate comment for function at 0x00460160\", \"warnings\": [\"Plate comment missing Algorithm section\", \"Plate comment missing Parameters section\", \"Plate comment missing Returns section\"]}"
+    },
+    {
+      "op": "plate_comment",
+      "addr": "0x00461460",
+      "ok": true,
+      "msg": "{\"status\": \"success\", \"message\": \"Set plate comment for function at 0x00461460\", \"warnings\": [\"Plate comment missing Algorithm section\", \"Plate comment missing Parameters section\", \"Plate comment missing Returns section\"]}"
+    },
+    {
+      "op": "save_program",
+      "ok": true,
+      "msg": "{\"success\": true, \"program\": \"bulanci.exe\", \"message\": \"Program saved successfully\"}"
+    }
+  ]
+}

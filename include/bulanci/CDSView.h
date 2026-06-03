@@ -36,14 +36,14 @@ public:
 	/* 42CA30 */ uchar CDSView_InvalidateRectClipped(int* param_1, uint param_2);
 	// !DECL 0x0042ca30 END
 	// !DECL 0x0042cea0 BEGIN
-	/* 42CEA0 */ void CDSView_dtor(void* param_1, uint param_2);
+	/* 42CEA0 */ void CDSView_dtor(uchar param_1, uint param_2);
 	// !DECL 0x0042cea0 END
 	// !DECL 0x0042cf50 BEGIN
-	/* 42CF50 */ uchar CDSView_OnLButtonDownAcquireFocus(int* param_1);
+	/* 42CF50 */ void CDSView_OnLButtonDownAcquireFocus();
 	// !DECL 0x0042cf50 END
 
 	// !DECL 0x0042bfc0 BEGIN
-	/* 42BFC0 */ uchar AddChildInternal(uchar param_1, int param_2);
+	/* 42BFC0 */ uchar AddChildInternal(uchar param_1, void* param_2);
 	// !DECL 0x0042bfc0 END
 	// !DECL 0x0042c3c0 BEGIN
 	/* 42C3C0 */ uchar EndModal(ushort param_1);
@@ -51,12 +51,55 @@ public:
 	// !DECL 0x0042c990 BEGIN
 	/* 42C990 */ uchar Show(int* param_1);
 	// !DECL 0x0042c990 END
-	// !DECL 0x0042d040 BEGIN
-	/* 42D040 */ uchar Hide(int* param_1);
-	// !DECL 0x0042d040 END
 	// !DECL 0x0042d0b0 BEGIN
-	/* 42D0B0 */ uchar AddChild(uchar param_1, int param_2);
+	/* 42D0B0 */ uchar CDSView_AddChild(uchar param_1, void* param_2);
 	// !DECL 0x0042d0b0 END
+
+	// !DECL 0x0042c120 BEGIN
+	/* 42C120 */ void CDSView_SetMouseMoveDefault();
+	// !DECL 0x0042c120 END
+	// !DECL 0x0042c1c0 BEGIN
+	/* 42C1C0 */ int* CDSView_ResolveInputChainFromHitTest(uint param_1);
+	// !DECL 0x0042c1c0 END
+	// !DECL 0x0042c430 BEGIN
+	/* 42C430 */ void CDSView_GetParentBounds(uint* param_1, int* param_2);
+	// !DECL 0x0042c430 END
+	// !DECL 0x0042c480 BEGIN
+	/* 42C480 */ void CDSView_SetRect(int* param_1);
+	// !DECL 0x0042c480 END
+	// !DECL 0x0042c580 BEGIN
+	/* 42C580 */ void CDSView_ComputeAnchoredRect(int* param_1, int* param_2);
+	// !DECL 0x0042c580 END
+	// !DECL 0x0042c770 BEGIN
+	/* 42C770 */ uchar CDSApp_BroadcastSyntheticEventToChildren(ushort param_1, uint param_2, uint param_3);
+	// !DECL 0x0042c770 END
+	// !DECL 0x0042c7d0 BEGIN
+	/* 42C7D0 */ uchar CDSApp_RouteSyntheticCloseEvent(ushort param_1);
+	// !DECL 0x0042c7d0 END
+	// !DECL 0x0042cae0 BEGIN
+	/* 42CAE0 */ uint CDSView_AdaptDisplaySize(uchar param_1);
+	// !DECL 0x0042cae0 END
+	// !DECL 0x0042ccf0 BEGIN
+	/* 42CCF0 */ void CDSView_RenderChildrenClipped();
+	// !DECL 0x0042ccf0 END
+	// !DECL 0x0042cf60 BEGIN
+	/* 42CF60 */ void CDSView_OnMouseUpModalInputRefresh();
+	// !DECL 0x0042cf60 END
+	// !DECL 0x0042cfa0 BEGIN
+	/* 42CFA0 */ void CDSView_RefreshModalFocusFromChildren();
+	// !DECL 0x0042cfa0 END
+	// !DECL 0x0042cff0 BEGIN
+	/* 42CFF0 */ void CDSView_TeardownModalFocusChain();
+	// !DECL 0x0042cff0 END
+	// !DECL 0x0042d080 BEGIN
+	/* 42D080 */ void CDSView_SetAsDefaultFocusChild();
+	// !DECL 0x0042d080 END
+	// !DECL 0x0042d1a0 BEGIN
+	/* 42D1A0 */ ushort CDSView_DoModal(void* param_1);
+	// !DECL 0x0042d1a0 END
+	// !DECL 0x0042ec90 BEGIN
+	/* 42EC90 */ uint IDSEventHandler_DispatchIfMask(uint* param_1);
+	// !DECL 0x0042ec90 END
 };
 
 #endif

@@ -14,12 +14,12 @@ uchar* CWindow::CWindow_GetTypeDescriptor() {
 
 // !FUNC 0x00405560 BEGIN
 /* 405560-4055BE 0005E */
-void* CWindow::CWindow_BuildAt(int param_1, int param_2, int param_3, int param_4, uchar param_5) { STUB_BODY(); return 0; }
+uchar CWindow::CWindow_BuildAt(int param_1, int param_2, int param_3, int param_4, uchar param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00405560 END
 
 // !FUNC 0x004055c0 BEGIN
 /* 4055C0-4055FA 0003A */
-void CWindow::CWindow_Render(void* param_1) { STUB_BODY(); }
+void CWindow::CWindow_Render(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x004055c0 END
 
 // !FUNC 0x004064e0 BEGIN
@@ -29,7 +29,7 @@ uint* CWindow::CWindow_dtor() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040baa0 BEGIN
 /* 40BAA0-40BB31 00091 */
-void* CWindow::CWindow_ctor(void* param_1) { STUB_BODY(); return 0; }
+uchar CWindow::CWindow_ctor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040baa0 END
 
 // !FUNC 0x0040bc10 BEGIN
@@ -49,7 +49,7 @@ uchar CWindow::CWindow_ScalarDeletingDtor_thunk_0040c540(uchar param_1) { STUB_B
 
 // !FUNC 0x0040f120 BEGIN
 /* 40F120-40F13E 0001E */
-uchar CWindow::CWindow_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CWindow::CWindow_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f120 END
 
 // !FUNC 0x0042c660 BEGIN

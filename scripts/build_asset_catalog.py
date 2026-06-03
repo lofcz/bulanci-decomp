@@ -10,7 +10,7 @@ Inputs (all already on disk):
 * ``ghidra_analysis/**/*.md`` — existing reverse-engineering notes.
 * ``ghidra_analysis/asset_catalog/_cache/ghidra_xrefs.jsonl`` — authoritative
   xref dump produced by an inline Ghidra script (see
-  ``scripts/ghidra/DumpResourceIdXrefs.java`` for the script
+  ``scripts/ghidra/DumpResourceIdXrefs.inline.txt`` for the script
   body).  Each line is one of::
 
       {"kind":"insn","addr":"00402b65","func":"CBulanci_OnCreate","funcAddr":"00402b20",

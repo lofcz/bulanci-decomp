@@ -9,13 +9,13 @@ public:
 	/* 431510 */ static uchar jpeg_CDSStreamStorage_dst(int param_1, uint param_2);
 	// !DECL 0x00431510 END
 	// !DECL 0x00431cc0 BEGIN
-	/* 431CC0 */ uchar CDSJpegImage_Load(int* param_1);
+	/* 431CC0 */ void CDSJpegImage_Load(void* param_1);
 	// !DECL 0x00431cc0 END
 	// !DECL 0x00431d50 BEGIN
 	/* 431D50 */ uchar* CDSJpegImage_GetTypeInfo();
 	// !DECL 0x00431d50 END
 	// !DECL 0x00431d60 BEGIN
-	/* 431D60 */ uchar FUN_00431d60();
+	/* 431D60 */ uchar CDSJpegImage_AlwaysReturnsOne();
 	// !DECL 0x00431d60 END
 	// !DECL 0x00431d70 BEGIN
 	/* 431D70 */ uchar CDSJpegImage_ScalarDeletingDtor_thunk_Sub4(uchar param_1);
@@ -30,13 +30,13 @@ public:
 	/* 431DB0 */ uchar CDSJpegImage_ScalarDeletingDtor_thunk(uchar param_1);
 	// !DECL 0x00431db0 END
 	// !DECL 0x00431de0 BEGIN
-	/* 431DE0 */ void CDSJpegImage_dtor(void* param_1);
+	/* 431DE0 */ void CDSJpegImage_dtor(uchar param_1);
 	// !DECL 0x00431de0 END
 	// !DECL 0x00431e50 BEGIN
-	/* 431E50 */ static uchar CompressFromImage(uint param_1, CPoemScroller* param_2, int param_3);
+	/* 431E50 */ static void CompressFromImage(void* param_1, CDSImage* param_2, int param_3);
 	// !DECL 0x00431e50 END
 	// !DECL 0x00432030 BEGIN
-	/* 432030 */ uchar CDSJpegImage_Save(uint param_1);
+	/* 432030 */ void CDSJpegImage_Save(void* param_1);
 	// !DECL 0x00432030 END
 	// !DECL 0x00432090 BEGIN
 	/* 432090 */ void* CDSJpegImage_ScalarDeletingDtor(uchar param_1);
@@ -45,7 +45,7 @@ public:
 	/* 45ECC0 */ static uchar jpeg_CreateCompress(int* param_1, int param_2, int param_3);
 	// !DECL 0x0045ecc0 END
 	// !DECL 0x0045ed80 BEGIN
-	/* 45ED80 */ static uchar FUN_0045ed80(int param_1, uchar param_2);
+	/* 45ED80 */ static uchar jpeg_suppress_tables(int param_1, uchar param_2);
 	// !DECL 0x0045ed80 END
 	// !DECL 0x0045edf0 BEGIN
 	/* 45EDF0 */ static uchar jpeg_finish_compress(int* param_1);
@@ -57,10 +57,10 @@ public:
 	/* 45EF60 */ static uchar jpeg_write_scanlines(int* param_1, uint param_2, uint param_3);
 	// !DECL 0x0045ef60 END
 	// !DECL 0x0045efe0 BEGIN
-	/* 45EFE0 */ static uchar FUN_0045efe0(int* param_1, int param_2, int param_3, int param_4, char param_5);
+	/* 45EFE0 */ static uchar jpeg_add_quant_table(int* param_1, int param_2, int param_3, int param_4, char param_5);
 	// !DECL 0x0045efe0 END
 	// !DECL 0x0045f1b0 BEGIN
-	/* 45F1B0 */ static uchar FUN_0045f1b0(int* param_1, int param_2, char param_3);
+	/* 45F1B0 */ static uchar jpeg_set_linear_quality(int* param_1, int param_2, char param_3);
 	// !DECL 0x0045f1b0 END
 	// !DECL 0x0045f1f0 BEGIN
 	/* 45F1F0 */ static int jpeg_quality_scaling(int param_1);
@@ -69,7 +69,7 @@ public:
 	/* 45F230 */ static uchar jpeg_set_quality(int* param_1, int param_2, char param_3);
 	// !DECL 0x0045f230 END
 	// !DECL 0x0045f260 BEGIN
-	/* 45F260 */ static uchar jpeg_add_quant_table(int* param_1, void* param_2);
+	/* 45F260 */ static uchar jpeg_add_quant_table_0045f260(int* param_1, void* param_2);
 	// !DECL 0x0045f260 END
 	// !DECL 0x0045f310 BEGIN
 	/* 45F310 */ uchar jpeg_add_default_quant_tables();
@@ -90,16 +90,16 @@ public:
 	/* 460DC0 */ static uchar jinit_compress_master(int* param_1);
 	// !DECL 0x00460dc0 END
 	// !DECL 0x00467600 BEGIN
-	/* 467600 */ static uchar FUN_00467600(int* param_1, char param_2);
+	/* 467600 */ static uchar jinit_c_main_controller(int* param_1, char param_2);
 	// !DECL 0x00467600 END
 	// !DECL 0x00467dc0 BEGIN
-	/* 467DC0 */ static uchar FUN_00467dc0(int param_1, char param_2);
+	/* 467DC0 */ static uchar jinit_c_coef_controller(int param_1, char param_2);
 	// !DECL 0x00467dc0 END
 	// !DECL 0x00468d70 BEGIN
 	/* 468D70 */ static uchar jinit_huff_encoder(int param_1);
 	// !DECL 0x00468d70 END
 	// !DECL 0x00469900 BEGIN
-	/* 469900 */ static uchar FUN_00469900(int param_1);
+	/* 469900 */ static void jinit_phuff_encoder(int param_1);
 	// !DECL 0x00469900 END
 	// !DECL 0x0046a750 BEGIN
 	/* 46A750 */ static uchar jpeg_jinit_inverse_dct(int* param_1);
@@ -108,7 +108,7 @@ public:
 	/* 46ABD0 */ uchar FUN_0046abd0();
 	// !DECL 0x0046abd0 END
 	// !DECL 0x0046acf0 BEGIN
-	/* 46ACF0 */ static uchar FUN_0046acf0(int* param_1, char param_2);
+	/* 46ACF0 */ static void jinit_c_prep_controller(int* param_1, char param_2);
 	// !DECL 0x0046acf0 END
 	// !DECL 0x0046b590 BEGIN
 	/* 46B590 */ static uchar FUN_0046b590(int* param_1);
@@ -129,6 +129,10 @@ public:
 	// !DECL 0x00431b70 BEGIN
 	/* 431B70 */ static uchar DecompressToImage(int* param_1, uint param_2, void* param_3);
 	// !DECL 0x00431b70 END
+
+	// !DECL 0x00431cf0 BEGIN
+	/* 431CF0 */ void* CDSJpegImage_InitVtables(void* param_1);
+	// !DECL 0x00431cf0 END
 };
 
 #endif

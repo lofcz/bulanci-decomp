@@ -53,7 +53,7 @@ uchar CDSResourceSign::CDSResourceSign_ReadFromStream(int* param_1) {
 
 // !FUNC 0x00434540 BEGIN
 /* 434540-4345BE 0007E */
-uint* CDSResourceSign::CDSResourceSign_ctor(uint* param_1) { STUB_BODY(); return 0; }
+void* CDSResourceSign::CDSResourceSign_ctor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00434540 END
 
 // !FUNC 0x004345c0 BEGIN
@@ -124,7 +124,7 @@ uchar CDSResourceSign::RegisterCDSResourceSignAuxClass2() { STUB_BODY(); return 
 // !FUNC 0x0047d230 END
 
 // !FUNC 0x0047d260 BEGIN
-/* 47D260-47D285 00025 */
+/* 47D260-47D284 00024 */
 uchar CDSResourceSign::RegisterCDSResourceSignAuxClass3() { STUB_BODY(); return 0; }
 // !FUNC 0x0047d260 END
 

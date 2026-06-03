@@ -68,7 +68,7 @@ long CNumEdit::_wcstol(wchar_t* param_1, wchar_t** param_2, int param_3) { STUB_
 
 // !FUNC 0x0044ed3e BEGIN
 /* 44ED3E-44EDC0 00082 */
-int CNumEdit::_iswctype_l(int param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
+int CNumEdit::_iswctype_l(int param_1, int param_2, localeinfo_struct* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0044ed3e END
 
 // !FUNC 0x00451606 BEGIN

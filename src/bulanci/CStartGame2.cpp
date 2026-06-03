@@ -2,7 +2,7 @@
 
 // !FUNC 0x00405440 BEGIN
 /* 405440-4054C1 00081 */
-uchar CStartGame2::FUN_00405440(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CStartGame2::CStaticText_SetLayoutAndInvalidate(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00405440 END
 
 // !FUNC 0x00407d50 BEGIN
@@ -37,19 +37,15 @@ uchar CStartGame2::CStartGame2_VectorDtorWrapper_thunk_Sub4(uchar param_1) { STU
 uchar CStartGame2::CStartGame2_VectorDtorWrapper_thunk_Sub10(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040bb80 END
 
-// !FUNC 0x0040d3f0 BEGIN
-/* 40D3F0-40D48D 0009D */
-void CStartGame2::CStartGame2_SelectPlayerByName(wchar_t* param_1) { STUB_BODY(); }
-// !FUNC 0x0040d3f0 END
 
 // !FUNC 0x0040d520 BEGIN
 /* 40D520-40D570 00050 */
-void CStartGame2::CStartGame2_UpdateDuplicateSerialWarning(void* param_1) { STUB_BODY(); }
+void CStartGame2::CStartGame2_UpdateDuplicateSerialWarning() { STUB_BODY(); }
 // !FUNC 0x0040d520 END
 
 // !FUNC 0x0040d570 BEGIN
 /* 40D570-40D6A3 00133 */
-void CStartGame2::CStartGame2_UpdateGamemodeCaption(uchar param_1) { STUB_BODY(); }
+void CStartGame2::CStartGame2_UpdateGamemodeCaption() { STUB_BODY(); }
 // !FUNC 0x0040d570 END
 
 // !FUNC 0x0040d6b0 BEGIN
@@ -58,14 +54,10 @@ uchar CStartGame2::CStartGame2_OnCustomMsg(ushort param_1, int param_2, uint par
 // !FUNC 0x0040d6b0 END
 
 // !FUNC 0x0040d7e0 BEGIN
-/* 40D7E0-40D928 00148 */
+/* 40D7E0-40D921 00141 */
 uchar CStartGame2::CStartGame2_OnBroadcast(short param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0040d7e0 END
 
-// !FUNC 0x0040d930 BEGIN
-/* 40D930-40DF63 00633 */
-uchar CStartGame2::CGameTypeDlg_BuildUi(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0040d930 END
 
 // !FUNC 0x0040e760 BEGIN
 /* 40E760-40E768 00008 */
@@ -83,7 +75,7 @@ uchar CStartGame2::CStartGame2_VectorDtorWrapper(uchar param_1) { STUB_BODY(); r
 // !FUNC 0x0040ed90 END
 
 // !FUNC 0x0040f610 BEGIN
-/* 40F610-40F7C6 001B6 */
+/* 40F610-40F7BF 001AF */
 uint CStartGame2::CStartGame2_Tick_CheckDuplicateNames(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f610 END
 
@@ -114,17 +106,17 @@ uchar CStartGame2::CGame_NetSendAdminByte_t64(void* param_1, char param_2) { STU
 
 // !FUNC 0x00412e90 BEGIN
 /* 412E90-412EC2 00032 */
-uchar CStartGame2::CStartGame2_ApplySetAvatar(uchar param_1, uchar param_2, void* param_3) { STUB_BODY(); return 0; }
+uchar CStartGame2::CStartGame2_ApplySetAvatar(uchar param_1, char param_2, void* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00412e90 END
 
 // !FUNC 0x00412ed0 BEGIN
 /* 412ED0-412F0D 0003D */
-uchar CStartGame2::FUN_00412ed0(uchar param_1, int param_2, void* param_3) { STUB_BODY(); return 0; }
+uchar CStartGame2::CStartGame2_ApplySlotCountIfChanged(uchar param_1, int param_2, void* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00412ed0 END
 
 // !FUNC 0x00412f10 BEGIN
 /* 412F10-412F31 00021 */
-uchar CStartGame2::CStartGame2_SetGameTypeAdminByte(uchar param_1, void* param_2) { STUB_BODY(); return 0; }
+uchar CStartGame2::CStartGame2_SetGameTypeAdminByte(char param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00412f10 END
 
 // !FUNC 0x004139b0 BEGIN
@@ -154,11 +146,16 @@ uchar CStartGame2::CStartGame2_AssignBindingLabelFromScanCode(uchar param_1, uch
 
 // !FUNC 0x0042d7a0 BEGIN
 /* 42D7A0-42D7AF 0000F */
-uchar CStartGame2::CStartGame2_CompareLevelName(uint* param_1) { STUB_BODY(); return 0; }
+uchar CStartGame2::CDsString_CompareHandles(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042d7a0 END
 
 // !FUNC 0x0042ec40 BEGIN
 /* 42EC40-42EC8C 0004C */
 uint CStartGame2::CStartGame2_EnqueueEvent(ushort param_1, ushort param_2, uint param_3, uint param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0042ec40 END
+
+// !FUNC 0x004104f0 BEGIN
+/* 4104F0-410E10 00920 */
+void* CStartGame2::CStartGame2_ctor(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004104f0 END
 

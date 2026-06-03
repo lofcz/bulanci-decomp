@@ -14,6 +14,16 @@ public:
 	// !DECL 0x0040c530 BEGIN
 	/* 40C530 */ uchar* CSessionList_GetTypeDescriptor();
 	// !DECL 0x0040c530 END
+
+	// !DECL 0x0040c550 BEGIN
+	/* 40C550 */ CSessionItem* CSessionList_GetPick(void* param_1);
+	// !DECL 0x0040c550 END
+	// !DECL 0x0040c570 BEGIN
+	/* 40C570 */ void CSessionList_SelectBySessionGuid(uchar* param_1);
+	// !DECL 0x0040c570 END
+	// !DECL 0x0040c5d0 BEGIN
+	/* 40C5D0 */ void CSessionList_SetStatusFromStringHandle(int param_1);
+	// !DECL 0x0040c5d0 END
 };
 
 #endif

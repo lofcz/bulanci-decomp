@@ -34,7 +34,7 @@ uchar CDSSafeStream::CDSSafeStream_ScalarDeletingDtor_thunk_Sub14(uchar param_1)
 
 // !FUNC 0x00433bc0 BEGIN
 /* 433BC0-433C52 00092 */
-void CDSSafeStream::CDSSafeStream_dtor(void* param_1) { STUB_BODY(); }
+void CDSSafeStream::CDSSafeStream_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00433bc0 END
 
 // !FUNC 0x00433c90 BEGIN
@@ -59,12 +59,12 @@ int CDSSafeStream::CDSSafeStream_AddRef(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00446d30 BEGIN
 /* 446D30-446D88 00058 */
-uint* CDSSafeStream::CDSSafeStream_InitBase(void* param_1) { STUB_BODY(); return 0; }
+uint* CDSSafeStream::CDSSafeStream_InitBase(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00446d30 END
 
 // !FUNC 0x00446d90 BEGIN
 /* 446D90-446E9E 0010E */
-int CDSSafeStream::FUN_00446d90(int param_1) { STUB_BODY(); return 0; }
+void* CDSSafeStream::CDSSafeStream_GetThreadSlice() { STUB_BODY(); return 0; }
 // !FUNC 0x00446d90 END
 
 // !FUNC 0x00446f90 BEGIN

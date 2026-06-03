@@ -2,7 +2,7 @@
 
 // !FUNC 0x00425580 BEGIN
 /* 425580-4255D9 00059 */
-uchar CDSImage::CDSImage_InitDefaults(uint* param_1) { STUB_BODY(); return 0; }
+void CDSImage::CDSImage_InitDefaults(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00425580 END
 
 // !FUNC 0x004255e0 BEGIN
@@ -61,15 +61,7 @@ uchar CDSImage::CDSImage_ReleaseRefcount_thunk_Sub58(int param_1) { STUB_BODY();
 
 
 
-// !FUNC 0x00436c60 BEGIN
-/* 436C60-436D1E 000BE */
-void CDSImage::CDSImage_Save(CDSStreamStorage* param_1) { STUB_BODY(); }
-// !FUNC 0x00436c60 END
 
-// !FUNC 0x00437160 BEGIN
-/* 437160-437285 00125 */
-void CDSImage::CDSImage_Load(CDSStreamStorage* param_1) { STUB_BODY(); }
-// !FUNC 0x00437160 END
 
 // !FUNC 0x00437520 BEGIN
 /* 437520-437528 00008 */
@@ -106,13 +98,54 @@ int CDSImage::ComputeBufferSize(char param_1) { STUB_BODY(); return 0; }
 int CDSImage::ComputeAllocationSize(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004362f0 END
 
-// !FUNC 0x00436d50 BEGIN
-/* 436D50-436D87 00037 */
-uchar _Globals::CDSImage::FreeBuffers(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00436d50 END
 
 // !FUNC 0x00436f40 BEGIN
 /* 436F40-436FEE 000AE */
-uchar _Globals::CDSImage::Allocate(int param_1, uint param_2, int param_3, char param_4, int param_5) { STUB_BODY(); return 0; }
+void CDSImage::CDSImage_Allocate(int param_1, int param_2, int param_3, char param_4, int param_5) { STUB_BODY(); }
 // !FUNC 0x00436f40 END
+
+// !FUNC 0x00425460 BEGIN
+/* 425460-4254EE 0008E */
+void* CDSImage::CDSImage_ctor(int* param_1, int param_2, char param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x00425460 END
+
+// !FUNC 0x004254f0 BEGIN
+/* 4254F0-42557D 0008D */
+void CDSImage::CDSImage_dtor(void* param_1) { STUB_BODY(); }
+// !FUNC 0x004254f0 END
+
+// !FUNC 0x00436020 BEGIN
+/* 436020-436055 00035 */
+bool CDSImage::CDSBmpImage_ValidateStride(char param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00436020 END
+
+// !FUNC 0x00436060 BEGIN
+/* 436060-4360CA 0006A */
+void CDSImage::CDSBmpImage_FillBitmapInfoHeader(BITMAPINFOHEADER* param_1) { STUB_BODY(); }
+// !FUNC 0x00436060 END
+
+// !FUNC 0x004360d0 BEGIN
+/* 4360D0-4360E9 00019 */
+void* CDSImage::GetPaletteBuffer() { STUB_BODY(); return 0; }
+// !FUNC 0x004360d0 END
+
+// !FUNC 0x004360f0 BEGIN
+/* 4360F0-43610B 0001B */
+void* CDSImage::GetColorPlane() { STUB_BODY(); return 0; }
+// !FUNC 0x004360f0 END
+
+// !FUNC 0x00436e40 BEGIN
+/* 436E40-436E73 00033 */
+uchar CDSImage::NotifyDirtyRect(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x00436e40 END
+
+// !FUNC 0x00436ef0 BEGIN
+/* 436EF0-436F1D 0002D */
+void CDSImage::BroadcastFrameTimeHint(uint param_1) { STUB_BODY(); }
+// !FUNC 0x00436ef0 END
+
+// !FUNC 0x004370b0 BEGIN
+/* 4370B0-437152 000A2 */
+void CDSImage::CDSImage_NotifySubscribersOnTrackSwitch(void* param_1) { STUB_BODY(); }
+// !FUNC 0x004370b0 END
 

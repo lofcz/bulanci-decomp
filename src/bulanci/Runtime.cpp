@@ -6,12 +6,12 @@ uchar Runtime::MSVCRT::_CxxThrowException_8(uint param_1, uchar* param_2) { STUB
 // !FUNC 0x00447303 END
 
 // !FUNC 0x00447392 BEGIN
-/* 447392-447420 0008E */
+/* 447392-447417 00085 */
 void Runtime::MSVCRT::_free(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00447392 END
 
 // !FUNC 0x00447420 BEGIN
-/* 447420-44753E 0011E */
+/* 447420-447530 00110 */
 int* Runtime::MSVCRT::_calloc_impl(uint param_1, uint param_2, uint* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00447420 END
 
@@ -21,7 +21,7 @@ void* Runtime::MSVCRT::_calloc(size_t param_1, size_t param_2) { STUB_BODY(); re
 // !FUNC 0x0044753e END
 
 // !FUNC 0x0044757d BEGIN
-/* 44757D-447798 0021B */
+/* 44757D-447789 0020C */
 void* Runtime::MSVCRT::_realloc(void* param_1, size_t param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0044757d END
 
@@ -37,7 +37,7 @@ int Runtime::MSVCRT::_rand() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044780e BEGIN
 /* 44780E-447839 0002B */
-void Runtime::MSVCRT::_JumpToContinuation(void* param_1, EHRegistrationNode* param_2) { STUB_BODY(); }
+void Runtime::MSVCRT::_JumpToContinuation(void* param_1, uchar param_2) { STUB_BODY(); }
 // !FUNC 0x0044780e END
 
 // !FUNC 0x00447845 BEGIN
@@ -72,7 +72,7 @@ uchar Runtime::MSVCRT::_FindAndUnlinkFrame(void* param_1) { STUB_BODY(); return 
 
 // !FUNC 0x00447b77 BEGIN
 /* 447B77-447BD5 0005E */
-void* Runtime::MSVCRT::_CallCatchBlock2(EHRegistrationNode* param_1, _s_FuncInfo* param_2, void* param_3, int param_4, ulong param_5) { STUB_BODY(); return 0; }
+void* Runtime::MSVCRT::_CallCatchBlock2(uchar param_1, _s_FuncInfo* param_2, void* param_3, int param_4, ulong param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00447b77 END
 
 // !FUNC 0x00447bd5 BEGIN
@@ -97,7 +97,7 @@ uint Runtime::MSVCRT::_onexit_nolock(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00447e36 BEGIN
 /* 447E36-447E6C 00036 */
-int Runtime::MSVCRT::_onexit(int param_1) { STUB_BODY(); return 0; }
+_onexit_t* Runtime::MSVCRT::_onexit(_onexit_t* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00447e36 END
 
 // !FUNC 0x00447e72 BEGIN
@@ -106,7 +106,7 @@ int Runtime::MSVCRT::_atexit(_func_3814* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00447e72 END
 
 // !FUNC 0x00447e90 BEGIN
-/* 447E90-4481F5 00365 */
+/* 447E90-448157 002C7 */
 void* Runtime::MSVCRT::_memcpy(void* param_1, void* param_2, size_t param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00447e90 END
 
@@ -121,7 +121,7 @@ longlong Runtime::MSVCRT::_allmul(uint param_1, int param_2, uint param_3, int p
 // !FUNC 0x004482b0 END
 
 // !FUNC 0x004486bc BEGIN
-/* 4486BC-44871A 0005E */
+/* 4486BC-4486EE 00032 */
 void Runtime::MSVCRT::_ArrayUnwind(void* param_1, uint param_2, int param_3, _func_void_void_ptr* param_4) { STUB_BODY(); }
 // !FUNC 0x004486bc END
 
@@ -161,7 +161,7 @@ uint Runtime::MSVCRT::_alloca_probe_8() { STUB_BODY(); return 0; }
 // !FUNC 0x00448b36 END
 
 // !FUNC 0x00448c60 BEGIN
-/* 448C60-448E40 001E0 */
+/* 448C60-448E04 001A4 */
 int Runtime::MSVCRT::_tmainCRTStartup() { STUB_BODY(); return 0; }
 // !FUNC 0x00448c60 END
 
@@ -171,7 +171,7 @@ uchar Runtime::MSVCRT::_mainCRTStartup() { STUB_BODY(); return 0; }
 // !FUNC 0x00448e40 END
 
 // !FUNC 0x00448ef0 BEGIN
-/* 448EF0-449255 00365 */
+/* 448EF0-4491B7 002C7 */
 void* Runtime::MSVCRT::_memmove(void* param_1, void* param_2, size_t param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00448ef0 END
 
@@ -182,12 +182,12 @@ wchar_t* Runtime::MSVCRT::_wcsncpy(wchar_t* param_1, wchar_t* param_2, size_t pa
 
 // !FUNC 0x00449292 BEGIN
 /* 449292-449329 00097 */
-int Runtime::MSVCRT::_vswprintf_l(wchar_t* param_1, size_t param_2, wchar_t* param_3, int param_4, int param_5) { STUB_BODY(); return 0; }
+int Runtime::MSVCRT::_vswprintf_l(wchar_t* param_1, size_t param_2, wchar_t* param_3, localeinfo_struct* param_4, char* param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00449292 END
 
 // !FUNC 0x00449329 BEGIN
 /* 449329-449340 00017 */
-int Runtime::MSVCRT::_vswprintf(wchar_t* param_1, wchar_t* param_2, int param_3) { STUB_BODY(); return 0; }
+int Runtime::MSVCRT::_vswprintf(wchar_t* param_1, wchar_t* param_2, char* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00449329 END
 
 // !FUNC 0x00449340 BEGIN
@@ -196,7 +196,7 @@ int* Runtime::MSVCRT::_V6_HeapAlloc(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00449340 END
 
 // !FUNC 0x0044938f BEGIN
-/* 44938F-449452 000C3 */
+/* 44938F-449450 000C1 */
 void* Runtime::MSVCRT::_malloc(size_t param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0044938f END
 
@@ -256,12 +256,12 @@ long Runtime::MSVCRT::_CxxUnhandledExceptionFilter(_EXCEPTION_POINTERS* param_1)
 // !FUNC 0x0044981f END
 
 // !FUNC 0x00449940 BEGIN
-/* 449940-4499C8 00088 */
+/* 449940-4499C7 00087 */
 int Runtime::MSVCRT::_strcmp(char* param_1, char* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00449940 END
 
 // !FUNC 0x004499c8 BEGIN
-/* 4499C8-449A23 0005B */
+/* 4499C8-449A1D 00055 */
 uint Runtime::MSVCRT::_heap_select() { STUB_BODY(); return 0; }
 // !FUNC 0x004499c8 END
 
@@ -281,7 +281,7 @@ void Runtime::MSVCRT::_mtdeletelocks() { STUB_BODY(); }
 // !FUNC 0x00449ac6 END
 
 // !FUNC 0x00449b30 BEGIN
-/* 449B30-449BEA 000BA */
+/* 449B30-449BE8 000B8 */
 int Runtime::MSVCRT::_mtinitlocknum(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00449b30 END
 
@@ -382,17 +382,17 @@ void Runtime::MSVCRT::_mtterm() { STUB_BODY(); }
 
 // !FUNC 0x0044abdf BEGIN
 /* 44ABDF-44AC8A 000AB */
-void Runtime::MSVCRT::_initptd(int param_1, int param_2) { STUB_BODY(); }
+void Runtime::MSVCRT::_initptd(_tiddata* param_1, threadlocaleinfostruct* param_2) { STUB_BODY(); }
 // !FUNC 0x0044abdf END
 
 // !FUNC 0x0044ac93 BEGIN
 /* 44AC93-44AD16 00083 */
-int Runtime::MSVCRT::_getptd_noexit() { STUB_BODY(); return 0; }
+_tiddata* Runtime::MSVCRT::_getptd_noexit() { STUB_BODY(); return 0; }
 // !FUNC 0x0044ac93 END
 
 // !FUNC 0x0044ad16 BEGIN
 /* 44AD16-44AD2E 00018 */
-int Runtime::MSVCRT::_getptd() { STUB_BODY(); return 0; }
+_tiddata* Runtime::MSVCRT::_getptd() { STUB_BODY(); return 0; }
 // !FUNC 0x0044ad16 END
 
 // !FUNC 0x0044ad2e BEGIN
@@ -402,7 +402,7 @@ uchar Runtime::MSVCRT::_freefls_4(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044ae4f BEGIN
 /* 44AE4F-44AEB8 00069 */
-void Runtime::MSVCRT::_freeptd(int param_1) { STUB_BODY(); }
+void Runtime::MSVCRT::_freeptd(_tiddata* param_1) { STUB_BODY(); }
 // !FUNC 0x0044ae4f END
 
 // !FUNC 0x0044aeb8 BEGIN
@@ -416,13 +416,13 @@ uint Runtime::MSVCRT::_TypeMatch(uchar* param_1, uchar* param_2, uint* param_3) 
 // !FUNC 0x0044b069 END
 
 // !FUNC 0x0044b109 BEGIN
-/* 44B109-44B1C9 000C0 */
+/* 44B109-44B1AF 000A6 */
 uchar Runtime::MSVCRT::_FrameUnwindToState(int param_1, uint param_2, int param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0044b109 END
 
 // !FUNC 0x0044b22f BEGIN
 /* 44B22F-44B272 00043 */
-uchar Runtime::MSVCRT::_DestructExceptionObject(int* param_1) { STUB_BODY(); return 0; }
+void Runtime::MSVCRT::_DestructExceptionObject(EHExceptionRecord* param_1) { STUB_BODY(); }
 // !FUNC 0x0044b22f END
 
 // !FUNC 0x0044b283 BEGIN
@@ -431,7 +431,7 @@ int Runtime::MSVCRT::_AdjustPointer(int param_1, int* param_2) { STUB_BODY(); re
 // !FUNC 0x0044b283 END
 
 // !FUNC 0x0044b506 BEGIN
-/* 44B506-44B685 0017F */
+/* 44B506-44B679 00173 */
 char Runtime::MSVCRT::_BuildCatchObjectHelper(int param_1, int* param_2, uint* param_3, uchar* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0044b506 END
 
@@ -442,11 +442,11 @@ uchar Runtime::MSVCRT::_BuildCatchObject(int param_1, int* param_2, uint* param_
 
 // !FUNC 0x0044bbe2 BEGIN
 /* 44BBE2-44BCC6 000E4 */
-uint Runtime::MSVCRT::_InternalCxxFrameHandler(EHExceptionRecord* param_1, EHRegistrationNode* param_2, _CONTEXT* param_3, void* param_4, _s_FuncInfo* param_5, int param_6, EHRegistrationNode* param_7, uchar param_8) { STUB_BODY(); return 0; }
+uint Runtime::MSVCRT::_InternalCxxFrameHandler(EHExceptionRecord* param_1, EHRegistrationNode* param_2, void* param_3, void* param_4, _s_FuncInfo* param_5, int param_6, EHRegistrationNode* param_7, uchar param_8) { STUB_BODY(); return 0; }
 // !FUNC 0x0044bbe2 END
 
 // !FUNC 0x0044bd12 BEGIN
-/* 44BD12-44BD49 00037 */
+/* 44BD12-44BD42 00030 */
 void Runtime::MSVCRT::_inconsistency() { STUB_BODY(); }
 // !FUNC 0x0044bd12 END
 
@@ -547,7 +547,7 @@ uint* Runtime::MSVCRT::_VEC_memcpy(uint* param_1, uint* param_2, uint param_3) {
 
 // !FUNC 0x0044c7fa BEGIN
 /* 44C7FA-44C892 00098 */
-int Runtime::MSVCRT::_updatetmbcinfo() { STUB_BODY(); return 0; }
+threadmbcinfostruct* Runtime::MSVCRT::_updatetmbcinfo() { STUB_BODY(); return 0; }
 // !FUNC 0x0044c7fa END
 
 // !FUNC 0x0044c918 BEGIN
@@ -556,7 +556,7 @@ uint Runtime::MSVCRT::_setmbcp_nolock(uint param_1, int param_2) { STUB_BODY(); 
 // !FUNC 0x0044c918 END
 
 // !FUNC 0x0044cac3 BEGIN
-/* 44CAC3-44CC5D 0019A */
+/* 44CAC3-44CC52 0018F */
 int Runtime::MSVCRT::_setmbcp(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0044cac3 END
 
@@ -586,13 +586,13 @@ errno_t Runtime::MSVCRT::_wcscpy_s(wchar_t* param_1, int param_2, wchar_t* param
 // !FUNC 0x0044cf81 END
 
 // !FUNC 0x0044cfed BEGIN
-/* 44CFED-44D24E 00261 */
+/* 44CFED-44D249 0025C */
 int Runtime::MSVCRT::_crtLCMapStringW_stat(localeinfo_struct* param_1, ulong param_2, ulong param_3, wchar_t* param_4, int param_5, wchar_t* param_6, int param_7, int param_8) { STUB_BODY(); return 0; }
 // !FUNC 0x0044cfed END
 
 // !FUNC 0x0044d24e BEGIN
 /* 44D24E-44D28E 00040 */
-int Runtime::MSVCRT::_crtLCMapStringW(int param_1, DWORD param_2, int param_3, int param_4, int param_5, int param_6) { STUB_BODY(); return 0; }
+int Runtime::MSVCRT::_crtLCMapStringW(WCHAR* param_1, DWORD param_2, WCHAR* param_3, int param_4, WCHAR* param_5, int param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x0044d24e END
 
 // !FUNC 0x0044d28e BEGIN
@@ -606,7 +606,7 @@ void Runtime::MSVCRT::_abort() { STUB_BODY(); }
 // !FUNC 0x0044d2aa END
 
 // !FUNC 0x0044d3bb BEGIN
-/* 44D3BB-44D55B 001A0 */
+/* 44D3BB-44D54A 0018F */
 void Runtime::MSVCRT::_NMSG_WRITE(int param_1) { STUB_BODY(); }
 // !FUNC 0x0044d3bb END
 
@@ -617,17 +617,17 @@ void Runtime::MSVCRT::_FF_MSGBANNER() { STUB_BODY(); }
 
 // !FUNC 0x0044d59e BEGIN
 /* 44D59E-44D60F 00071 */
-void Runtime::MSVCRT::_forcdecpt_l(char* param_1, int param_2) { STUB_BODY(); }
+void Runtime::MSVCRT::_forcdecpt_l(char* param_1, localeinfo_struct* param_2) { STUB_BODY(); }
 // !FUNC 0x0044d59e END
 
 // !FUNC 0x0044d60f BEGIN
 /* 44D60F-44D68F 00080 */
-void Runtime::MSVCRT::_cropzeros_l(char* param_1, int param_2) { STUB_BODY(); }
+void Runtime::MSVCRT::_cropzeros_l(char* param_1, localeinfo_struct* param_2) { STUB_BODY(); }
 // !FUNC 0x0044d60f END
 
 // !FUNC 0x0044d6a5 BEGIN
 /* 44D6A5-44D6E5 00040 */
-void Runtime::MSVCRT::_fassign_l(int param_1, char* param_2, char* param_3, int param_4) { STUB_BODY(); }
+void Runtime::MSVCRT::_fassign_l(int param_1, char* param_2, char* param_3, localeinfo_struct* param_4) { STUB_BODY(); }
 // !FUNC 0x0044d6a5 END
 
 // !FUNC 0x0044d6fc BEGIN
@@ -636,7 +636,7 @@ uchar Runtime::MSVCRT::_shift() { STUB_BODY(); return 0; }
 // !FUNC 0x0044d6fc END
 
 // !FUNC 0x0044d735 BEGIN
-/* 44D735-44D8A2 0016D */
+/* 44D735-44D89F 0016A */
 int Runtime::MSVCRT::_cftoe2_l(uint param_1, int param_2, int param_3, int* param_4, char param_5, localeinfo_struct* param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x0044d735 END
 
@@ -672,7 +672,7 @@ uchar Runtime::MSVCRT::_cftog_l(double* param_1, uchar* param_2, uint param_3, s
 
 // !FUNC 0x0044dfa5 BEGIN
 /* 44DFA5-44E02B 00086 */
-errno_t Runtime::MSVCRT::_cfltcvt_l(double* param_1, char* param_2, size_t param_3, int param_4, int param_5, int param_6, int param_7) { STUB_BODY(); return 0; }
+errno_t Runtime::MSVCRT::_cfltcvt_l(double* param_1, char* param_2, size_t param_3, int param_4, int param_5, int param_6, localeinfo_struct* param_7) { STUB_BODY(); return 0; }
 // !FUNC 0x0044dfa5 END
 
 // !FUNC 0x0044e02b BEGIN
@@ -686,7 +686,7 @@ uchar Runtime::MSVCRT::_initp_misc_cfltcvt_tab() { STUB_BODY(); return 0; }
 // !FUNC 0x0044e04c END
 
 // !FUNC 0x0044e06b BEGIN
-/* 44E06B-44E094 00029 */
+/* 44E06B-44E091 00026 */
 uchar Runtime::MSVCRT::_setdefaultprecision() { STUB_BODY(); return 0; }
 // !FUNC 0x0044e06b END
 
@@ -711,7 +711,7 @@ uchar* Runtime::MSVCRT::_wincmdln() { STUB_BODY(); return 0; }
 // !FUNC 0x0044e268 END
 
 // !FUNC 0x0044e2c5 BEGIN
-/* 44E2C5-44E3A0 000DB */
+/* 44E2C5-44E39D 000D8 */
 int Runtime::MSVCRT::_setenvp() { STUB_BODY(); return 0; }
 // !FUNC 0x0044e2c5 END
 
@@ -722,11 +722,11 @@ int Runtime::MSVCRT::_setargv() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044e5f1 BEGIN
 /* 44E5F1-44E726 00135 */
-LPVOID Runtime::MSVCRT::_crtGetEnvironmentStringsA() { STUB_BODY(); return 0; }
+void* Runtime::MSVCRT::_crtGetEnvironmentStringsA() { STUB_BODY(); return 0; }
 // !FUNC 0x0044e5f1 END
 
 // !FUNC 0x0044e726 BEGIN
-/* 44E726-44E966 00240 */
+/* 44E726-44E958 00232 */
 int Runtime::MSVCRT::_ioinit() { STUB_BODY(); return 0; }
 // !FUNC 0x0044e726 END
 
@@ -747,22 +747,22 @@ int Runtime::MSVCRT::_flsbuf(int param_1, FILE* param_2) { STUB_BODY(); return 0
 
 // !FUNC 0x0044efb9 BEGIN
 /* 44EFB9-44F8AA 008F1 */
-int Runtime::MSVCRT::_woutput_l(FILE* param_1, wchar_t* param_2, int param_3, int param_4) { STUB_BODY(); return 0; }
+int Runtime::MSVCRT::_woutput_l(FILE* param_1, wchar_t* param_2, localeinfo_struct* param_3, char* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0044efb9 END
 
 // !FUNC 0x0044f8d0 BEGIN
 /* 44F8D0-44F8F9 00029 */
-BOOL Runtime::MSVCRT::_ValidateImageBase(int param_1) { STUB_BODY(); return 0; }
+BOOL Runtime::MSVCRT::_ValidateImageBase(BYTE* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0044f8d0 END
 
 // !FUNC 0x0044f900 BEGIN
 /* 44F900-44F942 00042 */
-int Runtime::MSVCRT::_FindPESection(int param_1, DWORD_PTR param_2) { STUB_BODY(); return 0; }
+_IMAGE_SECTION_HEADER* Runtime::MSVCRT::_FindPESection(BYTE* param_1, DWORD_PTR param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0044f900 END
 
 // !FUNC 0x0044f942 BEGIN
-/* 44F942-44F9AE 0006C */
-BOOL Runtime::MSVCRT::_IsNonwritableInCurrentImage(int param_1) { STUB_BODY(); return 0; }
+/* 44F942-44F997 00055 */
+BOOL Runtime::MSVCRT::_IsNonwritableInCurrentImage(BYTE* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0044f942 END
 
 // !FUNC 0x0044f9ae BEGIN
@@ -782,11 +782,11 @@ size_t Runtime::MSVCRT::_strlen(char* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044fab5 BEGIN
 /* 44FAB5-44FAC5 00010 */
-uint Runtime::MSVCRT::_crtInitCritSecNoSpinCount_8(LPCRITICAL_SECTION param_1) { STUB_BODY(); return 0; }
+uint Runtime::MSVCRT::_crtInitCritSecNoSpinCount_8(_RTL_CRITICAL_SECTION* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0044fab5 END
 
 // !FUNC 0x0044fac5 BEGIN
-/* 44FAC5-44FB8A 000C5 */
+/* 44FAC5-44FB58 00093 */
 int Runtime::MSVCRT::_crtInitCritSecAndSpinCount(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0044fac5 END
 
@@ -812,7 +812,7 @@ uchar Runtime::MSVCRT::_EH4_TransferToHandler(uchar* param_1) { STUB_BODY(); ret
 
 // !FUNC 0x0044fcae BEGIN
 /* 44FCAE-44FCC8 0001A */
-uchar Runtime::MSVCRT::_EH4_GlobalUnwind(PVOID param_1) { STUB_BODY(); return 0; }
+uchar Runtime::MSVCRT::_EH4_GlobalUnwind(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0044fcae END
 
 // !FUNC 0x0044fcc8 BEGIN
@@ -827,7 +827,7 @@ uchar Runtime::MSVCRT::_EH_prolog3_catch(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044fd20 BEGIN
 /* 44FD20-44FD40 00020 */
-uchar Runtime::MSVCRT::_global_unwind2(PVOID param_1) { STUB_BODY(); return 0; }
+uchar Runtime::MSVCRT::_global_unwind2(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0044fd20 END
 
 // !FUNC 0x0044fd85 BEGIN
@@ -857,11 +857,11 @@ uchar Runtime::MSVCRT::_initp_misc_winsig(uint param_1) { STUB_BODY(); return 0;
 
 // !FUNC 0x0044ff61 BEGIN
 /* 44FF61-44FF6E 0000D */
-int Runtime::MSVCRT::_get_sigabrt() { STUB_BODY(); return 0; }
+_PHNDLR* Runtime::MSVCRT::_get_sigabrt() { STUB_BODY(); return 0; }
 // !FUNC 0x0044ff61 END
 
 // !FUNC 0x0044ff6e BEGIN
-/* 44FF6E-45011E 001B0 */
+/* 44FF6E-450109 0019B */
 int Runtime::MSVCRT::_raise(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0044ff6e END
 
@@ -872,7 +872,7 @@ int Runtime::MSVCRT::_crtLCMapStringA_stat(localeinfo_struct* param_1, ulong par
 
 // !FUNC 0x004504ca BEGIN
 /* 4504CA-45050D 00043 */
-int Runtime::MSVCRT::_crtLCMapStringA(int param_1, int param_2, DWORD param_3, int param_4, int param_5, int param_6, int param_7, int param_8, BOOL param_9) { STUB_BODY(); return 0; }
+int Runtime::MSVCRT::_crtLCMapStringA(localeinfo_struct* param_1, WCHAR* param_2, DWORD param_3, CHAR* param_4, int param_5, CHAR* param_6, int param_7, int param_8, BOOL param_9) { STUB_BODY(); return 0; }
 // !FUNC 0x004504ca END
 
 // !FUNC 0x0045050d BEGIN
@@ -882,7 +882,7 @@ int Runtime::MSVCRT::_crtGetStringTypeA_stat(localeinfo_struct* param_1, ulong p
 
 // !FUNC 0x004506c5 BEGIN
 /* 4506C5-450705 00040 */
-BOOL Runtime::MSVCRT::_crtGetStringTypeA(int param_1, DWORD param_2, int param_3, int param_4, int param_5, int param_6, BOOL param_7) { STUB_BODY(); return 0; }
+BOOL Runtime::MSVCRT::_crtGetStringTypeA(localeinfo_struct* param_1, DWORD param_2, CHAR* param_3, int param_4, WORD* param_5, int param_6, BOOL param_7) { STUB_BODY(); return 0; }
 // !FUNC 0x004506c5 END
 
 // !FUNC 0x00450705 BEGIN
@@ -927,12 +927,12 @@ long Runtime::MSVCRT::_ansicp(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00450b57 BEGIN
 /* 450B57-450D09 001B2 */
-int Runtime::MSVCRT::_convertcp(int param_1, int param_2, char* param_3, uint* param_4, int param_5, int param_6) { STUB_BODY(); return 0; }
+CHAR* Runtime::MSVCRT::_convertcp(int param_1, int param_2, char* param_3, uint* param_4, CHAR* param_5, int param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x00450b57 END
 
 // !FUNC 0x00450d09 BEGIN
-/* 450D09-450EA7 0019E */
-int Runtime::MSVCRT::_crtMessageBoxA(int param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
+/* 450D09-450EA1 00198 */
+int Runtime::MSVCRT::_crtMessageBoxA(CHAR* param_1, CHAR* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00450d09 END
 
 // !FUNC 0x00450ea7 BEGIN
@@ -942,7 +942,7 @@ int Runtime::MSVCRT::_set_error_mode(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00450eed BEGIN
 /* 450EED-450F3C 0004F */
-int Runtime::MSVCRT::_isdigit_l(int param_1, int param_2) { STUB_BODY(); return 0; }
+int Runtime::MSVCRT::_isdigit_l(int param_1, localeinfo_struct* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00450eed END
 
 // !FUNC 0x00450f3c BEGIN
@@ -957,7 +957,7 @@ char* Runtime::MSVCRT::_strrchr(char* param_1, int param_2) { STUB_BODY(); retur
 
 // !FUNC 0x00450f9d BEGIN
 /* 450F9D-4510B4 00117 */
-int Runtime::MSVCRT::_tolower_l(int param_1, int param_2) { STUB_BODY(); return 0; }
+int Runtime::MSVCRT::_tolower_l(int param_1, localeinfo_struct* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00450f9d END
 
 // !FUNC 0x004510b4 BEGIN
@@ -967,7 +967,7 @@ int Runtime::MSVCRT::_tolower(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00451227 BEGIN
 /* 451227-4512E4 000BD */
-errno_t Runtime::MSVCRT::_fptostr(char* param_1, size_t param_2, int param_3, int param_4) { STUB_BODY(); return 0; }
+errno_t Runtime::MSVCRT::_fptostr(char* param_1, size_t param_2, int param_3, _strflt* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00451227 END
 
 // !FUNC 0x004512e4 BEGIN
@@ -976,8 +976,8 @@ uchar Runtime::MSVCRT::_dtold(uint* param_1, uint* param_2) { STUB_BODY(); retur
 // !FUNC 0x004512e4 END
 
 // !FUNC 0x0045139f BEGIN
-/* 45139F-45142D 0008E */
-int Runtime::MSVCRT::_fltout2(int param_1, int param_2, char* param_3, size_t param_4) { STUB_BODY(); return 0; }
+/* 45139F-45142A 0008B */
+_strflt* Runtime::MSVCRT::_fltout2(int param_1, _strflt* param_2, char* param_3, size_t param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0045139f END
 
 // !FUNC 0x00451430 BEGIN
@@ -1057,7 +1057,7 @@ int Runtime::MSVCRT::_get_printf_count_output() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00453353 BEGIN
 /* 453353-453466 00113 */
-int Runtime::MSVCRT::_mbtowc_l(wchar_t* param_1, char* param_2, size_t param_3, int param_4) { STUB_BODY(); return 0; }
+int Runtime::MSVCRT::_mbtowc_l(wchar_t* param_1, char* param_2, size_t param_3, localeinfo_struct* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00453353 END
 
 // !FUNC 0x00453466 BEGIN
@@ -1067,7 +1067,7 @@ int Runtime::MSVCRT::_mbtowc(wchar_t* param_1, char* param_2, size_t param_3) { 
 
 // !FUNC 0x0045347d BEGIN
 /* 45347D-4534B3 00036 */
-int Runtime::MSVCRT::_isleadbyte_l(int param_1, int param_2) { STUB_BODY(); return 0; }
+int Runtime::MSVCRT::_isleadbyte_l(int param_1, localeinfo_struct* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0045347d END
 
 // !FUNC 0x004534b3 BEGIN
@@ -1082,12 +1082,12 @@ long Runtime::MSVCRT::_atol(char* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004534d2 BEGIN
 /* 4534D2-453588 000B6 */
-int Runtime::MSVCRT::_isctype_l(int param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
+int Runtime::MSVCRT::_isctype_l(int param_1, int param_2, localeinfo_struct* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004534d2 END
 
 // !FUNC 0x00453588 BEGIN
 /* 453588-453C19 00691 */
-uint Runtime::MSVCRT::_strgtold12_l(_LDBL12* param_1, char** param_2, char* param_3, int param_4, int param_5, int param_6, int param_7, int param_8) { STUB_BODY(); return 0; }
+uint Runtime::MSVCRT::_strgtold12_l(_LDBL12* param_1, char** param_2, char* param_3, int param_4, int param_5, int param_6, int param_7, localeinfo_struct* param_8) { STUB_BODY(); return 0; }
 // !FUNC 0x00453588 END
 
 // !FUNC 0x00454514 BEGIN
@@ -1127,7 +1127,7 @@ int Runtime::MSVCRT::_flswbuf(int param_1, FILE* param_2) { STUB_BODY(); return 
 
 // !FUNC 0x00454f51 BEGIN
 /* 454F51-4550B0 0015F */
-errno_t Runtime::MSVCRT::_wctomb_s_l(int* param_1, char* param_2, size_t param_3, wchar_t param_4, int param_5) { STUB_BODY(); return 0; }
+errno_t Runtime::MSVCRT::_wctomb_s_l(int* param_1, char* param_2, size_t param_3, wchar_t param_4, localeinfo_struct* param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00454f51 END
 
 // !FUNC 0x004550b0 BEGIN
@@ -1146,7 +1146,7 @@ int Runtime::MSVCRT::_ascii_strnicmp(char* param_1, char* param_2, size_t param_
 // !FUNC 0x00455320 END
 
 // !FUNC 0x00455381 BEGIN
-/* 455381-4553F3 00072 */
+/* 455381-4553C5 00044 */
 uchar Runtime::MSVCRT::_set_fpsr_sse2(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00455381 END
 

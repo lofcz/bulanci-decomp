@@ -39,7 +39,7 @@ uchar CHistoryDlg::CHistoryDlg_ScalarDeletingDtor_thunk_Sub10(uchar param_1) { S
 
 // !FUNC 0x00423470 BEGIN
 /* 423470-423522 000B2 */
-void CHistoryDlg::CHistoryDlg_dtor(void* param_1) { STUB_BODY(); }
+void CHistoryDlg::CHistoryDlg_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00423470 END
 
 // !FUNC 0x00423680 BEGIN

@@ -15,13 +15,13 @@ public:
 	/* 40B4B0 */ uchar OnTimerTick(void* param_1);
 	// !DECL 0x0040b4b0 END
 	// !DECL 0x0040b4d0 BEGIN
-	/* 40B4D0 */ uchar OnLButtonDown(int* param_1);
+	/* 40B4D0 */ void OnLButtonDown(int param_1, int param_2, uint param_3);
 	// !DECL 0x0040b4d0 END
 	// !DECL 0x0040b500 BEGIN
 	/* 40B500 */ uint OnKeyDown(char param_1, char param_2);
 	// !DECL 0x0040b500 END
 	// !DECL 0x0040e5f0 BEGIN
-	/* 40E5F0 */ void* CAdvertising_ctor(void* param_1);
+	/* 40E5F0 */ void* CAdvertising_ctor();
 	// !DECL 0x0040e5f0 END
 	// !DECL 0x0040e710 BEGIN
 	/* 40E710 */ uchar* GetClassId();
@@ -41,6 +41,10 @@ public:
 	// !DECL 0x0040fe30 BEGIN
 	/* 40FE30 */ uchar LoadSplashImage(uint param_1);
 	// !DECL 0x0040fe30 END
+
+	// !DECL 0x00401a10 BEGIN
+	/* 401A10 */ void CAdvertising_dtor();
+	// !DECL 0x00401a10 END
 };
 
 #endif

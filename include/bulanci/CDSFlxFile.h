@@ -66,7 +66,7 @@ public:
 	/* 432AA0 */ void* ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00432aa0 END
 	// !DECL 0x00432ac0 BEGIN
-	/* 432AC0 */ uchar CDSFlxFile_BindStream(int* param_1);
+	/* 432AC0 */ void CDSFlxFile_BindStream(int* param_1);
 	// !DECL 0x00432ac0 END
 	// !DECL 0x00432b60 BEGIN
 	/* 432B60 */ void CDSFlxFile_CloseStream(void* param_1);
@@ -75,7 +75,7 @@ public:
 	/* 432BE0 */ uchar CreateBoundClone(void* param_1);
 	// !DECL 0x00432be0 END
 	// !DECL 0x00432c60 BEGIN
-	/* 432C60 */ uchar DecodeFrame(uint* param_1, void* param_2);
+	/* 432C60 */ void DecodeFrame(uint* param_1, uchar param_2);
 	// !DECL 0x00432c60 END
 	// !DECL 0x00436e80 BEGIN
 	/* 436E80 */ uchar NotifyMove(uint param_1);

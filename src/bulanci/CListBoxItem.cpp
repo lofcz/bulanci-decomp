@@ -22,3 +22,8 @@ void* CListBoxItem::CListBoxItem_ScalarDeletingDtor(uchar param_1) { STUB_BODY()
 void* CListBoxItem::CListBoxItem_ctor(wchar_t* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b640 END
 
+// !FUNC 0x0040b6d0 BEGIN
+/* 40B6D0-40B759 00089 */
+void* CListBoxItem::CListBoxItem_ctorWithAssoc(wchar_t* param_1, void* param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x0040b6d0 END
+

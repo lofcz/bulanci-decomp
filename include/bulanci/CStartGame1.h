@@ -18,7 +18,7 @@ public:
 	/* 40AE00 */ uchar CStartGame1_UpdateModalChildVisibility(int param_1);
 	// !DECL 0x0040ae00 END
 	// !DECL 0x0040ae30 BEGIN
-	/* 40AE30 */ uchar CStartGame1_OnRadioChange(short param_1, int param_2, uint param_3);
+	/* 40AE30 */ uchar CStartGame1_OnRadioChange(short param_1, void* param_2, uint param_3);
 	// !DECL 0x0040ae30 END
 	// !DECL 0x0040ae90 BEGIN
 	/* 40AE90 */ uchar CStartGame1_OnEvent(ushort param_1);
@@ -45,20 +45,20 @@ public:
 	/* 40F4F0 */ uchar CStartGame1_AdjustOffsetDtor(uchar param_1);
 	// !DECL 0x0040f4f0 END
 	// !DECL 0x0040f500 BEGIN
-	/* 40F500 */ uchar CStartGame1_dtor(uchar param_1);
+	/* 40F500 */ uchar CStartGame1_dtor(int param_1, uint param_2);
 	// !DECL 0x0040f500 END
 	// !DECL 0x0040f560 BEGIN
-	/* 40F560 */ uchar CStartGame1_ScalarDeletingDtor(uchar param_1);
+	/* 40F560 */ void* CStartGame1_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x0040f560 END
 
 	// !DECL 0x0040a8c0 BEGIN
 	/* 40A8C0 */ uchar ApplyLocalPlayersConstraints(int param_1);
 	// !DECL 0x0040a8c0 END
 	// !DECL 0x0040a9d0 BEGIN
-	/* 40A9D0 */ uchar OnTotalPlayersChange(int param_1);
+	/* 40A9D0 */ uchar OnTotalPlayersChange(void* param_1);
 	// !DECL 0x0040a9d0 END
 	// !DECL 0x0040a9f0 BEGIN
-	/* 40A9F0 */ uchar OnLocalPlayersChange(int param_1);
+	/* 40A9F0 */ uchar OnLocalPlayersChange(void* param_1);
 	// !DECL 0x0040a9f0 END
 };
 

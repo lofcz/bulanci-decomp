@@ -12,7 +12,7 @@ public:
 	/* 42ACA0 */ uchar CDSImageMouse_ScalarDeletingDtor_thunk(uchar param_1);
 	// !DECL 0x0042aca0 END
 	// !DECL 0x0042acb0 BEGIN
-	/* 42ACB0 */ uchar CDSImageMouse_dtor(uint* param_1);
+	/* 42ACB0 */ uchar CDSImageMouse_dtor(uint* param_1, uint param_2);
 	// !DECL 0x0042acb0 END
 	// !DECL 0x0042af60 BEGIN
 	/* 42AF60 */ void* CDSImageMouse_vDtor(uchar param_1);

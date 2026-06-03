@@ -14,7 +14,7 @@ uchar CDSResInfo::CDSResInfo_ScalarDeletingDtorThunk(uchar param_1) { STUB_BODY(
 
 // !FUNC 0x00433a10 BEGIN
 /* 433A10-433A69 00059 */
-uchar CDSResInfo::CDSResInfo_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSResInfo::CDSResInfo_dtor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433a10 END
 
 // !FUNC 0x00433a70 BEGIN
@@ -24,16 +24,21 @@ void* CDSResInfo::CDSResInfo_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); re
 
 // !FUNC 0x00434270 BEGIN
 /* 434270-434286 00016 */
-uchar CDSResInfo::CDSResInfo_ReleaseEmbeddedResource(int param_1) { STUB_BODY(); return 0; }
+void CDSResInfo::CDSResInfo_ReleaseEmbeddedResource(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00434270 END
 
 // !FUNC 0x00434290 BEGIN
 /* 434290-4342BB 0002B */
-uchar CDSResInfo::CDSResInfo_Load(int* param_1) { STUB_BODY(); return 0; }
+void CDSResInfo::CDSResInfo_Load(int* param_1) { STUB_BODY(); }
 // !FUNC 0x00434290 END
 
 // !FUNC 0x004342c0 BEGIN
 /* 4342C0-4342EB 0002B */
-uchar CDSResInfo::CDSResInfo_Save(int* param_1) { STUB_BODY(); return 0; }
+void CDSResInfo::CDSResInfo_Save(int* param_1) { STUB_BODY(); }
 // !FUNC 0x004342c0 END
+
+// !FUNC 0x00433aa0 BEGIN
+/* 433AA0-433AA5 00005 */
+uchar CDSResInfo::CDSResInfo_ReleaseViaChainedFace(void* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00433aa0 END
 

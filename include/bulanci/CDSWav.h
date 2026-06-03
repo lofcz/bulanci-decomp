@@ -21,23 +21,17 @@ public:
 	/* 41BBE0 */ void* CDSWav_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x0041bbe0 END
 	// !DECL 0x00433040 BEGIN
-	/* 433040 */ uchar CDSWav_ReleaseRefcount(int param_1);
+	/* 433040 */ void CDSWav_ReleaseRefcount();
 	// !DECL 0x00433040 END
 	// !DECL 0x00433070 BEGIN
-	/* 433070 */ uchar CDSWav_ReleaseChild_thunk_Sub18(int param_1);
+	/* 433070 */ uchar CDSMpxStream_ReleaseRefcount_thunk_Sub18(int param_1);
 	// !DECL 0x00433070 END
 	// !DECL 0x004330a0 BEGIN
-	/* 4330A0 */ uchar CDSWav_ReleaseChild(int param_1);
+	/* 4330A0 */ uchar CDSMpxStream_ReleaseRefcount_thunk_Sub4(int param_1);
 	// !DECL 0x004330a0 END
 	// !DECL 0x0043b950 BEGIN
 	/* 43B950 */ uint CDSWav_HandleAcquireReadThunk();
 	// !DECL 0x0043b950 END
-	// !DECL 0x0043b960 BEGIN
-	/* 43B960 */ uchar CDSWav_HandleResourceRead(uint* param_1, int param_2, uint param_3);
-	// !DECL 0x0043b960 END
-	// !DECL 0x0043ba30 BEGIN
-	/* 43BA30 */ uchar FUN_0043ba30(int param_1);
-	// !DECL 0x0043ba30 END
 };
 
 #endif

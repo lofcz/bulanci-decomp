@@ -1,9 +1,5 @@
 #include "CDSAudioBankSample.h"
 
-// !FUNC 0x004291d0 BEGIN
-/* 4291D0-429235 00065 */
-uchar CDSAudioBankSample::CDSAudioBankSample_HandleResourceRead(uint* param_1, void* param_2, uint param_3) { STUB_BODY(); return 0; }
-// !FUNC 0x004291d0 END
 
 // !FUNC 0x00429340 BEGIN
 /* 429340-429346 00006 */
@@ -31,4 +27,9 @@ uchar CDSAudioBankSample::CDSAudioBankSample_dtor(uint* param_1) { STUB_BODY(); 
 /* 429510-42952E 0001E */
 void* CDSAudioBankSample::CDSAudioBankSample_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00429510 END
+
+// !FUNC 0x00429530 BEGIN
+/* 429530-4295FC 000CC */
+void* CDSAudioBankSample::CDSAudioBankSample_ctor(IDSAudioSource* param_1, uint param_2, uchar* param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x00429530 END
 

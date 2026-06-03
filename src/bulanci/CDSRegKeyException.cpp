@@ -20,7 +20,7 @@ wchar_t* CDSRegKeyException::CDSRegKeyException_What(wchar_t* param_1) { STUB_BO
 
 // !FUNC 0x004380c0 BEGIN
 /* 4380C0-43813B 0007B */
-uint* CDSRegKeyException::FUN_004380c0() { STUB_BODY(); return 0; }
+uint* CDSRegKeyException::CDSRegKeyException_AllocDefault() { STUB_BODY(); return 0; }
 // !FUNC 0x004380c0 END
 
 // !FUNC 0x00438140 BEGIN

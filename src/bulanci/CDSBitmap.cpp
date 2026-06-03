@@ -34,6 +34,6 @@ void* CDSBitmap::CDSBitmap_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); retu
 
 // !FUNC 0x004393d0 BEGIN
 /* 4393D0-43946E 0009E */
-void* CDSBitmap::CDSBitmap_ctor(uint param_1, uint param_2, int* param_3) { STUB_BODY(); return 0; }
+void* CDSBitmap::CDSBitmap_ctor(int param_1, int param_2, int* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004393d0 END
 

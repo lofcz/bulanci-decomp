@@ -15,7 +15,7 @@ public:
 	/* 401270 */ uchar CDSCollection_ScalarDeletingDtorThunk(uchar param_1);
 	// !DECL 0x00401270 END
 	// !DECL 0x0042fd40 BEGIN
-	/* 42FD40 */ void* CDSCollection_DeserializeElement(CDSStreamStorage* param_1);
+	/* 42FD40 */ void* CDSCollection_DeserializeElement(uchar param_1);
 	// !DECL 0x0042fd40 END
 	// !DECL 0x0042fdd1 BEGIN
 	/* 42FDD1 */ uchar Catch_0042fdd1();
@@ -33,8 +33,15 @@ public:
 	/* 431260 */ uchar CDSCollection_ctor(void* param_1);
 	// !DECL 0x00431260 END
 	// !DECL 0x00431360 BEGIN
-	/* 431360 */ void CDSCollection_Load(CDSStreamStorage* param_1);
+	/* 431360 */ void CDSCollection_Load(uchar param_1);
 	// !DECL 0x00431360 END
+
+	// !DECL 0x00431170 BEGIN
+	/* 431170 */ int CDSCollection_FindKeyIndex(int param_1, void* param_2);
+	// !DECL 0x00431170 END
+	// !DECL 0x004312c0 BEGIN
+	/* 4312C0 */ int CDSCollection_InsertKeyed(int param_1, void* param_2, char param_3);
+	// !DECL 0x004312c0 END
 };
 
 #endif

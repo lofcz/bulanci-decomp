@@ -18,16 +18,16 @@ public:
 	/* 4220A0 */ uchar* CHelpDlg_GetClassTable();
 	// !DECL 0x004220a0 END
 	// !DECL 0x004220b0 BEGIN
-	/* 4220B0 */ uchar CHelpDlg_ScalarDeletingDtor_thunk(uchar param_1);
+	/* 4220B0 */ uchar CHelpDlg_ScalarDeletingDtor_thunk_Sub18(uchar param_1);
 	// !DECL 0x004220b0 END
 	// !DECL 0x004220c0 BEGIN
 	/* 4220C0 */ uchar CHelpDlg_AdjustorThunk04_Dtor(uchar param_1);
 	// !DECL 0x004220c0 END
 	// !DECL 0x004220d0 BEGIN
-	/* 4220D0 */ uchar CHelpDlg_ScalarDeletingDtor_thunk_004220d0(uchar param_1);
+	/* 4220D0 */ uchar CHelpDlg_ScalarDeletingDtor_thunk_Sub10(uchar param_1);
 	// !DECL 0x004220d0 END
 	// !DECL 0x004220e0 BEGIN
-	/* 4220E0 */ void CHelpDlg_dtor(void* param_1);
+	/* 4220E0 */ void CHelpDlg_dtor(uchar param_1);
 	// !DECL 0x004220e0 END
 	// !DECL 0x004222f0 BEGIN
 	/* 4222F0 */ void* CHelpDlg_ScalarDeletingDtor(uchar param_1);

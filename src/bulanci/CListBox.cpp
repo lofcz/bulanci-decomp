@@ -7,7 +7,7 @@ uchar CListBox::CListBox::CListBox_RenderItem(int* param_1, int param_2) { STUB_
 
 // !FUNC 0x00408200 BEGIN
 /* 408200-408283 00083 */
-uchar CListBox::CListBox::CListBox_dtor(uchar param_1) { STUB_BODY(); return 0; }
+uchar CListBox::CListBox::CListBox_dtor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00408200 END
 
 // !FUNC 0x00408290 BEGIN
@@ -21,7 +21,7 @@ uchar* CListBox::CListBox::CListBox_GetTypeDescriptor() {
 
 // !FUNC 0x00408350 BEGIN
 /* 408350-40836E 0001E */
-uchar CListBox::CListBox::CListBox_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CListBox::CListBox::CListBox_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00408350 END
 
 

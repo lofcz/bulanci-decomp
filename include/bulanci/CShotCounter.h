@@ -15,20 +15,24 @@ public:
 	/* 427290 */ uchar* GetClassIdentifier();
 	// !DECL 0x00427290 END
 	// !DECL 0x004272a0 BEGIN
-	/* 4272A0 */ uchar DeletingDestructorThunk_10(uchar param_1);
+	/* 4272A0 */ uchar CShotCounter_ScalarDeletingDtor_thunk_n0x10(uchar param_1);
 	// !DECL 0x004272a0 END
 	// !DECL 0x004272b0 BEGIN
-	/* 4272B0 */ uchar DeletingDestructorThunk_18(uchar param_1);
+	/* 4272B0 */ uchar CShotCounter_ScalarDeletingDtor_thunk_n0x18(uchar param_1);
 	// !DECL 0x004272b0 END
 	// !DECL 0x004272d0 BEGIN
-	/* 4272D0 */ void Destructor(uchar param_1);
+	/* 4272D0 */ void CShotCounter_dtor(uchar param_1);
 	// !DECL 0x004272d0 END
 	// !DECL 0x00427a60 BEGIN
-	/* 427A60 */ uchar ScalarDeletingDestructor(uchar param_1);
+	/* 427A60 */ void* CShotCounter_ScalarDeletingDtor(uchar param_1);
 	// !DECL 0x00427a60 END
 	// !DECL 0x00448b50 BEGIN
-	/* 448B50 */ ulonglong FUN_00448b50(uint param_1, uint param_2);
+	/* 448B50 */ ulonglong CShotCounter_RoundFloatBankers(uint param_1, uint param_2);
 	// !DECL 0x00448b50 END
+
+	// !DECL 0x004272c0 BEGIN
+	/* 4272C0 */ uchar CShotCounter_ScalarDeletingDtor_thunk_n0x4(uchar param_1);
+	// !DECL 0x004272c0 END
 };
 
 #endif

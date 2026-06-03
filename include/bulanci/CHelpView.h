@@ -6,7 +6,7 @@
 class CHelpView {
 public:
 	// !DECL 0x004218a0 BEGIN
-	/* 4218A0 */ CDSChained* CHelpView_ctor(CDSChained* param_1);
+	/* 4218A0 */ void* CHelpView_ctor(void* param_1);
 	// !DECL 0x004218a0 END
 	// !DECL 0x00421900 BEGIN
 	/* 421900 */ uchar* CHelpView_GetClassTable();

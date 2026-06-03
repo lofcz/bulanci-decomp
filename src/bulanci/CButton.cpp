@@ -64,7 +64,7 @@ void CButton::CButton_Render(uchar param_1) { STUB_BODY(); }
 
 // !FUNC 0x00406670 BEGIN
 /* 406670-40668E 0001E */
-uchar CButton::CButton_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CButton::CButton_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00406670 END
 
 // !FUNC 0x004087f0 BEGIN

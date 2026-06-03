@@ -12,7 +12,7 @@ public:
 	/* 439510 */ uchar* GetTypeInfo();
 	// !DECL 0x00439510 END
 	// !DECL 0x00439560 BEGIN
-	/* 439560 */ void* ParameterizedCtor(uint param_1, uint param_2, int* param_3, int param_4);
+	/* 439560 */ void* ParameterizedCtor(int param_1, int param_2, int* param_3, int param_4);
 	// !DECL 0x00439560 END
 };
 

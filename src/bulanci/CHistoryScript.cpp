@@ -39,21 +39,21 @@ void* CHistoryScript::CHistoryScript_ScalarDeletingDtor(uchar param_1) { STUB_BO
 
 // !FUNC 0x00422b00 BEGIN
 /* 422B00-422BBD 000BD */
-uchar CHistoryScript::HhBuildStaticTextAuto(int param_1) { STUB_BODY(); return 0; }
+uchar CHistoryScript::HhBuildStaticTextAuto(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00422b00 END
 
 // !FUNC 0x00422bc0 BEGIN
 /* 422BC0-422CAF 000EF */
-uchar CHistoryScript::HhBuildStaticTextSized(int param_1) { STUB_BODY(); return 0; }
+uchar CHistoryScript::HhBuildStaticTextSized(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00422bc0 END
 
 // !FUNC 0x00423530 BEGIN
 /* 423530-423608 000D8 */
-CDSBitmap* CHistoryScript::HhBuildHistoryBitmapWidget(int param_1) { STUB_BODY(); return 0; }
+CDSBitmap* CHistoryScript::HhBuildHistoryBitmapWidget(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423530 END
 
 // !FUNC 0x00423820 BEGIN
 /* 423820-4238CF 000AF */
-uint CHistoryScript::HBuildHistoryMovieWidget(int param_1) { STUB_BODY(); return 0; }
+uint CHistoryScript::HBuildHistoryMovieWidget(CDSScript* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00423820 END
 

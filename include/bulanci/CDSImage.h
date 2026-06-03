@@ -6,7 +6,7 @@
 class CDSImage {
 public:
 	// !DECL 0x00425580 BEGIN
-	/* 425580 */ uchar CDSImage_InitDefaults(uint* param_1);
+	/* 425580 */ void CDSImage_InitDefaults(void* param_1);
 	// !DECL 0x00425580 END
 	// !DECL 0x004255e0 BEGIN
 	/* 4255E0 */ uchar* CDSImage_GetTypeInfo();
@@ -38,12 +38,6 @@ public:
 	// !DECL 0x00432320 BEGIN
 	/* 432320 */ uchar CDSImage_ReleaseRefcount_thunk_Sub58(int param_1);
 	// !DECL 0x00432320 END
-	// !DECL 0x00436c60 BEGIN
-	/* 436C60 */ void CDSImage_Save(CDSStreamStorage* param_1);
-	// !DECL 0x00436c60 END
-	// !DECL 0x00437160 BEGIN
-	/* 437160 */ void CDSImage_Load(CDSStreamStorage* param_1);
-	// !DECL 0x00437160 END
 	// !DECL 0x00437520 BEGIN
 	/* 437520 */ uchar CDSImage_ScalarDeletingDtorThunk(uchar param_1);
 	// !DECL 0x00437520 END
@@ -67,12 +61,37 @@ public:
 	/* 4362F0 */ int ComputeAllocationSize(void* param_1);
 	// !DECL 0x004362f0 END
 
-	// !DECL 0x00436d50 BEGIN
-	/* 436D50 */ uchar FreeBuffers(int param_1);
-	// !DECL 0x00436d50 END
 	// !DECL 0x00436f40 BEGIN
-	/* 436F40 */ uchar Allocate(int param_1, uint param_2, int param_3, char param_4, int param_5);
+	/* 436F40 */ void CDSImage_Allocate(int param_1, int param_2, int param_3, char param_4, int param_5);
 	// !DECL 0x00436f40 END
+
+	// !DECL 0x00425460 BEGIN
+	/* 425460 */ void* CDSImage_ctor(int* param_1, int param_2, char param_3);
+	// !DECL 0x00425460 END
+	// !DECL 0x004254f0 BEGIN
+	/* 4254F0 */ void CDSImage_dtor(void* param_1);
+	// !DECL 0x004254f0 END
+	// !DECL 0x00436020 BEGIN
+	/* 436020 */ bool CDSBmpImage_ValidateStride(char param_1);
+	// !DECL 0x00436020 END
+	// !DECL 0x00436060 BEGIN
+	/* 436060 */ void CDSBmpImage_FillBitmapInfoHeader(BITMAPINFOHEADER* param_1);
+	// !DECL 0x00436060 END
+	// !DECL 0x004360d0 BEGIN
+	/* 4360D0 */ void* GetPaletteBuffer();
+	// !DECL 0x004360d0 END
+	// !DECL 0x004360f0 BEGIN
+	/* 4360F0 */ void* GetColorPlane();
+	// !DECL 0x004360f0 END
+	// !DECL 0x00436e40 BEGIN
+	/* 436E40 */ uchar NotifyDirtyRect(uint param_1, uint param_2);
+	// !DECL 0x00436e40 END
+	// !DECL 0x00436ef0 BEGIN
+	/* 436EF0 */ void BroadcastFrameTimeHint(uint param_1);
+	// !DECL 0x00436ef0 END
+	// !DECL 0x004370b0 BEGIN
+	/* 4370B0 */ void CDSImage_NotifySubscribersOnTrackSwitch(void* param_1);
+	// !DECL 0x004370b0 END
 };
 
 #endif

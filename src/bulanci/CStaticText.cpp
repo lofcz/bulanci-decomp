@@ -34,7 +34,7 @@ uchar CStaticText::CStaticText_AdjustorThunk18_Dtor(uchar param_1) { STUB_BODY()
 
 // !FUNC 0x004052e0 BEGIN
 /* 4052E0-405370 00090 */
-uchar CStaticText::CStaticText_dtor(uchar param_1) { STUB_BODY(); return 0; }
+uchar CStaticText::CStaticText_dtor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004052e0 END
 
 // !FUNC 0x004054d0 BEGIN
@@ -44,12 +44,12 @@ void CStaticText::CStaticText_Render(void* param_1) { STUB_BODY(); }
 
 // !FUNC 0x004064c0 BEGIN
 /* 4064C0-4064DE 0001E */
-uchar CStaticText::CStaticText_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CStaticText::CStaticText_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004064c0 END
 
 // !FUNC 0x00406a50 BEGIN
 /* 406A50-406B9A 0014A */
-uchar CStaticText::CStaticText_BuildAtAuto(int param_1, uint param_2, uint param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
+void* CStaticText::CStaticText_BuildAtAuto(int param_1, uint param_2, uint param_3, uint param_4, uint param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00406a50 END
 
 // !FUNC 0x00406ba0 BEGIN

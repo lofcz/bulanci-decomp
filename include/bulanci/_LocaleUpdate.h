@@ -18,7 +18,7 @@ public:
 	/* 44CECD */ LONG* _updatetlocinfoEx_nolock();
 	// !DECL 0x0044cecd END
 	// !DECL 0x0044cf0b BEGIN
-	/* 44CF0B */ static int _updatetlocinfo();
+	/* 44CF0B */ static threadlocaleinfostruct* _updatetlocinfo();
 	// !DECL 0x0044cf0b END
 	// !DECL 0x0044cf75 BEGIN
 	/* 44CF75 */ uchar FUN_0044cf75();

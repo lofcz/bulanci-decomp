@@ -33,7 +33,7 @@ uchar* CWeapon::CWeapon_GetClassTable() {
 
 // !FUNC 0x0041bf00 BEGIN
 /* 41BF00-41BF66 00066 */
-void CWeapon::Update(void* param_1) { STUB_BODY(); }
+void CWeapon::Update(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0041bf00 END
 
 // !FUNC 0x0041bf70 BEGIN
@@ -49,13 +49,13 @@ uchar CWeapon::CWeapon_HideAssociatedView(int param_1) {
 
 // !FUNC 0x0041c550 BEGIN
 /* 41C550-41C5F1 000A1 */
-uchar CWeapon::Destructor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CWeapon::CWeapon_dtor(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041c550 END
 
 // !FUNC 0x0041c600 BEGIN
 /* 41C600-41C610 00010 */
 uchar CWeapon::Init(uint param_1, int* param_2) {
-    reinterpret_cast<_Globals*>(reinterpret_cast<char*>(this) - 16)->FUN_0041bf80(param_2);
+    reinterpret_cast<_Globals*>(reinterpret_cast<char*>(this) - 16)->CWeapon_SetTrackHolder(param_2);
     return 0;
 }
 // !FUNC 0x0041c600 END
@@ -67,6 +67,21 @@ void* CWeapon::CWeapon_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0
 
 // !FUNC 0x004212b0 BEGIN
 /* 4212B0-4215AD 002FD */
-uchar CWeapon::Fire(uint param_1, ushort param_2) { STUB_BODY(); return 0; }
+uchar CWeapon::CWeapon_Fire(uint param_1, ushort param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004212b0 END
+
+// !FUNC 0x0041bf80 BEGIN
+/* 41BF80-41C003 00083 */
+void CWeapon::CWeapon_SetTrackHolder(CBulanek* param_1) { STUB_BODY(); }
+// !FUNC 0x0041bf80 END
+
+// !FUNC 0x0041dbc0 BEGIN
+/* 41DBC0-41DD6D 001AD */
+void CWeapon::CWeapon_ctor(CBulanek* param_1, uchar param_2) { STUB_BODY(); }
+// !FUNC 0x0041dbc0 END
+
+// !FUNC 0x0041fce0 BEGIN
+/* 41FCE0-41FDE4 00104 */
+void CWeapon::CWeapon_FirePistol() { STUB_BODY(); }
+// !FUNC 0x0041fce0 END
 

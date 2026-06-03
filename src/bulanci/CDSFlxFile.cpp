@@ -104,7 +104,7 @@ void* CDSFlxFile::ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00432ac0 BEGIN
 /* 432AC0-432B5D 0009D */
-uchar CDSFlxFile::CDSFlxFile_BindStream(int* param_1) { STUB_BODY(); return 0; }
+void CDSFlxFile::CDSFlxFile_BindStream(int* param_1) { STUB_BODY(); }
 // !FUNC 0x00432ac0 END
 
 // !FUNC 0x00432b60 BEGIN
@@ -119,7 +119,7 @@ uchar CDSFlxFile::CreateBoundClone(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00432c60 BEGIN
 /* 432C60-432E51 001F1 */
-uchar CDSFlxFile::DecodeFrame(uint* param_1, void* param_2) { STUB_BODY(); return 0; }
+void CDSFlxFile::DecodeFrame(uint* param_1, uchar param_2) { STUB_BODY(); }
 // !FUNC 0x00432c60 END
 
 // !FUNC 0x00436e80 BEGIN

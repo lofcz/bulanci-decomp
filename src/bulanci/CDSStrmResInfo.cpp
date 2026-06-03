@@ -7,7 +7,7 @@ uchar CDSStrmResInfo::CDSStrmResInfo_Serialize(int* param_1) { STUB_BODY(); retu
 
 // !FUNC 0x00433980 BEGIN
 /* 433980-4339B1 00031 */
-void CDSStrmResInfo::CDSStrmResInfo_Deserialize(CDSStreamStorage* param_1) { STUB_BODY(); }
+void CDSStrmResInfo::CDSStrmResInfo_Deserialize(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00433980 END
 
 // !FUNC 0x00433a90 BEGIN

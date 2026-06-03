@@ -14,7 +14,7 @@ uchar CDSImageMouse::CDSImageMouse_ScalarDeletingDtor_thunk(uchar param_1) { STU
 
 // !FUNC 0x0042acb0 BEGIN
 /* 42ACB0-42AD12 00062 */
-uchar CDSImageMouse::CDSImageMouse_dtor(uint* param_1) { STUB_BODY(); return 0; }
+uchar CDSImageMouse::CDSImageMouse_dtor(uint* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0042acb0 END
 
 // !FUNC 0x0042af60 BEGIN

@@ -23,3 +23,13 @@ uchar CDirectKeyb::CDirectKeyb_dtor(uint* param_1) { STUB_BODY(); return 0; }
 void* CDirectKeyb::CDirectKeyb_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00412440 END
 
+// !FUNC 0x00412160 BEGIN
+/* 412160-4121A0 00040 */
+void CDirectKeyb::CDirectKeyb_PollKeyboard() { STUB_BODY(); }
+// !FUNC 0x00412160 END
+
+// !FUNC 0x004121a0 BEGIN
+/* 4121A0-4121C8 00028 */
+char CDirectKeyb::CDirectKeyb_GetKeyEdge(uchar param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x004121a0 END
+

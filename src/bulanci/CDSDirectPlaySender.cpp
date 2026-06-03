@@ -2,7 +2,7 @@
 
 // !FUNC 0x0043ad20 BEGIN
 /* 43AD20-43AD55 00035 */
-void CDSDirectPlaySender::CDSDirectPlaySender_ThreadEntry(void* param_1) { STUB_BODY(); }
+void CDSDirectPlaySender::CDSDirectPlaySender_ThreadEntry(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0043ad20 END
 
 // !FUNC 0x0043b120 BEGIN
@@ -26,7 +26,7 @@ uchar CDSDirectPlaySender::CDSDirectPlaySender_scalar_deleting_dtor_thunk(uchar 
 
 // !FUNC 0x0043b150 BEGIN
 /* 43B150-43B1FD 000AD */
-void CDSDirectPlaySender::CDSDirectPlaySender_dtor_body(void* param_1) { STUB_BODY(); }
+void CDSDirectPlaySender::CDSDirectPlaySender_dtor_body(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0043b150 END
 
 // !FUNC 0x0043b530 BEGIN

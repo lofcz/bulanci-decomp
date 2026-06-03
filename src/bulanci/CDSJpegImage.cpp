@@ -110,7 +110,7 @@ uchar CDSJpegImage::jpeg_CDSStreamStorage_dst(int param_1, uint param_2) {
 
 // !FUNC 0x00431cc0 BEGIN
 /* 431CC0-431CEB 0002B */
-uchar CDSJpegImage::CDSJpegImage_Load(int* param_1) { STUB_BODY(); return 0; }
+void CDSJpegImage::CDSJpegImage_Load(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00431cc0 END
 
 // !FUNC 0x00431d50 BEGIN
@@ -122,7 +122,7 @@ uchar* CDSJpegImage::CDSJpegImage_GetTypeInfo() {
 
 // !FUNC 0x00431d60 BEGIN
 /* 431D60-431D63 00003 */
-uchar CDSJpegImage::FUN_00431d60() { return 1; }
+uchar CDSJpegImage::CDSJpegImage_AlwaysReturnsOne() { return 1; }
 // !FUNC 0x00431d60 END
 
 // !FUNC 0x00431d70 BEGIN
@@ -147,17 +147,17 @@ uchar CDSJpegImage::CDSJpegImage_ScalarDeletingDtor_thunk(uchar param_1) { STUB_
 
 // !FUNC 0x00431de0 BEGIN
 /* 431DE0-431E4E 0006E */
-void CDSJpegImage::CDSJpegImage_dtor(void* param_1) { STUB_BODY(); }
+void CDSJpegImage::CDSJpegImage_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00431de0 END
 
 // !FUNC 0x00431e50 BEGIN
-/* 431E50-432027 001D7 */
-uchar CDSJpegImage::CompressFromImage(uint param_1, CPoemScroller* param_2, int param_3) { STUB_BODY(); return 0; }
+/* 431E50-43200F 001BF */
+void CDSJpegImage::CompressFromImage(void* param_1, CDSImage* param_2, int param_3) { STUB_BODY(); }
 // !FUNC 0x00431e50 END
 
 // !FUNC 0x00432030 BEGIN
 /* 432030-432066 00036 */
-uchar CDSJpegImage::CDSJpegImage_Save(uint param_1) { STUB_BODY(); return 0; }
+void CDSJpegImage::CDSJpegImage_Save(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00432030 END
 
 // !FUNC 0x00432090 BEGIN
@@ -176,7 +176,7 @@ uchar CDSJpegImage::jpeg_CreateCompress(int* param_1, int param_2, int param_3) 
 // quant / Huffman table's sent_table flag so future scans can choose whether
 // to re-emit them.  Note: the libjpeg signature takes a j_compress_ptr but
 // the Ghidra-inferred prototype is `int` (just the cinfo address).
-uchar CDSJpegImage::FUN_0045ed80(int param_1, uchar param_2) {
+uchar CDSJpegImage::jpeg_suppress_tables(int param_1, uchar param_2) {
     JpegCompress_layout* cinfo = reinterpret_cast<JpegCompress_layout*>(param_1);
     for (int i = 0; i < 4; i++) {
         JpegQuantTbl_layout* qtbl = cinfo->quant_tbl_ptrs[i];
@@ -212,7 +212,7 @@ uchar CDSJpegImage::jpeg_write_scanlines(int* param_1, uint param_2, uint param_
 // libjpeg-6b: jpeg_add_quant_table (jcparam.c).
 // Build a quant table at slot `which_tbl` from `basic_table[64]` scaled by
 // scale_factor%, optionally clamping to 1..255 when force_baseline.
-uchar CDSJpegImage::FUN_0045efe0(int* param_1, int param_2, int param_3,
+uchar CDSJpegImage::jpeg_add_quant_table(int* param_1, int param_2, int param_3,
                                  int param_4, char param_5) {
     JpegCompress_layout* cinfo = reinterpret_cast<JpegCompress_layout*>(param_1);
 
@@ -232,7 +232,7 @@ uchar CDSJpegImage::FUN_0045efe0(int* param_1, int param_2, int param_3,
     if (cinfo->quant_tbl_ptrs[param_2] == 0) {
         cinfo->quant_tbl_ptrs[param_2] =
             reinterpret_cast<JpegQuantTbl_layout*>(
-                static_cast<int>(_Globals::FUN_0045d1d0(reinterpret_cast<int>(cinfo))));
+                static_cast<int>(_Globals::jpeg_alloc_quant_table(reinterpret_cast<int>(cinfo))));
     }
     JpegQuantTbl_layout* qtbl = cinfo->quant_tbl_ptrs[param_2];
     const unsigned int* basic = reinterpret_cast<const unsigned int*>(param_3);
@@ -253,7 +253,7 @@ uchar CDSJpegImage::FUN_0045efe0(int* param_1, int param_2, int param_3,
 // libjpeg-6b: jpeg_set_linear_quality (jcparam.c).  Sets the luminance /
 // chrominance quant tables from the JPEG spec K.1 defaults, scaled by
 // `scale_factor` (percentage).  `force_baseline` clamps entries to 1..255.
-uchar CDSJpegImage::FUN_0045f1b0(int* param_1, int param_2, char param_3) {
+uchar CDSJpegImage::jpeg_set_linear_quality(int* param_1, int param_2, char param_3) {
     static const unsigned int std_luminance_quant_tbl[64] = {
         16,  11,  10,  16,  24,  40,  51,  61,
         12,  12,  14,  19,  26,  58,  60,  55,
@@ -274,9 +274,9 @@ uchar CDSJpegImage::FUN_0045f1b0(int* param_1, int param_2, char param_3) {
         99,  99,  99,  99,  99,  99,  99,  99,
         99,  99,  99,  99,  99,  99,  99,  99
     };
-    CDSJpegImage::FUN_0045efe0(param_1, 0,
+    CDSJpegImage::jpeg_add_quant_table(param_1, 0,
         reinterpret_cast<int>(std_luminance_quant_tbl), param_2, param_3);
-    CDSJpegImage::FUN_0045efe0(param_1, 1,
+    CDSJpegImage::jpeg_add_quant_table(param_1, 1,
         reinterpret_cast<int>(std_chrominance_quant_tbl), param_2, param_3);
     return 0;
 }
@@ -303,14 +303,14 @@ int CDSJpegImage::jpeg_quality_scaling(int param_1) {
 // point.  Converts to a linear scaling and forwards to jpeg_set_linear_quality.
 uchar CDSJpegImage::jpeg_set_quality(int* param_1, int param_2, char param_3) {
     int scaled = CDSJpegImage::jpeg_quality_scaling(param_2);
-    CDSJpegImage::FUN_0045f1b0(param_1, scaled, param_3);
+    CDSJpegImage::jpeg_set_linear_quality(param_1, scaled, param_3);
     return 0;
 }
 // !FUNC 0x0045f230 END
 
 // !FUNC 0x0045f260 BEGIN
 /* 45F260-45F304 000A4 */
-uchar CDSJpegImage::jpeg_add_quant_table(int* param_1, void* param_2) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jpeg_add_quant_table_0045f260(int* param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0045f260 END
 
 // !FUNC 0x0045f310 BEGIN
@@ -501,12 +501,12 @@ uchar CDSJpegImage::jinit_compress_master(int* param_1) { STUB_BODY(); return 0;
 
 // !FUNC 0x00467600 BEGIN
 /* 467600-46768E 0008E */
-uchar CDSJpegImage::FUN_00467600(int* param_1, char param_2) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jinit_c_main_controller(int* param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00467600 END
 
 // !FUNC 0x00467dc0 BEGIN
 /* 467DC0-467EC2 00102 */
-uchar CDSJpegImage::FUN_00467dc0(int param_1, char param_2) { STUB_BODY(); return 0; }
+uchar CDSJpegImage::jinit_c_coef_controller(int param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00467dc0 END
 
 // !FUNC 0x00468d70 BEGIN
@@ -516,7 +516,7 @@ uchar CDSJpegImage::jinit_huff_encoder(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00469900 BEGIN
 /* 469900-46993F 0003F */
-uchar CDSJpegImage::FUN_00469900(int param_1) { STUB_BODY(); return 0; }
+void CDSJpegImage::jinit_phuff_encoder(int param_1) { STUB_BODY(); }
 // !FUNC 0x00469900 END
 
 // !FUNC 0x0046a750 BEGIN
@@ -531,7 +531,7 @@ uchar CDSJpegImage::FUN_0046abd0() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0046acf0 BEGIN
 /* 46ACF0-46AD9E 000AE */
-uchar CDSJpegImage::FUN_0046acf0(int* param_1, char param_2) { STUB_BODY(); return 0; }
+void CDSJpegImage::jinit_c_prep_controller(int* param_1, char param_2) { STUB_BODY(); }
 // !FUNC 0x0046acf0 END
 
 // !FUNC 0x0046b590 BEGIN
@@ -550,7 +550,7 @@ uchar CDSJpegImage::initial_setup() { STUB_BODY(); return 0; }
 // !FUNC 0x0046bdf0 END
 
 // !FUNC 0x0046bfd0 BEGIN
-/* 46BFD0-46C3CB 003FB */
+/* 46BFD0-46C3C8 003F8 */
 uchar CDSJpegImage::jpeg_validate_script() { STUB_BODY(); return 0; }
 // !FUNC 0x0046bfd0 END
 
@@ -563,4 +563,9 @@ uchar CDSJpegImage::FUN_0046c8f0(int param_1, char param_2) { STUB_BODY(); retur
 /* 431B70-431CA9 00139 */
 uchar _Globals::CDSJpegImage::DecompressToImage(int* param_1, uint param_2, void* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00431b70 END
+
+// !FUNC 0x00431cf0 BEGIN
+/* 431CF0-431D50 00060 */
+void* CDSJpegImage::CDSJpegImage_InitVtables(void* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00431cf0 END
 

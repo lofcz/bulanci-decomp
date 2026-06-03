@@ -2,12 +2,12 @@
 
 // !FUNC 0x00404c80 BEGIN
 /* 404C80-404CA6 00026 */
-uint* CChatList::FUN_00404c80(uint* param_1) { STUB_BODY(); return 0; }
+uint* CChatList::CChatList_GetItemText(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00404c80 END
 
 // !FUNC 0x004058f0 BEGIN
 /* 4058F0-405923 00033 */
-uchar CChatList::FUN_004058f0(int param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CChatList::CChatList_SetScrollbarValues(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004058f0 END
 
 // !FUNC 0x00405b10 BEGIN
@@ -22,12 +22,12 @@ uint CChatList::CChatList_ScrollToItem(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00405ea0 BEGIN
 /* 405EA0-405FB2 00112 */
-uchar CChatList::RecalculateHorizontalExtent(void* param_1) { STUB_BODY(); return 0; }
+uchar CChatList::RecalculateHorizontalExtent(CScroller* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00405ea0 END
 
 // !FUNC 0x0040d010 BEGIN
 /* 40D010-40D089 00079 */
-void* CChatList::CChatList_BuildAt(int* param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
+void* CChatList::CChatList_BuildAt(int* param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0040d010 END
 
 // !FUNC 0x0040d090 BEGIN

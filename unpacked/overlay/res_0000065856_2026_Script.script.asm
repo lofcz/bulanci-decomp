@@ -210,7 +210,7 @@ fn export#10 @ 0x01e0  ; OnGameStart()  -- fires from `CGaming::FUN_0041c140(tru
     @0x01e1  Return(IntConst(0))
     ; (1069 byte(s) of unreachable tail/inline helper)
 
-fn @ 0x01e7  ; helper (call-target)
+fn @ 0x01e7  ; place_butterfly_decor(x, y)  -- BUTTERFLY decor on bed-night level "Na dobrou noc" / "Bedtime story". 1/8 chance of being absent (Rand 0..7). Inserts butterfly trio anim 65764..65766 bound to slot 1, plus images 65643 (body, +8/+141 offset) and 65642 (base, order axis -39), 1 obstacle (27,97)-(175,133), 1 obstacle bounds at (27,180)-(180,216). Per catalog: "level_bedtime_butterfly_fly_a/b/c" in levels/bedtime_story/decor.
   ; varCount=1
     @0x01e8  SetInsertMode(IntConst(0))
     @0x01ee  InsertView(CreateImage(Add(GetLocalVar(1), IntConst(8)), Add(GetLocalVar(2), IntConst(141)), 65643))
@@ -222,7 +222,7 @@ fn @ 0x01e7  ; helper (call-target)
     @0x0254  InsertView(SetAnimFrame(BindToSlot(CreateAnim(Add(GetLocalVar(1), IntConst(50)), Add(GetLocalVar(2), IntConst(50)), delay=1, frames=[65764, 65765, 65766]), IntConst(8)), IntConst(1)))
     @0x0280  Return(IntConst(0))
 
-fn @ 0x0286  ; helper (call-target)
+fn @ 0x0286  ; place_bunny_on_log(x, y)  -- BROWN BUNNY on log platform (level_bedtime_bunny_clip_*). 1/10 chance of being absent (Rand 0..9). Inserts 6 obstacle bumps (the "log platform" decorative shape: 79,50)-(112,80), (2,58)-(23,108), (23,44)-(42,108), (42,28)-(66,91), (66,14)-(87,69), (87,0)-(134,42) translated by (x,y); 1 image 65609 (the LOG); 5-frame bunny anim 65759..65763 bound to slot 6 (clip A=8f idle, B=5f static, C=20f idle, D=25f decapitation/death, E=20f idle). Slot 6 position offset: anim at (x+49, y-15).
   ; varCount=1
     @0x0287  IfEqual(Rand(IntConst(0), IntConst(7)), IntConst(0), 910)
     @0x029c  SetInsertMode(IntConst(2))
@@ -239,7 +239,7 @@ fn @ 0x0286  ; helper (call-target)
     @0x038b  InsertView(GetLocalVar(0))
     @0x038e  Return(IntConst(0))
 
-fn @ 0x0394  ; helper (call-target)
+fn @ 0x0394  ; place_gun_mouse(x, y, danger_w)  -- GREY MOUSE WITH RIFLE (level_bedtime_mouse_*). 1/8 chance of being absent (Rand 0..7). Sets globals 5/6/7/9/10/11=0. If server: defines 2 danger zones (0=(0,y-3)-(x,y+27), 1=(x+66,y-3)-(arg3,y+27)), registers timer 0. Inserts 3 obstacles (36,0)-(45,14), (5,0)-(36,58), (36,14)-(59,58) translated by (x,y); 1 image 65606 (the bush/cover the mouse hides behind, order axis -25); 8-frame mouse anim 65767..65774 bound to slot 9 (clips 0..7 = pop/hide/shoot/death for left and right, facing). Anim position offset: (x+17, y-29). Slot 9 = the gun-mouse's slot in the mimic flow.
   ; varCount=1
     @0x0395  IfEqual(Rand(IntConst(0), IntConst(9)), IntConst(0), 1243)
     @0x03aa  SetGlobalVar(5, GetLocalVar(1))
@@ -263,7 +263,7 @@ fn @ 0x0394  ; helper (call-target)
     @0x04d8  InsertView(GetLocalVar(0))
     @0x04db  Return(IntConst(0))
 
-fn @ 0x04e1  ; helper (call-target)
+fn @ 0x04e1  ; place_bird_in_nest(x, y)  -- BIRD IN A NEST (level_bedtime_bird_nest_*). 1/7 chance of being absent (Rand 0..6). Inserts 4 obstacles (106,20)-(122,36), (7,35)-(63,83), (63,55)-(134,98), (49,20)-(93,35) translated by (x,y); 1 image 65607 (the nest, order axis -25); 5-frame bird anim 65775..65779 bound to slot 4 (clip A=first of [65775..65779] @ fn@0x04e1 @+0x0589, B=2nd, C=3rd, D=12f idle, E=10f death/gore). Anim position offset: (x+82, y+1). Slot 4 = the bird's slot in the mimic flow.
   ; varCount=1
     @0x04e2  IfEqual(Rand(IntConst(0), IntConst(7)), IntConst(0), 1475)
     @0x04f7  SetInsertMode(IntConst(2))
@@ -279,7 +279,7 @@ fn @ 0x04e1  ; helper (call-target)
     @0x05c0  InsertView(GetLocalVar(0))
     @0x05c3  Return(IntConst(0))
 
-fn @ 0x05c9  ; helper (call-target)
+fn @ 0x05c9  ; place_bush_decor(x, y)  -- BERRY BUSH decor (level_bedtime_bush_*). 1/6 chance of being absent (Rand 0..6). Inserts 1 image 65608 with order axis -40, sets obstacle bounds (9,23)-(90,60). No anim, no obstacles, no danger zone, no timer. Pure decor.
   ; varCount=1
     @0x05ca  IfEqual(Rand(IntConst(0), IntConst(6)), IntConst(0), 1550)
     @0x05df  SetInsertMode(IntConst(1))
@@ -287,7 +287,7 @@ fn @ 0x05c9  ; helper (call-target)
     @0x05f6  InsertView(SetObstacleBounds(GetLocalVar(0), IntConst(9), IntConst(23), IntConst(90), IntConst(60)))
     @0x060e  Return(IntConst(0))
 
-fn @ 0x07b5  ; helper (call-target)
+fn @ 0x07b5  ; mimic_spawn_init(side)  -- SERVER-SIDE mimic-triggered spawn. Calls fn@0x8ab to position the slot-9 mimic, sets g_anim_7 = side*4+2, sets slot-9 anim. If side==1: spawn enemy at (g_pos5+65, g_pos6+10) facing right. If side==0: spawn enemy at (g_pos5-10, g_pos6+10) facing left. Then spawnAtView(4, 9). Server-only: binds g_global8 to slot 10, broadcasts to clients via fn@0x978(1, side).
   ; varCount=0
     @0x07b6  Call(fn@0x8ab, GetLocalVar(0))
     @0x07be  SetGlobalVar(7, Add(Mul(GetLocalVar(0), IntConst(4)), IntConst(2)))
@@ -302,7 +302,7 @@ fn @ 0x07b5  ; helper (call-target)
     @0x084b  Call(fn@0x978, IntConst(1), GetLocalVar(0))
     @0x0858  Return(IntConst(0))
 
-fn @ 0x085e  ; helper (call-target)
+fn @ 0x085e  ; mimic_spawn_closeup(side)  -- SERVER-SIDE close-up variant. Calls fn@0x8ab to position, sets g_anim_7 = side*4+1, sets slot-9 anim. Server-only: binds g_global8 to slot 255 (free), broadcasts via fn@0x978(2, side).
   ; varCount=0
     @0x085f  Call(fn@0x8ab, GetLocalVar(0))
     @0x0867  SetGlobalVar(7, Add(Mul(GetLocalVar(0), IntConst(4)), IntConst(1)))
@@ -312,7 +312,7 @@ fn @ 0x085e  ; helper (call-target)
     @0x0898  Call(fn@0x978, IntConst(2), GetLocalVar(0))
     @0x08a5  Return(IntConst(0))
 
-fn @ 0x08ab  ; helper (call-target)
+fn @ 0x08ab  ; mimic_position(side)  -- positions slot-9 mimic based on side. If side==0: (g_pos5+13, g_pos6-30). Else: (g_pos5+13, g_pos6-25).
   ; varCount=0
     @0x08ac  IfEqual(GetLocalVar(0), IntConst(0), 2261)
     @0x08b8  TranslateTo(GetSlot(IntConst(9)), Add(GetGlobalVar(5), IntConst(13)), Add(GetGlobalVar(6), IntConst(-30)))
@@ -320,7 +320,7 @@ fn @ 0x08ab  ; helper (call-target)
     @0x08d5  TranslateTo(GetSlot(IntConst(9)), Add(GetGlobalVar(5), IntConst(13)), Add(GetGlobalVar(6), IntConst(-25)))
     @0x08ec  Return(IntConst(0))
 
-fn @ 0x08f2  ; helper (call-target)
+fn @ 0x08f2  ; mimic_trigger(side)  -- master mimic trigger. If server AND g_state.11==0: call mimic_position(side), set g_anim_7 = side*4, set slot-9 anim, clear g_state.11, broadcast via fn@0x978(0, side).
   ; varCount=0
     @0x08f3  IfEqual(IsServer(), IntConst(0), 2314)
     @0x08fe  IfEqual(GetGlobalVar(11), IntConst(0), 2366)
@@ -331,7 +331,7 @@ fn @ 0x08f2  ; helper (call-target)
     @0x0931  Call(fn@0x978, IntConst(0), GetLocalVar(0))
     @0x093e  Return(IntConst(0))
 
-fn @ 0x0944  ; helper (call-target)
+fn @ 0x0944  ; mimic_net_broadcast_event(slot)  -- client-side mirror of fn@0x09af case dispatch. Writes [0, slot] to global stream 12 and sends.
   ; varCount=0
     @0x0945  IfNotEqual(IsNet(), IntConst(1), 2418)
     @0x0950  StrmSetSize(GetGlobalVar(12), IntConst(0))
@@ -340,7 +340,7 @@ fn @ 0x0944  ; helper (call-target)
     @0x096f  StrmSend(GetGlobalVar(12))
     @0x0972  Return(IntConst(0))
 
-fn @ 0x0978  ; helper (call-target)
+fn @ 0x0978  ; mimic_net_broadcast_init(type, side)  -- broadcasts the init-event: writes [type+1, side] to global stream 12 and sends. Type 1 = side-init (calls fn@0x7b5), type 2 = closeup (calls fn@0x85e).
   ; varCount=0
     @0x0979  IfNotEqual(IsNet(), IntConst(1), 2473)
     @0x0984  StrmSetSize(GetGlobalVar(12), IntConst(0))
@@ -349,7 +349,7 @@ fn @ 0x0978  ; helper (call-target)
     @0x09a6  StrmSend(GetGlobalVar(12))
     @0x09a9  Return(IntConst(0))
 
-fn @ 0x09af  ; helper (call-target)
+fn @ 0x09af  ; mimic_dispatch_event(slot)  -- SERVER-ONLY event handler dispatching on slot id: 5 = BIRD head-pop (g_state|=1, bindToSlot slot5 255, anim slot4 frame 4, spawnAtView(2,4), broadcast); 7 = BUTTERFLY (g_state|=2, bindToSlot slot7 255, anim slot6 frame 4, spawnAtView(1,6), broadcast); 10 = MOUSE (g_state|=4, bindToSlot g8 255, g_anim_7++, anim slot9, spawnAtView(3,9), broadcast).
   ; varCount=0
     @0x09b0  Switch(GetLocalVar(0); 5=>0x9d2, 7=>0xa15, 10=>0xa58)
     @0x09cc  Return(IntConst(0))

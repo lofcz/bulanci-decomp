@@ -12,12 +12,12 @@ uchar CMina::CMina_CheckTraceAreasForSlot(uint* param_1) { STUB_BODY(); return 0
 
 // !FUNC 0x00419fd0 BEGIN
 /* 419FD0-41A01C 0004C */
-uchar CMina::FUN_00419fd0(void* param_1) { STUB_BODY(); return 0; }
+void CMina::CMina_UpdateTraceAreas(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00419fd0 END
 
 // !FUNC 0x0041a990 BEGIN
 /* 41A990-41AA26 00096 */
-void* CMina::CMina_DefaultCtor(void* param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CMina::CMina_DefaultCtor(uchar param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041a990 END
 
 // !FUNC 0x0041aa30 BEGIN
@@ -74,17 +74,17 @@ uchar CMina::CMina_OnSchedulerHook(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041b4a0 BEGIN
 /* 41B4A0-41B500 00060 */
-uchar CMina::FUN_0041b4a0(void* param_1) { STUB_BODY(); return 0; }
+uchar CMina::CMina_ReleaseDangerZoneNode(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041b4a0 END
 
 // !FUNC 0x0041c010 BEGIN
 /* 41C010-41C0CB 000BB */
-void CMina::CMina_dtor(void* param_1) { STUB_BODY(); }
+void CMina::CMina_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0041c010 END
 
 // !FUNC 0x0041c0d0 BEGIN
 /* 41C0D0-41C132 00062 */
-uchar CMina::FUN_0041c0d0(int param_1) { STUB_BODY(); return 0; }
+uchar CMina::CMina_RegisterDangerZone(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041c0d0 END
 
 // !FUNC 0x0041c530 BEGIN
@@ -94,16 +94,16 @@ void* CMina::CMina_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041cb70 BEGIN
 /* 41CB70-41CCD3 00163 */
-void* CMina::CMina_Ctor(uchar param_1) { STUB_BODY(); return 0; }
+uchar CMina::CMina_Ctor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041cb70 END
 
 // !FUNC 0x0041cce0 BEGIN
 /* 41CCE0-41CE2E 0014E */
-void* CMina::InitMine(int param_1) { STUB_BODY(); return 0; }
+uchar CMina::InitMine(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041cce0 END
 
 // !FUNC 0x0041efb0 BEGIN
 /* 41EFB0-41EFD4 00024 */
-uchar CMina::OnEvent(short param_1, uint param_2, uint* param_3) { STUB_BODY(); return 0; }
+uchar CMina::CExplosion_OnEvent(short param_1, uint param_2, uint* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0041efb0 END
 

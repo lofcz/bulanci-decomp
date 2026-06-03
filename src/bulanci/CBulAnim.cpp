@@ -2,17 +2,17 @@
 
 // !FUNC 0x0040ad20 BEGIN
 /* 40AD20-40AD7D 0005D */
-void CBulAnim::CleanupBody(void* param_1) { STUB_BODY(); }
+void CBulAnim::CleanupBody(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0040ad20 END
 
 // !FUNC 0x0040afd0 BEGIN
 /* 40AFD0-40B015 00045 */
-uchar CBulAnim::ApplyTeamPalette(uchar param_1) { STUB_BODY(); return 0; }
+uchar CBulAnim::CBulAnim_ApplyTeamPalette(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040afd0 END
 
 // !FUNC 0x0040b020 BEGIN
 /* 40B020-40B04B 0002B */
-uchar CBulAnim::OnTeamPaletteEvt(short param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CBulAnim::CBulAnim_OnTeamPaletteEvt(short param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b020 END
 
 // !FUNC 0x0040b820 BEGIN
@@ -31,7 +31,7 @@ uchar* CBulAnim::GetTypeInfo_Sub78() {
 
 // !FUNC 0x0040b840 BEGIN
 /* 40B840-40B848 00008 */
-uchar CBulAnim::PrimaryTick_thunk(int param_1) { STUB_BODY(); return 0; }
+uchar CBulAnim::CBulAnim_PrimaryTick_thunk(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b840 END
 
 // !FUNC 0x0040b850 BEGIN
@@ -63,7 +63,7 @@ uchar CBulAnim::Sub68Dtor_thunk(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0040eaa0 BEGIN
 /* 40EAA0-40EB29 00089 */
-uchar CBulAnim::CreateCBulAnim() { STUB_BODY(); return 0; }
+CDSAnim* CBulAnim::CreateCBulAnim() { STUB_BODY(); return 0; }
 // !FUNC 0x0040eaa0 END
 
 // !FUNC 0x00438f20 BEGIN
@@ -83,7 +83,7 @@ void CBulAnim::SetPalette(uint* param_1) { STUB_BODY(); }
 
 // !FUNC 0x004391d0 BEGIN
 /* 4391D0-4391E0 00010 */
-uchar CBulAnim::IDSAnim_SetSequence_thunk(uint param_1, int* param_2) { STUB_BODY(); return 0; }
+uchar CBulAnim::IDSAnim_SetSequence_thunk(uint param_1, CDSImage* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004391d0 END
 
 // !FUNC 0x004392a0 BEGIN

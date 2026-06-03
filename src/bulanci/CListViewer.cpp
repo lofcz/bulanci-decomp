@@ -1,33 +1,21 @@
 #include "CListViewer.h"
 
-// !FUNC 0x00404180 BEGIN
-/* 404180-4041D5 00055 */
-uchar CListViewer::FUN_00404180(int* param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00404180 END
 
 // !FUNC 0x004041e0 BEGIN
 /* 4041E0-404232 00052 */
 uchar CListViewer::CListViewer_GetContentAreaSize(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004041e0 END
 
-// !FUNC 0x00404240 BEGIN
-/* 404240-404289 00049 */
-uchar CListViewer::FUN_00404240(int* param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00404240 END
 
 // !FUNC 0x00404290 BEGIN
 /* 404290-404318 00088 */
-uchar CListViewer::FUN_00404290(int param_1, int* param_2) { STUB_BODY(); return 0; }
+uchar CListViewer::CListViewer_IndexToItemRect(int param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00404290 END
 
-// !FUNC 0x004044f0 BEGIN
-/* 4044F0-404524 00034 */
-uchar CListViewer::FUN_004044f0(int* param_1, int* param_2) { STUB_BODY(); return 0; }
-// !FUNC 0x004044f0 END
 
 // !FUNC 0x00405b30 BEGIN
 /* 405B30-405BB5 00085 */
-uint CListViewer::CListViewer_HitTestItem(int param_1, int param_2) { STUB_BODY(); return 0; }
+void* CListViewer::CListViewer_HitTestItem(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00405b30 END
 
 // !FUNC 0x00405dd0 BEGIN
@@ -37,7 +25,7 @@ uchar CListViewer::CListViewer_OnMouseClick(int* param_1) { STUB_BODY(); return 
 
 // !FUNC 0x00405df0 BEGIN
 /* 405DF0-405E04 00014 */
-uchar CListViewer::CListViewer_RefreshHitTestAtScroll(uchar param_1) { STUB_BODY(); return 0; }
+uchar CListViewer::CListViewer_RefreshHitTestAtScroll(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00405df0 END
 
 // !FUNC 0x00405e10 BEGIN
@@ -46,7 +34,7 @@ void* CListViewer::CListViewer_AddItem(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00405e10 END
 
 // !FUNC 0x00406d00 BEGIN
-/* 406D00-406EB0 001B0 */
+/* 406D00-406EAD 001AD */
 uchar CListViewer::CListViewer_RenderItems(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00406d00 END
 
@@ -94,11 +82,11 @@ uchar CListViewer::CListViewer_OnFocusSelectItem(int* param_1) { STUB_BODY(); re
 
 // !FUNC 0x00408330 BEGIN
 /* 408330-40834E 0001E */
-uchar CListViewer::CListViewer_vDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CListViewer::CListViewer_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00408330 END
 
 // !FUNC 0x00408c00 BEGIN
 /* 408C00-408CBA 000BA */
-uchar CListViewer::CListViewer_BuildAt(int param_1, int param_2, uint param_3, int param_4, uint param_5, uint param_6, uint param_7) { STUB_BODY(); return 0; }
+void* CListViewer::CListViewer_BuildAt(int param_1, int param_2, uint param_3, int param_4, int param_5, int param_6, uint param_7) { STUB_BODY(); return 0; }
 // !FUNC 0x00408c00 END
 

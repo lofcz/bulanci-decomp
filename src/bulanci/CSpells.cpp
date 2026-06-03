@@ -2,7 +2,7 @@
 
 // !FUNC 0x00426da0 BEGIN
 /* 426DA0-426E0F 0006F */
-void CSpells::OnEvent(short param_1, uint param_2) { STUB_BODY(); }
+void CSpells::CSpells_OnEvent(short param_1, uint param_2) { STUB_BODY(); }
 // !FUNC 0x00426da0 END
 
 // !FUNC 0x004274b0 BEGIN
@@ -19,6 +19,16 @@ void CSpells::Draw(void* param_1) { STUB_BODY(); }
 
 // !FUNC 0x00427b10 BEGIN
 /* 427B10-427B92 00082 */
-uchar CSpells::CSpells_Allocate() { STUB_BODY(); return 0; }
+uint* CSpells::CSpells_Allocate() { STUB_BODY(); return 0; }
 // !FUNC 0x00427b10 END
+
+// !FUNC 0x00426d70 BEGIN
+/* 426D70-426D99 00029 */
+void CSpells::CSpells_SetAmmoEmptyAndInvalidate(uchar param_1, uchar param_2) { STUB_BODY(); }
+// !FUNC 0x00426d70 END
+
+// !FUNC 0x00427d40 BEGIN
+/* 427D40-427E30 000F0 */
+void* CSpells::CSpells_ctor(int param_1, int param_2) { STUB_BODY(); return 0; }
+// !FUNC 0x00427d40 END
 

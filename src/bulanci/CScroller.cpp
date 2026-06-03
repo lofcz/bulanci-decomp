@@ -46,17 +46,17 @@ uchar* CScroller::CScroller_GetTypeInfo() {
 
 // !FUNC 0x004034e0 BEGIN
 /* 4034E0-4034FE 0001E */
-uchar CScroller::CScroller_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
+void* CScroller::CScroller_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004034e0 END
 
 // !FUNC 0x004040c0 BEGIN
 /* 4040C0-4040F6 00036 */
-uchar CScroller::FUN_004040c0(int param_1) { STUB_BODY(); return 0; }
+uchar CScroller::CScroller_ResetScrollSchedulerSlot(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004040c0 END
 
 // !FUNC 0x00404110 BEGIN
 /* 404110-404175 00065 */
-uchar CScroller::FUN_00404110(short param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CScroller::CScroller_OnViewEvent(short param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00404110 END
 
 // !FUNC 0x00404de0 BEGIN
@@ -71,7 +71,7 @@ uint CScroller::CScroller_HandlePageKeys(char param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x004057c0 BEGIN
 /* 4057C0-4058E3 00123 */
-uchar CScroller::CScroller_Render(uchar param_1) { STUB_BODY(); return 0; }
+uchar CScroller::CScroller_Render(CListViewer* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004057c0 END
 
 // !FUNC 0x00405930 BEGIN
@@ -87,17 +87,17 @@ uchar CScroller::CScroller_SetRect(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004069b0 BEGIN
 /* 4069B0-406A11 00061 */
-uchar CScroller::FUN_004069b0(char param_1) { STUB_BODY(); return 0; }
+uchar CScroller::CScroller_OnKeyUp(char param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004069b0 END
 
 // !FUNC 0x00406cc0 BEGIN
 /* 406CC0-406CFE 0003E */
-bool CScroller::CScroller_OnKeyUp(char param_1) { STUB_BODY(); return 0; }
+bool CScroller::CScroller_OnKeyUp_00406cc0(char param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00406cc0 END
 
 // !FUNC 0x004089c0 BEGIN
 /* 4089C0-408BF2 00232 */
-uchar CScroller::CScroller_BuildAt(int param_1, int param_2, uint param_3, int param_4) { STUB_BODY(); return 0; }
+void* CScroller::CScroller_BuildAt(int param_1, int param_2, uint param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x004089c0 END
 
 // !FUNC 0x004229a0 BEGIN
@@ -107,6 +107,6 @@ uchar CScroller::CDSObject_ReleaseViaVtable(int param_1) { STUB_BODY(); return 0
 
 // !FUNC 0x0042cbb0 BEGIN
 /* 42CBB0-42CBE7 00037 */
-uchar CScroller::FUN_0042cbb0(int param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CScroller::CScroller_OffsetChildViewRect(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0042cbb0 END
 

@@ -19,6 +19,6 @@ uchar* CExitDlg::CExitDlg_GetClassTable() {
 
 // !FUNC 0x004390d0 BEGIN
 /* 4390D0-4390FE 0002E */
-uchar CExitDlg::FUN_004390d0(char param_1) { STUB_BODY(); return 0; }
+uchar CExitDlg::CAnim_SetTimelineActive(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004390d0 END
 

@@ -12,7 +12,7 @@ public:
 	/* 434AD0 */ uint CDSSimpleException_What(uint param_1);
 	// !DECL 0x00434ad0 END
 	// !DECL 0x00434c20 BEGIN
-	/* 434C20 */ uchar CDSSimpleException_Throw(uint param_1, uint param_2);
+	/* 434C20 */ static void CDSSimpleException_Throw(uint param_1, uint param_2);
 	// !DECL 0x00434c20 END
 };
 

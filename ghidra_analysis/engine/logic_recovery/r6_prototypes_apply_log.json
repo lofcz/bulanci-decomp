@@ -1,0 +1,192 @@
+{
+  "ok": 29,
+  "fail": 0,
+  "entries": [
+    {
+      "op": "prototype",
+      "addr": "0x0042cf50",
+      "ok": true,
+      "msg": "Successfully set prototype for function at 0x0042cf50 with __thiscall calling convention\n\nNOTE: For __thiscall/__fastcall member functions, also call set_function_this_type with the concrete struct/class pointer (e.g. MyWidget *) so the decompiler uses typed 'this' field access instead of void*."
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042cf50",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Confirmed CDSView_OnLButtonDownAcquireFocus in class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "prototype",
+      "addr": "0x0042cf60",
+      "ok": true,
+      "msg": "Successfully set prototype for function at 0x0042cf60 with __thiscall calling convention\n\nNOTE: For __thiscall/__fastcall member functions, also call set_function_this_type with the concrete struct/class pointer (e.g. MyWidget *) so the decompiler uses typed 'this' field access instead of void*."
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042cf60",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Confirmed CDSView_OnMouseUpModalInputRefresh in class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "prototype",
+      "addr": "0x0042cfa0",
+      "ok": true,
+      "msg": "Successfully set prototype for function at 0x0042cfa0 with __thiscall calling convention\n\nNOTE: For __thiscall/__fastcall member functions, also call set_function_this_type with the concrete struct/class pointer (e.g. MyWidget *) so the decompiler uses typed 'this' field access instead of void*."
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042cfa0",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Confirmed CDSView_RefreshModalFocusFromChildren in class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "prototype",
+      "addr": "0x0042cff0",
+      "ok": true,
+      "msg": "Successfully set prototype for function at 0x0042cff0 with __thiscall calling convention\n\nNOTE: For __thiscall/__fastcall member functions, also call set_function_this_type with the concrete struct/class pointer (e.g. MyWidget *) so the decompiler uses typed 'this' field access instead of void*."
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042cff0",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Confirmed CDSView_TeardownModalFocusChain in class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "prototype",
+      "addr": "0x0042d040",
+      "ok": true,
+      "msg": "Successfully set prototype for function at 0x0042d040 with __thiscall calling convention\n\nNOTE: For __thiscall/__fastcall member functions, also call set_function_this_type with the concrete struct/class pointer (e.g. MyWidget *) so the decompiler uses typed 'this' field access instead of void*."
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042d040",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Confirmed CDSView::Hide in class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "prototype",
+      "addr": "0x0042d080",
+      "ok": true,
+      "msg": "Successfully set prototype for function at 0x0042d080 with __thiscall calling convention\n\nNOTE: For __thiscall/__fastcall member functions, also call set_function_this_type with the concrete struct/class pointer (e.g. MyWidget *) so the decompiler uses typed 'this' field access instead of void*."
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042d080",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Confirmed CDSView_SetAsDefaultFocusChild in class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "prototype",
+      "addr": "0x0042ccf0",
+      "ok": true,
+      "msg": "Successfully set prototype for function at 0x0042ccf0 with __thiscall calling convention\n\nNOTE: For __thiscall/__fastcall member functions, also call set_function_this_type with the concrete struct/class pointer (e.g. MyWidget *) so the decompiler uses typed 'this' field access instead of void*."
+    },
+    {
+      "op": "this_type",
+      "addr": "0x0042ccf0",
+      "cls": "CDSView",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Confirmed CDSView_RenderChildrenClipped in class CDSView; 'this' types as CDSView * (auto-storage). Call get_decompiled_code or force_decompile to refresh output.\"}"
+    },
+    {
+      "op": "prototype",
+      "addr": "0x0042d3f0",
+      "ok": true,
+      "msg": "Successfully set prototype for function at 0x0042d3f0 with __cdecl calling convention"
+    },
+    {
+      "op": "prototype",
+      "addr": "0x00434110",
+      "ok": true,
+      "msg": "Successfully set prototype for function at 0x00434110 with __thiscall calling convention\n\nNOTE: For __thiscall/__fastcall member functions, also call set_function_this_type with the concrete struct/class pointer (e.g. MyWidget *) so the decompiler uses typed 'this' field access instead of void*."
+    },
+    {
+      "op": "prototype",
+      "addr": "0x00434140",
+      "ok": true,
+      "msg": "Successfully set prototype for function at 0x00434140 with __thiscall calling convention\n\nNOTE: For __thiscall/__fastcall member functions, also call set_function_this_type with the concrete struct/class pointer (e.g. MyWidget *) so the decompiler uses typed 'this' field access instead of void*."
+    },
+    {
+      "op": "prototype",
+      "addr": "0x00434380",
+      "ok": true,
+      "msg": "Successfully set prototype for function at 0x00434380 with __fastcall calling convention"
+    },
+    {
+      "op": "force_decompile",
+      "addr": "0x0042cf50",
+      "ok": true,
+      "msg": "Success: Forced redecompilation of CDSView_OnLButtonDownAcquireFocus\n\n\r\nvoid __thiscall CDSView::CDSView_OnLButtonDownAcquireFocus(CDSView *this)\r\n\r\n{\r\n  _Globals::CDSView_AcquireKeyboardFocus((int *)this);\r\n  return;\r\n}"
+    },
+    {
+      "op": "force_decompile",
+      "addr": "0x0042cf60",
+      "ok": true,
+      "msg": "Success: Forced redecompilation of CDSView_OnMouseUpModalInputRefresh\n\n\r\n/* R6: mouse-up on modal view \u2014 clear clip focus DAT_004b3b94; vfn+0x1c hit-test; miss ->\r\n   CDSView_UpdateInputChainOnMouseMove(g_pModalFocus) */\r\n\r\nvoid __thiscall CDSView::CDSView_OnMouseUpModalInputRefresh(CDSView *this)\r\n\r\n{\r\n  char cVar1;\r\n  \r\n                    /* UNCERTAIN: On widget mouse-up, if g_pModalFocus and vtable+0x1c rejects focus\r\n                       at g_pApp+0xf0, calls FUN_0042c880(g_pModalFocus). "
+    },
+    {
+      "op": "force_decompile",
+      "addr": "0x0042cfa0",
+      "ok": true,
+      "msg": "Success: Forced redecompilation of CDSView_RefreshModalFocusFromChildren\n\n\r\n/* R6: walk child chain for view with wViewStateFlags&8 then call OnMouseUpModalInputRefresh */\r\n\r\nvoid __thiscall CDSView::CDSView_RefreshModalFocusFromChildren(CDSView *this)\r\n\r\n{\r\n                    /* UNCERTAIN: walks widget chain from param_1 until DAT_004b3b94 match (+0x44\r\n                       flag 0x8); then FUN_0042cf60. Called from FUN_0042cff0 on CDSView::Hide when\r\n                       +0x44&8. Modal/vol"
+    },
+    {
+      "op": "force_decompile",
+      "addr": "0x0042cff0",
+      "ok": true,
+      "msg": "Success: Forced redecompilation of CDSView_TeardownModalFocusChain\n\n\r\n/* R6: hide/default-focus teardown when wViewStateFlags&8; callers CDSView__Hide,\r\n   SetAsDefaultFocusChild */\r\n\r\nvoid __thiscall CDSView::CDSView_TeardownModalFocusChain(CDSView *this)\r\n\r\n{\r\n  char cVar1;\r\n  \r\n                    /* UNCERTAIN: restores g_pModalFocus via FUN_0042c880 when hidden view had\r\n                       modal-focus flag (+0x44 bit 8). Callers CDSView__Hide and FUN_0042d080 \u2014 no\r\n                      "
+    },
+    {
+      "op": "force_decompile",
+      "addr": "0x0042d040",
+      "ok": true,
+      "msg": "Success: Forced redecompilation of CDSView::Hide\n\n\r\nvoid __thiscall CDSView::CDSView__Hide(CDSView *this)\r\n\r\n{\r\n  ushort uVar1;\r\n  \r\n  uVar1 = (this->win).wViewStateFlags;\r\n  if (((uVar1 & 1) != 0) &&\r\n     (uVar1 = uVar1 & 0xfffe, (this->win).wViewStateFlags = uVar1, (char)uVar1 < '\\0')) {\r\n    _Globals::CDSView_SetActive(this,0);\r\n    CDSView_TeardownModalFocusChain(this);\r\n    (**(code **)((int)(this->win).pVftable_primary + 0x24))(0,1);\r\n  }\r\n  return;\r\n}"
+    },
+    {
+      "op": "force_decompile",
+      "addr": "0x0042d080",
+      "ok": true,
+      "msg": "Success: Forced redecompilation of CDSView_SetAsDefaultFocusChild\n\n\r\nvoid __thiscall CDSView::CDSView_SetAsDefaultFocusChild(CDSView *this)\r\n\r\n{\r\n  ushort uVar1;\r\n  \r\n  uVar1 = (this->win).wViewStateFlags;\r\n  if ((uVar1 & 4) == 0) {\r\n    uVar1 = uVar1 | 4;\r\n    (this->win).wViewStateFlags = uVar1;\r\n    if ((char)uVar1 < '\\0') {\r\n      CDSView_TeardownModalFocusChain(this);\r\n      (**(code **)((int)(this->win).pVftable_primary + 0x24))(0,0);\r\n    }\r\n    return;\r\n  }\r\n  return;\r\n}"
+    },
+    {
+      "op": "force_decompile",
+      "addr": "0x0042ccf0",
+      "ok": true,
+      "msg": "Success: Forced redecompilation of CDSView_RenderChildrenClipped\n\n\r\n/* CDSView primary vfn[14] RenderChildrenClipped \u2014 walk child_chain @+0x54; clip; call\r\n   child->vfn[14] (+0x38). CWindow overrides slot14 with CWindow_Render. */\r\n\r\nvoid __thiscall CDSView::CDSView_RenderChildrenClipped(CDSView *this)\r\n\r\n{\r\n  tagRECT *this_00;\r\n  undefined4 uVar1;\r\n  undefined4 uVar2;\r\n  int *pCurrentView;\r\n  int iVar3;\r\n  tagRECT local_20;\r\n  int local_10;\r\n  int local_c;\r\n  int local_8;\r\n  int local_4;\r\n  \r\n"
+    },
+    {
+      "op": "force_decompile",
+      "addr": "0x0042d3f0",
+      "ok": true,
+      "msg": "Success: Forced redecompilation of CDsString_CompareHandles\n\n\r\nint __cdecl CBulanci::CDsString_CompareHandles(void *param_1)\r\n\r\n{\r\n  ushort uVar1;\r\n  ushort *puVar2;\r\n  undefined4 *in_ECX;\r\n  bool bVar3;\r\n  \r\n  if (param_1 == (void *)0x0) {\r\n    param_1 = PTR_DAT_004afce0;\r\n  }\r\n  puVar2 = (ushort *)*in_ECX;\r\n  if ((ushort *)*in_ECX == (ushort *)0x0) {\r\n    puVar2 = (ushort *)PTR_DAT_004afce0;\r\n  }\r\n  while( true ) {\r\n    uVar1 = *puVar2;\r\n    bVar3 = uVar1 < *(ushort *)param_1;\r\n    if (uVar1 !"
+    },
+    {
+      "op": "force_decompile",
+      "addr": "0x00434110",
+      "ok": true,
+      "msg": "Success: Forced redecompilation of CDSStreamStorage_OpenStream\n\n\r\nuchar __thiscall\r\nCDSStreamStorage::CDSStreamStorage_OpenStream(CDSStreamStorage *this,uint param_1,void *param_2)\r\n\r\n{\r\n  ULONG_PTR *this_00;\r\n  CDSStrmResInfo *entry;\r\n  void *pvVar1;\r\n  \r\n  this_00 = &this[-1].lock.SpinCount;\r\n  entry = CDSStreamStorage_CloseStreamByKey((CDSStreamStorage *)this_00,(void *)param_1);\r\n  pvVar1 = CDSStreamStorage_AppendOrReuseStream((CDSStreamStorage *)this_00,entry,param_2);\r\n  return (uchar)pvVa"
+    },
+    {
+      "op": "force_decompile",
+      "addr": "0x00434140",
+      "ok": true,
+      "msg": "Success: Forced redecompilation of CDSStreamStorage_GetStreamByIndex\n\n\r\nuchar __thiscall\r\nCDSStreamStorage::CDSStreamStorage_GetStreamByIndex(CDSStreamStorage *this,int index,void *out)\r\n\r\n{\r\n  void *pvVar1;\r\n  \r\n  pvVar1 = CDSStreamStorage_AppendOrReuseStream\r\n                     ((CDSStreamStorage *)&this[-1].lock.SpinCount,\r\n                      *(CDSStrmResInfo **)\r\n                       ((int)(this->collection).pM_pVtable_IDSChained + index * 4),out);\r\n  return (uchar)pvVar1;\r\n}"
+    },
+    {
+      "op": "force_decompile",
+      "addr": "0x00434380",
+      "ok": true,
+      "msg": "Success: Forced redecompilation of CDSStreamStorage_AddRefHeldObject\n\n\r\nvoid __fastcall CDSStreamStorage::CDSStreamStorage_AddRefHeldObject(void *param_1)\r\n\r\n{\r\n  int iVar1;\r\n  \r\n  iVar1 = _Globals::CheckedVirtualBaseCast(*(void **)((int)param_1 + 0x14),1);\r\n  *(int *)(iVar1 + 4) = *(int *)(iVar1 + 4) + 1;\r\n  return;\r\n}"
+    },
+    {
+      "op": "save_program",
+      "ok": true,
+      "msg": "{\"success\":true,\"program\":\"bulanci.exe\",\"message\":\"Program saved successfully\"}"
+    }
+  ]
+}

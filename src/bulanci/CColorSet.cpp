@@ -29,7 +29,7 @@ uchar CColorSet::CColorSet_ScalarDeletingDtor_thunk_Sub4(uchar param_1) { STUB_B
 
 // !FUNC 0x0040b7c0 BEGIN
 /* 40B7C0-40B81E 0005E */
-void CColorSet::CColorSet_dtor(void* param_1) { STUB_BODY(); }
+void CColorSet::CColorSet_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0040b7c0 END
 
 // !FUNC 0x0040cc60 BEGIN
@@ -39,12 +39,12 @@ void CColorSet::CColorSet_SetColorIndex(uchar param_1) { STUB_BODY(); }
 
 // !FUNC 0x0040ccc0 BEGIN
 /* 40CCC0-40CCD0 00010 */
-uchar CColorSet::CColorSet_LoadData(void* param_1) { STUB_BODY(); return 0; }
+uchar CColorSet::CColorSet_LoadData(uchar* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ccc0 END
 
 // !FUNC 0x0040e9f0 BEGIN
 /* 40E9F0-40EA7D 0008D */
-uint* CColorSet::CColorSet_Allocate() { STUB_BODY(); return 0; }
+void* CColorSet::CColorSet_Allocate() { STUB_BODY(); return 0; }
 // !FUNC 0x0040e9f0 END
 
 // !FUNC 0x0040ea80 BEGIN
@@ -56,4 +56,9 @@ void* CColorSet::CColorSet_vDtor(uchar param_1) { STUB_BODY(); return 0; }
 /* 40F580-40F60B 0008B */
 uchar CColorSet::CColorSet_OnMouseDown(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f580 END
+
+// !FUNC 0x0040ffd0 BEGIN
+/* 40FFD0-4100C3 000F3 */
+void* CColorSet::CColorSet_ctor_slotPillar(int param_1, int param_2, uchar param_3) { STUB_BODY(); return 0; }
+// !FUNC 0x0040ffd0 END
 

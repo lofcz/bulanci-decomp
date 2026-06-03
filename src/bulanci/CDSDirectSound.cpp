@@ -1,9 +1,5 @@
 #include "CDSDirectSound.h"
 
-// !FUNC 0x0043a350 BEGIN
-/* 43A350-43A483 00133 */
-uchar CDSDirectSound::FUN_0043a350(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0043a350 END
 
 // !FUNC 0x0043a483 BEGIN
 /* 43A483-43A493 00010 */
@@ -59,6 +55,11 @@ void CDSDirectSound::CDSDirectSound_WorkerThreadLoop(void* param_1) { STUB_BODY(
 
 // !FUNC 0x0043cdc0 BEGIN
 /* 43CDC0-43CE48 00088 */
-uchar CDSDirectSound::CDSDirectSound_OnMouseButtonDown(int* param_1) { STUB_BODY(); return 0; }
+uchar CDSDirectSound::CDSDirectSound_OnPlaybackCompleteMessage(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043cdc0 END
+
+// !FUNC 0x0043cbc0 BEGIN
+/* 43CBC0-43CCB0 000F0 */
+void CDSDirectSound::CDSDirectSound_InitPrimary(void* param_1, ushort param_2, int param_3, ushort param_4) { STUB_BODY(); }
+// !FUNC 0x0043cbc0 END
 

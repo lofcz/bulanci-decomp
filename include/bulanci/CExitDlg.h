@@ -15,7 +15,7 @@ public:
 	/* 411DE0 */ uchar* CExitDlg_GetClassTable();
 	// !DECL 0x00411de0 END
 	// !DECL 0x004390d0 BEGIN
-	/* 4390D0 */ uchar FUN_004390d0(char param_1);
+	/* 4390D0 */ uchar CAnim_SetTimelineActive(uchar param_1);
 	// !DECL 0x004390d0 END
 };
 

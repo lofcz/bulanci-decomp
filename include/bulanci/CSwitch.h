@@ -6,7 +6,7 @@
 class CSwitch {
 public:
 	// !DECL 0x00423950 BEGIN
-	/* 423950 */ void CSwitch_dtor(void* param_1);
+	/* 423950 */ void CSwitch_dtor(uchar param_1);
 	// !DECL 0x00423950 END
 	// !DECL 0x004239e0 BEGIN
 	/* 4239E0 */ uchar* CSwitch_GetClassTable();
@@ -33,7 +33,7 @@ public:
 	/* 423EF0 */ uchar CSwitch_PlayIdleTrack(int param_1);
 	// !DECL 0x00423ef0 END
 	// !DECL 0x004244a0 BEGIN
-	/* 4244A0 */ void* CSwitch_DefaultCtor(void* param_1, uint param_2);
+	/* 4244A0 */ uchar CSwitch_DefaultCtor(uchar param_1, uint param_2);
 	// !DECL 0x004244a0 END
 	// !DECL 0x00424cf0 BEGIN
 	/* 424CF0 */ uchar CSwitch_OnMouseEnter(int param_1);
@@ -50,6 +50,10 @@ public:
 	// !DECL 0x00425260 BEGIN
 	/* 425260 */ uchar CSwitch_OnMouseClick(uint param_1, uchar param_2);
 	// !DECL 0x00425260 END
+
+	// !DECL 0x00424bc0 BEGIN
+	/* 424BC0 */ void* CSwitch_ctor(int param_1, int param_2, uchar param_3, ushort param_4);
+	// !DECL 0x00424bc0 END
 };
 
 #endif

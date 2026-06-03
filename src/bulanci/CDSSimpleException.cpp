@@ -16,6 +16,6 @@ uint CDSSimpleException::CDSSimpleException_What(uint param_1) {
 
 // !FUNC 0x00434c20 BEGIN
 /* 434C20-434C62 00042 */
-uchar CDSSimpleException::CDSSimpleException_Throw(uint param_1, uint param_2) { STUB_BODY(); return 0; }
+void CDSSimpleException::CDSSimpleException_Throw(uint param_1, uint param_2) { STUB_BODY(); }
 // !FUNC 0x00434c20 END
 

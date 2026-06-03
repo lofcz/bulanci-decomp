@@ -2,12 +2,12 @@
 
 // !FUNC 0x004164f0 BEGIN
 /* 4164F0-41650F 0001F */
-uchar CAnim::CAnim_RenderAnimFrame(char param_1) { STUB_BODY(); return 0; }
+void CAnim::CAnim_RenderAnimFrame(int param_1) { STUB_BODY(); }
 // !FUNC 0x004164f0 END
 
 // !FUNC 0x00419870 BEGIN
 /* 419870-419911 000A1 */
-void* CAnim::CAnim_SubobjectCtor(void* param_1) { STUB_BODY(); return 0; }
+uchar CAnim::CAnim_SubobjectCtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00419870 END
 
 // !FUNC 0x00419920 BEGIN
@@ -24,7 +24,7 @@ uchar CAnim::CAnim_ReleaseViaVtable_thunk_Sub98(int param_1) { STUB_BODY(); retu
 
 // !FUNC 0x00419940 BEGIN
 /* 419940-4199F3 000B3 */
-void* CAnim::CAnim_ctor(uint param_1, uint param_2, int* param_3, int param_4) { STUB_BODY(); return 0; }
+void* CAnim::CAnim_ctor(int param_1, int param_2, int* param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00419940 END
 
 // !FUNC 0x00419a90 BEGIN
@@ -64,6 +64,6 @@ void* CAnim::CAnim_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0041b190 BEGIN
 /* 41B190-41B1C0 00030 */
-uchar CAnim::FUN_0041b190(void* param_1) { STUB_BODY(); return 0; }
+uchar CAnim::CAnim_OnSchedulerEnqueueSlot0(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041b190 END
 

@@ -12,7 +12,7 @@ uchar CBulPicture::CBulPicture_OnRecolorEvent(short param_1, uint param_2) { STU
 
 // !FUNC 0x0040b050 BEGIN
 /* 40B050-40B0B5 00065 */
-uchar CBulPicture::DrawSurface(void* param_1) { STUB_BODY(); return 0; }
+uchar CBulPicture::CBulPicture_DrawSurface(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040b050 END
 
 // !FUNC 0x0040b8b0 BEGIN
@@ -39,16 +39,21 @@ uchar CBulPicture::CBulPicture_ScalarDeletingDtor_thunk_Sub10(uchar param_1) { S
 
 // !FUNC 0x0040b8f0 BEGIN
 /* 40B8F0-40B94E 0005E */
-void CBulPicture::CBulPicture_dtor(void* param_1) { STUB_BODY(); }
+void CBulPicture::CBulPicture_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0040b8f0 END
 
 // !FUNC 0x0040eb30 BEGIN
 /* 40EB30-40EBCA 0009A */
-uint* CBulPicture::CBulPicture_Create() { STUB_BODY(); return 0; }
+void* CBulPicture::CBulPicture_Create() { STUB_BODY(); return 0; }
 // !FUNC 0x0040eb30 END
 
 // !FUNC 0x0040ebd0 BEGIN
 /* 40EBD0-40EBEE 0001E */
 void* CBulPicture::CBulPicture_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040ebd0 END
+
+// !FUNC 0x004101d0 BEGIN
+/* 4101D0-4102C9 000F9 */
+void* CBulPicture::CBulPicture_ctor(int param_1, int param_2, uint param_3, uint param_4) { STUB_BODY(); return 0; }
+// !FUNC 0x004101d0 END
 

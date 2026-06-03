@@ -21,28 +21,25 @@ public:
 	/* 425620 */ void* CDSObject_CtorWithImage(int* param_1, int param_2, char param_3);
 	// !DECL 0x00425620 END
 	// !DECL 0x004256c0 BEGIN
-	/* 4256C0 */ void CDSObject_dtor(void* param_1);
+	/* 4256C0 */ void CDSObject_dtor(uchar param_1);
 	// !DECL 0x004256c0 END
 	// !DECL 0x0042eb00 BEGIN
-	/* 42EB00 */ uchar CDSUpdatedItem_ReleaseSchedulerAndAudioBank(uchar param_1);
+	/* 42EB00 */ uchar CDSUpdatedItem_ReleaseSchedulerAndAudioBank(CBulanek* param_1);
 	// !DECL 0x0042eb00 END
 	// !DECL 0x0042f140 BEGIN
-	/* 42F140 */ void CDSUpdatedItem_dtor(CDSUpdatedItem* param_1);
+	/* 42F140 */ void CDSUpdatedItem_dtor(uchar param_1);
 	// !DECL 0x0042f140 END
-	// !DECL 0x00439c70 BEGIN
-	/* 439C70 */ void* ConstructTrackManager(void* param_1);
-	// !DECL 0x00439c70 END
 	// !DECL 0x0043b060 BEGIN
-	/* 43B060 */ CDSDirectPlaySender* CDSDirectPlaySender_ctor(CDSDirectPlaySender* param_1);
+	/* 43B060 */ uchar CDSDirectPlaySender_ctor(uchar param_1);
 	// !DECL 0x0043b060 END
 	// !DECL 0x0043c7c0 BEGIN
-	/* 43C7C0 */ uint* CDSDirectSound_ctor(CDSDirectSound* param_1);
+	/* 43C7C0 */ uint* CDSDirectSound_ctor(uchar param_1);
 	// !DECL 0x0043c7c0 END
 	// !DECL 0x00447170 BEGIN
 	/* 447170 */ uchar CDSObject_ClearRefcountFields(int param_1);
 	// !DECL 0x00447170 END
 	// !DECL 0x004471d0 BEGIN
-	/* 4471D0 */ uchar FUN_004471d0(char param_1);
+	/* 4471D0 */ uchar CDSWorkingThread_Start(char param_1);
 	// !DECL 0x004471d0 END
 };
 
