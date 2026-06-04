@@ -4,11 +4,6 @@
 -- control flow is reconstructed as if/elseif/else + while/break/continue.
 local engine = require("engine")
 
--- forward declarations (helpers are file-locals)
-local place_butterfly_decor, place_bunny_on_log, place_gun_mouse, place_bird_in_nest
-local place_bush_decor, mimic_spawn_init, mimic_spawn_closeup, mimic_position, mimic_trigger
-local mimic_net_broadcast_event, mimic_net_broadcast_init, mimic_dispatch_event
-
 -- writes globals 0/1/2 = name/type/GUID for the level/help/history picker
 function GetInfo(language)
     engine.set_global(1, 1)
@@ -91,8 +86,8 @@ function OnBitmapEvt(slot, evt)
         if engine.get_global(7) >= 4 then
             v0 = 1
         end
-        local _sw3 = engine.get_global(7)
-        if _sw3 == 1 then
+        local _sw = engine.get_global(7)
+        if _sw == 1 then
             engine.set_global(11, 1)
             if engine.is_server() == 0 then
                 return 0
@@ -100,13 +95,13 @@ function OnBitmapEvt(slot, evt)
             engine.timer_set_data(0, (math.random(3, 15) * 1000))
             engine.timer_stop(0)
             return 0
-        elseif _sw3 == 2 then
+        elseif _sw == 2 then
             if engine.is_server() == 0 then
                 return 0
             end
             mimic_spawn_closeup(v0)
             return 0
-        elseif _sw3 == 5 then
+        elseif _sw == 5 then
             engine.set_global(11, 1)
             if engine.is_server() == 0 then
                 return 0
@@ -114,7 +109,7 @@ function OnBitmapEvt(slot, evt)
             engine.timer_set_data(0, (math.random(3, 15) * 1000))
             engine.timer_stop(0)
             return 0
-        elseif _sw3 == 6 then
+        elseif _sw == 6 then
             if engine.is_server() == 0 then
                 return 0
             end
@@ -242,7 +237,7 @@ end
 -- plus images 65643 (body, +8/+141 offset) and 65642 (base, order axis -39), 1 obstacle
 -- (27,97)-(175,133), 1 obstacle bounds at (27,180)-(180,216). Per catalog:
 -- "level_bedtime_butterfly_fly_a/b/c" in levels/bedtime_story/decor.
-function place_butterfly_decor(x, y)
+local function place_butterfly_decor(x, y)
     local v0 = 0
     engine.set_insert_mode(0)
     engine.insert_view(engine.create_image((x + 8), (y + 141), 65643))
@@ -261,7 +256,7 @@ end
 -- by (x,y); 1 image 65609 (the LOG); 5-frame bunny anim 65759..65763 bound to slot 6 (clip A=8f
 -- idle, B=5f static, C=20f idle, D=25f decapitation/death, E=20f idle). Slot 6 position offset:
 -- anim at (x+49, y-15).
-function place_bunny_on_log(x, y)
+local function place_bunny_on_log(x, y)
     local v0 = 0
     if math.random(0, 7) ~= 0 then
         engine.set_insert_mode(2)
@@ -287,7 +282,7 @@ end
 -- axis -25); 8-frame mouse anim 65767..65774 bound to slot 9 (clips 0..7 = pop/hide/shoot/death
 -- for left and right, facing). Anim position offset: (x+17, y-29). Slot 9 = the gun-mouse's slot
 -- in the mimic flow.
-function place_gun_mouse(x, y, danger_w)
+local function place_gun_mouse(x, y, danger_w)
     local v0 = 0
     if math.random(0, 9) ~= 0 then
         engine.set_global(5, x)
@@ -320,7 +315,7 @@ end
 -- bound to slot 4 (clip A=first of [65775..65779] @ fn@0x04e1 @+0x0589, B=2nd, C=3rd, D=12f idle,
 -- E=10f death/gore). Anim position offset: (x+82, y+1). Slot 4 = the bird's slot in the mimic
 -- flow.
-function place_bird_in_nest(x, y)
+local function place_bird_in_nest(x, y)
     local v0 = 0
     if math.random(0, 7) ~= 0 then
         engine.set_insert_mode(2)
@@ -341,7 +336,7 @@ end
 -- BERRY BUSH decor (level_bedtime_bush_*). 1/7 chance of being absent (Rand 0..6, absent iff ==0).
 -- Inserts 1 image 65608 with order axis -40, sets obstacle bounds (9,23)-(90,60). No anim, no
 -- obstacles, no danger zone, no timer. Pure decor.
-function place_bush_decor(x, y)
+local function place_bush_decor(x, y)
     local v0 = 0
     if math.random(0, 6) ~= 0 then
         engine.set_insert_mode(1)
@@ -355,7 +350,7 @@ end
 -- side*4+2, sets slot-9 anim. If side==1: spawn enemy at (g_pos5+65, g_pos6+10) facing right. If
 -- side==0: spawn enemy at (g_pos5-10, g_pos6+10) facing left. Then spawnAtView(4, 9). Server-only:
 -- binds g_global8 to slot 10, broadcasts to clients via fn@0x978(1, side).
-function mimic_spawn_init(side)
+local function mimic_spawn_init(side)
     mimic_position(side)
     engine.set_global(7, ((side * 4) + 2))
     engine.set_anim(engine.get_slot(9), engine.get_global(7), 1)
@@ -374,7 +369,7 @@ end
 
 -- SERVER-SIDE close-up variant. Calls fn@0x8ab to position, sets g_anim_7 = side*4+1, sets slot-9
 -- anim. Server-only: binds g_global8 to slot 255 (free), broadcasts via fn@0x978(2, side).
-function mimic_spawn_closeup(side)
+local function mimic_spawn_closeup(side)
     mimic_position(side)
     engine.set_global(7, ((side * 4) + 1))
     engine.set_anim(engine.get_slot(9), engine.get_global(7), 1)
@@ -387,7 +382,7 @@ end
 
 -- positions slot-9 mimic based on side. If side==0: (g_pos5+13, g_pos6-30). Else: (g_pos5+13,
 -- g_pos6-25).
-function mimic_position(side)
+local function mimic_position(side)
     if side == 0 then
         engine.translate_to(engine.get_slot(9), (engine.get_global(5) + 13), (engine.get_global(6) + -25))
         return 0
@@ -398,7 +393,7 @@ end
 
 -- master mimic trigger. If server AND g_state.11==0: call mimic_position(side), set g_anim_7 =
 -- side*4, set slot-9 anim, clear g_state.11, broadcast via fn@0x978(0, side).
-function mimic_trigger(side)
+local function mimic_trigger(side)
     if engine.is_server() == 0 then
         mimic_position(side)
         engine.set_global(7, (side * 4))
@@ -418,7 +413,7 @@ function mimic_trigger(side)
 end
 
 -- client-side mirror of fn@0x09af case dispatch. Writes [0, slot] to global stream 12 and sends.
-function mimic_net_broadcast_event(slot)
+local function mimic_net_broadcast_event(slot)
     if engine.is_net() == 1 then
         engine.strm_set_size(engine.get_global(12), 0)
         engine.strm_write(engine.get_global(12), 0, 1)
@@ -430,7 +425,7 @@ end
 
 -- broadcasts the init-event: writes [type+1, side] to global stream 12 and sends. Type 1 =
 -- side-init (calls fn@0x7b5), type 2 = closeup (calls fn@0x85e).
-function mimic_net_broadcast_init(type, side)
+local function mimic_net_broadcast_init(type, side)
     if engine.is_net() == 1 then
         engine.strm_set_size(engine.get_global(12), 0)
         engine.strm_write(engine.get_global(12), (type + 1), 1)
@@ -444,7 +439,7 @@ end
 -- slot5 255, anim slot4 frame 4, spawnAtView(2,4), broadcast); 7 = BUTTERFLY (g_state|=2,
 -- bindToSlot slot7 255, anim slot6 frame 4, spawnAtView(1,6), broadcast); 10 = MOUSE (g_state|=4,
 -- bindToSlot g8 255, g_anim_7++, anim slot9, spawnAtView(3,9), broadcast).
-function mimic_dispatch_event(slot)
+local function mimic_dispatch_event(slot)
     local _sw = slot
     if _sw == 5 then
         engine.set_global(4, bit32.bor(engine.get_global(4), 1))

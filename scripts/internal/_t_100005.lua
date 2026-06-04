@@ -4,10 +4,6 @@
 -- control flow is reconstructed as if/elseif/else + while/break/continue.
 local engine = require("engine")
 
--- forward declarations (helpers are file-locals)
-local fn_0x042c, fn_0x0000, fn_0x05bc, fn_0x074c, fn_0x08dc, fn_0x0a6c, fn_0x0bfc, fn_0x0d8c
-local fn_0x0f1c, fn_0x10ac
-
 -- writes globals 0/1/2 = name/type/GUID for the level/help/history picker
 function GetInfo(language)
     engine.set_global(1, 1000)
@@ -165,7 +161,7 @@ function OnGameStart()
 end
 
 -- helper (call-target)
-function fn_0x042c(p0)
+local function fn_0x042c(p0)
     local v0, v1 = 0, 0
     v0 = math.random(0, 7)
     v1 = v0
@@ -284,7 +280,7 @@ function fn_0x042c(p0)
 end
 
 -- helper (call-target)
-function fn_0x0000(p0, p1, p2)
+local function fn_0x0000(p0, p1, p2)
     if engine.teleport_player_to(p0, p1, p2, 0) == 0 then
         return 0
     end
@@ -300,7 +296,7 @@ function fn_0x0000(p0, p1, p2)
 end
 
 -- helper (call-target)
-function fn_0x05bc(p0)
+local function fn_0x05bc(p0)
     local v0, v1 = 0, 0
     v0 = math.random(0, 7)
     v1 = v0
@@ -419,7 +415,7 @@ function fn_0x05bc(p0)
 end
 
 -- helper (call-target)
-function fn_0x074c(p0)
+local function fn_0x074c(p0)
     local v0, v1 = 0, 0
     v0 = math.random(0, 7)
     v1 = v0
@@ -538,7 +534,7 @@ function fn_0x074c(p0)
 end
 
 -- helper (call-target)
-function fn_0x08dc(p0)
+local function fn_0x08dc(p0)
     local v0, v1 = 0, 0
     v0 = math.random(0, 7)
     v1 = v0
@@ -657,7 +653,7 @@ function fn_0x08dc(p0)
 end
 
 -- helper (call-target)
-function fn_0x0a6c(p0)
+local function fn_0x0a6c(p0)
     local v0, v1 = 0, 0
     v0 = math.random(0, 7)
     v1 = v0
@@ -776,7 +772,7 @@ function fn_0x0a6c(p0)
 end
 
 -- helper (call-target)
-function fn_0x0bfc(p0)
+local function fn_0x0bfc(p0)
     local v0, v1 = 0, 0
     v0 = math.random(0, 7)
     v1 = v0
@@ -895,7 +891,7 @@ function fn_0x0bfc(p0)
 end
 
 -- helper (call-target)
-function fn_0x0d8c(p0)
+local function fn_0x0d8c(p0)
     local v0, v1 = 0, 0
     v0 = math.random(0, 7)
     v1 = v0
@@ -1014,7 +1010,7 @@ function fn_0x0d8c(p0)
 end
 
 -- helper (call-target)
-function fn_0x0f1c(p0)
+local function fn_0x0f1c(p0)
     local v0, v1 = 0, 0
     v0 = math.random(0, 7)
     v1 = v0
@@ -1133,7 +1129,7 @@ function fn_0x0f1c(p0)
 end
 
 -- helper (call-target)
-function fn_0x10ac(p0)
+local function fn_0x10ac(p0)
     local v0, v1 = 0, 0
     v0 = math.random(0, 7)
     v1 = v0

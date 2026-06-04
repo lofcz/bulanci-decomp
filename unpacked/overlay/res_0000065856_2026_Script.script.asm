@@ -210,7 +210,7 @@ fn export#10 @ 0x01e0  ; OnGameStart()  -- fires from `CGaming::FUN_0041c140(tru
     @0x01e1  Return(IntConst(0))
     ; (1069 byte(s) of unreachable tail/inline helper)
 
-fn @ 0x01e7  ; place_butterfly_decor(x, y)  -- BUTTERFLY decor on bed-night level "Na dobrou noc" / "Bedtime story". 1/8 chance of being absent (Rand 0..7). Inserts butterfly trio anim 65764..65766 bound to slot 1, plus images 65643 (body, +8/+141 offset) and 65642 (base, order axis -39), 1 obstacle (27,97)-(175,133), 1 obstacle bounds at (27,180)-(180,216). Per catalog: "level_bedtime_butterfly_fly_a/b/c" in levels/bedtime_story/decor.
+fn @ 0x01e7  ; place_butterfly_decor(x, y)  -- BUTTERFLY decor on bed-night level "Na dobrou noc" / "Bedtime story". ALWAYS present — no presence roll (fn@0x1e7 has no Rand). Inserts butterfly trio anim 65764..65766 bound to slot 1, plus images 65643 (body, +8/+141 offset) and 65642 (base, order axis -39), 1 obstacle (27,97)-(175,133), 1 obstacle bounds at (27,180)-(180,216). Per catalog: "level_bedtime_butterfly_fly_a/b/c" in levels/bedtime_story/decor.
   ; varCount=1
     @0x01e8  SetInsertMode(IntConst(0))
     @0x01ee  InsertView(CreateImage(Add(GetLocalVar(1), IntConst(8)), Add(GetLocalVar(2), IntConst(141)), 65643))
@@ -222,7 +222,7 @@ fn @ 0x01e7  ; place_butterfly_decor(x, y)  -- BUTTERFLY decor on bed-night leve
     @0x0254  InsertView(SetAnimFrame(BindToSlot(CreateAnim(Add(GetLocalVar(1), IntConst(50)), Add(GetLocalVar(2), IntConst(50)), delay=1, frames=[65764, 65765, 65766]), IntConst(8)), IntConst(1)))
     @0x0280  Return(IntConst(0))
 
-fn @ 0x0286  ; place_bunny_on_log(x, y)  -- BROWN BUNNY on log platform (level_bedtime_bunny_clip_*). 1/10 chance of being absent (Rand 0..9). Inserts 6 obstacle bumps (the "log platform" decorative shape: 79,50)-(112,80), (2,58)-(23,108), (23,44)-(42,108), (42,28)-(66,91), (66,14)-(87,69), (87,0)-(134,42) translated by (x,y); 1 image 65609 (the LOG); 5-frame bunny anim 65759..65763 bound to slot 6 (clip A=8f idle, B=5f static, C=20f idle, D=25f decapitation/death, E=20f idle). Slot 6 position offset: anim at (x+49, y-15).
+fn @ 0x0286  ; place_bunny_on_log(x, y)  -- BROWN BUNNY on log platform (level_bedtime_bunny_clip_*). 1/8 chance of being absent (Rand 0..7, absent iff ==0). Inserts 6 obstacle bumps (the "log platform" decorative shape: 79,50)-(112,80), (2,58)-(23,108), (23,44)-(42,108), (42,28)-(66,91), (66,14)-(87,69), (87,0)-(134,42) translated by (x,y); 1 image 65609 (the LOG); 5-frame bunny anim 65759..65763 bound to slot 6 (clip A=8f idle, B=5f static, C=20f idle, D=25f decapitation/death, E=20f idle). Slot 6 position offset: anim at (x+49, y-15).
   ; varCount=1
     @0x0287  IfEqual(Rand(IntConst(0), IntConst(7)), IntConst(0), 910)
     @0x029c  SetInsertMode(IntConst(2))
@@ -239,7 +239,7 @@ fn @ 0x0286  ; place_bunny_on_log(x, y)  -- BROWN BUNNY on log platform (level_b
     @0x038b  InsertView(GetLocalVar(0))
     @0x038e  Return(IntConst(0))
 
-fn @ 0x0394  ; place_gun_mouse(x, y, danger_w)  -- GREY MOUSE WITH RIFLE (level_bedtime_mouse_*). 1/8 chance of being absent (Rand 0..7). Sets globals 5/6/7/9/10/11=0. If server: defines 2 danger zones (0=(0,y-3)-(x,y+27), 1=(x+66,y-3)-(arg3,y+27)), registers timer 0. Inserts 3 obstacles (36,0)-(45,14), (5,0)-(36,58), (36,14)-(59,58) translated by (x,y); 1 image 65606 (the bush/cover the mouse hides behind, order axis -25); 8-frame mouse anim 65767..65774 bound to slot 9 (clips 0..7 = pop/hide/shoot/death for left and right, facing). Anim position offset: (x+17, y-29). Slot 9 = the gun-mouse's slot in the mimic flow.
+fn @ 0x0394  ; place_gun_mouse(x, y, danger_w)  -- GREY MOUSE WITH RIFLE (level_bedtime_mouse_*). 1/10 chance of being absent (Rand 0..9, absent iff ==0). Sets globals 5/6/7/9/10/11=0. If server: defines 2 danger zones (0=(0,y-3)-(x,y+27), 1=(x+66,y-3)-(arg3,y+27)), registers timer 0. Inserts 3 obstacles (36,0)-(45,14), (5,0)-(36,58), (36,14)-(59,58) translated by (x,y); 1 image 65606 (the bush/cover the mouse hides behind, order axis -25); 8-frame mouse anim 65767..65774 bound to slot 9 (clips 0..7 = pop/hide/shoot/death for left and right, facing). Anim position offset: (x+17, y-29). Slot 9 = the gun-mouse's slot in the mimic flow.
   ; varCount=1
     @0x0395  IfEqual(Rand(IntConst(0), IntConst(9)), IntConst(0), 1243)
     @0x03aa  SetGlobalVar(5, GetLocalVar(1))
@@ -263,7 +263,7 @@ fn @ 0x0394  ; place_gun_mouse(x, y, danger_w)  -- GREY MOUSE WITH RIFLE (level_
     @0x04d8  InsertView(GetLocalVar(0))
     @0x04db  Return(IntConst(0))
 
-fn @ 0x04e1  ; place_bird_in_nest(x, y)  -- BIRD IN A NEST (level_bedtime_bird_nest_*). 1/7 chance of being absent (Rand 0..6). Inserts 4 obstacles (106,20)-(122,36), (7,35)-(63,83), (63,55)-(134,98), (49,20)-(93,35) translated by (x,y); 1 image 65607 (the nest, order axis -25); 5-frame bird anim 65775..65779 bound to slot 4 (clip A=first of [65775..65779] @ fn@0x04e1 @+0x0589, B=2nd, C=3rd, D=12f idle, E=10f death/gore). Anim position offset: (x+82, y+1). Slot 4 = the bird's slot in the mimic flow.
+fn @ 0x04e1  ; place_bird_in_nest(x, y)  -- BIRD IN A NEST (level_bedtime_bird_nest_*). 1/8 chance of being absent (Rand 0..7, absent iff ==0). Inserts 4 obstacles (106,20)-(122,36), (7,35)-(63,83), (63,55)-(134,98), (49,20)-(93,35) translated by (x,y); 1 image 65607 (the nest, order axis -25); 5-frame bird anim 65775..65779 bound to slot 4 (clip A=first of [65775..65779] @ fn@0x04e1 @+0x0589, B=2nd, C=3rd, D=12f idle, E=10f death/gore). Anim position offset: (x+82, y+1). Slot 4 = the bird's slot in the mimic flow.
   ; varCount=1
     @0x04e2  IfEqual(Rand(IntConst(0), IntConst(7)), IntConst(0), 1475)
     @0x04f7  SetInsertMode(IntConst(2))
@@ -279,7 +279,7 @@ fn @ 0x04e1  ; place_bird_in_nest(x, y)  -- BIRD IN A NEST (level_bedtime_bird_n
     @0x05c0  InsertView(GetLocalVar(0))
     @0x05c3  Return(IntConst(0))
 
-fn @ 0x05c9  ; place_bush_decor(x, y)  -- BERRY BUSH decor (level_bedtime_bush_*). 1/6 chance of being absent (Rand 0..6). Inserts 1 image 65608 with order axis -40, sets obstacle bounds (9,23)-(90,60). No anim, no obstacles, no danger zone, no timer. Pure decor.
+fn @ 0x05c9  ; place_bush_decor(x, y)  -- BERRY BUSH decor (level_bedtime_bush_*). 1/7 chance of being absent (Rand 0..6, absent iff ==0). Inserts 1 image 65608 with order axis -40, sets obstacle bounds (9,23)-(90,60). No anim, no obstacles, no danger zone, no timer. Pure decor.
   ; varCount=1
     @0x05ca  IfEqual(Rand(IntConst(0), IntConst(6)), IntConst(0), 1550)
     @0x05df  SetInsertMode(IntConst(1))

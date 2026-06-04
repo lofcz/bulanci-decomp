@@ -1,8 +1,11 @@
 @echo off
 REM
 REM run_force_bedtime.cmd — launch Bulanci under Frida with the
-REM bulanci_force_bedtime.js hook (pinned srand + first-5-rand forced
-REM to a user-specified layout on "Na dobrou noc" / "Bedtime story").
+REM bulanci_force_bedtime_v2.js hook (resets on the per-match srand and forces
+REM the first 5 CDSScript_Rand *results* to a user-specified layout on
+REM "Na dobrou noc" / "Bedtime story"). v2 forces the script Rand opcode
+REM result directly; the old v1 forced raw _rand() and collapsed every roll
+REM to its minimum (variant A + all props absent), so it is not used here.
 REM
 REM Usage:
 REM   scripts\frida\run_force_bedtime.cmd                                  (defaults: orig, layout A1111, seed 0x12345678)
@@ -11,8 +14,12 @@ REM   scripts\frida\run_force_bedtime.cmd orig A1010 0xCAFEBABE          (custom
 REM   scripts\frida\run_force_bedtime.cmd --attach ^<pid^>                (attach to running Bulanci)
 REM   scripts\frida\run_force_bedtime.cmd --list                          (list Bulanci PIDs, then prompt)
 REM
-REM Layout spec:
-REM   A|B followed by 4 bits (bunny, mouse, bird, bush). 1=present, 0=absent.
+REM Layout spec (5 chars = variant + 4 presence bits):
+REM   char 1  variant : A or B  -> picks the A/B placement/coordinate table
+REM   char 2  bunny   : 1=present, 0=absent
+REM   char 3  mouse   : 1=present, 0=absent
+REM   char 4  bird    : 1=present, 0=absent
+REM   char 5  bush    : 1=present, 0=absent
 REM   Butterfly is always present (no roll).
 REM   Examples:
 REM     A1111  variant A, all 4 entities present  (max entities)
@@ -32,7 +39,7 @@ REM
 setlocal EnableDelayedExpansion
 
 set "EXE_DIR=%~dp0..\..\orig"
-set "SCRIPT=%~dp0bulanci_force_bedtime.js"
+set "SCRIPT=%~dp0bulanci_force_bedtime_v2.js"
 set "CFG=%~dp0bulanci_force_bedtime.cfg"
 set "FRIDA_ARGS=-l "%SCRIPT%""
 set "TARGET_KIND=orig"
@@ -113,17 +120,20 @@ if /I "%TARGET_KIND%"=="instrumented" (
     set "TARGET=%EXE_DIR%\bulanci.exe"
 )
 
+set "TARGET_DISP=!TARGET:mstagl-dev=[redacted]!"
+set "SCRIPT_DISP=!SCRIPT:mstagl-dev=[redacted]!"
+
 if not exist "%TARGET%" (
-    echo [run_force_bedtime] ERROR: %TARGET% not found.
+    echo [run_force_bedtime] ERROR: !TARGET_DISP! not found.
     exit /b 1
 )
 if not exist "%SCRIPT%" (
-    echo [run_force_bedtime] ERROR: %SCRIPT% not found.
+    echo [run_force_bedtime] ERROR: !SCRIPT_DISP! not found.
     exit /b 1
 )
 
-echo [run_force_bedtime] target : !TARGET!
-echo [run_force_bedtime] script : !SCRIPT!
+echo [run_force_bedtime] target : !TARGET_DISP!
+echo [run_force_bedtime] script : !SCRIPT_DISP!
 echo [run_force_bedtime] layout : !LAYOUT!   ^(variant + bunny/mouse/bird/bush^)
 echo [run_force_bedtime] seed   : !SEED!
 
@@ -133,24 +143,42 @@ REM target, so the script's `new File('bulanci_force_bedtime.cfg')`
 REM resolves it. The .cmd should be invoked from the repo root
 REM (e.g. C:\...\bulanci) for this to work; if invoked from a different
 REM dir, the script falls back to its hardcoded default.
-> "bulanci_force_bedtime.cfg" echo !LAYOUT!
+REM
+REM If a cfg already exists in cwd we leave it untouched (the LAYOUT arg is
+REM ignored) so hand-edited layouts survive re-runs. Delete the cfg to
+REM regenerate it from the LAYOUT argument.
+if exist "bulanci_force_bedtime.cfg" goto cfg_exists
+> "bulanci_force_bedtime.cfg" echo ; bedtime layout: 5 chars = variant,bunny,mouse,bird,bush
+>> "bulanci_force_bedtime.cfg" echo ;   char 1 variant : A or B picks the A/B placement table
+>> "bulanci_force_bedtime.cfg" echo ;   char 2 bunny   : 1=present 0=absent
+>> "bulanci_force_bedtime.cfg" echo ;   char 3 mouse   : 1=present 0=absent
+>> "bulanci_force_bedtime.cfg" echo ;   char 4 bird    : 1=present 0=absent
+>> "bulanci_force_bedtime.cfg" echo ;   char 5 bush    : 1=present 0=absent
+>> "bulanci_force_bedtime.cfg" echo ;   butterfly is ALWAYS present - no roll
+>> "bulanci_force_bedtime.cfg" echo !LAYOUT!
 echo [run_force_bedtime] wrote .\bulanci_force_bedtime.cfg (=!LAYOUT!)
+goto cfg_done
+:cfg_exists
+echo [run_force_bedtime] cfg exists, not regenerated ^(delete .\bulanci_force_bedtime.cfg to rebuild from LAYOUT^)
+:cfg_done
 
 REM Best-effort env-var pass-through (Frida 17 doesn't surface env to JS,
 REM but we set it anyway for documentation / future use).
 set "BULANCI_FORCE_LAYOUT=!LAYOUT!"
 set "BULANCI_FORCE_SEED=!SEED!"
 
+REM Frida console lines redacted via scripts\redact_console.ps1 (argv/cwd unchanged).
+set "REDACT_PS1=%~dp0..\redact_console.ps1"
 if "!SPAWN_NEW!"=="1" (
     echo [run_force_bedtime] spawning new Bulanci under Frida...
-    frida !FRIDA_ARGS! -f "!TARGET!"
+    powershell -NoProfile -ExecutionPolicy Bypass -File "!REDACT_PS1!" -- frida !FRIDA_ARGS! -f "!TARGET!"
 ) else (
     if "!ATTACH_PID!"=="" (
         echo [run_force_bedtime] ERROR: --attach needs a PID.
         exit /b 1
     )
     echo [run_force_bedtime] attaching to PID !ATTACH_PID!...
-    frida !FRIDA_ARGS! -p "!ATTACH_PID!"
+    powershell -NoProfile -ExecutionPolicy Bypass -File "!REDACT_PS1!" -- frida !FRIDA_ARGS! -p "!ATTACH_PID!"
 )
 exit /b %ERRORLEVEL%
 

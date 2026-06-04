@@ -3,7 +3,9 @@
 Order of operations
 -------------------
 1. In parallel:
-   * `transpile_to_lua.py`       — re-emit `.lua` for every master-pack Script.
+   * `asm_to_luau.py`            — re-emit goto-free Luau `.lua` for every
+                                   master-pack Script, from its curated
+                                   `*.script.asm` disassembly.
    * `build_assets.py`           — extract every `ship = true` resource listed
                                    in `registry.json` into `open_bulanci/assets/`.
    * `build_typed_handles.py`    — emit `client/src/generated/assets.rs`
@@ -53,7 +55,7 @@ def main() -> int:
     start = time.time()
     pipeline = Path(__file__).resolve().parent
 
-    transpile = pipeline / "transpile_to_lua.py"
+    transpile = pipeline / "asm_to_luau.py"
     assets    = pipeline / "build_assets.py"
     handles   = pipeline / "build_typed_handles.py"
     pack      = pipeline / "pack_assets.py"
