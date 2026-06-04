@@ -48,32 +48,32 @@ uchar CDSGZipStream::IDSStream_UnlockRegion_ThrowUnsupported(CDSFilterStream* pa
 // !FUNC 0x00434f90 END
 
 // !FUNC 0x00435220 BEGIN
-/* 435220-4352CF 000AF */
+/* 435220-4352D5 000B5 */
 uchar CDSGZipStream::ReadBytes(void* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00435220 END
 
 // !FUNC 0x004352e0 BEGIN
-/* 4352E0-435359 00079 */
+/* 4352E0-43535C 0007C */
 uchar CDSGZipStream::WriteBytes(void* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004352e0 END
 
 // !FUNC 0x00435360 BEGIN
-/* 435360-435387 00027 */
+/* 435360-43538A 0002A */
 int CDSGZipStream::GetSize(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00435360 END
 
 // !FUNC 0x00435390 BEGIN
-/* 435390-4353B9 00029 */
+/* 435390-4353BC 0002C */
 int CDSGZipStream::TellPosition(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00435390 END
 
 // !FUNC 0x004353c0 BEGIN
-/* 4353C0-435463 000A3 */
+/* 4353C0-435469 000A9 */
 uchar CDSGZipStream::SeekPosition(uchar* param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004353c0 END
 
 // !FUNC 0x00435a20 BEGIN
-/* 435A20-435AD1 000B1 */
+/* 435A20-435AD7 000B7 */
 uchar CDSGZipStream::CDSGZipStream_InitFromOpenInfo(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00435a20 END
 

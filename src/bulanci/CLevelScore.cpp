@@ -33,7 +33,7 @@ void* CLevelScore::CLevelScore_scalar_deleting_dtor(uchar param_1) { STUB_BODY()
 // !FUNC 0x00409a40 END
 
 // !FUNC 0x00409620 BEGIN
-/* 409620-40968D 0006D */
+/* 409620-409690 00070 */
 void CLevelScore::CLevelScore_InitializeDefaultScores() { STUB_BODY(); }
 // !FUNC 0x00409620 END
 
@@ -43,7 +43,7 @@ CDSChain* CLevelScore::CLevelScore_AddPlayerScore(uint* param_1, uchar* param_2,
 // !FUNC 0x00409b10 END
 
 // !FUNC 0x0042fae0 BEGIN
-/* 42FAE0-42FB64 00084 */
+/* 42FAE0-42FB67 00087 */
 uchar CLevelScore::CDSChain_SortChildrenWithComparator(_PtFuncCompare* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042fae0 END
 

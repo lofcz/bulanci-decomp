@@ -48,7 +48,7 @@ void CDSAudioPlayer::CDSAudioPlayer_FillDirectSoundBuffer(void* param_1) { STUB_
 // !FUNC 0x0043a350 END
 
 // !FUNC 0x0043a4a0 BEGIN
-/* 43A4A0-43A4E7 00047 */
+/* 43A4A0-43A4EA 0004A */
 uchar CDSAudioPlayer::CDSAudioPlayer_Stop(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043a4a0 END
 

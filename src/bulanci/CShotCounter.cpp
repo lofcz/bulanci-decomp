@@ -1,7 +1,7 @@
 #include "CShotCounter.h"
 
 // !FUNC 0x00426e10 BEGIN
-/* 426E10-427006 001F6 */
+/* 426E10-427012 00202 */
 void CShotCounter::Render(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00426e10 END
 
@@ -39,7 +39,7 @@ void* CShotCounter::CShotCounter_ScalarDeletingDtor(uchar param_1) { STUB_BODY()
 // !FUNC 0x00427a60 END
 
 // !FUNC 0x00448b50 BEGIN
-/* 448B50-448BE1 00091 */
+/* 448B50-448BFB 000AB */
 ulonglong CShotCounter::CShotCounter_RoundFloatBankers(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00448b50 END
 

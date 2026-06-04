@@ -34,7 +34,7 @@ void* CListViewer::CListViewer_AddItem(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00405e10 END
 
 // !FUNC 0x00406d00 BEGIN
-/* 406D00-406EAD 001AD */
+/* 406D00-406EB0 001B0 */
 uchar CListViewer::CListViewer_RenderItems(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00406d00 END
 

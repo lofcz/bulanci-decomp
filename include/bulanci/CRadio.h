@@ -55,8 +55,12 @@ public:
 	// !DECL 0x0040aa00 END
 
 	// !DECL 0x004075f0 BEGIN
-	/* 4075F0 */ uchar CRadio_AddOption(WCHAR* param_1, uint param_2);
+	/* 4075F0 */ uchar CRadio_AddOption(int param_1, uint param_2);
 	// !DECL 0x004075f0 END
+
+	// !DECL 0x00405280 BEGIN
+	/* 405280 */ int CRadio_HitTestRowAtPoint(int* param_1);
+	// !DECL 0x00405280 END
 };
 
 #endif

@@ -147,7 +147,7 @@ uchar CBulanek::CBulanek_DtorScalar_thunk_Sub4(uchar param_1) { STUB_BODY(); ret
 // !FUNC 0x00418ee0 END
 
 // !FUNC 0x004192b0 BEGIN
-/* 4192B0-41944C 0019C */
+/* 4192B0-41947A 001CA */
 uint CBulanek::CBulanek_CheckSlotCollision(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004192b0 END
 
@@ -157,7 +157,7 @@ uint CBulanek::CBulanek_TryApplyPickupMask(uint param_1, uint param_2) { STUB_BO
 // !FUNC 0x004194b0 END
 
 // !FUNC 0x004194c7 BEGIN
-/* 4194C7-41951F 00058 */
+/* 4194C7-419525 0005E */
 uint CBulanek::CBulanek_CheckSlotMaskCollisions(uint param_1, uint param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004194c7 END
 
@@ -200,7 +200,7 @@ void* CBulanek::CBulanek_DtorScalar(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bc20 END
 
 // !FUNC 0x0041c610 BEGIN
-/* 41C610-41C850 00240 */
+/* 41C610-41C857 00247 */
 void CBulanek::CBulanek_ResolveAndBindAnimTrack(CDeath* param_1, void* param_2) { STUB_BODY(); }
 // !FUNC 0x0041c610 END
 
@@ -235,12 +235,12 @@ uchar CBulanek::CBulanek_OnEvent_tD9_SyncWeaponFromSpawner(void* param_1) { STUB
 // !FUNC 0x0041ed10 END
 
 // !FUNC 0x0041f900 BEGIN
-/* 41F900-41FB8B 0028B */
+/* 41F900-41FB8E 0028E */
 uchar CBulanek::CBulanek_OnDeath(uchar param_1, uchar param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f900 END
 
 // !FUNC 0x0041fb90 BEGIN
-/* 41FB90-41FC9D 0010D */
+/* 41FB90-41FCA0 00110 */
 void CBulanek::CBulanek_Update(int* param_1) { STUB_BODY(); }
 // !FUNC 0x0041fb90 END
 
@@ -279,7 +279,7 @@ void CBulanek::CBulanek_ReleaseAudioPlayerRef(int* param_1) { STUB_BODY(); }
 
 
 // !FUNC 0x0041e4b0 BEGIN
-/* 41E4B0-41EA83 005D3 */
+/* 41E4B0-41EA87 005D7 */
 uchar CBulanek::CBulanekCtor(CGame* param_1, uchar param_2, void* param_3, int param_4, void* param_5, int param_6, int param_7, int param_8) { STUB_BODY(); return 0; }
 // !FUNC 0x0041e4b0 END
 

@@ -2,7 +2,7 @@
 
 // !FUNC 0x00401d00 BEGIN
 /* 401D00-401D21 00021 */
-void* CGame::CGame_InitWidePathFromMbcs(CHAR* param_1) { STUB_BODY(); return 0; }
+void* CGame::CGame_InitWidePathFromMbcs(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00401d00 END
 
 // !FUNC 0x0040a840 BEGIN
@@ -99,7 +99,7 @@ uchar CGame::CGame_RebuildLevelListFromPlayerRecs(uint* param_1, int param_2) { 
 // !FUNC 0x00415220 END
 
 // !FUNC 0x00415290 BEGIN
-/* 415290-415E0A 00B7A */
+/* 415290-415E11 00B81 */
 uchar CGame::CGame_ProcessNetMessage(int param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00415290 END
 
@@ -186,7 +186,7 @@ uchar CGame::CDSChain_AdjustThisOffset_ThisMinus18(int param_1) { STUB_BODY(); r
 // !FUNC 0x00428e20 END
 
 // !FUNC 0x0042eff0 BEGIN
-/* 42EFF0-42F052 00062 */
+/* 42EFF0-42F055 00065 */
 uchar CGame::BroadcastEvent(ushort param_1, uint param_2, uint param_3, void* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0042eff0 END
 

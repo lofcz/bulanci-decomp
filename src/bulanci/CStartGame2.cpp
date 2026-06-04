@@ -54,7 +54,7 @@ uchar CStartGame2::CStartGame2_OnCustomMsg(ushort param_1, int param_2, uint par
 // !FUNC 0x0040d6b0 END
 
 // !FUNC 0x0040d7e0 BEGIN
-/* 40D7E0-40D921 00141 */
+/* 40D7E0-40D928 00148 */
 uchar CStartGame2::CStartGame2_OnBroadcast(short param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0040d7e0 END
 
@@ -75,7 +75,7 @@ uchar CStartGame2::CStartGame2_VectorDtorWrapper(uchar param_1) { STUB_BODY(); r
 // !FUNC 0x0040ed90 END
 
 // !FUNC 0x0040f610 BEGIN
-/* 40F610-40F7BF 001AF */
+/* 40F610-40F7C6 001B6 */
 uint CStartGame2::CStartGame2_Tick_CheckDuplicateNames(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0040f610 END
 
@@ -155,7 +155,7 @@ uint CStartGame2::CStartGame2_EnqueueEvent(ushort param_1, ushort param_2, uint 
 // !FUNC 0x0042ec40 END
 
 // !FUNC 0x004104f0 BEGIN
-/* 4104F0-410E10 00920 */
+/* 4104F0-410E1C 0092C */
 void* CStartGame2::CStartGame2_ctor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004104f0 END
 

@@ -48,7 +48,7 @@ uchar CDSCollection::CDSCollection_ctor(void* param_1) { STUB_BODY(); return 0; 
 // !FUNC 0x00431260 END
 
 // !FUNC 0x00431360 BEGIN
-/* 431360-431409 000A9 */
+/* 431360-431421 000C1 */
 void CDSCollection::CDSCollection_Load(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00431360 END
 

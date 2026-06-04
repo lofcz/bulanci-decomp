@@ -2,7 +2,7 @@
 
 
 // !FUNC 0x00429240 BEGIN
-/* 429240-429273 00033 */
+/* 429240-429276 00036 */
 void CDSAudioBank::CDSAudioBank_ReleaseSampleSlots(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00429240 END
 

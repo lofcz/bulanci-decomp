@@ -47,7 +47,7 @@ public:
 	/* 44ED15 */ static long _wcstol(wchar_t* param_1, wchar_t** param_2, int param_3);
 	// !DECL 0x0044ed15 END
 	// !DECL 0x0044ed3e BEGIN
-	/* 44ED3E */ static int _iswctype_l(int param_1, int param_2, localeinfo_struct* param_3);
+	/* 44ED3E */ static int _iswctype_l(int param_1, int param_2, int param_3);
 	// !DECL 0x0044ed3e END
 	// !DECL 0x00451606 BEGIN
 	/* 451606 */ static int _wchartodigit(ushort param_1);

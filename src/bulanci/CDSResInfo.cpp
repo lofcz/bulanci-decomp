@@ -37,8 +37,4 @@ void CDSResInfo::CDSResInfo_Load(int* param_1) { STUB_BODY(); }
 void CDSResInfo::CDSResInfo_Save(int* param_1) { STUB_BODY(); }
 // !FUNC 0x004342c0 END
 
-// !FUNC 0x00433aa0 BEGIN
-/* 433AA0-433AA5 00005 */
-uchar CDSResInfo::CDSResInfo_ReleaseViaChainedFace(void* param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00433aa0 END
 

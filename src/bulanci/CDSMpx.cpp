@@ -63,7 +63,7 @@ uint CDSMpx::RefillInputBuffer(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004466c0 END
 
 // !FUNC 0x00446770 BEGIN
-/* 446770-44689F 0012F */
+/* 446770-4468A2 00132 */
 uint CDSMpx::DecodeFrame(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00446770 END
 
@@ -108,7 +108,7 @@ uint CDSMpx::mad_stream_sync(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00456850 END
 
 // !FUNC 0x004568b0 BEGIN
-/* 4568B0-456904 00054 */
+/* 4568B0-456910 00060 */
 void CDSMpx::mad_synth_mute(int* param_1) { STUB_BODY(); }
 // !FUNC 0x004568b0 END
 
@@ -118,12 +118,12 @@ uchar CDSMpx::mad_synth_frame_dct32_full(int* param_1) { STUB_BODY(); return 0; 
 // !FUNC 0x00456910 END
 
 // !FUNC 0x00457aa0 BEGIN
-/* 457AA0-458448 009A8 */
+/* 457AA0-45844C 009AC */
 uchar CDSMpx::DecodeGranuleStereo(int param_1, int param_2, int param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00457aa0 END
 
 // !FUNC 0x00458450 BEGIN
-/* 458450-458E0C 009BC */
+/* 458450-458E0D 009BD */
 uchar CDSMpx::DecodeGranuleMono(int param_1, int param_2, int param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00458450 END
 
@@ -148,7 +148,7 @@ uint CDSMpx::mad_header_decode(void* param_1, MpegAudioFrameInfo* param_2) { STU
 // !FUNC 0x00458f50 END
 
 // !FUNC 0x00459130 BEGIN
-/* 459130-4592BF 0018F */
+/* 459130-4592CA 0019A */
 uint CDSMpx::EstimateAvgBitrate(uint* param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00459130 END
 
@@ -163,7 +163,7 @@ uint CDSMpx::ReadOneFrame(int* param_1, uint* param_2) { STUB_BODY(); return 0; 
 // !FUNC 0x00459500 END
 
 // !FUNC 0x004595a0 BEGIN
-/* 4595A0-45960A 0006A */
+/* 4595A0-45961A 0007A */
 void CDSMpx::mad_frame_mute(uint* param_1) { STUB_BODY(); }
 // !FUNC 0x004595a0 END
 
@@ -210,7 +210,7 @@ void CDSMpx::mad_bit_skip(int* param_1, uint param_2) { STUB_BODY(); }
 // !FUNC 0x004596b0 END
 
 // !FUNC 0x004596f0 BEGIN
-/* 4596F0-4597A1 000B1 */
+/* 4596F0-4597A4 000B4 */
 uint CDSMpx::mad_bit_read(int* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004596f0 END
 
@@ -230,7 +230,7 @@ uint CDSMpx::mad_layer_I_sample() { STUB_BODY(); return 0; }
 // !FUNC 0x0045c480 END
 
 // !FUNC 0x0045c4e0 BEGIN
-/* 45C4E0-45C7EF 0030F */
+/* 45C4E0-45C7F2 00312 */
 uint CDSMpx::mad_layer_I(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0045c4e0 END
 
@@ -240,7 +240,7 @@ uchar CDSMpx::mad_layer_II_samples(uint* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0045c800 END
 
 // !FUNC 0x0045c8c0 BEGIN
-/* 45C8C0-45CF2A 0066A */
+/* 45C8C0-45CF4B 0068B */
 uint CDSMpx::mad_layer_II(uchar param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0045c8c0 END
 
@@ -256,7 +256,7 @@ uchar CDSMpx::CDSMpx_III_scalefactors_lsf() { STUB_BODY(); return 0; }
 
 
 // !FUNC 0x0045d030 BEGIN
-/* 45D030-45D166 00136 */
+/* 45D030-45D222 001F2 */
 uchar CDSMpx::CDSMpx_MadTimerAccumulate(int* param_1, int param_2, uint param_3, uint param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0045d030 END
 

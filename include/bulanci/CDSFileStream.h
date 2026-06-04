@@ -90,7 +90,7 @@ public:
 	/* 433720 */ void FlushStream();
 	// !DECL 0x00433720 END
 	// !DECL 0x00433750 BEGIN
-	/* 433750 */ uchar CDSFileStream_Open(WCHAR* param_1, void* param_2);
+	/* 433750 */ uchar CDSFileStream_Open(int param_1, void* param_2);
 	// !DECL 0x00433750 END
 	// !DECL 0x004338d0 BEGIN
 	/* 4338D0 */ uchar CDSFileStream_CreateInstance(int param_1);

@@ -13,7 +13,7 @@ uchar* CDSResourceException::CDSResourceException_GetClassTable() {
 // !FUNC 0x00434430 END
 
 // !FUNC 0x00434440 BEGIN
-/* 434440-434495 00055 */
+/* 434440-434496 00056 */
 void CDSResourceException::CDSResourceException_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00434440 END
 

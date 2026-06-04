@@ -1,16 +1,28 @@
 @echo off
 REM
 REM run_force_bedtime.cmd — launch Bulanci under Frida with the
-REM bulanci_force_bedtime.js hook (pinned srand + forced first-6 _rand
-REM to 0 → deterministic Variant A with all 5 entities present on
-REM "Na dobrou noc" / "Bedtime story").
+REM bulanci_force_bedtime.js hook (pinned srand + first-5-rand forced
+REM to a user-specified layout on "Na dobrou noc" / "Bedtime story").
 REM
 REM Usage:
-REM   scripts\frida\run_force_bedtime.cmd                                  (defaults: orig, seed 0x12345678)
+REM   scripts\frida\run_force_bedtime.cmd                                  (defaults: orig, layout A1111, seed 0x12345678)
 REM   scripts\frida\run_force_bedtime.cmd instrumented                    (use bulanci_insturmented.exe)
-REM   scripts\frida\run_force_bedtime.cmd orig 0xCAFEBABE                 (custom seed)
-REM   scripts\frida\run_force_bedtime.cmd --attach <pid>                  (attach to running Bulanci)
+REM   scripts\frida\run_force_bedtime.cmd orig A1010 0xCAFEBABE          (custom layout + seed)
+REM   scripts\frida\run_force_bedtime.cmd --attach ^<pid^>                (attach to running Bulanci)
 REM   scripts\frida\run_force_bedtime.cmd --list                          (list Bulanci PIDs, then prompt)
+REM
+REM Layout spec:
+REM   A|B followed by 4 bits (bunny, mouse, bird, bush). 1=present, 0=absent.
+REM   Butterfly is always present (no roll).
+REM   Examples:
+REM     A1111  variant A, all 4 entities present  (max entities)
+REM     A0000  variant A, no 4 entities         (butterfly only)
+REM     B1010  variant B, bunny+bird, no mouse, no bush
+REM
+REM The .cmd writes the layout to bulanci_force_bedtime.cfg next to the
+REM .js. The Frida script reads it on startup. (Frida 17.10.1 has no
+REM Process.env in the JS API, so env vars don't reach the script —
+REM config file is the reliable path.)
 REM
 REM What the player does:
 REM   After Frida attaches, pick "Na dobrou noc" from the level menu in-game.
@@ -21,9 +33,11 @@ setlocal EnableDelayedExpansion
 
 set "EXE_DIR=%~dp0..\..\orig"
 set "SCRIPT=%~dp0bulanci_force_bedtime.js"
+set "CFG=%~dp0bulanci_force_bedtime.cfg"
 set "FRIDA_ARGS=-l "%SCRIPT%""
 set "TARGET_KIND=orig"
 set "SEED=0x12345678"
+set "LAYOUT=A1111"
 set "ATTACH_PID="
 set "SPAWN_NEW=1"
 
@@ -54,8 +68,36 @@ if /I "%~1"=="instrumented" (
     shift /1
     goto parse_args
 )
-REM Anything else: if it looks like a hex seed, use it; else echo error.
-echo %~1 | findstr /R "^0x[0-9A-Fa-f][0-9A-Fa-f]*$" >nul
+REM Layout: 1 char (A|B) + 4 bits (0|1) = 5 chars total, e.g. A1111 / B1010
+set "_T=%~1"
+if "!_T:~0,1!"=="A" goto check_layout_tail
+if "!_T:~0,1!"=="B" goto check_layout_tail
+goto not_layout
+:check_layout_tail
+if "!_T:~1,1!"=="0" goto check_layout_mid
+if "!_T:~1,1!"=="1" goto check_layout_mid
+goto not_layout
+:check_layout_mid
+if "!_T:~2,1!"=="0" goto check_layout_mid2
+if "!_T:~2,1!"=="1" goto check_layout_mid2
+goto not_layout
+:check_layout_mid2
+if "!_T:~3,1!"=="0" goto check_layout_end
+if "!_T:~3,1!"=="1" goto check_layout_end
+goto not_layout
+:check_layout_end
+if "!_T:~4,1!"=="0" goto layout_ok
+if "!_T:~4,1!"=="1" goto layout_ok
+goto not_layout
+:layout_ok
+if "!_T:~5!"=="" (
+    set "LAYOUT=!_T!"
+    shift /1
+    goto parse_args
+)
+:not_layout
+REM Seed: 0xHEX
+echo %~1 | findstr /R /I "^0x[0-9A-Fa-f][0-9A-Fa-f]*$" >nul
 if !ERRORLEVEL!==0 (
     set "SEED=%~1"
     shift /1
@@ -82,11 +124,21 @@ if not exist "%SCRIPT%" (
 
 echo [run_force_bedtime] target : !TARGET!
 echo [run_force_bedtime] script : !SCRIPT!
+echo [run_force_bedtime] layout : !LAYOUT!   ^(variant + bunny/mouse/bird/bush^)
 echo [run_force_bedtime] seed   : !SEED!
 
-REM Pass the seed into the Frida script via env var so the user can re-run
-REM with a different seed by re-running the .cmd.  The script reads
-REM BULANCI_FORCE_SEED at startup (see CONFIG.seed).
+REM Write the config file the Frida script reads. We write it to the
+REM current working directory (cwd) — that's where frida spawns the
+REM target, so the script's `new File('bulanci_force_bedtime.cfg')`
+REM resolves it. The .cmd should be invoked from the repo root
+REM (e.g. C:\...\bulanci) for this to work; if invoked from a different
+REM dir, the script falls back to its hardcoded default.
+> "bulanci_force_bedtime.cfg" echo !LAYOUT!
+echo [run_force_bedtime] wrote .\bulanci_force_bedtime.cfg (=!LAYOUT!)
+
+REM Best-effort env-var pass-through (Frida 17 doesn't surface env to JS,
+REM but we set it anyway for documentation / future use).
+set "BULANCI_FORCE_LAYOUT=!LAYOUT!"
 set "BULANCI_FORCE_SEED=!SEED!"
 
 if "!SPAWN_NEW!"=="1" (
@@ -105,15 +157,21 @@ exit /b %ERRORLEVEL%
 :usage
 echo.
 echo Usage:
-echo   %~nx0  [orig^|instrumented] [0xSEED]
-echo   %~nx0  --attach ^<pid^> [orig^|instrumented] [0xSEED]
+echo   %~nx0  [orig^|instrumented] [LAYOUT] [0xSEED]
+echo   %~nx0  --attach ^<pid^> [orig^|instrumented] [LAYOUT] [0xSEED]
 echo   %~nx0  --list
 echo   %~nx0  --help
 echo.
+echo LAYOUT: A^|B + 4 bits for ^(bunny, mouse, bird, bush^). 1=present, 0=absent.
+echo   Example: A1111  ^(variant A, all 4 entities^)
+echo   Example: A0000  ^(variant A, no entities, only butterfly^)
+echo   Example: B1010  ^(variant B, bunny + bird, no mouse / no bush^)
+echo.
 echo Examples:
-echo   %~nx0                          REM spawn orig bulanci.exe, seed 0x12345678
+echo   %~nx0                          REM spawn orig, layout A1111, seed 0x12345678
 echo   %~nx0 instrumented              REM spawn bulanci_insturmented.exe
-echo   %~nx0 orig 0xCAFEBABE          REM custom seed
+echo   %~nx0 orig A0000                REM variant A, only butterfly
+echo   %~nx0 orig B1010 0xCAFEBABE    REM variant B, bunny+bird, custom seed
 echo   %~nx0 --list                   REM show running Bulanci PIDs
 echo   %~nx0 --attach 1234            REM attach to PID 1234
 exit /b 1

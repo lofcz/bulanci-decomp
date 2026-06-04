@@ -27,9 +27,6 @@ public:
 	/* 4342C0 */ void CDSResInfo_Save(int* param_1);
 	// !DECL 0x004342c0 END
 
-	// !DECL 0x00433aa0 BEGIN
-	/* 433AA0 */ uchar CDSResInfo_ReleaseViaChainedFace(void* param_1);
-	// !DECL 0x00433aa0 END
 };
 
 #endif

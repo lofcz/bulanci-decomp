@@ -48,32 +48,32 @@ uchar CDSQueueStream::CDSQueueStream_ReleaseRefcount_thunk_Sub0c(int param_1) { 
 // !FUNC 0x00433d60 END
 
 // !FUNC 0x0043beb0 BEGIN
-/* 43BEB0-43BED2 00022 */
+/* 43BEB0-43BED5 00025 */
 uchar CDSQueueStream::GetSize(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043beb0 END
 
 // !FUNC 0x0043bee0 BEGIN
-/* 43BEE0-43BF02 00022 */
+/* 43BEE0-43BF05 00025 */
 uchar CDSQueueStream::TellPosition(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043bee0 END
 
 // !FUNC 0x0043bf10 BEGIN
-/* 43BF10-43BF76 00066 */
+/* 43BF10-43BF7C 0006C */
 uchar CDSQueueStream::SetStreamSize(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0043bf10 END
 
 // !FUNC 0x0043bf80 BEGIN
-/* 43BF80-43BFE5 00065 */
+/* 43BF80-43BFEB 0006B */
 uchar CDSQueueStream::SeekPosition(uint param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0043bf80 END
 
 // !FUNC 0x0043c000 BEGIN
-/* 43C000-43C0A8 000A8 */
+/* 43C000-43C0AE 000AE */
 void CDSQueueStream::ReadBytes(void* param_1, size_t param_2) { STUB_BODY(); }
 // !FUNC 0x0043c000 END
 
 // !FUNC 0x0043c0b0 BEGIN
-/* 43C0B0-43C158 000A8 */
+/* 43C0B0-43C15E 000AE */
 void CDSQueueStream::WriteBytes(void* param_1, size_t param_2) { STUB_BODY(); }
 // !FUNC 0x0043c0b0 END
 

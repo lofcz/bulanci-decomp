@@ -138,6 +138,12 @@ class bad_exception;
 class exception;
 class type_info;
 class zlib;
+/* Ghidra namespace types used in mapping.csv but absent from unit headers */
+class CDSPtrSlotVec;
+class CDSChain_full;
+class DPEnumSessionInfo;
+class IDSAudioSource;
+class CDSImage_BackBufferEmbed;
 struct tagRECT;
 struct HINSTANCE__;
 struct HKEY__;
@@ -152,7 +158,4 @@ struct HPALETTE__;
 struct HRSRC__;
 struct HGLOBAL__;
 struct HLOCAL__;
-struct HRSRC__;
-typedef struct tagRECT RECT;
-typedef struct HINSTANCE__ *HINSTANCE;
-typedef struct HKEY__ *HKEY;
+/* tagRECT / HINSTANCE__ / HKEY__ forward decls only — typedefs live in globals.h */

@@ -43,7 +43,7 @@ void CColorSwitch::CColorSwitch_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0040b990 END
 
 // !FUNC 0x0040ccd0 BEGIN
-/* 40CCD0-40CDF3 00123 */
+/* 40CCD0-40CDFA 0012A */
 void CColorSwitch::CColorSwitch_Render(void* param_1) { STUB_BODY(); }
 // !FUNC 0x0040ccd0 END
 

@@ -42,6 +42,10 @@ public:
 	// !DECL 0x0043cbc0 BEGIN
 	/* 43CBC0 */ void CDSDirectSound_InitPrimary(void* param_1, ushort param_2, int param_3, ushort param_4);
 	// !DECL 0x0043cbc0 END
+
+	// !DECL 0x0043c9b0 BEGIN
+	/* 43C9B0 */ void CDSDirectSound_StopAllAndReleaseCom();
+	// !DECL 0x0043c9b0 END
 };
 
 #endif

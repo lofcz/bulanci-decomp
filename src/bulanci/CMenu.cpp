@@ -37,7 +37,7 @@ uint CMenu::CMenu_GetDigitFromVirtualKey(uchar param_1) { STUB_BODY(); return 0;
 // !FUNC 0x00412760 END
 
 // !FUNC 0x00412780 BEGIN
-/* 412780-4127BF 0003F */
+/* 412780-4127C2 00042 */
 uchar CMenu::CMenu_CleanupSlots(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00412780 END
 
@@ -48,7 +48,7 @@ uchar CMenu::CMenu_ThrowModalDone(int param_1) { STUB_BODY(); return 0; }
 
 
 // !FUNC 0x00413620 BEGIN
-/* 413620-41379F 0017F */
+/* 413620-4137AA 0018A */
 uchar CMenu::CGame_CopyPlayerBindingsFromProfile(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00413620 END
 

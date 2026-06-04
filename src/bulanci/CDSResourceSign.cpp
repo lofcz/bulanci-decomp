@@ -1,7 +1,7 @@
 #include "CDSResourceSign.h"
 
 // !PROLOGUE BEGIN
-// _Globals helpers (FUN_0042d440 / FUN_0042e140 / FUN_0042e7b0) are reached
+// _Globals helpers (CDsString_WriteWStringToStream / CDsString_ReadWStringFromStream / CDate_SetDate) are reached
 // through `this + offset` casts in the matched bodies below.
 #include "_Globals.h"
 // !PROLOGUE END
@@ -124,7 +124,7 @@ uchar CDSResourceSign::RegisterCDSResourceSignAuxClass2() { STUB_BODY(); return 
 // !FUNC 0x0047d230 END
 
 // !FUNC 0x0047d260 BEGIN
-/* 47D260-47D284 00024 */
+/* 47D260-47D285 00025 */
 uchar CDSResourceSign::RegisterCDSResourceSignAuxClass3() { STUB_BODY(); return 0; }
 // !FUNC 0x0047d260 END
 

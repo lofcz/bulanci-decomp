@@ -6,7 +6,7 @@ void* CDSDsmFile::InitializeQueueStreamView(int param_1, uchar* param_2, int par
 // !FUNC 0x004289a0 END
 
 // !FUNC 0x00428ad0 BEGIN
-/* 428AD0-428C29 00159 */
+/* 428AD0-428C3D 0016D */
 uchar CDSDsmFile::CDSDsmFile_HandleResourceRead(int* param_1, int param_2, uint param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00428ad0 END
 
@@ -150,7 +150,7 @@ uchar CDSDsmFile::InitializeChildObject(void* param_1) { STUB_BODY(); return 0; 
 // !FUNC 0x00439ac0 END
 
 // !FUNC 0x0043bde0 BEGIN
-/* 43BDE0-43BE75 00095 */
+/* 43BDE0-43BE78 00098 */
 uchar CDSDsmFile::InitializeSourceRegion(int param_1, uchar* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0043bde0 END
 

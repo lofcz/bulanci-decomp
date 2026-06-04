@@ -58457,8 +58457,8 @@ undefined DAT_004b8a90;
 LPSTR DAT_004ba1f8;
 LPVOID DAT_004b85c8;
 IMAGE_DOS_HEADER IMAGE_DOS_HEADER_00400000;
-pointer PTR_FUN_004895d0;
-pointer PTR_FUN_004895cc;
+pointer PTR___crt_default_thread_hook_nop_004895d0;
+pointer PTR___crt_default_thread_hook_nop_004895cc;
 undefined _threadstartex;
 undefined4 DAT_004b0eb0;
 undefined DAT_004b1018;
@@ -58493,12 +58493,12 @@ undefined4 DAT_004b8744;
 int DAT_004b8744;
 DWORD DAT_004b115c;
 int DAT_004b1158;
-undefined4 DAT_004b1158;
 int DAT_004b874c;
 int DAT_004b8750;
 int DAT_004b8754;
 undefined DAT_004b1198;
 undefined DAT_004b1898;
+undefined4 DAT_004b1158;
 undefined DAT_004b16c8;
 FARPROC DAT_004b8748;
 FARPROC DAT_004b874c;
@@ -58743,13 +58743,16 @@ undefined write_tables_only;
 undefined write_marker_header;
 undefined write_file_header;
 undefined write_scan_header;
-undefined LAB_004613e0;
+undefined LAB_00461200;
+undefined LAB_00461270;
+undefined LAB_004613b0;
+undefined start_pass_main;
 undefined LAB_00461590;
 undefined LAB_004617f0;
 undefined LAB_00462320;
 undefined CDSWav_HandleAcquireReadThunk;
 undefined jpeg_decompress_data;
-undefined FUN_004619e0;
+undefined decompress_data;
 undefined DAT_0049dc90;
 undefined DAT_0049dcd0;
 undefined LAB_00462e20;
@@ -58764,7 +58767,7 @@ undefined start_pass_huff_decoder;
 undefined LAB_0046c9a0;
 undefined LAB_0046cec0;
 undefined LAB_0046d2a0;
-undefined FUN_0046db50;
+undefined h2v1_merged_upsample_ycbcr_colormap;
 undefined LAB_0046d830;
 undefined LAB_0046dfc0;
 undefined2 DAT_0049dd90;
@@ -58791,7 +58794,7 @@ undefined LAB_00465060;
 undefined LAB_00465080;
 undefined LAB_00465140;
 undefined LAB_004652d0;
-undefined FUN_00465180;
+undefined h2v1_merged_upsample;
 undefined LAB_00465570;
 undefined LAB_00466670;
 undefined color_quantize3;
@@ -58801,29 +58804,28 @@ undefined LAB_004667c0;
 undefined4 DAT_0049df50;
 undefined1 DAT_0049de50;
 undefined LAB_00466d90;
-undefined FUN_00467020;
-undefined FUN_00467150;
+undefined h2v1_merged_upsample_rgb_row;
+undefined h2v2_fancy_upsample_row;
 undefined color_quantize;
-undefined FUN_00466f00;
+undefined merged_upsample_row_non_rgb;
 undefined LAB_00467440;
-undefined FUN_00467340;
+undefined start_pass_merged_upsampler;
 undefined LAB_004675b0;
 undefined jpeg_compress_data;
-undefined FUN_00467930;
+undefined compress_output;
 undefined compress_first_pass;
-undefined FUN_00467d10;
+undefined start_pass_coef;
 undefined4 DAT_0049db54;
 undefined LAB_00468740;
 undefined encode_mcu;
-undefined FUN_00468590;
+undefined finish_pass_huff;
 undefined finish_pass_gather;
-undefined FUN_00468be0;
+undefined start_pass_huff;
 undefined LAB_00469370;
 undefined LAB_00469430;
 undefined LAB_00469660;
-undefined FUN_00469060;
+undefined encode_mcu_DC_first;
 undefined encode_one_block;
-undefined FUN_004696a0;
 undefined LAB_00469940;
 undefined LAB_00469c40;
 undefined LAB_0046a050;
@@ -58831,24 +58833,23 @@ undefined LAB_0046e9f0;
 undefined jpeg_idct_islow;
 undefined jpeg_idct_ifast;
 undefined LAB_0046a7f0;
-undefined FUN_0046a870;
-undefined compress_output;
+undefined pre_process_data;
 undefined LAB_0046afb0;
-undefined FUN_0046b000;
-undefined FUN_0046b0b0;
+undefined h2v1_downsample;
+undefined h2v2_downsample;
 undefined h2v2_fancy_upsample;
-undefined FUN_0046b400;
-undefined FUN_0046adf0;
-undefined FUN_0046ae80;
+undefined fullsize_smooth_downsample;
+undefined sep_downsample;
+undefined int_downsample;
 undefined LAB_0046bae0;
 undefined LAB_0046bb40;
 undefined rgb_ycc_start;
 undefined rgb_ycc_convert;
 undefined rgb_gray_convert;
 undefined cmyk_ycck_convert;
-undefined LAB_0046c880;
-undefined FUN_0046c690;
-undefined FUN_0046c850;
+undefined prepare_for_pass;
+undefined pass_startup;
+undefined FUN_0046c880;
 undefined LAB_00471280;
 undefined zcalloc;
 pointer switchdataD_0046f324;
@@ -60745,7 +60746,7 @@ void __thiscall CBulanci::CBulanci_DestroyEmbedFields(CBulanci *this)
   local_4 = (uint)local_4._1_3_ << 8;
   CGame::CGame_dtor(&this->game);
   local_4 = 0xffffffff;
-  CDSApp::FUN_0042b3d0((undefined4 *)this);
+  CDSApp::CDSApp_ShutdownFromScalarDtor((undefined4 *)this);
   ExceptionList = local_c;
   return;
 }
@@ -61953,17 +61954,17 @@ void __fastcall CRadio::CRadio_Render(CRadio *param_1)
 void __thiscall CRadio::CRadio_SetSelected(CRadio *this,uchar idx)
 
 {
-  int iVar1;
+  void *target_evt;
   
   if (idx != this->bSelectedIndex) {
     this->bSelectedIndex = idx;
     if (this->pParent == 0) {
-      iVar1 = 0;
+      target_evt = (void *)0x0;
     }
     else {
-      iVar1 = this->pParent + 0x10;
+      target_evt = (void *)(this->pParent + 0x10);
     }
-    _Globals::FUN_0042ecc0(iVar1,0x400,0xce,this,0);
+    _Globals::CStartGame2_EnqueueEvent_NullSafe(target_evt,0x400,0xce,(uint)this,0);
     (**(code **)((int)this->pVftable_primary + 0x24))(0,0);
   }
   return;
@@ -63248,6 +63249,7 @@ int __thiscall CScrollBar::CScrollBar_SetValue(CScrollBar *this,int value)
 
 {
   int iVar1;
+  void *target_evt;
   int iVar2;
   
                     // R5: free helper moved into CScrollBar class; __thiscall CScrollBar*; notifies
@@ -63264,12 +63266,12 @@ int __thiscall CScrollBar::CScrollBar_SetValue(CScrollBar *this,int value)
     this->nCurrentValue = iVar1;
     (**(code **)((int)this->pVf_primary + 0x24))(0,0);
     if (this->pParent == (void *)0x0) {
-      iVar2 = 0;
+      target_evt = (void *)0x0;
     }
     else {
-      iVar2 = (int)this->pParent + 0x10;
+      target_evt = (void *)((int)this->pParent + 0x10);
     }
-    _Globals::FUN_0042ecc0(iVar2,0x200,7,this,0);
+    _Globals::CStartGame2_EnqueueEvent_NullSafe(target_evt,0x200,7,(uint)this,0);
   }
   return this->nCurrentValue;
 }
@@ -63411,21 +63413,21 @@ void __thiscall CRadio::CRadio_OnMouseUp(CRadio *this,undefined4 param_1,byte pa
 
 
 
-int __thiscall _Globals::FUN_00405280(void *this,int *param_1)
+int __thiscall CRadio::CRadio_HitTestRowAtPoint(CRadio *this,int *param_1)
 
 {
   int iVar1;
   
-                    // UNCERTAIN: __thiscall grid hit-test — maps (x,y) in +0x30..+0x3c to row
-                    // index via +0x6c table or 0xFF; FUN_00406a20 stores hover at +0x6a.
+                    // Maps client (x,y) in bbox +0x30..+0x3c to option row index; disabled rows
+                    // (option+4 bit0) and misses return 0xFF. Sole caller CRadio_OnMouseMove stores
+                    // result in bHoverIndex (+0x6a).
   iVar1 = param_1[1];
-  if ((((*(int *)((int)this + 0x30) <= *param_1) && (*(int *)((int)this + 0x34) <= iVar1)) &&
-      (*param_1 < *(int *)((int)this + 0x38))) &&
-     (((iVar1 < *(int *)((int)this + 0x3c) &&
-       (iVar1 = (iVar1 - *(int *)((int)this + 0x34)) /
-                (*(int *)(*(int *)((int)this + 0x94) + 8) + 2), -1 < iVar1)) &&
-      (iVar1 < *(int *)((int)this + 0x74))))) {
-    if ((*(byte *)(*(int *)(*(int *)((int)this + 0x6c) + iVar1 * 4) + 4) & 1) == 0) {
+  if ((((*(int *)&this->field_0x30 <= *param_1) && (*(int *)&this->field_0x34 <= iVar1)) &&
+      (*param_1 < *(int *)&this->field_0x38)) &&
+     (((iVar1 < *(int *)&this->field_0x3c &&
+       (iVar1 = (iVar1 - *(int *)&this->field_0x34) / (*(int *)((int)this->pBitmap0 + 8) + 2),
+       -1 < iVar1)) && (iVar1 < *(int *)&this->bOptionCount)))) {
+    if ((this->pLabelPtrs[iVar1][2] & L'\x01') == L'\0') {
       return iVar1;
     }
     return 0xff;
@@ -64875,7 +64877,7 @@ void __thiscall _Globals::CRadio_OnMouseMove(void *this,int *param_1)
 {
   int iVar1;
   
-  iVar1 = FUN_00405280(this,param_1);
+  iVar1 = CRadio::CRadio_HitTestRowAtPoint(this,param_1);
   if ((char)iVar1 != *(char *)((int)this + 0x6a)) {
     *(char *)((int)this + 0x6a) = (char)iVar1;
     (**(code **)(*(int *)this + 0x24))(0,0);
@@ -65290,6 +65292,7 @@ uint __thiscall _Globals::CEdit_SubmitText(void *this,LPCWSTR param_1,char param
   int iVar2;
   LPCWSTR pWVar3;
   uint uVar4;
+  void *target_evt;
   undefined4 uVar5;
   tagRECT local_1c;
   void *local_c;
@@ -65331,12 +65334,12 @@ LAB_004071e9:
       }
       (**(code **)(*(int *)this + 0x24))(0);
       if (*(int *)((int)this + 0x4c) == 0) {
-        iVar2 = 0;
+        target_evt = (void *)0x0;
       }
       else {
-        iVar2 = *(int *)((int)this + 0x4c) + 0x10;
+        target_evt = (void *)(*(int *)((int)this + 0x4c) + 0x10);
       }
-      FUN_0042ecc0(iVar2,0x400,0xd6,this);
+      CStartGame2_EnqueueEvent_NullSafe(target_evt,0x400,0xd6,(uint)this,0);
       goto LAB_004071e9;
     }
   }
@@ -65690,7 +65693,7 @@ void __thiscall _Globals::CRadio_OnMouseMove(void *this,int *param_1)
 {
   int iVar1;
   
-  iVar1 = FUN_00405280(this,param_1);
+  iVar1 = CRadio::CRadio_HitTestRowAtPoint(this,param_1);
   if ((char)iVar1 != *(char *)((int)this + 0x6a)) {
     *(char *)((int)this + 0x6a) = (char)iVar1;
     (**(code **)(*(int *)this + 0x24))(0,0);
@@ -66400,8 +66403,8 @@ void __thiscall _Globals::CListViewer_SetItemSelected(void *this,int param_1,cha
 
 {
   int iVar1;
-  int iVar2;
-  undefined4 uVar3;
+  void *target_evt;
+  undefined4 uVar2;
   
   if ((((*(byte *)((int)this + 0x9c) & 8) == 0) && (-1 < param_1)) &&
      (param_1 < *(int *)((int)this + 0xb4))) {
@@ -66419,14 +66422,14 @@ void __thiscall _Globals::CListViewer_SetItemSelected(void *this,int param_1,cha
         CIntListInsertSortedOrAppend((void *)((int)this + 0xbc),iVar1,(undefined *)0x0,1);
       }
       if (*(int *)((int)this + 0x4c) == 0) {
-        iVar2 = 0;
+        target_evt = (void *)0x0;
       }
       else {
-        iVar2 = *(int *)((int)this + 0x4c) + 0x10;
+        target_evt = (void *)(*(int *)((int)this + 0x4c) + 0x10);
       }
-      FUN_0042ecc0(iVar2,0x400,0xd0,this,0);
-      uVar3 = CChatList::CChatList_ScrollToItem(this,param_1);
-      if ((char)uVar3 == '\0') {
+      CStartGame2_EnqueueEvent_NullSafe(target_evt,0x400,0xd0,(uint)this,0);
+      uVar2 = CChatList::CChatList_ScrollToItem(this,param_1);
+      if ((char)uVar2 == '\0') {
         CListViewer_ScrollToItem(this,iVar1);
       }
     }
@@ -71566,7 +71569,7 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(CDSView *param_1)
 void __thiscall CColorSet::CColorSet_SetColorIndex(CColorSet *this,uchar colorIndex)
 
 {
-  int iVar1;
+  void *target_evt;
   
                     // Event 0xd1: CONCAT11(bColorIndex,bTeamTint) — high byte is lobby slot
                     // index, not CGameGetPlayerColorByte.
@@ -71577,12 +71580,13 @@ void __thiscall CColorSet::CColorSet_SetColorIndex(CColorSet *this,uchar colorIn
     this->bColorIndex = colorIndex;
     (**(code **)((int)this->pVftable_primary + 0x24))(0,0);
     if (this->pParent == (void *)0x0) {
-      iVar1 = 0;
+      target_evt = (void *)0x0;
     }
     else {
-      iVar1 = (int)this->pParent + 0x10;
+      target_evt = (void *)((int)this->pParent + 0x10);
     }
-    _Globals::FUN_0042ecc0(iVar1,0x400,0xd1,CONCAT11(this->bColorIndex,this->bTeamTint),0);
+    _Globals::CStartGame2_EnqueueEvent_NullSafe
+              (target_evt,0x400,0xd1,(uint)CONCAT11(this->bColorIndex,this->bTeamTint),0);
   }
   return;
 }
@@ -82582,7 +82586,7 @@ uchar __thiscall CGaming::CGaming_InsertEntityByDepth(CGaming *this,void *param_
       if (pCVar6 == this->pDepthInsertHead) {
         this->pDepthInsertHead = param_1;
       }
-      uVar2 = CBulanek::FUN_0042c190(param_1,(int)pCVar6);
+      uVar2 = CGameView::CGameView_RemoveFromSiblingAnchor(param_1,(int)pCVar6);
       return uVar2;
     }
   }
@@ -82618,7 +82622,7 @@ uchar __thiscall CGaming::CGaming_InsertEntityByDepth(CGaming *this,void *param_
         }
         this->pDepthInsertHead = pCVar6;
       }
-      uVar2 = CBulanek::FUN_0042c160(param_1,pCVar4);
+      uVar2 = CGameView::CGameView_InsertBeforeSiblingAnchor(param_1,pCVar4);
     }
   }
   return uVar2;
@@ -85799,34 +85803,39 @@ void __thiscall CBulanci::CBulanci_RegisterPlayerAndRespawn(CBulanci *this,CBula
 
 
 
-void __thiscall CGaming::FUN_0041b3b0(CGaming *this,int param_1)
+uchar __thiscall
+CGaming::CGaming_OnCustomEvent_0xF5_RemoveEntitiesBySlotId(CGaming *this,int param_1)
 
 {
   int *piVar1;
+  uchar in_AL;
   int iVar2;
   int iVar3;
+  int iVar4;
   
-                    // UNCERTAIN: CGaming_OnCustomEvent case 0xf5 — removes up to 2 objects from
-                    // +0x2f8 array where entity+0x3c==param_1, then
-                    // CGaming_UnregisterAndRemoveObject + vtable Release
-  iVar3 = *(int *)&this->field_0x300;
-  iVar2 = 0;
-  if (iVar3 != 0) {
+                    // CGaming_OnCustomEvent case 0xF5: reverse-walk vecSlotVec_2f8 (+0x2F8, count
+                    // +0x300); match entity dword[+0x3C] (byte +0xF0) == param_1; RemoveRange +
+                    // UnregisterAndRemoveObject + Release; max 2.
+  iVar4 = *(int *)&this->field_0x300;
+  iVar3 = 0;
+  if (iVar4 != 0) {
     do {
-      piVar1 = *(int **)(*(int *)&this->field_0x2f8 + -4 + iVar3 * 4);
-      iVar3 = iVar3 + -1;
+      iVar2 = *(int *)&this->field_0x2f8;
+      piVar1 = *(int **)(iVar2 + -4 + iVar4 * 4);
+      iVar4 = iVar4 + -1;
       if (piVar1[0x3c] == param_1) {
-        _Globals::CDynPtrArray_RemoveRange(&this->field_0x2f8,iVar3,1);
+        _Globals::CDynPtrArray_RemoveRange(&this->field_0x2f8,iVar4,1);
         CGaming_UnregisterAndRemoveObject(this,piVar1);
-        (**(code **)(*piVar1 + 8))();
-        iVar2 = iVar2 + 1;
-        if (iVar2 == 2) {
-          return;
+        iVar2 = (**(code **)(*piVar1 + 8))();
+        iVar3 = iVar3 + 1;
+        if (iVar3 == 2) {
+          return (uchar)iVar2;
         }
       }
-    } while (iVar3 != 0);
+      in_AL = (uchar)iVar2;
+    } while (iVar4 != 0);
   }
-  return;
+  return in_AL;
 }
 
 
@@ -90598,7 +90607,7 @@ CGaming::CGaming_OnCustomEvent(CGaming *this,undefined2 param_1,int *param_2,und
     CGaming_CleanupInactiveBullets(this);
     return;
   case 0xf5:
-    FUN_0041b3b0(this,(int)param_2);
+    CGaming_OnCustomEvent_0xF5_RemoveEntitiesBySlotId(this,(int)param_2);
     return;
   case 0xf6:
     CGaming_OnCustomEvent_0xF6_RespawnPlayer(this,param_2);
@@ -95122,7 +95131,7 @@ void __fastcall CSwitch::CSwitch_OnMouseLeave(int param_1)
 void __fastcall _Globals::Button_Click(CSwitch *btn)
 
 {
-  int iVar1;
+  void *pvVar1;
   
                     // Button_Click: (wChainInit44&5)==1 gate; trackManager.nCurrentTrackIdx@+0xa8
                     // (+0x7c+0x2c), dwCurrentFrameIdx@+0xb4 (+0x7c+0x38). Posts cmd@wCmd to
@@ -95134,19 +95143,19 @@ void __fastcall _Globals::Button_Click(CSwitch *btn)
     }
     btn->bPressedState = 1;
     if (btn->pParent == (void *)0x0) {
-      iVar1 = 0;
+      pvVar1 = (void *)0x0;
     }
     else {
-      iVar1 = (int)btn->pParent + 0x10;
+      pvVar1 = (void *)((int)btn->pParent + 0x10);
     }
-    FUN_0042ecc0(iVar1,0x400,200,btn,0);
+    CStartGame2_EnqueueEvent_NullSafe(pvVar1,0x400,200,(uint)btn,0);
     if (btn->pParent == (void *)0x0) {
-      iVar1 = 0;
+      pvVar1 = (void *)0x0;
     }
     else {
-      iVar1 = (int)btn->pParent + 0x10;
+      pvVar1 = (void *)((int)btn->pParent + 0x10);
     }
-    FUN_0042ecc0(iVar1,0x100,btn->wCmd,0,0);
+    CStartGame2_EnqueueEvent_NullSafe(pvVar1,0x100,btn->wCmd,0,0);
   }
   return;
 }
@@ -96490,7 +96499,7 @@ CGunMouse * __fastcall ODSImage::CGunMouse_ctor(CGunMouse *this)
     (**(code **)(*piVar1 + 8))();
     local_1c = local_1c + 1;
   } while ((int)local_1c < 0x4af90c);
-  _Globals::FUN_00439710(&this->trackManager,1);
+  CDSVideoPlayer::CDSVideoPlayer_SetNotifyCookie(&this->trackManager);
   _Globals::SetCurrentTrack(&this->trackManager,0,'\x01');
   pObject = (this->trackManager).pRenderTarget;
   if ((int *)this->m_dotSpriteInfo != (int *)0x0) {
@@ -100115,15 +100124,15 @@ void CDSAudioBank::Catch_0042985a(void)
 
 
 
-int __fastcall _Globals::FUN_00429880(int *param_1)
+int __thiscall tagRECT::CDSApp_DirtyRect_ComputeAreaPixels(tagRECT *this)
 
 {
-                    // UNCERTAIN: RECT pixel area (right-left)*(bottom-top) or 0 if empty; sole
-                    // caller CDSApp_AddDirtyRectCoalesced @ 0x42b70c. No CPoemScroller::rect_*
-                    // export.
-  if (*param_1 < param_1[2]) {
-    if (param_1[1] < param_1[3]) {
-      return (param_1[3] - param_1[1]) * (param_1[2] - *param_1);
+                    // Returns (right-left)*(bottom-top) for valid RECT (left<right, top<bottom);
+                    // else 0. Sole caller CDSApp_AddDirtyRectCoalesced — 40% merge-cost vs area
+                    // gate.
+  if (this->left < this->right) {
+    if (this->top < this->bottom) {
+      return (this->bottom - this->top) * (this->right - this->left);
     }
   }
   return 0;
@@ -100131,40 +100140,43 @@ int __fastcall _Globals::FUN_00429880(int *param_1)
 
 
 
-bool __fastcall _Globals::FUN_004298b0(int param_1)
+bool __fastcall _Globals::CDSBackBuffer_RestoreSurface(void)
 
 {
   int iVar1;
+  int in_ECX;
   
-                    // UNCERTAIN: vtable+0x6c on *(param+0x4c); returns success if >=0. Sole caller
-                    // FUN_00429bd0 (CDSApp synthetic WM path) — IDSStorage/vtable slot name not
-                    // verified.
-  iVar1 = (**(code **)(**(int **)(param_1 + 0x4c) + 0x6c))(*(int **)(param_1 + 0x4c));
+                    // IDirectDrawSurface::Restore on embeddedImage.pDirectDrawSurface @ +0x4c
+                    // (vtable+0x6c); returns HRESULT>=0 as bool. Sole caller
+                    // FUN_00429bd0(CDSApp+0x7c) after Restore on app+0x78.
+  iVar1 = (**(code **)(**(int **)(in_ECX + 0x4c) + 0x6c))(*(int **)(in_ECX + 0x4c));
   return -1 < iVar1;
 }
 
 
 
-uint __fastcall _Globals::FUN_004298d0(int param_1)
+bool __fastcall _Globals::CDSBackBuffer_BindImageFromSurface(void)
 
 {
-  uint uVar1;
-  undefined4 uVar2;
+  int iVar1;
+  int in_ECX;
   undefined4 uStack_80;
   undefined4 local_6c [27];
   
-                    // UNCERTAIN: IDirectSound buffer at +0x4c vtable+100 (WAVEFORMATEX
-                    // cbSize=0x6c), then FUN_00436d90; used from FUN_0042a590 on +0x7c subobject.
+                    // IDirectDrawSurface::GetSurfaceDesc on embeddedImage.pDirectDrawSurface @
+                    // +0x4c (vtable+0x64, DDSDESC 0x6c), then
+                    // CDSImage_BindFromSurfaceDesc(&embeddedImage). Callers:
+                    // CBulanci_RebuildBackBufferSurface, FUN_0042a590 (CDSApp+0x7c).
   uStack_80 = 0x4298e4;
   Runtime::MSVCRT::_memset(local_6c,0,0x6c);
   local_6c[0] = 0x6c;
   uStack_80 = 0;
-  uVar1 = (**(code **)(**(int **)(param_1 + 0x4c) + 100))(*(int **)(param_1 + 0x4c));
-  if ((int)uVar1 < 0) {
-    return uVar1 & 0xffffff00;
+  iVar1 = (**(code **)(**(int **)(in_ECX + 0x4c) + 100))(*(int **)(in_ECX + 0x4c));
+  if (iVar1 < 0) {
+    return false;
   }
-  uVar2 = CDSImage_BindFromSurfaceDesc((void *)(param_1 + 4),(int)&uStack_80);
-  return CONCAT31((int3)((uint)uVar2 >> 8),1);
+  CDSImage_BindFromSurfaceDesc((void *)(in_ECX + 4),(int)&uStack_80);
+  return true;
 }
 
 
@@ -100373,32 +100385,32 @@ void __fastcall CBulanci::CDSApp_OnDestroy(int param_1)
 
 {
   _Globals::CMenu_ClearAllChildren();
-  FUN_0043c9b0(param_1 + 0x200);
+                    // CDSDirectSound embed @ CDSApp+0x200: stop all voices and Release
+                    // IDirectSound/primary buffer before surface teardown.
+  CDSDirectSound::CDSDirectSound_StopAllAndReleaseCom((CDSDirectSound *)(param_1 + 0x200));
   CBulanci_ReleasePrimarySurface(param_1);
   return;
 }
 
 
 
-undefined4 __fastcall _Globals::FUN_00429bd0(int param_1)
+bool __thiscall CDSApp::CDSApp_RestoreLostSurfaces(CDSApp *this)
 
 {
   bool bVar1;
-  uint uVar2;
-  undefined3 extraout_var;
+  int iVar2;
   
                     // UNCERTAIN: CDSApp synthetic-event path — vtable+0x6c on +0x78 then
                     // FUN_004298b0(+0x7c). Called from FUN_0042a550 when msg==-0x7789fe3e before
                     // vtable+0x24 invalidate.
-  uVar2 = (**(code **)(**(int **)(param_1 + 0x78) + 0x6c))(*(int **)(param_1 + 0x78));
-  if (-1 < (int)uVar2) {
-    bVar1 = FUN_004298b0(param_1 + 0x7c);
-    uVar2 = CONCAT31(extraout_var,bVar1);
+  iVar2 = (**(code **)(**(int **)&this->field_0x78 + 0x6c))(*(int **)&this->field_0x78);
+  if (-1 < iVar2) {
+    bVar1 = _Globals::CDSBackBuffer_RestoreSurface();
     if (bVar1) {
-      return CONCAT31(extraout_var,1);
+      return true;
     }
   }
-  return uVar2 & 0xffffff00;
+  return false;
 }
 
 
@@ -100685,7 +100697,8 @@ void __cdecl _Globals::TArray16_ZeroRange(undefined4 *param_1,int param_2)
 
 
 
-int __thiscall _Globals::FUN_0042a070(void *this,int *param_1,undefined *param_2,int param_3)
+int __thiscall
+_Globals::CDSApp_DirtyRectList_FindIndex(void *this,int *keyRect,void *compareFn,int searchCount)
 
 {
   bool bVar1;
@@ -100695,34 +100708,36 @@ int __thiscall _Globals::FUN_0042a070(void *this,int *param_1,undefined *param_2
   int iVar5;
   int iVar6;
   
-                    // UNCERTAIN: binary search helper for 16-byte sorted RECT keys; sole caller
-                    // FUN_0042ae50 (InsertOrFindRect candidate). Parallel to FUN_00439730 used by
-                    // InsertOrFindTrack @ 0x00439bd0.
-  if (param_3 == -1) {
-    param_3 = *(int *)((int)this + 4);
+                    // Dirty-rect vector lookup on 12-byte header (ECX): +0x00 pRects, +0x04 count
+                    // (when searchCount==-1). compareFn==NULL: linear 16-byte equality vs keyRect
+                    // (4 dwords). Else binary search; compareFn(slotPtr,keyRect) — same contract
+                    // as CDSCollection_FindKeyIndex (index or -1-insertHint). Sole caller
+                    // CDSApp_DirtyRectList_UpsertRect @ 0x0042ae70.
+  if (searchCount == -1) {
+    searchCount = *(int *)((int)this + 4);
   }
   iVar4 = 0;
-  if (param_2 == (undefined *)0x0) {
+  if (compareFn == (void *)0x0) {
     iVar4 = 0;
-    if (0 < param_3) {
+    if (0 < searchCount) {
       piVar3 = *(int **)this;
       do {
-        if ((((*piVar3 == *param_1) && (piVar3[1] == param_1[1])) && (piVar3[2] == param_1[2])) &&
-           (piVar3[3] == param_1[3])) {
+        if ((((*piVar3 == *keyRect) && (piVar3[1] == keyRect[1])) && (piVar3[2] == keyRect[2])) &&
+           (piVar3[3] == keyRect[3])) {
           return iVar4;
         }
         iVar4 = iVar4 + 1;
         piVar3 = piVar3 + 4;
-      } while (iVar4 < param_3);
+      } while (iVar4 < searchCount);
     }
     return -1;
   }
-  iVar6 = param_3 + -1;
+  iVar6 = searchCount + -1;
   bVar1 = false;
   if (-1 < iVar6) {
     do {
       iVar5 = iVar6 + iVar4 >> 1;
-      iVar2 = (*(code *)param_2)(iVar5 * 0x10 + *(int *)this,param_1);
+      iVar2 = (*compareFn)(iVar5 * 0x10 + *(int *)this,keyRect);
       if (iVar2 < 0) {
         iVar4 = iVar5 + 1;
       }
@@ -100742,41 +100757,42 @@ int __thiscall _Globals::FUN_0042a070(void *this,int *param_1,undefined *param_2
 
 
 
-void __cdecl _Globals::FUN_0042a130(uint param_1,uint param_2,int param_3)
+void __cdecl _Globals::CDSApp_DirtyRectList_SlideRecords(void *dst,void *src,int count)
 
 {
   undefined4 *puVar1;
   undefined4 *puVar2;
   int iVar3;
   
-                    // UNCERTAIN: 16-byte record memmove (forward/reverse); called from FUN_0042ac20
-                    // vector insert — engine helper, no published symbol.
-  if (param_1 < param_2) {
-    if (0 < param_3) {
-      puVar2 = (undefined4 *)(param_2 + 8);
-      puVar1 = (undefined4 *)(param_1 + 0xc);
+                    // R7 task 14: 16-byte RECT memmove (forward/reverse) for dirty-rect vector
+                    // insert; sole caller CDSApp_DirtyRectList_InsertAt@0x0042ac4a. Parallel
+                    // TM_ShiftTrackEntries@0x004397e0 (8-byte).
+  if (dst < src) {
+    if (0 < count) {
+      puVar2 = (undefined4 *)((int)src + 8);
+      puVar1 = (undefined4 *)((int)dst + 0xc);
       do {
         puVar1[-3] = puVar2[-2];
         puVar1[-2] = puVar2[-1];
         puVar1[-1] = *puVar2;
-        *puVar1 = *(undefined4 *)((param_2 - param_1) + (int)puVar1);
+        *puVar1 = *(undefined4 *)(((int)src - (int)dst) + (int)puVar1);
         puVar2 = puVar2 + 4;
         puVar1 = puVar1 + 4;
-        param_3 = param_3 + -1;
-      } while (param_3 != 0);
+        count = count + -1;
+      } while (count != 0);
       return;
     }
   }
   else {
-    iVar3 = param_3 + -1;
+    iVar3 = count + -1;
     if (-1 < iVar3) {
-      puVar2 = (undefined4 *)(iVar3 * 0x10 + 8 + param_2);
-      puVar1 = (undefined4 *)(iVar3 * 0x10 + 0xc + param_1);
+      puVar2 = (undefined4 *)(iVar3 * 0x10 + 8 + (int)src);
+      puVar1 = (undefined4 *)(iVar3 * 0x10 + 0xc + (int)dst);
       do {
         puVar1[-3] = puVar2[-2];
         puVar1[-2] = puVar2[-1];
         puVar1[-1] = *puVar2;
-        *puVar1 = *(undefined4 *)((int)puVar1 + (param_2 - param_1));
+        *puVar1 = *(undefined4 *)((int)puVar1 + ((int)src - (int)dst));
         iVar3 = iVar3 + -1;
         puVar2 = puVar2 + -4;
         puVar1 = puVar1 + -4;
@@ -100791,16 +100807,16 @@ void __cdecl _Globals::FUN_0042a130(uint param_1,uint param_2,int param_3)
 void __fastcall CBulanci::CBulanci_RebuildBackBufferSurface(CDSBackBuffer *param_1)
 
 {
-  void *pvVar1;
-  undefined4 uVar2;
+  bool bVar1;
+  void *pvVar2;
   
   _Globals::CDSBackBuffer_FreeImageMember(param_1);
-  pvVar1 = (void *)CDSApp_CreateDirectInputDevice
+  pvVar2 = (void *)CDSApp_CreateDirectInputDevice
                              (g_pApp,*(int *)((int)g_pApp + 0x28) - *(int *)((int)g_pApp + 0x20),
                               *(int *)((int)g_pApp + 0x2c) - *(int *)((int)g_pApp + 0x24),4);
-  (param_1->embeddedImage).pDirectDrawSurface = pvVar1;
-  uVar2 = _Globals::FUN_004298d0((int)param_1);
-  if ((char)uVar2 == '\0') {
+  (param_1->embeddedImage).pDirectDrawSurface = pvVar2;
+  bVar1 = _Globals::CDSBackBuffer_BindImageFromSurface();
+  if (!bVar1) {
     CDSDirectXException::CDSDirectXException_ThrowFromHresult(0,0x80004005);
   }
   _Globals::CDSBackBuffer_Flip(param_1);
@@ -100988,43 +101004,51 @@ uchar __thiscall CBulanci::CDSApp_SetWindowed(CBulanci *this,uchar param_1)
 
 
 
-uint __thiscall _Globals::FUN_0042a550(void *this,int param_1)
+uint __thiscall CBulanci::CBulanci_HandleDirtyRectBitBltHresult(CBulanci *this,int hresult)
 
 {
-                    // UNCERTAIN: HRESULT gate after IDirectDraw vtable+0x14 blit; handles
-                    // 0x887601C2 (DDERR_SURFACELOST?) via FUN_00429bd0 restore. Sole caller
-                    // FUN_0042bae0 dirty-rect flush. No mapping.csv symbol.
-  if (-1 < param_1) {
-    return param_1 & 0xffffff00;
+  bool bVar1;
+  undefined3 extraout_var;
+  
+                    // HRESULT gate after IDirectDrawSurface vtable+0x14 BitBlt in
+                    // CDSApp_FlushDirtyRects. Success (>=0): AL=0 continue. DDERR_WASSTILLDRAWING
+                    // 0x8876021C: AL=1 abort. DDERR_SURFACELOST 0x887601C2: FUN_00429bd0 restore
+                    // then vtable+0x24(this+0x20,1); AL=1.
+  if (-1 < hresult) {
+    return hresult & 0xffffff00;
   }
-  if ((param_1 != -0x7789fde4) && (param_1 == -0x7789fe3e)) {
-    param_1 = FUN_00429bd0((int)this);
-    if ((char)param_1 == '\0') {
-      param_1 = (**(code **)(*(int *)this + 0x24))((int)this + 0x20,1);
+  if ((hresult != -0x7789fde4) && (hresult == -0x7789fe3e)) {
+    bVar1 = CDSApp::CDSApp_RestoreLostSurfaces(&this->app);
+    hresult = CONCAT31(extraout_var,bVar1);
+    if (!bVar1) {
+      hresult = (**(code **)((this->app).vftable_primary + 0x24))(&(this->app).nRect_left,1);
     }
   }
-  return CONCAT31((int3)((uint)param_1 >> 8),1);
+  return CONCAT31((int3)((uint)hresult >> 8),1);
 }
 
 
 
-void __fastcall _Globals::FUN_0042a590(int param_1)
+uchar __fastcall _Globals::CDSApp_TryBindBackBufferSurface(void)
 
 {
-  undefined4 uVar1;
+  bool bVar1;
+  bool bVar2;
+  CDSApp *in_ECX;
   
-                    // UNCERTAIN: CDSApp_RenderFrame dirty-path helper; FUN_004298d0 (GDI
-                    // GetDC/BeginPaint via vtable+100) then FUN_00429bd0 (child +0x78 vtable+0x6c).
-                    // No mapping.csv symbol.
-  uVar1 = FUN_004298d0(param_1 + 0x7c);
-  if ((char)uVar1 == '\0') {
-    uVar1 = FUN_00429bd0(param_1);
-    if ((char)uVar1 != '\0') {
-      FUN_004298d0(param_1 + 0x7c);
-      return;
+                    // Pre-render gate: FUN_004298d0(CDSBackBuffer@+0x7c) GetSurfaceDesc+bind; on
+                    // fail FUN_00429bd0 surface-restore then tail-retry. Non-zero AL ->
+                    // CDSApp_RenderFrame sets bDirtyDuringFrame@+0x275.
+  bVar1 = CDSBackBuffer_BindImageFromSurface();
+  if (!bVar1) {
+    bVar2 = CDSApp::CDSApp_RestoreLostSurfaces(in_ECX);
+    bVar1 = false;
+    if (bVar2) {
+      bVar1 = CDSBackBuffer_BindImageFromSurface();
+      return bVar1;
     }
   }
-  return;
+  return bVar1;
 }
 
 
@@ -101186,23 +101210,26 @@ void __thiscall _Globals::CDSApp_DirtyRectList_EnsureCapacity(void *this,uint pa
 
 
 
-void __thiscall _Globals::FUN_0042a9c0(void *this,int param_1,undefined4 param_2)
+void __thiscall
+_Globals::Catch_0042ab28_WriteExceptionLog
+          (void *this,void *pLogStringObj,int *pFileStream,wchar_t *secondWide)
 
 {
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
   
-                    // UNCERTAIN: exception catch helper — FUN_0042e4e0 wide-string stream write;
-                    // sole caller Catch_0042ab28 after CDSFileStream open; not CDsStringAssign*
+                    // SEH wrapper: FUN_0042e4e0 dual wide→ACP stream Write; sole caller
+                    // Catch_0042ab28 after CDSFileStream open (%s.txt). Not DirectX. Releases
+                    // pFileStream handle if non-null.
   puStack_8 = &LAB_00479048;
   local_c = ExceptionList;
   local_4 = 0;
   ExceptionList = &local_c;
-  FUN_0042e4e0(&param_1,this);
+  CDsString_WriteTwoWideStringsToStream(&pLogStringObj,this,(wchar_t *)pFileStream);
   local_4 = 0xffffffff;
-  if (param_1 != 0) {
-    CDsStringReleaseHeader((void *)(param_1 + -0xc));
+  if (pLogStringObj != (void *)0x0) {
+    CDsStringReleaseHeader((void *)((int)pLogStringObj + -0xc));
   }
   ExceptionList = local_c;
   return;
@@ -101273,11 +101300,13 @@ void _Globals::Catch_0042ab28(void)
 {
   wchar_t *pwVar1;
   int extraout_ECX;
-  int extraout_ECX_00;
+  void *extraout_ECX_00;
   int unaff_EBP;
+  wchar_t *unaff_retaddr;
   int iVar2;
+  void *pLogStringObj;
   undefined1 *puVar3;
-  undefined *puVar4;
+  int *pFileStream;
   
   *(BADSPACEBASE **)(unaff_EBP + -0x10) = register0x00000010;
   pwVar1 = CDSException::CDSException_GetMessageW(*(CDSException **)(unaff_EBP + -0x1c));
@@ -101290,12 +101319,13 @@ void _Globals::Catch_0042ab28(void)
   iVar2 = extraout_ECX;
   CDsString_InitFromHandle(&stack0xfffffff8,(undefined4 *)(unaff_EBP + 0x10));
   CDSFileStream::CDSFileStream_Ctor((CDSFileStream *)(unaff_EBP + -0x44),iVar2,puVar3);
-  puVar4 = PTR_DAT_004afca4;
+  pFileStream = (int *)PTR_DAT_004afca4;
   *(undefined1 **)(unaff_EBP + -0x20) = &stack0xfffffff8;
   *(undefined1 *)(unaff_EBP + -4) = 5;
-  iVar2 = extraout_ECX_00;
+  pLogStringObj = extraout_ECX_00;
   CDsString_InitFromLiteral(&stack0xfffffff8,pwVar1);
-  FUN_0042a9c0((void *)(unaff_EBP + -0x38),iVar2,puVar4);
+  Catch_0042ab28_WriteExceptionLog
+            ((void *)(unaff_EBP + -0x38),pLogStringObj,pFileStream,unaff_retaddr);
   *(undefined1 *)(unaff_EBP + -4) = 4;
   CDSFileStream::CDSFileStream_dtor((undefined4 *)(unaff_EBP + -0x44));
   *(undefined1 *)(unaff_EBP + -4) = 3;
@@ -101345,21 +101375,21 @@ undefined4 _Globals::Catch_0042ab28_ShowMessageAndRelease(void)
 int __thiscall _Globals::CDSApp_DirtyRectList_InsertAt(void *this,undefined4 *param_1,int param_2)
 
 {
-  uint uVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  void *src;
+  undefined4 *puVar1;
+  int count;
   
   CDSApp_DirtyRectList_EnsureCapacity(this,*(int *)((int)this + 8) + 1);
-  iVar3 = *(int *)((int)this + 8) - param_2;
-  if (iVar3 != 0) {
-    uVar1 = *(int *)this + param_2 * 0x10;
-    FUN_0042a130(uVar1 + 0x10,uVar1,iVar3);
+  count = *(int *)((int)this + 8) - param_2;
+  if (count != 0) {
+    src = (void *)(*(int *)this + param_2 * 0x10);
+    CDSApp_DirtyRectList_SlideRecords((void *)((int)src + 0x10),src,count);
   }
-  puVar2 = (undefined4 *)(param_2 * 0x10 + *(int *)this);
-  *puVar2 = *param_1;
-  puVar2[1] = param_1[1];
-  puVar2[2] = param_1[2];
-  puVar2[3] = param_1[3];
+  puVar1 = (undefined4 *)(param_2 * 0x10 + *(int *)this);
+  *puVar1 = *param_1;
+  puVar1[1] = param_1[1];
+  puVar1[2] = param_1[2];
+  puVar1[3] = param_1[3];
   *(int *)((int)this + 8) = *(int *)((int)this + 8) + 1;
   return param_2;
 }
@@ -101523,7 +101553,7 @@ _Globals::CDSApp_DirtyRectList_UpsertRect(void *this,int *param_1,undefined *par
                     // CDSApp_AddDirtyRectCoalesced; uses FUN_0042a070 search + FUN_0042ac20 update
                     // — no established symbol in mapping.csv
   if ((((char)param_3 == '\0') || (iVar1 = param_3, param_2 != (undefined *)0x0)) &&
-     (iVar1 = FUN_0042a070(this,param_1,param_2,*(int *)((int)this + 8)),
+     (iVar1 = CDSApp_DirtyRectList_FindIndex(this,param_1,param_2,*(int *)((int)this + 8)),
      param_2 != (undefined *)0x0)) {
     if (iVar1 < 0) {
       iVar1 = CDSApp_DirtyRectList_InsertAt(this,param_1,-1 - iVar1);
@@ -101589,67 +101619,90 @@ CDSImageMouse * __thiscall CDSImageMouse::CDSImageMouse_vDtor(CDSImageMouse *thi
 
 
 
-undefined4 * __fastcall CDSApp::FUN_0042afd0(undefined4 *param_1)
+CDSApp * __fastcall CDSApp::CDSApp_InitCreateObjectShell(void)
 
 {
-  uint uVar1;
+  CDSBackBuffer *pCVar1;
+  uint uVar2;
+  CDSApp *in_ECX;
   undefined4 extraout_EDX;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
   
-                    // UNCERTAIN: partial CDSApp vtable/back-buffer init (0x280-byte CreateObject @
-                    // 0x42b910); full app ctor is CBulanci::CDSApp_ctor @ 0x42b170
+                    // CDSApp partial shell init for MFC CreateObject@0x42b910 (OperatorNew 0x280).
+                    // Installs four vtables, zeros backBuffer embed @+0x7c, CDSDirectSound_ctor
+                    // @+0x200, dirty-rect capacity 8. Full ctor with strings/registry/globals is
+                    // CDSApp_ctor@0x42b170 — do not rename this to CDSApp_ctor.
   local_4 = 0xffffffff;
   puStack_8 = &LAB_00479180;
   local_c = ExceptionList;
-  uVar1 = DAT_004b0e44 ^ (uint)&stack0xffffffe8;
+  uVar2 = DAT_004b0e44 ^ (uint)&stack0xffffffe8;
   ExceptionList = &local_c;
-  CDSChained::CDSChained_ctor(param_1);
-  *param_1 = ::g_pCDSApp_vftable;
-  param_1[1] = vftable;
-  param_1[4] = vftable;
-  param_1[6] = vftable;
-  param_1[0x1a] = 0;
-  param_1[0x1b] = 0;
-  param_1[0x1c] = 0;
-  param_1[0x21] = 0;
-  param_1[0x22] = 0;
-  param_1[0x27] = 0;
-  param_1[0x28] = 0;
-  param_1[0x29] = 0;
-  param_1[0x2a] = 0;
-  param_1[0x2b] = 0;
-  param_1[0x2c] = 0;
-  param_1[0x2e] = 0;
-  param_1[0x2f] = 0;
-  param_1[0x30] = 0;
-  param_1[0x31] = 8;
-  param_1[0x1f] = g_pCDSBackBuffer_vftable_IDSReferenced;
-  param_1[0x20] = g_pCDSBackBuffer_vftable_IDSEventHandler;
-  param_1[0x32] = 0;
-  param_1[0x33] = 0;
-  param_1[0x34] = 0;
-  param_1[0x35] = 0;
-  param_1[0x36] = 0;
-  param_1[0x3a] = 0;
-  param_1[0x3b] = 0;
-  param_1[0x3c] = 0;
-  param_1[0x3d] = 0;
+  CDSChained::CDSChained_ctor(&in_ECX->vftable_primary);
+  in_ECX->vftable_primary = (undefined *)::g_pCDSApp_vftable;
+  in_ECX->vftable_sub04 = (undefined *)vftable;
+  in_ECX->vftable_sub10 = (undefined *)vftable;
+  in_ECX->vftable_sub18 = (undefined *)vftable;
+  in_ECX->pClassName = (undefined *)0x0;
+  in_ECX->pRegistryPath = (undefined *)0x0;
+  in_ECX->pMasterPackStorage = (CDSStreamStorage *)0x0;
+  (in_ECX->backBuffer).embeddedImage.nM_width = 0;
+  (in_ECX->backBuffer).embeddedImage.nM_height = 0;
+  (in_ECX->backBuffer).embeddedImage.pM_pixels = (void *)0x0;
+  (in_ECX->backBuffer).embeddedImage.pM_auxBuffer = (void *)0x0;
+  (in_ECX->backBuffer).embeddedImage.nField_24 = 0;
+  (in_ECX->backBuffer).embeddedImage.nField_28 = 0;
+  (in_ECX->backBuffer).embeddedImage.nM_copyWidth = 0;
+  (in_ECX->backBuffer).embeddedImage.nM_copyHeight = 0;
+  (in_ECX->backBuffer).embeddedImage.pM_slotVector[0] = 0;
+  (in_ECX->backBuffer).embeddedImage.pM_slotVector[1] = 0;
+  (in_ECX->backBuffer).embeddedImage.pM_slotVector[2] = 0;
+  (in_ECX->backBuffer).embeddedImage.pM_slotVector[3] = 0;
+  pCVar1 = &in_ECX->backBuffer;
+  (pCVar1->embeddedImage).pM_slotVector[4] = 0;
+  (pCVar1->embeddedImage).pM_slotVector[5] = 0;
+  (pCVar1->embeddedImage).pM_slotVector[6] = 0;
+  (pCVar1->embeddedImage).pM_slotVector[7] = 0;
+  (in_ECX->backBuffer).embeddedImage.nField_40 = 0;
+  (in_ECX->backBuffer).embeddedImage.nDefaultBppTag = 8;
+  (in_ECX->backBuffer).vftable_IDSReferenced = (undefined *)g_pCDSBackBuffer_vftable_IDSReferenced;
+  (in_ECX->backBuffer).embeddedImage.pVf_primary = g_pCDSBackBuffer_vftable_IDSEventHandler;
+  (in_ECX->backBuffer).embeddedImage.pDirectDrawSurface = (void *)0x0;
+  in_ECX->nPhysicalRect_left = 0;
+  in_ECX->nPhysicalRect_top = 0;
+  in_ECX->nPhysicalRect_right = 0;
+  in_ECX->nPhysicalRect_bottom = 0;
+  in_ECX->pCurrentView = (undefined *)0x0;
+  in_ECX->pPendingView = (undefined *)0x0;
+  in_ECX->pKeyDownBitmap[0] = 0;
+  in_ECX->pKeyDownBitmap[1] = 0;
+  in_ECX->pKeyDownBitmap[2] = 0;
+  in_ECX->pKeyDownBitmap[3] = 0;
+  in_ECX->pKeyDownBitmap[4] = 0;
+  in_ECX->pKeyDownBitmap[5] = 0;
+  in_ECX->pKeyDownBitmap[6] = 0;
+  in_ECX->pKeyDownBitmap[7] = 0;
   local_4 = 6;
-  param_1[0x3e] = 0;
-  param_1[0x3f] = 0;
-  CDSObject::CDSDirectSound_ctor(param_1 + 0x80,extraout_EDX,uVar1);
-  param_1[0x95] = 0;
-  param_1[0x96] = 0;
-  param_1[0x97] = 0;
-  param_1[0x98] = 8;
-  param_1[0x99] = 0;
-  param_1[0x9a] = 0;
-  param_1[0x9b] = 0;
-  param_1[0x9c] = 8;
+  in_ECX->pKeyDownBitmap[8] = 0;
+  in_ECX->pKeyDownBitmap[9] = 0;
+  in_ECX->pKeyDownBitmap[10] = 0;
+  in_ECX->pKeyDownBitmap[0xb] = 0;
+  in_ECX->pKeyDownBitmap[0xc] = 0;
+  in_ECX->pKeyDownBitmap[0xd] = 0;
+  in_ECX->pKeyDownBitmap[0xe] = 0;
+  in_ECX->pKeyDownBitmap[0xf] = 0;
+  CDSObject::CDSDirectSound_ctor(&in_ECX->directSound,extraout_EDX,uVar2);
+  in_ECX->pDirtyRectArray = (undefined *)0x0;
+  *(undefined4 *)in_ECX->pPad_258 = 0;
+  in_ECX->nDirtyRectCount = 0;
+  *(undefined4 *)in_ECX->pPad_260 = 8;
+  *(undefined4 *)(in_ECX->pPad_260 + 4) = 0;
+  *(undefined4 *)(in_ECX->pPad_260 + 8) = 0;
+  *(undefined4 *)(in_ECX->pPad_260 + 0xc) = 0;
+  *(undefined4 *)(in_ECX->pPad_260 + 0x10) = 8;
   ExceptionList = local_c;
-  return param_1;
+  return in_ECX;
 }
 
 
@@ -101834,7 +101887,7 @@ void __thiscall CDSApp::CDSApp_ctor(CDSApp *this,short *pClassName,short *pRegis
   this->bWindowed = iVar2 != 0;
   local_8[0] = 10;
   _Globals::CDSRegKeyQueryScope_dtor((int *)&local_24);
-  CBulanci::FUN_0042b3ae();
+  CBulanci::CDSApp_ctor_UnwindEpilogue();
   return;
 }
 
@@ -101851,21 +101904,24 @@ undefined * CBulanci::Catch_0042b39b(void)
 
 
 
-void CBulanci::FUN_0042b3ae(void)
+void CBulanci::CDSApp_ctor_UnwindEpilogue(void)
 
 {
   int unaff_EBP;
   
-                    // UNCERTAIN: SEH epilogue fragment; only restores ExceptionList.
+                    // MSVC SEH exit tail for CDSApp_ctor: Catch_0042b39b resumes @0x0042b3ab
+                    // (reload this); restore FS:[0] from EBP-0xc; return this in EAX; RET 8. Sole
+                    // CALL from CDSApp_ctor+0x229.
   ExceptionList = *(void **)(unaff_EBP + -0xc);
   return;
 }
 
 
 
-void __fastcall CDSApp::FUN_0042b3d0(undefined4 *param_1)
+void __fastcall CDSApp::CDSApp_ShutdownFromScalarDtor(undefined4 *param_1)
 
 {
+  CDSApp *this;
   int iVar1;
   undefined1 *puVar2;
   uint uStack_34;
@@ -101901,7 +101957,7 @@ void __fastcall CDSApp::FUN_0042b3d0(undefined4 *param_1)
   local_8 = (undefined *)CONCAT31(local_8._1_3_,10);
   _Globals::CDSRegKeyQueryScope_dtor(&local_20);
   local_8 = (undefined *)0x9;
-  FUN_0042b48c();
+  CDSApp_ReleaseMembers(this);
   return;
 }
 
@@ -101918,7 +101974,7 @@ undefined * CDSApp::Catch_0042b477(void)
 
 
 
-void CDSApp::FUN_0042b48c(void)
+void __thiscall CDSApp::CDSApp_ReleaseMembers(CDSApp *this)
 
 {
   int *piVar1;
@@ -102114,7 +102170,7 @@ LAB_0042b72a:
         }
         _Globals::CDSRect_Assign(&local_10,piVar12);
         tagRECT::CDSRect_IntersectInPlace(&local_10,&local_30.left);
-        uVar7 = _Globals::FUN_00429880(&local_10.left);
+        uVar7 = tagRECT::CDSApp_DirtyRect_ComputeAreaPixels(&local_10);
         iVar10 = local_30.left;
         if ((local_48 * 100) / uVar7 < 0x28) goto LAB_0042b72a;
       }
@@ -102189,7 +102245,8 @@ void __fastcall CDSApp::CDSApp_EventHandlerDtorBody(int param_1)
 undefined4 * _Globals::CreateObject(void)
 
 {
-  undefined4 *puVar1;
+  int iVar1;
+  CDSApp *pCVar2;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -102198,12 +102255,12 @@ undefined4 * _Globals::CreateObject(void)
   puStack_8 = &LAB_004792eb;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  puVar1 = (undefined4 *)OperatorNewWithBadAlloc(0x280);
+  iVar1 = OperatorNewWithBadAlloc(0x280);
   local_4 = 0;
-  if (puVar1 != (undefined4 *)0x0) {
-    puVar1 = CDSApp::FUN_0042afd0(puVar1);
+  if (iVar1 != 0) {
+    pCVar2 = CDSApp::CDSApp_InitCreateObjectShell();
     ExceptionList = local_c;
-    return puVar1;
+    return &pCVar2->vftable_primary;
   }
   ExceptionList = local_c;
   return (undefined4 *)0x0;
@@ -102214,7 +102271,7 @@ undefined4 * _Globals::CreateObject(void)
 CDSApp * __thiscall CDSApp::CDSApp_DtorScalar(CDSApp *this,byte param_1)
 
 {
-  FUN_0042b3d0(&this->vftable_primary);
+  CDSApp_ShutdownFromScalarDtor(&this->vftable_primary);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -102310,60 +102367,60 @@ void __fastcall CDSApp_FlushDirtyRects(CBulanci *param_1)
   byte bVar1;
   int *piVar2;
   undefined *puVar3;
-  undefined4 uVar4;
+  uint uVar4;
+  int hresult;
   int iVar5;
   int iVar6;
-  int iVar7;
-  undefined4 *puVar8;
+  undefined4 *puVar7;
   
                     // UNCERTAIN: CDSApp_RenderFrame dirty-rect flush helper; sole caller
                     // FUN_0042bbe0 when this+0x275 set. Walks rect lists at +0x254/+0x264, calls
                     // FUN_0042b8c0 and vtable+0x14 BitBlt path. No symbol in mapping.csv or
                     // app_shell.md.
   if (((param_1->app).nDirtyRectCount != 0) || (*(int *)((param_1->app).pPad_260 + 0xc) != 0)) {
-    iVar7 = *(int *)((param_1->app).pPad_260 + 0xc);
-    if (iVar7 != 0) {
-      iVar6 = iVar7 << 4;
+    iVar6 = *(int *)((param_1->app).pPad_260 + 0xc);
+    if (iVar6 != 0) {
+      iVar5 = iVar6 << 4;
       do {
-        iVar6 = iVar6 + -0x10;
-        iVar7 = iVar7 + -1;
+        iVar5 = iVar5 + -0x10;
+        iVar6 = iVar6 + -1;
         CBulanci::CBulanci_BlitAnimFrameToView
-                  (param_1,(int *)(*(int *)((param_1->app).pPad_260 + 4) + iVar6));
-      } while (iVar7 != 0);
+                  (param_1,(int *)(*(int *)((param_1->app).pPad_260 + 4) + iVar5));
+      } while (iVar6 != 0);
     }
     bVar1 = (param_1->app).bWindowed;
     *(undefined4 *)((param_1->app).pPad_260 + 0xc) = 0;
     if (bVar1 == 0) {
-      iVar7 = (param_1->app).nDirtyRectCount;
-      if (iVar7 != 0) {
-        iVar6 = iVar7 << 4;
+      iVar6 = (param_1->app).nDirtyRectCount;
+      if (iVar6 != 0) {
+        iVar5 = iVar6 << 4;
         do {
           puVar3 = (param_1->app).pDirtyRectArray;
-          iVar6 = iVar6 + -0x10;
-          puVar8 = (undefined4 *)(puVar3 + iVar6);
-          iVar7 = iVar7 + -1;
-          if ((*(int *)(puVar3 + iVar6) < (int)puVar8[2]) && ((int)puVar8[1] < (int)puVar8[3])) {
+          iVar5 = iVar5 + -0x10;
+          puVar7 = (undefined4 *)(puVar3 + iVar5);
+          iVar6 = iVar6 + -1;
+          if ((*(int *)(puVar3 + iVar5) < (int)puVar7[2]) && ((int)puVar7[1] < (int)puVar7[3])) {
             piVar2 = *(int **)&(param_1->app).field_0x78;
-            iVar5 = (**(code **)(*piVar2 + 0x14))
-                              (piVar2,puVar8,
-                               (param_1->app).backBuffer.embeddedImage.pDirectDrawSurface,puVar8,
-                               0x1000000,0);
-            uVar4 = _Globals::FUN_0042a550(param_1,iVar5);
+            hresult = (**(code **)(*piVar2 + 0x14))
+                                (piVar2,puVar7,
+                                 (param_1->app).backBuffer.embeddedImage.pDirectDrawSurface,puVar7,
+                                 0x1000000,0);
+            uVar4 = CBulanci::CBulanci_HandleDirtyRectBitBltHresult(param_1,hresult);
             if ((char)uVar4 != '\0') {
               return;
             }
-            puVar8[2] = *puVar8;
+            puVar7[2] = *puVar7;
           }
-        } while (iVar7 != 0);
+        } while (iVar6 != 0);
         (param_1->app).nDirtyRectCount = 0;
       }
     }
     else {
       piVar2 = *(int **)&(param_1->app).field_0x78;
-      iVar7 = (**(code **)(*piVar2 + 0x14))
+      iVar6 = (**(code **)(*piVar2 + 0x14))
                         (piVar2,&(param_1->app).nPhysicalRect_left,
                          (param_1->app).backBuffer.embeddedImage.pDirectDrawSurface,0,0x1000000,0);
-      uVar4 = _Globals::FUN_0042a550(param_1,iVar7);
+      uVar4 = CBulanci::CBulanci_HandleDirtyRectBitBltHresult(param_1,iVar6);
       if ((char)uVar4 == '\0') {
         (param_1->app).nDirtyRectCount = 0;
         return;
@@ -102393,15 +102450,15 @@ void __fastcall _Globals::CDSApp_RenderFrame(int *param_1)
 
 {
   int *piVar1;
-  char cVar2;
+  uchar uVar2;
   int iVar3;
   int iVar4;
   int iVar5;
   
   if ((char)param_1[0x9d] != '\0') {
     *(undefined1 *)((int)param_1 + 0x275) = 0;
-    cVar2 = FUN_0042a590((int)param_1);
-    if (cVar2 != '\0') {
+    uVar2 = CDSApp_TryBindBackBufferSurface();
+    if (uVar2 != '\0') {
       *(undefined1 *)((int)param_1 + 0x275) = 1;
       if ((int *)param_1[0x3a] != (int *)0x0) {
         (**(code **)(*(int *)param_1[0x3a] + 0x18))();
@@ -102760,17 +102817,19 @@ uint __fastcall CBulanci::CDSView_OnChar(int param_1)
 
 
 
-void __fastcall _Globals::FUN_0042c120(int *param_1)
+void __thiscall CDSView::CDSView_SetMouseMoveDefault(CDSView *this)
 
 {
-                    // UNCERTAIN: sets input-chain node flag (+0x44 ushort |= 8); if (+0x14 byte &
-                    // 8) calls vtable+0x44. Used from FUN_0042c7f0 g_pInputChainHead walk. No
-                    // export name in app_shell.md.
-  *(ushort *)(param_1 + 0x11) = *(ushort *)(param_1 + 0x11) | 8;
-  if ((*(byte *)(param_1 + 5) & 8) != 0) {
+  ushort *puVar1;
+  
+  puVar1 = &(this->win).wViewStateFlags;
+                    // R7: flags1 |= 0x08 (mouse-move-default); if byte@+0x14&8 calls vtable+0x44.
+                    // Caller CDSApp_SetInputChainHead chain walk.
+  *puVar1 = *puVar1 | 8;
+  if (((this->win).wViewFlags & 8) != 0) {
                     // WARNING: Could not recover jumptable at 0x0042c133. Too many branches
                     // WARNING: Treating indirect jump as call
-    (**(code **)(*param_1 + 0x44))();
+    (**(code **)((int)(this->win).pVftable_primary + 0x44))();
     return;
   }
   return;
@@ -102778,16 +102837,18 @@ void __fastcall _Globals::FUN_0042c120(int *param_1)
 
 
 
-void __fastcall _Globals::FUN_0042c140(int *param_1)
+void __fastcall _Globals::CDSView_InputChain_OnDetach(void)
 
 {
+  int *in_ECX;
+  
                     // UNCERTAIN: clears ushort at node+0x44 bit3; if node+0x14 byte bit3 set calls
                     // vtable+0x48; FUN_0042c880 drains g_pInputChainHead
-  *(ushort *)(param_1 + 0x11) = *(ushort *)(param_1 + 0x11) & 0xfff7;
-  if ((*(byte *)(param_1 + 5) & 8) != 0) {
+  *(ushort *)(in_ECX + 0x11) = *(ushort *)(in_ECX + 0x11) & 0xfff7;
+  if ((*(byte *)(in_ECX + 5) & 8) != 0) {
                     // WARNING: Could not recover jumptable at 0x0042c151. Too many branches
                     // WARNING: Treating indirect jump as call
-    (**(code **)(*param_1 + 0x48))();
+    (**(code **)(*in_ECX + 0x48))();
     return;
   }
   return;
@@ -102795,38 +102856,44 @@ void __fastcall _Globals::FUN_0042c140(int *param_1)
 
 
 
-void __thiscall CBulanek::FUN_0042c160(CBulanek *this,void *param_1)
+uchar __thiscall CGameView::CGameView_InsertBeforeSiblingAnchor(CGameView *this,void *anchor)
 
 {
-                    // UNCERTAIN: inserts entity into sibling list at (*(this+0x4c)+0x54) before
-                    // anchor via FUN_0042fa20; sole caller CGaming_InsertEntityByDepth @
-                    // 0x00418589.
+  uchar uVar1;
+  
+                    // Depth-sort helper: CDSChained_InsertBeforeWithHeadFixup on
+                    // (*(pChainParent)+0x54), node=this, anchor=arg; then primary vfn[9]
+                    // CDSView_InvalidateRectClipped(0,0). Sole caller
+                    // CGaming_InsertEntityByDepth@0x00418589.
   CDSChain::CDSChained_InsertBeforeWithHeadFixup
-            ((CDSChain *)(*(int *)(this->pChain_pad_48 + 4) + 0x54),this,param_1);
-  (**(code **)(this->vftable_primary + 0x24))(0,0);
-  return;
+            ((CDSChain *)(this->pChainParent + 0x54),(CBulanek *)this,anchor);
+  uVar1 = (**(code **)(this->vftable_primary + 0x24))(0,0);
+  return uVar1;
 }
 
 
 
-void __thiscall CBulanek::FUN_0042c190(CBulanek *this,int param_1)
+uchar __thiscall CGameView::CGameView_RemoveFromSiblingAnchor(CGameView *this,int anchor)
 
 {
+  uchar uVar1;
+  
                     // UNCERTAIN: unlinks entity from sibling list at (*(this+0x4c)+0x54) via
                     // FUN_0042fa50; sole caller CGaming_InsertEntityByDepth @ 0x00418507.
   CDSChain::CDSChained_RemoveWithHeadFixup
-            ((CDSChain *)(*(int *)(this->pChain_pad_48 + 4) + 0x54),this,param_1);
-  (**(code **)(this->vftable_primary + 0x24))(0,0);
-  return;
+            ((CDSChain *)(this->pChainParent + 0x54),(CBulanek *)this,anchor);
+  uVar1 = (**(code **)(this->vftable_primary + 0x24))(0,0);
+  return uVar1;
 }
 
 
 
-int * __thiscall _Globals::FUN_0042c1c0(void *this,undefined4 param_1)
+int * __thiscall CDSView::CDSView_ResolveInputChainFromHitTest(CDSView *this,undefined4 param_1)
 
 {
-  char cVar1;
-  int *piVar2;
+  void *pvVar1;
+  char cVar2;
+  CDSView *pCVar3;
   
                     // UNCERTAIN: Walks input-chain list at this+0x54 for node with +0x44 flag 0x80
                     // set and vtable+0x1c(param) true. Callees FUN_0042c700, FUN_0042c880. No
@@ -102835,22 +102902,26 @@ int * __thiscall _Globals::FUN_0042c1c0(void *this,undefined4 param_1)
     return DAT_004b3b94;
   }
   do {
-    piVar2 = (int *)CDSIntrusiveNode_GetLinkNext((int *)((int)this + 0x54));
+    pCVar3 = (CDSView *)
+             _Globals::CDSIntrusiveNode_GetLinkNext(&(this->win).pVftable_CDSChain_IDSReferenced);
     while( true ) {
-      if (piVar2 == (int *)0x0) {
-        return this;
+      if (pCVar3 == (CDSView *)0x0) {
+        return (int *)this;
       }
-      if (((*(byte *)(piVar2 + 0x11) & 0x84) == 0x80) &&
-         (cVar1 = (**(code **)(*piVar2 + 0x1c))(param_1), cVar1 != '\0')) break;
-      if (piVar2[0x13] == 0) {
-        piVar2 = (int *)0x0;
+      if ((((pCVar3->win).wViewStateFlags & 0x84) == 0x80) &&
+         (cVar2 = (**(code **)((int)(pCVar3->win).pVftable_primary + 0x1c))(param_1), cVar2 != '\0')
+         ) break;
+      pvVar1 = (pCVar3->win).pParent;
+      if (pvVar1 == (void *)0x0) {
+        pCVar3 = (CDSView *)0x0;
       }
       else {
-        piVar2 = (int *)CDSIntrusiveNode_GetNextLinkSkipSentinel
-                                  ((void *)(piVar2[0x13] + 0x54),(int)piVar2);
+        pCVar3 = (CDSView *)
+                 _Globals::CDSIntrusiveNode_GetNextLinkSkipSentinel
+                           ((void *)((int)pvVar1 + 0x54),(int)pCVar3);
       }
     }
-    this = piVar2;
+    this = pCVar3;
   } while (DAT_004b3b94 == (int *)0x0);
   return DAT_004b3b94;
 }
@@ -103204,7 +103275,7 @@ void _Globals::CDSApp_RefreshInputChainHitTest(void)
     this = g_pApp;
     piVar1 = g_pInputChainHead;
     if (g_pInputChainHead != (void *)0x0) goto LAB_0042c730;
-    piVar1 = FUN_0042c1c0(g_pApp,(int)g_pApp + 0xf0);
+    piVar1 = CDSView::CDSView_ResolveInputChainFromHitTest(g_pApp,(int)g_pApp + 0xf0);
     this = g_pApp;
     for (; piVar1 != (int *)0x0; piVar1 = (int *)piVar1[0x13]) {
 LAB_0042c730:
@@ -103227,7 +103298,7 @@ CDSView::CDSApp_BroadcastSyntheticEventToChildren
 
 {
   void *pCurrentView;
-  undefined4 local_14;
+  uint local_14;
   undefined2 local_10;
   undefined2 local_c;
   undefined4 local_8;
@@ -103240,7 +103311,7 @@ CDSView::CDSApp_BroadcastSyntheticEventToChildren
   for (pCurrentView = _Globals::CDSChained_GetFirstChildView
                                 ((CDSChain *)&(this->win).pVftable_CDSChain_IDSReferenced);
       (pCurrentView != (void *)0x0 &&
-      (_Globals::FUN_0042ec90((void *)((int)pCurrentView + 0x10),&local_14),
+      (IDSEventHandler_DispatchIfMask((CDSView *)((int)pCurrentView + 0x10),&local_14),
       *(int *)((int)pCurrentView + 0x4c) != 0));
       pCurrentView = _Globals::CDSChained_GetNextSiblingView(pCurrentView)) {
   }
@@ -103263,29 +103334,29 @@ void __thiscall CDSView::CDSApp_RouteSyntheticCloseEvent(CDSView *this,ushort pa
 void __fastcall _Globals::CDSApp_SetInputChainHead(int *param_1)
 
 {
-  int *piVar1;
+  CDSView *pCVar1;
+  CDSView *this;
   int *piVar2;
-  int *piVar3;
   
-  piVar1 = g_pInputChainHead;
+  pCVar1 = g_pInputChainHead;
   if (g_pApp == (void *)0x0) {
     return;
   }
-  piVar3 = g_pInputChainHead;
-  piVar2 = param_1;
+  piVar2 = g_pInputChainHead;
+  this = (CDSView *)param_1;
   if (g_pInputChainHead != param_1) {
-    for (; (piVar2 != (int *)0x0 && ((*(byte *)(piVar2 + 0x11) & 8) == 0));
-        piVar2 = (int *)piVar2[0x13]) {
-      FUN_0042c120(piVar2);
+    while ((this != (CDSView *)0x0 && (((this->win).wViewStateFlags & 8) == 0))) {
+      CDSView::CDSView_SetMouseMoveDefault(this);
+      this = (this->win).pParent;
     }
-    piVar3 = param_1;
-    if (piVar1 != (void *)0x0) {
-      for (; piVar3 = param_1, piVar2 != piVar1; piVar1 = (int *)piVar1[0x13]) {
-        FUN_0042c140(piVar1);
+    piVar2 = param_1;
+    if (pCVar1 != (void *)0x0) {
+      for (; piVar2 = param_1, this != pCVar1; pCVar1 = (pCVar1->win).pParent) {
+        CDSView_InputChain_OnDetach();
       }
     }
   }
-  g_pInputChainHead = piVar3;
+  g_pInputChainHead = piVar2;
   CDSApp_RefreshInputChainHitTest();
   return;
 }
@@ -103310,6 +103381,7 @@ void __fastcall _Globals::CDSView_UpdateInputChainOnMouseMove(int *param_1)
   int iVar1;
   char cVar2;
   int *piVar3;
+  void *pvVar4;
   
                     // UNCERTAIN: modal mouse-move handler — if view vtable+0x1c(g_pApp+0xf0) or
                     // DAT_004b3b94, FUN_0042c7f0(FUN_0042c1c0); else walks g_pInputChainHead via
@@ -103318,16 +103390,16 @@ void __fastcall _Globals::CDSView_UpdateInputChainOnMouseMove(int *param_1)
     iVar1 = (int)g_pApp + 0xf0;
     cVar2 = (**(code **)(*param_1 + 0x1c))(iVar1);
     if ((cVar2 != '\0') || (DAT_004b3b94 != 0)) {
-      piVar3 = FUN_0042c1c0(param_1,iVar1);
+      piVar3 = CDSView::CDSView_ResolveInputChainFromHitTest((CDSView *)param_1,iVar1);
       CDSApp_SetInputChainHead(piVar3);
       return;
     }
-    piVar3 = g_pInputChainHead;
+    pvVar4 = g_pInputChainHead;
     if (g_pInputChainHead != (void *)0x0) {
       do {
-        FUN_0042c140(piVar3);
-        piVar3 = (int *)piVar3[0x13];
-      } while (piVar3 != (int *)0x0);
+        CDSView_InputChain_OnDetach();
+        pvVar4 = *(void **)((int)pvVar4 + 0x4c);
+      } while (pvVar4 != (void *)0x0);
       g_pInputChainHead = (void *)0x0;
     }
   }
@@ -105207,7 +105279,8 @@ void __thiscall CBulanci::CDsString_WriteNarrowLengthPrefixedToStream(CBulanci *
 
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 
-void __thiscall _Globals::FUN_0042e4e0(void *this,int *param_1)
+void __thiscall
+_Globals::CDsString_WriteTwoWideStringsToStream(void *this,int *pStream,wchar_t *pWide2)
 
 {
   LPCWSTR pWVar1;
@@ -105228,9 +105301,10 @@ void __thiscall _Globals::FUN_0042e4e0(void *this,int *param_1)
   undefined1 *puStack_8;
   undefined4 uStack_4;
   
-                    // UNCERTAIN: __thiscall dual wide-string→ACP convert
-                    // (FUN_0042db60/FUN_004045f0) then stream Write via vtbl+0x14. Sole caller
-                    // FUN_0042a9c0 logging path.
+                    // R7: __thiscall — ECX=CDSString handle slot; stack: IDSStream* pStream,
+                    // wchar_t* pWide2. Wide→ACP via CDsString_WideToMultiByteBuffer (0x4000) then
+                    // CDsString_AssignFromWideCapped80; each payload written via stream vtbl+0x14.
+                    // Caller FUN_0042a9c0@0x0042a9f2 (Catch_0042ab28 exception log file).
   uStack_4 = 0xffffffff;
   puStack_8 = &LAB_00479626;
   local_c = ExceptionList;
@@ -105251,7 +105325,7 @@ void __thiscall _Globals::FUN_0042e4e0(void *this,int *param_1)
   else {
     uVar4 = *(undefined4 *)(*(int *)this + -0xc);
   }
-  (**(code **)(*param_1 + 0x14))(local_4010,uVar4);
+  (**(code **)(*pStream + 0x14))(local_4010,uVar4);
   local_c = (void *)0xffffffff;
   if (puStack_4018 != auStack_4014) {
     Runtime::MSVCRT::_free(puStack_4018);
@@ -105272,7 +105346,7 @@ void __thiscall _Globals::FUN_0042e4e0(void *this,int *param_1)
   UVar3 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
   CDsString_AssignFromWideCapped80(&stack0xffffbf64,pWVar6,UVar3);
   local_c = (void *)0x1;
-  (**(code **)(*param_1 + 0x14))(&stack0xffffbf68,(int)pWVar5 - (int)pWVar1 >> 1);
+  (**(code **)(*pStream + 0x14))(&stack0xffffbf68,(int)pWVar5 - (int)pWVar1 >> 1);
   if (_Memory != &stack0xffffbf60) {
     Runtime::MSVCRT::_free(_Memory);
   }
@@ -105559,7 +105633,7 @@ void __cdecl CBulanci::InitializeClassIdLookup(void *param_1)
 
 
 
-void __cdecl _Globals::FUN_0042ea40(int param_1,int param_2)
+void __cdecl _Globals::CDSQueue_ZeroRecordArgsRange(int param_1,int param_2)
 
 {
   while (param_2 != 0) {
@@ -105744,37 +105818,39 @@ CStartGame2::CStartGame2_EnqueueEvent
 
 
 
-uint __thiscall _Globals::FUN_0042ec90(void *this,undefined4 *param_1)
+uint __thiscall CDSView::IDSEventHandler_DispatchIfMask(CDSView *this,uint *param_1)
 
 {
   undefined4 uVar1;
   
-                    // UNCERTAIN: CGame::BroadcastEvent child helper — if (this+4)&eventMask, sets
-                    // *event=this and calls vtable+0x10 (IDSEventHandler dispatch).
-  if ((*(ushort *)((int)this + 4) & *(ushort *)(param_1 + 1)) == 0) {
+                    // Synchronous sibling of CDSEventHandler_EnqueueEvent: if (*(ushort*)(this+4) &
+                    // *(ushort*)(record+4))==0 return 0; *record=this; call IDSEventHandler
+                    // vtbl+0x10 (CDSView_DispatchEvent). Callers:
+                    // CDSApp_BroadcastSyntheticEventToChildren (view+0x10), CGame::BroadcastEvent
+                    // (scheduler handler ptr).
+  if ((*(ushort *)&(this->win).pVftable_IDSChained & (ushort)param_1[1]) == 0) {
     return (uint)param_1 & 0xffffff00;
   }
-  *param_1 = this;
-  uVar1 = (**(code **)(*(int *)this + 0x10))(param_1);
+  *param_1 = (uint)this;
+  uVar1 = (**(code **)((int)(this->win).pVftable_primary + 0x10))(param_1);
   return CONCAT31((int3)((uint)uVar1 >> 8),1);
 }
 
 
 
 uint __cdecl
-_Globals::FUN_0042ecc0
-          (CStartGame2 *param_1,ushort param_2,undefined2 param_3,undefined4 param_4,
-          undefined4 param_5)
+_Globals::CStartGame2_EnqueueEvent_NullSafe
+          (void *target_evt,ushort msg_id,ushort code,uint arg0,uint arg1)
 
 {
   uint in_EAX;
   uint uVar1;
   
-                    // UNCERTAIN: null-safe cdecl wrapper → CStartGame2::FUN_0042ec40 (vtable+0x10
-                    // event dispatch). Callers: CListViewer_SetItemSelected, Button_Click,
-                    // CRadio_SetSelected, etc.
-  if (param_1 != (CStartGame2 *)0x0) {
-    uVar1 = CStartGame2::CStartGame2_EnqueueEvent(param_1,param_2,param_3,param_4,param_5);
+                    // Null-safe __cdecl wrapper → CStartGame2_EnqueueEvent@0x0042ec40. target_evt
+                    // is parent+0x10 IDSEventHandler face (not always CStartGame2). Mirrors
+                    // CDSView_PostMessage_NullSafe@0x0042f590.
+  if (target_evt != (void *)0x0) {
+    uVar1 = CStartGame2::CStartGame2_EnqueueEvent(target_evt,msg_id,code,arg0,arg1);
     return uVar1;
   }
   return in_EAX & 0xffffff00;
@@ -105890,8 +105966,9 @@ void __thiscall _Globals::CDSQueue_SetCapacity(void *this,int param_1)
   if (*(int *)((int)this + 4) < param_1) {
     pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 * 0x14));
     *(void **)this = pvVar1;
-    FUN_0042ea40((int)((int)pvVar1 + *(int *)((int)this + 4) * 0x14),
-                 param_1 - *(int *)((int)this + 4));
+    CDSQueue_ZeroRecordArgsRange
+              ((int)((int)pvVar1 + *(int *)((int)this + 4) * 0x14),param_1 - *(int *)((int)this + 4)
+              );
     *(int *)((int)this + 4) = param_1;
     return;
   }
@@ -105995,9 +106072,9 @@ CGame::BroadcastEvent
 
 {
   void *pvVar1;
-  void *this_00;
+  CDSView *this_00;
   int iVar2;
-  undefined4 local_14;
+  uint local_14;
   undefined2 local_10;
   undefined2 local_c;
   undefined4 local_8;
@@ -106012,9 +106089,9 @@ CGame::BroadcastEvent
     local_4 = param_3;
     if (0 < (int)pvVar1) {
       do {
-        this_00 = *(void **)((int)(this->scheduler).pVftable_IDSUpdated + iVar2 * 4);
+        this_00 = *(CDSView **)((int)(this->scheduler).pVftable_IDSUpdated + iVar2 * 4);
         if (this_00 != param_4) {
-          _Globals::FUN_0042ec90(this_00,&local_14);
+          CDSView::IDSEventHandler_DispatchIfMask(this_00,&local_14);
         }
         iVar2 = iVar2 + 1;
       } while (iVar2 < (int)pvVar1);
@@ -107167,56 +107244,56 @@ void CDSCollection::Catch_0042fdd1(void)
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
 
-void __thiscall
-_Globals::FUN_0042fdf0
-          (void *this,int *param_1,uint param_2,int param_3,undefined *param_4,undefined4 param_5)
+void __thiscall IDSStream::IDSStream_CopyBulk64(IDSStream *this)
 
 {
   char cVar1;
   uint uVar2;
   bool bVar3;
-  void *apvStack_1001c [2];
+  int *in_stack_00000004;
+  uint in_stack_00000008;
+  int in_stack_0000000c;
+  code *in_stack_00000010;
+  undefined4 in_stack_00000014;
+  IDSStream *apIStack_1001c [2];
   uint uStack_10014;
   int iStack_10010;
-  uint uStack_1000c;
-  int iStack_10008;
+  undefined1 auStack_1000c [8];
   undefined1 auStack_10004 [65540];
   
                     // UNCERTAIN: bulk stream copy (64 KiB chunks, optional progress callback); used
                     // by CDSMpxStream::SaveMpxFile to copy queue payload — no verified CDSStream
                     // export name.
-  if (param_4 != (undefined *)0x0) {
-    uStack_1000c = param_2;
-    iStack_10008 = param_3;
+  if (in_stack_00000010 != (code *)0x0) {
     uStack_10014 = 0;
     iStack_10010 = 0;
-    apvStack_1001c[0] = this;
-    cVar1 = (*(code *)param_4)(apvStack_1001c,param_5);
+    apIStack_1001c[0] = this;
+    cVar1 = (*in_stack_00000010)(apIStack_1001c);
     if (cVar1 == '\0') {
       CDSSimpleException::CDSSimpleException_Throw(4,6);
     }
   }
-  if (param_2 != 0 || param_3 != 0) {
+  if (in_stack_00000008 != 0 || in_stack_0000000c != 0) {
     do {
-      uVar2 = param_2;
-      if ((-1 < param_3) && ((0 < param_3 || (0x10000 < param_2)))) {
+      uVar2 = in_stack_00000008;
+      if ((-1 < in_stack_0000000c) && ((0 < in_stack_0000000c || (0x10000 < in_stack_00000008)))) {
         uVar2 = 0x10000;
       }
-      (**(code **)(*param_1 + 0x10))(auStack_10004,uVar2);
-      (**(code **)(*(int *)this + 0x14))(&uStack_1000c,uVar2);
-      bVar3 = param_2 < uVar2;
-      param_2 = param_2 - uVar2;
-      param_3 = param_3 - (uint)bVar3;
-      if (param_4 != (undefined *)0x0) {
+      (**(code **)(*in_stack_00000004 + 0x10))(auStack_10004,uVar2);
+      (**(code **)((int)this->pVftable + 0x14))(auStack_1000c,uVar2);
+      bVar3 = in_stack_00000008 < uVar2;
+      in_stack_00000008 = in_stack_00000008 - uVar2;
+      in_stack_0000000c = in_stack_0000000c - (uint)bVar3;
+      if (in_stack_00000010 != (code *)0x0) {
         bVar3 = CARRY4(uStack_10014,uVar2);
         uStack_10014 = uStack_10014 + uVar2;
         iStack_10010 = iStack_10010 + (uint)bVar3;
-        cVar1 = (*(code *)param_4)(apvStack_1001c,param_5);
+        cVar1 = (*in_stack_00000010)(apIStack_1001c,in_stack_00000014);
         if (cVar1 == '\0') {
           CDSSimpleException::CDSSimpleException_Throw(4,6);
         }
       }
-    } while (param_2 != 0 || param_3 != 0);
+    } while (in_stack_00000008 != 0 || in_stack_0000000c != 0);
   }
   return;
 }
@@ -110646,9 +110723,7 @@ void __thiscall CDSMpxPersistFacet::SaveMpxFile(CDSMpxPersistFacet *this,IDSStre
                     // copy dwPayloadBytes from [P+0x30]
   (**(code **)(*(int *)this[-3].pVftable_IDSChained + 0x28))
             (this[-2].pVftable_IDSChained,*(undefined4 *)&this[-2].field_0x4,0);
-  _Globals::FUN_0042fdf0
-            (outStream,this[-3].pVftable_IDSChained,(uint)this[-1].pVftable_IDSChained,0,
-             (undefined *)0x0,0);
+  IDSStream::IDSStream_CopyBulk64(outStream);
   return;
 }
 
@@ -114322,8 +114397,8 @@ CPoemScroller::CPoemScroller_SampleSourcePixel
 
 
 undefined4 __thiscall
-CPoemScroller::FUN_00436160
-          (CPoemScroller *this,undefined4 param_1,undefined4 param_2,undefined4 param_3)
+CPoemScroller::CPoemScroller_WriteDestPixelRemapped
+          (CPoemScroller *this,uint param_1,uint param_2,uint param_3)
 
 {
   int iVar1;
@@ -114331,8 +114406,10 @@ CPoemScroller::FUN_00436160
   undefined4 uVar3;
   int extraout_EDX;
   
-                    // UNCERTAIN: PTR_LAB_004b0074[format*2] pixel op; palette-indexed dest write in
-                    // BlitOpaqueFallback (paired with CPoemScroller_BlitPixelViaFormatTable).
+                    // Dest pixel write:
+                    // PTR_LAB_004b0074[nField_0c*2](x,y,mappedIndex,stride@+0x10,GetColorPlane).
+                    // Sole caller BlitOpaqueFallback palette-remap branch (abStack_104); pairs with
+                    // CPoemScroller_SampleSourcePixel.
   iVar1 = this->nField_0c;
   pvVar2 = CDSImage::GetColorPlane((CDSImage *)this);
   uVar3 = (*(code *)(&PTR_LAB_004b0074)[iVar1 * 2])
@@ -114743,7 +114820,8 @@ CPoemScroller::BlitOpaqueFallback
         if (0 < iVar5) {
           do {
             iVar3 = CPoemScroller_SampleSourcePixel(local_108,*param_3 + iVar2,param_3[1] + iVar1);
-            FUN_00436160(local_110,*param_1 + iVar2,param_1[1] + iVar1,(uint)abStack_104[iVar3]);
+            CPoemScroller_WriteDestPixelRemapped
+                      (local_110,*param_1 + iVar2,param_1[1] + iVar1,(uint)abStack_104[iVar3]);
             iVar2 = iVar2 + 1;
             iVar3 = local_10c;
           } while (iVar2 < iVar5);
@@ -114980,15 +115058,15 @@ void __thiscall CDSImage_StreamHostFacet::CDSImage_Save(CDSImage_StreamHostFacet
 
 
 
-void __thiscall _Globals::FUN_00436d20(void *this,undefined4 *param_1)
+void __thiscall CDSPtrSlotVec::CDSPtrSlotVec_AssignFromDesc(CDSPtrSlotVec *this,undefined4 *desc)
 
 {
-                    // UNCERTAIN: CDSAudioBank sample-table load helper —
-                    // CDSAudioBank::FUN_00406340 resize then FUN_00403240 bulk copy; wrapped by
-                    // FUN_00436f20. Not the main CDSAudioBank_Deserialize path.
-  CDSPtrSlotVec::CDSPtrSlotVec_Resize(this,param_1[1]);
-  if (*(int *)((int)this + 4) != 0) {
-    MemMoveDword(*(undefined4 **)this,(undefined4 *)*param_1,*(int *)((int)this + 4));
+                    // Resize to desc[1] then MemMoveDword(pSlots, desc[0], cCapacity). desc[2]
+                    // unused here (wrapper FUN_00436f20 sets sibling count @ this+8). Sole caller
+                    // FUN_00436f20; audio track switch via FUN_004370b0.
+  CDSPtrSlotVec_Resize(this,desc[1]);
+  if (this->nCapacity != 0) {
+    MemMoveDword(this->pSlots,(undefined4 *)*desc,this->nCapacity);
   }
   return;
 }
@@ -115129,14 +115207,16 @@ void __thiscall CDSImage::BroadcastFrameTimeHint(CDSImage *this,uint param_1)
 
 
 
-void __thiscall _Globals::FUN_00436f20(void *this,undefined4 *param_1)
+void __thiscall CDSTrackVector::CDSTrackVector_AssignFromDesc(CDSTrackVector *this,undefined4 *desc)
 
 {
-                    // UNCERTAIN: copies vector at caller+0x38 via FUN_00436d20; sole caller
-                    // FUN_004370b0 (SetCurrentTrack audio-bank path). Wrapper name not documented.
-  *(undefined4 *)((int)this + 8) = 0;
-  FUN_00436d20(this,param_1);
-  *(undefined4 *)((int)this + 8) = param_1[2];
+                    // Zero cTracks (+8); CDSPtrSlotVec_AssignFromDesc on pTracks/cTracksAllocated;
+                    // restore cTracks from desc[2]. desc = {pSlots, cAllocated, cTracks}. Sole
+                    // caller FUN_004370b0 @ SetCurrentTrack track-switch (stack CDSTrackVector from
+                    // parent+0x38).
+  this->dwTracks = 0;
+  CDSPtrSlotVec::CDSPtrSlotVec_AssignFromDesc((CDSPtrSlotVec *)this,desc);
+  this->dwTracks = desc[2];
   return;
 }
 
@@ -115243,39 +115323,39 @@ void __fastcall _Globals::NotifyDirtyAll(void *param_1)
 
 
 
-void __thiscall _Globals::FUN_004370b0(void *this,undefined4 param_1)
+void __thiscall
+CDSImage::CDSImage_NotifySubscribersOnTrackSwitch(CDSImage *this,void *trackSwitchCookie)
 
 {
   void *pvVar1;
   uint uVar2;
-  int iVar3;
-  CDSPtrSlotVec local_1c;
-  int local_14;
-  undefined4 local_10;
+  uint uVar3;
+  CDSTrackVector local_1c;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
   
-                    // UNCERTAIN: CDSAudioVideoPlayer track-switch helper — iterates bank children
-                    // (FUN_00436f20 list), vtable+8 on each; sole caller SetCurrentTrack @ 0x439f04
-                    // before replacing this+0x30.
+                    // SetCurrentTrack pRenderTarget teardown: copy m_slotVector+m_slotCount @+0x38
+                    // via CDSTrackVector_AssignFromDesc; foreach subscriber CALL vtable+8(consumer,
+                    // newTrackCookie, cookie). Sole caller SetCurrentTrack@0x00439f04 when swapping
+                    // trackManager.pRenderTarget.
   puStack_8 = &LAB_0047a2c8;
   local_c = ExceptionList;
   uVar2 = DAT_004b0e44 ^ (uint)&stack0xffffffd4;
   ExceptionList = &local_c;
-  local_1c.pSlots = (void *)0x0;
-  local_1c.nCapacity = 0;
-  local_14 = 0;
-  local_10 = 8;
+  local_1c.pTracks = (void *)0x0;
+  local_1c.dwTracksAllocated = 0;
+  local_1c.dwTracks = 0;
+  local_1c.dwTrackCapacity = 8;
   local_4 = 0;
-  FUN_00436f20(&local_1c,(undefined4 *)((int)this + 0x38));
-  pvVar1 = local_1c.pSlots;
-  for (iVar3 = local_14; iVar3 != 0; iVar3 = iVar3 + -1) {
-    (**(code **)(**(int **)((int)pvVar1 + iVar3 * 4 + -4) + 8))(this,param_1,uVar2);
+  CDSTrackVector::CDSTrackVector_AssignFromDesc(&local_1c,&(this->m_slotVector).pSlots);
+  pvVar1 = local_1c.pTracks;
+  for (uVar3 = local_1c.dwTracks; uVar3 != 0; uVar3 = uVar3 - 1) {
+    (**(code **)(**(int **)((int)pvVar1 + uVar3 * 4 + -4) + 8))(this,trackSwitchCookie,uVar2);
   }
   local_4 = 0xffffffff;
-  local_14 = 0;
-  CDSPtrSlotVec::CDSPtrSlotVec_Resize(&local_1c,0);
+  local_1c.dwTracks = 0;
+  CDSPtrSlotVec::CDSPtrSlotVec_Resize((CDSPtrSlotVec *)&local_1c,0);
   ExceptionList = local_c;
   return;
 }
@@ -116905,7 +116985,7 @@ void __thiscall _Globals::TM_SetAnimFrameFromAnimSub(void *this,int frameIdx)
 {
                     // R5 w10: script SetAnimFrame adapter — view+0x98 anim sub; forwards to inner
                     // TM at this+0x10.
-  FUN_00439710((void *)((int)this + 0x10),frameIdx);
+  CDSVideoPlayer::CDSVideoPlayer_SetNotifyCookie((CDSVideoPlayer *)((int)this + 0x10));
   return;
 }
 
@@ -117420,13 +117500,15 @@ CBulAnim * __thiscall CBulAnim::ScalarDeletingDtor(CBulAnim *this,byte param_1)
 
 
 
-void __thiscall _Globals::FUN_00439710(void *this,undefined4 param_1)
+void __thiscall CDSVideoPlayer::CDSVideoPlayer_SetNotifyCookie(CDSVideoPlayer *this)
 
 {
-                    // UNCERTAIN: __thiscall stores param_1 at this+0x3c; reached from SetAnimFrame
-                    // via FUN_00438fd0(this+0x10); track-mgr frame field documented at +0x38 in
-                    // anim_runtime.md — verify offset before naming.
-  *(undefined4 *)((int)this + 0x3c) = param_1;
+  void *in_stack_00000004;
+  
+                    // R8: stores notify cookie at CDSVideoPlayer+0x3c (pNotifyCookie). Callers:
+                    // TM_SetAnimFrameFromAnimSub(CAnim+0x98->+0x10), CGunMouse_ctor. NOT
+                    // dwCurrentFrameIdx@+0x38.
+  this->pNotifyCookie = in_stack_00000004;
   return;
 }
 
@@ -118027,7 +118109,7 @@ void __thiscall _Globals::SetCurrentTrack(void *this,int trackIdx,char autostart
 {
   int *piVar1;
   int iVar2;
-  undefined4 uVar3;
+  void *trackSwitchCookie;
   
   TM_PauseAndStampClock(this);
   if (*(int *)((int)this + 0x2c) < 0) {
@@ -118039,9 +118121,10 @@ void __thiscall _Globals::SetCurrentTrack(void *this,int trackIdx,char autostart
   piVar1 = *(int **)(*(int *)((int)this + 0x1c) + 4 + trackIdx * 8);
   if ((((iVar2 == 0) || (piVar1[1] != *(int *)(iVar2 + 4))) || (piVar1[2] != *(int *)(iVar2 + 8)))
      || (piVar1[3] != *(int *)(iVar2 + 0xc))) {
-    uVar3 = (**(code **)(*piVar1 + 0x24))();
-    if (*(void **)((int)this + 0x30) != (void *)0x0) {
-      FUN_004370b0(*(void **)((int)this + 0x30),uVar3);
+    trackSwitchCookie = (void *)(**(code **)(*piVar1 + 0x24))();
+    if (*(CDSImage **)((int)this + 0x30) != (CDSImage *)0x0) {
+      CDSImage::CDSImage_NotifySubscribersOnTrackSwitch
+                (*(CDSImage **)((int)this + 0x30),trackSwitchCookie);
       if (*(int **)((int)this + 0x30) != (int *)0x0) {
         (**(code **)(**(int **)((int)this + 0x30) + 8))();
       }
@@ -118050,7 +118133,7 @@ void __thiscall _Globals::SetCurrentTrack(void *this,int trackIdx,char autostart
     if (*(int **)((int)this + 0x30) != (int *)0x0) {
       (**(code **)(**(int **)((int)this + 0x30) + 8))();
     }
-    *(undefined4 *)((int)this + 0x30) = uVar3;
+    *(void **)((int)this + 0x30) = trackSwitchCookie;
   }
   *(int *)((int)this + 0x2c) = trackIdx;
   if (autostart != '\0') {
@@ -119830,9 +119913,7 @@ void __thiscall CDSWavStream::CDSWavStream_SaveToStream(CDSWavStream *this,int *
   (**(code **)(*param_1 + 0x14))(&this[-1].pVftable_IDSEventHandler,0xc);
   (**(code **)(*(int *)this[-1].pVftable_IDSChained6 + 0x28))
             (this[-1].dwReservedTail,*(undefined4 *)this[-1].pPad_operatorNew0x40,0);
-  _Globals::FUN_0042fdf0
-            (param_1,(int *)this[-1].pVftable_IDSChained6,(uint)this[-1].pVftable_IDSEventHandler,0,
-             (undefined *)0x0,0);
+  IDSStream::IDSStream_CopyBulk64((IDSStream *)param_1);
   return;
 }
 
@@ -120973,23 +121054,24 @@ undefined4 __thiscall _Globals::CDSDirectSound_DuplicateSoundBuffer(void *this,u
 
 
 
-void __fastcall CBulanci::FUN_0043c9b0(int param_1)
+void __thiscall CDSDirectSound::CDSDirectSound_StopAllAndReleaseCom(CDSDirectSound *this)
 
 {
   int *piVar1;
   
-                    // UNCERTAIN: CGaming sub-object teardown (CBulanci+0x200);
-                    // CDSAudioPlayer_StopAll + release COM refs at +0x38/+0x3c; sole caller
-                    // CDSApp_OnDestroy.
+                    // WM_DESTROY path: CDSAudioPlayer_StopAll then COM Release (vtable+8) on
+                    // m_pPrimaryBuffer (+0x3c) and m_pDirectSound (+0x38). Sole caller
+                    // CDSApp_OnDestroy via LEA ECX,[app+0x200]. Pairs with
+                    // CDSDirectSound_InitPrimary.
   _Globals::CDSAudioPlayer_StopAll();
-  if (*(int *)(param_1 + 0x38) != 0) {
-    piVar1 = *(int **)(param_1 + 0x3c);
+  if (this->pM_pDirectSound != (void *)0x0) {
+    piVar1 = this->pM_pPrimaryBuffer;
     if (piVar1 != (int *)0x0) {
       (**(code **)(*piVar1 + 8))(piVar1);
-      *(undefined4 *)(param_1 + 0x3c) = 0;
+      this->pM_pPrimaryBuffer = (void *)0x0;
     }
-    (**(code **)(**(int **)(param_1 + 0x38) + 8))(*(int **)(param_1 + 0x38));
-    *(undefined4 *)(param_1 + 0x38) = 0;
+    (**(code **)(*(int *)this->pM_pDirectSound + 8))(this->pM_pDirectSound);
+    this->pM_pDirectSound = (void *)0x0;
   }
   return;
 }
@@ -121809,7 +121891,7 @@ _Globals::BlitOpaque_Indexed4_to_Indexed8
 
 
 void __cdecl
-_Globals::FUN_0043d5b0
+_Globals::BlitOpaque_Indexed4_to_RGB565
           (int *param_1,uint *param_2,int param_3,int param_4,int param_5,int param_6,int param_7)
 
 {
@@ -122150,10 +122232,10 @@ _Globals::BlitOpaque_Indexed8_to_BGRA32
 
 
 
-void __cdecl
-_Globals::FUN_0043dae0
-          (int *param_1,int *param_2,int param_3,int param_4,int param_5,int param_6,
-          undefined4 param_7,int param_8)
+uchar __cdecl
+_Globals::BlitOpaque_RGB565_to_Indexed8
+          (int *param_1,int *param_2,int param_3,int param_4,int param_5,int param_6,uint param_7,
+          int param_8)
 
 {
   int iVar1;
@@ -122165,13 +122247,13 @@ _Globals::FUN_0043dae0
   short sVar7;
   int iVar8;
   ushort *puVar9;
-  undefined1 *puVar10;
+  uchar *puVar10;
   int local_18;
   int local_14;
   
-                    // UNCERTAIN: BlitTable_Opaque slot 35 (src fmt 4 → dst fmt 3): RGB565 source
-                    // to 8bpp palette indices via 256-entry LUT at param_8. DATA only @
-                    // BlitTable_Opaque+0x8C.
+                    // BlitTable_Opaque[35] @0x004b0954: src fmt 4 (RGB565) → dst fmt 3 (8bpp
+                    // indexed). Linear scan 256×uint32 LUT @param_8; writes palette index per
+                    // pixel. param_7 unused in body.
   iVar1 = param_2[2];
   iVar2 = *param_2;
   iVar3 = param_1[2];
@@ -122179,7 +122261,7 @@ _Globals::FUN_0043dae0
   iVar5 = param_1[2];
   iVar6 = *param_1;
   local_14 = param_1[3] - param_1[1];
-  puVar10 = (undefined1 *)(param_3 + param_1[1] * param_6 + *param_1);
+  puVar10 = (uchar *)(param_3 + param_1[1] * param_6 + *param_1);
   puVar9 = (ushort *)(param_4 + param_2[1] * param_5 + *param_2 + *param_2);
   local_18 = iVar5 - iVar6;
   do {
@@ -122192,7 +122274,7 @@ _Globals::FUN_0043dae0
     } while (iVar8 != 0x100);
     iVar8 = 0;
 LAB_0043db90:
-    *puVar10 = (char)iVar8;
+    *puVar10 = (uchar)iVar8;
     puVar9 = puVar9 + 1;
     puVar10 = puVar10 + 1;
     local_18 = local_18 + -1;
@@ -122202,7 +122284,7 @@ LAB_0043db90:
       local_14 = local_14 + -1;
       local_18 = iVar5 - iVar6;
       if (local_14 == 0) {
-        return;
+        return (uchar)iVar8;
       }
     }
   } while( true );
@@ -122490,7 +122572,8 @@ _Globals::BlitOpaque_BGR24_to_BGR24
 
 
 void __cdecl
-_Globals::FUN_0043e040(int *param_1,int *param_2,int param_3,int param_4,int param_5,int param_6)
+_Globals::BlitOpaque_BGR24_to_BGRA32
+          (int *param_1,int *param_2,int param_3,int param_4,int param_5,int param_6)
 
 {
   int iVar1;
@@ -122503,9 +122586,8 @@ _Globals::FUN_0043e040(int *param_1,int *param_2,int param_3,int param_4,int par
   int local_18;
   int local_14;
   
-                    // UNCERTAIN: BlitTable_Opaque slot 46 (src_fmt 5 / dst_fmt 6 per
-                    // sprite_container.md); 24bpp RGB (3-byte stride) to 32bpp dest rect copy; no
-                    // published Blit* symbol in mapping.csv
+                    // BlitTable_Opaque[46]: src_fmt 5 (24bpp BGR) → dst_fmt 6 (32bpp BGRA); packs
+                    // 3-byte BGR with alpha=0 in high byte; sole xref DATA @0x004b0980
   iVar1 = param_2[2];
   iVar2 = *param_2;
   iVar3 = param_1[2];
@@ -122964,8 +123046,8 @@ _Globals::BlitChromaKey_Indexed2_to_RGB565
 
 
 
-void __cdecl
-_Globals::FUN_0043e740
+uchar __cdecl
+_Globals::BlitDestKey_Indexed2_to_BGR24
           (int *param_1,uint *param_2,int param_3,int param_4,int param_5,int param_6,int param_7,
           uint param_8)
 
@@ -122974,7 +123056,7 @@ _Globals::FUN_0043e740
   uint uVar2;
   int iVar3;
   int iVar4;
-  undefined4 uVar5;
+  uint uVar5;
   int iVar6;
   uint uVar7;
   int iVar8;
@@ -122985,9 +123067,9 @@ _Globals::FUN_0043e740
   int local_18;
   int local_14;
   
-                    // UNCERTAIN: BlitTable_DestKey slot 13 (src fmt 1 → dst fmt 5): expand 2-bit
-                    // packed pixels to 24bpp BGR using 4-entry color table at param_7. DATA @
-                    // BlitTable_DestKey+0x34.
+                    // BlitTable_DestKey[13] (src fmt 1 / 2bpp → dst fmt 5 / 24bpp BGR): 2-bit
+                    // packed pixels via 4-entry LUT at param_7; skip writes when pixel index ==
+                    // param_8 (dest chroma). Dispatched only from BlitDispatch@0x004368d0.
   uVar1 = param_2[2];
   uVar2 = *param_2;
   iVar3 = param_1[2];
@@ -123003,9 +123085,10 @@ _Globals::FUN_0043e740
     do {
       uVar7 = *pbVar11 >> ((byte)iVar9 & 0x1f) & 3;
       if (uVar7 != param_8) {
-        uVar5 = *(undefined4 *)(param_7 + uVar7 * 4);
+        uVar5 = *(uint *)(param_7 + uVar7 * 4);
         *puVar12 = (short)uVar5;
-        *(char *)(puVar12 + 1) = (char)((uint)uVar5 >> 0x10);
+        uVar7 = uVar5 >> 0x10;
+        *(char *)(puVar12 + 1) = (char)(uVar5 >> 0x10);
       }
       iVar10 = iVar9 + -2;
       if (iVar9 < 2) {
@@ -123022,7 +123105,7 @@ _Globals::FUN_0043e740
     iVar9 = iVar8;
     local_18 = iVar6;
   } while (local_14 != 0);
-  return;
+  return (uchar)uVar7;
 }
 
 
@@ -127336,8 +127419,8 @@ _Globals::BlitKeyAndMask_1bpp_to_BGR24
 
 
 
-void __cdecl
-_Globals::FUN_004438a0
+uchar __cdecl
+_Globals::BlitKeyAndMask_1bpp_to_BGRA32
           (int *param_1,uint *param_2,int param_3,int param_4,int param_5,int param_6,int param_7,
           uint param_8,int param_9,int param_10,uint param_11)
 
@@ -127349,8 +127432,8 @@ _Globals::FUN_004438a0
   uint uVar5;
   uint uVar6;
   uint uVar7;
-  int iVar8;
-  uint uVar9;
+  uint uVar8;
+  int iVar9;
   uint uVar10;
   int iVar11;
   int iVar12;
@@ -127365,14 +127448,15 @@ _Globals::FUN_004438a0
   int local_1c;
   int local_18;
   
-                    // UNCERTAIN: BlitTable_Masked slot 70 (src fmt 8, dst BGRA32); 1bpp mask +
-                    // palette alpha via g_pAlphaBlendLut — engine format 8 not documented in
-                    // bmp_decoder.md
+                    // BlitTable_KeyAndMask[6] (src fmt 0, dst BGRA32): 1bpp mask + 2-entry palette
+                    // + per-pixel alpha (*pbVar15 + param_11) via g_pAlphaBlendLut. Pairs
+                    // BlitKeyAndMask_1bpp_to_BGR24@0x00443700 (dst fmt 5). Masked-only PAL1 path
+                    // uses BlitMasked_PAL1_to_BGRA32@0x00441830 (10-arg, no param_11).
   uVar1 = param_2[2];
   uVar2 = *param_2;
   iVar3 = param_1[2];
   iVar4 = *param_1;
-  iVar8 = (param_1[2] - *param_1) * 4;
+  iVar9 = (param_1[2] - *param_1) * 4;
   local_18 = param_1[3] - param_1[1];
   uVar5 = param_2[2];
   uVar6 = *param_2;
@@ -127381,13 +127465,13 @@ _Globals::FUN_004438a0
   pbVar14 = (byte *)(param_4 + param_2[1] * param_5 + (*param_2 >> 3));
   iVar12 = 7 - (*param_2 & 7);
   iVar13 = iVar12;
-  local_1c = iVar8;
+  local_1c = iVar9;
   do {
     do {
-      uVar9 = *pbVar14 >> ((byte)iVar13 & 0x1f) & 1;
-      if (uVar9 != param_8) {
+      local_30 = *pbVar14 >> ((byte)iVar13 & 0x1f) & 1;
+      if (local_30 != param_8) {
         uVar7 = *puVar16;
-        uVar9 = *(uint *)(uVar9 * 4 + param_7);
+        uVar8 = *(uint *)(local_30 * 4 + param_7);
         uVar10 = (uint)*pbVar15 + (param_11 & 0xff);
         iVar11 = uVar10 - 0xff;
         if (uVar10 < 0xff) {
@@ -127396,18 +127480,18 @@ _Globals::FUN_004438a0
         local_34 = (char)uVar7;
         local_33 = (byte)(uVar7 >> 8);
         local_32 = (byte)(uVar7 >> 0x10);
-        local_30._3_1_ = (undefined1)(uVar9 >> 0x18);
+        local_30._3_1_ = (undefined1)(uVar8 >> 0x18);
         local_30._0_3_ =
              CONCAT12(local_32 +
                       (char)g_pAlphaBlendLut
-                            [iVar11 + (((uVar9 >> 0x10 & 0xff) - (uint)local_32) + 0xff) * 0x100],
+                            [iVar11 + (((uVar8 >> 0x10 & 0xff) - (uint)local_32) + 0xff) * 0x100],
                       CONCAT11(local_33 +
                                (char)g_pAlphaBlendLut
-                                     [iVar11 + (((uVar9 >> 8 & 0xff) - (uint)local_33) + 0xff) *
+                                     [iVar11 + (((uVar8 >> 8 & 0xff) - (uint)local_33) + 0xff) *
                                                0x100],
                                local_34 +
                                (char)g_pAlphaBlendLut
-                                     [iVar11 + (((uVar9 & 0xff) - (uVar7 & 0xff)) + 0xff) * 0x100]))
+                                     [iVar11 + (((uVar8 & 0xff) - (uVar7 & 0xff)) + 0xff) * 0x100]))
         ;
         *puVar16 = local_30;
       }
@@ -127426,9 +127510,9 @@ _Globals::FUN_004438a0
     pbVar15 = pbVar15 + (param_10 - (uVar5 - uVar6));
     local_18 = local_18 + -1;
     iVar13 = iVar12;
-    local_1c = iVar8;
+    local_1c = iVar9;
   } while (local_18 != 0);
-  return;
+  return (uchar)local_30;
 }
 
 
@@ -127618,7 +127702,7 @@ _Globals::BlitAlphaBlend_2bitIndex_BGR24
 
 
 void __cdecl
-_Globals::FUN_00443db0
+_Globals::BlitAlphaBlend_2bitIndex_BGRA32
           (int *param_1,uint *param_2,int param_3,int param_4,int param_5,int param_6,int param_7,
           uint param_8,int param_9,int param_10,uint param_11)
 
@@ -127646,8 +127730,10 @@ _Globals::FUN_00443db0
   int local_1c;
   int local_18;
   
-                    // UNCERTAIN: BlitTable_Masked slot 78 (src fmt 9, dst BGRA32); 2bpp mask +
-                    // palette alpha — engine format 9 not in bmp_decoder.md format table
+                    // BlitTable_Masked[78]: src fmt 9 (2bpp mask+palette row, see
+                    // BlitKeyAndMask2bpp@slot76) -> dst fmt 6 (32bpp BGRA). Masked alpha blend via
+                    // g_pAlphaBlendLut; param_7 palette LUT; param_8 skip index; param_9/10 alpha
+                    // plane; param_11 alpha addend.
   uVar1 = param_2[2];
   uVar2 = *param_2;
   iVar3 = param_1[2];
@@ -127897,8 +127983,8 @@ _Globals::BlitKeyAndMask_4bpp_to_BGR24
 
 
 
-void __cdecl
-_Globals::FUN_004442c0
+uchar __cdecl
+_Globals::BlitKeyAndMask_4bpp_to_BGRA32
           (int *param_1,uint *param_2,int param_3,int param_4,int param_5,int param_6,int param_7,
           uint param_8,int param_9,int param_10,uint param_11)
 
@@ -127910,8 +127996,8 @@ _Globals::FUN_004442c0
   uint uVar5;
   uint uVar6;
   uint uVar7;
-  int iVar8;
-  uint uVar9;
+  uint uVar8;
+  int iVar9;
   uint uVar10;
   int iVar11;
   int iVar12;
@@ -127926,13 +128012,16 @@ _Globals::FUN_004442c0
   int local_1c;
   int local_18;
   
-                    // UNCERTAIN: BlitTable_Masked slot 86 (src fmt 10, dst BGRA32); 4bpp mask +
-                    // palette alpha — engine format 10 not in bmp_decoder.md
+                    // BlitTable_Masked[86] (src fmt idx 10, dst fmt idx 6 BGRA32): 4bpp nibble
+                    // source + per-pixel mask byte + palette LUT; skip nibble==param_8; alpha via
+                    // g_pAlphaBlendLut + (param_11&0xff). Masked dispatch @ BlitDispatch+0x36baa
+                    // pushes 10 args (ADD ESP,0x28). Sibling:
+                    // BlitKeyAndMask_4bpp_to_BGR24@0x00444120 slot 84.
   uVar1 = param_2[2];
   uVar2 = *param_2;
   iVar3 = param_1[2];
   iVar4 = *param_1;
-  iVar8 = (param_1[2] - *param_1) * 4;
+  iVar9 = (param_1[2] - *param_1) * 4;
   local_18 = param_1[3] - param_1[1];
   uVar5 = param_2[2];
   uVar6 = *param_2;
@@ -127941,13 +128030,13 @@ _Globals::FUN_004442c0
   pbVar14 = (byte *)(param_4 + param_2[1] * param_5 + (*param_2 >> 1));
   iVar12 = (1 - (*param_2 & 1)) * 4;
   iVar13 = iVar12;
-  local_1c = iVar8;
+  local_1c = iVar9;
   do {
     do {
-      uVar9 = *pbVar14 >> ((byte)iVar13 & 0x1f) & 0xf;
-      if (uVar9 != param_8) {
+      local_30 = *pbVar14 >> ((byte)iVar13 & 0x1f) & 0xf;
+      if (local_30 != param_8) {
         uVar7 = *puVar16;
-        uVar9 = *(uint *)(uVar9 * 4 + param_7);
+        uVar8 = *(uint *)(local_30 * 4 + param_7);
         uVar10 = (uint)*pbVar15 + (param_11 & 0xff);
         iVar11 = uVar10 - 0xff;
         if (uVar10 < 0xff) {
@@ -127956,18 +128045,18 @@ _Globals::FUN_004442c0
         local_34 = (char)uVar7;
         local_33 = (byte)(uVar7 >> 8);
         local_32 = (byte)(uVar7 >> 0x10);
-        local_30._3_1_ = (undefined1)(uVar9 >> 0x18);
+        local_30._3_1_ = (undefined1)(uVar8 >> 0x18);
         local_30._0_3_ =
              CONCAT12(local_32 +
                       (char)g_pAlphaBlendLut
-                            [iVar11 + (((uVar9 >> 0x10 & 0xff) - (uint)local_32) + 0xff) * 0x100],
+                            [iVar11 + (((uVar8 >> 0x10 & 0xff) - (uint)local_32) + 0xff) * 0x100],
                       CONCAT11(local_33 +
                                (char)g_pAlphaBlendLut
-                                     [iVar11 + (((uVar9 >> 8 & 0xff) - (uint)local_33) + 0xff) *
+                                     [iVar11 + (((uVar8 >> 8 & 0xff) - (uint)local_33) + 0xff) *
                                                0x100],
                                local_34 +
                                (char)g_pAlphaBlendLut
-                                     [iVar11 + (((uVar9 & 0xff) - (uVar7 & 0xff)) + 0xff) * 0x100]))
+                                     [iVar11 + (((uVar8 & 0xff) - (uVar7 & 0xff)) + 0xff) * 0x100]))
         ;
         *puVar16 = local_30;
       }
@@ -127986,9 +128075,9 @@ _Globals::FUN_004442c0
     pbVar15 = pbVar15 + (param_10 - (uVar5 - uVar6));
     local_18 = local_18 + -1;
     iVar13 = iVar12;
-    local_1c = iVar8;
+    local_1c = iVar9;
   } while (local_18 != 0);
-  return;
+  return (uchar)local_30;
 }
 
 
@@ -129774,18 +129863,23 @@ int __cdecl CDSMpx::QuantizeQ31ToS16(int param_1)
 
 
 
-void CDSMpx::FUN_004466a0(int *param_1)
+uchar CDSMpx::CDSMpx_ScalarDeleteSubobjViaVfn1(void *subobj)
 
 {
-                    // UNCERTAIN: CDSMpx/CDSMpxStream vtable slot 7 indirect Release; no verified
-                    // export name.
-  if (param_1 != (int *)0x0) {
+  uchar in_AL;
+  uchar uVar1;
+  
+                    // CDSMpx/CDSMpxStream face_8slots vtable slot 7 (__stdcall): if subobj ptr
+                    // non-null, tail-JMP subobj->vftable[1] with ECX=subobj and scalar-delete flag
+                    // 1 on stack (MSVC deleting-dtor convention). MPX-specific (CDSWav slot 7 =
+                    // NoOpStub). Xrefs: 0x487310, 0x48738c DATA only.
+  if (subobj != (void *)0x0) {
                     // WARNING: Could not recover jumptable at 0x004466b5. Too many branches
                     // WARNING: Treating indirect jump as call
-    (**(code **)(*param_1 + 4))();
-    return;
+    uVar1 = (**(code **)(*(int *)subobj + 4))();
+    return uVar1;
   }
-  return;
+  return in_AL;
 }
 
 
@@ -130517,7 +130611,7 @@ void _Globals::CDSWorkingThread_ThreadProc(int *param_1)
   ExceptionList = &local_10;
   local_8 = 0;
   (**(code **)(*param_1 + 0x10))();
-  FUN_0044714a();
+  CDSWorkingThread_ThreadProcEpilogue();
   return;
 }
 
@@ -130535,15 +130629,15 @@ undefined * _Globals::Catch_0044712e(void)
 
 
 
-undefined4 _Globals::FUN_0044714a(void)
+undefined4 _Globals::CDSWorkingThread_ThreadProcEpilogue(void)
 
 {
   int unaff_EBP;
   int unaff_ESI;
   uint unaff_EDI;
   
-                    // UNCERTAIN: SEH epilogue for FUN_004470f0 thread proc — sets *(esi+0x10)=1
-                    // then Runtime::MSVCRT::__endthreadex.
+                    // ThreadProc tail (JMP from 0x0044712c): m_bWorkerThreadExited=1 at ESI+0x10,
+                    // __endthreadex(0), SEH epilogue. ESI=this from CDSWorkingThread_ThreadProc.
   *(undefined1 *)(unaff_ESI + 0x10) = 1;
   Runtime::MSVCRT::__endthreadex(unaff_EDI);
   ExceptionList = *(void **)(unaff_EBP + -0xc);
@@ -130694,11 +130788,11 @@ void __cdecl Runtime::MSVCRT::_free(void *_Memory)
     if (DAT_004ba1f4 == 3) {
       this = (void *)0x4;
       __lock(4);
-      puVar1 = (uint *)_Globals::thunk_FUN_00449c90(this,(int)_Memory);
+      puVar1 = _Globals::___sbh_find_block(this,_Memory);
       if (puVar1 != (uint *)0x0) {
         ___sbh_free_block(puVar1,(int)_Memory);
       }
-      _Globals::FUN_004473e8();
+      _Globals::__unlock_4_free_epilog();
       if (puVar1 != (uint *)0x0) {
         return;
       }
@@ -130822,11 +130916,11 @@ void __cdecl Runtime::MSVCRT::_free(void *_Memory)
     if (DAT_004ba1f4 == 3) {
       this = (void *)0x4;
       __lock(4);
-      puVar1 = (uint *)_Globals::thunk_FUN_00449c90(this,(int)_Memory);
+      puVar1 = _Globals::___sbh_find_block(this,_Memory);
       if (puVar1 != (uint *)0x0) {
         ___sbh_free_block(puVar1,(int)_Memory);
       }
-      _Globals::FUN_004473e8();
+      _Globals::__unlock_4_free_epilog();
       if (puVar1 != (uint *)0x0) {
         return;
       }
@@ -130844,11 +130938,12 @@ void __cdecl Runtime::MSVCRT::_free(void *_Memory)
 
 
 
-void _Globals::FUN_004473e8(void)
+void __cdecl _Globals::__unlock_4_free_epilog(void)
 
 {
-                    // UNCERTAIN: MSVCRT _unlock(4) SEH epilog stub; paired __lock(4) in
-                    // Runtime::MSVCRT::_free — heap lock.
+                    // MSVC CRT _free SBH-path SEH epilog: __unlock(4) @ 0x00449b1b. Single caller:
+                    // call @ 0x004473d8 inside Runtime::MSVCRT::_free (pairs __lock(4) call @
+                    // 0x004473b0 → __lock @ 0x00449bf3). PE: 6a 04 e8 2c 27 00 00 59 c3.
   __unlock(4);
   return;
 }
@@ -130883,7 +130978,7 @@ int * __cdecl Runtime::MSVCRT::__calloc_impl(uint param_1,uint param_2,undefined
            (dwBytes = (uint *)((int)dwBytes + 0xfU & 0xfffffff0), _Size <= DAT_004ba1e4)) {
           __lock(4);
           piVar1 = ___sbh_alloc_block(_Size);
-          _Globals::FUN_0044751c();
+          _Globals::__unlock_4_calloc_impl_epilog();
           if (piVar1 != (int *)0x0) {
             _memset(piVar1,0,(size_t)_Size);
             goto LAB_004474d1;
@@ -130923,11 +131018,11 @@ LAB_004474d1:
 
 
 
-void _Globals::FUN_0044751c(void)
+void _Globals::__unlock_4_calloc_impl_epilog(void)
 
 {
-                    // UNCERTAIN: MSVCRT _unlock(4) SEH epilog stub; paired __lock(4) in
-                    // Runtime::MSVCRT::__calloc_impl.
+                    // __calloc_impl SEH epilog: __unlock(4); paired __lock(4) @ 0x0044749c in
+                    // Runtime::MSVCRT::__calloc_impl@0x00447420.
   __unlock(4);
   return;
 }
@@ -130993,7 +131088,7 @@ void * __cdecl Runtime::MSVCRT::_realloc(void *_Memory,size_t _NewSize)
       if ((uint *)0xffffffe0 < _NewSize) goto LAB_00447756;
       pvVar1 = (void *)0x4;
       __lock(4);
-      local_24 = (uint *)_Globals::thunk_FUN_00449c90(pvVar1,(int)_Memory);
+      local_24 = _Globals::___sbh_find_block(pvVar1,_Memory);
       if (local_24 != (uint *)0x0) {
         if (_NewSize <= DAT_004ba1e4) {
           iVar2 = ___sbh_resize_block(local_24,(int)_Memory,_NewSize);
@@ -131005,7 +131100,7 @@ void * __cdecl Runtime::MSVCRT::_realloc(void *_Memory,size_t _NewSize)
                 puVar3 = (uint *)_NewSize;
               }
               _memcpy(local_20,_Memory,(size_t)puVar3);
-              local_24 = (uint *)_Globals::thunk_FUN_00449c90(this,(int)_Memory);
+              local_24 = _Globals::___sbh_find_block(this,_Memory);
               ___sbh_free_block(local_24,(int)_Memory);
             }
           }
@@ -131029,7 +131124,7 @@ void * __cdecl Runtime::MSVCRT::_realloc(void *_Memory,size_t _NewSize)
           }
         }
       }
-      _Globals::FUN_004476c1();
+      _Globals::__unlock_4_realloc_epilog();
       if (local_24 == (uint *)0x0) {
         if ((uint *)_NewSize == (uint *)0x0) {
           _NewSize = 1;
@@ -131089,11 +131184,11 @@ LAB_00447762:
 
 
 
-void _Globals::FUN_004476c1(void)
+void __cdecl _Globals::__unlock_4_realloc_epilog(void)
 
 {
-                    // UNCERTAIN: MSVCRT _unlock(4) SEH epilog stub; paired __lock(4) in
-                    // Runtime::MSVCRT::_realloc.
+                    // MSVCRT _realloc SBH-path SEH epilog: __unlock(4) @ 0x00449b1b. Paired
+                    // __lock(4) @ _realloc+0x2c (0x004475cc). Sole caller: _realloc @ 0x0044768e.
   __unlock(4);
   return;
 }
@@ -131714,21 +131809,24 @@ _onexit_t __cdecl Runtime::MSVCRT::__onexit(_onexit_t _Func)
 {
   _onexit_t p_Var1;
   
-  _Globals::FUN_0044c1d9();
+  _Globals::__lock_8_onexit_prolog();
   p_Var1 = (_onexit_t)__onexit_nolock(_Func);
-  _Globals::FUN_00447e6c();
+  _Globals::__onexit_unlock8_epilog();
   return p_Var1;
 }
 
 
 
-void _Globals::FUN_00447e6c(void)
+// __onexit epilog → __unlock(8) via FUN_0044c1e2; sole caller __onexit@0x00447e5e
+
+void _Globals::__onexit_unlock8_epilog(void)
 
 {
-                    // UNCERTAIN: __onexit epilog; calls FUN_0044c1e2 → FUN_00449b1b(8). Paired
-                    // __lock(8) in FUN_0044c1d9. Likely MSVCRT onexit-table unlock — not renamed
-                    // (wave3 CRT policy).
-  FUN_0044c1e2();
+                    // __onexit SEH epilog: calls FUN_0044c1e2 → __unlock(8) @ 0x00449b1b. Paired
+                    // FUN_0044c1d9 → __lock(8) @ 0x00447e42 in
+                    // Runtime::MSVCRT::__onexit@0x00447e36. CRT micro-thunk — not renamed (R9
+                    // task 011 / R8 task 26 policy).
+  __unlock_8_onexit_stub();
   return;
 }
 
@@ -132386,20 +132484,24 @@ void _eh_vector_constructor_iterator_
   for (local_20 = 0; local_20 < param_3; local_20 = local_20 + 1) {
     (*param_4)(in_stack_ffffffcc);
   }
-  _Globals::FUN_004486a4();
+  _Globals::eh_vector_constructor_iterator_unwind_epilog();
   return;
 }
 
 
 
-void _Globals::FUN_004486a4(void)
+// R9 task 14: MSVC SEH epilog split from `eh_vector_constructor_iterator`@0x448657. Sole caller
+// CALL@0x448697. If [EBP-0x20]==0 (loop incomplete), __ArrayUnwind(base,stride,count,dtor) from
+// frame slots; else RET. Not a separate CRT export.
+
+void _Globals::eh_vector_constructor_iterator_unwind_epilog(void)
 
 {
   int unaff_EBP;
   
-                    // UNCERTAIN: MSVC SEH epilogue inside CBulanci::_qsort — calls __ArrayUnwind
-                    // when EBP-0x20==0. Compiler-generated unwind helper, not a hand-written
-                    // export.
+                    // R9 verified: SEH epilog of eh_vector_constructor_iterator (not _qsort). Calls
+                    // __ArrayUnwind when [EBP-0x20]==0 using
+                    // [EBP+8],[EBP+0xc],[EBP-0x1c],[EBP+0x18].
   if (*(int *)(unaff_EBP + -0x20) == 0) {
     Runtime::MSVCRT::__ArrayUnwind
               (*(void **)(unaff_EBP + 8),*(uint *)(unaff_EBP + 0xc),*(int *)(unaff_EBP + -0x1c),
@@ -132452,19 +132554,21 @@ void _eh_vector_destructor_iterator_
     if (param_3 < 0) break;
     (*param_4)(in_stack_ffffffd0);
   }
-  _Globals::FUN_00448765();
+  _Globals::eh_vector_destructor_iterator_unwind_epilog();
   return;
 }
 
 
 
-void _Globals::FUN_00448765(void)
+void _Globals::eh_vector_destructor_iterator_unwind_epilog(void)
 
 {
   int unaff_EBP;
   
-                    // UNCERTAIN: MSVC SEH epilogue inside CBulanci::_qsort (second try block) —
-                    // __ArrayUnwind when EBP-0x1c==0. Compiler-generated unwind helper.
+                    // eh_vector_destructor_iterator SEH epilog: if [EBP-0x1c]==0 call
+                    // __ArrayUnwind@0x4486bc(base,elemSize,count,dtor from [EBP+8..+14]); sole
+                    // caller CALL@0x448758 in `eh_vector_destructor_iterator`@0x44871a (Ghidra
+                    // VS2005 lib match). Tail fragment at parent+0x4b; not game logic.
   if (*(int *)(unaff_EBP + -0x1c) == 0) {
     Runtime::MSVCRT::__ArrayUnwind
               (*(void **)(unaff_EBP + 8),*(uint *)(unaff_EBP + 0xc),*(int *)(unaff_EBP + 0x10),
@@ -132751,14 +132855,15 @@ void CDSException::__purecall(void)
 
 
 
-// UNCERTAIN: shared empty stub in std::bad_alloc vftable slots 3-4; also _Globals namespace
+// CRT null thread attach/detach callback (PTR_FUN_004895cc/d0)
 
-void __cdecl _Globals::FUN_00448a97(void)
+void __cdecl _Globals::__crt_default_thread_hook_nop(void)
 
 {
-                    // UNCERTAIN: Empty RET. __init_pointers, std::bad_alloc vtable [3][4],
-                    // PTR_FUN_004895cc/d0 — CRT null-callback / placeholder; not a real bad_alloc
-                    // dtor.
+                    // MSVC CRT default empty thread hook: single RET. Stored at PTR_FUN_004895cc
+                    // (thread start) and PTR_FUN_004895d0 (thread end); invoked from
+                    // _threadstartex/__endthreadex when __IsNonwritableInCurrentImage; also called
+                    // once from __init_pointers. Not a std::bad_alloc vfunc.
   return;
 }
 
@@ -133476,18 +133581,19 @@ int * __cdecl Runtime::MSVCRT::_V6_HeapAlloc(uint *param_1)
   if (param_1 <= DAT_004ba1e4) {
     __lock(4);
     local_20 = ___sbh_alloc_block(param_1);
-    _Globals::FUN_00449386();
+    _Globals::__unlock_4_V6_HeapAlloc_epilog();
   }
   return local_20;
 }
 
 
 
-void _Globals::FUN_00449386(void)
+void __cdecl _Globals::__unlock_4_V6_HeapAlloc_epilog(void)
 
 {
-                    // UNCERTAIN: MSVCRT _unlock(4) SEH epilog stub; paired __lock(4) in
-                    // Runtime::MSVCRT::_V6_HeapAlloc.
+                    // MSVCRT _V6_HeapAlloc SBH-path SEH epilog: __unlock(4). Pairs __lock(4) @
+                    // 0x0044935d → __lock@0x00449bf3 in Runtime::MSVCRT::_V6_HeapAlloc. Single
+                    // caller CALL @ 0x00449378.
   __unlock(4);
   return;
 }
@@ -133568,7 +133674,7 @@ size_t __cdecl Runtime::MSVCRT::__msize(void *_Memory)
 {
   int *piVar1;
   size_t sVar2;
-  int iVar3;
+  uint *puVar3;
   void *this;
   size_t local_20;
   
@@ -133582,12 +133688,12 @@ size_t __cdecl Runtime::MSVCRT::__msize(void *_Memory)
     if (DAT_004ba1f4 == 3) {
       this = (void *)0x4;
       __lock(4);
-      iVar3 = _Globals::thunk_FUN_00449c90(this,(int)_Memory);
-      if (iVar3 != 0) {
+      puVar3 = _Globals::___sbh_find_block(this,_Memory);
+      if (puVar3 != (uint *)0x0) {
         local_20 = *(int *)((int)_Memory + -4) - 9;
       }
-      _Globals::FUN_004494ec();
-      if (iVar3 != 0) {
+      _Globals::__unlock_4_msize_epilog();
+      if (puVar3 != (uint *)0x0) {
         return local_20;
       }
     }
@@ -133598,11 +133704,14 @@ size_t __cdecl Runtime::MSVCRT::__msize(void *_Memory)
 
 
 
-void _Globals::FUN_004494ec(void)
+void _Globals::__unlock_4_msize_epilog(void)
 
 {
-                    // UNCERTAIN: MSVCRT _unlock(4) SEH epilog stub; paired __lock(4) in
-                    // Runtime::MSVCRT::__msize.
+                    // MSVCRT heap-lock #4 SEH epilog stub: __unlock(4) via __unlock@0x449b1b.
+                    // Paired __lock(4) @ 0x449496 in Runtime::MSVCRT::__msize@0x449452. Single
+                    // caller: CALL @ 0x4494c2. Identical 9 B pattern to FUN_00449386@0x449386
+                    // (_V6_HeapAlloc epilog) — defer __unlock_4 rename until both stubs
+                    // coordinated.
   __unlock(4);
   return;
 }
@@ -133717,9 +133826,9 @@ void __cdecl Runtime::MSVCRT::__endthreadex(uint _Retval)
   BOOL BVar1;
   _ptiddata _Ptd;
   
-  BVar1 = __IsNonwritableInCurrentImage((PBYTE)&PTR_FUN_004895d0);
+  BVar1 = __IsNonwritableInCurrentImage((PBYTE)&PTR___crt_default_thread_hook_nop_004895d0);
   if (BVar1 != 0) {
-    _Globals::FUN_00448a97();
+    _Globals::__crt_default_thread_hook_nop();
   }
   _Ptd = __getptd_noexit();
   if (_Ptd != (_ptiddata)0x0) {
@@ -133757,19 +133866,20 @@ void _threadstartex(DWORD *param_1)
 
 {
   code *pcVar1;
-  undefined4 uVar2;
+  uint dwFlsIndex;
+  void *pvVar2;
   int iVar3;
   DWORD DVar4;
   BOOL BVar5;
   DWORD *pDVar6;
   
   Runtime::MSVCRT::___set_flsgetvalue();
-  uVar2 = _Globals::FUN_0044ab59();
-  iVar3 = _Globals::FUN_0044ab44(uVar2);
-  if (iVar3 == 0) {
+  dwFlsIndex = _Globals::__get_flsindex();
+  pvVar2 = _Globals::__fls_getvalue(dwFlsIndex);
+  if (pvVar2 == (void *)0x0) {
     pDVar6 = param_1;
-    uVar2 = _Globals::FUN_0044ab59();
-    iVar3 = Runtime::MSVCRT::___fls_setvalue_8(uVar2,pDVar6);
+    iVar3 = _Globals::__get_flsindex();
+    iVar3 = Runtime::MSVCRT::___fls_setvalue_8(iVar3,pDVar6);
     if (iVar3 == 0) {
       DVar4 = GetLastError();
                     // WARNING: Subroutine does not return
@@ -133779,14 +133889,15 @@ void _threadstartex(DWORD *param_1)
     *param_1 = DVar4;
   }
   else {
-    *(DWORD *)(iVar3 + 0x54) = param_1[0x15];
-    *(DWORD *)(iVar3 + 0x58) = param_1[0x16];
-    *(DWORD *)(iVar3 + 4) = param_1[1];
+    *(DWORD *)((int)pvVar2 + 0x54) = param_1[0x15];
+    *(DWORD *)((int)pvVar2 + 0x58) = param_1[0x16];
+    *(DWORD *)((int)pvVar2 + 4) = param_1[1];
     Runtime::MSVCRT::__freefls_4(param_1);
   }
-  BVar5 = Runtime::MSVCRT::__IsNonwritableInCurrentImage((PBYTE)&PTR_FUN_004895cc);
+  BVar5 = Runtime::MSVCRT::__IsNonwritableInCurrentImage
+                    ((PBYTE)&PTR___crt_default_thread_hook_nop_004895cc);
   if (BVar5 != 0) {
-    _Globals::FUN_00448a97();
+    _Globals::__crt_default_thread_hook_nop();
   }
   Runtime::MSVCRT::__callthreadstartex();
   pcVar1 = (code *)swi(3);
@@ -134229,10 +134340,7 @@ void __cdecl _Globals::__unlock(int lockIndex)
 
 // WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4
 // WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3
-// Library Function - Single Match
-//  __mtinitlocknum
-// 
-// Library: Visual Studio 2005 Release
+// Uses __unlock_10_mtinit_epilog @ 0x00449bea after __lock(10) critical-section init path
 
 int __cdecl Runtime::MSVCRT::__mtinitlocknum(int _LockNum)
 
@@ -134270,7 +134378,7 @@ int __cdecl Runtime::MSVCRT::__mtinitlocknum(int _LockNum)
         else {
           _free(_Memory);
         }
-        _Globals::FUN_00449bea();
+        _Globals::__unlock_10_mtinit_epilog();
         iVar2 = local_20;
       }
     }
@@ -134284,11 +134392,12 @@ int __cdecl Runtime::MSVCRT::__mtinitlocknum(int _LockNum)
 
 
 
-void _Globals::FUN_00449bea(void)
+void _Globals::__unlock_10_mtinit_epilog(void)
 
 {
-                    // UNCERTAIN: MSVCRT _unlock(10) SEH epilog stub; paired __lock(10) in
-                    // Runtime::MSVCRT::__mtinitlocknum.
+                    // MSVCRT __mtinitlocknum SEH epilog: __unlock(10). Pairs __lock(10) @
+                    // 0x00449b95. Byte-identical to __unlock_10 @ 0x00454ace (___lock_fhandle
+                    // epilog); separate VA — duplicate CRT thunk.
   __unlock(10);
   return;
 }
@@ -134339,27 +134448,34 @@ undefined4 __cdecl Runtime::MSVCRT::___sbh_heap_init(undefined4 param_1)
 
 
 
-void __thiscall _Globals::thunk_FUN_00449c90(void *this,int param_1)
+uint * __thiscall _Globals::___sbh_find_block(void *this,void *block_ptr)
 
 {
-  FUN_00449c90((void *)(DAT_004ba1dc * 0x14 + DAT_004ba1e0),param_1);
-  return;
+  uint *puVar1;
+  
+  puVar1 = ___sbh_find_block((void *)(DAT_004ba1dc * 0x14 + DAT_004ba1e0),block_ptr);
+  return puVar1;
 }
 
 
 
-void __thiscall _Globals::FUN_00449c90(void *this,int param_1)
+uint * __thiscall _Globals::___sbh_find_block(void *this,void *block_ptr)
 
 {
-  void *in_EAX;
+  uint *in_EAX;
   
-                    // UNCERTAIN: MSVC small-block heap region walk (0x14-byte nodes, +0xc size vs
-                    // param_1, 0xfffff threshold). Thunked from _free/_realloc/__msize only. CRT
-                    // ___sbh_* symbol not verified.
-  for (; (in_EAX < this && (0xfffff < (uint)(param_1 - *(int *)((int)in_EAX + 0xc))));
-      in_EAX = (void *)((int)in_EAX + 0x14)) {
+  while( true ) {
+                    // MSVCRT ___sbh_find_block: walk 0x14-byte SBH region nodes from
+                    // EAX=DAT_004ba1e0 until ECX=end; return header in EAX when (block-[node+0xc])
+                    // < 0x100000 else 0. Tail-called from thunk_FUN_00449c90; used by
+                    // _free/_realloc/__msize before ___sbh_free_block.
+    if (this <= in_EAX) {
+      return (uint *)0x0;
+    }
+    if ((int)block_ptr - in_EAX[3] < 0x100000) break;
+    in_EAX = in_EAX + 5;
   }
-  return;
+  return in_EAX;
 }
 
 
@@ -135098,12 +135214,15 @@ undefined4 __cdecl Runtime::MSVCRT::__except_handler4(undefined4 param_1,int par
 
 
 
-void __cdecl _Globals::FUN_0044a916(undefined4 param_1)
+// __init_pointers encoded handler store → DAT_004b873c (__callnewh)
+
+void __cdecl _Globals::__initp_encoded_null_callnewh(undefined4 encoded_null)
 
 {
-                    // UNCERTAIN: __init_pointers thunk stores encoded-null into DAT_004b873c
-                    // (decoded by Runtime::MSVCRT::__callnewh).
-  DAT_004b873c = param_1;
+                    // __init_pointers thunk #1 (VS2005 MSVCRT): DAT_004b873c = encoded_null; sole
+                    // consumer Runtime::MSVCRT::__callnewh decodes via __decode_pointer. Caller
+                    // __init_pointers@0x0044c43f. No unique __initp_* export in PE — keep FUN_*.
+  DAT_004b873c = encoded_null;
   return;
 }
 
@@ -135132,12 +135251,16 @@ int __cdecl Runtime::MSVCRT::__callnewh(size_t _Size)
 
 
 
-void __cdecl _Globals::FUN_0044a942(undefined4 param_1)
+// __init_pointers encoded-null store -> DAT_004b8744 (__invalid_parameter handler slot)
+
+void __cdecl _Globals::__initp_encoded_null_invalid_parameter(undefined4 encoded_null)
 
 {
-                    // UNCERTAIN: __init_pointers thunk stores into DAT_004b8744 (decoded by
-                    // Runtime::MSVCRT::__invalid_parameter).
-  DAT_004b8744 = param_1;
+                    // __init_pointers split thunk (VS2005 MSVCRT): DAT_004b8744 = encoded_null.
+                    // Sole reader: Runtime::MSVCRT::__invalid_parameter @0x0044aa4b
+                    // (__decode_pointer then indirect call). No __initp_* export name in this PE
+                    // (sibling pattern to FUN_0045011e).
+  DAT_004b8744 = encoded_null;
   return;
 }
 
@@ -135171,7 +135294,7 @@ Runtime::MSVCRT::__invoke_watson
   SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)0x0);
   LVar2 = UnhandledExceptionFilter(&local_2dc);
   if ((LVar2 == 0) && (BVar1 == 0)) {
-    _Globals::FUN_0044fcdf();
+    _Globals::__clear_fatal_exit_flag_hook();
   }
   uExitCode = 0xc000000d;
   hProcess = GetCurrentProcess();
@@ -135200,7 +135323,7 @@ Runtime::MSVCRT::__invalid_parameter
     (*UNRECOVERED_JUMPTABLE)();
     return;
   }
-  _Globals::FUN_0044fcdf();
+  _Globals::__clear_fatal_exit_flag_hook();
                     // WARNING: Subroutine does not return
   __invoke_watson(param_1,param_2,param_3,param_4,param_5);
 }
@@ -135297,26 +135420,28 @@ LAB_0044ab27:
 
 
 
-void _Globals::FUN_0044ab44(undefined4 param_1)
+void * _Globals::__fls_getvalue(uint dwFlsIndex)
 
 {
   code *pcVar1;
+  void *pvVar2;
   
-                    // UNCERTAIN: TlsGetValue(DAT_004b115c) indirect call; thread start FUN_00449672
-                    // / __beginthreadex FLS path — exact CRT export not matched.
+                    // MSVC CRT: FLS_GETVALUE(dwFlsIndex) — TlsGetValue(DAT_004b115c) then
+                    // indirect call (FlsGetValue ptr). Sole xref: _threadstartex after
+                    // ___set_flsgetvalue + __get_flsindex. Pair: ___fls_setvalue@8.
   pcVar1 = TlsGetValue(DAT_004b115c);
-  (*pcVar1)(param_1);
-  return;
+  pvVar2 = (void *)(*pcVar1)(dwFlsIndex);
+  return pvVar2;
 }
 
 
 
-undefined4 _Globals::FUN_0044ab59(void)
+int _Globals::__get_flsindex(void)
 
 {
-                    // UNCERTAIN: Returns DAT_004b1158 (FLS slot index). Used by _threadstartex /
-                    // __getptd_noexit with TlsGetValue(DAT_004b115c). FLS/_ptd bootstrap — no
-                    // Ghidra library Single Match.
+                    // MSVC CRT internal (VS2005): returns FLS slot index DAT_004b1158 (__flsindex).
+                    // Sole caller _threadstartex@0x00449672 — pairs with FUN_0044ab44
+                    // (__fls_getvalue) and ___fls_setvalue_8.
   return DAT_004b1158;
 }
 
@@ -135419,17 +135544,17 @@ void __cdecl Runtime::MSVCRT::__initptd(_ptiddata _Ptd,pthreadlocinfo _Locale)
     _Ptd->ptlocinfo = (pthreadlocinfo)PTR_DAT_004b17a0;
   }
   ___addlocaleref(&_Ptd->ptlocinfo->refcount);
-  _Globals::FUN_0044ac8a();
+  _Globals::__unlock_12_initptd_epilog();
   return;
 }
 
 
 
-void _Globals::FUN_0044ac8a(void)
+void _Globals::__unlock_12_initptd_epilog(void)
 
 {
-                    // UNCERTAIN: MSVCRT _unlock(12) SEH epilog stub; paired __lock(0xc) in
-                    // Runtime::MSVCRT::__initptd.
+                    // __initptd SEH epilog: __unlock(12); paired __lock(12) @ 0x0044ac51 in
+                    // Runtime::MSVCRT::__initptd@0x0044abdf.
   __unlock(0xc);
   return;
 }
@@ -135544,7 +135669,7 @@ void Runtime::MSVCRT::__freefls_4(void *param_1)
         _free(pLVar1);
       }
     }
-    _Globals::FUN_0044ae3a();
+    _Globals::__unlock_13_freefls_epilog();
     __lock(0xc);
     pLVar1 = *(LONG **)((int)param_1 + 0x6c);
     if (pLVar1 != (LONG *)0x0) {
@@ -135554,7 +135679,7 @@ void Runtime::MSVCRT::__freefls_4(void *param_1)
         ___freetlocinfo(pLVar1);
       }
     }
-    _Globals::FUN_0044ae46();
+    _Globals::__unlock_12_freefls_epilog();
     _free(param_1);
   }
   return;
@@ -135562,22 +135687,22 @@ void Runtime::MSVCRT::__freefls_4(void *param_1)
 
 
 
-void _Globals::FUN_0044ae3a(void)
+void _Globals::__unlock_13_freefls_epilog(void)
 
 {
-                    // UNCERTAIN: MSVCRT _unlock(13) SEH epilog stub; paired __lock(0xd) in
-                    // Runtime::MSVCRT::__freefls@4.
+                    // __freefls@4 SEH epilog: __unlock(0xd); paired __lock(0xd) @ 0x0044adac in
+                    // Runtime::MSVCRT::__freefls@4@0x0044ad2e.
   __unlock(0xd);
   return;
 }
 
 
 
-void _Globals::FUN_0044ae46(void)
+void _Globals::__unlock_12_freefls_epilog(void)
 
 {
-                    // UNCERTAIN: MSVCRT _unlock(12) SEH epilog stub; paired __lock(0xc) in
-                    // Runtime::MSVCRT::__freefls@4 locale path.
+                    // __freefls@4 SEH epilog: __unlock(12); pairs Runtime::MSVCRT::__lock(0xc) in
+                    // locale/tlocinfo path.
   __unlock(0xc);
   return;
 }
@@ -135770,7 +135895,7 @@ Runtime::MSVCRT::___FrameUnwindToState(int param_1,undefined4 param_2,int param_
       __CallSettingFrame_12(*(undefined4 *)(*(int *)(param_3 + 8) + 4 + iVar2),param_1,0x103);
     }
   }
-  _Globals::FUN_0044b1cf();
+  _Globals::__FrameUnwindToState_processing_throw_epilog();
   if (iVar4 != param_4) {
     _inconsistency();
   }
@@ -135780,13 +135905,15 @@ Runtime::MSVCRT::___FrameUnwindToState(int param_1,undefined4 param_2,int param_
 
 
 
-void _Globals::FUN_0044b1cf(void)
+void _Globals::__FrameUnwindToState_processing_throw_epilog(void)
 
 {
   _ptiddata p_Var1;
   
-                    // UNCERTAIN: epilogue of Runtime::MSVCRT::___FrameUnwindToState — decrements
-                    // __getptd()->_ProcessingThrow if >0.
+                    // MSVC ___FrameUnwindToState epilog (VS2005 Release EH): sole caller CALL @
+                    // 0x0044b1b1. Decrements Runtime::MSVCRT::__getptd()->_ProcessingThrow (+0x90)
+                    // when >0; pairs with INC @ 0x0044b130 in ___FrameUnwindToState. No separate
+                    // CRT export name — not renamed.
   p_Var1 = Runtime::MSVCRT::__getptd();
   if (0 < p_Var1->_ProcessingThrow) {
     p_Var1 = Runtime::MSVCRT::__getptd();
@@ -135964,13 +136091,13 @@ CallCatchBlock(EHExceptionRecord *ExceptionRecord,EHRegistrationNode *Frame,void
   local_8 = (undefined *)0x1;
   local_20 = Runtime::MSVCRT::_CallCatchBlock2(Frame,FuncInfo);
   local_8 = (undefined *)0xfffffffe;
-  _Globals::FUN_0044b490();
+  _Globals::CallCatchBlock_epilog();
   return local_20;
 }
 
 
 
-void _Globals::FUN_0044b490(void)
+void _Globals::CallCatchBlock_epilog(void)
 
 {
   ULONG_PTR UVar1;
@@ -135980,9 +136107,12 @@ void _Globals::FUN_0044b490(void)
   EHExceptionRecord *unaff_ESI;
   int unaff_EDI;
   
-                    // UNCERTAIN: MSVC EH catch epilogue — __FindAndUnlinkFrame, restore
-                    // _curexception/_curcontext, __DestructExceptionObject for 0x19930520 family;
-                    // sole xref CallCatchBlock @ 0x0044b477.
+                    // MSVC CallCatchBlock catch epilogue (VS2005 Release EH): sole caller CALL @
+                    // 0x0044b477. __FindAndUnlinkFrame([EBP-0x28]); restore
+                    // __getptd()->_curexception/_curcontext from [EBP-0x2c]/[EBP-0x30];
+                    // [EDI-4]=[EBP-0x24]; optional ___DestructExceptionObject when C++ EH magic
+                    // 0x19930520/21/22 and [EBP-0x34]==0 and [EBP-0x1c]!=0. No separate CRT export
+                    // — not renamed.
   *(undefined4 *)(unaff_EDI + -4) = *(undefined4 *)(unaff_EBP + -0x24);
   Runtime::MSVCRT::__FindAndUnlinkFrame(*(void **)(unaff_EBP + -0x28));
   p_Var2 = Runtime::MSVCRT::__getptd();
@@ -136596,11 +136726,11 @@ void __cdecl Runtime::MSVCRT::___report_gsfailure(void)
   _DAT_004b8874 = in_CS;
   _DAT_004b8880 = in_SS;
   DAT_004b87b0 = IsDebuggerPresent();
-  _Globals::FUN_0044fcdf();
+  _Globals::__clear_fatal_exit_flag_hook();
   SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)0x0);
   UnhandledExceptionFilter((_EXCEPTION_POINTERS *)&PTR_DAT_00489650);
   if (DAT_004b87b0 == 0) {
-    _Globals::FUN_0044fcdf();
+    _Globals::__clear_fatal_exit_flag_hook();
   }
   uExitCode = 0xc0000409;
   hProcess = GetCurrentProcess();
@@ -136960,23 +137090,26 @@ void __cdecl Runtime::MSVCRT::___crtExitProcess(int param_1)
 
 
 
-void _Globals::FUN_0044c1d9(void)
+// CRT __onexit lock thunk: __lock(8)
+
+void __cdecl _Globals::__lock_8_onexit_prolog(void)
 
 {
-                    // UNCERTAIN: Runtime::MSVCRT::__lock_8 stub — calls __lock(8); sole caller
-                    // Runtime::MSVCRT::__onexit @ 0x447e42; paired unlock FUN_0044c1e2 via
-                    // FUN_00447e6c (VS2005 CRT lock index 8).
+                    // MSVC CRT __onexit prolog: __lock(8) on DAT_004b1038 lock table. Sole caller
+                    // Runtime::MSVCRT::__onexit@0x447e42; paired unlock FUN_0044c1e2 via
+                    // FUN_00447e6c epilog. Lock index 8 from PUSH 0x8 in disasm.
   Runtime::MSVCRT::__lock(8);
   return;
 }
 
 
 
-void _Globals::FUN_0044c1e2(void)
+void _Globals::__unlock_8_onexit_stub(void)
 
 {
-                    // UNCERTAIN: Runtime::MSVCRT::__unlock_8 stub — calls FUN_00449b1b(8); caller
-                    // FUN_00447e6c epilog after __onexit; paired __lock(8) in __onexit @ 0x447e42.
+                    // MSVC CRT __onexit epilog thunk: __unlock(8) @ 0x00449b1b. Single caller
+                    // FUN_00447e6c (called from Runtime::MSVCRT::__onexit @ 0x00447e5e). Paired
+                    // __lock(8) via FUN_0044c1d9 @ __onexit+0x0c (0x00447e42).
   __unlock(8);
   return;
 }
@@ -137139,7 +137272,7 @@ void __cdecl _Globals::doexit(int param_1,int param_2,int param_3)
     }
     Runtime::MSVCRT::__initterm((undefined4 *)&DAT_0047f660);
   }
-  FUN_0044c3e1();
+  __unlock_8_doexit_epilog();
   if (param_3 == 0) {
     DAT_004b8acc = 1;
     __unlock(8);
@@ -137151,13 +137284,13 @@ void __cdecl _Globals::doexit(int param_1,int param_2,int param_3)
 
 
 
-void _Globals::FUN_0044c3e1(void)
+void _Globals::__unlock_8_doexit_epilog(void)
 
 {
   int unaff_EBP;
   
-                    // UNCERTAIN: doexit SEH epilog fragment — if EBP+0x10 calls FUN_00449b1b(8)
-                    // (MSVCRT __unlock index 8).
+                    // doexit SEH epilog: if [EBP+0x10]!=0 call __unlock(8). Single caller
+                    // doexit@0x0044c3bd. MSVC _doexit (VS2005 CRT).
   if (*(int *)(unaff_EBP + 0x10) != 0) {
     __unlock(8);
   }
@@ -137216,16 +137349,16 @@ void __cdecl Runtime::MSVCRT::__cexit(void)
 void __cdecl Runtime::MSVCRT::__init_pointers(void)
 
 {
-  undefined4 uVar1;
+  undefined4 encoded_null;
   
-  uVar1 = __encoded_null();
-  _Globals::FUN_0044a916(uVar1);
-  _Globals::FUN_0044faab(uVar1);
-  _Globals::FUN_0044a942(uVar1);
-  _Globals::FUN_0044d594(uVar1);
-  _Globals::FUN_0045011e(uVar1);
-  __initp_misc_winsig(uVar1);
-  _Globals::FUN_00448a97();
+  encoded_null = __encoded_null();
+  _Globals::__initp_encoded_null_callnewh(encoded_null);
+  _Globals::__initp_encoded_null_critsec_spin(encoded_null);
+  _Globals::__initp_encoded_null_invalid_parameter(encoded_null);
+  _Globals::__initp_encoded_null_purecall(encoded_null);
+  _Globals::__initp_encoded_null_slot5(encoded_null);
+  __initp_misc_winsig(encoded_null);
+  _Globals::__crt_default_thread_hook_nop();
   __initp_eh_hooks();
   PTR___exit_004b1194 = (undefined *)__encode_pointer(0x44c407);
   return;
@@ -137233,7 +137366,8 @@ void __cdecl Runtime::MSVCRT::__init_pointers(void)
 
 
 
-void __cdecl _Globals::FUN_0044c482(undefined4 *param_1,undefined4 *param_2,uint param_3)
+void __cdecl
+_Globals::__VEC_memcpy_movdqa_tail(undefined4 *param_1,undefined4 *param_2,uint param_3)
 
 {
   undefined4 uVar1;
@@ -137253,9 +137387,9 @@ void __cdecl _Globals::FUN_0044c482(undefined4 *param_1,undefined4 *param_2,uint
   undefined4 uVar15;
   uint uVar16;
   
-                    // UNCERTAIN: 128-byte unrolled copy loop (32 dwords/iter, count>>7); sole
-                    // callee from MSVCRT::__VEC_memcpy @ 0x44c509 — MSVC vector memcpy tail,
-                    // export name unverified.
+                    // R9w31: __VEC_memcpy@0x44c509 aligned 16 B path — sole CALL@0x44c556; MOVDQA
+                    // 128 B/iter (param_3>>7); tail bytes handled in parent. MSVC internal symbol
+                    // unverified — keep FUN_*.
   uVar16 = param_3 >> 7;
   do {
     uVar1 = param_2[1];
@@ -137355,7 +137489,7 @@ Runtime::MSVCRT::__VEC_memcpy(undefined4 *param_1,undefined4 *param_2,uint param
   if (iVar1 == 0 && uVar6 == uVar3) {
     uVar3 = param_3 & 0x7f;
     if (param_3 != uVar3) {
-      _Globals::FUN_0044c482(param_1,param_2,param_3 - uVar3);
+      _Globals::__VEC_memcpy_movdqa_tail(param_1,param_2,param_3 - uVar3);
     }
     if (uVar3 != 0) {
       puVar4 = (undefined1 *)((int)param_2 + (param_3 - uVar3));
@@ -137594,7 +137728,7 @@ pthreadmbcinfo __cdecl Runtime::MSVCRT::___updatetmbcinfo(void)
       lpAddend = (pthreadmbcinfo)PTR_DAT_004b15c0;
       InterlockedIncrement((LONG *)PTR_DAT_004b15c0);
     }
-    _Globals::FUN_0044c895();
+    _Globals::__unlock_13_updatetmbcinfo_epilog();
   }
   else {
     lpAddend = p_Var1->ptmbcinfo;
@@ -137607,11 +137741,11 @@ pthreadmbcinfo __cdecl Runtime::MSVCRT::___updatetmbcinfo(void)
 
 
 
-void _Globals::FUN_0044c895(void)
+void _Globals::__unlock_13_updatetmbcinfo_epilog(void)
 
 {
-                    // UNCERTAIN: Runtime::MSVCRT::__unlock_13 stub — calls FUN_00449b1b(0xd);
-                    // caller ___updatetmbcinfo @ 0x44c88b after __lock(0xd) on mbcsinfo.
+                    // ___updatetmbcinfo SEH epilog: __unlock(0xd); paired __lock(0xd) @ 0x0044c836
+                    // in Runtime::MSVCRT::___updatetmbcinfo@0x0044c7fa.
   __unlock(0xd);
   return;
 }
@@ -137850,7 +137984,7 @@ int __cdecl Runtime::MSVCRT::__setmbcp(int _CodePage)
           }
           PTR_DAT_004b15c0 = (undefined *)ptVar3;
           InterlockedIncrement(&ptVar3->refcount);
-          _Globals::FUN_0044cc24();
+          _Globals::__unlock_13_setmbcp_epilog();
         }
       }
       else if (local_24 == -1) {
@@ -137867,11 +138001,12 @@ int __cdecl Runtime::MSVCRT::__setmbcp(int _CodePage)
 
 
 
-void _Globals::FUN_0044cc24(void)
+void _Globals::__unlock_13_setmbcp_epilog(void)
 
 {
-                    // UNCERTAIN: Runtime::MSVCRT::__unlock_13 stub — calls FUN_00449b1b(0xd);
-                    // caller __setmbcp @ 0x44cc1d after __lock(0xd) global mbcs table copy.
+                    // __setmbcp SEH epilog: __unlock(0xd) after __lock(0xd) mbcs copy. Sole caller
+                    // __setmbcp@0x0044cc1d. Duplicate bytes of FUN_0044c895 (___updatetmbcinfo
+                    // epilog).
   __unlock(0xd);
   return;
 }
@@ -138088,7 +138223,7 @@ pthreadlocinfo __cdecl _LocaleUpdate::___updatetlocinfo(void)
   if (((p_Var1->_ownlocale & DAT_004b16bc) == 0) || (p_Var1->ptlocinfo == (pthreadlocinfo)0x0)) {
     Runtime::MSVCRT::__lock(0xc);
     __updatetlocinfoEx_nolock();
-    FUN_0044cf75();
+    __unlock_12_updatetlocinfo_epilog();
   }
   else {
     p_Var1 = Runtime::MSVCRT::__getptd();
@@ -138102,10 +138237,12 @@ pthreadlocinfo __cdecl _LocaleUpdate::___updatetlocinfo(void)
 
 
 
-void _LocaleUpdate::FUN_0044cf75(void)
+void _LocaleUpdate::__unlock_12_updatetlocinfo_epilog(void)
 
 {
-                    // UNCERTAIN: CRT _LocaleUpdate helper calling FUN_00449b1b.
+                    // ___updatetlocinfo SEH epilog: __unlock(12); MOV ESI,[EBP-0x1c] reloads
+                    // __updatetlocinfoEx_nolock result. Pairs __lock(0xc) @ 0x0044cf4a in same
+                    // parent.
   _Globals::__unlock(0xc);
   return;
 }
@@ -138528,12 +138665,16 @@ void __cdecl Runtime::MSVCRT::__FF_MSGBANNER(void)
 
 
 
-void __cdecl _Globals::FUN_0044d594(undefined4 param_1)
+// __init_pointers thunk: encoded-null store -> DAT_004b8e34 (__purecall handler slot)
+
+void __cdecl _Globals::__initp_encoded_null_purecall(undefined4 encoded_null)
 
 {
-                    // UNCERTAIN: __init_pointers thunk stores into DAT_004b8e34 (decoded by
-                    // CDSException::__purecall).
-  DAT_004b8e34 = param_1;
+                    // __init_pointers slot 4: DAT_004b8e34 = encoded_null. Sole consumer:
+                    // __purecall@0x00448a6d (PUSH [DAT_004b8e34]; __decode_pointer; call if
+                    // non-null). CDSException vftable[3]@0x0048752c and ODSImage slots reference
+                    // __purecall.
+  DAT_004b8e34 = encoded_null;
   return;
 }
 
@@ -140283,7 +140424,7 @@ int __cdecl Runtime::MSVCRT::__flsbuf(int _Ch,FILE *_File)
   char *pcVar1;
   FILE *_File_00;
   int *piVar2;
-  undefined **ppuVar3;
+  FILE *pFVar3;
   int iVar4;
   undefined *puVar5;
   int unaff_EDI;
@@ -140320,8 +140461,8 @@ LAB_0044ede4:
   _File_00->_cnt = 0;
   local_8 = 0;
   if (((uVar6 & 0x10c) == 0) &&
-     (((ppuVar3 = _Globals::FUN_00452fb7(), _File_00 != (FILE *)(ppuVar3 + 8) &&
-       (ppuVar3 = _Globals::FUN_00452fb7(), _File_00 != (FILE *)(ppuVar3 + 0x10))) ||
+     (((pFVar3 = _Globals::__iob_func(), _File_00 != pFVar3 + 1 &&
+       (pFVar3 = _Globals::__iob_func(), _File_00 != pFVar3 + 2)) ||
       (iVar4 = __isatty((int)_File), iVar4 == 0)))) {
     __getbuf(_File_00);
   }
@@ -141173,12 +141314,17 @@ LAB_0044fa50:
 
 
 
-void __cdecl _Globals::FUN_0044faab(undefined4 param_1)
+// CRT __init_pointers encoded pointer store -> DAT_004b8f80 (InitializeCriticalSectionAndSpinCount
+// slot)
+
+void __cdecl _Globals::__initp_encoded_null_critsec_spin(undefined4 encoded_null)
 
 {
-                    // UNCERTAIN: __init_pointers thunk stores into DAT_004b8f80
-                    // (InitializeCriticalSectionAndSpinCount pointer slot).
-  DAT_004b8f80 = param_1;
+                    // __init_pointers split thunk (slot 2): DAT_004b8f80 = encoded_null. Consumer:
+                    // ___crtInitCritSecAndSpinCount decodes via __decode_pointer and invokes
+                    // InitializeCriticalSectionAndSpinCount (GetProcAddress kernel32.dll or no-spin
+                    // fallback).
+  DAT_004b8f80 = encoded_null;
   return;
 }
 
@@ -141276,7 +141422,7 @@ void __cdecl Runtime::MSVCRT::__local_unwind4(uint *param_1,int param_2,uint par
     *(undefined4 *)(param_2 + 0xc) = *puVar1;
     if (puVar1[1] == 0) {
       __NLG_Notify(0x101);
-      _Globals::FUN_0044fe54();
+      _Globals::__NLG_unwind_dispatch_stub();
     }
   }
   ExceptionList = pvStack_28;
@@ -141361,12 +141507,14 @@ Runtime::MSVCRT::_EH4_LocalUnwind(int param_1,uint param_2,undefined4 param_3,ui
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-void _Globals::FUN_0044fcdf(void)
+void _Globals::__clear_fatal_exit_flag_hook(void)
 
 {
-                    // UNCERTAIN: Clears DAT_004ba0a4 before TerminateProcess in __invalid_parameter
-                    // / __invoke_watson / ___report_gsfailure when no debugger; sole writer of that
-                    // global.
+                    // R8: sole writer of DAT_004ba0a4 (AND dword,0). Called from MSVCRT fatal paths
+                    // before TerminateProcess when no debugger: __invalid_parameter@0x0044aa60,
+                    // __invoke_watson@0x0044aa1a (if UnhandledExceptionFilter==0 &&
+                    // !IsDebuggerPresent), ___report_gsfailure@0x0044be72 and @0x0044be96 (pre/post
+                    // UnhandledExceptionFilter). Global has no static readers.
   _DAT_004ba0a4 = 0;
   return;
 }
@@ -141444,7 +141592,7 @@ void __cdecl Runtime::MSVCRT::__local_unwind2(int param_1,uint param_2)
     *(undefined4 *)(param_1 + 0xc) = local_18;
     if (*(int *)(*(int *)(param_1 + 8) + 4 + uVar1 * 0xc) == 0) {
       __NLG_Notify(0x101);
-      _Globals::FUN_0044fe54();
+      _Globals::__NLG_unwind_dispatch_stub();
     }
   }
   ExceptionList = local_20;
@@ -141493,14 +141641,18 @@ void Runtime::MSVCRT::__NLG_Notify(ulong param_1)
 
 
 
-void _Globals::FUN_0044fe54(void)
+// 3-byte MSVC NLG stub (CALL EAX; RET) — indirect unwind-handler dispatch after
+// __NLG_Notify(0x101)
+
+void _Globals::__NLG_unwind_dispatch_stub(void)
 
 {
   code *in_EAX;
   
-                    // UNCERTAIN: Indirect tail call (*in_EAX)(). __local_unwind4/__local_unwind2
-                    // invoke after __NLG_Notify(0x101) — SEH unwind dispatch stub; no library
-                    // Single Match.
+                    // MSVC CRT NLG unwind stub (3 B): CALL EAX; RET. EAX = scope-table dtor fn ptr
+                    // [entry+8] after __NLG_Notify(0x101) when entry[+4]==0. Callers
+                    // __local_unwind4@0x0044fc07, __local_unwind2@0x0044fdf0. Keep FUN_* — no CRT
+                    // Single Match export.
   (*in_EAX)();
   return;
 }
@@ -141510,12 +141662,14 @@ void _Globals::FUN_0044fe54(void)
 // WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4
 // WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3
 
-undefined4 _Globals::FUN_0044fe57(void)
+undefined4 _Globals::__get_sse2_info_probe(void)
 
 {
-                    // UNCERTAIN: SEH-wrapped SSE2 MOVAPD probe; sole caller
-                    // Runtime::MSVCRT::__get_sse2_info. MSVC CRT helper — exact export symbol not
-                    // COFF-mapped.
+                    // MSVC CRT SSE2 probe: __SEH_prolog4(0xc, scope@0x4ac9c0) then MOVAPD
+                    // XMM0,XMM1; epilog returns [EBP-0x1c] (1=ok). SEH filter: exception code
+                    // 0xC0000005 or 0xC000001D -> return 0. Sole caller
+                    // Runtime::MSVCRT::__get_sse2_info@0x0044fea7 (Ghidra lib match VS2005/08). No
+                    // COFF export name — keep FUN_*.
   return 1;
 }
 
@@ -141560,7 +141714,7 @@ undefined4 Runtime::MSVCRT::__get_sse2_info(void)
     iVar2 = cpuid_Version_info(1);
     local_8 = *(uint *)(iVar2 + 8);
   }
-  if (((local_8 & 0x4000000) == 0) || (iVar2 = _Globals::FUN_0044fe57(), iVar2 == 0)) {
+  if (((local_8 & 0x4000000) == 0) || (iVar2 = _Globals::__get_sse2_info_probe(), iVar2 == 0)) {
     uVar3 = 0;
   }
   else {
@@ -141729,7 +141883,7 @@ LAB_00450087:
   uVar5 = __encoded_null();
   *puVar6 = uVar5;
 LAB_004500c1:
-  _Globals::FUN_004500e2();
+  _Globals::__unlock_0_raise_epilog();
   if (_SigNum == 8) {
     (*pcVar3)(8,p_Var7->_tfpecode);
   }
@@ -141748,13 +141902,17 @@ LAB_004500c1:
 
 
 
-void _Globals::FUN_004500e2(void)
+// MSVCRT _raise SEH epilog — conditional __unlock(0) via [EBP-0x1c]; not game logic (R8-26
+// PARTIAL)
+
+void _Globals::__unlock_0_raise_epilog(void)
 
 {
   int unaff_EBP;
   
-                    // UNCERTAIN: _raise SEH epilog fragment — if EBP-0x1c calls FUN_00449b1b(0)
-                    // (MSVCRT __unlock index 0).
+                    // R8 task-26 PROVEN: MSVCRT _raise SEH epilog — if [EBP-0x1c]!=0 then
+                    // __unlock(0). [EBP-0x1c]=local_20 (set 1 @0x450023 decode path); paired
+                    // __lock(0) @0x450052 when local_20!=0. Sole xref _raise@0x4500c8.
   if (*(int *)(unaff_EBP + -0x1c) != 0) {
     __unlock(0);
   }
@@ -141764,13 +141922,17 @@ void _Globals::FUN_004500e2(void)
 
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
+// CRT __init_pointers encoded-null store → DAT_004b8f98; no decode consumer
 
-void __cdecl _Globals::FUN_0045011e(undefined4 param_1)
+void __cdecl _Globals::__initp_encoded_null_slot5(undefined4 encoded_null)
 
 {
-                    // UNCERTAIN: __init_pointers thunk stores encoded-null into _DAT_004b8f98; no
-                    // decode consumer found in export.
-  _DAT_004b8f98 = param_1;
+                    // MSVCRT __init_pointers split thunk: store __encoded_null() into DAT_004b8f98
+                    // (0x4b8f98). Sole caller __init_pointers@0x0044c457 between FUN_0044d594
+                    // (__purecall slot) and __initp_misc_winsig. Adjacent winsig handler slots @
+                    // 0x004b8f84-0x004b8f90. No __decode_pointer consumer for 0x004b8f98 in
+                    // bulanci.exe — orphan CRT pointer slot; keep FUN_*.
+  _DAT_004b8f98 = encoded_null;
   return;
 }
 
@@ -144567,7 +144729,7 @@ longlong __cdecl Runtime::MSVCRT::__lseeki64(int _FileHandle,longlong _Offset,in
         else {
           local_28 = __lseeki64_nolock(_FileHandle,_Offset,in_stack_ffffffc8);
         }
-        _Globals::FUN_00452869();
+        _Globals::__lseeki64_unlock_fhandle_epilog();
       }
       goto LAB_00452863;
     }
@@ -144585,13 +144747,17 @@ LAB_00452863:
 
 
 
-void _Globals::FUN_00452869(void)
+// MSVC SEH epilog: ___unlock_fhandle(*(ebp+8)) after __lseeki64_nolock; sole caller
+// __lseeki64@0x452858. No CRT export name (compiler split). Pair: FUN_00452f0b (__write).
+
+void _Globals::__lseeki64_unlock_fhandle_epilog(void)
 
 {
   int unaff_EBP;
   
-                    // UNCERTAIN: __stdcall epilogue thunk; FUN_00454ad7(*(ebp+8)) after
-                    // __lseeki64_nolock success path.
+                    // Epilog thunk: MSVCRT___unlock_fhandle(_FileHandle) where _FileHandle =
+                    // *(int*)(ebp+8) from parent __lseeki64 frame. Invoked on locked seek path
+                    // before SEH epilog @0x452863.
   MSVCRT___unlock_fhandle(*(uint *)(unaff_EBP + 8));
   return;
 }
@@ -144934,7 +145100,7 @@ int __cdecl Runtime::MSVCRT::__write(int _FileHandle,void *_Buf,uint _MaxCharCou
         else {
           local_20 = __write_nolock(_FileHandle,_Buf,_MaxCharCount);
         }
-        _Globals::FUN_00452f0b();
+        _Globals::__write_unlock_fhandle_epilog();
         return local_20;
       }
     }
@@ -144949,13 +145115,15 @@ int __cdecl Runtime::MSVCRT::__write(int _FileHandle,void *_Buf,uint _MaxCharCou
 
 
 
-void _Globals::FUN_00452f0b(void)
+// CRT: __write unlock epilogue thunk → MSVCRT___unlock_fhandle(*(ebp+8))
+
+void _Globals::__write_unlock_fhandle_epilog(void)
 
 {
   int unaff_EBP;
   
-                    // UNCERTAIN: __stdcall epilogue thunk; FUN_00454ad7(*(ebp+8)) after
-                    // __write_nolock success path.
+                    // MSVCRT __write locked-path epilog: MSVCRT___unlock_fhandle(*(EBP+8)). Sole
+                    // xref __write@0x00452efd after __write_nolock. CRT-only; not libjpeg/game.
   MSVCRT___unlock_fhandle(*(uint *)(unaff_EBP + 8));
   return;
 }
@@ -145018,13 +145186,16 @@ int __cdecl Runtime::MSVCRT::__isatty(int _FileHandle)
 
 
 
-undefined ** _Globals::FUN_00452fb7(void)
+// MSVCRT 2005 __iob_func — returns &_iob (PTR_DAT_004b1d60). Sole callers __flsbuf/__flswbuf
+// (stdin/stdout skip __getbuf). R8 task 15.
+
+FILE * __cdecl _Globals::__iob_func(void)
 
 {
-                    // UNCERTAIN: Returns &PTR_DAT_004b1d60. __flsbuf/__flswbuf compare FILE* to
-                    // (result+8) and (result+0x10) — stdin/stdout _iob entries; likely __iob_func
-                    // — not renamed.
-  return &PTR_DAT_004b1d60;
+                    // Returns &_iob[0]. __flsbuf/__flswbuf compare _File to (result+8) and
+                    // (result+0x10) as undefined** — byte offsets +0x20/+0x40 = &_iob[1] stdout,
+                    // &_iob[2] stderr (FILE=0x20).
+  return (FILE *)&PTR_DAT_004b1d60;
 }
 
 
@@ -146897,7 +147068,7 @@ int __cdecl Runtime::MSVCRT::___lock_fhandle(int _Filehandle)
       local_20 = (uint)(iVar1 != 0);
       *(int *)(iVar2 + 8) = *(int *)(iVar2 + 8) + 1;
     }
-    _Globals::FUN_00454ace();
+    _Globals::__unlock_10();
   }
   if (local_20 != 0) {
     EnterCriticalSection
@@ -146909,12 +147080,13 @@ int __cdecl Runtime::MSVCRT::___lock_fhandle(int _Filehandle)
 
 
 
-void _Globals::FUN_00454ace(void)
+void _Globals::__unlock_10(void)
 
 {
-                    // UNCERTAIN: Runtime::MSVCRT::__unlock_10 stub — calls FUN_00449b1b(10);
-                    // caller ___lock_fhandle @ 0x454a99 after __lock(10) during per-handle critsec
-                    // init.
+                    // MSVCRT __unlock_10 stub: __unlock(10) via __unlock@0x449b1b. Paired
+                    // __lock(10) in ___lock_fhandle@0x454a68 during lazy per-fhandle
+                    // CriticalSection init (lock index 10 = _FHLOCK). Single caller
+                    // ___lock_fhandle@0x454a99.
   __unlock(10);
   return;
 }
@@ -147008,7 +147180,7 @@ int __cdecl Runtime::MSVCRT::__flswbuf(int _Ch,FILE *_File)
   char *pcVar2;
   uint _FileHandle;
   int *piVar3;
-  undefined **ppuVar4;
+  FILE *pFVar4;
   int iVar5;
   undefined *puVar6;
   int unaff_EDI;
@@ -147045,8 +147217,8 @@ LAB_00454e05:
   _MaxCharCount = 2;
   _File->_flag = uVar1 & 0xffffffef | 2;
   if (((uVar1 & 0x10c) == 0) &&
-     (((ppuVar4 = _Globals::FUN_00452fb7(), _File != (FILE *)(ppuVar4 + 8) &&
-       (ppuVar4 = _Globals::FUN_00452fb7(), _File != (FILE *)(ppuVar4 + 0x10))) ||
+     (((pFVar4 = _Globals::__iob_func(), _File != pFVar4 + 1 &&
+       (pFVar4 = _Globals::__iob_func(), _File != pFVar4 + 2)) ||
       (iVar5 = __isatty(_FileHandle), iVar5 == 0)))) {
     __getbuf(_File);
   }
@@ -150493,7 +150665,9 @@ void __cdecl _Globals::dctIV(int *param_1)
 
 
 
-void _Globals::FUN_0045b480(void)
+// libmad III_imdct_l imdct36 split (inlined); z=EDI, X=stack arg; callee dctIV only
+
+void __cdecl _Globals::imdct36_post_dctIV_scatter(int *X)
 
 {
   undefined4 *puVar1;
@@ -150506,9 +150680,10 @@ void _Globals::FUN_0045b480(void)
   undefined4 local_2c [9];
   int local_8 [2];
   
-                    // UNCERTAIN: libmad Layer III helper; called at entry of FUN_0045b530 before
-                    // fixed-point multiply by g_anMad window tables @ 0x0049c048 — likely IMDCT
-                    // window/state setup; upstream libmad symbol not confirmed
+                    // R9: MSVC-outlined libmad imdct36(X,z) prologue inside III_imdct_l — dctIV
+                    // then 18→36 scatter/negate; X=stack arg, z=EDI from III_imdct_l@0x45b538.
+                    // Matches libmad layer3.c imdct36() post-dctIV loops. Sole caller
+                    // III_imdct_l+8. No rename: imdct36@0x45b250 is core DCT path.
   dctIV(&local_48);
   puVar1 = (undefined4 *)(unaff_EDI + 8);
   iVar4 = 3;
@@ -150548,10 +150723,11 @@ void _Globals::FUN_0045b480(void)
 
 // libmad III_decode stereo alias reduction path
 
-void __thiscall _Globals::FUN_0045b530(void *this,int param_1)
+void __thiscall _Globals::III_imdct_l(void *this,uint block_type)
 
 {
   longlong lVar1;
+  int *in_EAX;
   uint *puVar2;
   uint uVar3;
   int *piVar4;
@@ -150559,9 +150735,9 @@ void __thiscall _Globals::FUN_0045b530(void *this,int param_1)
                     // UNCERTAIN: libmad layer3 III_decode helper (fixed-point multiply by
                     // DAT_0049c048); paired with misnamed jpeg_fdct_islow @ 0x45b7a0 for blocktype
                     // 2. Upstream symbol not confirmed — may be III_imdct_s windowing.
-  FUN_0045b480();
+  imdct36_post_dctIV_scatter(in_EAX);
   uVar3 = 0;
-  if (param_1 == 0) {
+  if (block_type == 0) {
     puVar2 = (uint *)((int)this + 8);
     do {
       lVar1 = (longlong)(int)puVar2[-2] * (longlong)*(int *)((int)&DAT_0049c048 + uVar3);
@@ -150579,7 +150755,7 @@ void __thiscall _Globals::FUN_0045b530(void *this,int param_1)
     } while (uVar3 < 0x90);
   }
   else {
-    if (param_1 == 1) {
+    if (block_type == 1) {
       puVar2 = (uint *)((int)this + 8);
       uVar3 = 0;
       do {
@@ -150609,7 +150785,7 @@ void __thiscall _Globals::FUN_0045b530(void *this,int param_1)
       *(undefined4 *)((int)this + 0x8c) = 0;
       return;
     }
-    if (param_1 == 3) {
+    if (block_type == 3) {
       *(undefined4 *)this = 0;
       *(undefined4 *)((int)this + 4) = 0;
       *(undefined4 *)((int)this + 8) = 0;
@@ -150953,7 +151129,7 @@ LAB_0045be08:
             }
             uVar10 = 0;
             do {
-              FUN_0045b530(local_1290,local_12c8);
+              III_imdct_l(local_1290,local_12c8);
               III_overlap((int)local_1290,uVar10,iVar3);
               uVar10 = uVar10 + 1;
             } while (uVar10 < 2);
@@ -150982,7 +151158,7 @@ LAB_0045be08:
           }
           else if (2 < local_12c8) {
             do {
-              FUN_0045b530(local_1290,(uint)pbVar13[1]);
+              III_imdct_l(local_1290,(uint)pbVar13[1]);
               III_overlap((int)local_1290,uVar8,iVar3);
               if ((uVar8 & 1) != 0) {
                 III_freqinver();
@@ -151971,17 +152147,17 @@ void __cdecl _Globals::jpeg_destroy(int param_1)
 
 
 
-void __cdecl _Globals::FUN_0045d1d0(int param_1)
+void * __cdecl _Globals::jpeg_alloc_quant_table(void *cinfo)
 
 {
-  int iVar1;
+  void *pvVar1;
   
-                    // UNCERTAIN: IJG jmemmgr.c alloc_small wrapper (size 0x82); sole callers
-                    // get_dqt @ 0x45db29 and jpeg quant-table builder FUN_0045efe0. Pair with
-                    // alloc_small @ 0x45d1f0 (size 0x112).
-  iVar1 = (*(code *)**(undefined4 **)(param_1 + 4))(param_1,0,0x82);
-  *(undefined1 *)(iVar1 + 0x80) = 0;
-  return;
+                    // IJG-6b jcomapi.c::jpeg_alloc_quant_table — alloc JQUANT_TBL (0x82 B) via
+                    // cinfo->mem->alloc_small(JPOOL_PERMANENT); init sent_table@+0x80=FALSE.
+                    // Callers: get_dqt, jpeg_add_quant_table.
+  pvVar1 = (void *)(*(code *)**(undefined4 **)((int)cinfo + 4))(cinfo,0,0x82);
+  *(undefined1 *)((int)pvVar1 + 0x80) = 0;
+  return pvVar1;
 }
 
 
@@ -152501,118 +152677,119 @@ undefined1 __cdecl _Globals::get_dqt(int *param_1)
   undefined4 *puVar2;
   int iVar3;
   int iVar4;
-  char cVar5;
-  int iVar6;
+  int iVar5;
+  char cVar6;
   int iVar7;
-  ushort uVar8;
-  uint uVar9;
-  byte *pbVar10;
+  void *pvVar8;
+  ushort uVar9;
+  uint uVar10;
   byte *pbVar11;
-  int iVar12;
+  byte *pbVar12;
+  int iVar13;
   int *piStack_c;
   
   puVar2 = (undefined4 *)param_1[6];
-  pbVar10 = (byte *)*puVar2;
-  iVar12 = puVar2[1];
-  if (iVar12 == 0) {
-    cVar5 = (*(code *)puVar2[3])(param_1);
-    if (cVar5 == '\0') {
+  pbVar11 = (byte *)*puVar2;
+  iVar13 = puVar2[1];
+  if (iVar13 == 0) {
+    cVar6 = (*(code *)puVar2[3])(param_1);
+    if (cVar6 == '\0') {
       return 0;
     }
-    pbVar10 = (byte *)*puVar2;
-    iVar12 = puVar2[1];
+    pbVar11 = (byte *)*puVar2;
+    iVar13 = puVar2[1];
   }
-  bVar1 = *pbVar10;
-  iVar12 = iVar12 + -1;
-  pbVar10 = pbVar10 + 1;
-  if (iVar12 == 0) {
-    cVar5 = (*(code *)puVar2[3])(param_1);
-    if (cVar5 == '\0') {
+  bVar1 = *pbVar11;
+  iVar13 = iVar13 + -1;
+  pbVar11 = pbVar11 + 1;
+  if (iVar13 == 0) {
+    cVar6 = (*(code *)puVar2[3])(param_1);
+    if (cVar6 == '\0') {
       return 0;
     }
-    pbVar10 = (byte *)*puVar2;
-    iVar12 = puVar2[1];
+    pbVar11 = (byte *)*puVar2;
+    iVar13 = puVar2[1];
   }
-  iVar12 = iVar12 + -1;
-  pbVar11 = pbVar10 + 1;
-  iVar7 = (uint)bVar1 * 0x100 + (uint)*pbVar10 + -2;
+  iVar13 = iVar13 + -1;
+  pbVar12 = pbVar11 + 1;
+  iVar3 = (uint)bVar1 * 0x100 + (uint)*pbVar11 + -2;
   do {
-    iVar4 = iVar7;
-    if (iVar4 < 1) {
-      if (iVar4 != 0) {
+    iVar5 = iVar3;
+    if (iVar5 < 1) {
+      if (iVar5 != 0) {
         *(undefined4 *)(*param_1 + 8) = 0xb;
         (**(code **)*param_1)(param_1);
       }
-      puVar2[1] = iVar12;
-      *puVar2 = pbVar11;
+      puVar2[1] = iVar13;
+      *puVar2 = pbVar12;
       return 1;
     }
-    if (iVar12 == 0) {
-      cVar5 = (*(code *)puVar2[3])(param_1);
-      if (cVar5 == '\0') {
+    if (iVar13 == 0) {
+      cVar6 = (*(code *)puVar2[3])(param_1);
+      if (cVar6 == '\0') {
         return 0;
       }
-      pbVar11 = (byte *)*puVar2;
-      iVar12 = puVar2[1];
+      pbVar12 = (byte *)*puVar2;
+      iVar13 = puVar2[1];
     }
-    iVar6 = (int)(uint)*pbVar11 >> 4;
-    uVar9 = *pbVar11 & 0xf;
-    iVar12 = iVar12 + -1;
-    pbVar11 = pbVar11 + 1;
-    if (3 < uVar9) {
+    iVar7 = (int)(uint)*pbVar12 >> 4;
+    uVar10 = *pbVar12 & 0xf;
+    iVar13 = iVar13 + -1;
+    pbVar12 = pbVar12 + 1;
+    if (3 < uVar10) {
       *(undefined4 *)(*param_1 + 8) = 0x1f;
-      *(uint *)(*param_1 + 0xc) = uVar9;
+      *(uint *)(*param_1 + 0xc) = uVar10;
       (**(code **)*param_1)(param_1);
     }
-    if (param_1[uVar9 + 0x24] == 0) {
-      iVar7 = FUN_0045d1d0((int)param_1);
-      param_1[uVar9 + 0x24] = iVar7;
+    if (param_1[uVar10 + 0x24] == 0) {
+      pvVar8 = jpeg_alloc_quant_table(param_1);
+      param_1[uVar10 + 0x24] = (int)pvVar8;
     }
-    iVar7 = param_1[uVar9 + 0x24];
+    iVar3 = param_1[uVar10 + 0x24];
     piStack_c = &DAT_0049db50;
     do {
-      if (iVar6 == 0) {
-        if (iVar12 == 0) {
-          cVar5 = (*(code *)puVar2[3])(param_1);
-          if (cVar5 == '\0') {
+      if (iVar7 == 0) {
+        if (iVar13 == 0) {
+          cVar6 = (*(code *)puVar2[3])(param_1);
+          if (cVar6 == '\0') {
             return 0;
           }
-          pbVar11 = (byte *)*puVar2;
-          iVar12 = puVar2[1];
+          pbVar12 = (byte *)*puVar2;
+          iVar13 = puVar2[1];
         }
-        uVar8 = (ushort)*pbVar11;
+        uVar9 = (ushort)*pbVar12;
       }
       else {
-        if (iVar12 == 0) {
-          cVar5 = (*(code *)puVar2[3])(param_1);
-          if (cVar5 == '\0') {
+        if (iVar13 == 0) {
+          cVar6 = (*(code *)puVar2[3])(param_1);
+          if (cVar6 == '\0') {
             return 0;
           }
-          pbVar11 = (byte *)*puVar2;
-          iVar12 = puVar2[1];
+          pbVar12 = (byte *)*puVar2;
+          iVar13 = puVar2[1];
         }
-        bVar1 = *pbVar11;
-        iVar12 = iVar12 + -1;
-        pbVar11 = pbVar11 + 1;
-        if (iVar12 == 0) {
-          cVar5 = (*(code *)puVar2[3])(param_1);
-          if (cVar5 == '\0') {
+        bVar1 = *pbVar12;
+        iVar13 = iVar13 + -1;
+        pbVar12 = pbVar12 + 1;
+        if (iVar13 == 0) {
+          cVar6 = (*(code *)puVar2[3])(param_1);
+          if (cVar6 == '\0') {
             return 0;
           }
-          pbVar11 = (byte *)*puVar2;
-          iVar12 = puVar2[1];
+          pbVar12 = (byte *)*puVar2;
+          iVar13 = puVar2[1];
         }
-        uVar8 = (ushort)bVar1 * 0x100 + (ushort)*pbVar11;
+        uVar9 = (ushort)bVar1 * 0x100 + (ushort)*pbVar12;
       }
-      iVar3 = *piStack_c;
+      iVar4 = *piStack_c;
       piStack_c = piStack_c + 1;
-      iVar12 = iVar12 + -1;
-      pbVar11 = pbVar11 + 1;
-      *(ushort *)(iVar7 + iVar3 * 2) = uVar8;
+      iVar13 = iVar13 + -1;
+      pbVar12 = pbVar12 + 1;
+      *(ushort *)(iVar3 + iVar4 * 2) = uVar9;
     } while ((int)piStack_c < 0x49dc50);
-    iVar7 = iVar4 + -0x41;
-    if (iVar6 != 0) {
-      iVar7 = iVar4 + -0x81;
+    iVar3 = iVar5 + -0x41;
+    if (iVar7 != 0) {
+      iVar3 = iVar5 + -0x81;
     }
   } while( true );
 }
@@ -152687,17 +152864,17 @@ undefined1 __cdecl _Globals::get_dri(int *param_1)
 
 
 
-// libjpeg: write marker bytes; caller save_marker@0x45dde0
+// IJG-6b jdmarker.c examine_app0 — JFIF APP0 parser (save_marker 0xE0 branch)
 
-void __thiscall _Globals::FUN_0045dd20(void *this,uint param_1)
+void __thiscall _Globals::examine_app0(void *this,uint datalen)
 
 {
   char *in_EAX;
   
-                    // UNCERTAIN: save_marker APP0 (0xe0) branch — parses "JFIF\0" density/version
-                    // into cinfo+0x100; sibling FUN_0045dda0 handles Adobe APP14 (0xee). No IJG
-                    // export name in jpeg_decoder.md.
-  if ((((0xd < param_1) && (*in_EAX == 'J')) && (in_EAX[1] == 'F')) &&
+                    // IJG-6b jdmarker.c::examine_app0 (JFIF APP0 core). Caller save_marker@0x45dde0
+                    // when unread_marker==0xE0. Payload ptr in EAX; sets cinfo+0x100..0x106
+                    // (saw_JFIF_marker, version, density). Stripped JFXX/TRACEMS vs stock 6b.
+  if ((((0xd < datalen) && (*in_EAX == 'J')) && (in_EAX[1] == 'F')) &&
      (((in_EAX[2] == 'I' && (in_EAX[3] == 'F')) && (in_EAX[4] == '\0')))) {
     *(undefined1 *)((int)this + 0x100) = 1;
     *(char *)((int)this + 0x101) = in_EAX[5];
@@ -152737,10 +152914,10 @@ undefined1 __cdecl _Globals::save_marker(int *param_1)
   undefined4 *puVar2;
   int *piVar3;
   char cVar4;
+  uint datalen;
   uint uVar5;
-  uint uVar6;
-  byte *pbVar7;
-  int iVar8;
+  byte *pbVar6;
+  int iVar7;
   int *local_20;
   uint uStack_1c;
   uint uStack_18;
@@ -152749,71 +152926,71 @@ undefined1 __cdecl _Globals::save_marker(int *param_1)
   
   local_4 = DAT_004b0e44 ^ (uint)&local_20;
   puVar2 = (undefined4 *)param_1[6];
-  pbVar7 = (byte *)*puVar2;
-  iVar8 = puVar2[1];
+  pbVar6 = (byte *)*puVar2;
+  iVar7 = puVar2[1];
   local_20 = param_1;
-  if (iVar8 == 0) {
+  if (iVar7 == 0) {
     cVar4 = (*(code *)puVar2[3])(param_1);
     if (cVar4 == '\0') {
       return 0;
     }
-    pbVar7 = (byte *)*puVar2;
-    iVar8 = puVar2[1];
+    pbVar6 = (byte *)*puVar2;
+    iVar7 = puVar2[1];
   }
-  bVar1 = *pbVar7;
-  iVar8 = iVar8 + -1;
-  pbVar7 = pbVar7 + 1;
-  if (iVar8 == 0) {
+  bVar1 = *pbVar6;
+  iVar7 = iVar7 + -1;
+  pbVar6 = pbVar6 + 1;
+  if (iVar7 == 0) {
     cVar4 = (*(code *)puVar2[3])(local_20);
     if (cVar4 == '\0') {
       return 0;
     }
-    pbVar7 = (byte *)*puVar2;
-    iVar8 = puVar2[1];
+    pbVar6 = (byte *)*puVar2;
+    iVar7 = puVar2[1];
   }
-  uStack_1c = ((uint)bVar1 * 0x100 + (uint)*pbVar7) - 2;
-  iVar8 = iVar8 + -1;
-  pbVar7 = pbVar7 + 1;
+  uStack_1c = ((uint)bVar1 * 0x100 + (uint)*pbVar6) - 2;
+  iVar7 = iVar7 + -1;
+  pbVar6 = pbVar6 + 1;
   if ((int)uStack_1c < 0xe) {
     uStack_18 = ((int)uStack_1c < 1) - 1 & uStack_1c;
   }
   else {
     uStack_18 = 0xe;
   }
-  uVar6 = 0;
-  uVar5 = uStack_18;
+  uVar5 = 0;
+  datalen = uStack_18;
   if (uStack_18 != 0) {
     do {
-      if (iVar8 == 0) {
+      if (iVar7 == 0) {
         cVar4 = (*(code *)puVar2[3])(local_20);
         if (cVar4 == '\0') {
           return 0;
         }
-        pbVar7 = (byte *)*puVar2;
-        iVar8 = puVar2[1];
-        uVar5 = uStack_18;
+        pbVar6 = (byte *)*puVar2;
+        iVar7 = puVar2[1];
+        datalen = uStack_18;
       }
-      abStack_14[uVar6] = *pbVar7;
-      uVar6 = uVar6 + 1;
-      iVar8 = iVar8 + -1;
-      pbVar7 = pbVar7 + 1;
-    } while (uVar6 < uVar5);
+      abStack_14[uVar5] = *pbVar6;
+      uVar5 = uVar5 + 1;
+      iVar7 = iVar7 + -1;
+      pbVar6 = pbVar6 + 1;
+    } while (uVar5 < datalen);
   }
   piVar3 = local_20;
-  uStack_1c = uStack_1c - uVar5;
+  uStack_1c = uStack_1c - datalen;
   if (local_20[0x5f] == 0xe0) {
-    FUN_0045dd20(local_20,uVar5);
+    examine_app0(local_20,datalen);
   }
   else if (local_20[0x5f] == 0xee) {
-    process_APP14(local_20,uVar5);
+    process_APP14(local_20,datalen);
   }
   else {
     *(undefined4 *)(*local_20 + 8) = 0x44;
     *(int *)(*local_20 + 0xc) = local_20[0x5f];
     (**(code **)*local_20)(local_20);
   }
-  *puVar2 = pbVar7;
-  puVar2[1] = iVar8;
+  *puVar2 = pbVar6;
+  puVar2[1] = iVar7;
   if (0 < (int)uStack_1c) {
     (**(code **)(piVar3[6] + 0x10))(piVar3,uStack_1c);
   }
@@ -153797,9 +153974,10 @@ void __cdecl
 CDSJpegImage::jpeg_add_quant_table(int *param_1,int param_2,int param_3,int param_4,char param_5)
 
 {
-  int iVar1;
+  void *pvVar1;
   int iVar2;
-  int *piVar3;
+  int iVar3;
+  int *piVar4;
   
                     // UNCERTAIN: fills 128-byte quant table from sample rows scaled by param_4;
                     // callee of FUN_0045f1b0 (default lum/chrom tables); not in jpeg_decoder.md IJG
@@ -153815,13 +153993,13 @@ CDSJpegImage::jpeg_add_quant_table(int *param_1,int param_2,int param_3,int para
     (**(code **)*param_1)(param_1);
   }
   if (param_1[param_2 + 0x12] == 0) {
-    iVar1 = _Globals::FUN_0045d1d0((int)param_1);
-    param_1[param_2 + 0x12] = iVar1;
+    pvVar1 = _Globals::jpeg_alloc_quant_table(param_1);
+    param_1[param_2 + 0x12] = (int)pvVar1;
   }
-  iVar1 = 0;
-  piVar3 = (int *)(param_3 + 8);
+  iVar3 = 0;
+  piVar4 = (int *)(param_3 + 8);
   do {
-    iVar2 = (piVar3[-2] * param_4 + 0x32) / 100;
+    iVar2 = (piVar4[-2] * param_4 + 0x32) / 100;
     if (iVar2 < 1) {
       iVar2 = 1;
     }
@@ -153831,8 +154009,8 @@ CDSJpegImage::jpeg_add_quant_table(int *param_1,int param_2,int param_3,int para
     if ((param_5 != '\0') && (0xff < iVar2)) {
       iVar2 = 0xff;
     }
-    *(short *)(iVar1 + param_1[param_2 + 0x12]) = (short)iVar2;
-    iVar2 = (piVar3[-1] * param_4 + 0x32) / 100;
+    *(short *)(iVar3 + param_1[param_2 + 0x12]) = (short)iVar2;
+    iVar2 = (piVar4[-1] * param_4 + 0x32) / 100;
     if (iVar2 < 1) {
       iVar2 = 1;
     }
@@ -153842,8 +154020,8 @@ CDSJpegImage::jpeg_add_quant_table(int *param_1,int param_2,int param_3,int para
     if ((param_5 != '\0') && (0xff < iVar2)) {
       iVar2 = 0xff;
     }
-    *(short *)(param_1[param_2 + 0x12] + 2 + iVar1) = (short)iVar2;
-    iVar2 = (*piVar3 * param_4 + 0x32) / 100;
+    *(short *)(param_1[param_2 + 0x12] + 2 + iVar3) = (short)iVar2;
+    iVar2 = (*piVar4 * param_4 + 0x32) / 100;
     if (iVar2 < 1) {
       iVar2 = 1;
     }
@@ -153853,8 +154031,8 @@ CDSJpegImage::jpeg_add_quant_table(int *param_1,int param_2,int param_3,int para
     if ((param_5 != '\0') && (0xff < iVar2)) {
       iVar2 = 0xff;
     }
-    *(short *)(param_1[param_2 + 0x12] + 4 + iVar1) = (short)iVar2;
-    iVar2 = (piVar3[1] * param_4 + 0x32) / 100;
+    *(short *)(param_1[param_2 + 0x12] + 4 + iVar3) = (short)iVar2;
+    iVar2 = (piVar4[1] * param_4 + 0x32) / 100;
     if (iVar2 < 1) {
       iVar2 = 1;
     }
@@ -153864,10 +154042,10 @@ CDSJpegImage::jpeg_add_quant_table(int *param_1,int param_2,int param_3,int para
     if ((param_5 != '\0') && (0xff < iVar2)) {
       iVar2 = 0xff;
     }
-    *(short *)(iVar1 + 6 + param_1[param_2 + 0x12]) = (short)iVar2;
-    iVar1 = iVar1 + 8;
-    piVar3 = piVar3 + 4;
-  } while (iVar1 < 0x80);
+    *(short *)(iVar3 + 6 + param_1[param_2 + 0x12]) = (short)iVar2;
+    iVar3 = iVar3 + 8;
+    piVar4 = piVar4 + 4;
+  } while (iVar3 < 0x80);
   *(undefined1 *)(param_1[param_2 + 0x12] + 0x80) = 0;
   return;
 }
@@ -154293,13 +154471,13 @@ _Globals::jcopy_sample_rows
 
 
 
-void __cdecl _Globals::FUN_0045f860(void *param_1,void *param_2,int param_3)
+void __cdecl _Globals::jcopy_block_row(void *input_row,void *output_row,int num_blocks)
 
 {
-                    // UNCERTAIN: _memcpy(dst,src,count<<7) copies count×128-byte DCT coef blocks;
-                    // sole caller @ 0x004619e0 progressive JPEG coef-controller path (iVar6+=0x80
-                    // loop). No verified IJG export symbol.
-  Runtime::MSVCRT::_memcpy(param_2,param_1,param_3 << 7);
+                    // IJG jutils.c jcopy_block_row: memcpy(output_row, input_row, num_blocks*128).
+                    // Sole CALL @0x00461f8f (jdcoefct coef path, PUSH 1). Neighbor
+                    // jcopy_sample_rows@0x0045f810.
+  Runtime::MSVCRT::_memcpy(output_row,input_row,num_blocks << 7);
   return;
 }
 
@@ -154758,9 +154936,10 @@ void __cdecl _Globals::jinit_d_main_controller(int *param_1)
 
 
 
-// R6 task43: main-controller range-limit table init (jdmainct.c)
+// IJG jdmaster.c LOCAL prepare_range_limit_table: alloc_small 0x580, fill sample_range_limit @
+// cinfo+0x120. Outlined from jinit_master_decompress tail (FUN_00460200).
 
-void _Globals::FUN_00460160(void)
+void _Globals::prepare_range_limit_table(void *cinfo)
 
 {
   void *_Dst;
@@ -154769,9 +154948,9 @@ void _Globals::FUN_00460160(void)
   undefined4 *puVar2;
   undefined4 *puVar3;
   
-                    // UNCERTAIN: Huffman decode lookup workspace init (0x100 identity + 0x180 0xFF
-                    // tables); sole caller decompress master FUN_00460200 before jinit_huff_decoder
-                    // path (batch_21).
+                    // R7 task39: IJG prepare_range_limit_table —
+                    // (5*(MAXJSAMPLE+1)+CENTERJSAMPLE)=0x580 bytes; identity 0..255 + post-IDCT
+                    // 0xFF/0 regions + 128B memcopy.
   _Dst = (void *)(*(code *)**(undefined4 **)(unaff_EBX + 4))();
   *(int *)(unaff_EBX + 0x120) = (int)_Dst + 0x100;
   Runtime::MSVCRT::_memset(_Dst,0,0x100);
@@ -154794,24 +154973,26 @@ void _Globals::FUN_00460160(void)
 
 
 
-// R6 task43: tail of jinit_d_post_controller init (decompress master)
+// IJG jdmaster.c LOCAL master_selection (decompress module wiring). Compiler-outlined body; sole
+// caller jinit_d_post_controller@0x004604fb. cinfo in ESI; post at [ESI+0x180].
 
-void _Globals::FUN_00460200(void)
+void _Globals::master_selection(void)
 
 {
   int iVar1;
   uint uVar2;
   undefined4 extraout_ECX;
   int *unaff_ESI;
+  void *unaff_EDI;
   char cStack_4;
   
-                    // UNCERTAIN: libjpeg-6b decompressor master init; called from
-                    // jpeg_start_decompress (FUN_0045ec10) via FUN_004604d0 when
-                    // global_state==0xCA; chains FUN_0045ff30 sampling setup and FUN_00460160
-                    // Huffman workspace init. Exact IJG export (jdmaster.c) not verified.
+                    // R8: IJG master_selection — wires decompress modules (merged upsample,
+                    // quantizer, color/upsample, Huffman, coef/main buffers, realize_virt_arrays,
+                    // start_input_pass). Not compress path. Called from jinit_d_post_controller
+                    // after post alloc.
   iVar1 = unaff_ESI[0x60];
   jinit_d_main_controller(unaff_ESI);
-  FUN_00460160();
+  prepare_range_limit_table(unaff_EDI);
   *(undefined4 *)(iVar1 + 0xc) = 0;
   uVar2 = use_merged_upsample(extraout_ECX,(int)unaff_ESI);
   *(char *)(iVar1 + 0x10) = (char)uVar2;
@@ -154862,7 +155043,7 @@ LAB_004602a5:
     }
     jinit_d_main_controller((int)unaff_ESI,*(char *)((int)unaff_ESI + 0x5a));
   }
-  FUN_00463ee0((int)unaff_ESI);
+  jinit_color_deconverter_00463ee0(unaff_ESI);
   if (*(char *)((int)unaff_ESI + 0xc9) == '\0') {
     if ((char)unaff_ESI[0x32] == '\0') {
       jinit_huff_decoder((int)unaff_ESI);
@@ -154881,7 +155062,7 @@ LAB_004602a5:
   }
   jinit_d_coef_controller(unaff_ESI,cStack_4);
   if (*(char *)((int)unaff_ESI + 0x41) == '\0') {
-    FUN_00461460(unaff_ESI,'\0');
+    jinit_d_prep_controller_sample_bufs(unaff_ESI,'\0');
   }
   (**(code **)(unaff_ESI[1] + 0x18))();
   (**(code **)(unaff_ESI[100] + 8))();
@@ -154952,7 +155133,7 @@ void __cdecl _Globals::jinit_d_post_controller(int param_1)
   *puVar1 = post_process_1pass;
   puVar1[1] = &LAB_004604a0;
   *(undefined1 *)(puVar1 + 2) = 0;
-  FUN_00460200();
+  master_selection();
   return;
 }
 
@@ -155416,11 +155597,11 @@ void __cdecl CDSJpegImage::jinit_compress_master(int *param_1)
   
                     // UNCERTAIN: param_1 is jpeg_compress_struct*; byte flags at +0xb1/+0xb2 need
                     // IJG struct import.
-  FUN_0046c8f0((int)param_1,'\0');
+  jinit_c_master_control(param_1,'\0');
   if ((char)param_1[0x2c] == '\0') {
     jinit_color_converter(param_1);
-    FUN_0046b590(param_1);
-    FUN_0046acf0(param_1,'\0');
+    jinit_downsampler(param_1);
+    jinit_c_prep_controller(param_1,'\0');
   }
   jpeg_jinit_inverse_dct(param_1);
   if (*(char *)((int)param_1 + 0xb1) == '\0') {
@@ -155428,7 +155609,7 @@ void __cdecl CDSJpegImage::jinit_compress_master(int *param_1)
       jinit_huff_encoder((int)param_1);
     }
     else {
-      FUN_00469900((int)param_1);
+      jinit_phuff_encoder((int)param_1);
     }
   }
   else {
@@ -155451,7 +155632,10 @@ void __cdecl CDSJpegImage::jinit_compress_master(int *param_1)
 
 
 
-void _Globals::FUN_00460e80(void)
+// R7: IJG jcprepct.c local — alloc per-component row ptr tables (workspace+0x38/0x3c). Sole CALL
+// xref FUN_00461460@0x004614c6.
+
+void _Globals::create_context_buffer(void)
 
 {
   int iVar1;
@@ -155462,11 +155646,10 @@ void _Globals::FUN_00460e80(void)
   int *piVar6;
   int unaff_ESI;
   
-                    // UNCERTAIN: Allocates per-component sample row pointer tables at
-                    // workspace+0x38/+0x3c; called from FUN_00461460 when prep controller
-                    // need_context_rows (+0x68+8). Likely first half of IJG jcprepct.c
-                    // create_context_buffer (FUN_00460f30 completes edge replication). Not in
-                    // jpeg_decoder.md verified table.
+                    // IJG jcprepct.c LOCAL create_context_buffer: alloc_small fake row-pointer
+                    // tables at prep+0x38/+0x3c; per-component alloc_sarray row bases. Sole CALL
+                    // from FUN_00461460@0x004614c6 when [downsample+8]!=0; cinfo in ESI. Caller
+                    // chain: jinit_d_post→FUN_00460200→FUN_00461460.
   iVar1 = *(int *)(unaff_ESI + 0x118);
   iVar2 = *(int *)(unaff_ESI + 0x184);
   iVar3 = (*(code *)**(undefined4 **)(unaff_ESI + 4))();
@@ -155490,10 +155673,11 @@ void _Globals::FUN_00460e80(void)
 
 
 
-// UNCERTAIN: libjpeg jcprepct.c context-row edge expansion for smooth downsampling (mirrors
-// color_buf rows); LOCAL in IJG — no export symbol name.
+// R7 task42: IJG jcprepct.c LOCAL — context-row edge replication for prep color_buf
+// (+0x38/+0x3c). Sole CALL FUN_004613e0@0x0046142e when downsample need_context_rows. No IJG export
+// symbol.
 
-void __cdecl _Globals::FUN_00460f30(int param_1)
+void __cdecl _Globals::create_context_buffer_edge_replicate(int cinfo)
 
 {
   int iVar1;
@@ -155511,14 +155695,20 @@ void __cdecl _Globals::FUN_00460f30(int param_1)
   int *local_1c;
   int local_14;
   
-  iVar1 = *(int *)(param_1 + 0x118);
-  iVar2 = *(int *)(param_1 + 0x184);
+                    // IJG libjpeg-6b jcprepct.c LOCAL (create_context_buffer edge-replication
+                    // tail): per-component loops mirror/replicate fake row pointers at
+                    // prep+0x38/+0x3c for downsampling context rows. NOT a separate IJG export —
+                    // compiler split from create_context_buffer head @ create_context_buffer. Sole
+                    // caller: prep vtable start_pass FUN_004613e0@0x0046142e when
+                    // [cinfo+0x1a0+8]!=0.
+  iVar1 = *(int *)(cinfo + 0x118);
+  iVar2 = *(int *)(cinfo + 0x184);
   local_20 = 0;
-  if (0 < *(int *)(param_1 + 0x24)) {
-    piVar10 = (int *)(*(int *)(param_1 + 0xc4) + 0xc);
+  if (0 < *(int *)(cinfo + 0x24)) {
+    piVar10 = (int *)(*(int *)(cinfo + 0xc4) + 0xc);
     local_1c = (int *)(iVar2 + 8);
     do {
-      iVar6 = (piVar10[6] * *piVar10) / *(int *)(param_1 + 0x118);
+      iVar6 = (piVar10[6] * *piVar10) / *(int *)(cinfo + 0x118);
       puVar3 = *(undefined4 **)(*(int *)(iVar2 + 0x38) + local_20 * 4);
       iVar4 = *local_1c;
       puVar9 = *(undefined4 **)(*(int *)(iVar2 + 0x3c) + local_20 * 4);
@@ -155557,14 +155747,17 @@ void __cdecl _Globals::FUN_00460f30(int param_1)
       local_1c = local_1c + 1;
       piVar10 = piVar10 + 0x15;
       local_20 = local_20 + 1;
-    } while (local_20 < *(int *)(param_1 + 0x24));
+    } while (local_20 < *(int *)(cinfo + 0x24));
   }
   return;
 }
 
 
 
-void __cdecl _Globals::FUN_00461080(int param_1)
+// R9 verified: IJG jcprepct.c LOCAL — context color_buf row replicate (max_v padding). Sole CALL
+// pre_process_context@0x0046137d when prep+0x4c==1.
+
+void __cdecl _Globals::pre_process_context_row_replicate(int cinfo)
 
 {
   int iVar1;
@@ -155578,16 +155771,18 @@ void __cdecl _Globals::FUN_00461080(int param_1)
   undefined4 *puVar9;
   int local_10;
   
-                    // UNCERTAIN: libjpeg-6b compressor helper; replicates sample rows for h/v
-                    // expansion. Called from FUN_00461460 buffer setup. No IJG name in
-                    // jpeg_decoder.md.
-  iVar1 = *(int *)(param_1 + 0x118);
-  iVar2 = *(int *)(param_1 + 0x184);
+                    // R9 re-verify (Jun 2026): jcprepct.c pre_process_context helper —
+                    // per-component dword copy into fake color_buf rows -1 / max_v+1 / max_v+2;
+                    // mirrors prep+0x38/+0x3c. Caller LAB_00461270 @0x0046137d after FUN_00461160 +
+                    // downsampler when prep+0x4c==1. LOCAL split — no COFF export; rename
+                    // blocked.
+  iVar1 = *(int *)(cinfo + 0x118);
+  iVar2 = *(int *)(cinfo + 0x184);
   local_10 = 0;
-  if (0 < *(int *)(param_1 + 0x24)) {
-    piVar7 = (int *)(*(int *)(param_1 + 0xc4) + 0xc);
+  if (0 < *(int *)(cinfo + 0x24)) {
+    piVar7 = (int *)(*(int *)(cinfo + 0xc4) + 0xc);
     do {
-      iVar3 = (piVar7[6] * *piVar7) / *(int *)(param_1 + 0x118);
+      iVar3 = (piVar7[6] * *piVar7) / *(int *)(cinfo + 0x118);
       puVar9 = *(undefined4 **)(*(int *)(iVar2 + 0x3c) + local_10 * 4);
       if (0 < iVar3) {
         puVar6 = puVar9 + (iVar1 + 2) * iVar3;
@@ -155608,66 +155803,121 @@ void __cdecl _Globals::FUN_00461080(int param_1)
       }
       local_10 = local_10 + 1;
       piVar7 = piVar7 + 0x15;
-    } while (local_10 < *(int *)(param_1 + 0x24));
+    } while (local_10 < *(int *)(cinfo + 0x24));
   }
   return;
 }
 
 
 
-void __cdecl _Globals::FUN_00461160(int param_1)
+// jcprepct.c LOCAL (no IJG export): shift color_buf row-pointer slots in prep workspace; sets
+// prep+0x48 on comp 0. Sole caller CALL@0x00461331 in pre_process_context vtable cluster.
+
+void __cdecl _Globals::pre_process_context_row_shift(int *cinfo)
 
 {
   undefined4 *puVar1;
   int iVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  uint uVar5;
+  undefined4 *puVar3;
+  uint uVar4;
+  int iVar5;
   int *piVar6;
   int iVar7;
   uint uVar8;
   
-                    // UNCERTAIN: libjpeg-6b jcprepct.c compressor prep — shifts sample rows left
-                    // before FUN_00460f30 edge expand (CALL chain @ 0x00461331..0x0046142e). LOCAL
-                    // IJG name not verified.
-  iVar2 = *(int *)(param_1 + 0x184);
+                    // IJG libjpeg-6b jcprepct context-mode helper: for each component, advance
+                    // fake_buffer row pointers (MEMCOPY-style shift of JSAMPROW dwords) and compute
+                    // prep->next_buf_stop at prep+0x48. Called once per row-group cycle from
+                    // pre_process_context path when prep+0x44==0 and
+                    // prep+0x4c==cinfo->max_v_samp_factor (top-of-image pad). Not a separate symbol
+                    // in stock jcprepct.c.
+  iVar2 = cinfo[0x61];
   iVar7 = 0;
-  if (0 < *(int *)(param_1 + 0x24)) {
-    piVar6 = (int *)(*(int *)(param_1 + 0xc4) + 0xc);
+  if (0 < cinfo[9]) {
+    piVar6 = (int *)(cinfo[0x31] + 0xc);
     do {
-      uVar5 = piVar6[6] * *piVar6;
-      iVar3 = (int)uVar5 / *(int *)(param_1 + 0x118);
-      uVar8 = (uint)piVar6[8] % uVar5;
-      if ((uint)piVar6[8] % uVar5 == 0) {
-        uVar8 = uVar5;
+      uVar4 = piVar6[6] * *piVar6;
+      iVar5 = cinfo[0x46];
+      uVar8 = (uint)piVar6[8] % uVar4;
+      if ((uint)piVar6[8] % uVar4 == 0) {
+        uVar8 = uVar4;
       }
       if (iVar7 == 0) {
-        *(int *)(iVar2 + 0x48) = (int)(uVar8 - 1) / iVar3 + 1;
+        *(int *)(iVar2 + 0x48) = (int)(uVar8 - 1) / ((int)uVar4 / iVar5) + 1;
       }
-      iVar3 = iVar3 * 2;
-      if (0 < iVar3) {
+      iVar5 = ((int)uVar4 / iVar5) * 2;
+      if (0 < iVar5) {
         puVar1 = (undefined4 *)
                  (*(int *)(*(int *)(iVar2 + 0x38 + *(int *)(iVar2 + 0x40) * 4) + iVar7 * 4) +
                  uVar8 * 4);
-        puVar4 = puVar1;
+        puVar3 = puVar1;
         do {
-          *puVar4 = puVar1[-1];
-          puVar4 = puVar4 + 1;
-          iVar3 = iVar3 + -1;
-        } while (iVar3 != 0);
+          *puVar3 = puVar1[-1];
+          puVar3 = puVar3 + 1;
+          iVar5 = iVar5 + -1;
+        } while (iVar5 != 0);
       }
       iVar7 = iVar7 + 1;
       piVar6 = piVar6 + 0x15;
-    } while (iVar7 < *(int *)(param_1 + 0x24));
+    } while (iVar7 < cinfo[9]);
   }
   return;
 }
 
 
 
-// R6 task44: decompress buffer init; caller jinit_d_post path @0x460354
+// R9 other task3: jdmainct.c start_pass_main homolog — main-buffer vtable slot0 @0x4613e0 (DATA
+// xref FUN_00461460@0x461483). pass_mode 0: wire process_data + edge expand if
+// upsample.need_context_rows; 2: wire 0x4613b0 (crank_dest); else JERR_BAD_BUFFER_MODE(4).
+// Decompress path (master_selection).
 
-void __cdecl _Globals::FUN_00461460(int *param_1,char param_2)
+void __cdecl start_pass_main(int *cinfo,int pass_mode)
+
+{
+  int iVar1;
+  
+                    // IJG jdmainct.c METHODDEF start_pass_main (main->pub.start_pass). NOT jcprepct
+                    // start_pass_prep: this binary accepts JBUF_CRANK_DEST(2) -> prep+4=0x4613b0;
+                    // jcprepct only accepts JBUF_PASS_THRU. On pass_mode 0: if [cinfo+0x1a0+8]
+                    // (upsample.need_context_rows) set prep+4=0x461270 + CALL edge-tail
+                    // FUN_00460f30; else prep+4=0x461200. Object at cinfo+0x184 installed by
+                    // FUN_00461460 from master_selection.
+  iVar1 = cinfo[0x61];
+  if (pass_mode == 0) {
+    if (*(char *)(cinfo[0x68] + 8) != '\0') {
+      *(undefined1 **)(iVar1 + 4) = &LAB_00461270;
+      _Globals::create_context_buffer_edge_replicate((int)cinfo);
+      *(undefined4 *)(iVar1 + 0x40) = 0;
+      *(undefined4 *)(iVar1 + 0x44) = 0;
+      *(undefined4 *)(iVar1 + 0x4c) = 0;
+      *(undefined1 *)(iVar1 + 0x30) = 0;
+      *(undefined4 *)(iVar1 + 0x34) = 0;
+      return;
+    }
+    *(undefined1 *)(iVar1 + 0x30) = 0;
+    *(undefined4 *)(iVar1 + 0x34) = 0;
+    *(undefined1 **)(iVar1 + 4) = &LAB_00461200;
+    return;
+  }
+  if (pass_mode != 2) {
+    *(undefined4 *)(*cinfo + 8) = 4;
+    (**(code **)*cinfo)(cinfo);
+    return;
+  }
+  *(undefined1 **)(iVar1 + 4) = &LAB_004613b0;
+  return;
+}
+
+
+
+// libjpeg-6b decompress prep sample-buffer init (LOCAL, no COFF export)
+// Parameters: jpeg_decompress_struct *cinfo, char buffer_mode (nonzero triggers JERR 4 @ 0x46148b)
+// Algorithm: alloc_small(cinfo,1,0x50)->cinfo+0x184; *workspace=0x4613e0; if [cinfo+0x1a0]+8
+// need_context_rows call create_context_buffer; loop num_components alloc_large row buffers
+// Returns: void
+// Caller: master_selection @ 0x00460354 when [cinfo+0x41]==0 (after jinit_d_coef_controller)
+
+void __cdecl _Globals::jinit_d_prep_controller_sample_bufs(int *cinfo,char buffer_mode)
 
 {
   undefined4 *puVar1;
@@ -155676,67 +155926,76 @@ void __cdecl _Globals::FUN_00461460(int *param_1,char param_2)
   int iVar4;
   int *piVar5;
   
-                    // UNCERTAIN: libjpeg-6b compressor pass; allocates per-component sample buffers
-                    // (calls FUN_00460e80), then FUN_00461080. Called from FUN_00460200 (compress
-                    // main loop). No IJG name in jpeg_decoder.md.
-  puVar1 = (undefined4 *)(**(code **)param_1[1])(param_1,1,0x50);
-  param_1[0x61] = (int)puVar1;
-  *puVar1 = &LAB_004613e0;
-  if (param_2 != '\0') {
-    *(undefined4 *)(*param_1 + 8) = 4;
-    (**(code **)*param_1)(param_1);
+                    // IJG libjpeg-6b DECOMPRESS prep init (jcprepct/jdmainct LOCAL): alloc 0x50
+                    // workspace at cinfo+0x184, first method slot FUN_004613e0; if module at
+                    // cinfo+0x1a0 has byte+8 (need_context_rows) calls create_context_buffer and
+                    // uses max_v_samp_factor+2 row height else max_v_samp_factor; per-component
+                    // alloc_large sample rows. Sole caller master_selection@0x00460354 after
+                    // jinit_d_coef_controller when cinfo+0x41 raw_data_out==0. buffer_mode!=0 ->
+                    // err->msg_code=4. Distinct from jinit_d_main_controller@0x464230 (0x1c @
+                    // cinfo+0x18c). No verified IJG export name — keep FUN_*.
+  puVar1 = (undefined4 *)(**(code **)cinfo[1])(cinfo,1,0x50);
+  cinfo[0x61] = (int)puVar1;
+  *puVar1 = start_pass_main;
+  if (buffer_mode != '\0') {
+    *(undefined4 *)(*cinfo + 8) = 4;
+    (**(code **)*cinfo)(cinfo);
   }
-  if (*(char *)(param_1[0x68] + 8) == '\0') {
-    iVar2 = param_1[0x46];
+  if (*(char *)(cinfo[0x68] + 8) == '\0') {
+    iVar2 = cinfo[0x46];
   }
   else {
-    if (param_1[0x46] < 2) {
-      *(undefined4 *)(*param_1 + 8) = 0x2f;
-      (**(code **)*param_1)(param_1);
+    if (cinfo[0x46] < 2) {
+      *(undefined4 *)(*cinfo + 8) = 0x2f;
+      (**(code **)*cinfo)(cinfo);
     }
-    FUN_00460e80();
-    iVar2 = param_1[0x46] + 2;
+    create_context_buffer();
+    iVar2 = cinfo[0x46] + 2;
   }
   iVar4 = 0;
-  if (0 < param_1[9]) {
-    piVar5 = (int *)(param_1[0x31] + 0x24);
+  if (0 < cinfo[9]) {
+    piVar5 = (int *)(cinfo[0x31] + 0x24);
     puVar1 = puVar1 + 2;
     do {
-      uVar3 = (**(code **)(param_1[1] + 8))
-                        (param_1,1,piVar5[-2] * *piVar5,
-                         ((piVar5[-6] * *piVar5) / param_1[0x46]) * iVar2);
+      uVar3 = (**(code **)(cinfo[1] + 8))
+                        (cinfo,1,piVar5[-2] * *piVar5,((piVar5[-6] * *piVar5) / cinfo[0x46]) * iVar2
+                        );
       *puVar1 = uVar3;
       iVar4 = iVar4 + 1;
       puVar1 = puVar1 + 1;
       piVar5 = piVar5 + 0x15;
-    } while (iVar4 < param_1[9]);
+    } while (iVar4 < cinfo[9]);
   }
   return;
 }
 
 
 
-// libjpeg: decompress_data MCU sizing
+// IJG jdcoefct.c LOCAL start_iMCU_row (decompress). Pair: start_iMCU_row @0x00467690 (jccoefct.c
+// compress).
 
-void __fastcall _Globals::FUN_00461540(int param_1)
+void __fastcall _Globals::start_iMCU_row(void)
 
 {
   int iVar1;
+  int in_ECX;
   undefined4 uVar2;
   
-                    // UNCERTAIN: jpeg_decompress_data row-window setup on cinfo+0x188
-                    // (+0x14/+0x18/+0x1c). Leaf helper before MCU decode loop — no verified
-                    // libjpeg-6b export symbol.
-  iVar1 = *(int *)(param_1 + 0x188);
+                    // IJG jdcoefct.c LOCAL start_iMCU_row (decompress): reset coef
+                    // MCU_ctr/MCU_vert_offset/MCU_rows_per_iMCU_row on cinfo->coef (+0x188). Uses
+                    // output_iMCU_row (+0x80) after increment — lockstep with input in
+                    // decompress_onepass. Caller: jpeg_decompress_data@0x004617a9. NOT jccoefct.c
+                    // start_iMCU_row @0x00467690 (compress).
+  iVar1 = *(int *)(in_ECX + 0x188);
   uVar2 = 1;
-  if (*(int *)(param_1 + 0x124) < 2) {
-    if (*(uint *)(param_1 + 0x80) < *(int *)(param_1 + 0x11c) - 1U) {
-      *(undefined4 *)(iVar1 + 0x1c) = *(undefined4 *)(*(int *)(param_1 + 0x128) + 0xc);
+  if (*(int *)(in_ECX + 0x124) < 2) {
+    if (*(uint *)(in_ECX + 0x80) < *(int *)(in_ECX + 0x11c) - 1U) {
+      *(undefined4 *)(iVar1 + 0x1c) = *(undefined4 *)(*(int *)(in_ECX + 0x128) + 0xc);
       *(undefined4 *)(iVar1 + 0x14) = 0;
       *(undefined4 *)(iVar1 + 0x18) = 0;
       return;
     }
-    uVar2 = *(undefined4 *)(*(int *)(param_1 + 0x128) + 0x48);
+    uVar2 = *(undefined4 *)(*(int *)(in_ECX + 0x128) + 0x48);
   }
   *(undefined4 *)(iVar1 + 0x1c) = uVar2;
   *(undefined4 *)(iVar1 + 0x14) = 0;
@@ -155840,7 +156099,7 @@ undefined4 __cdecl _Globals::jpeg_decompress_data(int param_1,int param_2)
   *(int *)(param_1 + 0x80) = *(int *)(param_1 + 0x80) + 1;
   *(int *)(param_1 + 0x88) = *(int *)(param_1 + 0x88) + 1;
   if (*(uint *)(param_1 + 0x80) < *(uint *)(param_1 + 0x11c)) {
-    FUN_00461540(param_1);
+    start_iMCU_row();
     return 3;
   }
   (**(code **)(*(int *)(param_1 + 400) + 0xc))(param_1);
@@ -155851,7 +156110,7 @@ undefined4 __cdecl _Globals::jpeg_decompress_data(int param_1,int param_2)
 
 // libjpeg: jinit_d_coef_controller helper
 
-int __cdecl _Globals::FUN_004619e0(int param_1,int param_2)
+int __cdecl _Globals::decompress_data(int cinfo,int output_buf)
 
 {
   int iVar1;
@@ -155868,31 +156127,31 @@ int __cdecl _Globals::FUN_004619e0(int param_1,int param_2)
   int iStack_18;
   int iStack_14;
   
-                    // UNCERTAIN: Progressive JPEG coef-controller consume_data;
-                    // jinit_d_coef_controller sets puVar3[3]=this when param_2!=0 (with
-                    // LAB_004617f0 at slot 1); non-progressive/WAV path uses jpeg_decompress_data
-                    // at slot 3. Loops components, calls per-component fn at cinfo+0x19c,
-                    // increments +0x88.
-  iVar1 = *(int *)(param_1 + 0x11c);
-  iVar4 = *(int *)(param_1 + 0x188);
-  while ((*(int *)(param_1 + 0x7c) < *(int *)(param_1 + 0x84) ||
-         ((*(int *)(param_1 + 0x7c) == *(int *)(param_1 + 0x84) &&
-          (*(uint *)(param_1 + 0x80) <= *(uint *)(param_1 + 0x88)))))) {
-    iVar3 = (*(code *)**(undefined4 **)(param_1 + 400))(param_1);
+                    // IJG jdcoefct.c METHODDEF decompress_data — multipass/progressive
+                    // coef-controller output (need_full_buffer path). Wired at
+                    // coef->pub.decompress_data by jinit_d_coef_controller @ 0x00462431 when
+                    // param_2!=0. Reads virt coef arrays, inverse DCT per component, returns
+                    // JPEG_ROW_COMPLETED(3) or JPEG_SCAN_COMPLETED(4).
+  iVar1 = *(int *)(cinfo + 0x11c);
+  iVar4 = *(int *)(cinfo + 0x188);
+  while ((*(int *)(cinfo + 0x7c) < *(int *)(cinfo + 0x84) ||
+         ((*(int *)(cinfo + 0x7c) == *(int *)(cinfo + 0x84) &&
+          (*(uint *)(cinfo + 0x80) <= *(uint *)(cinfo + 0x88)))))) {
+    iVar3 = (*(code *)**(undefined4 **)(cinfo + 400))(cinfo);
     if (iVar3 == 0) {
       return 0;
     }
   }
-  iVar3 = *(int *)(param_1 + 0xc4);
+  iVar3 = *(int *)(cinfo + 0xc4);
   iStack_14 = 0;
-  if (0 < *(int *)(param_1 + 0x24)) {
+  if (0 < *(int *)(cinfo + 0x24)) {
     puVar7 = (undefined4 *)(iVar4 + 0x48);
     do {
       if (*(char *)(iVar3 + 0x30) != '\0') {
-        iVar4 = (**(code **)(*(int *)(param_1 + 4) + 0x20))
-                          (param_1,*puVar7,*(int *)(param_1 + 0x88) * *(int *)(iVar3 + 0xc),
+        iVar4 = (**(code **)(*(int *)(cinfo + 4) + 0x20))
+                          (cinfo,*puVar7,*(int *)(cinfo + 0x88) * *(int *)(iVar3 + 0xc),
                            *(int *)(iVar3 + 0xc),0);
-        if (*(uint *)(param_1 + 0x88) < iVar1 - 1U) {
+        if (*(uint *)(cinfo + 0x88) < iVar1 - 1U) {
           uStack_20 = *(uint *)(iVar3 + 0xc);
         }
         else {
@@ -155901,8 +156160,8 @@ int __cdecl _Globals::FUN_004619e0(int param_1,int param_2)
             uStack_20 = *(uint *)(iVar3 + 0xc);
           }
         }
-        pcVar2 = *(code **)(*(int *)(param_1 + 0x19c) + 4 + iStack_14 * 4);
-        iStack_1c = *(int *)(param_2 + iStack_14 * 4);
+        pcVar2 = *(code **)(*(int *)(cinfo + 0x19c) + 4 + iStack_14 * 4);
+        iStack_1c = *(int *)(output_buf + iStack_14 * 4);
         iStack_18 = 0;
         if (0 < (int)uStack_20) {
           uVar5 = *(uint *)(iVar3 + 0x1c);
@@ -155912,7 +156171,7 @@ int __cdecl _Globals::FUN_004619e0(int param_1,int param_2)
             uVar8 = 0;
             if (uVar5 != 0) {
               do {
-                (*pcVar2)(param_1,iVar3,iVar6,iStack_1c,iVar9);
+                (*pcVar2)(cinfo,iVar3,iVar6,iStack_1c,iVar9);
                 uVar5 = *(uint *)(iVar3 + 0x1c);
                 iVar9 = iVar9 + *(int *)(iVar3 + 0x24);
                 uVar8 = uVar8 + 1;
@@ -155927,15 +156186,18 @@ int __cdecl _Globals::FUN_004619e0(int param_1,int param_2)
       iStack_14 = iStack_14 + 1;
       puVar7 = puVar7 + 1;
       iVar3 = iVar3 + 0x54;
-    } while (iStack_14 < *(int *)(param_1 + 0x24));
+    } while (iStack_14 < *(int *)(cinfo + 0x24));
   }
-  *(int *)(param_1 + 0x88) = *(int *)(param_1 + 0x88) + 1;
-  return 4 - (uint)(*(uint *)(param_1 + 0x88) < *(uint *)(param_1 + 0x11c));
+  *(int *)(cinfo + 0x88) = *(int *)(cinfo + 0x88) + 1;
+  return 4 - (uint)(*(uint *)(cinfo + 0x88) < *(uint *)(cinfo + 0x11c));
 }
 
 
 
-uint _Globals::FUN_00461b70(void)
+// R7: IJG jdcoefct.c coef-controller method — copies comp bounds into workspace+0x70; CALL from
+// LAB_00462320 cluster@0x00462338; vtable slot installed jinit_d_coef_controller puVar3[2].
+
+int __cdecl _Globals::smoothing_ok(int *cinfo)
 
 {
   uint in_EAX;
@@ -155948,9 +156210,8 @@ uint _Globals::FUN_00461b70(void)
   int unaff_EDI;
   undefined1 local_5;
   
-                    // UNCERTAIN: vtable slot @ LAB_00462320 (jinit_d_coef_controller path). Copies
-                    // six int fields per track from this+0xc4 into mixer buffer *(this+0x188)+0x70.
-                    // Owning class unconfirmed.
+                    // IJG jdcoefct.c LOCAL smoothing_ok: progressive coef_bits + quant table gate;
+                    // called from start_output_pass @ LAB_00462320 when do_block_smoothing.
   iVar4 = *(int *)(unaff_EDI + 0x188);
   local_5 = 0;
   if ((*(char *)(unaff_EDI + 200) == '\0') || (*(int *)(unaff_EDI + 0x8c) == 0)) {
@@ -156047,7 +156308,7 @@ void __cdecl _Globals::jinit_d_coef_controller(undefined4 *param_1,char param_2)
       } while (_param_2 < (int)puVar2[9]);
     }
     puVar3[1] = &LAB_004617f0;
-    puVar3[3] = FUN_004619e0;
+    puVar3[3] = decompress_data;
     puVar3[4] = puVar3 + 0x12;
     return;
   }
@@ -156344,9 +156605,10 @@ _Globals::jpeg_huff_decode(undefined4 *param_1,uint param_2,int param_3,int para
 
 
 
-// libjpeg: decode_mcu bit buffer helper
+// IJG jdhuff.c LOCAL process_restart — decode_mcu-only copy; restarts_to_go@entropy+0x24; sole
+// caller decode_mcu@0x00462a22. Duplicate of process_restart@0x00462f80 (progressive +0x28).
 
-undefined4 _Globals::FUN_00462980(void)
+undefined4 _Globals::process_restart_00462980(void)
 
 {
   int *piVar1;
@@ -156411,7 +156673,7 @@ int __cdecl _Globals::decode_mcu(int param_1,int param_2)
   iVar1 = *(int *)(param_1 + 0x198);
   local_24[3] = in_EAX;
   if (((*(int *)(param_1 + 0xfc) != 0) && (*(int *)(iVar1 + 0x24) == 0)) &&
-     (local_24[3] = FUN_00462980(), (char)local_24[3] == '\0')) {
+     (local_24[3] = process_restart_00462980(), (char)local_24[3] == '\0')) {
     return local_24[3];
   }
   if (*(char *)(iVar1 + 8) == '\0') {
@@ -157109,7 +157371,7 @@ void __cdecl _Globals::start_pass_dcolor(int *param_1)
         break;
       case 2:
         iVar10 = 0;
-        local_14 = FUN_0046db50;
+        local_14 = h2v1_merged_upsample_ycbcr_colormap;
         local_10 = 0;
         break;
       default:
@@ -157207,7 +157469,10 @@ void __cdecl _Globals::start_pass_dcolor(int *param_1)
 
 
 
-void __cdecl _Globals::FUN_00463ee0(int param_1)
+// R7: IJG jdcolor.c decompress init — alloc 0x54 module @cinfo+0x19c, vtbl[0]=start_pass_dcolor,
+// per-comp 0x100 LUTs. CALL FUN_00460200@0x004602ed.
+
+void __cdecl _Globals::jinit_color_deconverter_00463ee0(int *cinfo)
 
 {
   undefined4 *puVar1;
@@ -157215,26 +157480,26 @@ void __cdecl _Globals::FUN_00463ee0(int param_1)
   undefined4 *puVar2;
   int iVar3;
   
-                    // UNCERTAIN: libjpeg-6b jdcolor.c — allocates 0x54-byte color-deconverter
-                    // module at cinfo+0x19c, sets start_pass_dcolor, per-component 0x100 lookup
-                    // tables. jinit_color_deconverter already at 0x464e00 (color_convert only);
-                    // exact IJG split not verified.
-  puVar1 = (undefined4 *)(*(code *)**(undefined4 **)(param_1 + 4))(param_1,1,0x54);
-  *(undefined4 **)(param_1 + 0x19c) = puVar1;
+                    // IJG jdcolor.c module init (split): mem->alloc_small(0x54)->cinfo[0x67];
+                    // *module=start_pass_dcolor; per comp_info alloc 0x100 @+0x50, memset, init
+                    // module+0x2c to -1. Pairs jinit_color_deconverter@0x464e00 (colorspace/convert
+                    // ptrs @ cinfo[0x69]).
+  puVar1 = (undefined4 *)(**(code **)cinfo[1])(cinfo,1,0x54);
+  cinfo[0x67] = (int)puVar1;
   *puVar1 = start_pass_dcolor;
   iVar3 = 0;
-  if (0 < *(int *)(param_1 + 0x24)) {
-    puVar2 = (undefined4 *)(*(int *)(param_1 + 0xc4) + 0x50);
+  if (0 < cinfo[9]) {
+    puVar2 = (undefined4 *)(cinfo[0x31] + 0x50);
     puVar1 = puVar1 + 0xb;
     do {
-      _Dst = (void *)(*(code *)**(undefined4 **)(param_1 + 4))(param_1,1,0x100);
+      _Dst = (void *)(**(code **)cinfo[1])(cinfo,1,0x100);
       *puVar2 = _Dst;
       Runtime::MSVCRT::_memset(_Dst,0,0x100);
       *puVar1 = 0xffffffff;
       iVar3 = iVar3 + 1;
       puVar1 = puVar1 + 1;
       puVar2 = puVar2 + 0x15;
-    } while (iVar3 < *(int *)(param_1 + 0x24));
+    } while (iVar3 < cinfo[9]);
   }
   return;
 }
@@ -157931,9 +158196,11 @@ void _Globals::build_ycc_rgb_table(void)
 
 
 
-// libjpeg: jinit_color_deconverter helper
+// R7: IJG jdcolor.c scanline color_convert — YCbCr→BGR via LUTs @cinfo+0x1a0. DATA xref
+// jinit_merged_upsampler@0x00465563 installs method +0xc.
 
-void __cdecl _Globals::FUN_00465180(int param_1,int *param_2,int param_3,undefined4 *param_4)
+void __cdecl
+_Globals::h2v1_merged_upsample(int cinfo,int *input_buf,int in_row_group_ctr,uint *output_buf)
 
 {
   byte bVar1;
@@ -157957,17 +158224,17 @@ void __cdecl _Globals::FUN_00465180(int param_1,int *param_2,int param_3,undefin
                     // UNCERTAIN: YCbCr→BGR scanline writer; fn ptr installed at FUN_004654f0+0xc
                     // when cinfo+0x114!=2. Uses LUT block at cinfo+0x1a0. No symbol in
                     // jpeg_decoder.md.
-  iVar3 = *(int *)(param_1 + 0x1a0);
-  iVar4 = *(int *)(param_1 + 0x120);
+  iVar3 = *(int *)(cinfo + 0x1a0);
+  iVar4 = *(int *)(cinfo + 0x120);
   iVar5 = *(int *)(iVar3 + 0x10);
   iVar6 = *(int *)(iVar3 + 0x14);
   iVar7 = *(int *)(iVar3 + 0x18);
   iVar3 = *(int *)(iVar3 + 0x1c);
-  pbVar17 = *(byte **)(*param_2 + param_3 * 4);
-  pbVar15 = *(byte **)(param_2[1] + param_3 * 4);
-  pbVar12 = *(byte **)(param_2[2] + param_3 * 4);
-  puVar11 = (undefined1 *)*param_4;
-  for (uVar13 = *(uint *)(param_1 + 0x5c) >> 1; uVar13 != 0; uVar13 = uVar13 - 1) {
+  pbVar17 = *(byte **)(*input_buf + in_row_group_ctr * 4);
+  pbVar15 = *(byte **)(input_buf[1] + in_row_group_ctr * 4);
+  pbVar12 = *(byte **)(input_buf[2] + in_row_group_ctr * 4);
+  puVar11 = (undefined1 *)*output_buf;
+  for (uVar13 = *(uint *)(cinfo + 0x5c) >> 1; uVar13 != 0; uVar13 = uVar13 - 1) {
     bVar1 = *pbVar12;
     bVar2 = *pbVar15;
     pbVar15 = pbVar15 + 1;
@@ -157988,7 +158255,7 @@ void __cdecl _Globals::FUN_00465180(int param_1,int *param_2,int param_3,undefin
     pbVar17 = pbVar17 + 2;
     puVar11 = puVar11 + 6;
   }
-  if ((*(byte *)(param_1 + 0x5c) & 1) != 0) {
+  if ((*(byte *)(cinfo + 0x5c) & 1) != 0) {
     iVar3 = *(int *)(iVar3 + (uint)*pbVar15 * 4);
     iVar7 = *(int *)(iVar7 + (uint)*pbVar12 * 4);
     uVar13 = (uint)*pbVar17;
@@ -158026,7 +158293,7 @@ void __cdecl _Globals::jinit_merged_upsampler(int param_1)
   }
   puVar1[8] = 0;
   puVar1[1] = &LAB_00465140;
-  puVar1[3] = FUN_00465180;
+  puVar1[3] = h2v1_merged_upsample;
   build_ycc_rgb_table();
   return;
 }
@@ -159084,7 +159351,10 @@ void __cdecl _Globals::jinit_2pass_quantizer(int *param_1)
 
 
 
-int __cdecl _Globals::FUN_00466920(int *param_1,int *param_2)
+// R7: IJG merged-upsampler dither — permutation/alloc-size loop; jpeg_natural_order@0x0049df50
+// when cinfo[0xb]==2. CALL FUN_00466a50@0x00466a6a (not zlib gen_codes).
+
+int __cdecl _Globals::compute_sample_table_size(int *param_1,int *param_2)
 
 {
   int iVar1;
@@ -159097,10 +159367,11 @@ int __cdecl _Globals::FUN_00466920(int *param_1,int *param_2)
   int iVar8;
   int *piVar9;
   
-                    // UNCERTAIN: libjpeg-6b IJG helper; caller FUN_00466a50 uses return as alloc
-                    // size. Factorial/permutation loop over param_2 with optional
-                    // jpeg_natural_order remap (param_1[0xb]==2). Exact IJG source function not
-                    // COFF-mapped.
+                    // IJG merged-upsampler helper: compute ordered-dither sample-table size. Walks
+                    // factorial base over param_2[]; if cinfo+0x2c==2 indexes via
+                    // jpeg_natural_order tail @0x49df50. Returns byte count for FUN_00466a50 alloc.
+                    // Raises JERR 0x38 when base<2. Sole caller FUN_00466a50 @
+                    // jinit_merged_upsampler path.
   iVar2 = param_1[0x19];
   iVar3 = param_1[0x15];
   iVar7 = 1;
@@ -159165,32 +159436,38 @@ int __cdecl _Globals::FUN_00466920(int *param_1,int *param_2)
 
 
 
-int __fastcall _Globals::FUN_00466a10(int param_1)
+int __fastcall _Globals::scale_dither_index_to_byte(int param_1)
 
 {
   int unaff_ESI;
   
-                    // UNCERTAIN: (num*0xff+div/2)/div rounded byte scale; caller FUN_00466a50
-                    // libjpeg upsampler table init — exact IJG export not COFF-verified.
+                    // R8: Rounded index→byte scale (ECX*0xff+ESI/2)/ESI; ESI=max_idx=bound-1 set
+                    // by FUN_00466a50@0x466ad4. Sole caller FUN_00466a50 (merged-upsampler dither
+                    // table fill). Not zlib::gen_codes. IJG export name UNK.
   return (param_1 * 0xff + unaff_ESI / 2) / unaff_ESI;
 }
 
 
 
-int __fastcall _Globals::FUN_00466a30(int param_1)
+int __fastcall _Globals::gen_codes_rounded_idiv_stub(int param_1)
 
 {
   int in_EAX;
   
-                    // UNCERTAIN: __fastcall (EAX*0x1fe+0xff+ECX)/(ECX*2); only caller
-                    // zlib::gen_codes inner loop over code lengths — likely zlib trees.c
-                    // bi_reverse helper, upstream symbol not verified.
+                    // R9 task50 re-verified (R7/R8): (EAX*0x1fe+ECX+0xff)/(ECX*2) — sym_index in
+                    // EAX, bits-1 in ECX (__fastcall param_1). Sole caller zlib::gen_codes @
+                    // 0x466c1c (EAX=0) and 0x466c37 (EAX=loop idx). Not a separate zlib COFF
+                    // symbol; keep FUN_.
   return (in_EAX * 0x1fe + 0xff + param_1) / (param_1 * 2);
 }
 
 
 
-void __cdecl _Globals::FUN_00466a50(int *param_1)
+// R8: merged-upsampler colormap index table alloc+fill @ upsample+0x10/+0x14; calls FUN_00466920
+// size calc; FUN_00466a10 byte scale. Sole caller jinit_merged_upsampler@0x004674db. Not zlib
+// Huffman (R6 corrected). IJG symbol UNK.
+
+void __cdecl _Globals::build_colormap_sample_tables(int *param_1)
 
 {
   int iVar1;
@@ -159209,12 +159486,12 @@ void __cdecl _Globals::FUN_00466a50(int *param_1)
   int iStack_1c;
   int iStack_10;
   
-                    // UNCERTAIN: libjpeg-6b helper; fills quantizer sample buffers after
-                    // FUN_00466920 size calc. Caller FUN_00467460 (separate upsampler init). Exact
-                    // IJG name not COFF-verified.
+                    // R8: Merged-upsampler ordered-dither table build. FUN_00466920 size →
+                    // alloc_large; FUN_00466a10 per-cell fill. Stores ptr at upsample+0x10/0x14.
+                    // Sole caller jinit_merged_upsampler@0x004674db. IJG export name UNK.
   iVar1 = param_1[0x6a];
   piVar11 = (int *)(iVar1 + 0x20);
-  iVar3 = FUN_00466920(param_1,piVar11);
+  iVar3 = compute_sample_table_size(param_1,piVar11);
   piVar4 = (int *)(**(code **)(param_1[1] + 8))(param_1,1,iVar3,param_1[0x19]);
   iStack_10 = 0;
   piVar9 = piVar4;
@@ -159227,7 +159504,7 @@ void __cdecl _Globals::FUN_00466a50(int *param_1)
       if (0 < iVar2) {
         iVar10 = 0;
         do {
-          iVar6 = FUN_00466a10(iStack_20);
+          iVar6 = scale_dither_index_to_byte(iStack_20);
           for (iVar8 = iVar10; iVar8 < iVar3; iVar8 = iVar8 + iStack_1c) {
             iVar7 = 0;
             if (0 < iVar5) {
@@ -159302,12 +159579,12 @@ void __cdecl _Globals::zlib__gen_codes(int param_1)
       puVar3 = *(undefined1 **)(*(int *)(iVar2 + 0x18) + iStack_10 * 4);
       iVar9 = iVar9 + -1;
       cVar8 = '\0';
-      iVar6 = FUN_00466a30(iVar9);
+      iVar6 = gen_codes_rounded_idiv_stub(iVar9);
       iVar10 = 0;
       do {
         while (iVar6 < iVar10) {
           cVar8 = cVar8 + '\x01';
-          iVar6 = FUN_00466a30(iVar9);
+          iVar6 = gen_codes_rounded_idiv_stub(iVar9);
         }
         cStack_8 = (char)iVar5;
         puVar3[iVar10] = cStack_8 * cVar8;
@@ -159332,7 +159609,7 @@ void __cdecl _Globals::zlib__gen_codes(int param_1)
 
 
 
-int * __fastcall _Globals::FUN_00466cc0(int param_1)
+int * __fastcall _Globals::alloc_scaled_quant_table_from_rdata(int param_1)
 
 {
   byte *pbVar1;
@@ -159343,9 +159620,10 @@ int * __fastcall _Globals::FUN_00466cc0(int param_1)
   int *piVar5;
   undefined1 *puVar6;
   
-                    // UNCERTAIN: Scales jpeg std quant table DAT_0049de50..0x49df50 by scale
-                    // factor; sole caller FUN_00466d40 (1-pass quant setup via FUN_00467340).
-                    // Matches IJG quant scaling shape but no COFF export / jpeg_decoder.md entry.
+                    // R9 task 52: alloc_small(cinfo,JPOOL_IMAGE=1,0x400) -> 256 ints; scale each
+                    // byte of .rdata 0x49de50..0x49df50 by (0xfe01-byte*0x1fe)/((scale<<9)-0x200).
+                    // __fastcall ECX=scale_selector; caller passes cinfo in EAX
+                    // (FUN_00466d40@0x66d7a). Sole xref caller. Not jpeg_add_quant_table@0x45efe0.
   piVar2 = (int *)(*(code *)**(undefined4 **)(in_EAX + 4))();
   puVar6 = &DAT_0049de50;
   piVar4 = piVar2;
@@ -159366,7 +159644,7 @@ int * __fastcall _Globals::FUN_00466cc0(int param_1)
 
 
 
-void _Globals::FUN_00466d40(void)
+void _Globals::init_scaled_quant_tables_dedup(void)
 
 {
   int iVar1;
@@ -159376,9 +159654,11 @@ void _Globals::FUN_00466d40(void)
   int iVar4;
   int *piVar5;
   
-                    // UNCERTAIN: libjpeg-6b progressive decode; builds per-component derived
-                    // Huffman tables via FUN_00466cc0. Called from FUN_00467340 when progressive
-                    // and table slot empty — exact IJG jdphuff.c export not verified.
+                    // R8 task-33: Merged-upsampler start_pass helper (FUN_00467340@0x467400).
+                    // EBX=cinfo on entry. For each component (cinfo+0x64), fills upsample+0x34[]
+                    // scaled quant tables via FUN_00466cc0; reuses ptr when earlier component
+                    // shares same quant selector (upsample+0x20[]). Not a simple wrapper — 0x50 B
+                    // dedup loop. IJG jdmerge/jquant symbol UNK.
   iVar1 = *(int *)(unaff_EBX + 0x1a8);
   iVar4 = 0;
   if (0 < *(int *)(unaff_EBX + 100)) {
@@ -159397,7 +159677,7 @@ void _Globals::FUN_00466d40(void)
           piVar3 = piVar3 + 1;
         } while (iVar2 < iVar4);
       }
-      piVar3 = FUN_00466cc0(piVar5[-5]);
+      piVar3 = alloc_scaled_quant_table_from_rdata(piVar5[-5]);
 LAB_00466d7f:
       *piVar5 = (int)piVar3;
       iVar4 = iVar4 + 1;
@@ -159450,7 +159730,8 @@ void __cdecl _Globals::color_quantize(int param_1,int param_2,int *param_3,int p
 
 
 
-void __cdecl _Globals::FUN_00466f00(int param_1,int param_2,undefined4 *param_3,int *param_4)
+void __cdecl
+_Globals::merged_upsample_row_non_rgb(int *cinfo,int input_buf,undefined4 *output_buf,int num_rows)
 
 {
   byte bVar1;
@@ -159466,29 +159747,30 @@ void __cdecl _Globals::FUN_00466f00(int param_1,int param_2,undefined4 *param_3,
   size_t sVar10;
   uint uVar11;
   int local_20;
-  int *local_14;
+  int local_14;
   
-                    // UNCERTAIN: libjpeg-6b upsampler method ptr installed by FUN_00467340 when
-                    // samp type==1 (not 3 components). Per-row AC table lookup + ring @coef+0x30;
-                    // related FUN_00467020. Not matched to single IJG jdsample.c export (see
-                    // batch_28).
-  iVar2 = *(int *)(param_1 + 100);
-  len = *(size_t *)(param_1 + 0x5c);
-  iVar3 = *(int *)(param_1 + 0x1a8);
-  if (0 < (int)param_4) {
-    iVar8 = param_2 - (int)param_3;
-    local_14 = param_4;
+                    // IJG libjpeg-6b merged-upsampler row method (cinfo+0x4c==1,
+                    // num_components!=3). DATA xref FUN_00467340@0x004673db installs at upsample+4.
+                    // Zeros row via IJG_jzero_far; AC-table lookup with ring index &0xf at
+                    // upsample+0x30. Sibling FUN_00467020 (RGB/3-comp). Exact jdmerge.c export UNK
+                    // (R6/R8).
+  iVar2 = cinfo[0x19];
+  len = cinfo[0x17];
+  iVar3 = cinfo[0x6a];
+  if (0 < num_rows) {
+    iVar8 = input_buf - (int)output_buf;
+    local_14 = num_rows;
     do {
-      IJG_jzero_far((void *)*param_3,len);
+      IJG_jzero_far((void *)*output_buf,len);
       iVar4 = *(int *)(iVar3 + 0x30);
       local_20 = 0;
       if (0 < iVar2) {
-        param_4 = (int *)(iVar3 + 0x34);
+        num_rows = iVar3 + 0x34;
         do {
           iVar5 = *(int *)(*(int *)(iVar3 + 0x18) + local_20 * 4);
-          pcVar9 = (char *)*param_3;
-          iVar6 = *param_4;
-          pbVar7 = (byte *)(*(int *)(iVar8 + (int)param_3) + local_20);
+          pcVar9 = (char *)*output_buf;
+          iVar6 = *(int *)num_rows;
+          pbVar7 = (byte *)(*(int *)(iVar8 + (int)output_buf) + local_20);
           uVar11 = 0;
           for (sVar10 = len; sVar10 != 0; sVar10 = sVar10 - 1) {
             bVar1 = *pbVar7;
@@ -159498,21 +159780,38 @@ void __cdecl _Globals::FUN_00466f00(int param_1,int param_2,undefined4 *param_3,
             pcVar9 = pcVar9 + 1;
             uVar11 = uVar11 + 1 & 0xf;
           }
-          param_4 = param_4 + 1;
+          num_rows = num_rows + 4;
           local_20 = local_20 + 1;
         } while (local_20 < iVar2);
       }
-      param_3 = param_3 + 1;
-      local_14 = (int *)((int)local_14 + -1);
+      output_buf = output_buf + 1;
+      local_14 = local_14 + -1;
       *(uint *)(iVar3 + 0x30) = iVar4 + 1U & 0xf;
-    } while (local_14 != (int *)0x0);
+    } while (local_14 != 0);
   }
   return;
 }
 
 
 
-void __cdecl _Globals::FUN_00467020(int param_1,int param_2,int *param_3,int param_4)
+// Parameters:
+//   cinfo — jpeg_decompress_struct *
+//   input_buf — JSAMPARRAY base (input chroma rows)
+//   output_buf_ptr — JSAMPARRAY * (output row pointer array)
+//   num_rows — rows to produce this call
+// 
+// Algorithm:
+//   upsample = cinfo+0x1a8; tables = upsample+0x18 (Y/Cb/Cr bases)
+//   Per row: ring idx upsample+0x30; AC ptr rings +0x34/+0x38/+0x3c
+//   Inner loop: sum table[Y]+table[Cb]+table[Cr]; output 1 byte/pixel; idx&=0xf
+// 
+// Returns: void
+// 
+// Caller: none direct — DATA xref FUN_00467340@0x4673d2 stores fn ptr when merged upsample + 3
+// components
+
+void __cdecl
+_Globals::h2v1_merged_upsample_rgb_row(int *cinfo,int input_buf,int *output_buf_ptr,int num_rows)
 
 {
   int iVar1;
@@ -159533,24 +159832,26 @@ void __cdecl _Globals::FUN_00467020(int param_1,int param_2,int *param_3,int par
   char *pcVar16;
   int local_24;
   
-                    // UNCERTAIN: libjpeg-6b sep upsample+YCC row worker (ring idx &0xf, 3 table
-                    // sums); installed by FUN_00467340 when samp type 1 and out_color 3; sibling
-                    // FUN_00466f00.
-  iVar2 = *(int *)(param_1 + 0x1a8);
+                    // IJG libjpeg-6b merged-upsampler row worker (RGB / num_components==3):
+                    // per-pixel sum of three AC-table lookups on 3-byte Y,Cb,Cr walk; ring index
+                    // &0xf at upsample+0x30. Method ptr installed at upsample+4 by FUN_00467340
+                    // when cinfo+0x4c==1 && cinfo+0x64==3 (@0x4673d2 DATA xref). Sibling
+                    // FUN_00466f00 for !=3. No COFF-exact jdmerge.c export — keep FUN_*.
+  iVar2 = cinfo[0x6a];
   piVar3 = *(int **)(iVar2 + 0x18);
-  iVar4 = *(int *)(param_1 + 0x5c);
+  iVar4 = cinfo[0x17];
   iVar5 = *piVar3;
   iVar6 = piVar3[1];
   iVar7 = piVar3[2];
-  if (0 < param_4) {
-    iVar12 = param_2 - (int)param_3;
-    local_24 = param_4;
+  if (0 < num_rows) {
+    iVar12 = input_buf - (int)output_buf_ptr;
+    local_24 = num_rows;
     do {
       iVar8 = *(int *)(iVar2 + 0x30);
-      pcVar16 = (char *)*param_3;
+      pcVar16 = (char *)*output_buf_ptr;
       iVar9 = *(int *)(iVar2 + 0x3c);
       iVar10 = *(int *)(iVar2 + 0x38);
-      pbVar13 = *(byte **)(iVar12 + (int)param_3);
+      pbVar13 = *(byte **)(iVar12 + (int)output_buf_ptr);
       iVar14 = iVar8 * 0x40;
       iVar11 = *(int *)(iVar2 + 0x34);
       uVar15 = 0;
@@ -159562,7 +159863,7 @@ void __cdecl _Globals::FUN_00467020(int param_1,int param_2,int *param_3,int par
         pbVar13 = pbVar13 + 3;
         uVar15 = uVar15 + 1 & 0xf;
       }
-      param_3 = param_3 + 1;
+      output_buf_ptr = output_buf_ptr + 1;
       local_24 = local_24 + -1;
       *(uint *)(iVar2 + 0x30) = iVar8 + 1U & 0xf;
     } while (local_24 != 0);
@@ -159572,7 +159873,8 @@ void __cdecl _Globals::FUN_00467020(int param_1,int param_2,int *param_3,int par
 
 
 
-void __cdecl _Globals::FUN_00467150(int param_1,int param_2,undefined4 *param_3,int param_4)
+void __cdecl
+_Globals::h2v2_fancy_upsample_row(int *cinfo,int output_buf,uint **input_buf,int num_rows)
 
 {
   size_t sVar1;
@@ -159592,36 +159894,39 @@ void __cdecl _Globals::FUN_00467150(int param_1,int param_2,undefined4 *param_3,
   byte *pbVar14;
   int iVar15;
   int iVar16;
-  char *pcVar17;
+  uint *puVar17;
   int local_2c;
   int local_1c;
   int local_18;
   
-                    // UNCERTAIN: Upsample pass callback installed by FUN_00467340 when cinfo field
-                    // at +0x4c==2; uses short row workspace + colormap tables. Not
-                    // h2v2_fancy_upsample (cf. FUN_00464660 @ 0x464660). Needs COFF-exact IJG id.
-  len = *(size_t *)(param_1 + 0x5c);
-  iVar3 = *(int *)(param_1 + 0x120);
-  iVar4 = *(int *)(param_1 + 100);
-  iVar5 = *(int *)(param_1 + 0x1a8);
-  if (0 < param_4) {
-    iVar11 = param_2 - (int)param_3;
-    local_18 = param_4;
+                    // R9: IJG libjpeg-6b merged-upsampler fancy upsample method (cinfo[0x13]==2).
+                    // Installed at upsample+4 by FUN_00467340@0x0046738d (sole DATA xref). Per-row
+                    // IJG_jzero_far; short workspace upsample+0x44[]; colormap cinfo+0x120; range
+                    // tables upsample+0x10/+0x18; toggles scan dir upsample+0x54. Distinct from
+                    // h2v2_smooth_downsample@0x464660. Exact jdmerge/jquant export UNK — keep
+                    // FUN_*.
+  len = cinfo[0x17];
+  iVar3 = cinfo[0x48];
+  iVar4 = cinfo[0x19];
+  iVar5 = cinfo[0x6a];
+  if (0 < num_rows) {
+    iVar11 = output_buf - (int)input_buf;
+    local_18 = num_rows;
     do {
-      IJG_jzero_far((void *)*param_3,len);
+      IJG_jzero_far(*input_buf,len);
       local_1c = 0;
       if (0 < iVar4) {
         piVar12 = (int *)(iVar5 + 0x44);
         do {
-          pcVar17 = (char *)*param_3;
+          puVar17 = *input_buf;
           psVar13 = (short *)*piVar12;
-          pbVar14 = (byte *)(*(int *)(iVar11 + (int)param_3) + local_1c);
+          pbVar14 = (byte *)(*(int *)(iVar11 + (int)input_buf) + local_1c);
           if (*(char *)(iVar5 + 0x54) == '\0') {
             iVar16 = 1;
             iVar15 = iVar4;
           }
           else {
-            pcVar17 = pcVar17 + (len - 1);
+            puVar17 = (uint *)((int)puVar17 + (len - 1));
             pbVar14 = pbVar14 + (len - 1) * iVar4;
             iVar16 = -1;
             psVar13 = psVar13 + len + 1;
@@ -159630,29 +159935,29 @@ void __cdecl _Globals::FUN_00467150(int param_1,int param_2,undefined4 *param_3,
           iVar6 = *(int *)(*(int *)(iVar5 + 0x18) + local_1c * 4);
           iVar7 = *(int *)(*(int *)(iVar5 + 0x10) + local_1c * 4);
           iVar8 = 0;
-          param_4 = 0;
-          param_4._0_2_ = 0;
+          num_rows = 0;
+          num_rows._0_2_ = 0;
           local_2c = 0;
           for (sVar1 = len; sVar1 != 0; sVar1 = sVar1 - 1) {
             bVar2 = *pbVar14;
             pbVar14 = pbVar14 + iVar15;
             uVar9 = (uint)*(byte *)((uint)bVar2 + (psVar13[iVar16] + 8 + iVar8 >> 4) + iVar3);
             bVar2 = *(byte *)(uVar9 + iVar6);
-            *pcVar17 = *pcVar17 + bVar2;
+            *(byte *)puVar17 = (char)*puVar17 + bVar2;
             iVar10 = uVar9 - *(byte *)((uint)bVar2 + iVar7);
-            *psVar13 = (short)param_4 + (short)iVar10 * 3;
-            param_4 = local_2c + iVar10 * 5;
+            *psVar13 = (short)num_rows + (short)iVar10 * 3;
+            num_rows = local_2c + iVar10 * 5;
             iVar8 = iVar10 * 7;
-            pcVar17 = pcVar17 + iVar16;
+            puVar17 = (uint *)((int)puVar17 + iVar16);
             psVar13 = psVar13 + iVar16;
             local_2c = iVar10;
           }
           piVar12 = piVar12 + 1;
           local_1c = local_1c + 1;
-          *psVar13 = (short)param_4;
+          *psVar13 = (short)num_rows;
         } while (local_1c < iVar4);
       }
-      param_3 = param_3 + 1;
+      input_buf = input_buf + 1;
       local_18 = local_18 + -1;
       *(bool *)(iVar5 + 0x54) = *(char *)(iVar5 + 0x54) == '\0';
     } while (local_18 != 0);
@@ -159662,7 +159967,7 @@ void __cdecl _Globals::FUN_00467150(int param_1,int param_2,undefined4 *param_3,
 
 
 
-void _Globals::FUN_00467300(void)
+void _Globals::alloc_fancy_upsample_row_bufs(int *cinfo)
 
 {
   undefined4 uVar1;
@@ -159670,10 +159975,11 @@ void _Globals::FUN_00467300(void)
   int unaff_ESI;
   int iVar3;
   
-                    // UNCERTAIN: libjpeg-6b merged-upsampler setup — allocates per-component
-                    // sample row buffers at upsampler+0x44 via cinfo->mem->alloc_small. Called from
-                    // FUN_00467460 when cinfo->progress_mode==2 and from FUN_00467340 when buffer
-                    // ptr null. Exact IJG symbol (jdmerge.c) not COFF-mapped.
+                    // R8 verified: IJG libjpeg-6b jdmerge/jdsample helper — per-component
+                    // alloc_small row buffers at upsample+0x44[]. Callers pass cinfo in ESI (not
+                    // stack). From jinit_merged_upsampler@0x4674ef when cinfo+0x4c==2; from
+                    // FUN_00467340@0x46739a when +0x44[0]==0. Exact jdmerge.c static symbol UNK (no
+                    // COFF).
   iVar3 = 0;
   if (0 < *(int *)(unaff_ESI + 100)) {
     puVar2 = (undefined4 *)(*(int *)(unaff_ESI + 0x1a8) + 0x44);
@@ -159689,22 +159995,26 @@ void _Globals::FUN_00467300(void)
 
 
 
-void __cdecl _Globals::FUN_00467340(int *param_1)
+void __cdecl _Globals::start_pass_merged_upsampler(int *cinfo)
 
 {
   int iVar1;
+  int *unaff_EBX;
   undefined4 *puVar2;
   int iVar3;
   
-                    // UNCERTAIN: libjpeg-6b decompress setup; selects upsample/color method ptrs
-                    // (FUN_00466e40/66f00/67020/67150) from param_1[0x13] and num_components
-                    // param_1[0x19]. Exact IJG source function not COFF-mapped.
-  iVar1 = param_1[0x6a];
-  param_1[0x1d] = *(int *)(iVar1 + 0x10);
-  iVar3 = param_1[0x13];
-  param_1[0x1c] = *(int *)(iVar1 + 0x14);
+                    // R9 task 058: IJG libjpeg-6b merged-upsampler start_pass (jdmerge.c family).
+                    // Copies upsample+0x10/+0x14 into cinfo+0x74/+0x70; installs upsample method at
+                    // upsample+4 from cinfo+0x4c (0=sep, 1=merged, 2=fancy). May call
+                    // zlib::gen_codes@0x466b70, FUN_00466d40 (EBX=cinfo), FUN_00467300,
+                    // IJG_jzero_far. Vtable slot 0 in jinit_merged_upsampler@0x467479. IJG export
+                    // name UNK.
+  iVar1 = cinfo[0x6a];
+  cinfo[0x1d] = *(int *)(iVar1 + 0x10);
+  iVar3 = cinfo[0x13];
+  cinfo[0x1c] = *(int *)(iVar1 + 0x14);
   if (iVar3 == 0) {
-    if (param_1[0x19] != 3) {
+    if (cinfo[0x19] != 3) {
       *(undefined1 **)(iVar1 + 4) = &LAB_00466d90;
       return;
     }
@@ -159712,41 +160022,41 @@ void __cdecl _Globals::FUN_00467340(int *param_1)
     return;
   }
   if (iVar3 == 1) {
-    if (param_1[0x19] == 3) {
-      *(code **)(iVar1 + 4) = FUN_00467020;
+    if (cinfo[0x19] == 3) {
+      *(code **)(iVar1 + 4) = h2v1_merged_upsample_rgb_row;
     }
     else {
-      *(code **)(iVar1 + 4) = FUN_00466f00;
+      *(code **)(iVar1 + 4) = merged_upsample_row_non_rgb;
     }
     *(undefined4 *)(iVar1 + 0x30) = 0;
     if (*(char *)(iVar1 + 0x1c) == '\0') {
-      zlib__gen_codes((int)param_1);
+      zlib__gen_codes((int)cinfo);
     }
     if (*(int *)(iVar1 + 0x34) == 0) {
-      FUN_00466d40();
+      init_scaled_quant_tables_dedup();
       return;
     }
   }
   else {
     if (iVar3 != 2) {
-      *(undefined4 *)(*param_1 + 8) = 0x30;
-      (**(code **)*param_1)(param_1);
+      *(undefined4 *)(*cinfo + 8) = 0x30;
+      (**(code **)*cinfo)(cinfo);
       return;
     }
     puVar2 = (undefined4 *)(iVar1 + 0x44);
-    *(code **)(iVar1 + 4) = FUN_00467150;
+    *(code **)(iVar1 + 4) = h2v2_fancy_upsample_row;
     *(undefined1 *)(iVar1 + 0x54) = 0;
     if (*(int *)(iVar1 + 0x44) == 0) {
-      FUN_00467300();
+      alloc_fancy_upsample_row_bufs(unaff_EBX);
     }
-    iVar1 = param_1[0x17];
-    if (0 < param_1[0x19]) {
+    iVar1 = cinfo[0x17];
+    if (0 < cinfo[0x19]) {
       iVar3 = 0;
       do {
         IJG_jzero_far((void *)*puVar2,iVar1 * 2 + 4);
         iVar3 = iVar3 + 1;
         puVar2 = puVar2 + 1;
-      } while (iVar3 < param_1[0x19]);
+      } while (iVar3 < cinfo[0x19]);
     }
   }
   return;
@@ -159774,13 +160084,14 @@ void __cdecl _Globals::jinit_merged_upsampler(int *param_1)
 
 {
   undefined4 *puVar1;
+  int *unaff_ESI;
   
                     // UNCERTAIN: libjpeg-6b jinit_merged_upsampler family — alloc 0x58 upsampler,
                     // installs FUN_00467340 @ +0; caller FUN_00460200 when merged upsample path
                     // active (batch_29/34).
   puVar1 = (undefined4 *)(**(code **)param_1[1])(param_1,1,0x58);
   param_1[0x6a] = (int)puVar1;
-  *puVar1 = FUN_00467340;
+  *puVar1 = start_pass_merged_upsampler;
   puVar1[2] = CDSApp::CDSApp_PreCreateHook;
   puVar1[3] = &LAB_00467440;
   puVar1[0x11] = 0;
@@ -159795,10 +160106,10 @@ void __cdecl _Globals::jinit_merged_upsampler(int *param_1)
     *(undefined4 *)(*param_1 + 0xc) = 0x100;
     (**(code **)*param_1)(param_1);
   }
-  FUN_00466a50(param_1);
+  build_colormap_sample_tables(param_1);
   zlib__gen_codes((int)param_1);
   if (param_1[0x13] == 2) {
-    FUN_00467300();
+    alloc_fancy_upsample_row_bufs(unaff_ESI);
   }
   return;
 }
@@ -159848,24 +160159,28 @@ void __cdecl CDSJpegImage::jinit_c_main_controller(int *param_1,char param_2)
 
 // libjpeg: compress_data buffer helper
 
-void __fastcall _Globals::FUN_00467690(int param_1)
+void __fastcall _Globals::start_iMCU_row(void)
 
 {
   int iVar1;
+  int in_ECX;
   undefined4 uVar2;
   
-                    // UNCERTAIN: Resets coef scan state at cinfo+0x148 after jpeg_compress_data
-                    // iMCU pass; exact IJG jccoefct.c symbol not byte-matched.
-  iVar1 = *(int *)(param_1 + 0x148);
+                    // IJG jccoefct.c LOCAL: reset coef-controller within-iMCU-row counters after
+                    // completing an iMCU row. ECX=cinfo; coef=cinfo+0x148. Sets
+                    // MCU_rows_per_iMCU_row (+0x14) from comps_in_scan/cur_comp_info; zeros mcu_ctr
+                    // (+0xc) and MCU_vert_offset (+0x10). Tail-called from jpeg_compress_data and
+                    // FUN_00467930 after iMCU_row_num++.
+  iVar1 = *(int *)(in_ECX + 0x148);
   uVar2 = 1;
-  if (*(int *)(param_1 + 0xe4) < 2) {
-    if (*(uint *)(iVar1 + 8) < *(int *)(param_1 + 0xe0) - 1U) {
-      *(undefined4 *)(iVar1 + 0x14) = *(undefined4 *)(*(int *)(param_1 + 0xe8) + 0xc);
+  if (*(int *)(in_ECX + 0xe4) < 2) {
+    if (*(uint *)(iVar1 + 8) < *(int *)(in_ECX + 0xe0) - 1U) {
+      *(undefined4 *)(iVar1 + 0x14) = *(undefined4 *)(*(int *)(in_ECX + 0xe8) + 0xc);
       *(undefined4 *)(iVar1 + 0xc) = 0;
       *(undefined4 *)(iVar1 + 0x10) = 0;
       return;
     }
-    uVar2 = *(undefined4 *)(*(int *)(param_1 + 0xe8) + 0x48);
+    uVar2 = *(undefined4 *)(*(int *)(in_ECX + 0xe8) + 0x48);
   }
   *(undefined4 *)(iVar1 + 0x14) = uVar2;
   *(undefined4 *)(iVar1 + 0xc) = 0;
@@ -159883,15 +160198,15 @@ undefined4 __cdecl _Globals::jpeg_compress_data(int param_1,int param_2)
   int iVar3;
   int iVar4;
   char cVar5;
-  undefined4 uVar6;
-  int iVar7;
-  undefined4 *puVar8;
+  undefined4 extraout_EAX;
+  int iVar6;
+  undefined4 *puVar7;
+  uint uVar8;
   uint uVar9;
-  uint uVar10;
-  int iVar11;
-  uint uVar12;
-  int *piVar13;
-  int iVar14;
+  int iVar10;
+  uint uVar11;
+  int *piVar12;
+  int iVar13;
   int local_24;
   int local_20;
   int iStack_14;
@@ -159899,182 +160214,184 @@ undefined4 __cdecl _Globals::jpeg_compress_data(int param_1,int param_2)
   
   iVar1 = *(int *)(param_1 + 0xe0);
   iVar2 = *(int *)(param_1 + 0x148);
-  uVar9 = *(uint *)(iVar2 + 0x10);
-  uVar10 = *(int *)(param_1 + 0xf8) - 1;
-  if ((int)uVar9 < *(int *)(iVar2 + 0x14)) {
+  uVar8 = *(uint *)(iVar2 + 0x10);
+  uVar9 = *(int *)(param_1 + 0xf8) - 1;
+  if ((int)uVar8 < *(int *)(iVar2 + 0x14)) {
     do {
-      for (uVar12 = *(uint *)(iVar2 + 0xc); uVar12 <= uVar10; uVar12 = uVar12 + 1) {
-        iVar14 = 0;
+      for (uVar11 = *(uint *)(iVar2 + 0xc); uVar11 <= uVar9; uVar11 = uVar11 + 1) {
+        iVar13 = 0;
         local_10 = 0;
         if (0 < *(int *)(param_1 + 0xe4)) {
-          piVar13 = (int *)(param_1 + 0xe8);
+          piVar12 = (int *)(param_1 + 0xe8);
           do {
-            iVar3 = *piVar13;
-            if (uVar12 < uVar10) {
-              iVar11 = *(int *)(iVar3 + 0x34);
+            iVar3 = *piVar12;
+            if (uVar11 < uVar9) {
+              iVar10 = *(int *)(iVar3 + 0x34);
             }
             else {
-              iVar11 = *(int *)(iVar3 + 0x44);
+              iVar10 = *(int *)(iVar3 + 0x44);
             }
             iVar4 = *(int *)(iVar3 + 0x40);
-            local_24 = uVar9 * 8;
+            local_24 = uVar8 * 8;
             local_20 = 0;
             if (0 < *(int *)(iVar3 + 0x38)) {
-              iVar7 = *(int *)(iVar3 + 0x34);
+              iVar6 = *(int *)(iVar3 + 0x34);
               do {
                 if ((*(uint *)(iVar2 + 8) < iVar1 - 1U) ||
-                   ((int)(local_20 + uVar9) < *(int *)(iVar3 + 0x48))) {
+                   ((int)(local_20 + uVar8) < *(int *)(iVar3 + 0x48))) {
                   (**(code **)(*(int *)(param_1 + 0x158) + 4))
                             (param_1,iVar3,*(undefined4 *)(param_2 + *(int *)(iVar3 + 4) * 4),
-                             *(undefined4 *)(iVar2 + 0x18 + iVar14 * 4),local_24,iVar4 * uVar12,
-                             iVar11);
-                  if ((iVar11 < *(int *)(iVar3 + 0x34)) &&
-                     (IJG_jzero_far(*(void **)(iVar2 + 0x18 + (iVar14 + iVar11) * 4),
-                                    (*(int *)(iVar3 + 0x34) - iVar11) * 0x80),
-                     iVar11 < *(int *)(iVar3 + 0x34))) {
-                    puVar8 = (undefined4 *)(iVar2 + 0x18 + (iVar14 + iVar11) * 4);
-                    iStack_14 = iVar11;
+                             *(undefined4 *)(iVar2 + 0x18 + iVar13 * 4),local_24,iVar4 * uVar11,
+                             iVar10);
+                  if ((iVar10 < *(int *)(iVar3 + 0x34)) &&
+                     (IJG_jzero_far(*(void **)(iVar2 + 0x18 + (iVar13 + iVar10) * 4),
+                                    (*(int *)(iVar3 + 0x34) - iVar10) * 0x80),
+                     iVar10 < *(int *)(iVar3 + 0x34))) {
+                    puVar7 = (undefined4 *)(iVar2 + 0x18 + (iVar13 + iVar10) * 4);
+                    iStack_14 = iVar10;
                     do {
-                      *(undefined2 *)*puVar8 = *(undefined2 *)puVar8[-1];
+                      *(undefined2 *)*puVar7 = *(undefined2 *)puVar7[-1];
                       iStack_14 = iStack_14 + 1;
-                      puVar8 = puVar8 + 1;
+                      puVar7 = puVar7 + 1;
                     } while (iStack_14 < *(int *)(iVar3 + 0x34));
                   }
                 }
                 else {
-                  IJG_jzero_far(*(void **)(iVar2 + 0x18 + iVar14 * 4),iVar7 << 7);
-                  iVar7 = 0;
+                  IJG_jzero_far(*(void **)(iVar2 + 0x18 + iVar13 * 4),iVar6 << 7);
+                  iVar6 = 0;
                   if (0 < *(int *)(iVar3 + 0x34)) {
-                    puVar8 = (undefined4 *)(iVar2 + 0x18 + iVar14 * 4);
+                    puVar7 = (undefined4 *)(iVar2 + 0x18 + iVar13 * 4);
                     do {
-                      iVar7 = iVar7 + 1;
-                      *(undefined2 *)*puVar8 = **(undefined2 **)(iVar2 + 0x14 + iVar14 * 4);
-                      puVar8 = puVar8 + 1;
-                    } while (iVar7 < *(int *)(iVar3 + 0x34));
+                      iVar6 = iVar6 + 1;
+                      *(undefined2 *)*puVar7 = **(undefined2 **)(iVar2 + 0x14 + iVar13 * 4);
+                      puVar7 = puVar7 + 1;
+                    } while (iVar6 < *(int *)(iVar3 + 0x34));
                   }
                 }
-                iVar7 = *(int *)(iVar3 + 0x34);
+                iVar6 = *(int *)(iVar3 + 0x34);
                 local_24 = local_24 + 8;
                 local_20 = local_20 + 1;
-                iVar14 = iVar14 + iVar7;
+                iVar13 = iVar13 + iVar6;
               } while (local_20 < *(int *)(iVar3 + 0x38));
             }
             local_10 = local_10 + 1;
-            piVar13 = piVar13 + 1;
+            piVar12 = piVar12 + 1;
           } while (local_10 < *(int *)(param_1 + 0xe4));
         }
         cVar5 = (**(code **)(*(int *)(param_1 + 0x15c) + 4))(param_1,iVar2 + 0x18);
         if (cVar5 == '\0') {
-          *(uint *)(iVar2 + 0xc) = uVar12;
-          *(uint *)(iVar2 + 0x10) = uVar9;
-          return uVar9 & 0xffffff00;
+          *(uint *)(iVar2 + 0xc) = uVar11;
+          *(uint *)(iVar2 + 0x10) = uVar8;
+          return uVar8 & 0xffffff00;
         }
       }
-      uVar9 = uVar9 + 1;
+      uVar8 = uVar8 + 1;
       *(undefined4 *)(iVar2 + 0xc) = 0;
-    } while ((int)uVar9 < *(int *)(iVar2 + 0x14));
+    } while ((int)uVar8 < *(int *)(iVar2 + 0x14));
   }
   *(int *)(iVar2 + 8) = *(int *)(iVar2 + 8) + 1;
-  uVar6 = FUN_00467690(param_1);
-  return CONCAT31((int3)((uint)uVar6 >> 8),1);
+  start_iMCU_row();
+  return CONCAT31((int3)((uint)extraout_EAX >> 8),1);
 }
 
 
 
-// libjpeg: compress_first_pass helper
+// libjpeg-6b jccoefct.c :: compress_output (coef controller output pass)
 
-undefined4 __cdecl _Globals::FUN_00467930(int param_1)
+bool __cdecl _Globals::compress_output(int cinfo)
 
 {
   int iVar1;
   int iVar2;
-  int iVar3;
+  char cVar3;
   int iVar4;
   int iVar5;
-  uint uVar6;
-  undefined4 uVar7;
+  int iVar6;
+  int iVar7;
   int iVar8;
-  int iVar9;
-  int *piVar10;
-  int iVar11;
-  int *piVar12;
+  int *piVar9;
+  int iVar10;
+  int *piVar11;
   int *local_2c;
   int *piStack_28;
   int iStack_24;
   int iStack_20;
   int aiStack_10 [4];
   
-                    // UNCERTAIN: JPEG/MCU strip compositor; called from FUN_00467af0 after
-                    // per-component row blits. Not a BlitTable kernel.
-  iVar1 = *(int *)(param_1 + 0x148);
-  iVar11 = 0;
-  if (0 < *(int *)(param_1 + 0xe4)) {
-    local_2c = (int *)(param_1 + 0xe8);
+                    // IJG jccoefct.c compress_output (multipass coef emit): access_virt_barray per
+                    // comp, build MCU_buffer ptrs (+0x80 stride), entropy->encode_mcu; suspend
+                    // saves coef+0xc/+0x10; tail start_iMCU_row via FUN_00467690. Installed
+                    // pass_mode==2 @ FUN_00467d10; tail from compress_first_pass. NOT the
+                    // mislabeled compress_output @ 0x0046aa00 (decompress pump).
+  iVar1 = *(int *)(cinfo + 0x148);
+  iVar10 = 0;
+  if (0 < *(int *)(cinfo + 0xe4)) {
+    local_2c = (int *)(cinfo + 0xe8);
     do {
-      iVar3 = *(int *)(*local_2c + 0xc);
-      iVar3 = (**(code **)(*(int *)(param_1 + 4) + 0x20))
-                        (param_1,*(undefined4 *)(iVar1 + 0x40 + *(int *)(*local_2c + 4) * 4),
-                         *(int *)(iVar1 + 8) * iVar3,iVar3,0);
+      iVar4 = *(int *)(*local_2c + 0xc);
+      iVar4 = (**(code **)(*(int *)(cinfo + 4) + 0x20))
+                        (cinfo,*(undefined4 *)(iVar1 + 0x40 + *(int *)(*local_2c + 4) * 4),
+                         *(int *)(iVar1 + 8) * iVar4,iVar4,0);
       local_2c = local_2c + 1;
-      aiStack_10[iVar11] = iVar3;
-      iVar11 = iVar11 + 1;
-    } while (iVar11 < *(int *)(param_1 + 0xe4));
+      aiStack_10[iVar10] = iVar4;
+      iVar10 = iVar10 + 1;
+    } while (iVar10 < *(int *)(cinfo + 0xe4));
   }
-  iVar11 = *(int *)(iVar1 + 0x10);
-  if (iVar11 < *(int *)(iVar1 + 0x14)) {
+  iVar10 = *(int *)(iVar1 + 0x10);
+  if (iVar10 < *(int *)(iVar1 + 0x14)) {
     do {
       local_2c = *(int **)(iVar1 + 0xc);
-      if (local_2c < *(uint *)(param_1 + 0xf8)) {
+      if (local_2c < *(uint *)(cinfo + 0xf8)) {
         do {
-          iVar3 = 0;
+          iVar4 = 0;
           iStack_20 = 0;
-          if (0 < *(int *)(param_1 + 0xe4)) {
-            piStack_28 = (int *)(param_1 + 0xe8);
+          if (0 < *(int *)(cinfo + 0xe4)) {
+            piStack_28 = (int *)(cinfo + 0xe8);
             do {
               iVar2 = *piStack_28;
-              iVar8 = *(int *)(iVar2 + 0x34);
-              iVar4 = iVar8 * (int)local_2c;
+              iVar7 = *(int *)(iVar2 + 0x34);
+              iVar5 = iVar7 * (int)local_2c;
               iStack_24 = 0;
               if (0 < *(int *)(iVar2 + 0x38)) {
-                piVar10 = (int *)(aiStack_10[iStack_20] + iVar11 * 4);
+                piVar9 = (int *)(aiStack_10[iStack_20] + iVar10 * 4);
                 do {
-                  iVar5 = *piVar10 + iVar4 * 0x80;
-                  iVar9 = 0;
-                  if (0 < iVar8) {
-                    piVar12 = (int *)(iVar1 + 0x18 + iVar3 * 4);
+                  iVar6 = *piVar9 + iVar5 * 0x80;
+                  iVar8 = 0;
+                  if (0 < iVar7) {
+                    piVar11 = (int *)(iVar1 + 0x18 + iVar4 * 4);
                     do {
-                      *piVar12 = iVar5;
-                      iVar8 = *(int *)(iVar2 + 0x34);
-                      iVar9 = iVar9 + 1;
-                      iVar3 = iVar3 + 1;
-                      piVar12 = piVar12 + 1;
-                      iVar5 = iVar5 + 0x80;
-                    } while (iVar9 < iVar8);
+                      *piVar11 = iVar6;
+                      iVar7 = *(int *)(iVar2 + 0x34);
+                      iVar8 = iVar8 + 1;
+                      iVar4 = iVar4 + 1;
+                      piVar11 = piVar11 + 1;
+                      iVar6 = iVar6 + 0x80;
+                    } while (iVar8 < iVar7);
                   }
                   iStack_24 = iStack_24 + 1;
-                  piVar10 = piVar10 + 1;
+                  piVar9 = piVar9 + 1;
                 } while (iStack_24 < *(int *)(iVar2 + 0x38));
               }
               piStack_28 = piStack_28 + 1;
               iStack_20 = iStack_20 + 1;
-            } while (iStack_20 < *(int *)(param_1 + 0xe4));
+            } while (iStack_20 < *(int *)(cinfo + 0xe4));
           }
-          uVar6 = (**(code **)(*(int *)(param_1 + 0x15c) + 4))(param_1,iVar1 + 0x18);
-          if ((char)uVar6 == '\0') {
-            *(int *)(iVar1 + 0x10) = iVar11;
+          cVar3 = (**(code **)(*(int *)(cinfo + 0x15c) + 4))(cinfo,iVar1 + 0x18);
+          if (cVar3 == '\0') {
+            *(int *)(iVar1 + 0x10) = iVar10;
             *(int **)(iVar1 + 0xc) = local_2c;
-            return uVar6 & 0xffffff00;
+            return false;
           }
           local_2c = (int *)((int)local_2c + 1);
-        } while (local_2c < *(uint *)(param_1 + 0xf8));
+        } while (local_2c < *(uint *)(cinfo + 0xf8));
       }
-      iVar11 = iVar11 + 1;
+      iVar10 = iVar10 + 1;
       *(undefined4 *)(iVar1 + 0xc) = 0;
-    } while (iVar11 < *(int *)(iVar1 + 0x14));
+    } while (iVar10 < *(int *)(iVar1 + 0x14));
   }
   *(int *)(iVar1 + 8) = *(int *)(iVar1 + 8) + 1;
-  uVar7 = FUN_00467690(param_1);
-  return CONCAT31((int3)((uint)uVar7 >> 8),1);
+  start_iMCU_row();
+  return true;
 }
 
 
@@ -160186,50 +160503,54 @@ void __cdecl _Globals::compress_first_pass(int param_1,undefined4 *param_2)
       iVar15 = iVar15 + 0x54;
     } while (local_c < *(int *)(param_1 + 0x3c));
   }
-  FUN_00467930(param_1);
+  compress_output(param_1);
   return;
 }
 
 
 
-void __cdecl _Globals::FUN_00467d10(int *param_1,int param_2)
+// libjpeg-6b jccoefct.c :: start_pass_coef (METHODDEF vtable slot @ jinit_c_coef_controller)
+
+void __cdecl _Globals::start_pass_coef(int *cinfo,int pass_mode)
 
 {
   int iVar1;
   
-                    // UNCERTAIN: JPEG encoder workspace pass dispatcher (installed by
-                    // CDSJpegImage::FUN_00467dc0); selects FUN_004676e0 / FUN_00467930 /
-                    // FUN_00467af0 by mode — libjpeg start_pass_* analogue not verified at this
-                    // address
-  iVar1 = param_1[0x52];
+                    // IJG libjpeg-6b jccoefct.c :: start_pass_coef — coef-controller vtable
+                    // start_pass (installed by jinit_c_coef_controller). Zeros iMCU_row_num, calls
+                    // start_iMCU_row, selects compress_data path by J_BUF_MODE:
+                    // 0=jpeg_compress_data (whole_image[0]==NULL), 2=compress_output,
+                    // 3=compress_first_pass (whole_image[0]!=NULL); else ERREXIT
+                    // JERR_BAD_BUFFER_MODE (msg 4).
+  iVar1 = cinfo[0x52];
   *(undefined4 *)(iVar1 + 8) = 0;
-  FUN_00467690((int)param_1);
-  if (param_2 == 0) {
+  start_iMCU_row();
+  if (pass_mode == 0) {
     if (*(int *)(iVar1 + 0x40) != 0) {
-      *(undefined4 *)(*param_1 + 8) = 4;
-      (**(code **)*param_1)(param_1);
+      *(undefined4 *)(*cinfo + 8) = 4;
+      (**(code **)*cinfo)(cinfo);
     }
     *(code **)(iVar1 + 4) = jpeg_compress_data;
     return;
   }
-  if (param_2 != 2) {
-    if (param_2 != 3) {
-      *(undefined4 *)(*param_1 + 8) = 4;
-      (**(code **)*param_1)(param_1);
+  if (pass_mode != 2) {
+    if (pass_mode != 3) {
+      *(undefined4 *)(*cinfo + 8) = 4;
+      (**(code **)*cinfo)(cinfo);
       return;
     }
     if (*(int *)(iVar1 + 0x40) == 0) {
-      *(undefined4 *)(*param_1 + 8) = 4;
-      (**(code **)*param_1)(param_1);
+      *(undefined4 *)(*cinfo + 8) = 4;
+      (**(code **)*cinfo)(cinfo);
     }
     *(code **)(iVar1 + 4) = compress_first_pass;
     return;
   }
   if (*(int *)(iVar1 + 0x40) == 0) {
-    *(undefined4 *)(*param_1 + 8) = 4;
-    (**(code **)*param_1)(param_1);
+    *(undefined4 *)(*cinfo + 8) = 4;
+    (**(code **)*cinfo)(cinfo);
   }
-  *(code **)(iVar1 + 4) = FUN_00467930;
+  *(code **)(iVar1 + 4) = compress_output;
   return;
 }
 
@@ -160252,7 +160573,7 @@ void __cdecl CDSJpegImage::jinit_c_coef_controller(int param_1,char param_2)
                     // rows; no IJG name in jpeg_decoder.md
   puVar2 = (undefined4 *)(*(code *)**(undefined4 **)(param_1 + 4))(param_1,1,0x68);
   *(undefined4 **)(param_1 + 0x148) = puVar2;
-  *puVar2 = _Globals::FUN_00467d10;
+  *puVar2 = _Globals::start_pass_coef;
   if (param_2 == '\0') {
     iVar6 = (**(code **)(*(int *)(param_1 + 4) + 4))(param_1,1,0x500);
     puVar2[7] = iVar6 + 0x80;
@@ -160579,7 +160900,7 @@ LAB_00468264:
 
 
 
-uint __cdecl _Globals::FUN_004683a0(char param_1)
+uint __cdecl _Globals::emit_restart(void *state,char restart_num)
 
 {
   char cVar1;
@@ -160590,9 +160911,10 @@ uint __cdecl _Globals::FUN_004683a0(char param_1)
   int iVar3;
   int *piVar4;
   
-                    // UNCERTAIN: Called from encode_mcu when restart_interval and coef +0x24==0;
-                    // emits byte (param-0x30) via entropy buffer — libjpeg jchuff.c emit_restart
-                    // candidate (not COFF-verified).
+                    // IJG jchuff.c LOCAL emit_restart(working_state*, int): flush_bits_s; emit 0xFF
+                    // + (RST0+restart_num); zero state+0x10 last_dc_val[comps_in_scan]. Sole caller
+                    // encode_mcu@0x00468484 when restart_interval && restarts_to_go==0. Duplicate
+                    // emit_restart@0x00468fd0 is entropy/EOBRUN path.
   uVar2 = flush_bits_s();
   if ((char)uVar2 == '\0') {
 LAB_004683b4:
@@ -160607,7 +160929,7 @@ LAB_004683b4:
     uVar2 = CONCAT31(extraout_var,cVar1);
     if (cVar1 == '\0') goto LAB_004683b4;
   }
-  *(char *)*in_EAX = param_1 + -0x30;
+  *(char *)*in_EAX = (char)state + -0x30;
   *in_EAX = *in_EAX + 1;
   piVar4 = in_EAX + 1;
   *piVar4 = *piVar4 + -1;
@@ -160640,6 +160962,7 @@ uint __cdecl _Globals::encode_mcu(int *param_1,int param_2)
   int *piVar5;
   uint uVar6;
   int iVar7;
+  char unaff_DI;
   undefined4 local_24;
   undefined4 local_20;
   undefined4 local_1c;
@@ -160659,7 +160982,7 @@ uint __cdecl _Globals::encode_mcu(int *param_1,int param_2)
   local_14[3] = *(undefined4 *)(iVar3 + 0x20);
   local_4 = param_1;
   if ((param_1[0x2f] != 0) && (*(int *)(iVar3 + 0x24) == 0)) {
-    uVar6 = FUN_004683a0((char)*(undefined4 *)(iVar3 + 0x28));
+    uVar6 = emit_restart(*(void **)(iVar3 + 0x28),unaff_DI);
     if ((char)uVar6 == '\0') {
       return uVar6;
     }
@@ -160702,7 +161025,7 @@ uint __cdecl _Globals::encode_mcu(int *param_1,int param_2)
 
 
 
-void __cdecl _Globals::FUN_00468590(int *param_1)
+void __cdecl _Globals::finish_pass_huff(int *cinfo)
 
 {
   undefined4 uVar1;
@@ -160716,12 +161039,13 @@ void __cdecl _Globals::FUN_00468590(int *param_1)
   undefined4 uVar9;
   undefined4 uVar10;
   
-                    // UNCERTAIN: libjpeg-6b jchuff.c bit-emitter state restore on FUN_004681d0
-                    // failure; installed as cinfo[0x57]+8 callback from FUN_00468be0 when
-                    // param_2==0. Pair with FUN_00468420 save/restore emit path.
-  uVar1 = *(undefined4 *)param_1[6];
-  uVar2 = ((undefined4 *)param_1[6])[1];
-  iVar3 = param_1[0x57];
+                    // IJG jchuff.c finish_pass_huff (LOCAL): non-progressive path — save
+                    // dest+entropy.saved, flush_bits_s, restore; ERREXIT JERR_CANT_SUSPEND(0x18) on
+                    // suspend. Installed as entropy->pub.finish_pass @ FUN_00468be0 when param_2==0
+                    // (emit mode). Sibling finish_pass_gather @ +8 when gather.
+  uVar1 = *(undefined4 *)cinfo[6];
+  uVar2 = ((undefined4 *)cinfo[6])[1];
+  iVar3 = cinfo[0x57];
   uVar4 = *(undefined4 *)(iVar3 + 0xc);
   uVar5 = *(undefined4 *)(iVar3 + 0x10);
   uVar6 = *(undefined4 *)(iVar3 + 0x14);
@@ -160730,11 +161054,11 @@ void __cdecl _Globals::FUN_00468590(int *param_1)
   uVar9 = *(undefined4 *)(iVar3 + 0x20);
   uVar10 = flush_bits_s();
   if ((char)uVar10 == '\0') {
-    *(undefined4 *)(*param_1 + 8) = 0x18;
-    (**(code **)*param_1)(param_1);
+    *(undefined4 *)(*cinfo + 8) = 0x18;
+    (**(code **)*cinfo)(cinfo);
   }
-  *(undefined4 *)param_1[6] = uVar1;
-  *(undefined4 *)(param_1[6] + 4) = uVar2;
+  *(undefined4 *)cinfo[6] = uVar1;
+  *(undefined4 *)(cinfo[6] + 4) = uVar2;
   *(undefined4 *)(iVar3 + 0xc) = uVar4;
   *(undefined4 *)(iVar3 + 0x10) = uVar5;
   *(undefined4 *)(iVar3 + 0x14) = uVar6;
@@ -161033,76 +161357,76 @@ void __cdecl _Globals::finish_pass_gather(int *param_1)
 
 
 
-// libjpeg: jinit_huff_encoder helper
+// IJG jchuff.c start_pass_huff (METHODDEF): entropy pass setup; vtable install from
+// jinit_huff_encoder@0x00468d89. Baseline-only (no progressive branch).
 
-void __cdecl _Globals::FUN_00468be0(int *param_1,char param_2)
+void __cdecl _Globals::start_pass_huff(void *cinfo,char gather_statistics)
 
 {
   int iVar1;
   int iVar2;
   int iVar3;
-  int *piVar4;
+  void *pvVar4;
   undefined4 uVar5;
   int local_8;
   undefined4 *local_4;
   
-                    // UNCERTAIN: libjpeg-6b Huffman pass setup — installs encode callbacks
-                    // FUN_00468420/FUN_00468590 or LAB_00468740/finish_pass_gather @ 0x00468af0 on
-                    // cinfo[0x57]; called from CDSJpegImage::FUN_00468d70. Likely jchuff.c
-                    // start_pass_huff (encode) but param_2 paths need cross-check vs batch_45
-                    // notes.
-  piVar4 = param_1;
-  iVar1 = param_1[0x57];
-  if (param_2 == '\0') {
+                    // R8 task40: gather_statistics param_2 — 0: encode_mcu@0x468420 +
+                    // finish_pass_huff FUN_00468590; 1: encode_mcu_gather LAB_00468740 +
+                    // finish_pass_gather@0x468af0. JERR_NO_HUFF_TABLE 0x32;
+                    // jpeg_make_c_derived_tbl; count tables 0x404.
+  pvVar4 = cinfo;
+  iVar1 = *(int *)((int)cinfo + 0x15c);
+  if (gather_statistics == '\0') {
     *(code **)(iVar1 + 4) = encode_mcu;
-    *(code **)(iVar1 + 8) = FUN_00468590;
+    *(code **)(iVar1 + 8) = finish_pass_huff;
   }
   else {
     *(undefined1 **)(iVar1 + 4) = &LAB_00468740;
     *(code **)(iVar1 + 8) = finish_pass_gather;
   }
   local_8 = 0;
-  if (0 < param_1[0x39]) {
+  if (0 < *(int *)((int)cinfo + 0xe4)) {
     local_4 = (undefined4 *)(iVar1 + 0x14);
-    param_1 = param_1 + 0x3a;
+    cinfo = (void *)((int)cinfo + 0xe8);
     do {
-      iVar2 = *(int *)(*param_1 + 0x14);
-      iVar3 = *(int *)(*param_1 + 0x18);
-      if (param_2 == '\0') {
-        jpeg_make_c_derived_tbl(piVar4,'\x01',iVar2,(int *)(iVar1 + 0x2c + iVar2 * 4));
-        jpeg_make_c_derived_tbl(piVar4,'\0',iVar3,(int *)(iVar1 + 0x3c + iVar3 * 4));
+      iVar2 = *(int *)(*(int *)cinfo + 0x14);
+      iVar3 = *(int *)(*(int *)cinfo + 0x18);
+      if (gather_statistics == '\0') {
+        jpeg_make_c_derived_tbl(pvVar4,'\x01',iVar2,(int *)(iVar1 + 0x2c + iVar2 * 4));
+        jpeg_make_c_derived_tbl(pvVar4,'\0',iVar3,(int *)(iVar1 + 0x3c + iVar3 * 4));
       }
       else {
         if ((iVar2 < 0) || (3 < iVar2)) {
-          *(undefined4 *)(*piVar4 + 8) = 0x32;
-          *(int *)(*piVar4 + 0xc) = iVar2;
-          (**(code **)*piVar4)(piVar4);
+          *(undefined4 *)(*(int *)pvVar4 + 8) = 0x32;
+          *(int *)(*(int *)pvVar4 + 0xc) = iVar2;
+          (*(code *)**(undefined4 **)pvVar4)(pvVar4);
         }
         if ((iVar3 < 0) || (3 < iVar3)) {
-          *(undefined4 *)(*piVar4 + 8) = 0x32;
-          *(int *)(*piVar4 + 0xc) = iVar3;
-          (**(code **)*piVar4)(piVar4);
+          *(undefined4 *)(*(int *)pvVar4 + 8) = 0x32;
+          *(int *)(*(int *)pvVar4 + 0xc) = iVar3;
+          (*(code *)**(undefined4 **)pvVar4)(pvVar4);
         }
         if (*(int *)(iVar1 + 0x4c + iVar2 * 4) == 0) {
-          uVar5 = (**(code **)piVar4[1])(piVar4,1,0x404);
+          uVar5 = (*(code *)**(undefined4 **)((int)pvVar4 + 4))(pvVar4,1,0x404);
           *(undefined4 *)(iVar1 + 0x4c + iVar2 * 4) = uVar5;
         }
         Runtime::MSVCRT::_memset(*(void **)(iVar1 + 0x4c + iVar2 * 4),0,0x404);
         if (*(int *)(iVar1 + 0x5c + iVar3 * 4) == 0) {
-          uVar5 = (**(code **)piVar4[1])(piVar4,1,0x404);
+          uVar5 = (*(code *)**(undefined4 **)((int)pvVar4 + 4))(pvVar4,1,0x404);
           *(undefined4 *)(iVar1 + 0x5c + iVar3 * 4) = uVar5;
         }
         Runtime::MSVCRT::_memset(*(void **)(iVar1 + 0x5c + iVar3 * 4),0,0x404);
       }
-      param_1 = param_1 + 1;
+      cinfo = (void *)((int)cinfo + 4);
       *local_4 = 0;
       local_8 = local_8 + 1;
       local_4 = local_4 + 1;
-    } while (local_8 < piVar4[0x39]);
+    } while (local_8 < *(int *)((int)pvVar4 + 0xe4));
   }
   *(undefined4 *)(iVar1 + 0xc) = 0;
   *(undefined4 *)(iVar1 + 0x10) = 0;
-  *(int *)(iVar1 + 0x24) = piVar4[0x2f];
+  *(undefined4 *)(iVar1 + 0x24) = *(undefined4 *)((int)pvVar4 + 0xbc);
   *(undefined4 *)(iVar1 + 0x28) = 0;
   return;
 }
@@ -161119,7 +161443,7 @@ void __cdecl CDSJpegImage::jinit_huff_encoder(int param_1)
                     // ghidra_analysis/formats/jpeg_decoder.md
   puVar1 = (undefined4 *)(*(code *)**(undefined4 **)(param_1 + 4))(param_1,1,0x6c);
   *(undefined4 **)(param_1 + 0x15c) = puVar1;
-  *puVar1 = _Globals::FUN_00468be0;
+  *puVar1 = _Globals::start_pass_huff;
   puVar1[0xf] = 0;
   puVar1[0xb] = 0;
   puVar1[0x17] = 0;
@@ -161367,9 +161691,10 @@ void __cdecl _Globals::emit_restart(char param_1)
 
 
 
-// libjpeg: start_pass_huff_decoder helper
+// libjpeg-6b jchuff.c :: encode_mcu_DC_first (progressive DC initial scan); installed @ entropy+4
+// when Ah==0 && Ss==0
 
-undefined4 __cdecl _Globals::FUN_00469060(int *param_1,int param_2)
+bool __cdecl _Globals::encode_mcu_DC_first(int *cinfo,int MCU_data)
 
 {
   int iVar1;
@@ -161381,29 +161706,30 @@ undefined4 __cdecl _Globals::FUN_00469060(int *param_1,int param_2)
   int *local_c;
   byte local_8;
   
-                    // UNCERTAIN: libjpeg jchuff-style bit encoder (emit_bits path); wired by
-                    // FUN_00469770 with sibling FUN_004691b0 using jpeg_natural_order — exact IJG
-                    // export name not verified.
-  piVar2 = param_1;
-  iVar1 = param_1[0x4e];
-  this = (void *)param_1[0x57];
-  *(undefined4 *)((int)this + 0x10) = *(undefined4 *)param_1[6];
-  *(undefined4 *)((int)this + 0x14) = *(undefined4 *)(param_1[6] + 4);
-  if ((param_1[0x2f] != 0) && (*(int *)((int)this + 0x44) == 0)) {
+                    // IJG jchuff.c encode_mcu_DC_first: per-block DC diff after Al point transform;
+                    // emit_dc via emit_ac_symbol + emit_bits_e; JERR_BAD_DCT_COEF if nbits>11.
+                    // Wired from misnamed start_pass_huff_decoder@0x004697a6 (progressive
+                    // start_pass_huff).
+  piVar2 = cinfo;
+  iVar1 = cinfo[0x4e];
+  this = (void *)cinfo[0x57];
+  *(undefined4 *)((int)this + 0x10) = *(undefined4 *)cinfo[6];
+  *(undefined4 *)((int)this + 0x14) = *(undefined4 *)(cinfo[6] + 4);
+  if ((cinfo[0x2f] != 0) && (*(int *)((int)this + 0x44) == 0)) {
     emit_restart((char)*(undefined4 *)((int)this + 0x48));
   }
   iVar5 = 0;
-  if (0 < param_1[0x40]) {
-    local_c = param_1 + 0x41;
+  if (0 < cinfo[0x40]) {
+    local_c = cinfo + 0x41;
     do {
       local_8 = (byte)iVar1;
-      iVar4 = (int)**(short **)(param_2 + iVar5 * 4) >> (local_8 & 0x1f);
-      param_1 = (int *)(iVar4 - *(int *)((int)this + *local_c * 4 + 0x24));
+      iVar4 = (int)**(short **)(MCU_data + iVar5 * 4) >> (local_8 & 0x1f);
+      cinfo = (int *)(iVar4 - *(int *)((int)this + *local_c * 4 + 0x24));
       *(int *)((int)this + *local_c * 4 + 0x24) = iVar4;
-      piVar3 = param_1;
-      if ((int)param_1 < 0) {
-        piVar3 = (int *)-(int)param_1;
-        param_1 = (int *)((int)param_1 + -1);
+      piVar3 = cinfo;
+      if ((int)cinfo < 0) {
+        piVar3 = (int *)-(int)cinfo;
+        cinfo = (int *)((int)cinfo + -1);
       }
       iVar4 = 0;
       if (piVar3 != (int *)0x0) {
@@ -161418,15 +161744,14 @@ undefined4 __cdecl _Globals::FUN_00469060(int *param_1,int param_2)
       }
       emit_ac_symbol(this);
       if (iVar4 != 0) {
-        emit_bits_e(this,(uint)param_1);
+        emit_bits_e(this,(uint)cinfo);
       }
       local_c = local_c + 1;
       iVar5 = iVar5 + 1;
     } while (iVar5 < piVar2[0x40]);
   }
   *(undefined4 *)piVar2[6] = *(undefined4 *)((int)this + 0x10);
-  iVar1 = piVar2[6];
-  *(undefined4 *)(iVar1 + 4) = *(undefined4 *)((int)this + 0x14);
+  *(undefined4 *)(piVar2[6] + 4) = *(undefined4 *)((int)this + 0x14);
   if (piVar2[0x2f] != 0) {
     if (*(int *)((int)this + 0x44) == 0) {
       *(int *)((int)this + 0x44) = piVar2[0x2f];
@@ -161434,7 +161759,7 @@ undefined4 __cdecl _Globals::FUN_00469060(int *param_1,int param_2)
     }
     *(int *)((int)this + 0x44) = *(int *)((int)this + 0x44) + -1;
   }
-  return CONCAT31((int3)((uint)iVar1 >> 8),1);
+  return true;
 }
 
 
@@ -161533,9 +161858,11 @@ undefined4 __cdecl _Globals::encode_one_block(int *param_1,int *param_2)
 
 
 
-// libjpeg: start_pass_huff_decoder (AC tables)
+// R8 task42: progressive Huff gather finish_pass (jchuff.c finish_pass_gather homolog). Sole DATA
+// xref start_pass_huff_decoder@0x004697ea (entropy+8 when gather_statistics). emit_eobrun +
+// jpeg_gen_optimal_table on AC/DC count ptrs.
 
-void __cdecl _Globals::FUN_004696a0(int *param_1)
+void __cdecl _Globals::finish_pass_gather(int *cinfo)
 
 {
   int iVar1;
@@ -161547,21 +161874,20 @@ void __cdecl _Globals::FUN_004696a0(int *param_1)
   char local_8 [4];
   int local_4;
   
-                    // UNCERTAIN: libjpeg-6b jchuff.c entropy finish_pass that calls
-                    // jpeg_gen_optimal_table; installed at entropy+8 when start_pass_huff
-                    // gather_statistics (param_2!=0). Sibling finish_pass_gather @ 0x00468af0 uses
-                    // did_dc/did_ac guards for both tables per component — exact IJG export name
-                    // not verified.
-  local_4 = param_1[0x57];
+                    // IJG jchuff.c finish_pass_gather progressive split (METHODDEF LOCAL).
+                    // Installed by start_pass_huff_decoder@0x00469770 when param_2!=0. Baseline
+                    // finish_pass_gather@0x00468af0 lacks emit_eobrun. Not renamed:
+                    // finish_pass_gather taken.
+  local_4 = cinfo[0x57];
   emit_eobrun();
-  iVar1 = param_1[0x4b];
+  iVar1 = cinfo[0x4b];
   local_8[0] = '\0';
   local_8[1] = '\0';
   local_8[2] = '\0';
   local_8[3] = '\0';
   local_c = 0;
-  if (0 < param_1[0x39]) {
-    local_10 = param_1 + 0x3a;
+  if (0 < cinfo[0x39]) {
+    local_10 = cinfo + 0x3a;
     do {
       if (iVar1 != 0) {
         iVar3 = *(int *)(*local_10 + 0x18);
@@ -161571,23 +161897,22 @@ LAB_00469702:
           if (iVar1 != 0) {
             iVar2 = iVar3 + 0x1a;
           }
-          piVar4 = param_1 + iVar2;
+          piVar4 = cinfo + iVar2;
           if (*piVar4 == 0) {
-            iVar2 = alloc_small((int)param_1);
+            iVar2 = alloc_small((int)cinfo);
             *piVar4 = iVar2;
           }
-          jpeg_gen_optimal_table(param_1,(undefined4 *)*piVar4,*(int *)(local_4 + 0x5c + iVar3 * 4))
-          ;
+          jpeg_gen_optimal_table(cinfo,(undefined4 *)*piVar4,*(int *)(local_4 + 0x5c + iVar3 * 4));
           local_8[iVar3] = '\x01';
         }
       }
-      else if (param_1[0x4d] == 0) {
+      else if (cinfo[0x4d] == 0) {
         iVar3 = *(int *)(*local_10 + 0x14);
         goto LAB_00469702;
       }
       local_10 = local_10 + 1;
       local_c = local_c + 1;
-    } while (local_c < param_1[0x39]);
+    } while (local_c < cinfo[0x39]);
   }
   return;
 }
@@ -161612,7 +161937,7 @@ void __cdecl _Globals::start_pass_huff_decoder(int *param_1,char param_2)
   bVar6 = param_1[0x4b] == 0;
   if (param_1[0x4d] == 0) {
     if (bVar6) {
-      *(code **)(iVar1 + 4) = FUN_00469060;
+      *(code **)(iVar1 + 4) = encode_mcu_DC_first;
     }
     else {
       *(code **)(iVar1 + 4) = encode_one_block;
@@ -161632,7 +161957,7 @@ void __cdecl _Globals::start_pass_huff_decoder(int *param_1,char param_2)
     *(undefined1 **)(iVar1 + 8) = &LAB_00469660;
   }
   else {
-    *(code **)(iVar1 + 8) = FUN_004696a0;
+    *(code **)(iVar1 + 8) = finish_pass_gather;
   }
   local_4 = 0;
   if (0 < param_1[0x39]) {
@@ -161684,15 +162009,17 @@ LAB_00469842:
 
 
 
-// libjpeg: jinit_compress_master (variant)
+// IJG jcphuff.c jinit_phuff_encoder — progressive Huffman entropy init; sole caller
+// jinit_compress_master when progressive_mode (+0xd4) && !arith_code (+0xb1)
 
-void __cdecl CDSJpegImage::FUN_00469900(int param_1)
+void __cdecl CDSJpegImage::jinit_phuff_encoder(int param_1)
 
 {
   undefined4 *puVar1;
   
-                    // UNCERTAIN: jinit_compress_master when progressive — alloc 0x6c entropy
-                    // module, vfunc0=start_pass_huff_decoder; baseline path uses FUN_00468d70
+                    // R8: progressive Huffman entropy init (alloc 0x6c,
+                    // start_pass=start_pass_huff_decoder); jinit_compress_master branch when
+                    // cinfo+0xd4; split from jinit_huff_encoder@0x468d70 baseline path.
   puVar1 = (undefined4 *)(*(code *)**(undefined4 **)(param_1 + 4))(param_1,1,0x6c);
   *(undefined4 **)(param_1 + 0x15c) = puVar1;
   *puVar1 = _Globals::start_pass_huff_decoder;
@@ -161752,9 +162079,10 @@ LAB_0046a7c6:
 
 
 
-// libjpeg: compress_output alloc helper
+// libjpeg-6b jcprepct.c :: expand_bottom_edge homolog (MSVC LOCAL split, 0x2d B);
+// jcopy_sample_rows@0x0045f810
 
-void __cdecl _Globals::FUN_0046a840(size_t param_1)
+void __cdecl _Globals::expand_bottom_edge(size_t num_cols)
 
 {
   int iVar1;
@@ -161762,13 +162090,16 @@ void __cdecl _Globals::FUN_0046a840(size_t param_1)
   int unaff_EBX;
   int unaff_EDI;
   
-                    // UNCERTAIN: libjpeg decompress row refill — loops FUN_0045f810
-                    // (jcopy_sample_rows pattern) when coef buffer empty; sole callers FUN_0046a870
-                    // and compress_output. IJG LOCAL name not verified.
+                    // IJG jcprepct.c expand_bottom_edge homolog (LOCAL split): pad JSAMPARRAY rows
+                    // [input_rows..output_rows) by duplicating row input_rows-1 via
+                    // jcopy_sample_rows. Register args at call: EDI=image_data, EAX=input_rows,
+                    // EBX=output_rows; stack=num_cols. Callers: mislabeled
+                    // compress_output@0x0046aa00 (0x0046ab30), FUN_0046a870 (0x0046a923,
+                    // 0x0046a9d9). No rename — LOCAL, not COFF export.
   if (in_EAX < unaff_EBX) {
     iVar1 = in_EAX + -1;
     do {
-      jcopy_sample_rows(unaff_EDI,iVar1,unaff_EDI,in_EAX,1,param_1);
+      jcopy_sample_rows(unaff_EDI,iVar1,unaff_EDI,in_EAX,1,num_cols);
       in_EAX = in_EAX + 1;
     } while (in_EAX < unaff_EBX);
   }
@@ -161777,10 +162108,12 @@ void __cdecl _Globals::FUN_0046a840(size_t param_1)
 
 
 
+// libjpeg-6b jcprepct.c :: pre_process_data (no context rows)
+
 void __cdecl
-_Globals::FUN_0046a870
-          (int param_1,int param_2,uint *param_3,uint param_4,undefined4 param_5,uint *param_6,
-          uint param_7)
+_Globals::pre_process_data
+          (int *cinfo,int input_buf,uint *in_row_ctr,uint in_rows_avail,int output_buf,
+          uint *out_row_group_ctr,uint out_row_groups_avail)
 
 {
   int *piVar1;
@@ -161790,53 +162123,53 @@ _Globals::FUN_0046a870
   int iVar5;
   int iStack_4;
   
-                    // UNCERTAIN: JPEG decompress output pump — writes param_2 scan rows via
-                    // vtable at param_1+0x150/+0x154; refills via FUN_0046a840→FUN_0045f810.
-                    // Installed by CDSJpegImage::FUN_0046acf0 at writer block+4. No verified IJG
-                    // symbol name at this RVA.
-  iVar5 = *(int *)(param_1 + 0x144);
-  if (*param_3 < param_4) {
-    while (*param_6 < param_7) {
-      uVar4 = *(int *)(param_1 + 0xdc) - *(int *)(iVar5 + 0x34);
-      uVar2 = param_4 - *param_3;
+                    // IJG jcprepct.c pre_process_data: color_convert@prep+0x150 then
+                    // downsample@prep+0x154; bottom pad via expand_bottom_edge homolog
+                    // FUN_0046a840. Wired at prep+4 by jinit_c_prep_controller@0x0046acf0 when
+                    // downsample+8==0. Not decompress; not jccoefct compress_output.
+  iVar5 = cinfo[0x51];
+  if (*in_row_ctr < in_rows_avail) {
+    while (*out_row_group_ctr < out_row_groups_avail) {
+      uVar4 = cinfo[0x37] - *(int *)(iVar5 + 0x34);
+      uVar2 = in_rows_avail - *in_row_ctr;
       if (uVar2 <= uVar4) {
         uVar4 = uVar2;
       }
-      (**(code **)(*(int *)(param_1 + 0x150) + 4))
-                (param_1,param_2 + *param_3 * 4,iVar5 + 8,*(undefined4 *)(iVar5 + 0x34),uVar4);
-      *param_3 = *param_3 + uVar4;
+      (**(code **)(cinfo[0x54] + 4))
+                (cinfo,input_buf + *in_row_ctr * 4,iVar5 + 8,*(undefined4 *)(iVar5 + 0x34),uVar4);
+      *in_row_ctr = *in_row_ctr + uVar4;
       *(int *)(iVar5 + 0x34) = *(int *)(iVar5 + 0x34) + uVar4;
       piVar1 = (int *)(iVar5 + 0x30);
       *piVar1 = *piVar1 - uVar4;
-      if ((*piVar1 == 0) && (*(int *)(iVar5 + 0x34) < *(int *)(param_1 + 0xdc))) {
+      if ((*piVar1 == 0) && (*(int *)(iVar5 + 0x34) < cinfo[0x37])) {
         iStack_4 = 0;
-        if (0 < *(int *)(param_1 + 0x3c)) {
+        if (0 < cinfo[0xf]) {
           do {
-            FUN_0046a840(*(size_t *)(param_1 + 0x1c));
+            expand_bottom_edge(cinfo[7]);
             iStack_4 = iStack_4 + 1;
-          } while (iStack_4 < *(int *)(param_1 + 0x3c));
+          } while (iStack_4 < cinfo[0xf]);
         }
-        *(undefined4 *)(iVar5 + 0x34) = *(undefined4 *)(param_1 + 0xdc);
+        *(int *)(iVar5 + 0x34) = cinfo[0x37];
       }
-      if (*(int *)(iVar5 + 0x34) == *(int *)(param_1 + 0xdc)) {
-        (**(code **)(*(int *)(param_1 + 0x154) + 4))(param_1,iVar5 + 8,0,param_5,*param_6);
+      if (*(int *)(iVar5 + 0x34) == cinfo[0x37]) {
+        (**(code **)(cinfo[0x55] + 4))(cinfo,iVar5 + 8,0,output_buf,*out_row_group_ctr);
         *(undefined4 *)(iVar5 + 0x34) = 0;
-        *param_6 = *param_6 + 1;
+        *out_row_group_ctr = *out_row_group_ctr + 1;
       }
-      if ((*(int *)(iVar5 + 0x30) == 0) && (*param_6 < param_7)) {
+      if ((*(int *)(iVar5 + 0x30) == 0) && (*out_row_group_ctr < out_row_groups_avail)) {
         iVar5 = 0;
-        if (0 < *(int *)(param_1 + 0x3c)) {
-          iVar3 = *(int *)(param_1 + 0x44) + 0xc;
+        if (0 < cinfo[0xf]) {
+          iVar3 = cinfo[0x11] + 0xc;
           do {
-            FUN_0046a840(*(int *)(iVar3 + 0x10) * 8);
+            expand_bottom_edge(*(int *)(iVar3 + 0x10) * 8);
             iVar3 = iVar3 + 0x54;
             iVar5 = iVar5 + 1;
-          } while (iVar5 < *(int *)(param_1 + 0x3c));
+          } while (iVar5 < cinfo[0xf]);
         }
-        *param_6 = param_7;
+        *out_row_group_ctr = out_row_groups_avail;
         return;
       }
-      if (param_4 <= *param_3) {
+      if (in_rows_avail <= *in_row_ctr) {
         return;
       }
     }
@@ -161909,7 +162242,7 @@ _Globals::compress_output
         param_1 = 0;
         if (0 < *(int *)(iVar4 + 0x3c)) {
           do {
-            FUN_0046a840(*(size_t *)(iVar4 + 0x1c));
+            expand_bottom_edge(*(size_t *)(iVar4 + 0x1c));
             param_1 = param_1 + 1;
           } while (param_1 < *(int *)(iVar4 + 0x3c));
         }
@@ -161935,7 +162268,9 @@ _Globals::compress_output
 
 
 
-void CDSJpegImage::FUN_0046abd0(void)
+// libjpeg-6b jcprepct.c :: create_context_buffer (compress CONTEXT_ROWS)
+
+void CDSJpegImage::create_context_buffer(void)
 
 {
   int iVar1;
@@ -161950,9 +162285,13 @@ void CDSJpegImage::FUN_0046abd0(void)
   int iStack_10;
   undefined4 *puStack_c;
   
-                    // UNCERTAIN: coef-buffer prep during CDSJpegImage::FUN_0046acf0 when
-                    // cinfo+0x55+8!=0 (multi-pass compress); merges sample rows before
-                    // compress_output @ 0x0046aa00 is installed.
+                    // IJG libjpeg-6b jcprepct.c LOCAL create_context_buffer (compress): alloc_small
+                    // fake JSAMPROW ring (5×max_v_samp_factor×num_components), per-component
+                    // alloc_sarray (3×rgroup rows), memcpy+wrap pointers,
+                    // prep->color_buf[ci]=fake+rgroup. Sole CALL jinit_c_prep_controller@0x0046ad3d
+                    // when [downsample+8]!=0; cinfo in EDI. Homolog
+                    // _Globals::create_context_buffer@0x00460e80 (decompress split head). R9 other
+                    // task 4.
   iVar4 = *(int *)(unaff_EDI + 0x144);
   iVar1 = *(int *)(unaff_EDI + 0xdc);
   iStack_20 = (*(code *)**(undefined4 **)(unaff_EDI + 4))();
@@ -161989,9 +162328,14 @@ void CDSJpegImage::FUN_0046abd0(void)
 
 
 
-// libjpeg: jinit_compress_master (variant)
+// libjpeg-6b jcprepct.c :: jinit_c_prep_controller
+// Parameters: cinfo (jpeg_compress_struct*), need_full_buffer (must be FALSE)
+// Algorithm: alloc prep controller (0x40 B) at cinfo+0x144; wire start_pass_prep + pre_process_data
+// or context path
+// Returns: void
+// Caller: jinit_compress_master@0x00460de8 (!raw_data_in branch)
 
-void __cdecl CDSJpegImage::FUN_0046acf0(int *param_1,char param_2)
+void __cdecl CDSJpegImage::jinit_c_prep_controller(int *cinfo,char need_full_buffer)
 
 {
   undefined4 *puVar1;
@@ -161999,34 +162343,35 @@ void __cdecl CDSJpegImage::FUN_0046acf0(int *param_1,char param_2)
   int iVar3;
   int *piVar4;
   
-                    // UNCERTAIN: CDSJpegImage compress coef-controller setup (writer LAB_0046a7f0,
-                    // compress_output or per-comp buffers); caller FUN_00460dc0.
-  if (param_2 != '\0') {
-    *(undefined4 *)(*param_1 + 8) = 4;
-    (**(code **)*param_1)(param_1);
+                    // R8: compress pipeline buffer controller init (alloc 0x40 at cinfo+0x144);
+                    // caller jinit_compress_master@0x460de8; wires FUN_0046a870 or
+                    // compress_output+FUN_0046abd0.
+  if (need_full_buffer != '\0') {
+    *(undefined4 *)(*cinfo + 8) = 4;
+    (**(code **)*cinfo)(cinfo);
   }
-  puVar1 = (undefined4 *)(**(code **)param_1[1])(param_1,1,0x40);
-  param_1[0x51] = (int)puVar1;
+  puVar1 = (undefined4 *)(**(code **)cinfo[1])(cinfo,1,0x40);
+  cinfo[0x51] = (int)puVar1;
   *puVar1 = &LAB_0046a7f0;
-  if (*(char *)(param_1[0x55] + 8) == '\0') {
-    puVar1[1] = _Globals::FUN_0046a870;
+  if (*(char *)(cinfo[0x55] + 8) == '\0') {
+    puVar1[1] = _Globals::pre_process_data;
     iVar3 = 0;
-    if (0 < param_1[0xf]) {
-      piVar4 = (int *)(param_1[0x11] + 8);
+    if (0 < cinfo[0xf]) {
+      piVar4 = (int *)(cinfo[0x11] + 8);
       puVar1 = puVar1 + 2;
       do {
-        uVar2 = (**(code **)(param_1[1] + 8))
-                          (param_1,1,(piVar4[5] * param_1[0x36] * 8) / *piVar4,param_1[0x37]);
+        uVar2 = (**(code **)(cinfo[1] + 8))
+                          (cinfo,1,(piVar4[5] * cinfo[0x36] * 8) / *piVar4,cinfo[0x37]);
         *puVar1 = uVar2;
         iVar3 = iVar3 + 1;
         puVar1 = puVar1 + 1;
         piVar4 = piVar4 + 0x15;
-      } while (iVar3 < param_1[0xf]);
+      } while (iVar3 < cinfo[0xf]);
     }
     return;
   }
   puVar1[1] = _Globals::compress_output;
-  FUN_0046abd0();
+  create_context_buffer();
   return;
 }
 
@@ -162054,7 +162399,13 @@ void __thiscall _Globals::expand_right_edge(void *this,int param_1,int param_2)
 
 
 
-void __cdecl _Globals::FUN_0046adf0(int param_1,int *param_2,int param_3,int param_4,int param_5)
+// IJG jdsample.c sep_upsample per-component dispatch (CDS decompress variant). Upsampler method +4
+// installed by CDSJpegImage::FUN_0046b590 @ 0x46b5b5. Stripped vs full sep_upsample@0x4642f0 (no
+// color_convert emit). Corrects erroneous sep_downsample FLIRT name.
+
+void __cdecl
+_Globals::sep_downsample
+          (int cinfo,int *input_buf,int in_row_group_ctr,int *output_buf,int rowgroup_height)
 
 {
   int *piVar1;
@@ -162064,32 +162415,37 @@ void __cdecl _Globals::FUN_0046adf0(int param_1,int *param_2,int param_3,int par
   undefined4 *puVar5;
   int iVar6;
   
-                    // UNCERTAIN: Per-component upsample dispatch (calls fn ptrs at comp+0xc, stride
-                    // 0x54); installed at upsampler+4 by CDSJpegImage::FUN_0046b590 — not
-                    // byte-matched to IJG sep_upsample @ 0x4642f0.
-  iVar3 = param_1;
-  piVar1 = (int *)(param_1 + 0x3c);
-  piVar2 = (int *)(param_1 + 0x154);
-  iVar6 = *(int *)(param_1 + 0x44);
-  param_1 = 0;
+                    // IJG jcsample.c sep_downsample (compress): per-component downsample dispatch.
+                    // Installed at downsampler+4 by jinit_compress_master path
+                    // FUN_0046b590@0x46b5b5. Not decompress sep_upsample@0x4642f0.
+  iVar3 = cinfo;
+  piVar1 = (int *)(cinfo + 0x3c);
+  piVar2 = (int *)(cinfo + 0x154);
+  iVar6 = *(int *)(cinfo + 0x44);
+  cinfo = 0;
   if (0 < *piVar1) {
     puVar5 = (undefined4 *)(*piVar2 + 0xc);
-    iVar4 = param_4 - (int)param_2;
+    iVar4 = (int)output_buf - (int)input_buf;
     do {
-      (*(code *)*puVar5)(iVar3,iVar6,*param_2 + param_3 * 4,
-                         *(int *)(iVar4 + (int)param_2) + *(int *)(iVar6 + 0xc) * param_5 * 4);
-      param_1 = param_1 + 1;
-      param_2 = param_2 + 1;
+      (*(code *)*puVar5)(iVar3,iVar6,*input_buf + in_row_group_ctr * 4,
+                         *(int *)(iVar4 + (int)input_buf) +
+                         *(int *)(iVar6 + 0xc) * rowgroup_height * 4);
+      cinfo = cinfo + 1;
+      input_buf = input_buf + 1;
       puVar5 = puVar5 + 1;
       iVar6 = iVar6 + 0x54;
-    } while (param_1 < *(int *)(iVar3 + 0x3c));
+    } while (cinfo < *(int *)(iVar3 + 0x3c));
   }
   return;
 }
 
 
 
-void __cdecl _Globals::FUN_0046ae80(int *param_1,int param_2,int *param_3,int param_4)
+// IJG jcsample.c int_downsample — integral-ratio box-filter downsample; installed by
+// CDSJpegImage::FUN_0046b590 (jinit_downsampler homolog) when max_h%%h_samp==0 && max_v%%v_samp==0.
+// Distinct from decompress int_upsample@0x4643e0 (replication).
+
+void __cdecl _Globals::int_downsample(int cinfo,int compptr,int *input_data,int output_data)
 
 {
   int iVar1;
@@ -162105,21 +162461,21 @@ void __cdecl _Globals::FUN_0046ae80(int *param_1,int param_2,int *param_3,int pa
   int local_20;
   int local_14;
   
-                    // UNCERTAIN: assigned by jinit upsampler (FUN_0046b590) for integral non-2:1
-                    // ratios; body box-filters/averages—verify vs IJG int_upsample before rename.
-  iVar4 = param_1[0x36] / *(int *)(param_2 + 8);
-  iVar2 = *(int *)(param_2 + 0x1c);
-  iVar5 = param_1[0x37] / *(int *)(param_2 + 0xc);
-  expand_right_edge(param_1,(int)param_3,param_1[0x37]);
+                    // R8 task48: h_expand=cinfo+0xD8/comp+8, v_expand=cinfo+0xDC/comp+0xC;
+                    // expand_right_edge; output (sum+numpix/2)/numpix per IJG int_downsample.
+  iVar4 = *(int *)(cinfo + 0xd8) / *(int *)(compptr + 8);
+  iVar2 = *(int *)(compptr + 0x1c);
+  iVar5 = *(int *)(cinfo + 0xdc) / *(int *)(compptr + 0xc);
+  expand_right_edge((void *)cinfo,(int)input_data,*(int *)(cinfo + 0xdc));
   local_14 = 0;
-  if (0 < *(int *)(param_2 + 0xc)) {
-    param_1 = param_3;
+  if (0 < *(int *)(compptr + 0xc)) {
+    cinfo = (int)input_data;
     do {
       iVar9 = 0;
-      puVar3 = *(undefined1 **)(param_4 + local_14 * 4);
+      puVar3 = *(undefined1 **)(output_data + local_14 * 4);
       for (iVar1 = iVar2 * 8; iVar1 != 0; iVar1 = iVar1 + -1) {
         iVar8 = 0;
-        piVar10 = param_1;
+        piVar10 = (int *)cinfo;
         local_20 = iVar5;
         if (0 < iVar5) {
           do {
@@ -162140,16 +162496,19 @@ void __cdecl _Globals::FUN_0046ae80(int *param_1,int param_2,int *param_3,int pa
         *puVar3 = (char)((iVar8 + (iVar5 * iVar4) / 2) / (iVar5 * iVar4));
         puVar3 = puVar3 + 1;
       }
-      param_1 = param_1 + iVar5;
+      cinfo = cinfo + iVar5 * 4;
       local_14 = local_14 + 1;
-    } while (local_14 < *(int *)(param_2 + 0xc));
+    } while (local_14 < *(int *)(compptr + 0xc));
   }
   return;
 }
 
 
 
-void __cdecl _Globals::FUN_0046b000(void *param_1,int param_2,undefined4 *param_3,int param_4)
+// R8: H2V1 upsample row (expand_right_edge + dithered (a+b+phase)>>1); DATA xref
+// FUN_0046b590@0x46b651 when comp w*2==image w & h match; IJG jdsample.c slot — symbol h2v1_* UNK
+
+void __cdecl _Globals::h2v1_downsample(void *param_1,int param_2,undefined4 *param_3,int param_4)
 
 {
   int iVar1;
@@ -162159,8 +162518,9 @@ void __cdecl _Globals::FUN_0046b000(void *param_1,int param_2,undefined4 *param_
   uint uVar5;
   int iVar6;
   
-                    // UNCERTAIN: libjpeg-6b per-component upsampler (jinit_upsampler assigns for
-                    // 2h1v); byte match to h2v1_fancy_upsample/h2v1_upsample not verified.
+                    // IJG jcsample.c h2v1_downsample (compress): dithered (a+b+phase)>>1;
+                    // expand_right_edge. Installed by FUN_0046b590@0x46b651 when 2h1v integral
+                    // ratio.
   iVar1 = *(int *)(param_2 + 0x1c);
   expand_right_edge(param_1,(int)param_3,*(int *)((int)param_1 + 0xdc));
   param_1 = (void *)0x0;
@@ -162185,7 +162545,10 @@ void __cdecl _Globals::FUN_0046b000(void *param_1,int param_2,undefined4 *param_
 
 
 
-void __cdecl _Globals::FUN_0046b0b0(void *param_1,int param_2,undefined4 *param_3,int param_4)
+// IJG jdsample.c h2v2_upsample: 2h2v box ((a+b+c+d)+round)>>2; expand_right_edge; installed @
+// FUN_0046b590+0x67f when comp 2:1 and cinfo+0x2d==0 (pairs h2v2_fancy_upsample).
+
+void __cdecl _Globals::h2v2_downsample(void *param_1,int param_2,undefined4 *param_3,int param_4)
 
 {
   int iVar1;
@@ -162196,10 +162559,9 @@ void __cdecl _Globals::FUN_0046b0b0(void *param_1,int param_2,undefined4 *param_
   uint uVar6;
   int local_8;
   
-                    // UNCERTAIN: libjpeg-6b upsample/color path — 2x2 box filter ((a+b+c+d)>>2)
-                    // per output sample. Installed by CDSJpegImage::FUN_0046b590 when component
-                    // size is exactly half image W and H (H2V2). IJG symbol (jdcolor/jdsample) not
-                    // byte-matched yet.
+                    // IJG jcsample.c h2v2_downsample (compress): 2h2v box ((a+b+c+d)+round)>>2;
+                    // expand_right_edge. Installed by FUN_0046b590 when 2:1 comp size and
+                    // cinfo+0xb4==0.
   iVar2 = *(int *)(param_2 + 0x1c);
   expand_right_edge(param_1,(int)param_3,*(int *)((int)param_1 + 0xdc));
   local_8 = 0;
@@ -162301,7 +162663,8 @@ void __cdecl _Globals::h2v2_fancy_upsample(int param_1,int param_2,int param_3,i
 
 
 
-void __cdecl _Globals::FUN_0046b400(int param_1,int param_2,undefined4 *param_3,int param_4)
+void __cdecl
+_Globals::fullsize_smooth_downsample(int cinfo,int compptr,uint *input_data,int output_data)
 
 {
   int iVar1;
@@ -162320,19 +162683,22 @@ void __cdecl _Globals::FUN_0046b400(int param_1,int param_2,undefined4 *param_3,
   uint uVar14;
   int local_c;
   
-                    // UNCERTAIN: CDSJpegImage IDCT output horizontal 1D filter (3-tap); vtable slot
-                    // when component scale matches 1:1 and +0x2d set — paired with FUN_0046adf0
-  iVar3 = *(int *)(param_2 + 0x1c);
-  expand_right_edge(param_3 + -1,(int)(param_3 + -1),*(int *)(param_1 + 0xdc) + 2);
-  iVar11 = (0x80 - *(int *)(param_1 + 0xb4)) * 0x200;
-  iVar8 = *(int *)(param_1 + 0xb4) * 0x40;
+                    // IJG jcsample.c fullsize_smooth_downsample (INPUT_SMOOTHING): 1:1 component
+                    // downsample with 3x3 input smoothing. Installed at downsampler->methods[ci] by
+                    // CDSJpegImage::FUN_0046b590 when h/v match max and cinfo+0xb4
+                    // (smoothing_factor)!=0; sets need_context_rows. Sibling LAB_0046afb0 =
+                    // fullsize_downsample (no smooth). Callee expand_right_edge@0x0046ada0.
+  iVar3 = *(int *)(compptr + 0x1c);
+  expand_right_edge(input_data + -1,(int)(input_data + -1),*(int *)(cinfo + 0xdc) + 2);
+  iVar11 = (0x80 - *(int *)(cinfo + 0xb4)) * 0x200;
+  iVar8 = *(int *)(cinfo + 0xb4) * 0x40;
   local_c = 0;
-  if (0 < *(int *)(param_2 + 0xc)) {
+  if (0 < *(int *)(compptr + 0xc)) {
     do {
-      puVar4 = *(undefined1 **)(param_4 + local_c * 4);
-      pbVar5 = (byte *)param_3[-1];
-      pbVar6 = (byte *)param_3[1];
-      pbVar7 = (byte *)*param_3;
+      puVar4 = *(undefined1 **)(output_data + local_c * 4);
+      pbVar5 = (byte *)input_data[-1];
+      pbVar6 = (byte *)input_data[1];
+      pbVar7 = (byte *)*input_data;
       uVar14 = (uint)*pbVar7;
       iVar13 = (uint)*pbVar5 + *pbVar6 + uVar14;
       pbVar12 = pbVar7 + 1;
@@ -162352,8 +162718,8 @@ void __cdecl _Globals::FUN_0046b400(int param_1,int param_2,undefined4 *param_3,
       *puVar4 = (char)(((iVar9 * 2 - (uint)*pbVar12) + iVar13) * iVar8 + 0x8000 +
                        (uint)*pbVar12 * iVar11 >> 0x10);
       local_c = local_c + 1;
-      param_3 = param_3 + 1;
-    } while (local_c < *(int *)(param_2 + 0xc));
+      input_data = input_data + 1;
+    } while (local_c < *(int *)(compptr + 0xc));
   }
   return;
 }
@@ -162362,7 +162728,7 @@ void __cdecl _Globals::FUN_0046b400(int param_1,int param_2,undefined4 *param_3,
 
 // libjpeg: jinit_compress_master (variant)
 
-void __cdecl CDSJpegImage::FUN_0046b590(int *param_1)
+void __cdecl CDSJpegImage::jinit_downsampler(int *cinfo)
 
 {
   int iVar1;
@@ -162372,43 +162738,43 @@ void __cdecl CDSJpegImage::FUN_0046b590(int *param_1)
   undefined4 *puVar5;
   int iStack_4;
   
-                    // UNCERTAIN: libjpeg-6b jinit_upsampler-equivalent method picker (alloc
-                    // 0x34-byte upsampler, per-component h2v2/h2v1/int slots); called from
-                    // FUN_00460dc0 decompress init; distinct from _Globals::jinit_upsampler @
-                    // 0x4647a0.
-  puVar3 = (undefined4 *)(**(code **)param_1[1])(param_1,1,0x34);
-  param_1[0x55] = (int)puVar3;
+                    // IJG libjpeg-6b jcsample.c jinit_downsampler: alloc 0x34-byte jpeg_downsampler
+                    // at cinfo+0x154; wire sep_downsample + per-component METHODDEF picker
+                    // (fullsize/h2v1/h2v2/int). Sole caller jinit_compress_master@0x00460de0 when
+                    // !raw_data_in.
+  puVar3 = (undefined4 *)(**(code **)cinfo[1])(cinfo,1,0x34);
+  cinfo[0x55] = (int)puVar3;
   *puVar3 = CDSApp::CDSApp_PreCreateHook;
-  puVar3[1] = _Globals::FUN_0046adf0;
+  puVar3[1] = _Globals::sep_downsample;
   *(undefined1 *)(puVar3 + 2) = 0;
-  if (*(char *)((int)param_1 + 0xb3) != '\0') {
-    *(undefined4 *)(*param_1 + 8) = 0x19;
-    (**(code **)*param_1)(param_1);
+  if (*(char *)((int)cinfo + 0xb3) != '\0') {
+    *(undefined4 *)(*cinfo + 8) = 0x19;
+    (**(code **)*cinfo)(cinfo);
   }
   iStack_4 = 0;
-  if (0 < param_1[0xf]) {
-    piVar4 = (int *)(param_1[0x11] + 0xc);
+  if (0 < cinfo[0xf]) {
+    piVar4 = (int *)(cinfo[0x11] + 0xc);
     puVar5 = puVar3 + 3;
     do {
       iVar1 = piVar4[-1];
-      iVar2 = param_1[0x36];
-      if ((iVar1 == iVar2) && (*piVar4 == param_1[0x37])) {
-        if (param_1[0x2d] == 0) {
+      iVar2 = cinfo[0x36];
+      if ((iVar1 == iVar2) && (*piVar4 == cinfo[0x37])) {
+        if (cinfo[0x2d] == 0) {
           *puVar5 = &LAB_0046afb0;
         }
         else {
-          *puVar5 = _Globals::FUN_0046b400;
+          *puVar5 = _Globals::fullsize_smooth_downsample;
           *(undefined1 *)(puVar3 + 2) = 1;
         }
       }
       else if (iVar1 * 2 == iVar2) {
-        if (*piVar4 == param_1[0x37]) {
-          *puVar5 = _Globals::FUN_0046b000;
+        if (*piVar4 == cinfo[0x37]) {
+          *puVar5 = _Globals::h2v1_downsample;
         }
         else {
-          if ((iVar1 * 2 != iVar2) || (*piVar4 * 2 != param_1[0x37])) goto LAB_0046b687;
-          if (param_1[0x2d] == 0) {
-            *puVar5 = _Globals::FUN_0046b0b0;
+          if ((iVar1 * 2 != iVar2) || (*piVar4 * 2 != cinfo[0x37])) goto LAB_0046b687;
+          if (cinfo[0x2d] == 0) {
+            *puVar5 = _Globals::h2v2_downsample;
           }
           else {
             *puVar5 = _Globals::h2v2_fancy_upsample;
@@ -162418,18 +162784,18 @@ void __cdecl CDSJpegImage::FUN_0046b590(int *param_1)
       }
       else {
 LAB_0046b687:
-        if ((iVar2 % iVar1 == 0) && (param_1[0x37] % *piVar4 == 0)) {
-          *puVar5 = _Globals::FUN_0046ae80;
+        if ((iVar2 % iVar1 == 0) && (cinfo[0x37] % *piVar4 == 0)) {
+          *puVar5 = _Globals::int_downsample;
         }
         else {
-          *(undefined4 *)(*param_1 + 8) = 0x26;
-          (**(code **)*param_1)(param_1);
+          *(undefined4 *)(*cinfo + 8) = 0x26;
+          (**(code **)*cinfo)(cinfo);
         }
       }
       iStack_4 = iStack_4 + 1;
       puVar5 = puVar5 + 1;
       piVar4 = piVar4 + 0x15;
-    } while (iStack_4 < param_1[0xf]);
+    } while (iStack_4 < cinfo[0xf]);
   }
   return;
 }
@@ -163043,7 +163409,10 @@ void CDSJpegImage::jpeg_validate_script(void)
 
 
 
-void _Globals::FUN_0046c3d0(void)
+// libjpeg-6b jcmaster.c select_scan_parameters — 3× CALL from prepare_for_pass@0x0046c690
+// (ESI=cinfo)
+
+void __cdecl _Globals::select_scan_parameters(int cinfo)
 
 {
   int *piVar1;
@@ -163053,10 +163422,11 @@ void _Globals::FUN_0046c3d0(void)
   int *unaff_ESI;
   int *piVar5;
   
-                    // UNCERTAIN: Progressive JPEG coef-controller helper called with FUN_0046c4c0
-                    // from FUN_0046c690; sets per-component sample row pointers (0x54 stride) and
-                    // MCU layout. JERR 0x1a if num_components>4. Not yet matched to a specific IJG
-                    // jdphuff/jdcoefct symbol.
+                    // IJG jcmaster.c select_scan_parameters: if scan_info@+0xac, bind
+                    // comps_in_scan/cur_comp_info from scan_info[master.scan_number]; progressive
+                    // sets Ss/Se/Ah/Al@+0x12c..+0x138. Else JERR_COMPONENT_COUNT(0x1a) if
+                    // num_components>4; default Ss=0 Se=0x3f Ah=Al=0. Caller FUN_0046c690
+                    // (prepare_for_pass) passes cinfo in ESI; always followed by per_scan_setup.
   if (unaff_ESI[0x2b] != 0) {
     piVar1 = (int *)(unaff_ESI[0x2b] + *(int *)(unaff_ESI[0x4f] + 0x1c) * 0x24);
     unaff_ESI[0x39] = *piVar1;
@@ -163196,39 +163566,42 @@ uint _Globals::per_scan_setup(void)
 
 
 
-void __cdecl _Globals::FUN_0046c690(int *param_1)
+void __cdecl _Globals::prepare_for_pass(int *cinfo)
 
 {
   int iVar1;
   int iVar2;
+  int unaff_EDI;
   
-                    // UNCERTAIN: CDSJpegImage decode state callback (installed by
-                    // CDSJpegImage::FUN_0046c8f0 @ puVar1[0]); branches on *(param_1[0x4f]+0x10).
-  iVar1 = param_1[0x4f];
+                    // IJG jcmaster.c prepare_for_pass: per-pass compress setup;
+                    // switch(master->pass_type @ cinfo+0x13c+0x10). Calls select_scan_parameters +
+                    // per_scan_setup; dispatches module start_pass vtables. Installed as
+                    // jpeg_comp_master slot [0] by jinit_compress_master @ FUN_0046c8f0 (DATA xref
+                    // 0x0046c910). libjpeg-6b.
+  iVar1 = cinfo[0x4f];
   iVar2 = *(int *)(iVar1 + 0x10);
   if (iVar2 == 0) {
-    FUN_0046c3d0();
+    select_scan_parameters(unaff_EDI);
     per_scan_setup();
-    if ((char)param_1[0x2c] == '\0') {
-      (**(code **)param_1[0x54])(param_1);
-      (**(code **)param_1[0x55])(param_1);
-      (**(code **)param_1[0x51])(param_1,0);
+    if ((char)cinfo[0x2c] == '\0') {
+      (**(code **)cinfo[0x54])(cinfo);
+      (**(code **)cinfo[0x55])(cinfo);
+      (**(code **)cinfo[0x51])(cinfo,0);
     }
-    (**(code **)param_1[0x56])(param_1);
-    (**(code **)param_1[0x57])(param_1,*(undefined1 *)((int)param_1 + 0xb2));
-    (**(code **)param_1[0x52])(param_1,(*(int *)(iVar1 + 0x18) < 2) - 1U & 3);
-    (**(code **)param_1[0x50])(param_1,0);
-    *(bool *)(iVar1 + 0xc) = *(char *)((int)param_1 + 0xb2) == '\0';
+    (**(code **)cinfo[0x56])(cinfo);
+    (**(code **)cinfo[0x57])(cinfo,*(undefined1 *)((int)cinfo + 0xb2));
+    (**(code **)cinfo[0x52])(cinfo,(*(int *)(iVar1 + 0x18) < 2) - 1U & 3);
+    (**(code **)cinfo[0x50])(cinfo,0);
+    *(bool *)(iVar1 + 0xc) = *(char *)((int)cinfo + 0xb2) == '\0';
     *(bool *)(iVar1 + 0xd) = *(int *)(iVar1 + 0x14) == *(int *)(iVar1 + 0x18) + -1;
     return;
   }
   if (iVar2 == 1) {
-    FUN_0046c3d0();
+    select_scan_parameters(unaff_EDI);
     per_scan_setup();
-    if (((param_1[0x4b] != 0) || (param_1[0x4d] == 0)) || (*(char *)((int)param_1 + 0xb1) != '\0'))
-    {
-      (**(code **)param_1[0x57])(param_1,1);
-      (**(code **)param_1[0x52])(param_1,2);
+    if (((cinfo[0x4b] != 0) || (cinfo[0x4d] == 0)) || (*(char *)((int)cinfo + 0xb1) != '\0')) {
+      (**(code **)cinfo[0x57])(cinfo,1);
+      (**(code **)cinfo[0x52])(cinfo,2);
       *(undefined1 *)(iVar1 + 0xc) = 0;
       *(bool *)(iVar1 + 0xd) = *(int *)(iVar1 + 0x14) == *(int *)(iVar1 + 0x18) + -1;
       return;
@@ -163237,21 +163610,21 @@ void __cdecl _Globals::FUN_0046c690(int *param_1)
     *(undefined4 *)(iVar1 + 0x10) = 2;
   }
   else if (iVar2 != 2) {
-    *(undefined4 *)(*param_1 + 8) = 0x30;
-    (**(code **)*param_1)(param_1);
+    *(undefined4 *)(*cinfo + 8) = 0x30;
+    (**(code **)*cinfo)(cinfo);
     *(bool *)(iVar1 + 0xd) = *(int *)(iVar1 + 0x14) == *(int *)(iVar1 + 0x18) + -1;
     return;
   }
-  if (*(char *)((int)param_1 + 0xb2) == '\0') {
-    FUN_0046c3d0();
+  if (*(char *)((int)cinfo + 0xb2) == '\0') {
+    select_scan_parameters(unaff_EDI);
     per_scan_setup();
   }
-  (**(code **)param_1[0x57])(param_1,0);
-  (**(code **)param_1[0x52])(param_1,2);
+  (**(code **)cinfo[0x57])(cinfo,0);
+  (**(code **)cinfo[0x52])(cinfo,2);
   if (*(int *)(iVar1 + 0x1c) == 0) {
-    (**(code **)(param_1[0x53] + 4))(param_1);
+    (**(code **)(cinfo[0x53] + 4))(cinfo);
   }
-  (**(code **)(param_1[0x53] + 8))(param_1);
+  (**(code **)(cinfo[0x53] + 8))(cinfo);
   *(undefined1 *)(iVar1 + 0xc) = 0;
   *(bool *)(iVar1 + 0xd) = *(int *)(iVar1 + 0x14) == *(int *)(iVar1 + 0x18) + -1;
   return;
@@ -163259,15 +163632,50 @@ void __cdecl _Globals::FUN_0046c690(int *param_1)
 
 
 
-void __cdecl _Globals::FUN_0046c850(int param_1)
+void __cdecl _Globals::pass_startup(int *cinfo)
 
 {
-                    // UNCERTAIN: CDSJpegImage master-control vtable slot [1] (FUN_0046c690 is slot
-                    // [0]); clears flag at writer+0xc then calls cinfo vtable +4/+8. Installed by
-                    // CDSJpegImage::FUN_0046c8f0.
-  *(undefined1 *)(*(int *)(param_1 + 0x13c) + 0xc) = 0;
-  (**(code **)(*(int *)(param_1 + 0x14c) + 4))(param_1);
-  (**(code **)(*(int *)(param_1 + 0x14c) + 8))(param_1);
+                    // IJG jcmaster.c pass_startup: master->call_pass_startup=FALSE @ master+0xc;
+                    // marker->write_frame_header (+4) + write_scan_header (+8). jpeg_comp_master
+                    // slot [1]; installed by CDSJpegImage::FUN_0046c8f0 @ puVar1[1] (0x0046c916).
+  *(undefined1 *)(cinfo[0x4f] + 0xc) = 0;
+  (**(code **)(cinfo[0x53] + 4))(cinfo);
+  (**(code **)(cinfo[0x53] + 8))(cinfo);
+  return;
+}
+
+
+
+void __cdecl FUN_0046c880(int param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  iVar1 = *(int *)(param_1 + 0x13c);
+  (**(code **)(*(int *)(param_1 + 0x15c) + 8))(param_1);
+  iVar2 = *(int *)(iVar1 + 0x10);
+  if (iVar2 == 0) {
+    *(undefined4 *)(iVar1 + 0x10) = 2;
+    if (*(char *)(param_1 + 0xb2) != '\0') goto LAB_0046c8e5;
+  }
+  else {
+    if (iVar2 == 1) {
+      *(int *)(iVar1 + 0x14) = *(int *)(iVar1 + 0x14) + 1;
+      *(undefined4 *)(iVar1 + 0x10) = 2;
+      return;
+    }
+    if (iVar2 != 2) goto LAB_0046c8e5;
+    if (*(char *)(param_1 + 0xb2) != '\0') {
+      *(int *)(iVar1 + 0x1c) = *(int *)(iVar1 + 0x1c) + 1;
+      *(int *)(iVar1 + 0x14) = *(int *)(iVar1 + 0x14) + 1;
+      *(undefined4 *)(iVar1 + 0x10) = 1;
+      return;
+    }
+  }
+  *(int *)(iVar1 + 0x1c) = *(int *)(iVar1 + 0x1c) + 1;
+LAB_0046c8e5:
+  *(int *)(iVar1 + 0x14) = *(int *)(iVar1 + 0x14) + 1;
   return;
 }
 
@@ -163275,51 +163683,56 @@ void __cdecl _Globals::FUN_0046c850(int param_1)
 
 // libjpeg: jinit_compress_master (variant)
 
-void __cdecl CDSJpegImage::FUN_0046c8f0(int param_1,char param_2)
+void __cdecl CDSJpegImage::jinit_c_master_control(int *cinfo,char transcode_only)
 
 {
   undefined4 *puVar1;
   
-                    // UNCERTAIN: CDSJpegImage decompress coef-controller setup (0x20 callback
-                    // block: FUN_0046c690/FUN_0046c850/LAB_0046c880); caller FUN_00460dc0.
-  puVar1 = (undefined4 *)(*(code *)**(undefined4 **)(param_1 + 4))(param_1,1,0x20);
-  *(undefined4 **)(param_1 + 0x13c) = puVar1;
-  *puVar1 = _Globals::FUN_0046c690;
-  puVar1[1] = _Globals::FUN_0046c850;
-  puVar1[2] = &LAB_0046c880;
+                    // IJG jcmaster.c jinit_c_master_control: alloc_small(0x20) jpeg_comp_master @
+                    // cinfo+0x13c; slots prepare_for_pass/pass_startup/finish_pass; initial_setup;
+                    // scan_info branch; transcode_only sets pass_type;
+                    // total_passes=num_scans*(optimize?2:1). Caller
+                    // jinit_compress_master@0x00460dc8.
+  puVar1 = (undefined4 *)(**(code **)cinfo[1])(cinfo,1,0x20);
+  cinfo[0x4f] = (int)puVar1;
+  *puVar1 = _Globals::prepare_for_pass;
+  puVar1[1] = _Globals::pass_startup;
+  puVar1[2] = FUN_0046c880;
   *(undefined1 *)((int)puVar1 + 0xd) = 0;
   initial_setup();
-  if (*(int *)(param_1 + 0xac) == 0) {
-    *(undefined1 *)(param_1 + 0xd4) = 0;
-    *(undefined4 *)(param_1 + 0xa8) = 1;
+  if (cinfo[0x2b] == 0) {
+    *(undefined1 *)(cinfo + 0x35) = 0;
+    cinfo[0x2a] = 1;
   }
   else {
     jpeg_validate_script();
   }
-  if (*(char *)(param_1 + 0xd4) != '\0') {
-    *(undefined1 *)(param_1 + 0xb2) = 1;
+  if ((char)cinfo[0x35] != '\0') {
+    *(undefined1 *)((int)cinfo + 0xb2) = 1;
   }
-  if (param_2 == '\0') {
+  if (transcode_only == '\0') {
     puVar1[4] = 0;
   }
   else {
-    puVar1[4] = 2 - (uint)(*(char *)(param_1 + 0xb2) != '\0');
+    puVar1[4] = 2 - (uint)(*(char *)((int)cinfo + 0xb2) != '\0');
   }
   puVar1[7] = 0;
   puVar1[5] = 0;
-  if (*(char *)(param_1 + 0xb2) != '\0') {
-    puVar1[6] = *(int *)(param_1 + 0xa8) * 2;
+  if (*(char *)((int)cinfo + 0xb2) != '\0') {
+    puVar1[6] = cinfo[0x2a] * 2;
     return;
   }
-  puVar1[6] = *(undefined4 *)(param_1 + 0xa8);
+  puVar1[6] = cinfo[0x2a];
   return;
 }
 
 
 
-// libjpeg: start_pass_dcolor helper
+// libjpeg jdcolor H2V1 merged upsample+quantize row helper (start_pass_dcolor case 2)
 
-void __cdecl _Globals::FUN_0046db50(int param_1,int param_2,int param_3,int *param_4,int param_5)
+void __cdecl
+_Globals::h2v1_merged_upsample_ycbcr_colormap
+          (int param_1,int param_2,int param_3,int *param_4,int param_5)
 
 {
   undefined1 uVar1;
@@ -163336,9 +163749,10 @@ void __cdecl _Globals::FUN_0046db50(int param_1,int param_2,int param_3,int *par
   int local_20 [7];
   int local_4;
   
-                    // UNCERTAIN: libjpeg-6b component-2 MCU row merge (vtable slot in FUN_00463bc0
-                    // case 2); YCC fixed-point blend 0x73fc/0x28ba/0x1b37 — need jdmerge/jdsample
-                    // symbol match.
+                    // R9 task 63: H2V1 merged upsample+YCbCr->colormap row helper
+                    // (start_pass_dcolor case 2). DATA xrefs @ start_pass_dcolor+0x62/+0xfb. void
+                    // __cdecl 0x470 B. _Globals.cpp body written. LOCAL — no COFF export; keep
+                    // FUN_0046db50.
   piVar4 = *(int **)(param_2 + 0x50);
   iVar2 = *(int *)(param_1 + 0x120) + 0x80;
   psVar3 = (short *)(param_3 + 0x30);
@@ -165746,7 +166160,7 @@ void __cdecl _Globals::pqdownheap(int param_1)
 
 
 
-void __fastcall _Globals::FUN_004713d0(int *param_1)
+void __fastcall _Globals::gen_bitlen_tail(int *param_1)
 
 {
   short sVar1;
@@ -165771,9 +166185,12 @@ void __fastcall _Globals::FUN_004713d0(int *param_1)
   uint local_14;
   int local_10;
   
-                    // UNCERTAIN: Compiler-split tail of IJG jchuff.c gen_huff_coding /
-                    // jpeg_gen_optimal_table (only caller FUN_004725a0). Counts Huffman code
-                    // lengths and applies JPEG max-16-bit length adjustment (+0xb34 bit histogram).
+                    // zlib 1.1.3 trees.c gen_bitlen (compiler-split tail). Sole caller
+                    // build_tree@0x00472776: MOV EAX,deflate_state*; CALL. Clears
+                    // s->bl_count@+0xb34, walks s->heap from s->heap_max+1..HEAP_SIZE(0x23d),
+                    // max_length cap, overflow rebalance, updates
+                    // s->opt_len@+0x16a0/s->static_len@+0x16a4. Followed by gen_codes@0x00472520.
+                    // Not IJG; not audio (R5 w09).
   iVar2 = param_1[1];
   iVar3 = *param_1;
   piVar4 = (int *)param_1[2];
@@ -166573,32 +166990,34 @@ void _Globals::bi_windup(void)
 
 
 
-void __fastcall _Globals::FUN_00472420(int param_1,undefined1 *param_2,int param_3)
+// R9 t65: zlib 1.1.3 copy_block LOCAL (send_bits tail); last_eob_len=8 @+0x16ac; not audio
+
+void __fastcall _Globals::copy_block(uint stored_len,uchar *buf,int emit_len_nlen)
 
 {
   int iVar1;
   byte bVar2;
   
-                    // UNCERTAIN: Writes stored-block LEN/NLEN (4 bytes) then copies buf to pending
-                    // out; UNCONDITIONAL_CALL from send_bits @ 0x004728e1/0x00472908 — zlib 1.1.3
-                    // _tr_stored_block fragment, symbol not COFF-verified.
+                    // zlib 1.1.3 trees.c copy_block (LOCAL): bi_windup; s->last_eob_len(+0x16ac)=8;
+                    // if header put_short LEN+~LEN; copy buf to pending_buf. EAX=deflate_state*
+                    // from send_bits@0x4728e1/0x472908. Not COFF export.
   iVar1 = bi_windup();
   *(undefined4 *)(iVar1 + 0x16ac) = 8;
-  if (param_3 != 0) {
-    *(byte *)(*(int *)(iVar1 + 0x14) + *(int *)(iVar1 + 8)) = (byte)param_1;
+  if (emit_len_nlen != 0) {
+    *(byte *)(*(int *)(iVar1 + 0x14) + *(int *)(iVar1 + 8)) = (byte)stored_len;
     *(int *)(iVar1 + 0x14) = *(int *)(iVar1 + 0x14) + 1;
-    bVar2 = (byte)((uint)param_1 >> 8);
+    bVar2 = (byte)(stored_len >> 8);
     *(byte *)(*(int *)(iVar1 + 0x14) + *(int *)(iVar1 + 8)) = bVar2;
     *(int *)(iVar1 + 0x14) = *(int *)(iVar1 + 0x14) + 1;
-    *(byte *)(*(int *)(iVar1 + 8) + *(int *)(iVar1 + 0x14)) = ~(byte)param_1;
+    *(byte *)(*(int *)(iVar1 + 8) + *(int *)(iVar1 + 0x14)) = ~(byte)stored_len;
     *(int *)(iVar1 + 0x14) = *(int *)(iVar1 + 0x14) + 1;
     *(byte *)(*(int *)(iVar1 + 8) + *(int *)(iVar1 + 0x14)) = ~bVar2;
     *(int *)(iVar1 + 0x14) = *(int *)(iVar1 + 0x14) + 1;
   }
-  for (; param_1 != 0; param_1 = param_1 + -1) {
-    *(undefined1 *)(*(int *)(iVar1 + 0x14) + *(int *)(iVar1 + 8)) = *param_2;
+  for (; stored_len != 0; stored_len = stored_len - 1) {
+    *(uchar *)(*(int *)(iVar1 + 0x14) + *(int *)(iVar1 + 8)) = *buf;
     *(int *)(iVar1 + 0x14) = *(int *)(iVar1 + 0x14) + 1;
-    param_2 = param_2 + 1;
+    buf = buf + 1;
   }
   return;
 }
@@ -166748,7 +167167,7 @@ void __cdecl _Globals::build_tree(int *param_1)
   *(int *)(unaff_ESI + 0x144c) = *(int *)(unaff_ESI + 0x144c) + -1;
   *(undefined4 *)(unaff_ESI + 0xb54 + *(int *)(unaff_ESI + 0x144c) * 4) =
        *(undefined4 *)(unaff_ESI + 0xb58);
-  FUN_004713d0(param_1);
+  gen_bitlen_tail(param_1);
   gen_codes(extraout_ECX,unaff_ESI + 0xb34);
   return;
 }
@@ -166811,13 +167230,13 @@ void __cdecl _Globals::send_bits(int param_1,undefined1 *param_2,int param_3,int
     *(int *)(param_1 + 0x14) = *(int *)(param_1 + 0x14) + 1;
     *(int *)(param_1 + 0x16b4) = iVar1 + -0xd;
     *(ushort *)(param_1 + 0x16b0) = (ushort)param_4 >> (0x10U - (char)iVar1 & 0x1f);
-    FUN_00472420(param_3,param_2,1);
+    copy_block(param_3,param_2,1);
     return;
   }
   *(int *)(param_1 + 0x16b4) = iVar1 + 3;
   *(ushort *)(param_1 + 0x16b0) =
        *(ushort *)(param_1 + 0x16b0) | (ushort)(param_4 << ((byte)iVar1 & 0x1f));
-  FUN_00472420(param_3,param_2,1);
+  copy_block(param_3,param_2,1);
   return;
 }
 
@@ -168381,7 +168800,7 @@ void _Globals::Unwind_004742f0(void)
 {
   int unaff_EBP;
   
-  CDSApp::FUN_0042b3d0(*(undefined4 **)(unaff_EBP + -0x10));
+  CDSApp::CDSApp_ShutdownFromScalarDtor(*(undefined4 **)(unaff_EBP + -0x10));
   return;
 }
 
@@ -168436,7 +168855,7 @@ void _Globals::Unwind_00474350(void)
 {
   int unaff_EBP;
   
-  CDSApp::FUN_0042b3d0(*(undefined4 **)(unaff_EBP + -0x10));
+  CDSApp::CDSApp_ShutdownFromScalarDtor(*(undefined4 **)(unaff_EBP + -0x10));
   return;
 }
 

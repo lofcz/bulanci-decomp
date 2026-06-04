@@ -1,8 +1,6 @@
 #include "_Globals.h"
 
 // !PROLOGUE BEGIN
-// Cross-unit types used in mapping.csv signatures (pointers only in stubs).
-#include "bulanci_fwd.h"
 // zlib::inflate*/deflate* are reached from the matched bodies at 0x434e30
 // and 0x434ee0 (CDSGZipStream::Decompress / Compress).
 #include "zlib.h"
@@ -26,7 +24,7 @@ uchar _Globals::CDsString_EnsureCapacityWide(int* param_1, size_t param_2, void*
 // !FUNC 0x00401060 END
 
 // !FUNC 0x004010f0 BEGIN
-/* 4010F0-40118B 0009B */
+/* 4010F0-40118E 0009E */
 int _Globals::CIntList_BinarySearch(int* param_1, uchar* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004010f0 END
 
@@ -47,7 +45,7 @@ void _Globals::eh_CDSStreamStorage_DeleteCriticalSection(void* param_1) { STUB_B
 
 // !FUNC 0x00401290 BEGIN
 /* 401290-40133F 000AF */
-uchar _Globals::MultiByteToWideChar_Wrapper(CHAR* param_1, int param_2) { STUB_BODY(); return 0; }
+uchar _Globals::MultiByteToWideChar_Wrapper(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00401290 END
 
 // !FUNC 0x00401340 BEGIN
@@ -98,7 +96,7 @@ uchar _Globals::CDSApp_ShowSetupDialog(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00402680 BEGIN
 /* 402680-4026E4 00064 */
-int _Globals::WinMain(HINSTANCE__* param_1, HINSTANCE__* param_2, CHAR* param_3, int param_4) { STUB_BODY(); return 0; }
+int _Globals::WinMain(HINSTANCE param_1, HINSTANCE param_2, int param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00402680 END
 
 // !FUNC 0x00402a90 BEGIN
@@ -140,7 +138,7 @@ uchar _Globals::CListViewer_UpdateContentSize(int* param_1) { STUB_BODY(); retur
 
 // !FUNC 0x004045f0 BEGIN
 /* 4045F0-4046B2 000C2 */
-uchar _Globals::CDsString_AssignFromWideCapped80(WCHAR* param_1, int param_2) { STUB_BODY(); return 0; }
+uchar _Globals::CDsString_AssignFromWideCapped80(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004045f0 END
 
 // !FUNC 0x004046c0 BEGIN
@@ -170,10 +168,6 @@ uint _Globals::CreateObject() { STUB_BODY(); return 0; }
 
 
 
-// !FUNC 0x00405280 BEGIN
-/* 405280-4052D3 00053 */
-int _Globals::FUN_00405280(int* param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x00405280 END
 
 // !FUNC 0x00405370 BEGIN
 /* 405370-40543A 000CA */
@@ -186,7 +180,7 @@ uchar _Globals::CListViewer_ReindexItemsFrom(int param_1) { STUB_BODY(); return 
 // !FUNC 0x00405bc0 END
 
 // !FUNC 0x00405bf0 BEGIN
-/* 405BF0-405C33 00043 */
+/* 405BF0-405C3A 0004A */
 uchar _Globals::CListViewer_ClearSelectedItems(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00405bf0 END
 
@@ -247,7 +241,7 @@ uchar _Globals::CEdit_LayoutToCaretNoAnchor(CEdit* param_1) { STUB_BODY(); retur
 
 // !FUNC 0x004070c0 BEGIN
 /* 4070C0-407218 00158 */
-uint _Globals::CEdit_SubmitText(WCHAR* param_1, char param_2) { STUB_BODY(); return 0; }
+uint _Globals::CEdit_SubmitText(int param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004070c0 END
 
 // !FUNC 0x004072b0 BEGIN
@@ -303,7 +297,7 @@ uchar _Globals::CDsString_WriteHandleToStream(int param_1) { STUB_BODY(); return
 
 // !FUNC 0x00409510 BEGIN
 /* 409510-4095A7 00097 */
-void* _Globals::CDSRegKey_ctor(HKEY__* param_1, int param_2, uchar* param_3) { STUB_BODY(); return 0; }
+void* _Globals::CDSRegKey_ctor(int param_1, int param_2, uchar* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00409510 END
 
 // !FUNC 0x004095b0 BEGIN
@@ -927,7 +921,7 @@ uchar _Globals::DetonatePlayerMines(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041ed60 END
 
 // !FUNC 0x0041f0c0 BEGIN
-/* 41F0C0-41F1C8 00108 */
+/* 41F0C0-41F1CF 0010F */
 uchar _Globals::CGaming_TickPlayerCollisions(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f0c0 END
 
@@ -942,7 +936,7 @@ uchar _Globals::CGaming_SpawnBulletAndPlaySound(int* param_1, uchar param_2, uch
 // !FUNC 0x0041f230 END
 
 // !FUNC 0x0041f350 BEGIN
-/* 41F350-41F4F6 001A6 */
+/* 41F350-41F4FC 001AC */
 uchar _Globals::CGaming_TickRoundStateAndScoring(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041f350 END
 
@@ -1182,8 +1176,8 @@ void _Globals::CDSBackBuffer_FreeImageMember(CDSBackBuffer* param_1) { STUB_BODY
 
 
 // !FUNC 0x00429c00 BEGIN
-/* 429C00-429CA6 000A6 */
-int _Globals::CDSApp_WndProc(HWND__* param_1, int param_2, int param_3, int param_4) { STUB_BODY(); return 0; }
+/* 429C00-429CB6 000B6 */
+int _Globals::CDSApp_WndProc(HWND param_1, int param_2, int param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00429c00 END
 
 // !FUNC 0x00429c8d BEGIN
@@ -1202,12 +1196,12 @@ uchar _Globals::TArray16_ZeroRange(uint* param_1, int param_2) { STUB_BODY(); re
 // !FUNC 0x0042a040 END
 
 // !FUNC 0x0042a070 BEGIN
-/* 42A070-42A12D 000BD */
+/* 42A070-42A130 000C0 */
 int _Globals::CDSApp_DirtyRectList_FindIndex(int* param_1, void* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0042a070 END
 
 // !FUNC 0x0042a130 BEGIN
-/* 42A130-42A1B0 00080 */
+/* 42A130-42A1B6 00086 */
 void _Globals::CDSApp_DirtyRectList_SlideRecords(void* param_1, void* param_2, int param_3) { STUB_BODY(); }
 // !FUNC 0x0042a130 END
 
@@ -1234,7 +1228,7 @@ void _Globals::Catch_0042ab28_WriteExceptionLog(void* param_1, int* param_2, wch
 
 // !FUNC 0x0042aa60 BEGIN
 /* 42AA60-42AB28 000C8 */
-uint _Globals::CDSApp_AppMain(HINSTANCE__** param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
+uint _Globals::CDSApp_AppMain(HINSTANCE* param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0042aa60 END
 
 // !FUNC 0x0042ab28 BEGIN
@@ -1438,7 +1432,7 @@ uchar _Globals::CDsStringAssignFromLong(void* param_1) { STUB_BODY(); return 0; 
 
 // !FUNC 0x0042db60 BEGIN
 /* 42DB60-42DC22 000C2 */
-uchar _Globals::CDsString_WideToMultiByteBuffer(WCHAR* param_1, int param_2) { STUB_BODY(); return 0; }
+uchar _Globals::CDsString_WideToMultiByteBuffer(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0042db60 END
 
 // !FUNC 0x0042dc50 BEGIN
@@ -1556,7 +1550,7 @@ uchar _Globals::CDSQueue_SetCapacity(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0042ef00 BEGIN
 /* 42EF00-42EFE2 000E2 */
-uint _Globals::InitializeByClassId(WCHAR* param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
+uint _Globals::InitializeByClassId(int param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0042ef00 END
 
 
@@ -1567,7 +1561,7 @@ uint _Globals::InitializeByClassId(WCHAR* param_1, uint param_2, int param_3) { 
 
 
 // !FUNC 0x0042f410 BEGIN
-/* 42F410-42F453 00043 */
+/* 42F410-42F45A 0004A */
 uint _Globals::CDSApp_PollEventQueue() { STUB_BODY(); return 0; }
 // !FUNC 0x0042f410 END
 
@@ -1930,17 +1924,17 @@ uint _Globals::CDSGZipStream_Compress_static(uint param_1, int param_2, uint* pa
 // !FUNC 0x00434ee0 END
 
 // !FUNC 0x00435050 BEGIN
-/* 435050-435137 000E7 */
+/* 435050-435140 000F0 */
 uchar _Globals::CDSGZipStream_ReadBufferAt(uint param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00435050 END
 
 // !FUNC 0x00435140 BEGIN
-/* 435140-435215 000D5 */
+/* 435140-435218 000D8 */
 uchar _Globals::CDSGZipStream_WriteBuffer(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00435140 END
 
 // !FUNC 0x004354a0 BEGIN
-/* 4354A0-43561A 0017A */
+/* 4354A0-43561D 0017D */
 uchar _Globals::CDSGZipStream_CloseInt(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004354a0 END
 
@@ -2040,12 +2034,12 @@ uchar _Globals::NotifyDirtyAll(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x00437440 BEGIN
 /* 437440-437502 000C2 */
-uchar _Globals::WideCharToMultiByte_Wrapper(WCHAR* param_1, int param_2) { STUB_BODY(); return 0; }
+uchar _Globals::WideCharToMultiByte_Wrapper(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00437440 END
 
 // !FUNC 0x004375e0 BEGIN
-/* 4375E0-437AB7 004D7 */
-uchar _Globals::TextShaper_LayOutAndRender(WCHAR* param_1, tagRECT* param_2, CPoemScroller* param_3, uint* param_4) { STUB_BODY(); return 0; }
+/* 4375E0-437ABA 004DA */
+uchar _Globals::TextShaper_LayOutAndRender(int param_1, tagRECT* param_2, CPoemScroller* param_3, uint* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x004375e0 END
 
 // !FUNC 0x00437b00 BEGIN
@@ -2060,7 +2054,7 @@ uchar _Globals::CDSRegKeyException_ThrowFromWin32(uint param_1) { STUB_BODY(); r
 
 // !FUNC 0x00437d60 BEGIN
 /* 437D60-437E1A 000BA */
-uchar _Globals::InitializeRegistryKey(HKEY__* param_1, WCHAR* param_2, int param_3) { STUB_BODY(); return 0; }
+uchar _Globals::InitializeRegistryKey(int param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00437d60 END
 
 // !FUNC 0x00437ed0 BEGIN
@@ -2105,7 +2099,7 @@ uchar** _Globals::CDSScript_StrmCreateMem(CDSScript* param_1) { STUB_BODY(); ret
 // !FUNC 0x00438960 END
 
 // !FUNC 0x00438b30 BEGIN
-/* 438B30-438C23 000F3 */
+/* 438B30-438C3B 0010B */
 uint _Globals::CDSScript_Run(uint param_1, int param_2, void* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00438b30 END
 
@@ -2277,7 +2271,7 @@ void _Globals::CDSAudioPlayer_SetVolumePercent(uint param_1) { STUB_BODY(); }
 
 
 // !FUNC 0x0043a590 BEGIN
-/* 43A590-43A5D3 00043 */
+/* 43A590-43A5D6 00046 */
 uchar _Globals::CDSAudioPlayer_StopAll() { STUB_BODY(); return 0; }
 // !FUNC 0x0043a590 END
 
@@ -2366,7 +2360,7 @@ uchar _Globals::CDSMemQueue_Unlock(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0043c200 END
 
 // !FUNC 0x0043c210 BEGIN
-/* 43C210-43C2C6 000B6 */
+/* 43C210-43C2D7 000C7 */
 uchar _Globals::CDSMemQueue_Read(void* param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0043c210 END
 
@@ -2432,7 +2426,7 @@ uchar _Globals::BlitOpaque_Indexed4_to_Indexed8(int* param_1, uint* param_2, int
 
 // !FUNC 0x0043d5b0 BEGIN
 /* 43D5B0-43D693 000E3 */
-uchar _Globals::FUN_0043d5b0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7) { STUB_BODY(); return 0; }
+uchar _Globals::BlitOpaque_Indexed4_to_RGB565(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7) { STUB_BODY(); return 0; }
 // !FUNC 0x0043d5b0 END
 
 // !FUNC 0x0043d6a0 BEGIN
@@ -2467,7 +2461,7 @@ uchar _Globals::BlitOpaque_Indexed8_to_BGRA32(int* param_1, int* param_2, int pa
 
 // !FUNC 0x0043dae0 BEGIN
 /* 43DAE0-43DBB2 000D2 */
-uchar _Globals::FUN_0043dae0(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8) { STUB_BODY(); return 0; }
+uchar _Globals::BlitOpaque_RGB565_to_Indexed8(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6, uint param_7, int param_8) { STUB_BODY(); return 0; }
 // !FUNC 0x0043dae0 END
 
 // !FUNC 0x0043dbc0 BEGIN
@@ -2498,7 +2492,7 @@ uchar _Globals::Blit_Opaque_24bpp_16bpp(int* param_1, int* param_2, int param_3,
 
 // !FUNC 0x0043e040 BEGIN
 /* 43E040-43E0E7 000A7 */
-uchar _Globals::FUN_0043e040(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6) { STUB_BODY(); return 0; }
+uchar _Globals::BlitOpaque_BGR24_to_BGRA32(int* param_1, int* param_2, int param_3, int param_4, int param_5, int param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x0043e040 END
 
 // !FUNC 0x0043e0f0 BEGIN
@@ -2543,7 +2537,7 @@ uchar _Globals::BlitChromaKey_Indexed2_to_RGB565(int* param_1, uint* param_2, in
 
 // !FUNC 0x0043e740 BEGIN
 /* 43E740-43E813 000D3 */
-uchar _Globals::FUN_0043e740(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8) { STUB_BODY(); return 0; }
+uchar _Globals::BlitDestKey_Indexed2_to_BGR24(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8) { STUB_BODY(); return 0; }
 // !FUNC 0x0043e740 END
 
 // !FUNC 0x0043e820 BEGIN
@@ -2848,7 +2842,7 @@ uchar _Globals::BlitKeyAndMask_1bpp_to_BGR24(int* param_1, uint* param_2, int pa
 
 // !FUNC 0x004438a0 BEGIN
 /* 4438A0-443A2A 0018A */
-uchar _Globals::FUN_004438a0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11) { STUB_BODY(); return 0; }
+uchar _Globals::BlitKeyAndMask_1bpp_to_BGRA32(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11) { STUB_BODY(); return 0; }
 // !FUNC 0x004438a0 END
 
 // !FUNC 0x00443a30 BEGIN
@@ -2863,7 +2857,7 @@ uchar _Globals::BlitAlphaBlend_2bitIndex_BGR24(int* param_1, uint* param_2, int 
 
 // !FUNC 0x00443db0 BEGIN
 /* 443DB0-443F3C 0018C */
-uchar _Globals::FUN_00443db0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11) { STUB_BODY(); return 0; }
+uchar _Globals::BlitAlphaBlend_2bitIndex_BGRA32(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11) { STUB_BODY(); return 0; }
 // !FUNC 0x00443db0 END
 
 // !FUNC 0x00443f40 BEGIN
@@ -2878,7 +2872,7 @@ uchar _Globals::BlitKeyAndMask_4bpp_to_BGR24(int* param_1, uint* param_2, int pa
 
 // !FUNC 0x004442c0 BEGIN
 /* 4442C0-44444A 0018A */
-uchar _Globals::FUN_004442c0(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11) { STUB_BODY(); return 0; }
+uchar _Globals::BlitKeyAndMask_4bpp_to_BGRA32(int* param_1, uint* param_2, int param_3, int param_4, int param_5, int param_6, int param_7, uint param_8, int param_9, int param_10, uint param_11) { STUB_BODY(); return 0; }
 // !FUNC 0x004442c0 END
 
 // !FUNC 0x00444450 BEGIN
@@ -2968,7 +2962,7 @@ uchar* _Globals::Catch_0044712e() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044714a BEGIN
 /* 44714A-44716D 00023 */
-uint _Globals::FUN_0044714a() { STUB_BODY(); return 0; }
+uint _Globals::CDSWorkingThread_ThreadProcEpilogue() { STUB_BODY(); return 0; }
 // !FUNC 0x0044714a END
 
 // !FUNC 0x00447190 BEGIN
@@ -2978,17 +2972,17 @@ uchar _Globals::CDSWorkingThread_StopAndJoin(DWORD param_1) { STUB_BODY(); retur
 
 // !FUNC 0x004473e8 BEGIN
 /* 4473E8-4473F1 00009 */
-uchar _Globals::FUN_004473e8() { STUB_BODY(); return 0; }
+void _Globals::_unlock_4_free_epilog() { STUB_BODY(); }
 // !FUNC 0x004473e8 END
 
 // !FUNC 0x0044751c BEGIN
 /* 44751C-447525 00009 */
-uchar _Globals::FUN_0044751c() { STUB_BODY(); return 0; }
+uchar _Globals::_unlock_4_calloc_impl_epilog() { STUB_BODY(); return 0; }
 // !FUNC 0x0044751c END
 
 // !FUNC 0x004476c1 BEGIN
 /* 4476C1-4476CA 00009 */
-uchar _Globals::FUN_004476c1() { STUB_BODY(); return 0; }
+void _Globals::_unlock_4_realloc_epilog() { STUB_BODY(); }
 // !FUNC 0x004476c1 END
 
 // !FUNC 0x00447897 BEGIN
@@ -3003,27 +2997,27 @@ uchar _Globals::OperatorNewWithBadAlloc(size_t param_1) { STUB_BODY(); return 0;
 
 // !FUNC 0x00447e6c BEGIN
 /* 447E6C-447E72 00006 */
-uchar _Globals::FUN_00447e6c() { STUB_BODY(); return 0; }
+uchar _Globals::_onexit_unlock8_epilog() { STUB_BODY(); return 0; }
 // !FUNC 0x00447e6c END
 
 // !FUNC 0x004486a4 BEGIN
 /* 4486A4-4486BC 00018 */
-uchar _Globals::FUN_004486a4() { STUB_BODY(); return 0; }
+void _Globals::eh_vector_constructor_iterator_unwind_epilog() { STUB_BODY(); }
 // !FUNC 0x004486a4 END
 
 // !FUNC 0x00448765 BEGIN
 /* 448765-44877D 00018 */
-uchar _Globals::FUN_00448765() { STUB_BODY(); return 0; }
+void _Globals::eh_vector_destructor_iterator_unwind_epilog() { STUB_BODY(); }
 // !FUNC 0x00448765 END
 
 // !FUNC 0x004489d1 BEGIN
 /* 4489D1-448A04 00033 */
-errno_t _Globals::FID_conflict_wcslwr_s_l(wchar_t* param_1, size_t param_2, localeinfo_struct* param_3) { STUB_BODY(); return 0; }
+errno_t _Globals::FID_conflict_wcslwr_s_l(wchar_t* param_1, size_t param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004489d1 END
 
 // !FUNC 0x00448a97 BEGIN
 /* 448A97-448A98 00001 */
-void _Globals::FUN_00448a97() { STUB_BODY(); }
+void _Globals::_crt_default_thread_hook_nop() { STUB_BODY(); }
 // !FUNC 0x00448a97 END
 
 // !FUNC 0x00448bfb BEGIN
@@ -3038,12 +3032,12 @@ uint _Globals::check_managed_app() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00449386 BEGIN
 /* 449386-44938F 00009 */
-uchar _Globals::FUN_00449386() { STUB_BODY(); return 0; }
+void _Globals::_unlock_4_V6_HeapAlloc_epilog() { STUB_BODY(); }
 // !FUNC 0x00449386 END
 
 // !FUNC 0x004494ec BEGIN
 /* 4494EC-4494F5 00009 */
-uchar _Globals::FUN_004494ec() { STUB_BODY(); return 0; }
+void _Globals::_unlock_4_msize_epilog() { STUB_BODY(); }
 // !FUNC 0x004494ec END
 
 // !FUNC 0x00449b1b BEGIN
@@ -3053,7 +3047,7 @@ void _Globals::_unlock(int param_1) { STUB_BODY(); }
 
 // !FUNC 0x00449bea BEGIN
 /* 449BEA-449BF3 00009 */
-uchar _Globals::FUN_00449bea() { STUB_BODY(); return 0; }
+void _Globals::_unlock_10_mtinit_epilog() { STUB_BODY(); }
 // !FUNC 0x00449bea END
 
 // !FUNC 0x00449c90 BEGIN
@@ -3063,44 +3057,44 @@ uint* _Globals::_sbh_find_block(void* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044a916 BEGIN
 /* 44A916-44A920 0000A */
-uchar _Globals::FUN_0044a916(uint param_1) { STUB_BODY(); return 0; }
+void _Globals::_initp_encoded_null_callnewh(uint param_1) { STUB_BODY(); }
 // !FUNC 0x0044a916 END
 
 // !FUNC 0x0044a942 BEGIN
 /* 44A942-44A94C 0000A */
-uchar _Globals::FUN_0044a942(uint param_1) { STUB_BODY(); return 0; }
+void _Globals::_initp_encoded_null_invalid_parameter(uint param_1) { STUB_BODY(); }
 // !FUNC 0x0044a942 END
 
 // !FUNC 0x0044ab44 BEGIN
 /* 44AB44-44AB59 00015 */
-uchar _Globals::FUN_0044ab44(uint param_1) { STUB_BODY(); return 0; }
+void* _Globals::_fls_getvalue(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0044ab44 END
 
 // !FUNC 0x0044ab59 BEGIN
 /* 44AB59-44AB5F 00006 */
-uint _Globals::_get_flsindex() {
-    return *reinterpret_cast<uint*>(&DAT_004b1158);
+int _Globals::_get_flsindex() {
+    return static_cast<int>(*reinterpret_cast<uint*>(&DAT_004b1158));
 }
 // !FUNC 0x0044ab59 END
 
 // !FUNC 0x0044ac8a BEGIN
 /* 44AC8A-44AC93 00009 */
-uchar _Globals::FUN_0044ac8a() { STUB_BODY(); return 0; }
+uchar _Globals::_unlock_12_initptd_epilog() { STUB_BODY(); return 0; }
 // !FUNC 0x0044ac8a END
 
 // !FUNC 0x0044ae3a BEGIN
 /* 44AE3A-44AE43 00009 */
-uchar _Globals::FUN_0044ae3a() { STUB_BODY(); return 0; }
+uchar _Globals::_unlock_13_freefls_epilog() { STUB_BODY(); return 0; }
 // !FUNC 0x0044ae3a END
 
 // !FUNC 0x0044ae46 BEGIN
 /* 44AE46-44AE4F 00009 */
-uchar _Globals::FUN_0044ae46() { STUB_BODY(); return 0; }
+void _Globals::_unlock_12_freefls_epilog() { STUB_BODY(); }
 // !FUNC 0x0044ae46 END
 
 // !FUNC 0x0044b1cf BEGIN
 /* 44B1CF-44B1EA 0001B */
-uchar _Globals::FUN_0044b1cf() { STUB_BODY(); return 0; }
+uchar _Globals::_FrameUnwindToState_processing_throw_epilog() { STUB_BODY(); return 0; }
 // !FUNC 0x0044b1cf END
 
 // !FUNC 0x0044b352 BEGIN
@@ -3110,11 +3104,53 @@ uchar _Globals::Catch_All_0044b352() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044b490 BEGIN
 /* 44B490-44B506 00076 */
-uchar _Globals::FUN_0044b490() { STUB_BODY(); return 0; }
+/* CallCatchBlock catch epilogue (VS2005 CRT): sole CALL @ 0x0044b477; no prologue — uses
+   caller EBP/ESI/EDI from CallCatchBlock@0x0044b36a. */
+__declspec(noinline) uchar _Globals::CallCatchBlock_epilog() {
+    int caller_ebp = 0;
+    EHExceptionRecord* exception_record = 0;
+    int registration_edi = 0;
+    __asm {
+        mov caller_ebp, ebp
+        mov exception_record, esi
+        mov registration_edi, edi
+    }
+    char* const frame = reinterpret_cast<char*>(caller_ebp);
+    int* const registration = reinterpret_cast<int*>(registration_edi);
+    *reinterpret_cast<uint*>(reinterpret_cast<char*>(registration) - 4) =
+        *reinterpret_cast<uint*>(frame - 0x24);
+    Runtime::MSVCRT::_FindAndUnlinkFrame(*reinterpret_cast<void**>(frame - 0x28));
+    _tiddata* ptd = Runtime::MSVCRT::_getptd();
+    if (ptd != 0) {
+        *reinterpret_cast<void**>(reinterpret_cast<char*>(ptd) + 0x88) =
+            *reinterpret_cast<void**>(frame - 0x2c);
+        ptd = Runtime::MSVCRT::_getptd();
+        *reinterpret_cast<void**>(reinterpret_cast<char*>(ptd) + 0x8c) =
+            *reinterpret_cast<void**>(frame - 0x30);
+    }
+    if (exception_record != 0) {
+        const uint exc_code = *reinterpret_cast<const uint*>(exception_record);
+        const uint num_params = *reinterpret_cast<const uint*>(
+            reinterpret_cast<const char*>(exception_record) + 0x10);
+        const uint magic = *reinterpret_cast<const uint*>(
+            reinterpret_cast<const char*>(exception_record) + 0x14);
+        if (exc_code == 0xe06d7363 && num_params == 3 &&
+            (magic == 0x19930520 || magic == 0x19930521 || magic == 0x19930522) &&
+            *reinterpret_cast<const int*>(frame - 0x34) == 0 &&
+            *reinterpret_cast<const int*>(frame - 0x1c) != 0) {
+            const int thrown_object = *reinterpret_cast<const int*>(
+                reinterpret_cast<const char*>(exception_record) + 0x18);
+            if (Runtime::MSVCRT::_IsExceptionObjectToBeDestroyed(thrown_object) != 0) {
+                Runtime::MSVCRT::_DestructExceptionObject(exception_record);
+            }
+        }
+    }
+    return 0;
+}
 // !FUNC 0x0044b490 END
 
 // !FUNC 0x0044bfad BEGIN
-/* 44BFAD-44BFFC 0004F */
+/* 44BFAD-44C004 00057 */
 uchar _Globals::fastzero_I(void* param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0044bfad END
 
@@ -3125,42 +3161,50 @@ void _Globals::_crtCorExitProcess(int param_1) { STUB_BODY(); }
 
 // !FUNC 0x0044c1d9 BEGIN
 /* 44C1D9-44C1E2 00009 */
-uchar _Globals::FUN_0044c1d9() { STUB_BODY(); return 0; }
+void _Globals::_lock_8_onexit_prolog() { STUB_BODY(); }
 // !FUNC 0x0044c1d9 END
 
 // !FUNC 0x0044c1e2 BEGIN
 /* 44C1E2-44C1EB 00009 */
-uchar _Globals::FUN_0044c1e2() { STUB_BODY(); return 0; }
+void _Globals::_unlock_8_onexit_stub() { STUB_BODY(); }
 // !FUNC 0x0044c1e2 END
 
 // !FUNC 0x0044c328 BEGIN
-/* 44C328-44C3E4 000BC */
+/* 44C328-44C3F6 000CE */
 uchar _Globals::doexit(int param_1, int param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x0044c328 END
 
 // !FUNC 0x0044c3e1 BEGIN
 /* 44C3E1-44C3F0 0000F */
-uchar _Globals::FUN_0044c3e1() { STUB_BODY(); return 0; }
+void _Globals::_unlock_8_doexit_epilog() { STUB_BODY(); }
 // !FUNC 0x0044c3e1 END
 
 // !FUNC 0x0044c482 BEGIN
 /* 44C482-44C503 00081 */
-uchar _Globals::FUN_0044c482(uint* param_1, uint* param_2, uint param_3) { STUB_BODY(); return 0; }
+uchar _Globals::_VEC_memcpy_movdqa_tail(uint* param_1, uint* param_2, uint param_3) {
+	for (uint blocks = param_3 >> 7; blocks != 0; --blocks) {
+		for (uint i = 0; i < 32; ++i)
+			param_1[i] = param_2[i];
+		param_1 += 32;
+		param_2 += 32;
+	}
+	return 0;
+}
 // !FUNC 0x0044c482 END
 
 // !FUNC 0x0044c895 BEGIN
 /* 44C895-44C89E 00009 */
-uchar _Globals::FUN_0044c895() { STUB_BODY(); return 0; }
+uchar _Globals::_unlock_13_updatetmbcinfo_epilog() { STUB_BODY(); return 0; }
 // !FUNC 0x0044c895 END
 
 // !FUNC 0x0044cc24 BEGIN
 /* 44CC24-44CC2D 00009 */
-uchar _Globals::FUN_0044cc24() { STUB_BODY(); return 0; }
+void _Globals::_unlock_13_setmbcp_epilog() { STUB_BODY(); }
 // !FUNC 0x0044cc24 END
 
 // !FUNC 0x0044d594 BEGIN
 /* 44D594-44D59E 0000A */
-uchar _Globals::FUN_0044d594(uint param_1) { STUB_BODY(); return 0; }
+void _Globals::_initp_encoded_null_purecall(uint param_1) { STUB_BODY(); }
 // !FUNC 0x0044d594 END
 
 // !FUNC 0x0044e3a0 BEGIN
@@ -3185,22 +3229,22 @@ uchar _Globals::write_string(int param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044faab BEGIN
 /* 44FAAB-44FAB5 0000A */
-uchar _Globals::FUN_0044faab(uint param_1) { STUB_BODY(); return 0; }
+void _Globals::_initp_encoded_null_critsec_spin(uint param_1) { STUB_BODY(); }
 // !FUNC 0x0044faab END
 
 // !FUNC 0x0044fcdf BEGIN
 /* 44FCDF-44FCE7 00008 */
-void _Globals::FUN_0044fcdf() { STUB_BODY(); }
+void _Globals::_clear_fatal_exit_flag_hook() { STUB_BODY(); }
 // !FUNC 0x0044fcdf END
 
 // !FUNC 0x0044fe54 BEGIN
 /* 44FE54-44FE57 00003 */
-uchar _Globals::FUN_0044fe54() { STUB_BODY(); return 0; }
+void _Globals::_NLG_unwind_dispatch_stub() { STUB_BODY(); }
 // !FUNC 0x0044fe54 END
 
 // !FUNC 0x0044fe57 BEGIN
-/* 44FE57-44FE84 0002D */
-uint _Globals::FUN_0044fe57() { STUB_BODY(); return 0; }
+/* 44FE57-44FEA7 00050 */
+uint _Globals::_get_sse2_info_probe() { STUB_BODY(); return 0; }
 // !FUNC 0x0044fe57 END
 
 // !FUNC 0x0044ff2d BEGIN
@@ -3210,22 +3254,22 @@ uint _Globals::siglookup(uint param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x004500e2 BEGIN
 /* 4500E2-4500F1 0000F */
-uchar _Globals::FUN_004500e2() { STUB_BODY(); return 0; }
+uchar _Globals::_unlock_0_raise_epilog() { STUB_BODY(); return 0; }
 // !FUNC 0x004500e2 END
 
 // !FUNC 0x0045011e BEGIN
 /* 45011E-450128 0000A */
-void _Globals::FUN_0045011e(uint param_1) { STUB_BODY(); }
+void _Globals::_initp_encoded_null_slot5(uint param_1) { STUB_BODY(); }
 // !FUNC 0x0045011e END
 
 // !FUNC 0x004510db BEGIN
 /* 4510DB-451181 000A6 */
-int _Globals::FID_conflict_atoflt_l(_CRT_FLOAT* param_1, char* param_2, localeinfo_struct* param_3) { STUB_BODY(); return 0; }
+int _Globals::FID_conflict_atoflt_l(_CRT_FLOAT* param_1, char* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004510db END
 
 // !FUNC 0x00451181 BEGIN
 /* 451181-451227 000A6 */
-int _Globals::FID_conflict_atoflt_l_00451181(_CRT_FLOAT* param_1, char* param_2, localeinfo_struct* param_3) { STUB_BODY(); return 0; }
+int _Globals::FID_conflict_atoflt_l_00451181(_CRT_FLOAT* param_1, char* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00451181 END
 
 // !FUNC 0x00451825 BEGIN
@@ -3240,23 +3284,23 @@ int _Globals::FID_conflict_ld12tod_00451d67(_LDBL12* param_1, _CRT_DOUBLE* param
 
 // !FUNC 0x00452869 BEGIN
 /* 452869-452873 0000A */
-void _Globals::FUN_00452869() { STUB_BODY(); }
+void _Globals::_lseeki64_unlock_fhandle_epilog() { STUB_BODY(); }
 // !FUNC 0x00452869 END
 
 // !FUNC 0x00452f0b BEGIN
 /* 452F0B-452F15 0000A */
-uchar _Globals::FUN_00452f0b() { STUB_BODY(); return 0; }
+void _Globals::_write_unlock_fhandle_epilog() { STUB_BODY(); }
 // !FUNC 0x00452f0b END
 
 // !FUNC 0x00452fb7 BEGIN
 /* 452FB7-452FBD 00006 */
-uchar** _Globals::_iob_func() {
-    return reinterpret_cast<uchar**>(&PTR_DAT_004b1d60);
+FILE* _Globals::_iob_func() {
+    return reinterpret_cast<FILE*>(&PTR_DAT_004b1d60);
 }
 // !FUNC 0x00452fb7 END
 
 // !FUNC 0x00453c4c BEGIN
-/* 453C4C-45450E 008C2 */
+/* 453C4C-454514 008C8 */
 uint _Globals::I10_OUTPUT(int param_1, uint param_2, ushort param_3, int param_4, uchar param_5, short* param_6) { STUB_BODY(); return 0; }
 // !FUNC 0x00453c4c END
 
@@ -3281,22 +3325,22 @@ void _Globals::mad_frame_finish(int* param_1) { STUB_BODY(); }
 // !FUNC 0x00458f20 END
 
 // !FUNC 0x00459900 BEGIN
-/* 459900-459B71 00271 */
+/* 459900-459B7A 0027A */
 int _Globals::III_sideinfo(uint param_1, int param_2, uint* param_3, int* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00459900 END
 
 // !FUNC 0x00459b80 BEGIN
-/* 459B80-459E44 002C4 */
+/* 459B80-459E4A 002CA */
 uchar _Globals::decode_mcu(int* param_1, int param_2, int param_3, uchar* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00459b80 END
 
 // !FUNC 0x00459e50 BEGIN
-/* 459E50-45A049 001F9 */
+/* 459E50-45A052 00202 */
 uchar _Globals::III_scalefactors(int param_1, uchar param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00459e50 END
 
 // !FUNC 0x0045a060 BEGIN
-/* 45A060-45A20C 001AC */
+/* 45A060-45A212 001B2 */
 uchar _Globals::III_exponents(uchar* param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0045a060 END
 
@@ -3306,22 +3350,22 @@ uint _Globals::III_huffdec_fixed_mul(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0045a220 END
 
 // !FUNC 0x0045a2c0 BEGIN
-/* 45A2C0-45A9C5 00705 */
+/* 45A2C0-45A9CF 0070F */
 uint _Globals::III_huffdecode(uint* param_1, ushort* param_2, uchar* param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0045a2c0 END
 
 // !FUNC 0x0045a9d0 BEGIN
-/* 45A9D0-45AAF2 00122 */
+/* 45A9D0-45AAFC 0012C */
 uchar _Globals::III_reorder(int param_1, uchar* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0045a9d0 END
 
 // !FUNC 0x0045ab00 BEGIN
-/* 45AB00-45AF96 00496 */
+/* 45AB00-45AFB0 004B0 */
 uint _Globals::III_stereo(int param_1, int param_2, int param_3, uchar* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0045ab00 END
 
 // !FUNC 0x0045afb0 BEGIN
-/* 45AFB0-45B074 000C4 */
+/* 45AFB0-45B077 000C7 */
 uchar _Globals::III_aliasreduce(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0045afb0 END
 
@@ -3342,16 +3386,72 @@ uchar _Globals::dctIV(int* param_1) { STUB_BODY(); return 0; }
 
 // !FUNC 0x0045b480 BEGIN
 /* 45B480-45B52B 000AB */
-void _Globals::FUN_0045b480(int* param_1) { STUB_BODY(); }
+/* libmad III_imdct_l imdct36 split: EDI=z[36] from III_imdct_l@0x45b538, stack arg X. */
+__declspec(noinline) void _Globals::imdct36_post_dctIV_scatter(int* param_1) {
+    int* z;
+    int local_48;
+    int local_44[6];
+    int local_2c[9];
+    int local_8[2];
+    int* puVar1;
+    int* piVar2;
+    int* piVar3;
+    int iVar4;
+
+    __asm {
+        mov z, edi
+    }
+    __asm {
+        mov eax, param_1
+    }
+    dctIV(&local_48);
+    puVar1 = reinterpret_cast<int*>(reinterpret_cast<char*>(z) + 8);
+    iVar4 = 3;
+    do {
+        puVar1[-2] = *reinterpret_cast<int*>(
+            reinterpret_cast<char*>(local_2c) - reinterpret_cast<char*>(z) +
+            reinterpret_cast<char*>(puVar1));
+        puVar1[-1] = *reinterpret_cast<int*>(
+            reinterpret_cast<char*>(local_2c) + (4 - reinterpret_cast<char*>(z)) +
+            reinterpret_cast<char*>(puVar1));
+        *puVar1 = *reinterpret_cast<int*>(
+            reinterpret_cast<char*>(local_2c) + (8 - reinterpret_cast<char*>(z)) +
+            reinterpret_cast<char*>(puVar1));
+        puVar1 = puVar1 + 3;
+        iVar4 = iVar4 - 1;
+    } while (iVar4 != 0);
+    piVar3 = reinterpret_cast<int*>(reinterpret_cast<char*>(z) + 0x2c);
+    piVar2 = local_8;
+    iVar4 = 6;
+    do {
+        piVar3[-2] = -piVar2[1];
+        piVar3[-1] = -*piVar2;
+        *piVar3 = -piVar2[-1];
+        piVar2 = piVar2 - 3;
+        piVar3 = piVar3 + 3;
+        iVar4 = iVar4 - 1;
+    } while (iVar4 != 0);
+    piVar3 = reinterpret_cast<int*>(reinterpret_cast<char*>(z) + 0x74);
+    piVar2 = local_44;
+    iVar4 = 3;
+    do {
+        piVar3[-2] = -piVar2[-1];
+        piVar3[-1] = -*piVar2;
+        *piVar3 = -piVar2[1];
+        piVar2 = piVar2 + 3;
+        piVar3 = piVar3 + 3;
+        iVar4 = iVar4 - 1;
+    } while (iVar4 != 0);
+}
 // !FUNC 0x0045b480 END
 
 // !FUNC 0x0045b530 BEGIN
-/* 45B530-45B792 00262 */
+/* 45B530-45B7A0 00270 */
 void _Globals::III_imdct_l(uint param_1) { STUB_BODY(); }
 // !FUNC 0x0045b530 END
 
 // !FUNC 0x0045b7a0 BEGIN
-/* 45B7A0-45BA80 002E0 */
+/* 45B7A0-45BA86 002E6 */
 uchar _Globals::III_imdct_s(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0045b7a0 END
 
@@ -3361,12 +3461,12 @@ uchar _Globals::III_overlap(int param_1, int param_2, int param_3) { STUB_BODY()
 // !FUNC 0x0045ba90 END
 
 // !FUNC 0x0045bb40 BEGIN
-/* 45BB40-45BBA3 00063 */
+/* 45BB40-45BBA6 00066 */
 uchar _Globals::III_freqinver() { STUB_BODY(); return 0; }
 // !FUNC 0x0045bb40 END
 
 // !FUNC 0x0045bbb0 BEGIN
-/* 45BBB0-45C0DC 0052C */
+/* 45BBB0-45C0F4 00544 */
 int _Globals::III_decode(int* param_1, int param_2, int param_3, uint param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x0045bbb0 END
 
@@ -3406,7 +3506,7 @@ uint _Globals::get_sos() { STUB_BODY(); return 0; }
 // !FUNC 0x0045d560 END
 
 // !FUNC 0x0045d7d0 BEGIN
-/* 45D7D0-45DA44 00274 */
+/* 45D7D0-45DA47 00277 */
 uchar _Globals::get_dht(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0045d7d0 END
 
@@ -3471,31 +3571,38 @@ uchar _Globals::reset_marker_reader(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0045e5f0 END
 
 // !FUNC 0x0045e620 BEGIN
-/* 45E620-45E694 00074 */
+/* 45E620-45E69B 0007B */
 uchar _Globals::jinit_marker_reader(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0045e620 END
 
 // !FUNC 0x0045e6a0 BEGIN
 /* 45E6A0-45E787 000E7 */
 // libjpeg-6b: jpeg_CreateDecompress (jdapimin.c) -- version/struct guards + init.
-uchar _Globals::jpeg_CreateDecompress(int* param_1, int param_2, int param_3) {
+__declspec(noinline) uchar _Globals::jpeg_CreateDecompress(int* param_1, int param_2, int param_3) {
     int iVar1;
-    int* err;
+    int* ecx;
+    int* edx;
 
     param_1[1] = 0;
     if (param_2 != 0x3e) {
-        err = reinterpret_cast<int*>(*param_1);
-        err[2] = 0xc;
-        err[3] = 0x3e;
-        err[4] = param_2;
-        reinterpret_cast<void(__cdecl*)(int*)>(*err)(param_1);
+        ecx = reinterpret_cast<int*>(*param_1);
+        ecx[2] = 0xc;
+        edx = reinterpret_cast<int*>(*param_1);
+        edx[3] = 0x3e;
+        ecx = reinterpret_cast<int*>(*param_1);
+        ecx[4] = param_2;
+        edx = reinterpret_cast<int*>(*param_1);
+        reinterpret_cast<void(__cdecl*)(int*)>(*edx)(param_1);
     }
     if (param_3 != 0x1b0) {
-        err = reinterpret_cast<int*>(*param_1);
-        err[2] = 0x15;
-        err[3] = 0x1b0;
-        err[4] = param_3;
-        reinterpret_cast<void(__cdecl*)(int*)>(*err)(param_1);
+        ecx = reinterpret_cast<int*>(*param_1);
+        ecx[2] = 0x15;
+        edx = reinterpret_cast<int*>(*param_1);
+        edx[3] = 0x1b0;
+        ecx = reinterpret_cast<int*>(*param_1);
+        ecx[4] = param_3;
+        edx = reinterpret_cast<int*>(*param_1);
+        reinterpret_cast<void(__cdecl*)(int*)>(*edx)(param_1);
     }
     iVar1 = *param_1;
     Runtime::MSVCRT::_memset(param_1, 0, 0x1b0);
@@ -3587,12 +3694,12 @@ void _Globals::IJG_jzero_far(void* param_1, size_t param_2) { STUB_BODY(); }
 // !FUNC 0x0045f880 END
 
 // !FUNC 0x0045f8a0 BEGIN
-/* 45F8A0-45FA94 001F4 */
+/* 45F8A0-45FA97 001F7 */
 uchar _Globals::initial_setup() { STUB_BODY(); return 0; }
 // !FUNC 0x0045f8a0 END
 
 // !FUNC 0x0045faa0 BEGIN
-/* 45FAA0-45FC3F 0019F */
+/* 45FAA0-45FC42 001A2 */
 uint _Globals::per_scan_setup() { STUB_BODY(); return 0; }
 // !FUNC 0x0045faa0 END
 
@@ -3632,7 +3739,7 @@ uchar _Globals::jinit_d_main_controller(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0045ff30 END
 
 // !FUNC 0x00460160 BEGIN
-/* 460160-4601EE 0008E */
+/* 460160-4601F5 00095 */
 void _Globals::prepare_range_limit_table(void* param_1) { STUB_BODY(); }
 // !FUNC 0x00460160 END
 
@@ -3667,12 +3774,12 @@ uchar _Globals::emit_2bytes() { STUB_BODY(); return 0; }
 // !FUNC 0x00460570 END
 
 // !FUNC 0x004605a0 BEGIN
-/* 4605A0-460699 000F9 */
+/* 4605A0-4606A0 00100 */
 char _Globals::encode_one_block(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004605a0 END
 
 // !FUNC 0x004606a0 BEGIN
-/* 4606A0-46077E 000DE */
+/* 4606A0-460781 000E1 */
 uchar _Globals::emit_dht(int param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004606a0 END
 
@@ -3717,7 +3824,7 @@ uchar _Globals::write_scan_header(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00460bf0 END
 
 // !FUNC 0x00460cd0 BEGIN
-/* 460CD0-460D57 00087 */
+/* 460CD0-460D5A 0008A */
 uchar _Globals::write_tables_only(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00460cd0 END
 
@@ -3728,22 +3835,179 @@ void _Globals::create_context_buffer() { STUB_BODY(); }
 
 // !FUNC 0x00460f30 BEGIN
 /* 460F30-461072 00142 */
-void _Globals::FUN_00460f30(int param_1) { STUB_BODY(); }
+void _Globals::create_context_buffer_edge_replicate(int param_1) {
+    int max_v_samp_factor;
+    int prep;
+    int comp_idx;
+    int* comp_pi;
+    int* prep_row_base;
+    int samples_per_row;
+    uint** real_rows;
+    int row_base;
+    uint** fake_rows;
+    int loop1_count;
+    uint* pu_loop;
+    uint sample;
+    int loop2_count;
+    uint* pu_fake_mid;
+    uint* pu_row;
+    int loop2_rem;
+    int loop3_count;
+    uint** pu_left;
+
+    max_v_samp_factor = *reinterpret_cast<int*>(param_1 + 0x118);
+    prep = *reinterpret_cast<int*>(param_1 + 0x184);
+    comp_idx = 0;
+    if (*reinterpret_cast<int*>(param_1 + 0x24) <= 0) {
+        return;
+    }
+    comp_pi = reinterpret_cast<int*>(*reinterpret_cast<int*>(param_1 + 0xc4) + 0xc);
+    prep_row_base = reinterpret_cast<int*>(prep + 8);
+    do {
+        samples_per_row = (comp_pi[6] * *comp_pi) / *reinterpret_cast<int*>(param_1 + 0x118);
+        real_rows = *reinterpret_cast<uint***>(*reinterpret_cast<int*>(prep + 0x38) + comp_idx * 4);
+        row_base = *prep_row_base;
+        fake_rows = *reinterpret_cast<uint***>(*reinterpret_cast<int*>(prep + 0x3c) + comp_idx * 4);
+        loop1_count = (max_v_samp_factor + 2) * samples_per_row;
+        if (loop1_count > 0) {
+            pu_loop = fake_rows;
+            do {
+                sample = *reinterpret_cast<uint*>(reinterpret_cast<char*>(pu_loop) + (row_base - reinterpret_cast<int>(fake_rows)));
+                *pu_loop = sample;
+                *reinterpret_cast<uint*>(reinterpret_cast<char*>(real_rows) - reinterpret_cast<char*>(fake_rows) +
+                                          reinterpret_cast<char*>(pu_loop)) = sample;
+                pu_loop = pu_loop + 1;
+                loop1_count = loop1_count - 1;
+            } while (loop1_count != 0);
+        }
+        if (samples_per_row * 2 > 0) {
+            pu_fake_mid = fake_rows + samples_per_row * max_v_samp_factor;
+            pu_row = reinterpret_cast<uint*>(row_base + (max_v_samp_factor - 2) * samples_per_row * 4);
+            loop2_rem = samples_per_row * 2;
+            do {
+                *reinterpret_cast<uint*>(reinterpret_cast<char*>(fake_rows) - row_base + reinterpret_cast<char*>(pu_row)) =
+                    *reinterpret_cast<uint*>(reinterpret_cast<char*>(pu_fake_mid) + (row_base - reinterpret_cast<int>(fake_rows)));
+                *pu_fake_mid = *pu_row;
+                pu_row = pu_row + 1;
+                pu_fake_mid = pu_fake_mid + 1;
+                loop2_rem = loop2_rem - 1;
+            } while (loop2_rem != 0);
+        }
+        if (samples_per_row > 0) {
+            pu_left = real_rows - samples_per_row;
+            loop3_count = samples_per_row;
+            do {
+                *pu_left = *real_rows;
+                pu_left = pu_left + 1;
+                loop3_count = loop3_count - 1;
+            } while (loop3_count != 0);
+        }
+        prep_row_base = prep_row_base + 1;
+        comp_pi = comp_pi + 0x15;
+        comp_idx = comp_idx + 1;
+    } while (comp_idx < *reinterpret_cast<int*>(param_1 + 0x24));
+}
 // !FUNC 0x00460f30 END
 
 // !FUNC 0x00461080 BEGIN
-/* 461080-461154 000D4 */
-void _Globals::FUN_00461080(int param_1) { STUB_BODY(); }
+/* 461080-461157 000D7 */
+void _Globals::pre_process_context_row_replicate(int param_1) { STUB_BODY(); }
 // !FUNC 0x00461080 END
 
 // !FUNC 0x00461160 BEGIN
 /* 461160-4611FA 0009A */
-void _Globals::FUN_00461160(int* param_1) { STUB_BODY(); }
+void _Globals::pre_process_context_row_shift(int* param_1) {
+    int prep;
+    int comp_idx;
+    int* comp;
+    uint samples_per_row;
+    int max_v;
+    uint idx;
+    int row_slots;
+    int shift_count;
+    uint* row_ptr;
+
+    prep = param_1[0x61];
+    comp_idx = 0;
+    if (param_1[9] <= 0) {
+        return;
+    }
+    comp = reinterpret_cast<int*>(param_1[0x31] + 0xc);
+    do {
+        samples_per_row = static_cast<uint>(comp[6] * comp[0]);
+        max_v = param_1[0x46];
+        idx = static_cast<uint>(comp[8]) % samples_per_row;
+        if (static_cast<uint>(comp[8]) % samples_per_row == 0) {
+            idx = samples_per_row;
+        }
+        if (comp_idx == 0) {
+            row_slots = static_cast<int>(samples_per_row) / max_v;
+            *reinterpret_cast<int*>(prep + 0x48) =
+                static_cast<int>(idx - 1) / row_slots + 1;
+        }
+        shift_count = (static_cast<int>(samples_per_row) / max_v) * 2;
+        if (shift_count > 0) {
+            row_ptr = reinterpret_cast<uint*>(
+                *reinterpret_cast<int*>(*reinterpret_cast<int*>(prep + 0x38 +
+                                                                 *reinterpret_cast<int*>(prep + 0x40) * 4) +
+                                        comp_idx * 4) +
+                idx * 4);
+            do {
+                *row_ptr = row_ptr[-1];
+                row_ptr = row_ptr + 1;
+                shift_count = shift_count - 1;
+            } while (shift_count != 0);
+        }
+        comp_idx = comp_idx + 1;
+        comp = comp + 0x15;
+    } while (comp_idx < param_1[9]);
+}
 // !FUNC 0x00461160 END
 
 // !FUNC 0x00461460 BEGIN
 /* 461460-461533 000D3 */
-void _Globals::FUN_00461460(int* param_1, char param_2) { STUB_BODY(); }
+// libjpeg-6b: decompress prep sample-buffer init (jcprepct/jdmainct LOCAL).
+__declspec(noinline) void _Globals::jinit_d_prep_controller_sample_bufs(int* cinfo, char buffer_mode) {
+    uint* prep;
+    int row_height;
+    int comp_idx;
+    int* comp;
+    uint buffer;
+
+    prep = reinterpret_cast<uint*>(
+        (reinterpret_cast<uint*(__cdecl*)(int*, int, int)>(*reinterpret_cast<uint*>(cinfo[1])))(
+            cinfo, 1, 0x50));
+    cinfo[0x61] = reinterpret_cast<int>(prep);
+    *prep = reinterpret_cast<uint>(reinterpret_cast<uintptr_t>(&LAB_004613e0));
+    if (buffer_mode != '\0') {
+        *reinterpret_cast<uint*>(reinterpret_cast<char*>(*cinfo) + 8) = 4;
+        reinterpret_cast<void(__cdecl*)(int*)>(*reinterpret_cast<uint*>(*cinfo))(cinfo);
+    }
+    if (*reinterpret_cast<char*>(cinfo[0x68] + 8) == '\0') {
+        row_height = cinfo[0x46];
+    } else {
+        if (cinfo[0x46] < 2) {
+            *reinterpret_cast<uint*>(reinterpret_cast<char*>(*cinfo) + 8) = 0x2f;
+            reinterpret_cast<void(__cdecl*)(int*)>(*reinterpret_cast<uint*>(*cinfo))(cinfo);
+        }
+        _Globals::create_context_buffer();
+        row_height = cinfo[0x46] + 2;
+    }
+    comp_idx = 0;
+    if (0 < cinfo[9]) {
+        comp = reinterpret_cast<int*>(cinfo[0x31] + 0x24);
+        prep = prep + 2;
+        do {
+            buffer = (reinterpret_cast<uint*(__cdecl*)(int*, int, int, int)>(
+                          *reinterpret_cast<uint*>(reinterpret_cast<char*>(cinfo[1]) + 8)))(
+                cinfo, 1, comp[-2] * *comp, ((comp[-6] * *comp) / cinfo[0x46]) * row_height);
+            *prep = buffer;
+            comp_idx = comp_idx + 1;
+            prep = prep + 1;
+            comp = comp + 0x15;
+        } while (comp_idx < cinfo[9]);
+    }
+}
 // !FUNC 0x00461460 END
 
 // !FUNC 0x00461540 BEGIN
@@ -3752,7 +4016,7 @@ void _Globals::start_iMCU_row() { STUB_BODY(); }
 // !FUNC 0x00461540 END
 
 // !FUNC 0x004615b0 BEGIN
-/* 4615B0-4617EC 0023C */
+/* 4615B0-4617EF 0023F */
 uint _Globals::jpeg_decompress_data(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004615b0 END
 
@@ -3772,7 +4036,7 @@ uchar _Globals::jinit_d_coef_controller(uint* param_1, char param_2) { STUB_BODY
 // !FUNC 0x00462370 END
 
 // !FUNC 0x004624c0 BEGIN
-/* 4624C0-462797 002D7 */
+/* 4624C0-4627A4 002E4 */
 uchar _Globals::jpeg_make_d_derived_tbl(int* param_1, char param_2, int param_3, int* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x004624c0 END
 
@@ -3787,12 +4051,12 @@ uint _Globals::jpeg_huff_decode(uint* param_1, uint param_2, int param_3, int pa
 // !FUNC 0x004628b0 END
 
 // !FUNC 0x00462980 BEGIN
-/* 462980-4629F5 00075 */
+/* 462980-4629FE 0007E */
 uint _Globals::process_restart_00462980() { STUB_BODY(); return 0; }
 // !FUNC 0x00462980 END
 
 // !FUNC 0x00462a00 BEGIN
-/* 462A00-462E16 00416 */
+/* 462A00-462E20 00420 */
 uint _Globals::decode_mcu_00462a00(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00462a00 END
 
@@ -3802,7 +4066,7 @@ uchar _Globals::jinit_huff_decoder(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00462f30 END
 
 // !FUNC 0x00462f80 BEGIN
-/* 462F80-462FFC 0007C */
+/* 462F80-463005 00085 */
 uint _Globals::process_restart() { STUB_BODY(); return 0; }
 // !FUNC 0x00462f80 END
 
@@ -3822,7 +4086,7 @@ uint _Globals::jpeg_decode_mcu_AC_refine(int param_1, int param_2) { STUB_BODY()
 // !FUNC 0x004634a0 END
 
 // !FUNC 0x00463960 BEGIN
-/* 463960-463B40 001E0 */
+/* 463960-463B47 001E7 */
 uchar _Globals::start_pass_huff_decoder(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00463960 END
 
@@ -3867,7 +4131,7 @@ uchar _Globals::int_upsample(int param_1, uint* param_2, uint* param_3, int* par
 // !FUNC 0x004643e0 END
 
 // !FUNC 0x00464660 BEGIN
-/* 464660-46479C 0013C */
+/* 464660-46479F 0013F */
 uchar _Globals::h2v2_smooth_downsample(int param_1, int param_2, uint* param_3, int* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00464660 END
 
@@ -3887,7 +4151,7 @@ uchar _Globals::ycc_rgb_convert(int param_1, int* param_2, int param_3, uint* pa
 // !FUNC 0x00464a60 END
 
 // !FUNC 0x00464ca0 BEGIN
-/* 464CA0-464DE8 00148 */
+/* 464CA0-464DF2 00152 */
 uchar _Globals::ycck_cmyk_convert(int param_1, int* param_2, int param_3, uint* param_4, int param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x00464ca0 END
 
@@ -3922,12 +4186,12 @@ int* _Globals::find_biggest_volume(int param_1, int param_2) { STUB_BODY(); retu
 // !FUNC 0x00465620 END
 
 // !FUNC 0x00465650 BEGIN
-/* 465650-465A42 003F2 */
+/* 465650-465A57 00407 */
 uchar _Globals::update_box(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00465650 END
 
 // !FUNC 0x00465a60 BEGIN
-/* 465A60-465BA5 00145 */
+/* 465A60-465BAA 0014A */
 int _Globals::median_cut(void* param_1, int param_2, int param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00465a60 END
 
@@ -3947,7 +4211,7 @@ uchar _Globals::init_error_limit(int param_1, int param_2, int param_3) { STUB_B
 // !FUNC 0x00465da0 END
 
 // !FUNC 0x00465f70 BEGIN
-/* 465F70-4660E2 00172 */
+/* 465F70-4660E3 00173 */
 uchar _Globals::prescan_quantize(int param_1, int param_2, int param_3, int param_4, int param_5, int param_6, uchar* param_7) { STUB_BODY(); return 0; }
 // !FUNC 0x00465f70 END
 
@@ -3962,7 +4226,7 @@ uchar _Globals::color_quantize3(int param_1, int param_2, int* param_3, int para
 // !FUNC 0x00466230 END
 
 // !FUNC 0x00466300 BEGIN
-/* 466300-4665BB 002BB */
+/* 466300-4665BE 002BE */
 uchar _Globals::h2v2_merged_upsample(int param_1, int param_2, int* param_3, int param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00466300 END
 
@@ -3982,34 +4246,34 @@ uchar _Globals::jinit_2pass_quantizer(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004667d0 END
 
 // !FUNC 0x00466920 BEGIN
-/* 466920-466A02 000E2 */
-int _Globals::FUN_00466920(int* param_1, int* param_2) { STUB_BODY(); return 0; }
+/* 466920-466A07 000E7 */
+int _Globals::compute_sample_table_size(int* param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00466920 END
 
 // !FUNC 0x00466a10 BEGIN
 /* 466A10-466A25 00015 */
-int _Globals::FUN_00466a10(int param_1) { STUB_BODY(); return 0; }
+int _Globals::scale_dither_index_to_byte(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00466a10 END
 
 // !FUNC 0x00466a30 BEGIN
 /* 466A30-466A43 00013 */
-int _Globals::FUN_00466a30(int param_1) { STUB_BODY(); return 0; }
+int _Globals::gen_codes_rounded_idiv_stub(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00466a30 END
 
 // !FUNC 0x00466a50 BEGIN
-/* 466A50-466B64 00114 */
-uchar _Globals::FUN_00466a50(int* param_1) { STUB_BODY(); return 0; }
+/* 466A50-466B6D 0011D */
+uchar _Globals::build_colormap_sample_tables(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00466a50 END
 
 
 // !FUNC 0x00466cc0 BEGIN
-/* 466CC0-466D28 00068 */
-int* _Globals::FUN_00466cc0(int param_1) { STUB_BODY(); return 0; }
+/* 466CC0-466D34 00074 */
+int* _Globals::alloc_scaled_quant_table_from_rdata(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00466cc0 END
 
 // !FUNC 0x00466d40 BEGIN
 /* 466D40-466D90 00050 */
-uchar _Globals::FUN_00466d40() { STUB_BODY(); return 0; }
+uchar _Globals::init_scaled_quant_tables_dedup() { STUB_BODY(); return 0; }
 // !FUNC 0x00466d40 END
 
 // !FUNC 0x00466e40 BEGIN
@@ -4018,28 +4282,91 @@ uchar _Globals::color_quantize(int param_1, int param_2, int* param_3, int param
 // !FUNC 0x00466e40 END
 
 // !FUNC 0x00466f00 BEGIN
-/* 466F00-467011 00111 */
-void _Globals::FUN_00466f00(int* param_1, int param_2, uint* param_3, int param_4) { STUB_BODY(); }
+/* 466F00-467018 00118 */
+void _Globals::merged_upsample_row_non_rgb(int* param_1, int param_2, uint* param_3, int param_4) { STUB_BODY(); }
 // !FUNC 0x00466f00 END
 
 // !FUNC 0x00467020 BEGIN
-/* 467020-467144 00124 */
-void _Globals::FUN_00467020(int* param_1, int param_2, int* param_3, int param_4) { STUB_BODY(); }
+/* 467020-46714D 0012D */
+void _Globals::h2v1_merged_upsample_rgb_row(int* param_1, int param_2, int* param_3, int param_4) { STUB_BODY(); }
 // !FUNC 0x00467020 END
 
 // !FUNC 0x00467150 BEGIN
-/* 467150-4672E9 00199 */
-uchar _Globals::FUN_00467150(int* param_1, int param_2, uint** param_3, int param_4) { STUB_BODY(); return 0; }
+/* 467150-4672F2 001A2 */
+void _Globals::h2v2_fancy_upsample_row(int* param_1, int param_2, uint** param_3, int param_4) { STUB_BODY(); }
 // !FUNC 0x00467150 END
 
 // !FUNC 0x00467300 BEGIN
 /* 467300-467340 00040 */
-void _Globals::FUN_00467300(int* param_1) { STUB_BODY(); }
+void _Globals::alloc_fancy_upsample_row_bufs(int* param_1) { STUB_BODY(); }
 // !FUNC 0x00467300 END
 
 // !FUNC 0x00467340 BEGIN
 /* 467340-467423 000E3 */
-void _Globals::FUN_00467340(int* param_1) { STUB_BODY(); }
+// libjpeg-6b merged-upsampler start_pass (jdmerge.c family LOCAL).
+__declspec(noinline) void _Globals::start_pass_merged_upsampler(int* cinfo) {
+    int upsample;
+    int method;
+    int* color_buf;
+    int comp;
+    int row_bytes;
+
+    upsample = cinfo[0x6a];
+    cinfo[0x1d] = *reinterpret_cast<int*>(upsample + 0x10);
+    method = cinfo[0x13];
+    cinfo[0x1c] = *reinterpret_cast<int*>(upsample + 0x14);
+    if (method == 0) {
+        if (cinfo[0x19] != 3) {
+            *reinterpret_cast<uintptr_t*>(upsample + 4) =
+                reinterpret_cast<uintptr_t>(&LAB_00466d90);
+            return;
+        }
+        *reinterpret_cast<uintptr_t*>(upsample + 4) =
+            reinterpret_cast<uintptr_t>(color_quantize);
+        return;
+    }
+    if (method == 1) {
+        if (cinfo[0x19] == 3) {
+            *reinterpret_cast<uintptr_t*>(upsample + 4) =
+                reinterpret_cast<uintptr_t>(h2v1_merged_upsample_rgb_row);
+        } else {
+            *reinterpret_cast<uintptr_t*>(upsample + 4) =
+                reinterpret_cast<uintptr_t>(merged_upsample_row_non_rgb);
+        }
+        *reinterpret_cast<int*>(upsample + 0x30) = 0;
+        if (*reinterpret_cast<char*>(upsample + 0x1c) == '\0') {
+            using ZlibGenCodesFn = uchar(__cdecl*)(int);
+            reinterpret_cast<ZlibGenCodesFn>(0x00466b70)(reinterpret_cast<int>(cinfo));
+        }
+        if (*reinterpret_cast<int*>(upsample + 0x34) == 0) {
+            init_scaled_quant_tables_dedup();
+            return;
+        }
+    } else {
+        if (method != 2) {
+            *reinterpret_cast<uint*>(reinterpret_cast<char*>(*cinfo) + 8) = 0x30;
+            reinterpret_cast<void(__cdecl*)(int*)>(*reinterpret_cast<uint*>(*cinfo))(cinfo);
+            return;
+        }
+        color_buf = reinterpret_cast<int*>(upsample + 0x44);
+        *reinterpret_cast<uintptr_t*>(upsample + 4) =
+            reinterpret_cast<uintptr_t>(h2v2_fancy_upsample_row);
+        *reinterpret_cast<char*>(upsample + 0x54) = '\0';
+        if (*reinterpret_cast<int*>(upsample + 0x44) == 0) {
+            alloc_fancy_upsample_row_bufs(cinfo);
+        }
+        row_bytes = cinfo[0x17];
+        if (0 < cinfo[0x19]) {
+            comp = 0;
+            do {
+                IJG_jzero_far(reinterpret_cast<void*>(*color_buf),
+                              static_cast<size_t>(row_bytes * 2 + 4));
+                comp = comp + 1;
+                color_buf = color_buf + 1;
+            } while (comp < cinfo[0x19]);
+        }
+    }
+}
 // !FUNC 0x00467340 END
 
 // !FUNC 0x00467460 BEGIN
@@ -4053,17 +4380,17 @@ void _Globals::start_iMCU_row_00467690() { STUB_BODY(); }
 // !FUNC 0x00467690 END
 
 // !FUNC 0x004676e0 BEGIN
-/* 4676E0-46791E 0023E */
+/* 4676E0-467925 00245 */
 uint _Globals::jpeg_compress_data(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004676e0 END
 
 // !FUNC 0x00467930 BEGIN
-/* 467930-467AE2 001B2 */
+/* 467930-467AE5 001B5 */
 bool _Globals::compress_output(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00467930 END
 
 // !FUNC 0x00467af0 BEGIN
-/* 467AF0-467CF8 00208 */
+/* 467AF0-467D02 00212 */
 uchar _Globals::compress_first_pass(int param_1, uint* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00467af0 END
 
@@ -4073,7 +4400,7 @@ void _Globals::start_pass_coef(int* param_1, int param_2) { STUB_BODY(); }
 // !FUNC 0x00467d10 END
 
 // !FUNC 0x00467ed0 BEGIN
-/* 467ED0-4680DE 0020E */
+/* 467ED0-4680E5 00215 */
 uchar _Globals::jpeg_make_c_derived_tbl(int* param_1, char param_2, int param_3, int* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00467ed0 END
 
@@ -4083,7 +4410,7 @@ uchar _Globals::emit_byte_s() { STUB_BODY(); return 0; }
 // !FUNC 0x004680f0 END
 
 // !FUNC 0x00468120 BEGIN
-/* 468120-4681CC 000AC */
+/* 468120-4681CF 000AF */
 uint _Globals::emit_bits_s(uint param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00468120 END
 
@@ -4093,12 +4420,12 @@ uint _Globals::flush_bits_s() { STUB_BODY(); return 0; }
 // !FUNC 0x004681d0 END
 
 // !FUNC 0x00468200 BEGIN
-/* 468200-468396 00196 */
+/* 468200-468399 00199 */
 uint _Globals::encode_one_block_00468200(void* param_1, short* param_2, uint param_3, uint* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00468200 END
 
 // !FUNC 0x004683a0 BEGIN
-/* 4683A0-46841A 0007A */
+/* 4683A0-46841D 0007D */
 uint _Globals::emit_restart(void* param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004683a0 END
 
@@ -4118,7 +4445,7 @@ int* _Globals::htest_one_block(int* param_1, short* param_2, int param_3) { STUB
 // !FUNC 0x00468650 END
 
 // !FUNC 0x00468810 BEGIN
-/* 468810-468AD5 002C5 */
+/* 468810-468AE2 002D2 */
 uchar _Globals::jpeg_gen_optimal_table(int* param_1, uint* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00468810 END
 
@@ -4168,7 +4495,7 @@ uchar _Globals::emit_restart_00468fd0(char param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00468fd0 END
 
 // !FUNC 0x00469060 BEGIN
-/* 469060-46919C 0013C */
+/* 469060-4691A6 00146 */
 bool _Globals::encode_mcu_DC_first(int* param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00469060 END
 
@@ -4183,17 +4510,38 @@ void _Globals::finish_pass_gather_004696a0(int* param_1) { STUB_BODY(); }
 // !FUNC 0x004696a0 END
 
 // !FUNC 0x00469770 BEGIN
-/* 469770-4698EB 0017B */
+/* 469770-4698F2 00182 */
 uchar _Globals::start_pass_huff_decoder_00469770(int* param_1, char param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00469770 END
 
 // !FUNC 0x0046a840 BEGIN
 /* 46A840-46A86A 0002A */
-void _Globals::FUN_0046a840(size_t param_1) { STUB_BODY(); }
+/* IJG jcprepct.c expand_bottom_edge LOCAL split: EDI=image_data, EAX=input_rows,
+   EBX=output_rows at entry; stack=num_cols. */
+__declspec(noinline) void _Globals::expand_bottom_edge(size_t num_cols) {
+    int image_data;
+    int input_rows;
+    int output_rows;
+    int source_row;
+
+    __asm {
+        mov image_data, edi
+        mov input_rows, eax
+        mov output_rows, ebx
+    }
+    if (input_rows >= output_rows) {
+        return;
+    }
+    source_row = input_rows - 1;
+    do {
+        jcopy_sample_rows(image_data, source_row, image_data, input_rows, 1, num_cols);
+        input_rows = input_rows + 1;
+    } while (input_rows < output_rows);
+}
 // !FUNC 0x0046a840 END
 
 // !FUNC 0x0046a870 BEGIN
-/* 46A870-46A9F8 00188 */
+/* 46A870-46A9FE 0018E */
 void _Globals::pre_process_data(int* param_1, int param_2, uint* param_3, uint param_4, int param_5, uint* param_6, uint param_7) { STUB_BODY(); }
 // !FUNC 0x0046a870 END
 
@@ -4203,7 +4551,7 @@ uchar _Globals::compress_output_0046aa00(int param_1, int param_2, uint* param_3
 // !FUNC 0x0046aa00 END
 
 // !FUNC 0x0046ada0 BEGIN
-/* 46ADA0-46ADE4 00044 */
+/* 46ADA0-46ADEC 0004C */
 uchar _Globals::expand_right_edge(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0046ada0 END
 
@@ -4213,7 +4561,7 @@ void _Globals::sep_downsample(int param_1, int* param_2, int param_3, int* param
 // !FUNC 0x0046adf0 END
 
 // !FUNC 0x0046ae80 BEGIN
-/* 46AE80-46AFA2 00122 */
+/* 46AE80-46AFA9 00129 */
 void _Globals::int_downsample(int param_1, int param_2, int* param_3, int param_4) { STUB_BODY(); }
 // !FUNC 0x0046ae80 END
 
@@ -4234,11 +4582,11 @@ uchar _Globals::h2v2_fancy_upsample(int param_1, int param_2, int param_3, int p
 
 // !FUNC 0x0046b400 BEGIN
 /* 46B400-46B58D 0018D */
-uchar _Globals::FUN_0046b400(int param_1, int param_2, uint* param_3, int param_4) { STUB_BODY(); return 0; }
+void _Globals::fullsize_smooth_downsample(int param_1, int param_2, uint* param_3, int param_4) { STUB_BODY(); }
 // !FUNC 0x0046b400 END
 
 // !FUNC 0x0046b6e0 BEGIN
-/* 46B6E0-46B7AB 000CB */
+/* 46B6E0-46B7B1 000D1 */
 uchar _Globals::rgb_ycc_start(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0046b6e0 END
 
@@ -4248,7 +4596,7 @@ uchar _Globals::rgb_ycc_convert(int param_1, uint* param_2, int* param_3, int pa
 // !FUNC 0x0046b7c0 END
 
 // !FUNC 0x0046b8e0 BEGIN
-/* 46B8E0-46B980 000A0 */
+/* 46B8E0-46B987 000A7 */
 uchar _Globals::rgb_gray_convert(int param_1, uint* param_2, int* param_3, int param_4, int param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x0046b8e0 END
 
@@ -4269,17 +4617,125 @@ uint _Globals::per_scan_setup_0046c4c0() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0046c690 BEGIN
 /* 46C690-46C849 001B9 */
-uchar _Globals::FUN_0046c690(int* param_1) { STUB_BODY(); return 0; }
+void _Globals::prepare_for_pass(int* param_1) { STUB_BODY(); }
 // !FUNC 0x0046c690 END
 
 // !FUNC 0x0046c850 BEGIN
 /* 46C850-46C87C 0002C */
-uchar _Globals::FUN_0046c850(int param_1) { STUB_BODY(); return 0; }
+void _Globals::pass_startup(int* param_1) { STUB_BODY(); }
 // !FUNC 0x0046c850 END
+
 
 // !FUNC 0x0046db50 BEGIN
 /* 46DB50-46DFC0 00470 */
-uchar _Globals::FUN_0046db50(int param_1, int param_2, int param_3, int* param_4, int param_5) { STUB_BODY(); return 0; }
+void _Globals::h2v1_merged_upsample_ycbcr_colormap(int param_1, int param_2, int param_3, int* param_4, int param_5) {
+    int* quant_row = *reinterpret_cast<int**>(param_2 + 0x50);
+    int colormap_base = *reinterpret_cast<int*>(param_1 + 0x120) + 0x80;
+    short* sample_ptr = reinterpret_cast<short*>(param_3 + 0x30);
+    int loop_idx = 6;
+    int blend_y[7];
+    int blend_cr_row2;
+    int blend_y2[7];
+    int blend_cb_row2;
+    int* blend_out = blend_y + 1;
+
+    do {
+        if (loop_idx != 4 && loop_idx != 2 && loop_idx != 0) {
+            if (sample_ptr[-0x10] == 0 && sample_ptr[0] == 0 && sample_ptr[0x10] == 0 &&
+                sample_ptr[0x20] == 0) {
+                blend_out[-1] = static_cast<int>(sample_ptr[-0x18]) * quant_row[0] * 4;
+            } else {
+                int chroma_blend = static_cast<int>(sample_ptr[0x10]) * quant_row[0x28] * 0x1b37 +
+                                   static_cast<int>(sample_ptr[0x20]) * quant_row[0x38] * -0x1712 +
+                                   static_cast<int>(sample_ptr[-0x10]) * quant_row[8] * 0x73fc +
+                                   static_cast<int>(sample_ptr[0]) * quant_row[0x18] * -0x28ba;
+                int y_scaled = static_cast<int>(sample_ptr[-0x18]) * quant_row[0] * 0x8000;
+                blend_out[-1] = (chroma_blend + 0x1000 + y_scaled) >> 0xd;
+                y_scaled = ((y_scaled - chroma_blend) + 0x1000) >> 0xd;
+                blend_out[7] = y_scaled;
+            }
+        }
+        if (loop_idx != 5 && loop_idx != 3 && loop_idx != 1) {
+            if (sample_ptr[-0xf] == 0 && sample_ptr[1] == 0 && sample_ptr[0x11] == 0 &&
+                sample_ptr[0x21] == 0) {
+                *blend_out = static_cast<int>(sample_ptr[-0x17]) * quant_row[1] * 4;
+            } else {
+                int chroma_blend = static_cast<int>(sample_ptr[0x11]) * quant_row[0x29] * 0x1b37 +
+                                   static_cast<int>(sample_ptr[0x21]) * quant_row[0x39] * -0x1712 +
+                                   static_cast<int>(sample_ptr[1]) * quant_row[0x19] * -0x28ba +
+                                   static_cast<int>(sample_ptr[-0xf]) * quant_row[9] * 0x73fc;
+                int y_scaled = static_cast<int>(sample_ptr[-0x17]) * quant_row[1] * 0x8000;
+                *blend_out = (chroma_blend + 0x1000 + y_scaled) >> 0xd;
+                y_scaled = ((y_scaled - chroma_blend) + 0x1000) >> 0xd;
+                blend_out[8] = y_scaled;
+            }
+        }
+        if (loop_idx != 6 && loop_idx != 4 && loop_idx != 2) {
+            if (sample_ptr[-0xe] == 0 && sample_ptr[2] == 0 && sample_ptr[0x12] == 0 &&
+                sample_ptr[0x22] == 0) {
+                blend_out[1] = static_cast<int>(sample_ptr[-0x16]) * quant_row[2] * 4;
+            } else {
+                int chroma_blend = static_cast<int>(sample_ptr[0x12]) * quant_row[0x2a] * 0x1b37 +
+                                   static_cast<int>(sample_ptr[0x22]) * quant_row[0x3a] * -0x1712 +
+                                   static_cast<int>(sample_ptr[2]) * quant_row[0x1a] * -0x28ba +
+                                   static_cast<int>(sample_ptr[-0xe]) * quant_row[10] * 0x73fc;
+                int y_scaled = static_cast<int>(sample_ptr[-0x16]) * quant_row[2] * 0x8000;
+                blend_out[1] = (chroma_blend + 0x1000 + y_scaled) >> 0xd;
+                y_scaled = ((y_scaled - chroma_blend) + 0x1000) >> 0xd;
+                blend_out[9] = y_scaled;
+            }
+        }
+        if (loop_idx != 7 && loop_idx != 5 && loop_idx != 3) {
+            if (sample_ptr[-0xd] == 0 && sample_ptr[3] == 0 && sample_ptr[0x13] == 0 &&
+                sample_ptr[0x23] == 0) {
+                blend_out[2] = static_cast<int>(sample_ptr[-0x15]) * quant_row[3] * 4;
+            } else {
+                int chroma_blend = static_cast<int>(sample_ptr[0x13]) * quant_row[0x2b] * 0x1b37 +
+                                   static_cast<int>(sample_ptr[0x23]) * quant_row[0x3b] * -0x1712 +
+                                   static_cast<int>(sample_ptr[3]) * quant_row[0x1b] * -0x28ba +
+                                   static_cast<int>(sample_ptr[-0xd]) * quant_row[0xb] * 0x73fc;
+                int y_scaled = static_cast<int>(sample_ptr[-0x15]) * quant_row[3] * 0x8000;
+                blend_out[2] = (chroma_blend + 0x1000 + y_scaled) >> 0xd;
+                y_scaled = ((y_scaled - chroma_blend) + 0x1000) >> 0xd;
+                blend_out[10] = y_scaled;
+            }
+        }
+        int loop_tail = loop_idx + -2;
+        bool continue_blend = (loop_idx != 2) && (-1 < loop_tail);
+        sample_ptr = sample_ptr + 4;
+        quant_row = quant_row + 4;
+        blend_out = blend_out + 4;
+        loop_idx = loop_idx + -4;
+    } while (continue_blend);
+
+    uchar* out_row0 = reinterpret_cast<uchar*>(param_4[0] + param_5);
+    uchar lut_byte;
+    if (blend_y[1] == 0 && blend_y[3] == 0 && blend_y[5] == 0 && blend_cr_row2 == 0) {
+        lut_byte = *reinterpret_cast<uchar*>(((blend_y[0] + 0x10) >> 5 & 0x3ffU) + colormap_base);
+        *out_row0 = lut_byte;
+    } else {
+        int chroma_lut = blend_y[1] * 0x73fc + blend_y[3] * -0x28ba + blend_y[5] * 0x1b37 + blend_cr_row2 * -0x1712;
+        *out_row0 =
+            *reinterpret_cast<uchar*>(((chroma_lut + 0x80000 + blend_y[0] * 0x8000) >> 0x14 & 0x3ffU) + colormap_base);
+        lut_byte = *reinterpret_cast<uchar*>(
+            (((blend_y[0] * 0x8000 - chroma_lut) + 0x80000) >> 0x14 & 0x3ffU) + colormap_base);
+    }
+    out_row0[1] = lut_byte;
+
+    uchar* out_row1 = reinterpret_cast<uchar*>(param_4[1] + param_5);
+    if (blend_y2[1] == 0 && blend_y2[3] == 0 && blend_y2[5] == 0 && blend_cb_row2 == 0) {
+        lut_byte = *reinterpret_cast<uchar*>(((blend_y2[0] + 0x10) >> 5 & 0x3ffU) + colormap_base);
+        *out_row1 = lut_byte;
+        out_row1[1] = lut_byte;
+        return;
+    }
+    int chroma_lut2 =
+        blend_y2[1] * 0x73fc + blend_y2[5] * 0x1b37 + blend_cb_row2 * -0x1712 + blend_y2[3] * -0x28ba;
+    *out_row1 =
+        *reinterpret_cast<uchar*>(((chroma_lut2 + 0x80000 + blend_y2[0] * 0x8000) >> 0x14 & 0x3ffU) + colormap_base);
+    out_row1[1] = *reinterpret_cast<uchar*>(
+        (((blend_y2[0] * 0x8000 - chroma_lut2) + 0x80000) >> 0x14 & 0x3ffU) + colormap_base);
+}
 // !FUNC 0x0046db50 END
 
 // !FUNC 0x0046e000 BEGIN
@@ -4288,7 +4744,7 @@ uchar _Globals::jpeg_idct_islow(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0046e000 END
 
 // !FUNC 0x0046e320 BEGIN
-/* 46E320-46E9E9 006C9 */
+/* 46E320-46E9EC 006CC */
 uchar _Globals::jpeg_idct_ifast(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0046e320 END
 
@@ -4325,8 +4781,124 @@ uchar _Globals::pqdownheap(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00471300 END
 
 // !FUNC 0x004713d0 BEGIN
-/* 4713D0-4715E1 00211 */
-uchar _Globals::FUN_004713d0(int* param_1) { STUB_BODY(); return 0; }
+/* 4713D0-4715E6 00217 — zlib trees.c gen_bitlen tail; EAX=deflate_state* at entry (build_tree@00472774) */
+uchar _Globals::gen_bitlen_tail(int* param_1) {
+    int s;
+    __asm { mov s, eax }
+
+    int max_code = param_1[1];
+    char* tree = reinterpret_cast<char*>(*param_1);
+    int* stat_desc = reinterpret_cast<int*>(param_1[2]);
+    char* stree = reinterpret_cast<char*>(stat_desc[0]);
+    int* extra_bits = reinterpret_cast<int*>(stat_desc[1]);
+    int extra_base = stat_desc[2];
+    unsigned max_length = static_cast<unsigned>(stat_desc[4]);
+
+    *reinterpret_cast<int*>(s + 0xb34) = 0;
+    *reinterpret_cast<int*>(s + 0xb38) = 0;
+    *reinterpret_cast<int*>(s + 0xb3c) = 0;
+    *reinterpret_cast<int*>(s + 0xb40) = 0;
+    *reinterpret_cast<int*>(s + 0xb44) = 0;
+    *reinterpret_cast<int*>(s + 0xb48) = 0;
+    *reinterpret_cast<int*>(s + 0xb4c) = 0;
+    *reinterpret_cast<int*>(s + 0xb50) = 0;
+
+    int heap_max = *reinterpret_cast<int*>(s + 0x144c);
+    int root_n = *reinterpret_cast<int*>(s + 0xb54 + heap_max * 4);
+    *reinterpret_cast<short*>(tree + 2 + root_n * 4) = 0;
+
+    int h = heap_max + 1;
+    int overflow = 0;
+    if (h < 0x23d) {
+        int* heap_ptr = reinterpret_cast<int*>(s + 0xb54 + h * 4);
+        int heap_left = 0x23d - h;
+        int heap_tail = h + heap_left;
+        do {
+            int n = *heap_ptr;
+            unsigned bits = static_cast<unsigned>(
+                                *reinterpret_cast<unsigned short*>(
+                                    tree + 2 +
+                                    static_cast<unsigned>(*reinterpret_cast<unsigned short*>(
+                                        tree + 2 + n * 4)) *
+                                        4)) +
+                            1;
+            if (static_cast<int>(max_length) < static_cast<int>(bits)) {
+                overflow = overflow + 1;
+                bits = max_length;
+            }
+            *reinterpret_cast<short*>(tree + 2 + n * 4) = static_cast<short>(bits);
+            if (n <= max_code) {
+                short* bl_entry = reinterpret_cast<short*>(s + 0xb34 + bits * 2);
+                *bl_entry = static_cast<short>(*bl_entry + 1);
+                int xbits = 0;
+                if (extra_base <= n) {
+                    xbits = extra_bits[n - extra_base];
+                }
+                unsigned freq = *reinterpret_cast<unsigned short*>(tree + n * 4);
+                *reinterpret_cast<int*>(s + 0x16a0) =
+                    *reinterpret_cast<int*>(s + 0x16a0) + (bits + xbits) * freq;
+                if (stree != nullptr) {
+                    *reinterpret_cast<int*>(s + 0x16a4) =
+                        *reinterpret_cast<int*>(s + 0x16a4) +
+                        (static_cast<unsigned>(*reinterpret_cast<unsigned short*>(stree + 2 + n * 4)) +
+                         xbits) *
+                            freq;
+                }
+            }
+            heap_ptr = heap_ptr + 1;
+            heap_left = heap_left - 1;
+        } while (heap_left != 0);
+
+        if (overflow != 0) {
+            int bits_idx = static_cast<int>(max_length) - 1;
+            unsigned short* pu_bl =
+                reinterpret_cast<unsigned short*>(s + 0xb34 + max_length * 2);
+            do {
+                short s_count = *reinterpret_cast<short*>(s + 0xb34 + bits_idx * 2);
+                int walk = bits_idx;
+                while (s_count == 0) {
+                    walk = walk - 1;
+                    s_count = *reinterpret_cast<short*>(s + 0xb34 + walk * 2);
+                }
+                short* ps_fix = reinterpret_cast<short*>(s + 0xb34 + walk * 2);
+                *ps_fix = static_cast<short>(*ps_fix - 1);
+                ps_fix = reinterpret_cast<short*>(s + 0xb36 + walk * 2);
+                *ps_fix = static_cast<short>(*ps_fix + 2);
+                *pu_bl = static_cast<unsigned short>(*pu_bl - 1);
+                overflow = overflow - 2;
+            } while (0 < overflow);
+
+            for (unsigned cur_bits = max_length; cur_bits != 0; cur_bits = cur_bits - 1) {
+                unsigned n_left = *pu_bl;
+                if (n_left != 0) {
+                    int* heap_walk = reinterpret_cast<int*>(s + 0xb54 + heap_tail * 4);
+                    int heap_scan = heap_tail;
+                    do {
+                        int m = *(heap_walk - 1);
+                        heap_scan = heap_scan - 1;
+                        heap_walk = heap_walk - 1;
+                        if (m <= max_code) {
+                            unsigned old_len =
+                                *reinterpret_cast<unsigned short*>(tree + 2 + m * 4);
+                            if (old_len != cur_bits) {
+                                *reinterpret_cast<int*>(s + 0x16a0) =
+                                    *reinterpret_cast<int*>(s + 0x16a0) +
+                                    (cur_bits - old_len) *
+                                        *reinterpret_cast<unsigned short*>(tree + m * 4);
+                                *reinterpret_cast<short*>(tree + 2 + m * 4) =
+                                    static_cast<short>(cur_bits);
+                            }
+                            n_left = n_left - 1;
+                        }
+                        heap_tail = heap_scan;
+                    } while (n_left != 0);
+                }
+                pu_bl = pu_bl - 1;
+            }
+        }
+    }
+    return 0;
+}
 // !FUNC 0x004713d0 END
 
 // !FUNC 0x004715f0 BEGIN
@@ -4363,7 +4935,35 @@ uchar _Globals::bi_windup() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00472420 BEGIN
 /* 472420-4724A2 00082 */
-void _Globals::FUN_00472420(uint param_1, uchar* param_2, int param_3) { STUB_BODY(); }
+/* zlib 1.1.3 trees.c copy_block LOCAL split: EAX=deflate_state* from send_bits caller;
+   __fastcall stored_len/buf; stack emit_len_nlen (always 1 from send_bits). */
+__declspec(noinline) void _Globals::copy_block(uint stored_len, uchar* buf, int emit_len_nlen) {
+    int s;
+    byte bVar2;
+
+    __asm mov s, eax
+    bi_windup();
+    *reinterpret_cast<uint*>(s + 0x16ac) = 8;
+    if (emit_len_nlen != 0) {
+        *reinterpret_cast<uchar*>(*reinterpret_cast<int*>(s + 0x14) + *reinterpret_cast<int*>(s + 8)) =
+            static_cast<uchar>(stored_len);
+        *reinterpret_cast<int*>(s + 0x14) = *reinterpret_cast<int*>(s + 0x14) + 1;
+        bVar2 = static_cast<byte>(stored_len >> 8);
+        *reinterpret_cast<uchar*>(*reinterpret_cast<int*>(s + 0x14) + *reinterpret_cast<int*>(s + 8)) = bVar2;
+        *reinterpret_cast<int*>(s + 0x14) = *reinterpret_cast<int*>(s + 0x14) + 1;
+        *reinterpret_cast<uchar*>(*reinterpret_cast<int*>(s + 8) + *reinterpret_cast<int*>(s + 0x14)) =
+            static_cast<uchar>(~static_cast<uchar>(stored_len));
+        *reinterpret_cast<int*>(s + 0x14) = *reinterpret_cast<int*>(s + 0x14) + 1;
+        *reinterpret_cast<uchar*>(*reinterpret_cast<int*>(s + 8) + *reinterpret_cast<int*>(s + 0x14)) =
+            static_cast<uchar>(~bVar2);
+        *reinterpret_cast<int*>(s + 0x14) = *reinterpret_cast<int*>(s + 0x14) + 1;
+    }
+    for (; stored_len != 0; stored_len = stored_len - 1) {
+        *reinterpret_cast<uchar*>(*reinterpret_cast<int*>(s + 0x14) + *reinterpret_cast<int*>(s + 8)) = *buf;
+        *reinterpret_cast<int*>(s + 0x14) = *reinterpret_cast<int*>(s + 0x14) + 1;
+        buf = buf + 1;
+    }
+}
 // !FUNC 0x00472420 END
 
 // !FUNC 0x004724b0 BEGIN
@@ -4382,7 +4982,7 @@ uchar _Globals::build_tree(int* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x004725a0 END
 
 // !FUNC 0x004727a0 BEGIN
-/* 4727A0-472866 000C6 */
+/* 4727A0-472869 000C9 */
 uchar _Globals::build_bl_tree() { STUB_BODY(); return 0; }
 // !FUNC 0x004727a0 END
 

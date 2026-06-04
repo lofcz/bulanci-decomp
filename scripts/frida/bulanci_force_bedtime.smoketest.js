@@ -38,26 +38,35 @@ const log = function () {
 };
 
 function findImport(name) {
-    if (typeof Module === 'undefined' || !Module.findExportByName) {
-        log('Module.findExportByName not available');
+    if (typeof Module === 'undefined') {
+        log('Module not available');
         return null;
     }
-    var candidates = [
-        'msvcrt', 'msvcr80', 'msvcr90', 'msvcr100', 'msvcr110', 'msvcr120',
-        'ucrtbase', 'MSVCRT', 'msvcrt.dll',
-    ];
-    for (var i = 0; i < candidates.length; i++) {
+    // Module.findGlobalExportByName(name) scans every loaded module and
+    // returns the address of the named export. This is the simplest and
+    // most reliable way to hook an imported C runtime function without
+    // touching the IAT.
+    if (typeof Module.findGlobalExportByName === 'function') {
         try {
-            var p = Module.findExportByName(candidates[i], name);
+            var p = Module.findGlobalExportByName(name);
             if (p && !p.isNull()) {
-                log('resolved ' + name + ' via ' + candidates[i] + ' -> 0x' + p.toString(16));
+                log('resolved ' + name + ' via findGlobalExportByName -> 0x' + p.toString(16));
                 return p;
+            } else {
+                log('findGlobalExportByName(' + name + ') returned null');
             }
-        } catch (_e) {}
+        } catch (e) {
+            log('findGlobalExportByName(' + name + ') threw: ' + e);
+        }
+    } else {
+        log('Module.findGlobalExportByName not a function (Frida API mismatch?)');
     }
+    // Fallback: enumerate every module and try .findExportByName (instance
+    // method) on each. This is what we'd do anyway if findGlobalExportByName
+    // doesn't exist on this Frida build.
     if (typeof Process !== 'undefined' && Process.enumerateModules) {
         var mods = Process.enumerateModules();
-        log('enumerateModules found ' + mods.length + ' modules:');
+        log('fallback: enumerateModules found ' + mods.length + ' modules');
         for (var m = 0; m < mods.length; m++) {
             try {
                 var p2 = Module.findExportByName(mods[m].name, name);

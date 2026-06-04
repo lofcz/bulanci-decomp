@@ -105,13 +105,13 @@ public:
 	/* 46A750 */ static uchar jpeg_jinit_inverse_dct(int* param_1);
 	// !DECL 0x0046a750 END
 	// !DECL 0x0046abd0 BEGIN
-	/* 46ABD0 */ uchar FUN_0046abd0();
+	/* 46ABD0 */ void create_context_buffer();
 	// !DECL 0x0046abd0 END
 	// !DECL 0x0046acf0 BEGIN
 	/* 46ACF0 */ static void jinit_c_prep_controller(int* param_1, char param_2);
 	// !DECL 0x0046acf0 END
 	// !DECL 0x0046b590 BEGIN
-	/* 46B590 */ static uchar FUN_0046b590(int* param_1);
+	/* 46B590 */ static void jinit_downsampler(int* param_1);
 	// !DECL 0x0046b590 END
 	// !DECL 0x0046bbc0 BEGIN
 	/* 46BBC0 */ static uchar jinit_color_converter(int* param_1);
@@ -123,7 +123,7 @@ public:
 	/* 46BFD0 */ uchar jpeg_validate_script();
 	// !DECL 0x0046bfd0 END
 	// !DECL 0x0046c8f0 BEGIN
-	/* 46C8F0 */ static uchar FUN_0046c8f0(int param_1, char param_2);
+	/* 46C8F0 */ static void jinit_c_master_control(int* param_1, char param_2);
 	// !DECL 0x0046c8f0 END
 
 	// !DECL 0x00431b70 BEGIN

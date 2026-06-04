@@ -149,7 +149,7 @@ int* zlib::inflate_blocks_new(int param_1, int param_2, int param_3) { STUB_BODY
 // !FUNC 0x00470570 END
 
 // !FUNC 0x00470620 BEGIN
-/* 470620-471083 00A63 */
+/* 470620-47109B 00A7B */
 uchar zlib::inflate_blocks(uint* param_1, int* param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00470620 END
 

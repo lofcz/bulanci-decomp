@@ -34,7 +34,7 @@ void CDSObject::CDSObject_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x004256c0 END
 
 // !FUNC 0x0042eb00 BEGIN
-/* 42EB00-42EB29 00029 */
+/* 42EB00-42EB2C 0002C */
 uchar CDSObject::CDSUpdatedItem_ReleaseSchedulerAndAudioBank(CBulanek* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042eb00 END
 

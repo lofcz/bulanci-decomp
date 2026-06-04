@@ -43,7 +43,7 @@ void* CScore::CScore_ScalarDeletingDtor(uchar param_1) { STUB_BODY(); return 0; 
 // !FUNC 0x0040f070 END
 
 // !FUNC 0x00411010 BEGIN
-/* 411010-411B3A 00B2A */
+/* 411010-411B4B 00B3B */
 uchar CScore::CScore_ctor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00411010 END
 

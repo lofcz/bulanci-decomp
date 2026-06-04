@@ -80,7 +80,7 @@ void LoadConfigFromRegistryBody(uchar* chain) {
 		uchar* slot = chain + kOffKeyBindings + i * 6;
 		gzipRead->ReadBytes(slot + 0, 1);
 		gzipRead->ReadBytes(slot + 1, 1);
-		bul->FUN_0042e2f0(reinterpret_cast<int*>(slot + 2), reinterpret_cast<int*>(gzipRead));
+		bul->CDsString_ReadNarrowLengthPrefixedFromStream(reinterpret_cast<int*>(slot + 2), reinterpret_cast<int*>(gzipRead));
 	}
 
 	gzipRead->ReadBytes(chain + kOffProfileUser, 4);
@@ -88,7 +88,7 @@ void LoadConfigFromRegistryBody(uchar* chain) {
 	gzipRead->ReadBytes(chain + kOffPanBinding, 4);
 	gzipRead->ReadBytes(chain + kOffReservedAudio0, 4);
 	gzipRead->ReadBytes(chain + kOffReservedAudio1, 4);
-	bul->FUN_0042e2f0(reinterpret_cast<int*>(chain + kOffStrConfigTail),
+	bul->CDsString_ReadNarrowLengthPrefixedFromStream(reinterpret_cast<int*>(chain + kOffStrConfigTail),
 	                  reinterpret_cast<int*>(gzipRead));
 
 	chain[kOffField78] = 1;

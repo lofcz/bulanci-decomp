@@ -123,7 +123,7 @@ uchar CGaming::CGaming_ScalarDeletingDtor_thunk_Sub18(uchar param_1) { STUB_BODY
 // !FUNC 0x0041ace0 END
 
 // !FUNC 0x0041b3b0 BEGIN
-/* 41B3B0-41B414 00064 */
+/* 41B3B0-41B417 00067 */
 uchar CGaming::CGaming_OnCustomEvent_0xF5_RemoveEntitiesBySlotId(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041b3b0 END
 
@@ -148,7 +148,7 @@ uchar CGaming::CGaming_dtor(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041b850 END
 
 // !FUNC 0x0041bab0 BEGIN
-/* 41BAB0-41BAF8 00048 */
+/* 41BAB0-41BAFB 0004B */
 uchar CGaming::CGaming_EnqueuePreMatchSchedulerSlots(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0041bab0 END
 
@@ -193,7 +193,7 @@ uchar CGaming::CGaming_OnCustomEvent(ushort param_1, int* param_2, uint param_3)
 // !FUNC 0x004206a0 END
 
 // !FUNC 0x00429d90 BEGIN
-/* 429D90-429DAA 0001A */
+/* 429D90-429DAD 0001D */
 uchar CGaming::CGaming_ClearSchedulerSlotFlags(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00429d90 END
 
@@ -226,7 +226,7 @@ uchar CGaming::CGaming_SetEntityRegisterMode(uchar param_1) {
 // !FUNC 0x004168c0 END
 
 // !FUNC 0x004180e0 BEGIN
-/* 4180E0-41824E 0016E */
+/* 4180E0-418255 00175 */
 void CGaming::CGaming_OnKillCredit_UpdateScoreHud(CBulanek* param_1) { STUB_BODY(); }
 // !FUNC 0x004180e0 END
 

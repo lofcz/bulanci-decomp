@@ -18,7 +18,7 @@ uchar CLevelList::CLevelList_RenderItem(int* param_1, CListBoxItem* param_2) { S
 // !FUNC 0x0040d490 END
 
 // !FUNC 0x0040d3f0 BEGIN
-/* 40D3F0-40D485 00095 */
+/* 40D3F0-40D48D 0009D */
 void CLevelList::CStartGame2_SelectPlayerByName(wchar_t* param_1) { STUB_BODY(); }
 // !FUNC 0x0040d3f0 END
 

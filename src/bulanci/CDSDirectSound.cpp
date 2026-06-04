@@ -63,3 +63,8 @@ uchar CDSDirectSound::CDSDirectSound_OnPlaybackCompleteMessage(int* param_1) { S
 void CDSDirectSound::CDSDirectSound_InitPrimary(void* param_1, ushort param_2, int param_3, ushort param_4) { STUB_BODY(); }
 // !FUNC 0x0043cbc0 END
 
+// !FUNC 0x0043c9b0 BEGIN
+/* 43C9B0-43C9E8 00038 */
+void CDSDirectSound::CDSDirectSound_StopAllAndReleaseCom() { STUB_BODY(); }
+// !FUNC 0x0043c9b0 END
+

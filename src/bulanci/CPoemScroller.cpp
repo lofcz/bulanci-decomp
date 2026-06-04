@@ -124,7 +124,7 @@ uchar CPoemScroller::CPoemScroller_DrawRectOutline(int* param_1, uint param_2, i
 // !FUNC 0x00436530 END
 
 // !FUNC 0x004365f0 BEGIN
-/* 4365F0-436745 00155 */
+/* 4365F0-436748 00158 */
 uchar CPoemScroller::CPoemScroller_FillRect(int* param_1, uint param_2, int param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x004365f0 END
 

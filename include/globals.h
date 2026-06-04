@@ -40,6 +40,17 @@ typedef int errno_t;
 typedef void *PVOID;
 typedef void *LPVOID;
 
+/* MSVC CRT / PE opaque types used in Runtime and _Globals stubs (pointers only). */
+struct FILE;
+struct localeinfo_struct;
+struct _strflt;
+struct _tiddata;
+struct threadlocaleinfostruct;
+struct threadmbcinfostruct;
+struct _IMAGE_SECTION_HEADER;
+typedef void (*_onexit_t)(void);
+typedef int (*_PHNDLR)(int);
+
 struct RECT {
     long left;
     long top;

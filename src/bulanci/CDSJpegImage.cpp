@@ -77,8 +77,8 @@ struct JpegCompInfo_layout {
 // libjpeg-6b allocators (mapped under _Globals in mapping.csv).
 class _Globals {
 public:
-    static uchar FUN_0045d1d0(int param_1); // jpeg_alloc_quant_table
-    static uchar FUN_0045d1f0(int param_1); // jpeg_alloc_huff_table
+    static void* jpeg_alloc_quant_table(void* param_1);
+    static uchar alloc_small(int param_1);
 };
 // !PROLOGUE END
 
@@ -151,7 +151,7 @@ void CDSJpegImage::CDSJpegImage_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00431de0 END
 
 // !FUNC 0x00431e50 BEGIN
-/* 431E50-43200F 001BF */
+/* 431E50-432027 001D7 */
 void CDSJpegImage::CompressFromImage(void* param_1, CDSImage* param_2, int param_3) { STUB_BODY(); }
 // !FUNC 0x00431e50 END
 
@@ -526,7 +526,37 @@ uchar CDSJpegImage::jpeg_jinit_inverse_dct(int* param_1) { STUB_BODY(); return 0
 
 // !FUNC 0x0046abd0 BEGIN
 /* 46ABD0-46ACED 0011D */
-uchar CDSJpegImage::FUN_0046abd0() { STUB_BODY(); return 0; }
+void CDSJpegImage::create_context_buffer(int* cinfo) {
+    int prep = cinfo[0x51];
+    int rgroup = cinfo[0x37];
+    auto alloc_small = reinterpret_cast<int(__cdecl*)(int*, int, int)>(*(int*)cinfo[1]);
+    auto alloc_sarray =
+        reinterpret_cast<int*(__cdecl*)(int*, int, int)>(*(int*)(cinfo[1] + 8));
+    int fake_base = alloc_small(cinfo, 1, cinfo[0xf] * rgroup * 5 * (int)sizeof(int*));
+    if (cinfo[0xf] <= 0) {
+        return;
+    }
+    int* dst = reinterpret_cast<int*>(fake_base + rgroup * 4);
+    int* color_buf = reinterpret_cast<int*>(prep + 8);
+    int* comp = reinterpret_cast<int*>(cinfo[0x11]);
+    int fake_comp = fake_base;
+    for (int ci = 0; ci < cinfo[0xf]; ++ci) {
+        int width = (comp[5] * comp[0]) / cinfo[0x36];
+        int* true_buffer = alloc_sarray(cinfo, 1, width * 3 * rgroup * (int)sizeof(int*));
+        Runtime::MSVCRT::_memcpy(dst, true_buffer, (size_t)(rgroup * 0xc));
+        if (rgroup > 0) {
+            int* fake_rows = reinterpret_cast<int*>(fake_comp);
+            for (int row = 0; row < rgroup; ++row) {
+                fake_rows[4 * rgroup + row] = true_buffer[2 * rgroup + row];
+                fake_rows[row] = true_buffer[row];
+            }
+        }
+        *color_buf++ = reinterpret_cast<int>(dst);
+        dst += rgroup * 5;
+        fake_comp += rgroup * 0x14;
+        comp = reinterpret_cast<int*>(reinterpret_cast<char*>(comp) + 0x54);
+    }
+}
 // !FUNC 0x0046abd0 END
 
 // !FUNC 0x0046acf0 BEGIN
@@ -536,7 +566,7 @@ void CDSJpegImage::jinit_c_prep_controller(int* param_1, char param_2) { STUB_BO
 
 // !FUNC 0x0046b590 BEGIN
 /* 46B590-46B6D7 00147 */
-uchar CDSJpegImage::FUN_0046b590(int* param_1) { STUB_BODY(); return 0; }
+void CDSJpegImage::jinit_downsampler(int* param_1) { STUB_BODY(); }
 // !FUNC 0x0046b590 END
 
 // !FUNC 0x0046bbc0 BEGIN
@@ -550,13 +580,13 @@ uchar CDSJpegImage::initial_setup() { STUB_BODY(); return 0; }
 // !FUNC 0x0046bdf0 END
 
 // !FUNC 0x0046bfd0 BEGIN
-/* 46BFD0-46C3C8 003F8 */
+/* 46BFD0-46C3CB 003FB */
 uchar CDSJpegImage::jpeg_validate_script() { STUB_BODY(); return 0; }
 // !FUNC 0x0046bfd0 END
 
 // !FUNC 0x0046c8f0 BEGIN
 /* 46C8F0-46C99F 000AF */
-uchar CDSJpegImage::FUN_0046c8f0(int param_1, char param_2) { STUB_BODY(); return 0; }
+void CDSJpegImage::jinit_c_master_control(int* param_1, char param_2) { STUB_BODY(); }
 // !FUNC 0x0046c8f0 END
 
 // !FUNC 0x00431b70 BEGIN

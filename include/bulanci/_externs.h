@@ -755,7 +755,6 @@ extern unsigned char LAB_0046a7f0;
 extern unsigned char LAB_0046afb0;
 extern unsigned char LAB_0046bae0;
 extern unsigned char LAB_0046bb40;
-extern unsigned char LAB_0046c880;
 extern unsigned char LAB_0046c9a0;
 extern unsigned char LAB_0046cec0;
 extern unsigned char LAB_0046d2a0;

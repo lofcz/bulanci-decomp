@@ -371,7 +371,7 @@ void CDSFileStream::FlushStream() {
 
 // !FUNC 0x00433750 BEGIN
 /* 433750-433877 00127 */
-uchar CDSFileStream::CDSFileStream_Open(WCHAR* param_1, void* param_2) { STUB_BODY(); return 0; }
+uchar CDSFileStream::CDSFileStream_Open(int param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00433750 END
 
 // !FUNC 0x004338d0 BEGIN

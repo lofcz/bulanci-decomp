@@ -15,7 +15,7 @@ uchar* CExplosion::CExplosion_GetClassTable() {
 // !FUNC 0x0041ab20 END
 
 // !FUNC 0x0041b250 BEGIN
-/* 41B250-41B380 00130 */
+/* 41B250-41B383 00133 */
 uint CExplosion::CExplosion_DamageAtPoint(tagRECT* param_1, int* param_2, int param_3, char param_4, uchar param_5) { STUB_BODY(); return 0; }
 // !FUNC 0x0041b250 END
 

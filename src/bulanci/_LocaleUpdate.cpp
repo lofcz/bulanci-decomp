@@ -12,11 +12,11 @@ LONG* _LocaleUpdate::_updatetlocinfoEx_nolock() { STUB_BODY(); return 0; }
 
 // !FUNC 0x0044cf0b BEGIN
 /* 44CF0B-44CF75 0006A */
-threadlocaleinfostruct* _LocaleUpdate::_updatetlocinfo() { STUB_BODY(); return 0; }
+int _LocaleUpdate::_updatetlocinfo() { STUB_BODY(); return 0; }
 // !FUNC 0x0044cf0b END
 
 // !FUNC 0x0044cf75 BEGIN
 /* 44CF75-44CF81 0000C */
-uchar _LocaleUpdate::FUN_0044cf75() { STUB_BODY(); return 0; }
+void _LocaleUpdate::_unlock_12_updatetlocinfo_epilog() { STUB_BODY(); }
 // !FUNC 0x0044cf75 END
 

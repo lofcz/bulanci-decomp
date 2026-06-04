@@ -1,7 +1,7 @@
 #include "CMovieView.h"
 
 // !FUNC 0x00422630 BEGIN
-/* 422630-422663 00033 */
+/* 422630-422666 00036 */
 void CMovieView::StopPlayback(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00422630 END
 

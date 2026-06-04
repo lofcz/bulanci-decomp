@@ -6,7 +6,7 @@
 class CGame {
 public:
 	// !DECL 0x00401d00 BEGIN
-	/* 401D00 */ void* CGame_InitWidePathFromMbcs(CHAR* param_1);
+	/* 401D00 */ void* CGame_InitWidePathFromMbcs(int param_1);
 	// !DECL 0x00401d00 END
 	// !DECL 0x0040a840 BEGIN
 	/* 40A840 */ uchar CGame_FocusLobbyScroller(int param_1);

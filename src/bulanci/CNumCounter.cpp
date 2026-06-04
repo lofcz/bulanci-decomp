@@ -48,7 +48,7 @@ void CNumCounter::CNumCounter_dtor(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00427430 END
 
 // !FUNC 0x00427740 BEGIN
-/* 427740-4278B4 00174 */
+/* 427740-4278BD 0017D */
 void CNumCounter::CNumCounter_Render(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x00427740 END
 

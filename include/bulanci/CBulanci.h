@@ -15,7 +15,7 @@ public:
 	CBulanci() : m_ptr(0) {}
 	CBulanci(short* param_1) {
 		m_ptr = 0;
-		FUN_0042d510(param_1);
+		CDsStringAssignFromLiteral(param_1);
 	}
 	~CBulanci();
 
@@ -287,10 +287,10 @@ public:
 	/* 42C540 */ uchar CDSView_AdjustAnchoredEdge(int* param_1, int param_2, int param_3);
 	// !DECL 0x0042c540 END
 	// !DECL 0x0042d310 BEGIN
-	/* 42D310 */ static uint CBulanci_NormalizePathForExistenceCheck(WCHAR* param_1);
+	/* 42D310 */ static uint CBulanci_NormalizePathForExistenceCheck(int param_1);
 	// !DECL 0x0042d310 END
 	// !DECL 0x0042d330 BEGIN
-	/* 42D330 */ static uint CBulanci_GetPathSuffixCompareIndex(WCHAR* param_1);
+	/* 42D330 */ static uint CBulanci_GetPathSuffixCompareIndex(int param_1);
 	// !DECL 0x0042d330 END
 	// !DECL 0x0042d3f0 BEGIN
 	/* 42D3F0 */ static int CDsString_CompareHandles(void* param_1);
@@ -311,7 +311,7 @@ public:
 	/* 42D970 */ static uchar CBulanci_AssignTempPathWithTrailingBackslash(uchar param_1);
 	// !DECL 0x0042d970 END
 	// !DECL 0x0042dab0 BEGIN
-	/* 42DAB0 */ uchar CDsString_AssignFromMultiByte(CHAR* param_1, int param_2);
+	/* 42DAB0 */ uchar CDsString_AssignFromMultiByte(int param_1, int param_2);
 	// !DECL 0x0042dab0 END
 	// !DECL 0x0042dc30 BEGIN
 	/* 42DC30 */ int* CBulanci_WideStringToLowerInPlace(int* param_1);
@@ -365,7 +365,7 @@ public:
 	/* 4332D0 */ void CDSRect_ClampToBounds(int* param_1, int* param_2);
 	// !DECL 0x004332d0 END
 	// !DECL 0x00433320 BEGIN
-	/* 433320 */ uchar CBulanci_OpenFindFirst(WCHAR* param_1);
+	/* 433320 */ uchar CBulanci_OpenFindFirst(int param_1);
 	// !DECL 0x00433320 END
 	// !DECL 0x0043420c BEGIN
 	/* 43420C */ uchar Catch_0043420c();
@@ -380,16 +380,16 @@ public:
 	/* 4359F3 */ uchar Catch_004359f3();
 	// !DECL 0x004359f3 END
 	// !DECL 0x00437e20 BEGIN
-	/* 437E20 */ uchar RegOpenKey(HKEY__* param_1, WCHAR* param_2, uchar* param_3);
+	/* 437E20 */ uchar RegOpenKey(int param_1, int param_2, uchar* param_3);
 	// !DECL 0x00437e20 END
 	// !DECL 0x00437f40 BEGIN
-	/* 437F40 */ uint RegQueryDword(WCHAR* param_1);
+	/* 437F40 */ uint RegQueryDword(int param_1);
 	// !DECL 0x00437f40 END
 	// !DECL 0x00437fe0 BEGIN
 	/* 437FE0 */ uchar RegWriteBinaryStream(uint param_1, int* param_2);
 	// !DECL 0x00437fe0 END
 	// !DECL 0x00438160 BEGIN
-	/* 438160 */ uchar RegQueryBinaryStream(WCHAR* param_1, int* param_2);
+	/* 438160 */ uchar RegQueryBinaryStream(int param_1, int* param_2);
 	// !DECL 0x00438160 END
 	// !DECL 0x00438340 BEGIN
 	/* 438340 */ uchar CDSView_NoOpStub();
@@ -397,9 +397,6 @@ public:
 	// !DECL 0x00438f80 BEGIN
 	/* 438F80 */ uchar CDSView_EmptyHook27();
 	// !DECL 0x00438f80 END
-	// !DECL 0x0043c9b0 BEGIN
-	/* 43C9B0 */ uchar FUN_0043c9b0(int param_1);
-	// !DECL 0x0043c9b0 END
 	// !DECL 0x00446550 BEGIN
 	/* 446550 */ uchar InitAlphaBlendLut();
 	// !DECL 0x00446550 END

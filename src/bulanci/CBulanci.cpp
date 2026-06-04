@@ -4,7 +4,7 @@
 #include "_Globals.h"
 
 CBulanci::~CBulanci() {
-	reinterpret_cast<_Globals*>(this)->FUN_0042d2d0(this);
+	reinterpret_cast<_Globals*>(this)->CDsStringReleaseHeader(this);
 }
 // !PROLOGUE END
 
@@ -45,7 +45,7 @@ bool CBulanci::CBulanci_ShowPostMatchScoreModal() { STUB_BODY(); return 0; }
 // !FUNC 0x00401c59 END
 
 // !FUNC 0x00401d80 BEGIN
-/* 401D80-402122 003A2 */
+/* 401D80-40214F 003CF */
 CDSStreamStorage* CBulanci::CBulanci_OpenPackStream(void* param_1, void* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00401d80 END
 
@@ -143,7 +143,7 @@ uchar CBulanci::CBulanci_ReleaseAudioBank(CDSPtrSlotVec* param_1) { STUB_BODY();
 // !FUNC 0x00402bc0 END
 
 // !FUNC 0x00402c30 BEGIN
-/* 402C30-402DD4 001A4 */
+/* 402C30-402DE3 001B3 */
 uchar CBulanci::CBulanci_dtor(uchar param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00402c30 END
 
@@ -274,7 +274,7 @@ uchar CBulanci::CBulanci_AllocAnimFromSprite(uint* param_1, uint param_2, char p
 // !FUNC 0x0041cfb0 END
 
 // !FUNC 0x0041d2e0 BEGIN
-/* 41D2E0-41D56B 0028B */
+/* 41D2E0-41D580 002A0 */
 void CBulanci::CGaming_LoadLevelAssetAndMusic(uchar param_1) { STUB_BODY(); }
 // !FUNC 0x0041d2e0 END
 
@@ -487,12 +487,12 @@ uchar CBulanci::CDSView_AdjustAnchoredEdge(int* param_1, int param_2, int param_
 
 // !FUNC 0x0042d310 BEGIN
 /* 42D310-42D329 00019 */
-uint CBulanci::CBulanci_NormalizePathForExistenceCheck(WCHAR* param_1) { STUB_BODY(); return 0; }
+uint CBulanci::CBulanci_NormalizePathForExistenceCheck(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042d310 END
 
 // !FUNC 0x0042d330 BEGIN
 /* 42D330-42D34B 0001B */
-uint CBulanci::CBulanci_GetPathSuffixCompareIndex(WCHAR* param_1) { STUB_BODY(); return 0; }
+uint CBulanci::CBulanci_GetPathSuffixCompareIndex(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042d330 END
 
 // !FUNC 0x0042d3f0 BEGIN
@@ -527,7 +527,7 @@ uchar CBulanci::CBulanci_AssignTempPathWithTrailingBackslash(uchar param_1) { ST
 
 // !FUNC 0x0042dab0 BEGIN
 /* 42DAB0-42DB5F 000AF */
-uchar CBulanci::CDsString_AssignFromMultiByte(CHAR* param_1, int param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::CDsString_AssignFromMultiByte(int param_1, int param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x0042dab0 END
 
 // !FUNC 0x0042dc30 BEGIN
@@ -621,7 +621,7 @@ void CBulanci::CDSRect_ClampToBounds(int* param_1, int* param_2) { STUB_BODY(); 
 
 // !FUNC 0x00433320 BEGIN
 /* 433320-4333DA 000BA */
-uchar CBulanci::CBulanci_OpenFindFirst(WCHAR* param_1) { STUB_BODY(); return 0; }
+uchar CBulanci::CBulanci_OpenFindFirst(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00433320 END
 
 
@@ -631,7 +631,7 @@ uchar CBulanci::Catch_0043420c() { STUB_BODY(); return 0; }
 // !FUNC 0x0043420c END
 
 // !FUNC 0x004356e0 BEGIN
-/* 4356E0-435958 00278 */
+/* 4356E0-43595E 0027E */
 void CBulanci::CDSGZipStream_Open(int* param_1, int param_2) { STUB_BODY(); }
 // !FUNC 0x004356e0 END
 
@@ -647,12 +647,12 @@ uchar CBulanci::Catch_004359f3() { STUB_BODY(); return 0; }
 
 // !FUNC 0x00437e20 BEGIN
 /* 437E20-437ECF 000AF */
-uchar CBulanci::RegOpenKey(HKEY__* param_1, WCHAR* param_2, uchar* param_3) { STUB_BODY(); return 0; }
+uchar CBulanci::RegOpenKey(int param_1, int param_2, uchar* param_3) { STUB_BODY(); return 0; }
 // !FUNC 0x00437e20 END
 
 // !FUNC 0x00437f40 BEGIN
 /* 437F40-437FA2 00062 */
-uint CBulanci::RegQueryDword(WCHAR* param_1) { STUB_BODY(); return 0; }
+uint CBulanci::RegQueryDword(int param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x00437f40 END
 
 // !FUNC 0x00437fe0 BEGIN
@@ -662,7 +662,7 @@ uchar CBulanci::RegWriteBinaryStream(uint param_1, int* param_2) { STUB_BODY(); 
 
 // !FUNC 0x00438160 BEGIN
 /* 438160-4382BA 0015A */
-uchar CBulanci::RegQueryBinaryStream(WCHAR* param_1, int* param_2) { STUB_BODY(); return 0; }
+uchar CBulanci::RegQueryBinaryStream(int param_1, int* param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x00438160 END
 
 // !FUNC 0x00438340 BEGIN
@@ -675,10 +675,6 @@ uchar CBulanci::CDSView_NoOpStub() { STUB_BODY(); return 0; }
 uchar CBulanci::CDSView_EmptyHook27() { STUB_BODY(); return 0; }
 // !FUNC 0x00438f80 END
 
-// !FUNC 0x0043c9b0 BEGIN
-/* 43C9B0-43C9E8 00038 */
-uchar CBulanci::FUN_0043c9b0(int param_1) { STUB_BODY(); return 0; }
-// !FUNC 0x0043c9b0 END
 
 // !FUNC 0x00446550 BEGIN
 /* 446550-4465A6 00056 */
@@ -692,12 +688,12 @@ uchar CBulanci::swap() { STUB_BODY(); return 0; }
 // !FUNC 0x004482f0 END
 
 // !FUNC 0x00448320 BEGIN
-/* 448320-4483A4 00084 */
+/* 448320-4483A7 00087 */
 uchar CBulanci::shortsort(uchar* param_1, uchar* param_2, int param_3, uchar* param_4) { STUB_BODY(); return 0; }
 // !FUNC 0x00448320 END
 
 // !FUNC 0x004483b0 BEGIN
-/* 4483B0-448654 002A4 */
+/* 4483B0-448657 002A7 */
 void CBulanci::_qsort(void* param_1, size_t param_2, size_t param_3, _PtFuncCompare* param_4) { STUB_BODY(); }
 // !FUNC 0x004483b0 END
 

@@ -88,6 +88,11 @@ uchar CRadio::CRadio_SaveData(uchar* param_1) {
 
 // !FUNC 0x004075f0 BEGIN
 /* 4075F0-4076F7 00107 */
-uchar CRadio::CRadio_AddOption(WCHAR* param_1, uint param_2) { STUB_BODY(); return 0; }
+uchar CRadio::CRadio_AddOption(int param_1, uint param_2) { STUB_BODY(); return 0; }
 // !FUNC 0x004075f0 END
+
+// !FUNC 0x00405280 BEGIN
+/* 405280-4052D3 00053 */
+int CRadio::CRadio_HitTestRowAtPoint(int* param_1) { STUB_BODY(); return 0; }
+// !FUNC 0x00405280 END
 

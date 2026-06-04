@@ -134,7 +134,7 @@ void CDSView::CDSView_OnMouseUpModalInputRefresh() { STUB_BODY(); }
 // !FUNC 0x0042cf60 END
 
 // !FUNC 0x0042cfa0 BEGIN
-/* 42CFA0-42CFE6 00046 */
+/* 42CFA0-42CFE9 00049 */
 void CDSView::CDSView_RefreshModalFocusFromChildren() { STUB_BODY(); }
 // !FUNC 0x0042cfa0 END
 
@@ -149,7 +149,7 @@ void CDSView::CDSView_SetAsDefaultFocusChild() { STUB_BODY(); }
 // !FUNC 0x0042d080 END
 
 // !FUNC 0x0042d1a0 BEGIN
-/* 42D1A0-42D2BC 0011C */
+/* 42D1A0-42D2CA 0012A */
 ushort CDSView::CDSView_DoModal(void* param_1) { STUB_BODY(); return 0; }
 // !FUNC 0x0042d1a0 END
 

@@ -1,0 +1,326 @@
+{
+  "renames": [
+    {
+      "address": "0x004473e8",
+      "new_name": "__unlock_4_free_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x004473e8 from 'FUN_004473e8' to '__unlock_4_free_epilog'\",\"warnings\":[\"Function name '__unlock_4_free_epilog' \u2014 main part '__unlock_4_free"
+    },
+    {
+      "address": "0x0044751c",
+      "new_name": "__unlock_4_calloc_impl_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044751c from 'FUN_0044751c' to '__unlock_4_calloc_impl_epilog'\",\"warnings\":[\"Function name '__unlock_4_calloc_impl_epilog' \u2014 main part '_"
+    },
+    {
+      "address": "0x004476c1",
+      "new_name": "__unlock_4_realloc_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x004476c1 from 'FUN_004476c1' to '__unlock_4_realloc_epilog'\",\"warnings\":[\"Function name '__unlock_4_realloc_epilog' \u2014 main part '__unlock_"
+    },
+    {
+      "address": "0x00447e6c",
+      "new_name": "__onexit_unlock8_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00447e6c from 'FUN_00447e6c' to '__onexit_unlock8_epilog'\",\"warnings\":[\"Function name '__onexit_unlock8_epilog' \u2014 main part '__onexit_unlo"
+    },
+    {
+      "address": "0x00449386",
+      "new_name": "__unlock_4_V6_HeapAlloc_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00449386 from 'FUN_00449386' to '__unlock_4_V6_HeapAlloc_epilog'\",\"warnings\":[\"Function name '__unlock_4_V6_HeapAlloc_epilog' \u2014 main part "
+    },
+    {
+      "address": "0x004494ec",
+      "new_name": "__unlock_4_msize_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x004494ec from 'stub' to '__unlock_4_msize_epilog'\",\"warnings\":[\"Function name '__unlock_4_msize_epilog' \u2014 main part '__unlock_4_msize_epil"
+    },
+    {
+      "address": "0x0044ac8a",
+      "new_name": "__unlock_12_initptd_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044ac8a from 'FUN_0044ac8a' to '__unlock_12_initptd_epilog'\",\"warnings\":[\"Function name '__unlock_12_initptd_epilog' \u2014 main part '__unloc"
+    },
+    {
+      "address": "0x0044ae3a",
+      "new_name": "__unlock_13_freefls_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044ae3a from 'FUN_0044ae3a' to '__unlock_13_freefls_epilog'\",\"warnings\":[\"Function name '__unlock_13_freefls_epilog' \u2014 main part '__unloc"
+    },
+    {
+      "address": "0x0044ae46",
+      "new_name": "__unlock_12_freefls_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044ae46 from 'FUN_0044ae46' to '__unlock_12_freefls_epilog'\",\"warnings\":[\"Function name '__unlock_12_freefls_epilog' \u2014 main part '__unloc"
+    },
+    {
+      "address": "0x0044c1d9",
+      "new_name": "__lock_8_onexit_prolog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044c1d9 from 'FUN_0044c1d9' to '__lock_8_onexit_prolog'\",\"warnings\":[\"Function name '__lock_8_onexit_prolog' \u2014 main part '__lock_8_onexit"
+    },
+    {
+      "address": "0x0044c1e2",
+      "new_name": "__unlock_8_onexit_stub",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044c1e2 from 'FUN_0044c1e2' to '__unlock_8_onexit_stub'\",\"warnings\":[\"Function name '__unlock_8_onexit_stub' \u2014 main part '__unlock_8_onex"
+    },
+    {
+      "address": "0x0044c3e1",
+      "new_name": "__unlock_8_doexit_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044c3e1 from 'FUN_0044c3e1' to '__unlock_8_doexit_epilog'\",\"warnings\":[\"Function name '__unlock_8_doexit_epilog' \u2014 main part '__unlock_8_"
+    },
+    {
+      "address": "0x0044c895",
+      "new_name": "__unlock_13_updatetmbcinfo_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044c895 from 'FUN_0044c895' to '__unlock_13_updatetmbcinfo_epilog'\",\"warnings\":[\"Function name '__unlock_13_updatetmbcinfo_epilog' \u2014 main"
+    },
+    {
+      "address": "0x0044cc24",
+      "new_name": "__unlock_13_setmbcp_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044cc24 from 'FUN_0044cc24' to '__unlock_13_setmbcp_epilog'\",\"warnings\":[\"Function name '__unlock_13_setmbcp_epilog' \u2014 main part '__unloc"
+    },
+    {
+      "address": "0x0044cf75",
+      "new_name": "__unlock_12_updatetlocinfo_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044cf75 from 'FUN_0044cf75' to '__unlock_12_updatetlocinfo_epilog'\",\"warnings\":[\"Function name '__unlock_12_updatetlocinfo_epilog' \u2014 main"
+    },
+    {
+      "address": "0x004500e2",
+      "new_name": "__unlock_0_raise_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x004500e2 from 'FUN_004500e2' to '__unlock_0_raise_epilog'\",\"warnings\":[\"Function name '__unlock_0_raise_epilog' \u2014 main part '__unlock_0_ra"
+    },
+    {
+      "address": "0x00452869",
+      "new_name": "__lseeki64_unlock_fhandle_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00452869 from 'FUN_00452869' to '__lseeki64_unlock_fhandle_epilog'\",\"warnings\":[\"Function name '__lseeki64_unlock_fhandle_epilog' \u2014 main p"
+    },
+    {
+      "address": "0x00452f0b",
+      "new_name": "__write_unlock_fhandle_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00452f0b from 'FUN_00452f0b' to '__write_unlock_fhandle_epilog'\",\"warnings\":[\"Function name '__write_unlock_fhandle_epilog' \u2014 main part '_"
+    },
+    {
+      "address": "0x004486a4",
+      "new_name": "eh_vector_constructor_iterator_unwind_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x004486a4 from 'FUN_004486a4' to 'eh_vector_constructor_iterator_unwind_epilog'\",\"warnings\":[\"Function name 'eh_vector_constructor_iterator"
+    },
+    {
+      "address": "0x00448765",
+      "new_name": "eh_vector_destructor_iterator_unwind_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00448765 from 'FUN_00448765' to 'eh_vector_destructor_iterator_unwind_epilog'\",\"warnings\":[\"Function name 'eh_vector_destructor_iterator_u"
+    },
+    {
+      "address": "0x00448a97",
+      "new_name": "__crt_default_thread_hook_nop",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00448a97 from 'FUN_00448a97' to '__crt_default_thread_hook_nop'\",\"warnings\":[\"Function name '__crt_default_thread_hook_nop' \u2014 main part '_"
+    },
+    {
+      "address": "0x0044b1cf",
+      "new_name": "__FrameUnwindToState_processing_throw_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044b1cf from 'FUN_0044b1cf' to '__FrameUnwindToState_processing_throw_epilog'\",\"warnings\":[\"Function name '__FrameUnwindToState_processin"
+    },
+    {
+      "address": "0x0044b490",
+      "new_name": "CallCatchBlock_epilog",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044b490 from 'FUN_0044b490' to 'CallCatchBlock_epilog'\",\"warnings\":[\"Function name 'CallCatchBlock_epilog' \u2014 main part 'CallCatchBlock_ep"
+    },
+    {
+      "address": "0x0044c482",
+      "new_name": "__VEC_memcpy_movdqa_tail",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044c482 from 'FUN_0044c482' to '__VEC_memcpy_movdqa_tail'\",\"warnings\":[\"Function name '__VEC_memcpy_movdqa_tail' \u2014 main part '__VEC_memcp"
+    },
+    {
+      "address": "0x0044fcdf",
+      "new_name": "__clear_fatal_exit_flag_hook",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044fcdf from 'FUN_0044fcdf' to '__clear_fatal_exit_flag_hook'\",\"warnings\":[\"Function name '__clear_fatal_exit_flag_hook' \u2014 main part '__c"
+    },
+    {
+      "address": "0x0044fe54",
+      "new_name": "__NLG_unwind_dispatch_stub",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044fe54 from 'FUN_0044fe54' to '__NLG_unwind_dispatch_stub'\",\"warnings\":[\"Function name '__NLG_unwind_dispatch_stub' \u2014 main part '__NLG_u"
+    },
+    {
+      "address": "0x0044fe57",
+      "new_name": "__get_sse2_info_probe",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044fe57 from 'FUN_0044fe57' to '__get_sse2_info_probe'\",\"warnings\":[\"Function name '__get_sse2_info_probe' \u2014 main part '__get_sse2_info_p"
+    },
+    {
+      "address": "0x0044a916",
+      "new_name": "__initp_encoded_null_callnewh",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044a916 from 'FUN_0044a916' to '__initp_encoded_null_callnewh'\",\"warnings\":[\"Function name '__initp_encoded_null_callnewh' \u2014 main part '_"
+    },
+    {
+      "address": "0x0044a942",
+      "new_name": "__initp_encoded_null_invalid_parameter",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044a942 from 'FUN_0044a942' to '__initp_encoded_null_invalid_parameter'\",\"warnings\":[\"Function name '__initp_encoded_null_invalid_paramet"
+    },
+    {
+      "address": "0x0044d594",
+      "new_name": "__initp_encoded_null_purecall",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044d594 from 'FUN_0044d594' to '__initp_encoded_null_purecall'\",\"warnings\":[\"Function name '__initp_encoded_null_purecall' \u2014 main part '_"
+    },
+    {
+      "address": "0x0044faab",
+      "new_name": "__initp_encoded_null_critsec_spin",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0044faab from 'FUN_0044faab' to '__initp_encoded_null_critsec_spin'\",\"warnings\":[\"Function name '__initp_encoded_null_critsec_spin' \u2014 main"
+    },
+    {
+      "address": "0x0045011e",
+      "new_name": "__initp_encoded_null_slot5",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0045011e from 'FUN_0045011e' to '__initp_encoded_null_slot5'\",\"warnings\":[\"Function name '__initp_encoded_null_slot5' \u2014 main part '__initp"
+    },
+    {
+      "address": "0x0045b480",
+      "new_name": "imdct36_post_dctIV_scatter",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0045b480 from 'FUN_0045b480' to 'imdct36_post_dctIV_scatter'\",\"warnings\":[\"Function name 'imdct36_post_dctIV_scatter' \u2014 main part 'imdct36"
+    },
+    {
+      "address": "0x00460f30",
+      "new_name": "create_context_buffer_edge_replicate",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00460f30 from 'FUN_00460f30' to 'create_context_buffer_edge_replicate'\",\"warnings\":[\"Function name 'create_context_buffer_edge_replicate' "
+    },
+    {
+      "address": "0x00461080",
+      "new_name": "pre_process_context_row_replicate",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00461080 from 'FUN_00461080' to 'pre_process_context_row_replicate'\",\"warnings\":[\"Function name 'pre_process_context_row_replicate' \u2014 main"
+    },
+    {
+      "address": "0x00461160",
+      "new_name": "pre_process_context_row_shift",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00461160 from 'FUN_00461160' to 'pre_process_context_row_shift'\",\"warnings\":[\"Function name 'pre_process_context_row_shift' \u2014 main part 'p"
+    },
+    {
+      "address": "0x004613e0",
+      "new_name": "start_pass_main",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x004613e0 from 'FUN_004613e0' to 'start_pass_main'\",\"warnings\":[\"Function name 'start_pass_main' \u2014 main part 'start_pass_main' is not Pasca"
+    },
+    {
+      "address": "0x00461460",
+      "new_name": "jinit_d_prep_controller_sample_bufs",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00461460 from 'FUN_00461460' to 'jinit_d_prep_controller_sample_bufs'\",\"warnings\":[\"Function name 'jinit_d_prep_controller_sample_bufs' \u2014 "
+    },
+    {
+      "address": "0x0046a840",
+      "new_name": "expand_bottom_edge",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0046a840 from 'FUN_0046a840' to 'expand_bottom_edge'\",\"warnings\":[\"Function name 'expand_bottom_edge' \u2014 main part 'expand_bottom_edge' is "
+    },
+    {
+      "address": "0x00466920",
+      "new_name": "compute_sample_table_size",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00466920 from 'FUN_00466920' to 'compute_sample_table_size'\",\"warnings\":[\"Function name 'compute_sample_table_size' \u2014 main part 'compute_s"
+    },
+    {
+      "address": "0x00466a10",
+      "new_name": "scale_dither_index_to_byte",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00466a10 from 'FUN_00466a10' to 'scale_dither_index_to_byte'\",\"warnings\":[\"Function name 'scale_dither_index_to_byte' \u2014 main part 'scale_d"
+    },
+    {
+      "address": "0x00466a50",
+      "new_name": "build_colormap_sample_tables",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00466a50 from 'FUN_00466a50' to 'build_colormap_sample_tables'\",\"warnings\":[\"Function name 'build_colormap_sample_tables' \u2014 main part 'bui"
+    },
+    {
+      "address": "0x00466cc0",
+      "new_name": "alloc_scaled_quant_table_from_rdata",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00466cc0 from 'FUN_00466cc0' to 'alloc_scaled_quant_table_from_rdata'\",\"warnings\":[\"Function name 'alloc_scaled_quant_table_from_rdata' \u2014 "
+    },
+    {
+      "address": "0x00466d40",
+      "new_name": "init_scaled_quant_tables_dedup",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00466d40 from 'FUN_00466d40' to 'init_scaled_quant_tables_dedup'\",\"warnings\":[\"Function name 'init_scaled_quant_tables_dedup' \u2014 main part "
+    },
+    {
+      "address": "0x00466f00",
+      "new_name": "merged_upsample_row_non_rgb",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00466f00 from 'FUN_00466f00' to 'merged_upsample_row_non_rgb'\",\"warnings\":[\"Function name 'merged_upsample_row_non_rgb' \u2014 main part 'merge"
+    },
+    {
+      "address": "0x00467020",
+      "new_name": "h2v1_merged_upsample_rgb_row",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00467020 from 'FUN_00467020' to 'h2v1_merged_upsample_rgb_row'\",\"warnings\":[\"Function name 'h2v1_merged_upsample_rgb_row' \u2014 main part 'h2v"
+    },
+    {
+      "address": "0x00467150",
+      "new_name": "h2v2_fancy_upsample_row",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00467150 from 'FUN_00467150' to 'h2v2_fancy_upsample_row'\",\"warnings\":[\"Function name 'h2v2_fancy_upsample_row' \u2014 main part 'h2v2_fancy_up"
+    },
+    {
+      "address": "0x00467300",
+      "new_name": "alloc_fancy_upsample_row_bufs",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00467300 from 'FUN_00467300' to 'alloc_fancy_upsample_row_bufs'\",\"warnings\":[\"Function name 'alloc_fancy_upsample_row_bufs' \u2014 main part 'a"
+    },
+    {
+      "address": "0x00467340",
+      "new_name": "start_pass_merged_upsampler",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00467340 from 'FUN_00467340' to 'start_pass_merged_upsampler'\",\"warnings\":[\"Function name 'start_pass_merged_upsampler' \u2014 main part 'start"
+    },
+    {
+      "address": "0x0046db50",
+      "new_name": "h2v1_merged_upsample_ycbcr_colormap",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x0046db50 from 'FUN_0046db50' to 'h2v1_merged_upsample_ycbcr_colormap'\",\"warnings\":[\"Function name 'h2v1_merged_upsample_ycbcr_colormap' \u2014 "
+    },
+    {
+      "address": "0x00466a30",
+      "new_name": "gen_codes_rounded_idiv_stub",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00466a30 from 'FUN_00466a30' to 'gen_codes_rounded_idiv_stub'\",\"warnings\":[\"Function name 'gen_codes_rounded_idiv_stub' \u2014 main part 'gen_c"
+    },
+    {
+      "address": "0x004713d0",
+      "new_name": "gen_bitlen_tail",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x004713d0 from 'FUN_004713d0' to 'gen_bitlen_tail'\",\"warnings\":[\"Function name 'gen_bitlen_tail' \u2014 main part 'gen_bitlen_tail' is not Pasca"
+    },
+    {
+      "address": "0x00472420",
+      "new_name": "copy_block",
+      "ok": true,
+      "msg": "{\"status\":\"success\",\"message\":\"Success: Renamed function at 0x00472420 from 'FUN_00472420' to 'copy_block'\",\"warnings\":[\"Function name 'copy_block' \u2014 main part 'copy_block' is not PascalCase. Expected"
+    }
+  ],
+  "save": {
+    "ok": true,
+    "msg": "{\"success\":true,\"program\":\"bulanci.exe\",\"message\":\"Program saved successfully\"}"
+  }
+}
