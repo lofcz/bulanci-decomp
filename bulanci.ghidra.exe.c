@@ -4902,6 +4902,180 @@ struct _s_CatchableType {
     pointer copyFunction;
 };
 
+typedef struct CMenu CMenu, *PCMenu;
+
+typedef struct CRuch CRuch, *PCRuch;
+
+struct CMenu {
+    struct CDSView_vftable_t *pVftable_primary;
+    void *pVftable_IDSChained;
+    dword dwField_08;
+    dword dwField_0c;
+    void *pVftable_IDSEventHandler;
+    ushort wViewFlags;
+    ushort wPad_16;
+    void *pVftable_IDSReferenced;
+    dword dwField_1c;
+    int nBbox_left;
+    int nBbox_top;
+    int nBbox_right;
+    int nBbox_bottom;
+    dword dwField_30;
+    dword dwField_34;
+    dword dwField_38;
+    dword dwField_3c;
+    dword dwChainHead_40;
+    ushort wViewStateFlags;
+    ushort wWidgetFlags;
+    ushort wChainCounter_48;
+    ushort wChainCounter_4a;
+    void *pParent;
+    dword dwChainField_50;
+    void *pVftable_CDSChain_IDSReferenced;
+    void *pVftable_CDSChain_IDSChained;
+    dword dwField_5c;
+    dword dwField_60;
+    dword dwField_64;
+    struct CDSUpdatedItem updatedItem;
+    int nPushedSubScreenId;
+    struct CDSView *pCurSubScreen;
+    struct CDSBitmap *pSubScreenBgBitmap;
+    struct CDSBitmap *pTitleBitmap;
+    struct CDSBitmap *pIconStartNormal;
+    struct CDSBitmap *pIconStartHighlight;
+    struct CDSBitmap *pIconHistoryNormal;
+    struct CDSBitmap *pIconHistoryHighlight;
+    struct CDSBitmap *pIconQuitNormal;
+    struct CDSBitmap *pIconQuitHighlight;
+    byte pPad_a8_af[8];
+    struct CSwitch *pBtnStart;
+    struct CSwitch *pBtnHistory;
+    struct CSwitch *pBtnQuit;
+    byte pPad_bc_bf[4];
+    struct CDSAudioPlayer *pBackgroundMusicPlayer;
+    struct CDSAudioPlayer *pDeferredExitVoicePlayer;
+    struct CDSBitmap *pHeroBitmap;
+    ushort wModalExitCodeStash;
+    ushort wPad_ce;
+    struct CRuch *pRuch0;
+    struct CRuch *pRuch1;
+    struct CRuch *pRuch2;
+    struct CRuch *pRuch3;
+    byte bLastSplashFlag;
+    byte bDayNightLatch;
+    byte bBgMusicEnabled;
+    byte bPad_e3;
+};
+
+struct CRuch {
+    undefined field0_0x0;
+    undefined field1_0x1;
+    undefined field2_0x2;
+    undefined field3_0x3;
+    undefined field4_0x4;
+    undefined field5_0x5;
+    undefined field6_0x6;
+    undefined field7_0x7;
+    undefined field8_0x8;
+    undefined field9_0x9;
+    undefined field10_0xa;
+    undefined field11_0xb;
+    undefined field12_0xc;
+    undefined field13_0xd;
+    undefined field14_0xe;
+    undefined field15_0xf;
+    undefined field16_0x10;
+    undefined field17_0x11;
+    undefined field18_0x12;
+    undefined field19_0x13;
+    undefined field20_0x14;
+    undefined field21_0x15;
+    undefined field22_0x16;
+    undefined field23_0x17;
+    undefined field24_0x18;
+    undefined field25_0x19;
+    undefined field26_0x1a;
+    undefined field27_0x1b;
+    undefined field28_0x1c;
+    undefined field29_0x1d;
+    undefined field30_0x1e;
+    undefined field31_0x1f;
+    undefined field32_0x20;
+    undefined field33_0x21;
+    undefined field34_0x22;
+    undefined field35_0x23;
+    undefined field36_0x24;
+    undefined field37_0x25;
+    undefined field38_0x26;
+    undefined field39_0x27;
+    undefined field40_0x28;
+    undefined field41_0x29;
+    undefined field42_0x2a;
+    undefined field43_0x2b;
+    undefined field44_0x2c;
+    undefined field45_0x2d;
+    undefined field46_0x2e;
+    undefined field47_0x2f;
+    undefined field48_0x30;
+    undefined field49_0x31;
+    undefined field50_0x32;
+    undefined field51_0x33;
+    undefined field52_0x34;
+    undefined field53_0x35;
+    undefined field54_0x36;
+    undefined field55_0x37;
+    undefined field56_0x38;
+    undefined field57_0x39;
+    undefined field58_0x3a;
+    undefined field59_0x3b;
+    undefined field60_0x3c;
+    undefined field61_0x3d;
+    undefined field62_0x3e;
+    undefined field63_0x3f;
+    undefined field64_0x40;
+    undefined field65_0x41;
+    undefined field66_0x42;
+    undefined field67_0x43;
+    undefined field68_0x44;
+    undefined field69_0x45;
+    undefined field70_0x46;
+    undefined field71_0x47;
+    undefined field72_0x48;
+    undefined field73_0x49;
+    undefined field74_0x4a;
+    undefined field75_0x4b;
+    undefined field76_0x4c;
+    undefined field77_0x4d;
+    undefined field78_0x4e;
+    undefined field79_0x4f;
+    undefined field80_0x50;
+    undefined field81_0x51;
+    undefined field82_0x52;
+    undefined field83_0x53;
+    undefined field84_0x54;
+    undefined field85_0x55;
+    undefined field86_0x56;
+    undefined field87_0x57;
+    undefined field88_0x58;
+    undefined field89_0x59;
+    undefined field90_0x5a;
+    undefined field91_0x5b;
+    undefined field92_0x5c;
+    undefined field93_0x5d;
+    undefined field94_0x5e;
+    undefined field95_0x5f;
+    undefined field96_0x60;
+    undefined field97_0x61;
+    undefined field98_0x62;
+    undefined field99_0x63;
+    undefined field100_0x64;
+    undefined field101_0x65;
+    undefined field102_0x66;
+    undefined field103_0x67;
+    // ignoring dynamic datatype inside composite: -BAD-
+-BAD- updateItem; // Type 'CDSUpdatedItem' was deleted
+};
+
 typedef struct CListBoxItem CListBoxItem, *PCListBoxItem;
 
 struct CListBoxItem {
@@ -5117,117 +5291,6 @@ struct CHelpView {
     struct CDSChained chain;
 };
 
-typedef struct CRuch CRuch, *PCRuch;
-
-struct CRuch {
-    undefined field0_0x0;
-    undefined field1_0x1;
-    undefined field2_0x2;
-    undefined field3_0x3;
-    undefined field4_0x4;
-    undefined field5_0x5;
-    undefined field6_0x6;
-    undefined field7_0x7;
-    undefined field8_0x8;
-    undefined field9_0x9;
-    undefined field10_0xa;
-    undefined field11_0xb;
-    undefined field12_0xc;
-    undefined field13_0xd;
-    undefined field14_0xe;
-    undefined field15_0xf;
-    undefined field16_0x10;
-    undefined field17_0x11;
-    undefined field18_0x12;
-    undefined field19_0x13;
-    undefined field20_0x14;
-    undefined field21_0x15;
-    undefined field22_0x16;
-    undefined field23_0x17;
-    undefined field24_0x18;
-    undefined field25_0x19;
-    undefined field26_0x1a;
-    undefined field27_0x1b;
-    undefined field28_0x1c;
-    undefined field29_0x1d;
-    undefined field30_0x1e;
-    undefined field31_0x1f;
-    undefined field32_0x20;
-    undefined field33_0x21;
-    undefined field34_0x22;
-    undefined field35_0x23;
-    undefined field36_0x24;
-    undefined field37_0x25;
-    undefined field38_0x26;
-    undefined field39_0x27;
-    undefined field40_0x28;
-    undefined field41_0x29;
-    undefined field42_0x2a;
-    undefined field43_0x2b;
-    undefined field44_0x2c;
-    undefined field45_0x2d;
-    undefined field46_0x2e;
-    undefined field47_0x2f;
-    undefined field48_0x30;
-    undefined field49_0x31;
-    undefined field50_0x32;
-    undefined field51_0x33;
-    undefined field52_0x34;
-    undefined field53_0x35;
-    undefined field54_0x36;
-    undefined field55_0x37;
-    undefined field56_0x38;
-    undefined field57_0x39;
-    undefined field58_0x3a;
-    undefined field59_0x3b;
-    undefined field60_0x3c;
-    undefined field61_0x3d;
-    undefined field62_0x3e;
-    undefined field63_0x3f;
-    undefined field64_0x40;
-    undefined field65_0x41;
-    undefined field66_0x42;
-    undefined field67_0x43;
-    undefined field68_0x44;
-    undefined field69_0x45;
-    undefined field70_0x46;
-    undefined field71_0x47;
-    undefined field72_0x48;
-    undefined field73_0x49;
-    undefined field74_0x4a;
-    undefined field75_0x4b;
-    undefined field76_0x4c;
-    undefined field77_0x4d;
-    undefined field78_0x4e;
-    undefined field79_0x4f;
-    undefined field80_0x50;
-    undefined field81_0x51;
-    undefined field82_0x52;
-    undefined field83_0x53;
-    undefined field84_0x54;
-    undefined field85_0x55;
-    undefined field86_0x56;
-    undefined field87_0x57;
-    undefined field88_0x58;
-    undefined field89_0x59;
-    undefined field90_0x5a;
-    undefined field91_0x5b;
-    undefined field92_0x5c;
-    undefined field93_0x5d;
-    undefined field94_0x5e;
-    undefined field95_0x5f;
-    undefined field96_0x60;
-    undefined field97_0x61;
-    undefined field98_0x62;
-    undefined field99_0x63;
-    undefined field100_0x64;
-    undefined field101_0x65;
-    undefined field102_0x66;
-    undefined field103_0x67;
-    // ignoring dynamic datatype inside composite: -BAD-
--BAD- updateItem; // Type 'CDSUpdatedItem' was deleted
-};
-
 typedef struct CHistoryScript CHistoryScript, *PCHistoryScript;
 
 struct CHistoryScript {
@@ -5355,69 +5418,6 @@ struct CDSEasyMemStream_test {
     undefined field39_0x2a;
     undefined field40_0x2b;
     pointer backing_heap;
-};
-
-typedef struct CMenu CMenu, *PCMenu;
-
-struct CMenu {
-    struct CDSView_vftable_t *pVftable_primary;
-    void *pVftable_IDSChained;
-    dword dwField_08;
-    dword dwField_0c;
-    void *pVftable_IDSEventHandler;
-    ushort wViewFlags;
-    ushort wPad_16;
-    void *pVftable_IDSReferenced;
-    dword dwField_1c;
-    int nBbox_left;
-    int nBbox_top;
-    int nBbox_right;
-    int nBbox_bottom;
-    dword dwField_30;
-    dword dwField_34;
-    dword dwField_38;
-    dword dwField_3c;
-    dword dwChainHead_40;
-    ushort wViewStateFlags;
-    ushort wWidgetFlags;
-    ushort wChainCounter_48;
-    ushort wChainCounter_4a;
-    void *pParent;
-    dword dwChainField_50;
-    void *pVftable_CDSChain_IDSReferenced;
-    void *pVftable_CDSChain_IDSChained;
-    dword dwField_5c;
-    dword dwField_60;
-    dword dwField_64;
-    struct CDSUpdatedItem updatedItem;
-    int nPushedSubScreenId;
-    struct CDSView *pCurSubScreen;
-    struct CDSBitmap *pSubScreenBgBitmap;
-    struct CDSBitmap *pTitleBitmap;
-    struct CDSBitmap *pIconStartNormal;
-    struct CDSBitmap *pIconStartHighlight;
-    struct CDSBitmap *pIconHistoryNormal;
-    struct CDSBitmap *pIconHistoryHighlight;
-    struct CDSBitmap *pIconQuitNormal;
-    struct CDSBitmap *pIconQuitHighlight;
-    byte pPad_a8_af[8];
-    struct CSwitch *pBtnStart;
-    struct CSwitch *pBtnHistory;
-    struct CSwitch *pBtnQuit;
-    byte pPad_bc_bf[4];
-    struct CDSAudioPlayer *pBackgroundMusicPlayer;
-    struct CDSAudioPlayer *pDeferredExitVoicePlayer;
-    struct CDSBitmap *pHeroBitmap;
-    ushort wModalExitCodeStash;
-    ushort wPad_ce;
-    struct CRuch *pRuch0;
-    struct CRuch *pRuch1;
-    struct CRuch *pRuch2;
-    struct CRuch *pRuch3;
-    byte bLastSplashFlag;
-    byte bDayNightLatch;
-    byte bBgMusicEnabled;
-    byte bPad_e3;
 };
 
 typedef struct _s_FuncInfo FuncInfo;
@@ -5869,6 +5869,13 @@ struct CScroller {
     int nLastRenderScrollSnapshot;
 };
 
+typedef struct CVolume CVolume, *PCVolume;
+
+struct CVolume {
+    struct CScrollBar scrollbar;
+    struct CDSAudioPlayer *pAudio_preview;
+};
+
 typedef struct CDSWavStream CDSWavStream, *PCDSWavStream;
 
 struct CDSWavStream {
@@ -5893,13 +5900,6 @@ struct CDSWavStream {
 typedef struct type_info type_info, *Ptype_info;
 
 struct type_info { // PlaceHolder Class Structure
-};
-
-typedef struct CVolume CVolume, *PCVolume;
-
-struct CVolume {
-    struct CScrollBar scrollbar;
-    struct CDSAudioPlayer *pAudio_preview;
 };
 
 typedef struct CExplosion CExplosion, *PCExplosion;
@@ -57417,7 +57417,6 @@ undefined LAB_0047428b;
 undefined LAB_004742c9;
 undefined *PTR_g_wszRegSubKeySleepTeamBulanci_004ae000;
 undefined LAB_00474330;
-undefined DAT_0047f8bc;
 undefined DAT_004b3450;
 undefined DAT_004b3488;
 undefined DAT_004b3894;
@@ -57428,7 +57427,7 @@ undefined DAT_004b7dc4;
 undefined DAT_004b7e08;
 undefined DAT_004b7e4c;
 pointer[6] vftable;
-undefined g_pCBulanci_vftable_primary;
+undefined *g_pCBulanci_vftable_primary;
 void *g_pClassRegistryDsm;
 undefined g_AppDescriptor;
 undefined DAT_004b7c38;
@@ -57441,7 +57440,7 @@ undefined LAB_00474458;
 undefined DAT_004b7cb8;
 undefined LAB_0047449e;
 void *g_pCDSView_vftable_IDSEventHandler;
-undefined vftable;
+undefined *vftable;
 CDSView_vftable_IDSReferenced_t *g_pCDSView_vftable_IDSReferenced;
 CDSView_vftable_t *g_pCDSView_vftable_primary;
 void *g_pCDSView_vftable_IDSChained;
@@ -57460,10 +57459,10 @@ undefined LAB_0047454f;
 undefined DAT_004b3348;
 undefined DAT_004b335c;
 undefined LAB_00474578;
-undefined g_pCIcon_vftable_IDSChained_18;
-undefined g_pCIcon_vftable_IDSEventHandler_10;
-undefined g_pCIcon_vftable_primary;
-undefined g_pCIcon_vftable_IDSChained;
+undefined *g_pCIcon_vftable_IDSChained_18;
+undefined *g_pCIcon_vftable_IDSEventHandler_10;
+undefined *g_pCIcon_vftable_primary;
+undefined *g_pCIcon_vftable_IDSChained;
 undefined DAT_004b343c;
 undefined LAB_004745a8;
 undefined LAB_004745d8;
@@ -57531,8 +57530,8 @@ undefined DAT_004b7f04;
 undefined LAB_0047506f;
 undefined LAB_004750a3;
 undefined LAB_004750cb;
-undefined DAT_004804ec;
-undefined DAT_00480504;
+undefined4 DAT_004804ec;
+undefined4 DAT_00480504;
 undefined LAB_004750fb;
 undefined LAB_00475136;
 undefined LAB_00475194;
@@ -57544,7 +57543,6 @@ undefined DAT_80000002;
 undefined LAB_00475238;
 undefined CGame_LevelResourceQsortCmp;
 undefined LAB_00475281;
-undefined DAT_00480608;
 undefined CGame_PlayerRec_dtor;
 undefined LAB_004752f2;
 undefined LAB_00475330;
@@ -57919,7 +57917,6 @@ undefined DAT_004829d0;
 undefined DAT_004829d4;
 undefined LAB_00477ba6;
 void *[8] g_apfnCHelpScriptOpcodeExt;
-undefined *vftable;
 undefined *g_pCHelpScript_vftable_IDSEventHandler;
 undefined *g_pCHelpScript_vftable_IDSChained;
 undefined LAB_00477bd8;
@@ -58140,11 +58137,10 @@ undefined DAT_0042b3ab;
 undefined LAB_004792c2;
 undefined DAT_0042b487;
 undefined LAB_004792eb;
-int *DAT_004b3b94;
+CDSView *DAT_004b3b94;
 int DAT_004b3b94;
 undefined LAB_0047931b;
 undefined4 DAT_004b3b94;
-CDSView *DAT_004b3b94;
 undefined *PTR_DAT_004afce0;
 undefined LAB_004793a8;
 undefined LAB_004793d8;
@@ -58849,7 +58845,7 @@ undefined rgb_gray_convert;
 undefined cmyk_ycck_convert;
 undefined prepare_for_pass;
 undefined pass_startup;
-undefined FUN_0046c880;
+undefined finish_pass;
 undefined LAB_00471280;
 undefined zcalloc;
 pointer switchdataD_0046f324;
@@ -58869,17 +58865,14 @@ pointer switchdataD_0047109c;
 undefined DAT_0049e158;
 undefined DAT_004b32a8;
 undefined1 DAT_0049e2fc;
-undefined DAT_0049e288;
-undefined DAT_0049e310;
 undefined DAT_0049e8cf;
+byte[116] CRYPT_zinflate_lengthexBytestraBits;
 undefined DAT_0049ebd0;
 undefined DAT_0049ec48;
+byte[120] CRYPT_zinflate_distanceExtraBits;
 pointer PTR_DAT_004b2160;
 pointer PTR_DAT_004b2174;
 undefined DAT_004b2188;
-undefined UNK_0049e2f9;
-undefined UNK_0049e2fa;
-undefined UNK_0049e2fb;
 undefined4 DAT_004b21a0;
 undefined4 DAT_004b21a4;
 undefined DAT_004b21a8;
@@ -59376,7 +59369,7 @@ int * __thiscall CBulanci::CBulanci_GetPathExtension(CBulanci *this,int *param_1
   ExceptionList = &local_c;
   *param_1 = 0;
   local_4 = 0;
-  CDsString_SplitPathBackslashDot(this,0,0,param_1);
+  CDsString_SplitPathBackslashDot(this,(CBulanci *)0x0,(void *)0x0,param_1);
   ExceptionList = local_c;
   return param_1;
 }
@@ -60039,18 +60032,18 @@ undefined * CBulanci::Catch_00401c30(void)
 bool CBulanci::CBulanci_ShowPostMatchScoreModal(void)
 
 {
-  short sVar1;
+  ushort uVar1;
   void *target_evt;
   char unaff_BL;
   int unaff_EBP;
-  void *unaff_ESI;
+  CDSView *unaff_ESI;
   
                     // If solo score tie: (game).bMenuLastSplashFlag=1 for next CMenu (auto Start
                     // via bLastSplashFlag)
-  CScore::CScore_ctor((CScore *)(unaff_EBP + -0x90),(int)unaff_ESI + 0x284);
+  CScore::CScore_ctor((CScore *)(unaff_EBP + -0x90),&unaff_ESI[5].win.pVftable_IDSChained);
   *(undefined4 *)(unaff_EBP + -4) = 2;
-  sVar1 = CDSView::CDSView_DoModal((CDSView *)(unaff_EBP + -0x90),unaff_ESI);
-  if (sVar1 == -0x7ffc) {
+  uVar1 = CDSView::CDSView_DoModal((CDSView *)(unaff_EBP + -0x90),unaff_ESI);
+  if (uVar1 == 0x8004) {
     if (g_pModalFocus == (void *)0x0) {
       target_evt = (void *)0x0;
     }
@@ -60059,9 +60052,9 @@ bool CBulanci::CBulanci_ShowPostMatchScoreModal(void)
     }
     _Globals::CDSView_PostMessage_NullSafe(target_evt,0x100,0x8004,0,0);
   }
-  if ((*(char *)((int)unaff_ESI + 0x2e6) == '\0') &&
-     (*(char *)((int)unaff_ESI + 0x2e7) == *(char *)((int)unaff_ESI + 0x2e8))) {
-    *(undefined1 *)((int)unaff_ESI + 0x4c8) = 1;
+  if ((*(char *)((int)&unaff_ESI[5].win.pOverlapEntity + 2) == '\0') &&
+     (*(byte *)((int)&unaff_ESI[5].win.pOverlapEntity + 3) == unaff_ESI[5].win.bModalFlag)) {
+    *(undefined1 *)&unaff_ESI[9].win.wChainCounter_48 = 1;
   }
   *(undefined4 *)(unaff_EBP + -4) = 0xffffffff;
   CScore::CScore_dtor((CScore *)(unaff_EBP + -0x90));
@@ -60470,7 +60463,7 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort cmd_id,uint cm
 
 {
   char extraout_AL;
-  short modal_rc;
+  ushort modal_rc;
   CMenu *this_00;
   CDSView *menu;
   undefined **target_evt;
@@ -60492,7 +60485,7 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort cmd_id,uint cm
         CAdvertising::CAdvertising_ctor(&splash);
         local_4 = 1;
         CAdvertising::LoadSplashImage(&splash,0x1013a);
-        CDSView::CDSView_DoModal((CDSView *)&splash,this);
+        CDSView::CDSView_DoModal((CDSView *)&splash,(CDSView *)this);
         local_4 = 0xffffffff;
         CAdvertising::CAdvertising_dtor(&splash);
         _Globals::CDSView__PostMessage(&(this->app).vftable_sub10,0x100,0xcc,0,1);
@@ -60530,19 +60523,19 @@ CBulanci::CBulanci_OnEvent_MenuStateMachine(CBulanci *this,ushort cmd_id,uint cm
   local_4 = 0xffffffff;
   this->pMainMenu = menu;
   (this->game).bMenuLastSplashFlag = 0;
-  modal_rc = CDSView::CDSView_DoModal(menu,this);
+  modal_rc = CDSView::CDSView_DoModal(menu,(CDSView *)this);
   if ((int *)this->pMainMenu != (int *)0x0) {
     (**(code **)(*(int *)this->pMainMenu + 4))(1);
   }
   this->pMainMenu = 0;
   (this->game).pSchedTeamScoreScratch[2] = 0;
-  if (modal_rc != -0x7ffc) {
-    if (modal_rc == -0x7f38) {
+  if (modal_rc != 0x8004) {
+    if (modal_rc == 0x80c8) {
       _Globals::CDSView_PostMessage_NullSafe(&(this->app).vftable_sub10,0x100,0xcd,0,0);
       ExceptionList = local_c;
       return;
     }
-    if (modal_rc != -0x7f35) {
+    if (modal_rc != 0x80cb) {
       ExceptionList = local_c;
       return;
     }
@@ -60586,10 +60579,9 @@ CBulanci * __fastcall CBulanci::CBulanci_ctor(CBulanci *this)
   puStack_8 = &LAB_00474330;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CDSApp::CDSApp_ctor(&this->app,(short *)&DAT_0047f8bc,
-                      (short *)PTR_g_wszRegSubKeySleepTeamBulanci_004ae000);
+  CDSApp::CDSApp_ctor(&this->app,L"Bulanci",(short *)PTR_g_wszRegSubKeySleepTeamBulanci_004ae000);
   uStack_4 = 0;
-  (this->app).vftable_primary = &::g_pCBulanci_vftable_primary;
+  (this->app).vftable_primary = (undefined *)&::g_pCBulanci_vftable_primary;
   (this->app).vftable_sub04 = (undefined *)vftable;
   (this->app).vftable_sub10 = (undefined *)vftable;
   (this->app).vftable_sub18 = (undefined *)vftable;
@@ -60725,7 +60717,7 @@ void __thiscall CBulanci::CBulanci_DestroyEmbedFields(CBulanci *this)
   local_c = ExceptionList;
   uVar3 = DAT_004b0e44 ^ (uint)&stack0xffffffec;
   ExceptionList = &local_c;
-  (this->app).vftable_primary = &::g_pCBulanci_vftable_primary;
+  (this->app).vftable_primary = (undefined *)&::g_pCBulanci_vftable_primary;
   (this->app).vftable_sub04 = (undefined *)vftable;
   (this->app).vftable_sub10 = (undefined *)vftable;
   (this->app).vftable_sub18 = (undefined *)vftable;
@@ -60784,7 +60776,8 @@ void __thiscall CBulanci::CBulanci_DestroyEmbedFields(CBulanci *this)
 // main_menu.md §1 step (c) and §10.
 
 CDSPtrSlotVec * __thiscall
-CBulanci::CBulanci_BuildBitmapCache(CBulanci *this,int param_1,int param_2,int *param_3)
+CBulanci::CBulanci_BuildBitmapCache
+          (CBulanci *this,int param_1,int param_2,CDSStreamStorage *param_3)
 
 {
   int iVar1;
@@ -60800,8 +60793,8 @@ CBulanci::CBulanci_BuildBitmapCache(CBulanci *this,int param_1,int param_2,int *
   puStack_8 = &LAB_004743ab;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  if (param_3 == (int *)0x0) {
-    param_3 = (int *)(this->app).pMasterPackStorage;
+  if (param_3 == (CDSStreamStorage *)0x0) {
+    param_3 = (this->app).pMasterPackStorage;
   }
   this_00 = (CDSPtrSlotVec *)_Globals::OperatorNewWithBadAlloc(8);
   local_4 = 0;
@@ -60819,7 +60812,7 @@ CBulanci::CBulanci_BuildBitmapCache(CBulanci *this,int param_1,int param_2,int *
   while (param_2 != 0) {
     iVar1 = param_2 * 4;
     param_2 = param_2 + -1;
-    this_01 = (void *)(**(code **)(((CDSStreamStorage *)param_3)->pVftable_IDSReferenced + 0x10))
+    this_01 = (void *)(**(code **)(param_3->pVftable_IDSReferenced + 0x10))
                                 (*(undefined4 *)(param_1 + -4 + iVar1),0);
     piVar2 = (int *)_Globals::HandleVirtualBaseCast(this_01,0xf);
     if (piVar2 != (int *)0x0) {
@@ -60864,7 +60857,7 @@ CBulanci * _Globals::CBulanci_CreateObject(void)
     return pCVar1;
   }
   ExceptionList = local_c;
-  return (CBulanci *)0;
+  return (CBulanci *)0x0;
 }
 
 
@@ -60898,15 +60891,15 @@ void __fastcall CBulanci::CBulanci_OnCreate(CBulanci *pThis)
 
 {
   int *piVar1;
+  CBulanci *pPackedTime;
   ulong dwSeed;
   undefined *puVar2;
-  undefined1 packedDateTime [8];
   
-  piVar1 = (int *)BuildLocalDateTime(packedDateTime);
-  dwSeed = CBulanci_PackedTimeToMs(piVar1);
+  pPackedTime = BuildLocalDateTime((CBulanci *)&stack0xfffffff8);
+  dwSeed = CBulanci_PackedTimeToMs((int *)pPackedTime);
   Runtime_MSVCRT__srand(dwSeed);
   CDSApp_OnCreate(pThis);
-  CBulanci_BuildBitmapCache(pThis,0x4ae008,0x6e,(int *)0x0);
+  CBulanci_BuildBitmapCache(pThis,0x4ae008,0x6e,(CDSStreamStorage *)0x0);
                     // Load res 0x10004 (65540 CDSAudioBankIndex) → bank 65874 global UI/combat
                     // SFX; stored g_pApp+0x4c0
   puVar2 = (undefined *)
@@ -60971,7 +60964,7 @@ void __fastcall CBulanci::CBulanci_dtor(CBulanci *param_1)
   uint uVar4;
   int iVar5;
   short *local_274;
-  int local_270;
+  undefined *local_270;
   int iStack_26c;
   _WIN32_FIND_DATAW _Stack_268;
   undefined *puStack_18;
@@ -60991,11 +60984,11 @@ void __fastcall CBulanci::CBulanci_dtor(CBulanci *param_1)
     (**(code **)(*piVar1 + 8))();
   }
   (param_1->game).pReleaseOnDestroy = (undefined *)0x0;
-  local_270 = 0;
+  local_270 = (undefined *)0x0;
                     // CBulanci_dtor audio-bank loop: (game).pAudioBankArray / dwAudioBankCount
                     // (CBulanci+0x4b0 == &game.pAudioBankArray)
   local_4 = 0;
-  CBulanci_AssignTempPathWithTrailingBackslash();
+  CBulanci_AssignTempPathWithTrailingBackslash((CBulanci *)&local_274);
   local_4._0_1_ = 1;
   _Globals::CDsStringFormatV(&local_270,L"%s*.tmp");
   local_4._0_1_ = 0;
@@ -61032,8 +61025,8 @@ void __fastcall CBulanci::CBulanci_dtor(CBulanci *param_1)
   local_4 = local_4 & 0xffffff00;
   _Globals::CBulanci_DirEnumCtx_dtor(&iStack_26c);
   local_4 = 0xffffffff;
-  if (local_270 != 0) {
-    _Globals::CDsStringReleaseHeader((void *)(local_270 + -0xc));
+  if (local_270 != (undefined *)0x0) {
+    _Globals::CDsStringReleaseHeader(local_270 + -0xc);
   }
   ExceptionList = local_c;
   return;
@@ -61044,7 +61037,7 @@ void __fastcall CBulanci::CBulanci_dtor(CBulanci *param_1)
 void __fastcall CBulanci::CBulanci_ChainDtorBody(int param_1)
 
 {
-  CBulanci_dtor(param_1 + -4);
+  CBulanci_dtor((CBulanci *)(param_1 + -4));
   return;
 }
 
@@ -61053,7 +61046,7 @@ void __fastcall CBulanci::CBulanci_ChainDtorBody(int param_1)
 void __fastcall CBulanci::CBulanci_ReferencedDtorBody(int param_1)
 
 {
-  CBulanci_dtor(param_1 + -0x10);
+  CBulanci_dtor((CBulanci *)(param_1 + -0x10));
   return;
 }
 
@@ -61062,7 +61055,7 @@ void __fastcall CBulanci::CBulanci_ReferencedDtorBody(int param_1)
 void __fastcall CBulanci::CBulanci_EventHandlerDtorBody(int param_1)
 
 {
-  CBulanci_dtor(param_1 + -0x18);
+  CBulanci_dtor((CBulanci *)(param_1 + -0x18));
   return;
 }
 
@@ -61151,18 +61144,18 @@ void __thiscall CRadio::CRadio_OnMouseDown(CRadio *this,uint mouseInfo,short isD
 
 {
   byte bVar1;
-  int *piVar2;
-  undefined1 uVar3;
+  CDSAudioPlayer *pCVar2;
   
   bVar1 = _Globals::CDSView_AcquireKeyboardFocus((int *)this);
   if (((bVar1 != 0) && (isDown == 1)) && (this->bHoverIndex != 0xff)) {
     this->bPressedIndex = this->bHoverIndex;
-    _Globals::CControl_ClaimModalFocusOnPress((int *)this);
+    _Globals::CControl_ClaimModalFocusOnPress((CDSView *)this);
     (**(code **)((int)this->pVftable_primary + 0x24))(0,0);
-    uVar3 = 0;
+    bVar1 = 0;
     this->bIsPressed = 1;
-    piVar2 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0xe,0,(void *)0x0,'\x01');
-    _Globals::CDSAudioPlayer_PlayAndRelease(piVar2,uVar3);
+    pCVar2 = (CDSAudioPlayer *)
+             _Globals::TriggerBankSample((undefined *)0x1,0,0xe,0,(void *)0x0,'\x01');
+    _Globals::CDSAudioPlayer_PlayAndRelease(pCVar2,bVar1);
   }
   return;
 }
@@ -61204,7 +61197,7 @@ void __thiscall CIcon::CIcon_OnMouseDown(CIcon *this,undefined4 param_1,short pa
 {
   if (param_2 == 1) {
     this->bPressedFlag = 1;
-    _Globals::CControl_ClaimModalFocusOnPress((int *)this);
+    _Globals::CControl_ClaimModalFocusOnPress((CDSView *)this);
     (**(code **)(*(int *)this + 0x24))(0,0);
   }
   return;
@@ -61224,14 +61217,15 @@ void __fastcall CIcon::CIcon_Invalidate(int *param_1)
 void __fastcall CButton::CButton_PlayClickSound(int param_1)
 
 {
-  int *piVar1;
-  undefined1 uVar2;
+  CDSAudioPlayer *pCVar1;
+  byte bVar2;
   
   if (*(int *)(param_1 + 0x94) != -1) {
-    uVar2 = 0;
-    piVar1 = (int *)_Globals::TriggerBankSample
-                              ((undefined *)0x1,0,*(int *)(param_1 + 0x94),0,(void *)0x0,'\x01');
-    _Globals::CDSAudioPlayer_PlayAndRelease(piVar1,uVar2);
+    bVar2 = 0;
+    pCVar1 = (CDSAudioPlayer *)
+             _Globals::TriggerBankSample
+                       ((undefined *)0x1,0,*(int *)(param_1 + 0x94),0,(void *)0x0,'\x01');
+    _Globals::CDSAudioPlayer_PlayAndRelease(pCVar1,bVar2);
   }
   return;
 }
@@ -61248,7 +61242,7 @@ void __thiscall CButton::CButton_OnMouseDown(CButton *this,undefined4 param_1,sh
     if (bVar1 != 0) {
       this->bPressedFlag = 1;
       CButton_PlayClickSound((int)this);
-      _Globals::CControl_ClaimModalFocusOnPress((int *)this);
+      _Globals::CControl_ClaimModalFocusOnPress((CDSView *)this);
       (**(code **)(*(int *)this + 0x24))(0,0);
     }
   }
@@ -61257,11 +61251,11 @@ void __thiscall CButton::CButton_OnMouseDown(CButton *this,undefined4 param_1,sh
 
 
 
-void __fastcall CScroller::CScroller_IDSUpdated_ArmSlot(void *param_1)
+void __fastcall CScroller::CScroller_IDSUpdated_ArmSlot(CDSUpdatedItem *param_1)
 
 {
-  (**(code **)(*(int *)((int)param_1 + -0x68) + 0x24))(0,0);
-  *(undefined4 *)((int)param_1 + 0x30) = 0;
+  (**(code **)(param_1[-5].dwEventSlots + 0x24))(0,0);
+  param_1[2].pVftable_IDSUpdated = (void *)0x0;
   CDSUpdatedItem::Scheduler_ArmSlot(param_1,0);
   return;
 }
@@ -62096,10 +62090,10 @@ void __thiscall CIcon::CIcon_OnMouseUp(CIcon *this,undefined4 param_1,byte param
 
 {
   char cVar1;
-  int *piVar2;
+  CDSAudioPlayer *pCVar2;
   void *target_evt;
   undefined4 unaff_ESI;
-  undefined1 uVar3;
+  byte bVar3;
   
   if (((param_2 & 1) != 0) && (this->bPressedFlag != 0)) {
     this->bPressedFlag = 0;
@@ -62107,9 +62101,10 @@ void __thiscall CIcon::CIcon_OnMouseUp(CIcon *this,undefined4 param_1,byte param
     (**(code **)(*(int *)this + 0x24))(0,0);
     cVar1 = (**(code **)(*(int *)this + 0x1c))(unaff_ESI);
     if (cVar1 != '\0') {
-      uVar3 = 0;
-      piVar2 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x14,0,(void *)0x0,'\x01');
-      _Globals::CDSAudioPlayer_PlayAndRelease(piVar2,uVar3);
+      bVar3 = 0;
+      pCVar2 = (CDSAudioPlayer *)
+               _Globals::TriggerBankSample((undefined *)0x1,0,0x14,0,(void *)0x0,'\x01');
+      _Globals::CDSAudioPlayer_PlayAndRelease(pCVar2,bVar3);
       if (*(int *)(this->pPad_0x45 + 7) == 0) {
         target_evt = (void *)0x0;
       }
@@ -62788,10 +62783,10 @@ CStaticText * __fastcall CStaticText::CStaticText_ctor(CStaticText *this)
 
 {
   CDSChained::CDSChained_ctor(&this->vftable_primary);
-  this->vftable_primary = &vftable;
-  this->vftable_IDSChained = &vftable;
-  this->vftable_IDSEventHandler = &vftable;
-  this->vftable_IDSReferenced = &vftable;
+  this->vftable_primary = (undefined *)&vftable;
+  this->vftable_IDSChained = (undefined *)&vftable;
+  this->vftable_IDSEventHandler = (undefined *)&vftable;
+  this->vftable_IDSReferenced = (undefined *)&vftable;
   this->pFont = (CDSFont *)0x0;
   this->dwUser_data = 0;
   this->dwReserved = 0;
@@ -62881,10 +62876,10 @@ CIcon * __fastcall CIcon::CIcon_ctor(CIcon *this)
   ExceptionList = &local_c;
   CDSChained::CDSChained_ctor((undefined4 *)this);
   local_4 = 0;
-  *(undefined **)this = &g_pCIcon_vftable_primary;
-  *(undefined **)&this->field_0x4 = &g_pCIcon_vftable_IDSChained;
-  *(undefined **)&this->field_0x10 = &g_pCIcon_vftable_IDSChained_18;
-  *(undefined **)(this->pPad_0x16 + 2) = &g_pCIcon_vftable_IDSEventHandler_10;
+  *(undefined ***)this = &g_pCIcon_vftable_primary;
+  *(undefined ***)&this->field_0x4 = &g_pCIcon_vftable_IDSChained;
+  *(undefined ***)&this->field_0x10 = &g_pCIcon_vftable_IDSChained_18;
+  *(undefined ***)(this->pPad_0x16 + 2) = &g_pCIcon_vftable_IDSEventHandler_10;
   _eh_vector_constructor_iterator_
             (&this->pBitmapNormal,4,3,eh_ctor_ZeroDword,_Globals::eh_dtor_CDSObject_ptr);
   ExceptionList = local_c;
@@ -62964,10 +62959,10 @@ CButton * __fastcall CButton::CButton_ctor(CButton *this)
   ExceptionList = &local_c;
   CDSChained::CDSChained_ctor((undefined4 *)this);
   local_4 = 0;
-  *(undefined **)this = &vftable;
-  *(undefined **)&this->field_0x4 = &vftable;
-  *(undefined **)&this->field_0x10 = &vftable;
-  *(undefined **)(this->pPad_0x16 + 2) = &vftable;
+  *(undefined ***)this = &vftable;
+  *(undefined ***)&this->field_0x4 = &vftable;
+  *(undefined ***)&this->field_0x10 = &vftable;
+  *(undefined ***)(this->pPad_0x16 + 2) = &vftable;
   _eh_vector_constructor_iterator_
             (&this->pBitmapNormal,4,3,eh_ctor_ZeroDword,_Globals::eh_dtor_CDSObject_ptr);
   this->pFont = (CDSFont *)0x0;
@@ -63059,7 +63054,7 @@ CItemInfo * CItemInfo__CreateObject(void)
   
   pCVar1 = (CItemInfo *)_Globals::OperatorNewWithBadAlloc(0x10);
   if (pCVar1 != (CItemInfo *)0x0) {
-    pCVar1->vftable = &CItemInfo::vftable;
+    pCVar1->vftable = (undefined *)&CItemInfo::vftable;
     pCVar1->dwReserved_08 = 0;
     pCVar1->dwRowFlags = 0;
     return pCVar1;
@@ -63386,7 +63381,7 @@ void __thiscall CScrollBar::CScrollBar_SetScrollRange(CScrollBar *this,int minVa
     this->nCurrentValue = maxVal;
     (**(code **)((int)this->pVf_primary + 0x24))(0,0);
     if (this->nMinValue < this->nMaxValue) {
-      _Globals::CDSView__Show((int *)this);
+      _Globals::CDSView__Show((CDSView *)this);
       return;
     }
     CDSView::CDSView__Hide((CDSView *)this);
@@ -63797,7 +63792,7 @@ void __fastcall CButton::CButton_Render(int param_1)
 
 
 
-void __fastcall CScroller::CScroller_Render(CListViewer *param_1)
+void __fastcall CScroller::CScroller_Render(CDSView *param_1)
 
 {
   int *this;
@@ -63813,7 +63808,7 @@ void __fastcall CScroller::CScroller_Render(CListViewer *param_1)
   int local_8;
   undefined4 local_4;
   
-  CDSView::CDSView_RenderChildrenClipped((CDSView *)param_1);
+  CDSView::CDSView_RenderChildrenClipped(param_1);
   if (g_pApp == (void *)0xffffff84) {
     pCVar2 = (CPoemScroller *)0x0;
   }
@@ -63821,8 +63816,8 @@ void __fastcall CScroller::CScroller_Render(CListViewer *param_1)
     pCVar2 = (CPoemScroller *)((int)g_pApp + 0x80);
   }
   uVar3 = 0xffffffff;
-  iVar1 = _Globals::WidgetStateFlags_ToTintColor(param_1->pPad_base[0x44] & 6);
-  CPoemScroller::BlitStatic(pCVar2,(int *)(param_1->pPad_base + 0x30),iVar1,uVar3);
+  iVar1 = _Globals::WidgetStateFlags_ToTintColor((byte)(param_1->win).wViewStateFlags & 6);
+  CPoemScroller::BlitStatic(pCVar2,&(param_1->win).nScreenBbox_left,iVar1,uVar3);
   local_20 = 0;
   local_1c = 0;
   local_18 = 0;
@@ -63844,7 +63839,7 @@ void __fastcall CScroller::CScroller_Render(CListViewer *param_1)
     pCVar2->nBounds_bottom = (int)pCVar2->pVftable_IDSChained_04;
     *(int *)pCVar2->pPad_30_67 = pCVar2->nField_08;
     tagRECT::CDSRect_Intersect((tagRECT *)this,&local_30);
-    (**(code **)(*(int *)param_1->pPad_base + 0x70))(&local_20);
+    (**(code **)((int)(param_1->win).pVftable_primary + 0x70))(&local_20);
     *this = 0;
     pCVar2->nBounds_right = 0;
     *(int *)pCVar2->pPad_30_67 = pCVar2->nField_08;
@@ -64909,10 +64904,10 @@ CStaticText::CStaticText_BuildAtAuto
   ExceptionList = &local_c;
   local_4 = 0;
   CDSChained::CDSChained_ctor(&this->vftable_primary);
-  this->vftable_primary = &vftable;
-  this->vftable_IDSChained = &vftable;
-  this->vftable_IDSEventHandler = &vftable;
-  this->vftable_IDSReferenced = &vftable;
+  this->vftable_primary = (undefined *)&vftable;
+  this->vftable_IDSChained = (undefined *)&vftable;
+  this->vftable_IDSEventHandler = (undefined *)&vftable;
+  this->vftable_IDSReferenced = (undefined *)&vftable;
   this->pFont = (CDSFont *)0x0;
   this_00 = &this->pLabel_text;
   this->dwUser_data = 0;
@@ -65019,10 +65014,10 @@ CStaticText::CStaticText_BuildAt
   ExceptionList = &local_c;
   local_4 = 0;
   CDSChained::CDSChained_ctor(&this->vftable_primary);
-  this->vftable_primary = &vftable;
-  this->vftable_IDSChained = &vftable;
-  this->vftable_IDSEventHandler = &vftable;
-  this->vftable_IDSReferenced = &vftable;
+  this->vftable_primary = (undefined *)&vftable;
+  this->vftable_IDSChained = (undefined *)&vftable;
+  this->vftable_IDSEventHandler = (undefined *)&vftable;
+  this->vftable_IDSReferenced = (undefined *)&vftable;
   this->pFont = (CDSFont *)0x0;
   this->pLabel_text = (wchar_t *)0x0;
   this->dwInline_style_0 = 0xffffffff;
@@ -65551,7 +65546,7 @@ void __thiscall CScrollBar::CScrollBar_OnMouseDown(CScrollBar *this,int *mousePt
     uVar2 = CScrollBar_HitTest(this,mousePt);
     _Globals::CScrollBar_SetDragMode(this,(int)uVar2,mousePt);
     if ((this->nDragMode != 2) && (this->nDragMode != 4)) {
-      _Globals::CControl_ClaimModalFocusOnPress((int *)this);
+      _Globals::CControl_ClaimModalFocusOnPress((CDSView *)this);
     }
   }
   return;
@@ -65811,10 +65806,10 @@ CEdit::CEdit_BuildAt
   this_00 = (CDSUpdatedItem *)(this->p_base + 0x68);
   local_4 = 0;
   CDSUpdatedItem::CDSUpdatedItem_ctor(this_00);
-  *(undefined **)this->p_base = &vftable;
-  *(undefined **)(this->p_base + 4) = &vftable;
-  *(undefined **)(this->p_base + 0x10) = &vftable;
-  *(undefined **)(this->p_base + 0x18) = &vftable;
+  *(undefined ***)this->p_base = &vftable;
+  *(undefined ***)(this->p_base + 4) = &vftable;
+  *(undefined ***)(this->p_base + 0x10) = &vftable;
+  *(undefined ***)(this->p_base + 0x18) = &vftable;
   this_00->pVftable_IDSUpdated = &vftable;
   *(undefined4 *)(this->p_base + 0x80) = 0;
   *(undefined4 *)(this->p_base + 0x88) = 0;
@@ -66130,11 +66125,11 @@ CStartGame2::CNumEdit_BuildAt
   this->bPad_bd = param_7._1_1_;
   this->pPad_be[0] = param_7._2_1_;
   this->pPad_be[1] = param_7._3_1_;
-  *(undefined **)this = &CNumEdit::vftable;
-  *(undefined **)&this->field_0x4 = &CNumEdit::vftable;
-  *(undefined **)&this->field_0x10 = &CNumEdit::vftable;
-  *(undefined **)&this->field_0x18 = &CNumEdit::vftable;
-  *(undefined **)&this->field_0x68 = &CNumEdit::vftable;
+  *(undefined ***)this = &CNumEdit::vftable;
+  *(undefined ***)&this->field_0x4 = &CNumEdit::vftable;
+  *(undefined ***)&this->field_0x10 = &CNumEdit::vftable;
+  *(undefined ***)&this->field_0x18 = &CNumEdit::vftable;
+  *(undefined ***)&this->field_0x68 = &CNumEdit::vftable;
   return this;
 }
 
@@ -66372,11 +66367,11 @@ void __fastcall CListViewer::CListViewer_dtor(CScroller *param_1)
   puStack_8 = &LAB_00474c94;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  *(undefined **)param_1->pPad_base = &vftable;
-  *(undefined **)(param_1->pPad_base + 4) = &vftable;
-  *(undefined **)(param_1->pPad_base + 0x10) = &vftable;
-  *(undefined **)(param_1->pPad_base + 0x18) = &vftable;
-  *(undefined **)&param_1->updatedItem = &vftable;
+  *(undefined ***)param_1->pPad_base = &vftable;
+  *(undefined ***)(param_1->pPad_base + 4) = &vftable;
+  *(undefined ***)(param_1->pPad_base + 0x10) = &vftable;
+  *(undefined ***)(param_1->pPad_base + 0x18) = &vftable;
+  *(undefined ***)&param_1->updatedItem = &vftable;
   local_4 = 2;
   _Globals::CScroller_ClearContent(param_1);
   local_4._0_1_ = 1;
@@ -66947,10 +66942,10 @@ CIcon::CIcon_BuildAt(CIcon *this,int param_1,int param_2,ushort param_3,int para
   CDSChained::CDSChained_ctor((undefined4 *)this);
   iVar4 = 0;
   local_4 = 0;
-  *(undefined **)this = &g_pCIcon_vftable_primary;
-  *(undefined **)&this->field_0x4 = &g_pCIcon_vftable_IDSChained;
-  *(undefined **)&this->field_0x10 = &g_pCIcon_vftable_IDSChained_18;
-  *(undefined **)(this->pPad_0x16 + 2) = &g_pCIcon_vftable_IDSEventHandler_10;
+  *(undefined ***)this = &g_pCIcon_vftable_primary;
+  *(undefined ***)&this->field_0x4 = &g_pCIcon_vftable_IDSChained;
+  *(undefined ***)&this->field_0x10 = &g_pCIcon_vftable_IDSChained_18;
+  *(undefined ***)(this->pPad_0x16 + 2) = &g_pCIcon_vftable_IDSEventHandler_10;
   _eh_vector_constructor_iterator_
             (&this->pBitmapNormal,4,3,eh_ctor_ZeroDword,_Globals::eh_dtor_CDSObject_ptr);
   this->nBboxLeft = param_1;
@@ -67074,10 +67069,10 @@ CButton::CButton_BuildAt
   CDSChained::CDSChained_ctor((undefined4 *)this);
   piVar5 = &this->pBitmapNormal;
   local_4._0_1_ = 1;
-  *(undefined **)this = &vftable;
-  *(undefined **)&this->field_0x4 = &vftable;
-  *(undefined **)&this->field_0x10 = &vftable;
-  *(undefined **)(this->pPad_0x16 + 2) = &vftable;
+  *(undefined ***)this = &vftable;
+  *(undefined ***)&this->field_0x4 = &vftable;
+  *(undefined ***)&this->field_0x10 = &vftable;
+  *(undefined ***)(this->pPad_0x16 + 2) = &vftable;
   _eh_vector_constructor_iterator_(piVar5,4,3,eh_ctor_ZeroDword,_Globals::eh_dtor_CDSObject_ptr);
   this->pFont = (CDSFont *)0x0;
   this->dwTextStyle = 0;
@@ -67196,11 +67191,11 @@ CScroller::CScroller_BuildAt(CScroller *this,int param_1,int param_2,undefined4 
   CDSChained::CDSChained_ctor((undefined4 *)this);
   local_4 = 0;
   CDSUpdatedItem::CDSUpdatedItem_ctor((CDSUpdatedItem *)&this->updatedItem);
-  *(undefined **)&this->updatedItem = &vftable;
-  *(undefined **)this->pPad_base = &vftable;
-  *(undefined **)(this->pPad_base + 4) = &vftable;
-  *(undefined **)(this->pPad_base + 0x10) = &vftable;
-  *(undefined **)(this->pPad_base + 0x18) = &vftable;
+  *(undefined ***)&this->updatedItem = &vftable;
+  *(undefined ***)this->pPad_base = &vftable;
+  *(undefined ***)(this->pPad_base + 4) = &vftable;
+  *(undefined ***)(this->pPad_base + 0x10) = &vftable;
+  *(undefined ***)(this->pPad_base + 0x18) = &vftable;
   this->nScrollX_px = 0;
   this->nScrollY_px = 0;
   this->nContentWidth_px = 0;
@@ -67247,8 +67242,8 @@ CScroller::CScroller_BuildAt(CScroller *this,int param_1,int param_2,undefined4 
              ((*(int *)(this->pPad_base + 0x2c) - *(int *)(this->pPad_base + 0x24)) - iVar3) + -3);
   CScroller_OffsetChildViewRect((CScroller *)this->pVerticalScrollBar,-6 - iVar4,0);
   *(undefined2 *)(this->pVerticalScrollBar + 0x48) = 0xe;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)this->pHorizontalScrollBar,(void *)0x0);
+  CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)this->pVerticalScrollBar,(void *)0x0);
   this->nScrollX_px = 0;
   this->nScrollY_px = 0;
   *(ushort *)(this->pPad_base + 0x14) = *(ushort *)(this->pPad_base + 0x14) | 0x23b;
@@ -67315,11 +67310,11 @@ CListViewer::CListViewer_BuildAt
 
 {
   CScroller::CScroller_BuildAt((CScroller *)this,param_1,param_2,param_3,param_4);
-  *(undefined **)this->pPad_base = &vftable;
-  *(undefined **)(this->pPad_base + 4) = &vftable;
-  *(undefined **)(this->pPad_base + 0x10) = &vftable;
-  *(undefined **)(this->pPad_base + 0x18) = &vftable;
-  *(undefined **)&this->updatedItem = &vftable;
+  *(undefined ***)this->pPad_base = &vftable;
+  *(undefined ***)(this->pPad_base + 4) = &vftable;
+  *(undefined ***)(this->pPad_base + 0x10) = &vftable;
+  *(undefined ***)(this->pPad_base + 0x18) = &vftable;
+  *(undefined ***)&this->updatedItem = &vftable;
   this->pItems = (void **)0x0;
   this->nCapacity = 0;
   this->nItemCount = 0;
@@ -67401,11 +67396,11 @@ CListBox::CListBox__CListBox_BuildAt
   ExceptionList = &local_c;
   ::CListViewer::CListViewer_BuildAt
             (&this->listViewer,param_1,param_2,param_3,param_4,param_5,0xf,param_6);
-  *(undefined **)(this->listViewer).pPad_base = &vftable;
-  *(undefined **)((this->listViewer).pPad_base + 4) = &vftable;
-  *(undefined **)((this->listViewer).pPad_base + 0x10) = &vftable;
-  *(undefined **)((this->listViewer).pPad_base + 0x18) = &vftable;
-  *(undefined **)&(this->listViewer).updatedItem = &vftable;
+  *(undefined ***)(this->listViewer).pPad_base = &vftable;
+  *(undefined ***)((this->listViewer).pPad_base + 4) = &vftable;
+  *(undefined ***)((this->listViewer).pPad_base + 0x10) = &vftable;
+  *(undefined ***)((this->listViewer).pPad_base + 0x18) = &vftable;
+  *(undefined ***)&(this->listViewer).updatedItem = &vftable;
   this->labelFont = (undefined *)0x0;
   this->dwStyleState_d4 = 0;
   this->dwStyleState_d8 = 0;
@@ -67706,9 +67701,9 @@ CDSEasyMemStream::CDSEasyMemStream_ctor(CDSEasyMemStream *this,uchar *param_1,ui
   ExceptionList = &local_c;
   this->dwRefcount = 1;
   this->dwStreamState = 0x20;
-  this->vf_IDSReferenced = &vftable;
-  this->vf_IDSEventHandler = &vftable;
-  this->vf_IDSStream = &vftable;
+  this->vf_IDSReferenced = (undefined *)&vftable;
+  this->vf_IDSEventHandler = (undefined *)&vftable;
+  this->vf_IDSStream = (undefined *)&vftable;
   this->backing_heap = (undefined *)0x0;
   local_4 = 1;
   CDSEasyMemStream_InitBackingBuffer(this,param_1,param_2);
@@ -68084,30 +68079,33 @@ void __fastcall _Globals::CDSRegKeyQueryScope_dtor(int *param_1)
 void __thiscall CLevelScore::CLevelScore_InitializeDefaultScores(CLevelScore *this)
 
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 uVar1;
+  CDSChained *pCVar2;
+  uint uVar3;
   
-  uVar2 = 0;
+  uVar3 = 0;
   do {
-    puVar1 = (undefined4 *)_Globals::OperatorNewWithBadAlloc(0x1c);
-    if (puVar1 == (undefined4 *)0x0) {
-      puVar1 = (undefined4 *)0x0;
+    pCVar2 = (CDSChained *)_Globals::OperatorNewWithBadAlloc(0x1c);
+    if (pCVar2 == (CDSChained *)0x0) {
+      pCVar2 = (CDSChained *)0x0;
     }
     else {
-      puVar1[2] = 0;
-      puVar1[3] = 0;
-      *puVar1 = &CScoreItem::vftable;
-      puVar1[1] = &CScoreItem::vftable;
-      puVar1[4] = 0;
+      pCVar2->dwField_08 = 0;
+      pCVar2->dwField_0c = 0;
+      pCVar2->pVftable_primary = &CScoreItem::vftable;
+      pCVar2->pVftable_IDSChained = &CScoreItem::vftable;
+      pCVar2->pVftable_IDSEventHandler = (void *)0x0;
     }
     CBulanci::CDsStringAssignFromLiteral
-              ((CBulanci *)(puVar1 + 4),*(short **)((int)g_dwScrollBarBitmapIds_H[6] + uVar2 + 0x1c)
-              );
-    puVar1[5] = *(undefined4 *)(&DAT_00480504 + uVar2);
-    puVar1[6] = *(undefined4 *)(&DAT_004804ec + uVar2);
-    _Globals::CDSChained_AppendChild(&this->scoreChain,puVar1);
-    uVar2 = uVar2 + 4;
-  } while (uVar2 < 0x18);
+              ((CBulanci *)&pCVar2->pVftable_IDSEventHandler,
+               *(short **)((int)g_dwScrollBarBitmapIds_H[6] + uVar3 + 0x1c));
+    uVar1 = *(undefined4 *)((int)&DAT_00480504 + uVar3);
+    pCVar2->wViewFlags = (short)uVar1;
+    pCVar2->wPad_16 = (short)((uint)uVar1 >> 0x10);
+    pCVar2->pVftable_IDSReferenced = *(void **)((int)&DAT_004804ec + uVar3);
+    _Globals::CDSChained_AppendChild(&this->scoreChain,pCVar2);
+    uVar3 = uVar3 + 4;
+  } while (uVar3 < 0x18);
   return;
 }
 
@@ -68132,7 +68130,8 @@ void CBulanci::CScore_AllocStaticTextAt
                char shapeFlagsExtra)
 
 {
-  CStaticText *pCVar1;
+  CStaticText *this;
+  CBulanci *pCVar1;
   uint shapeFlags;
   undefined4 uVar2;
   undefined4 uVar3;
@@ -68154,24 +68153,25 @@ void CBulanci::CScore_AllocStaticTextAt
   }
   *colY = *colX + 0x14a;
   colY[2] = colX[1] + 0x14a;
-  pCVar1 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+  this = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4 = 0;
-  if (pCVar1 == (CStaticText *)0x0) {
-    pCVar1 = (CStaticText *)0x0;
+  if (this == (CStaticText *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
   }
   else {
     fontResId = 0x100af;
     uVar3 = 1;
     uVar2 = 0;
     _Globals::CDsStringAssignFromHandle(&stack0xffffffd0,textHandle);
-    pCVar1 = CStaticText::CStaticText_BuildAt
-                       (pCVar1,*colY,colY[1],colY[2],colY[3],uVar2,uVar3,shapeFlags,fontResId);
+    pCVar1 = (CBulanci *)
+             CStaticText::CStaticText_BuildAt
+                       (this,*colY,colY[1],colY[2],colY[3],uVar2,uVar3,shapeFlags,fontResId);
   }
   local_4 = 0xffffffff;
   if (highlightRow != '\0') {
-    pCVar1->bForce_default_colour = 1;
+    *(undefined1 *)&(pCVar1->app).backBuffer.embeddedImage.nM_paletteMarker = 1;
   }
-  CDSView::CDSView__AddChild((CDSView *)parentView);
+  CDSView::CDSView__AddChild((CDSView *)parentView,pCVar1,(void *)0x0);
   ExceptionList = local_c;
   return;
 }
@@ -68433,15 +68433,15 @@ CPoem * __thiscall CPoem::CPoem_ScalarDeletingDtor(CPoem *this,byte param_1)
 
 
 
-CDSChain * __thiscall
+CDSChained * __thiscall
 CLevelScore::CLevelScore_AddPlayerScore
-          (CLevelScore *this,undefined4 *param_1,undefined *param_2,undefined *param_3)
+          (CLevelScore *this,undefined4 *param_1,undefined4 param_2,void *param_3)
 
 {
   CDSChain *this_00;
   void *pvVar1;
-  CDSChain *pCVar2;
-  CDSChain *pCVar3;
+  CDSChained *pCVar2;
+  CDSChained *pCVar3;
   uint uVar4;
   undefined4 unaff_EDI;
   
@@ -68450,21 +68450,22 @@ CLevelScore::CLevelScore_AddPlayerScore
   if (pvVar1 == (void *)0x0) {
     CLevelScore_InitializeDefaultScores(this);
   }
-  pCVar2 = (CDSChain *)_Globals::OperatorNewWithBadAlloc(0x1c);
-  pCVar3 = (CDSChain *)0x0;
-  if (pCVar2 != (CDSChain *)0x0) {
-    pCVar2->pFirstChild = (undefined *)0x0;
+  pCVar2 = (CDSChained *)_Globals::OperatorNewWithBadAlloc(0x1c);
+  pCVar3 = (CDSChained *)0x0;
+  if (pCVar2 != (CDSChained *)0x0) {
+    pCVar2->dwField_08 = 0;
                     // m_link_prev (+0xc): intrusive list back-link; independent of Serialize
                     // WString (IDSChained this+0xc → m_name +0x10).
-    pCVar2->pAuxHeap = (void *)0x0;
-    pCVar2->pVftable_IDSReferenced = &CScoreItem::vftable;
+    pCVar2->dwField_0c = 0;
+    pCVar2->pVftable_primary = &CScoreItem::vftable;
     pCVar2->pVftable_IDSChained = &CScoreItem::vftable;
-    pCVar2->dwChildCount = 0;
+    pCVar2->pVftable_IDSEventHandler = (void *)0x0;
     pCVar3 = pCVar2;
   }
-  _Globals::CDsStringAssignFromHandle(&pCVar3->dwChildCount,param_1);
-  pCVar3[1].pVftable_IDSChained = param_3;
-  pCVar3[1].pVftable_IDSReferenced = param_2;
+  _Globals::CDsStringAssignFromHandle(&pCVar3->pVftable_IDSEventHandler,param_1);
+  pCVar3->pVftable_IDSReferenced = param_3;
+  pCVar3->wViewFlags = (undefined2)param_2;
+  pCVar3->wPad_16 = param_2._2_2_;
   _Globals::CDSChained_AppendChild(this_00,pCVar3);
   CDSChain_SortChildrenWithComparator((CLevelScore *)this_00,CScoreItem_CompareByNetScore);
   uVar4 = (this->scoreChain).dwChildCount;
@@ -68472,9 +68473,9 @@ CLevelScore::CLevelScore_AddPlayerScore
     uVar4 = uVar4 - 1;
     pCVar2 = CDSChain::CDSChain_GetChildAtIndex(this_00,uVar4);
     if (pCVar2 == pCVar3) {
-      pCVar3 = (CDSChain *)0x0;
+      pCVar3 = (CDSChained *)0x0;
     }
-    CDSChain::CDSChain_RemoveListNode(this_00,pCVar2,(void *)0x1,(char)unaff_EDI);
+    CDSChain::CDSChain_RemoveListNode(this_00,(CDSChain *)pCVar2,(void *)0x1,(char)unaff_EDI);
   }
   return pCVar3;
 }
@@ -68899,7 +68900,8 @@ void __fastcall CBulanci::CBulanci_InstallFactoryDefaults(uchar *configStore)
   configStore[0x61] = '\0';
   configStore[0x62] = '\0';
   configStore[99] = '\0';
-  CDsStringAssignFromLiteral((CBulanci *)(configStore + 0x45),(short *)&DAT_00480608);
+  CDsStringAssignFromLiteral
+            ((CBulanci *)(configStore + 0x45),L"0DDB62C1-2E2E-430c-A914-73AD2669796A");
   configStore[0x49] = '\0';
   configStore[0x4a] = '\0';
   configStore[0x4b] = '\0';
@@ -69245,8 +69247,8 @@ void __fastcall CStartGame1::CStartGame1_ApplyHostJoinVisibility(CStartGame1 *th
   if (((bVar1 != 0) || (this->pRadioGameType->bSelectedIndex != 0)) &&
      ((this->pRadioRoundCount->bSelectedIndex < bVar1 || (this->pRadioGameType->bSelectedIndex == 1)
       ))) {
-    _Globals::CDSView__Show((int *)this->pRadioHostJoin);
-    _Globals::CDSView__Show((int *)this->pStaticHostHeader);
+    _Globals::CDSView__Show((CDSView *)this->pRadioHostJoin);
+    _Globals::CDSView__Show((CDSView *)this->pStaticHostHeader);
     return;
   }
   CDSView::CDSView__Hide((CDSView *)this->pRadioHostJoin);
@@ -69268,8 +69270,8 @@ void __fastcall CStartGame1::CStartGame1__ApplyLocalPlayersConstraints(int param
     CDSView::CDSView__Hide(*(CDSView **)(param_1 + 0xa0));
     return;
   }
-  _Globals::CDSView__Show(*(int **)(param_1 + 0x90));
-  _Globals::CDSView__Show(*(int **)(param_1 + 0xa0));
+  _Globals::CDSView__Show(*(CDSView **)(param_1 + 0x90));
+  _Globals::CDSView__Show(*(CDSView **)(param_1 + 0xa0));
   if ((*(char *)(*(int *)(param_1 + 0x8c) + 0x68) == '\x01') &&
      (*(char *)(*(int *)(param_1 + 0x88) + 0x68) == '\0')) {
     bVar1 = true;
@@ -69290,8 +69292,8 @@ void __thiscall CStartGame1::CStartGame1_ApplyJoinModeVisibility(CStartGame1 *th
 
 {
   if (param_1 == '\0') {
-    _Globals::CDSView__Show((int *)this->pRadioConnection);
-    _Globals::CDSView__Show((int *)this->pStaticConnectionHeader);
+    _Globals::CDSView__Show((CDSView *)this->pRadioConnection);
+    _Globals::CDSView__Show((CDSView *)this->pStaticConnectionHeader);
     CStartGame1__ApplyLocalPlayersConstraints((int)this);
     CStartGame1_ApplyHostJoinVisibility(this);
     return;
@@ -69405,7 +69407,7 @@ void __thiscall CGameTypeDlg::CGameTypeDlg_RefreshFocusOrEnable(CGameTypeDlg *th
                     // R4: EnableWidget/SetAsDefaultFocusChild on cached pBtnOk @ +0x90 (disasm
                     // ESI+0x90)
   if (cVar1 != '\0') {
-    _Globals::CDSView_EnableWidget((int *)this->pBtnOk);
+    _Globals::CDSView_EnableWidget((CDSView *)this->pBtnOk);
     return;
   }
   CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pBtnOk);
@@ -69438,8 +69440,8 @@ CGameTypeDlg::CGameTypeDlg_OnNotify(CGameTypeDlg *this,short param_1,int param_2
                     // R4: show rule triplet by radio byte @ param_2+0x68 → pLabelGroup[i] +
                     // pNumEditGroup[i] (was &win+1 indexed)
       bVar1 = *(byte *)(param_2 + 0x68);
-      _Globals::CDSView__Show((int *)this->pLabelGroup[bVar1]);
-      _Globals::CDSView__Show((int *)this->pNumEditGroup[bVar1]);
+      _Globals::CDSView__Show((CDSView *)this->pLabelGroup[bVar1]);
+      _Globals::CDSView__Show((CDSView *)this->pNumEditGroup[bVar1]);
       CGameTypeDlg_RefreshFocusOrEnable(this);
     }
   }
@@ -69654,7 +69656,7 @@ CSessionList::CSessionList_OnEvent
     return;
   }
   if (*(int *)((this->pSessionListBox->listViewer).pPad_scrollCalc + 8) != 0) {
-    _Globals::CDSView_EnableWidget((int *)this->pJoinButton);
+    _Globals::CDSView_EnableWidget((CDSView *)this->pJoinButton);
     return;
   }
   CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pJoinButton);
@@ -69675,7 +69677,7 @@ void __fastcall CStartGame1::CStartGame1_UpdateModalChildVisibility(int param_1)
       return;
     }
     if (g_pModalFocus == *(void **)(param_1 + -0x24)) {
-      _Globals::CDSView__Show((int *)this);
+      _Globals::CDSView__Show(this);
     }
   }
   return;
@@ -69865,11 +69867,11 @@ CListBox * __fastcall CLevelList::CLevelList_ctor(CListBox *param_1)
 
 {
   CListBox::CListBox__CListBox_BuildAt(param_1,0x1e,0x10e,0xe6,0x1b8,0xbe,0);
-  *(undefined **)(param_1->listViewer).pPad_base = &vftable;
-  *(undefined **)((param_1->listViewer).pPad_base + 4) = &vftable;
-  *(undefined **)((param_1->listViewer).pPad_base + 0x10) = &vftable;
-  *(undefined **)((param_1->listViewer).pPad_base + 0x18) = &vftable;
-  *(undefined **)&(param_1->listViewer).updatedItem = &vftable;
+  *(undefined ***)(param_1->listViewer).pPad_base = &vftable;
+  *(undefined ***)((param_1->listViewer).pPad_base + 4) = &vftable;
+  *(undefined ***)((param_1->listViewer).pPad_base + 0x10) = &vftable;
+  *(undefined ***)((param_1->listViewer).pPad_base + 0x18) = &vftable;
+  *(undefined ***)&(param_1->listViewer).updatedItem = &vftable;
   return param_1;
 }
 
@@ -69895,9 +69897,9 @@ void __thiscall CListBox::CListBox_ScalarDeletingDtor_thunk_Sub68(CListBox *this
 void __thiscall CGameCounter::CGameCounter_OnEvent(CGameCounter *this,short param_1,uint param_2)
 
 {
-  int *piVar1;
+  CDSAudioPlayer *pCVar1;
   int iVar2;
-  undefined1 uVar3;
+  byte bVar3;
   
                     // Event 0xE2: param_2<3 -> sample 0x12 +
                     // ODSImage__SetImage(pProgressSlot[param_2]); else sample 0x11 +
@@ -69921,9 +69923,10 @@ void __thiscall CGameCounter::CGameCounter_OnEvent(CGameCounter *this,short para
               (&this->pProgressSlot3->trackImage,(CDSImage *)this->strPackCancelBtn);
     iVar2 = 0x11;
   }
-  uVar3 = 0;
-  piVar1 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,iVar2,0,(void *)0x0,'\x01');
-  _Globals::CDSAudioPlayer_PlayAndRelease(piVar1,uVar3);
+  bVar3 = 0;
+  pCVar1 = (CDSAudioPlayer *)
+           _Globals::TriggerBankSample((undefined *)0x1,0,iVar2,0,(void *)0x0,'\x01');
+  _Globals::CDSAudioPlayer_PlayAndRelease(pCVar1,bVar3);
   (**(code **)((&this->pProgressSlot0)[param_2]->pVftable_primary + 0x24))(0,0);
   return;
 }
@@ -70023,10 +70026,10 @@ CPauseDlg::CPauseDlg_OnNotify(CPauseDlg *this,short param_1,byte param_2,int par
   if (param_2 != this->pGame->bLocalSenderSlot) goto LAB_0040b375;
   bVar5 = (this->wViewStateFlags & 1) == 0;
   if (bVar5) {
-    _Globals::CDSView__Show((int *)this);
+    _Globals::CDSView__Show((CDSView *)this);
   }
   if (param_3 == 0) {
-    _Globals::CDSView__Show((int *)this->pBtnPrimary);
+    _Globals::CDSView__Show((CDSView *)this->pBtnPrimary);
     CDSView::CDSView__Hide((CDSView *)this->pBtnSecondary);
     if ((this->pBtnSecondary->bViewStateFlags & 2) != 0) {
       pCVar2 = this->pBtnPrimary;
@@ -70035,7 +70038,7 @@ CPauseDlg::CPauseDlg_OnNotify(CPauseDlg *this,short param_1,byte param_2,int par
   }
   else {
     CDSView::CDSView__Hide((CDSView *)this->pBtnPrimary);
-    _Globals::CDSView__Show((int *)this->pBtnSecondary);
+    _Globals::CDSView__Show((CDSView *)this->pBtnSecondary);
     if ((this->pBtnPrimary->bViewStateFlags & 2) != 0) {
       pCVar2 = this->pBtnSecondary;
 LAB_0040b365:
@@ -70107,10 +70110,10 @@ LAB_0040b48b:
 
 
 
-void __fastcall CAdvertising::OnTimerTick(void *param_1)
+void __fastcall CAdvertising::OnTimerTick(CDSUpdatedItem *param_1)
 
 {
-  CAdvertising_Dismiss((int)param_1 + -0x70);
+  CAdvertising_Dismiss((int)&param_1[-5].pSelf);
   CDSUpdatedItem::Scheduler_ArmSlot(param_1,0);
   return;
 }
@@ -70962,14 +70965,13 @@ CMsgDialog::CMsgDialog_ctor(CMsgDialog *this,int cdsStringHandle,undefined4 *pBu
   int iVar1;
   CStaticText *this_00;
   CButton *pCVar2;
-  CDSView *this_01;
   int iVar3;
   int iVar4;
-  CStaticText *this_02;
+  CBulanci *pCVar5;
   undefined4 local_48;
-  undefined4 uVar5;
-  uint uVar6;
-  undefined *puVar7;
+  undefined4 uVar6;
+  uint uVar7;
+  undefined *puVar8;
   void *local_c;
   undefined1 *puStack_8;
   int local_4;
@@ -70977,7 +70979,7 @@ CMsgDialog::CMsgDialog_ctor(CMsgDialog *this,int cdsStringHandle,undefined4 *pBu
   puStack_8 = &LAB_00475686;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  this_02 = (CStaticText *)0x0;
+  pCVar5 = (CBulanci *)0x0;
   local_4 = 0;
   CWindow::CWindow_BuildAt((CWindow *)this,0,0,0,0,'\x01');
   pButtonMode = (undefined4 *)((uint)pButtonMode & 1);
@@ -70989,23 +70991,23 @@ CMsgDialog::CMsgDialog_ctor(CMsgDialog *this,int cdsStringHandle,undefined4 *pBu
   this_00 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 2;
   if (this_00 != (CStaticText *)0x0) {
-    puVar7 = (undefined *)0x100ae;
-    uVar6 = 2;
-    uVar5 = 0;
+    puVar8 = (undefined *)0x100ae;
+    uVar7 = 2;
+    uVar6 = 0;
     _Globals::CDsStringAssignFromHandle(&stack0xffffffc8,&cdsStringHandle);
-    this_02 = CStaticText::CStaticText_BuildAtAuto(this_00,0,0,uVar5,uVar6,puVar7);
+    pCVar5 = (CBulanci *)CStaticText::CStaticText_BuildAtAuto(this_00,0,0,uVar6,uVar7,puVar8);
   }
-  iVar4 = this_02->nBbox_bottom - this_02->nBbox_top;
-  iVar3 = this_02->nBbox_right - this_02->nBbox_left;
+  iVar4 = (pCVar5->app).nRect_bottom - (pCVar5->app).nRect_top;
+  iVar3 = (pCVar5->app).nRect_right - (pCVar5->app).nRect_left;
   this->nBbox_right = this->nBbox_left + iVar3 + 0x3c;
   local_4._0_1_ = 1;
   this->nBbox_bottom = this->nBbox_top + iVar4 + 0x3c;
-  _Globals::CDSView_OffsetRectAndAdapt(this_02,0x1e,10);
-  CDSView::CDSView__AddChild((CDSView *)this);
+  _Globals::CDSView_OffsetRectAndAdapt(pCVar5,0x1e,10);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar5,(void *)0x0);
   pCVar2 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
   if (pCVar2 == (CButton *)0x0) {
-    this_01 = (CDSView *)0x0;
+    pCVar5 = (CBulanci *)0x0;
   }
   else {
     iVar1 = (int)pButtonMode + 3;
@@ -71017,13 +71019,14 @@ CMsgDialog::CMsgDialog_ctor(CMsgDialog *this,int cdsStringHandle,undefined4 *pBu
     ;
     pButtonMode = &local_48;
     local_48 = 0;
-    this_01 = (CDSView *)CButton::CButton_BuildAt(pCVar2);
+    pCVar5 = (CBulanci *)CButton::CButton_BuildAt(pCVar2);
   }
   local_4 = CONCAT31(local_4._1_3_,1);
   CDSView::CDSView__SetPosition
-            (this_01,((iVar3 - ((this_01->win).nBbox_right - (this_01->win).nBbox_left)) + 0x3c) / 2
-             ,iVar4 + 0x14);
-  CDSView::CDSView__AddChild((CDSView *)this);
+            ((CDSView *)pCVar5,
+             ((iVar3 - ((pCVar5->app).nRect_right - (pCVar5->app).nRect_left)) + 0x3c) / 2,
+             iVar4 + 0x14);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar5,(void *)0x0);
   this->wWidgetFlags = this->wWidgetFlags | 0xc;
   local_4 = -1;
   if (cdsStringHandle != 0) {
@@ -71039,10 +71042,11 @@ void __thiscall CTcpIpConfig::CTcpIpConfig(CTcpIpConfig *this)
 
 {
   CStaticText *this_00;
+  CBulanci *pCVar1;
   CEdit *this_01;
-  CButton *pCVar1;
-  undefined *puVar2;
+  CButton *pCVar2;
   undefined *puVar3;
+  undefined *puVar4;
   uint shapeFlags;
   undefined *fontResId;
   void *local_c;
@@ -71065,43 +71069,56 @@ void __thiscall CTcpIpConfig::CTcpIpConfig(CTcpIpConfig *this)
   this->pVftable_field18 = vftable;
   this_00 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 1;
-  if (this_00 != (CStaticText *)0x0) {
+  if (this_00 == (CStaticText *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
+  }
+  else {
     fontResId = (undefined *)0x100ae;
     shapeFlags = 5;
-    puVar3 = (undefined *)0x1;
-    puVar2 = (undefined *)0x0;
+    puVar4 = (undefined *)0x1;
+    puVar3 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x7c));
-    CStaticText::CStaticText_BuildAt
-              (this_00,0x14,0x14,0x124,0x3c,puVar2,puVar3,shapeFlags,fontResId);
+    pCVar1 = (CBulanci *)
+             CStaticText::CStaticText_BuildAt
+                       (this_00,0x14,0x14,0x124,0x3c,puVar3,puVar4,shapeFlags,fontResId);
   }
   local_4._0_1_ = 0;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
   this_01 = (CEdit *)_Globals::OperatorNewWithBadAlloc(0xb8);
   local_4._0_1_ = 2;
-  if (this_01 != (CEdit *)0x0) {
-    CEdit::CEdit_BuildAt(this_01,0x14,0x46,0x124,0x3c,0x12,2,0,0x100af);
+  if (this_01 == (CEdit *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
+  }
+  else {
+    pCVar1 = (CBulanci *)CEdit::CEdit_BuildAt(this_01,0x14,0x46,0x124,0x3c,0x12,2,0,0x100af);
   }
   local_4._0_1_ = 0;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar1 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
+  pCVar2 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
-  if (pCVar1 != (CButton *)0x0) {
+  if (pCVar2 == (CButton *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
+  }
+  else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
-    CButton::CButton_BuildAt(pCVar1);
+    pCVar1 = (CBulanci *)CButton::CButton_BuildAt(pCVar2);
   }
   local_4._0_1_ = 0;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar1 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
+  pCVar2 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 4;
-  if (pCVar1 != (CButton *)0x0) {
+  if (pCVar2 == (CButton *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
+  }
+  else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    CButton::CButton_BuildAt(pCVar1);
+    pCVar1 = (CBulanci *)CButton::CButton_BuildAt(pCVar2);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
   this->nBbox_bottom = this->nBbox_bottom - this->nBbox_top;
   this->nBbox_right = (this->nBbox_right - this->nBbox_left) + 300;
   this->nBbox_left = 300;
@@ -71158,12 +71175,13 @@ CSessionList * __fastcall CSessionList::CSessionList_BuildDialog(CSessionList *t
 
 {
   ushort *puVar1;
-  CStaticText *pCVar2;
-  CListBox *pCVar3;
-  CButton *pCVar4;
+  CStaticText *this_00;
+  CBulanci *pCVar2;
+  CListBox *this_01;
+  CButton *pCVar3;
+  undefined *puVar4;
   undefined *puVar5;
   undefined *puVar6;
-  undefined *puVar7;
   void *local_c;
   undefined1 *puStack_8;
   int local_4;
@@ -71180,55 +71198,59 @@ CSessionList * __fastcall CSessionList::CSessionList_BuildDialog(CSessionList *t
   (this->win).pVftable_IDSChained = vftable;
   (this->win).pVftable_IDSEventHandler = vftable;
   (this->win).pVftable_IDSReferenced = vftable;
-  pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+  this_00 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 1;
-  if (pCVar2 == (CStaticText *)0x0) {
-    pCVar2 = (CStaticText *)0x0;
+  if (this_00 == (CStaticText *)0x0) {
+    pCVar2 = (CBulanci *)0x0;
   }
   else {
-    puVar7 = (undefined *)0x100ae;
-    puVar6 = (undefined *)0x2;
-    puVar5 = (undefined *)0x0;
+    puVar6 = (undefined *)0x100ae;
+    puVar5 = (undefined *)0x2;
+    puVar4 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffcc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x80));
-    pCVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x14,puVar5,(uint)puVar6,puVar7);
+    pCVar2 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(this_00,0x14,0x14,puVar4,(uint)puVar5,puVar6);
   }
   local_4._0_1_ = 0;
-  this->pCaptionStatic = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar3 = (CListBox *)_Globals::OperatorNewWithBadAlloc(0xe4);
+  this->pCaptionStatic = (CStaticText *)pCVar2;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar2,(void *)0x0);
+  this_01 = (CListBox *)_Globals::OperatorNewWithBadAlloc(0xe4);
   local_4._0_1_ = 2;
-  if (pCVar3 == (CListBox *)0x0) {
-    pCVar3 = (CListBox *)0x0;
+  if (this_01 == (CListBox *)0x0) {
+    pCVar2 = (CBulanci *)0x0;
   }
   else {
-    pCVar3 = CListBox::CListBox__CListBox_BuildAt(pCVar3,0x14,0x32,0x13b,0xb4,0x118,0);
+    pCVar2 = (CBulanci *)CListBox::CListBox__CListBox_BuildAt(this_01,0x14,0x32,0x13b,0xb4,0x118,0);
   }
   local_4._0_1_ = 0;
-  this->pSessionListBox = pCVar3;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar4 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  this->pSessionListBox = (CListBox *)pCVar2;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar2,(void *)0x0);
+  pCVar3 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
-  if (pCVar4 == (CButton *)0x0) {
-    pCVar4 = (CButton *)0x0;
+  if (pCVar3 == (CButton *)0x0) {
+    pCVar2 = (CBulanci *)0x0;
   }
   else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x84));
-    pCVar4 = (CButton *)CButton::CButton_BuildAt(pCVar4);
+    pCVar2 = (CBulanci *)CButton::CButton_BuildAt(pCVar3);
   }
   local_4._0_1_ = 0;
-  this->pJoinButton = pCVar4;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar4 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  this->pJoinButton = (CButton *)pCVar2;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar2,(void *)0x0);
+  pCVar3 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 4;
-  if (pCVar4 != (CButton *)0x0) {
+  if (pCVar3 == (CButton *)0x0) {
+    pCVar2 = (CBulanci *)0x0;
+  }
+  else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    CButton::CButton_BuildAt(pCVar4);
+    pCVar2 = (CBulanci *)CButton::CButton_BuildAt(pCVar3);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar2,(void *)0x0);
   CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pJoinButton);
   (this->win).nBbox_bottom = (this->win).nBbox_bottom - (this->win).nBbox_top;
   (this->win).nBbox_right = ((this->win).nBbox_right - (this->win).nBbox_left) + 300;
@@ -71366,17 +71388,18 @@ CSessionList::CSessionList_SetStatusFromStringHandle(CSessionList *this,int stri
 // 
 // See main_menu.md §3.
 
-void __fastcall CStartGame1::CStartGame1_BuildUi(CDSView *param_1)
+void __fastcall CStartGame1::CStartGame1_BuildUi(CMenu *param_1)
 
 {
   CStaticText *pCVar1;
-  CRadio *pCVar2;
-  CButton *pCVar3;
+  CBulanci *pCVar2;
+  CRadio *pCVar3;
+  CButton *pCVar4;
   char unaff_retaddr;
-  undefined *puVar4;
   undefined *puVar5;
-  LPCWSTR pWVar6;
-  undefined *puVar7;
+  undefined *puVar6;
+  LPCWSTR pWVar7;
+  undefined *puVar8;
   void *local_c;
   undefined1 *puStack_8;
   int local_4;
@@ -71385,182 +71408,194 @@ void __fastcall CStartGame1::CStartGame1_BuildUi(CDSView *param_1)
   puStack_8 = &LAB_004757e3;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  _Globals::CMenu_ClearAllChildren();
+  _Globals::CMenu_ClearAllChildren(param_1);
   pCVar1 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4 = 0;
-  if (pCVar1 != (CStaticText *)0x0) {
-    puVar7 = (undefined *)0x100ae;
-    puVar5 = (undefined *)0x2;
-    puVar4 = (undefined *)0x0;
-    CBulanci::CDsStringAssignFromLiteral
-              ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x88));
-    CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x14,puVar4,(uint)puVar5,puVar7);
-  }
-  local_4 = -1;
-  CDSView::CDSView__AddChild(param_1);
-  pCVar2 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
-  local_4 = 1;
-  if (pCVar2 == (CRadio *)0x0) {
-    pCVar2 = (CRadio *)0x0;
+  if (pCVar1 == (CStaticText *)0x0) {
+    pCVar2 = (CBulanci *)0x0;
   }
   else {
-    pCVar2 = CRadio::CRadio_BuildAt(pCVar2,0x1e,0x2d);
+    puVar8 = (undefined *)0x100ae;
+    puVar6 = (undefined *)0x2;
+    puVar5 = (undefined *)0x0;
+    CBulanci::CDsStringAssignFromLiteral
+              ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x88));
+    pCVar2 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x14,puVar5,(uint)puVar6,puVar8);
   }
-  param_1[1].win.dwField_08 = (dword)pCVar2;
-  puVar4 = (undefined *)0x0;
   local_4 = -1;
-  pWVar6 = (LPCWSTR)0x0;
+  CDSView::CDSView__AddChild((CDSView *)param_1,pCVar2,(void *)0x0);
+  pCVar3 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
+  local_4 = 1;
+  if (pCVar3 == (CRadio *)0x0) {
+    pCVar3 = (CRadio *)0x0;
+  }
+  else {
+    pCVar3 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0x2d);
+  }
+  param_1->pSubScreenBgBitmap = (CDSBitmap *)pCVar3;
+  puVar5 = (undefined *)0x0;
+  local_4 = -1;
+  pWVar7 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x8c));
-  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_08,pWVar6,puVar4);
-  puVar4 = (undefined *)0x0;
-  pWVar6 = (LPCWSTR)0x0;
+  CRadio::CRadio_AddOption((CRadio *)param_1->pSubScreenBgBitmap,pWVar7,puVar5);
+  puVar5 = (undefined *)0x0;
+  pWVar7 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x90));
-  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_08,pWVar6,puVar4);
-  CDSView::CDSView__AddChild(param_1);
+  CRadio::CRadio_AddOption((CRadio *)param_1->pSubScreenBgBitmap,pWVar7,puVar5);
+  CDSView::CDSView__AddChild((CDSView *)param_1,(CBulanci *)param_1->pSubScreenBgBitmap,(void *)0x0)
+  ;
   pCVar1 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4 = 2;
   if (pCVar1 == (CStaticText *)0x0) {
-    pCVar1 = (CStaticText *)0x0;
+    pCVar2 = (CBulanci *)0x0;
   }
   else {
-    puVar7 = (undefined *)0x100ae;
-    puVar5 = (undefined *)0x2;
-    puVar4 = (undefined *)0x0;
+    puVar8 = (undefined *)0x100ae;
+    puVar6 = (undefined *)0x2;
+    puVar5 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x94));
-    pCVar1 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x69,puVar4,(uint)puVar5,puVar7);
+    pCVar2 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x69,puVar5,(uint)puVar6,puVar8);
   }
   local_4 = -1;
-  param_1[1].win.dwField_1c = (dword)pCVar1;
-  CDSView::CDSView__AddChild(param_1);
-  pCVar2 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
+  param_1->pIconHistoryHighlight = (CDSBitmap *)pCVar2;
+  CDSView::CDSView__AddChild((CDSView *)param_1,pCVar2,(void *)0x0);
+  pCVar3 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
   local_4 = 3;
-  if (pCVar2 == (CRadio *)0x0) {
-    pCVar2 = (CRadio *)0x0;
+  if (pCVar3 == (CRadio *)0x0) {
+    pCVar3 = (CRadio *)0x0;
   }
   else {
-    pCVar2 = CRadio::CRadio_BuildAt(pCVar2,0x1e,0x82);
+    pCVar3 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0x82);
   }
-  param_1[1].win.dwField_0c = (dword)pCVar2;
-  puVar4 = (undefined *)0x0;
+  param_1->pTitleBitmap = (CDSBitmap *)pCVar3;
+  puVar5 = (undefined *)0x0;
   local_4 = -1;
-  pWVar6 = (LPCWSTR)0x0;
+  pWVar7 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1ac));
-  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_0c,pWVar6,puVar4);
-  puVar4 = (undefined *)0x0;
-  pWVar6 = (LPCWSTR)0x0;
+  CRadio::CRadio_AddOption((CRadio *)param_1->pTitleBitmap,pWVar7,puVar5);
+  puVar5 = (undefined *)0x0;
+  pWVar7 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x9c));
-  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_0c,pWVar6,puVar4);
-  puVar4 = (undefined *)0x0;
-  pWVar6 = (LPCWSTR)0x0;
+  CRadio::CRadio_AddOption((CRadio *)param_1->pTitleBitmap,pWVar7,puVar5);
+  puVar5 = (undefined *)0x0;
+  pWVar7 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa0));
-  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_0c,pWVar6,puVar4);
-  puVar4 = (undefined *)0x0;
-  pWVar6 = (LPCWSTR)0x0;
+  CRadio::CRadio_AddOption((CRadio *)param_1->pTitleBitmap,pWVar7,puVar5);
+  puVar5 = (undefined *)0x0;
+  pWVar7 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa4));
-  CRadio::CRadio_AddOption((CRadio *)param_1[1].win.dwField_0c,pWVar6,puVar4);
-  CDSView::CDSView__AddChild(param_1);
+  CRadio::CRadio_AddOption((CRadio *)param_1->pTitleBitmap,pWVar7,puVar5);
+  CDSView::CDSView__AddChild((CDSView *)param_1,(CBulanci *)param_1->pTitleBitmap,(void *)0x0);
   pCVar1 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4 = 4;
   if (pCVar1 == (CStaticText *)0x0) {
-    pCVar1 = (CStaticText *)0x0;
+    pCVar2 = (CBulanci *)0x0;
   }
   else {
-    puVar7 = (undefined *)0x100ae;
-    puVar5 = (undefined *)0x2;
-    puVar4 = (undefined *)0x0;
+    puVar8 = (undefined *)0x100ae;
+    puVar6 = (undefined *)0x2;
+    puVar5 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa8));
-    pCVar1 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0xdf,puVar4,(uint)puVar5,puVar7);
+    pCVar2 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0xdf,puVar5,(uint)puVar6,puVar8);
   }
   local_4 = -1;
-  param_1[1].win.nBbox_left = (int)pCVar1;
-  CDSView::CDSView__AddChild(param_1);
-  pCVar2 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
+  param_1->pIconQuitNormal = (CDSBitmap *)pCVar2;
+  CDSView::CDSView__AddChild((CDSView *)param_1,pCVar2,(void *)0x0);
+  pCVar3 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
   local_4 = 5;
-  if (pCVar2 == (CRadio *)0x0) {
-    pCVar2 = (CRadio *)0x0;
+  if (pCVar3 == (CRadio *)0x0) {
+    pCVar3 = (CRadio *)0x0;
   }
   else {
-    pCVar2 = CRadio::CRadio_BuildAt(pCVar2,0x1e,0xf8);
+    pCVar3 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0xf8);
   }
-  param_1[1].win.pVftable_IDSEventHandler = pCVar2;
-  puVar4 = (undefined *)0x0;
+  param_1->pIconStartNormal = (CDSBitmap *)pCVar3;
+  puVar5 = (undefined *)0x0;
   local_4 = -1;
-  pWVar6 = (LPCWSTR)0x0;
+  pWVar7 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x98));
-  CRadio::CRadio_AddOption(param_1[1].win.pVftable_IDSEventHandler,pWVar6,puVar4);
-  puVar4 = (undefined *)0x0;
-  pWVar6 = (LPCWSTR)0x0;
+  CRadio::CRadio_AddOption((CRadio *)param_1->pIconStartNormal,pWVar7,puVar5);
+  puVar5 = (undefined *)0x0;
+  pWVar7 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x9c));
-  CRadio::CRadio_AddOption(param_1[1].win.pVftable_IDSEventHandler,pWVar6,puVar4);
-  puVar4 = (undefined *)0x0;
-  pWVar6 = (LPCWSTR)0x0;
+  CRadio::CRadio_AddOption((CRadio *)param_1->pIconStartNormal,pWVar7,puVar5);
+  puVar5 = (undefined *)0x0;
+  pWVar7 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xa0));
-  CRadio::CRadio_AddOption(param_1[1].win.pVftable_IDSEventHandler,pWVar6,puVar4);
-  CDSView::CDSView__AddChild(param_1);
+  CRadio::CRadio_AddOption((CRadio *)param_1->pIconStartNormal,pWVar7,puVar5);
+  CDSView::CDSView__AddChild((CDSView *)param_1,(CBulanci *)param_1->pIconStartNormal,(void *)0x0);
   pCVar1 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4 = 6;
   if (pCVar1 == (CStaticText *)0x0) {
-    pCVar1 = (CStaticText *)0x0;
+    pCVar2 = (CBulanci *)0x0;
   }
   else {
-    puVar7 = (undefined *)0x100ae;
-    puVar5 = (undefined *)0x2;
-    puVar4 = (undefined *)0x0;
+    puVar8 = (undefined *)0x100ae;
+    puVar6 = (undefined *)0x2;
+    puVar5 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffd0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xac));
-    pCVar1 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x145,puVar4,(uint)puVar5,puVar7);
+    pCVar2 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar1,0x14,0x145,puVar5,(uint)puVar6,puVar8);
   }
   local_4 = -1;
-  param_1[1].win.pVftable_IDSReferenced = pCVar1;
-  CDSView::CDSView__AddChild(param_1);
-  pCVar2 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
+  param_1->pIconHistoryNormal = (CDSBitmap *)pCVar2;
+  CDSView::CDSView__AddChild((CDSView *)param_1,pCVar2,(void *)0x0);
+  pCVar3 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
   local_4 = 7;
-  if (pCVar2 == (CRadio *)0x0) {
-    pCVar2 = (CRadio *)0x0;
+  if (pCVar3 == (CRadio *)0x0) {
+    pCVar3 = (CRadio *)0x0;
   }
   else {
-    pCVar2 = CRadio::CRadio_BuildAt(pCVar2,0x1e,0x15e);
+    pCVar3 = CRadio::CRadio_BuildAt(pCVar3,0x1e,0x15e);
   }
-  *(CRadio **)&param_1[1].win.wViewFlags = pCVar2;
-  puVar4 = (undefined *)0x0;
+  param_1->pIconStartHighlight = (CDSBitmap *)pCVar3;
+  puVar5 = (undefined *)0x0;
   local_4 = -1;
-  pWVar6 = (LPCWSTR)0x0;
+  pWVar7 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xb0));
-  CRadio::CRadio_AddOption(*(CRadio **)&param_1[1].win.wViewFlags,pWVar6,puVar4);
-  puVar4 = (undefined *)0x0;
-  pWVar6 = (LPCWSTR)0x0;
+  CRadio::CRadio_AddOption((CRadio *)param_1->pIconStartHighlight,pWVar7,puVar5);
+  puVar5 = (undefined *)0x0;
+  pWVar7 = (LPCWSTR)0x0;
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffd4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xb4));
-  CRadio::CRadio_AddOption(*(CRadio **)&param_1[1].win.wViewFlags,pWVar6,puVar4);
-  CDSView::CDSView__AddChild(param_1);
-  pCVar3 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  CRadio::CRadio_AddOption((CRadio *)param_1->pIconStartHighlight,pWVar7,puVar5);
+  CDSView::CDSView__AddChild
+            ((CDSView *)param_1,(CBulanci *)param_1->pIconStartHighlight,(void *)0x0);
+  pCVar4 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4 = 8;
-  if (pCVar3 != (CButton *)0x0) {
+  if (pCVar4 == (CButton *)0x0) {
+    pCVar2 = (CBulanci *)0x0;
+  }
+  else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xc0));
-    CButton::CButton_BuildAt(pCVar3);
+    pCVar2 = (CBulanci *)CButton::CButton_BuildAt(pCVar4);
   }
   local_4 = -1;
-  CDSView::CDSView__AddChild(param_1);
-  param_1[1].win.nBbox_top = 0;
+  CDSView::CDSView__AddChild((CDSView *)param_1,pCVar2,(void *)0x0);
+  param_1->pIconQuitHighlight = (CDSBitmap *)0x0;
   CStartGame1_GetEmbeddedCGamePtr();
-  (**(code **)((int)(param_1->win).pVftable_primary + 0x14))();
+  (*param_1->pVftable_primary->pLoadData)();
   if (unaff_retaddr != '\0') {
-    (**(code **)((int)(param_1->win).pVftable_primary + 0x24))();
+    (*param_1->pVftable_primary->pInvalidateRect)();
   }
-  ExceptionList = pCVar3;
+  ExceptionList = pCVar4;
   return;
 }
 
@@ -71759,7 +71794,8 @@ char __thiscall CChatEdit::CChatEdit_OnChar(CChatEdit *this,undefined1 *param_1,
           bVar1 = bVar1 + this->stateCtxOrNull[0x68];
         }
         CGame::CGame_NetSendChat_t06
-                  ((CGame *)this->gameHost,bVar1,(int *)((this->base).p_base + 0x98),(void *)0x0);
+                  ((CGame *)this->gameHost,bVar1,(int *)((this->base).p_base + 0x98),(CDSView *)0x0)
+        ;
       }
       param_2 = (undefined1 *)0x0;
       cVar2 = '\x01';
@@ -72110,7 +72146,7 @@ void __thiscall CStartGame2::CStartGame2_UpdateDuplicateSerialWarning(CStartGame
       return;
     }
     local_c = (undefined *)0x40d56b;
-    _Globals::CDSView__Show((int *)this_00);
+    _Globals::CDSView__Show(this_00);
   }
   return;
 }
@@ -72121,7 +72157,8 @@ void __thiscall CStartGame2::CStartGame2_UpdateGamemodeCaption(CStartGame2 *this
 
 {
   byte bVar1;
-  CStaticText *pCVar2;
+  CStaticText *this_00;
+  CBulanci *pCVar2;
   undefined4 uVar3;
   uint uVar4;
   undefined4 uVar5;
@@ -72145,11 +72182,11 @@ void __thiscall CStartGame2::CStartGame2_UpdateGamemodeCaption(CStartGame2 *this
              *(wchar_t **)
               (g_apCDSStaticTextsSingleton[2] + g_dwScrollBarBitmapIds_H[8][bVar1 + 6] * 4));
   if (this->pGamemodeCaption == (CStaticText *)0x0) {
-    pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+    this_00 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
     local_4._0_1_ = 1;
-    local_14 = pCVar2;
-    if (pCVar2 == (CStaticText *)0x0) {
-      pCVar2 = (CStaticText *)0x0;
+    local_14 = this_00;
+    if (this_00 == (CStaticText *)0x0) {
+      pCVar2 = (CBulanci *)0x0;
     }
     else {
       uVar5 = 0x100af;
@@ -72158,11 +72195,12 @@ void __thiscall CStartGame2::CStartGame2_UpdateGamemodeCaption(CStartGame2 *this
       uVar3 = 0;
       _Globals::CDsStringAssignFromHandle(&stack0xffffffcc,&local_1c);
       local_10 = &stack0xffffffc4;
-      pCVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar2,0x79,0xd4,uVar3,uVar4,uVar5);
+      pCVar2 = (CBulanci *)CStaticText::CStaticText_BuildAtAuto(this_00,0x79,0xd4,uVar3,uVar4,uVar5)
+      ;
     }
     local_4 = (uint)local_4._1_3_ << 8;
-    this->pGamemodeCaption = pCVar2;
-    CDSView::CDSView__AddChild((CDSView *)this);
+    this->pGamemodeCaption = (CStaticText *)pCVar2;
+    CDSView::CDSView__AddChild((CDSView *)this,pCVar2,(void *)0x0);
   }
   else {
     local_10 = &stack0xffffffd4;
@@ -72217,7 +72255,7 @@ CStartGame2::CStartGame2_OnCustomMsg
     break;
   case 0xe3:
     if (param_2 == 1) {
-      _Globals::CDSView_EnableWidget((int *)this->pBtnBack);
+      _Globals::CDSView_EnableWidget((CDSView *)this->pBtnBack);
       CDSUpdatedItem::Scheduler_AckSlot(&this->updated,0,-1);
       CBulanci::CDSView_EmptyHook27();
       return;
@@ -72230,38 +72268,38 @@ CStartGame2::CStartGame2_OnCustomMsg
 
 
 void __thiscall
-CStartGame2::CStartGame2_OnBroadcast(CStartGame2 *this,short param_1,int param_2,undefined4 param_3)
+CStartGame2::CStartGame2_OnBroadcast
+          (CStartGame2 *this,short param_1,CLevelList *param_2,undefined4 param_3)
 
 {
   byte bVar1;
   CLevelList *pCVar2;
   byte bVar3;
-  void *pvVar4;
+  CDSView *pCVar4;
   int iVar5;
   
   if (param_1 == 0xd0) {
     pCVar2 = this->pLevelList;
-    if (((CLevelList *)param_2 == pCVar2) &&
-       (*(int *)((pCVar2->base).listViewer.pPad_scrollCalc + 8) == 1)) {
-      pvVar4 = &this->field_0x10;
+    if ((param_2 == pCVar2) && (*(int *)((pCVar2->base).listViewer.pPad_scrollCalc + 8) == 1)) {
+      pCVar4 = (CDSView *)&this->field_0x10;
       iVar5 = 0;
       _Globals::CDsStringAssignFromHandle
                 (&stack0xffffffec,
                  (undefined4 *)
                  (*(int *)(**(int **)(pCVar2->base).listViewer.pPad_scrollCalc + 8) + 0x10));
-      CStartGame2_SetSelectedLevel((CStartGame2 *)this->pParentState,iVar5,pvVar4);
+      CStartGame2_SetSelectedLevel((CStartGame2 *)this->pParentState,iVar5,pCVar4);
     }
   }
   else {
     if (param_1 == 0xd1) {
       if (this == (CStartGame2 *)0x0) {
-        pvVar4 = (void *)0x0;
+        pCVar4 = (CDSView *)0x0;
       }
       else {
-        pvVar4 = &this->field_0x10;
+        pCVar4 = (CDSView *)&this->field_0x10;
       }
       CStartGame2_ApplySetAvatar
-                ((CStartGame2 *)this->pParentState,(byte)param_2,(char)((uint)param_2 >> 8),pvVar4);
+                ((CStartGame2 *)this->pParentState,(byte)param_2,(byte)((uint)param_2 >> 8),pCVar4);
       CDSView::CDSApp_BroadcastSyntheticEventToChildren((CDSView *)this,0xd1,param_2,param_3);
       return;
     }
@@ -72270,11 +72308,12 @@ CStartGame2::CStartGame2_OnBroadcast(CStartGame2 *this,short param_1,int param_2
       bVar3 = 0;
       if (bVar1 != 0) {
         do {
-          if (this->pSlotNameEdit[bVar3] == (CEdit *)param_2) {
-            pvVar4 = &this->field_0x10;
+          if ((CLevelList *)this->pSlotNameEdit[bVar3] == param_2) {
+            pCVar4 = (CDSView *)&this->field_0x10;
             iVar5 = 0;
-            _Globals::CDsStringAssignFromHandle(&stack0xffffffec,(undefined4 *)(param_2 + 0x98));
-            CStartGame2_ApplyPlayerRename((CStartGame2 *)this->pParentState,bVar3,iVar5,pvVar4);
+            _Globals::CDsStringAssignFromHandle
+                      (&stack0xffffffec,&(param_2->base).listViewer.nLastRenderScrollSnapshot);
+            CStartGame2_ApplyPlayerRename((CStartGame2 *)this->pParentState,bVar3,iVar5,pCVar4);
             CDSView::CDSApp_BroadcastSyntheticEventToChildren((CDSView *)this,0xd6,param_2,param_3);
             return;
           }
@@ -72296,9 +72335,9 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
 {
   ushort *puVar1;
   CStaticText *pCVar2;
-  CRadio *pCVar3;
-  CStartGame2 *pCVar4;
-  CNumEdit *pCVar5;
+  CBulanci *pCVar3;
+  CRadio *pCVar4;
+  CStartGame2 *pCVar5;
   CButton *pCVar6;
   undefined *puVar7;
   undefined *puVar8;
@@ -72324,25 +72363,29 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   (this->win).pVftable_IDSReferenced = vftable;
   pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 1;
-  if (pCVar2 != (CStaticText *)0x0) {
+  if (pCVar2 == (CStaticText *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
+  }
+  else {
     puVar10 = (undefined *)0x100ae;
     puVar8 = (undefined *)0x2;
     puVar7 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 200));
-    CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x14,puVar7,(uint)puVar8,puVar10);
+    pCVar3 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x14,puVar7,(uint)puVar8,puVar10);
   }
   local_4._0_1_ = 0;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar3 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
+  pCVar4 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
   local_4._0_1_ = 2;
-  if (pCVar3 == (CRadio *)0x0) {
-    pCVar3 = (CRadio *)0x0;
+  if (pCVar4 == (CRadio *)0x0) {
+    pCVar4 = (CRadio *)0x0;
   }
   else {
-    pCVar3 = CRadio::CRadio_BuildAt(pCVar3,0x28,0x2d);
+    pCVar4 = CRadio::CRadio_BuildAt(pCVar4,0x28,0x2d);
   }
-  this->pRadioModeA = pCVar3;
+  this->pRadioModeA = pCVar4;
   puVar7 = (undefined *)0x0;
   local_4._0_1_ = 0;
   pWVar9 = (LPCWSTR)0x0;
@@ -72359,11 +72402,11 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffcc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x17c));
   CRadio::CRadio_AddOption(this->pRadioModeA,pWVar9,puVar7);
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)this->pRadioModeA,(void *)0x0);
   pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
   if (pCVar2 == (CStaticText *)0x0) {
-    pCVar2 = (CStaticText *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
     puVar10 = (undefined *)0x100ae;
@@ -72371,19 +72414,20 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
     puVar7 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1b0));
-    pCVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar2,0x9b,0x14,puVar7,(uint)puVar8,puVar10);
+    pCVar3 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar2,0x9b,0x14,puVar7,(uint)puVar8,puVar10);
   }
   local_4._0_1_ = 0;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar3 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
+  pCVar4 = (CRadio *)_Globals::OperatorNewWithBadAlloc(0xa8);
   local_4._0_1_ = 4;
-  if (pCVar3 == (CRadio *)0x0) {
-    pCVar3 = (CRadio *)0x0;
+  if (pCVar4 == (CRadio *)0x0) {
+    pCVar4 = (CRadio *)0x0;
   }
   else {
-    pCVar3 = CRadio::CRadio_BuildAt(pCVar3,0xaf,0x2d);
+    pCVar4 = CRadio::CRadio_BuildAt(pCVar4,0xaf,0x2d);
   }
-  this->pRadioModeB = pCVar3;
+  this->pRadioModeB = pCVar4;
   puVar7 = (undefined *)0x0;
   local_4 = (uint)local_4._1_3_ << 8;
   pWVar9 = (LPCWSTR)0x0;
@@ -72395,17 +72439,17 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
   CBulanci::CDsStringAssignFromLiteral
             ((CBulanci *)&stack0xffffffcc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1b8));
   CRadio::CRadio_AddOption(this->pRadioModeB,pWVar9,puVar7);
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)this->pRadioModeB,(void *)0x0);
   if (*(char *)(param_1 + 0x86) == '\0') {
-    CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)pCVar2);
+    CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)pCVar3);
     CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pRadioModeB);
   }
   CDSView::CDSView__Hide((CDSView *)this->pRadioModeB);
-  CDSView::CDSView__Hide((CDSView *)pCVar2);
+  CDSView::CDSView__Hide((CDSView *)pCVar3);
   pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 5;
   if (pCVar2 == (CStaticText *)0x0) {
-    pCVar2 = (CStaticText *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
     puVar10 = (undefined *)0x100ae;
@@ -72413,26 +72457,28 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
     puVar7 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xf4));
-    pCVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x76,puVar7,(uint)puVar8,puVar10);
+    pCVar3 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x76,puVar7,(uint)puVar8,puVar10);
   }
   local_4._0_1_ = 0;
-  this->pLabelGroup[0] = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar4 = (CStartGame2 *)_Globals::OperatorNewWithBadAlloc(0xc4);
+  this->pLabelGroup[0] = (CStaticText *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
+  pCVar5 = (CStartGame2 *)_Globals::OperatorNewWithBadAlloc(0xc4);
   local_4._0_1_ = 6;
-  if (pCVar4 == (CStartGame2 *)0x0) {
-    pCVar5 = (CNumEdit *)0x0;
+  if (pCVar5 == (CStartGame2 *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
-    pCVar5 = (CNumEdit *)CStartGame2::CNumEdit_BuildAt(pCVar4,0xe6,0x73,0x120,0xa8,3,5,999,1);
+    pCVar3 = (CBulanci *)
+             CStartGame2::CNumEdit_BuildAt(pCVar5,0xe6,0x73,0x120,0xa8,3,(CButton *)0x5,999,1);
   }
   local_4._0_1_ = 0;
-  this->pNumEditGroup[0] = pCVar5;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pNumEditGroup[0] = (CNumEdit *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 7;
   if (pCVar2 == (CStaticText *)0x0) {
-    pCVar2 = (CStaticText *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
     puVar10 = (undefined *)0x100ae;
@@ -72440,26 +72486,28 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
     puVar7 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xf8));
-    pCVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x76,puVar7,(uint)puVar8,puVar10);
+    pCVar3 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x76,puVar7,(uint)puVar8,puVar10);
   }
   local_4._0_1_ = 0;
-  this->pLabelGroup[1] = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar4 = (CStartGame2 *)_Globals::OperatorNewWithBadAlloc(0xc4);
+  this->pLabelGroup[1] = (CStaticText *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
+  pCVar5 = (CStartGame2 *)_Globals::OperatorNewWithBadAlloc(0xc4);
   local_4._0_1_ = 8;
-  if (pCVar4 == (CStartGame2 *)0x0) {
-    pCVar5 = (CNumEdit *)0x0;
+  if (pCVar5 == (CStartGame2 *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
-    pCVar5 = (CNumEdit *)CStartGame2::CNumEdit_BuildAt(pCVar4,0xe6,0x73,0x120,0xa8,4,10,9999,1);
+    pCVar3 = (CBulanci *)
+             CStartGame2::CNumEdit_BuildAt(pCVar5,0xe6,0x73,0x120,0xa8,4,(CButton *)0xa,9999,1);
   }
   local_4._0_1_ = 0;
-  this->pNumEditGroup[1] = pCVar5;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pNumEditGroup[1] = (CNumEdit *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 9;
   if (pCVar2 == (CStaticText *)0x0) {
-    pCVar2 = (CStaticText *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
     puVar10 = (undefined *)0x100ae;
@@ -72467,44 +72515,49 @@ CGameTypeDlg * __thiscall CGameTypeDlg::CGameTypeDlg_BuildUi(CGameTypeDlg *this,
     puVar7 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x178));
-    pCVar2 = CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x76,puVar7,(uint)puVar8,puVar10);
+    pCVar3 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x76,puVar7,(uint)puVar8,puVar10);
   }
   local_4._0_1_ = 0;
-  this->pLabelGroup[2] = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar4 = (CStartGame2 *)_Globals::OperatorNewWithBadAlloc(0xc4);
+  this->pLabelGroup[2] = (CStaticText *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
+  pCVar5 = (CStartGame2 *)_Globals::OperatorNewWithBadAlloc(0xc4);
   local_4._0_1_ = 10;
-  if (pCVar4 == (CStartGame2 *)0x0) {
-    pCVar5 = (CNumEdit *)0x0;
+  if (pCVar5 == (CStartGame2 *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
-    pCVar5 = (CNumEdit *)CStartGame2::CNumEdit_BuildAt(pCVar4,0xe6,0x73,0x120,0xa8,3,5,999,1);
+    pCVar3 = (CBulanci *)
+             CStartGame2::CNumEdit_BuildAt(pCVar5,0xe6,0x73,0x120,0xa8,3,(CButton *)0x5,999,1);
   }
   local_4._0_1_ = 0;
-  this->pNumEditGroup[2] = pCVar5;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pNumEditGroup[2] = (CNumEdit *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   pCVar6 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 0xb;
   if (pCVar6 == (CButton *)0x0) {
-    pCVar6 = (CButton *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
-    pCVar6 = (CButton *)CButton::CButton_BuildAt(pCVar6);
+    pCVar3 = (CBulanci *)CButton::CButton_BuildAt(pCVar6);
   }
   local_4._0_1_ = 0;
-  this->pBtnOk = pCVar6;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pBtnOk = (CButton *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   pCVar6 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 0xc;
-  if (pCVar6 != (CButton *)0x0) {
+  if (pCVar6 == (CButton *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
+  }
+  else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    CButton::CButton_BuildAt(pCVar6);
+    pCVar3 = (CBulanci *)CButton::CButton_BuildAt(pCVar6);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   ExceptionList = local_c;
   return this;
 }
@@ -72517,23 +72570,25 @@ CProgressBar * __fastcall CProgressBar::CProgressBar_ctor(CProgressBar *this)
   CDSChained::CDSChained_InitWithRect((CDSChained *)this,(int *)&stack0x00000004);
   this->dwTotal = 0;
   this->dwValue = 0;
-  this->vftable_primary = &vftable;
-  this->vftable_IDSChained = &vftable;
-  this->vftable_IDSEventHandler = &vftable;
-  this->vftable_IDSReferenced = &vftable;
+  this->vftable_primary = (undefined *)&vftable;
+  this->vftable_IDSChained = (undefined *)&vftable;
+  this->vftable_IDSEventHandler = (undefined *)&vftable;
+  this->vftable_IDSReferenced = (undefined *)&vftable;
   return this;
 }
 
 
 
-CWindow * __fastcall CLoadingLevel::CLoadingLevel_ctor(CWindow *param_1)
+CDSView * __fastcall CLoadingLevel::CLoadingLevel_ctor(CDSView *param_1)
 
 {
+  ushort *puVar1;
   CStaticText *this;
-  CProgressBar *pCVar1;
-  undefined *puVar2;
+  CBulanci *pCVar2;
+  CProgressBar *this_00;
   undefined *puVar3;
-  undefined4 uVar4;
+  undefined *puVar4;
+  undefined4 uVar5;
   void *local_c;
   undefined1 *puStack_8;
   int local_4;
@@ -72542,36 +72597,41 @@ CWindow * __fastcall CLoadingLevel::CLoadingLevel_ctor(CWindow *param_1)
   puStack_8 = &LAB_004759fe;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  CWindow::CWindow_BuildAt(param_1,0,0,0xfa,0x4b,'\x01');
+  CWindow::CWindow_BuildAt(&param_1->win,0,0,0xfa,0x4b,'\x01');
   local_4 = 0;
-  param_1->pVftable_primary = vftable;
-  param_1->pVftable_IDSChained = g_pCLoadingLevel_vftable_IDSChained;
-  param_1->pVftable_IDSEventHandler = vftable;
-  param_1->pVftable_IDSReferenced = vftable;
+  (param_1->win).pVftable_primary = vftable;
+  (param_1->win).pVftable_IDSChained = g_pCLoadingLevel_vftable_IDSChained;
+  (param_1->win).pVftable_IDSEventHandler = vftable;
+  (param_1->win).pVftable_IDSReferenced = vftable;
   this = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 1;
-  if (this != (CStaticText *)0x0) {
-    uVar4 = 0x100ae;
-    puVar3 = (undefined *)0x2;
-    puVar2 = (undefined *)0x0;
-    CBulanci::CDsStringAssignFromLiteral
-              ((CBulanci *)&stack0xffffffcc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x134));
-    CStaticText::CStaticText_BuildAtAuto(this,0x14,0x14,puVar2,(uint)puVar3,uVar4);
-  }
-  local_4._0_1_ = 0;
-  CDSView::CDSView__AddChild((CDSView *)param_1);
-  pCVar1 = (CProgressBar *)_Globals::OperatorNewWithBadAlloc(0x70);
-  local_4._0_1_ = 2;
-  if (pCVar1 == (CProgressBar *)0x0) {
-    pCVar1 = (CProgressBar *)0x0;
+  if (this == (CStaticText *)0x0) {
+    pCVar2 = (CBulanci *)0x0;
   }
   else {
-    pCVar1 = CProgressBar::CProgressBar_ctor(pCVar1);
+    uVar5 = 0x100ae;
+    puVar4 = (undefined *)0x2;
+    puVar3 = (undefined *)0x0;
+    CBulanci::CDsStringAssignFromLiteral
+              ((CBulanci *)&stack0xffffffcc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x134));
+    pCVar2 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(this,0x14,0x14,puVar3,(uint)puVar4,uVar5);
+  }
+  local_4._0_1_ = 0;
+  CDSView::CDSView__AddChild(param_1,pCVar2,(void *)0x0);
+  this_00 = (CProgressBar *)_Globals::OperatorNewWithBadAlloc(0x70);
+  local_4._0_1_ = 2;
+  if (this_00 == (CProgressBar *)0x0) {
+    pCVar2 = (CBulanci *)0x0;
+  }
+  else {
+    pCVar2 = (CBulanci *)CProgressBar::CProgressBar_ctor(this_00);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  param_1[1].pVftable_primary = pCVar1;
-  CDSView::CDSView__AddChild((CDSView *)param_1);
-  param_1->wWidgetFlags = param_1->wWidgetFlags | 0xc;
+  *(CBulanci **)&param_1->bGaming_slot_id = pCVar2;
+  CDSView::CDSView__AddChild(param_1,pCVar2,(void *)0x0);
+  puVar1 = &(param_1->win).wWidgetFlags;
+  *puVar1 = *puVar1 | 0xc;
   ExceptionList = local_c;
   return param_1;
 }
@@ -72686,13 +72746,13 @@ void __thiscall CVolume::CVolume_OnMouseUp(CVolume *this,undefined4 param_1,byte
 CSetupDlg * __fastcall CSetupDlg::CSetupDlgCtor(CSetupDlg *this)
 
 {
-  CStaticText *pCVar1;
-  CVolume *this_00;
-  undefined4 uVar2;
-  CButton *pCVar3;
+  CStaticText *this_00;
+  CBulanci *pCVar1;
+  CVolume *this_01;
+  CButton *pCVar2;
+  undefined *puVar3;
   undefined *puVar4;
   undefined *puVar5;
-  undefined *puVar6;
   int local_1c [4];
   void *local_c;
   undefined1 *puStack_8;
@@ -72711,26 +72771,27 @@ CSetupDlg * __fastcall CSetupDlg::CSetupDlgCtor(CSetupDlg *this)
   this->pVftable_IDSChained = g_pCSetupDlg_vftable_IDSChained;
   this->pVftable_IDSEventHandler = vftable;
   this->pVftable_field18 = vftable;
-  pCVar1 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+  this_00 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 1;
-  if (pCVar1 == (CStaticText *)0x0) {
-    pCVar1 = (CStaticText *)0x0;
+  if (this_00 == (CStaticText *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
   }
   else {
-    puVar6 = (undefined *)0x100ae;
-    puVar5 = (undefined *)0x1;
-    puVar4 = (undefined *)0x0;
+    puVar5 = (undefined *)0x100ae;
+    puVar4 = (undefined *)0x1;
+    puVar3 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffbc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x170));
-    pCVar1 = CStaticText::CStaticText_BuildAtAuto(pCVar1,0x19,0x14,puVar4,(uint)puVar5,puVar6);
+    pCVar1 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(this_00,0x19,0x14,puVar3,(uint)puVar4,puVar5);
   }
   local_4._0_1_ = 0;
-  this->pVolumeLabel = pCVar1;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  this_00 = (CVolume *)_Globals::OperatorNewWithBadAlloc(0xd0);
+  this->pVolumeLabel = (CStaticText *)pCVar1;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
+  this_01 = (CVolume *)_Globals::OperatorNewWithBadAlloc(0xd0);
   local_4._0_1_ = 2;
-  if (this_00 == (CVolume *)0x0) {
-    uVar2 = 0;
+  if (this_01 == (CVolume *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
   }
   else {
                     // CVolume_BuildAt(&g_volumeSliderBitmapIds): slots [6]=0x1007e normal,
@@ -72739,30 +72800,37 @@ CSetupDlg * __fastcall CSetupDlg::CSetupDlgCtor(CSetupDlg *this)
     local_1c[1] = 0x2a;
     local_1c[2] = 0x10e;
     local_1c[3] = 0x50;
-    uVar2 = CVolume::CVolume_BuildAt(this_00,local_1c,(undefined4 *)&g_volumeSliderBitmapIds);
+    pCVar1 = (CBulanci *)
+             CVolume::CVolume_BuildAt(this_01,local_1c,(undefined4 *)&g_volumeSliderBitmapIds);
   }
   local_4._0_1_ = 0;
-  this->pVolume = uVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pVolume = pCVar1;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
   CScrollBar::CScrollBar_SetScrollRange((CScrollBar *)this->pVolume,-0x32,0x32);
-  pCVar3 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  pCVar2 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
-  if (pCVar3 != (CButton *)0x0) {
+  if (pCVar2 == (CButton *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
+  }
+  else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffb4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
-    CButton::CButton_BuildAt(pCVar3);
+    pCVar1 = (CBulanci *)CButton::CButton_BuildAt(pCVar2);
   }
   local_4._0_1_ = 0;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar3 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
+  pCVar2 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 4;
-  if (pCVar3 != (CButton *)0x0) {
+  if (pCVar2 == (CButton *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
+  }
+  else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffb4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    CButton::CButton_BuildAt(pCVar3);
+    pCVar1 = (CBulanci *)CButton::CButton_BuildAt(pCVar2);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
   ExceptionList = local_c;
   return this;
 }
@@ -72846,7 +72914,7 @@ CAdvertising * __thiscall CAdvertising::CAdvertising_ctor(CAdvertising *this)
 
 {
   ushort *puVar1;
-  CDSChained *this_00;
+  CBulanci *this_00;
   int local_1c [4];
   void *local_c;
   undefined1 *puStack_8;
@@ -72868,24 +72936,27 @@ CAdvertising * __thiscall CAdvertising::CAdvertising_ctor(CAdvertising *this)
   (this->win).pVftable_IDSEventHandler = g_pCAdvertising_vftable_IDSChained;
   (this->win).pVftable_IDSReferenced = g_pCAdvertising_vftable_IDSEventHandler;
   (this->updatedItem).pVftable_IDSUpdated = g_pCAdvertising_vftable_IDSUpdated;
-  this_00 = (CDSChained *)_Globals::OperatorNewWithBadAlloc(0x6c);
+  this_00 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0x6c);
   local_4._0_1_ = 2;
-  if (this_00 != (CDSChained *)0x0) {
+  if (this_00 == (CBulanci *)0x0) {
+    this_00 = (CBulanci *)0x0;
+  }
+  else {
     local_1c[0] = 0;
     local_1c[1] = 0;
     local_1c[2] = 800;
     local_1c[3] = 600;
-    CDSChained::CDSChained_InitWithRect(this_00,local_1c);
-    this_00->pVftable_primary = &CBlackView::vftable;
-    this_00->pVftable_IDSChained = &CBlackView::vftable;
-    this_00->pVftable_IDSEventHandler = &CBlackView::vftable;
-    this_00->pVftable_IDSReferenced = &CBlackView::vftable;
-    this_00[1].pVftable_primary = (void *)0xffffff;
+    CDSChained::CDSChained_InitWithRect((CDSChained *)this_00,local_1c);
+    (this_00->app).vftable_primary = (undefined *)&CBlackView::vftable;
+    (this_00->app).vftable_sub04 = (undefined *)&CBlackView::vftable;
+    (this_00->app).vftable_sub10 = (undefined *)&CBlackView::vftable;
+    (this_00->app).vftable_sub18 = (undefined *)&CBlackView::vftable;
+    (this_00->app).pClassName = (undefined *)0xffffff;
   }
   local_4 = CONCAT31(local_4._1_3_,1);
                     // CDSView__AddChild(this, backdropChild): first heap child is white full-screen
                     // fill; splash CDSBitmap added later in LoadSplashImage.
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,this_00,(void *)0x0);
   puVar1 = &(this->win).wViewFlags;
   *puVar1 = *puVar1 | 0x111;
   this->bM_bBlockDismiss = 0;
@@ -73525,10 +73596,10 @@ CGameCounter::CGameCounter_ScalarDeletingDtor(CGameCounter *this,byte param_1)
 // 
 // Library: Visual Studio 2005 Release
 
-CWindow * _Globals::CreateObject(void)
+CDSView * _Globals::CreateObject(void)
 
 {
-  CWindow *pCVar1;
+  CDSView *pCVar1;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -73537,15 +73608,15 @@ CWindow * _Globals::CreateObject(void)
   puStack_8 = &LAB_00475d8b;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  pCVar1 = (CWindow *)OperatorNewWithBadAlloc(0x74);
+  pCVar1 = (CDSView *)OperatorNewWithBadAlloc(0x74);
   local_4 = 0;
-  if (pCVar1 != (CWindow *)0x0) {
+  if (pCVar1 != (CDSView *)0x0) {
     pCVar1 = CLoadingLevel::CLoadingLevel_ctor(pCVar1);
     ExceptionList = local_c;
     return pCVar1;
   }
   ExceptionList = local_c;
-  return (CWindow *)0x0;
+  return (CDSView *)0x0;
 }
 
 
@@ -73780,7 +73851,7 @@ CAdvertising * _Globals::CreateObject(void)
 undefined4 __cdecl _Globals::CMsgDialog_ShowModalFromStringHandle(int param_1)
 
 {
-  undefined2 uVar1;
+  ushort uVar1;
   undefined2 extraout_var;
   undefined2 uVar2;
   int cdsStringHandle;
@@ -73865,7 +73936,7 @@ CStartGame1 * __fastcall CStartGame1::CStartGame1_ctor(CStartGame1 *this)
   *(undefined ***)(this->pPad_windowBase + 0x10) = vftable;
   *(undefined ***)(this->pPad_windowBase + 0x18) = vftable;
   *(undefined ***)&this->updatedItem = g_pCStartGame1_vftable_IDSUpdated;
-  CStartGame1_BuildUi(this);
+  CStartGame1_BuildUi((CMenu *)this);
   ExceptionList = local_c;
   return this;
 }
@@ -74080,14 +74151,13 @@ CStartGame2 * __thiscall CStartGame2::CKeybShow_Build(CStartGame2 *this,int para
 {
   short *psVar1;
   CStaticText *pCVar2;
-  int *piVar3;
+  CBulanci *pCVar3;
   wchar_t *pwVar4;
   short *psVar5;
-  CStartGame2 *this_00;
   CButton *pCVar6;
-  int *piVar7;
-  size_t sVar8;
-  int iVar9;
+  size_t sVar7;
+  int iVar8;
+  int *piVar9;
   undefined4 local_4c;
   undefined *puVar10;
   undefined *puVar11;
@@ -74098,27 +74168,30 @@ CStartGame2 * __thiscall CStartGame2::CKeybShow_Build(CStartGame2 *this,int para
   undefined1 *local_10;
   void *local_c;
   undefined1 *puStack_8;
-  uint local_4;
+  undefined1 local_4 [4];
   
                     // UNCERTAIN: installs CKeybShow vftable on this but signature/namespace say
                     // CStartGame2; no CKeybShow struct in program — see widgets.md §11 vs
                     // post_match_lobby CKeybShow overlay.
-  local_4 = 0xffffffff;
+  local_4 = (undefined1  [4])0xffffffff;
   puStack_8 = &LAB_00475fc9;
   local_c = ExceptionList;
   ExceptionList = &local_c;
   local_1c = &stack0xffffffbc;
   local_14 = this;
   CWindow::CWindow_BuildAt((CWindow *)this,0,0,0x118,0xb4,'\x01');
-  local_4 = 0;
+  local_4 = (undefined1  [4])0x0;
   *(undefined ***)this = CKeybShow::vftable;
   *(undefined ***)&this->field_0x4 = CKeybShow::g_pCKeybShow_vftable_IDSChained;
   *(undefined ***)&this->field_0x10 = CKeybShow::vftable;
   *(undefined ***)&this->field_0x18 = CKeybShow::vftable;
   pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
-  local_4._0_1_ = 1;
+  local_4[0] = 1;
   local_18 = pCVar2;
-  if (pCVar2 != (CStaticText *)0x0) {
+  if (pCVar2 == (CStaticText *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
+  }
+  else {
     puVar12 = (undefined *)0x100ae;
     puVar11 = (undefined *)0x2;
     local_10 = &stack0xffffffc4;
@@ -74126,55 +74199,57 @@ CStartGame2 * __thiscall CStartGame2::CKeybShow_Build(CStartGame2 *this,int para
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xe8));
     local_10 = &stack0xffffffbc;
-    CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x14,puVar10,(uint)puVar11,puVar12);
+    pCVar3 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar2,0x14,0x14,puVar10,(uint)puVar11,puVar12);
   }
-  local_4._0_1_ = 0;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  local_4[0] = 0;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   local_1c = (undefined1 *)0x0;
-  local_4._0_1_ = 2;
-  iVar9 = 0;
+  local_4[0] = 2;
+  iVar8 = 0;
   do {
-    piVar3 = (int *)CStartGame2_AssignBindingLabelFromScanCode();
-    local_4._0_1_ = 3;
+    pCVar3 = CStartGame2_AssignBindingLabelFromScanCode
+                       ((CBulanci *)&local_18,*(byte *)(param_1 + iVar8));
+    local_4[0] = 3;
     if (local_1c == (undefined1 *)0x0) {
-      piVar7 = (int *)0x0;
+      piVar9 = (int *)0x0;
     }
     else {
-      piVar7 = *(int **)(local_1c + -0xc);
+      piVar9 = *(int **)(local_1c + -0xc);
     }
-    pwVar4 = (wchar_t *)*piVar3;
+    pwVar4 = (wchar_t *)(pCVar3->app).vftable_primary;
     if (pwVar4 == (wchar_t *)0x0) {
-      sVar8 = 0;
+      sVar7 = 0;
       pwVar4 = (wchar_t *)PTR_DAT_004ae7a8;
     }
     else {
-      sVar8 = *(size_t *)(pwVar4 + -6);
+      sVar7 = *(size_t *)(pwVar4 + -6);
     }
-    _Globals::CDsStringInsertWide(&local_1c,piVar7,0,pwVar4,sVar8);
-    local_4._0_1_ = 2;
+    _Globals::CDsStringInsertWide(&local_1c,piVar9,0,pwVar4,sVar7);
+    local_4[0] = 2;
     if (local_18 != (CStaticText *)0x0) {
       _Globals::CDsStringReleaseHeader(&local_18[-1].dwInline_style_2);
     }
-    if (iVar9 < 5) {
+    if (iVar8 < 5) {
       if (local_1c == (undefined1 *)0x0) {
-        piVar3 = (int *)0x0;
+        piVar9 = (int *)0x0;
       }
       else {
-        piVar3 = *(int **)(local_1c + -0xc);
+        piVar9 = *(int **)(local_1c + -0xc);
       }
       psVar1 = &DAT_00481964;
       do {
         psVar5 = psVar1;
         psVar1 = psVar5 + 1;
       } while (*psVar5 != 0);
-      _Globals::CDsStringInsertWide(&local_1c,piVar3,0,L"\n",(int)(psVar5 + -0x240cb2) >> 1);
+      _Globals::CDsStringInsertWide(&local_1c,piVar9,0,L"\n",(int)(psVar5 + -0x240cb2) >> 1);
     }
-    iVar9 = iVar9 + 1;
-  } while (iVar9 < 6);
+    iVar8 = iVar8 + 1;
+  } while (iVar8 < 6);
   pCVar2 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
-  local_4._0_1_ = 4;
+  local_4[0] = 4;
   if (pCVar2 == (CStaticText *)0x0) {
-    this_00 = (CStartGame2 *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
     puVar12 = (undefined *)0x100af;
@@ -74183,27 +74258,30 @@ CStartGame2 * __thiscall CStartGame2::CKeybShow_Build(CStartGame2 *this,int para
     puVar10 = (undefined *)0x0;
     _Globals::CDsStringAssignFromHandle(&stack0xffffffc4,&local_1c);
     local_10 = &stack0xffffffbc;
-    this_00 = (CStartGame2 *)
-              CStaticText::CStaticText_BuildAtAuto(pCVar2,0x9b,0x15,puVar10,(uint)puVar11,puVar12);
+    pCVar3 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar2,0x9b,0x15,puVar10,(uint)puVar11,puVar12);
   }
-  local_4._0_1_ = 2;
-  CStaticText_SetLayoutAndInvalidate(this_00,2,3);
-  CDSView::CDSView__AddChild((CDSView *)this);
+  local_4[0] = 2;
+  CStaticText_SetLayoutAndInvalidate((CStartGame2 *)pCVar3,(void *)0x2,(void *)0x3);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   pCVar6 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
-  local_4._0_1_ = 5;
-  if (pCVar6 != (CButton *)0x0) {
+  local_4[0] = 5;
+  if (pCVar6 == (CButton *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
+  }
+  else {
     local_10 = &stack0xffffffbc;
     local_4c = 0x40fa10;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffbc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x74));
     local_10 = (undefined1 *)&local_4c;
     local_4c = 100;
-    CButton::CButton_BuildAt(pCVar6);
+    pCVar3 = (CBulanci *)CButton::CButton_BuildAt(pCVar6);
   }
-  local_4._0_1_ = 2;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  local_4[0] = 2;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   *(ushort *)&this->field_0x46 = *(ushort *)&this->field_0x46 | 0xc;
-  local_4 = (uint)local_4._1_3_ << 8;
+  local_4 = (undefined1  [4])((uint)(uint3)local_4._1_3_ << 8);
   if (local_1c != (undefined1 *)0x0) {
     _Globals::CDsStringReleaseHeader(local_1c + -0xc);
   }
@@ -74258,7 +74336,7 @@ void __thiscall CVolume::CVolume_OnMouseDown(CVolume *this,int *param_1,short pa
   }
   this->pAudio_preview = pCVar1;
   pCVar1->dwRefCount = pCVar1->dwRefCount + 1;
-  _Globals::CDSAudioPlayer_PlayAndRelease((int *)this->pAudio_preview,DAT_004b3b94 == this);
+  _Globals::CDSAudioPlayer_PlayAndRelease(this->pAudio_preview,DAT_004b3b94 == this);
   return;
 }
 
@@ -74326,7 +74404,7 @@ CVolume * __thiscall CVolume::CVolume_vDtor(CVolume *this,byte param_1)
 void __thiscall CStartGame2::CStartGame2_OnCmd(CStartGame2 *this,ushort param_1)
 
 {
-  short sVar1;
+  ushort uVar1;
   int iVar2;
   char cVar3;
   undefined1 local_120 [4];
@@ -74366,18 +74444,18 @@ void __thiscall CStartGame2::CStartGame2_OnCmd(CStartGame2 *this,ushort param_1)
     local_114 = *(undefined2 *)(iVar2 + 0x1a8);
     local_4 = (void *)0x0;
     CBulanci::CDSView_LoadData((CBulanci *)&local_110,(int)local_120);
-    sVar1 = CDSView::CDSView_DoModal((CDSView *)&local_110,this);
-    if (sVar1 == -0x7ffe) {
+    uVar1 = CDSView::CDSView_DoModal((CDSView *)&local_110,(CDSView *)this);
+    if (uVar1 == 0x8002) {
       CBulanci::CDSView_SaveData((CBulanci *)&local_110,(int)local_120);
       CStartGame2_ApplySlotCountIfChanged
                 ((CStartGame2 *)this->pParentState,local_120[0],
-                 *(int *)(local_120 + ((uint)local_120 & 0xff) * 4 + 2),(void *)0x0);
+                 *(int *)(local_120 + ((uint)local_120 & 0xff) * 4 + 2),(CDSView *)0x0);
       if ((((CStartGame2 *)this->pParentState)->updated).p_pad[1] != 0) {
-        CStartGame2_SetGameTypeAdminByte((CStartGame2 *)this->pParentState,local_120[1],(void *)0x0)
-        ;
+        CStartGame2_SetGameTypeAdminByte
+                  ((CStartGame2 *)this->pParentState,local_120[1],(CDSView *)0x0);
       }
     }
-    else if (sVar1 == -0x7ffc) {
+    else if (uVar1 == 0x8004) {
       _Globals::CDSView__EndModal(this,0x8004);
     }
     local_4 = (void *)0xffffffff;
@@ -74394,8 +74472,8 @@ void __thiscall CStartGame2::CStartGame2_OnCmd(CStartGame2 *this,ushort param_1)
                      (((CGame *)this->pParentState)->chain).field_0x5 + cVar3);
   CKeybShow_Build((CStartGame2 *)local_7c,iVar2);
   local_4 = (void *)0x1;
-  sVar1 = CDSView::CDSView_DoModal((CDSView *)local_7c,this);
-  if (sVar1 == -0x7ffc) {
+  uVar1 = CDSView::CDSView_DoModal((CDSView *)local_7c,(CDSView *)this);
+  if (uVar1 == 0x8004) {
     _Globals::CDSView__EndModal(this,0x8004);
   }
   local_4 = (void *)0xffffffff;
@@ -74413,7 +74491,8 @@ void __thiscall CAdvertising::LoadSplashImage(CAdvertising *this,undefined4 para
   int iVar2;
   int *trackParams;
   void *this_00;
-  CDSBitmap *pCVar3;
+  CDSBitmap *this_01;
+  CBulanci *pCVar3;
   void *unaff_EBX;
   uint unaff_retaddr;
   void *local_c;
@@ -74439,18 +74518,19 @@ void __thiscall CAdvertising::LoadSplashImage(CAdvertising *this,undefined4 para
                     // heap splash CDSBitmap OperatorNew(0x78)=120B; CDSBitmap_ctor centers using
                     // FLX track width/height.
   local_c = (void *)0x0;
-  pCVar3 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
+  this_01 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 1;
-  if (pCVar3 == (CDSBitmap *)0x0) {
-    pCVar3 = (CDSBitmap *)0x0;
+  if (this_01 == (CDSBitmap *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
-    pCVar3 = CDSBitmap::CDSBitmap_ctor(pCVar3,(800 - iVar1) / 2,(600 - iVar2) / 2,trackParams);
+    pCVar3 = (CBulanci *)
+             CDSBitmap::CDSBitmap_ctor(this_01,(800 - iVar1) / 2,(600 - iVar2) / 2,trackParams);
   }
   local_c = (void *)((uint)local_c._1_3_ << 8);
                     // CDSView__AddChild(this, pSplashBitmap, 0): second heap child overlays
                     // centered splash on white backdrop.
-  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,0);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   ArmDismissTimer(this,unaff_retaddr);
   local_c = (void *)0xffffffff;
   if (trackParams != (int *)0x0) {
@@ -74713,13 +74793,14 @@ _Globals::CStartGame2_BuildLobbyChatPanel(CDSView *this,undefined *param_2,int p
 {
   CColorSwitch *this_00;
   CStaticText *this_01;
-  CChatList *pCVar1;
-  CChatEdit *this_02;
+  CBulanci *pCVar1;
+  CChatList *this_02;
+  CChatEdit *this_03;
   int iVar2;
   undefined *puVar3;
   undefined *puVar4;
   undefined4 uVar5;
-  CDSView *local_28;
+  CBulanci *local_28;
   int local_1c;
   int local_18;
   int local_14;
@@ -74735,67 +74816,77 @@ _Globals::CStartGame2_BuildLobbyChatPanel(CDSView *this,undefined *param_2,int p
   ExceptionList = &local_c;
   if (*(int *)(param_2 + 0x1dc) != 0) {
     iVar2 = param_3 + 0x10e;
-    local_28 = (CDSView *)0x0;
+    local_28 = (CBulanci *)0x0;
     if (1 < (byte)param_2[0x37]) {
       this_00 = (CColorSwitch *)OperatorNewWithBadAlloc(0x74);
       local_4._0_2_ = 0;
       local_4._2_2_ = 0;
       if (this_00 == (CColorSwitch *)0x0) {
-        local_28 = (CDSView *)0x0;
+        local_28 = (CBulanci *)0x0;
       }
       else {
-        local_28 = (CDSView *)CColorSwitch::CColorSwitch_BuildAt(this_00,0,0,param_2);
+        local_28 = (CBulanci *)CColorSwitch::CColorSwitch_BuildAt(this_00,0,0,param_2);
       }
       local_4._0_2_ = 0xffff;
       local_4._2_2_ = 0xffff;
-      CDSView::CDSView__AddChild(this);
-      iVar2 = iVar2 - ((local_28->win).nBbox_right - (local_28->win).nBbox_left);
-      CDSView::CDSView__SetPosition(local_28,iVar2,param_4 + 0xb2);
+      CDSView::CDSView__AddChild(this,local_28,(void *)0x0);
+      iVar2 = iVar2 - ((local_28->app).nRect_right - (local_28->app).nRect_left);
+      CDSView::CDSView__SetPosition((CDSView *)local_28,iVar2,param_4 + 0xb2);
       iVar2 = iVar2 + -3;
     }
     this_01 = (CStaticText *)OperatorNewWithBadAlloc(0x98);
     local_4._0_2_ = 1;
     local_4._2_2_ = 0;
-    if (this_01 != (CStaticText *)0x0) {
+    if (this_01 == (CStaticText *)0x0) {
+      pCVar1 = (CBulanci *)0x0;
+    }
+    else {
       uVar5 = 0x100ae;
       puVar4 = (undefined *)0x2;
       puVar3 = (undefined *)0x0;
       CBulanci::CDsStringAssignFromLiteral
                 ((CBulanci *)&stack0xffffffb8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xd4));
-      CStaticText::CStaticText_BuildAtAuto(this_01,param_3,param_4,puVar3,(uint)puVar4,uVar5);
+      pCVar1 = (CBulanci *)
+               CStaticText::CStaticText_BuildAtAuto
+                         (this_01,param_3,param_4,puVar3,(uint)puVar4,uVar5);
     }
     local_4._0_2_ = 0xffff;
     local_4._2_2_ = 0xffff;
-    CDSView::CDSView__AddChild(this);
-    pCVar1 = (CChatList *)OperatorNewWithBadAlloc(0xe8);
+    CDSView::CDSView__AddChild(this,pCVar1,(void *)0x0);
+    this_02 = (CChatList *)OperatorNewWithBadAlloc(0xe8);
     local_4._0_2_ = 2;
     local_4._2_2_ = 0;
-    if (pCVar1 == (CChatList *)0x0) {
-      pCVar1 = (CChatList *)0x0;
+    if (this_02 == (CChatList *)0x0) {
+      pCVar1 = (CBulanci *)0x0;
     }
     else {
       local_18 = param_4 + 0x1a;
       local_14 = param_3 + 0x10e;
       local_1c = param_3 + 10;
       local_10 = param_4 + 0xa6;
-      pCVar1 = CChatList::CChatList_BuildAt(pCVar1,&local_1c,0x122,param_2);
+      pCVar1 = (CBulanci *)CChatList::CChatList_BuildAt(this_02,&local_1c,0x122,param_2);
     }
     local_4._0_2_ = 0xffff;
     local_4._2_2_ = 0xffff;
-    CDSView::CDSView__AddChild(this);
-    this_02 = (CChatEdit *)OperatorNewWithBadAlloc(0xc4);
+    CDSView::CDSView__AddChild(this,pCVar1,(void *)0x0);
+    this_03 = (CChatEdit *)OperatorNewWithBadAlloc(0xc4);
     local_4._0_2_ = 3;
     local_4._2_2_ = 0;
-    if (this_02 != (CChatEdit *)0x0) {
+    if (this_03 == (CChatEdit *)0x0) {
+      pCVar1 = (CBulanci *)0x0;
+    }
+    else {
       local_18 = param_4 + 0xae;
       local_1c = param_3 + 10;
       local_10 = param_4 + 0xce;
       local_14 = iVar2;
-      CChatEdit::CChatEdit_BuildAt(this_02,&local_1c,(undefined *)local_28,pCVar1,param_2);
+      pCVar1 = (CBulanci *)
+               CChatEdit::CChatEdit_BuildAt
+                         (this_03,&local_1c,(undefined *)local_28,(undefined *)pCVar1,param_2);
     }
     local_4._0_2_ = 0xffff;
     local_4._2_2_ = 0xffff;
-    CDSView::CDSView__AddChild(this);
+    CDSView::CDSView__AddChild(this,pCVar1,(void *)0x0);
   }
   ExceptionList = local_c;
   return;
@@ -74832,33 +74923,35 @@ _Globals::CStartGame2_BuildLobbyChatPanel(CDSView *this,undefined *param_2,int p
 CStartGame2 * __thiscall CStartGame2::CStartGame2_ctor(CStartGame2 *this,int param_2)
 
 {
-  byte bVar1;
+  ushort *puVar1;
+  undefined1 *this_00;
   byte bVar2;
   byte bVar3;
-  bool bVar4;
-  byte bVar5;
+  byte bVar4;
+  bool bVar5;
+  byte bVar6;
   byte teamTint;
-  CColorSet *this_00;
-  CDSView *pCVar6;
-  void *pvVar7;
-  CGameView *this_01;
-  CDSAnim *this_02;
+  CColorSet *this_01;
+  CDSView *pCVar7;
+  void *pvVar8;
+  CGameView *this_02;
+  CBulanci *pCVar9;
   CEdit *this_03;
-  CButton *pCVar8;
-  CStaticText *pCVar9;
-  CLevelList *pCVar10;
+  CButton *pCVar10;
+  CStaticText *pCVar11;
+  CLevelList *pCVar12;
   int levelEntry;
-  int iVar11;
-  undefined4 unaff_EBX;
-  int *piVar12;
   int iVar13;
-  CEdit **ppCVar14;
-  undefined4 *puVar15;
-  undefined *puVar16;
-  int **ppiVar17;
-  undefined1 auVar18 [4];
-  undefined *puVar19;
-  char cVar20;
+  undefined4 unaff_EBX;
+  int *piVar14;
+  int iVar15;
+  CEdit **ppCVar16;
+  undefined4 *puVar17;
+  undefined *puVar18;
+  int **ppiVar19;
+  undefined1 auVar20 [4];
+  undefined *puVar21;
+  char cVar22;
   uchar uStack_430;
   undefined4 uStack_42c;
   undefined4 *local_424;
@@ -74887,254 +74980,279 @@ CStartGame2 * __thiscall CStartGame2::CStartGame2_ctor(CStartGame2 *this,int par
   *(undefined ***)&this->field_0x10 = vftable;
   *(undefined ***)&this->field_0x18 = vftable;
   (this->updated).pVftable_IDSUpdated = vftable;
-  bVar1 = *(byte *)(param_2 + 0xd8);
-  bVar2 = *(byte *)(param_2 + 0x36);
-  bVar3 = *(byte *)(param_2 + 0x37);
+  bVar2 = *(byte *)(param_2 + 0xd8);
+  bVar3 = *(byte *)(param_2 + 0x36);
+  bVar4 = *(byte *)(param_2 + 0x37);
   *(ushort *)&this->field_0x46 = *(ushort *)&this->field_0x46 | 0x40;
   local_414 = *(int **)((int)g_pApp + 0x70);
-  uStack_42c = CONCAT13(bVar3,(undefined3)uStack_42c);
+  uStack_42c = CONCAT13(bVar4,(undefined3)uStack_42c);
   local_4 = (CDSDirectPlay *)CONCAT31(local_4._1_3_,1);
-  puVar15 = local_40c;
-  for (iVar11 = 0x100; iVar11 != 0; iVar11 = iVar11 + -1) {
-    *puVar15 = 0xffffffff;
-    puVar15 = puVar15 + 1;
+  puVar17 = local_40c;
+  for (iVar13 = 0x100; iVar13 != 0; iVar13 = iVar13 + -1) {
+    *puVar17 = 0xffffffff;
+    puVar17 = puVar17 + 1;
   }
   teamTint = 0;
-  if (bVar1 != 0) {
-    ppCVar14 = this->pSlotNameEdit;
+  if (bVar2 != 0) {
+    ppCVar16 = this->pSlotNameEdit;
     local_420 = (int *)0x0;
     local_424 = (undefined4 *)0x22;
     do {
-      piVar12 = local_414;
-      if ((teamTint < bVar2) || (bVar4 = true, (int)((uint)bVar3 + (uint)bVar2) <= (int)local_420))
+      piVar14 = local_414;
+      if ((teamTint < bVar3) || (bVar5 = true, (int)((uint)bVar4 + (uint)bVar3) <= (int)local_420))
       {
-        bVar4 = false;
+        bVar5 = false;
       }
-      this_00 = (CColorSet *)_Globals::OperatorNewWithBadAlloc(0x70);
+      this_01 = (CColorSet *)_Globals::OperatorNewWithBadAlloc(0x70);
       local_4._0_1_ = 2;
-      if (this_00 == (CColorSet *)0x0) {
-        pCVar6 = (CDSView *)0x0;
+      if (this_01 == (CColorSet *)0x0) {
+        pCVar7 = (CDSView *)0x0;
       }
       else {
-        pCVar6 = (CDSView *)
-                 CColorSet::CColorSet_ctor_slotPillar(this_00,(int)local_424 + -3,10,teamTint);
+        pCVar7 = (CDSView *)
+                 CColorSet::CColorSet_ctor_slotPillar(this_01,(int)local_424 + -3,10,teamTint);
       }
       local_4 = (CDSDirectPlay *)CONCAT31(local_4._1_3_,1);
-      ppCVar14[4] = (CEdit *)pCVar6;
-      if (!bVar4) {
-        CDSView::CDSView_SetAsDefaultFocusChild(pCVar6);
+      ppCVar16[4] = (CEdit *)pCVar7;
+      if (!bVar5) {
+        CDSView::CDSView_SetAsDefaultFocusChild(pCVar7);
       }
-      CDSView::CDSView__AddChild((CDSView *)this);
-      pvVar7 = (void *)(**(code **)(*piVar12 + 0x10))();
+      CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)ppCVar16[4],(void *)0x0);
+      pvVar8 = (void *)(**(code **)(*piVar14 + 0x10))();
       local_420 = (int *)0x0;
-      if (pvVar7 != (void *)0x0) {
-        local_420 = (int *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b826c);
+      if (pvVar8 != (void *)0x0) {
+        local_420 = (int *)_Globals::CheckedVirtualBaseCast(pvVar8,DAT_004b826c);
       }
       local_c._0_1_ = 3;
       *(undefined1 *)(local_420 + 6) = 0x80;
-      this_01 = (CGameView *)_Globals::OperatorNewWithBadAlloc(0x98);
+      this_02 = (CGameView *)_Globals::OperatorNewWithBadAlloc(0x98);
       local_c._0_1_ = 4;
-      if (this_01 != (CGameView *)0x0) {
-        CGameView::CGameView_ctor(this_01,(int)local_424,0x35,local_420);
-      }
-      local_c._0_1_ = 3;
-      CDSView::CDSView__AddChild((CDSView *)this);
-      this_02 = (CDSAnim *)_Globals::OperatorNewWithBadAlloc(0xd4);
-      local_c._0_1_ = 5;
-      if (this_02 == (CDSAnim *)0x0) {
-        this_02 = (CDSAnim *)0x0;
+      if (this_02 == (CGameView *)0x0) {
+        pCVar9 = (CBulanci *)0x0;
       }
       else {
-        CDSAnim::ParameterizedCtor(this_02,(int)local_424 + 10,0x44,(int *)0x0,0);
-        this_02->pVft_primary = &CBulAnim::vftable;
-        this_02->pVft_chain = &CBulAnim::vftable;
-        this_02->pVft_event = &CBulAnim::vftable;
-        this_02->pVft_ref = &CBulAnim::vftable;
-        this_02->pVft_update = &CBulAnim::vftable;
-        this_02->pVft_anim = &CBulAnim::vftable;
-        this_02->pVft_anim_sub = &CBulAnim::vftable;
-        *(uchar *)&this_02[1].pVft_primary = uStack_430;
-        this_02->wViewFlags = this_02->wViewFlags | 0x200;
+        pCVar9 = (CBulanci *)CGameView::CGameView_ctor(this_02,(int)local_424,0x35,local_420);
       }
       local_c._0_1_ = 3;
-      CDSView::CDSView__AddChild((CDSView *)this);
-      puVar15 = &g_dwLobbyWalkerResIds;
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
+      pCVar9 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0xd4);
+      local_c._0_1_ = 5;
+      if (pCVar9 == (CBulanci *)0x0) {
+        pCVar9 = (CBulanci *)0x0;
+      }
+      else {
+        CDSAnim::ParameterizedCtor((CDSAnim *)pCVar9,(int)local_424 + 10,0x44,(int *)0x0,0);
+        (pCVar9->app).vftable_primary = (undefined *)&CBulAnim::vftable;
+        (pCVar9->app).vftable_sub04 = (undefined *)&CBulAnim::vftable;
+        (pCVar9->app).vftable_sub10 = (undefined *)&CBulAnim::vftable;
+        (pCVar9->app).vftable_sub18 = (undefined *)&CBulAnim::vftable;
+        (pCVar9->app).pClassName = (undefined *)&CBulAnim::vftable;
+        (pCVar9->app).pRegistryPath = (undefined *)&CBulAnim::vftable;
+        *(undefined ***)&(pCVar9->app).field_0x78 = &CBulAnim::vftable;
+        *(uchar *)&(pCVar9->app).nPhysicalRect_top = uStack_430;
+        puVar1 = (ushort *)(pCVar9->app).pMiPad_after_vftable_sub10;
+        *puVar1 = *puVar1 | 0x200;
+      }
+      local_c._0_1_ = 3;
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
+      this_00 = &(pCVar9->app).field_0x78;
+      puVar17 = &g_dwLobbyWalkerResIds;
       do {
-        pvVar7 = (void *)(**(code **)((*ppCVar14)->p_base + 0x10))();
-        piVar12 = (int *)0x0;
-        if (pvVar7 != (void *)0x0) {
-          piVar12 = (int *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b8370);
+        pvVar8 = (void *)(**(code **)((*ppCVar16)->p_base + 0x10))();
+        piVar14 = (int *)0x0;
+        if (pvVar8 != (void *)0x0) {
+          piVar14 = (int *)_Globals::CheckedVirtualBaseCast(pvVar8,DAT_004b8370);
         }
         local_c._0_1_ = 6;
-        _Globals::TM_BindSequence(&this_02->pVft_anim_sub,piVar12);
+        _Globals::TM_BindSequence(this_00,piVar14);
         local_c._0_1_ = 3;
-        if (piVar12 != (int *)0x0) {
-          (**(code **)(*piVar12 + 8))();
+        if (piVar14 != (int *)0x0) {
+          (**(code **)(*piVar14 + 8))();
         }
-        puVar15 = puVar15 + 1;
-      } while ((int)puVar15 < 0x481978);
-      bVar5 = _Globals::CGameGetPlayerColorByte(local_4,uStack_430);
-      _Globals::CGame_BuildTeamPaletteLut(&local_414,(uint)bVar5);
-      ppiVar17 = &local_414;
-      puVar16 = (undefined *)0x1;
-      iVar11 = Runtime::MSVCRT::_rand();
+        puVar17 = puVar17 + 1;
+      } while ((int)puVar17 < 0x481978);
+      bVar6 = _Globals::CGameGetPlayerColorByte(local_4,uStack_430);
+      _Globals::CGame_BuildTeamPaletteLut(&local_414,(uint)bVar6);
+      ppiVar19 = &local_414;
+      puVar18 = (undefined *)0x1;
+      iVar13 = Runtime::MSVCRT::_rand();
       _Globals::TM_SetTrack
-                (&this_02->pVft_anim_sub,(int)(iVar11 * 4 + (iVar11 * 4 >> 0x1f & 0x7fffU)) >> 0xf,
-                 (int)puVar16,(uint *)ppiVar17);
+                (this_00,(int)(iVar13 * 4 + (iVar13 * 4 >> 0x1f & 0x7fffU)) >> 0xf,(int)puVar18,
+                 (uint *)ppiVar19);
       this_03 = (CEdit *)_Globals::OperatorNewWithBadAlloc(0xb8);
       local_c._0_1_ = 7;
       if (this_03 == (CEdit *)0x0) {
-        pCVar6 = (CDSView *)0x0;
+        pCVar7 = (CDSView *)0x0;
       }
       else {
-        pCVar6 = (CDSView *)
+        pCVar7 = (CDSView *)
                  CEdit::CEdit_BuildAt
                            (this_03,uStack_42c + -0xc,0x8a,uStack_42c + 0x58,0x96,0x28,1,1,0x100af);
       }
-      cVar20 = (char)((uint)unaff_EBX >> 8);
+      cVar22 = (char)((uint)unaff_EBX >> 8);
       local_c._0_1_ = 3;
-      *local_424 = pCVar6;
-      if (cVar20 == '\0') {
-        CDSView::CDSView_SetAsDefaultFocusChild(pCVar6);
+      *local_424 = pCVar7;
+      if (cVar22 == '\0') {
+        CDSView::CDSView_SetAsDefaultFocusChild(pCVar7);
       }
-      CDSView::CDSView__AddChild((CDSView *)this);
-      if (cVar20 != '\0') {
-        pCVar8 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+      CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)*local_424,(void *)0x0);
+      if (cVar22 != '\0') {
+        pCVar10 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
         local_c._0_1_ = 8;
-        if (pCVar8 != (CButton *)0x0) {
+        if (pCVar10 == (CButton *)0x0) {
+          pCVar9 = (CBulanci *)0x0;
+        }
+        else {
           CBulanci::CDsStringAssignFromLiteral
                     ((CBulanci *)&stack0xfffffb98,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xc4)
                     );
-          CButton::CButton_BuildAt(pCVar8);
+          pCVar9 = (CBulanci *)CButton::CButton_BuildAt(pCVar10);
         }
         local_c._0_1_ = 3;
-        CDSView::CDSView__AddChild((CDSView *)this);
+        CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
       }
       local_c = (CDSDirectPlay *)CONCAT31(local_c._1_3_,1);
       (**(code **)(*local_420 + 8))();
       local_420 = (int *)((int)local_420 + 1);
-      ppCVar14 = ppCVar14 + 1;
+      ppCVar16 = ppCVar16 + 1;
       teamTint = teamTint + 1;
       local_424 = (undefined4 *)(uStack_42c + 0x82);
-    } while (teamTint < bVar1);
+    } while (teamTint < bVar2);
   }
-  if ((*(char *)(this->pParentState + 0x36) == '\0') && (1 < bVar1)) {
-    pCVar8 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
-    local_4._0_1_ = 9;
-    if (pCVar8 != (CButton *)0x0) {
+  if ((*(char *)(this->pParentState + 0x36) == '\0') && (1 < bVar2)) {
+    pCVar10 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+    local_4 = (CDSDirectPlay *)CONCAT31(local_4._1_3_,9);
+    if (pCVar10 != (CButton *)0x0) {
       CBulanci::CDsStringAssignFromLiteral
                 ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xcc));
-      CButton::CButton_BuildAt(pCVar8);
+      pCVar9 = (CBulanci *)CButton::CButton_BuildAt(pCVar10);
+      goto LAB_00410a6a;
     }
   }
   else {
-    pCVar9 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
-    local_4._0_1_ = 10;
-    if (pCVar9 != (CStaticText *)0x0) {
-      puVar19 = (undefined *)0x100ae;
-      auVar18 = (undefined1  [4])0x2;
-      puVar16 = (undefined *)0x0;
+    pCVar11 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+    local_4 = (CDSDirectPlay *)CONCAT31(local_4._1_3_,10);
+    if (pCVar11 != (CStaticText *)0x0) {
+      puVar21 = (undefined *)0x100ae;
+      auVar20 = (undefined1  [4])0x2;
+      puVar18 = (undefined *)0x0;
       CBulanci::CDsStringAssignFromLiteral
                 ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 200));
-      CStaticText::CStaticText_BuildAtAuto(pCVar9,0x14,0xd2,puVar16,(uint)auVar18,puVar19);
+      pCVar9 = (CBulanci *)
+               CStaticText::CStaticText_BuildAtAuto(pCVar11,0x14,0xd2,puVar18,(uint)auVar20,puVar21)
+      ;
+      goto LAB_00410a6a;
     }
   }
+  pCVar9 = (CBulanci *)0x0;
+LAB_00410a6a:
   local_4._0_1_ = 1;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar8 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
+  pCVar10 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 0xb;
-  if (pCVar8 != (CButton *)0x0) {
-    CBulanci::CDsStringAssignFromLiteral
-              ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x15c));
-    CButton::CButton_BuildAt(pCVar8);
-  }
-  local_4._0_1_ = 1;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar9 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
-  local_4._0_1_ = 0xc;
-  if (pCVar9 != (CStaticText *)0x0) {
-    puVar19 = (undefined *)0x100ae;
-    auVar18 = (undefined1  [4])0x2;
-    puVar16 = (undefined *)0x0;
-    CBulanci::CDsStringAssignFromLiteral
-              ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xd0));
-    CStaticText::CStaticText_BuildAtAuto(pCVar9,0x14,0xf4,puVar16,(uint)auVar18,puVar19);
-  }
-  local_4._0_1_ = 1;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  iVar11 = _Globals::OperatorNewWithBadAlloc(0xe4);
-  local_4._0_1_ = 0xd;
-  if (iVar11 == 0) {
-    pCVar10 = (CLevelList *)0x0;
+  if (pCVar10 == (CButton *)0x0) {
+    pCVar9 = (CBulanci *)0x0;
   }
   else {
-    pCVar10 = (CLevelList *)CLevelList::CLevelList_ctor(iVar11);
+    CBulanci::CDsStringAssignFromLiteral
+              ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x15c));
+    pCVar9 = (CBulanci *)CButton::CButton_BuildAt(pCVar10);
   }
-  this->pLevelList = pCVar10;
-  iVar11 = *(int *)(this->pParentState + 0xc4);
-  iVar13 = 0;
+  local_4._0_1_ = 1;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
+  pCVar11 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+  local_4._0_1_ = 0xc;
+  if (pCVar11 == (CStaticText *)0x0) {
+    pCVar9 = (CBulanci *)0x0;
+  }
+  else {
+    puVar21 = (undefined *)0x100ae;
+    auVar20 = (undefined1  [4])0x2;
+    puVar18 = (undefined *)0x0;
+    CBulanci::CDsStringAssignFromLiteral
+              ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xd0));
+    pCVar9 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(pCVar11,0x14,0xf4,puVar18,(uint)auVar20,puVar21);
+  }
+  local_4._0_1_ = 1;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
+  iVar13 = _Globals::OperatorNewWithBadAlloc(0xe4);
+  local_4._0_1_ = 0xd;
+  if (iVar13 == 0) {
+    pCVar12 = (CLevelList *)0x0;
+  }
+  else {
+    pCVar12 = (CLevelList *)CLevelList::CLevelList_ctor(iVar13);
+  }
+  this->pLevelList = pCVar12;
+  iVar13 = *(int *)(this->pParentState + 0xc4);
+  iVar15 = 0;
   local_4 = (CDSDirectPlay *)CONCAT31(local_4._1_3_,1);
-  if (0 < iVar11) {
+  if (0 < iVar13) {
     do {
-      pvVar7 = (void *)this->pParentState;
-      puVar16 = (undefined *)0x0;
+      pvVar8 = (void *)this->pParentState;
+      puVar18 = (undefined *)0x0;
       _Globals::CDsStringAssignFromHandle
-                (&stack0xfffffbb0,(undefined4 *)(*(int *)((int)pvVar7 + 0xbc) + iVar13 * 4));
-      levelEntry = _Globals::CGame_FindResourceByName(pvVar7,(int)puVar16);
+                (&stack0xfffffbb0,(undefined4 *)(*(int *)((int)pvVar8 + 0xbc) + iVar15 * 4));
+      levelEntry = _Globals::CGame_FindResourceByName(pvVar8,(int)puVar18);
       CMenu::CMenu__CLevelList_AddItem((CMenu *)this->pLevelList,levelEntry);
-      iVar13 = iVar13 + 1;
-    } while (iVar13 < iVar11);
+      iVar15 = iVar15 + 1;
+    } while (iVar15 < iVar13);
   }
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)this->pLevelList,(void *)0x0);
   if (*(char *)(this->pParentState + 0x36) != '\0') {
     CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pLevelList);
   }
   _Globals::CStartGame2_BuildLobbyChatPanel();
-  pCVar8 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  pCVar10 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 0xe;
-  if (pCVar8 == (CButton *)0x0) {
-    pCVar8 = (CButton *)0x0;
+  if (pCVar10 == (CButton *)0x0) {
+    pCVar9 = (CBulanci *)0x0;
   }
   else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xd8));
-    pCVar8 = (CButton *)CButton::CButton_BuildAt(pCVar8);
+    pCVar9 = (CBulanci *)CButton::CButton_BuildAt(pCVar10);
   }
   local_4._0_1_ = 1;
-  this->pBtnBack = pCVar8;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pBtnBack = (CButton *)pCVar9;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
   this->pPressStartHint = (CDSView *)0x0;
   if (*(char *)(this->pParentState + 0x36) != '\0') {
     CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)this->pBtnBack);
-    pCVar9 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+    pCVar11 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
     local_4._0_1_ = 0xf;
-    if (pCVar9 == (CStaticText *)0x0) {
-      pCVar9 = (CStaticText *)0x0;
+    if (pCVar11 == (CStaticText *)0x0) {
+      pCVar9 = (CBulanci *)0x0;
     }
     else {
-      puVar19 = (undefined *)0x100af;
-      auVar18 = (undefined1  [4])0x2;
-      puVar16 = (undefined *)0x0;
+      puVar21 = (undefined *)0x100af;
+      auVar20 = (undefined1  [4])0x2;
+      puVar18 = (undefined *)0x0;
       CBulanci::CDsStringAssignFromLiteral
                 ((CBulanci *)&stack0xfffffba8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x1a8));
-      pCVar9 = CStaticText::CStaticText_BuildAtAuto(pCVar9,0x28,0x1ef,puVar16,(uint)auVar18,puVar19)
-      ;
+      pCVar9 = (CBulanci *)
+               CStaticText::CStaticText_BuildAtAuto
+                         (pCVar11,0x28,0x1ef,puVar18,(uint)auVar20,puVar21);
     }
     local_4._0_1_ = 1;
     this->pPressStartHint = (CDSView *)pCVar9;
-    CDSView::CDSView__AddChild((CDSView *)this);
+    CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
     CDSView::CDSView__Hide(this->pPressStartHint);
     CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->updated,0,500,7);
   }
-  pCVar8 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  pCVar10 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 0x10;
-  if (pCVar8 != (CButton *)0x0) {
+  if (pCVar10 == (CButton *)0x0) {
+    pCVar9 = (CBulanci *)0x0;
+  }
+  else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xfffffba0,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x78));
-    CButton::CButton_BuildAt(pCVar8);
+    pCVar9 = (CBulanci *)CButton::CButton_BuildAt(pCVar10);
   }
   local_4 = (CDSDirectPlay *)CONCAT31(local_4._1_3_,1);
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
   this->bPad_bd = 0;
   this->bPad_bc = 0;
   ExceptionList = local_c;
@@ -75171,9 +75289,10 @@ CDSView * __fastcall CBulanci::CGameCounterCtor(CDSView *param_1)
   void *pvVar5;
   int iVar6;
   CDSBitmap *pCVar7;
+  CBulanci *pCVar8;
   int nBbox_left;
   void *unaff_ESI;
-  byte *pbVar8;
+  byte *pbVar9;
   int *trackParams;
   void *local_c;
   undefined1 *puStack_8;
@@ -75185,13 +75304,13 @@ CDSView * __fastcall CBulanci::CGameCounterCtor(CDSView *param_1)
   uVar4 = DAT_004b0e44 ^ (uint)&stack0xffffffd8;
   ExceptionList = &local_c;
   CDSChained::CDSChained_ctor((undefined4 *)param_1);
-  pbVar8 = &(param_1->win).bModalFlag;
+  pbVar9 = &(param_1->win).bModalFlag;
   local_4 = 0;
   (param_1->win).pVftable_primary = g_pCGameCounter_vftable_primary;
   (param_1->win).pVftable_IDSChained = CGameCounter::g_pCGameCounter_vftable_IDSChained;
   (param_1->win).pVftable_IDSEventHandler = CGameCounter::g_pCGameCounter_vftable_IDSUpdated;
   (param_1->win).pVftable_IDSReferenced = CGameCounter::g_pCGameCounter_vftable_IDSEventHandler;
-  _eh_vector_constructor_iterator_(pbVar8,4,2,eh_ctor_ZeroDword,_Globals::eh_dtor_CDSObject_ptr);
+  _eh_vector_constructor_iterator_(pbVar9,4,2,eh_ctor_ZeroDword,_Globals::eh_dtor_CDSObject_ptr);
   piVar2 = *(int **)((int)g_pApp + 0x70);
   trackParams = (int *)0x0;
   local_4 = CONCAT31(local_4._1_3_,1);
@@ -75201,7 +75320,7 @@ CDSView * __fastcall CBulanci::CGameCounterCtor(CDSView *param_1)
   }
   local_c = (void *)CONCAT31(local_c._1_3_,2);
   pvVar5 = (void *)(**(code **)(*piVar2 + 0x10))(0x10023,0);
-  piVar3 = *(int **)pbVar8;
+  piVar3 = *(int **)pbVar9;
   if (piVar3 != (int *)0x0) {
     (**(code **)(*piVar3 + 8))();
   }
@@ -75223,27 +75342,27 @@ CDSView * __fastcall CBulanci::CGameCounterCtor(CDSView *param_1)
   }
   pCVar7 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   if (pCVar7 == (CDSBitmap *)0x0) {
-    pCVar7 = (CDSBitmap *)0x0;
+    pCVar8 = (CBulanci *)0x0;
   }
   else {
-    pCVar7 = CDSBitmap::CDSBitmap_ctor(pCVar7,0,0,(int *)param_1);
+    pCVar8 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(pCVar7,0,0,(int *)param_1);
   }
-  CDSView::CDSView__AddChild(param_1,pCVar7,0);
+  CDSView::CDSView__AddChild(param_1,pCVar8,(void *)0x0);
   nBbox_left = 0x205;
-  pbVar8 = &param_1->bGaming_slot_id;
+  pbVar9 = &param_1->bGaming_slot_id;
   iVar6 = 4;
   do {
     pCVar7 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
     if (pCVar7 == (CDSBitmap *)0x0) {
-      pCVar7 = (CDSBitmap *)0x0;
+      pCVar8 = (CBulanci *)0x0;
     }
     else {
-      pCVar7 = CDSBitmap::CDSBitmap_ctor(pCVar7,nBbox_left,0x219,trackParams);
+      pCVar8 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(pCVar7,nBbox_left,0x219,trackParams);
     }
-    *(CDSBitmap **)pbVar8 = pCVar7;
-    CDSView::CDSView__AddChild(param_1,pCVar7,0);
+    *(CBulanci **)pbVar9 = pCVar8;
+    CDSView::CDSView__AddChild(param_1,pCVar8,(void *)0x0);
     nBbox_left = nBbox_left + 0x46;
-    pbVar8 = pbVar8 + 4;
+    pbVar9 = pbVar9 + 4;
     iVar6 = iVar6 + -1;
   } while (iVar6 != 0);
   (param_1->win).nBbox_left = 0;
@@ -75303,12 +75422,12 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
   CDSStreamStorage *extraout_EAX;
   CDSBitmap *pCVar7;
   void *pvVar8;
-  CDSAnim *pCVar9;
+  CBulanci *pCVar9;
+  CDSAnim *this_00;
   CStaticText *pCVar10;
   wchar_t **ppwVar11;
   uint uVar12;
   uint *puVar13;
-  CBulanci *this_00;
   CBulanci *pCVar14;
   CDSAudioPlayer *this_01;
   byte bVar15;
@@ -75316,6 +75435,7 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
   uint uVar17;
   int *piVar18;
   undefined4 *puVar19;
+  undefined1 *this_02;
   int *piVar20;
   undefined *puVar21;
   undefined *fontResId;
@@ -75383,15 +75503,18 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
   local_450 = piVar25;
   pCVar7 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = '\x03';
-  if (pCVar7 != (CDSBitmap *)0x0) {
+  if (pCVar7 == (CDSBitmap *)0x0) {
+    pCVar9 = (CBulanci *)0x0;
+  }
+  else {
     pvVar8 = (void *)(**(code **)(*piVar25 + 0x10))();
     if (pvVar8 != (void *)0x0) {
       local_45c = (int *)_Globals::CheckedVirtualBaseCast(pvVar8,DAT_004b826c);
     }
-    CDSBitmap::CDSBitmap_ctor(pCVar7,0,0,local_45c);
+    pCVar9 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(pCVar7,0,0,local_45c);
   }
   local_4 = CONCAT31(local_4._1_3_,'\x02');
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
   bVar15 = (byte)(param_2->app).nPhysicalRect_bottom;
   pcStack_474 = (char *)0x0;
   puVar19 = auStack_40c;
@@ -75406,7 +75529,10 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
       pvStack_454 = (void *)CONCAT31(pvStack_454._1_3_,local_42c[uVar17 * 8]);
       pCVar7 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
       local_4._0_1_ = '\x04';
-      if (pCVar7 != (CDSBitmap *)0x0) {
+      if (pCVar7 == (CDSBitmap *)0x0) {
+        pCVar9 = (CBulanci *)0x0;
+      }
+      else {
         pvVar8 = (void *)(**(code **)(*local_450 + 0x10))();
         if (local_45c != (int *)0x0) {
           (**(code **)(*local_45c + 8))();
@@ -75414,31 +75540,34 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
         if (pvVar8 != (void *)0x0) {
           local_45c = (int *)_Globals::CheckedVirtualBaseCast(pvVar8,DAT_004b826c);
         }
-        CDSBitmap::CDSBitmap_ctor
-                  (pCVar7,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),0xe5,local_45c);
+        pCVar9 = (CBulanci *)
+                 CDSBitmap::CDSBitmap_ctor
+                           (pCVar7,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),0xe5,local_45c);
       }
       local_4._0_1_ = '\x02';
-      CDSView::CDSView__AddChild((CDSView *)this);
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
       if (uStack_480._3_1_ == 0) {
         pCStack_438 = (CAnim *)local_45c[1];
       }
-      pCVar9 = (CDSAnim *)_Globals::OperatorNewWithBadAlloc(0xd0);
+      this_00 = (CDSAnim *)_Globals::OperatorNewWithBadAlloc(0xd0);
       local_4._0_1_ = '\x05';
-      if (pCVar9 == (CDSAnim *)0x0) {
-        pCVar9 = (CDSAnim *)0x0;
+      if (this_00 == (CDSAnim *)0x0) {
+        pCVar9 = (CBulanci *)0x0;
       }
       else {
-        pCVar9 = CDSAnim::ParameterizedCtor
-                           (pCVar9,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4) + 0x21,
+        pCVar9 = (CBulanci *)
+                 CDSAnim::ParameterizedCtor
+                           (this_00,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4) + 0x21,
                             *(int *)(&gAScoreRowAnimHeights + (int)pcStack_474 * 4),(int *)0x0,0);
       }
       local_4._0_1_ = '\x02';
-      CDSView::CDSView__AddChild((CDSView *)this);
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
       piVar25 = local_450;
       if (((char)(param_2->app).nPhysicalRect_bottom == '\x01') &&
          (local_434 == (CDSStreamStorage *)0x0)) {
         pcStack_474 = (char *)0x3;
       }
+      this_02 = &(pCVar9->app).field_0x78;
       piStack_464 = (int *)0x4;
       do {
                     // Scoreboard walker res id from g_dwScoreRowWalkResIds[i] (0x100c0..)
@@ -75448,7 +75577,7 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
           piVar20 = (int *)_Globals::CheckedVirtualBaseCast(pvVar8,DAT_004b8370);
         }
         local_4._0_1_ = '\x06';
-        _Globals::TM_BindSequence(&pCVar9->pVft_anim_sub,piVar20);
+        _Globals::TM_BindSequence(this_02,piVar20);
         local_4._0_1_ = '\x02';
         if (piVar20 != (int *)0x0) {
           (**(code **)(*piVar20 + 8))();
@@ -75465,8 +75594,8 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
       puVar22 = (undefined *)0x1;
       iVar6 = Runtime::MSVCRT::_rand();
       _Globals::TM_SetTrack
-                (&pCVar9->pVft_anim_sub,(int)(iVar6 * 4 + (iVar6 * 4 >> 0x1f & 0x7fffU)) >> 0xf,
-                 (int)puVar22,(uint *)auVar24);
+                (this_02,(int)(iVar6 * 4 + (iVar6 * 4 >> 0x1f & 0x7fffU)) >> 0xf,(int)puVar22,
+                 (uint *)auVar24);
       iVar6 = *(int *)(&gAScoreRowAnimHeights + (int)pcStack_474 * 4);
       if ((uVar17 + 1 < (uint)bVar15) && (aiStack_428[uVar17 * 2 + 2] < aiStack_428[uVar17 * 2])) {
         pcStack_474 = (char *)((int)pcStack_474 + 1);
@@ -75474,7 +75603,7 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
       pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
       local_4._0_1_ = '\a';
       if (pCVar10 == (CStaticText *)0x0) {
-        pCVar10 = (CStaticText *)0x0;
+        pCVar9 = (CBulanci *)0x0;
       }
       else {
         auVar24 = (undefined1  [4])0x100af;
@@ -75483,15 +75612,16 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
         ppwVar11 = _Globals::CGameGetPlayerNamePtr(param_2,player);
         puVar22 = (undefined *)0x0;
         _Globals::CDsStringAssignFromHandle(&stack0xfffffb5c,ppwVar11);
-        pCVar10 = CStaticText::CStaticText_BuildAt
-                            (pCVar10,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),iVar6 + -0x1c,
-                             (int)&pCStack_438->vftable_primary +
-                             *(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),iVar6 + -10,puVar22,
-                             puVar21,(uint)puVar23,auVar24);
+        pCVar9 = (CBulanci *)
+                 CStaticText::CStaticText_BuildAt
+                           (pCVar10,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),iVar6 + -0x1c,
+                            (int)&pCStack_438->vftable_primary +
+                            *(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),iVar6 + -10,puVar22,
+                            puVar21,(uint)puVar23,auVar24);
       }
       local_4._0_1_ = '\x02';
-      pCVar10->bForce_default_colour = 1;
-      CDSView::CDSView__AddChild((CDSView *)this);
+      *(undefined1 *)&(pCVar9->app).backBuffer.embeddedImage.nM_paletteMarker = 1;
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
       puStack_458 = (undefined *)0x0;
       uVar12 = (uint)pvStack_454 & 0xff;
       local_4._0_1_ = '\b';
@@ -75500,7 +75630,7 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
       pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
       local_4._0_1_ = '\t';
       if (pCVar10 == (CStaticText *)0x0) {
-        pCVar10 = (CStaticText *)0x0;
+        pCVar9 = (CBulanci *)0x0;
         pCVar16 = pCStack_438;
       }
       else {
@@ -75510,21 +75640,22 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
         puVar22 = (undefined *)0x0;
         _Globals::CDsStringAssignFromHandle(&stack0xfffffb5c,&puStack_458);
         pCVar16 = pCStack_438;
-        pCVar10 = CStaticText::CStaticText_BuildAt
-                            (pCVar10,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),0x1e5,
-                             (int)&pCStack_438->vftable_primary +
-                             *(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),500,puVar22,puVar21,
-                             (uint)puVar23,auVar24);
+        pCVar9 = (CBulanci *)
+                 CStaticText::CStaticText_BuildAt
+                           (pCVar10,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),0x1e5,
+                            (int)&pCStack_438->vftable_primary +
+                            *(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),500,puVar22,puVar21,
+                            (uint)puVar23,auVar24);
       }
       local_4._0_1_ = '\b';
-      pCVar10->bForce_default_colour = 1;
-      CDSView::CDSView__AddChild((CDSView *)this);
+      *(undefined1 *)&(pCVar9->app).backBuffer.embeddedImage.nM_paletteMarker = 1;
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
       _Globals::CDsStringFormatV(&puStack_458,*(wchar_t **)(g_apCDSStaticTextsSingleton[2] + 0x16c))
       ;
       pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
       local_4._0_1_ = '\n';
       if (pCVar10 == (CStaticText *)0x0) {
-        pCVar10 = (CStaticText *)0x0;
+        pCVar9 = (CBulanci *)0x0;
       }
       else {
         auVar24 = (undefined1  [4])0x100af;
@@ -75532,15 +75663,16 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
         puVar21 = (undefined *)0x1;
         puVar22 = (undefined *)0x0;
         _Globals::CDsStringAssignFromHandle(&stack0xfffffb5c,&puStack_458);
-        pCVar10 = CStaticText::CStaticText_BuildAt
-                            (pCVar10,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),0x1d7,
-                             (int)&((CStaticText *)pCVar16)->vftable_primary +
-                             *(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),0x1e6,puVar22,puVar21,
-                             (uint)puVar23,auVar24);
+        pCVar9 = (CBulanci *)
+                 CStaticText::CStaticText_BuildAt
+                           (pCVar10,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),0x1d7,
+                            (int)&((CStaticText *)pCVar16)->vftable_primary +
+                            *(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4),0x1e6,puVar22,puVar21,
+                            (uint)puVar23,auVar24);
       }
       local_4._0_1_ = '\b';
-      pCVar10->bForce_default_colour = 1;
-      CDSView::CDSView__AddChild((CDSView *)this);
+      *(undefined1 *)&(pCVar9->app).backBuffer.embeddedImage.nM_paletteMarker = 1;
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
       piStack_464 = (int *)((param_2->app).pPad_e5 + uVar12 * 0x23 + 5);
       pvStack_44c = (void *)0x0;
       uStack_448 = 0;
@@ -75560,7 +75692,7 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
           pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
           local_4._0_1_ = '\f';
           if (pCVar10 == (CStaticText *)0x0) {
-            pCVar10 = (CStaticText *)0x0;
+            pCVar9 = (CBulanci *)0x0;
           }
           else {
             auVar24 = (undefined1  [4])0x100af;
@@ -75569,20 +75701,21 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
             puVar22 = (undefined *)0x0;
             CBulanci::CDsStringAssignFromLiteral
                       ((CBulanci *)&stack0xfffffb5c,(short *)&DAT_00481978);
-            pCVar10 = CStaticText::CStaticText_BuildAt
-                                (pCVar10,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4) + -0xf,
-                                 iVar6,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4) + -0xf +
-                                       (int)pCVar16,iVar6 + 0x12,puVar22,puVar21,(uint)puVar23,
-                                 auVar24);
+            pCVar9 = (CBulanci *)
+                     CStaticText::CStaticText_BuildAt
+                               (pCVar10,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4) + -0xf,
+                                iVar6,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4) + -0xf +
+                                      (int)pCVar16,iVar6 + 0x12,puVar22,puVar21,(uint)puVar23,
+                                auVar24);
           }
           local_4._0_1_ = '\v';
-          CStaticText::CStaticText_SetStyle(pCVar10,&pvStack_44c,2);
-          pCVar10->bForce_default_colour = 1;
-          CDSView::CDSView__AddChild((CDSView *)this);
+          CStaticText::CStaticText_SetStyle((CStaticText *)pCVar9,&pvStack_44c,2);
+          *(undefined1 *)&(pCVar9->app).backBuffer.embeddedImage.nM_paletteMarker = 1;
+          CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
           pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
           local_4._0_1_ = '\r';
           if (pCVar10 == (CStaticText *)0x0) {
-            pCVar10 = (CStaticText *)0x0;
+            pCVar9 = (CBulanci *)0x0;
           }
           else {
             auVar24 = (undefined1  [4])0x100af;
@@ -75590,15 +75723,16 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
             puVar21 = (undefined *)0x1;
             puVar22 = (undefined *)0x0;
             _Globals::CDsStringAssignFromHandle(&stack0xfffffb5c,&pCStack_43c);
-            pCVar10 = CStaticText::CStaticText_BuildAt
-                                (pCVar10,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4) + 5,iVar6,
-                                 (int)&((CStaticText *)pCVar16)->vftable_IDSChained +
-                                 *(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4) + 1,iVar6 + 0x12,
-                                 puVar22,puVar21,(uint)puVar23,auVar24);
+            pCVar9 = (CBulanci *)
+                     CStaticText::CStaticText_BuildAt
+                               (pCVar10,*(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4) + 5,iVar6,
+                                (int)&((CStaticText *)pCVar16)->vftable_IDSChained +
+                                *(int *)(&gAScoreRowAvatarXOffsets + uVar17 * 4) + 1,iVar6 + 0x12,
+                                puVar22,puVar21,(uint)puVar23,auVar24);
           }
           local_4._0_1_ = '\v';
-          pCVar10->bForce_default_colour = 1;
-          CDSView::CDSView__AddChild((CDSView *)this);
+          *(undefined1 *)&(pCVar9->app).backBuffer.embeddedImage.nM_paletteMarker = 1;
+          CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
           iVar6 = iVar6 + -0xe;
           local_4._0_1_ = '\b';
           if (pCStack_43c != (CDSStreamStorage *)0x0) {
@@ -75629,11 +75763,14 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
     *(undefined1 *)(piVar25 + 6) = 0x80;
     pCStack_438 = (CAnim *)_Globals::OperatorNewWithBadAlloc(0x78);
     local_c._0_1_ = 0xf;
-    if (pCStack_438 != (CAnim *)0x0) {
-      CDSBitmap::CDSBitmap_ctor((CDSBitmap *)pCStack_438,0x14a,0xbe,piVar25);
+    if (pCStack_438 == (CAnim *)0x0) {
+      pCVar9 = (CBulanci *)0x0;
+    }
+    else {
+      pCVar9 = (CBulanci *)CDSBitmap::CDSBitmap_ctor((CDSBitmap *)pCStack_438,0x14a,0xbe,piVar25);
     }
     local_c._0_1_ = 0xe;
-    CDSView::CDSView__AddChild(uStack_480);
+    CDSView::CDSView__AddChild(uStack_480,pCVar9,(void *)0x0);
     local_450 = (int *)0xbf;
     uStack_448 = 0xd6;
     piVar20 = &gAScoreboardColumnLabelStringIds;
@@ -75645,7 +75782,7 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
       local_c._0_1_ = 0x10;
       pCStack_438 = (CAnim *)pCVar10;
       if (pCVar10 == (CStaticText *)0x0) {
-        pCVar10 = (CStaticText *)0x0;
+        pCVar9 = (CBulanci *)0x0;
       }
       else {
         fontResId = (undefined *)0x100af;
@@ -75655,29 +75792,30 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
         CBulanci::CDsStringAssignFromLiteral
                   ((CBulanci *)&stack0xfffffb54,
                    *(short **)(g_apCDSStaticTextsSingleton[2] + *piVar20 * 4));
-        pCVar10 = CStaticText::CStaticText_BuildAt
-                            (pCVar10,pvStack_454,local_450,(int)pvStack_44c,uStack_448,puVar22,
-                             puVar21,(uint)puVar23,fontResId);
+        pCVar9 = (CBulanci *)
+                 CStaticText::CStaticText_BuildAt
+                           (pCVar10,pvStack_454,local_450,(int)pvStack_44c,uStack_448,puVar22,
+                            puVar21,(uint)puVar23,fontResId);
       }
       local_c._0_1_ = 0xe;
-      pCVar10->bForce_default_colour = 1;
-      CDSView::CDSView__AddChild(uStack_480);
+      *(undefined1 *)&(pCVar9->app).backBuffer.embeddedImage.nM_paletteMarker = 1;
+      CDSView::CDSView__AddChild(uStack_480,pCVar9,(void *)0x0);
       piVar18 = piVar18 + 2;
       piVar20 = piVar20 + 1;
     } while ((int)piVar18 < 0x4aeadc);
     uVar17 = CBulanci::CGame_FindLevelScoreInChain(local_4);
-    this_00 = _Globals::CDSChained_GetFirstChildView((CDSChain *)(uVar17 + 0x14));
+    pCVar9 = _Globals::CDSChained_GetFirstChildView((CDSChain *)(uVar17 + 0x14));
     highlight = '\0';
     pcStack_474 = (char *)0x1;
     bVar1 = false;
-    while (this_00 != (CBulanci *)0x0) {
+    while (pCVar9 != (CBulanci *)0x0) {
       local_450 = (int *)((int)local_450 + 0x1a);
       uStack_448 = uStack_448 + 0x1a;
       if (pCStack_43c != (CDSStreamStorage *)0x0) {
                     // CScoreItem_MatchesKillsDeathsAndName(pHighlightTemplate=[ESP+0x60], pRow=ESI
                     // chain row); first SP high-score match gets highlight.
         iVar6 = CScoreItem::CScoreItem_MatchesKillsDeathsAndName
-                          ((CScoreItem *)pCStack_43c,(CScoreItem *)this_00,pRow);
+                          ((CScoreItem *)pCStack_43c,(CScoreItem *)pCVar9,pRow);
         if (((char)iVar6 == '\0') || (bVar1)) {
           highlight = '\0';
         }
@@ -75687,15 +75825,15 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
         }
       }
       CBulanci::CScore_RenderHighScoreRow
-                (this_00,(CScoreItem *)uStack_480,&gAScoreboardHighScoreColumnX,(int *)&pvStack_454,
+                (pCVar9,(CScoreItem *)uStack_480,&gAScoreboardHighScoreColumnX,(int *)&pvStack_454,
                  pcStack_474,highlight);
-      pCVar14 = _Globals::CDSChained_GetNextSiblingView(this_00);
+      pCVar14 = _Globals::CDSChained_GetNextSiblingView(pCVar9);
       if ((pCVar14 == (CBulanci *)0x0) ||
-         (pCVar2 = &this_00->app, pCVar3 = &this_00->app, this_00 = pCVar14,
+         (pCVar2 = &pCVar9->app, pCVar3 = &pCVar9->app, pCVar9 = pCVar14,
          (int)pCVar2->vftable_sub18 - *(int *)pCVar3->pMiPad_after_vftable_sub10 !=
          (int)(pCVar14->app).vftable_sub18 - *(int *)(pCVar14->app).pMiPad_after_vftable_sub10)) {
         pcStack_474 = pcStack_474 + 1;
-        this_00 = pCVar14;
+        pCVar9 = pCVar14;
       }
     }
     local_c = (void *)CONCAT31(local_c._1_3_,2);
@@ -75710,11 +75848,14 @@ CDSView * __thiscall CScore::CScore_ctor(CScore *this,CBulanci *param_2)
   local_c._0_1_ = 0x11;
   pCStack_438 = (CAnim *)_Globals::OperatorNewWithBadAlloc(0xf0);
   local_c._0_1_ = 0x12;
-  if (pCStack_438 != (CAnim *)0x0) {
-    CAnim::CAnim_ctor(pCStack_438,0x78,0x32,piVar25,1);
+  if (pCStack_438 == (CAnim *)0x0) {
+    pCVar9 = (CBulanci *)0x0;
+  }
+  else {
+    pCVar9 = (CBulanci *)CAnim::CAnim_ctor(pCStack_438,0x78,0x32,piVar25,1);
   }
   local_c._0_1_ = 0x11;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar9,(void *)0x0);
   this_01 = (CDSAudioPlayer *)
             _Globals::TriggerBankSample((undefined *)0x2,0,0x1d,0,(void *)0x0,'\x01');
   if (*(int **)&((CDSView *)this)->bGaming_slot_id != (int *)0x0) {
@@ -75742,12 +75883,13 @@ CExitDlg * __fastcall CExitDlg::CExitDlg_ctor(CExitDlg *this)
   int *piVar1;
   CAnim *pCVar2;
   void *pvVar3;
+  CBulanci *pCVar4;
   CStaticText *this_00;
-  CButton *pCVar4;
-  int *piVar5;
-  undefined *puVar6;
+  CButton *pCVar5;
+  int *piVar6;
   undefined *puVar7;
   undefined *puVar8;
+  undefined *puVar9;
   void *local_c;
   undefined1 *puStack_8;
   uint local_4;
@@ -75762,7 +75904,7 @@ CExitDlg * __fastcall CExitDlg::CExitDlg_ctor(CExitDlg *this)
   this->pVftable_IDSEventHandler = vftable;
   this->pVftable_IDSReferenced = vftable;
   piVar1 = *(int **)((int)g_pApp + 0x70);
-  piVar5 = (int *)0x0;
+  piVar6 = (int *)0x0;
   this->pLinkedAnim = (void *)0x0;
   this->dwReserved_74 = 0;
   this->dwReserved_78 = 0;
@@ -75770,54 +75912,67 @@ CExitDlg * __fastcall CExitDlg::CExitDlg_ctor(CExitDlg *this)
   local_4._1_3_ = 0;
   pCVar2 = (CAnim *)_Globals::OperatorNewWithBadAlloc(0xf0);
   local_4._0_1_ = 2;
-  if (pCVar2 != (CAnim *)0x0) {
+  if (pCVar2 == (CAnim *)0x0) {
+    pCVar4 = (CBulanci *)0x0;
+  }
+  else {
     pvVar3 = (void *)(**(code **)(*piVar1 + 0x10))();
     if (pvVar3 != (void *)0x0) {
-      piVar5 = (int *)_Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b8370);
+      piVar6 = (int *)_Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b8370);
     }
-    CAnim::CAnim_ctor(pCVar2,0xc2,0x16,piVar5,3);
+    pCVar4 = (CBulanci *)CAnim::CAnim_ctor(pCVar2,0xc2,0x16,piVar6,3);
   }
   local_4 = CONCAT31(local_4._1_3_,1);
-  CDSView::CDSView__AddChild((CDSView *)this);
-  if (piVar5 != (int *)0x0) {
-    (**(code **)(*piVar5 + 8))();
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar4,(void *)0x0);
+  if (piVar6 != (int *)0x0) {
+    (**(code **)(*piVar6 + 8))();
   }
-  piVar5 = (int *)0x0;
+  piVar6 = (int *)0x0;
   pCVar2 = (CAnim *)_Globals::OperatorNewWithBadAlloc(0xf0);
   local_4._0_1_ = 3;
-  if (pCVar2 != (CAnim *)0x0) {
+  if (pCVar2 == (CAnim *)0x0) {
+    pCVar4 = (CBulanci *)0x0;
+  }
+  else {
     pvVar3 = (void *)(**(code **)(*piVar1 + 0x10))();
     if (pvVar3 != (void *)0x0) {
-      piVar5 = (int *)_Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b8370);
+      piVar6 = (int *)_Globals::CheckedVirtualBaseCast(pvVar3,DAT_004b8370);
     }
-    CAnim::CAnim_ctor(pCVar2,0x139,0x11a,piVar5,3);
+    pCVar4 = (CBulanci *)CAnim::CAnim_ctor(pCVar2,0x139,0x11a,piVar6,3);
   }
   local_4._0_1_ = 1;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar4,(void *)0x0);
   this_00 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 4;
-  if (this_00 != (CStaticText *)0x0) {
-    puVar8 = (undefined *)0x100af;
-    puVar7 = (undefined *)0x2;
-    puVar6 = (undefined *)0x0;
+  if (this_00 == (CStaticText *)0x0) {
+    pCVar4 = (CBulanci *)0x0;
+  }
+  else {
+    puVar9 = (undefined *)0x100af;
+    puVar8 = (undefined *)0x2;
+    puVar7 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x138));
-    CStaticText::CStaticText_BuildAtAuto(this_00,0x28,0x48,puVar6,(uint)puVar7,puVar8);
+    pCVar4 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(this_00,0x28,0x48,puVar7,(uint)puVar8,puVar9);
   }
   local_4._0_1_ = 1;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar4 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar4,(void *)0x0);
+  pCVar5 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 5;
-  if (pCVar4 != (CButton *)0x0) {
+  if (pCVar5 == (CButton *)0x0) {
+    pCVar4 = (CBulanci *)0x0;
+  }
+  else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffbc,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x14c));
-    CButton::CButton_BuildAt(pCVar4);
+    pCVar4 = (CBulanci *)CButton::CButton_BuildAt(pCVar5);
   }
   local_4._0_1_ = 1;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar4,(void *)0x0);
   local_4 = (uint)local_4._1_3_ << 8;
-  if (piVar5 != (int *)0x0) {
-    (**(code **)(*piVar5 + 8))();
+  if (piVar6 != (int *)0x0) {
+    (**(code **)(*piVar6 + 8))();
   }
   ExceptionList = local_c;
   return this;
@@ -75844,9 +75999,10 @@ CPauseDlg * __thiscall CPauseDlg::CPauseDlg_Build(CPauseDlg *this,CGame *pGame)
 
 {
   CStaticText *this_00;
-  CButton *pCVar1;
-  undefined *puVar2;
+  CBulanci *pCVar1;
+  CButton *pCVar2;
   undefined *puVar3;
+  undefined *puVar4;
   uint shapeFlags;
   undefined *fontResId;
   void *local_c;
@@ -75871,66 +76027,77 @@ CPauseDlg * __thiscall CPauseDlg::CPauseDlg_Build(CPauseDlg *this,CGame *pGame)
   this->pGame = pGame;
   this_00 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 1;
-  if (this_00 != (CStaticText *)0x0) {
+  if (this_00 == (CStaticText *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
+  }
+  else {
     fontResId = (undefined *)0x100ae;
     shapeFlags = 5;
-    puVar3 = (undefined *)0x2;
-    puVar2 = (undefined *)0x0;
+    puVar4 = (undefined *)0x2;
+    puVar3 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x150));
-    CStaticText::CStaticText_BuildAt(this_00,0,0xc,0x132,0x23,puVar2,puVar3,shapeFlags,fontResId);
+    pCVar1 = (CBulanci *)
+             CStaticText::CStaticText_BuildAt
+                       (this_00,0,0xc,0x132,0x23,puVar3,puVar4,shapeFlags,fontResId);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
   if (this->pGame->pDirectPlayActive != (undefined *)0x0) {
     this->nBbox_bottom = this->nBbox_bottom + 200;
     _Globals::CStartGame2_BuildLobbyChatPanel();
   }
-  pCVar1 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  pCVar2 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 2;
-  if (pCVar1 == (CButton *)0x0) {
-    pCVar1 = (CButton *)0x0;
+  if (pCVar2 == (CButton *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
   }
   else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x154));
-    pCVar1 = (CButton *)CButton::CButton_BuildAt(pCVar1);
+    pCVar1 = (CBulanci *)CButton::CButton_BuildAt(pCVar2);
   }
   local_4._0_1_ = 0;
-  this->pBtnPrimary = pCVar1;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar1 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  this->pBtnPrimary = (CButton *)pCVar1;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
+  pCVar2 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 3;
-  if (pCVar1 == (CButton *)0x0) {
-    pCVar1 = (CButton *)0x0;
+  if (pCVar2 == (CButton *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
   }
   else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x158));
-    pCVar1 = (CButton *)CButton::CButton_BuildAt(pCVar1);
+    pCVar1 = (CBulanci *)CButton::CButton_BuildAt(pCVar2);
   }
   local_4._0_1_ = 0;
-  this->pBtnSecondary = pCVar1;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pBtnSecondary = (CButton *)pCVar1;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
   CDSView::CDSView__Hide((CDSView *)this->pBtnSecondary);
-  pCVar1 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  pCVar2 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 4;
-  if (pCVar1 != (CButton *)0x0) {
+  if (pCVar2 == (CButton *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
+  }
+  else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x15c));
-    CButton::CButton_BuildAt(pCVar1);
+    pCVar1 = (CBulanci *)CButton::CButton_BuildAt(pCVar2);
   }
   local_4._0_1_ = 0;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar1 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
+  pCVar2 = (CButton *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_4._0_1_ = 5;
-  if (pCVar1 != (CButton *)0x0) {
+  if (pCVar2 == (CButton *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
+  }
+  else {
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffc4,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x14c));
-    CButton::CButton_BuildAt(pCVar1);
+    pCVar1 = (CBulanci *)CButton::CButton_BuildAt(pCVar2);
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)0x0);
   _Globals::CDSView_AcquireKeyboardFocus((int *)this->pBtnPrimary);
   this->wWidgetFlags = this->wWidgetFlags | 0x2c;
   CDSView::CDSView__Hide((CDSView *)this);
@@ -76209,7 +76376,7 @@ void __thiscall _Globals::CGame_NetSendKick_t0a(void *this,uint param_1)
     }
     CGame::BroadcastEvent
               ((CGame *)((int)this + 0x1c),0xe9,(uint)*(byte *)((int)this + 0xdb),uVar2 & 0xff,
-               (void *)0x0);
+               (CDSView *)0x0);
   }
   return;
 }
@@ -76829,7 +76996,8 @@ void __thiscall CBulanek::CGame_NetSendPlayerDie_t11(CBulanek *this,undefined1 p
 
 
 void __thiscall
-CStartGame2::CGame_NetSendSetAvatar_t03(CStartGame2 *this,byte param_1,void *param_2,char param_3)
+CStartGame2::CGame_NetSendSetAvatar_t03
+          (CStartGame2 *this,byte param_1,CDSView *param_2,char param_3)
 
 {
   byte bVar1;
@@ -76855,7 +77023,7 @@ CStartGame2::CGame_NetSendSetAvatar_t03(CStartGame2 *this,byte param_1,void *par
 
 
 void __thiscall
-CStartGame2::CGame_NetSendSlotCount_t04(CStartGame2 *this,void *param_1,char param_2)
+CStartGame2::CGame_NetSendSlotCount_t04(CStartGame2 *this,CDSView *param_1,char param_2)
 
 {
   undefined1 local_8;
@@ -76878,7 +77046,7 @@ CStartGame2::CGame_NetSendSlotCount_t04(CStartGame2 *this,void *param_1,char par
 
 
 void __thiscall
-CStartGame2::CGame_NetSendAdminByte_t64(CStartGame2 *this,void *param_1,char param_2)
+CStartGame2::CGame_NetSendAdminByte_t64(CStartGame2 *this,CDSView *param_1,char param_2)
 
 {
   byte bStack00000009;
@@ -76907,7 +77075,7 @@ void __thiscall CGame::CGame_NetSendCountdown_t07(CGame *this,char param_1)
                     // NET_MSG_0x07 SEND: [0x07, countdownByte] 2 B (host scheduler).
                     // GAMEPLAY_IMPACT: Loading countdown UI 0xE2; value 4 → start 0x8002.
                     // Must-match: 2 bytes fixed.
-  BroadcastEvent((CGame *)&this->pEventHub,0xe2,(uint)this->bCountdownByte,0,(void *)0x0);
+  BroadcastEvent((CGame *)&this->pEventHub,0xe2,(uint)this->bCountdownByte,0,(CDSView *)0x0);
   if ((this->pDirectPlayActive != (undefined *)0x0) && (param_1 != '\0')) {
     bStack00000005 = this->bCountdownByte;
     param_1 = '\a';
@@ -76947,7 +77115,8 @@ void __thiscall _Globals::CGame_NetSendCustomScriptPayload_t15(void *this,int *p
 
 
 void __thiscall
-CStartGame2::CStartGame2_ApplySetAvatar(CStartGame2 *this,byte param_1,char param_2,void *param_3)
+CStartGame2::CStartGame2_ApplySetAvatar
+          (CStartGame2 *this,byte param_1,byte param_2,CDSView *param_3)
 
 {
   if (this[1].pPad_4d[(uint)param_1 * 0x23 + -0x4d] != param_2) {
@@ -76961,7 +77130,7 @@ CStartGame2::CStartGame2_ApplySetAvatar(CStartGame2 *this,byte param_1,char para
 
 void __thiscall
 CStartGame2::CStartGame2_ApplySlotCountIfChanged
-          (CStartGame2 *this,byte param_1,int param_2,void *param_3)
+          (CStartGame2 *this,byte param_1,int param_2,CDSView *param_3)
 
 {
                     // UNCERTAIN: if CGame+0x19c slot idx/value changed, store and
@@ -76978,7 +77147,7 @@ CStartGame2::CStartGame2_ApplySlotCountIfChanged
 
 
 void __thiscall
-CStartGame2::CStartGame2_SetGameTypeAdminByte(CStartGame2 *this,char param_1,void *param_2)
+CStartGame2::CStartGame2_SetGameTypeAdminByte(CStartGame2 *this,byte param_1,CDSView *param_2)
 
 {
   if (this[1].pPad_be[3] != param_1) {
@@ -77053,35 +77222,36 @@ void __thiscall CGaming::CGaming_RegisterPreMatchSchedulerHooks(CGaming *this,vo
 
 
 
-short __thiscall CGame::CMenu_DoModalChild(CGame *this,void *param_1,char param_2)
+ushort __thiscall CGame::CMenu_DoModalChild(CGame *this,CDSView *param_1,char param_2)
 
 {
-  short sVar1;
-  void *pvVar2;
+  CDSView *pCVar1;
+  ushort uVar2;
+  void *pvVar3;
   
   if ((param_2 != '\0') && (this->pDirectPlayActive != (undefined *)0x0)) {
     CDSUpdatedItem::Scheduler_AckSlot(&this->scheduler,0,-1);
   }
-  pvVar2 = *(void **)(this->pPad_countdownTail + 3);
-  this->pLobbyView = param_1;
-  sVar1 = CDSView::CDSView_DoModal(param_1,pvVar2);
+  pCVar1 = *(CDSView **)(this->pPad_countdownTail + 3);
+  this->pLobbyView = (undefined *)param_1;
+  uVar2 = CDSView::CDSView_DoModal(param_1,pCVar1);
   this->pLobbyView = (undefined *)0x0;
   if (param_2 != '\0') {
-    pvVar2 = CDSUpdatedItem::Scheduler_GetEventSlot(&this->scheduler,0);
-    if ((*(byte *)((int)pvVar2 + 8) & 1) == 0) {
+    pvVar3 = CDSUpdatedItem::Scheduler_GetEventSlot(&this->scheduler,0);
+    if ((*(byte *)((int)pvVar3 + 8) & 1) == 0) {
       CDSUpdatedItem::Scheduler_ArmSlot(&this->scheduler,0);
     }
   }
-  if (sVar1 == -0x7ffd) {
+  if (uVar2 == 0x8003) {
     CDSSimpleException::CDSSimpleException_Throw(4,6);
   }
   else {
-    if (sVar1 == -0x7ffc) {
+    if (uVar2 == 0x8004) {
       CDSSimpleException::CDSSimpleException_Throw(0x14,0);
-      return -0x7ffc;
+      return 0x8004;
     }
-    if (sVar1 != -0x7f37) {
-      return sVar1;
+    if (uVar2 != 0x80c9) {
+      return uVar2;
     }
   }
                     // WARNING: Subroutine does not return
@@ -77544,7 +77714,7 @@ void __fastcall _Globals::CMenu_ShowConnectingDialog(CGame *param_1)
             ((CBulanci *)&stack0xffffff70,*(short **)(g_apCDSStaticTextsSingleton[2] + 0xfc));
   CMsgDialog::CMsgDialog_ctor(&local_7c,(int)cdsStringHandle,pButtonMode);
   local_4 = 0;
-  CGame::CMenu_DoModalChild(param_1,&local_7c,'\x01');
+  CGame::CMenu_DoModalChild(param_1,(CDSView *)&local_7c,'\x01');
   local_4 = -1;
   CWindow_dtor((int)&local_7c);
   ExceptionList = local_c;
@@ -77653,7 +77823,7 @@ uint __fastcall CBulanci::CGame_FindLevelScoreInChain(void *param_1)
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
 
 void __thiscall
-CStartGame2::CGame_NetSendRename_t02(CStartGame2 *this,byte param_1,void *param_2,char param_3)
+CStartGame2::CGame_NetSendRename_t02(CStartGame2 *this,byte param_1,CDSView *param_2,char param_3)
 
 {
   void *this_00;
@@ -77690,7 +77860,8 @@ CStartGame2::CGame_NetSendRename_t02(CStartGame2 *this,byte param_1,void *param_
 
 
 void __thiscall
-CStartGame2::CStartGame2_ApplyPlayerRename(CStartGame2 *this,byte param_1,int param_2,void *param_3)
+CStartGame2::CStartGame2_ApplyPlayerRename
+          (CStartGame2 *this,byte param_1,int param_2,CDSView *param_3)
 
 {
   int iVar1;
@@ -77778,7 +77949,7 @@ void __thiscall CMenu::CMenuGetResourceById(CMenu *this,uint param_1)
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
 
-void __thiscall CGame::CGame_NetSendChat_t06(CGame *this,byte param_1,int *param_2,void *param_3)
+void __thiscall CGame::CGame_NetSendChat_t06(CGame *this,byte param_1,int *param_2,CDSView *param_3)
 
 {
   undefined *this_00;
@@ -77862,20 +78033,18 @@ void __thiscall CGame::CGame_StartGame(CGame *this)
   CDSUpdatedItem *this_01;
   byte *pbVar1;
   char cVar2;
-  CDSView *pCVar3;
-  NetSlotBinding *pNVar4;
-  PlayerLobbyRec *pPVar5;
-  undefined4 uVar6;
-  bool bVar7;
-  uint uVar8;
-  undefined4 *puVar9;
-  void *pvVar10;
-  int iVar11;
+  CDSView *this_02;
+  NetSlotBinding *pNVar3;
+  PlayerLobbyRec *pPVar4;
+  bool bVar5;
+  uint uVar6;
+  undefined4 *puVar7;
+  void *pvVar8;
+  int iVar9;
+  CGame *extraout_ECX;
   uint local_424;
   CGaming local_414;
-  int local_a8 [4];
-  undefined1 local_98 [88];
-  undefined1 local_40 [24];
+  CDSView local_a8;
   undefined1 local_28;
   undefined1 uStack_27;
   undefined2 uStack_26;
@@ -77888,7 +78057,7 @@ void __thiscall CGame::CGame_StartGame(CGame *this)
   undefined1 *local_14;
   void *local_10;
   undefined1 *puStack_c;
-  int local_8;
+  void *local_8;
   
                     // NET_MSG_0x09/0x08 SEND inline (CGame_StartGame, host): 0x09 then 0x08.
                     // GAMEPLAY_IMPACT: 0x09 slot-change banner 0xE3; 0x08 level-loaded per slot
@@ -77899,28 +78068,28 @@ void __thiscall CGame::CGame_StartGame(CGame *this)
   local_424 = DAT_004b0e44 ^ (uint)&stack0xfffffffc;
   local_14 = (undefined1 *)&local_424;
   ExceptionList = &local_10;
-  local_8 = 0;
+  local_8 = (void *)0x0;
   (this->chain).pPad_89[0x16] = 0;
   (this->chain).pPad_89[0x17] = 0;
   (this->chain).pPad_89[0x18] = 0;
   (this->chain).pPad_89[0x19] = 0;
   this->pSchedTeamScoreScratch[1] = 0;
   local_20 = this;
-  uVar8 = _Globals::CMenu_GetProfileBindIndex((int)this);
-  uVar8 = uVar8 & 0xff;
+  uVar6 = _Globals::CMenu_GetProfileBindIndex((int)this);
+  uVar6 = uVar6 & 0xff;
   local_1c = (uint)(byte)(this->chain).field_0x5;
   local_15 = 0;
   while (local_15 < (byte)(this->chain).field_0x6) {
-    iVar11 = local_15 + local_1c;
-    pbVar1 = (this->scheduler).p_pad + uVar8 * 6 + -0x19;
+    iVar9 = local_15 + local_1c;
+    pbVar1 = (this->scheduler).p_pad + uVar6 * 6 + -0x19;
     local_28 = SUB41(pbVar1,0);
     uStack_27 = (undefined1)((uint)pbVar1 >> 8);
     uStack_26 = (undefined2)((uint)pbVar1 >> 0x10);
-    _Globals::CDsStringAssignFromHandle(pbVar1 + 0x40,&this->pPlayerRec[iVar11].pName);
-    uVar8 = uVar8 + 1;
+    _Globals::CDsStringAssignFromHandle(pbVar1 + 0x40,&this->pPlayerRec[iVar9].pName);
+    uVar6 = uVar6 + 1;
     local_15 = local_15 + 1;
     *(BYTE *)(CONCAT22(uStack_26,CONCAT11(uStack_27,local_28)) + 0x3e) =
-         this->pPlayerRec[iVar11].pPad_00[0];
+         this->pPlayerRec[iVar9].pPad_00[0];
   }
   if (this->bTotalSlots != 1) {
     (this->chain).pOptionBlock[1] = this->bAdminByte;
@@ -77930,29 +78099,29 @@ void __thiscall CGame::CGame_StartGame(CGame *this)
   (this->chain).pOptionBlock[0] = this->bGameModeIndex;
   _Globals::CDsStringAssignFromHandle
             (&(this->chain).strConfigTail,(undefined4 *)((this->chain).pPad_89 + 0x12));
-  uVar8 = (uint)this->bHostSlotCursor;
-  while (uVar8 != 0) {
-    pNVar4 = this->pSlotBinding + (uVar8 - 1);
-    pNVar4->pPad_08[0] = '\0';
-    pNVar4->pPad_08[1] = '\0';
-    pNVar4->pPad_08[2] = '\0';
-    pNVar4->pPad_08[3] = '\0';
-    uVar8 = uVar8 - 1;
+  uVar6 = (uint)this->bHostSlotCursor;
+  while (uVar6 != 0) {
+    pNVar3 = this->pSlotBinding + (uVar6 - 1);
+    pNVar3->pPad_08[0] = '\0';
+    pNVar3->pPad_08[1] = '\0';
+    pNVar3->pPad_08[2] = '\0';
+    pNVar3->pPad_08[3] = '\0';
+    uVar6 = uVar6 - 1;
   }
-  uVar8 = (uint)this->bTotalSlots;
-  while (uVar8 != 0) {
-    pbVar1 = (this->chain).pPad_89 + uVar8 * 0x23 + 9;
+  uVar6 = (uint)this->bTotalSlots;
+  while (uVar6 != 0) {
+    pbVar1 = (this->chain).pPad_89 + uVar6 * 0x23 + 9;
     pbVar1[0] = 0;
     pbVar1[1] = 0;
     pbVar1[2] = 0;
     pbVar1[3] = 0;
-    pPVar5 = this->pPlayerRec + (uVar8 - 1);
-    pPVar5->pPad_1b[3] = 0;
-    pPVar5->pPad_1b[4] = 0;
-    pPVar5->pPad_1b[5] = 0;
-    pPVar5->pPad_1b[6] = 0;
-    this->pPlayerRec[uVar8 - 1].pPad_1b[7] = 4;
-    uVar8 = uVar8 - 1;
+    pPVar4 = this->pPlayerRec + (uVar6 - 1);
+    pPVar4->pPad_1b[3] = 0;
+    pPVar4->pPad_1b[4] = 0;
+    pPVar4->pPad_1b[5] = 0;
+    pPVar4->pPad_1b[6] = 0;
+    this->pPlayerRec[uVar6 - 1].pPad_1b[7] = 4;
+    uVar6 = uVar6 - 1;
   }
   cVar2 = (this->chain).field_0x5;
   this->pPad_countdownTail[0] = 0;
@@ -77968,42 +78137,42 @@ void __thiscall CGame::CGame_StartGame(CGame *this)
   local_17 = 0;
   local_16 = 0;
   local_15 = '\0';
-  CBulanci::CGameCounterCtor(local_a8);
+  CBulanci::CGameCounterCtor(&local_a8);
   local_8._0_1_ = 3;
-  puVar9 = (undefined4 *)_Globals::OperatorNewWithBadAlloc(0x20c);
-  local_28 = SUB41(puVar9,0);
-  uStack_27 = (undefined1)((uint)puVar9 >> 8);
-  uStack_26 = (undefined2)((uint)puVar9 >> 0x10);
+  puVar7 = (undefined4 *)_Globals::OperatorNewWithBadAlloc(0x20c);
+  local_28 = SUB41(puVar7,0);
+  uStack_27 = (undefined1)((uint)puVar7 >> 8);
+  uStack_26 = (undefined2)((uint)puVar7 >> 0x10);
   local_8._0_1_ = 4;
-  if (puVar9 == (undefined4 *)0x0) {
-    puVar9 = (undefined4 *)0x0;
+  if (puVar7 == (undefined4 *)0x0) {
+    puVar7 = (undefined4 *)0x0;
   }
   else {
-    puVar9 = CDirectKeyb::CDirectKeyb__CDirectKeyb_ctor(puVar9);
+    puVar7 = CDirectKeyb::CDirectKeyb__CDirectKeyb_ctor(puVar7);
   }
-  pCVar3 = *(CDSView **)(this->pPad_countdownTail + 3);
-  local_8 = CONCAT31(local_8._1_3_,3);
-  *(undefined4 **)&this->bPollKeyboard = puVar9;
-  CDSView::CDSView__AddChild(pCVar3,local_a8,0);
+  this_02 = *(CDSView **)(this->pPad_countdownTail + 3);
+  local_8 = (void *)CONCAT31(local_8._1_3_,3);
+  *(undefined4 **)&this->bPollKeyboard = puVar7;
+  CDSView::CDSView__AddChild(this_02,(CBulanci *)&local_a8,(void *)0x0);
   local_17 = 1;
-  _Globals::CDSApp_FrameBody(*(undefined4 *)(this->pPad_countdownTail + 3));
+  _Globals::CDSApp_FrameBody(*(CBulanci **)(this->pPad_countdownTail + 3));
   CBulanci::CGaming_LoadLevelAssetAndMusic(&local_414);
-  uVar8 = local_1c;
+  uVar6 = local_1c;
   this->bNetState = 4;
   if (this->pDirectPlayActive != (undefined *)0x0) {
     this->pSlotBinding[this->bLocalSenderSlot].bLoadState = 2;
     local_1c = CONCAT31((uint3)this->bLocalSenderSlot,8);
-    uVar6 = local_1c;
-    local_1c._3_1_ = SUB41(uVar8,3);
-    local_1c._0_3_ = CONCAT12(2,(short)uVar6);
+    iVar9 = local_1c;
+    local_1c._3_1_ = SUB41(uVar6,3);
+    local_1c._0_3_ = CONCAT12(2,(short)iVar9);
     _Globals::CDSDirectPlay_Send(this->pDirectPlayActive,0,&local_1c,(uchar *)0x3);
-    bVar7 = _Globals::CGame_AllSlotsHaveState(this,'\x02');
-    if (!bVar7) {
-      _Globals::CMenu_ShowConnectingDialog();
+    bVar5 = _Globals::CGame_AllSlotsHaveState(this,'\x02');
+    if (!bVar5) {
+      _Globals::CMenu_ShowConnectingDialog(extraout_ECX);
     }
   }
   this_00 = &this->pEventHub;
-  _Globals::Scheduler_PushHook(this_00,(int)local_98);
+  _Globals::Scheduler_PushHook(this_00,(int)&local_a8.win.pVftable_IDSEventHandler);
   cVar2 = (this->chain).field_0x5;
   local_16 = 1;
   this->bNetState = 5;
@@ -78012,28 +78181,28 @@ void __thiscall CGame::CGame_StartGame(CGame *this)
     CDSUpdatedItem::Scheduler_AckSlot(&this->scheduler,2,-1);
     local_15 = '\x01';
   }
-  CMenu_DoModalChild(this,local_a8,'\x01');
+  CMenu_DoModalChild(this,&local_a8,'\x01');
   if (local_15 != '\0') {
     local_15 = '\0';
     CDSUpdatedItem::Scheduler_ArmSlot(&this->scheduler,2);
   }
   local_16 = 0;
-  _Globals::Scheduler_PopHook(this_00,(int)local_98);
+  _Globals::Scheduler_PopHook(this_00,(int)&local_a8.win.pVftable_IDSEventHandler);
   local_17 = 0;
-  CMenu::CMenu_DetachChildWithVisibility(*(CMenu **)(this->pPad_countdownTail + 3),local_a8);
+  CMenu::CMenu_DetachChildWithVisibility(*(CMenu **)(this->pPad_countdownTail + 3),&local_a8);
   this_01 = &this->scheduler;
   this->bNetState = 6;
   this->bTeamScoreCategory = 1;
   local_15 = 0;
-  local_8 = 6;
+  local_8 = (void *)0x6;
   CDSUpdatedItem::Scheduler_AckSlot(this_01,7,-1);
   _Globals::Scheduler_PushHook(this_00,(int)&local_414.field_0x10);
   local_15 = 1;
-  CMenu_DoModalChild(this,&local_414,'\x01');
+  CMenu_DoModalChild(this,(CDSView *)&local_414,'\x01');
   local_15 = 0;
   _Globals::Scheduler_PopHook(this_00,(int)&local_414.field_0x10);
-  pvVar10 = CDSUpdatedItem::Scheduler_GetEventSlot(this_01,7);
-  if ((*(byte *)((int)pvVar10 + 8) & 1) == 0) {
+  pvVar8 = CDSUpdatedItem::Scheduler_GetEventSlot(this_01,7);
+  if ((*(byte *)((int)pvVar8 + 8) & 1) == 0) {
     CDSUpdatedItem::Scheduler_ArmSlot(this_01,7);
   }
   (**(code **)(**(int **)&this->bPollKeyboard + 8))();
@@ -78041,13 +78210,13 @@ void __thiscall CGame::CGame_StartGame(CGame *this)
   this->bDemoRecording = 0;
   this->pSchedTeamScoreTagBuf[0] = '\0';
   this->pSchedTeamScoreTagBuf[1] = '\0';
-  local_8 = 2;
+  local_8 = (void *)0x2;
   _Globals::CGame_ResetForLobby((int)this);
   local_8._0_1_ = 8;
-  _eh_vector_destructor_iterator_(local_40,4,2,_Globals::eh_dtor_CDSObject_ptr);
+  _eh_vector_destructor_iterator_(&local_a8.win.bModalFlag,4,2,_Globals::eh_dtor_CDSObject_ptr);
   local_8._0_1_ = 1;
-  CDSView::CDSView_dtor(local_a8);
-  local_8 = (uint)local_8._1_3_ << 8;
+  CDSView::CDSView_dtor(&local_a8);
+  local_8 = (void *)((uint)local_8._1_3_ << 8);
   CGaming::CGaming_dtor(&local_414);
   ExceptionList = local_10;
   return;
@@ -78100,7 +78269,8 @@ void _Globals::Catch_004140fa(void)
     Scheduler_PopHook((void *)(iVar1 + 0x1c),unaff_EBP + -0x94);
   }
   if (*(char *)(unaff_EBP + -0x13) != '\0') {
-    CMenu::CMenu_DetachChildWithVisibility(*(CMenu **)(iVar1 + 0x1ec),(int *)(unaff_EBP + -0xa4));
+    CMenu::CMenu_DetachChildWithVisibility
+              (*(CMenu **)(iVar1 + 0x1ec),(CDSView *)(unaff_EBP + -0xa4));
   }
   if (*(int **)(iVar1 + 0x208) != (int *)0x0) {
     (**(code **)(**(int **)(iVar1 + 0x208) + 8))();
@@ -78129,8 +78299,7 @@ void __thiscall CGame::CMenu_PickSession(CGame *this,uint *param_1)
 {
   CSessionItem *pCVar1;
   uint uStack_a4;
-  CSessionList local_94;
-  CGame *local_18;
+  CDSView local_94;
   undefined1 *local_14;
   void *local_10;
   undefined1 *puStack_c;
@@ -78142,15 +78311,15 @@ void __thiscall CGame::CMenu_PickSession(CGame *this,uint *param_1)
   uStack_a4 = DAT_004b0e44 ^ (uint)&stack0xfffffffc;
   local_14 = (undefined1 *)&uStack_a4;
   ExceptionList = &local_10;
-  local_18 = this;
-  CSessionList::CSessionList_BuildDialog(&local_94);
+  local_94.nSrc_x = (int)this;
+  CSessionList::CSessionList_BuildDialog((CSessionList *)&local_94);
   local_8 = 0;
   CDSUpdatedItem::Scheduler_AckSlot(&this->scheduler,1,-1);
   local_8 = CONCAT31(local_8._1_3_,1);
   CMenu_DoModalChild(this,&local_94,'\0');
   CDSUpdatedItem::Scheduler_ArmSlot(&this->scheduler,1);
   local_8 = 0;
-  pCVar1 = CSessionList::CSessionList_GetPick(&local_94);
+  pCVar1 = CSessionList::CSessionList_GetPick((CSessionList *)&local_94);
   *param_1 = pCVar1->hostIp;
   param_1[1] = pCVar1->port;
   param_1[2] = pCVar1->playerCount;
@@ -78195,9 +78364,9 @@ void __thiscall CGame::CGame_GetOrCreateLevelScore(CGame *this)
 {
   CLevelScore *pLevelScore;
   wchar_t **ppwVar1;
-  undefined *puVar2;
+  uint uVar2;
   int iVar3;
-  undefined *puVar4;
+  void *pvVar4;
   
                     // Slice 13 / todo 28: OperatorNew(0x28) allocates CLevelScore; pLevelScore
                     // typed via rename+set_local_variable_type (not ECX). param_1 is CGame*.
@@ -78208,31 +78377,30 @@ void __thiscall CGame::CGame_GetOrCreateLevelScore(CGame *this)
   pLevelScore = (CLevelScore *)CBulanci::CGame_FindLevelScoreInChain(this);
   if (pLevelScore == (CLevelScore *)0x0) {
     pLevelScore = (CLevelScore *)_Globals::OperatorNewWithBadAlloc(0x28);
-    if ((CLevelScore *)pLevelScore == (CLevelScore *)0x0) {
+    if ((CDSChained *)pLevelScore == (CDSChained *)0x0) {
       pLevelScore = (CLevelScore *)0x0;
     }
     else {
-      ((CLevelScore *)pLevelScore)->m_link_next = (undefined *)0x0;
-      ((CLevelScore *)pLevelScore)->m_link_prev = (undefined *)0x0;
-      ((CLevelScore *)pLevelScore)->pVftable_IDSReferenced = &CLevelScore::vftable;
-      ((CLevelScore *)pLevelScore)->pVftable_IDSChained = &CLevelScore::vftable;
-      ((CLevelScore *)pLevelScore)->m_levelName = (undefined *)0x0;
-      (((CLevelScore *)pLevelScore)->scoreChain).pVftable_IDSReferenced =
-           (undefined *)g_pCDSChain_vftable_IDSReferenced;
-      (((CLevelScore *)pLevelScore)->scoreChain).pVftable_IDSChained =
-           (undefined *)g_pCDSChain_vftable_IDSChained;
-      (((CLevelScore *)pLevelScore)->scoreChain).pFirstChild = (undefined *)0x0;
-      (((CLevelScore *)pLevelScore)->scoreChain).pAuxHeap = (void *)0x0;
-      (((CLevelScore *)pLevelScore)->scoreChain).dwChildCount = 0;
+      ((CDSChained *)pLevelScore)->dwField_08 = 0;
+      ((CDSChained *)pLevelScore)->dwField_0c = 0;
+      ((CDSChained *)pLevelScore)->pVftable_primary = &CLevelScore::vftable;
+      ((CDSChained *)pLevelScore)->pVftable_IDSChained = &CLevelScore::vftable;
+      ((CDSChained *)pLevelScore)->pVftable_IDSEventHandler = (void *)0x0;
+      *(undefined ***)&((CDSChained *)pLevelScore)->wViewFlags = g_pCDSChain_vftable_IDSReferenced;
+      ((CDSChained *)pLevelScore)->pVftable_IDSReferenced = g_pCDSChain_vftable_IDSChained;
+      ((CDSChained *)pLevelScore)->dwField_1c = 0;
+      ((CDSChained *)pLevelScore)->nBbox_left = 0;
+      ((CDSChained *)pLevelScore)->nBbox_top = 0;
     }
     _Globals::CDsStringAssignFromHandle
-              (&((CLevelScore *)pLevelScore)->m_levelName,(undefined4 *)(iVar3 + 0x10));
-    _Globals::CDSChained_AppendChild(&(this->chain).pVftable_IDSReferenced,pLevelScore);
+              (&((CDSChained *)pLevelScore)->pVftable_IDSEventHandler,(undefined4 *)(iVar3 + 0x10));
+    _Globals::CDSChained_AppendChild
+              (&(this->chain).pVftable_IDSReferenced,(CDSChained *)pLevelScore);
   }
-  puVar4 = *(undefined **)(this->pPlayerRec[0].pPad_1b + 3);
-  puVar2 = (undefined *)this->pPlayerRec[0].dwKills;
+  pvVar4 = *(void **)(this->pPlayerRec[0].pPad_1b + 3);
+  uVar2 = this->pPlayerRec[0].dwKills;
   ppwVar1 = _Globals::CGameGetPlayerNamePtr(this,'\0');
-  CLevelScore::CLevelScore_AddPlayerScore((CLevelScore *)pLevelScore,ppwVar1,puVar2,puVar4);
+  CLevelScore::CLevelScore_AddPlayerScore((CLevelScore *)pLevelScore,ppwVar1,uVar2,pvVar4);
   return;
 }
 
@@ -78240,7 +78408,8 @@ void __thiscall CGame::CGame_GetOrCreateLevelScore(CGame *this)
 
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
 
-void __thiscall CStartGame2::CGame_NetSendSetLevel_t05(CStartGame2 *this,void *param_1,char param_2)
+void __thiscall
+CStartGame2::CGame_NetSendSetLevel_t05(CStartGame2 *this,CDSView *param_1,char param_2)
 
 {
   char cVar1;
@@ -78284,7 +78453,7 @@ void __thiscall CStartGame2::CGame_NetSendSetLevel_t05(CStartGame2 *this,void *p
 
 
 void __thiscall
-CStartGame2::CStartGame2_SetSelectedLevel(CStartGame2 *this,int param_1,void *param_2)
+CStartGame2::CStartGame2_SetSelectedLevel(CStartGame2 *this,int param_1,CDSView *param_2)
 
 {
   int iVar1;
@@ -78419,13 +78588,13 @@ void __fastcall CMenu::CMenu_NetSendLobbySyncAll(CStartGame2 *param_1)
   bVar1 = param_1->field_0x36;
   bVar2 = param_1->field_0x37 + bVar1;
   for (; bVar1 < bVar2; bVar1 = bVar1 + 1) {
-    CStartGame2::CGame_NetSendSetAvatar_t03(param_1,bVar1,(void *)0x0,'\x01');
-    CStartGame2::CGame_NetSendRename_t02(param_1,bVar1,(void *)0x0,'\x01');
+    CStartGame2::CGame_NetSendSetAvatar_t03(param_1,bVar1,(CDSView *)0x0,'\x01');
+    CStartGame2::CGame_NetSendRename_t02(param_1,bVar1,(CDSView *)0x0,'\x01');
   }
   if (param_1->field_0x36 == '\0') {
-    CStartGame2::CGame_NetSendSlotCount_t04(param_1,(void *)0x0,'\x01');
-    CStartGame2::CGame_NetSendSetLevel_t05(param_1,(void *)0x0,'\x01');
-    CStartGame2::CGame_NetSendAdminByte_t64(param_1,(void *)0x0,'\x01');
+    CStartGame2::CGame_NetSendSlotCount_t04(param_1,(CDSView *)0x0,'\x01');
+    CStartGame2::CGame_NetSendSetLevel_t05(param_1,(CDSView *)0x0,'\x01');
+    CStartGame2::CGame_NetSendAdminByte_t64(param_1,(CDSView *)0x0,'\x01');
   }
   return;
 }
@@ -78495,8 +78664,7 @@ void __fastcall CGame::CMenu_ShowLobby(CGame *param_1)
 {
   undefined4 extraout_EDX;
   uint uStack_ec;
-  undefined1 local_dc [16];
-  undefined1 local_cc [176];
+  CDSView local_dc;
   CGame *local_1c;
   byte local_15;
   undefined1 *local_14;
@@ -78514,24 +78682,24 @@ void __fastcall CGame::CMenu_ShowLobby(CGame *param_1)
   local_14 = (undefined1 *)&uStack_ec;
   ExceptionList = &local_10;
   local_1c = param_1;
-  CMenu::CMenu_CleanupSlots();
-  CStartGame2::CStartGame2_ctor((CStartGame2 *)local_dc,param_1);
+  CMenu::CMenu_CleanupSlots((CMenu *)param_1);
+  CStartGame2::CStartGame2_ctor((CStartGame2 *)&local_dc,param_1);
   local_15 = 0;
   local_8[0] = 1;
   local_8[1] = 0;
   local_8[2] = 0;
   local_8[3] = 0;
-  _Globals::Scheduler_PushHook(&param_1->pEventHub,(int)local_cc);
+  _Globals::Scheduler_PushHook(&param_1->pEventHub,(int)&local_dc.win.pVftable_IDSEventHandler);
   local_15 = 1;
-  CMenu::CMenu_NetSendLobbySyncAll(param_1);
-  CMenu_DoModalChild(param_1,local_dc,'\x01');
+  CMenu::CMenu_NetSendLobbySyncAll((CStartGame2 *)param_1);
+  CMenu_DoModalChild(param_1,&local_dc,'\x01');
   local_15 = 0;
-  _Globals::Scheduler_PopHook(&param_1->pEventHub,(int)local_cc);
+  _Globals::Scheduler_PopHook(&param_1->pEventHub,(int)&local_dc.win.pVftable_IDSEventHandler);
   local_8[0] = 0xff;
   local_8[1] = 0xff;
   local_8[2] = 0xff;
   local_8[3] = 0xff;
-  _Globals::CStartGame2_dtor((int)local_dc,extraout_EDX);
+  _Globals::CStartGame2_dtor((int)&local_dc,extraout_EDX);
   ExceptionList = local_10;
   return;
 }
@@ -78723,9 +78891,9 @@ CGame * __fastcall CDSObject::CGame_ctor(CGame *this)
   this->pPad_netBlock[5] = 0;
   this->pPad_netBlock[6] = 0;
   this->pPad_netBlock[7] = 0;
-  *(undefined **)((int)&this->pOnNetCustomStream + 2) = &CDSEasyMemStream::vftable;
-  *(undefined **)(this->pPad_beforeOnNetStream + 2) = &CDSEasyMemStream::vftable;
-  *(undefined **)this->pPad_netBlock = &CDSEasyMemStream::vftable;
+  *(undefined ***)((int)&this->pOnNetCustomStream + 2) = &CDSEasyMemStream::vftable;
+  *(undefined ***)(this->pPad_beforeOnNetStream + 2) = &CDSEasyMemStream::vftable;
+  *(undefined ***)this->pPad_netBlock = &CDSEasyMemStream::vftable;
   this->pDirectPlay = (CDSDirectPlay *)0x0;
   this->dwRecvBufSize = 0;
   (this->schedChildSlotVec).pSlots = (void *)0x0;
@@ -78894,12 +79062,12 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(CGame *this)
   byte bVar5;
   BOOL BVar6;
   CMenu *pCVar7;
-  UINT UVar8;
-  int iVar9;
+  char *pcVar8;
+  UINT UVar9;
   int iVar10;
-  LPCWSTR pWVar11;
-  CDSStreamStorage *pCVar12;
-  undefined4 *puVar13;
+  int iVar11;
+  LPCWSTR pWVar12;
+  CDSStreamStorage *pCVar13;
   undefined *puVar14;
   GUID *pGVar15;
   undefined1 *puVar16;
@@ -78908,7 +79076,7 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(CGame *this)
   CGame *local_4080;
   DWORD local_407c;
   undefined1 *local_4078;
-  undefined4 *local_4074;
+  char *local_4074;
   undefined1 *local_4070;
   void *local_406c;
   undefined1 *puStack_4068;
@@ -78918,7 +79086,7 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(CGame *this)
   byte local_404f;
   byte local_404e;
   undefined1 *local_404d;
-  undefined4 local_4026 [4085];
+  char local_4026 [16342];
   WCHAR local_50 [36];
   uint local_8;
   
@@ -78931,7 +79099,7 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(CGame *this)
   uStack_4184 = DAT_004b0e44 ^ (uint)local_4060;
   local_4070 = (undefined1 *)&uStack_4184;
   ExceptionList = &local_406c;
-  iVar10 = 0;
+  iVar11 = 0;
   local_4064 = 0;
   (this->chain).pPad_89[0x16] = 0;
   (this->chain).pPad_89[0x17] = 0;
@@ -78951,20 +79119,20 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(CGame *this)
   this->bTotalSlots = 0;
   this->bJoinedSlotCount = 0;
   this->bHostSlotCursor = 0;
-  for (iVar9 = 0; iVar9 < 4; iVar9 = iVar9 + 1) {
-    this->pSlotBinding[iVar9].bPauseStatus = 0;
-    pPVar3 = this->pPlayerRec + iVar9;
+  for (iVar10 = 0; iVar10 < 4; iVar10 = iVar10 + 1) {
+    this->pSlotBinding[iVar10].bPauseStatus = 0;
+    pPVar3 = this->pPlayerRec + iVar10;
     pPVar3->pPad_0e[0] = 0;
     pPVar3->pPad_0e[1] = 0;
     pPVar3->pPad_0e[2] = 0;
     pPVar3->pPad_0e[3] = 0;
-    pPVar3 = this->pPlayerRec + iVar9;
+    pPVar3 = this->pPlayerRec + iVar10;
     pPVar3->pPad_0e[4] = 0;
     pPVar3->pPad_0e[5] = 0;
     pPVar3->pPad_0e[6] = 0;
     pPVar3->pPad_0e[7] = 0;
-    this->pPlayerRec[iVar9].dwDeaths = 0;
-    pPVar3 = this->pPlayerRec + iVar9;
+    this->pPlayerRec[iVar10].dwDeaths = 0;
+    pPVar3 = this->pPlayerRec + iVar10;
     pPVar3->bLives = 0;
     pPVar3->pPad_1b[0] = 0;
     pPVar3->pPad_1b[1] = 0;
@@ -78985,25 +79153,30 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(CGame *this)
     local_4064 = (uint)local_4064._1_3_ << 8;
     this->pDirectPlayActive = (undefined *)pCVar7;
     if (cVar1 == '\0') {
-      local_4074 = (undefined4 *)0x0;
+      local_4074 = (char *)0x0;
       local_4064._0_1_ = 3;
       local_4064._1_3_ = uVar4;
       CTcpIpConfig::CTcpIpConfig((CTcpIpConfig *)local_4174);
       local_4064._0_1_ = 4;
-      CGame::CMenu_DoModalChild(this,local_4174,'\0');
+      CGame::CMenu_DoModalChild(this,(CDSView *)local_4174,'\0');
       CBulanci::CDSView_SaveData((CBulanci *)local_4174,(int)&local_4074);
-      CDSDirectPlay_ConnectTCP(this->pDirectPlayActive,&g_abTcpipServiceProviderGuid);
+      pcVar8 = local_4074;
+      if (local_4074 == (char *)0x0) {
+        pcVar8 = PTR_DAT_004aef20;
+      }
+      CDSDirectPlay_ConnectTCP
+                ((CMenu *)this->pDirectPlayActive,(dword *)&g_abTcpipServiceProviderGuid,
+                 (dword *)&g_abBulanciDirectPlayGuid,pcVar8);
       local_4064._0_1_ = 3;
       _Globals::CWindow_dtor((int)local_4174);
       local_4064 = (uint)local_4064._1_3_ << 8;
-      if (local_4074 != (undefined4 *)0x0) {
-        _Globals::CDsStringReleaseHeader(local_4074 + -3);
+      if (local_4074 != (char *)0x0) {
+        _Globals::CDsStringReleaseHeader(local_4074 + -0xc);
       }
     }
     else if (cVar1 == '\x01') {
       CDSDirectPlay_ConnectLobby
-                (pCVar7,(undefined4 *)&g_abLobbyServiceProviderGuid,
-                 (undefined4 *)&g_abBulanciDirectPlayGuid);
+                (pCVar7,(dword *)&g_abLobbyServiceProviderGuid,(dword *)&g_abBulanciDirectPlayGuid);
     }
     else {
       CDSSimpleException::CDSSimpleException_Throw(4,6);
@@ -79027,26 +79200,26 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(CGame *this)
     local_4050 = 0;
     local_404d = local_4078;
     while (puVar16 = local_4078 + -1, local_4078 != (undefined1 *)0x0) {
-      pWVar11 = *(LPCWSTR *)
+      pWVar12 = *(LPCWSTR *)
                  (*(int *)((int)(this->chain).pLevelResourceTable + (int)puVar16 * 4) + 0x10);
-      if (pWVar11 == (LPCWSTR)0x0) {
-        pWVar11 = (LPCWSTR)PTR_DAT_004aef20;
+      if (pWVar12 == (LPCWSTR)0x0) {
+        pWVar12 = (LPCWSTR)PTR_DAT_004aef20;
       }
       local_4174._112_4_ = local_4174 + 0x74;
       local_4078 = puVar16;
-      UVar8 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-      _Globals::CDsString_AssignFromWideCapped80(local_4174 + 0x70,pWVar11,UVar8);
-      pCVar12 = (CDSStreamStorage *)local_4174._112_4_;
-      puVar13 = local_4074;
-      for (iVar10 = 9; iVar10 != 0; iVar10 = iVar10 + -1) {
-        *puVar13 = pCVar12->pVftable_IDSReferenced;
-        pCVar12 = (CDSStreamStorage *)&pCVar12->pVftable_IDSStorage;
-        puVar13 = puVar13 + 1;
+      UVar9 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
+      _Globals::CDsString_AssignFromWideCapped80(local_4174 + 0x70,pWVar12,UVar9);
+      pCVar13 = (CDSStreamStorage *)local_4174._112_4_;
+      pcVar8 = local_4074;
+      for (iVar11 = 9; iVar11 != 0; iVar11 = iVar11 + -1) {
+        *(undefined **)pcVar8 = pCVar13->pVftable_IDSReferenced;
+        pCVar13 = (CDSStreamStorage *)&pCVar13->pVftable_IDSStorage;
+        pcVar8 = pcVar8 + 4;
       }
       if ((CDSStreamStorage *)local_4174._112_4_ != (CDSStreamStorage *)(local_4174 + 0x74)) {
         Runtime::MSVCRT::_free((void *)local_4174._112_4_);
       }
-      local_4074 = local_4074 + 9;
+      local_4074 = local_4074 + 0x24;
     }
     local_4078 = puVar16;
     _Globals::CDSDirectPlay_Send
@@ -79061,19 +79234,19 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(CGame *this)
   (this->chain).pPad_89[0xb] = 0;
   (this->chain).pPad_89[0xc] = 0;
   (this->chain).pPad_89[0xd] = 0;
-  for (; iVar10 < (int)uVar2; iVar10 = iVar10 + 1) {
+  for (; iVar11 < (int)uVar2; iVar11 = iVar11 + 1) {
                     // Host lobby: walk CGame+0x66 Resource* table (+0x6e count);
                     // CGame_LevelList_AddByName copies each level name into chained list @
                     // game+0xbc/+0xc4.
     puVar16 = (undefined1 *)0x1;
     puVar14 = (undefined *)0x0;
     local_4078 = &stack0xffffbe70;
-    iVar9 = 0;
+    iVar10 = 0;
     _Globals::CDsStringAssignFromHandle
               (&stack0xffffbe70,
-               (undefined4 *)(*(int *)((int)(this->chain).pLevelResourceTable + iVar10 * 4) + 0x10))
+               (undefined4 *)(*(int *)((int)(this->chain).pLevelResourceTable + iVar11 * 4) + 0x10))
     ;
-    _Globals::CGame_LevelList_AddByName((this->chain).pPad_89 + 2,iVar9,puVar14,puVar16);
+    _Globals::CGame_LevelList_AddByName((this->chain).pPad_89 + 2,iVar10,puVar14,puVar16);
   }
   CMenu_InitPlayerSlotFromDefaults((CMenu *)this,0);
   this->bHostSlotCursor = this->bHostSlotCursor + 1;
@@ -79097,8 +79270,7 @@ void __fastcall CMenu::CMenu_OpenNetworkSession(CGame *this)
   if (cVar1 == '\0') {
     pGVar15 = &g_abTcpipServiceProviderGuid;
 LAB_00414f9e:
-    CDSDirectPlay_ConnectLobby
-              (pCVar7,(undefined4 *)pGVar15,(undefined4 *)&g_abBulanciDirectPlayGuid);
+    CDSDirectPlay_ConnectLobby(pCVar7,(dword *)pGVar15,(dword *)&g_abBulanciDirectPlayGuid);
   }
   else {
     if (cVar1 == '\x01') {
@@ -79584,7 +79756,7 @@ LAB_00415741:
               ((CBulanci *)&this->pPlayerRec[*(byte *)((int)param_2 + 1)].pName,
                (short *)((int)param_2 + 2));
     CStartGame2::CGame_NetSendRename_t02
-              ((CStartGame2 *)this,*(byte *)((int)param_2 + 1),(void *)0x0,'\0');
+              ((CStartGame2 *)this,*(byte *)((int)param_2 + 1),(CDSView *)0x0,'\0');
     break;
   case '\x03':
     ExceptionList = &local_c;
@@ -79593,14 +79765,14 @@ LAB_00415741:
                     // Must-match: 3 bytes exactly [0x03, slot, avatarIdx].
     this->pPlayerRec[*(byte *)((int)param_2 + 1)].pPad_00[0] = *(BYTE *)((int)param_2 + 2);
     CStartGame2::CGame_NetSendSetAvatar_t03
-              ((CStartGame2 *)this,*(byte *)((int)param_2 + 1),(void *)0x0,'\0');
+              ((CStartGame2 *)this,*(byte *)((int)param_2 + 1),(CDSView *)0x0,'\0');
     break;
   case '\x04':
     bVar15 = *(byte *)((int)param_2 + 1);
     ExceptionList = &local_c;
     this->bGameModeIndex = bVar15;
     this->pScoreLimitByMode[bVar15] = *(uint *)((int)param_2 + 2);
-    CStartGame2::CGame_NetSendSlotCount_t04((CStartGame2 *)this,(void *)0x0,'\0');
+    CStartGame2::CGame_NetSendSlotCount_t04((CStartGame2 *)this,(CDSView *)0x0,'\0');
     break;
   case '\x05':
     ExceptionList = &local_c;
@@ -79619,7 +79791,7 @@ LAB_00415741:
     (this->chain).pPad_89[0x17] = 0;
     (this->chain).pPad_89[0x18] = 0;
     (this->chain).pPad_89[0x19] = 0;
-    CStartGame2::CGame_NetSendSetLevel_t05((CStartGame2 *)this,(void *)0x0,'\0');
+    CStartGame2::CGame_NetSendSetLevel_t05((CStartGame2 *)this,(CDSView *)0x0,'\0');
     break;
   case '\x06':
     ExceptionList = &local_c;
@@ -79629,7 +79801,7 @@ LAB_00415741:
                     // Must-match: [0x06, slot, UTF-16LE text+NUL].
     local_4 = 7;
     BroadcastEvent((CGame *)&this->pEventHub,0xe1,(uint)*(byte *)((int)param_2 + 1),&local_4be4,
-                   (void *)0x0);
+                   (CDSView *)0x0);
     local_4 = 0xffffffff;
     if (local_4be4 != (CBulanci *)0x0) {
       _Globals::CDsStringReleaseHeader(&local_4be4[-1].game.pReleaseOnDestroy);
@@ -79656,14 +79828,14 @@ LAB_00415741:
   case '\t':
     ExceptionList = &local_c;
     BroadcastEvent((CGame *)&this->pEventHub,0xe3,(uint)*(byte *)((int)param_2 + 1),
-                   *(undefined4 *)((int)param_2 + 2),(void *)0x0);
+                   *(undefined4 *)((int)param_2 + 2),(CDSView *)0x0);
     break;
   case '\n':
     if (this->bNetState == 6) {
       ExceptionList = &local_c;
       this->pSlotBinding[*(byte *)((int)param_2 + 1)].bPauseStatus = *(byte *)((int)param_2 + 2);
       BroadcastEvent((CGame *)&this->pEventHub,0xe9,(uint)*(byte *)((int)param_2 + 1),
-                     (uint)*(byte *)((int)param_2 + 2),(void *)0x0);
+                     (uint)*(byte *)((int)param_2 + 2),(CDSView *)0x0);
     }
     break;
   case '\v':
@@ -79806,7 +79978,7 @@ LAB_00415741:
   case 'd':
     ExceptionList = &local_c;
     this->bAdminByte = *(byte *)((int)param_2 + 1);
-    CStartGame2::CGame_NetSendAdminByte_t64((CStartGame2 *)this,(void *)0x0,'\0');
+    CStartGame2::CGame_NetSendAdminByte_t64((CStartGame2 *)this,(CDSView *)0x0,'\0');
   }
   ExceptionList = local_c;
   return;
@@ -80164,33 +80336,31 @@ undefined4 CGame::Catch_00416407(void)
 
 
 
-void __fastcall CDSView::CDSView_dtor(undefined4 *param_1,undefined4 param_2)
+void __fastcall CDSView::CDSView_dtor(CMenu *param_1)
 
 {
-  uint uVar1;
   void *pvStack_c;
   undefined1 *puStack_8;
   int iStack_4;
   
   puStack_8 = &LAB_0047937a;
   pvStack_c = ExceptionList;
-  uVar1 = DAT_004b0e44 ^ (uint)&stack0xffffffe4;
   ExceptionList = &pvStack_c;
-  *param_1 = &::g_pCDSView_vftable_primary;
-  param_1[1] = &g_pCDSView_vftable_IDSChained;
-  param_1[4] = &g_pCDSView_vftable_IDSEventHandler;
-  param_1[6] = &g_pCDSView_vftable_IDSReferenced;
+  param_1->pVftable_primary = (CDSView_vftable_t *)&::g_pCDSView_vftable_primary;
+  param_1->pVftable_IDSChained = &g_pCDSView_vftable_IDSChained;
+  param_1->pVftable_IDSEventHandler = &g_pCDSView_vftable_IDSEventHandler;
+  param_1->pVftable_IDSReferenced = &g_pCDSView_vftable_IDSReferenced;
   iStack_4 = 2;
   if (g_pInputChainHead == param_1) {
     g_pInputChainHead = (void *)0x0;
   }
-  _Globals::CMenu_ClearAllChildren(param_1,param_2,uVar1);
+  _Globals::CMenu_ClearAllChildren(param_1);
   iStack_4._0_1_ = 1;
-  CDSChain::CDSChain_dtor((CDSChain *)(param_1 + 0x15));
+  CDSChain::CDSChain_dtor((CDSChain *)&param_1->pVftable_CDSChain_IDSReferenced);
   iStack_4 = (uint)iStack_4._1_3_ << 8;
-  _Globals::CDSEventQueue_ClearForTarget((int)(param_1 + 4));
+  _Globals::CDSEventQueue_ClearForTarget((int)&param_1->pVftable_IDSEventHandler);
   iStack_4 = 0xffffffff;
-  CDSChained::CDSChained_InitIDSReferencedVtable(param_1);
+  CDSChained::CDSChained_InitIDSReferencedVtable(&param_1->pVftable_primary);
   ExceptionList = pvStack_c;
   return;
 }
@@ -80570,7 +80740,7 @@ void * __thiscall CGaming::CGaming_GetObjectAtSlotSafe(CGaming *this,byte param_
   if (param_1 < 0x80) {
     return this->pEntitySlots[param_1];
   }
-  return (void *)0;
+  return (void *)0x0;
 }
 
 
@@ -80811,13 +80981,13 @@ undefined1 __cdecl CLevelScript::CLevelScriptOpExt_SetInsertMode(CDSScript *para
 int * __cdecl CLevelScript::CLevelScriptOpExt_HideView(CDSScript *param_1)
 
 {
-  int *extraout_EAX;
+  CDSView *extraout_EAX;
   
   CDSScript::ReadSubExpr(param_1);
-  if (extraout_EAX != (int *)0x0) {
+  if (extraout_EAX != (CDSView *)0x0) {
     _Globals::CDSView__Show(extraout_EAX);
   }
-  return extraout_EAX;
+  return (int *)extraout_EAX;
 }
 
 
@@ -81581,22 +81751,23 @@ void __fastcall CBulanek::CBulanek_ResetAmmoAndPlayReload(void *param_1)
   undefined1 uVar1;
   void *pvVar2;
   int iVar3;
-  int *piVar4;
+  CDSAudioPlayer *pCVar4;
   char cVar5;
-  undefined1 uVar6;
+  byte bVar6;
   
   pvVar2 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)((int)param_1 + 0x88),0);
   if ((*(byte *)((int)pvVar2 + 8) & 1) == 0) {
     CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)((int)param_1 + 0x88),0);
   }
   uVar1 = _Globals::GetMaxAmmoForKind(0);
-  uVar6 = 0;
+  bVar6 = 0;
   cVar5 = '\x01';
   *(undefined1 *)((int)param_1 + 0x11c) = uVar1;
   pvVar2 = (void *)0x0;
   iVar3 = _Globals::ComputeSpatialAttenuationDb100((int *)((int)param_1 + 0x20));
-  piVar4 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x10,iVar3,pvVar2,cVar5);
-  _Globals::CDSAudioPlayer_PlayAndRelease(piVar4,uVar6);
+  pCVar4 = (CDSAudioPlayer *)_Globals::TriggerBankSample((undefined *)0x1,0,0x10,iVar3,pvVar2,cVar5)
+  ;
+  _Globals::CDSAudioPlayer_PlayAndRelease(pCVar4,bVar6);
   if (*(char *)(*(int *)((int)param_1 + 0xf8) + 100) == '\0') {
     CBulanek_RefreshHudWeaponStrip(param_1);
     return;
@@ -81816,14 +81987,14 @@ void __cdecl _Globals::TriggerSoundEffect(int param_1,uchar param_2,int *param_3
 
 {
   int iVar1;
-  int *piVar2;
+  CDSAudioPlayer *pCVar2;
   int iVar3;
   void *pvVar4;
   char cVar5;
-  undefined1 uVar6;
+  byte bVar6;
   
   if (param_1 != -1) {
-    uVar6 = 0;
+    bVar6 = 0;
     cVar5 = '\x01';
     pvVar4 = (void *)0x0;
     iVar3 = 0;
@@ -81831,8 +82002,8 @@ void __cdecl _Globals::TriggerSoundEffect(int param_1,uchar param_2,int *param_3
       iVar3 = DAT_004b3730;
     }
     iVar1 = ComputeSpatialAttenuationDb100(param_3);
-    piVar2 = (int *)TriggerBankSample((undefined *)0x1,iVar3,param_1,iVar1,pvVar4,cVar5);
-    CDSAudioPlayer_PlayAndRelease(piVar2,uVar6);
+    pCVar2 = (CDSAudioPlayer *)TriggerBankSample((undefined *)0x1,iVar3,param_1,iVar1,pvVar4,cVar5);
+    CDSAudioPlayer_PlayAndRelease(pCVar2,bVar6);
   }
   return;
 }
@@ -82277,20 +82448,21 @@ void __thiscall _Globals::TriggerLevelScriptSound(void *this,byte param_1,int pa
   int *piVar1;
   int iVar2;
   int iVar3;
-  void *pvVar4;
-  char cVar5;
-  undefined1 uVar6;
+  CDSAudioPlayer *pCVar4;
+  void *pvVar5;
+  char cVar6;
+  byte bVar7;
   int local_10;
   int local_c;
   int local_8;
   int local_4;
   
-  piVar1 = (int *)CGaming::CGaming_GetObjectAtSlotSafe(this,param_1);
+  piVar1 = CGaming::CGaming_GetObjectAtSlotSafe(this,param_1);
   if (piVar1 == (int *)0x0) {
     iVar2 = *(int *)((int)this + 0x80);
-    uVar6 = 0;
-    cVar5 = '\x01';
-    pvVar4 = (void *)0x0;
+    bVar7 = 0;
+    cVar6 = '\x01';
+    pvVar5 = (void *)0x0;
     iVar3 = 0;
   }
   else {
@@ -82309,13 +82481,13 @@ void __thiscall _Globals::TriggerLevelScriptSound(void *this,byte param_1,int pa
       local_4 = piVar1[0xb];
     }
     iVar2 = *(int *)((int)this + 0x80);
-    uVar6 = 0;
-    cVar5 = '\x01';
-    pvVar4 = (void *)0x0;
+    bVar7 = 0;
+    cVar6 = '\x01';
+    pvVar5 = (void *)0x0;
     iVar3 = ComputeSpatialAttenuationDb100(&local_10);
   }
-  piVar1 = (int *)TriggerBankSample((undefined *)0x1,iVar2,param_2,iVar3,pvVar4,cVar5);
-  CDSAudioPlayer_PlayAndRelease(piVar1,uVar6);
+  pCVar4 = (CDSAudioPlayer *)TriggerBankSample((undefined *)0x1,iVar2,param_2,iVar3,pvVar5,cVar6);
+  CDSAudioPlayer_PlayAndRelease(pCVar4,bVar7);
   return;
 }
 
@@ -82461,7 +82633,7 @@ void __thiscall CGameView::CGameView_FireOnSlotDisplaced(CGameView *this,byte pa
 
 int * __thiscall
 _Globals::_Globals__SpatialQuery
-          (void *this,undefined4 *param_1,void *param_2,tagRECT *param_3,char param_4,char param_5)
+          (void *this,LONG *param_1,void *param_2,tagRECT *param_3,char param_4,char param_5)
 
 {
   int *pCurrentView;
@@ -82865,18 +83037,18 @@ void * __cdecl CLevelScript::CLevelScriptOpExt_ResortDepth(CDSScript *param_1)
 
 
 
-CBulanek * __cdecl CLevelScript::CLevelScriptOpExt_TranslateTo(CDSScript *param_1)
+CDSView * __cdecl CLevelScript::CLevelScriptOpExt_TranslateTo(CDSScript *param_1)
 
 {
-  CBulanek *this;
+  CDSView *this;
   int extraout_EAX;
   int extraout_EAX_00;
   
   CDSScript::ReadSubExpr(param_1);
   CDSScript::ReadSubExpr(param_1);
   CDSScript::ReadSubExpr(param_1);
-  if (this != (CBulanek *)0x0) {
-    CDSView::CDSView__SetPosition((CDSView *)this,extraout_EAX,extraout_EAX_00);
+  if (this != (CDSView *)0x0) {
+    CDSView::CDSView__SetPosition(this,extraout_EAX,extraout_EAX_00);
   }
   return this;
 }
@@ -83633,8 +83805,7 @@ uint __thiscall CBulanek::CBulanek_CheckSlotCollision(CBulanek *this,byte param_
   
   pCVar1 = this->pGame;
   if ((pCVar1->chain).field_0x5 == '\0') {
-    piVar2 = (int *)CGaming::CGaming_GetObjectAtSlotSafe
-                              ((CGaming *)this->pGamingHostScratch,param_1);
+    piVar2 = CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)this->pGamingHostScratch,param_1);
     pCVar1 = (CGame *)0x0;
     if (piVar2 != (int *)0x0) {
       local_140 = 0;
@@ -83810,7 +83981,7 @@ void __thiscall CBulanek::CBulanek_GetWorldCollisionRect(CBulanek *this,int *par
 
 void __thiscall
 _Globals::CBulanek_ClampMoveRectByCollision
-          (void *this,undefined4 param_1,int *param_2,int *param_3,int *param_4)
+          (void *this,undefined4 param_1,int *param_2,LONG *param_3,int *param_4)
 
 {
   byte bVar1;
@@ -84151,80 +84322,78 @@ void __thiscall CAnim::CAnim_ScalarDeletingDtor_thunk_Sub88(CAnim *this,byte par
 
 
 
-void __fastcall CShot::CShot_OnTrackTick_AdvanceFacingRect(void *param_1)
+void __fastcall CShot::CShot_OnTrackTick_AdvanceFacingRect(CDSUpdatedItem *param_1)
 
 {
-  int iVar1;
-  int local_10;
+  void *pvVar1;
+  uint local_10;
   int local_c;
-  int local_8;
-  int local_4;
+  void *local_8;
+  void *local_4;
   
                     // UNCERTAIN: CShot CDSUpdatedItem facet slot 4 @ 0x00481c5c — advances track
                     // rect by facing byte at +0x1c; Scheduler_ArmSlot + CDSView__Hide when +0x20
                     // set (combat_projectiles.md timer/track callback).
-  local_10 = *(int *)((int)param_1 + -0x68);
-  local_c = *(int *)((int)param_1 + -100);
-  local_8 = *(int *)((int)param_1 + -0x60);
-  local_4 = *(int *)((int)param_1 + -0x5c);
-  switch(*(undefined1 *)((int)param_1 + 0x1c)) {
+  local_10 = param_1[-5].dwEventSlots;
+  local_c = *(int *)&param_1[-5].bIsLive;
+  local_8 = param_1[-4].pVftable_IDSUpdated;
+  local_4 = param_1[-4].pVftable_IDSEventHandler;
+  switch(*(undefined1 *)&param_1[1].pVftable_IDSEventHandler) {
   case 0:
-    local_10 = local_10 + -0x28;
-    local_8 = local_8 + -0x28;
-    if (*(char *)((int)param_1 + 0x1e) == '\x01') {
+    local_10 = local_10 - 0x28;
+    local_8 = (void *)((int)local_8 + -0x28);
+    if (*(char *)((int)&param_1[1].pVftable_IDSEventHandler + 2) == '\x01') {
       local_c = local_c + -5;
-      local_4 = local_4 + 5;
-      _Globals::CGameEntity_SetEntityType
-                ((void *)((int)param_1 + -0x88),*(int *)((int)param_1 + -0x1c) + -5);
+      local_4 = (void *)((int)local_4 + 5);
+      _Globals::CGameEntity_SetEntityType(&param_1[-6].pSelf,*(int *)&param_1[-2].bIsLive + -5);
     }
     else {
-      local_c = local_c - *(int *)((int)param_1 + 0x24);
-      local_4 = local_4 - *(int *)((int)param_1 + 0x24);
+      local_c = local_c - (int)param_1[1].pEventSlots;
+      local_4 = (void *)((int)local_4 - (int)param_1[1].pEventSlots);
     }
     break;
   case 1:
     local_10 = local_10 + 0x28;
-    local_8 = local_8 + 0x28;
-    if (*(char *)((int)param_1 + 0x1e) == '\x01') {
+    local_8 = (void *)((int)local_8 + 0x28);
+    if (*(char *)((int)&param_1[1].pVftable_IDSEventHandler + 2) == '\x01') {
       local_c = local_c + -5;
-      local_4 = local_4 + 5;
-      _Globals::CGameEntity_SetEntityType
-                ((void *)((int)param_1 + -0x88),*(int *)((int)param_1 + -0x1c) + -5);
+      local_4 = (void *)((int)local_4 + 5);
+      _Globals::CGameEntity_SetEntityType(&param_1[-6].pSelf,*(int *)&param_1[-2].bIsLive + -5);
     }
     else {
-      local_c = local_c + *(int *)((int)param_1 + 0x24);
-      local_4 = local_4 + *(int *)((int)param_1 + 0x24);
+      local_c = local_c + (int)param_1[1].pEventSlots;
+      local_4 = (void *)((int)local_4 + (int)param_1[1].pEventSlots);
     }
     break;
   case 2:
     local_c = local_c + -0x28;
-    local_4 = local_4 + -0x28;
-    if (*(char *)((int)param_1 + 0x1e) != '\x01') {
-      local_10 = local_10 - *(int *)((int)param_1 + 0x24);
-      local_8 = local_8 - *(int *)((int)param_1 + 0x24);
+    local_4 = (void *)((int)local_4 + -0x28);
+    if (*(char *)((int)&param_1[1].pVftable_IDSEventHandler + 2) != '\x01') {
+      local_10 = local_10 - (int)param_1[1].pEventSlots;
+      local_8 = (void *)((int)local_8 - (int)param_1[1].pEventSlots);
       break;
     }
-    iVar1 = 5;
-    local_10 = local_10 + -5;
+    pvVar1 = (void *)0x5;
+    local_10 = local_10 - 5;
     goto LAB_00419c4d;
   case 3:
     local_c = local_c + 0x28;
-    local_4 = local_4 + 0x28;
-    if (*(char *)((int)param_1 + 0x1e) == '\x01') {
-      iVar1 = 5;
-      local_10 = local_10 + -5;
+    local_4 = (void *)((int)local_4 + 0x28);
+    if (*(char *)((int)&param_1[1].pVftable_IDSEventHandler + 2) == '\x01') {
+      pvVar1 = (void *)0x5;
+      local_10 = local_10 - 5;
     }
     else {
-      iVar1 = *(int *)((int)param_1 + 0x24);
-      local_10 = local_10 + iVar1;
+      pvVar1 = param_1[1].pEventSlots;
+      local_10 = local_10 + (int)pvVar1;
     }
 LAB_00419c4d:
-    local_8 = local_8 + iVar1;
+    local_8 = (void *)((int)local_8 + (int)pvVar1);
   }
-  (**(code **)(*(int *)((int)param_1 + -0x88) + 0x20))(&local_10);
-  if (*(char *)((int)param_1 + 0x20) != '\0') {
+  (**(code **)((int)param_1[-6].pSelf + 0x20))(&local_10);
+  if (*(char *)&param_1[1].pSelf != '\0') {
     CDSUpdatedItem::Scheduler_ArmSlot(param_1,0);
-    CDSView::CDSView__Hide((CDSView *)((int)param_1 + -0x88));
+    CDSView::CDSView__Hide((CDSView *)&param_1[-6].pSelf);
   }
   return;
 }
@@ -84251,7 +84420,7 @@ void __thiscall CGaming::CGaming_UnregisterAndRemoveObject(CGaming *this,CDSView
       this->pDepthInsertTail = pCVar1;
     }
     _Globals::CGaming_RegisterObjectAtSlot(this,(int)param_2,0xff);
-    CMenu::CMenu_DetachChildWithVisibility((CMenu *)this->pEntityViewRoot,(int *)param_2);
+    CMenu::CMenu_DetachChildWithVisibility((CMenu *)this->pEntityViewRoot,param_2);
     param_2[1].win.pVftable_IDSChained = (void *)0x0;
   }
   return;
@@ -84281,8 +84450,8 @@ void __thiscall
 _Globals::CGaming_OnTimerCountdown(void *this,short param_1,undefined4 param_2,int param_3)
 
 {
-  int *piVar1;
-  undefined1 uVar2;
+  CDSAudioPlayer *pCVar1;
+  byte bVar2;
   void *local_c;
   undefined1 *puStack_8;
   void *local_4;
@@ -84292,9 +84461,9 @@ _Globals::CGaming_OnTimerCountdown(void *this,short param_1,undefined4 param_2,i
   local_c = ExceptionList;
   ExceptionList = &local_c;
   if ((ushort)(param_1 - 1U) < 5) {
-    uVar2 = 0;
-    piVar1 = (int *)TriggerBankSample((undefined *)0x1,0,0x12,0,(void *)0x0,'\x01');
-    CDSAudioPlayer_PlayAndRelease(piVar1,uVar2);
+    bVar2 = 0;
+    pCVar1 = (CDSAudioPlayer *)TriggerBankSample((undefined *)0x1,0,0x12,0,(void *)0x0,'\x01');
+    CDSAudioPlayer_PlayAndRelease(pCVar1,bVar2);
   }
   param_3 = 0;
   CDsStringAssignFromLong(&param_3);
@@ -84420,11 +84589,11 @@ CGaming::CGaming_OnPlayerCollectItem(CGaming *this,void *pPickup,void *pCollecto
 
 {
   int iVar1;
-  int *piVar2;
+  CDSAudioPlayer *pCVar2;
   int iVar3;
   void *pvVar4;
   char cVar5;
-  undefined1 uVar6;
+  byte bVar6;
   
   CGaming_UnregisterAndRemoveObject(this,pCollector);
   _Globals::CBulanek_NetSendTeamScoreOnCollect(pPickup,weaponKind);
@@ -84444,12 +84613,13 @@ CGaming::CGaming_OnPlayerCollectItem(CGaming *this,void *pPickup,void *pCollecto
       iVar3 = 0x1f;
     }
   }
-  uVar6 = 0;
+  bVar6 = 0;
   cVar5 = '\x01';
   pvVar4 = (void *)0x0;
   iVar1 = _Globals::ComputeSpatialAttenuationDb100((int *)((int)pPickup + 0x20));
-  piVar2 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,iVar3,iVar1,pvVar4,cVar5);
-  _Globals::CDSAudioPlayer_PlayAndRelease(piVar2,uVar6);
+  pCVar2 = (CDSAudioPlayer *)
+           _Globals::TriggerBankSample((undefined *)0x1,0,iVar3,iVar1,pvVar4,cVar5);
+  _Globals::CDSAudioPlayer_PlayAndRelease(pCVar2,bVar6);
   CBulanci_SetAmbientAnimMode(this,0);
   return;
 }
@@ -84462,8 +84632,8 @@ void __thiscall CGame::CGame_DestroyObjectAtSlot(CGame *this,byte param_1)
   int *piVar1;
   
   if ((param_1 != 0xff) &&
-     (piVar1 = (int *)CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)this,param_1),
-     piVar1 != (int *)0x0)) {
+     (piVar1 = CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)this,param_1), piVar1 != (int *)0x0))
+  {
     CGaming::CGaming_UnregisterAndRemoveObject();
     (**(code **)(*piVar1 + 8))();
   }
@@ -84502,7 +84672,7 @@ uint __thiscall _Globals::CGaming_TryGetPlayerCoords(void *this,byte param_1,und
 // Random safe spawn rect loop. Calls SpatialQuery(0x00418300) with param_4=1 param_5=0 — skip
 // CDSRect_Overlaps tile gate; include +0x6a entities.
 
-void __thiscall CGaming::CGaming_RespawnPlayerAtSafeLocation(CGaming *this,CBulanek *param_1)
+void __thiscall CGaming::CGaming_RespawnPlayerAtSafeLocation(CGaming *this,CDSView *param_1)
 
 {
   int iVar1;
@@ -84533,12 +84703,12 @@ void __thiscall CGaming::CGaming_RespawnPlayerAtSafeLocation(CGaming *this,CBula
   local_10.top = 0;
   local_10.right = 0;
   local_10.bottom = 0;
-  if (param_1->bSkipSpatialWhenNonZero == 0) {
-    iVar5 = param_1->nSpatial_bucket_x - param_1->nOrigin_x;
-    iVar3 = param_1->nSpatial_bucket_y - param_1->nOrigin_y;
+  if ((param_1->win).pPad_69[0] == 0) {
+    iVar5 = (param_1->win).nBbox_right - (param_1->win).nBbox_left;
+    iVar3 = (param_1->win).nBbox_bottom - (param_1->win).nBbox_top;
   }
   else {
-    (**(code **)(param_1->vftable_primary + 0x70))(&local_30);
+    (**(code **)((int)(param_1->win).pVftable_primary + 0x70))(&local_30);
     iVar5 = local_28 - local_30;
     iVar3 = local_24 - local_2c;
   }
@@ -84554,13 +84724,13 @@ void __thiscall CGaming::CGaming_RespawnPlayerAtSafeLocation(CGaming *this,CBula
     iStack_1c = iVar4;
     piVar2 = _Globals::_Globals__SpatialQuery(this,&iStack_20,&iStack_20,&local_10,'\x01','\0');
   } while (piVar2 != (int *)0x0);
-  if (param_1->bSkipSpatialWhenNonZero != 0) {
-    local_10.left = param_1->nOrigin_x + (iStack_20 - local_30);
-    local_10.top = param_1->nOrigin_y + (iStack_1c - local_2c);
-    CDSView::CDSView__SetPosition((CDSView *)param_1,local_10.left,local_10.top);
+  if ((param_1->win).pPad_69[0] != 0) {
+    local_10.left = (param_1->win).nBbox_left + (iStack_20 - local_30);
+    local_10.top = (param_1->win).nBbox_top + (iStack_1c - local_2c);
+    CDSView::CDSView__SetPosition(param_1,local_10.left,local_10.top);
     return;
   }
-  CDSView::CDSView__SetPosition((CDSView *)param_1,iStack_20,iStack_1c);
+  CDSView::CDSView__SetPosition(param_1,iStack_20,iStack_1c);
   return;
 }
 
@@ -84670,7 +84840,7 @@ void __thiscall CGaming::CGaming_AddEntity(CGaming *this,void *entity,char regis
       return;
     }
     if (cVar1 == '\x02') {
-      CDSView::CDSView__AddChild((CDSView *)this->pEntityViewRoot,entity,0);
+      CDSView::CDSView__AddChild((CDSView *)this->pEntityViewRoot,entity,(void *)0x0);
       if (this->pDepthInsertTail == (CDSView *)0x0) {
         this->pDepthInsertTail = entity;
       }
@@ -85732,7 +85902,7 @@ CExplosion::CExplosion_DamageAtPoint
   CGaming *this_00;
   int *in_EAX;
   int *extraout_EAX;
-  uint uVar3;
+  void *pvVar3;
   int iVar4;
   tagRECT tStack_20;
   tagRECT local_10;
@@ -85766,8 +85936,8 @@ CExplosion::CExplosion_DamageAtPoint
   this_00 = this->pGaming;
   tStack_20.left = 0;
   tStack_20.top = 0;
-  uVar3 = _Globals::CGaming_TryGetPlayerCoords(this_00,bVar1,&tStack_20.left);
-  if ((char)uVar3 != '\0') {
+  pvVar3 = (void *)_Globals::CGaming_TryGetPlayerCoords(this_00,bVar1,&tStack_20.left);
+  if ((char)pvVar3 != '\0') {
     if (rayStep != '\0') {
       octantFlags = octantFlags | 0x80;
     }
@@ -85779,21 +85949,21 @@ LAB_0041b2e2:
     while( true ) {
       _Globals::CGaming_OnSlotPlacementEvent
                 (this_00,bVar1,this->bOwnerSlot,octantFlags,&tStack_20.left,'\x01');
-      uVar3 = CGaming::CGaming_GetObjectAtSlotSafe(this_00,bVar1);
+      pvVar3 = CGaming::CGaming_GetObjectAtSlotSafe(this_00,bVar1);
       iVar4 = iVar4 + 1;
-      entityBuf[entityCount] = uVar3;
+      entityBuf[entityCount] = (int)pvVar3;
       if (iVar4 == 4) break;
-      if (uVar3 == 0) {
+      if (pvVar3 == (void *)0x0) {
         return 0;
       }
     }
   }
-  return CONCAT31((int3)(uVar3 >> 8),1);
+  return CONCAT31((int3)((uint)pvVar3 >> 8),1);
 }
 
 
 
-void __thiscall CBulanci::CBulanci_RegisterPlayerAndRespawn(CBulanci *this,CBulanek *param_1)
+void __thiscall CBulanci::CBulanci_RegisterPlayerAndRespawn(CBulanci *this,CDSView *param_1)
 
 {
   CGaming::CGaming_AddEntity((CGaming *)this,param_1,'\x01');
@@ -85922,22 +86092,22 @@ void __fastcall CGaming::CGaming_TickAmbientAnimations(CBulanci *param_1)
   switch((int)((iVar1 >> 0xf) + (iVar1 >> 0x1f & 0x3fU)) >> 6) {
   case 0:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
-              (param_1,*(CBulanek **)((int)&(param_1->game).chain.pFirstChild + 3));
+              (param_1,*(CDSView **)((int)&(param_1->game).chain.pFirstChild + 3));
     CBulanci_SetAmbientAnimMode(param_1,1);
     return;
   case 1:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
-              (param_1,*(CBulanek **)((int)&(param_1->game).chain.pAuxHeap + 3));
+              (param_1,*(CDSView **)((int)&(param_1->game).chain.pAuxHeap + 3));
     CBulanci_SetAmbientAnimMode(param_1,1);
     return;
   case 2:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
-              (param_1,*(CBulanek **)((int)&(param_1->game).chain.dwChildCount + 3));
+              (param_1,*(CDSView **)((int)&(param_1->game).chain.dwChildCount + 3));
     CBulanci_SetAmbientAnimMode(param_1,1);
     return;
   case 3:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
-              (param_1,*(CBulanek **)((int)&(param_1->game).chain.pProfileList_data + 2));
+              (param_1,*(CDSView **)((int)&(param_1->game).chain.pProfileList_data + 2));
   }
   CBulanci_SetAmbientAnimMode(param_1,1);
   return;
@@ -86009,7 +86179,7 @@ void __thiscall CGaming::CGaming_SeedMatchSchedulerEvents(CGaming *this,void *pa
 
 
 
-void __thiscall CGaming::CGaming_LoadBackgroundMusic(CGaming *this,CBulanci *param_2)
+void __thiscall CGaming::CGaming_LoadBackgroundMusic(CGaming *this,CBulanci *param_1)
 
 {
   CDSFileStream *pCVar1;
@@ -86025,12 +86195,12 @@ void __thiscall CGaming::CGaming_LoadBackgroundMusic(CGaming *this,CBulanci *par
   local_10 = ExceptionList;
   ExceptionList = &local_10;
   local_8 = 0;
-  pCVar1 = CBulanci::CBulanci_CreateCDSFileStream(param_2,(void *)0x1);
+  pCVar1 = CBulanci::CBulanci_CreateCDSFileStream(param_1,(void *)0x1);
   if (pCVar1 == (CDSFileStream *)0x0) {
-    param_2 = (CBulanci *)0x0;
+    param_1 = (CBulanci *)0x0;
   }
   else {
-    param_2 = (CBulanci *)(pCVar1->pPad_04 + 8);
+    param_1 = (CBulanci *)(pCVar1->pPad_04 + 8);
   }
   local_8._0_1_ = 1;
   piVar2 = (int *)_Globals::OperatorNewWithBadAlloc(0x40);
@@ -86048,7 +86218,7 @@ void __thiscall CGaming::CGaming_LoadBackgroundMusic(CGaming *this,CBulanci *par
     piVar4 = piVar2;
   }
   local_8 = CONCAT31(local_8._1_3_,2);
-  (**(code **)(piVar4[0xc] + 0x10))(param_2);
+  (**(code **)(piVar4[0xc] + 0x10))(param_1);
   if (*(int **)&this->field_0x35c != (int *)0x0) {
     (**(code **)(**(int **)&this->field_0x35c + 8))();
   }
@@ -86073,8 +86243,8 @@ void __thiscall CGaming::CGaming_LoadBackgroundMusic(CGaming *this,CBulanci *par
   local_8._0_1_ = 1;
   (**(code **)(*piVar4 + 8))();
   local_8 = (uint)local_8._1_3_ << 8;
-  if (param_2 != (CBulanci *)0x0) {
-    (**(code **)(*(int *)param_2 + 8))();
+  if (param_1 != (CBulanci *)0x0) {
+    (**(code **)((param_1->app).vftable_primary + 8))();
   }
   ExceptionList = local_10;
   return;
@@ -86227,7 +86397,7 @@ void __thiscall CGaming::CGaming_EnqueuePreMatchSchedulerSlots(CGaming *this,voi
 undefined4 __cdecl CLevelScript::CLevelScriptOpExt_SetMusic(int param_1)
 
 {
-  undefined4 uVar1;
+  uint uVar1;
   uint uVar2;
   
   uVar1 = CDSScript::ReadI32(param_1);
@@ -86372,7 +86542,7 @@ undefined4 _Globals::CreateObject(void)
 // 
 // Library: Visual Studio 2005 Release
 
-undefined4 * _Globals::CreateObject(void)
+CDeath2 * _Globals::CreateObject(void)
 
 {
   CDeath2 *pCVar1;
@@ -86389,10 +86559,10 @@ undefined4 * _Globals::CreateObject(void)
   if (pCVar1 != (CDeath2 *)0x0) {
     pCVar1 = CDeath2::CDeath2_SubobjectCtor(pCVar1);
     ExceptionList = local_c;
-    return &pCVar1->vftable_primary;
+    return pCVar1;
   }
   ExceptionList = local_c;
-  return (undefined4 *)0x0;
+  return (CDeath2 *)0x0;
 }
 
 
@@ -86692,12 +86862,13 @@ void __thiscall CGaming::CGaming_OnResumeOrStartGame(CGaming *this,char param_1)
 {
   CGame *pCVar1;
   int *piVar2;
-  int iVar3;
+  void *pvVar3;
   CGaming *this_00;
   CGaming *this_01;
   uint delayMs;
   byte bVar4;
   char cVar5;
+  int nameHandle;
   
   CBulanci::CDSView_NoOpStub();
   if (param_1 == '\0') {
@@ -86721,8 +86892,8 @@ void __thiscall CGaming::CGaming_OnResumeOrStartGame(CGaming *this,char param_1)
       piVar2 = (int *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,bVar4);
       CGaming_RetestTraceAreasForEntity(this_00,piVar2);
     }
-    iVar3 = CGaming_GetObjectAtSlotSafe(this,0x7f);
-    if (iVar3 != 0) {
+    pvVar3 = CGaming_GetObjectAtSlotSafe(this,0x7f);
+    if (pvVar3 != (void *)0x0) {
       cVar5 = '\x03';
       do {
         piVar2 = (int *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,0x80 - cVar5);
@@ -86739,10 +86910,10 @@ void __thiscall CGaming::CGaming_OnResumeOrStartGame(CGaming *this,char param_1)
     }
     pCVar1 = this->pOwnerGame;
     if ((pCVar1->chain).field_0x5 == '\0') {
-      iVar3 = 0;
+      nameHandle = 0;
       _Globals::CDsStringAssignFromHandle
                 (&stack0xfffffff0,(undefined4 *)((pCVar1->chain).pPad_89 + 0x12));
-      piVar2 = (int *)_Globals::CGame_FindResourceByName(pCVar1,iVar3);
+      piVar2 = (int *)_Globals::CGame_FindResourceByName(pCVar1,nameHandle);
       if (*piVar2 == 0x10144) {
         CDSUpdatedItem::Scheduler_RegisterEventSlot((CDSUpdatedItem *)&this->field_0x68,2,7000,6);
       }
@@ -86759,8 +86930,7 @@ void __fastcall CGaming::CGaming_RunPreMatchModal(CGaming *param_1)
 
 {
   uint *puVar1;
-  CDSAudioPlayer *this;
-  int *piVar2;
+  CDSAudioPlayer *pCVar2;
   int *piVar3;
   int iVar4;
   undefined4 *puVar5;
@@ -86831,17 +87001,17 @@ void __fastcall CGaming::CGaming_RunPreMatchModal(CGaming *param_1)
       dStack_128 = g_dwElapsedMs;
     }
     else if (iVar4 == 2) {
-      this = (CDSAudioPlayer *)piVar3[1];
-      puVar1 = &this->dwRefCount;
+      pCVar2 = (CDSAudioPlayer *)piVar3[1];
+      puVar1 = &pCVar2->dwRefCount;
       *puVar1 = *puVar1 + 1;
-      CDSAudioPlayer::CDSAudioPlayer_Stop(this,0);
+      CDSAudioPlayer::CDSAudioPlayer_Stop(pCVar2,0);
       dStack_128 = g_dwElapsedMs;
     }
   }
   *(undefined4 *)((int)g_pApp + 0x4ac) = 1;
   _Globals::CDSApp_RefreshInputChainHitTest();
   CDSAudioPlayer::CDSAudioPlayer_Play(param_1->pIntroMusicPlayer,1);
-  CDSView::CDSView_DoModal((CDSView *)param_1->pPauseDlg,(void *)0x0);
+  CDSView::CDSView_DoModal((CDSView *)param_1->pPauseDlg,(CDSView *)0x0);
   CDSAudioPlayer::CDSAudioPlayer_Stop(param_1->pIntroMusicPlayer,1);
   *(undefined4 *)((int)g_pApp + 0x4ac) = 0;
   _Globals::CDSApp_RefreshInputChainHitTest();
@@ -86860,9 +87030,9 @@ void __fastcall CGaming::CGaming_RunPreMatchModal(CGaming *param_1)
                 (*(CDSUpdatedItem **)(piVar3[1] + 0x10),*(uint *)(piVar3[1] + 0x14),dStack_128);
     }
     else if (iVar6 == 2) {
-      piVar2 = (int *)piVar3[1];
-      CGaming_PreMatchModal_RestartDeferredAudio(piVar2);
-      (**(code **)(*piVar2 + 8))();
+      pCVar2 = (CDSAudioPlayer *)piVar3[1];
+      CGaming_PreMatchModal_RestartDeferredAudio(pCVar2);
+      (**(code **)((int)pCVar2->pVftable_primary + 8))();
       param_1 = local_124;
     }
     _Globals::Runtime_Free(&DAT_004b7c94,piVar3);
@@ -86890,7 +87060,7 @@ CMina * __thiscall CMina::CMina_ScalarDeletingDtor(CMina *this,byte param_1)
 
 
 
-void __fastcall CWeapon::CWeapon_dtor(undefined4 *param_1)
+void __fastcall CWeapon::CWeapon_dtor(CWeapon *param_1)
 
 {
   uint uVar1;
@@ -86902,35 +87072,35 @@ void __fastcall CWeapon::CWeapon_dtor(undefined4 *param_1)
   local_c = ExceptionList;
   uVar1 = DAT_004b0e44 ^ (uint)&stack0xffffffec;
   ExceptionList = &local_c;
-  *param_1 = g_pCWeapon_vftable;
-  param_1[1] = vftable;
+  param_1->pVftable_primary = g_pCWeapon_vftable;
+  param_1->pVftable_secondary = vftable;
   local_4 = 4;
-  CWeapon_SetTrackHolder((CWeapon *)param_1,(CBulanek *)0x0);
+  CWeapon_SetTrackHolder(param_1,(CBulanek *)0x0);
   local_4._0_1_ = 3;
-  if ((int *)param_1[0x1b] != (int *)0x0) {
-    (**(code **)(*(int *)param_1[0x1b] + 8))(uVar1);
+  if (param_1->pHudIconB != (int *)0x0) {
+    (**(code **)(*(int *)param_1->pHudIconB + 8))(uVar1);
   }
   local_4._0_1_ = 2;
-  if ((int *)param_1[0x1a] != (int *)0x0) {
-    (**(code **)(*(int *)param_1[0x1a] + 8))();
+  if (param_1->pHudIconA != (int *)0x0) {
+    (**(code **)(*(int *)param_1->pHudIconA + 8))();
   }
   local_4._0_1_ = 1;
-  if ((int *)param_1[0x14] != (int *)0x0) {
-    (**(code **)(*(int *)param_1[0x14] + 8))();
+  if (param_1->pTrackHolder != (CBulanek *)0x0) {
+    (**(code **)(param_1->pTrackHolder->vftable_primary + 8))();
   }
   local_4 = (uint)local_4._1_3_ << 8;
-  CDSVideoPlayer::CDSVideoPlayer_TM_Destructor(param_1 + 2);
-  *param_1 = g_pCDSObject_vftable_IDSReferenced;
+  CDSVideoPlayer::CDSVideoPlayer_TM_Destructor(&(param_1->trackManager).pVftable_IDSChained);
+  param_1->pVftable_primary = g_pCDSObject_vftable_IDSReferenced;
   ExceptionList = local_c;
   return;
 }
 
 
 
-void __thiscall CWeapon::Init(CWeapon *this,undefined4 param_1,int *param_2)
+void __thiscall CWeapon::Init(CWeapon *this,undefined4 param_1,CBulanek *param_2)
 
 {
-  CWeapon_SetTrackHolder((CWeapon *)&this[-1].pHudIconB,(CBulanek *)param_2);
+  CWeapon_SetTrackHolder((CWeapon *)&this[-1].pHudIconB,param_2);
   return;
 }
 
@@ -87304,15 +87474,16 @@ CMina * __thiscall CMina::InitMine(CMina *this,int deployContext)
 void * __thiscall CExplosion::CExplosion_Ctor(CExplosion *this,void *pParentView,uchar ownerSlot)
 
 {
-  void *pvVar1;
-  int iVar2;
+  int *piVar1;
+  void *pvVar2;
   int iVar3;
-  int *piVar4;
+  int iVar4;
+  CDSAudioPlayer *pCVar5;
   undefined4 in_EDX;
-  int *piVar5;
-  int iVar6;
-  char cVar7;
-  undefined1 uVar8;
+  int *piVar6;
+  int iVar7;
+  char cVar8;
+  byte bVar9;
   void *local_c;
   undefined1 *puStack_8;
   int *local_4;
@@ -87332,38 +87503,39 @@ void * __thiscall CExplosion::CExplosion_Ctor(CExplosion *this,void *pParentView
   this->wViewFlags = this->wViewFlags | 0x200;
   this->bOwnerSlot = ownerSlot;
   local_4 = (int *)0x0;
-  pvVar1 = (void *)(**(code **)(**(int **)((int)g_pApp + 0x70) + 0x10))(0x100b2,0);
-  piVar5 = (int *)0x0;
-  if (pvVar1 != (void *)0x0) {
-    piVar5 = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b8370);
+  pvVar2 = (void *)(**(code **)(**(int **)((int)g_pApp + 0x70) + 0x10))(0x100b2,0);
+  piVar6 = (int *)0x0;
+  if (pvVar2 != (void *)0x0) {
+    piVar6 = (int *)_Globals::CheckedVirtualBaseCast(pvVar2,DAT_004b8370);
   }
   local_c = (void *)CONCAT31(local_c._1_3_,1);
-  _Globals::TM_BindSequence(&this->pVftable_anim_sub,piVar5);
+  _Globals::TM_BindSequence(&this->pVftable_anim_sub,piVar6);
   _Globals::TM_SetTrack(&this->pVftable_anim_sub,0,1,(uint *)0x0);
-  piVar4 = &this->nBbox_left;
-  uVar8 = 0;
-  iVar2 = local_4[2];
-  iVar6 = ((local_4[3] - this->nBbox_bottom) - local_4[1]) / 2;
-  iVar3 = *local_4;
-  this->nBbox_top = this->nBbox_top + iVar6;
-  iVar2 = ((iVar2 - this->nBbox_right) - iVar3) / 2;
-  *piVar4 = *piVar4 + iVar2;
-  this->nBbox_right = this->nBbox_right + iVar2;
-  this->nBbox_bottom = this->nBbox_bottom + iVar6;
-  *piVar4 = *piVar4 + *local_4;
+  piVar1 = &this->nBbox_left;
+  bVar9 = 0;
+  iVar3 = local_4[2];
+  iVar7 = ((local_4[3] - this->nBbox_bottom) - local_4[1]) / 2;
+  iVar4 = *local_4;
+  this->nBbox_top = this->nBbox_top + iVar7;
+  iVar3 = ((iVar3 - this->nBbox_right) - iVar4) / 2;
+  *piVar1 = *piVar1 + iVar3;
+  this->nBbox_right = this->nBbox_right + iVar3;
+  this->nBbox_bottom = this->nBbox_bottom + iVar7;
+  *piVar1 = *piVar1 + *local_4;
   this->nBbox_top = this->nBbox_top + local_4[1];
   this->nBbox_right = this->nBbox_right + *local_4;
   this->nBbox_bottom = this->nBbox_bottom + local_4[1];
-  iVar2 = DAT_004b3730;
-  cVar7 = '\x01';
-  pvVar1 = (void *)0x0;
-  iVar3 = _Globals::ComputeSpatialAttenuationDb100(piVar4);
-  piVar4 = (int *)_Globals::TriggerBankSample((undefined *)0x1,iVar2,1,iVar3,pvVar1,cVar7);
-  _Globals::CDSAudioPlayer_PlayAndRelease(piVar4,uVar8);
+  iVar3 = DAT_004b3730;
+  cVar8 = '\x01';
+  pvVar2 = (void *)0x0;
+  iVar4 = _Globals::ComputeSpatialAttenuationDb100(piVar1);
+  pCVar5 = (CDSAudioPlayer *)
+           _Globals::TriggerBankSample((undefined *)0x1,iVar3,1,iVar4,pvVar2,cVar8);
+  _Globals::CDSAudioPlayer_PlayAndRelease(pCVar5,bVar9);
   _Globals::CGameEntity_SetEntityType(this,0);
   local_4 = (int *)((uint)local_4 & 0xffffff00);
-  if (piVar5 != (int *)0x0) {
-    (**(code **)(*piVar5 + 8))();
+  if (piVar6 != (int *)0x0) {
+    (**(code **)(*piVar6 + 8))();
   }
   ExceptionList = local_c;
   return this;
@@ -87404,7 +87576,7 @@ CBulanci::CBulanci_AllocAnimFromSprite(CBulanci *this,undefined4 *param_1,uint p
   *param_1 = pCVar1;
   _Globals::CGameEntity_SetEntityType(pCVar1,0);
   if (param_3 != '\0') {
-    CBulanci_RegisterPlayerAndRespawn(this,(CBulanek *)*param_1);
+    CBulanci_RegisterPlayerAndRespawn(this,(CDSView *)*param_1);
   }
   local_4 = 0xffffffff;
   if (piVar2 != (int *)0x0) {
@@ -87423,13 +87595,12 @@ CBulanek::CBulanek_CreateRespawnTeleportPair
 {
   int *piVar1;
   CTeleportPoint *pCVar2;
-  CBulanek *entity_00;
   undefined4 uVar3;
   int local_3c;
   int local_38;
   int local_34;
   int local_30;
-  int local_2c;
+  LONG local_2c;
   int local_28;
   int local_24;
   int local_20;
@@ -87484,21 +87655,20 @@ CBulanek::CBulanek_CreateRespawnTeleportPair
   pCVar2 = (CTeleportPoint *)_Globals::OperatorNewWithBadAlloc(0xf8);
   uStack_4 = 1;
   if (pCVar2 == (CTeleportPoint *)0x0) {
-    entity_00 = (CBulanek *)0x0;
+    pCVar2 = (CTeleportPoint *)0x0;
   }
   else {
-    entity_00 = (CBulanek *)CTeleportPoint::CTeleportPoint_Ctor(pCVar2,entity,this,0);
+    pCVar2 = CTeleportPoint::CTeleportPoint_Ctor(pCVar2,entity,this,0);
   }
   uStack_4 = 0xffffffff;
-  _Globals::CIntListInsertSortedOrAppend
-            (this[1].pPad_postWalkEmbed,(int)entity_00,(undefined *)0x0,1);
-  CGaming::CGaming_AddEntity((CGaming *)this,entity_00,-1);
+  _Globals::CIntListInsertSortedOrAppend(this[1].pPad_postWalkEmbed,(int)pCVar2,(undefined *)0x0,1);
+  CGaming::CGaming_AddEntity((CGaming *)this,pCVar2,-1);
   if (x == -1) {
-    uVar3 = CGaming::CGaming_RespawnPlayerAtSafeLocation((CGaming *)this,entity_00);
+    uVar3 = CGaming::CGaming_RespawnPlayerAtSafeLocation((CGaming *)this,(CDSView *)pCVar2);
   }
   else {
-    (**(code **)(entity_00->vftable_primary + 0x70))(&local_3c);
-    uVar3 = _Globals::CDSView_OffsetRectAndAdapt(entity_00,x - local_3c,y - local_38);
+    (**(code **)((pCVar2->canim_base).vftable_primary + 0x70))(&local_3c);
+    uVar3 = _Globals::CDSView_OffsetRectAndAdapt(pCVar2,x - local_3c,y - local_38);
   }
   ExceptionList = local_c;
   return CONCAT31((int3)((uint)uVar3 >> 8),1);
@@ -87567,55 +87737,53 @@ void __fastcall CBulanci::CGaming_LoadLevelAssetAndMusic(CGaming *param_1)
   CDSFileStream *pCVar5;
   uint uVar6;
   uint uStack_40bc;
-  undefined1 local_40ac [146];
-  undefined1 local_401a;
-  undefined1 local_4019;
-  undefined1 *local_4018;
-  void *local_4014;
+  undefined1 local_40ac [140];
+  undefined1 local_4020 [12];
+  undefined *local_4014;
   undefined1 *puStack_4010;
-  void *local_400c;
+  undefined1 local_400c [4];
   undefined1 local_4008 [16384];
   uint local_8;
   
-  local_400c = (void *)0xffffffff;
+  local_400c = (undefined1  [4])0xffffffff;
   puStack_4010 = &LAB_0047765b;
   local_4014 = ExceptionList;
   uStack_40bc = DAT_004b0e44 ^ (uint)local_4008;
-  local_4018 = (undefined1 *)&uStack_40bc;
+  local_4020._8_4_ = &uStack_40bc;
   ExceptionList = &local_4014;
   local_40ac._124_4_ = param_1;
   puVar2 = &uStack_40bc;
   local_8 = uStack_40bc;
   if (*(int **)param_1->pPad_0x360 != (int *)0x0) {
     (**(code **)(**(int **)param_1->pPad_0x360 + 8))();
-    puVar2 = (uint *)local_4018;
+    puVar2 = (uint *)local_4020._8_4_;
   }
-  local_4018 = (undefined1 *)puVar2;
+  local_4020._8_4_ = puVar2;
   param_1->pPad_0x360[0] = 0;
   param_1->pPad_0x360[1] = 0;
   param_1->pPad_0x360[2] = 0;
   param_1->pPad_0x360[3] = 0;
   if (param_1->dwMusicResourceId != 0) {
-    local_40ac._140_4_ = (LPCWSTR)0x0;
-    local_400c = (void *)0x0;
-    CBulanci_AssignTempPathWithTrailingBackslash(local_40ac + 0x88);
-    local_400c._0_1_ = 1;
-    _Globals::CDsStringFormatV(local_40ac + 0x8c,L"%s%s.tmp");
-    local_400c._0_1_ = 0;
+    local_4020._0_4_ = (LPCWSTR)0x0;
+    local_400c = (undefined1  [4])0x0;
+    CBulanci_AssignTempPathWithTrailingBackslash((CBulanci *)(local_40ac + 0x88));
+    local_400c[0] = 1;
+    _Globals::CDsStringFormatV(local_4020,L"%s%s.tmp");
+    local_400c[0] = 0;
     if ((int *)local_40ac._136_4_ != (int *)0x0) {
       _Globals::CDsStringReleaseHeader((int *)(local_40ac._136_4_ + -0xc));
     }
-    pWVar3 = (LPCWSTR)local_40ac._140_4_;
-    if ((LPCWSTR)local_40ac._140_4_ == (LPCWSTR)0x0) {
+    pWVar3 = (LPCWSTR)local_4020._0_4_;
+    if ((LPCWSTR)local_4020._0_4_ == (LPCWSTR)0x0) {
       pWVar3 = (LPCWSTR)PTR_DAT_004af100;
     }
     uVar4 = CBulanci_GetPathSuffixCompareIndex(pWVar3);
     if ((char)uVar4 == '\0') {
-      CLoadingLevel::CLoadingLevel_ctor((CWindow *)local_40ac);
-      local_4019 = 0;
-      local_400c = (void *)CONCAT31(local_400c._1_3_,5);
-      CDSView::CDSView__AddChild(g_pApp,local_40ac,0);
-      local_4019 = 1;
+      CLoadingLevel::CLoadingLevel_ctor((CDSView *)local_40ac);
+      local_4020[7] = 0;
+      local_400c[0] = 5;
+      CDSView::CDSView__AddChild(g_pApp,(CBulanci *)local_40ac,(void *)0x0);
+      local_4020[7] = 1;
       _Globals::CDSApp_FrameBody(g_pApp);
       this = (void *)CMenu::CMenuGetResourceById
                                ((CMenu *)((int)g_pApp + 0x284),param_1->dwMusicResourceId);
@@ -87624,20 +87792,20 @@ void __fastcall CBulanci::CGaming_LoadLevelAssetAndMusic(CGaming *param_1)
         local_40ac._136_4_ = _Globals::CheckedVirtualBaseCast(this,DAT_004b83c4);
       }
       uVar1 = local_40ac._136_4_;
-      local_401a = 0;
-      local_400c._0_1_ = 7;
-      pCVar5 = CBulanci_CreateCDSFileStream((CBulanci *)(local_40ac + 0x8c),(void *)0xa);
+      local_4020[6] = 0;
+      local_400c[0] = 7;
+      pCVar5 = CBulanci_CreateCDSFileStream((CBulanci *)local_4020,(void *)0xa);
       if (pCVar5 == (CDSFileStream *)0x0) {
         local_40ac._128_4_ = (byte *)0x0;
       }
       else {
         local_40ac._128_4_ = pCVar5->pPad_04 + 8;
       }
-      local_400c = (void *)CONCAT31(local_400c._1_3_,8);
+      local_400c[0] = 8;
       (**(code **)(*(int *)local_40ac._128_4_ + 0x14))((uint *)(uVar1 + 4),0xc);
       uVar4 = *(uint *)(uVar1 + 4);
       local_40ac._132_4_ = (**(code **)(*(int *)uVar1 + 0x14))();
-      local_401a = 1;
+      local_4020[6] = 1;
       while (uVar4 != 0) {
         uVar6 = uVar4;
         if (0x3fff < uVar4) {
@@ -87651,25 +87819,25 @@ void __fastcall CBulanci::CGaming_LoadLevelAssetAndMusic(CGaming *param_1)
         CBulanci_PollEventsAndRunFrame(g_pApp);
         param_1 = (CGaming *)local_40ac._124_4_;
       }
-      local_401a = 0;
+      local_4020[6] = 0;
       (**(code **)(*(int *)uVar1 + 0x1c))(local_40ac._132_4_);
       (**(code **)(*(int *)local_40ac._128_4_ + 8))();
-      local_400c = (void *)0x6;
-      local_4019 = 0;
-      CMenu::CMenu_DetachChildWithVisibility(g_pApp,(int *)local_40ac);
-      CGaming::CGaming_LoadBackgroundMusic(param_1,local_40ac + 0x8c);
-      local_400c = (void *)CONCAT31(local_400c._1_3_,5);
+      local_400c = (undefined1  [4])0x6;
+      local_4020[7] = 0;
+      CMenu::CMenu_DetachChildWithVisibility(g_pApp,(CDSView *)local_40ac);
+      CGaming::CGaming_LoadBackgroundMusic(param_1,(CBulanci *)local_4020);
+      local_400c[0] = 5;
       (**(code **)(*(int *)uVar1 + 8))();
-      local_400c = (void *)0x0;
+      local_400c = (undefined1  [4])0x0;
       _Globals::CWindow_dtor((int)local_40ac);
     }
     else {
-      local_400c = (void *)CONCAT31(local_400c._1_3_,2);
-      CGaming::CGaming_LoadBackgroundMusic(param_1,local_40ac + 0x8c);
+      local_400c[0] = 2;
+      CGaming::CGaming_LoadBackgroundMusic(param_1,(CBulanci *)local_4020);
     }
-    local_400c = (void *)0xffffffff;
-    if ((LPCWSTR)local_40ac._140_4_ != (LPCWSTR)0x0) {
-      _Globals::CDsStringReleaseHeader((LPCWSTR)(local_40ac._140_4_ + -0xc));
+    local_400c = (undefined1  [4])0xffffffff;
+    if ((LPCWSTR)local_4020._0_4_ != (LPCWSTR)0x0) {
+      _Globals::CDsStringReleaseHeader((LPCWSTR)(local_4020._0_4_ + -0xc));
     }
   }
   ExceptionList = local_4014;
@@ -87713,7 +87881,7 @@ undefined4 CBulanci::Catch_0041d59d(void)
   int iVar2;
   
   if (*(char *)(unaff_EBP + -0x11) != '\0') {
-    CMenu::CMenu_DetachChildWithVisibility(g_pApp,(int *)(unaff_EBP + -0xa4));
+    CMenu::CMenu_DetachChildWithVisibility(g_pApp,(CDSView *)(unaff_EBP + -0xa4));
   }
   this = *(CDSException **)(unaff_EBP + -0x2c);
   pwVar1 = CDSException::CDSException_GetMessageW(this);
@@ -87731,9 +87899,9 @@ void __thiscall CGaming::CGaming_OnCmd(CGaming *this,ushort param_1,int param_2)
 
 {
   bool bVar1;
-  int *piVar2;
+  CDSAudioPlayer *pCVar2;
   char cVar3;
-  undefined1 uVar4;
+  byte bVar4;
   
   if ((param_1 & 0x8000) == 0) {
     if ((param_1 == 0xed) && (this->wModalExitCode == 0xffff)) {
@@ -87753,10 +87921,10 @@ void __thiscall CGaming::CGaming_OnCmd(CGaming *this,ushort param_1,int param_2)
       }
       CGame_NetSendRoundResult_t0b((CGaming *)this->pOwnerGame,cVar3,param_1);
       this->nRoundEndWait = this->nRoundEndWait + 1;
-      uVar4 = 0;
-      piVar2 = (int *)_Globals::TriggerBankSample
-                                ((undefined *)0x1,0,0x11,0,&this->field_0x10,'\x01');
-      _Globals::CDSAudioPlayer_PlayAndRelease(piVar2,uVar4);
+      bVar4 = 0;
+      pCVar2 = (CDSAudioPlayer *)
+               _Globals::TriggerBankSample((undefined *)0x1,0,0x11,0,&this->field_0x10,'\x01');
+      _Globals::CDSAudioPlayer_PlayAndRelease(pCVar2,bVar4);
       bVar1 = CGaming_IsRoundEndTransitionComplete((int)this);
       while (!bVar1) {
         _Globals::CDSApp_PumpTick(g_pApp);
@@ -88002,7 +88170,7 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_CreateMine(CLevelScript *para
 CWeapon * __thiscall CWeapon::CWeapon_ScalarDeletingDtor(CWeapon *this,byte param_1)
 
 {
-  CWeapon_dtor(&this->pVftable_primary);
+  CWeapon_dtor(this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -88040,10 +88208,9 @@ uint __thiscall CBulanek::CBulanek_OnTakeDamage(CBulanek *this,int param_1,int p
   uint in_EAX;
   undefined4 uVar3;
   int iVar4;
-  int *piVar5;
+  CDSAudioPlayer *pCVar5;
   void *pvVar6;
   char cVar7;
-  undefined1 uVar8;
   
                     // OnTakeDamage: if alive human and match active, FUN_0041d090 builds teleport
                     // respawn gate pair, plays bank sample 0x24, may decrement life counter at
@@ -88056,12 +88223,13 @@ uint __thiscall CBulanek::CBulanek_OnTakeDamage(CBulanek *this,int param_1,int p
     uVar3 = CBulanek_CreateRespawnTeleportPair(this_00,(int *)this,param_1,param_2,param_3);
     cVar2 = (char)uVar3;
     if (cVar2 != '\0') {
-      uVar8 = 0;
+      bVar1 = 0;
       cVar7 = '\x01';
       pvVar6 = (void *)0x0;
       iVar4 = _Globals::ComputeSpatialAttenuationDb100(&this->nOrigin_x);
-      piVar5 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x24,iVar4,pvVar6,cVar7);
-      _Globals::CDSAudioPlayer_PlayAndRelease(piVar5,uVar8);
+      pCVar5 = (CDSAudioPlayer *)
+               _Globals::TriggerBankSample((undefined *)0x1,0,0x24,iVar4,pvVar6,cVar7);
+      _Globals::CDSAudioPlayer_PlayAndRelease(pCVar5,bVar1);
       uVar3 = CBulanek_IsInKnockdownAnimBand((int)this);
       if ((char)uVar3 != '\0') {
         CBulanek_SetFacingTrack(this,(this->videoTrackManager).nCurrentTrackIdx,'\0');
@@ -88436,10 +88604,11 @@ void __thiscall CExplosion::CExplosion_ApplyAreaDamage(CExplosion *this)
 void __thiscall _Globals::CGaming_SpawnPickupAndBroadcast(void *this,uint param_1)
 
 {
-  int iVar1;
-  CBulanek *pCVar2;
+  void *pvVar1;
+  CDSView *pCVar2;
   char extraout_DL;
   char cVar3;
+  int *piVar4;
   undefined4 local_4;
   
   cVar3 = (char)param_1;
@@ -88447,21 +88616,23 @@ void __thiscall _Globals::CGaming_SpawnPickupAndBroadcast(void *this,uint param_
   local_4 = CONCAT31(local_4._1_3_,100);
   if (cVar3 != '\x01') {
     local_4 = CONCAT31(local_4._1_3_,0x65);
-    while (iVar1 = CGaming::CGaming_GetObjectAtSlotSafe(this,(byte)local_4), iVar1 != 0) {
+    while (pvVar1 = CGaming::CGaming_GetObjectAtSlotSafe(this,(byte)local_4), pvVar1 != (void *)0x0)
+    {
       local_4 = CONCAT31(local_4._1_3_,extraout_DL + 1U);
       if (0x6b < (byte)(extraout_DL + 1U)) {
         return;
       }
     }
   }
-  pCVar2 = (CBulanek *)CGame_SpawnPickupObject(this,param_1,local_4);
+  pCVar2 = (CDSView *)CGame_SpawnPickupObject(this,param_1,local_4);
   CBulanci::CBulanci_RegisterPlayerAndRespawn(this,pCVar2);
+  piVar4 = &(pCVar2->win).nBbox_left;
   if (cVar3 != '\x01') {
     CGame_NetSendPlaceObject_t18
-              (*(void **)((int)this + 0x84),cVar3,(char)local_4,(undefined2 *)&pCVar2->nOrigin_x);
+              (*(void **)((int)this + 0x84),cVar3,(char)local_4,(undefined2 *)piVar4);
     return;
   }
-  CGame_NetSendWorldEvent_t13(*(void **)((int)this + 0x84),(undefined2 *)&pCVar2->nOrigin_x);
+  CGame_NetSendWorldEvent_t13(*(void **)((int)this + 0x84),(undefined2 *)piVar4);
   return;
 }
 
@@ -88471,7 +88642,7 @@ void __thiscall _Globals::CGaming_SpawnPickupAndBroadcast(void *this,uint param_
 // 6=all). EOL slot100 redirect hourglass->MG. EOL CGaming_SpawnPickupAndBroadcast slots 101..107
 // scan.
 
-int __fastcall CGaming::CGaming_RandomPickupSpawner_Tick(CGaming *param_1)
+CGame * __fastcall CGaming::CGaming_RandomPickupSpawner_Tick(CGaming *param_1)
 
 {
   longlong lVar1;
@@ -88502,7 +88673,7 @@ int __fastcall CGaming::CGaming_RandomPickupSpawner_Tick(CGaming *param_1)
     local_4 = CONCAT31(local_4._1_3_,bVar6);
     uVar7 = (uint)bVar6;
     if (bVar6 == 1) {
-      pCVar3 = (CGame *)CGaming_GetObjectAtSlotSafe(param_1,100);
+      pCVar3 = CGaming_GetObjectAtSlotSafe(param_1,100);
       uVar7 = extraout_EDX;
       if (pCVar3 != (CGame *)0x0) {
         uVar7 = 4;
@@ -88513,7 +88684,7 @@ int __fastcall CGaming::CGaming_RandomPickupSpawner_Tick(CGaming *param_1)
       pCVar3 = (CGame *)_Globals::CGaming_SpawnPickupAndBroadcast(param_1,local_4);
     }
   }
-  return (int)pCVar3;
+  return pCVar3;
 }
 
 
@@ -88527,8 +88698,7 @@ uint __cdecl CLevelScript::CLevelScriptOpExt_KillObject(CDSScript *param_1)
   uint uVar2;
   
   CDSScript::ReadSubExpr(param_1);
-  this = (CBulanek *)
-         CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)param_1[1].nOpcodeCount,extraout_AL);
+  this = CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)param_1[1].nOpcodeCount,extraout_AL);
   if (this != (CBulanek *)0x0) {
     iVar1 = (**(code **)this->vftable_primary)();
     if (*(int *)(iVar1 + 8) == 0x7ec) {
@@ -88556,7 +88726,7 @@ uint __cdecl CLevelScript::CLevelScriptOpExt_TeleportPlayerTo(CLevelScript *para
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   CDSScript::ReadSubExpr((CDSScript *)param_1);
-  this = (CBulanek *)CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)param_1->pGaming,extraout_AL);
+  this = CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)param_1->pGaming,extraout_AL);
   if (this != (CBulanek *)0x0) {
     iVar1 = (**(code **)this->vftable_primary)();
     if (*(int *)(iVar1 + 8) == 0x7ec) {
@@ -88965,7 +89135,7 @@ void __thiscall _Globals::CGame_ApplyPickup(void *this,byte param_1,byte param_2
   byte bVar5;
   
   if (param_2 != 0xff) {
-    piVar3 = (int *)CGaming::CGaming_GetObjectAtSlotSafe(*(CGaming **)((int)this + 0x84),param_2);
+    piVar3 = CGaming::CGaming_GetObjectAtSlotSafe(*(CGaming **)((int)this + 0x84),param_2);
     if (piVar3 != (int *)0x0) {
       if (param_1 == 0xff) {
         param_1 = *(byte *)(piVar3 + 7);
@@ -89268,7 +89438,7 @@ void __thiscall CGaming::CGaming_OnSchedulerTimer(CGaming *this,int param_1)
       return;
     }
     if (*(int *)&this->field_0x2d4 == 1) {
-      CGaming_UnregisterRoundHudObjects(&this[-1].field_0x304);
+      CGaming_UnregisterRoundHudObjects((CGaming *)&this[-1].field_0x304);
       return;
     }
   }
@@ -89291,21 +89461,22 @@ void __thiscall _Globals::CGaming_TickPlayerCollisions(void *this,int *param_1)
 
 {
   uint uVar1;
-  byte bVar2;
+  void *pvVar2;
+  byte bVar3;
   
   CGaming::CGaming_InsertEntityByDepth(this,param_1);
   if ((*(byte *)(param_1 + 0x11) & 1) != 0) {
     uVar1 = CBulanek_IsHumanPlayer((int)param_1);
     if ((char)uVar1 != '\0') {
-      bVar2 = 0x6c;
+      bVar3 = 0x6c;
       do {
-        bVar2 = bVar2 - 1;
-        uVar1 = CGaming::CGaming_GetObjectAtSlotSafe(this,bVar2);
-        uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,uVar1);
+        bVar3 = bVar3 - 1;
+        pvVar2 = CGaming::CGaming_GetObjectAtSlotSafe(this,bVar3);
+        uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,(uint)pvVar2);
         if ((char)uVar1 != '\0') {
-          CGame_ApplyPickup(param_1,0xff,bVar2);
+          CGame_ApplyPickup(param_1,0xff,bVar3);
         }
-      } while (100 < bVar2);
+      } while (100 < bVar3);
     }
     if (*(char *)(*(int *)((int)this + 0x84) + 0xd8) == '\x01') {
       uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,*(uint *)((int)this + 0x324));
@@ -89370,13 +89541,12 @@ _Globals::CGaming_SpawnBulletAndPlaySound
 
 {
   byte bVar1;
-  CShot *this_00;
-  void *pvVar2;
+  CShot *pCVar2;
   int iVar3;
-  int *piVar4;
+  CDSAudioPlayer *pCVar4;
   int iVar5;
-  char cVar6;
-  undefined1 uVar7;
+  void *pvVar6;
+  char cVar7;
   void *local_c;
   undefined1 *puStack_8;
   void *local_4;
@@ -89387,18 +89557,17 @@ _Globals::CGaming_SpawnBulletAndPlaySound
   ExceptionList = &local_c;
   CDSView__PostMessage((void *)((int)this + 0x10),0x200,0xf4,0,0);
   if ((param_4 & 3) != 0) {
-    this_00 = (CShot *)OperatorNewWithBadAlloc(0xb0);
+    pCVar2 = (CShot *)OperatorNewWithBadAlloc(0xb0);
     local_4 = (void *)0x0;
-    if (this_00 == (CShot *)0x0) {
-      pvVar2 = (void *)0x0;
+    if (pCVar2 == (CShot *)0x0) {
+      pCVar2 = (CShot *)0x0;
     }
     else {
-      pvVar2 = (void *)CShot::CShot_Ctor(this_00,param_1,this,param_2,param_3,(param_4 & 3) - 1,
-                                         param_6);
+      pCVar2 = CShot::CShot_Ctor(pCVar2,param_1,this,param_2,param_3,(param_4 & 3) - 1,param_6);
     }
     local_4 = (void *)0xffffffff;
-    CIntListInsertSortedOrAppend((void *)((int)this + 0x2c8),(int)pvVar2,(undefined *)0x0,1);
-    CGaming::CGaming_AddEntity(this,pvVar2,'\x01');
+    CIntListInsertSortedOrAppend((void *)((int)this + 0x2c8),(int)pCVar2,(undefined *)0x0,1);
+    CGaming::CGaming_AddEntity(this,pCVar2,'\x01');
   }
   bVar1 = param_4 & 0xf0;
   if (bVar1 == 0x10) {
@@ -89414,12 +89583,12 @@ _Globals::CGaming_SpawnBulletAndPlaySound
     }
     iVar5 = 0x13;
   }
-  uVar7 = 0;
-  cVar6 = '\x01';
-  pvVar2 = (void *)0x0;
+  bVar1 = 0;
+  cVar7 = '\x01';
+  pvVar6 = (void *)0x0;
   iVar3 = ComputeSpatialAttenuationDb100(param_5);
-  piVar4 = (int *)TriggerBankSample((undefined *)0x1,0,iVar5,iVar3,pvVar2,cVar6);
-  CDSAudioPlayer_PlayAndRelease(piVar4,uVar7);
+  pCVar4 = (CDSAudioPlayer *)TriggerBankSample((undefined *)0x1,0,iVar5,iVar3,pvVar6,cVar7);
+  CDSAudioPlayer_PlayAndRelease(pCVar4,bVar1);
   ExceptionList = local_4;
   return;
 }
@@ -89552,7 +89721,7 @@ _Globals::CGaming_SpawnAndInitializePlayer
   local_4 = 0xffffffff;
   CGaming::CGaming_AddEntity(this,pCVar1,-1);
   CGaming_RegisterObjectAtSlot(this,(int)pCVar1,param_1);
-  CGaming::CGaming_RespawnPlayerAtSafeLocation(this_00,pCVar1);
+  CGaming::CGaming_RespawnPlayerAtSafeLocation(this_00,(CDSView *)pCVar1);
   sendNet = '\0';
                     // _rand initial facing 0..3 -> CBulanek_SetFacingTrack on spawn
   iVar2 = Runtime::MSVCRT::_rand();
@@ -89613,7 +89782,7 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_SpawnEnemyAt(CLevelScript *pa
   byte extraout_AL;
   byte extraout_AL_00;
   byte extraout_AL_01;
-  int iVar1;
+  void *pvVar1;
   int *piVar2;
   byte extraout_DL;
   byte bVar3;
@@ -89629,8 +89798,8 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_SpawnEnemyAt(CLevelScript *pa
     bVar3 = 0xff;
   }
   else {
-    iVar1 = CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)param_1->pGaming,extraout_AL_00);
-    piVar2 = (int *)(iVar1 + 0x20);
+    pvVar1 = CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)param_1->pGaming,extraout_AL_00);
+    piVar2 = (int *)((int)pvVar1 + 0x20);
     bVar3 = extraout_DL;
   }
   _Globals::CGaming_SpawnBulletAndPlaySound
@@ -89647,7 +89816,7 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_SpawnOpponentEx(CLevelScript 
   byte extraout_AL_00;
   byte extraout_AL_01;
   int extraout_EAX;
-  int iVar1;
+  void *pvVar1;
   int *piVar2;
   byte extraout_DL;
   byte bVar3;
@@ -89667,8 +89836,8 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_SpawnOpponentEx(CLevelScript 
     bVar3 = 0xff;
   }
   else {
-    iVar1 = CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)param_1->pGaming,extraout_AL_00);
-    piVar2 = (int *)(iVar1 + 0x20);
+    pvVar1 = CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)param_1->pGaming,extraout_AL_00);
+    piVar2 = (int *)((int)pvVar1 + 0x20);
     bVar3 = extraout_DL;
   }
   _Globals::CGaming_SpawnBulletAndPlaySound
@@ -89702,10 +89871,10 @@ void __thiscall _Globals::CGaming_RespawnPlayer(void *this,char param_1,byte par
 {
   int iVar1;
   int iVar2;
-  int *piVar3;
+  CDSAudioPlayer *pCVar3;
   void *pvVar4;
   char cVar5;
-  undefined1 uVar6;
+  byte bVar6;
   
                     // Death/respawn: clear corpse +0xfc/+0x100, Show; local=safe spawn+net 0x10;
                     // remote=packet xy; spawn quip audio.
@@ -89740,13 +89909,13 @@ void __thiscall _Globals::CGaming_RespawnPlayer(void *this,char param_1,byte par
     CDSView::CDSView__SetPosition(this,*param_3,param_3[1]);
     CBulanek::CBulanek_SetFacingTrack(this,(uint)param_2,'\0');
   }
-  uVar6 = 0;
+  bVar6 = 0;
   cVar5 = '\x01';
   pvVar4 = (void *)0x0;
   iVar1 = ComputeSpatialAttenuationDb100((int *)((int)this + 0x20));
   iVar2 = CBulanek_GetSpawnQuipSlot((int)this);
-  piVar3 = (int *)TriggerBankSample((undefined *)0x1,0,iVar2,iVar1,pvVar4,cVar5);
-  CDSAudioPlayer_PlayAndRelease(piVar3,uVar6);
+  pCVar3 = (CDSAudioPlayer *)TriggerBankSample((undefined *)0x1,0,iVar2,iVar1,pvVar4,cVar5);
+  CDSAudioPlayer_PlayAndRelease(pCVar3,bVar6);
   if ((0x1f < *(byte *)((int)this + 0x70)) && (*(byte *)((int)this + 0x70) < 0x24)) {
     *(undefined4 *)((int)this + 0x140) = 0;
     pvVar4 = CDSUpdatedItem::Scheduler_GetEventSlot((CDSUpdatedItem *)((int)this + 0x88),5);
@@ -89770,7 +89939,7 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
   void *pvVar3;
   undefined4 uVar4;
   int iVar5;
-  int *piVar6;
+  CDSAudioPlayer *pCVar6;
   CDeath *corpseAnim;
   CDeath2 *tombstone;
   uint uVar7;
@@ -89826,11 +89995,12 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
     cVar2 = '\x01';
     ppuVar11 = &this->vftable_IDSReferenced;
     iVar5 = _Globals::ComputeSpatialAttenuationDb100(&this->nOrigin_x);
-    piVar6 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,iVar9,iVar5,ppuVar11,cVar2);
+    pCVar6 = (CDSAudioPlayer *)
+             _Globals::TriggerBankSample((undefined *)0x1,0,iVar9,iVar5,ppuVar11,cVar2);
                     // OnDeath: TriggerBankSample stores completion target in pDeathVoicePlayer @
                     // +0x16C (cleared on event 1).
-    this->pDeathVoicePlayer = piVar6;
-    _Globals::CDSAudioPlayer_PlayAndRelease(piVar6,0);
+    this->pDeathVoicePlayer = pCVar6;
+    _Globals::CDSAudioPlayer_PlayAndRelease(pCVar6,0);
   }
                     // CBulanek_OnDeath: OperatorNew(0x108)->CDeath_ctor; ResolveAndBindAnimTrack
                     // consumes CDeath tail +0xf4/+0xfc/+0xf8/+0x100/+0x104.
@@ -89970,8 +90140,7 @@ void __thiscall CWeapon::CWeapon_FirePistol(CWeapon *this)
   uint uVar2;
   char cVar3;
   uint uVar4;
-  CShot *this_00;
-  void *entity;
+  CShot *pCVar5;
   int local_14;
   int local_10;
   void *local_c;
@@ -89994,17 +90163,17 @@ void __thiscall CWeapon::CWeapon_FirePistol(CWeapon *this)
     uVar4 = uVar2 & 0xff;
     local_14 = gAPlayerSkinPaletteIds[uVar4 * 2 + 4] + pCVar1->nOrigin_x;
     local_10 = pCVar1->nOrigin_y + gAPlayerSkinPaletteIds[uVar4 * 2 + 5];
-    this_00 = (CShot *)_Globals::OperatorNewWithBadAlloc(0xb0);
+    pCVar5 = (CShot *)_Globals::OperatorNewWithBadAlloc(0xb0);
     local_4 = 0;
-    if (this_00 == (CShot *)0x0) {
-      entity = (void *)0x0;
+    if (pCVar5 == (CShot *)0x0) {
+      pCVar5 = (CShot *)0x0;
     }
     else {
-      entity = (void *)CShot::CShot_Ctor(this_00,&local_14,(CGameView *)this->pWorld,(byte)uVar2,
-                                         this->pOwner->bPlayerSlot,0,0);
+      pCVar5 = CShot::CShot_Ctor(pCVar5,&local_14,(CGameView *)this->pWorld,(byte)uVar2,
+                                 this->pOwner->bPlayerSlot,0,0);
     }
     local_4 = 0xffffffff;
-    CGaming::CGaming_AddEntity(this->pWorld,entity,'\x01');
+    CGaming::CGaming_AddEntity(this->pWorld,pCVar5,'\x01');
     ExceptionList = local_c;
     return;
   }
@@ -90021,8 +90190,7 @@ void __fastcall _Globals::CWeapon_FireGrenade(CWeapon *param_1)
   CBulanek *pCVar1;
   uint uVar2;
   uint uVar3;
-  CShot *this;
-  void *entity;
+  CShot *pCVar4;
   int local_14;
   int local_10;
   void *local_c;
@@ -90041,17 +90209,17 @@ void __fastcall _Globals::CWeapon_FireGrenade(CWeapon *param_1)
   uVar3 = uVar2 & 0xff;
   local_14 = gAPlayerSkinPaletteIds[uVar3 * 2 + 0xc] + pCVar1->nOrigin_x;
   local_10 = pCVar1->nOrigin_y + gAPlayerSkinPaletteIds[uVar3 * 2 + 0xd];
-  this = (CShot *)OperatorNewWithBadAlloc(0xb0);
+  pCVar4 = (CShot *)OperatorNewWithBadAlloc(0xb0);
   local_4 = 0;
-  if (this == (CShot *)0x0) {
-    entity = (void *)0x0;
+  if (pCVar4 == (CShot *)0x0) {
+    pCVar4 = (CShot *)0x0;
   }
   else {
-    entity = (void *)CShot::CShot_Ctor(this,&local_14,(CGameView *)param_1->pWorld,(byte)uVar2,
-                                       param_1->pOwner->bPlayerSlot,1,0);
+    pCVar4 = CShot::CShot_Ctor(pCVar4,&local_14,(CGameView *)param_1->pWorld,(byte)uVar2,
+                               param_1->pOwner->bPlayerSlot,1,0);
   }
   local_4 = 0xffffffff;
-  CGaming::CGaming_AddEntity(param_1->pWorld,entity,'\x01');
+  CGaming::CGaming_AddEntity(param_1->pWorld,pCVar4,'\x01');
   ExceptionList = local_c;
   return;
 }
@@ -90158,9 +90326,9 @@ CGaming * __thiscall CGaming::CGaming_ctor(CGaming *this,CGame *ownerGame)
   CDSChained *pCVar5;
   uint *puVar6;
   CLevelScript *pCVar7;
-  CBulanci *this_01;
-  void *pvVar8;
-  CPauseDlg *pCVar9;
+  CBulanci *pCVar8;
+  void *pvVar9;
+  CPauseDlg *this_01;
   int nameHandle;
   uint uStack_40;
   int local_30 [4];
@@ -90330,38 +90498,38 @@ CGaming * __thiscall CGaming::CGaming_ctor(CGaming *this,CGame *ownerGame)
     CDSUpdatedItem::Scheduler_RegisterEventSlot((CDSUpdatedItem *)&this->field_0x68,0,0,6);
     CBulanci_SetAmbientAnimMode(this,0);
   }
-  CDSView::CDSView__AddChild((CDSView *)this,this->pEntityViewRoot);
-  this_01 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0xfc);
+  CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)this->pEntityViewRoot,(void *)0x0);
+  pCVar8 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0xfc);
   local_8._0_1_ = 0x10;
-  if (this_01 == (CBulanci *)0x0) {
-    uVar3 = 0;
+  if (pCVar8 == (CBulanci *)0x0) {
+    pCVar8 = (CBulanci *)0x0;
   }
   else {
-    uVar3 = CBulanci::CPanelCtor(this_01,this->pOwnerGame);
+    pCVar8 = CBulanci::CPanelCtor(pCVar8,(undefined *)this->pOwnerGame);
   }
   local_8 = CONCAT31(local_8._1_3_,0xf);
-  *(undefined4 *)&this->field_0x320 = uVar3;
-  CDSView::CDSView__AddChild((CDSView *)this,uVar3);
+  *(CBulanci **)&this->field_0x320 = pCVar8;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
   ownerGame = (CGame *)0x0;
   while ((byte)ownerGame < this->pOwnerGame->bTotalSlots) {
-    pvVar8 = (void *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,(byte)ownerGame);
-    _Globals::CGamingHud_UpdatePlayerAmmoStrip(*(void **)&this->field_0x320,pvVar8);
+    pvVar9 = (void *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,(byte)ownerGame);
+    _Globals::CGamingHud_UpdatePlayerAmmoStrip(*(void **)&this->field_0x320,pvVar9);
     ownerGame = (CGame *)(uint)(byte)((byte)ownerGame + 1);
   }
   local_8 = 0xd;
-  pCVar9 = (CPauseDlg *)_Globals::OperatorNewWithBadAlloc(0x7c);
+  this_01 = (CPauseDlg *)_Globals::OperatorNewWithBadAlloc(0x7c);
   local_8._0_1_ = 0x12;
-  if (pCVar9 == (CPauseDlg *)0x0) {
-    pCVar9 = (CPauseDlg *)0x0;
+  if (this_01 == (CPauseDlg *)0x0) {
+    pCVar8 = (CBulanci *)0x0;
   }
   else {
                     // CPauseDlg_Build((CPauseDlg*)OperatorNew(0x7c), ownerGame); result ->
                     // CGaming+0x334 pPauseDlg. ECX at entry = heap CPauseDlg*, not CBulanci*.
-    pCVar9 = CPauseDlg::CPauseDlg_Build(pCVar9,this->pOwnerGame);
+    pCVar8 = (CBulanci *)CPauseDlg::CPauseDlg_Build(this_01,this->pOwnerGame);
   }
   local_8 = CONCAT31(local_8._1_3_,0xd);
-  this->pPauseDlg = pCVar9;
-  CDSView::CDSView__AddChild((CDSView *)this,pCVar9);
+  this->pPauseDlg = (CPauseDlg *)pCVar8;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
   ExceptionList = local_10;
   return this;
 }
@@ -90502,7 +90670,7 @@ void __fastcall _Globals::CGaming_SpawnCoopPartnerSlots(void *param_1)
 // player count==1 spawn campaign AI slots 0x7d..0x7f. EOL SetCloneFlag(1) first. Caller:
 // CLevelScriptOpExt_InsertBulanci @0x420610.
 
-void __fastcall _Globals::CBulanek_SpawnPlayerAndCampaignSlots(CBulanek *param_1)
+void __fastcall _Globals::CBulanek_SpawnPlayerAndCampaignSlots(CGaming *param_1)
 
 {
   byte bVar1;
@@ -90511,8 +90679,8 @@ void __fastcall _Globals::CBulanek_SpawnPlayerAndCampaignSlots(CBulanek *param_1
   
                     // InsertBulanci: spawn slots 0..(CBulanci+0xd8-1); if solo also slots
                     // 0x7d..0x7f campaign AI.
-  CGaming::CGaming_SetEntityRegisterMode((CGaming *)param_1,1);
-  bVar1 = param_1->pGamingHostScratch[0xd8];
+  CGaming::CGaming_SetEntityRegisterMode(param_1,1);
+  bVar1 = param_1->pOwnerGame->bTotalSlots;
   bVar2 = 0;
   if (bVar1 != 0) {
     do {
@@ -90535,7 +90703,7 @@ void __fastcall _Globals::CBulanek_SpawnPlayerAndCampaignSlots(CBulanek *param_1
 undefined4 __cdecl CLevelScript::CLevelScriptOpExt_InsertBulanci(int param_1)
 
 {
-  _Globals::CBulanek_SpawnPlayerAndCampaignSlots(*(CBulanek **)(param_1 + 0x458));
+  _Globals::CBulanek_SpawnPlayerAndCampaignSlots(*(CGaming **)(param_1 + 0x458));
   return 0;
 }
 
@@ -90892,23 +91060,24 @@ void __thiscall
 CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,undefined4 *param_3)
 
 {
-  bool bVar1;
-  undefined4 uVar2;
-  int iVar3;
+  int *piVar1;
+  bool bVar2;
+  undefined4 uVar3;
   int iVar4;
-  int *piVar5;
-  uint uVar6;
-  byte bVar7;
-  undefined **ppuVar8;
-  char cVar9;
+  int iVar5;
+  CDSAudioPlayer *pCVar6;
+  uint uVar7;
+  byte bVar8;
+  undefined **ppuVar9;
+  char cVar10;
   uint local_8;
   
-  bVar7 = (byte)lParam;
+  bVar8 = (byte)lParam;
   if (eventId < 0xef) {
     if (eventId == 0xee) {
-      uVar6 = (uint)lParam >> 8 & 0xff;
-      if (uVar6 == 0) {
-        if (bVar7 == this->bPlayerSlot) {
+      uVar7 = (uint)lParam >> 8 & 0xff;
+      if (uVar7 == 0) {
+        if (bVar8 == this->bPlayerSlot) {
           this->bDrawAsMuted = 1;
           CGaming::CGaming_RetestTraceAreasForEntity
                     ((CGaming *)this->pGamingHostScratch,(int *)this);
@@ -90916,13 +91085,13 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
           return;
         }
       }
-      else if (uVar6 == 1) {
-        if (bVar7 == this->bPlayerSlot) {
+      else if (uVar7 == 1) {
+        if (bVar8 == this->bPlayerSlot) {
           this->bScriptDeathGuard = 1;
           return;
         }
       }
-      else if ((uVar6 == 2) && (bVar7 == this->bPlayerSlot)) {
+      else if ((uVar7 == 2) && (bVar8 == this->bPlayerSlot)) {
         this->bIsAiVariant = 1;
         return;
       }
@@ -90933,16 +91102,17 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
                     // Event 1: death-voice CDSAudioPlayer* completion — compare lParam to
                     // pDeathVoicePlayer @ +0x16C; chains delayed quip.
         if (this->pDeathVoicePlayer == lParam) {
-          cVar9 = '\x01';
-          ppuVar8 = &this->vftable_IDSReferenced;
+          cVar10 = '\x01';
+          ppuVar9 = &this->vftable_IDSReferenced;
           this->pDeathVoicePlayer = (void *)0x0;
-          iVar3 = _Globals::ComputeSpatialAttenuationDb100(&this->nOrigin_x);
-          iVar4 = CBulanek_GetDelayedQuipSlot((int)this);
+          iVar4 = _Globals::ComputeSpatialAttenuationDb100(&this->nOrigin_x);
+          iVar5 = CBulanek_GetDelayedQuipSlot((int)this);
                     // Death-voice done (event 1, lParam==pPad_mid+0x58): chains delayed quip with
                     // same pEventTarget=pCdsViewPrefix+0x10; stores player at +0x174.
-          piVar5 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,iVar4,iVar3,ppuVar8,cVar9);
-          this->pDelayedQuipPlayer = piVar5;
-          _Globals::CDSAudioPlayer_PlayAndRelease(piVar5,0);
+          pCVar6 = (CDSAudioPlayer *)
+                   _Globals::TriggerBankSample((undefined *)0x1,0,iVar5,iVar4,ppuVar9,cVar10);
+          this->pDelayedQuipPlayer = pCVar6;
+          _Globals::CDSAudioPlayer_PlayAndRelease(pCVar6,0);
           return;
         }
         if (this->pHitQuipPlayer == lParam) {
@@ -90963,25 +91133,25 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
         goto switchD_00420d73_caseD_2;
       case 0xd7:
         if (((this->dwView_flags & 1) != 0) && (this->bScriptDeathGuard == 0)) {
-          uVar2 = CBulanek_IsInKnockdownAnimBand((int)this);
-          if ((char)uVar2 != '\0') {
-            piVar5 = &this->nLivesRemaining;
-            *piVar5 = *piVar5 + -1;
-            if (*piVar5 != 0) {
+          uVar3 = CBulanek_IsInKnockdownAnimBand((int)this);
+          if ((char)uVar3 != '\0') {
+            piVar1 = &this->nLivesRemaining;
+            *piVar1 = *piVar1 + -1;
+            if (*piVar1 != 0) {
               *param_3 = 0;
               return;
             }
           }
-          CBulanek_OnDeath(this,(byte)((uint)lParam >> 8),bVar7);
+          CBulanek_OnDeath(this,(byte)((uint)lParam >> 8),bVar8);
           return;
         }
         *param_3 = 0;
         return;
       case 0xd8:
-        bVar1 = CGaming_IsPlayerSlotOccupied((CBulanek *)this->pGamingHostScratch,bVar7);
-        if (bVar1) {
+        bVar2 = CGaming_IsPlayerSlotOccupied((CBulanek *)this->pGamingHostScratch,bVar8);
+        if (bVar2) {
           this->dwScriptKillScore = this->dwScriptKillScore + 1;
-          if (bVar7 < 4) {
+          if (bVar8 < 4) {
                     // Script event 0xD8: increment anOpponentScriptTally[slot] @ +0x12C (human
                     // slots 0..3 only).
             this->pOpponentScriptTally[(uint)lParam & 0xff] =
@@ -90995,16 +91165,17 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
         return;
       case 0xdb:
         if (((this->dwView_flags & 1) != 0) && (this->pHitQuipPlayer == (void *)0x0)) {
-          cVar9 = '\x01';
-          ppuVar8 = &this->vftable_IDSReferenced;
-          iVar3 = _Globals::ComputeSpatialAttenuationDb100(&this->nOrigin_x);
-          iVar4 = CBulanek_GetHitQuipSlot((int)this);
+          cVar10 = '\x01';
+          ppuVar9 = &this->vftable_IDSReferenced;
+          iVar4 = _Globals::ComputeSpatialAttenuationDb100(&this->nOrigin_x);
+          iVar5 = CBulanek_GetHitQuipSlot((int)this);
                     // Hit quip (event 0xdb): TriggerBankSample with
                     // pEventTarget=pCdsViewPrefix+0x10; player stored at +0x170; completion event 1
                     // clears +0x170.
-          piVar5 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,iVar4,iVar3,ppuVar8,cVar9);
-          this->pHitQuipPlayer = piVar5;
-          _Globals::CDSAudioPlayer_PlayAndRelease(piVar5,0);
+          pCVar6 = (CDSAudioPlayer *)
+                   _Globals::TriggerBankSample((undefined *)0x1,0,iVar5,iVar4,ppuVar9,cVar10);
+          this->pHitQuipPlayer = pCVar6;
+          _Globals::CDSAudioPlayer_PlayAndRelease(pCVar6,0);
           return;
         }
       }
@@ -91013,9 +91184,9 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
   else {
     switch(eventId) {
     case 0xef:
-      uVar6 = (uint)lParam >> 8 & 0xff;
-      if (uVar6 == 0) {
-        if (bVar7 == this->bPlayerSlot) {
+      uVar7 = (uint)lParam >> 8 & 0xff;
+      if (uVar7 == 0) {
+        if (bVar8 == this->bPlayerSlot) {
           this->bDrawAsMuted = 0;
           CGaming::CGaming_RetestTraceAreasForEntity
                     ((CGaming *)this->pGamingHostScratch,(int *)this);
@@ -91023,13 +91194,13 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
           return;
         }
       }
-      else if (uVar6 == 1) {
-        if (bVar7 == this->bPlayerSlot) {
+      else if (uVar7 == 1) {
+        if (bVar8 == this->bPlayerSlot) {
           this->bScriptDeathGuard = 0;
           return;
         }
       }
-      else if ((uVar6 == 2) && (bVar7 == this->bPlayerSlot)) {
+      else if ((uVar7 == 2) && (bVar8 == this->bPlayerSlot)) {
         this->bIsAiVariant = 0;
         return;
       }
@@ -91042,19 +91213,19 @@ switchD_00420d73_caseD_2:
       if ((((this->pAiTrackHolders[0] != (void *)0x0) && ((this->dwView_flags & 1) != 0)) &&
           (this->dwPickupFacingLatch == 0)) && ((this->dwView_flags & 0x40) != 0)) {
         this->dwPickupFacingLatch = (uint)lParam;
-        uVar2 = CBulanek_TryApplyPickupMask(this,lParam[1] & 0xf,*lParam);
-        if (((char)uVar2 != '\0') &&
-           (uVar6 = CBulanek_SetFacingTrack(this,*(int *)this->dwPickupFacingLatch,'\0'),
-           (char)uVar6 != '\0')) {
-          uVar2 = CBulanek_IsInKnockdownAnimBand((int)this);
-          uVar6 = 2;
-          if ((char)uVar2 != '\0') {
+        uVar3 = CBulanek_TryApplyPickupMask(this,lParam[1] & 0xf,*lParam);
+        if (((char)uVar3 != '\0') &&
+           (uVar7 = CBulanek_SetFacingTrack(this,*(int *)this->dwPickupFacingLatch,'\0'),
+           (char)uVar7 != '\0')) {
+          uVar3 = CBulanek_IsInKnockdownAnimBand((int)this);
+          uVar7 = 2;
+          if ((char)uVar3 != '\0') {
             local_8 = (uint)(longlong)ROUND((1.0 / ((double)this->nSpeedParam / 100.0)) * 200.0);
             CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->scheduler,1,local_8,2);
             return;
           }
-          iVar3 = RandInRange(0,3);
-          CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->scheduler,1,iVar3 * 500,uVar6);
+          iVar4 = RandInRange(0,3);
+          CDSUpdatedItem::Scheduler_RegisterEventSlot(&this->scheduler,1,iVar4 * 500,uVar7);
           return;
         }
       }
@@ -91087,11 +91258,11 @@ void __thiscall CWeapon::CWeapon_Fire(CWeapon *this,undefined4 param_1,ushort pa
   bool bVar3;
   char cVar4;
   CMina *pCVar5;
-  void *pvVar6;
-  uint uVar7;
-  CShot *pCVar8;
-  uint uVar9;
-  int iVar10;
+  void *entity;
+  uint uVar6;
+  CShot *pCVar7;
+  uint uVar8;
+  int iVar9;
   int extraout_ECX;
   int local_14;
   int local_10;
@@ -91110,13 +91281,13 @@ void __thiscall CWeapon::CWeapon_Fire(CWeapon *this,undefined4 param_1,ushort pa
     pCVar5 = (CMina *)_Globals::OperatorNewWithBadAlloc(0x118);
     local_4 = 0;
     if (pCVar5 == (CMina *)0x0) {
-      pvVar6 = (void *)0x0;
+      entity = (void *)0x0;
     }
     else {
-      pvVar6 = (void *)CMina::CMina_Ctor(pCVar5,this->pTrackHolder);
+      entity = (void *)CMina::CMina_Ctor(pCVar5,this->pTrackHolder);
     }
     local_4 = 0xffffffff;
-    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pvVar6,'\x01');
+    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,entity,'\x01');
     _Globals::CBulanek_DecrementWeaponAmmo(this->pTrackHolder);
     if (3 < this->pTrackHolder->bPlayerSlot) {
       CBulanek::CBulanek_OnTakeDamage(this->pTrackHolder,-1,-1,'\0');
@@ -91125,42 +91296,42 @@ void __thiscall CWeapon::CWeapon_Fire(CWeapon *this,undefined4 param_1,ushort pa
   }
   if (((char)this->dwParamB == '\x04') && (param_2 != 0xffff)) {
     pCVar2 = this->pTrackHolder;
-    uVar9 = (pCVar2->videoTrackManager).nCurrentTrackIdx;
-    uVar7 = uVar9 & 0xff;
-    local_14 = *(int *)(&DAT_004829d0 + uVar7 * 8) + pCVar2->nOrigin_x;
-    local_10 = pCVar2->nOrigin_y + *(int *)(&DAT_004829d4 + uVar7 * 8);
-    pCVar8 = (CShot *)_Globals::OperatorNewWithBadAlloc(0xb0);
+    uVar8 = (pCVar2->videoTrackManager).nCurrentTrackIdx;
+    uVar6 = uVar8 & 0xff;
+    local_14 = *(int *)(&DAT_004829d0 + uVar6 * 8) + pCVar2->nOrigin_x;
+    local_10 = pCVar2->nOrigin_y + *(int *)(&DAT_004829d4 + uVar6 * 8);
+    pCVar7 = (CShot *)_Globals::OperatorNewWithBadAlloc(0xb0);
     local_4 = 1;
-    if (pCVar8 == (CShot *)0x0) {
-      pvVar6 = (void *)0x0;
+    if (pCVar7 == (CShot *)0x0) {
+      pCVar7 = (CShot *)0x0;
     }
     else {
-      pvVar6 = (void *)CShot::CShot_Ctor(pCVar8,&local_14,(CGameView *)this->pOwner,(byte)uVar9,
-                                         this->pTrackHolder->bPlayerSlot,(char)param_2 + 3,0);
+      pCVar7 = CShot::CShot_Ctor(pCVar7,&local_14,(CGameView *)this->pOwner,(byte)uVar8,
+                                 this->pTrackHolder->bPlayerSlot,(char)param_2 + 3,0);
     }
     local_4 = 0xffffffff;
-    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pvVar6,'\x01');
+    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pCVar7,'\x01');
     SetAmmo((CWeapon *)&this[-1].pHudIconB,4 - (uint)(param_2 < 3));
   }
   bVar1 = (byte)this->dwParamB;
   if ((bVar1 == 5) && (param_2 == 0)) {
     _Globals::CBulanek_DecrementWeaponAmmo(this->pTrackHolder);
     pCVar2 = this->pTrackHolder;
-    uVar9 = (pCVar2->videoTrackManager).nCurrentTrackIdx;
-    uVar7 = uVar9 & 0xff;
-    local_14 = *(int *)(&DAT_004829b0 + uVar7 * 8) + pCVar2->nOrigin_x;
-    local_10 = pCVar2->nOrigin_y + *(int *)(&DAT_004829b4 + uVar7 * 8);
-    pCVar8 = (CShot *)_Globals::OperatorNewWithBadAlloc(0xb0);
+    uVar8 = (pCVar2->videoTrackManager).nCurrentTrackIdx;
+    uVar6 = uVar8 & 0xff;
+    local_14 = *(int *)(&DAT_004829b0 + uVar6 * 8) + pCVar2->nOrigin_x;
+    local_10 = pCVar2->nOrigin_y + *(int *)(&DAT_004829b4 + uVar6 * 8);
+    pCVar7 = (CShot *)_Globals::OperatorNewWithBadAlloc(0xb0);
     local_4 = 2;
-    if (pCVar8 == (CShot *)0x0) {
-      pvVar6 = (void *)0x0;
+    if (pCVar7 == (CShot *)0x0) {
+      pCVar7 = (CShot *)0x0;
     }
     else {
-      pvVar6 = (void *)CShot::CShot_Ctor(pCVar8,&local_14,(CGameView *)this->pOwner,(byte)uVar9,
-                                         this->pTrackHolder->bPlayerSlot,2,0);
+      pCVar7 = CShot::CShot_Ctor(pCVar7,&local_14,(CGameView *)this->pOwner,(byte)uVar8,
+                                 this->pTrackHolder->bPlayerSlot,2,0);
     }
     local_4 = 0xffffffff;
-    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pvVar6,'\x01');
+    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pCVar7,'\x01');
     SetAmmo((CWeapon *)&this[-1].pHudIconB,7);
     ExceptionList = local_c;
     return;
@@ -91169,8 +91340,8 @@ void __thiscall CWeapon::CWeapon_Fire(CWeapon *this,undefined4 param_1,ushort pa
     if (bVar1 != 0) {
       cVar4 = _Globals::CBulanek_GetAmmoForKind(this->pTrackHolder,bVar1);
       if ((cVar4 == '\0') && (((byte)~(byte)this->pOwner->dwView_flags >> 4 & 1) == 0)) {
-        uVar9 = _Globals::CBulanek_IsHumanPlayer(extraout_ECX);
-        if ((char)uVar9 != '\0') {
+        uVar8 = _Globals::CBulanek_IsHumanPlayer(extraout_ECX);
+        if ((char)uVar8 != '\0') {
           _Globals::CDSView__PostMessage
                     (&this->pTrackHolder->vftable_IDSReferenced,0x200,0xd9,
                      (uint)(byte)this->dwParamB,0);
@@ -91189,8 +91360,8 @@ void __thiscall CWeapon::CWeapon_Fire(CWeapon *this,undefined4 param_1,ushort pa
         ExceptionList = local_c;
         return;
       }
-      iVar10 = RandInRange(0,99);
-      if (iVar10 < 0x28) {
+      iVar9 = RandInRange(0,99);
+      if (iVar9 < 0x28) {
         CBulanek::CBulanek_OnTakeDamage(this->pTrackHolder,-1,-1,'\0');
       }
     }
@@ -91407,12 +91578,12 @@ CStaticText * __cdecl CHelpHistoryScript::HhSetStaticTextStyleAttrs(CDSScript *p
 void * __cdecl CHelpScript::HhAddChildToParentView(CHelpScript *script)
 
 {
-  void *extraout_EAX;
+  CBulanci *extraout_EAX;
   
                     // R4 todo11: cdecl script* @ [ESP+0xc]; ReadSubExpr(&script->script);
                     // AddChild(script->pBoundView, child, 0)
   CDSScript::ReadSubExpr(&script->script);
-  CDSView::CDSView__AddChild(script->pBoundView,extraout_EAX,0);
+  CDSView::CDSView__AddChild(script->pBoundView,extraout_EAX,(void *)0x0);
   return extraout_EAX;
 }
 
@@ -91757,9 +91928,9 @@ void __thiscall CHelpDlg::CHelpDlg_LoadHelpPage(CHelpDlg *this,int pageIndex)
     iVar8 = iVar1 + -1;
   }
   if (iVar8 != this->nM_currentPage) {
-    if (this->pHelpView != (CHelpView *)0x0) {
+    if ((CDSView *)this->pHelpView != (CDSView *)0x0) {
                     // CMenu_DetachChildWithVisibility before releasing prior CHelpView
-      CMenu::CMenu_DetachChildWithVisibility((CMenu *)this,(int *)this->pHelpView);
+      CMenu::CMenu_DetachChildWithVisibility((CMenu *)this,(CDSView *)this->pHelpView);
       (**(code **)((int)(this->pHelpView->chain).pVftable_primary + 8))();
       if (this->pActiveScript != (CDSScript *)0x0) {
         (**(code **)(this->pActiveScript->pVftable_IDSReferenced + 8))();
@@ -91789,7 +91960,7 @@ void __thiscall CHelpDlg::CHelpDlg_LoadHelpPage(CHelpDlg *this,int pageIndex)
       CHelpScript::CDSScript_SetBoundParentView((CHelpScript *)this->pActiveScript,pCVar6);
       pageIndex = 1;
       CDSScript::CallExport(this->pActiveScript,0,1,&pageIndex);
-      CDSView::CDSView__AddChild((CDSView *)this,this->pHelpView,this->pIconFirst);
+      CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)this->pHelpView,this->pIconFirst);
     }
     iVar8 = 4;
     pCVar7 = this + 1;
@@ -91800,12 +91971,12 @@ void __thiscall CHelpDlg::CHelpDlg_LoadHelpPage(CHelpDlg *this,int pageIndex)
       CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)pCVar3->pIconLast);
     } while (iVar8 != 0);
     if (0 < this->nM_currentPage) {
-      _Globals::CDSView_EnableWidget((int *)this->pIconFirst);
-      _Globals::CDSView_EnableWidget((int *)this->pIconPrev);
+      _Globals::CDSView_EnableWidget((CDSView *)this->pIconFirst);
+      _Globals::CDSView_EnableWidget((CDSView *)this->pIconPrev);
     }
     if ((-1 < this->nM_currentPage) && (this->nM_currentPage + 1 < (this->m_pageIds).nM_count)) {
-      _Globals::CDSView_EnableWidget((int *)this->pIconNext);
-      _Globals::CDSView_EnableWidget((int *)this->pIconLast);
+      _Globals::CDSView_EnableWidget((CDSView *)this->pIconNext);
+      _Globals::CDSView_EnableWidget((CDSView *)this->pIconLast);
     }
   }
   ExceptionList = local_c;
@@ -91867,7 +92038,8 @@ CHelpDlg * __fastcall CHelpDlg::CHelpDlgCtor(CHelpDlg *this)
   int iVar2;
   int iVar3;
   CIcon *pCVar4;
-  int iVar5;
+  CBulanci *pCVar5;
+  int iVar6;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -91876,7 +92048,7 @@ CHelpDlg * __fastcall CHelpDlg::CHelpDlgCtor(CHelpDlg *this)
   puStack_8 = &LAB_00477d6d;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  iVar5 = 0;
+  iVar6 = 0;
   CWindow::CWindow_BuildAt(&this->win,0xe7,0x24,0x2fa,0x239,'\0');
   (this->win).pVftable_primary = &g_pCHelpDlg_vftable_primary;
   (this->win).pVftable_IDSChained = &vftable;
@@ -91895,62 +92067,62 @@ CHelpDlg * __fastcall CHelpDlg::CHelpDlgCtor(CHelpDlg *this)
   if (0 < iVar2) {
     do {
       iVar3 = (**(code **)(*piVar1 + 0x1c))();
-      iVar5 = iVar5 + 1;
+      iVar6 = iVar6 + 1;
       if (*(int *)(iVar3 + 0xc) == 0x81c) {
         _Globals::CIntListInsertSortedOrAppend
                   (&this->m_pageIds,*(int *)(iVar3 + 8),(undefined *)0x0,1);
       }
-    } while (iVar5 < iVar2);
+    } while (iVar6 < iVar2);
   }
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 3;
   if (pCVar4 == (CIcon *)0x0) {
-    pCVar4 = (CIcon *)0x0;
+    pCVar5 = (CBulanci *)0x0;
   }
   else {
                     // CHelpDlg first-page CIcon: resource id slot g_resId_0x10038
                     // (ui_pageNav_first_normal).
-    pCVar4 = CIcon::CIcon_BuildAt(pCVar4,0x27,0x1e0,0xe5,0x482b28);
+    pCVar5 = (CBulanci *)CIcon::CIcon_BuildAt(pCVar4,0x27,0x1e0,0xe5,0x482b28);
   }
   local_4._0_1_ = 2;
-  this->pIconFirst = pCVar4;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconFirst = (CIcon *)pCVar5;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar5,(void *)0x0);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 4;
   if (pCVar4 == (CIcon *)0x0) {
-    pCVar4 = (CIcon *)0x0;
+    pCVar5 = (CBulanci *)0x0;
   }
   else {
                     // CHelpDlg prev-page CIcon: g_resId_0x1003b (ui_pageNav_prev_normal).
-    pCVar4 = CIcon::CIcon_BuildAt(pCVar4,0x38,0x1e0,0xe6,0x482b1c);
+    pCVar5 = (CBulanci *)CIcon::CIcon_BuildAt(pCVar4,0x38,0x1e0,0xe6,0x482b1c);
   }
   local_4._0_1_ = 2;
-  this->pIconPrev = pCVar4;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconPrev = (CIcon *)pCVar5;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar5,(void *)0x0);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 5;
   if (pCVar4 == (CIcon *)0x0) {
-    pCVar4 = (CIcon *)0x0;
+    pCVar5 = (CBulanci *)0x0;
   }
   else {
-    pCVar4 = CIcon::CIcon_BuildAt(pCVar4,0x48,0x1e0,0xe7,0x482b10);
+    pCVar5 = (CBulanci *)CIcon::CIcon_BuildAt(pCVar4,0x48,0x1e0,0xe7,0x482b10);
   }
   local_4._0_1_ = 2;
-  this->pIconNext = pCVar4;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconNext = (CIcon *)pCVar5;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar5,(void *)0x0);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 6;
   if (pCVar4 == (CIcon *)0x0) {
-    pCVar4 = (CIcon *)0x0;
+    pCVar5 = (CBulanci *)0x0;
   }
   else {
                     // CHelpDlg nav CIcons use g_kHelpDlg_pageNavIconResIds @ 0x482b04 — same 12
                     // BitmapSpecial IDs as history dialog
-    pCVar4 = CIcon::CIcon_BuildAt(pCVar4,0x5b,0x1e0,0xe8,0x482b04);
+    pCVar5 = (CBulanci *)CIcon::CIcon_BuildAt(pCVar4,0x5b,0x1e0,0xe8,0x482b04);
   }
   local_4 = CONCAT31(local_4._1_3_,2);
-  this->pIconLast = pCVar4;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconLast = (CIcon *)pCVar5;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar5,(void *)0x0);
   CHelpDlg_LoadHelpPage(this,0);
   ExceptionList = local_c;
   return this;
@@ -92187,13 +92359,13 @@ _Globals::CDSAudioPlayer_Create
 
 
 
-void _Globals::CDSAudioPlayer_PlayAndRelease(int *param_1,undefined1 param_2)
+void _Globals::CDSAudioPlayer_PlayAndRelease(CDSAudioPlayer *param_1,byte param_2)
 
 {
-  CDSAudioPlayer::CDSAudioPlayer_Play((CDSAudioPlayer *)param_1,param_2);
+  CDSAudioPlayer::CDSAudioPlayer_Play(param_1,param_2);
                     // WARNING: Could not recover jumptable at 0x004223d9. Too many branches
                     // WARNING: Treating indirect jump as call
-  (**(code **)(*param_1 + 8))();
+  (**(code **)((int)param_1->pVftable_primary + 8))();
   return;
 }
 
@@ -92561,10 +92733,10 @@ int __cdecl CHelpHistoryScript::HhSetByteFieldAt0x18(CDSScript *param_1)
 
 
 
-void __thiscall CMovieView::OnMovieStop(CMovieView *this,char param_1)
+void __thiscall CMovieView::OnMovieStop(undefined4 param_1_00,char param_2)
 
 {
-  if (param_1 == '\0') {
+  if (param_2 == '\0') {
     StopPlayback();
   }
   CBulanci::CDSView_NoOpStub();
@@ -93091,9 +93263,9 @@ void __thiscall CHistoryDlg::CHistoryDlg_LoadHistoryPage(CHistoryDlg *this,int p
     iVar8 = iVar1 + -1;
   }
   if (iVar8 != this->nM_currentPage) {
-    if (this->pHistoryView != (CHistoryView *)0x0) {
+    if ((CDSView *)this->pHistoryView != (CDSView *)0x0) {
                     // CMenu_DetachChildWithVisibility before releasing prior CHistoryView
-      CMenu::CMenu_DetachChildWithVisibility((CMenu *)this,(int *)this->pHistoryView);
+      CMenu::CMenu_DetachChildWithVisibility((CMenu *)this,(CDSView *)this->pHistoryView);
       (**(code **)((int)(this->pHistoryView->chain).pVftable_primary + 8))();
       if (this->pActiveScript != (CDSScript *)0x0) {
         (**(code **)(this->pActiveScript->pVftable_IDSReferenced + 8))();
@@ -93129,7 +93301,7 @@ void __thiscall CHistoryDlg::CHistoryDlg_LoadHistoryPage(CHistoryDlg *this,int p
       CHelpScript::CDSScript_SetBoundParentView((CHelpScript *)this->pActiveScript,pCVar6);
       pageIndex = 1;
       CDSScript::CallExport(this->pActiveScript,0,1,&pageIndex);
-      CDSView::CDSView__AddChild((CDSView *)this,this->pHistoryView,this->pIconFirst);
+      CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)this->pHistoryView,this->pIconFirst);
     }
     iVar8 = 4;
     pCVar7 = this + 1;
@@ -93140,12 +93312,12 @@ void __thiscall CHistoryDlg::CHistoryDlg_LoadHistoryPage(CHistoryDlg *this,int p
       CDSView::CDSView_SetAsDefaultFocusChild((CDSView *)pCVar3->pIconLast);
     } while (iVar8 != 0);
     if (0 < this->nM_currentPage) {
-      _Globals::CDSView_EnableWidget((int *)this->pIconFirst);
-      _Globals::CDSView_EnableWidget((int *)this->pIconPrev);
+      _Globals::CDSView_EnableWidget((CDSView *)this->pIconFirst);
+      _Globals::CDSView_EnableWidget((CDSView *)this->pIconPrev);
     }
     if ((-1 < this->nM_currentPage) && (this->nM_currentPage + 1 < (this->m_pageIds).nM_count)) {
-      _Globals::CDSView_EnableWidget((int *)this->pIconNext);
-      _Globals::CDSView_EnableWidget((int *)this->pIconLast);
+      _Globals::CDSView_EnableWidget((CDSView *)this->pIconNext);
+      _Globals::CDSView_EnableWidget((CDSView *)this->pIconLast);
     }
   }
   ExceptionList = local_c;
@@ -93200,7 +93372,8 @@ CHistoryDlg * __fastcall CHistoryDlg::CHistoryDlg_ctor(CHistoryDlg *this)
   int iVar2;
   int iVar3;
   CIcon *pCVar4;
-  int iVar5;
+  CBulanci *pCVar5;
+  int iVar6;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
@@ -93211,7 +93384,7 @@ CHistoryDlg * __fastcall CHistoryDlg::CHistoryDlg_ctor(CHistoryDlg *this)
   puStack_8 = &LAB_004780fd;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  iVar5 = 0;
+  iVar6 = 0;
   CWindow::CWindow_BuildAt(&this->win,0xe7,0x24,0x2fa,0x239,'\0');
   (this->win).pVftable_primary = vftable;
   (this->win).pVftable_IDSChained = g_pCHistoryDlg_vftable_IDSChained;
@@ -93230,7 +93403,7 @@ CHistoryDlg * __fastcall CHistoryDlg::CHistoryDlg_ctor(CHistoryDlg *this)
   if (0 < iVar2) {
     do {
       iVar3 = (**(code **)(*piVar1 + 0x1c))();
-      iVar5 = iVar5 + 1;
+      iVar6 = iVar6 + 1;
                     // CHistoryDlg_ctor: enumerate g_pApp script registry; filter
                     // *(entry+0xc)==0x802 (classId CHistoryScript / decimal 2050); append
                     // *(entry+8) page id to m_pageIds.
@@ -93238,53 +93411,53 @@ CHistoryDlg * __fastcall CHistoryDlg::CHistoryDlg_ctor(CHistoryDlg *this)
         _Globals::CIntListInsertSortedOrAppend
                   (&this->m_pageIds,*(int *)(iVar3 + 8),(undefined *)0x0,1);
       }
-    } while (iVar5 < iVar2);
+    } while (iVar6 < iVar2);
   }
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 3;
   if (pCVar4 == (CIcon *)0x0) {
-    pCVar4 = (CIcon *)0x0;
+    pCVar5 = (CBulanci *)0x0;
   }
   else {
                     // CHistoryDlg nav CIcon -> g_resId_0x10038 (ui_pageNav_first_normal).
-    pCVar4 = CIcon::CIcon_BuildAt(pCVar4,0x27,0x1e0,0xe5,0x483390);
+    pCVar5 = (CBulanci *)CIcon::CIcon_BuildAt(pCVar4,0x27,0x1e0,0xe5,0x483390);
   }
   local_4._0_1_ = 2;
-  this->pIconFirst = pCVar4;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconFirst = (CIcon *)pCVar5;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar5,(void *)0x0);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 4;
   if (pCVar4 == (CIcon *)0x0) {
-    pCVar4 = (CIcon *)0x0;
+    pCVar5 = (CBulanci *)0x0;
   }
   else {
-    pCVar4 = CIcon::CIcon_BuildAt(pCVar4,0x38,0x1e0,0xe6,0x483384);
+    pCVar5 = (CBulanci *)CIcon::CIcon_BuildAt(pCVar4,0x38,0x1e0,0xe6,0x483384);
   }
   local_4._0_1_ = 2;
-  this->pIconPrev = pCVar4;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconPrev = (CIcon *)pCVar5;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar5,(void *)0x0);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 5;
   if (pCVar4 == (CIcon *)0x0) {
-    pCVar4 = (CIcon *)0x0;
+    pCVar5 = (CBulanci *)0x0;
   }
   else {
-    pCVar4 = CIcon::CIcon_BuildAt(pCVar4,0x48,0x1e0,0xe7,0x483378);
+    pCVar5 = (CBulanci *)CIcon::CIcon_BuildAt(pCVar4,0x48,0x1e0,0xe7,0x483378);
   }
   local_4._0_1_ = 2;
-  this->pIconNext = pCVar4;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconNext = (CIcon *)pCVar5;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar5,(void *)0x0);
   pCVar4 = (CIcon *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_4._0_1_ = 6;
   if (pCVar4 == (CIcon *)0x0) {
-    pCVar4 = (CIcon *)0x0;
+    pCVar5 = (CBulanci *)0x0;
   }
   else {
-    pCVar4 = CIcon::CIcon_BuildAt(pCVar4,0x5b,0x1e0,0xe8,0x48336c);
+    pCVar5 = (CBulanci *)CIcon::CIcon_BuildAt(pCVar4,0x5b,0x1e0,0xe8,0x48336c);
   }
   local_4 = CONCAT31(local_4._1_3_,2);
-  this->pIconLast = pCVar4;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconLast = (CIcon *)pCVar5;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar5,(void *)0x0);
   ExceptionList = local_c;
   return this;
 }
@@ -93740,7 +93913,7 @@ void __thiscall CSwitch::CSwitch_OnFocusChange(CSwitch *this,undefined4 param_1,
 
 {
   if (param_2 == 1) {
-    _Globals::CControl_ClaimModalFocusOnPress((int *)this);
+    _Globals::CControl_ClaimModalFocusOnPress((CDSView *)this);
   }
   return;
 }
@@ -93755,7 +93928,7 @@ void __thiscall CMenu::CMenu_CloseCurrentSubScreen(CMenu *this,char param_1)
   int iVar3;
   
   if (((param_1 != '\0') && (iVar3 = this->nPushedSubScreenId, -1 < iVar3)) && (iVar3 < 6)) {
-    _Globals::CDSView__Show(*(int **)(this->pPad_a8_af + iVar3 * 8 + -0x18));
+    _Globals::CDSView__Show(*(CDSView **)(this->pPad_a8_af + iVar3 * 8 + -0x18));
     CDSView::CDSView__Hide(*(CDSView **)(this->pPad_a8_af + this->nPushedSubScreenId * 8 + -0x14));
   }
   pCVar1 = this->pCurSubScreen;
@@ -93768,7 +93941,7 @@ void __thiscall CMenu::CMenu_CloseCurrentSubScreen(CMenu *this,char param_1)
     else if (this->nPushedSubScreenId == 1) {
       *(void **)((int)g_pApp + 0x306) = pCVar1[1].win.pVftable_primary;
     }
-    CMenu_DetachChildWithVisibility(this,(int *)this->pCurSubScreen);
+    CMenu_DetachChildWithVisibility(this,this->pCurSubScreen);
     if (this->pCurSubScreen != (CDSView *)0x0) {
       (**(code **)((int)(this->pCurSubScreen->win).pVftable_primary + 4))(1);
     }
@@ -94068,7 +94241,7 @@ CRuch * __thiscall CRuch::CRuch_ScalarDeletingDtor(CRuch *this,byte param_1)
 // to a new X, repeats. Four instances run in parallel on the menu
 // background. See main_menu.md sec. 9.2.
 
-void __fastcall CRuch::CRuch_OnScheduledTick(void *param_1)
+void __fastcall CRuch::CRuch_OnScheduledTick(CDSUpdatedItem *param_1)
 
 {
   int iVar1;
@@ -94076,23 +94249,23 @@ void __fastcall CRuch::CRuch_OnScheduledTick(void *param_1)
   int iVar3;
   int iVar4;
   
-  if ((*(byte *)((int)param_1 + -0x24) & 1) != 0) {
+  if (((uint)param_1[-2].pEventSlots & 1) != 0) {
     iVar2 = Runtime::MSVCRT::_rand();
     CDSUpdatedItem::Scheduler_SetEventDelayMs
               (param_1,0,(int)(iVar2 * 0xfa1 + (iVar2 * 0xfa1 >> 0x1f & 0x7fffU)) >> 0xf);
-    CDSView::CDSView__Hide((CDSView *)((int)param_1 + -0x68));
+    CDSView::CDSView__Hide((CDSView *)&param_1[-5].dwEventSlots);
     iVar2 = *(int *)((int)g_pApp + 0x28);
     iVar1 = *(int *)((int)g_pApp + 0x20);
     iVar4 = 0;
     iVar3 = Runtime::MSVCRT::_rand();
     iVar3 = iVar3 * (iVar2 - iVar1);
     CDSView::CDSView__SetPosition
-              ((CDSView *)((int)param_1 + -0x68),(int)(iVar3 + (iVar3 >> 0x1f & 0x7fffU)) >> 0xf,
+              ((CDSView *)&param_1[-5].dwEventSlots,(int)(iVar3 + (iVar3 >> 0x1f & 0x7fffU)) >> 0xf,
                iVar4);
     return;
   }
   CDSUpdatedItem::Scheduler_SetEventDelayMs(param_1,0,100);
-  _Globals::CDSView__Show((int *)((int)param_1 + -0x68));
+  _Globals::CDSView__Show((CDSView *)&param_1[-5].dwEventSlots);
   return;
 }
 
@@ -94177,8 +94350,8 @@ void __fastcall _Globals::CSwitch_PlayHoverTrack(int param_1)
 
 {
   void *pvVar1;
-  int *piVar2;
-  undefined1 uVar3;
+  CDSAudioPlayer *pCVar2;
+  byte bVar3;
   
                     // CSwitch_PlayHoverTrack(this)
                     // 
@@ -94207,14 +94380,14 @@ void __fastcall _Globals::CSwitch_PlayHoverTrack(int param_1)
   if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
     SetCurrentTrack((CDSVideoPlayer *)(param_1 + 0x7c),0,'\x01');
     CDSVideoPlayer::TM_Play((CDSVideoPlayer *)(param_1 + 0x7c),'\0');
-    uVar3 = 0;
+    bVar3 = 0;
                     // Retail CSwitch hover path: only reachable when CSwitch_OnMouseEnter or
                     // OnAnimEnd decides the switch is eligible. It switches to track 0, starts
                     // playback, then creates a fresh one-shot CDSAudioPlayer for global AudioBank
                     // slot 0 and immediately plays/releases it. There is no global 'hover sample
                     // already playing' suppression here.
-    piVar2 = (int *)TriggerBankSample((undefined *)0x1,0,0,0,(void *)0x0,'\x01');
-    CDSAudioPlayer_PlayAndRelease(piVar2,uVar3);
+    pCVar2 = (CDSAudioPlayer *)TriggerBankSample((undefined *)0x1,0,0,0,(void *)0x0,'\x01');
+    CDSAudioPlayer_PlayAndRelease(pCVar2,bVar3);
   }
   return;
 }
@@ -95501,7 +95674,7 @@ undefined4 _Globals::CMenu_CreateObject(void)
 CMenu * __thiscall CMenu::CMenu_VectorDtorWrapper(CMenu *this,byte param_1)
 
 {
-  CMenu_dtor();
+  CMenu_dtor(this);
   if ((param_1 & 1) != 0) {
     Runtime::MSVCRT::_free(this);
   }
@@ -95622,7 +95795,7 @@ void __thiscall CMenu::CMenu_DispatchHotkey(CMenu *this,ushort modalExitCode,int
     }
     this->pDeferredExitVoicePlayer = pCVar1;
     pCVar1->dwRefCount = pCVar1->dwRefCount + 1;
-    _Globals::CDSAudioPlayer_PlayAndRelease((int *)this->pDeferredExitVoicePlayer,0);
+    _Globals::CDSAudioPlayer_PlayAndRelease(this->pDeferredExitVoicePlayer,0);
     ppCVar2 = &this->pBtnStart;
     iVar3 = 3;
     do {
@@ -95688,15 +95861,16 @@ void __thiscall CBulanci::CMenu_PollDayNight(CBulanci *this,char param_1)
 
 {
   bool bVar1;
-  int *piVar2;
-  bool local_8 [8];
+  CBulanci *pCVar2;
+  bool local_8;
+  undefined3 uStack_7;
   
                     // Main menu day/night poll. Reads local time, derives hour as
                     // packedDateTime>>25, and treats hours 22..23 and 0..5 as night. On state
                     // change or force it calls CMenu_SetDayNightBg to swap menu background/music.
-  piVar2 = (int *)BuildLocalDateTime(local_8);
-  bVar1 = 0xf < (*piVar2 >> 0x19) - 6U;
-  local_8[0] = bVar1;
+  pCVar2 = BuildLocalDateTime((CBulanci *)&local_8);
+  bVar1 = 0xf < ((int)(pCVar2->app).vftable_primary >> 0x19) - 6U;
+  _local_8 = (undefined *)CONCAT31(uStack_7,bVar1);
   if ((bVar1 != (bool)*(char *)((int)&(this->app).nMouseX + 1)) || (param_1 != '\0')) {
     CMenu_SetDayNightBg(this,bVar1);
   }
@@ -95994,7 +96168,8 @@ void __thiscall CMenu::CMenu_LoadBackgroundResource(CMenu *this,undefined4 param
 {
   int *trackParams;
   void *this_00;
-  CDSBitmap *pCVar1;
+  CDSBitmap *this_01;
+  CBulanci *pCVar1;
   void *unaff_ESI;
   void *local_c;
   undefined1 *puStack_8;
@@ -96012,22 +96187,23 @@ void __thiscall CMenu::CMenu_LoadBackgroundResource(CMenu *this,undefined4 param
   }
   trackParams = piStack_4;
   local_c = (void *)0x0;
-  if (this->pSubScreenBgBitmap != (CDSBitmap *)0x0) {
-    CMenu_DetachChildWithVisibility(this,(int *)this->pSubScreenBgBitmap);
+  if ((CDSView *)this->pSubScreenBgBitmap != (CDSView *)0x0) {
+    CMenu_DetachChildWithVisibility(this,(CDSView *)this->pSubScreenBgBitmap);
     (**(code **)(this->pSubScreenBgBitmap->pVftable_primary + 8))();
   }
-  pCVar1 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
+  this_01 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 1;
-  if (pCVar1 == (CDSBitmap *)0x0) {
-    pCVar1 = (CDSBitmap *)0x0;
+  if (this_01 == (CDSBitmap *)0x0) {
+    pCVar1 = (CBulanci *)0x0;
   }
   else {
-    pCVar1 = CDSBitmap::CDSBitmap_ctor(pCVar1,800 - trackParams[1],600 - trackParams[2],trackParams)
-    ;
+    pCVar1 = (CBulanci *)
+             CDSBitmap::CDSBitmap_ctor
+                       (this_01,800 - trackParams[1],600 - trackParams[2],trackParams);
   }
-  this->pSubScreenBgBitmap = pCVar1;
+  this->pSubScreenBgBitmap = (CDSBitmap *)pCVar1;
   local_c = (void *)((uint)local_c._1_3_ << 8);
-  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,this->pTitleBitmap->dwField_0c);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar1,(void *)this->pTitleBitmap->dwField_0c);
   local_c = (void *)0xffffffff;
   if (trackParams != (int *)0x0) {
     (**(code **)(*trackParams + 8))();
@@ -96067,13 +96243,13 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
 {
   uint uVar1;
   CExitDlg *this_00;
-  CDSView *pCVar2;
-  int *piVar3;
+  CBulanci *pCVar2;
+  CDSAudioPlayer *pCVar3;
   CHistoryDlg *pCVar4;
-  CStartGame1 *pCVar5;
+  CStartGame1 *this_01;
   undefined4 extraout_EDX;
   ushort modalExitCode;
-  undefined1 uVar6;
+  byte bVar5;
   int audioSlot;
   void *local_c;
   undefined1 *puStack_8;
@@ -96095,7 +96271,7 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
       if (param_1 == 0xca) {
         CMenu_CloseCurrentSubScreen(this,'\x01');
         CDSView::CDSView__Hide((CDSView *)this->pIconHistoryNormal);
-        _Globals::CDSView__Show((int *)this->pIconHistoryHighlight);
+        _Globals::CDSView__Show((CDSView *)this->pIconHistoryHighlight);
         CMenu_LoadBackgroundResource(this,0x1013e);
         pCVar4 = (CHistoryDlg *)_Globals::OperatorNewWithBadAlloc(0x9c);
         local_4 = (void *)0x1;
@@ -96108,10 +96284,11 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
         this->pCurSubScreen = (CDSView *)pCVar4;
         local_4 = (void *)0xffffffff;
         CHistoryDlg::CHistoryDlg_LoadHistoryPage(pCVar4,*(int *)((int)g_pApp + 0x306));
-        CDSView::CDSView__AddChild((CDSView *)this,this->pCurSubScreen,this->pRuch0);
-        uVar6 = 0;
-        piVar3 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x18,0,(void *)0x0,'\x01');
-        _Globals::CDSAudioPlayer_PlayAndRelease(piVar3,uVar6);
+        CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)this->pCurSubScreen,this->pRuch0);
+        bVar5 = 0;
+        pCVar3 = (CDSAudioPlayer *)
+                 _Globals::TriggerBankSample((undefined *)0x1,0,0x18,0,(void *)0x0,'\x01');
+        _Globals::CDSAudioPlayer_PlayAndRelease(pCVar3,bVar5);
         this->nPushedSubScreenId = 1;
         ExceptionList = local_4;
         return;
@@ -96119,22 +96296,23 @@ void __thiscall CMenu::CMenu_CmdDispatch(CMenu *this,ushort param_1)
       if (param_1 == 0xcb) {
         CMenu_CloseCurrentSubScreen(this,'\x01');
         CDSView::CDSView__Hide((CDSView *)this->pIconQuitNormal);
-        _Globals::CDSView__Show((int *)this->pIconQuitHighlight);
+        _Globals::CDSView__Show((CDSView *)this->pIconQuitHighlight);
         CMenu_LoadBackgroundResource(this,0x1013d);
         this_00 = (CExitDlg *)_Globals::OperatorNewWithBadAlloc(0x7c);
         local_4 = (void *)0x2;
         if (this_00 == (CExitDlg *)0x0) {
-          pCVar2 = (CDSView *)0x0;
+          pCVar2 = (CBulanci *)0x0;
         }
         else {
-          pCVar2 = (CDSView *)CExitDlg::CExitDlg_ctor(this_00);
+          pCVar2 = (CBulanci *)CExitDlg::CExitDlg_ctor(this_00);
         }
         local_4 = (void *)0xffffffff;
-        this->pCurSubScreen = pCVar2;
+        this->pCurSubScreen = (CDSView *)pCVar2;
         CDSView::CDSView__AddChild((CDSView *)this,pCVar2,this->pRuch0);
-        uVar6 = 0;
-        piVar3 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x19,0,(void *)0x0,'\x01');
-        _Globals::CDSAudioPlayer_PlayAndRelease(piVar3,uVar6);
+        bVar5 = 0;
+        pCVar3 = (CDSAudioPlayer *)
+                 _Globals::TriggerBankSample((undefined *)0x1,0,0x19,0,(void *)0x0,'\x01');
+        _Globals::CDSAudioPlayer_PlayAndRelease(pCVar3,bVar5);
         this->nPushedSubScreenId = 2;
         ExceptionList = local_4;
         return;
@@ -96146,22 +96324,23 @@ LAB_00425c48:
     }
     CMenu_CloseCurrentSubScreen(this,'\x01');
     CDSView::CDSView__Hide((CDSView *)this->pIconStartNormal);
-    _Globals::CDSView__Show((int *)this->pIconStartHighlight);
+    _Globals::CDSView__Show((CDSView *)this->pIconStartHighlight);
     CMenu_LoadBackgroundResource(this,0x1013c);
-    pCVar5 = (CStartGame1 *)_Globals::OperatorNewWithBadAlloc(0xa8);
+    this_01 = (CStartGame1 *)_Globals::OperatorNewWithBadAlloc(0xa8);
     local_4 = (void *)0x0;
-    if (pCVar5 == (CStartGame1 *)0x0) {
-      pCVar5 = (CStartGame1 *)0x0;
+    if (this_01 == (CStartGame1 *)0x0) {
+      pCVar2 = (CBulanci *)0x0;
     }
     else {
-      pCVar5 = CStartGame1::CStartGame1_ctor(pCVar5);
+      pCVar2 = (CBulanci *)CStartGame1::CStartGame1_ctor(this_01);
     }
     local_4 = (void *)0xffffffff;
-    this->pCurSubScreen = (CDSView *)pCVar5;
-    CDSView::CDSView__AddChild((CDSView *)this,pCVar5,this->pRuch0);
-    uVar6 = 0;
-    piVar3 = (int *)_Globals::TriggerBankSample((undefined *)0x1,0,0x1b,0,(void *)0x0,'\x01');
-    _Globals::CDSAudioPlayer_PlayAndRelease(piVar3,uVar6);
+    this->pCurSubScreen = (CDSView *)pCVar2;
+    CDSView::CDSView__AddChild((CDSView *)this,pCVar2,this->pRuch0);
+    bVar5 = 0;
+    pCVar3 = (CDSAudioPlayer *)
+             _Globals::TriggerBankSample((undefined *)0x1,0,0x1b,0,(void *)0x0,'\x01');
+    _Globals::CDSAudioPlayer_PlayAndRelease(pCVar3,bVar5);
     this->nPushedSubScreenId = 0;
     if (this->bLastSplashFlag != 0) {
       _Globals::CDSView__PostMessage
@@ -96742,10 +96921,11 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
 {
   void *pvVar1;
   CDSBitmap *pCVar2;
-  CSwitch *pCVar3;
+  CBulanci *pCVar3;
+  CSwitch *pCVar4;
   CPoemScroller *this_00;
   CStaticText *this_01;
-  CRuch *pCVar4;
+  CRuch *this_02;
   int *unaff_EBX;
   int *piVar5;
   int iVar6;
@@ -96801,52 +96981,52 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 5;
   if (pCVar2 == (CDSBitmap *)0x0) {
-    pCVar2 = (CDSBitmap *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
-    pCVar2 = CDSBitmap::CDSBitmap_ctor(pCVar2,0,0,trackParams_00);
+    pCVar3 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(pCVar2,0,0,trackParams_00);
   }
   local_c._0_1_ = 4;
-  this->pTitleBitmap = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar3 = (CSwitch *)_Globals::OperatorNewWithBadAlloc(200);
+  this->pTitleBitmap = (CDSBitmap *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
+  pCVar4 = (CSwitch *)_Globals::OperatorNewWithBadAlloc(200);
   local_c._0_1_ = 6;
-  if (pCVar3 == (CSwitch *)0x0) {
-    pCVar3 = (CSwitch *)0x0;
+  if (pCVar4 == (CSwitch *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
-    pCVar3 = CSwitch::CSwitch_ctor(pCVar3,0x23,0x25,'\x01',0xc9);
+    pCVar3 = (CBulanci *)CSwitch::CSwitch_ctor(pCVar4,0x23,0x25,'\x01',0xc9);
   }
   local_c._0_1_ = 4;
-  this->pBtnStart = pCVar3;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar3 = (CSwitch *)_Globals::OperatorNewWithBadAlloc(200);
+  this->pBtnStart = (CSwitch *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
+  pCVar4 = (CSwitch *)_Globals::OperatorNewWithBadAlloc(200);
   local_c._0_1_ = 7;
-  if (pCVar3 == (CSwitch *)0x0) {
-    pCVar3 = (CSwitch *)0x0;
+  if (pCVar4 == (CSwitch *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
-    pCVar3 = CSwitch::CSwitch_ctor(pCVar3,0x23,0x79,'\x01',0xca);
+    pCVar3 = (CBulanci *)CSwitch::CSwitch_ctor(pCVar4,0x23,0x79,'\x01',0xca);
   }
   local_c._0_1_ = 4;
-  this->pBtnHistory = pCVar3;
-  CDSView::CDSView__AddChild((CDSView *)this);
-  pCVar3 = (CSwitch *)_Globals::OperatorNewWithBadAlloc(200);
+  this->pBtnHistory = (CSwitch *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
+  pCVar4 = (CSwitch *)_Globals::OperatorNewWithBadAlloc(200);
   local_c._0_1_ = 8;
-  if (pCVar3 == (CSwitch *)0x0) {
-    pCVar3 = (CSwitch *)0x0;
+  if (pCVar4 == (CSwitch *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
-    pCVar3 = CSwitch::CSwitch_ctor(pCVar3,0x23,0xcd,'\x01',0xcb);
+    pCVar3 = (CBulanci *)CSwitch::CSwitch_ctor(pCVar4,0x23,0xcd,'\x01',0xcb);
   }
   local_c._0_1_ = 4;
-  this->pBtnQuit = pCVar3;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pBtnQuit = (CSwitch *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   local_c._0_1_ = 9;
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 10;
   if (pCVar2 == (CDSBitmap *)0x0) {
-    pCVar2 = (CDSBitmap *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
                     // Load menu Start icon normal (BitmapSpecial 0x10093 /
@@ -96855,15 +97035,15 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
     if (pvVar1 != (void *)0x0) {
       trackParams = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    pCVar2 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x37,trackParams);
+    pCVar3 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x37,trackParams);
   }
   local_c._0_1_ = 9;
-  this->pIconStartNormal = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconStartNormal = (CDSBitmap *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0xb;
   if (pCVar2 == (CDSBitmap *)0x0) {
-    pCVar2 = (CDSBitmap *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
                     // Load menu Start icon highlight (BitmapSpecial 0x10094 /
@@ -96875,15 +97055,15 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
     if (pvVar1 != (void *)0x0) {
       trackParams = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    pCVar2 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x37,trackParams);
+    pCVar3 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x37,trackParams);
   }
   local_c._0_1_ = 9;
-  this->pIconStartHighlight = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconStartHighlight = (CDSBitmap *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0xc;
   if (pCVar2 == (CDSBitmap *)0x0) {
-    pCVar2 = (CDSBitmap *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
     pvVar1 = (void *)(**(code **)(*piVar5 + 0x10))();
@@ -96893,15 +97073,15 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
     if (pvVar1 != (void *)0x0) {
       trackParams = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    pCVar2 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x8b,trackParams);
+    pCVar3 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x8b,trackParams);
   }
   local_c._0_1_ = 9;
-  this->pIconHistoryNormal = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconHistoryNormal = (CDSBitmap *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0xd;
   if (pCVar2 == (CDSBitmap *)0x0) {
-    pCVar2 = (CDSBitmap *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
     pvVar1 = (void *)(**(code **)(*piVar5 + 0x10))();
@@ -96911,15 +97091,15 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
     if (pvVar1 != (void *)0x0) {
       trackParams = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    pCVar2 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x8b,trackParams);
+    pCVar3 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(pCVar2,100,0x8b,trackParams);
   }
   local_c._0_1_ = 9;
-  this->pIconHistoryHighlight = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconHistoryHighlight = (CDSBitmap *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0xe;
   if (pCVar2 == (CDSBitmap *)0x0) {
-    pCVar2 = (CDSBitmap *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
                     // g_kMenuIconRes_QuitNormal -> BitmapSpecial 0x1004b (icon_quit)
@@ -96930,16 +97110,16 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
     if (pvVar1 != (void *)0x0) {
       trackParams = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    pCVar2 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0xdf,trackParams);
+    pCVar3 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(pCVar2,100,0xdf,trackParams);
     piVar5 = unaff_EBX;
   }
   local_c._0_1_ = 9;
-  this->pIconQuitNormal = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconQuitNormal = (CDSBitmap *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0xf;
   if (pCVar2 == (CDSBitmap *)0x0) {
-    pCVar2 = (CDSBitmap *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
     pvVar1 = (void *)(**(code **)(*piVar5 + 0x10))();
@@ -96949,19 +97129,19 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
     if (pvVar1 != (void *)0x0) {
       trackParams = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    pCVar2 = CDSBitmap::CDSBitmap_ctor(pCVar2,100,0xdf,trackParams);
+    pCVar3 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(pCVar2,100,0xdf,trackParams);
     piVar5 = unaff_EBX;
   }
   local_c._0_1_ = 9;
-  this->pIconQuitHighlight = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pIconQuitHighlight = (CDSBitmap *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   CDSView::CDSView__Hide((CDSView *)this->pIconStartHighlight);
   CDSView::CDSView__Hide((CDSView *)this->pIconHistoryHighlight);
   CDSView::CDSView__Hide((CDSView *)this->pIconQuitHighlight);
   pCVar2 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 0x10;
   if (pCVar2 == (CDSBitmap *)0x0) {
-    pCVar2 = (CDSBitmap *)0x0;
+    pCVar3 = (CBulanci *)0x0;
   }
   else {
     pvVar1 = (void *)(**(code **)(*piVar5 + 0x10))();
@@ -96971,30 +97151,37 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
     if (pvVar1 != (void *)0x0) {
       trackParams = (int *)_Globals::CheckedVirtualBaseCast(pvVar1,DAT_004b826c);
     }
-    pCVar2 = CDSBitmap::CDSBitmap_ctor(pCVar2,0x262,0,trackParams);
+    pCVar3 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(pCVar2,0x262,0,trackParams);
   }
   local_c._0_1_ = 9;
-  this->pHeroBitmap = pCVar2;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  this->pHeroBitmap = (CDSBitmap *)pCVar3;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   this_00 = (CPoemScroller *)_Globals::OperatorNewWithBadAlloc(0x128);
   local_c._0_1_ = 0x11;
-  if (this_00 != (CPoemScroller *)0x0) {
-    CPoemScroller::CPoemScroller_Constructor(this_00);
+  if (this_00 == (CPoemScroller *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
+  }
+  else {
+    pCVar3 = (CBulanci *)CPoemScroller::CPoemScroller_Constructor(this_00);
   }
   local_c._0_1_ = 9;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   this_01 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
   local_c._0_1_ = 0x12;
-  if (this_01 != (CStaticText *)0x0) {
+  if (this_01 == (CStaticText *)0x0) {
+    pCVar3 = (CBulanci *)0x0;
+  }
+  else {
     uVar10 = 0x100b0;
     puVar9 = (undefined *)0x1;
     puVar8 = (undefined *)0x0;
     CBulanci::CDsStringAssignFromLiteral
               ((CBulanci *)&stack0xffffffb8,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x174));
-    CStaticText::CStaticText_BuildAtAuto(this_01,0xe6,0x23f,puVar8,(uint)puVar9,uVar10);
+    pCVar3 = (CBulanci *)
+             CStaticText::CStaticText_BuildAtAuto(this_01,0xe6,0x23f,puVar8,(uint)puVar9,uVar10);
   }
   local_c = (void *)CONCAT31(local_c._1_3_,9);
-  CDSView::CDSView__AddChild((CDSView *)this);
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
   ppCVar7 = &this->pRuch0;
   *ppCVar7 = (CRuch *)0x0;
   this->pRuch1 = (CRuch *)0x0;
@@ -97002,17 +97189,17 @@ CMenu * __thiscall CMenu::CMenu_ctor_with_ui(CMenu *this,uint displayDirty,uchar
   this->pRuch3 = (CRuch *)0x0;
   iVar6 = 4;
   do {
-    pCVar4 = (CRuch *)_Globals::OperatorNewWithBadAlloc(0x80);
+    this_02 = (CRuch *)_Globals::OperatorNewWithBadAlloc(0x80);
     local_c._0_1_ = 0x13;
-    if (pCVar4 == (CRuch *)0x0) {
-      pCVar4 = (CRuch *)0x0;
+    if (this_02 == (CRuch *)0x0) {
+      pCVar3 = (CBulanci *)0x0;
     }
     else {
-      pCVar4 = CRuch::CRuch_ctor(pCVar4);
+      pCVar3 = (CBulanci *)CRuch::CRuch_ctor(this_02);
     }
     local_c = (void *)CONCAT31(local_c._1_3_,9);
-    *ppCVar7 = pCVar4;
-    CDSView::CDSView__AddChild((CDSView *)this);
+    *ppCVar7 = (CRuch *)pCVar3;
+    CDSView::CDSView__AddChild((CDSView *)this,pCVar3,(void *)0x0);
     ppCVar7 = ppCVar7 + 1;
     iVar6 = iVar6 + -1;
   } while (iVar6 != 0);
@@ -97062,8 +97249,8 @@ void __thiscall CPanel::CPanel_OnEvent(CPanel *this,short eventId)
         CDSView::CDSView__Hide(*(CDSView **)(this->p_pad_db + uVar4 * 4 + 1));
       }
       else {
-        _Globals::CDSView__Show((int *)*(CDSView **)(this->p_pad_e0 + uVar4 * 4 + 0xc));
-        _Globals::CDSView__Show(*(int **)(this->p_pad_db + uVar4 * 4 + 1));
+        _Globals::CDSView__Show(*(CDSView **)(this->p_pad_e0 + uVar4 * 4 + 0xc));
+        _Globals::CDSView__Show(*(CDSView **)(this->p_pad_db + uVar4 * 4 + 1));
       }
       bVar3 = bVar3 + 1;
     } while (bVar3 < this->bPlayer_count);
@@ -97257,7 +97444,7 @@ CNumCounter::CNumCounter_UpdateDigit(CNumCounter *this,int param_1,undefined1 *p
 
 
 
-void __fastcall CNumCounter::CNumCounter_OnTimerTick(void *param_1)
+void __fastcall CNumCounter::CNumCounter_OnTimerTick(CDSUpdatedItem *param_1)
 
 {
   CNumCounter *this;
@@ -97267,7 +97454,7 @@ void __fastcall CNumCounter::CNumCounter_OnTimerTick(void *param_1)
   
   uStack_4 = (uint)param_1 & 0xffffff;
   CNumCounter_UpdateDigit
-            ((CNumCounter *)((int)param_1 + -0x68),0,(undefined1 *)((int)&uStack_4 + 3));
+            ((CNumCounter *)&param_1[-5].dwEventSlots,0,(undefined1 *)((int)&uStack_4 + 3));
   CNumCounter_UpdateDigit(this,1,(undefined1 *)((int)&uStack_4 + 3));
   CNumCounter_UpdateDigit(this_00,2,(undefined1 *)((int)&uStack_4 + 3));
   if (uStack_4._3_1_ == '\0') {
@@ -97723,7 +97910,7 @@ void __thiscall CPanel::CPanel_Render(CPanel *this,char doFullRedraw)
 void __thiscall _Globals::CGameCounter_UpdatePlayerScore(void *this,byte param_1,char param_2)
 
 {
-  int *piVar1;
+  CDSView *pCVar1;
   uint uVar2;
   
   if (param_1 < 4) {
@@ -97732,8 +97919,8 @@ void __thiscall _Globals::CGameCounter_UpdatePlayerScore(void *this,byte param_1
               (*(CBulanci **)((int)this + (uint)param_1 * 4 + 0xa8),uVar2,param_2);
     uVar2 = CGame_IsPlayerAliveForLastMan(*(void **)((int)this + 0x68),param_1);
     if (((char)uVar2 != '\0') &&
-       (piVar1 = *(int **)((int)this + (uint)param_1 * 4 + 0x98), piVar1 != (int *)0x0)) {
-      CDSView__Show(piVar1);
+       (pCVar1 = *(CDSView **)((int)this + (uint)param_1 * 4 + 0x98), pCVar1 != (CDSView *)0x0)) {
+      CDSView__Show(pCVar1);
     }
   }
   return;
@@ -98372,27 +98559,25 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
   code *pcVar5;
   byte bVar6;
   void *pvVar7;
-  CDSStreamStorage *pCVar8;
-  int iVar9;
-  CStaticText *pCVar10;
-  wchar_t **ppwVar11;
-  CDSBitmap *pCVar12;
-  CBulPicture *pCVar13;
+  CBulanci *pCVar8;
+  CDSStreamStorage *pCVar9;
+  int iVar10;
+  CStaticText *pCVar11;
+  wchar_t **ppwVar12;
+  CDSBitmap *pCVar13;
+  CBulPicture *pCVar14;
   CSpells *this_00;
-  CDSChained *this_01;
-  CBulanci *pCVar14;
-  CShotCounter *pCVar15;
   void *unaff_EBX;
+  int *piVar15;
   int *piVar16;
-  int *piVar17;
-  uint uVar18;
+  uint uVar17;
+  undefined *puVar18;
   undefined *puVar19;
-  undefined *puVar20;
-  uint uVar21;
-  undefined4 uVar22;
-  uint uVar23;
+  uint uVar20;
+  undefined4 uVar21;
+  uint uVar22;
+  int *piVar23;
   int *piVar24;
-  int *piVar25;
   CDSStreamStorage *local_c;
   undefined1 *puStack_8;
   CDSBitmap *local_4;
@@ -98403,7 +98588,7 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
   ExceptionList = &local_c;
   CDSChained::CDSChained_ctor((undefined4 *)this);
   ppCVar1 = &(this->app).pMasterPackStorage;
-  piVar16 = (int *)0x0;
+  piVar15 = (int *)0x0;
   local_4 = (CDSBitmap *)0x0;
   (this->app).vftable_primary = (undefined *)CPanel::vftable;
   (this->app).vftable_sub04 = (undefined *)CPanel::g_pCPanel_vftable_IDSChained;
@@ -98411,48 +98596,51 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
   (this->app).vftable_sub18 = (undefined *)CPanel::g_pCPanel_vftable_IDSEventHandler;
   _eh_vector_constructor_iterator_(ppCVar1,4,2,eh_ctor_ZeroDword,_Globals::eh_dtor_CDSObject_ptr);
   (this->app).pClassName = param_1;
-  piVar24 = *(int **)((int)g_pApp + 0x70);
-  piVar25 = (int *)0x10075;
+  piVar23 = *(int **)((int)g_pApp + 0x70);
+  piVar24 = (int *)0x10075;
   local_4 = (CDSBitmap *)CONCAT31(local_4._1_3_,1);
-  pvVar7 = (void *)(**(code **)(*piVar24 + 0x10))();
+  pvVar7 = (void *)(**(code **)(*piVar23 + 0x10))();
   if (pvVar7 != (void *)0x0) {
-    piVar16 = (int *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b826c);
+    piVar15 = (int *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b826c);
   }
   local_c._0_1_ = 2;
   local_4 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
   local_c._0_1_ = 3;
-  if (local_4 != (CDSBitmap *)0x0) {
-    CDSBitmap::CDSBitmap_ctor(local_4,0,0,piVar16);
+  if (local_4 == (CDSBitmap *)0x0) {
+    pCVar8 = (CBulanci *)0x0;
+  }
+  else {
+    pCVar8 = (CBulanci *)CDSBitmap::CDSBitmap_ctor(local_4,0,0,piVar15);
   }
   local_c = (CDSStreamStorage *)CONCAT31(local_c._1_3_,2);
-  CDSView::CDSView__AddChild((CDSView *)this);
-  iVar9 = piVar16[2];
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
+  iVar10 = piVar15[2];
   (this->app).nRect_left = 0;
-  (this->app).nRect_top = 600 - iVar9;
+  (this->app).nRect_top = 600 - iVar10;
   (this->app).nRect_right = 800;
   (this->app).nRect_bottom = 600;
-  piVar16 = (int *)0x0;
-  pvVar7 = (void *)(**(code **)(*piVar24 + 0x10))();
+  piVar15 = (int *)0x0;
+  pvVar7 = (void *)(**(code **)(*piVar23 + 0x10))();
   if (*ppCVar1 != (CDSStreamStorage *)0x0) {
     (**(code **)((*ppCVar1)->pVftable_IDSReferenced + 8))();
   }
   if (pvVar7 != (void *)0x0) {
-    pCVar8 = (CDSStreamStorage *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b826c);
-    *ppCVar1 = pCVar8;
+    pCVar9 = (CDSStreamStorage *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b826c);
+    *ppCVar1 = pCVar9;
   }
-  uVar23 = 0;
-  pvVar7 = (void *)(**(code **)(*piVar24 + 0x10))();
-  piVar17 = *(int **)&(this->app).field_0x74;
-  if (piVar17 != (int *)0x0) {
-    (**(code **)(*piVar17 + 8))();
+  uVar22 = 0;
+  pvVar7 = (void *)(**(code **)(*piVar23 + 0x10))();
+  piVar16 = *(int **)&(this->app).field_0x74;
+  if (piVar16 != (int *)0x0) {
+    (**(code **)(*piVar16 + 8))();
   }
   if (pvVar7 != (void *)0x0) {
-    iVar9 = _Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b826c);
-    *(int *)&(this->app).field_0x74 = iVar9;
+    iVar10 = _Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b826c);
+    *(int *)&(this->app).field_0x74 = iVar10;
   }
                     // PUSH 0x10080 — hud_panel_player_bitmap (per-player column avatar strip in
                     // CPanel).
-  pvVar7 = (void *)(**(code **)(*piVar24 + 0x10))();
+  pvVar7 = (void *)(**(code **)(*piVar23 + 0x10))();
   if (pvVar7 != (void *)0x0) {
     _Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b826c);
   }
@@ -98462,139 +98650,151 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
     _DAT_004b3a00 = 0xeeeeee;
   }
   _Globals::CGameGetModeAndScoreLimit((this->app).pClassName,(int *)&stack0xffffffc8);
-  pvVar7 = (void *)(**(code **)(*piVar24 + 0x10))();
-  piVar24 = (int *)0x0;
+  pvVar7 = (void *)(**(code **)(*piVar23 + 0x10))();
+  piVar23 = (int *)0x0;
   if (pvVar7 != (void *)0x0) {
-    piVar24 = (int *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b826c);
+    piVar23 = (int *)_Globals::CheckedVirtualBaseCast(pvVar7,DAT_004b826c);
   }
   cVar3 = (this->app).pClassName[0xd8];
   *(char *)&(this->app).pRegistryPath = cVar3;
-  uVar23 = uVar23 & 0xffffff00;
+  uVar22 = uVar22 & 0xffffff00;
   if (cVar3 != '\0') {
     do {
-      uVar18 = uVar23 & 0xff;
-      iVar9 = gAPanelColumnXOffsets[uVar18];
-      pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
-      if (pCVar10 == (CStaticText *)0x0) {
-        pCVar10 = (CStaticText *)0x0;
+      uVar17 = uVar22 & 0xff;
+      iVar10 = gAPanelColumnXOffsets[uVar17];
+      pCVar11 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+      if (pCVar11 == (CStaticText *)0x0) {
+        pCVar8 = (CBulanci *)0x0;
       }
       else {
-        uVar22 = 0x100af;
-        uVar21 = 5;
-        puVar20 = (undefined *)0x1;
-        ppwVar11 = _Globals::CGameGetPlayerNamePtr((this->app).pClassName,(uchar)uVar23);
-        puVar19 = (undefined *)0x0;
-        _Globals::CDsStringAssignFromHandle(&stack0xffffff84,ppwVar11);
-        pCVar10 = CStaticText::CStaticText_BuildAt
-                            (pCVar10,iVar9 + 4,9,iVar9 + 0x5c,0x16,puVar19,puVar20,uVar21,uVar22);
+        uVar21 = 0x100af;
+        uVar20 = 5;
+        puVar19 = (undefined *)0x1;
+        ppwVar12 = _Globals::CGameGetPlayerNamePtr((this->app).pClassName,(uchar)uVar22);
+        puVar18 = (undefined *)0x0;
+        _Globals::CDsStringAssignFromHandle(&stack0xffffff84,ppwVar12);
+        pCVar8 = (CBulanci *)
+                 CStaticText::CStaticText_BuildAt
+                           (pCVar11,iVar10 + 4,9,iVar10 + 0x5c,0x16,puVar18,puVar19,uVar20,uVar21);
       }
-      *(CStaticText **)((this->app).pPad_e5 + uVar18 * 4 + -0x19) = pCVar10;
-      CDSView::CDSView__AddChild((CDSView *)this);
-      pCVar12 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
-      if (pCVar12 != (CDSBitmap *)0x0) {
-        CDSBitmap::CDSBitmap_ctor(pCVar12,gAPanelColumnXOffsets[uVar18] + 5,0x28,piVar16);
-      }
-      CDSView::CDSView__AddChild((CDSView *)this);
-      pCVar13 = (CBulPicture *)_Globals::OperatorNewWithBadAlloc(0x470);
-      uVar21 = uVar23;
-      if (pCVar13 == (CBulPicture *)0x0) {
-        pCVar13 = (CBulPicture *)0x0;
+      *(CBulanci **)((this->app).pPad_e5 + uVar17 * 4 + -0x19) = pCVar8;
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
+      pCVar13 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
+      if (pCVar13 == (CDSBitmap *)0x0) {
+        pCVar8 = (CBulanci *)0x0;
       }
       else {
-        pCVar13 = CBulPicture::CBulPicture_ctor
-                            (pCVar13,gAPanelColumnXOffsets[uVar18] + 6,0x29,uVar23,0x1001d);
+        pCVar8 = (CBulanci *)
+                 CDSBitmap::CDSBitmap_ctor(pCVar13,gAPanelColumnXOffsets[uVar17] + 5,0x28,piVar15);
       }
-      *(CBulPicture **)((this->app).backBuffer.embeddedImage.pM_slotVector + uVar18 * 4 + 4) =
-           pCVar13;
-      bVar6 = _Globals::CGameGetPlayerColorByte((this->app).pClassName,(uchar)uVar23);
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
+      pCVar14 = (CBulPicture *)_Globals::OperatorNewWithBadAlloc(0x470);
+      uVar20 = uVar22;
+      if (pCVar14 == (CBulPicture *)0x0) {
+        pCVar14 = (CBulPicture *)0x0;
+      }
+      else {
+        pCVar14 = CBulPicture::CBulPicture_ctor
+                            (pCVar14,gAPanelColumnXOffsets[uVar17] + 6,0x29,uVar22,0x1001d);
+      }
+      *(CBulPicture **)((this->app).backBuffer.embeddedImage.pM_slotVector + uVar17 * 4 + 4) =
+           pCVar14;
+      bVar6 = _Globals::CGameGetPlayerColorByte((this->app).pClassName,(uchar)uVar22);
       CBulPicture::CBulPicture_ApplyTeamPalette
                 (*(CBulPicture **)
-                  ((this->app).backBuffer.embeddedImage.pM_slotVector + uVar18 * 4 + 4),bVar6);
-      CDSView::CDSView__AddChild((CDSView *)this);
-      *(undefined4 *)((this->app).backBuffer.embeddedImage.pPad_19 + uVar18 * 4 + -1) = 0;
+                  ((this->app).backBuffer.embeddedImage.pM_slotVector + uVar17 * 4 + 4),bVar6);
+      CDSView::CDSView__AddChild
+                ((CDSView *)this,
+                 *(CBulanci **)((this->app).backBuffer.embeddedImage.pM_slotVector + uVar17 * 4 + 4)
+                 ,(void *)0x0);
+      *(undefined4 *)((this->app).backBuffer.embeddedImage.pPad_19 + uVar17 * 4 + -1) = 0;
       this_00 = (CSpells *)_Globals::OperatorNewWithBadAlloc(0x80);
-      if (this_00 != (CSpells *)0x0) {
-        CSpells::CSpells_ctor(this_00,gAPanelColumnXOffsets[uVar18] + 6,0x29);
-      }
-      CDSView::CDSView__AddChild((CDSView *)this);
-      iVar9 = *(int *)((this->app).backBuffer.embeddedImage.pM_slotVector + uVar18 * 4 + 4);
-      piVar17 = (int *)(iVar9 + 0x20);
-      this_01 = (CDSChained *)_Globals::OperatorNewWithBadAlloc(0x6c);
-      if (this_01 == (CDSChained *)0x0) {
-        this_01 = (CDSChained *)0x0;
+      if (this_00 == (CSpells *)0x0) {
+        pCVar8 = (CBulanci *)0x0;
       }
       else {
-        CDSChained::CDSChained_InitWithRect(this_01,piVar17);
-        this_01->pVftable_primary = &CBlackView::vftable;
-        this_01->pVftable_IDSChained = &CBlackView::vftable;
-        this_01->pVftable_IDSEventHandler = &CBlackView::vftable;
-        this_01->pVftable_IDSReferenced = &CBlackView::vftable;
-        this_01[1].pVftable_primary = (void *)0xffffff;
+        pCVar8 = (CBulanci *)CSpells::CSpells_ctor(this_00,gAPanelColumnXOffsets[uVar17] + 6,0x29);
       }
-      *(CDSChained **)((this->app).pKeyDownBitmap + uVar18 * 4 + -4) = this_01;
-      CDSView::CDSView__AddChild((CDSView *)this);
-      piVar4 = *(int **)((this->app).pKeyDownBitmap + uVar18 * 4 + -4);
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
+      iVar10 = *(int *)((this->app).backBuffer.embeddedImage.pM_slotVector + uVar17 * 4 + 4);
+      piVar16 = (int *)(iVar10 + 0x20);
+      pCVar8 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0x6c);
+      if (pCVar8 == (CBulanci *)0x0) {
+        pCVar8 = (CBulanci *)0x0;
+      }
+      else {
+        CDSChained::CDSChained_InitWithRect((CDSChained *)pCVar8,piVar16);
+        (pCVar8->app).vftable_primary = (undefined *)&CBlackView::vftable;
+        (pCVar8->app).vftable_sub04 = (undefined *)&CBlackView::vftable;
+        (pCVar8->app).vftable_sub10 = (undefined *)&CBlackView::vftable;
+        (pCVar8->app).vftable_sub18 = (undefined *)&CBlackView::vftable;
+        (pCVar8->app).pClassName = (undefined *)0xffffff;
+      }
+      *(CBulanci **)((this->app).pKeyDownBitmap + uVar17 * 4 + -4) = pCVar8;
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
+      piVar4 = *(int **)((this->app).pKeyDownBitmap + uVar17 * 4 + -4);
       pcVar5 = *(code **)(*piVar4 + 0x24);
       piVar4[0x1a] = 0x9f9f9f;
       (*pcVar5)();
-      CDSView::CDSView__Hide(*(CDSView **)((this->app).pKeyDownBitmap + uVar18 * 4 + -4));
-      pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
-      if (pCVar10 == (CStaticText *)0x0) {
-        pCVar10 = (CStaticText *)0x0;
+      CDSView::CDSView__Hide(*(CDSView **)((this->app).pKeyDownBitmap + uVar17 * 4 + -4));
+      pCVar11 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+      if (pCVar11 == (CStaticText *)0x0) {
+        pCVar8 = (CBulanci *)0x0;
       }
       else {
-        uVar22 = 0x100af;
-        uVar23 = 5;
-        puVar20 = (undefined *)0x1;
-        puVar19 = (undefined *)0x0;
+        uVar21 = 0x100af;
+        uVar22 = 5;
+        puVar19 = (undefined *)0x1;
+        puVar18 = (undefined *)0x0;
         CDsStringAssignFromLiteral
                   ((CBulanci *)&stack0xffffff84,*(short **)(g_apCDSStaticTextsSingleton[2] + 0x168))
         ;
-        pCVar10 = CStaticText::CStaticText_BuildAt
-                            (pCVar10,*piVar17,*(undefined4 *)(iVar9 + 0x24),*(int *)(iVar9 + 0x28),
-                             *(undefined4 *)(iVar9 + 0x2c),puVar19,puVar20,uVar23,uVar22);
+        pCVar8 = (CBulanci *)
+                 CStaticText::CStaticText_BuildAt
+                           (pCVar11,*piVar16,*(undefined4 *)(iVar10 + 0x24),*(int *)(iVar10 + 0x28),
+                            *(undefined4 *)(iVar10 + 0x2c),puVar18,puVar19,uVar22,uVar21);
       }
-      *(CStaticText **)((this->app).pPad_e5 + uVar18 * 4 + -9) = pCVar10;
-      CDSView::CDSView__AddChild((CDSView *)this);
+      *(CBulanci **)((this->app).pPad_e5 + uVar17 * 4 + -9) = pCVar8;
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
       CStaticText::CStaticText_SetStyle
-                (*(CStaticText **)((this->app).pPad_e5 + uVar18 * 4 + -9),&DAT_004b39fc,2);
-      *(undefined1 *)(*(int *)((this->app).pPad_e5 + uVar18 * 4 + -9) + 0x94) = 1;
-      CDSView::CDSView__Hide(*(CDSView **)((this->app).pPad_e5 + uVar18 * 4 + -9));
-      pCVar14 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0x7c);
-      if (pCVar14 == (CBulanci *)0x0) {
-        pCVar15 = (CShotCounter *)0x0;
+                (*(CStaticText **)((this->app).pPad_e5 + uVar17 * 4 + -9),&DAT_004b39fc,2);
+      *(undefined1 *)(*(int *)((this->app).pPad_e5 + uVar17 * 4 + -9) + 0x94) = 1;
+      CDSView::CDSView__Hide(*(CDSView **)((this->app).pPad_e5 + uVar17 * 4 + -9));
+      pCVar8 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0x7c);
+      if (pCVar8 == (CBulanci *)0x0) {
+        pCVar8 = (CBulanci *)0x0;
       }
       else {
-        pCVar15 = CShotCounterCtor(pCVar14,*piVar17,*(int *)(iVar9 + 0x2c) + 3);
+        pCVar8 = (CBulanci *)CShotCounterCtor(pCVar8,*piVar16,*(int *)(iVar10 + 0x2c) + 3);
       }
-      *(CShotCounter **)((this->app).backBuffer.embeddedImage.pPad_19 + uVar18 * 4 + -0x21) =
-           pCVar15;
-      CDSView::CDSView__AddChild((CDSView *)this);
-      pCVar12 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
-      if (pCVar12 == (CDSBitmap *)0x0) {
-        pCVar12 = (CDSBitmap *)0x0;
-      }
-      else {
-        pCVar8 = (this->app).pMasterPackStorage;
-        pCVar12 = CDSBitmap::CDSBitmap_ctor
-                            (pCVar12,*(int *)(iVar9 + 0x28) + 3,
-                             *(int *)(iVar9 + 0x2c) - (int)pCVar8->pVftable_IDSEventHandler,
-                             (int *)pCVar8);
-      }
-      *(CDSBitmap **)((this->app).backBuffer.embeddedImage.pPad_19 + uVar18 * 4 + -0x11) = pCVar12;
-      CDSView::CDSView__AddChild((CDSView *)this);
-      pCVar14 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0xa8);
-      if (pCVar14 == (CBulanci *)0x0) {
-        uVar22 = 0;
+      *(CBulanci **)((this->app).backBuffer.embeddedImage.pPad_19 + uVar17 * 4 + -0x21) = pCVar8;
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
+      pCVar13 = (CDSBitmap *)_Globals::OperatorNewWithBadAlloc(0x78);
+      if (pCVar13 == (CDSBitmap *)0x0) {
+        pCVar8 = (CBulanci *)0x0;
       }
       else {
-        uVar23 = CGameGetPlayerScoreForMode((CBulanci *)(this->app).pClassName,(uchar)uVar21);
-        uVar22 = CNumCounterCtor(pCVar14,*(int *)(iVar9 + 0x28) + 3,*(int *)(iVar9 + 0x24),uVar23);
+        pCVar9 = (this->app).pMasterPackStorage;
+        pCVar8 = (CBulanci *)
+                 CDSBitmap::CDSBitmap_ctor
+                           (pCVar13,*(int *)(iVar10 + 0x28) + 3,
+                            *(int *)(iVar10 + 0x2c) - (int)pCVar9->pVftable_IDSEventHandler,
+                            (int *)pCVar9);
       }
-      *(undefined4 *)((this->app).backBuffer.embeddedImage.pPad_19 + uVar18 * 4 + 0xf) = uVar22;
-      CDSView::CDSView__AddChild((CDSView *)this);
-      bVar6 = (char)uVar21 + 1;
-      uVar23 = CONCAT31((int3)(uVar21 >> 8),bVar6);
+      *(CBulanci **)((this->app).backBuffer.embeddedImage.pPad_19 + uVar17 * 4 + -0x11) = pCVar8;
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
+      pCVar8 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0xa8);
+      if (pCVar8 == (CBulanci *)0x0) {
+        pCVar8 = (CBulanci *)0x0;
+      }
+      else {
+        uVar22 = CGameGetPlayerScoreForMode((CBulanci *)(this->app).pClassName,(uchar)uVar20);
+        pCVar8 = CNumCounterCtor(pCVar8,*(int *)(iVar10 + 0x28) + 3,*(int *)(iVar10 + 0x24),uVar22);
+      }
+      *(CBulanci **)((this->app).backBuffer.embeddedImage.pPad_19 + uVar17 * 4 + 0xf) = pCVar8;
+      CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
+      bVar6 = (char)uVar20 + 1;
+      uVar22 = CONCAT31((int3)(uVar20 >> 8),bVar6);
     } while (bVar6 < *(byte *)&(this->app).pRegistryPath);
   }
   if ((_DAT_004b3a04 & 2) == 0) {
@@ -98604,37 +98804,38 @@ CBulanci * __thiscall CBulanci::CPanelCtor(CBulanci *this,undefined *param_1)
     _DAT_004b39f4 = 0x606060;
     _DAT_004b39f8 = 0x909090;
   }
-  iVar9 = 0;
-  pCVar10 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
-  if (pCVar10 == (CStaticText *)0x0) {
-    pCVar10 = (CStaticText *)0x0;
+  iVar10 = 0;
+  pCVar11 = (CStaticText *)_Globals::OperatorNewWithBadAlloc(0x98);
+  if (pCVar11 == (CStaticText *)0x0) {
+    pCVar8 = (CBulanci *)0x0;
   }
   else {
-    uVar22 = 0x100ae;
-    uVar23 = 5;
-    puVar20 = (undefined *)0x1;
-    puVar19 = (undefined *)0x0;
+    uVar21 = 0x100ae;
+    uVar22 = 5;
+    puVar19 = (undefined *)0x1;
+    puVar18 = (undefined *)0x0;
     _Globals::CDsStringAssignFromHandle(&stack0xffffff84,(undefined4 *)&stack0xffffffb8);
-    pCVar10 = CStaticText::CStaticText_BuildAt
-                        (pCVar10,0x166,0x2d,0x1bc,0x5f,puVar19,puVar20,uVar23,uVar22);
+    pCVar8 = (CBulanci *)
+             CStaticText::CStaticText_BuildAt
+                       (pCVar11,0x166,0x2d,0x1bc,0x5f,puVar18,puVar19,uVar22,uVar21);
   }
-  *(CStaticText **)(this->app).backBuffer.embeddedImage.pM_slotVector = pCVar10;
-  CDSView::CDSView__AddChild((CDSView *)this);
+  *(CBulanci **)(this->app).backBuffer.embeddedImage.pM_slotVector = pCVar8;
+  CDSView::CDSView__AddChild((CDSView *)this,pCVar8,(void *)0x0);
   CStaticText::CStaticText_SetStyle
             (*(CStaticText **)(this->app).backBuffer.embeddedImage.pM_slotVector,&DAT_004b39ec,4);
   puVar2 = (this->app).pMiPad_after_vftable_sub10;
   *(ushort *)puVar2 = *(ushort *)puVar2 | 0x600;
-  if (iVar9 != 0) {
-    _Globals::CDsStringReleaseHeader((void *)(iVar9 + -0xc));
+  if (iVar10 != 0) {
+    _Globals::CDsStringReleaseHeader((void *)(iVar10 + -0xc));
+  }
+  if (piVar23 != (int *)0x0) {
+    (**(code **)(*piVar23 + 8))();
+  }
+  if (piVar15 != (int *)0x0) {
+    (**(code **)(*piVar15 + 8))();
   }
   if (piVar24 != (int *)0x0) {
     (**(code **)(*piVar24 + 8))();
-  }
-  if (piVar16 != (int *)0x0) {
-    (**(code **)(*piVar16 + 8))();
-  }
-  if (piVar25 != (int *)0x0) {
-    (**(code **)(*piVar25 + 8))();
   }
   ExceptionList = unaff_EBX;
   return this;
@@ -99008,11 +99209,11 @@ void _Globals::Catch_00428c15(void)
 // Returns:
 //   void
 
-void CDSDsmFile::HandleRecordRead(int *param_1,void *param_2)
+void CDSDsmFile::HandleRecordRead(int *param_1,CDSImage *param_2)
 
 {
   CDSDsmFile *this;
-  void *pvVar1;
+  CDSImage *pCVar1;
   uint uStack_4c;
   undefined4 local_3c;
   int local_38;
@@ -99038,7 +99239,7 @@ void CDSDsmFile::HandleRecordRead(int *param_1,void *param_2)
   local_8 = 0;
   _Globals::CDSMemQueue_Read(this,&param_1,(void *)0x4);
   InitializeQueueStreamView((CDSDsmFile *)&local_3c,(int)this,(undefined *)param_1,0);
-  pvVar1 = param_2;
+  pCVar1 = param_2;
   local_8._0_1_ = 1;
   _Globals::CDSJpegImage__DecompressToImage(&local_38,param_1,param_2);
   _Globals::CDSQueueStream_DetachQueue((int)&local_3c);
@@ -99051,7 +99252,7 @@ void CDSDsmFile::HandleRecordRead(int *param_1,void *param_2)
   local_8 = (uint)local_8._1_3_ << 8;
   CDSQueueStream::CDSQueueStream_dtor(&local_3c);
   local_8 = 0xffffffff;
-  _Globals::NotifyDirtyAll(pvVar1);
+  _Globals::NotifyDirtyAll(pCVar1);
   ExceptionList = local_10;
   return;
 }
@@ -100381,14 +100582,14 @@ void __fastcall CBulanci::CBulanci_ReleasePrimarySurface(int param_1)
 
 
 
-void __fastcall CBulanci::CDSApp_OnDestroy(int param_1)
+void __fastcall CBulanci::CDSApp_OnDestroy(CMenu *param_1)
 
 {
-  _Globals::CMenu_ClearAllChildren();
+  _Globals::CMenu_ClearAllChildren(param_1);
                     // CDSDirectSound embed @ CDSApp+0x200: stop all voices and Release
                     // IDirectSound/primary buffer before surface teardown.
-  CDSDirectSound::CDSDirectSound_StopAllAndReleaseCom((CDSDirectSound *)(param_1 + 0x200));
-  CBulanci_ReleasePrimarySurface(param_1);
+  CDSDirectSound::CDSDirectSound_StopAllAndReleaseCom((CDSDirectSound *)&param_1[2].dwField_38);
+  CBulanci_ReleasePrimarySurface((int)param_1);
   return;
 }
 
@@ -100493,12 +100694,12 @@ void __thiscall CBulanci::CDSApp_OnActivateApp(CBulanci *this,char param_1)
 
 
 
-undefined2 __fastcall CBulanci::CDSApp_Run(void *param_1)
+ushort __fastcall CBulanci::CDSApp_Run(CDSView *param_1)
 
 {
-  undefined2 uVar1;
+  ushort uVar1;
   
-  uVar1 = CDSView::CDSView_DoModal(param_1,(void *)0x0);
+  uVar1 = CDSView::CDSView_DoModal(param_1,(CDSView *)0x0);
   _Globals::CDSView_SetActive(param_1,0);
   _Globals::CDSView_SetModalEligible(param_1,0);
   return uVar1;
@@ -101097,7 +101298,7 @@ CBulanci::CDSApp_WndProcDispatch(CBulanci *this,uint param_1,ushort param_2,unde
     else {
       switch(param_1) {
       case 2:
-        CDSApp_OnDestroy();
+        CDSApp_OnDestroy((CMenu *)this);
         g_pHwnd = (HWND *)0x0;
         PostQuitMessage(0);
         return 0;
@@ -101543,7 +101744,7 @@ void __fastcall _Globals::CDSApp_DirtyRectList_Clear(void *param_1)
 
 
 int __thiscall
-_Globals::CDSApp_DirtyRectList_UpsertRect(void *this,int *param_1,undefined *param_2,int param_3)
+_Globals::CDSApp_DirtyRectList_UpsertRect(void *this,int *param_1,void *param_2,int param_3)
 
 {
   int iVar1;
@@ -101552,9 +101753,9 @@ _Globals::CDSApp_DirtyRectList_UpsertRect(void *this,int *param_1,undefined *par
                     // UNCERTAIN: dirty-rect list insert/upsert (16-byte RECT records); sole caller
                     // CDSApp_AddDirtyRectCoalesced; uses FUN_0042a070 search + FUN_0042ac20 update
                     // — no established symbol in mapping.csv
-  if ((((char)param_3 == '\0') || (iVar1 = param_3, param_2 != (undefined *)0x0)) &&
+  if ((((char)param_3 == '\0') || (iVar1 = param_3, param_2 != (void *)0x0)) &&
      (iVar1 = CDSApp_DirtyRectList_FindIndex(this,param_1,param_2,*(int *)((int)this + 8)),
-     param_2 != (undefined *)0x0)) {
+     param_2 != (void *)0x0)) {
     if (iVar1 < 0) {
       iVar1 = CDSApp_DirtyRectList_InsertAt(this,param_1,-1 - iVar1);
       return iVar1;
@@ -102183,7 +102384,7 @@ LAB_0042b72a:
         return;
       }
     }
-    _Globals::CDSApp_DirtyRectList_UpsertRect(param_1,&local_30.left,(undefined *)0x0,1);
+    _Globals::CDSApp_DirtyRectList_UpsertRect(param_1,&local_30.left,(void *)0x0,1);
   }
   return;
 }
@@ -102242,7 +102443,7 @@ void __fastcall CDSApp::CDSApp_EventHandlerDtorBody(int param_1)
 // 
 // Library: Visual Studio 2005 Release
 
-undefined4 * _Globals::CreateObject(void)
+CDSApp * _Globals::CreateObject(void)
 
 {
   int iVar1;
@@ -102260,10 +102461,10 @@ undefined4 * _Globals::CreateObject(void)
   if (iVar1 != 0) {
     pCVar2 = CDSApp::CDSApp_InitCreateObjectShell();
     ExceptionList = local_c;
-    return &pCVar2->vftable_primary;
+    return pCVar2;
   }
   ExceptionList = local_c;
-  return (undefined4 *)0x0;
+  return (CDSApp *)0x0;
 }
 
 
@@ -102432,13 +102633,13 @@ void __fastcall CDSApp_FlushDirtyRects(CBulanci *param_1)
 
 
 
-void __fastcall _Globals::CDSApp_FlushDirtyRectsIfFlagged(int param_1)
+void __fastcall _Globals::CDSApp_FlushDirtyRectsIfFlagged(CBulanci *param_1)
 
 {
                     // UNCERTAIN: if this+0x78 && byte this+0x275 calls FUN_0042bae0; tail of
                     // CDSApp_RenderFrame dirty-rect path — pair with 0x42bae0.
-  if ((*(int *)(param_1 + 0x78) != 0) && (*(char *)(param_1 + 0x275) != '\0')) {
-    CDSApp_FlushDirtyRects();
+  if ((*(int *)&(param_1->app).field_0x78 != 0) && ((param_1->app).bDirtyDuringFrame != 0)) {
+    CDSApp_FlushDirtyRects(param_1);
     return;
   }
   return;
@@ -102446,75 +102647,79 @@ void __fastcall _Globals::CDSApp_FlushDirtyRectsIfFlagged(int param_1)
 
 
 
-void __fastcall _Globals::CDSApp_RenderFrame(int *param_1)
+void __fastcall _Globals::CDSApp_RenderFrame(CBulanci *param_1)
 
 {
   int *piVar1;
-  uchar uVar2;
-  int iVar3;
+  undefined *puVar2;
+  uchar uVar3;
   int iVar4;
   int iVar5;
   
-  if ((char)param_1[0x9d] != '\0') {
-    *(undefined1 *)((int)param_1 + 0x275) = 0;
-    uVar2 = CDSApp_TryBindBackBufferSurface();
-    if (uVar2 != '\0') {
-      *(undefined1 *)((int)param_1 + 0x275) = 1;
-      if ((int *)param_1[0x3a] != (int *)0x0) {
-        (**(code **)(*(int *)param_1[0x3a] + 0x18))();
+  if ((param_1->app).bDrawable != 0) {
+    (param_1->app).bDirtyDuringFrame = 0;
+    uVar3 = CDSApp_TryBindBackBufferSurface();
+    if (uVar3 != '\0') {
+      piVar1 = (int *)(param_1->app).pCurrentView;
+      (param_1->app).bDirtyDuringFrame = 1;
+      if (piVar1 != (int *)0x0) {
+        (**(code **)(*piVar1 + 0x18))();
       }
-      iVar4 = param_1[0x97];
+      iVar4 = (param_1->app).nDirtyRectCount;
       if (0 < iVar4) {
         iVar5 = 0;
         do {
-          DAT_004b3b9c = *(int *)(param_1[0x95] + iVar5);
-          iVar3 = param_1[0x95] + iVar5;
-          DAT_004b3ba0 = *(int *)(iVar3 + 4);
-          DAT_004b3ba4 = *(int *)(iVar3 + 8);
-          DAT_004b3ba8 = *(int *)(iVar3 + 0xc);
+          puVar2 = (param_1->app).pDirtyRectArray;
+          DAT_004b3b9c = *(int *)(puVar2 + iVar5);
+          DAT_004b3ba0 = *(int *)(puVar2 + iVar5 + 4);
+          DAT_004b3ba4 = *(int *)(puVar2 + iVar5 + 8);
+          DAT_004b3ba8 = *(int *)(puVar2 + iVar5 + 0xc);
           if ((DAT_004b3b9c < DAT_004b3ba4) && (DAT_004b3ba0 < DAT_004b3ba8)) {
-            (**(code **)(*param_1 + 0x38))();
+            (**(code **)((param_1->app).vftable_primary + 0x38))();
           }
           iVar5 = iVar5 + 0x10;
           iVar4 = iVar4 + -1;
         } while (iVar4 != 0);
       }
-      piVar1 = (int *)param_1[0x3a];
-      if (piVar1 != (int *)param_1[0x3b]) {
+      piVar1 = (int *)(param_1->app).pCurrentView;
+      if (piVar1 != (int *)(param_1->app).pPendingView) {
         if (piVar1 != (int *)0x0) {
           (**(code **)(*piVar1 + 0x10))();
-          if ((int *)param_1[0x3a] != (int *)0x0) {
-            (**(code **)(*(int *)param_1[0x3a] + 8))();
+          piVar1 = (int *)(param_1->app).pCurrentView;
+          if (piVar1 != (int *)0x0) {
+            (**(code **)(*piVar1 + 8))();
           }
-          param_1[0x3a] = 0;
+          (param_1->app).pCurrentView = (undefined *)0x0;
         }
-        iVar4 = param_1[0x3b];
-        param_1[0x3a] = iVar4;
-        if (iVar4 != 0) {
-          *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 1;
-          (**(code **)(*(int *)param_1[0x3a] + 0xc))();
+        puVar2 = (param_1->app).pPendingView;
+        (param_1->app).pCurrentView = puVar2;
+        if (puVar2 != (undefined *)0x0) {
+          *(int *)(puVar2 + 8) = *(int *)(puVar2 + 8) + 1;
+          (**(code **)(*(int *)(param_1->app).pCurrentView + 0xc))();
         }
       }
-      if ((int *)param_1[0x3a] != (int *)0x0) {
-        (**(code **)(*(int *)param_1[0x3a] + 0x14))();
+      piVar1 = (int *)(param_1->app).pCurrentView;
+      if (piVar1 != (int *)0x0) {
+        (**(code **)(*piVar1 + 0x14))();
       }
-      CDSBackBuffer_Flip((CDSBackBuffer *)(param_1 + 0x1f));
+      CDSBackBuffer_Flip(&(param_1->app).backBuffer);
     }
-    DAT_004b3b9c = param_1[8];
-    DAT_004b3ba0 = param_1[9];
-    DAT_004b3ba4 = param_1[10];
-    DAT_004b3ba8 = param_1[0xb];
-    iVar4 = param_1[0x22];
-    iVar5 = param_1[0x21];
-    ((tagRECT *)(param_1 + 0x29))->left = 0;
-    param_1[0x2a] = 0;
-    param_1[0x2b] = iVar5;
-    param_1[0x2c] = iVar4;
-    tagRECT::CDSRect_Intersect((tagRECT *)(param_1 + 0x29),(tagRECT *)&DAT_004b3b9c);
+    DAT_004b3b9c = (param_1->app).nRect_left;
+    DAT_004b3ba0 = (param_1->app).nRect_top;
+    DAT_004b3ba4 = (param_1->app).nRect_right;
+    DAT_004b3ba8 = (param_1->app).nRect_bottom;
+    iVar4 = (param_1->app).backBuffer.embeddedImage.nM_height;
+    iVar5 = (param_1->app).backBuffer.embeddedImage.nM_width;
+    piVar1 = &(param_1->app).backBuffer.embeddedImage.nField_24;
+    *piVar1 = 0;
+    (param_1->app).backBuffer.embeddedImage.nField_28 = 0;
+    (param_1->app).backBuffer.embeddedImage.nM_copyWidth = iVar5;
+    (param_1->app).backBuffer.embeddedImage.nM_copyHeight = iVar4;
+    tagRECT::CDSRect_Intersect((tagRECT *)piVar1,(tagRECT *)&DAT_004b3b9c);
     CDSApp_FlushDirtyRectsIfFlagged(param_1);
     return;
   }
-  param_1[0x97] = 0;
+  (param_1->app).nDirtyRectCount = 0;
   return;
 }
 
@@ -102534,7 +102739,7 @@ void __thiscall CBulanci::CDSView_Invalidate(CBulanci *this,int *param_1,char pa
 
 
 
-void __fastcall _Globals::CDSApp_FrameBody(undefined4 param_1)
+void __fastcall _Globals::CDSApp_FrameBody(CBulanci *param_1)
 
 {
   uint uVar1;
@@ -102568,7 +102773,7 @@ void __fastcall _Globals::CDSApp_FrameBody(undefined4 param_1)
 
 
 
-void __fastcall _Globals::CDSApp_PumpTick(undefined4 param_1)
+void __fastcall _Globals::CDSApp_PumpTick(CBulanci *param_1)
 
 {
   char cVar1;
@@ -102587,7 +102792,7 @@ void __fastcall _Globals::CDSApp_PumpTick(undefined4 param_1)
 
 
 
-void __fastcall CBulanci::CBulanci_PollEventsAndRunFrame(undefined4 param_1)
+void __fastcall CBulanci::CBulanci_PollEventsAndRunFrame(CBulanci *param_1)
 
 {
   uint uVar1;
@@ -102687,16 +102892,16 @@ void __thiscall CBulanci::CDSView__UpdateScreenCoordinates(CBulanci *this,char p
 
 
 
-void __thiscall _Globals::CDSView__AddChildInternal(void *this,CBulanci *param_2,void *param_3)
+void __thiscall _Globals::CDSView__AddChildInternal(void *this,CBulanci *param_1,void *param_2)
 
 {
   void *unaff_EDI;
   
-  (param_2->app).pParentModal = this;
-  CDSChained_InsertChildAtAnchor((void *)((int)this + 0x54),param_2,param_3,unaff_EDI);
+  (param_1->app).pParentModal = this;
+  CDSChained_InsertChildAtAnchor((void *)((int)this + 0x54),param_1,param_2,unaff_EDI);
   if ((*(byte *)((int)this + 0x44) & 0x40) != 0) {
-    CDSView_SetModalEligible(param_2,1);
-    CBulanci::CDSView__UpdateScreenCoordinates(param_2,'\x01');
+    CDSView_SetModalEligible(param_1,1);
+    CBulanci::CDSView__UpdateScreenCoordinates(param_1,'\x01');
   }
   return;
 }
@@ -102866,7 +103071,7 @@ uchar __thiscall CGameView::CGameView_InsertBeforeSiblingAnchor(CGameView *this,
                     // CDSView_InvalidateRectClipped(0,0). Sole caller
                     // CGaming_InsertEntityByDepth@0x00418589.
   CDSChain::CDSChained_InsertBeforeWithHeadFixup
-            ((CDSChain *)(this->pChainParent + 0x54),(CBulanek *)this,anchor);
+            ((CDSChain *)(this->pChainParent + 0x54),(CDSChain *)this,anchor);
   uVar1 = (**(code **)(this->vftable_primary + 0x24))(0,0);
   return uVar1;
 }
@@ -102881,14 +103086,14 @@ uchar __thiscall CGameView::CGameView_RemoveFromSiblingAnchor(CGameView *this,in
                     // UNCERTAIN: unlinks entity from sibling list at (*(this+0x4c)+0x54) via
                     // FUN_0042fa50; sole caller CGaming_InsertEntityByDepth @ 0x00418507.
   CDSChain::CDSChained_RemoveWithHeadFixup
-            ((CDSChain *)(this->pChainParent + 0x54),(CBulanek *)this,anchor);
+            ((CDSChain *)(this->pChainParent + 0x54),(CDSChain *)this,anchor);
   uVar1 = (**(code **)(this->vftable_primary + 0x24))(0,0);
   return uVar1;
 }
 
 
 
-int * __thiscall CDSView::CDSView_ResolveInputChainFromHitTest(CDSView *this,undefined4 param_1)
+CDSView * __thiscall CDSView::CDSView_ResolveInputChainFromHitTest(CDSView *this,undefined4 param_1)
 
 {
   void *pvVar1;
@@ -102898,7 +103103,7 @@ int * __thiscall CDSView::CDSView_ResolveInputChainFromHitTest(CDSView *this,und
                     // UNCERTAIN: Walks input-chain list at this+0x54 for node with +0x44 flag 0x80
                     // set and vtable+0x1c(param) true. Callees FUN_0042c700, FUN_0042c880. No
                     // published export name.
-  if (DAT_004b3b94 != (int *)0x0) {
+  if (DAT_004b3b94 != (CDSView *)0x0) {
     return DAT_004b3b94;
   }
   do {
@@ -102906,7 +103111,7 @@ int * __thiscall CDSView::CDSView_ResolveInputChainFromHitTest(CDSView *this,und
              _Globals::CDSIntrusiveNode_GetLinkNext(&(this->win).pVftable_CDSChain_IDSReferenced);
     while( true ) {
       if (pCVar3 == (CDSView *)0x0) {
-        return (int *)this;
+        return this;
       }
       if ((((pCVar3->win).wViewStateFlags & 0x84) == 0x80) &&
          (cVar2 = (**(code **)((int)(pCVar3->win).pVftable_primary + 0x1c))(param_1), cVar2 != '\0')
@@ -102922,7 +103127,7 @@ int * __thiscall CDSView::CDSView_ResolveInputChainFromHitTest(CDSView *this,und
       }
     }
     this = pCVar3;
-  } while (DAT_004b3b94 == (int *)0x0);
+  } while (DAT_004b3b94 == (CDSView *)0x0);
   return DAT_004b3b94;
 }
 
@@ -103264,7 +103469,7 @@ void __fastcall _Globals::CMenu_ClearAllChildren(CMenu *param_1)
 void _Globals::CDSApp_RefreshInputChainHitTest(void)
 
 {
-  int *piVar1;
+  CDSView *pCVar1;
   int iVar2;
   void *this;
   
@@ -103273,14 +103478,15 @@ void _Globals::CDSApp_RefreshInputChainHitTest(void)
                     // FUN_0042c7f0, CGaming::FUN_0041c290. No published export name.
   if (g_pApp != (void *)0x0) {
     this = g_pApp;
-    piVar1 = g_pInputChainHead;
+    pCVar1 = g_pInputChainHead;
     if (g_pInputChainHead != (void *)0x0) goto LAB_0042c730;
-    piVar1 = CDSView::CDSView_ResolveInputChainFromHitTest(g_pApp,(int)g_pApp + 0xf0);
+    pCVar1 = CDSView::CDSView_ResolveInputChainFromHitTest(g_pApp,(int)g_pApp + 0xf0);
     this = g_pApp;
-    for (; piVar1 != (int *)0x0; piVar1 = (int *)piVar1[0x13]) {
+    for (; pCVar1 != (CDSView *)0x0; pCVar1 = (pCVar1->win).pParent) {
 LAB_0042c730:
-      if (((*(byte *)((int)piVar1 + 0x46) & 0x10) != 0) &&
-         (iVar2 = (**(code **)(*piVar1 + 0x18))((int)this + 0xf0), this = g_pApp, iVar2 != 0)) {
+      if ((((pCVar1->win).wWidgetFlags & 0x10) != 0) &&
+         (iVar2 = (**(code **)((int)(pCVar1->win).pVftable_primary + 0x18))((int)this + 0xf0),
+         this = g_pApp, iVar2 != 0)) {
         CDSApp_SetPendingChildView(g_pApp,iVar2);
         return;
       }
@@ -103331,42 +103537,42 @@ void __thiscall CDSView::CDSApp_RouteSyntheticCloseEvent(CDSView *this,ushort pa
 
 
 
-void __fastcall _Globals::CDSApp_SetInputChainHead(int *param_1)
+void __fastcall _Globals::CDSApp_SetInputChainHead(CDSView *param_1)
 
 {
   CDSView *pCVar1;
   CDSView *this;
-  int *piVar2;
+  CDSView *pCVar2;
   
   pCVar1 = g_pInputChainHead;
   if (g_pApp == (void *)0x0) {
     return;
   }
-  piVar2 = g_pInputChainHead;
-  this = (CDSView *)param_1;
+  pCVar2 = g_pInputChainHead;
+  this = param_1;
   if (g_pInputChainHead != param_1) {
     while ((this != (CDSView *)0x0 && (((this->win).wViewStateFlags & 8) == 0))) {
       CDSView::CDSView_SetMouseMoveDefault(this);
       this = (this->win).pParent;
     }
-    piVar2 = param_1;
+    pCVar2 = param_1;
     if (pCVar1 != (void *)0x0) {
-      for (; piVar2 = param_1, this != pCVar1; pCVar1 = (pCVar1->win).pParent) {
+      for (; pCVar2 = param_1, this != pCVar1; pCVar1 = (pCVar1->win).pParent) {
         CDSView_InputChain_OnDetach();
       }
     }
   }
-  g_pInputChainHead = piVar2;
+  g_pInputChainHead = pCVar2;
   CDSApp_RefreshInputChainHitTest();
   return;
 }
 
 
 
-void __fastcall _Globals::CControl_ClaimModalFocusOnPress(int *param_1)
+void __fastcall _Globals::CControl_ClaimModalFocusOnPress(CDSView *param_1)
 
 {
-  if ((*(byte *)(param_1 + 0x11) & 0x84) == 0x80) {
+  if (((param_1->win).wViewStateFlags & 0x84) == 0x80) {
     CDSApp_SetInputChainHead(param_1);
     DAT_004b3b94 = param_1;
   }
@@ -103375,12 +103581,12 @@ void __fastcall _Globals::CControl_ClaimModalFocusOnPress(int *param_1)
 
 
 
-void __fastcall _Globals::CDSView_UpdateInputChainOnMouseMove(int *param_1)
+void __fastcall _Globals::CDSView_UpdateInputChainOnMouseMove(CDSView *param_1)
 
 {
   int iVar1;
   char cVar2;
-  int *piVar3;
+  CDSView *pCVar3;
   void *pvVar4;
   
                     // UNCERTAIN: modal mouse-move handler — if view vtable+0x1c(g_pApp+0xf0) or
@@ -103388,10 +103594,10 @@ void __fastcall _Globals::CDSView_UpdateInputChainOnMouseMove(int *param_1)
                     // FUN_0042c140. CDSApp_DispatchInputEvent @ 0x00429de7.
   if (g_pApp != (void *)0x0) {
     iVar1 = (int)g_pApp + 0xf0;
-    cVar2 = (**(code **)(*param_1 + 0x1c))(iVar1);
+    cVar2 = (**(code **)((int)(param_1->win).pVftable_primary + 0x1c))(iVar1);
     if ((cVar2 != '\0') || (DAT_004b3b94 != 0)) {
-      piVar3 = CDSView::CDSView_ResolveInputChainFromHitTest((CDSView *)param_1,iVar1);
-      CDSApp_SetInputChainHead(piVar3);
+      pCVar3 = CDSView::CDSView_ResolveInputChainFromHitTest(param_1,iVar1);
+      CDSApp_SetInputChainHead(pCVar3);
       return;
     }
     pvVar4 = g_pInputChainHead;
@@ -103435,7 +103641,7 @@ byte __fastcall _Globals::CDSView_AcquireKeyboardFocus(int *param_1)
 
 
 
-void __fastcall _Globals::CDSView__Show_UpdateFocusChain(int *param_1)
+void __fastcall _Globals::CDSView__Show_UpdateFocusChain(CDSView *param_1)
 
 {
   char cVar1;
@@ -103444,7 +103650,7 @@ void __fastcall _Globals::CDSView__Show_UpdateFocusChain(int *param_1)
                     // vtable+0x1c(g_pApp+0xf0) then FUN_0042c880 focus chain. Not
                     // CDSView_AcquireKeyboardFocus @ 0x0042c8e0.
   if ((g_pApp != (void *)0x0) && (DAT_004b3b94 == 0)) {
-    cVar1 = (**(code **)(*param_1 + 0x1c))((int)g_pApp + 0xf0);
+    cVar1 = (**(code **)((int)(param_1->win).pVftable_primary + 0x1c))((int)g_pApp + 0xf0);
     if (cVar1 != '\0') {
       CDSView_UpdateInputChainOnMouseMove(param_1);
       return;
@@ -103455,19 +103661,23 @@ void __fastcall _Globals::CDSView__Show_UpdateFocusChain(int *param_1)
 
 
 
-void __fastcall _Globals::CDSView__Show(int *param_1)
+void __fastcall _Globals::CDSView__Show(CDSView *param_1)
 
 {
-  if ((*(ushort *)(param_1 + 0x11) & 1) == 0) {
-    *(ushort *)(param_1 + 0x11) = *(ushort *)(param_1 + 0x11) | 1;
+  ushort uVar1;
+  void *pvVar2;
+  
+  uVar1 = (param_1->win).wViewStateFlags;
+  if ((uVar1 & 1) == 0) {
+    (param_1->win).wViewStateFlags = uVar1 | 1;
     if ((g_pApp != (void *)0x0) &&
-       (((param_1[0x13] != 0 && ((*(byte *)(param_1[0x13] + 0x44) & 0x80) != 0)) ||
-        (g_pApp == param_1)))) {
+       (((pvVar2 = (param_1->win).pParent, pvVar2 != (void *)0x0 &&
+         ((*(byte *)((int)pvVar2 + 0x44) & 0x80) != 0)) || (g_pApp == param_1)))) {
       CDSView_SetActive(param_1,1);
-      if ((*(byte *)(param_1 + 0x11) & 4) == 0) {
+      if (((param_1->win).wViewStateFlags & 4) == 0) {
         CDSView__Show_UpdateFocusChain(param_1);
       }
-      (**(code **)(*param_1 + 0x24))(0,0);
+      (**(code **)((int)(param_1->win).pVftable_primary + 0x24))(0,0);
     }
   }
   return;
@@ -103475,19 +103685,19 @@ void __fastcall _Globals::CDSView__Show(int *param_1)
 
 
 
-undefined2 __fastcall _Globals::CDSView_EnableWidget(int *param_1)
+undefined2 __fastcall _Globals::CDSView_EnableWidget(CDSView *param_1)
 
 {
   ushort uVar1;
   uint uVar2;
   
-  uVar1 = *(ushort *)(param_1 + 0x11);
+  uVar1 = (param_1->win).wViewStateFlags;
   if ((uVar1 & 4) != 0) {
     uVar2 = uVar1 & 0xfffb;
-    *(short *)(param_1 + 0x11) = (short)uVar2;
+    (param_1->win).wViewStateFlags = (ushort)uVar2;
     if ((char)uVar2 < '\0') {
       CDSView__Show_UpdateFocusChain(param_1);
-      uVar2 = (**(code **)(*param_1 + 0x24))(0,0);
+      uVar2 = (**(code **)((int)(param_1->win).pVftable_primary + 0x24))(0,0);
     }
     return (short)CONCAT31((int3)(uVar2 >> 8),1);
   }
@@ -103772,33 +103982,31 @@ undefined4 * _Globals::CreateObject(void)
 
 
 
-void __fastcall CDSView::CDSView_dtor(undefined4 *param_1,undefined4 param_2)
+void __fastcall CDSView::CDSView_dtor(CMenu *param_1)
 
 {
-  uint uVar1;
   void *local_c;
   undefined1 *puStack_8;
   int local_4;
   
   puStack_8 = &LAB_0047937a;
   local_c = ExceptionList;
-  uVar1 = DAT_004b0e44 ^ (uint)&stack0xffffffe4;
   ExceptionList = &local_c;
-  *param_1 = &::g_pCDSView_vftable_primary;
-  param_1[1] = &g_pCDSView_vftable_IDSChained;
-  param_1[4] = &g_pCDSView_vftable_IDSEventHandler;
-  param_1[6] = &g_pCDSView_vftable_IDSReferenced;
+  param_1->pVftable_primary = (CDSView_vftable_t *)&::g_pCDSView_vftable_primary;
+  param_1->pVftable_IDSChained = &g_pCDSView_vftable_IDSChained;
+  param_1->pVftable_IDSEventHandler = &g_pCDSView_vftable_IDSEventHandler;
+  param_1->pVftable_IDSReferenced = &g_pCDSView_vftable_IDSReferenced;
   local_4 = 2;
   if (g_pInputChainHead == param_1) {
     g_pInputChainHead = (void *)0x0;
   }
-  _Globals::CMenu_ClearAllChildren(param_1,param_2,uVar1);
+  _Globals::CMenu_ClearAllChildren(param_1);
   local_4._0_1_ = 1;
-  CDSChain::CDSChain_dtor((CDSChain *)(param_1 + 0x15));
+  CDSChain::CDSChain_dtor((CDSChain *)&param_1->pVftable_CDSChain_IDSReferenced);
   local_4 = (uint)local_4._1_3_ << 8;
-  _Globals::CDSEventQueue_ClearForTarget((int)(param_1 + 4));
+  _Globals::CDSEventQueue_ClearForTarget((int)&param_1->pVftable_IDSEventHandler);
   local_4 = 0xffffffff;
-  CDSChained::CDSChained_InitIDSReferencedVtable(param_1);
+  CDSChained::CDSChained_InitIDSReferencedVtable(&param_1->pVftable_primary);
   ExceptionList = local_c;
   return;
 }
@@ -103937,7 +104145,7 @@ void __thiscall CDSView::CDSView_SetAsDefaultFocusChild(CDSView *this)
 // CDSView__AddChild — NOT a vtable slot. Centers child via SetPosition when anchor flags set;
 // AddChildInternal; optional Show/Hide; default keyboard focus.
 
-void __thiscall CDSView::CDSView__AddChild(CDSView *this,CDSView *param_2,undefined4 param_3)
+void __thiscall CDSView::CDSView__AddChild(CDSView *this,CBulanci *param_1,void *param_2)
 
 {
   ushort uVar1;
@@ -103945,37 +104153,37 @@ void __thiscall CDSView::CDSView__AddChild(CDSView *this,CDSView *param_2,undefi
   int iVar3;
   int iVar4;
   
-  uVar1 = (param_2->win).wWidgetFlags;
+  uVar1 = (param_1->app).wFlags2;
   if ((uVar1 & 0xc) != 0) {
-    iVar3 = (param_2->win).nBbox_left;
-    iVar4 = (param_2->win).nBbox_top;
+    iVar3 = (param_1->app).nRect_left;
+    iVar4 = (param_1->app).nRect_top;
     if ((uVar1 & 4) != 0) {
       iVar3 = (((this->win).nBbox_right - (this->win).nBbox_left) -
-              ((param_2->win).nBbox_right - iVar3)) / 2;
+              ((param_1->app).nRect_right - iVar3)) / 2;
     }
-    if (((param_2->win).wWidgetFlags & 8) != 0) {
+    if (((param_1->app).wFlags2 & 8) != 0) {
       iVar4 = (((this->win).nBbox_bottom - (this->win).nBbox_top) -
-              ((param_2->win).nBbox_bottom - iVar4)) / 2;
+              ((param_1->app).nRect_bottom - iVar4)) / 2;
     }
-    CDSView__SetPosition(param_2,iVar3,iVar4);
+    CDSView__SetPosition((CDSView *)param_1,iVar3,iVar4);
   }
-  bVar2 = (byte)(param_2->win).wViewStateFlags & 1;
+  bVar2 = (byte)(param_1->app).wFlags1 & 1;
   if (bVar2 != 0) {
-    CDSView__Hide(param_2);
+    CDSView__Hide((CDSView *)param_1);
   }
-  _Globals::CDSView__AddChildInternal(this,param_2,param_3);
+  _Globals::CDSView__AddChildInternal(this,param_1,param_2);
   if (bVar2 != 0) {
-    _Globals::CDSView__Show((int *)param_2);
+    _Globals::CDSView__Show((CDSView *)param_1);
   }
   if ((this->win).dwChainField_50 == 0) {
-    _Globals::CDSView_AcquireKeyboardFocus((int *)param_2);
+    _Globals::CDSView_AcquireKeyboardFocus((int *)param_1);
   }
   return;
 }
 
 
 
-void __thiscall CMenu::CMenu_DetachChildWithVisibility(CMenu *this,int *param_1)
+void __thiscall CMenu::CMenu_DetachChildWithVisibility(CMenu *this,CDSView *param_1)
 
 {
   byte bVar1;
@@ -103983,15 +104191,15 @@ void __thiscall CMenu::CMenu_DetachChildWithVisibility(CMenu *this,int *param_1)
                     // Detach child from menu: optional ReleaseKeyboardFocus (chain+0x44 bit2), Hide
                     // (bit0), CMenu_DetachChild, then Show if was visible. Used by
                     // CHelpDlg_LoadHelpPage / CHistoryDlg_LoadHistoryPage when swapping pages.
-  if ((*(byte *)(param_1 + 0x11) & 2) != 0) {
-    _Globals::CDSView_ReleaseKeyboardFocus(param_1);
+  if (((param_1->win).wViewStateFlags & 2) != 0) {
+    _Globals::CDSView_ReleaseKeyboardFocus((int *)param_1);
   }
-  bVar1 = *(byte *)(param_1 + 0x11);
-  if ((bVar1 & 1) != 0) {
-    CDSView::CDSView__Hide((CDSView *)param_1);
+  bVar1 = (byte)(param_1->win).wViewStateFlags & 1;
+  if (bVar1 != 0) {
+    CDSView::CDSView__Hide(param_1);
   }
   CMenu_DetachChild(this,param_1);
-  if ((bVar1 & 1) != 0) {
+  if (bVar1 != 0) {
     _Globals::CDSView__Show(param_1);
   }
   return;
@@ -104001,7 +104209,7 @@ void __thiscall CMenu::CMenu_DetachChildWithVisibility(CMenu *this,int *param_1)
 
 // WARNING: Removing unreachable block (ram,0x0042d2b5)
 
-undefined2 __thiscall CDSView::CDSView_DoModal(CDSView *this,void *param_1)
+ushort __thiscall CDSView::CDSView_DoModal(CDSView *this,CDSView *param_1)
 
 {
   ushort *puVar1;
@@ -104013,13 +104221,13 @@ undefined2 __thiscall CDSView::CDSView_DoModal(CDSView *this,void *param_1)
   
                     // Modal exit code at +0x4a (not wChainCounter_4a); R6 task 18
   if (g_pApp != (void *)0x0) {
-    if ((param_1 == (void *)0x0) || ((this->win).pParent != (void *)0x0)) {
+    if ((param_1 == (CDSView *)0x0) || ((this->win).pParent != (void *)0x0)) {
       pvVar2 = (this->win).pParent;
       if ((pvVar2 == (void *)0x0) || ((*(byte *)((int)pvVar2 + 0x44) & 0x80) != 0))
       goto LAB_0042d1ef;
     }
-    else if ((*(byte *)((int)param_1 + 0x44) & 0x80) != 0) {
-      CDSView__AddChild(param_1,this,0);
+    else if (((param_1->win).wViewStateFlags & 0x80) != 0) {
+      CDSView__AddChild(param_1,(CBulanci *)this,(void *)0x0);
 LAB_0042d1ef:
       pvVar2 = (this->win).pParent;
       if (pvVar2 == (void *)0x0) {
@@ -104034,7 +104242,7 @@ LAB_0042d1ef:
       puVar1 = &(this->win).wViewStateFlags;
       *puVar1 = *puVar1 | 0x10;
       if (bVar4 == 0) {
-        _Globals::CDSView__Show((int *)this);
+        _Globals::CDSView__Show(this);
       }
       (**(code **)((int)(this->win).pVftable_primary + 0x24))(0);
       do {
@@ -104846,7 +105054,7 @@ int * __fastcall _Globals::CDsString_ClearInPlace(int *param_1)
 
 void __thiscall
 CBulanci::CDsString_SplitPathBackslashDot
-          (CBulanci *this,CBulanci *param_2,void *param_3,int *param_4)
+          (CBulanci *this,CBulanci *param_1,void *param_2,int *param_3)
 
 {
   void *this_00;
@@ -104859,7 +105067,7 @@ CBulanci::CDsString_SplitPathBackslashDot
   undefined1 *puStack_8;
   undefined4 local_4;
   
-  this_00 = param_3;
+  this_00 = param_2;
   local_4 = 0xffffffff;
   puStack_8 = &LAB_00479480;
   local_c = ExceptionList;
@@ -104867,14 +105075,14 @@ CBulanci::CDsString_SplitPathBackslashDot
   iVar4 = -1;
   iVar3 = -1;
   local_10 = this;
-  if ((((param_2 != (CBulanci *)0x0) || (param_3 != (void *)0x0)) &&
+  if ((((param_1 != (CBulanci *)0x0) || (param_2 != (void *)0x0)) &&
       (iVar4 = CDsString_FindLastWideChar(this,0x5c,-1), this_00 != (void *)0x0)) ||
-     (param_4 != (int *)0x0)) {
+     (param_3 != (int *)0x0)) {
     iVar3 = CDsString_FindLastWideChar(this,0x2e,-1);
   }
   if (iVar4 < 0) {
-    if (param_2 != (CBulanci *)0x0) {
-      _Globals::CDsString_ClearInPlace((int *)param_2);
+    if (param_1 != (CBulanci *)0x0) {
+      _Globals::CDsString_ClearInPlace((int *)param_1);
     }
     if (iVar3 < 0) {
       if (this_00 != (void *)0x0) {
@@ -104883,69 +105091,69 @@ CBulanci::CDsString_SplitPathBackslashDot
       goto LAB_0042de8e;
     }
     if (this_00 != (void *)0x0) {
-      puVar1 = CDsString_SubstringWide(this,&param_2,0,iVar3);
+      puVar1 = CDsString_SubstringWide(this,&param_1,0,iVar3);
       local_4 = 4;
       _Globals::CDsStringAssignFromHandle(this_00,puVar1);
       local_4 = 0xffffffff;
-      if (param_2 != (CBulanci *)0x0) {
-        _Globals::CDsStringReleaseHeader(&param_2[-1].game.pReleaseOnDestroy);
+      if (param_1 != (CBulanci *)0x0) {
+        _Globals::CDsStringReleaseHeader(&param_1[-1].game.pReleaseOnDestroy);
       }
     }
-    if (param_4 == (int *)0x0) {
+    if (param_3 == (int *)0x0) {
       ExceptionList = local_c;
       return;
     }
     puVar1 = CDsString_SubstringWide(this,&local_10,iVar3 + 1,-1);
     local_4 = 5;
-    _Globals::CDsStringAssignFromHandle(param_4,puVar1);
+    _Globals::CDsStringAssignFromHandle(param_3,puVar1);
     pCVar2 = local_10;
   }
   else {
-    if (param_2 != (CBulanci *)0x0) {
-      puVar1 = CDsString_SubstringWide(this,&param_3,0,iVar4);
+    if (param_1 != (CBulanci *)0x0) {
+      puVar1 = CDsString_SubstringWide(this,&param_2,0,iVar4);
       local_4 = 0;
-      _Globals::CDsStringAssignFromHandle(param_2,puVar1);
+      _Globals::CDsStringAssignFromHandle(param_1,puVar1);
       local_4 = 0xffffffff;
-      if (param_3 != (void *)0x0) {
-        _Globals::CDsStringReleaseHeader((void *)((int)param_3 + -0xc));
+      if (param_2 != (void *)0x0) {
+        _Globals::CDsStringReleaseHeader((void *)((int)param_2 + -0xc));
       }
     }
     if (iVar3 < 0) {
       if (this_00 != (void *)0x0) {
-        puVar1 = CDsString_SubstringWide(this,&param_2,iVar4 + 1,-1);
+        puVar1 = CDsString_SubstringWide(this,&param_1,iVar4 + 1,-1);
         local_4 = 3;
         _Globals::CDsStringAssignFromHandle(this_00,puVar1);
         local_4 = 0xffffffff;
-        if (param_2 != (CBulanci *)0x0) {
-          _Globals::CDsStringReleaseHeader(&param_2[-1].game.pReleaseOnDestroy);
+        if (param_1 != (CBulanci *)0x0) {
+          _Globals::CDsStringReleaseHeader(&param_1[-1].game.pReleaseOnDestroy);
         }
       }
 LAB_0042de8e:
-      if (param_4 == (int *)0x0) {
+      if (param_3 == (int *)0x0) {
         ExceptionList = local_c;
         return;
       }
-      _Globals::CDsString_ClearInPlace(param_4);
+      _Globals::CDsString_ClearInPlace(param_3);
       ExceptionList = local_c;
       return;
     }
     if (this_00 != (void *)0x0) {
-      puVar1 = CDsString_SubstringWide(this,&param_2,iVar4 + 1,(iVar3 - iVar4) + -1);
+      puVar1 = CDsString_SubstringWide(this,&param_1,iVar4 + 1,(iVar3 - iVar4) + -1);
       local_4 = 1;
       _Globals::CDsStringAssignFromHandle(this_00,puVar1);
       local_4 = 0xffffffff;
-      if (param_2 != (CBulanci *)0x0) {
-        _Globals::CDsStringReleaseHeader(&param_2[-1].game.pReleaseOnDestroy);
+      if (param_1 != (CBulanci *)0x0) {
+        _Globals::CDsStringReleaseHeader(&param_1[-1].game.pReleaseOnDestroy);
       }
     }
-    if (param_4 == (int *)0x0) {
+    if (param_3 == (int *)0x0) {
       ExceptionList = local_c;
       return;
     }
-    puVar1 = CDsString_SubstringWide(this,&param_2,iVar3 + 1,-1);
+    puVar1 = CDsString_SubstringWide(this,&param_1,iVar3 + 1,-1);
     local_4 = 2;
-    _Globals::CDsStringAssignFromHandle(param_4,puVar1);
-    pCVar2 = param_2;
+    _Globals::CDsStringAssignFromHandle(param_3,puVar1);
+    pCVar2 = param_1;
   }
   local_4 = 0xffffffff;
   if (pCVar2 != (CBulanci *)0x0) {
@@ -105178,11 +105386,12 @@ void * __thiscall CBulanci::CBulanci_FormatPathPair(CBulanci *this,short *param_
 
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 
-int * __thiscall CBulanci::CDsString_ReadNarrowLengthPrefixedFromStream(CBulanci *this,int *param_1)
+CBulanci * __thiscall
+CBulanci::CDsString_ReadNarrowLengthPrefixedFromStream(CBulanci *this,int *param_1)
 
 {
   uint uVar1;
-  int *piVar2;
+  CBulanci *pCVar2;
   LPCSTR pCVar3;
   UINT UVar4;
   int unaff_ESI;
@@ -105203,7 +105412,7 @@ int * __thiscall CBulanci::CDsString_ReadNarrowLengthPrefixedFromStream(CBulanci
   ExceptionList = &local_c;
   (**(code **)(*param_1 + 0x10))(local_8018,4);
   if (unaff_ESI == 0) {
-    piVar2 = _Globals::CDsString_ClearInPlace((int *)this);
+    pCVar2 = (CBulanci *)_Globals::CDsString_ClearInPlace((int *)this);
   }
   else {
     pCVar3 = _Globals::Runtime_MallocOrThrow(&DAT_004b7c94,(uchar *)(unaff_ESI + 1));
@@ -105213,7 +105422,7 @@ int * __thiscall CBulanci::CDsString_ReadNarrowLengthPrefixedFromStream(CBulanci
     UVar4 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
     CDsString_AssignFromMultiByte(local_8018,pCVar3,UVar4);
     local_c = (void *)CONCAT31(local_c._1_3_,1);
-    piVar2 = (int *)CDsStringAssignFromLiteral(this,(short *)local_8018[0].app.vftable_primary);
+    pCVar2 = CDsStringAssignFromLiteral(this,(short *)local_8018[0].app.vftable_primary);
     if ((undefined **)local_8018[0].app.vftable_primary != &local_8018[0].app.vftable_sub04) {
       Runtime::MSVCRT::_free(local_8018[0].app.vftable_primary);
     }
@@ -105223,7 +105432,7 @@ int * __thiscall CBulanci::CDsString_ReadNarrowLengthPrefixedFromStream(CBulanci
     }
   }
   ExceptionList = pvStack_14;
-  return piVar2;
+  return pCVar2;
 }
 
 
@@ -105700,17 +105909,17 @@ void __thiscall CDSUpdatedItem::Scheduler_FreeSlotIfLive(CDSUpdatedItem *this,ui
 
 
 
-void __fastcall CDSObject::CDSUpdatedItem_ReleaseSchedulerAndAudioBank(CBulanek *param_1)
+void __fastcall CDSObject::CDSUpdatedItem_ReleaseSchedulerAndAudioBank(CDSUpdatedItem *param_1)
 
 {
-  undefined *puVar1;
+  uint uVar1;
   
-  puVar1 = param_1->vftable_IDSReferenced;
-  while (puVar1 != (undefined *)0x0) {
-    puVar1 = puVar1 + -1;
-    CDSUpdatedItem::Scheduler_FreeSlotIfLive((CDSUpdatedItem *)param_1,(uint)puVar1);
+  uVar1 = param_1->dwEventSlots;
+  while (uVar1 != 0) {
+    uVar1 = uVar1 - 1;
+    CDSUpdatedItem::Scheduler_FreeSlotIfLive(param_1,uVar1);
   }
-  CDSPtrSlotVec::CDSPtrSlotVec_Resize((CDSPtrSlotVec *)&param_1->dwPad_0c,0);
+  CDSPtrSlotVec::CDSPtrSlotVec_Resize((CDSPtrSlotVec *)&param_1->pEventSlots,0);
   return;
 }
 
@@ -106068,7 +106277,7 @@ undefined4 __cdecl _Globals::InitializeByClassId(LPCWSTR param_1,undefined4 para
 
 void __thiscall
 CGame::BroadcastEvent
-          (CGame *this,undefined2 param_1,undefined4 param_2,undefined4 param_3,void *param_4)
+          (CGame *this,undefined2 param_1,undefined4 param_2,undefined4 param_3,CDSView *param_4)
 
 {
   void *pvVar1;
@@ -106167,7 +106376,7 @@ LAB_0042f107:
 
 // WARNING: Globals starting with '_' overlap smaller symbols at the same address
 
-void __fastcall CDSObject::CDSUpdatedItem_dtor(CBulanek *param_1)
+void __fastcall CDSObject::CDSUpdatedItem_dtor(CDSUpdatedItem *param_1)
 
 {
   uint uVar1;
@@ -106183,7 +106392,7 @@ void __fastcall CDSObject::CDSUpdatedItem_dtor(CBulanek *param_1)
   local_4 = 1;
   CDSUpdatedItem_ReleaseSchedulerAndAudioBank(param_1);
   iVar2 = CDSCollection::CDSCollection_FindKeyIndex
-                    (g_pTaskList,(int)&param_1->vftable_IDSChained,(void *)0x0);
+                    (g_pTaskList,(int)&param_1->pVftable_IDSEventHandler,(void *)0x0);
   *(undefined4 *)(*(int *)((int)g_pTaskList + 8) + iVar2 * 4) = 0;
   _DAT_004b7bec = _DAT_004b7bec + -1;
   if (_DAT_004b7bec == 0) {
@@ -106191,8 +106400,8 @@ void __fastcall CDSObject::CDSUpdatedItem_dtor(CBulanek *param_1)
     g_pTaskList = (void *)0x0;
   }
   local_4 = local_4 & 0xffffff00;
-  CDSPtrSlotVec::CDSPtrSlotVec_Resize((CDSPtrSlotVec *)&param_1->dwPad_0c,0);
-  param_1->vftable_IDSChained = (undefined *)g_pCDSObject_vftable_IDSReferenced;
+  CDSPtrSlotVec::CDSPtrSlotVec_Resize((CDSPtrSlotVec *)&param_1->pEventSlots,0);
+  param_1->pVftable_IDSEventHandler = g_pCDSObject_vftable_IDSReferenced;
   ExceptionList = local_c;
   return;
 }
@@ -106927,7 +107136,7 @@ CDSChain::CDSChain_RemoveListNode(CDSChain *this,CDSChain *pChain,void *pNode,ch
 
 
 
-void __thiscall CDSChained_PrependChild(void *this,void *param_1)
+void __thiscall CDSChained_PrependChild(void *this,CDSChained *param_1)
 
 {
   undefined4 extraout_ECX;
@@ -106947,7 +107156,7 @@ void __thiscall CDSChained_PrependChild(void *this,void *param_1)
 
 
 
-void __thiscall _Globals::CDSChained_AppendChild(void *this,void *param_1)
+void __thiscall _Globals::CDSChained_AppendChild(void *this,CDSChained *param_1)
 
 {
   undefined4 extraout_ECX;
@@ -106993,7 +107202,7 @@ _Globals::CDSChained_InsertChildAtAnchor(void *this,void *pChain,void *pChild,vo
 
 
 void __thiscall
-CDSChain::CDSChained_InsertBeforeWithHeadFixup(CDSChain *this,CBulanek *param_1,void *param_2)
+CDSChain::CDSChained_InsertBeforeWithHeadFixup(CDSChain *this,CDSChain *param_1,undefined *param_2)
 
 {
   undefined *extraout_ECX;
@@ -107002,7 +107211,7 @@ CDSChain::CDSChained_InsertBeforeWithHeadFixup(CDSChain *this,CBulanek *param_1,
                     // UNCERTAIN: list insert-before at index param_2 (FUN_0042f880); updates head
                     // at +0x8 when inserting at front; called from FUN_0042c160.
   CDSChain_ReleaseAuxHeap(this);
-  CDSChained_InsertBeforeAnchor((CDSChain *)param_1,param_2,unaff_EDI);
+  CDSChained_InsertBeforeAnchor(param_1,param_2,unaff_EDI);
   if (param_2 == this->pFirstChild) {
     this->pFirstChild = extraout_ECX;
   }
@@ -107012,16 +107221,16 @@ CDSChain::CDSChained_InsertBeforeWithHeadFixup(CDSChain *this,CBulanek *param_1,
 
 
 void __thiscall
-CDSChain::CDSChained_RemoveWithHeadFixup(CDSChain *this,CBulanek *param_1,int param_2)
+CDSChain::CDSChained_RemoveWithHeadFixup(CDSChain *this,CDSChain *param_1,int param_2)
 
 {
                     // UNCERTAIN: list unlink node param_1 at index param_2 (FUN_0042f890); fixes
                     // head at +0x8 if removing head; called from FUN_0042c190.
   CDSChain_ReleaseAuxHeap(this);
-  if (param_1 == (CBulanek *)this->pFirstChild) {
-    this->pFirstChild = (undefined *)param_1->dwPad_08;
+  if (param_1 == (CDSChain *)this->pFirstChild) {
+    this->pFirstChild = param_1->pFirstChild;
   }
-  CDSChained_UnlinkAndSpliceNode((CDSChain *)param_1,param_2);
+  CDSChained_UnlinkAndSpliceNode(param_1,param_2);
   return;
 }
 
@@ -107071,7 +107280,7 @@ CLevelScore::CDSChain_SortChildrenWithComparator(CLevelScore *this,_PtFuncCompar
     CBulanci::_qsort(_Base,(size_t)this->m_levelName,4,param_1);
     CDSChain::CDSChained_ClearChildren((CDSChain *)this,'\0');
     for (; iVar1 != 0; iVar1 = iVar1 + -1) {
-      CDSChained_PrependChild(this,*(void **)((int)_Base + iVar1 * 4 + -4));
+      CDSChained_PrependChild(this,*(CDSChained **)((int)_Base + iVar1 * 4 + -4));
     }
     _Globals::Runtime_Free(&DAT_004b7c94,_Base);
   }
@@ -107084,7 +107293,7 @@ void __thiscall CDSChain_full::CDSChain_Append(CDSChain_full *this,void *pConfig
 
 {
   void *pvVar1;
-  void *pvVar2;
+  CDSChained *pCVar2;
   void **ppvVar3;
   int iVar4;
   uint uStack_2c;
@@ -107112,9 +107321,9 @@ void __thiscall CDSChain_full::CDSChain_Append(CDSChain_full *this,void *pConfig
     ppvVar3 = &pConfigStream;
     local_18 = local_18 + -1;
     (**(code **)(*(int *)pvVar1 + 0x10))();
-    pvVar2 = (void *)_Globals::InitializeByClassId(pConfigStream,ppvVar3,iVar4);
-    (**(code **)(*(int *)((int)pvVar2 + 4) + 0x10))(pvVar1);
-    _Globals::CDSChained_AppendChild((CDSChain *)(this[-1].pPad_89 + 0x17),pvVar2);
+    pCVar2 = (CDSChained *)_Globals::InitializeByClassId(pConfigStream,ppvVar3,iVar4);
+    (**(code **)((int)pCVar2->pVftable_IDSChained + 0x10))(pvVar1);
+    _Globals::CDSChained_AppendChild((CDSChain *)(this[-1].pPad_89 + 0x17),pCVar2);
   }
   ExceptionList = local_10;
   return;
@@ -107637,10 +107846,10 @@ undefined * __thiscall
 CDSStreamException::CDSStreamException_FormatMessage(CDSStreamException *this,wchar_t *param_1)
 
 {
-  undefined4 *puVar1;
+  CBulanci *pCVar1;
   undefined *puVar2;
   CDSStreamException *local_10;
-  void *local_c;
+  undefined *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
   
@@ -107650,11 +107859,9 @@ CDSStreamException::CDSStreamException_FormatMessage(CDSStreamException *this,wc
   ExceptionList = &local_c;
   local_10 = this;
   if (this->dwWin32Error != 0) {
-    puVar1 = (undefined4 *)
-             _Globals::CDsStringFromWin32ErrorCode
-                       (&local_10,this->dwWin32Error,DAT_004b0e44 ^ (uint)&stack0xffffffe8);
+    pCVar1 = _Globals::CDsStringFromWin32ErrorCode((CBulanci *)&local_10,this->dwWin32Error);
     local_4 = 0;
-    _Globals::CDsStringAssignFromHandle(&this->pWin32Msg,puVar1);
+    _Globals::CDsStringAssignFromHandle(&this->pWin32Msg,(undefined4 *)pCVar1);
     local_4 = 0xffffffff;
     if (local_10 != (CDSStreamException *)0x0) {
       _Globals::CDsStringReleaseHeader(&local_10[-1].pStreamName);
@@ -107820,19 +108027,18 @@ void __thiscall IDSStream::SeekPosition(IDSStream *this,uint param_1,int param_2
 // Forwards to inner->Lock (vftable[0x2c/4 = slot 11]) at this+0x24.
 
 void __thiscall
-IDSStream::LockRegion(IDSStream *this,undefined *param_1,int param_2,uint param_3,int param_4)
+IDSStream::LockRegion(IDSStream *this,uint param_1,int param_2,uint param_3,int param_4)
 
 {
   int iVar1;
   int iVar2;
   
   if (((int)this->dwWindowBaseHi <= param_2) &&
-     (((int)this->dwWindowBaseHi < param_2 || ((undefined *)this->dwWindowBaseLo <= param_1)))) {
+     (((int)this->dwWindowBaseHi < param_2 || (this->dwWindowBaseLo <= param_1)))) {
     iVar1 = this->nSizeCapHi;
     if (-1 < iVar1) {
-      iVar2 = param_2 + param_4 + (uint)CARRY4((uint)param_1,param_3);
-      if ((iVar1 < iVar2) ||
-         ((iVar1 <= iVar2 && ((undefined *)this->dwSizeCapLo < param_1 + param_3))))
+      iVar2 = param_2 + param_4 + (uint)CARRY4(param_1,param_3);
+      if ((iVar1 < iVar2) || ((iVar1 <= iVar2 && (this->dwSizeCapLo < param_1 + param_3))))
       goto LAB_0043061a;
     }
     (**(code **)(*(int *)this->pInnerStream + 0x2c))(param_1,param_2,param_3,param_4);
@@ -107852,19 +108058,18 @@ LAB_0043061a:
 // Forwards to inner->Unlock (vftable[0x30/4 = slot 12]) at this+0x24.
 
 void __thiscall
-IDSStream::UnlockRegion(IDSStream *this,undefined *param_1,int param_2,uint param_3,int param_4)
+IDSStream::UnlockRegion(IDSStream *this,uint param_1,int param_2,uint param_3,int param_4)
 
 {
   int iVar1;
   int iVar2;
   
   if (((int)this->dwWindowBaseHi <= param_2) &&
-     (((int)this->dwWindowBaseHi < param_2 || ((undefined *)this->dwWindowBaseLo <= param_1)))) {
+     (((int)this->dwWindowBaseHi < param_2 || (this->dwWindowBaseLo <= param_1)))) {
     iVar1 = this->nSizeCapHi;
     if (-1 < iVar1) {
-      iVar2 = param_2 + param_4 + (uint)CARRY4((uint)param_1,param_3);
-      if ((iVar1 < iVar2) ||
-         ((iVar1 <= iVar2 && ((undefined *)this->dwSizeCapLo < param_1 + param_3))))
+      iVar2 = param_2 + param_4 + (uint)CARRY4(param_1,param_3);
+      if ((iVar1 < iVar2) || ((iVar1 <= iVar2 && (this->dwSizeCapLo < param_1 + param_3))))
       goto LAB_0043069a;
     }
     (**(code **)(*(int *)this->pInnerStream + 0x30))(param_1,param_2,param_3,param_4);
@@ -109176,7 +109381,7 @@ void _Globals::CDSJpegMemPool_InitMethodPointers(void)
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
 
 void __cdecl
-_Globals::CDSJpegImage__DecompressToImage(int *param_1,undefined4 param_2,void *param_3)
+_Globals::CDSJpegImage__DecompressToImage(int *param_1,undefined4 param_2,CDSImage *param_3)
 
 {
   undefined1 uVar1;
@@ -109222,7 +109427,7 @@ _Globals::CDSJpegImage__DecompressToImage(int *param_1,undefined4 param_2,void *
       puVar3 = puVar3 + 3;
       iVar2 = iVar2 + -1;
     } while (iVar2 != 0);
-    local_1cc = local_1cc + *(int *)((int)param_3 + 0x10);
+    local_1cc = local_1cc + param_3->nM_stride;
   }
   jpeg_finish_decompress(local_1b8);
   jpeg_destroy((int)local_1b8);
@@ -109250,17 +109455,17 @@ void _Globals::Catch_00431ca9(void)
 void __thiscall CDSJpegImage::CDSJpegImage_Load(CDSJpegImage *this,void *stream)
 
 {
-  int *piVar1;
+  CDSImage *pCVar1;
   undefined4 uVar2;
   
   if (this == (CDSJpegImage *)&DAT_00000054) {
-    piVar1 = (int *)0x0;
+    pCVar1 = (CDSImage *)0x0;
   }
   else {
-    piVar1 = &this[-1].m_image.nM_stride;
+    pCVar1 = (CDSImage *)&this[-1].m_image.nM_stride;
   }
   uVar2 = (**(code **)(*(int *)stream + 0x1c))();
-  _Globals::CDSJpegImage__DecompressToImage(stream,uVar2,piVar1);
+  _Globals::CDSJpegImage__DecompressToImage(stream,uVar2,pCVar1);
   return;
 }
 
@@ -112012,32 +112217,33 @@ void __fastcall CDSStreamStorage::CDSStreamStorage_dtor(undefined4 *param_1)
 void * __thiscall CDSStreamStorage::CDSStreamStorage_GetThreadLoaderNode(CDSStreamStorage *this)
 
 {
-  DWORD DVar1;
+  void *pvVar1;
   void *pCurrentView;
-  undefined4 *puVar2;
-  undefined4 *puVar3;
+  CDSChained *pCVar2;
+  CDSChained *pCVar3;
   
                     // Per-thread CDSChain loader node @ storage+0x34; match GetCurrentThreadId @
                     // node+0x10.
-  DVar1 = GetCurrentThreadId();
+  pvVar1 = (void *)GetCurrentThreadId();
   pCurrentView = _Globals::CDSChained_GetFirstChildView(&this->chain);
   while( true ) {
     if (pCurrentView == (void *)0x0) {
-      puVar2 = (undefined4 *)_Globals::OperatorNewWithBadAlloc(0x18);
-      puVar3 = (undefined4 *)0x0;
-      if (puVar2 != (undefined4 *)0x0) {
-        puVar2[2] = 0;
-        puVar2[3] = 0;
-        puVar2[5] = 0;
-        *puVar2 = 0x4874a0;
-        puVar2[1] = 0x487484;
-        puVar2[4] = DVar1;
-        puVar3 = puVar2;
+      pCVar2 = (CDSChained *)_Globals::OperatorNewWithBadAlloc(0x18);
+      pCVar3 = (CDSChained *)0x0;
+      if (pCVar2 != (CDSChained *)0x0) {
+        pCVar2->dwField_08 = 0;
+        pCVar2->dwField_0c = 0;
+        pCVar2->wViewFlags = 0;
+        pCVar2->wPad_16 = 0;
+        pCVar2->pVftable_primary = (void *)0x4874a0;
+        pCVar2->pVftable_IDSChained = g_pCDSApp_vftable[8] + 0xe;
+        pCVar2->pVftable_IDSEventHandler = pvVar1;
+        pCVar3 = pCVar2;
       }
-      _Globals::CDSChained_AppendChild(&this->chain,puVar3);
-      return puVar3;
+      _Globals::CDSChained_AppendChild(&this->chain,pCVar3);
+      return pCVar3;
     }
-    if (*(DWORD *)((int)pCurrentView + 0x10) == DVar1) break;
+    if (*(void **)((int)pCurrentView + 0x10) == pvVar1) break;
     pCurrentView = _Globals::CDSChained_GetNextSiblingView(pCurrentView);
   }
   return pCurrentView;
@@ -113161,7 +113367,7 @@ wchar_t * __thiscall CDSApiException::CDSApiException_What(CDSApiException *this
 {
   wchar_t *pwVar1;
   CDSApiException *local_10;
-  void *local_c;
+  undefined *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
   
@@ -113170,8 +113376,7 @@ wchar_t * __thiscall CDSApiException::CDSApiException_What(CDSApiException *this
   local_c = ExceptionList;
   ExceptionList = &local_c;
   local_10 = this;
-  _Globals::CDsStringFromWin32ErrorCode
-            (&local_10,this->dwWin32Error,DAT_004b0e44 ^ (uint)&stack0xffffffec);
+  _Globals::CDsStringFromWin32ErrorCode((CBulanci *)&local_10,this->dwWin32Error);
   local_4 = 0;
   _Globals::CDsStringFormatV(&this->pFormattedMessage,param_1);
   local_4 = 0xffffffff;
@@ -113949,10 +114154,10 @@ CDSGZipStream * __thiscall CBulanci::CDSGZipStream_Ctor(CBulanci *this,int *para
   ExceptionList = &local_10;
   *(undefined4 *)(this->app).pMiPad_after_vftable_sub04 = 1;
   (this->app).vftable_sub10 = (undefined *)0x20;
-  (this->app).vftable_primary = &CDSGZipStream::vftable;
-  (this->app).vftable_sub04 = &CDSGZipStream::vftable;
-  *(undefined **)((this->app).pMiPad_after_vftable_sub04 + 4) = &CDSGZipStream::vftable;
-  *(undefined **)(this->app).pMiPad_after_vftable_sub10 = &CDSGZipStream::vftable;
+  (this->app).vftable_primary = (undefined *)&CDSGZipStream::vftable;
+  (this->app).vftable_sub04 = (undefined *)&CDSGZipStream::vftable;
+  *(undefined ***)((this->app).pMiPad_after_vftable_sub04 + 4) = &CDSGZipStream::vftable;
+  *(undefined ***)(this->app).pMiPad_after_vftable_sub10 = &CDSGZipStream::vftable;
   (this->app).nRect_left = 0;
   (this->app).nRect_top = 0;
   (this->app).nRect_right = 0;
@@ -114045,9 +114250,9 @@ CDSGZipStream * __thiscall CDSGZipStream::CDSGZipStream_ctor(CDSGZipStream *this
   this->pBase[10] = '\0';
   this->pBase[0xb] = '\0';
   this->dwM_bWriting = 0x20;
-  *(undefined **)this->pBase = &vftable;
-  *(undefined **)(this->pBase + 4) = &vftable;
-  *(undefined **)(this->pBase + 0xc) = &vftable;
+  *(undefined ***)this->pBase = &vftable;
+  *(undefined ***)(this->pBase + 4) = &vftable;
+  *(undefined ***)(this->pBase + 0xc) = &vftable;
   this->dwPad_14 = (dword)&vftable;
   this->m_stream = (undefined *)0x0;
   this->m_pData = (undefined *)0x0;
@@ -115305,18 +115510,18 @@ void __thiscall _Globals::CDSView_CopyColorPlane(void *this,void *param_1)
 
 
 
-void __fastcall _Globals::NotifyDirtyAll(void *param_1)
+void __fastcall _Globals::NotifyDirtyAll(CDSImage *param_1)
 
 {
   undefined4 local_10;
   undefined4 local_c;
-  undefined4 local_8;
-  undefined4 local_4;
+  int local_8;
+  int local_4;
   
-  local_4 = *(undefined4 *)((int)param_1 + 8);
+  local_4 = param_1->nM_height;
   local_10 = 0;
   local_c = 0;
-  local_8 = *(undefined4 *)((int)param_1 + 4);
+  local_8 = param_1->nM_width;
   CDSImage::NotifyDirtyRect(param_1,&local_10,1);
   return;
 }
@@ -116022,7 +116227,7 @@ CDSRegKeyException::CDSRegKeyException_What(CDSRegKeyException *this,wchar_t *fo
 {
   wchar_t *pwVar1;
   CDSRegKeyException *local_10;
-  void *local_c;
+  undefined *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
   
@@ -116031,8 +116236,7 @@ CDSRegKeyException::CDSRegKeyException_What(CDSRegKeyException *this,wchar_t *fo
   local_c = ExceptionList;
   ExceptionList = &local_c;
   local_10 = this;
-  _Globals::CDsStringFromWin32ErrorCode
-            (&local_10,this->dwWin32Error,DAT_004b0e44 ^ (uint)&stack0xffffffe8);
+  _Globals::CDsStringFromWin32ErrorCode((CBulanci *)&local_10,this->dwWin32Error);
   local_4 = 0;
   _Globals::CDsStringFormatV(&this->pPszFormatted,format);
   local_4 = 0xffffffff;
@@ -116822,6 +117026,12 @@ CDSScript * __thiscall CDSScript::CDSScript_ScalarDeletingDtor(CDSScript *this,b
 }
 
 
+
+// CDSScript_Rand -- the script VM 'Rand' opcode (op 1). Reads two sub-expressions (lo, hi) via
+// ReadSubExpr, then returns an inclusive uniform int in [lo,hi]: lo + ((_rand()*(hi-lo+1))>>15).
+// Used by level scripts for all randomized choices. Example (bedtime level 65856 OnInit):
+// Rand(0,1)=A/B variant, then per-prop presence rolls Rand(0,7)/Rand(0,9)/Rand(0,7)/Rand(0,6) where
+// ==0 means absent.
 
 int __cdecl _Globals::CDSScript_Rand(CDSScript *param_1)
 
@@ -118861,7 +119071,7 @@ void __thiscall CDSAudioPlayer::CDSAudioPlayer_Play(CDSAudioPlayer *this,byte pa
 
 
 
-void __fastcall CGaming::CGaming_PreMatchModal_RestartDeferredAudio(void *param_1)
+void __fastcall CGaming::CGaming_PreMatchModal_RestartDeferredAudio(CDSAudioPlayer *param_1)
 
 {
   int *piVar1;
@@ -118874,23 +119084,21 @@ void __fastcall CGaming::CGaming_PreMatchModal_RestartDeferredAudio(void *param_
                     // mapping.csv
   CDSAudioPlayer::CDSAudioPlayer_Stop(param_1,1);
   CDSAudioPlayer::CDSAudioPlayer_ApplyEffectiveVolume(param_1,'\0');
-  *(undefined1 *)((int)param_1 + 0x22) = 1;
-  iVar2 = g_dwElapsedMs - *(int *)((int)param_1 + 0x48);
-  *(undefined1 *)((int)param_1 + 0x21) = 1;
-  *(int *)((int)param_1 + 0x44) = *(int *)((int)param_1 + 0x44) + iVar2;
-  piVar1 = *(int **)((int)param_1 + 0x14);
+  param_1->bPlaying = 1;
+  iVar2 = g_dwElapsedMs - param_1->dwStopMs;
+  param_1->bPlayPending = 1;
+  param_1->dwPlayStartMs = param_1->dwPlayStartMs + iVar2;
+  piVar1 = param_1->pDirectSoundBuffer;
   if (piVar1 != (int *)0x0) {
     dwHresult = (**(code **)(*piVar1 + 0x30))
-                          (piVar1,0,0,
-                           *(char *)((int)param_1 + 0x1d) != '\0' ||
-                           *(char *)((int)param_1 + 0x1c) != '\0');
+                          (piVar1,0,0,param_1->bLooping != 0 || param_1->bStreaming != 0);
     if ((int)dwHresult < 0) {
       CDSDirectXException::CDSDirectXException_ThrowFromHresult(1,dwHresult);
     }
   }
   _Globals::CIntListInsertSortedOrAppend(&DAT_004b020c,(int)param_1,(undefined *)0x0,1);
-  *(int *)((int)param_1 + 8) = *(int *)((int)param_1 + 8) + 1;
-  *(undefined1 *)((int)param_1 + 0x1f) = 1;
+  param_1->dwRefCount = param_1->dwRefCount + 1;
+  param_1->bReleaseOnStop = 1;
   return;
 }
 
@@ -119011,8 +119219,7 @@ void __fastcall CMenu::CDSDirectPlay_CreateLocalPlayer(int param_1)
     CDSDirectXException::CDSDirectXException_ThrowFromHresult(2,dwHresult);
   }
   CDSDirectPlaySender_Bind
-            ((CMenu *)(param_1 + 0x3c),*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 0x38))
-  ;
+            ((CMenu *)(param_1 + 0x3c),*(undefined4 *)(param_1 + 4),*(void **)(param_1 + 0x38));
   return;
 }
 
@@ -119127,18 +119334,18 @@ void __fastcall _Globals::CDSDirectPlay_Shutdown(int param_1)
 
 
 
-void __thiscall CMenu::CDSDirectPlay_SetGuids(CMenu *this,undefined4 *param_1,undefined4 *param_2)
+void __thiscall CMenu::CDSDirectPlay_SetGuids(CMenu *this,dword *param_1,dword *param_2)
 
 {
-  undefined4 uVar1;
+  dword dVar1;
   uint uVar2;
   
   _Globals::CDSDirectPlay_Shutdown((int)this);
   this->dwField_0c = *param_1;
   this->pVftable_IDSEventHandler = (void *)param_1[1];
-  uVar1 = param_1[2];
-  this->wViewFlags = (short)uVar1;
-  this->wPad_16 = (short)((uint)uVar1 >> 0x10);
+  dVar1 = param_1[2];
+  this->wViewFlags = (short)dVar1;
+  this->wPad_16 = (short)(dVar1 >> 0x10);
   this->pVftable_IDSReferenced = (void *)param_1[3];
   this->dwField_1c = *param_2;
   this->nBbox_left = param_2[1];
@@ -119445,8 +119652,7 @@ void __fastcall CDSDirectPlay::CDSDirectPlay_dtor_body(undefined4 *param_1)
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
 
 void __cdecl
-CMenu::CDSDirectPlay_ConnectTCP
-          (CMenu *param_1,undefined4 *param_2,undefined4 *param_3,char *param_4)
+CMenu::CDSDirectPlay_ConnectTCP(CMenu *param_1,dword *param_2,dword *param_3,char *param_4)
 
 {
   char cVar1;
@@ -119600,8 +119806,7 @@ CDSDirectPlay::CDSDirectPlay_scalar_deleting_dtor(CDSDirectPlay *this,byte param
 
 
 
-void __thiscall
-CMenu::CDSDirectPlay_ConnectLobby(CMenu *this,undefined4 *param_1,undefined4 *param_2)
+void __thiscall CMenu::CDSDirectPlay_ConnectLobby(CMenu *this,dword *param_1,dword *param_2)
 
 {
   uint dwHresult;
@@ -119907,13 +120112,13 @@ void __thiscall CDSWav_face8slots::CDSWav_BindPcmMemStream(CDSWav_face8slots *th
 
 
 
-void __thiscall CDSWavStream::CDSWavStream_SaveToStream(CDSWavStream *this,int *param_1)
+void __thiscall CDSWavStream::CDSWavStream_SaveToStream(CDSWavStream *this,IDSStream *param_1)
 
 {
-  (**(code **)(*param_1 + 0x14))(&this[-1].pVftable_IDSEventHandler,0xc);
+  (**(code **)((int)param_1->pVftable + 0x14))(&this[-1].pVftable_IDSEventHandler,0xc);
   (**(code **)(*(int *)this[-1].pVftable_IDSChained6 + 0x28))
             (this[-1].dwReservedTail,*(undefined4 *)this[-1].pPad_operatorNew0x40,0);
-  IDSStream::IDSStream_CopyBulk64((IDSStream *)param_1);
+  IDSStream::IDSStream_CopyBulk64(param_1);
   return;
 }
 
@@ -130366,11 +130571,11 @@ void * __thiscall CDSSafeStream::CDSSafeStream_GetThreadSlice(CDSSafeStream *thi
 
 {
   undefined **pChain;
-  DWORD DVar1;
+  void *pvVar1;
   void *pvVar2;
   undefined **streamThis;
   int *piVar3;
-  undefined4 *puVar4;
+  CDSChained *pCVar4;
   int iVar5;
   void *local_c;
   undefined1 *puStack_8;
@@ -130384,7 +130589,7 @@ void * __thiscall CDSSafeStream::CDSSafeStream_GetThreadSlice(CDSSafeStream *thi
   ExceptionList = &local_c;
   EnterCriticalSection((LPCRITICAL_SECTION)&this->lock);
   local_4 = 0;
-  DVar1 = GetCurrentThreadId();
+  pvVar1 = (void *)GetCurrentThreadId();
   pChain = &this->vf_chain_IDSReferenced;
   pvVar2 = _Globals::CDSChained_GetFirstChildView((CDSChain *)pChain);
   if (pvVar2 == (void *)0x0) {
@@ -130398,7 +130603,7 @@ void * __thiscall CDSSafeStream::CDSSafeStream_GetThreadSlice(CDSSafeStream *thi
   }
   else {
     do {
-      if (*(DWORD *)((int)pvVar2 + 0x10) == DVar1) {
+      if (*(void **)((int)pvVar2 + 0x10) == pvVar1) {
         pvVar2 = *(void **)((int)pvVar2 + 0x14);
         goto LAB_00446e83;
       }
@@ -130412,21 +130617,21 @@ void * __thiscall CDSSafeStream::CDSSafeStream_GetThreadSlice(CDSSafeStream *thi
   iVar5 = 7;
   pvVar2 = (void *)(**(code **)(*piVar3 + 0x10))();
   pvVar2 = (void *)_Globals::CheckedVirtualBaseCast(pvVar2,iVar5);
-  puVar4 = (undefined4 *)_Globals::OperatorNewWithBadAlloc(0x18);
-  if (puVar4 == (undefined4 *)0x0) {
-    puVar4 = (undefined4 *)0x0;
+  pCVar4 = (CDSChained *)_Globals::OperatorNewWithBadAlloc(0x18);
+  if (pCVar4 == (CDSChained *)0x0) {
+    pCVar4 = (CDSChained *)0x0;
   }
   else {
-    puVar4[2] = 0;
-    puVar4[3] = 0;
-    *puVar4 = CDSSafeStreamInfo::vftable;
-    puVar4[1] = CDSSafeStreamInfo::g_pCDSSafeStreamInfo_vftable_IDSChained;
-    puVar4[4] = DVar1;
+    pCVar4->dwField_08 = 0;
+    pCVar4->dwField_0c = 0;
+    pCVar4->pVftable_primary = CDSSafeStreamInfo::vftable;
+    pCVar4->pVftable_IDSChained = CDSSafeStreamInfo::g_pCDSSafeStreamInfo_vftable_IDSChained;
+    pCVar4->pVftable_IDSEventHandler = pvVar1;
                     // Lazy CDSSafeStreamInfo: CheckedVirtualBaseCast(childStream,2) then vfn+0x10;
                     // second cast(...,7) -> m_streamSlice@node+0x14 (IDSStream face)
-    puVar4[5] = pvVar2;
+    *(void **)&pCVar4->wViewFlags = pvVar2;
   }
-  _Globals::CDSChained_AppendChild(pChain,puVar4);
+  _Globals::CDSChained_AppendChild(pChain,pCVar4);
 LAB_00446e83:
   LeaveCriticalSection((LPCRITICAL_SECTION)&this->lock);
   ExceptionList = local_c;
@@ -130447,7 +130652,8 @@ CDSSafeStreamInfo::CDSSafeStream_RegisterThreadSlice(CDSSafeStreamInfo *this,int
   int *pObject;
   uint uVar1;
   undefined4 *puVar2;
-  DWORD DVar3;
+  CDSChained *pCVar3;
+  void *pvVar4;
   int unaff_retaddr;
   void *local_c;
   undefined1 *puStack_8;
@@ -130473,20 +130679,20 @@ CDSSafeStreamInfo::CDSSafeStream_RegisterThreadSlice(CDSSafeStreamInfo *this,int
     _Globals::CDsStringReleaseHeader((void *)(unaff_retaddr + -0xc));
   }
   _Globals::CDSObject_AddRef(pObject);
-  puVar2 = (undefined4 *)_Globals::OperatorNewWithBadAlloc(0x18);
-  if (puVar2 == (undefined4 *)0x0) {
-    puVar2 = (undefined4 *)0x0;
+  pCVar3 = (CDSChained *)_Globals::OperatorNewWithBadAlloc(0x18);
+  if (pCVar3 == (CDSChained *)0x0) {
+    pCVar3 = (CDSChained *)0x0;
   }
   else {
-    DVar3 = GetCurrentThreadId();
-    puVar2[2] = 0;
-    puVar2[3] = 0;
-    *puVar2 = vftable;
-    puVar2[1] = g_pCDSSafeStreamInfo_vftable_IDSChained;
-    puVar2[4] = DVar3;
-    puVar2[5] = pObject;
+    pvVar4 = (void *)GetCurrentThreadId();
+    pCVar3->dwField_08 = 0;
+    pCVar3->dwField_0c = 0;
+    pCVar3->pVftable_primary = vftable;
+    pCVar3->pVftable_IDSChained = g_pCDSSafeStreamInfo_vftable_IDSChained;
+    pCVar3->pVftable_IDSEventHandler = pvVar4;
+    *(int **)&pCVar3->wViewFlags = pObject;
   }
-  _Globals::CDSChained_AppendChild(this + 1,puVar2);
+  _Globals::CDSChained_AppendChild(this + 1,pCVar3);
                     // dwM_streamFlags@CDSSafeStream+0x08 = 1 (active) after first CDSSafeStreamInfo
                     // node chained. Write-only — decompiler shows m_link_next due to
                     // CDSSafeStreamInfo* this alias at +0x08.
@@ -131231,8 +131437,10 @@ void __cdecl Runtime_MSVCRT__srand(ulong dwSeed)
 
 
 
-// MSVC _rand LCG (thread seed @ TLS+0x14). Gameplay uses (val>>15)&0x7FFF for [0,N) buckets.
-// CBulanek AI: ctor color, ArmFireDelay, TryBotRandomAction, spawn facing.
+// Library Function - Single Match
+//  _rand
+// 
+// Libraries: Visual Studio 2003 Release, Visual Studio 2005 Release, Visual Studio 2008 Release
 
 int __cdecl Runtime::MSVCRT::_rand(void)
 
@@ -163646,18 +163854,21 @@ void __cdecl _Globals::pass_startup(int *cinfo)
 
 
 
-void __cdecl FUN_0046c880(int param_1)
+void __cdecl finish_pass(int *cinfo)
 
 {
   int iVar1;
   int iVar2;
   
-  iVar1 = *(int *)(param_1 + 0x13c);
-  (**(code **)(*(int *)(param_1 + 0x15c) + 8))(param_1);
+                    // IJG jcmaster.c finish_pass — jpeg_comp_master vtable slot [2] installed by
+                    // jinit_c_master_control@0x0046c8f0. Updates pass_type/pass_number/scan_number
+                    // state machine at master+0x10.
+  iVar1 = cinfo[0x4f];
+  (**(code **)(cinfo[0x57] + 8))(cinfo);
   iVar2 = *(int *)(iVar1 + 0x10);
   if (iVar2 == 0) {
     *(undefined4 *)(iVar1 + 0x10) = 2;
-    if (*(char *)(param_1 + 0xb2) != '\0') goto LAB_0046c8e5;
+    if (*(char *)((int)cinfo + 0xb2) != '\0') goto LAB_0046c8e5;
   }
   else {
     if (iVar2 == 1) {
@@ -163666,7 +163877,7 @@ void __cdecl FUN_0046c880(int param_1)
       return;
     }
     if (iVar2 != 2) goto LAB_0046c8e5;
-    if (*(char *)(param_1 + 0xb2) != '\0') {
+    if (*(char *)((int)cinfo + 0xb2) != '\0') {
       *(int *)(iVar1 + 0x1c) = *(int *)(iVar1 + 0x1c) + 1;
       *(int *)(iVar1 + 0x14) = *(int *)(iVar1 + 0x14) + 1;
       *(undefined4 *)(iVar1 + 0x10) = 1;
@@ -163697,7 +163908,7 @@ void __cdecl CDSJpegImage::jinit_c_master_control(int *cinfo,char transcode_only
   cinfo[0x4f] = (int)puVar1;
   *puVar1 = _Globals::prepare_for_pass;
   puVar1[1] = _Globals::pass_startup;
-  puVar1[2] = FUN_0046c880;
+  puVar1[2] = finish_pass;
   *(undefined1 *)((int)puVar1 + 0xd) = 0;
   initial_setup();
   if (cinfo[0x2b] == 0) {
@@ -164615,7 +164826,7 @@ LAB_0046f553:
           _Globals::_tr_align((int)puVar1);
         }
         else {
-          _Globals::send_bits((int)puVar1,(undefined1 *)0x0,0,0);
+          _Globals::send_bits((int)puVar1,(uchar *)0x0,0,0);
           if (flush == 3) {
             *(undefined2 *)(puVar1[0xf] + -2 + puVar1[0x11] * 2) = 0;
             Runtime::MSVCRT::_memset((void *)puVar1[0xf],0,puVar1[0x11] * 2 - 2);
@@ -164911,7 +165122,7 @@ byte __cdecl _Globals::zlib__deflate_stored(int *param_1,int param_2)
   int *piVar1;
   int iVar2;
   uint uVar3;
-  undefined1 *puVar4;
+  uchar *puVar4;
   uint uVar5;
   
   uVar5 = 0xffff;
@@ -164929,10 +165140,10 @@ byte __cdecl _Globals::zlib__deflate_stored(int *param_1,int param_2)
         }
         iVar2 = param_1[0x15];
         if (iVar2 < 0) {
-          puVar4 = (undefined1 *)0x0;
+          puVar4 = (uchar *)0x0;
         }
         else {
-          puVar4 = (undefined1 *)(param_1[0xc] + iVar2);
+          puVar4 = (uchar *)(param_1[0xc] + iVar2);
         }
         _tr_flush_block((int)param_1,puVar4,param_1[0x19] - iVar2,(uint)(param_2 == 4));
         param_1[0x15] = param_1[0x19];
@@ -164952,10 +165163,10 @@ byte __cdecl _Globals::zlib__deflate_stored(int *param_1,int param_2)
       param_1[0x1b] = param_1[0x19] - uVar3;
       param_1[0x19] = uVar3;
       if (iVar2 < 0) {
-        puVar4 = (undefined1 *)0x0;
+        puVar4 = (uchar *)0x0;
       }
       else {
-        puVar4 = (undefined1 *)(param_1[0xc] + iVar2);
+        puVar4 = (uchar *)(param_1[0xc] + iVar2);
       }
       _tr_flush_block((int)param_1,puVar4,uVar3 - iVar2,0);
       param_1[0x15] = param_1[0x19];
@@ -164967,10 +165178,10 @@ byte __cdecl _Globals::zlib__deflate_stored(int *param_1,int param_2)
     iVar2 = param_1[0x15];
     if (param_1[9] - 0x106U <= (uint)(param_1[0x19] - iVar2)) {
       if (iVar2 < 0) {
-        puVar4 = (undefined1 *)0x0;
+        puVar4 = (uchar *)0x0;
       }
       else {
-        puVar4 = (undefined1 *)(param_1[0xc] + iVar2);
+        puVar4 = (uchar *)(param_1[0xc] + iVar2);
       }
       _tr_flush_block((int)param_1,puVar4,param_1[0x19] - iVar2,0);
       param_1[0x15] = param_1[0x19];
@@ -164992,7 +165203,7 @@ byte __cdecl _Globals::deflate_fast(int *param_1,int param_2)
   byte bVar3;
   char *pcVar4;
   uint uVar5;
-  undefined1 *puVar6;
+  uchar *puVar6;
   short sVar7;
   ushort uVar8;
   uint uVar9;
@@ -165010,10 +165221,10 @@ byte __cdecl _Globals::deflate_fast(int *param_1,int param_2)
       if (uVar5 == 0) {
         iVar2 = param_1[0x15];
         if (iVar2 < 0) {
-          puVar6 = (undefined1 *)0x0;
+          puVar6 = (uchar *)0x0;
         }
         else {
-          puVar6 = (undefined1 *)(param_1[0xc] + iVar2);
+          puVar6 = (uchar *)(param_1[0xc] + iVar2);
         }
         _tr_flush_block((int)param_1,puVar6,param_1[0x19] - iVar2,(uint)(param_2 == 4));
         param_1[0x15] = param_1[0x19];
@@ -165095,10 +165306,10 @@ LAB_0046fdd2:
     if (bVar10) {
       iVar2 = param_1[0x15];
       if (iVar2 < 0) {
-        puVar6 = (undefined1 *)0x0;
+        puVar6 = (uchar *)0x0;
       }
       else {
-        puVar6 = (undefined1 *)(param_1[0xc] + iVar2);
+        puVar6 = (uchar *)(param_1[0xc] + iVar2);
       }
       _tr_flush_block((int)param_1,puVar6,param_1[0x19] - iVar2,0);
       param_1[0x15] = param_1[0x19];
@@ -165124,7 +165335,7 @@ byte __cdecl _Globals::zlib__deflate_slow(int *param_1,int param_2)
   uint uVar7;
   char *pcVar8;
   ushort uVar9;
-  undefined1 *puVar10;
+  uchar *puVar10;
   short sVar11;
   uint uVar12;
   
@@ -165149,10 +165360,10 @@ LAB_0046fe90:
         }
         iVar2 = param_1[0x15];
         if (iVar2 < 0) {
-          puVar10 = (undefined1 *)0x0;
+          puVar10 = (uchar *)0x0;
         }
         else {
-          puVar10 = (undefined1 *)(param_1[0xc] + iVar2);
+          puVar10 = (uchar *)(param_1[0xc] + iVar2);
         }
         _tr_flush_block((int)param_1,puVar10,param_1[0x19] - iVar2,(uint)(param_2 == 4));
         param_1[0x15] = param_1[0x19];
@@ -165203,10 +165414,10 @@ LAB_0046fe90:
       if (param_1[0x5a6] == param_1[0x5a5] + -1) {
         iVar2 = param_1[0x15];
         if (iVar2 < 0) {
-          puVar10 = (undefined1 *)0x0;
+          puVar10 = (uchar *)0x0;
         }
         else {
-          puVar10 = (undefined1 *)(param_1[0xc] + iVar2);
+          puVar10 = (uchar *)(param_1[0xc] + iVar2);
         }
         _tr_flush_block((int)param_1,puVar10,param_1[0x19] - iVar2,0);
         param_1[0x15] = param_1[0x19];
@@ -165260,10 +165471,10 @@ LAB_0046fe90:
       if (iVar4 != iVar5 + -1) goto LAB_0046fe90;
       iVar2 = param_1[0x15];
       if (iVar2 < 0) {
-        puVar10 = (undefined1 *)0x0;
+        puVar10 = (uchar *)0x0;
       }
       else {
-        puVar10 = (undefined1 *)(param_1[0xc] + iVar2);
+        puVar10 = (uchar *)(param_1[0xc] + iVar2);
       }
       _tr_flush_block((int)param_1,puVar10,param_1[0x19] - iVar2,0);
       param_1[0x15] = param_1[0x19];
@@ -166775,7 +166986,7 @@ LAB_0047219d:
                *(short *)(param_1 + 0x404 + uVar6 * 4) << (bVar3 & 0x1f);
           *(uint *)(in_EAX + 0x16b4) = iVar5 + uVar10;
         }
-        iVar5 = *(int *)(&DAT_0049e288 + uVar6 * 4);
+        iVar5 = *(int *)(CRYPT_zinflate_lengthexBytestraBits + uVar6 * 4);
         if (iVar5 != 0) {
           iVar9 = uVar8 - *(int *)(&DAT_0049ebd0 + uVar6 * 4);
           iVar2 = *(int *)(in_EAX + 0x16b4);
@@ -166828,7 +167039,7 @@ LAB_0047219d:
                *(short *)(param_2 + uVar6 * 4) << ((byte)iVar5 & 0x1f);
           *(uint *)(in_EAX + 0x16b4) = iVar5 + uVar7;
         }
-        iVar5 = *(int *)(&DAT_0049e310 + uVar6 * 4);
+        iVar5 = *(int *)(CRYPT_zinflate_distanceExtraBits + uVar6 * 4);
         if (iVar5 != 0) {
           iVar2 = *(int *)(in_EAX + 0x16b4);
           iVar9 = uVar8 - *(int *)(&DAT_0049ec48 + uVar6 * 4);
@@ -167190,15 +167401,18 @@ LAB_0047285d:
       *(int *)(in_EAX + 0x16a0) = *(int *)(in_EAX + 0x16a0) + iVar1 * 3 + 0x11;
       return;
     }
-    if (*(short *)(in_EAX + 0xa76 + (uint)(byte)(&UNK_0049e2fb)[iVar1] * 4) != 0) {
+    if (*(short *)(in_EAX + 0xa76 + (uint)CRYPT_zinflate_lengthexBytestraBits[iVar1 + 0x73] * 4) !=
+        0) {
       *(int *)(in_EAX + 0x16a0) = *(int *)(in_EAX + 0x16a0) + (iVar1 + -1) * 3 + 0x11;
       return;
     }
-    if (*(short *)(in_EAX + 0xa76 + (uint)(byte)(&UNK_0049e2fa)[iVar1] * 4) != 0) {
+    if (*(short *)(in_EAX + 0xa76 + (uint)CRYPT_zinflate_lengthexBytestraBits[iVar1 + 0x72] * 4) !=
+        0) {
       *(int *)(in_EAX + 0x16a0) = *(int *)(in_EAX + 0x16a0) + (iVar1 + -2) * 3 + 0x11;
       return;
     }
-    if (*(short *)(in_EAX + 0xa76 + (uint)(byte)(&UNK_0049e2f9)[iVar1] * 4) != 0) {
+    if (*(short *)(in_EAX + 0xa76 + (uint)CRYPT_zinflate_lengthexBytestraBits[iVar1 + 0x71] * 4) !=
+        0) {
       iVar1 = iVar1 + -3;
       goto LAB_0047285d;
     }
@@ -167212,7 +167426,7 @@ LAB_0047285d:
 
 
 
-void __cdecl _Globals::send_bits(int param_1,undefined1 *param_2,int param_3,int param_4)
+void __cdecl _Globals::send_bits(int param_1,uchar *param_2,uint param_3,int param_4)
 
 {
   int iVar1;
@@ -167325,7 +167539,7 @@ void __cdecl _Globals::_tr_align(int param_1)
 
 
 
-void __cdecl _Globals::_tr_flush_block(int param_1,undefined1 *param_2,int param_3,int param_4)
+void __cdecl _Globals::_tr_flush_block(int param_1,uchar *param_2,uint param_3,int param_4)
 
 {
   int iVar1;
@@ -167356,7 +167570,7 @@ void __cdecl _Globals::_tr_flush_block(int param_1,undefined1 *param_2,int param
   }
   uVar6 = uVar4;
 LAB_00472b70:
-  if ((uVar6 < param_3 + 4U) || (param_2 == (undefined1 *)0x0)) {
+  if ((uVar6 < param_3 + 4) || (param_2 == (uchar *)0x0)) {
     iVar2 = *(int *)(param_1 + 0x16b4);
     bVar3 = (byte)iVar2;
     if (uVar4 == uVar6) {
