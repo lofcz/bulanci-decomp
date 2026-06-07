@@ -1,0 +1,288 @@
+[
+  {
+    "op": "create_struct",
+    "ok": true,
+    "msg": "Successfully created structure 'CDSString' with 1 fields, total size: 4 bytes"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042d440",
+    "ok": true,
+    "msg": "Successfully set prototype for function at 0x0042d440 with __thiscall calling convention\n\nWARNING: __thiscall ECX auto-parameter 'this' cannot be retyped via API. Ghidra accepts the prototype but the "
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042d440",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042d510",
+    "ok": true,
+    "msg": "Successfully set prototype for function at 0x0042d510 with __thiscall calling convention\n\nWARNING: __thiscall ECX auto-parameter 'this' cannot be retyped via API. Ghidra accepts the prototype but the "
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042d510",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042d7a0",
+    "ok": true,
+    "msg": "Successfully set prototype for function at 0x0042d7a0 with __thiscall calling convention\n\nWARNING: __thiscall ECX auto-parameter 'this' cannot be retyped via API. Ghidra accepts the prototype but the "
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042d7a0",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042d7b0",
+    "ok": true,
+    "msg": "Successfully set prototype for function at 0x0042d7b0 with __thiscall calling convention\n\nWARNING: __thiscall ECX auto-parameter 'this' cannot be retyped via API. Ghidra accepts the prototype but the "
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042d7b0",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042d7f0",
+    "ok": true,
+    "msg": "Successfully set prototype for function at 0x0042d7f0 with __thiscall calling convention\n\nWARNING: __thiscall ECX auto-parameter 'this' cannot be retyped via API. Ghidra accepts the prototype but the "
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042d7f0",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042d8c0",
+    "ok": true,
+    "msg": "Successfully set prototype for function at 0x0042d8c0 with __thiscall calling convention\n\nWARNING: __thiscall ECX auto-parameter 'this' cannot be retyped via API. Ghidra accepts the prototype but the "
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042d8c0",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042d970",
+    "ok": true,
+    "msg": "Successfully set prototype for function at 0x0042d970 with __cdecl calling convention"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042dab0",
+    "ok": false,
+    "msg": "Failed to set function prototype: Error applying function signature: Can't resolve datatype: LPCSTR"
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042dab0",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042db60",
+    "ok": false,
+    "msg": "Failed to set function prototype: Error applying function signature: Can't resolve datatype: LPCWSTR"
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042db60",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042dc50",
+    "ok": true,
+    "msg": "Successfully set prototype for function at 0x0042dc50 with __thiscall calling convention\n\nWARNING: __thiscall ECX auto-parameter 'this' cannot be retyped via API. Ghidra accepts the prototype but the "
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042dc50",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042dc70",
+    "ok": true,
+    "msg": "Successfully set prototype for function at 0x0042dc70 with __thiscall calling convention\n\nWARNING: __thiscall ECX auto-parameter 'this' cannot be retyped via API. Ghidra accepts the prototype but the "
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042dc70",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042dec0",
+    "ok": true,
+    "msg": "Successfully set prototype for function at 0x0042dec0 with __thiscall calling convention\n\nWARNING: __thiscall ECX auto-parameter 'this' cannot be retyped via API. Ghidra accepts the prototype but the "
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042dec0",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "prototype",
+    "addr": "0x0042dfc0",
+    "ok": true,
+    "msg": "Successfully set prototype for function at 0x0042dfc0 with __thiscall calling convention\n\nWARNING: __thiscall ECX auto-parameter 'this' cannot be retyped via API. Ghidra accepts the prototype but the "
+  },
+  {
+    "op": "this_type",
+    "addr": "0x0042dfc0",
+    "cls": "CDSString",
+    "ok": false,
+    "msg": "<h1>404 Not Found</h1>No context found for request"
+  },
+  {
+    "op": "comment",
+    "addr": "0x0042d970",
+    "ok": true,
+    "msg": "{\"status\":\"success\",\"message\":\"Set comment at 0x0042d970\"}"
+  },
+  {
+    "op": "comment",
+    "addr": "0x0042d440",
+    "ok": true,
+    "msg": "{\"status\":\"success\",\"message\":\"Set comment at 0x0042d440\"}"
+  },
+  {
+    "op": "comment",
+    "addr": "0x0042e140",
+    "ok": true,
+    "msg": "{\"status\":\"success\",\"message\":\"Set comment at 0x0042e140\"}"
+  },
+  {
+    "op": "comment",
+    "addr": "0x0042d510",
+    "ok": true,
+    "msg": "{\"status\":\"success\",\"message\":\"Set comment at 0x0042d510\"}"
+  },
+  {
+    "op": "comment",
+    "addr": "0x0042d7a0",
+    "ok": true,
+    "msg": "{\"status\":\"success\",\"message\":\"Set comment at 0x0042d7a0\"}"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042d440",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CDsString_WriteWStringToStream\n\n\r\nint __thiscall _Globals::CDsStr"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042d510",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CDsStringAssignFromLiteral\n\n\r\n/* CDsString::AssignFromLiteral(thi"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042d7a0",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CDsString_CompareHandles\n\n\r\nvoid __thiscall CStartGame2::CDsStrin"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042d7b0",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CDsString_FindLastWideChar\n\n\r\nint __thiscall CBulanci::CDsString_"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042d7f0",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CDsString_SubstringWide\n\n\r\nundefined4 * __thiscall\r\nCBulanci::CDs"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042d8c0",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CBulanci_CreateCDSFileStream\n\n\r\nCDSFileStream * __thiscall CBulan"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042d970",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CBulanci_AssignTempPathWithTrailingBackslash\n\n\r\n/* WARNING: Funct"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042dab0",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CDsString_AssignFromMultiByte\n\n\r\nvoid __thiscall CBulanci::CDsStr"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042db60",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CDsString_WideToMultiByteBuffer\n\n\r\nvoid __thiscall _Globals::CDsS"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042dc50",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CDsString_ClearInPlace\n\n\r\nint * __fastcall _Globals::CDsString_Cl"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042dc70",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CDsString_SplitPathBackslashDot\n\n\r\nvoid __thiscall\r\nCBulanci::CDs"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042dec0",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CBulanci_SplitPathDirectoryAndBase\n\n\r\nvoid __thiscall\r\nCBulanci::"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042dfc0",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CBulanci_JoinPathDirectoryAndBase\n\n\r\nvoid * __thiscall\r\nCBulanci:"
+  },
+  {
+    "op": "force_decompile",
+    "addr": "0x0042e140",
+    "ok": true,
+    "msg": "Success: Forced redecompilation of CDsString_ReadWStringFromStream\n\n\r\nint * __thiscall _Globals::CDs"
+  },
+  {
+    "op": "save_program",
+    "ok": true,
+    "msg": "{\"success\":true,\"program\":\"bulanci.exe\",\"message\":\"Program saved successfully\"}"
+  }
+]

@@ -1,0 +1,277 @@
+{
+  "round": 11,
+  "kind": "ai_behavior",
+  "workers": 30,
+  "summary": "Full AI archetype + algorithm recovery for 1:1 reimplementation",
+  "tasks": [
+    {
+      "id": 1,
+      "title": "CBulanek_SchedulerTick — pre-tick enqueue algorithm",
+      "archetype": "core_scheduler",
+      "seed_address": "0x0041aed0",
+      "addresses": ["0x0041aed0", "0x0041ad80"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_01_report.md", "ghidra_analysis/engine/tick_system.md", "ghidra_analysis/engine/struct_recovery/CBulanek.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Document slots 0..5 walk, kind 0/1 enqueue targets (videoTrackManager, scheduler, weapon TM); vtable slot 30; live xrefs."
+    },
+    {
+      "id": 2,
+      "title": "CBulanek_WeaponSchedulerCallback — slot switch 0..5+",
+      "archetype": "core_scheduler",
+      "seed_address": "0x00420b30",
+      "addresses": ["0x00420b30", "0x00420a90", "0x004172d0"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/CBulanek.md", "config/bulanci/mapping.csv", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Full switch(slotIndex) cases: reload die, primary fire, damage tick, knockdown+TryBot, pickup mask+SetFacing+arm slot 1."
+    },
+    {
+      "id": 3,
+      "title": "CBulanek_TryBotRandomAction — random idle vs action 0..3",
+      "archetype": "moving_bot",
+      "seed_address": "0x00420a90",
+      "addresses": ["0x00420a90", "0x004477ec"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/round5_worker_03_report.md", "ghidra_analysis/engine/struct_recovery/CBulanek.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Prove _rand scaling formulas; IsHumanPlayer gate; fire-delay slot bit checks; CanDispatchPlayerAction before ApplyAction."
+    },
+    {
+      "id": 4,
+      "title": "CBulanek_ApplyAction — actions 0..5 dispatch",
+      "archetype": "core_input",
+      "seed_address": "0x00420910",
+      "addresses": ["0x00420910", "0x004197b0", "0x004212b0"],
+      "evidence_paths": ["ghidra_analysis/engine/player_controls.md", "ghidra_analysis/engine/struct_recovery/CBulanek.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Map each action index to facing/fire/weapon; human vs AI paths; net send sites."
+    },
+    {
+      "id": 5,
+      "title": "CBulanek_ArmFireDelayScheduler — post-fire delay ms",
+      "archetype": "shooting_ai",
+      "seed_address": "0x00417260",
+      "addresses": ["0x00417260"],
+      "evidence_paths": ["ghidra_analysis/gameplay/damage_pipeline.md", "ghidra_analysis/engine/struct_recovery/round5_worker_03_report.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Exact _rand → ms formula for scheduler slot 2; all callers."
+    },
+    {
+      "id": 6,
+      "title": "CBulanek_ArmTournamentSchedulerDelays — slots 3/4",
+      "archetype": "shooting_ai",
+      "seed_address": "0x004172d0",
+      "addresses": ["0x004172d0"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/round5_worker_02_report.md", "ghidra_analysis/engine/struct_recovery/CBulanek.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Prove slotKind 0x20..0x27 branch; _rand delay scaling; callers WeaponSchedulerCallback case 3."
+    },
+    {
+      "id": 7,
+      "title": "AI vs human detection — IsHumanPlayer, bIsAiVariant, bSlotKind",
+      "archetype": "taxonomy",
+      "seed_address": "0x00416720",
+      "addresses": ["0x00416720", "0x0041e4b0"],
+      "evidence_paths": ["ghidra_analysis/gameplay/map_slots_spawner.md", "ghidra_analysis/engine/struct_recovery/CBulanek.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Prove ctor writes bIsAiVariant (slotKind>3), bSlotKind masking; every IsHumanPlayer caller in AI path."
+    },
+    {
+      "id": 8,
+      "title": "CBulanek_CanDispatchPlayerAction — action gating",
+      "archetype": "core_input",
+      "seed_address": "0x004174a0",
+      "addresses": ["0x004174a0"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/CBulanek.md", "config/bulanci/mapping.csv", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "All rejection conditions per action index; knockdown, ammo, anim band flags with field offsets."
+    },
+    {
+      "id": 9,
+      "title": "CBulanek_StepMovementAndCollision (FUN_0041af70)",
+      "archetype": "moving_bot",
+      "seed_address": "0x0041af70",
+      "addresses": ["0x0041af70", "0x00417410", "0x00417460", "0x004195f0"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_02_report.md", "ghidra_analysis/engine/struct_recovery/CBulanek.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Apply rename if still FUN_*; full movement math; 3 callers; vtable +0x20/+0x24 commit."
+    },
+    {
+      "id": 10,
+      "title": "CBulanek_ClampMoveRectByCollision + SpatialQuery",
+      "archetype": "moving_bot",
+      "seed_address": "0x004195f0",
+      "addresses": ["0x004195f0", "0x00418300"],
+      "evidence_paths": ["ghidra_analysis/gameplay/damage_pipeline.md", "ghidra_analysis/engine/struct_recovery/pass_r4_CGameView_report.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Collision query algorithm; obstacle bitmask; campaign slot usage."
+    },
+    {
+      "id": 11,
+      "title": "Facing / rotation — SetFacingTrack, SnapPositionToFacingAxis",
+      "archetype": "rotation",
+      "seed_address": "0x004197b0",
+      "addresses": ["0x004197b0", "0x00417910", "0x0041c610"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/CBulanek.md", "ghidra_analysis/engine/anim_runtime.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Track index ↔ facing byte; walk anim table selection; AI pickup case 4 path."
+    },
+    {
+      "id": 12,
+      "title": "CGaming_SpawnAndInitializePlayer + CBulanekCtor slotKind",
+      "archetype": "spawn",
+      "seed_address": "0x0041f500",
+      "addresses": ["0x0041f500", "0x0041e4b0"],
+      "evidence_paths": ["ghidra_analysis/gameplay/map_slots_spawner.md", "ghidra_analysis/engine/struct_recovery/CGaming.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "All ctor branches for slotKind 0..3, 0x20..0x27, 0x7d..0x7f; speed nLives team color params."
+    },
+    {
+      "id": 13,
+      "title": "InsertVampires / SpawnCoopPartnerSlots (slots 0x20..0x23)",
+      "archetype": "vampire_coop",
+      "seed_address": "0x00420630",
+      "addresses": ["0x00420630", "0x00420550", "0x00420530"],
+      "evidence_paths": ["ghidra_analysis/engine/script_dispatch_table.md", "open_bulanci/assets/levels/res_0000065860_2026_Script.lua", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Prove vampire == coop CBulanek slots; hide slots 1..3; TickRoundStateAndScoring side effects."
+    },
+    {
+      "id": 14,
+      "title": "Campaign AI enemies (slots 0x7d..0x7f)",
+      "archetype": "campaign_ai",
+      "seed_address": "0x004205a0",
+      "addresses": ["0x004205a0", "0x00420610"],
+      "evidence_paths": ["ghidra_analysis/gameplay/map_slots_spawner.md", "ghidra_analysis/engine/logic_recovery/round6_logic_task_10_report.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Solo-only spawn loop; AI behavior after spawn; collision tick inclusion."
+    },
+    {
+      "id": 15,
+      "title": "Practice dummies — SpawnPracticeDummy (slots 0x24..0x27)",
+      "archetype": "stationary_target",
+      "seed_address": "0x0041f5d0",
+      "addresses": ["0x0041f5d0", "0x0041f230"],
+      "evidence_paths": ["ghidra_analysis/gameplay/map_slots_spawner.md", "config/bulanci/mapping.csv", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Prove stationary (no TryBot?); shoot-only interaction; cloneFlag/register mode."
+    },
+    {
+      "id": 16,
+      "title": "InsertOpponent script spawn (tournament lives)",
+      "archetype": "script_spawn",
+      "seed_address": "0x0041f730",
+      "addresses": ["0x0041f730", "0x0041f500"],
+      "evidence_paths": ["ghidra_analysis/engine/script_dispatch_table.md", "unpacked/overlay/res_0000065859_2026_Script.script.asm", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "4-arg bytecode → SpawnAndInitializePlayer; slot 0x24.. auto alloc."
+    },
+    {
+      "id": 17,
+      "title": "SpawnOpponentEx — skin pool + 6-arg spawn",
+      "archetype": "script_spawn",
+      "seed_address": "0x0041f6a0",
+      "addresses": ["0x0041f6a0", "0x0041f230", "0x00418770"],
+      "evidence_paths": ["ghidra_analysis/engine/script_dispatch_table.md", "ghidra_analysis/asset_catalog/naming/agent_05.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "CollInsert pool; parentSlot; kind/team/flags semantics."
+    },
+    {
+      "id": 18,
+      "title": "SpawnEnemyAt — 5-arg Rand spawn",
+      "archetype": "script_spawn",
+      "seed_address": "0x0041f610",
+      "addresses": ["0x0041f610", "0x0041f230"],
+      "evidence_paths": ["ghidra_analysis/engine/script_dispatch_table.md", "unpacked/overlay/res_0000065856_2026_Script.script.asm", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Diff vs SpawnOpponentEx; position/state args; shared helper 0x0041f230."
+    },
+    {
+      "id": 19,
+      "title": "Deep spawn helper @0x0041f230",
+      "archetype": "spawn",
+      "seed_address": "0x0041f230",
+      "addresses": ["0x0041f230"],
+      "evidence_paths": ["ghidra_analysis/engine/script_dispatch_table.md", "config/bulanci/mapping.csv", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "All callers; slot assignment; AddEntity path; initialTrack/facing."
+    },
+    {
+      "id": 20,
+      "title": "CGaming_TickPlayerCollisions — campaign overlap AI",
+      "archetype": "campaign_ai",
+      "seed_address": "0x0041f0c0",
+      "addresses": ["0x0041f0c0", "0x0041a020"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_10_report.md", "ghidra_analysis/gameplay/map_slots_spawner.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Full collision loop; pickup mask; slots 125..127."
+    },
+    {
+      "id": 21,
+      "title": "CGaming_OnResumeOrStartGame — wake slots 125..127",
+      "archetype": "campaign_ai",
+      "seed_address": "0x0041c140",
+      "addresses": ["0x0041c140", "0x00417e40"],
+      "evidence_paths": ["ghidra_analysis/gameplay/map_slots_spawner.md", "ghidra_analysis/engine/struct_recovery/CGaming.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Slot 127 gate; downward TickPlayerCollisions loop."
+    },
+    {
+      "id": 22,
+      "title": "apAiTrackHolders @+0x178 — AllocAiTrackHolder",
+      "archetype": "moving_bot",
+      "seed_address": "0x0041b420",
+      "addresses": ["0x0041b420", "0x0041e4b0"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/round5_worker_03_report.md", "ghidra_analysis/engine/struct_recovery/CBulanek.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Array size; ctor init; consumers in movement/weapon paths."
+    },
+    {
+      "id": 23,
+      "title": "CWeapon::Fire — AI mine self-hit and bot branches",
+      "archetype": "shooting_ai",
+      "seed_address": "0x004212b0",
+      "addresses": ["0x004212b0", "0x0041cb70"],
+      "evidence_paths": ["ghidra_analysis/gameplay/combat_projectiles.md", "ghidra_analysis/engine/struct_recovery/round4_task_31_report.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "kind dispatch; u16==0xFFFF ammo-empty bot damage; CMina spawn."
+    },
+    {
+      "id": 24,
+      "title": "CBulanek_DispatchCurrentWeaponAction — net weapon sync",
+      "archetype": "shooting_ai",
+      "seed_address": "0x00420721",
+      "addresses": ["0x00420721", "0x004212b0"],
+      "evidence_paths": ["ghidra_analysis/gameplay/combat_projectiles.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Switch bWeaponKind 0..5; pistol/grenade/mine/det MG; net 0x0E trigger path."
+    },
+    {
+      "id": 25,
+      "title": "CBulanek_TriggerPrimaryActionAndBroadcast",
+      "archetype": "shooting_ai",
+      "seed_address": "0x004208c0",
+      "addresses": ["0x004208c0", "0x00420721"],
+      "evidence_paths": ["config/bulanci/mapping.csv", "ghidra_analysis/engine/struct_recovery/CWeapon.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Scheduler slot 1 path; network broadcast; human vs AI."
+    },
+    {
+      "id": 26,
+      "title": "DefineDangerZone + CMina danger zones (hazard AI)",
+      "archetype": "hazard",
+      "seed_address": "0x0041bb30",
+      "addresses": ["0x0041bb30", "0x0041b420", "0x00419fd0"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/CMina.md", "ghidra_analysis/engine/script_dispatch_table.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Script opcode → CGaming+0x2d8 vector; CMina_RegisterDangerZone; trace areas."
+    },
+    {
+      "id": 27,
+      "title": "Script TranslateTo — teleport/move CBulanek",
+      "archetype": "teleport",
+      "seed_address": "0x004188e0",
+      "addresses": ["0x004188e0", "0x0042cc80"],
+      "evidence_paths": ["ghidra_analysis/engine/script_dispatch_table.md", "ghidra_analysis/gameplay/combat_projectiles.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Bytecode args; SetPosition call; used by level scripts for AI reposition."
+    },
+    {
+      "id": 28,
+      "title": "Script SetAnimDirection — rotation / facing",
+      "archetype": "rotation",
+      "seed_address": "0x00418980",
+      "addresses": ["0x00418980", "0x0041c610"],
+      "evidence_paths": ["ghidra_analysis/engine/script_dispatch_table.md", "config/bulanci/mapping.csv", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "How script sets anim direction on bound views; link to track manager."
+    },
+    {
+      "id": 29,
+      "title": "Script gap movers — SpawnAtView, BindToSlot, OnBitmapEvt",
+      "archetype": "script_mover",
+      "seed_address": "0x00418950",
+      "addresses": ["0x00418950", "0x00418770", "0x00418260", "0x00418a00"],
+      "evidence_paths": ["ghidra_analysis/gameplay/map_slots_spawner.md", "ghidra_analysis/engine/script_dispatch_table.md", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Script-controlled entities in slots 4..31, 40..99, 108..124; event 0xD7; IsViewKind."
+    },
+    {
+      "id": 30,
+      "title": "Coordinator: R11 AI manifest audit",
+      "kind": "coordinator",
+      "addresses": [],
+      "evidence_paths": ["ghidra_analysis/engine/agent_todos_30_r11_ai.json", "ghidra_analysis/gameplay/map_slots_spawner.md"],
+      "acceptance": "No Ghidra mutations; archetype coverage matrix; R12 gaps."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{"id":12,"round":11,"phase":"connect","action":"connect_instance","project":"bulanci","result":"ok","tools_registered":195}
+{"id":12,"round":11,"phase":"verify","address":"0x0041f500","symbol":"CGaming_SpawnAndInitializePlayer","finding":"OperatorNew(0x19c); CBulanekCtor(slotKind,0xFFFFFFFF-path params); AddEntity@0x0041f583; RegisterObjectAtSlot@0x0041f58c; Respawn; _rand facing 0..3"}
+{"id":12,"round":11,"phase":"verify","address":"0x0041e4b0","symbol":"CBulanekCtor","finding":"slotKind predicates: isCoop=(slotKind-0x20)<=3 @0x0041e5e7; isPractice=(slotKind-0x24)<=3 @0x0041e5f2"}
+{"id":12,"round":11,"phase":"branch","slotKind":"0x00..0x03","finding":"bIsAiVariant=0; bTeamColor=CGameGetPlayerColorByte; scheduler slot0 only (delay 0x96 solo / 0x1f4 multi); early return @0x0041ea61"}
+{"id":12,"round":11,"phase":"branch","slotKind":"0x20..0x23","finding":"coop: nSpeed=0x28 nLives=1 skinPalette=4 bTeamColor=7 gABulanekWalkAnimsSpecial; scheduler slots 3,4,5 (delays 0,0,100); apAiTrackHolders x4"}
+{"id":12,"round":11,"phase":"branch","slotKind":"0x24..0x27","finding":"practice: caller nLives/speed/skin via SpawnPracticeDummy; bTeamColor=script if <8; scheduler slots 3,4 delay 0; bSlotKind remap"}
+{"id":12,"round":11,"phase":"branch","slotKind":"0x7d..0x7f","finding":"campaign AI via SpawnPlayerAtSlot hardcoded nLives=1; bIsAiVariant=1; scheduler slot2 delay 0; bSlotKind=slot&3 (0x7d->1,0x7e->2,0x7f->3)"}
+{"id":12,"round":11,"phase":"caller","address":"0x00420530","symbol":"CGaming_SpawnPlayerAtSlot","finding":"SpawnAndInitializePlayer(slot,0xFFFFFFFF,1,100,0) — humans+coop+campaign"}
+{"id":12,"round":11,"phase":"caller","address":"0x0041f5d0","symbol":"CGaming_SpawnPracticeDummy","finding":"slot=CountOccupiedPlayerSlots+0x24; script teamColor,nLives,speed,skinId"}
+{"id":12,"round":11,"phase":"fields","finding":"nSpeedParam clamp [0x28,200] @+0x194; nLives @+0x18C/+0x190; bSlotKind @+0x124 remap; bAmmoKind1 when slotKind>4"}
+{"id":12,"round":11,"status":"DONE","title":"CGaming_SpawnAndInitializePlayer + CBulanekCtor slotKind","archetype":"spawn","report":"ghidra_analysis/engine/ai_recovery/r11_ai_task_12_report.md","ghidra_actions":[],"blockers":[],"source":"r11_ai_worker_12"}

@@ -1,0 +1,7 @@
+{"id":28,"round":11,"phase":"connect","action":"connect_instance","project":"bulanci","result":"ok","tools_registered":195}
+{"id":28,"round":11,"phase":"verify","address":"0x00418980","symbol":"CLevelScriptOpExt_SetAnimDirection","finding":"ReadSubExpr×2; TEST ESI; MOV ECX,[ESI+0x94]; MOV byte [ECX+0x18],AL; return ESI — no CALL to track manager"}
+{"id":28,"round":11,"phase":"contrast","address":"0x00416b70","symbol":"CLevelScriptOpExt_SetAnim","finding":"TM_SetTrack(view+0x98, trackIdx, flags, NULL) — master-pack facing path (opcode 63)"}
+{"id":28,"round":11,"phase":"corpus","method":"grep unpacked/*.script.asm SetAnimDirection","finding":"zero hits; res_0000065856 uses SetAnim(GetSlot(n), track, 1) @0x0675/0x069b/0x091c etc"}
+{"id":28,"round":11,"phase":"link","address":"0x0041c610","symbol":"CBulanek_ResolveAndBindAnimTrack","finding":"SetFacingTrack(host, facingTrack, 0) before TM_BindSequence on CDeath+0x98 — CBulanek videoTrackManager+0xA8 not SetAnimDirection"}
+{"id":28,"round":11,"phase":"ghidra","action":"set_decompiler_comment@0x00418980","result":"ok"}
+{"id":28,"round":11,"phase":"ghidra","action":"save_program bulanci.exe","result":"ok"}

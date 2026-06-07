@@ -433,6 +433,44 @@ most-derived `CBulAnim::FUN_004396f0`).
   `vbase->vfn[9]`). Likely the same `{kind, x, y, frame}` shape the
   script's `OnBitmapEvt` already exposes.
 
+## CBulanek facing ↔ track index (R11 task 11)
+
+`CBulanek::videoTrackManager` @ `+0xA8` is the live walk player. Four sequences are
+registered in `CBulanekCtor` from `gABulanekWalkAnimsNormal[0..3]` (co-op slots
+`0x20..0x23` use `gABulanekWalkAnimsSpecial`). Track index is the facing byte
+everywhere (input actions 0..3, net `0x0D` state byte, `SetFacingTrack` arg).
+
+| track | input action | `gABulanekWalkAnimsNormal[i]` | motion axis | grid snap in `SnapPositionToFacingAxis` |
+|------:|-------------|------------------------------|-------------|----------------------------------------|
+| 0 | 0 | left (`0x100c8`) | horizontal | lock `nOrigin_y` → `nFacingAxisExtent@+0xA4` |
+| 1 | 1 | right (`0x100ca`) | horizontal | lock Y |
+| 2 | 2 | down/away (`0x100c6`) | vertical | lock `nOrigin_x` → `nFacingAxisExtent` |
+| 3 | 3 | up/toward | vertical | lock X |
+
+`nFacingAxisExtent` is written during movement (`CBulanek_StepMovementAndCollision`) and
+`AdaptDisplaySize` from the collision rect edge orthogonal to the walk axis.
+`SnapPositionToFacingAxis @ 0x00417910` pauses the track manager
+(`TM_PauseAndStampClock`) then calls `CDSView__SetPosition` with the frozen axis
+coordinate.
+
+`SetFacingTrack @ 0x004197b0` gates on `bHitStun@+0x16A`. When scheduler slot 0 on
+`videoTrackManager` is **not** armed, it snaps position and calls
+`BeginCurrentTrackPlayback`. On track change it sets `bField_168`, calls
+`SetFacingFromByte` on `pWeapon@+0xF8` (sync weapon `trackManager+0x2C`), then
+`SetCurrentTrack(&videoTrackManager, track, autoplay=1)` and frees host scheduler
+slot 1. `sendNet=1` → `TM_Play`; `sendNet=0` + human → `CGame_NetSendPlayerState_t0d`
+with `animState = track | 8`.
+
+Corpse / sit bind `CBulanek_ResolveAndBindAnimTrack @ 0x0041c610` resolves a resource
+from `gABulanekWalkAnimSheet[dwM_modeFlags + nCurrentTrackIdx*4]` (walk path) or
+`g_dwResId_player_sit_facing_*[dwM_modeFlags]` (sit path), calls `SetFacingTrack`
+with the derived index, then `TM_BindSequence` / `TM_SetTrack` on the `CDeath` anim
+subobject.
+
+AI pickup facing: `CBulanek_WeaponSchedulerCallback` case **4** and script event
+`0xF2` (`dwPickupFacingLatch@+0x188`) both call `TryApplyPickupMask` then
+`SetFacingTrack` with a latched facing dword.
+
 ## Cross-references
 
 * Script-side handling of frame events: `script_lifecycle.md`

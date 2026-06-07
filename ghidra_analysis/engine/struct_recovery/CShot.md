@@ -2,7 +2,7 @@
 
 ## Status
 
-**PARTIAL** — `sizeof == 0xb0` (176 B) proven via heap alloc; Ghidra layout applied R5 worker 27 (`+0x40..+0x9F` gaming band + `CDSUpdatedItem` embed). Projectile-specific tail `+0xA0..+0xAC` documented in `combat_projectiles.md`.
+**PARTIAL** — `sizeof == 0xb0` (176 B) proven via heap alloc; Ghidra layout applied R5 worker 27 (`+0x40..+0x9F` gaming band + `CDSUpdatedItem` embed). R10 worker 10 re-verified **scheduler tick** (`CShot_SchedulerTick@0x0041b1d0`) and **collision tail** (`+0x20` rect trace, `+0xA4..+0xAC`) with live disasm + IDA correlation. Projectile behavior cross-ref: `combat_projectiles.md`.
 
 **Note:** There is no separate `CBullet` class in the binary; “bullet” = **`CShot`** (`OperatorNew(0xB0)`, entity type **`0x0F`**).
 
@@ -35,7 +35,7 @@
 | `+0x6B` | 1 | `byte` | `bView_flag_6b` | UNK |
 | `+0x6C` | 4 | `uint` | `dwView_aux_6c` | **`CGameEntity_SetEntityType` stores entity type (`0x0F`)**; on plain `CGameView` same offset is bucket aux (`GetSpatialBucketKey`) |
 | `+0x70` | 1 | `byte` | `bPlayerSlot` | `InitGamingFields` `=0xFF` (view shell; not shooter id) |
-| `+0x74` | 16 | `int[4]` | `nCollisionLeft`…`nCollisionBottom` | `CShot_Ctor@0x0041ee3f` zeros before `InitGamingFields` |
+| `+0x74` | 16 | `int[4]` | `nCollisionLeft`…`nCollisionBottom` | `CShot_Ctor@0x0041ee3f` `MOV [ESI+0x74..0x80],0`; **not read** by `Update`/`TraceCollision` — shot trace uses `pWorldRect@+0x20` |
 | `+0x84` | 4 | `CGaming *` | `pGaming_host` | `CBulanek::AddEntity@0x0041a390`; `TraceCollision` → `SpatialQuery` |
 | `+0x88` | 24 | `CDSUpdatedItem` | `updatedItem` | `CDSUpdatedItem_ctor`; `pVftable_IDSUpdated` @ `0x0041ee95` → `0x481c5c`; `Scheduler_RegisterEventSlot(...,0x32,6)` |
 | `+0xA0` | 4 | `pointer` | `pBulletFrames` | `CGameView::FUN_00417f40` in ctor |
@@ -51,7 +51,7 @@
 | Symbol | Address |
 |--------|---------|
 | `CShot_Ctor` | `0x0041edf0` |
-| `CShot_SchedulerTick` | `0x0041b1d0` | Primary vtable slot 30; `Scheduler_GetEventSlot(&updatedItem,0)`; enqueue when slot `+8` bit0 clear |
+| `CShot_SchedulerTick` | `0x0041b1d0` | Primary vtable slot 30 (`0x00481cbc`+0x78 → xref `0x00481d34`); `LEA ESI,[ECX+0x88]`; `Scheduler_GetEventSlot(updatedItem,0)`; if `slot+8` bit0 clear → `Scheduler_EnqueueEvent(param_1,1,slot)` |
 | `CShot::Update` | `0x0041df60` |
 | `CShot_Draw` | `0x00417bd0` |
 | `CShot::TraceCollision` | `0x0041de60` |
@@ -77,6 +77,35 @@
 - Owner slot **`+0xA5`** aligns with **`CGameView+0x70`** `bPlayerSlot` family (different fields on `CShot`)
 - **`CGaming`** bullet list @ `+0x2C8`
 
-## Follow-up (R5 worker 27)
+## Scheduler tick (R10 verified)
 
-- See [round5_worker_27_report.md](./round5_worker_27_report.md).
+`CShot_SchedulerTick` @ `0x0041b1d0` — `__thiscall`, `CShot *this`, `void *schedulerList` (stack arg after `RET 4`).
+
+| Step | Disasm | Meaning |
+|------|--------|---------|
+| 1 | `LEA ESI,[ECX+0x88]` | `CDSUpdatedItem updatedItem` embed offset |
+| 2 | `CALL 0x0042f1e0` (`Scheduler_GetEventSlot`, slot 0) | Returns event-slot descriptor |
+| 3 | `TEST byte ptr [EAX+0x8],0x1` | Skip enqueue when armed / bit0 set |
+| 4 | `CALL 0x0041ad80` (`Scheduler_EnqueueEvent`) | `EnqueueEvent(schedulerList, kind=1, slotRef)` |
+
+Ctor arms slot 0 on spawn-blocked shots: `Scheduler_ArmSlot(updatedItem,0)` @ `0x0041ef68` after `bExpired=1` + `CDSView_Hide`.
+
+## Collision path (R10 verified)
+
+| Field | Offset | Consumer | Evidence |
+|-------|--------|----------|----------|
+| `pWorldRect` | `+0x20` | `Update`, `TraceCollision`, `ResolveHit`, ctor spawn test | `MOV from [ESI+0x20..0x2c]` @ `Update@0x0041df6b` |
+| `pGaming_host` | `+0x84` | `TraceCollision` → `SpatialQuery` | `MOV ECX,[EDI+0x84]` @ `0x0041dee4` |
+| `bWeaponStrength` | `+0xA6` | `Update` path select | `0` or `≥3` → single trace; `1` or `2` → 5-pellet loop (`CMP AL,2; JNC` @ `0x0041df9d`) |
+| `bPelletMask` | `+0xA7` | multi-pellet loop | `TEST [ESI+0xA7],BL` @ `0x0041dfd0`; cleared per-hit |
+| `bExpired` | `+0xA8` | hit / cleanup | `MOV [ESI+0xA8],1` @ `0x0041e031` / `0x0041e056` |
+| `bDirection` | `+0xA4` | `ResolveHit` → net placement | `this+0xA4` in `CGaming_OnSlotPlacementEvent` |
+| `bOwnerSlotId` | `+0xA5` | `ResolveHit` shooter slot | hit entity `+0x70` = victim slot |
+| `nScatterJitter` | `+0xAC` | ctor only when `bWeaponStrength > 2` | `MOV [ESI+0xAC],EAX` @ `0x0041ef8d` |
+
+`TraceCollision` — 4-step lerp `i=1..4`, `SpatialQuery(pGaming_host, rect, …, param_4=1, param_5=1)`; in-bounds when `left/top ≥ 0`, `right ≤ 799`, `bottom ≤ 0x203`.
+
+## Follow-up
+
+- R5 layout: [round5_worker_27_report.md](./round5_worker_27_report.md)
+- R10 deep: [r10_deep_task_10_report.md](../deep_recovery/r10_deep_task_10_report.md)

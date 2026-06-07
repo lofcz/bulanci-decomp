@@ -1,0 +1,19 @@
+{"id": 17, "round": 11, "phase": "connect", "action": "decompile", "address": "0x0041f6a0", "symbol": "CLevelScriptOpExt_SpawnOpponentEx", "finding": "6× ReadSubExpr; CALL CGaming_SpawnBulletAndPlaySound@0x0041f230; 6th stack arg PUSH EDI = skinPool collection"}
+
+{"id": 17, "round": 11, "phase": "verify", "address": "0x00418b20", "symbol": "CLevelScriptOpExt_CollInsert", "finding": "ReadSubExpr×3; index<0 → m_count append; CDSCollection_Insert@0x004310b0"}
+
+{"id": 17, "round": 11, "phase": "verify", "address": "0x00417f40", "symbol": "CGameView_LookupBulletFrameStrip", "finding": "frameId!=0 → m_items[poolIndex] via coll+0x8; HandleVirtualBaseCast(...,0xD); NOT random"}
+
+{"id": 17, "round": 11, "phase": "overlay", "script": "65859", "finding": "OnInit: NewCollection→gvar12; CollInsert -1 ×4 images 65633,65634,65635,65632; OnDeinit FreeObject(g12)"}
+
+{"id": 17, "round": 11, "phase": "overlay", "script": "65859", "finding": "SpawnOpponentEx(221,136,3,9,2,g12) + SpawnAtView(0,9); poolIndex=3 → res 65632; parentSlot=9 zombie peek view"}
+
+{"id": 17, "round": 11, "phase": "disasm", "address": "0x0041f6fb", "finding": "parentSlot!=0xFF → CGaming_GetObjectAtSlotSafe@0x00416810; ADD EAX,0x20 audio anchor"}
+
+{"id": 17, "round": 11, "phase": "manifest", "address": "0x00418770", "finding": "live symbol BindToSlot not CollInsert; pool opcode is 0x00418b20"}
+
+{"id": 17, "round": 11, "phase": "ghidra", "action": "set_decompiler_comment", "address": "0x0041f6a0", "result": "corrected poolIndex semantics; removed random-thumb claim"}
+
+{"id": 17, "round": 11, "phase": "ghidra", "action": "save_program", "program": "bulanci.exe", "result": "ok"}
+
+{"id": 17, "round": 11, "status": "DONE", "title": "SpawnOpponentEx — skin pool + 6-arg spawn", "archetype": "script_spawn", "seed_address": "0x0041f6a0", "addresses": ["0x0041f6a0", "0x0041f230", "0x00418b20", "0x00417f40", "0x0041edf0"], "report": "ghidra_analysis/engine/ai_recovery/r11_ai_task_17_report.md", "ghidra_actions": ["set_decompiler_comment@0x0041f6a0", "save_program"], "blockers": [], "findings": {"collinsert_pool": "gvar12 append order [65633,65634,65635,65632] indices 0..3", "spawn_entity": "CShot via CGaming_SpawnBulletAndPlaySound", "arg_map": "x,y,poolIndex,parentSlot,flags,skinPool", "pool_selection": "deterministic m_items[poolIndex] not engine rand", "vs_spawn_enemy_at": "6th arg collection handle vs hardcoded 0"}, "remaining_unk": ["HandleVirtualBaseCast class 0xD name", "other overlay levels using opcode 98"], "source": "r11_ai_worker_17"}

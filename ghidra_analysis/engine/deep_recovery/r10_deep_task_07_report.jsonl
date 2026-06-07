@@ -1,0 +1,14 @@
+{"id":7,"round":10,"phase":"connect","action":"connect_instance","project":"bulanci","result":"ok","tools_registered":195}
+{"id":7,"round":10,"phase":"verify","address":"0x004327e0","symbol":"DecodeCopyColor","finding":"memcpy wrapper; xref DecodeFrame@0x00432d80 only"}
+{"id":7,"round":10,"phase":"verify","address":"0x00432800","symbol":"DecodePaletteRgb","finding":"FLX tag 9 palette update loop; plate comment intact"}
+{"id":7,"round":10,"phase":"verify","address":"0x00432840","symbol":"ResetCursor","finding":"*param_1=0 meta vtable slot 6"}
+{"id":7,"round":10,"phase":"verify","address":"0x00432850","symbol":"DecodeRegionList","finding":"max 32 region records -> NotifyRegionList"}
+{"id":7,"round":10,"phase":"verify","address":"0x00432900","symbol":"CDSFlxFile_Sub20ChainOp","finding":"SUB ECX,0x20; JMP 0x0042ac90"}
+{"id":7,"round":10,"phase":"verify","address":"0x004329c0","symbol":"DestructInPlace","finding":"LEA ECX,[ESI+0x28] -> IDSChainedTail_ClearSubObjStash; free +0x3c release +0x38"}
+{"id":7,"round":10,"phase":"verify","address":"0x00432ac0","symbol":"CDSFlxFile_BindStream","finding":"Read 0x24; file+0x04 -> outer bodyStartCursor@+0x40; disasm matches CDSFlxFile.md map"}
+{"id":7,"round":10,"phase":"verify","address":"0x00432be0","symbol":"CreateBoundClone","finding":"OperatorNew(0x60); xref data 0x004872c8 vtable slot 9 only"}
+{"id":7,"round":10,"phase":"pSubObjStash","address":"0x0043312d","symbol":"CDSMpxStream_CreateObject","finding":"MOV [EAX+0x40],ECX ECX=0 sole writer; slice ends 0x00432be0"}
+{"id":7,"round":10,"phase":"pSubObjStash","action":"search_byte_patterns","pattern":"89 48 40","finding":"13 hits; only 0x0043312d is MPx pSubObjStash; others CDSImage/InitializeInstance zero-init"}
+{"id":7,"round":10,"phase":"pSubObjStash","address":"0x00434250","symbol":"IDSChainedTail_ClearSubObjStash","finding":"18 xrefs; facet+4 payload clear protocol unchanged"}
+{"id":7,"round":10,"phase":"overlay","note":"MPx mad_stream vs persist band","finding":"documented CDSMpx.md/CDSMpxStream.md; decode starts adjacent 0x00432c60+ not in task addresses"}
+{"id":7,"round":10,"status":"PARTIAL","prior_status":"PARTIAL","ghidra_actions":[],"blockers":["pSubObjStash@+0x40 concrete type","mpxFormatTail bit-field alias during decode"]}

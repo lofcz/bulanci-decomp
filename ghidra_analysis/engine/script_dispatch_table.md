@@ -176,7 +176,7 @@ identifier is unknown.
 |  98 |   53 | `0x0041f6a0` | `SpawnOpponentEx` **e** | sub*6              | 6-arg enemy spawn (x, y, kind, team, flags, parentSlot); calls `0x0041f230` |
 |  99 |   54 | `0x00416f00` | `EnableFireThrough`   | sub,sub              |                                                                |
 | 100 |   55 | `0x00420630` | `InsertVampires`      | —                    |                                                                |
-| 101 |   56 | `0x0041f730` | `InsertOpponent`      | sub*4                |                                                                |
+| 101 |   56 | `0x0041f730` | `InsertOpponent` **e** | sub*4                | tournament / lives-mode spawn: `CGaming_SpawnPracticeDummy(gaming, teamColor, nLives, nSpeed, skinId)` → auto slot `count+0x24` → `CGaming_SpawnAndInitializePlayer`; **only** bytecode path with script-set `nLives` (see `Editor.Scripts.InsertOpponent`: Color, Hits, Speed, Weapon) |
 | 102 |   57 | `0x0041da50` | `CreateMine`          | sub,sub              | single mine at (x, y); allocates 0x118 bytes                   |
 
 ## CHistoryScript extension @ `0x004af7ac` (opcodes 45..52)
@@ -270,6 +270,15 @@ CHelpScript table below — almost certainly four shared helpers.
   - `SpawnEnemyAt` (67) and `SpawnOpponentEx` (98) share a deep helper
     with `InsertOpponent` (101); the precise difference in semantics is
     a handful of additional fields that are passed through unchanged.
+  - **`InsertOpponent` (101) vs `SpawnOpponentEx` (98):** `InsertOpponent`
+    is the **lives/tournament** spawn — four args only, no x/y position;
+    lands in slots **`0x24..0x27`** via `CGaming_CountOccupiedPlayerSlots +
+    0x24` (counts occupied cells in `apEntitySlots[0x24..0x27]`). Co-op
+    slots `0x20..0x23` force `nLives=1` in `CBulanekCtor`; **`0x24..0x27`
+    keep script `nLives`**. Typical scripts: `InsertBulanci()` then
+    `InsertOpponent(7, 3, 120, 5)` (tutorial — 3-hit tournament),
+    `InsertOpponent(7, 1, 100, 5)` (deathmatch). Overlay menu levels
+    (`65855..65860`) use **`InsertBulanci` only** — no `InsertOpponent`.
 - The CBulPicture animation component used by 63..66, 78, 80 and the
   CDSAnim sub-object at `+0x98` have their own vtables; tagging each
   slot is separate work.

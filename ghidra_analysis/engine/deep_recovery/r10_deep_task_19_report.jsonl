@@ -1,0 +1,10 @@
+{"id":19,"round":10,"phase":"connect","action":"connect_instance","project":"bulanci","result":"ok","tools_registered":195}
+{"id":19,"round":10,"phase":"verify","address":"0x0041a020","symbol":"CGaming_OnPlayerCollectItem","finding":"4 callers from CGaming_TickPlayerCollisions; quip jmp table @0x41a0ac; CMP [EBX+0x70] gate"}
+{"id":19,"round":10,"phase":"verify","address":"0x00416610","symbol":"CBulanek_NetSendTeamScoreOnCollect","finding":"sole xref 0x41a03b; forwards to CGame_NetSendTeamScoreEvent_t16 with weaponKind+bPlayerSlot"}
+{"id":19,"round":10,"phase":"verify","address":"0x00414550","symbol":"CGame_NetSendTeamScoreEvent_t16","finding":"score/net HUD path; category=weaponKind; no inventory callee"}
+{"id":19,"round":10,"phase":"verify","address":"0x0041f0c0","symbol":"CGaming_TickPlayerCollisions","finding":"dual path: CGame_ApplyPickup@0x41f117 (inventory) vs OnPlayerCollectItem x4 (campaign +0x324..0x330)"}
+{"id":19,"round":10,"phase":"dispatch","address":"0x0041a050","symbol":"weaponKind_quip_table","finding":"kind 0->0x20 1->0x23 2->0x21 3->0x1f default 0x22; slots +0x324/328/32c/330 -> kind 0/1/2/3"}
+{"id":19,"round":10,"phase":"decomp_fix","address":"0x0041a020","action":"set_function_prototype","finding":"corrected arg order pCollector,pPickup,weaponKind; decomp now uses bPlayerSlot and Unregister(pPickup)"}
+{"id":19,"round":10,"phase":"decomp_fix","address":"0x0041bf00","symbol":"CWeapon::Update","finding":"HideAssociatedView MOV ECX,[ECX+0x50] before CALL; ECX=CBulanek* track holder"}
+{"id":19,"round":10,"phase":"ghidra","action":"save_program","program":"bulanci.exe","result":"ok"}
+{"id":19,"round":10,"status":"DONE","prior_status":"PARTIAL","prior_round":6,"prior_task":10,"seed_address":"0x0041a020","ghidra_actions":["set_function_prototype","set_decompiler_comment","force_decompile","save_program"],"inventory_xref":"CGame_ApplyPickup@0x41f117 only (not OnPlayerCollectItem)","score_xref":"CBulanek_NetSendTeamScoreOnCollect@0x41a03b","report":"ghidra_analysis/engine/deep_recovery/r10_deep_task_19_report.md","blockers":[]}

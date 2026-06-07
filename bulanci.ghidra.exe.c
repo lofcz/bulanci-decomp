@@ -451,119 +451,93 @@ struct CGaming {
     undefined field201_0x2d5;
     undefined field202_0x2d6;
     undefined field203_0x2d7;
-    undefined field204_0x2d8;
-    undefined field205_0x2d9;
-    undefined field206_0x2da;
-    undefined field207_0x2db;
-    undefined field208_0x2dc;
-    undefined field209_0x2dd;
-    undefined field210_0x2de;
-    undefined field211_0x2df;
-    undefined field212_0x2e0;
-    undefined field213_0x2e1;
-    undefined field214_0x2e2;
-    undefined field215_0x2e3;
-    undefined field216_0x2e4;
-    undefined field217_0x2e5;
-    undefined field218_0x2e6;
-    undefined field219_0x2e7;
-    undefined field220_0x2e8;
-    undefined field221_0x2e9;
-    undefined field222_0x2ea;
-    undefined field223_0x2eb;
-    undefined field224_0x2ec;
-    undefined field225_0x2ed;
-    undefined field226_0x2ee;
-    undefined field227_0x2ef;
-    undefined field228_0x2f0;
-    undefined field229_0x2f1;
-    undefined field230_0x2f2;
-    undefined field231_0x2f3;
-    undefined field232_0x2f4;
-    undefined field233_0x2f5;
-    undefined field234_0x2f6;
-    undefined field235_0x2f7;
-    undefined field236_0x2f8;
-    undefined field237_0x2f9;
-    undefined field238_0x2fa;
-    undefined field239_0x2fb;
-    undefined field240_0x2fc;
-    undefined field241_0x2fd;
-    undefined field242_0x2fe;
-    undefined field243_0x2ff;
-    undefined field244_0x300;
-    undefined field245_0x301;
-    undefined field246_0x302;
-    undefined field247_0x303;
-    undefined field248_0x304;
-    undefined field249_0x305;
-    undefined field250_0x306;
-    undefined field251_0x307;
-    undefined field252_0x308;
-    undefined field253_0x309;
-    undefined field254_0x30a;
-    undefined field255_0x30b;
-    undefined field256_0x30c;
-    undefined field257_0x30d;
-    undefined field258_0x30e;
-    undefined field259_0x30f;
-    undefined field260_0x310;
-    undefined field261_0x311;
-    undefined field262_0x312;
-    undefined field263_0x313;
-    undefined field264_0x314;
-    undefined field265_0x315;
-    undefined field266_0x316;
-    undefined field267_0x317;
-    undefined field268_0x318;
-    undefined field269_0x319;
-    undefined field270_0x31a;
-    undefined field271_0x31b;
+    struct CDSPtrSlotVec dangerZoneSlotVec;
+    int nDangerZoneSlotCount;
+    undefined field206_0x2e4;
+    undefined field207_0x2e5;
+    undefined field208_0x2e6;
+    undefined field209_0x2e7;
+    undefined field210_0x2e8;
+    undefined field211_0x2e9;
+    undefined field212_0x2ea;
+    undefined field213_0x2eb;
+    undefined field214_0x2ec;
+    undefined field215_0x2ed;
+    undefined field216_0x2ee;
+    undefined field217_0x2ef;
+    undefined field218_0x2f0;
+    undefined field219_0x2f1;
+    undefined field220_0x2f2;
+    undefined field221_0x2f3;
+    undefined field222_0x2f4;
+    undefined field223_0x2f5;
+    undefined field224_0x2f6;
+    undefined field225_0x2f7;
+    struct CDSPtrSlotVec netPurgeEntitySlotVec;
+    int nNetPurgeEntitySlotCount;
+    undefined field228_0x304;
+    undefined field229_0x305;
+    undefined field230_0x306;
+    undefined field231_0x307;
+    undefined field232_0x308;
+    undefined field233_0x309;
+    undefined field234_0x30a;
+    undefined field235_0x30b;
+    int nPad_0x30c;
+    undefined field237_0x310;
+    undefined field238_0x311;
+    undefined field239_0x312;
+    undefined field240_0x313;
+    undefined field241_0x314;
+    undefined field242_0x315;
+    undefined field243_0x316;
+    undefined field244_0x317;
+    undefined field245_0x318;
+    undefined field246_0x319;
+    undefined field247_0x31a;
+    undefined field248_0x31b;
     struct CDSChained *pEntityViewRoot;
-    undefined field273_0x320;
-    undefined field274_0x321;
-    undefined field275_0x322;
-    undefined field276_0x323;
-    undefined field277_0x324;
-    undefined field278_0x325;
-    undefined field279_0x326;
-    undefined field280_0x327;
-    undefined field281_0x328;
-    undefined field282_0x329;
-    undefined field283_0x32a;
-    undefined field284_0x32b;
-    undefined field285_0x32c;
-    undefined field286_0x32d;
-    undefined field287_0x32e;
-    undefined field288_0x32f;
-    undefined field289_0x330;
-    undefined field290_0x331;
-    undefined field291_0x332;
-    undefined field292_0x333;
+    undefined field250_0x320;
+    undefined field251_0x321;
+    undefined field252_0x322;
+    undefined field253_0x323;
+    undefined field254_0x324;
+    undefined field255_0x325;
+    undefined field256_0x326;
+    undefined field257_0x327;
+    undefined field258_0x328;
+    undefined field259_0x329;
+    undefined field260_0x32a;
+    undefined field261_0x32b;
+    undefined field262_0x32c;
+    undefined field263_0x32d;
+    undefined field264_0x32e;
+    undefined field265_0x32f;
+    undefined field266_0x330;
+    undefined field267_0x331;
+    undefined field268_0x332;
+    undefined field269_0x333;
     struct CPauseDlg *pPauseDlg;
     int nRoundEndWait;
-    undefined field295_0x33c;
-    undefined field296_0x33d;
-    undefined field297_0x33e;
-    undefined field298_0x33f;
-    undefined field299_0x340;
-    undefined field300_0x341;
-    undefined field301_0x342;
-    undefined field302_0x343;
+    int nAmbientAnimMode;
+    undefined field273_0x340;
+    undefined field274_0x341;
+    undefined field275_0x342;
+    undefined field276_0x343;
     struct CLevelScript *pLevelScript;
     struct CDSView *pDepthInsertHead;
     struct CDSView *pDepthInsertTail;
     uint dwMusicResourceId;
     struct CDSAudioPlayer *pLevelBgmPlayer;
     struct CDSAudioPlayer *pIntroMusicPlayer;
-    undefined field309_0x35c;
-    undefined field310_0x35d;
-    undefined field311_0x35e;
-    undefined field312_0x35f;
-    byte pPad_0x360[4];
+    undefined field283_0x35c;
+    undefined field284_0x35d;
+    undefined field285_0x35e;
+    undefined field286_0x35f;
+    void *pPrefaceDrawable;
     ushort wModalExitCode;
-    undefined field315_0x366;
-    undefined field316_0x367;
+    undefined field289_0x366;
+    undefined field290_0x367;
     uint dwWeaponSpawnerMode;
 };
 
@@ -2412,7 +2386,8 @@ struct CDeath2 {
     undefined field108_0xed;
     undefined field109_0xee;
     undefined field110_0xef;
-    struct CBulanek *pHost;
+    // ignoring dynamic datatype inside composite: -BAD-
+-BAD- pHost; // Type 'CBulanek *' was deleted
     int nM_placementOffsetX;
     int nM_placementOffsetY;
 };
@@ -2430,8 +2405,10 @@ struct CWeapon {
     void *pVftable_primary;
     void *pVftable_secondary;
     struct CDSVideoPlayer trackManager;
-    struct CBulanek *pTrackHolder;
-    struct CBulanek *pOwner;
+    // ignoring dynamic datatype inside composite: -BAD-
+-BAD- pTrackHolder; // Type 'CBulanek *' was deleted
+    // ignoring dynamic datatype inside composite: -BAD-
+-BAD- pOwner; // Type 'CBulanek *' was deleted
     struct CGaming *pWorld;
     uint dwParamA;
     uint dwParamB;
@@ -2615,9 +2592,13 @@ struct CBulanek {
     int nBounds_top;
     int nBounds_right;
     int nBounds_bottom;
-    uint dwField_40;
-    uint dwView_flags;
-    byte pChain_pad_48[12];
+    uint dwChainRoot;
+    ushort wChainInit44;
+    ushort wChainFlag46;
+    ushort wChainFlag48;
+    ushort wChainFlag4a;
+    struct CDSView *pChainParent;
+    uint dwChainField_50;
     pointer child_chain;
     byte pHeader_tail_58[16];
     byte bActiveInWorld;
@@ -2631,23 +2612,28 @@ struct CBulanek {
     int nCollisionTop;
     int nCollisionRight;
     int nCollisionBottom;
-    pointer pGamingHostScratch;
+    struct CGaming *pGaming_host;
     struct CDSUpdatedItem scheduler;
     pointer vftable_event;
-    uint dwFacingAxisExtent;
+    int nFacingAxisExtent;
     struct CDSVideoPlayer videoTrackManager;
     struct CBulAnim *pActiveAnim;
     struct CGame *pGame;
     struct CWeapon *pWeapon;
     struct CBulAnim *pCorpseAnim;
     struct CDeath2 *pDeath2Tombstone;
-    byte pReserved_preAmmo[24];
+    int nWalkEmbedBaseX;
+    int nWalkEmbedBaseY;
+    int nWalkEmbedAccX;
+    int nWalkEmbedAccY;
+    int nWalkClipNegX;
+    int nWalkClipNegY;
     byte bAmmoKind0;
     byte bAmmoKind1;
-    undefined field46_0x11e;
-    undefined field47_0x11f;
+    undefined field55_0x11e;
+    undefined field56_0x11f;
     ushort wField_120;
-    undefined field49_0x122;
+    undefined field58_0x122;
     byte bTeamColor;
     byte bSlotKind;
     byte pPad_preDw128[3];
@@ -2658,8 +2644,13 @@ struct CBulanek {
     byte bPendingKillerSlot;
     byte pPad_preInitialTrack[3];
     int nInitialTrack;
-    void *pWalkTrackSources[4];
-    byte pPad_postWalkEmbed[12];
+    void *pWalkTrackSources_0;
+    void *pWalkTrackSources_1;
+    uint dwCachedWeaponParamA;
+    uint dwCachedWeaponParamB;
+    int nWalkEmbedPadTop;
+    int nWalkEmbedPadLeft;
+    struct CBulanek *pCachedTrackHolder;
     byte bField_168;
     byte bField_169;
     byte bHitStun;
@@ -4069,7 +4060,8 @@ struct CAnim {
     undefined1 pChain_pad_48[12];
     pointer child_chain;
     byte pHeader_tail_58[12];
-    struct CBulanek *pOverlap_entity;
+    // ignoring dynamic datatype inside composite: -BAD-
+-BAD- pOverlap_entity; // Type 'CBulanek *' was deleted
     byte bView_state_68;
     byte bView_state_69;
     byte bView_state_6a;
@@ -4712,6 +4704,12 @@ struct CDSRegKeyException {
     wchar_t *pPszFormatted;
 };
 
+typedef struct IDSEventHandler IDSEventHandler, *PIDSEventHandler;
+
+struct IDSEventHandler {
+    void *pVftable;
+};
+
 typedef struct CNumCounter CNumCounter, *PCNumCounter;
 
 struct CNumCounter {
@@ -4794,6 +4792,12 @@ struct CDSMouse {
     void *pVf_IDSChained;
     void *pVf_IDSEventHandler;
     uint dwRefCount;
+};
+
+typedef struct CDSString CDSString, *PCDSString;
+
+struct CDSString {
+    wchar_t *pHandle;
 };
 
 typedef struct CoordQueue CoordQueue, *PCoordQueue;
@@ -5468,6 +5472,17 @@ struct CColorSwitch {
     void *pPaletteList;
     // ignoring dynamic datatype inside composite: -BAD-
 -BAD- pSwatchAtlas; // Type 'CDSImage *' was deleted
+};
+
+typedef struct CBulanekWalkEmbed CBulanekWalkEmbed, *PCBulanekWalkEmbed;
+
+struct CBulanekWalkEmbed {
+    int nWalkEmbedBaseX;
+    int nWalkEmbedBaseY;
+    int nWalkEmbedAccX;
+    int nWalkEmbedAccY;
+    int nWalkClipNegX;
+    int nWalkClipNegY;
 };
 
 typedef enum BulanciOverlayResId {
@@ -58785,7 +58800,7 @@ undefined LAB_00464c10;
 undefined LAB_00464c40;
 undefined ycc_rgb_convert;
 undefined ycck_cmyk_convert;
-undefined CDSApp_PreCreateHook;
+undefined IDSStream_NoOpFlush;
 undefined LAB_00465060;
 undefined LAB_00465080;
 undefined LAB_00465140;
@@ -60964,7 +60979,7 @@ void __fastcall CBulanci::CBulanci_dtor(CBulanci *param_1)
   uint uVar4;
   int iVar5;
   short *local_274;
-  undefined *local_270;
+  int local_270;
   int iStack_26c;
   _WIN32_FIND_DATAW _Stack_268;
   undefined *puStack_18;
@@ -60984,11 +60999,11 @@ void __fastcall CBulanci::CBulanci_dtor(CBulanci *param_1)
     (**(code **)(*piVar1 + 8))();
   }
   (param_1->game).pReleaseOnDestroy = (undefined *)0x0;
-  local_270 = (undefined *)0x0;
+  local_270 = 0;
                     // CBulanci_dtor audio-bank loop: (game).pAudioBankArray / dwAudioBankCount
                     // (CBulanci+0x4b0 == &game.pAudioBankArray)
   local_4 = 0;
-  CBulanci_AssignTempPathWithTrailingBackslash((CBulanci *)&local_274);
+  CBulanci_AssignTempPathWithTrailingBackslash();
   local_4._0_1_ = 1;
   _Globals::CDsStringFormatV(&local_270,L"%s*.tmp");
   local_4._0_1_ = 0;
@@ -61025,8 +61040,8 @@ void __fastcall CBulanci::CBulanci_dtor(CBulanci *param_1)
   local_4 = local_4 & 0xffffff00;
   _Globals::CBulanci_DirEnumCtx_dtor(&iStack_26c);
   local_4 = 0xffffffff;
-  if (local_270 != (undefined *)0x0) {
-    _Globals::CDsStringReleaseHeader(local_270 + -0xc);
+  if (local_270 != 0) {
+    _Globals::CDsStringReleaseHeader((void *)(local_270 + -0xc));
   }
   ExceptionList = local_c;
   return;
@@ -76664,8 +76679,8 @@ CBulanek::CBulanek_CopyScoreBlockToSlot
     *(undefined4 *)((this->videoTrackManager).pPad_0x36 + (uint)param_1 * 0x23 + 8) = param_2;
     *(undefined4 *)((this->videoTrackManager).pPad_0x36 + (uint)param_1 * 0x23 + 0xc) = *param_3;
     *(undefined4 *)((this->videoTrackManager).pPad_0x36 + (uint)param_1 * 0x23 + 0x10) = param_3[1];
-    *(undefined4 *)(this->pReserved_preAmmo + (uint)param_1 * 0x23 + -0x12) = param_3[2];
-    *(undefined4 *)(this->pReserved_preAmmo + (uint)param_1 * 0x23 + -0xe) = param_3[3];
+    *(undefined4 *)(this->pPad_preDw128 + (uint)param_1 * 0x23 + -0x33) = param_3[2];
+    *(undefined4 *)(this->pPad_preDw128 + (uint)param_1 * 0x23 + -0x2f) = param_3[3];
   }
   return;
 }
@@ -76791,7 +76806,7 @@ void __thiscall _Globals::CGame_NetSendRoundTimer_t12(void *this,undefined2 para
 
 
 
-void __thiscall CBulanek::CGame_NetSendDamage_t0c(CBulanek *this,byte param_1,undefined1 param_2)
+void __thiscall CGame::CGame_NetSendDamage_t0c(CGame *this,uchar param_1,uchar param_2)
 
 {
   undefined4 uVar1;
@@ -76805,12 +76820,12 @@ void __thiscall CBulanek::CGame_NetSendDamage_t0c(CBulanek *this,byte param_1,un
                     // User sees held weapon change / ammo bar fill.
                     // State: player+0x64, +0x11C+kind, new CWeapon @+0xF8.
                     // Must-match: [0x0C, slot, weaponKind] — 3 bytes.
-  if ((void *)this[1].dwField_40 != (void *)0x0) {
+  if (this->pDirectPlayActive != (undefined *)0x0) {
     _local_4 = CONCAT31((uint3)param_1,0xc);
     uVar1 = _local_4;
     uStack_1 = (undefined1)((uint)this >> 0x18);
     _local_4 = CONCAT12(param_2,(short)uVar1);
-    _Globals::CDSDirectPlay_Send((void *)this[1].dwField_40,0,&local_4,(uchar *)0x3);
+    _Globals::CDSDirectPlay_Send(this->pDirectPlayActive,0,&local_4,(uchar *)0x3);
   }
   return;
 }
@@ -76885,13 +76900,13 @@ CBulanek::CGame_NetSendPlayerState_t0d
                     // GAMEPLAY_IMPACT: Remote teleports + anim (walk/jump/punch…); position
                     // +0x20.
                     // Must-match: 7 bytes; s16 x/y truncated.
-  if ((void *)this[1].dwField_40 != (void *)0x0) {
+  if ((void *)this[1].dwChainRoot != (void *)0x0) {
     local_7 = param_1;
     local_6 = param_2;
     local_5 = *param_3;
     local_3 = param_3[2];
     local_8 = 0xd;
-    _Globals::CDSDirectPlay_Send((void *)this[1].dwField_40,0,&local_8,(uchar *)0x7);
+    _Globals::CDSDirectPlay_Send((void *)this[1].dwChainRoot,0,&local_8,(uchar *)0x7);
   }
   return;
 }
@@ -76985,10 +77000,10 @@ void __thiscall CBulanek::CGame_NetSendPlayerDie_t11(CBulanek *this,undefined1 p
                     // NET_MSG_0x11 SEND: [0x11, slot] 2 B.
                     // GAMEPLAY_IMPACT: Death + respawn timer on peers (CBulanek death seq).
                     // Must-match: 2 bytes.
-  if ((void *)this[1].dwField_40 != (void *)0x0) {
+  if ((void *)this[1].dwChainRoot != (void *)0x0) {
     uStack_2 = (undefined2)((uint)this >> 0x10);
     _local_4 = CONCAT11(param_1,0x11);
-    _Globals::CDSDirectPlay_Send((void *)this[1].dwField_40,0,&local_4,(uchar *)0x2);
+    _Globals::CDSDirectPlay_Send((void *)this[1].dwChainRoot,0,&local_4,(uchar *)0x2);
   }
   return;
 }
@@ -77807,7 +77822,7 @@ uint __fastcall CBulanci::CGame_FindLevelScoreInChain(void *param_1)
   if (pCurrentView != (void *)0x0) {
     do {
       iVar1 = CStartGame2::CDsString_CompareHandles
-                        ((CStartGame2 *)(iVar2 + 0x10),(undefined4 *)((int)pCurrentView + 0x10));
+                        ((CStartGame2 *)(iVar2 + 0x10),(void *)((int)pCurrentView + 0x10));
       if (iVar1 == 0) {
         return (uint)pCurrentView;
       }
@@ -80472,12 +80487,14 @@ void __fastcall _Globals::CTeleportPoint_TryActivateFromOverlap(uint param_1)
 
 
 
-void __thiscall _Globals::CBulanek_NetSendTeamScoreOnCollect(void *this,undefined4 param_1)
+uchar __thiscall _Globals::CBulanek_NetSendTeamScoreOnCollect(void *this,uint weaponKind)
 
 {
-  CGame::CGame_NetSendTeamScoreEvent_t16
-            (*(CGame **)((int)this + 0xf4),param_1,(uint)*(byte *)((int)this + 0x70),0);
-  return;
+  uchar uVar1;
+  
+  uVar1 = CGame::CGame_NetSendTeamScoreEvent_t16
+                    (*(CGame **)((int)this + 0xf4),weaponKind,(uint)*(byte *)((int)this + 0x70),0);
+  return uVar1;
 }
 
 
@@ -80593,7 +80610,7 @@ void __fastcall CBulanek::CBulanek_RefreshHudWeaponStrip(void *param_1)
 
 
 
-uint __fastcall _Globals::CBulanek_IsHumanPlayer(int param_1)
+uint __thiscall CBulanek::CBulanek_IsHumanPlayer(CBulanek *this)
 
 {
   uint uVar1;
@@ -80601,11 +80618,11 @@ uint __fastcall _Globals::CBulanek_IsHumanPlayer(int param_1)
                     // UNCERTAIN: CBulanek* fastcall — if +0x70<4 delegates FUN_004128f0(weapon at
                     // +0xf4, kind); else checks weapon+0x36==0. damage_pipeline.md: human/local
                     // gate for net send paths.
-  if (*(byte *)(param_1 + 0x70) < 4) {
-    uVar1 = CGame_IsLocalPlayerSlot(*(void **)(param_1 + 0xf4),*(byte *)(param_1 + 0x70));
+  if (this->bPlayerSlot < 4) {
+    uVar1 = _Globals::CGame_IsLocalPlayerSlot(this->pGame,this->bPlayerSlot);
     return uVar1;
   }
-  return (uint)(*(char *)((int)*(void **)(param_1 + 0xf4) + 0x36) == '\0');
+  return (uint)((this->pGame->chain).field_0x5 == '\0');
 }
 
 
@@ -81561,15 +81578,17 @@ void __fastcall _Globals::CBulanek_ArmFireDelayScheduler(int param_1)
   int iVar2;
   void *pvVar3;
   
-                    // UNCERTAIN: Arms scheduler slot 2 with random 5–16s delay when entity+0x70
-                    // state byte is outside ranges 0–3, 0x20–0x23, 0x24–0x27. Callers
-                    // CBulanek_OnShow, CGaming_RespawnPlayer, CBulanek_OnTakeDamage.
-                    // damage_pipeline.md notes post-damage scheduler arm; no published export name.
+                    // Arms CBulanek.scheduler slot 2 for AI-only slots (bPlayerSlot>3 excluding
+                    // 0x20..0x23 coop and 0x24..0x27 dummies). delay_ms =
+                    // (((unsigned)_rand()*11)>>15)+5)*1000 => 5000..15000. Callers: OnShow,
+                    // OnTakeDamage, CGaming_RespawnPlayer. Fires CBulanek_WeaponSchedulerCallback
+                    // case 2.
   bVar1 = *(byte *)(param_1 + 0x70);
   if (((3 < bVar1) && ((bVar1 < 0x20 || (0x23 < bVar1)))) && ((bVar1 < 0x24 || (0x27 < bVar1)))) {
     this = (CDSUpdatedItem *)(param_1 + 0x88);
-                    // _rand: AI fire-delay ms = ((_rand%11)+5)*1000; scheduler slot 2 @
-                    // CBulanek+0x88
+                    // MSVC _rand() -> 0..32767. delay_sec = ((unsigned)r*11)>>15)+5  [== biased
+                    // r%11]. delay_ms = delay_sec*1000  => 5000..15000 ms. Arms scheduler slot 2 on
+                    // CBulanek+0x88.
     iVar2 = Runtime::MSVCRT::_rand();
     CDSUpdatedItem::Scheduler_SetEventDelayMs
               (this,2,(((int)(iVar2 * 0xb + (iVar2 * 0xb >> 0x1f & 0x7fffU)) >> 0xf) + 5) * 1000);
@@ -81653,43 +81672,44 @@ void __fastcall _Globals::CBulanek_HasAmmoForCurrentWeapon(void *param_1)
 
 
 
-void __thiscall CBulanek::CBulanek_CopyCollisionRectLocal(CBulanek *this,int *outRect)
+void __thiscall CBulanek::CBulanek_CopyCollisionRectLocal(CBulanek *this,tagRECT *outRect)
 
 {
-  *outRect = this->nCollisionLeft;
-  outRect[1] = this->nCollisionTop;
-  outRect[2] = this->nCollisionRight;
-  outRect[3] = this->nCollisionBottom;
-  *outRect = *outRect + *(int *)(this->pReserved_preAmmo + 8);
-  outRect[1] = outRect[1] + *(int *)(this->pReserved_preAmmo + 0xc);
-  outRect[2] = outRect[2] + *(int *)(this->pReserved_preAmmo + 8);
-  outRect[3] = outRect[3] + *(int *)(this->pReserved_preAmmo + 0xc);
+  outRect->left = this->nCollisionLeft;
+  outRect->top = this->nCollisionTop;
+  outRect->right = this->nCollisionRight;
+  outRect->bottom = this->nCollisionBottom;
+  outRect->left = outRect->left + this->nWalkEmbedAccX;
+  outRect->top = outRect->top + this->nWalkEmbedAccY;
+  outRect->right = outRect->right + this->nWalkEmbedAccX;
+  outRect->bottom = outRect->bottom + this->nWalkEmbedAccY;
   return;
 }
 
 
 
 void __thiscall
-CBulanek::CBulanek_OffsetCollisionRectByFacing(CBulanek *this,int *param_1,int *param_2,int param_3)
+CBulanek::CBulanek_OffsetCollisionRectByFacing
+          (CBulanek *this,tagRECT *pSrcRect,tagRECT *pDstRect,int nTrackIdx)
 
 {
-  uint uVar1;
+  int iVar1;
   int iVar2;
   
-  uVar1 = this->dwFacingAxisExtent;
-  if (1 < param_3) {
-    iVar2 = param_1[1];
-    *param_2 = *param_2 + uVar1;
-    param_2[1] = param_2[1] + iVar2;
-    param_2[2] = param_2[2] + uVar1;
-    param_2[3] = param_2[3] + iVar2;
+  iVar1 = this->nFacingAxisExtent;
+  if (1 < nTrackIdx) {
+    iVar2 = pSrcRect->top;
+    pDstRect->left = pDstRect->left + iVar1;
+    pDstRect->top = pDstRect->top + iVar2;
+    pDstRect->right = pDstRect->right + iVar1;
+    pDstRect->bottom = pDstRect->bottom + iVar2;
     return;
   }
-  iVar2 = *param_1;
-  *param_2 = *param_2 + iVar2;
-  param_2[1] = param_2[1] + uVar1;
-  param_2[2] = param_2[2] + iVar2;
-  param_2[3] = param_2[3] + uVar1;
+  iVar2 = pSrcRect->left;
+  pDstRect->left = pDstRect->left + iVar2;
+  pDstRect->top = pDstRect->top + iVar1;
+  pDstRect->right = pDstRect->right + iVar2;
+  pDstRect->bottom = pDstRect->bottom + iVar1;
   return;
 }
 
@@ -81788,12 +81808,12 @@ void __thiscall CBulanek::CBulanek_AdaptDisplaySize(CBulanek *this,uint *param_1
   uVar2 = extraout_EDX;
   if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
     if (1 < (this->videoTrackManager).nCurrentTrackIdx) {
-      this->dwFacingAxisExtent = *param_1;
+      this->nFacingAxisExtent = *param_1;
       CDSView::CDSView_AdaptDisplaySize(this);
       return;
     }
     uVar2 = param_1[1];
-    this->dwFacingAxisExtent = uVar2;
+    this->nFacingAxisExtent = uVar2;
   }
   CDSView::CDSView_AdaptDisplaySize(this,uVar2,param_1);
   return;
@@ -81804,22 +81824,21 @@ void __thiscall CBulanek::CBulanek_AdaptDisplaySize(CBulanek *this,uint *param_1
 void __thiscall CBulanek::CBulanek_Draw(CBulanek *this)
 
 {
-  CBulanek *pCVar1;
+  int iVar1;
   int iVar2;
-  CPoemScroller *pCVar3;
-  uint uVar4;
-  undefined **ppuVar5;
-  CBulanek *pCVar6;
-  int *piVar7;
+  uint uVar3;
+  int *piVar4;
+  CPoemScroller *pCVar5;
+  int *piVar6;
   CPoemScroller *local_4c;
   int local_44;
   int local_40;
-  undefined *local_3c;
+  int local_3c;
   int local_38;
   int local_34;
   int local_30;
   int local_2c;
-  uint local_28;
+  int local_28;
   int local_24;
   int local_20;
   int local_1c;
@@ -81836,8 +81855,8 @@ LAB_00417694:
     }
   }
   else {
-    uVar4 = _Globals::CBulanek_IsHumanPlayer((int)this);
-    if ((char)uVar4 == '\0') {
+    uVar3 = CBulanek_IsHumanPlayer(this);
+    if ((char)uVar3 == '\0') {
       return;
     }
     if ((this->pGame->bTotalSlots == 1) && (this->bPlayerSlot != 0)) {
@@ -81847,20 +81866,20 @@ LAB_00417694:
     local_10 = 0x303030;
     if (this->bDrawAsMuted == 0) goto LAB_00417694;
   }
-  local_44 = *(int *)(this->pReserved_preAmmo + 0x10) + this->nBounds_left;
+  local_44 = this->nWalkClipNegX + this->nBounds_left;
   local_24 = 0;
   local_20 = 0;
   local_1c = 0;
   local_18 = 0;
-  local_3c = (undefined *)0x0;
+  local_3c = 0;
   local_38 = 0;
   local_34 = 0;
   local_30 = 0;
   local_2c = 0;
   local_28 = 0;
-  pCVar1 = this->pWeapon->pTrackHolder;
-  ppuVar5 = &pCVar1->vftable_IDSChained;
-  local_40 = *(int *)(this->pReserved_preAmmo + 0x14) + this->nBounds_top;
+  iVar1 = this->pWeapon->pTrackHolder;
+  piVar4 = (int *)(iVar1 + 4);
+  local_40 = this->nWalkClipNegY + this->nBounds_top;
   if (g_pApp == (void *)0xffffff84) {
     local_4c = (CPoemScroller *)0x0;
   }
@@ -81871,51 +81890,51 @@ LAB_00417694:
   if (-1 < iVar2) {
     if (iVar2 < 2) {
       if (iVar2 == 0) {
-        local_38 = (int)pCVar1->dwPad_08 / 2 + -7;
+        local_38 = *(int *)(iVar1 + 8) / 2 + -7;
       }
       else {
-        local_38 = (int)pCVar1->dwPad_08 / 2 + 5;
+        local_38 = *(int *)(iVar1 + 8) / 2 + 5;
       }
       local_38 = local_38 + local_40;
-      local_3c = *ppuVar5 + local_44;
+      local_3c = *piVar4 + local_44;
       local_28 = local_38 - local_40;
-      local_2c = (int)local_3c - local_44;
-      piVar7 = &local_34;
-      pCVar6 = this->pWeapon->pTrackHolder;
+      local_2c = local_3c - local_44;
+      piVar6 = &local_34;
+      pCVar5 = (CPoemScroller *)this->pWeapon->pTrackHolder;
     }
     else {
       if (iVar2 != 2) goto LAB_004177d0;
-      local_38 = pCVar1->dwPad_08 + local_40;
-      local_3c = *ppuVar5 + local_44;
-      pCVar6 = this->pWeapon->pTrackHolder;
-      piVar7 = (int *)0x0;
+      local_38 = *(int *)(iVar1 + 8) + local_40;
+      local_3c = *piVar4 + local_44;
+      pCVar5 = (CPoemScroller *)this->pWeapon->pTrackHolder;
+      piVar6 = (int *)0x0;
     }
     local_30 = 0;
     local_34 = 0;
-    CPoemScroller::BlitDispatch(local_4c,&local_44,(CPoemScroller *)pCVar6,piVar7,&local_14);
+    CPoemScroller::BlitDispatch(local_4c,&local_44,pCVar5,piVar6,&local_14);
   }
 LAB_004177d0:
-  local_24 = *(int *)(this->pReserved_preAmmo + 8) + this->nBounds_left;
-  local_20 = *(int *)(this->pReserved_preAmmo + 0xc) + this->nBounds_top;
-  pCVar3 = (CPoemScroller *)this->pActiveAnim;
-  local_18 = pCVar3->nField_08 + local_20;
-  local_1c = (int)pCVar3->pVftable_IDSChained_04 + local_24;
-  CPoemScroller::BlitDispatch(local_4c,&local_24,pCVar3,(int *)0x0,&local_14);
+  local_24 = this->nWalkEmbedAccX + this->nBounds_left;
+  local_20 = this->nWalkEmbedAccY + this->nBounds_top;
+  pCVar5 = (CPoemScroller *)this->pActiveAnim;
+  local_18 = pCVar5->nField_08 + local_20;
+  local_1c = (int)pCVar5->pVftable_IDSChained_04 + local_24;
+  CPoemScroller::BlitDispatch(local_4c,&local_24,pCVar5,(int *)0x0,&local_14);
   iVar2 = (this->videoTrackManager).nCurrentTrackIdx;
   if (-1 < iVar2) {
     if (iVar2 < 2) {
       local_40 = local_40 + local_28;
-      local_3c = *ppuVar5 + local_44;
-      local_38 = (local_40 - local_28) + pCVar1->dwPad_08;
+      local_3c = *piVar4 + local_44;
+      local_38 = (local_40 - local_28) + *(int *)(iVar1 + 8);
       local_30 = local_28;
-      local_28 = pCVar1->dwPad_08;
+      local_28 = *(undefined4 *)(iVar1 + 8);
       CPoemScroller::BlitDispatch
                 (local_4c,&local_44,(CPoemScroller *)this->pWeapon->pTrackHolder,&local_34,&local_14
                 );
     }
     else if (iVar2 == 3) {
-      local_38 = pCVar1->dwPad_08 + local_40;
-      local_3c = *ppuVar5 + local_44;
+      local_38 = *(int *)(iVar1 + 8) + local_40;
+      local_3c = *piVar4 + local_44;
       CPoemScroller::BlitDispatch
                 (local_4c,&local_44,(CPoemScroller *)this->pWeapon->pTrackHolder,(int *)0x0,
                  &local_14);
@@ -81970,14 +81989,14 @@ CBulanek::CBulanek_UpdateStateFromParams
 void __thiscall CBulanek::CBulanek_SnapPositionToFacingAxis(CBulanek *this)
 
 {
-                    // UNCERTAIN: pause TM at +0xa8 and CDSView__SetPosition using +0x20/+0xa4 per
-                    // +0xd4; callers CBulanek_ApplyAction / SetFacingTrack
+                    // TM_PauseAndStampClock; track<=1 snaps Y=nFacingAxisExtent@+0xA4 else X; pairs
+                    // horizontal facings 0/1 vs vertical 2/3
   _Globals::TM_PauseAndStampClock(&this->videoTrackManager);
   if (1 < (this->videoTrackManager).nCurrentTrackIdx) {
-    CDSView::CDSView__SetPosition((CDSView *)this,this->dwFacingAxisExtent,this->nOrigin_y);
+    CDSView::CDSView__SetPosition((CDSView *)this,this->nFacingAxisExtent,this->nOrigin_y);
     return;
   }
-  CDSView::CDSView__SetPosition((CDSView *)this,this->nOrigin_x,this->dwFacingAxisExtent);
+  CDSView::CDSView__SetPosition((CDSView *)this,this->nOrigin_x,this->nFacingAxisExtent);
   return;
 }
 
@@ -82013,7 +82032,7 @@ void __cdecl _Globals::TriggerSoundEffect(int param_1,uchar param_2,int *param_3
 void __thiscall CWeapon::SetAmmo(CWeapon *this,int param_1)
 
 {
-  _Globals::TriggerSoundEffect(param_1,this->bWeaponKind,&this->pOwner->nOrigin_x);
+  _Globals::TriggerSoundEffect(param_1,this->bWeaponKind,(int *)(this->pOwner + 0x20));
   return;
 }
 
@@ -82100,7 +82119,7 @@ void __fastcall CDeath::CDeath_OnCorpseHideRequestRespawn(int param_1)
                     // respawn (FUN_00420480). CDeath2 slot4 @ 0x00417b10 only hides.
   if (((byte)~*(byte *)(*(int *)(param_1 + -8) + 0x44) >> 4 & 1) == 0) {
     CDSView::CDSView__Hide((CDSView *)(param_1 + -0x8c));
-    uVar1 = _Globals::CBulanek_IsHumanPlayer(*(int *)(param_1 + 100));
+    uVar1 = CBulanek::CBulanek_IsHumanPlayer(*(CBulanek **)(param_1 + 100));
     if ((char)uVar1 != '\0') {
       CDeath_UpdateLastManStandingState(*(CDeath **)(param_1 + 100));
       if (extraout_AL == '\0') {
@@ -82209,7 +82228,7 @@ void __thiscall CShot::CShot_Draw(CShot *this)
 
 
 
-void __thiscall CBulanci_SetAmbientAnimMode(void *this,int param_1)
+void __thiscall CGaming_SetAmbientAnimMode(void *this,int param_1)
 
 {
   void *pvVar1;
@@ -82219,6 +82238,8 @@ void __thiscall CBulanci_SetAmbientAnimMode(void *this,int param_1)
                     // UNCERTAIN: stores ambient-anim mode at this+0x33c (0=25s / 1=10s scheduler
                     // delay on this+0x68 slot 0); called from CGaming_TickAmbientAnimations and
                     // level teardown FUN_00419e40(0).
+                    // CGaming+0x33c nAmbientAnimMode: 0=25s / 1=10s scheduler delay on facet+0x68
+                    // slot 0.
   *(int *)((int)this + 0x33c) = param_1;
   if (param_1 == 0) {
     uVar2 = 25000;
@@ -82325,14 +82346,14 @@ _Globals::CGaming_DispatchTraceAreaTransitionIfMasked
 
 
 
-bool __thiscall CBulanek::CGaming_IsPlayerSlotOccupied(CBulanek *this,byte param_1)
+bool __thiscall CBulanek::CGaming_IsPlayerSlotOccupied(CBulanek *this,uchar slot)
 
 {
   undefined4 *puVar1;
   int iVar2;
   
-  if (((param_1 != 0xff) && (param_1 < 0x80)) &&
-     (puVar1 = *(undefined4 **)((this->videoTrackManager).pPad_0x36 + (uint)param_1 * 4 + -0x16),
+  if (((slot != 0xff) && (slot < 0x80)) &&
+     (puVar1 = *(undefined4 **)((this->videoTrackManager).pPad_0x36 + (uint)slot * 4 + -0x16),
      puVar1 != (undefined4 *)0x0)) {
     iVar2 = (**(code **)*puVar1)();
     return *(int *)(iVar2 + 8) == 0x7ec;
@@ -82427,6 +82448,9 @@ undefined4 __thiscall CBulanek::CBulanek_GetKillerGenderByteAtSlot(CBulanek *thi
 void __thiscall _Globals::CGaming_RegisterObjectAtSlot(void *this,int param_1,byte param_2)
 
 {
+                    // apEntitySlots[slot] @ CGaming+0xC8 (disasm ECX+slot*4+0xC8).
+                    // entity+0x14|=0x200; entity+0x70=slot. slot>=0x80 clears prior binding. NOT
+                    // AddEntity — paired caller step.
   if (param_2 < 0x80) {
     *(int *)((int)this + (uint)param_2 * 4 + 200) = param_1;
     *(ushort *)(param_1 + 0x14) = *(ushort *)(param_1 + 0x14) | 0x200;
@@ -82508,69 +82532,68 @@ void __thiscall CGame::CGaming_OnNetMsg_t11_PlayerDie(CGame *this,byte param_1)
 
 
 
-void __thiscall CGaming::CGaming_OnKillCredit_UpdateScoreHud(CGaming *this,CBulanek *scorer)
+void __thiscall CGaming::CGaming_OnKillCredit_UpdateScoreHud(CGaming *this,int param_2)
 
 {
   byte player;
-  CBulanek *pCVar1;
-  uchar uVar2;
-  int iVar3;
+  uchar uVar1;
+  int iVar2;
   void *this_00;
-  byte bVar4;
-  uint uVar5;
+  byte bVar3;
+  uint uVar4;
   uint extraout_EDX;
   uint extraout_EDX_00;
-  CBulanek *pCVar6;
-  uint uVar7;
-  uint local_10;
+  int iVar5;
+  int iVar6;
+  int local_10;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
   
-  pCVar1 = scorer;
+  iVar2 = param_2;
                     // UNCERTAIN: CGameCounter_UpdatePlayerScore + leading-player HUD string; caller
                     // CBulanek_OnEvent; may post WM 0x100 wParam 0x80cc when score limit reached
   local_4 = 0xffffffff;
   puStack_8 = &LAB_00476bb8;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  player = scorer->bPlayerSlot;
+  player = *(byte *)(param_2 + 0x70);
   CBulanek::CBulanek_CopyScoreBlockToSlot
-            ((CBulanek *)this->pOwnerGame,player,scorer->dwScriptKillScore,
-             scorer->pOpponentScriptTally);
-  uVar2 = _Globals::CGameGetModeAndScoreLimit(this->pOwnerGame,(int *)&local_10);
-  if ((uVar2 != '\x02') && (*(void **)&this->field_0x320 != (void *)0x0)) {
+            ((CBulanek *)this->pOwnerGame,player,*(undefined4 *)(param_2 + 0x128),
+             (undefined4 *)(param_2 + 300));
+  uVar1 = _Globals::CGameGetModeAndScoreLimit(this->pOwnerGame,&local_10);
+  if ((uVar1 != '\x02') && (*(void **)&this->field_0x320 != (void *)0x0)) {
     _Globals::CGameCounter_UpdatePlayerScore(*(void **)&this->field_0x320,player,'\x01');
   }
-  if (uVar2 == '\0') {
-    bVar4 = this->pOwnerGame->bTotalSlots;
-    uVar5 = (uint)bVar4;
-    pCVar6 = (CBulanek *)0x0;
-    uVar7 = 0;
-    while (bVar4 != 0) {
-      bVar4 = (char)uVar5 - 1;
-      iVar3 = _Globals::CGaming_GetObjectAtSlotUnchecked(this,bVar4);
-      uVar5 = extraout_EDX;
-      if ((int)uVar7 < *(int *)(iVar3 + 0x128)) {
-        pCVar6 = (CBulanek *)_Globals::CGaming_GetObjectAtSlotUnchecked(this_00,bVar4);
-        uVar7 = pCVar6->dwScriptKillScore;
-        uVar5 = extraout_EDX_00;
+  if (uVar1 == '\0') {
+    bVar3 = this->pOwnerGame->bTotalSlots;
+    uVar4 = (uint)bVar3;
+    iVar5 = 0;
+    iVar6 = 0;
+    while (bVar3 != 0) {
+      bVar3 = (char)uVar4 - 1;
+      iVar2 = _Globals::CGaming_GetObjectAtSlotUnchecked(this,bVar3);
+      uVar4 = extraout_EDX;
+      if (iVar6 < *(int *)(iVar2 + 0x128)) {
+        iVar5 = _Globals::CGaming_GetObjectAtSlotUnchecked(this_00,bVar3);
+        iVar6 = *(int *)(iVar5 + 0x128);
+        uVar4 = extraout_EDX_00;
       }
-      pCVar1 = scorer;
-      bVar4 = (byte)uVar5;
+      iVar2 = param_2;
+      bVar3 = (byte)uVar4;
     }
-    if ((pCVar6 == pCVar1) && (*(int *)&this->field_0x320 != 0)) {
-      scorer = (CBulanek *)0x0;
+    if ((iVar5 == iVar2) && (*(int *)&this->field_0x320 != 0)) {
+      param_2 = 0;
       local_4 = 0;
       _Globals::CGameGetPlayerNamePtr(this->pOwnerGame,player);
-      _Globals::CDsStringFormatV(&scorer,L"\x01 %s \n\x01 %d ");
-      _Globals::CGaming_SetRoundTimerLabelFromString(*(void **)&this->field_0x320,&scorer);
-      if (((this->pOwnerGame->chain).field_0x5 == '\0') && (uVar7 == local_10)) {
+      _Globals::CDsStringFormatV(&param_2,L"\x01 %s \n\x01 %d ");
+      _Globals::CGaming_SetRoundTimerLabelFromString(*(void **)&this->field_0x320,&param_2);
+      if (((this->pOwnerGame->chain).field_0x5 == '\0') && (iVar6 == local_10)) {
         _Globals::CDSView__PostMessage(&this->field_0x10,0x100,0x80cc,1,0);
       }
       local_4 = 0xffffffff;
-      if (scorer != (CBulanek *)0x0) {
-        _Globals::CDsStringReleaseHeader(&scorer[-1].nLivesSnapshot);
+      if (param_2 != 0) {
+        _Globals::CDsStringReleaseHeader((void *)(param_2 + -0xc));
       }
     }
   }
@@ -83044,6 +83067,9 @@ CDSView * __cdecl CLevelScript::CLevelScriptOpExt_TranslateTo(CDSScript *param_1
   int extraout_EAX;
   int extraout_EAX_00;
   
+                    // R11 task27: ReadSubExpr×3 → target=ESI, x=EBX, y=EAX; if target:
+                    // CDSView__SetPosition(target,x,y); return target. Disasm @
+                    // 0x004188e9–0x00418908.
   CDSScript::ReadSubExpr(param_1);
   CDSScript::ReadSubExpr(param_1);
   CDSScript::ReadSubExpr(param_1);
@@ -83074,8 +83100,9 @@ uint __cdecl CLevelScript::CLevelScriptOpExt_SpawnAtView(CLevelScript *param_1)
   byte extraout_AL;
   int extraout_EAX;
   
-                    // param_1+0x458: world/CGaming* (CLevelScript::ctor @ 0x4185c0); script opcode
-                    // 65 SpawnAtView reads two subexprs then TriggerLevelScriptSound.
+                    // Opcode 65 (editor: SpawnAtView). Reads sampleId then slotId; calls
+                    // TriggerLevelScriptSound(CGaming@+0x458, slotId, sampleId). NOT projectile
+                    // spawn — spatial/stereo bank sample trigger. slotId=0xFF → global stereo.
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   _Globals::TriggerLevelScriptSound((void *)param_1->pGaming,extraout_AL,extraout_EAX);
@@ -83090,6 +83117,12 @@ int __cdecl CLevelScript::CLevelScriptOpExt_SetAnimDirection(CDSScript *param_1)
   undefined1 extraout_AL;
   int extraout_EAX;
   
+                    // SetAnimDirection ext opcode 78 (sub-op 33): view=ReadSubExpr;
+                    // direction=ReadSubExpr (low byte in AL). If view:
+                    // *(uint8_t*)(*(view+0x94)+0x18)=direction. Returns view. Does NOT call
+                    // TM_SetTrack — use opcode 63 SetAnim for track switch on view+0x98. Master
+                    // pack has zero SetAnimDirection calls; facing uses SetAnim(GetSlot(n),
+                    // trackIdx, flags).
   CDSScript::ReadSubExpr(param_1);
   CDSScript::ReadSubExpr(param_1);
   if (extraout_EAX != 0) {
@@ -83139,6 +83172,11 @@ bool __cdecl CLevelScript::CLevelScriptOpExt_IsViewKind(CDSScript *param_1)
   undefined4 uVar2;
   undefined *puVar3;
   
+                    // Opcode 87 IsViewKind: CAnim meta check via
+                    // ClassRegEntry_ListContains(&DAT_004b3768); then
+                    // Scheduler_GetEventSlot(view+0xac,0). Returns true when slot0 exists and
+                    // (flags@+8 & 1)==0 (anim idle). Used by OnTimer to gate spawns while slot-9
+                    // cabinet anim plays.
   CDSScript::ReadSubExpr(param_1);
   if (extraout_EAX != (undefined4 *)0x0) {
     puVar3 = &DAT_004b3768;
@@ -83459,7 +83497,7 @@ undefined * CBulanek::CBulanek_GetClassTable(void)
 void __thiscall CBulanek::CBulanek_DtorScalar_thunk_Sub88(CBulanek *this,byte param_1)
 
 {
-  CBulanek_DtorScalar((CBulanek *)(this[-1].pReserved_preAmmo + 0x10),param_1);
+  CBulanek_DtorScalar((CBulanek *)&this[-1].nWalkClipNegX,param_1);
   return;
 }
 
@@ -83797,7 +83835,8 @@ uint __thiscall CBulanek::CBulanek_CheckSlotCollision(CBulanek *this,byte param_
   LONG local_140;
   uint local_13c;
   LONG local_138;
-  uint local_134 [8];
+  uint local_134 [3];
+  tagRECT local_128;
   uint uStack_114;
   LONG LStack_110;
   uint uStack_10c;
@@ -83805,7 +83844,7 @@ uint __thiscall CBulanek::CBulanek_CheckSlotCollision(CBulanek *this,byte param_
   
   pCVar1 = this->pGame;
   if ((pCVar1->chain).field_0x5 == '\0') {
-    piVar2 = CGaming::CGaming_GetObjectAtSlotSafe((CGaming *)this->pGamingHostScratch,param_1);
+    piVar2 = CGaming::CGaming_GetObjectAtSlotSafe(this->pGaming_host,param_1);
     pCVar1 = (CGame *)0x0;
     if (piVar2 != (int *)0x0) {
       local_140 = 0;
@@ -83814,8 +83853,8 @@ uint __thiscall CBulanek::CBulanek_CheckSlotCollision(CBulanek *this,byte param_
       local_134[0] = 0;
       local_134[1] = 0;
       local_134[2] = 0;
-      local_134[3] = 0;
-      local_134[4] = 0;
+      local_128.left = 0;
+      local_128.top = 0;
       (**(code **)(*piVar2 + 0x70))(&local_140);
       (**(code **)(this->vftable_primary + 0x70))(local_134);
       switch(unaff_retaddr) {
@@ -83836,17 +83875,16 @@ uint __thiscall CBulanek::CBulanek_CheckSlotCollision(CBulanek *this,byte param_
         LStack_110 = local_140;
         uStack_114 = unaff_EBX;
         iVar4 = CGaming::CExplosion_CollectEntitiesInBlastRect
-                          ((CGaming *)this->pGamingHostScratch,(int *)&stack0xfffffeb8,aiStack_108,
-                           '\x01');
+                          (this->pGaming_host,(int *)&stack0xfffffeb8,aiStack_108,'\x01');
         iVar5 = 0;
         if (0 < iVar4) {
           do {
-            local_134[3] = 0;
-            local_134[4] = 0;
-            local_134[5] = 0;
-            local_134[6] = 0;
-            (**(code **)(*(int *)aiStack_108[iVar5] + 0x70))(local_134 + 3);
-            tagRECT::CDSRect_IntersectInPlace((tagRECT *)&stack0xfffffeb8,(int *)(local_134 + 3));
+            local_128.left = 0;
+            local_128.top = 0;
+            local_128.right = 0;
+            local_128.bottom = 0;
+            (**(code **)(*(int *)aiStack_108[iVar5] + 0x70))(&local_128);
+            tagRECT::CDSRect_IntersectInPlace((tagRECT *)&stack0xfffffeb8,&local_128);
             iVar5 = iVar5 + 1;
           } while (iVar5 < iVar4);
         }
@@ -83949,18 +83987,16 @@ uint __thiscall _Globals::CBulanek_TestRectOverlapWithEntity(void *this,uint par
 int __fastcall CBulanek::CBulanek_GetSpatialBucketKey(CBulanek *param_1)
 
 {
-  int local_10;
-  int local_c;
-  int local_8;
-  int local_4;
+  tagRECT local_10;
   
-  local_10 = param_1->nCollisionLeft + *(int *)(param_1->pReserved_preAmmo + 8);
-  local_8 = param_1->nCollisionRight + *(int *)(param_1->pReserved_preAmmo + 8);
-  local_c = param_1->nCollisionTop + *(int *)(param_1->pReserved_preAmmo + 0xc);
-  local_4 = param_1->nCollisionBottom + *(int *)(param_1->pReserved_preAmmo + 0xc);
+  local_10.left = param_1->nCollisionLeft + param_1->nWalkEmbedAccX;
+  local_10.right = param_1->nCollisionRight + param_1->nWalkEmbedAccX;
+  local_10.top = param_1->nCollisionTop + param_1->nWalkEmbedAccY;
+  local_10.bottom = param_1->nCollisionBottom + param_1->nWalkEmbedAccY;
   CBulanek_OffsetCollisionRectByFacing
-            (param_1,&param_1->nOrigin_x,&local_10,(param_1->videoTrackManager).nCurrentTrackIdx);
-  return local_4;
+            (param_1,(tagRECT *)&param_1->nOrigin_x,&local_10,
+             (param_1->videoTrackManager).nCurrentTrackIdx);
+  return local_10.bottom;
 }
 
 
@@ -83968,9 +84004,10 @@ int __fastcall CBulanek::CBulanek_GetSpatialBucketKey(CBulanek *param_1)
 void __thiscall CBulanek::CBulanek_GetWorldCollisionRect(CBulanek *this,int *param_1)
 
 {
-  CBulanek_CopyCollisionRectLocal(this,param_1);
+  CBulanek_CopyCollisionRectLocal(this,(tagRECT *)param_1);
   CBulanek_OffsetCollisionRectByFacing
-            (this,&this->nOrigin_x,param_1,(this->videoTrackManager).nCurrentTrackIdx);
+            (this,(tagRECT *)&this->nOrigin_x,(tagRECT *)param_1,
+             (this->videoTrackManager).nCurrentTrackIdx);
   return;
 }
 
@@ -83980,108 +84017,122 @@ void __thiscall CBulanek::CBulanek_GetWorldCollisionRect(CBulanek *this,int *par
 // param_5=0 — tile overlap test enabled, do not skip +0x6a entities.
 
 void __thiscall
-_Globals::CBulanek_ClampMoveRectByCollision
-          (void *this,undefined4 param_1,int *param_2,LONG *param_3,int *param_4)
+CBulanek::CBulanek_ClampMoveRectByCollision
+          (CBulanek *this,int *pOrigin,tagRECT *pProposed,int *pCollisionAtOrigin,
+          tagRECT *pHitBoundsOut)
 
 {
   byte bVar1;
   int iVar2;
-  int *piVar3;
-  int iVar4;
+  CDSView *pCVar3;
+  int *piVar4;
   int iVar5;
   int iVar6;
   int iVar7;
-  bool bVar8;
+  int iVar8;
+  bool bVar9;
   tagRECT local_10;
   
-  if ((*(void **)((int)this + 0x84) != (void *)0x0) &&
-     ((((iVar6 = *param_3, iVar6 != *param_4 || (param_3[1] != param_4[1])) ||
-       (param_3[2] != param_4[2])) || (param_3[3] != param_4[3])))) {
+                    // R11 task 10: axis clamp after SpatialQuery(pGaming_host, proposed,
+                    // collisionAtOrigin, hitBounds, p4=0, p5=0). Facing=nCurrentTrackIdx@+0xD4
+                    // (0=L,1=R,2=U,3=D). Map size from pChainParent@+0x4C bbox +0x20..+0x2C.
+                    // Coop/dummy slots 0x20..0x27 post OnCustom 0x102 on block →
+                    // TryBotRandomAction.
+  if ((this->pGaming_host != (CGaming *)0x0) &&
+     ((((iVar7 = *pCollisionAtOrigin, iVar7 != pHitBoundsOut->left ||
+        (pCollisionAtOrigin[1] != pHitBoundsOut->top)) ||
+       (pCollisionAtOrigin[2] != pHitBoundsOut->right)) ||
+      (pCollisionAtOrigin[3] != pHitBoundsOut->bottom)))) {
     local_10.left = 0;
     local_10.top = 0;
     local_10.right = 0;
     local_10.bottom = 0;
-    iVar2 = param_3[1];
-    bVar8 = false;
-    piVar3 = _Globals__SpatialQuery
-                       (*(void **)((int)this + 0x84),param_3,param_4,&local_10,'\0','\0');
-    iVar7 = *(int *)((int)this + 0x4c);
-    iVar5 = *(int *)(iVar7 + 0x2c) - *(int *)(iVar7 + 0x24);
-    iVar7 = *(int *)(iVar7 + 0x28) - *(int *)(iVar7 + 0x20);
-    switch(*(undefined4 *)((int)this + 0xd4)) {
+    iVar2 = pCollisionAtOrigin[1];
+    bVar9 = false;
+                    // SpatialQuery: movement mode — tile overlap gate ON (param_4=0), include
+                    // +0x6A entities (param_5=0)
+    piVar4 = _Globals::_Globals__SpatialQuery
+                       (this->pGaming_host,pCollisionAtOrigin,pHitBoundsOut,&local_10,'\0','\0');
+    pCVar3 = this->pChainParent;
+    iVar6 = (pCVar3->win).nBbox_bottom - (pCVar3->win).nBbox_top;
+    iVar8 = (pCVar3->win).nBbox_right - (pCVar3->win).nBbox_left;
+    switch((this->videoTrackManager).nCurrentTrackIdx) {
     case 0:
-      iVar7 = *param_3;
-      bVar8 = iVar7 < 0;
-      iVar5 = iVar7;
-      if (bVar8) {
-        iVar5 = 0;
+      iVar6 = *pCollisionAtOrigin;
+      bVar9 = iVar6 < 0;
+      iVar8 = iVar6;
+      if (bVar9) {
+        iVar8 = 0;
       }
-      if ((piVar3 != (int *)0x0) && (iVar7 < *param_4)) {
-        bVar8 = true;
-        iVar5 = local_10.right;
+      if ((piVar4 != (int *)0x0) && (iVar6 < pHitBoundsOut->left)) {
+        bVar9 = true;
+        iVar8 = local_10.right;
       }
-      if (iVar5 != iVar7) {
-        param_3[2] = param_3[2] + (iVar5 - iVar7);
-        *param_3 = iVar5;
+      if (iVar8 != iVar6) {
+        pCollisionAtOrigin[2] = pCollisionAtOrigin[2] + (iVar8 - iVar6);
+        *pCollisionAtOrigin = iVar8;
       }
       break;
     case 1:
-      iVar5 = param_3[2];
-      iVar4 = iVar5;
-      if (iVar7 < iVar5) {
-        iVar4 = iVar7;
+      iVar6 = pCollisionAtOrigin[2];
+      iVar5 = iVar6;
+      if (iVar8 < iVar6) {
+        iVar5 = iVar8;
       }
-      bVar8 = iVar7 < iVar5;
-      if ((piVar3 != (int *)0x0) && (*param_4 < *param_3)) {
-        bVar8 = true;
-        iVar4 = local_10.left;
+      bVar9 = iVar8 < iVar6;
+      if ((piVar4 != (int *)0x0) && (pHitBoundsOut->left < *pCollisionAtOrigin)) {
+        bVar9 = true;
+        iVar5 = local_10.left;
       }
-      if (iVar4 != iVar5) {
-        *param_3 = *param_3 + (iVar4 - iVar5);
-        param_3[2] = iVar4;
+      if (iVar5 != iVar6) {
+        *pCollisionAtOrigin = *pCollisionAtOrigin + (iVar5 - iVar6);
+        pCollisionAtOrigin[2] = iVar5;
       }
       break;
     case 2:
-      iVar7 = param_3[1];
-      bVar8 = iVar7 < 0;
-      iVar5 = iVar7;
-      if (bVar8) {
-        iVar5 = 0;
+      iVar6 = pCollisionAtOrigin[1];
+      bVar9 = iVar6 < 0;
+      iVar8 = iVar6;
+      if (bVar9) {
+        iVar8 = 0;
       }
-      if ((piVar3 != (int *)0x0) && (iVar7 < param_4[1])) {
-        bVar8 = true;
-        iVar5 = local_10.bottom;
+      if ((piVar4 != (int *)0x0) && (iVar6 < pHitBoundsOut->top)) {
+        bVar9 = true;
+        iVar8 = local_10.bottom;
       }
-      if (iVar5 != iVar7) {
-        param_3[3] = param_3[3] + (iVar5 - iVar7);
-        param_3[1] = iVar5;
+      if (iVar8 != iVar6) {
+        pCollisionAtOrigin[3] = pCollisionAtOrigin[3] + (iVar8 - iVar6);
+        pCollisionAtOrigin[1] = iVar8;
       }
       break;
     case 3:
-      iVar7 = param_3[3];
-      iVar4 = iVar7;
-      if (iVar5 < iVar7) {
-        iVar4 = iVar5;
+      iVar8 = pCollisionAtOrigin[3];
+      iVar5 = iVar8;
+      if (iVar6 < iVar8) {
+        iVar5 = iVar6;
       }
-      bVar8 = iVar5 < iVar7;
-      if ((piVar3 != (int *)0x0) && (param_4[1] < param_3[1])) {
-        bVar8 = true;
-        iVar4 = local_10.top;
+      bVar9 = iVar6 < iVar8;
+      if ((piVar4 != (int *)0x0) && (pHitBoundsOut->top < pCollisionAtOrigin[1])) {
+        bVar9 = true;
+        iVar5 = local_10.top;
       }
-      if (iVar4 != iVar7) {
-        param_3[1] = param_3[1] + (iVar4 - iVar7);
-        param_3[3] = iVar4;
+      if (iVar5 != iVar8) {
+        pCollisionAtOrigin[1] = pCollisionAtOrigin[1] + (iVar5 - iVar8);
+        pCollisionAtOrigin[3] = iVar5;
       }
     }
-    iVar7 = param_3[1];
-    iVar6 = *param_3 - iVar6;
-    param_2[1] = param_2[1] + (iVar7 - iVar2);
-    *param_2 = *param_2 + iVar6;
-    param_2[3] = param_2[3] + (iVar7 - iVar2);
-    param_2[2] = param_2[2] + iVar6;
-    bVar1 = *(byte *)((int)this + 0x70);
-    if ((((0x1f < bVar1) && (bVar1 < 0x24)) || ((0x23 < bVar1 && (bVar1 < 0x28)))) && (bVar8)) {
-      CDSView__PostMessage((void *)((int)this + 0x10),0x200,0x102,0,0);
+    iVar6 = pCollisionAtOrigin[1];
+    iVar7 = *pCollisionAtOrigin - iVar7;
+    pProposed->top = pProposed->top + (iVar6 - iVar2);
+    pProposed->left = pProposed->left + iVar7;
+    pProposed->bottom = pProposed->bottom + (iVar6 - iVar2);
+    pProposed->right = pProposed->right + iVar7;
+    bVar1 = this->bPlayerSlot;
+    if ((((0x1f < bVar1) && (bVar1 < 0x24)) || ((0x23 < bVar1 && (bVar1 < 0x28)))) && (bVar9)) {
+                    // bPlayerSlot@+0x70 in 0x20..0x27 and axis clamp applied →
+                    // PostMessage(IDSEventHandler+0x10, 0x200, 0x102) → CBulanek_OnEvent →
+                    // TryBotRandomAction
+      _Globals::CDSView__PostMessage(&this->vftable_IDSReferenced,0x200,0x102,0,0);
     }
   }
   return;
@@ -84098,6 +84149,8 @@ uint __thiscall CBulanek::CBulanek_SetFacingTrack(CBulanek *this,int track,char 
   undefined4 uVar3;
   uint extraout_EAX;
   
+                    // Facing track 0..3 -> videoTrackManager.SetCurrentTrack; mirrors CWeapon track
+                    // via SetFacingFromByte; bHitStun early-out; slot0 idle -> Snap+BeginPlayback
   if (this->bHitStun != 0) {
     return in_EAX & 0xffffff00;
   }
@@ -84114,7 +84167,7 @@ uint __thiscall CBulanek::CBulanek_SetFacingTrack(CBulanek *this,int track,char 
     CDSUpdatedItem::Scheduler_FreeSlotIfLive(&this->scheduler,1);
   }
   if (sendNet == '\0') {
-    uVar2 = _Globals::CBulanek_IsHumanPlayer((int)this);
+    uVar2 = CBulanek_IsHumanPlayer(this);
     if ((char)uVar2 != '\0') {
       uVar3 = CGame_NetSendPlayerState_t0d
                         ((CBulanek *)this->pGame,this->bPlayerSlot,(byte)track | 8,
@@ -84223,7 +84276,7 @@ CAnim * __thiscall CAnim::CAnim_ctor(CAnim *this,int origin_x,int origin_y,int *
 // bM_tourneyFlag.
 
 CDeath * __thiscall
-CDeath::CDeath_ctor(CDeath *this,CBulanek *victim,void *worldHost,uint deathFlags)
+CDeath::CDeath_ctor(CDeath *this,undefined4 param_2,undefined4 param_3,uint param_4)
 
 {
                     // CDeath_ctor: pHost@+0xf0=victim; dwM_modeFlags@+0xf4=deathFlags&3;
@@ -84239,13 +84292,13 @@ CDeath::CDeath_ctor(CDeath *this,CBulanek *victim,void *worldHost,uint deathFlag
   this->vftable_anim_sub = (undefined *)vftable;
   this->nM_placementOffsetX = 0;
   this->nM_placementOffsetY = 0;
-  this->pHost = victim;
+  this->pHost = param_2;
                     // bM_tourneyFlag store — sole writer besides zero-init; read only in
                     // CBulanek_ResolveAndBindAnimTrack (+0xfc) for sit-sheet vs walk-sheet path.
-  this->bM_tourneyFlag = (byte)(deathFlags >> 7) & 1;
+  this->bM_tourneyFlag = (byte)(param_4 >> 7) & 1;
                     // dwM_modeFlags = deathFlags&3 — sole writer; anim bind reads for
                     // gABulanekWalkAnimSheet index / sit facings.
-  this->dwM_modeFlags = deathFlags & 3;
+  this->dwM_modeFlags = param_4 & 3;
   return this;
 }
 
@@ -84268,7 +84321,7 @@ void __thiscall CAnim::CAnim_AdjustOffsetDtor(CAnim *this,byte param_1)
 
 
 
-CDeath2 * __thiscall CDeath2::CDeath2_ctor(CDeath2 *this,CBulanek *victim)
+CDeath2 * __thiscall CDeath2::CDeath2_ctor(CDeath2 *this,undefined4 param_2)
 
 {
   CAnim::CAnim_SubobjectCtor();
@@ -84281,7 +84334,7 @@ CDeath2 * __thiscall CDeath2::CDeath2_ctor(CDeath2 *this,CBulanek *victim)
   this->vftable_anim_sub = (undefined *)vftable;
   this->nM_placementOffsetX = 0;
   this->nM_placementOffsetY = 0;
-  this->pHost = victim;
+  this->pHost = param_2;
   return this;
 }
 
@@ -84492,7 +84545,7 @@ void __fastcall CGaming::CGaming_UnregisterRoundHudObjects(CGaming *param_1)
   CGaming_UnregisterAndRemoveObject(param_1,*(undefined4 *)&param_1->field_0x328);
   CGaming_UnregisterAndRemoveObject(param_1,*(undefined4 *)&param_1->field_0x32c);
   CGaming_UnregisterAndRemoveObject(param_1,*(undefined4 *)&param_1->field_0x330);
-  CBulanci_SetAmbientAnimMode(param_1,0);
+  CGaming_SetAmbientAnimMode(param_1,0);
   return;
 }
 
@@ -84520,7 +84573,7 @@ _Globals::CGaming_CheckTraceAreasForEntity
     local_10.top = param_1[3];
     local_10.right = param_1[4];
     local_10.bottom = param_1[5];
-    tagRECT::CDSRect_IntersectInPlace(&local_10,param_3);
+    tagRECT::CDSRect_IntersectInPlace(&local_10,(tagRECT *)param_3);
     if ((((local_10.left == param_1[2]) && (local_10.top == param_1[3])) &&
         (local_10.right == param_1[4])) && (local_10.bottom == param_1[5])) {
       CGaming_DispatchTraceAreaTransitionIfMasked(this,param_2,'\x01',param_1,param_4);
@@ -84565,8 +84618,10 @@ void __fastcall CMina::CMina_UpdateTraceAreas(CMina *this)
 {
   undefined4 *puVar1;
   
-                    // R5 w44: animBase.bTraceAreasActive!=0 enables slot sweep 0x80..0x7e via
-                    // CGaming entity ring.
+                    // R11 task26: slot sweep 0x80..0x7d via CMina_CheckTraceAreasForSlot (entity @
+                    // this+0xc8 = CGaming::apEntitySlots). Callers pass CGaming*
+                    // (AppendDangerZoneNode @0x0041b492, CBulanek_Update @0x0041fc83). Gate
+                    // [this+0xc]!=0; host byte @ [this+0x84]+0xd8.
   if ((this->animBase).dwTraceAreasActive != 0) {
     puVar1 = (undefined4 *)(uint)*(byte *)(((this->animBase).pGaming_host)->pEntitySlots + 4);
     while (puVar1 != (undefined4 *)0x0) {
@@ -84585,7 +84640,7 @@ void __fastcall CMina::CMina_UpdateTraceAreas(CMina *this)
 
 
 void __thiscall
-CGaming::CGaming_OnPlayerCollectItem(CGaming *this,void *pPickup,void *pCollector,uint weaponKind)
+CGaming::CGaming_OnPlayerCollectItem(CGaming *this,void *param_2,undefined4 param_3,uint param_4)
 
 {
   int iVar1;
@@ -84595,11 +84650,16 @@ CGaming::CGaming_OnPlayerCollectItem(CGaming *this,void *pPickup,void *pCollecto
   char cVar5;
   byte bVar6;
   
-  CGaming_UnregisterAndRemoveObject(this,pCollector);
-  _Globals::CBulanek_NetSendTeamScoreOnCollect(pPickup,weaponKind);
+                    // Pickup complete (campaign weapon sprites @ CGaming+0x324..0x330). Args:
+                    // CGaming* this, CBulanek* pCollector, CDSView* pPickup, uint weaponKind
+                    // (0..3). Quip jmp table @ 0x41a0ac maps kind→bank slot 0x1f..0x23; default
+                    // 0x22. Score: CBulanek_NetSendTeamScoreOnCollect →
+                    // CGame_NetSendTeamScoreEvent_t16.
+  CGaming_UnregisterAndRemoveObject(this,param_3);
+  _Globals::CBulanek_NetSendTeamScoreOnCollect(param_2,param_4);
   iVar3 = 0x22;
-  if (*(char *)((int)pPickup + 0x70) == '\0') {
-    switch(weaponKind) {
+  if (*(char *)((int)param_2 + 0x70) == '\0') {
+    switch(param_4) {
     case 0:
       iVar3 = 0x20;
       break;
@@ -84616,11 +84676,11 @@ CGaming::CGaming_OnPlayerCollectItem(CGaming *this,void *pPickup,void *pCollecto
   bVar6 = 0;
   cVar5 = '\x01';
   pvVar4 = (void *)0x0;
-  iVar1 = _Globals::ComputeSpatialAttenuationDb100((int *)((int)pPickup + 0x20));
+  iVar1 = _Globals::ComputeSpatialAttenuationDb100((int *)((int)param_2 + 0x20));
   pCVar2 = (CDSAudioPlayer *)
            _Globals::TriggerBankSample((undefined *)0x1,0,iVar3,iVar1,pvVar4,cVar5);
   _Globals::CDSAudioPlayer_PlayAndRelease(pCVar2,bVar6);
-  CBulanci_SetAmbientAnimMode(this,0);
+  CGaming_SetAmbientAnimMode(this,0);
   return;
 }
 
@@ -84647,21 +84707,22 @@ uint __thiscall _Globals::CGaming_TryGetPlayerCoords(void *this,byte param_1,und
 {
   bool bVar1;
   undefined3 extraout_var;
-  int iVar3;
-  uint uVar4;
+  CBulanek *this_00;
+  uint uVar3;
+  int iVar4;
   undefined4 uVar2;
   
   bVar1 = CBulanek::CGaming_IsPlayerSlotOccupied(this,param_1);
   uVar2 = CONCAT31(extraout_var,bVar1);
   if (bVar1) {
-    iVar3 = CGaming_GetObjectAtSlotUnchecked(this,param_1);
-    uVar4 = CBulanek_IsHumanPlayer(iVar3);
-    if ((char)uVar4 == '\0') {
-      return uVar4;
+    this_00 = (CBulanek *)CGaming_GetObjectAtSlotUnchecked(this,param_1);
+    uVar3 = CBulanek::CBulanek_IsHumanPlayer(this_00);
+    if ((char)uVar3 == '\0') {
+      return uVar3;
     }
-    iVar3 = CGaming_GetObjectAtSlotUnchecked(this,param_1);
-    *param_2 = *(undefined4 *)(iVar3 + 0x20);
-    uVar2 = *(undefined4 *)(iVar3 + 0x24);
+    iVar4 = CGaming_GetObjectAtSlotUnchecked(this,param_1);
+    *param_2 = *(undefined4 *)(iVar4 + 0x20);
+    uVar2 = *(undefined4 *)(iVar4 + 0x24);
     param_2[1] = uVar2;
   }
   return CONCAT31((int3)((uint)uVar2 >> 8),1);
@@ -84794,6 +84855,7 @@ CGaming::CExplosion_CollectLandminesInBlastRect(CGaming *this,int *blastRect,int
   if (pCurrentView != (undefined4 *)0x0) {
     do {
       iVar1 = (**(code **)*pCurrentView)();
+                    // R10 t11: classId 0x816 (CMina) filter before blast AABB intersect.
       if (*(int *)(iVar1 + 8) == 0x816) {
         tStack_10.left = pCurrentView[8];
         tStack_10.top = pCurrentView[9];
@@ -85724,103 +85786,113 @@ void __thiscall CBulanek::CBulanek_SchedulerTick(CBulanek *this,void *param_1)
 
 
 
-undefined4 __fastcall _Globals::CBulanek_StepMovementAndCollision(CBulanek *param_1)
+// CBulanek walk/collision step. Returns 1 always.
+// Parameters: CBulanek *this (ECX) — stored sig void* due Ghidra ECX auto-param API limit;
+// decompile uses (int)this+off.
+// Offsets: pWeapon+0xF8, pActiveAnim+0xF0, walk embed +0x104..+0x118, nOrigin +0x20/+0x24, pad
+// +0x15C/+0x160, nInitialTrack+0x148, videoTrackManager.nCurrentTrackIdx+0xD4,
+// dwFacingAxisExtent+0xA4, videoTrackManager.scheduler+0xAC.
+// Callers: CBulanek_ApplyPickupEffect@0x41eb28, CWeapon_OnSchedulerEvent@0x41b186 (MI -0xA0),
+// CBulanek_SyncWeaponWalkFromTrack@0x41bf61.
+
+uchar __thiscall CBulanek::CBulanek_StepMovementAndCollision(CBulanek *this)
 
 {
   CWeapon *pCVar1;
-  uint uVar2;
-  void *pvVar3;
-  undefined4 uVar4;
+  char cVar2;
+  int iVar3;
+  void *pvVar4;
   int iVar5;
-  uint uVar6;
+  int iVar6;
   int iVar7;
-  tagRECT local_40;
-  int local_30;
-  int local_2c;
-  int local_28;
-  int local_24;
-  int local_20 [2];
-  undefined *local_18;
-  uint local_14;
-  int local_10 [4];
+  tagRECT originRect;
+  tagRECT deltaRect;
+  tagRECT proposedCollisionRect;
+  tagRECT originCollisionRect;
   
-                    // UNCERTAIN: CBulanek movement step — updates collision rects
-                    // (CopyCollisionRectLocal, OffsetCollisionRectByFacing), FUN_00433200
-                    // normalize, SpatialQuery slide via FUN_004195f0, vtable move hooks. Callers:
-                    // CBulanek_ApplyPickupEffect, CWeapon::Update, FUN_0041b180 (IDSEventHandler
-                    // slot).
-  pCVar1 = param_1->pWeapon;
-  local_40.right = (LONG)pCVar1->pTrackHolder->vftable_IDSChained;
-  local_40.bottom = pCVar1->pTrackHolder->dwPad_08;
-  local_2c = pCVar1->dwParamB - *(int *)(param_1->pReserved_preAmmo + 4);
-  local_30 = pCVar1->dwParamA - *(int *)param_1->pReserved_preAmmo;
-  local_24 = local_2c + param_1->pActiveAnim->dwChainField_08;
-  local_28 = local_30 + (int)param_1->pActiveAnim->pVftable_IDSChained;
-  local_20[0] = 0;
-  local_20[1] = 0;
-  local_10[0] = 0;
-  local_10[1] = 0;
-  local_10[2] = 0;
-  local_10[3] = 0;
-  local_40.left = 0;
-  local_40.top = 0;
-  local_18 = (undefined *)local_40.right;
-  local_14 = local_40.bottom;
-  tagRECT::CDSRect_IntersectInPlace(&local_40,&local_30);
-  iVar7 = local_30 - local_40.left;
-  *(LONG *)(param_1->pReserved_preAmmo + 0x10) = -local_40.left;
-  *(LONG *)(param_1->pReserved_preAmmo + 0x14) = -local_40.top;
-  iVar5 = local_2c - local_40.top;
-  uVar2 = (*(int *)(param_1->pPad_postWalkEmbed + 4) + *(int *)(param_1->pReserved_preAmmo + 0xc) +
-          param_1->nOrigin_y) - iVar5;
-  uVar6 = (param_1->nOrigin_x - iVar7) + *(int *)(param_1->pReserved_preAmmo + 8) +
-          *(int *)param_1->pPad_postWalkEmbed;
-  local_40.bottom = (local_40.bottom - local_40.top) + uVar2;
-  local_40.right = local_40.right + (uVar6 - local_40.left);
-  local_40.left = uVar6;
-  local_40.top = uVar2;
-  CBulanek::CBulanek_CopyCollisionRectLocal(param_1,local_10);
-  *(int *)(param_1->pReserved_preAmmo + 0xc) = iVar5;
-  *(int *)(param_1->pReserved_preAmmo + 8) = iVar7;
-  param_1->pPad_postWalkEmbed[0] = 0;
-  param_1->pPad_postWalkEmbed[1] = 0;
-  param_1->pPad_postWalkEmbed[2] = 0;
-  param_1->pPad_postWalkEmbed[3] = 0;
-  param_1->pPad_postWalkEmbed[4] = 0;
-  param_1->pPad_postWalkEmbed[5] = 0;
-  param_1->pPad_postWalkEmbed[6] = 0;
-  param_1->pPad_postWalkEmbed[7] = 0;
-  CBulanek::CBulanek_CopyCollisionRectLocal(param_1,local_20);
-  CBulanek::CBulanek_OffsetCollisionRectByFacing
-            (param_1,&param_1->nOrigin_x,local_10,param_1->nInitialTrack);
-  param_1->nInitialTrack = (param_1->videoTrackManager).nCurrentTrackIdx;
-  pvVar3 = CDSUpdatedItem::Scheduler_GetEventSlot(&(param_1->videoTrackManager).scheduler,0);
-  if ((*(byte *)((int)pvVar3 + 8) & 1) != 0) {
-    if (param_1->nInitialTrack < 2) {
-      param_1->dwFacingAxisExtent = local_40.top;
+                    // R12 ptr task 01: CBulanek* this (ECX/ESI). Stack rects: originRect=holder,
+                    // deltaRect=weapon+anim delta, proposedCollisionRect/originCollisionRect for
+                    // CopyCollisionRectLocal. Walk embed @+0x104..+0x118; pad zero @+0x15C/+0x160.
+                    // Scheduler: LEA [ESI+0xAC]=videoTrackManager.scheduler (+0xA8+4). Track idx
+                    // @+0xD4. Facing @+0xA4. Vtable commit [this+0x20] else [this+0x24].
+                    // MOV ESI,ECX — CBulanek* this
+  pCVar1 = this->pWeapon;
+  originRect.right = *(int *)(pCVar1->pTrackHolder + 4);
+  originRect.bottom = *(int *)(pCVar1->pTrackHolder + 8);
+  deltaRect.top = pCVar1->dwParamB - this->nWalkEmbedBaseY;
+  deltaRect.left = pCVar1->dwParamA - this->nWalkEmbedBaseX;
+  deltaRect.bottom = deltaRect.top + this->pActiveAnim->dwChainField_08;
+  deltaRect.right = deltaRect.left + (int)this->pActiveAnim->pVftable_IDSChained;
+  proposedCollisionRect.left = 0;
+  proposedCollisionRect.top = 0;
+  originCollisionRect.left = 0;
+  originCollisionRect.top = 0;
+  originCollisionRect.right = 0;
+  originCollisionRect.bottom = 0;
+  originRect.left = 0;
+  originRect.top = 0;
+  proposedCollisionRect.right = originRect.right;
+  proposedCollisionRect.bottom = originRect.bottom;
+  tagRECT::CDSRect_IntersectInPlace(&originRect,&deltaRect);
+  iVar7 = deltaRect.left - originRect.left;
+  this->nWalkClipNegX = -originRect.left;
+  this->nWalkClipNegY = -originRect.top;
+  iVar5 = deltaRect.top - originRect.top;
+  iVar3 = (this->nWalkEmbedPadLeft + this->nWalkEmbedAccY + this->nOrigin_y) - iVar5;
+  iVar6 = (this->nOrigin_x - iVar7) + this->nWalkEmbedAccX + this->nWalkEmbedPadTop;
+  originRect.bottom = (originRect.bottom - originRect.top) + iVar3;
+  originRect.right = originRect.right + (iVar6 - originRect.left);
+  originRect.left = iVar6;
+  originRect.top = iVar3;
+  CBulanek_CopyCollisionRectLocal(this,&originCollisionRect);
+  this->nWalkEmbedAccY = iVar5;
+  this->nWalkEmbedAccX = iVar7;
+  this->nWalkEmbedPadTop = 0;
+  this->nWalkEmbedPadLeft = 0;
+  CBulanek_CopyCollisionRectLocal(this,&proposedCollisionRect);
+  CBulanek_OffsetCollisionRectByFacing
+            (this,(tagRECT *)&this->nOrigin_x,&originCollisionRect,this->nInitialTrack);
+                    // this->videoTrackManager.nCurrentTrackIdx @ CBulanek+0xD4
+                    // (CDSVideoPlayer+0x2C); staged to +0x148 for OffsetCollisionRectByFacing
+                    // facing-axis pick
+                    // Scheduler_GetEventSlot(&this->videoTrackManager.scheduler, 0) — LEA
+                    // ECX,[ESI+0xAC]; CBulanek+0xA8=videoTrackManager, +4=inner CDSUpdatedItem (NOT
+                    // standalone scheduler @+0x88)
+  this->nInitialTrack = (this->videoTrackManager).nCurrentTrackIdx;
+  pvVar4 = CDSUpdatedItem::Scheduler_GetEventSlot(&(this->videoTrackManager).scheduler,0);
+  if ((*(byte *)((int)pvVar4 + 8) & 1) != 0) {
+    if (this->nInitialTrack < 2) {
+      this->nFacingAxisExtent = originRect.top;
     }
     else {
-      param_1->dwFacingAxisExtent = local_40.left;
+      this->nFacingAxisExtent = originRect.left;
     }
   }
-  CBulanek::CBulanek_OffsetCollisionRectByFacing
-            (param_1,&local_40.left,local_20,param_1->nInitialTrack);
-  CBulanek_ClampMoveRectByCollision(param_1,&param_1->nOrigin_x,&local_40.left,local_20,local_10);
-  uVar4 = (**(code **)(param_1->vftable_primary + 0x20))(&local_40);
-  if ((char)uVar4 == '\0') {
-    uVar4 = (**(code **)(param_1->vftable_primary + 0x24))(0,0);
+  CBulanek_OffsetCollisionRectByFacing(this,&originRect,&proposedCollisionRect,this->nInitialTrack);
+  CBulanek_ClampMoveRectByCollision
+            (this,&this->nOrigin_x,&originRect,&proposedCollisionRect.left,&originCollisionRect);
+  cVar2 = (**(code **)(this->vftable_primary + 0x20))(&originRect);
+  if (cVar2 == '\0') {
+    (**(code **)(this->vftable_primary + 0x24))(0,0);
   }
-  return CONCAT31((int3)((uint)uVar4 >> 8),1);
+  return '\x01';
 }
 
 
 
-void __fastcall CBulanek::CWeapon_OnSchedulerEvent(int param_1)
+uchar __thiscall
+IDSEventHandler::CWeapon_OnSchedulerEvent
+          (IDSEventHandler *this,uint param_1,uint param_2,uint param_3)
 
 {
-                    // MI adjustor: ECX -= 0xA0 -> CBulanek*; delegates to movement step (R6 task 3)
-  _Globals::CBulanek_StepMovementAndCollision((CBulanek *)(param_1 + -0xa0));
-  return;
+  uchar uVar1;
+  
+                    // IDSEventHandler vtbl@0x481ddc slot0 on CBulanek+0xA0 (NOT CWeapon*). Machine
+                    // CC: __thiscall (ECX=facet, RET 0xC=3 stack args). Ghidra CC: __fastcall for
+                    // MI decomp. MI adjustor ECX-=0xA0 -> CBulanek*; delegates to
+                    // CBulanek_StepMovementAndCollision@0x41af70. IDA: sub_41B180(this-40).
+  uVar1 = CBulanek::CBulanek_StepMovementAndCollision((CBulanek *)(this + -0x28));
+  return uVar1;
 }
 
 
@@ -85979,30 +86051,30 @@ CGaming::CGaming_OnCustomEvent_0xF5_RemoveEntitiesBySlotId(CGaming *this,int par
 {
   int *piVar1;
   uchar in_AL;
-  int iVar2;
+  void *pvVar2;
   int iVar3;
   int iVar4;
   
                     // CGaming_OnCustomEvent case 0xF5: reverse-walk vecSlotVec_2f8 (+0x2F8, count
                     // +0x300); match entity dword[+0x3C] (byte +0xF0) == param_1; RemoveRange +
                     // UnregisterAndRemoveObject + Release; max 2.
-  iVar4 = *(int *)&this->field_0x300;
+  iVar4 = this->nNetPurgeEntitySlotCount;
   iVar3 = 0;
   if (iVar4 != 0) {
     do {
-      iVar2 = *(int *)&this->field_0x2f8;
-      piVar1 = *(int **)(iVar2 + -4 + iVar4 * 4);
+      pvVar2 = (this->netPurgeEntitySlotVec).pSlots;
+      piVar1 = *(int **)((int)pvVar2 + iVar4 * 4 + -4);
       iVar4 = iVar4 + -1;
       if (piVar1[0x3c] == param_1) {
-        _Globals::CDynPtrArray_RemoveRange(&this->field_0x2f8,iVar4,1);
+        _Globals::CDynPtrArray_RemoveRange(&this->netPurgeEntitySlotVec,iVar4,1);
         CGaming_UnregisterAndRemoveObject(this,piVar1);
-        iVar2 = (**(code **)(*piVar1 + 8))();
+        pvVar2 = (void *)(**(code **)(*piVar1 + 8))();
         iVar3 = iVar3 + 1;
         if (iVar3 == 2) {
-          return (uchar)iVar2;
+          return (uchar)pvVar2;
         }
       }
-      in_AL = (uchar)iVar2;
+      in_AL = (uchar)pvVar2;
     } while (iVar4 != 0);
   }
   return in_AL;
@@ -86017,9 +86089,8 @@ CGaming::CGaming_AppendDangerZoneNode
 {
   undefined4 *puVar1;
   
-                    // UNCERTAIN: OperatorNew 0x20 zone node (rect+flags) into owner+0x2d8; callers
-                    // DefineDangerZone/DefineTraceArea/CMina::FUN_0041c0d0 — script trace/danger
-                    // rect alloc, class method name unverified.
+                    // Alloc 0x20B CDangerZoneNode; rect@+0x08; owner CBulanek*@+0x1C; append
+                    // CGaming.dangerZoneSlotVec@+0x2D8; used for AI apAiTrackHolders@CBulanek+0x178
   puVar1 = (undefined4 *)_Globals::OperatorNewWithBadAlloc(0x20);
   if (puVar1 == (undefined4 *)0x0) {
     puVar1 = (undefined4 *)0x0;
@@ -86041,7 +86112,7 @@ CGaming::CGaming_AppendDangerZoneNode
   if (param_4 != 0) {
     *(ushort *)(param_4 + 0x14) = *(ushort *)(param_4 + 0x14) | 0x200;
   }
-  _Globals::CIntListInsertSortedOrAppend(&this->field_0x2d8,(int)puVar1,(undefined *)0x0,1);
+  _Globals::CIntListInsertSortedOrAppend(&this->dangerZoneSlotVec,(int)puVar1,(undefined *)0x0,1);
   CMina::CMina_UpdateTraceAreas((CMina *)this);
   return puVar1;
 }
@@ -86093,23 +86164,23 @@ void __fastcall CGaming::CGaming_TickAmbientAnimations(CBulanci *param_1)
   case 0:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
               (param_1,*(CDSView **)((int)&(param_1->game).chain.pFirstChild + 3));
-    CBulanci_SetAmbientAnimMode(param_1,1);
+    CGaming_SetAmbientAnimMode(param_1,1);
     return;
   case 1:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
               (param_1,*(CDSView **)((int)&(param_1->game).chain.pAuxHeap + 3));
-    CBulanci_SetAmbientAnimMode(param_1,1);
+    CGaming_SetAmbientAnimMode(param_1,1);
     return;
   case 2:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
               (param_1,*(CDSView **)((int)&(param_1->game).chain.dwChildCount + 3));
-    CBulanci_SetAmbientAnimMode(param_1,1);
+    CGaming_SetAmbientAnimMode(param_1,1);
     return;
   case 3:
     CBulanci::CBulanci_RegisterPlayerAndRespawn
               (param_1,*(CDSView **)((int)&(param_1->game).chain.pProfileList_data + 2));
   }
-  CBulanci_SetAmbientAnimMode(param_1,1);
+  CGaming_SetAmbientAnimMode(param_1,1);
   return;
 }
 
@@ -86134,10 +86205,10 @@ void __thiscall CGaming::CGaming_RetestTraceAreasForEntity(CGaming *this,int *pa
     (**(code **)(*param_1 + 0x70))(&local_10);
     iVar2 = param_1[0x66];
     bVar1 = *(byte *)(param_1 + 0x1c);
-    for (iVar3 = *(int *)&this->field_0x2e0; iVar3 != 0; iVar3 = iVar3 + -1) {
+    for (iVar3 = this->nDangerZoneSlotCount; iVar3 != 0; iVar3 = iVar3 + -1) {
       _Globals::CGaming_CheckTraceAreasForEntity
-                (this,*(undefined4 **)(*(int *)&this->field_0x2d8 + -4 + iVar3 * 4),(uint)bVar1,
-                 (int *)&stack0xffffffec,(char)iVar2);
+                (this,*(undefined4 **)((int)(this->dangerZoneSlotVec).pSlots + iVar3 * 4 + -4),
+                 (uint)bVar1,(int *)&stack0xffffffec,(char)iVar2);
     }
   }
   return;
@@ -86298,8 +86369,8 @@ void __fastcall CGaming::CGaming_dtor(CGaming *param_1)
   }
   DAT_004b3730 = (int *)0x0;
   local_4._0_1_ = 0xc;
-  if (*(int **)param_1->pPad_0x360 != (int *)0x0) {
-    (**(code **)(**(int **)param_1->pPad_0x360 + 8))();
+  if (param_1->pPrefaceDrawable != (int *)0x0) {
+    (**(code **)(*(int *)param_1->pPrefaceDrawable + 8))();
   }
   local_4._0_1_ = 0xb;
   if (*(int **)&param_1->field_0x35c != (int *)0x0) {
@@ -86322,14 +86393,14 @@ void __fastcall CGaming::CGaming_dtor(CGaming *param_1)
     _Globals::CDsStringReleaseHeader((void *)(*(int *)&param_1->field_0x310 + -0xc));
   }
   local_4._0_1_ = 6;
-  *(undefined4 *)&param_1->field_0x300 = 0;
-  CDSPtrSlotVec::CDSPtrSlotVec_Resize((CDSPtrSlotVec *)&param_1->field_0x2f8,0);
+  param_1->nNetPurgeEntitySlotCount = 0;
+  CDSPtrSlotVec::CDSPtrSlotVec_Resize(&param_1->netPurgeEntitySlotVec,0);
   local_4._0_1_ = 5;
   *(undefined4 *)&param_1->field_0x2f0 = 0;
   CDSPtrSlotVec::CDSPtrSlotVec_Resize((CDSPtrSlotVec *)&param_1->field_0x2e8,0);
   local_4._0_1_ = 4;
-  *(undefined4 *)&param_1->field_0x2e0 = 0;
-  CDSPtrSlotVec::CDSPtrSlotVec_Resize((CDSPtrSlotVec *)&param_1->field_0x2d8,0);
+  param_1->nDangerZoneSlotCount = 0;
+  CDSPtrSlotVec::CDSPtrSlotVec_Resize(&param_1->dangerZoneSlotVec,0);
   local_4._0_1_ = 3;
   *(undefined4 *)&param_1->field_0x2d0 = 0;
   CDSPtrSlotVec::CDSPtrSlotVec_Resize(&param_1->bulletSlotVec,0);
@@ -86379,7 +86450,7 @@ void __thiscall CGaming::CGaming_EnqueuePreMatchSchedulerSlots(CGaming *this,voi
                     // UNCERTAIN: CDSApp_PreCreateHook on embedded CDSApp at this+0x440; walks
                     // scheduler slots at +0x450 calling FUN_0041ad80 for active events. Sole caller
                     // CGaming_RunPreMatchModal.
-  CDSApp::CDSApp_PreCreateHook((CDSApp *)(this[1].pEntitySlots + 3));
+  CDSApp::IDSStream_NoOpFlush();
   pvVar2 = this[1].pEntitySlots[7];
   while (pvVar2 != (void *)0x0) {
     pvVar2 = (void *)((int)pvVar2 + -1);
@@ -86417,6 +86488,10 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_DefineDangerZone(CDSScript *p
   undefined4 local_8;
   undefined4 local_4;
   
+                    // R11 task26: script export #28 DefineDangerZone. pGaming =
+                    // *(CLevelScript+0x458) @ 0x0041bb61 (not param_1[1].nOpcodeCount).
+                    // CDSScript_ReadKindAndRect4 → CGaming_AppendDangerZoneNode(kind, rect,
+                    // flags=1, owner=0) → dangerZoneSlotVec @ CGaming+0x2d8.
   local_10 = 0;
   local_c = 0;
   local_8 = 0;
@@ -86717,26 +86792,28 @@ CGaming * __thiscall CGaming::CGaming_ScalarDeletingDtor(CGaming *this,byte para
 
 
 
-void __fastcall CWeapon::Update(CBulanek *param_1)
+void __fastcall CBulanek::CBulanek_SyncWeaponWalkFromTrack(CBulanek *this)
 
 {
-  byte bVar1;
-  CWeapon *pCVar2;
+  CWeapon *pWeapon;
   
-  pCVar2 = param_1->pWeapon;
-  if (pCVar2 != (CWeapon *)0x0) {
-    if (((param_1->pWalkTrackSources[2] == (void *)pCVar2->dwParamA) &&
-        (param_1->pWalkTrackSources[3] == (void *)pCVar2->dwParamB)) &&
-       (*(CBulanek **)(param_1->pPad_postWalkEmbed + 8) == pCVar2->pTrackHolder)) {
-      (**(code **)(param_1->vftable_primary + 0x24))(0,0);
+                    // CBulanek* this (ECX): compares dwCachedWeaponParamA/B@+0x154/+0x158 and
+                    // pCachedTrackHolder@+0x164 vs pWeapon->dwParamA/dwParamB/pTrackHolder; on
+                    // change + bField_168==0 -> CBulanek_StepMovementAndCollision. Caller
+                    // CWeapon_HideAssociatedView@0x41bf70 passes pTrackHolder.
+  pWeapon = this->pWeapon;
+  if (pWeapon != (CWeapon *)0x0) {
+    if (((this->dwCachedWeaponParamA == pWeapon->dwParamA) &&
+        (this->dwCachedWeaponParamB == pWeapon->dwParamB)) &&
+       (this->pCachedTrackHolder == (CBulanek *)pWeapon->pTrackHolder)) {
+      (**(code **)(this->vftable_primary + 0x24))(0,0);
     }
     else {
-      param_1->pWalkTrackSources[2] = (void *)pCVar2->dwParamA;
-      param_1->pWalkTrackSources[3] = (void *)pCVar2->dwParamB;
-      bVar1 = param_1->bField_168;
-      *(CBulanek **)(param_1->pPad_postWalkEmbed + 8) = param_1->pWeapon->pTrackHolder;
-      if (bVar1 == 0) {
-        _Globals::CBulanek_StepMovementAndCollision(param_1);
+      this->dwCachedWeaponParamA = pWeapon->dwParamA;
+      this->dwCachedWeaponParamB = pWeapon->dwParamB;
+      this->pCachedTrackHolder = (CBulanek *)this->pWeapon->pTrackHolder;
+      if (this->bField_168 == 0) {
+        CBulanek_StepMovementAndCollision(this);
         return;
       }
     }
@@ -86749,46 +86826,47 @@ void __fastcall CWeapon::Update(CBulanek *param_1)
 void __thiscall CWeapon::CWeapon_HideAssociatedView(CWeapon *this)
 
 {
-  if (this->pTrackHolder != (CBulanek *)0x0) {
-    Update();
+  if ((CBulanek *)this->pTrackHolder != (CBulanek *)0x0) {
+    CBulanek::CBulanek_SyncWeaponWalkFromTrack((CBulanek *)this->pTrackHolder);
   }
   return;
 }
 
 
 
-void __thiscall CWeapon::CWeapon_SetTrackHolder(CWeapon *this,CBulanek *pHolder)
+void __thiscall CWeapon::CWeapon_SetTrackHolder(CWeapon *this,int *param_2)
 
 {
-  CBulanek *pCVar1;
+  int iVar1;
   int iVar2;
   CWeapon *local_4;
   
                     // UNCERTAIN: CWeapon+0x50 track holder swap (list remove, Release,
                     // CIntListInsertSortedOrAppend); called from CWeapon_ctor/Init/Destructor —
                     // exact method name not in mapping.csv.
-  pCVar1 = this->pTrackHolder;
+  iVar1 = this->pTrackHolder;
   local_4 = this;
-  if (pCVar1 != (CBulanek *)0x0) {
+  if (iVar1 != 0) {
     local_4 = (CWeapon *)&this->pVftable_secondary;
     iVar2 = _Globals::CIntList_BinarySearch
-                      (&pCVar1->nBounds_right,(int *)&local_4,(undefined *)0x0,pCVar1->dwField_40);
+                      ((void *)(iVar1 + 0x38),(int *)&local_4,(undefined *)0x0,
+                       *(int *)(iVar1 + 0x40));
     if (-1 < iVar2) {
-      _Globals::CDynPtrArray_RemoveRange(&pCVar1->nBounds_right,iVar2,1);
+      _Globals::CDynPtrArray_RemoveRange((void *)(iVar1 + 0x38),iVar2,1);
     }
-    if (this->pTrackHolder != (CBulanek *)0x0) {
-      (**(code **)(this->pTrackHolder->vftable_primary + 8))();
+    if ((int *)this->pTrackHolder != (int *)0x0) {
+      (**(code **)(*(int *)this->pTrackHolder + 8))();
     }
-    this->pTrackHolder = (CBulanek *)0x0;
+    this->pTrackHolder = 0;
   }
-  if (pHolder != (CBulanek *)0x0) {
-    _Globals::CDSObject_AddRef((int *)pHolder);
-    if (this->pTrackHolder != (CBulanek *)0x0) {
-      (**(code **)(this->pTrackHolder->vftable_primary + 8))();
+  if (param_2 != (int *)0x0) {
+    _Globals::CDSObject_AddRef(param_2);
+    if ((int *)this->pTrackHolder != (int *)0x0) {
+      (**(code **)(*(int *)this->pTrackHolder + 8))();
     }
-    this->pTrackHolder = pHolder;
+    this->pTrackHolder = param_2;
     _Globals::CIntListInsertSortedOrAppend
-              (&pHolder->nBounds_right,(int)&this->pVftable_secondary,(undefined *)0x0,1);
+              (param_2 + 0xe,(int)&this->pVftable_secondary,(undefined *)0x0,1);
   }
   return;
 }
@@ -86888,14 +86966,19 @@ void __thiscall CGaming::CGaming_OnResumeOrStartGame(CGaming *this,char param_1)
     }
     bVar4 = this->pOwnerGame->bTotalSlots;
     while (bVar4 != 0) {
+                    // Retest danger zones for each human slot 0..bTotalSlots-1 (pOwnerGame+0xD8)
       bVar4 = bVar4 - 1;
       piVar2 = (int *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,bVar4);
       CGaming_RetestTraceAreasForEntity(this_00,piVar2);
     }
+                    // Gate: slot 127 (0x7f) occupied → wake campaign/trace slots 125..127 on
+                    // resume
     pvVar3 = CGaming_GetObjectAtSlotSafe(this,0x7f);
     if (pvVar3 != (void *)0x0) {
       cVar5 = '\x03';
       do {
+                    // Downward loop: slot = 0x80 - counter (3→127, 2→126, 1→125);
+                    // CGaming_RetestTraceAreasForEntity per slot
         piVar2 = (int *)_Globals::CGaming_GetObjectAtSlotUnchecked(this,0x80 - cVar5);
         CGaming_RetestTraceAreasForEntity(this_01,piVar2);
         cVar5 = cVar5 + -1;
@@ -87075,7 +87158,7 @@ void __fastcall CWeapon::CWeapon_dtor(CWeapon *param_1)
   param_1->pVftable_primary = g_pCWeapon_vftable;
   param_1->pVftable_secondary = vftable;
   local_4 = 4;
-  CWeapon_SetTrackHolder(param_1,(CBulanek *)0x0);
+  CWeapon_SetTrackHolder(param_1,0);
   local_4._0_1_ = 3;
   if (param_1->pHudIconB != (int *)0x0) {
     (**(code **)(*(int *)param_1->pHudIconB + 8))(uVar1);
@@ -87085,8 +87168,8 @@ void __fastcall CWeapon::CWeapon_dtor(CWeapon *param_1)
     (**(code **)(*(int *)param_1->pHudIconA + 8))();
   }
   local_4._0_1_ = 1;
-  if (param_1->pTrackHolder != (CBulanek *)0x0) {
-    (**(code **)(param_1->pTrackHolder->vftable_primary + 8))();
+  if ((int *)param_1->pTrackHolder != (int *)0x0) {
+    (**(code **)(*(int *)param_1->pTrackHolder + 8))();
   }
   local_4 = (uint)local_4._1_3_ << 8;
   CDSVideoPlayer::CDSVideoPlayer_TM_Destructor(&(param_1->trackManager).pVftable_IDSChained);
@@ -87097,10 +87180,10 @@ void __fastcall CWeapon::CWeapon_dtor(CWeapon *param_1)
 
 
 
-void __thiscall CWeapon::Init(CWeapon *this,undefined4 param_1,CBulanek *param_2)
+void __thiscall CWeapon::Init(CWeapon *this,undefined4 param_1,undefined4 param_3)
 
 {
-  CWeapon_SetTrackHolder((CWeapon *)&this[-1].pHudIconB,param_2);
+  CWeapon_SetTrackHolder((CWeapon *)&this[-1].pHudIconB,param_3);
   return;
 }
 
@@ -87126,6 +87209,8 @@ void __fastcall CBulanek::CBulanek_ResolveAndBindAnimTrack(CDeath *corpseAnim,vo
   undefined1 *puStack_8;
   undefined4 uStack_4;
   
+                    // Corpse anim bind: gABulanekWalkAnimSheet scan from dwM_modeFlags+track*4;
+                    // SetFacingTrack then TM_BindSequence on CDeath
   uStack_4 = 0xffffffff;
   puStack_8 = &LAB_00477488;
   local_c = ExceptionList;
@@ -87245,17 +87330,17 @@ void __fastcall CBulanek::CBulanek_BindDeathTombstoneAnim(CDeath2 *tombstone)
   local_c = (void *)0x0;
   _Globals::TM_BindSequence(&tombstone->vftable_anim_sub,piVar4);
   _Globals::TM_SetTrack(&tombstone->vftable_anim_sub,0,1,(uint *)0x0);
-  uVar1 = (uint)tombstone->pHost->bTeamColor;
+  uVar1 = (uint)*(byte *)(tombstone->pHost + 0x123);
   puVar2 = CDSImage::GetPaletteBuffer(tombstone->pOds_drawable);
   _Globals::CGame_BuildTeamPaletteLut(puVar2,uVar1);
-  CBulanek_GetAnimAnchorPos(tombstone->pHost,(int *)&stack0xffffffe4);
+  CBulanek_GetAnimAnchorPos((void *)tombstone->pHost,(int *)&stack0xffffffe4);
   tombstone->nDraw_pos_y =
        (tombstone->nDraw_pos_y - tombstone->nOrigin_y) + -tombstone->nM_placementOffsetY;
   tombstone->nDraw_pos_x =
        (tombstone->nDraw_pos_x - tombstone->nOrigin_x) + -tombstone->nM_placementOffsetX;
   tombstone->nOrigin_x = -tombstone->nM_placementOffsetX;
   tombstone->nOrigin_y = -tombstone->nM_placementOffsetY;
-  iVar3 = (**(code **)(tombstone->pHost->vftable_primary + 0x74))();
+  iVar3 = (**(code **)(*(int *)tombstone->pHost + 0x74))();
   _Globals::CGameEntity_SetEntityType(tombstone,iVar3 - tombstone->nDraw_pos_y);
   local_c = (void *)0xffffffff;
   if (piVar4 != (int *)0x0) {
@@ -87650,7 +87735,7 @@ CBulanek::CBulanek_CreateRespawnTeleportPair
     pCVar2 = CTeleportPoint::CTeleportPoint_Ctor(pCVar2,entity,this,1);
   }
   uStack_4 = 0xffffffff;
-  _Globals::CIntListInsertSortedOrAppend(this[1].pPad_postWalkEmbed,(int)pCVar2,(undefined *)0x0,1);
+  _Globals::CIntListInsertSortedOrAppend(&this[1].nWalkEmbedPadTop,(int)pCVar2,(undefined *)0x0,1);
   CGaming::CGaming_AddEntity((CGaming *)this,pCVar2,'\x01');
   pCVar2 = (CTeleportPoint *)_Globals::OperatorNewWithBadAlloc(0xf8);
   uStack_4 = 1;
@@ -87661,7 +87746,7 @@ CBulanek::CBulanek_CreateRespawnTeleportPair
     pCVar2 = CTeleportPoint::CTeleportPoint_Ctor(pCVar2,entity,this,0);
   }
   uStack_4 = 0xffffffff;
-  _Globals::CIntListInsertSortedOrAppend(this[1].pPad_postWalkEmbed,(int)pCVar2,(undefined *)0x0,1);
+  _Globals::CIntListInsertSortedOrAppend(&this[1].nWalkEmbedPadTop,(int)pCVar2,(undefined *)0x0,1);
   CGaming::CGaming_AddEntity((CGaming *)this,pCVar2,-1);
   if (x == -1) {
     uVar3 = CGaming::CGaming_RespawnPlayerAtSafeLocation((CGaming *)this,(CDSView *)pCVar2);
@@ -87737,53 +87822,52 @@ void __fastcall CBulanci::CGaming_LoadLevelAssetAndMusic(CGaming *param_1)
   CDSFileStream *pCVar5;
   uint uVar6;
   uint uStack_40bc;
-  undefined1 local_40ac [140];
-  undefined1 local_4020 [12];
-  undefined *local_4014;
+  undefined1 local_40ac [146];
+  undefined1 local_401a;
+  undefined1 local_4019;
+  undefined1 *local_4018;
+  void *local_4014;
   undefined1 *puStack_4010;
-  undefined1 local_400c [4];
+  void *local_400c;
   undefined1 local_4008 [16384];
   uint local_8;
   
-  local_400c = (undefined1  [4])0xffffffff;
+  local_400c = (void *)0xffffffff;
   puStack_4010 = &LAB_0047765b;
   local_4014 = ExceptionList;
   uStack_40bc = DAT_004b0e44 ^ (uint)local_4008;
-  local_4020._8_4_ = &uStack_40bc;
+  local_4018 = (undefined1 *)&uStack_40bc;
   ExceptionList = &local_4014;
   local_40ac._124_4_ = param_1;
   puVar2 = &uStack_40bc;
   local_8 = uStack_40bc;
-  if (*(int **)param_1->pPad_0x360 != (int *)0x0) {
-    (**(code **)(**(int **)param_1->pPad_0x360 + 8))();
-    puVar2 = (uint *)local_4020._8_4_;
+  if (param_1->pPrefaceDrawable != (int *)0x0) {
+    (**(code **)(*(int *)param_1->pPrefaceDrawable + 8))();
+    puVar2 = (uint *)local_4018;
   }
-  local_4020._8_4_ = puVar2;
-  param_1->pPad_0x360[0] = 0;
-  param_1->pPad_0x360[1] = 0;
-  param_1->pPad_0x360[2] = 0;
-  param_1->pPad_0x360[3] = 0;
+  local_4018 = (undefined1 *)puVar2;
+  param_1->pPrefaceDrawable = (void *)0x0;
   if (param_1->dwMusicResourceId != 0) {
-    local_4020._0_4_ = (LPCWSTR)0x0;
-    local_400c = (undefined1  [4])0x0;
-    CBulanci_AssignTempPathWithTrailingBackslash((CBulanci *)(local_40ac + 0x88));
-    local_400c[0] = 1;
-    _Globals::CDsStringFormatV(local_4020,L"%s%s.tmp");
-    local_400c[0] = 0;
+    local_40ac._140_4_ = (LPCWSTR)0x0;
+    local_400c = (void *)0x0;
+    CBulanci_AssignTempPathWithTrailingBackslash();
+    local_400c._0_1_ = 1;
+    _Globals::CDsStringFormatV(local_40ac + 0x8c,L"%s%s.tmp");
+    local_400c._0_1_ = 0;
     if ((int *)local_40ac._136_4_ != (int *)0x0) {
       _Globals::CDsStringReleaseHeader((int *)(local_40ac._136_4_ + -0xc));
     }
-    pWVar3 = (LPCWSTR)local_4020._0_4_;
-    if ((LPCWSTR)local_4020._0_4_ == (LPCWSTR)0x0) {
+    pWVar3 = (LPCWSTR)local_40ac._140_4_;
+    if ((LPCWSTR)local_40ac._140_4_ == (LPCWSTR)0x0) {
       pWVar3 = (LPCWSTR)PTR_DAT_004af100;
     }
     uVar4 = CBulanci_GetPathSuffixCompareIndex(pWVar3);
     if ((char)uVar4 == '\0') {
       CLoadingLevel::CLoadingLevel_ctor((CDSView *)local_40ac);
-      local_4020[7] = 0;
-      local_400c[0] = 5;
+      local_4019 = 0;
+      local_400c = (void *)CONCAT31(local_400c._1_3_,5);
       CDSView::CDSView__AddChild(g_pApp,(CBulanci *)local_40ac,(void *)0x0);
-      local_4020[7] = 1;
+      local_4019 = 1;
       _Globals::CDSApp_FrameBody(g_pApp);
       this = (void *)CMenu::CMenuGetResourceById
                                ((CMenu *)((int)g_pApp + 0x284),param_1->dwMusicResourceId);
@@ -87792,20 +87876,20 @@ void __fastcall CBulanci::CGaming_LoadLevelAssetAndMusic(CGaming *param_1)
         local_40ac._136_4_ = _Globals::CheckedVirtualBaseCast(this,DAT_004b83c4);
       }
       uVar1 = local_40ac._136_4_;
-      local_4020[6] = 0;
-      local_400c[0] = 7;
-      pCVar5 = CBulanci_CreateCDSFileStream((CBulanci *)local_4020,(void *)0xa);
+      local_401a = 0;
+      local_400c._0_1_ = 7;
+      pCVar5 = CBulanci_CreateCDSFileStream((CBulanci *)(local_40ac + 0x8c),(void *)0xa);
       if (pCVar5 == (CDSFileStream *)0x0) {
         local_40ac._128_4_ = (byte *)0x0;
       }
       else {
         local_40ac._128_4_ = pCVar5->pPad_04 + 8;
       }
-      local_400c[0] = 8;
+      local_400c = (void *)CONCAT31(local_400c._1_3_,8);
       (**(code **)(*(int *)local_40ac._128_4_ + 0x14))((uint *)(uVar1 + 4),0xc);
       uVar4 = *(uint *)(uVar1 + 4);
       local_40ac._132_4_ = (**(code **)(*(int *)uVar1 + 0x14))();
-      local_4020[6] = 1;
+      local_401a = 1;
       while (uVar4 != 0) {
         uVar6 = uVar4;
         if (0x3fff < uVar4) {
@@ -87819,25 +87903,25 @@ void __fastcall CBulanci::CGaming_LoadLevelAssetAndMusic(CGaming *param_1)
         CBulanci_PollEventsAndRunFrame(g_pApp);
         param_1 = (CGaming *)local_40ac._124_4_;
       }
-      local_4020[6] = 0;
+      local_401a = 0;
       (**(code **)(*(int *)uVar1 + 0x1c))(local_40ac._132_4_);
       (**(code **)(*(int *)local_40ac._128_4_ + 8))();
-      local_400c = (undefined1  [4])0x6;
-      local_4020[7] = 0;
+      local_400c = (void *)0x6;
+      local_4019 = 0;
       CMenu::CMenu_DetachChildWithVisibility(g_pApp,(CDSView *)local_40ac);
-      CGaming::CGaming_LoadBackgroundMusic(param_1,(CBulanci *)local_4020);
-      local_400c[0] = 5;
+      CGaming::CGaming_LoadBackgroundMusic(param_1,(CBulanci *)(local_40ac + 0x8c));
+      local_400c = (void *)CONCAT31(local_400c._1_3_,5);
       (**(code **)(*(int *)uVar1 + 8))();
-      local_400c = (undefined1  [4])0x0;
+      local_400c = (void *)0x0;
       _Globals::CWindow_dtor((int)local_40ac);
     }
     else {
-      local_400c[0] = 2;
-      CGaming::CGaming_LoadBackgroundMusic(param_1,(CBulanci *)local_4020);
+      local_400c = (void *)CONCAT31(local_400c._1_3_,2);
+      CGaming::CGaming_LoadBackgroundMusic(param_1,(CBulanci *)(local_40ac + 0x8c));
     }
-    local_400c = (undefined1  [4])0xffffffff;
-    if ((LPCWSTR)local_4020._0_4_ != (LPCWSTR)0x0) {
-      _Globals::CDsStringReleaseHeader((LPCWSTR)(local_4020._0_4_ + -0xc));
+    local_400c = (void *)0xffffffff;
+    if ((LPCWSTR)local_40ac._140_4_ != (LPCWSTR)0x0) {
+      _Globals::CDsStringReleaseHeader((LPCWSTR)(local_40ac._140_4_ + -0xc));
     }
   }
   ExceptionList = local_4014;
@@ -87911,6 +87995,8 @@ void __thiscall CGaming::CGaming_OnCmd(CGaming *this,ushort param_1,int param_2)
     CDSView::CDSApp_RouteSyntheticCloseEvent((CDSView *)this,param_1);
   }
   else {
+                    // wModalExitCode @ CGaming+0x364: sentinel 0xFFFF until first high-bit
+                    // round-end cmd (CGaming_OnCmd).
     if (this->wModalExitCode == 0xffff) {
       this->wModalExitCode = param_1;
       if ((param_1 == 0x8004) || (param_2 != 0)) {
@@ -88090,6 +88176,8 @@ uint __cdecl CLevelScript::CLevelScriptOpExt_LoadPreface(int param_1)
   iVar1 = *(int *)(param_1 + 0x458);
   piVar2 = *(int **)(iVar1 + 0x360);
   local_4 = 0;
+                    // CLevelScriptOpExt_LoadPreface: store drawable cast (DAT_004b826c) ->
+                    // CGaming+0x360 pPrefaceDrawable.
   if (piVar2 != (int *)0x0) {
     (**(code **)(*piVar2 + 8))(uVar3);
   }
@@ -88202,7 +88290,7 @@ CWeapon * __thiscall CWeapon::CWeapon_ScalarDeletingDtor(CWeapon *this,byte para
 uint __thiscall CBulanek::CBulanek_OnTakeDamage(CBulanek *this,int param_1,int param_2,char param_3)
 
 {
-  CBulanek *this_00;
+  CGaming *this_00;
   byte bVar1;
   char cVar2;
   uint in_EAX;
@@ -88217,10 +88305,12 @@ uint __thiscall CBulanek::CBulanek_OnTakeDamage(CBulanek *this,int param_1,int p
                     // +0x18c via FUN_00416490, sets hit-stun flag +0x16a, arms respawn scheduler
                     // FUN_00417260.
   if ((((this->pCorpseAnim == (CBulAnim *)0x0) && (this->bHitStun == 0)) &&
-      (this_00 = (CBulanek *)this->pGamingHostScratch, this_00 != (CBulanek *)0x0)) &&
-     ((bVar1 = (byte)~(byte)this_00->dwView_flags >> 4, in_EAX = CONCAT31((int3)(in_EAX >> 8),bVar1)
-      , (bVar1 & 1) == 0 && ((this->dwView_flags & 1) != 0)))) {
-    uVar3 = CBulanek_CreateRespawnTeleportPair(this_00,(int *)this,param_1,param_2,param_3);
+      (this_00 = this->pGaming_host, this_00 != (CGaming *)0x0)) &&
+     ((bVar1 = (byte)~(byte)*(ushort *)&this_00->field_0x44 >> 4,
+      in_EAX = CONCAT31((int3)(in_EAX >> 8),bVar1), (bVar1 & 1) == 0 &&
+      ((this->wChainInit44 & 1) != 0)))) {
+    uVar3 = CBulanek_CreateRespawnTeleportPair
+                      ((CBulanek *)this_00,(int *)this,param_1,param_2,param_3);
     cVar2 = (char)uVar3;
     if (cVar2 != '\0') {
       bVar1 = 0;
@@ -88247,7 +88337,7 @@ uint __thiscall CBulanek::CBulanek_OnTakeDamage(CBulanek *this,int param_1,int p
 // ECX=CWeapon* (not ODSImage*); embedded CDSVideoPlayer trackManager @ this+0x08 (0x48 B);
 // ConstructTrackManager then 4x AddTrackSource from gAWeaponDefsTable[weaponKind]
 
-void __thiscall CWeapon::CWeapon_ctor(CWeapon *this,CBulanek *pOwner,uchar weaponKind)
+void __thiscall CWeapon::CWeapon_ctor(CWeapon *this,uint param_2,byte param_3)
 
 {
   int *piVar1;
@@ -88259,7 +88349,7 @@ void __thiscall CWeapon::CWeapon_ctor(CWeapon *this,CBulanek *pOwner,uchar weapo
   int in_EDX;
   void *local_c;
   undefined1 *puStack_8;
-  CBulanek *local_4;
+  undefined4 local_4;
   
                     // CWeapon::ctor — trackManager @ +0x08 is embedded CDSVideoPlayer (0x48):
                     // scheduler+0x04, trackVector+0x1c, nCurrentTrackIdx+0x2c, pRenderTarget+0x30,
@@ -88270,32 +88360,32 @@ void __thiscall CWeapon::CWeapon_ctor(CWeapon *this,CBulanek *pOwner,uchar weapo
   uVar3 = DAT_004b0e44 ^ (uint)&stack0xffffffd8;
   ExceptionList = &local_c;
   this->pVftable_secondary = ODSImage::vftable;
-  local_4 = (CBulanek *)0x0;
+  local_4 = 0;
   this->pVftable_primary = g_pCWeapon_vftable;
   this->pVftable_secondary = vftable;
   CDSVideoPlayer::ConstructTrackManager(&this->trackManager,in_EDX);
-  this->pTrackHolder = (CBulanek *)0x0;
+  this->pTrackHolder = 0;
   this->dwParamA = 0;
   this->dwParamB = 0;
   this->pHudIconA = (void *)0x0;
   this->pHudIconB = (void *)0x0;
   piVar1 = *(int **)((int)g_pApp + 0x70);
-  this->bWeaponKind = weaponKind;
-  uVar4 = (uint)weaponKind;
-  this->pOwner = (CBulanek *)0x0;
+                    // R10: bWeaponKind = uchar weaponKind from [ESP+0x34]; stored at CWeapon+0x64.
+  this->bWeaponKind = param_3;
+  uVar4 = (uint)param_3;
+  this->pOwner = 0;
   iVar2 = uVar4 * 0x1c;
-  this->pWorld = (CGaming *)pOwner->pGamingHostScratch;
-  local_4 = (CBulanek *)CONCAT31(local_4._1_3_,5);
-  _weaponKind = 0;
+  this->pWorld = *(CGaming **)(param_2 + 0x84);
+  local_4 = CONCAT31(local_4._1_3_,5);
+  _param_3 = 0;
   do {
     piVar5 = (int *)(**(code **)(*piVar1 + 0x10))
-                              (*(undefined4 *)(&gAWeaponDefsTable + iVar2 + _weaponKind * 4),0,uVar3
-                              );
+                              (*(undefined4 *)(&gAWeaponDefsTable + iVar2 + _param_3 * 4),0,uVar3);
     (**(code **)(piVar5[1] + 0x10))();
     _Globals::AddTrackSource(&this->trackManager,piVar5 + 1);
     (**(code **)(*piVar5 + 8))();
-    _weaponKind = _weaponKind + 1;
-  } while (_weaponKind < 4);
+    _param_3 = _param_3 + 1;
+  } while (_param_3 < 4);
   pvVar6 = (void *)(**(code **)(*piVar1 + 0x10))
                              (*(undefined4 *)(&gAWeaponDefs_kind0_pistol_nStillBitmapId + iVar2),0);
   if (this->pHudIconA != (int *)0x0) {
@@ -88316,9 +88406,9 @@ void __thiscall CWeapon::CWeapon_ctor(CWeapon *this,CBulanek *pOwner,uchar weapo
       this->pHudIconB = pvVar6;
     }
   }
-                    // SetCurrentTrack(&trackManager, weaponKind, 0) — asm MOVZX from stack uchar
-                    // weaponKind (not pOwner). Initial track index = bWeaponKind.
-  _Globals::SetCurrentTrack(&this->trackManager,(uint)pOwner & 0xff,'\0');
+                    // R10: SetCurrentTrack index = initialTrackIdx ([ESP+0x38] 4th ctor param), NOT
+                    // weaponKind ([ESP+0x34] -> +0x64). IDA sub_439EB0(this+8,a4,0).
+  _Globals::SetCurrentTrack(&this->trackManager,param_2 & 0xff,'\0');
                     // CWeapon_SetTrackHolder(this, trackManager.pRenderTarget) — pTrackHolder
                     // mirrors FLX consumer; Fire uses +0x50 as CBulanek* (owner host).
   CWeapon_SetTrackHolder(this,(this->trackManager).pRenderTarget);
@@ -88406,7 +88496,7 @@ uint __thiscall CShot::TraceCollision(CShot *this,int *param_1,int *param_2,unde
     local_20.left = *param_2 + local_20.left;
     local_20.top = param_2[1] + local_20.bottom;
     local_20.bottom = param_2[3] + local_20.bottom;
-    tagRECT::CDSRect_IntersectInPlace(&local_20,param_2);
+    tagRECT::CDSRect_IntersectInPlace(&local_20,(tagRECT *)param_2);
     piVar4 = _Globals::_Globals__SpatialQuery
                        (this->pGaming_host,&local_20.left,param_2,&local_10,'\x01','\x01');
     *param_3 = 0xff;
@@ -88438,8 +88528,9 @@ void __thiscall CShot::CShot_Update(CShot *this,int *param_1)
   int local_8;
   int local_4;
   
-                    // CShot::Update — moves rect (+0x20), scatter when weaponStrength +0xa6 in
-                    // {1,2}
+                    // Multi-pellet TraceCollision when bWeaponStrength@+0xA6 is 1 or 2 (disasm:
+                    // TEST AL; JZ single; CMP AL,2; JNC single). IDA sub_41DF60 wrongly gates on
+                    // ==1 only.
   piVar1 = param_1;
   local_30[8] = this->pWorldRect[0];
   local_c = this->pWorldRect[1];
@@ -88485,12 +88576,11 @@ void __thiscall CShot::CShot_Update(CShot *this,int *param_1)
 
 
 
-undefined4 __fastcall _Globals::_Globals__ExplodeMine(CDSView *param_1)
+uchar __thiscall _Globals::_Globals__ExplodeMine(void *this)
 
 {
   uchar ownerSlot;
-  dword dVar1;
-  CExplosion *this;
+  CExplosion *this_00;
   void *entity;
   void *local_c;
   undefined1 *puStack_8;
@@ -88499,30 +88589,30 @@ undefined4 __fastcall _Globals::_Globals__ExplodeMine(CDSView *param_1)
   local_4 = 0xffffffff;
   puStack_8 = &LAB_0047781b;
   local_c = ExceptionList;
-  if ((char)param_1[2].win.wViewFlags == '\0') {
-    return 0;
+                    // R10 t11: bArmed gate — CMP byte ptr [ESI+0x114]; skip detonate if zero.
+  if (*(char *)((int)this + 0x114) == '\0') {
+    return '\0';
   }
   ExceptionList = &local_c;
-  *(undefined1 *)&param_1[2].win.wViewFlags = 0;
-  CDSView::CDSView__Hide(param_1);
-  CDSView_PostEntityDetachMessage_f9((int)param_1);
-  dVar1 = param_1[2].win.dwField_08;
+  *(undefined1 *)((int)this + 0x114) = 0;
+  CDSView::CDSView__Hide(this);
+  CDSView_PostEntityDetachMessage_f9((int)this);
   ownerSlot = 0xff;
-  if (dVar1 != 0) {
-    ownerSlot = *(uchar *)(dVar1 + 0x70);
+  if (*(int *)((int)this + 0x108) != 0) {
+    ownerSlot = *(uchar *)(*(int *)((int)this + 0x108) + 0x70);
   }
-  this = (CExplosion *)OperatorNewWithBadAlloc(0xf4);
+  this_00 = (CExplosion *)OperatorNewWithBadAlloc(0xf4);
   local_4 = 0;
-  if (this == (CExplosion *)0x0) {
+  if (this_00 == (CExplosion *)0x0) {
     entity = (void *)0x0;
   }
   else {
-    entity = CExplosion::CExplosion_Ctor(this,&(param_1->win).nBbox_left,ownerSlot);
+    entity = CExplosion::CExplosion_Ctor(this_00,(void *)((int)this + 0x20),ownerSlot);
   }
   local_4 = 0xffffffff;
-  CGaming::CGaming_AddEntity(param_1[2].win.pVftable_IDSEventHandler,entity,'\x01');
+  CGaming::CGaming_AddEntity(*(CGaming **)((int)this + 0x110),entity,'\x01');
   ExceptionList = local_c;
-  return 1;
+  return '\x01';
 }
 
 
@@ -88593,7 +88683,7 @@ void __thiscall CExplosion::CExplosion_ApplyAreaDamage(CExplosion *this)
     for (iVar3 = CGaming::CExplosion_CollectLandminesInBlastRect
                            (local_1010,&local_1030,local_1004 + 1); iVar3 != 0; iVar3 = iVar3 + -1)
     {
-      _Globals::_Globals__ExplodeMine(local_1004[iVar3]);
+      _Globals::_Globals__ExplodeMine((void *)local_1004[iVar3]);
     }
   }
   return;
@@ -88813,43 +88903,19 @@ CBulanek::CBulanekCtor
   this->pActiveAnim = (CBulAnim *)0x0;
                     // abReserved_preAmmo @ +0x104..+0x11B: ctor write-only zero band before
                     // bAmmoKind0 @ +0x11C; no runtime reads found.
-  this->pReserved_preAmmo[0] = 0;
-  this->pReserved_preAmmo[1] = 0;
-  this->pReserved_preAmmo[2] = 0;
-  this->pReserved_preAmmo[3] = 0;
-  this->pReserved_preAmmo[4] = 0;
-  this->pReserved_preAmmo[5] = 0;
-  this->pReserved_preAmmo[6] = 0;
-  this->pReserved_preAmmo[7] = 0;
-  this->pReserved_preAmmo[8] = 0;
-  this->pReserved_preAmmo[9] = 0;
-  this->pReserved_preAmmo[10] = 0;
-  this->pReserved_preAmmo[0xb] = 0;
-  this->pReserved_preAmmo[0xc] = 0;
-  this->pReserved_preAmmo[0xd] = 0;
-  this->pReserved_preAmmo[0xe] = 0;
-  this->pReserved_preAmmo[0xf] = 0;
-  this->pReserved_preAmmo[0x10] = 0;
-  this->pReserved_preAmmo[0x11] = 0;
-  this->pReserved_preAmmo[0x12] = 0;
-  this->pReserved_preAmmo[0x13] = 0;
-  this->pReserved_preAmmo[0x14] = 0;
-  this->pReserved_preAmmo[0x15] = 0;
-  this->pReserved_preAmmo[0x16] = 0;
-  this->pReserved_preAmmo[0x17] = 0;
-  this->pWalkTrackSources[0] = (void *)0x0;
-  this->pWalkTrackSources[1] = (void *)0x0;
-  this->pWalkTrackSources[2] = (void *)0x0;
-  this->pWalkTrackSources[3] = (void *)0x0;
+  this->nWalkEmbedBaseX = 0;
+  this->nWalkEmbedBaseY = 0;
+  this->nWalkEmbedAccX = 0;
+  this->nWalkEmbedAccY = 0;
+  this->nWalkClipNegX = 0;
+  this->nWalkClipNegY = 0;
+  this->pWalkTrackSources_0 = (void *)0x0;
+  this->pWalkTrackSources_1 = (void *)0x0;
+  this->dwCachedWeaponParamA = 0;
+  this->dwCachedWeaponParamB = 0;
   local_4 = CONCAT31(local_4._1_3_,3);
-  this->pPad_postWalkEmbed[0] = 0;
-  this->pPad_postWalkEmbed[1] = 0;
-  this->pPad_postWalkEmbed[2] = 0;
-  this->pPad_postWalkEmbed[3] = 0;
-  this->pPad_postWalkEmbed[4] = 0;
-  this->pPad_postWalkEmbed[5] = 0;
-  this->pPad_postWalkEmbed[6] = 0;
-  this->pPad_postWalkEmbed[7] = 0;
+  this->nWalkEmbedPadTop = 0;
+  this->nWalkEmbedPadLeft = 0;
   if (nSpeedParam < 0xc9) {
     nSpeedParam = 0x28;
     if (iVar5 < 0x28) goto LAB_0041e5e1;
@@ -88869,7 +88935,7 @@ LAB_0041e5e1:
   if (bVar2) {
     nSpeedParam = 0x28;
     nLives = 1;
-    skinPaletteId._0_1_ = '\x04';
+    skinPaletteId = 4;
   }
   this->bIsAiVariant = 3 < slotKind;
   ppvVar10 = this->pAiTrackHolders;
@@ -88886,6 +88952,9 @@ LAB_0041e5e1:
     local_14 = 0;
     iVar5 = 0;
     do {
+                    // AI ctor (slotKind>3): loop i=0..3
+                    // CGaming_AppendDangerZoneNode(host,i,&zeroRect,0,this)→apAiTrackHolders[i]@+0x178;
+                    // node=0x20B CDangerZoneNode in CGaming+0x2d8 vec
       puVar6 = CGaming::CGaming_AppendDangerZoneNode
                          (pGamingHostScratch,iVar5,(undefined4 *)&local_20,0,(int)this);
       *ppvVar10 = puVar6;
@@ -88904,22 +88973,10 @@ LAB_0041e5e1:
   this->pGame = pGame;
   this->nOrigin_x = 0;
   this->nOrigin_y = 0;
-  this->pReserved_preAmmo[8] = 0;
-  this->pReserved_preAmmo[9] = 0;
-  this->pReserved_preAmmo[10] = 0;
-  this->pReserved_preAmmo[0xb] = 0;
-  this->pReserved_preAmmo[0xc] = 0;
-  this->pReserved_preAmmo[0xd] = 0;
-  this->pReserved_preAmmo[0xe] = 0;
-  this->pReserved_preAmmo[0xf] = 0;
-  this->pPad_postWalkEmbed[0] = 0;
-  this->pPad_postWalkEmbed[1] = 0;
-  this->pPad_postWalkEmbed[2] = 0;
-  this->pPad_postWalkEmbed[3] = 0;
-  this->pPad_postWalkEmbed[4] = 0;
-  this->pPad_postWalkEmbed[5] = 0;
-  this->pPad_postWalkEmbed[6] = 0;
-  this->pPad_postWalkEmbed[7] = 0;
+  this->nWalkEmbedAccX = 0;
+  this->nWalkEmbedAccY = 0;
+  this->nWalkEmbedPadTop = 0;
+  this->nWalkEmbedPadLeft = 0;
   this->nDrawAlphaPercent = 100;
                     // Load walk track from gABulanekWalkAnimsNormal[0] res 0x100c6
                     // (player_walk_normal_down)
@@ -88927,22 +88984,19 @@ LAB_0041e5e1:
   if (bVar2) {
     pGame = (CGame *)&gABulanekWalkAnimsSpecial;
   }
-  this->pPad_postWalkEmbed[8] = 0;
-  this->pPad_postWalkEmbed[9] = 0;
-  this->pPad_postWalkEmbed[10] = 0;
-  this->pPad_postWalkEmbed[0xb] = 0;
+  this->pCachedTrackHolder = (CBulanek *)0x0;
   this->pCorpseAnim = (CBulAnim *)0x0;
   this->pDeath2Tombstone = (CDeath2 *)0x0;
-  this->pWalkTrackSources[2] = (void *)0x0;
-  this->pWalkTrackSources[3] = (void *)0x0;
-  this->pWalkTrackSources[0] = (void *)0x0;
-  this->pWalkTrackSources[1] = (void *)0x0;
+  this->dwCachedWeaponParamA = 0;
+  this->dwCachedWeaponParamB = 0;
+  this->pWalkTrackSources_0 = (void *)0x0;
+  this->pWalkTrackSources_1 = (void *)0x0;
   this->nInitialTrack = initialTrack;
   local_4 = CONCAT31(local_4._1_3_,4);
   this->bPendingKillerSlot = 0xff;
                     // nFacingAxisExtent=0; collision rect bias + AdaptDisplaySize +
                     // SnapPositionToFacingAxis
-  this->dwFacingAxisExtent = 0;
+  this->nFacingAxisExtent = 0;
   this->bSlotKind = slotKind;
   this->nLivesRemaining = nLives;
   this->nLivesSnapshot = nLives;
@@ -88994,7 +89048,7 @@ LAB_0041e5e1:
     if (3 < nLives) break;
     piVar7 = (int *)local_20;
   }
-  this->pGamingHostScratch = pGamingHostScratch;
+  this->pGaming_host = pGamingHostScratch;
                     // OperatorNewWithBadAlloc(0x70) -> CWeapon; stored CBulanek+0xF8 (pWeapon)
   pCVar8 = (CWeapon *)_Globals::OperatorNewWithBadAlloc(0x70);
   local_4._0_1_ = 5;
@@ -89002,13 +89056,13 @@ LAB_0041e5e1:
     pCVar8 = (CWeapon *)0x0;
   }
   else {
-    CWeapon::CWeapon_ctor(pCVar8,this,(uchar)skinPaletteId);
+    CWeapon::CWeapon_ctor(pCVar8,this,skinPaletteId,initialTrack);
     pCVar8 = extraout_EAX;
   }
   this_00 = &this->videoTrackManager;
   local_4 = CONCAT31(local_4._1_3_,4);
   this->pWeapon = pCVar8;
-  this->pGamingHostScratch = (undefined *)0x0;
+  this->pGaming_host = (CGaming *)0x0;
   _Globals::SetCurrentTrack(this_00,initialTrack,'\0');
   if (nSpeedParam != 100) {
     local_20 = (longlong)ROUND((1.0 / ((double)this->nSpeedParam / 100.0)) * 47.25);
@@ -89048,18 +89102,23 @@ LAB_0041e5e1:
     delayMs = 100;
     uVar9 = 5;
   }
-  else if (bVar3) {
-    CDSUpdatedItem::Scheduler_RegisterEventSlot(this_01,3,0,7);
-    delayMs = 0;
-    uVar9 = 4;
-  }
   else {
-    if (slotKind < 4) {
-      ExceptionList = local_c;
-      return this;
+                    // Practice dummy slots 0x24..0x27 (bVar3): Scheduler_RegisterEventSlot slots
+                    // 3+4 only — NO slot 5 walk pulse (coop 0x20..0x23 registers slot 5 delay
+                    // 100ms @ 0x0041ea3b).
+    if (bVar3) {
+      CDSUpdatedItem::Scheduler_RegisterEventSlot(this_01,3,0,7);
+      delayMs = 0;
+      uVar9 = 4;
     }
-    delayMs = 0;
-    uVar9 = 2;
+    else {
+      if (slotKind < 4) {
+        ExceptionList = local_c;
+        return this;
+      }
+      delayMs = 0;
+      uVar9 = 2;
+    }
   }
   CDSUpdatedItem::Scheduler_RegisterEventSlot(this_01,uVar9,delayMs,7);
   ExceptionList = local_c;
@@ -89076,6 +89135,7 @@ void __thiscall CBulanek::CBulanek_ApplyPickupEffect(CBulanek *this,uchar param_
   CWeapon *extraout_EAX;
   uint uVar3;
   byte *pbVar4;
+  undefined3 in_stack_00000005;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 uStack_4;
@@ -89097,15 +89157,21 @@ void __thiscall CBulanek::CBulanek_ApplyPickupEffect(CBulanek *this,uchar param_
       pCVar2 = (CWeapon *)0x0;
     }
     else {
-      CWeapon::CWeapon_ctor(pCVar2,this,param_1);
+      CWeapon::CWeapon_ctor(pCVar2,this,_param_1,(this->videoTrackManager).nCurrentTrackIdx);
       pCVar2 = extraout_EAX;
     }
     uStack_4 = 0xffffffff;
     this->pWeapon = pCVar2;
-    _Globals::CBulanek_StepMovementAndCollision(this);
-    uVar3 = _Globals::CBulanek_IsHumanPlayer((int)this);
+                    // R12 ptr task 09: CALL CBulanek_StepMovementAndCollision@0x41af70 — ECX=ESI
+                    // (unadjusted CBulanek*). Disasm: MOV ECX,ESI@0x41eb18/0x41eb2d; no MI adjustor
+                    // (contrast CWeapon_OnSchedulerEvent ECX-0xA0@0x41b186).
+    CBulanek_StepMovementAndCollision(this);
+    uVar3 = CBulanek_IsHumanPlayer(this);
     if ((char)uVar3 != '\0') {
-      CGame_NetSendDamage_t0c((CBulanek *)this->pGame,this->bPlayerSlot,param_1);
+                    // R12: CGame_NetSendDamage_t0c — ECX=[ESI+0xF4]=this->pGame (CGame*). Asm MOV
+                    // ECX,[ESI+0xf4]@0x41eb3c. Prototype CGame* __thiscall; Ghidra may show
+                    // (CBulanek*) cast at call site.
+      CGame::CGame_NetSendDamage_t0c(this->pGame,this->bPlayerSlot,param_1);
     }
     if (3 < this->bPlayerSlot) {
       param_1 = '\0';
@@ -89144,7 +89210,7 @@ void __thiscall _Globals::CGame_ApplyPickup(void *this,byte param_1,byte param_2
       (**(code **)(*piVar3 + 8))();
     }
   }
-  uVar4 = CBulanek_IsHumanPlayer((int)this);
+  uVar4 = CBulanek::CBulanek_IsHumanPlayer(this);
   if ((char)uVar4 == '\0') {
 LAB_0041ec73:
     if (param_1 == 2) {
@@ -89168,7 +89234,7 @@ LAB_0041ec73:
   uVar1 = GetMaxAmmoForKind(param_1);
   *(undefined1 *)(param_1 + 0x11c + (int)this) = uVar1;
 LAB_0041ec21:
-  uVar4 = CBulanek_IsHumanPlayer((int)this);
+  uVar4 = CBulanek::CBulanek_IsHumanPlayer(this);
   if ((char)uVar4 != '\0') {
     CBulanek::CBulanek_ApplyPickupEffect(this,param_1);
   }
@@ -89191,7 +89257,7 @@ void __fastcall CBulanek::CBulanek_CycleWeaponPickup(CBulanek *param_1)
   bVar2 = bVar1 + 1;
   if (bVar1 != bVar2) {
     while( true ) {
-      if ((uint)bVar2 == *(uint *)(param_1->pGamingHostScratch + 0x368)) {
+      if ((uint)bVar2 == param_1->pGaming_host->dwWeaponSpawnerMode) {
         bVar2 = 0;
       }
       if ((param_1->pPad_preDw128[bVar2 - 9] != 0) || (bVar2 == 0)) break;
@@ -89216,7 +89282,7 @@ void __fastcall CBulanek::CBulanek_OnEvent_tD9_SyncWeaponFromSpawner(CBulanek *p
   
                     // UNCERTAIN: CBulanek_OnEvent 0xd9 — scan weapon/pickup bar +0x11c vs
                     // CGaming+0x368; CBulanek_ApplyPickupEffect on index change
-  bVar1 = param_1->pGamingHostScratch[0x368];
+  bVar1 = (byte)param_1->pGaming_host->dwWeaponSpawnerMode;
   if (bVar1 == 0) {
     bVar1 = 0xff;
   }
@@ -89237,29 +89303,29 @@ void __fastcall CBulanek::CBulanek_OnEvent_tD9_SyncWeaponFromSpawner(CBulanek *p
 void __fastcall _Globals::DetonatePlayerMines(int param_1)
 
 {
-  char cVar1;
-  undefined4 *pCurrentView;
+  uchar uVar1;
+  undefined4 *this;
   int iVar2;
   int iVar3;
   int iVar4;
   
   iVar4 = 0;
   iVar3 = 0;
-  pCurrentView = CDSChained_GetFirstChildView
-                           ((CDSChain *)(*(int *)(*(int *)(param_1 + 0x58) + 0x31c) + 0x54));
-  if (pCurrentView != (undefined4 *)0x0) {
+  this = CDSChained_GetFirstChildView
+                   ((CDSChain *)(*(int *)(*(int *)(param_1 + 0x58) + 0x31c) + 0x54));
+  if (this != (undefined4 *)0x0) {
     do {
-      iVar2 = (**(code **)*pCurrentView)();
-      if ((*(int *)(iVar2 + 8) == 0x816) && (pCurrentView[0x42] == *(int *)(param_1 + 0x54))) {
+      iVar2 = (**(code **)*this)();
+      if ((*(int *)(iVar2 + 8) == 0x816) && (this[0x42] == *(int *)(param_1 + 0x54))) {
         iVar4 = iVar4 + 1;
-        cVar1 = _Globals__ExplodeMine(pCurrentView);
-        if (cVar1 != '\0') {
+        uVar1 = _Globals__ExplodeMine(this);
+        if (uVar1 != '\0') {
           iVar3 = iVar3 + 1;
         }
       }
-      if (pCurrentView[0x13] == 0) break;
-      pCurrentView = CDSChained_GetNextSiblingView(pCurrentView);
-    } while (pCurrentView != (undefined4 *)0x0);
+      if (this[0x13] == 0) break;
+      this = CDSChained_GetNextSiblingView(this);
+    } while (this != (undefined4 *)0x0);
     if (0 < iVar3) {
       CDSVideoPlayer::TM_Play((CDSVideoPlayer *)(param_1 + 8),'\0');
       if (iVar3 == iVar4) {
@@ -89357,11 +89423,13 @@ CShot::CShot_Ctor(CShot *this,int *param_1,CGameView *param_2,byte param_3,byte 
 
 
 void __thiscall
-CMina::CExplosion_OnEvent(CMina *this,short param_1,undefined4 param_2,undefined4 *param_3)
+CMina::CMina_OnEvent(CMina *this,short param_1,undefined4 param_2,undefined4 *param_3)
 
 {
+                    // R10 t11: CMina OnEvent (vtable+27). eventId 0xF2 -> CMina_ExplodeMine
+                    // (ECX=this); 0xF3 no-op; else CGameView_OnEvent.
   if (param_1 == 0xf2) {
-    _Globals::_Globals__ExplodeMine();
+    _Globals::_Globals__ExplodeMine(this);
   }
   else if (param_1 != 0xf3) {
     CGameView::CGameView_OnEvent((CGameView *)this,param_1,param_2,param_3);
@@ -89457,47 +89525,60 @@ void __thiscall CGaming::CGaming_OnSchedulerTimer(CGaming *this,int param_1)
 
 
 
-void __thiscall _Globals::CGaming_TickPlayerCollisions(void *this,int *param_1)
+void __thiscall _Globals::CGaming_TickPlayerCollisions(void *this,CBulanek *param_2)
 
 {
   uint uVar1;
   void *pvVar2;
   byte bVar3;
   
-  CGaming::CGaming_InsertEntityByDepth(this,param_1);
-  if ((*(byte *)(param_1 + 0x11) & 1) != 0) {
-    uVar1 = CBulanek_IsHumanPlayer((int)param_1);
+                    // R11 task20: Per-entity collision tick. Callers: CBulanek_Update,
+                    // CGaming_TickRoundStateAndScoring, TriggerTeleportFX. Campaign AI slots
+                    // 0x7d..0x7f reach this via CBulanek_Update when rect changes. Paths: (A)
+                    // human-gated slot loop 0x65..0x6b -> CGame_ApplyPickup; (B) solo
+                    // bTotalSlots==1 -> ambient views +0x324..+0x330 -> OnPlayerCollectItem; (C)
+                    // always RetestTraceAreasForEntity (mines/traps).
+  CGaming::CGaming_InsertEntityByDepth(this,param_2);
+  if ((param_2->wChainInit44 & 1) != 0) {
+    uVar1 = CBulanek::CBulanek_IsHumanPlayer(param_2);
     if ((char)uVar1 != '\0') {
+                    // Map weapon/mine pickup scan: slot = 0x6c down to 0x65 (slots 101..107). Gated
+                    // on CBulanek_IsHumanPlayer(pEntity). Overlap -> CGame_ApplyPickup(pEntity,
+                    // 0xff, slot).
       bVar3 = 0x6c;
       do {
         bVar3 = bVar3 - 1;
         pvVar2 = CGaming::CGaming_GetObjectAtSlotSafe(this,bVar3);
-        uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,(uint)pvVar2);
+        uVar1 = CBulanek_TestRectOverlapWithEntity(param_2,(uint)pvVar2);
         if ((char)uVar1 != '\0') {
-          CGame_ApplyPickup(param_1,0xff,bVar3);
+          CGame_ApplyPickup(param_2,0xff,bVar3);
         }
       } while (100 < bVar3);
     }
+                    // Solo campaign gate: pOwnerGame->bTotalSlots@+0xd8 == 1. Enables ambient
+                    // weapon overlap tests at CGaming+0x324/+0x328/+0x32c/+0x330 with weaponKind
+                    // 0/1/2/3 -> OnPlayerCollectItem. No bPlayerSlot filter — campaign AI
+                    // 0x7d..0x7f can trigger when solo.
     if (*(char *)(*(int *)((int)this + 0x84) + 0xd8) == '\x01') {
-      uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,*(uint *)((int)this + 0x324));
+      uVar1 = CBulanek_TestRectOverlapWithEntity(param_2,*(uint *)((int)this + 0x324));
       if ((char)uVar1 != '\0') {
-        CGaming::CGaming_OnPlayerCollectItem(this,param_1,*(void **)((int)this + 0x324),0);
+        CGaming::CGaming_OnPlayerCollectItem(this,param_2,*(undefined4 *)((int)this + 0x324),0);
       }
-      uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,*(uint *)((int)this + 0x330));
+      uVar1 = CBulanek_TestRectOverlapWithEntity(param_2,*(uint *)((int)this + 0x330));
       if ((char)uVar1 != '\0') {
-        CGaming::CGaming_OnPlayerCollectItem(this,param_1,*(void **)((int)this + 0x330),3);
+        CGaming::CGaming_OnPlayerCollectItem(this,param_2,*(undefined4 *)((int)this + 0x330),3);
       }
-      uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,*(uint *)((int)this + 0x328));
+      uVar1 = CBulanek_TestRectOverlapWithEntity(param_2,*(uint *)((int)this + 0x328));
       if ((char)uVar1 != '\0') {
-        CGaming::CGaming_OnPlayerCollectItem(this,param_1,*(void **)((int)this + 0x328),1);
+        CGaming::CGaming_OnPlayerCollectItem(this,param_2,*(undefined4 *)((int)this + 0x328),1);
       }
-      uVar1 = CBulanek_TestRectOverlapWithEntity(param_1,*(uint *)((int)this + 0x32c));
+      uVar1 = CBulanek_TestRectOverlapWithEntity(param_2,*(uint *)((int)this + 0x32c));
       if ((char)uVar1 != '\0') {
-        CGaming::CGaming_OnPlayerCollectItem(this,param_1,*(void **)((int)this + 0x32c),2);
+        CGaming::CGaming_OnPlayerCollectItem(this,param_2,*(undefined4 *)((int)this + 0x32c),2);
       }
     }
   }
-  CGaming::CGaming_RetestTraceAreasForEntity(this,param_1);
+  CGaming::CGaming_RetestTraceAreasForEntity(this,(int *)param_2);
   return;
 }
 
@@ -89551,6 +89632,9 @@ _Globals::CGaming_SpawnBulletAndPlaySound
   undefined1 *puStack_8;
   void *local_4;
   
+                    // CShot spawn + optional SFX. NOT CBulanek spawn — no RegisterObjectAtSlot.
+                    // Callers: SpawnEnemyAt@0x0041f687, SpawnOpponentEx@0x0041f720 only
+                    // (search_instructions CALL 0x0041f230). CWeapon_Fire inlines same ctor path.
   local_4 = (void *)0xffffffff;
   puStack_8 = &LAB_0047791b;
   local_c = ExceptionList;
@@ -89567,6 +89651,8 @@ _Globals::CGaming_SpawnBulletAndPlaySound
     }
     local_4 = (void *)0xffffffff;
     CIntListInsertSortedOrAppend((void *)((int)this + 0x2c8),(int)pCVar2,(undefined *)0x0,1);
+                    // CGaming_AddEntity(shot, register_flag=1) — view-tree depth insert; sets
+                    // shot+0x84=pGaming. No apEntitySlots write.
     CGaming::CGaming_AddEntity(this,pCVar2,'\x01');
   }
   bVar1 = param_4 & 0xf0;
@@ -89769,6 +89855,8 @@ _Globals::CGaming_SpawnPracticeDummy(void *this,void *param_1,int param_2,int pa
   iVar1 = CGaming_CountOccupiedPlayerSlots((int)this);
   if (iVar1 < 4) {
     CGaming::CGaming_SetEntityRegisterMode(this,1);
+                    // slot_id = CGaming_CountOccupiedPlayerSlots + 0x24 (practice dummy slots
+                    // 0x24..0x27)
     CGaming_SpawnAndInitializePlayer(this,extraout_DL + 0x24,param_1,param_2,param_3,param_4);
   }
   return;
@@ -89788,6 +89876,12 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_SpawnEnemyAt(CLevelScript *pa
   byte bVar3;
   int local_8 [2];
   
+                    // SpawnEnemyAt (opcode 67): 5 script args (x,y,direction,ownerSlot,flags). Not
+                    // CBulanek AI — calls CGaming_SpawnBulletAndPlaySound@0x41f230 with
+                    // frameId=0. ownerSlot 0xFF skips CGaming_GetObjectAtSlotSafe audio ref.
+                    // flags&3 → CShot weaponStrength-1; flags&0xF0 → SFX bank. Overlay: 65856
+                    // mimic (dir 0/1, slot 9), 65857 Rand spawn (high byte of packed timer data as
+                    // ownerSlot).
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   CDSScript::ReadSubExpr((CDSScript *)param_1);
@@ -89802,6 +89896,9 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_SpawnEnemyAt(CLevelScript *pa
     piVar2 = (int *)((int)pvVar1 + 0x20);
     bVar3 = extraout_DL;
   }
+                    // SpawnEnemyAt 5-arg → CGaming_SpawnBulletAndPlaySound(pGaming, &xy, kind,
+                    // parentSlot, flags, parent+0x20|null, 0). Script projectile at (x,y); owner
+                    // slot in CShot+0xA5.
   _Globals::CGaming_SpawnBulletAndPlaySound
             ((void *)param_1->pGaming,local_8,extraout_AL,bVar3,extraout_AL_01,piVar2,0);
   return 0;
@@ -89822,9 +89919,12 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_SpawnOpponentEx(CLevelScript 
   byte bVar3;
   int local_8 [2];
   
-                    // SpawnOpponentEx picks a random BitmapSpecial thumb from CollInsert pool
-                    // (global 12). Level 65859 pool: 0x10061,0x10062,0x10063,0x10060. Ambush uses
-                    // slot-9 zombie_peek anim + SetAnim clips 0x10103..0x10105.
+                    // SpawnOpponentEx (op 98): 6 args (x,y,poolIndex,parentSlot,flags,skinPool).
+                    // x,y -> local int[2]; parentSlot 0xFF skips GetObjectAtSlotSafe; else
+                    // view+0x20 for SFX attenuation. flags&3 -> CShot weaponStrength-1; poolIndex
+                    // selects collection->m_items[idx] in LookupBulletFrameStrip. Level 65859 pool
+                    // gvar12: [65633,65634,65635,65632]. Calls
+                    // CGaming_SpawnBulletAndPlaySound@0x0041f230.
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   CDSScript::ReadSubExpr((CDSScript *)param_1);
@@ -89840,6 +89940,8 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_SpawnOpponentEx(CLevelScript 
     piVar2 = (int *)((int)pvVar1 + 0x20);
     bVar3 = extraout_DL;
   }
+                    // SpawnOpponentEx 6-arg → same helper; 6th script arg → CShot_Ctor
+                    // frameLookup param_6 (CollInsert skin pool).
   _Globals::CGaming_SpawnBulletAndPlaySound
             ((void *)param_1->pGaming,local_8,extraout_AL,bVar3,extraout_AL_01,piVar2,extraout_EAX);
   return 0;
@@ -89855,6 +89957,10 @@ undefined4 __cdecl CLevelScript::CLevelScriptOpExt_InsertOpponent(CLevelScriptCt
   int extraout_EAX_01;
   int extraout_EAX_02;
   
+                    // InsertOpponent opcode 101: ReadSubExpr x4 ->
+                    // CGaming_SpawnPracticeDummy(gaming, teamColor, nLives, nSpeed, skinId). Only
+                    // script path with configurable nLives; auto slot CountOccupiedPlayerSlots+0x24
+                    // (0x24..0x27).
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   CDSScript::ReadSubExpr((CDSScript *)param_1);
   CDSScript::ReadSubExpr((CDSScript *)param_1);
@@ -89977,7 +90083,7 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
     }
   }
   CDSView::CDSView__Hide((CDSView *)this);
-  this_01 = (CGaming *)this->pGamingHostScratch;
+  this_01 = this->pGaming_host;
   this->bSkipSpatialWhenNonZero = 0;
   this->bPendingKillerSlot = param_1;
   iVar9 = 0x17;
@@ -90010,7 +90116,7 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
     corpseAnim = (CDeath *)0x0;
   }
   else {
-    corpseAnim = CDeath::CDeath_ctor(pCStack00000010,this,this->pGamingHostScratch,(uint)param_2);
+    corpseAnim = CDeath::CDeath_ctor(pCStack00000010,this,this->pGaming_host);
     uVar10 = CONCAT44(extraout_EDX,pCStack00000010);
   }
   pCStack00000010 = (CDeath *)uVar10;
@@ -90038,7 +90144,7 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
     }
   }
   if (((this->pAiTrackHolders[0] == (void *)0x0) &&
-      (uVar7 = _Globals::CBulanek_IsHumanPlayer((int)this), (char)uVar7 != '\0')) &&
+      (uVar7 = CBulanek_IsHumanPlayer(this), (char)uVar7 != '\0')) &&
      (this->pWeapon->bWeaponKind != 0)) {
     CBulanek_ApplyPickupEffect(this,'\0');
   }
@@ -90053,7 +90159,7 @@ void __thiscall CBulanek::CBulanek_OnDeath(CBulanek *this,byte param_1,byte para
     cVar2 = cVar2 + -1;
     puVar8 = puVar8 + -1;
   } while (cVar2 != '\0');
-  _Globals::CGaming_TickRoundStateAndScoring(this->pGamingHostScratch,(int *)this);
+  _Globals::CGaming_TickRoundStateAndScoring(this->pGaming_host,(int *)this);
   ExceptionList = local_4;
   return;
 }
@@ -90072,10 +90178,12 @@ void __thiscall CBulanek::CBulanek_Update(CBulanek *this,int *rect)
   undefined4 local_4;
   
   CDSView::CDSView_SetRect((CDSView *)this,rect);
-  if (this->pGamingHostScratch != (undefined *)0x0) {
-    _Globals::CGaming_TickPlayerCollisions(this->pGamingHostScratch,(int *)this);
+  if (this->pGaming_host != (CGaming *)0x0) {
+    _Globals::CGaming_TickPlayerCollisions(this->pGaming_host,this);
   }
   if (this->pAiTrackHolders[0] != (void *)0x0) {
+                    // apAiTrackHolders[0]!=NULL: GetScreenRect(vft+0x70); sync 4 danger-zone node
+                    // rects @ node+0x08; CMina_UpdateTraceAreas(host,node) x4
     local_10 = 0;
     local_c = 0;
     local_8 = 0;
@@ -90101,10 +90209,10 @@ void __thiscall CBulanek::CBulanek_Update(CBulanek *this,int *rect)
     *(undefined4 *)((int)pvVar1 + 0xc) = local_10;
     *(undefined4 *)((int)pvVar1 + 0x10) = 799;
     *(undefined4 *)((int)pvVar1 + 0x14) = local_8;
-    if (this->pGamingHostScratch != (undefined *)0x0) {
+    if (this->pGaming_host != (CGaming *)0x0) {
       iVar2 = 4;
       do {
-        CMina::CMina_UpdateTraceAreas((CMina *)this->pGamingHostScratch);
+        CMina::CMina_UpdateTraceAreas((CMina *)this->pGaming_host);
         iVar2 = iVar2 + -1;
       } while (iVar2 != 0);
     }
@@ -90126,7 +90234,7 @@ void __fastcall CTeleportPoint::TriggerTeleportFX(CTeleportPoint *this)
   iVar1 = (this->canim_base).nOrigin_y;
   if ((this->canim_base).nFx_coord != iVar1) {
     (this->canim_base).nFx_coord = iVar1;
-    _Globals::CGaming_TickPlayerCollisions((this->canim_base).pGaming_host,(int *)this);
+    _Globals::CGaming_TickPlayerCollisions((this->canim_base).pGaming_host,this);
   }
   return;
 }
@@ -90136,7 +90244,7 @@ void __fastcall CTeleportPoint::TriggerTeleportFX(CTeleportPoint *this)
 void __thiscall CWeapon::CWeapon_FirePistol(CWeapon *this)
 
 {
-  CBulanek *pCVar1;
+  int iVar1;
   uint uVar2;
   char cVar3;
   uint uVar4;
@@ -90153,16 +90261,16 @@ void __thiscall CWeapon::CWeapon_FirePistol(CWeapon *this)
   puStack_8 = &LAB_004779eb;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  cVar3 = _Globals::CBulanek_HasAmmoForCurrentWeapon(this->pOwner);
+  cVar3 = _Globals::CBulanek_HasAmmoForCurrentWeapon((void *)this->pOwner);
   if (cVar3 != '\0') {
     SetAmmo(this,0x15);
     CDSVideoPlayer::TM_Play(&this->trackManager,'\0');
-    _Globals::CBulanek_DecrementWeaponAmmo(this->pOwner);
-    pCVar1 = this->pOwner;
-    uVar2 = (pCVar1->videoTrackManager).nCurrentTrackIdx;
+    _Globals::CBulanek_DecrementWeaponAmmo((void *)this->pOwner);
+    iVar1 = this->pOwner;
+    uVar2 = *(uint *)(iVar1 + 0xd4);
     uVar4 = uVar2 & 0xff;
-    local_14 = gAPlayerSkinPaletteIds[uVar4 * 2 + 4] + pCVar1->nOrigin_x;
-    local_10 = pCVar1->nOrigin_y + gAPlayerSkinPaletteIds[uVar4 * 2 + 5];
+    local_14 = gAPlayerSkinPaletteIds[uVar4 * 2 + 4] + *(int *)(iVar1 + 0x20);
+    local_10 = *(int *)(iVar1 + 0x24) + gAPlayerSkinPaletteIds[uVar4 * 2 + 5];
     pCVar5 = (CShot *)_Globals::OperatorNewWithBadAlloc(0xb0);
     local_4 = 0;
     if (pCVar5 == (CShot *)0x0) {
@@ -90170,7 +90278,7 @@ void __thiscall CWeapon::CWeapon_FirePistol(CWeapon *this)
     }
     else {
       pCVar5 = CShot::CShot_Ctor(pCVar5,&local_14,(CGameView *)this->pWorld,(byte)uVar2,
-                                 this->pOwner->bPlayerSlot,0,0);
+                                 *(byte *)(this->pOwner + 0x70),0,0);
     }
     local_4 = 0xffffffff;
     CGaming::CGaming_AddEntity(this->pWorld,pCVar5,'\x01');
@@ -90187,7 +90295,7 @@ void __thiscall CWeapon::CWeapon_FirePistol(CWeapon *this)
 void __fastcall _Globals::CWeapon_FireGrenade(CWeapon *param_1)
 
 {
-  CBulanek *pCVar1;
+  int iVar1;
   uint uVar2;
   uint uVar3;
   CShot *pCVar4;
@@ -90203,12 +90311,12 @@ void __fastcall _Globals::CWeapon_FireGrenade(CWeapon *param_1)
   ExceptionList = &local_c;
   CWeapon::SetAmmo(param_1,0xd);
   CDSVideoPlayer::TM_Play(&param_1->trackManager,'\0');
-  CBulanek_DecrementWeaponAmmo(param_1->pOwner);
-  pCVar1 = param_1->pOwner;
-  uVar2 = (pCVar1->videoTrackManager).nCurrentTrackIdx;
+  CBulanek_DecrementWeaponAmmo((void *)param_1->pOwner);
+  iVar1 = param_1->pOwner;
+  uVar2 = *(uint *)(iVar1 + 0xd4);
   uVar3 = uVar2 & 0xff;
-  local_14 = gAPlayerSkinPaletteIds[uVar3 * 2 + 0xc] + pCVar1->nOrigin_x;
-  local_10 = pCVar1->nOrigin_y + gAPlayerSkinPaletteIds[uVar3 * 2 + 0xd];
+  local_14 = gAPlayerSkinPaletteIds[uVar3 * 2 + 0xc] + *(int *)(iVar1 + 0x20);
+  local_10 = *(int *)(iVar1 + 0x24) + gAPlayerSkinPaletteIds[uVar3 * 2 + 0xd];
   pCVar4 = (CShot *)OperatorNewWithBadAlloc(0xb0);
   local_4 = 0;
   if (pCVar4 == (CShot *)0x0) {
@@ -90216,7 +90324,7 @@ void __fastcall _Globals::CWeapon_FireGrenade(CWeapon *param_1)
   }
   else {
     pCVar4 = CShot::CShot_Ctor(pCVar4,&local_14,(CGameView *)param_1->pWorld,(byte)uVar2,
-                               param_1->pOwner->bPlayerSlot,1,0);
+                               *(byte *)(param_1->pOwner + 0x70),1,0);
   }
   local_4 = 0xffffffff;
   CGaming::CGaming_AddEntity(param_1->pWorld,pCVar4,'\x01');
@@ -90234,7 +90342,7 @@ uchar __thiscall
 CTeleportPoint::CTeleportPoint_OnEvent(CTeleportPoint *this,uint event_id,short param_2)
 
 {
-  CBulanek *this_00;
+  CDSView *this_00;
   int iVar1;
   int iVar2;
   uchar uVar3;
@@ -90258,12 +90366,12 @@ CTeleportPoint::CTeleportPoint_OnEvent(CTeleportPoint *this,uint event_id,short 
       local_8 = 0;
       local_4 = 0;
       (**(code **)(this[-1].canim_base.dwView_aux_6c + 0x70))(&local_10);
-      (**(code **)(((this->canim_base).pOverlap_entity)->vftable_primary + 0x70))(&stack0xffffffdc);
-      this_00 = (this->canim_base).pOverlap_entity;
-      iVar1 = this_00->nOrigin_y;
-      iVar2 = this_00->nOrigin_x;
+      (**(code **)(*(int *)(this->canim_base).pOverlap_entity + 0x70))(&stack0xffffffdc);
+      this_00 = (CDSView *)(this->canim_base).pOverlap_entity;
+      iVar1 = (this_00->win).nBbox_top;
+      iVar2 = (this_00->win).nBbox_left;
       *(undefined1 *)((int)&this[-1].canim_base.track_manager.nCurrentTrackIdx + 1) = 0;
-      CDSView::CDSView__SetPosition((CDSView *)this_00,iVar2 - unaff_ESI,iVar1 - unaff_EBX);
+      CDSView::CDSView__SetPosition(this_00,iVar2 - unaff_ESI,iVar1 - unaff_EBX);
       TriggerTeleportFX((CTeleportPoint *)(this->canim_base).pOverlap_entity);
       in_EAX = extraout_EAX;
     }
@@ -90278,8 +90386,7 @@ CTeleportPoint::CTeleportPoint_OnEvent(CTeleportPoint *this,uint event_id,short 
                     // OnEvent: MOV ECX,[ESI+0x64] — overlap_entity (CDSChained::dwField_64). No
                     // game .text store to this slot on CTeleportPoint_Ctor/CreateRespawnPair; see
                     // AddEntity @+0x84 for owner CBulanek*.
-      uVar3 = _Globals::CTeleportPoint_TryActivateFromOverlap
-                        ((uint)(this->canim_base).pOverlap_entity);
+      uVar3 = _Globals::CTeleportPoint_TryActivateFromOverlap((this->canim_base).pOverlap_entity);
       return uVar3;
     }
   }
@@ -90365,27 +90472,24 @@ CGaming * __thiscall CGaming::CGaming_ctor(CGaming *this,CGame *ownerGame)
   (this->bulletSlotVec).nCapacity = 0;
   *(undefined4 *)&this->field_0x2d0 = 0;
   *(undefined4 *)&this->field_0x2d4 = 8;
-  *(undefined4 *)&this->field_0x2d8 = 0;
-  *(undefined4 *)&this->field_0x2dc = 0;
-  *(undefined4 *)&this->field_0x2e0 = 0;
+  (this->dangerZoneSlotVec).pSlots = (void *)0x0;
+  (this->dangerZoneSlotVec).nCapacity = 0;
+  this->nDangerZoneSlotCount = 0;
   *(undefined4 *)&this->field_0x2e4 = 8;
   *(undefined4 *)&this->field_0x2e8 = 0;
   *(undefined4 *)&this->field_0x2ec = 0;
   *(undefined4 *)&this->field_0x2f0 = 0;
   *(undefined4 *)&this->field_0x2f4 = 8;
-  *(undefined4 *)&this->field_0x2f8 = 0;
-  *(undefined4 *)&this->field_0x2fc = 0;
-  *(undefined4 *)&this->field_0x300 = 0;
+  (this->netPurgeEntitySlotVec).pSlots = (void *)0x0;
+  (this->netPurgeEntitySlotVec).nCapacity = 0;
+  this->nNetPurgeEntitySlotCount = 0;
   *(undefined4 *)&this->field_0x304 = 8;
   *(undefined4 *)&this->field_0x310 = 0;
   this->pLevelScript = (CLevelScript *)0x0;
   this->pLevelBgmPlayer = (CDSAudioPlayer *)0x0;
   this->pIntroMusicPlayer = (CDSAudioPlayer *)0x0;
   *(undefined4 *)&this->field_0x35c = 0;
-  this->pPad_0x360[0] = 0;
-  this->pPad_0x360[1] = 0;
-  this->pPad_0x360[2] = 0;
-  this->pPad_0x360[3] = 0;
+  this->pPrefaceDrawable = (void *)0x0;
   *(undefined4 *)&this->field_0x20 = 0;
   *(undefined4 *)&this->field_0x24 = 0;
   local_8 = CONCAT31(local_8._1_3_,0xd);
@@ -90393,7 +90497,7 @@ CGaming * __thiscall CGaming::CGaming_ctor(CGaming *this,CGame *ownerGame)
   *(undefined4 *)&this->field_0x2c = 600;
   Runtime::MSVCRT::_memset(this->pEntitySlots,0,0x200);
   this->pOwnerGame = ownerGame;
-  *(undefined4 *)&this->field_0x30c = 0;
+  this->nPad_0x30c = 0;
   this->field_0x314 = 1;
   this->pDepthInsertTail = (CDSView *)0x0;
   this->pDepthInsertHead = (CDSView *)0x0;
@@ -90441,7 +90545,7 @@ CGaming * __thiscall CGaming::CGaming_ctor(CGaming *this,CGame *ownerGame)
   *(undefined4 *)&this->field_0x328 = 0;
   *(undefined4 *)&this->field_0x32c = 0;
   *(undefined4 *)&this->field_0x330 = 0;
-  *(undefined4 *)&this->field_0x33c = 0;
+  this->nAmbientAnimMode = 0;
   pCVar5 = (CDSChained *)_Globals::OperatorNewWithBadAlloc(0x68);
   local_8._0_1_ = 0xe;
   if (pCVar5 == (CDSChained *)0x0) {
@@ -90496,7 +90600,7 @@ CGaming * __thiscall CGaming::CGaming_ctor(CGaming *this,CGame *ownerGame)
     CBulanci::CBulanci_AllocAnimFromSprite
               ((CBulanci *)this,(undefined4 *)&this->field_0x330,0x100dc,'\0');
     CDSUpdatedItem::Scheduler_RegisterEventSlot((CDSUpdatedItem *)&this->field_0x68,0,0,6);
-    CBulanci_SetAmbientAnimMode(this,0);
+    CGaming_SetAmbientAnimMode(this,0);
   }
   CDSView::CDSView__AddChild((CDSView *)this,(CBulanci *)this->pEntityViewRoot,(void *)0x0);
   pCVar8 = (CBulanci *)_Globals::OperatorNewWithBadAlloc(0xfc);
@@ -90801,12 +90905,16 @@ void __fastcall _Globals::CBulanek_TriggerPrimaryActionAndBroadcast(int param_1)
   void *pvVar1;
   uint uVar2;
   
+                    // Primary-action gate: player+0x44 bit0; pWeapon->trackManager.scheduler slot0
+                    // armed (slot+8 bit0). Dispatches via CBulanek_DispatchCurrentWeaponAction;
+                    // humans only re-broadcast NET 0x0E [slot]. Callers: ApplyAction(4),
+                    // WeaponSchedulerCallback(1), CGame_OnNetMsg_t0e_PrimaryAction.
   if ((*(byte *)(param_1 + 0x44) & 1) != 0) {
     pvVar1 = CDSUpdatedItem::Scheduler_GetEventSlot
                        ((CDSUpdatedItem *)(*(int *)(param_1 + 0xf8) + 0xc),0);
     if ((*(byte *)((int)pvVar1 + 8) & 1) != 0) {
       CBulanek_DispatchCurrentWeaponAction(*(CWeapon **)(param_1 + 0xf8));
-      uVar2 = CBulanek_IsHumanPlayer(param_1);
+      uVar2 = CBulanek::CBulanek_IsHumanPlayer((CBulanek *)param_1);
       if ((char)uVar2 != '\0') {
         CGame_NetSendPlayerEvent1_t0e(*(void **)(param_1 + 0xf4),*(undefined1 *)(param_1 + 0x70));
       }
@@ -90828,7 +90936,7 @@ void __thiscall CBulanek::CBulanek_ApplyAction(CBulanek *this,int param_1,char p
     CBulanek_SnapPositionToFacingAxis(this);
                     // BeginCurrentTrackPlayback(&this->videoTrackManager @ CBulanek+0xA8)
     _Globals::BeginCurrentTrackPlayback(&this->videoTrackManager);
-    uVar1 = _Globals::CBulanek_IsHumanPlayer((int)this);
+    uVar1 = CBulanek_IsHumanPlayer(this);
     if ((char)uVar1 != '\0') {
       CGame_NetSendPlayerState_t0d
                 ((CBulanek *)this->pGame,this->bPlayerSlot,(char)param_1 + '\x04',
@@ -90842,7 +90950,7 @@ void __thiscall CBulanek::CBulanek_ApplyAction(CBulanek *this,int param_1,char p
         _Globals::CBulanek_TriggerPrimaryActionAndBroadcast((int)this);
         return;
       }
-      uVar1 = _Globals::CBulanek_IsHumanPlayer((int)this);
+      uVar1 = CBulanek_IsHumanPlayer(this);
       if ((char)uVar1 != '\0') {
         CGame_NetSendPlayerState_t0d
                   ((CBulanek *)this->pGame,this->bPlayerSlot,(char)param_1,
@@ -90851,7 +90959,7 @@ void __thiscall CBulanek::CBulanek_ApplyAction(CBulanek *this,int param_1,char p
       CBulanek_SetFacingTrack(this,param_1,'\x01');
       return;
     }
-    CBulanek_CycleWeaponPickup(this);
+    CBulanek_CycleWeaponPickup();
   }
   return;
 }
@@ -90927,7 +91035,7 @@ void __fastcall CBulanek::CBulanek_TryBotRandomAction(CBulanek *param_1)
   void *pvVar2;
   int iVar3;
   
-  uVar1 = _Globals::CBulanek_IsHumanPlayer((int)param_1);
+  uVar1 = CBulanek_IsHumanPlayer(param_1);
   if (((char)uVar1 != '\0') &&
      (pvVar2 = CDSUpdatedItem::Scheduler_GetEventSlot(&(param_1->pWeapon->trackManager).scheduler,0)
      , (*(byte *)((int)pvVar2 + 8) & 1) != 0)) {
@@ -90962,7 +91070,7 @@ void __thiscall CBulanek::CBulanek_WeaponSchedulerCallback(CBulanek *this,uint s
   undefined4 uVar5;
   uint uVar6;
   int iVar7;
-  CBulanek *pCVar8;
+  int *piVar8;
   CGame **ppCVar9;
   uint local_8;
   
@@ -90972,27 +91080,27 @@ void __thiscall CBulanek::CBulanek_WeaponSchedulerCallback(CBulanek *this,uint s
     *pcVar1 = *pcVar1 + '\x01';
     if (*(char *)((int)&(this->scheduler).dwEventSlots + 2) == '\x10') {
       CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)this,0);
-      uVar6 = _Globals::CBulanek_IsHumanPlayer((int)(this[-1].pReserved_preAmmo + 0x10));
+      uVar6 = CBulanek_IsHumanPlayer((CBulanek *)&this[-1].nWalkClipNegX);
       if ((char)uVar6 != '\0') {
-        CBulanek_ResetAmmoAndPlayReload(this[-1].pReserved_preAmmo + 0x10);
+        CBulanek_ResetAmmoAndPlayReload(&this[-1].nWalkClipNegX);
         CGame_NetSendPlayerDie_t11
                   ((CBulanek *)this->dwView_aux_6c,*(undefined1 *)(this[-1].pAiTrackHolders + 3));
         return;
       }
     }
     else if (*(char *)(*(int *)&this->bPlayerSlot + 100) == '\0') {
-      CBulanek_RefreshHudWeaponStrip(this[-1].pReserved_preAmmo + 0x10);
+      CBulanek_RefreshHudWeaponStrip(&this[-1].nWalkClipNegX);
       return;
     }
     break;
   case 1:
-    _Globals::CBulanek_TriggerPrimaryActionAndBroadcast((int)(this[-1].pReserved_preAmmo + 0x10));
+    _Globals::CBulanek_TriggerPrimaryActionAndBroadcast((int)&this[-1].nWalkClipNegX);
     return;
   case 2:
     pvVar4 = CDSUpdatedItem::Scheduler_GetEventSlot
                        ((CDSUpdatedItem *)(*(int *)&this->bPlayerSlot + 0xc),0);
     if ((*(byte *)((int)pvVar4 + 8) & 1) != 0) {
-      CBulanek_OnTakeDamage((CBulanek *)(this[-1].pReserved_preAmmo + 0x10),-1,-1,'\0');
+      CBulanek_OnTakeDamage((CBulanek *)&this[-1].nWalkClipNegX,-1,-1,'\0');
       return;
     }
     break;
@@ -91000,11 +91108,11 @@ void __thiscall CBulanek::CBulanek_WeaponSchedulerCallback(CBulanek *this,uint s
     pvVar4 = CDSUpdatedItem::Scheduler_GetEventSlot
                        ((CDSUpdatedItem *)(*(int *)&this->bPlayerSlot + 0xc),0);
     if ((*(byte *)((int)pvVar4 + 8) & 1) != 0) {
-      pCVar8 = (CBulanek *)(this[-1].pReserved_preAmmo + 0x10);
-      uVar5 = CBulanek_IsInKnockdownAnimBand((int)pCVar8);
+      piVar8 = &this[-1].nWalkClipNegX;
+      uVar5 = CBulanek_IsInKnockdownAnimBand((int)piVar8);
       if ((char)uVar5 != '\0') {
-        CBulanek_TryBotRandomAction(pCVar8);
-        CBulanek_ArmTournamentSchedulerDelays((int)pCVar8);
+        CBulanek_TryBotRandomAction(piVar8);
+        CBulanek_ArmTournamentSchedulerDelays((int)piVar8);
         return;
       }
     }
@@ -91017,18 +91125,16 @@ void __thiscall CBulanek::CBulanek_WeaponSchedulerCallback(CBulanek *this,uint s
         pCVar3 = *ppCVar9;
         if ((((uint)(pCVar3->scheduler).pVftable_IDSUpdated & 0xf) != 0) &&
            (uVar5 = CBulanek_TryApplyPickupMask
-                              ((CBulanek *)(this[-1].pReserved_preAmmo + 0x10),
+                              ((CBulanek *)&this[-1].nWalkClipNegX,
                                (uint)(pCVar3->scheduler).pVftable_IDSUpdated & 0xf,
                                pCVar3->pVptr_IDSReferenced), (char)uVar5 != '\0')) {
           uVar6 = CBulanek_SetFacingTrack
-                            ((CBulanek *)(this[-1].pReserved_preAmmo + 0x10),
-                             **(int **)(this->pReserved_preAmmo + iVar7 * 4 + -0x14),'\0');
+                            ((CBulanek *)&this[-1].nWalkClipNegX,
+                             **(int **)(this->pPad_preDw128 + iVar7 * 4 + -0x35),'\0');
           if ((char)uVar6 == '\0') {
             return;
           }
-          local_8 = (uint)(longlong)
-                          ROUND((1.0 / ((double)*(int *)(this->pReserved_preAmmo + 8) / 100.0)) *
-                                200.0);
+          local_8 = (uint)(longlong)ROUND((1.0 / ((double)this->nWalkEmbedAccX / 100.0)) * 200.0);
           CDSUpdatedItem::Scheduler_RegisterEventSlot((CDSUpdatedItem *)this,1,local_8,2);
           return;
         }
@@ -91044,7 +91150,7 @@ void __thiscall CBulanek::CBulanek_WeaponSchedulerCallback(CBulanek *this,uint s
       (this->videoTrackManager).scheduler.pEventSlots = &DAT_00000064;
       CDSUpdatedItem::Scheduler_ArmSlot((CDSUpdatedItem *)this,5);
     }
-    (**(code **)(*(int *)(this[-1].pReserved_preAmmo + 0x10) + 0x24))(0,0);
+    (**(code **)(this[-1].nWalkClipNegX + 0x24))(0,0);
     return;
   }
   return;
@@ -91067,31 +91173,30 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
   int iVar5;
   CDSAudioPlayer *pCVar6;
   uint uVar7;
-  byte bVar8;
-  undefined **ppuVar9;
-  char cVar10;
+  byte slot;
+  undefined **ppuVar8;
+  char cVar9;
   uint local_8;
   
-  bVar8 = (byte)lParam;
+  slot = (byte)lParam;
   if (eventId < 0xef) {
     if (eventId == 0xee) {
       uVar7 = (uint)lParam >> 8 & 0xff;
       if (uVar7 == 0) {
-        if (bVar8 == this->bPlayerSlot) {
+        if (slot == this->bPlayerSlot) {
           this->bDrawAsMuted = 1;
-          CGaming::CGaming_RetestTraceAreasForEntity
-                    ((CGaming *)this->pGamingHostScratch,(int *)this);
+          CGaming::CGaming_RetestTraceAreasForEntity(this->pGaming_host,(int *)this);
           (**(code **)(this->vftable_primary + 0x24))(0,0);
           return;
         }
       }
       else if (uVar7 == 1) {
-        if (bVar8 == this->bPlayerSlot) {
+        if (slot == this->bPlayerSlot) {
           this->bScriptDeathGuard = 1;
           return;
         }
       }
-      else if ((uVar7 == 2) && (bVar8 == this->bPlayerSlot)) {
+      else if ((uVar7 == 2) && (slot == this->bPlayerSlot)) {
         this->bIsAiVariant = 1;
         return;
       }
@@ -91102,15 +91207,15 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
                     // Event 1: death-voice CDSAudioPlayer* completion — compare lParam to
                     // pDeathVoicePlayer @ +0x16C; chains delayed quip.
         if (this->pDeathVoicePlayer == lParam) {
-          cVar10 = '\x01';
-          ppuVar9 = &this->vftable_IDSReferenced;
+          cVar9 = '\x01';
+          ppuVar8 = &this->vftable_IDSReferenced;
           this->pDeathVoicePlayer = (void *)0x0;
           iVar4 = _Globals::ComputeSpatialAttenuationDb100(&this->nOrigin_x);
           iVar5 = CBulanek_GetDelayedQuipSlot((int)this);
                     // Death-voice done (event 1, lParam==pPad_mid+0x58): chains delayed quip with
                     // same pEventTarget=pCdsViewPrefix+0x10; stores player at +0x174.
           pCVar6 = (CDSAudioPlayer *)
-                   _Globals::TriggerBankSample((undefined *)0x1,0,iVar5,iVar4,ppuVar9,cVar10);
+                   _Globals::TriggerBankSample((undefined *)0x1,0,iVar5,iVar4,ppuVar8,cVar9);
           this->pDelayedQuipPlayer = pCVar6;
           _Globals::CDSAudioPlayer_PlayAndRelease(pCVar6,0);
           return;
@@ -91123,7 +91228,7 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
           this->pDelayedQuipPlayer = (void *)0x0;
           if (this->bPendingKillerSlot != 0xff) {
             CBulanek_PostScriptEvent
-                      ((CBulanek *)this->pGamingHostScratch,this->bPendingKillerSlot,0xdb,0,0);
+                      ((CBulanek *)this->pGaming_host,this->bPendingKillerSlot,0xdb,0,0);
             this->bPendingKillerSlot = 0xff;
             return;
           }
@@ -91132,7 +91237,7 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
       default:
         goto switchD_00420d73_caseD_2;
       case 0xd7:
-        if (((this->dwView_flags & 1) != 0) && (this->bScriptDeathGuard == 0)) {
+        if (((this->wChainInit44 & 1) != 0) && (this->bScriptDeathGuard == 0)) {
           uVar3 = CBulanek_IsInKnockdownAnimBand((int)this);
           if ((char)uVar3 != '\0') {
             piVar1 = &this->nLivesRemaining;
@@ -91142,38 +91247,38 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
               return;
             }
           }
-          CBulanek_OnDeath(this,(byte)((uint)lParam >> 8),bVar8);
+          CBulanek_OnDeath(this,(byte)((uint)lParam >> 8),slot);
           return;
         }
         *param_3 = 0;
         return;
       case 0xd8:
-        bVar2 = CGaming_IsPlayerSlotOccupied((CBulanek *)this->pGamingHostScratch,bVar8);
+        bVar2 = CGaming_IsPlayerSlotOccupied((CBulanek *)this->pGaming_host,slot);
         if (bVar2) {
           this->dwScriptKillScore = this->dwScriptKillScore + 1;
-          if (bVar8 < 4) {
+          if (slot < 4) {
                     // Script event 0xD8: increment anOpponentScriptTally[slot] @ +0x12C (human
                     // slots 0..3 only).
             this->pOpponentScriptTally[(uint)lParam & 0xff] =
                  this->pOpponentScriptTally[(uint)lParam & 0xff] + 1;
           }
-          CGaming::CGaming_OnKillCredit_UpdateScoreHud((CGaming *)this->pGamingHostScratch,this);
+          CGaming::CGaming_OnKillCredit_UpdateScoreHud(this->pGaming_host,this);
         }
         break;
       case 0xd9:
         CBulanek_OnEvent_tD9_SyncWeaponFromSpawner(this);
         return;
       case 0xdb:
-        if (((this->dwView_flags & 1) != 0) && (this->pHitQuipPlayer == (void *)0x0)) {
-          cVar10 = '\x01';
-          ppuVar9 = &this->vftable_IDSReferenced;
+        if (((this->wChainInit44 & 1) != 0) && (this->pHitQuipPlayer == (void *)0x0)) {
+          cVar9 = '\x01';
+          ppuVar8 = &this->vftable_IDSReferenced;
           iVar4 = _Globals::ComputeSpatialAttenuationDb100(&this->nOrigin_x);
           iVar5 = CBulanek_GetHitQuipSlot((int)this);
                     // Hit quip (event 0xdb): TriggerBankSample with
                     // pEventTarget=pCdsViewPrefix+0x10; player stored at +0x170; completion event 1
                     // clears +0x170.
           pCVar6 = (CDSAudioPlayer *)
-                   _Globals::TriggerBankSample((undefined *)0x1,0,iVar5,iVar4,ppuVar9,cVar10);
+                   _Globals::TriggerBankSample((undefined *)0x1,0,iVar5,iVar4,ppuVar8,cVar9);
           this->pHitQuipPlayer = pCVar6;
           _Globals::CDSAudioPlayer_PlayAndRelease(pCVar6,0);
           return;
@@ -91186,21 +91291,20 @@ CBulanek::CBulanek_OnEvent(CBulanek *this,ushort eventId,undefined4 *lParam,unde
     case 0xef:
       uVar7 = (uint)lParam >> 8 & 0xff;
       if (uVar7 == 0) {
-        if (bVar8 == this->bPlayerSlot) {
+        if (slot == this->bPlayerSlot) {
           this->bDrawAsMuted = 0;
-          CGaming::CGaming_RetestTraceAreasForEntity
-                    ((CGaming *)this->pGamingHostScratch,(int *)this);
+          CGaming::CGaming_RetestTraceAreasForEntity(this->pGaming_host,(int *)this);
           (**(code **)(this->vftable_primary + 0x24))(0,0);
           return;
         }
       }
       else if (uVar7 == 1) {
-        if (bVar8 == this->bPlayerSlot) {
+        if (slot == this->bPlayerSlot) {
           this->bScriptDeathGuard = 0;
           return;
         }
       }
-      else if ((uVar7 == 2) && (bVar8 == this->bPlayerSlot)) {
+      else if ((uVar7 == 2) && (slot == this->bPlayerSlot)) {
         this->bIsAiVariant = 0;
         return;
       }
@@ -91210,8 +91314,8 @@ switchD_00420d73_caseD_2:
       CGameView::CGameView_OnEvent((CGameView *)this,eventId,lParam,param_3);
       return;
     case 0xf2:
-      if ((((this->pAiTrackHolders[0] != (void *)0x0) && ((this->dwView_flags & 1) != 0)) &&
-          (this->dwPickupFacingLatch == 0)) && ((this->dwView_flags & 0x40) != 0)) {
+      if ((((this->pAiTrackHolders[0] != (void *)0x0) && ((this->wChainInit44 & 1) != 0)) &&
+          (this->dwPickupFacingLatch == 0)) && ((this->wChainInit44 & 0x40) != 0)) {
         this->dwPickupFacingLatch = (uint)lParam;
         uVar3 = CBulanek_TryApplyPickupMask(this,lParam[1] & 0xf,*lParam);
         if (((char)uVar3 != '\0') &&
@@ -91254,115 +91358,120 @@ void __thiscall CWeapon::CWeapon_Fire(CWeapon *this,undefined4 param_1,ushort pa
 
 {
   byte bVar1;
-  CBulanek *pCVar2;
-  bool bVar3;
-  char cVar4;
-  CMina *pCVar5;
+  bool bVar2;
+  char cVar3;
+  CMina *pCVar4;
   void *entity;
-  uint uVar6;
-  CShot *pCVar7;
-  uint uVar8;
-  int iVar9;
-  int extraout_ECX;
+  uint uVar5;
+  CShot *pCVar6;
+  uint uVar7;
+  int iVar8;
+  CBulanek *this_00;
   int local_14;
   int local_10;
   void *local_c;
   undefined1 *puStack_8;
   undefined4 local_4;
   
-                    // FrameTimeHint u16 (param_2): weaponKind-specific — 0 mine spawn, 0xFFFF
-                    // ammo/bot branch, else shot kind uses (param_2+3) for kind 4 (R4 task 31).
+                    // FLX 0x0C subscriber (IDSChained vfn[4]). Kind gate uses byte at CWeapon+0x60
+                    // (dwParamB low byte) per disasm — NOT bWeaponKind@+0x64 used by
+                    // CBulanek_DispatchCurrentWeaponAction. Sole static write to +0x60 is zero in
+                    // ctor; runtime kind mirror UNK.
   local_4 = 0xffffffff;
   puStack_8 = &LAB_00477b71;
   local_c = ExceptionList;
   ExceptionList = &local_c;
-  bVar3 = false;
+                    // weaponKind==2 && param_2==0: CMina 0x118 CMina_Ctor(pTrackHolder) AddEntity
+                    // decrement ammo
+  bVar2 = false;
   if (((char)this->dwParamB == '\x02') && (param_2 == 0)) {
-    pCVar5 = (CMina *)_Globals::OperatorNewWithBadAlloc(0x118);
+    pCVar4 = (CMina *)_Globals::OperatorNewWithBadAlloc(0x118);
     local_4 = 0;
-    if (pCVar5 == (CMina *)0x0) {
+    if (pCVar4 == (CMina *)0x0) {
       entity = (void *)0x0;
     }
     else {
-      entity = (void *)CMina::CMina_Ctor(pCVar5,this->pTrackHolder);
+      entity = (void *)CMina::CMina_Ctor(pCVar4,this->pTrackHolder);
     }
     local_4 = 0xffffffff;
     CGaming::CGaming_AddEntity((CGaming *)this->pOwner,entity,'\x01');
-    _Globals::CBulanek_DecrementWeaponAmmo(this->pTrackHolder);
-    if (3 < this->pTrackHolder->bPlayerSlot) {
-      CBulanek::CBulanek_OnTakeDamage(this->pTrackHolder,-1,-1,'\0');
-      bVar3 = true;
+    _Globals::CBulanek_DecrementWeaponAmmo((void *)this->pTrackHolder);
+                    // AI mine self-hit: pTrackHolder->bPlayerSlot>3 → OnTakeDamage(-1,-1,0); sets
+                    // skip flag for 0xFFFF bot branch
+    if (3 < ((CBulanek *)this->pTrackHolder)->bPlayerSlot) {
+      CBulanek::CBulanek_OnTakeDamage((CBulanek *)this->pTrackHolder,-1,-1,'\0');
+      bVar2 = true;
     }
   }
   if (((char)this->dwParamB == '\x04') && (param_2 != 0xffff)) {
-    pCVar2 = this->pTrackHolder;
-    uVar8 = (pCVar2->videoTrackManager).nCurrentTrackIdx;
-    uVar6 = uVar8 & 0xff;
-    local_14 = *(int *)(&DAT_004829d0 + uVar6 * 8) + pCVar2->nOrigin_x;
-    local_10 = pCVar2->nOrigin_y + *(int *)(&DAT_004829d4 + uVar6 * 8);
-    pCVar7 = (CShot *)_Globals::OperatorNewWithBadAlloc(0xb0);
+    iVar8 = this->pTrackHolder;
+    uVar7 = *(uint *)(iVar8 + 0xd4);
+    uVar5 = uVar7 & 0xff;
+    local_14 = *(int *)(&DAT_004829d0 + uVar5 * 8) + *(int *)(iVar8 + 0x20);
+    local_10 = *(int *)(iVar8 + 0x24) + *(int *)(&DAT_004829d4 + uVar5 * 8);
+    pCVar6 = (CShot *)_Globals::OperatorNewWithBadAlloc(0xb0);
     local_4 = 1;
-    if (pCVar7 == (CShot *)0x0) {
-      pCVar7 = (CShot *)0x0;
+    if (pCVar6 == (CShot *)0x0) {
+      pCVar6 = (CShot *)0x0;
     }
     else {
-      pCVar7 = CShot::CShot_Ctor(pCVar7,&local_14,(CGameView *)this->pOwner,(byte)uVar8,
-                                 this->pTrackHolder->bPlayerSlot,(char)param_2 + 3,0);
+      pCVar6 = CShot::CShot_Ctor(pCVar6,&local_14,(CGameView *)this->pOwner,(byte)uVar7,
+                                 *(byte *)(this->pTrackHolder + 0x70),(char)param_2 + 3,0);
     }
     local_4 = 0xffffffff;
-    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pCVar7,'\x01');
+    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pCVar6,'\x01');
     SetAmmo((CWeapon *)&this[-1].pHudIconB,4 - (uint)(param_2 < 3));
   }
   bVar1 = (byte)this->dwParamB;
   if ((bVar1 == 5) && (param_2 == 0)) {
-    _Globals::CBulanek_DecrementWeaponAmmo(this->pTrackHolder);
-    pCVar2 = this->pTrackHolder;
-    uVar8 = (pCVar2->videoTrackManager).nCurrentTrackIdx;
-    uVar6 = uVar8 & 0xff;
-    local_14 = *(int *)(&DAT_004829b0 + uVar6 * 8) + pCVar2->nOrigin_x;
-    local_10 = pCVar2->nOrigin_y + *(int *)(&DAT_004829b4 + uVar6 * 8);
-    pCVar7 = (CShot *)_Globals::OperatorNewWithBadAlloc(0xb0);
+    _Globals::CBulanek_DecrementWeaponAmmo((void *)this->pTrackHolder);
+    iVar8 = this->pTrackHolder;
+    uVar7 = *(uint *)(iVar8 + 0xd4);
+    uVar5 = uVar7 & 0xff;
+    local_14 = *(int *)(&DAT_004829b0 + uVar5 * 8) + *(int *)(iVar8 + 0x20);
+    local_10 = *(int *)(iVar8 + 0x24) + *(int *)(&DAT_004829b4 + uVar5 * 8);
+    pCVar6 = (CShot *)_Globals::OperatorNewWithBadAlloc(0xb0);
     local_4 = 2;
-    if (pCVar7 == (CShot *)0x0) {
-      pCVar7 = (CShot *)0x0;
+    if (pCVar6 == (CShot *)0x0) {
+      pCVar6 = (CShot *)0x0;
     }
     else {
-      pCVar7 = CShot::CShot_Ctor(pCVar7,&local_14,(CGameView *)this->pOwner,(byte)uVar8,
-                                 this->pTrackHolder->bPlayerSlot,2,0);
+      pCVar6 = CShot::CShot_Ctor(pCVar6,&local_14,(CGameView *)this->pOwner,(byte)uVar7,
+                                 *(byte *)(this->pTrackHolder + 0x70),2,0);
     }
     local_4 = 0xffffffff;
-    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pCVar7,'\x01');
+    CGaming::CGaming_AddEntity((CGaming *)this->pOwner,pCVar6,'\x01');
     SetAmmo((CWeapon *)&this[-1].pHudIconB,7);
     ExceptionList = local_c;
     return;
   }
   if (param_2 == 0xffff) {
     if (bVar1 != 0) {
-      cVar4 = _Globals::CBulanek_GetAmmoForKind(this->pTrackHolder,bVar1);
-      if ((cVar4 == '\0') && (((byte)~(byte)this->pOwner->dwView_flags >> 4 & 1) == 0)) {
-        uVar8 = _Globals::CBulanek_IsHumanPlayer(extraout_ECX);
-        if ((char)uVar8 != '\0') {
+      cVar3 = _Globals::CBulanek_GetAmmoForKind((void *)this->pTrackHolder,bVar1);
+      if ((cVar3 == '\0') && (((byte)~*(byte *)(this->pOwner + 0x44) >> 4 & 1) == 0)) {
+        uVar7 = CBulanek::CBulanek_IsHumanPlayer(this_00);
+        if ((char)uVar7 != '\0') {
           _Globals::CDSView__PostMessage
-                    (&this->pTrackHolder->vftable_IDSReferenced,0x200,0xd9,
-                     (uint)(byte)this->dwParamB,0);
+                    ((void *)(this->pTrackHolder + 0x10),0x200,0xd9,(uint)(byte)this->dwParamB,0);
         }
-        if (this->pTrackHolder->bShotgunPickupGuard != 0) {
-          _Globals::CGaming_SpawnSpecialPickupIfAllowed(this->pOwner,'\0');
-          this->pTrackHolder->bShotgunPickupGuard = 0;
+        if (*(char *)(this->pTrackHolder + 0x16b) != '\0') {
+          _Globals::CGaming_SpawnSpecialPickupIfAllowed((void *)this->pOwner,'\0');
+          *(undefined1 *)(this->pTrackHolder + 0x16b) = 0;
         }
       }
     }
-    pCVar2 = this->pTrackHolder;
-    if ((3 < pCVar2->bPlayerSlot) && (!bVar3)) {
-      bVar1 = pCVar2->bPlayerSlot;
+                    // param_2==0xFFFF bot branch: slot>3 && !mineSelfHit → coop/vampire
+                    // 0x20..0x27 TryBotRandomAction else 28% OnTakeDamage
+    if ((3 < *(byte *)(this->pTrackHolder + 0x70)) && (!bVar2)) {
+      bVar1 = *(byte *)(this->pTrackHolder + 0x70);
       if (((0x1f < bVar1) && (bVar1 < 0x24)) || ((0x23 < bVar1 && (bVar1 < 0x28)))) {
-        CBulanek::CBulanek_TryBotRandomAction(pCVar2);
+        CBulanek::CBulanek_TryBotRandomAction();
         ExceptionList = local_c;
         return;
       }
-      iVar9 = RandInRange(0,99);
-      if (iVar9 < 0x28) {
-        CBulanek::CBulanek_OnTakeDamage(this->pTrackHolder,-1,-1,'\0');
+      iVar8 = RandInRange(0,99);
+      if (iVar8 < 0x28) {
+        CBulanek::CBulanek_OnTakeDamage((CBulanek *)this->pTrackHolder,-1,-1,'\0');
       }
     }
   }
@@ -92351,7 +92460,7 @@ _Globals::CDSAudioPlayer_Create
   local_4 = 0xffffffff;
   CDSAudioPlayer::CDSAudioPlayer_Init(this_00,pSource,initFlags,pEventTarget,pCategory);
   if (preDelayOrFlags != 0) {
-    CDSAudioPlayer_SetDirectSoundBufferPosition(this_00,preDelayOrFlags);
+    CDSAudioPlayer_ApplySpatialAttenToDirectSound(this_00,preDelayOrFlags);
   }
   ExceptionList = local_c;
   return this_00;
@@ -100694,14 +100803,16 @@ void __thiscall CBulanci::CDSApp_OnActivateApp(CBulanci *this,char param_1)
 
 
 
-ushort __fastcall CBulanci::CDSApp_Run(CDSView *param_1)
+ushort __thiscall CBulanci::CDSApp_Run(CBulanci *this)
 
 {
   ushort uVar1;
   
-  uVar1 = CDSView::CDSView_DoModal(param_1,(CDSView *)0x0);
-  _Globals::CDSView_SetActive(param_1,0);
-  _Globals::CDSView_SetModalEligible(param_1,0);
+                    // CBulanci vtable slot 29 (Run): DoModal then clear modal/active flags. IDA
+                    // sub_429D60 __usercall; __thiscall CBulanci* this.
+  uVar1 = CDSView::CDSView_DoModal((CDSView *)this,(CDSView *)0x0);
+  _Globals::CDSView_SetActive(this,0);
+  _Globals::CDSView_SetModalEligible(this,0);
   return uVar1;
 }
 
@@ -100713,6 +100824,9 @@ void __fastcall CGaming::CGaming_ClearSchedulerSlotFlags(int param_1)
   int iVar1;
   int iVar2;
   
+                    // Clears bit2 (&~4) across 256 bytes at param+0x200. Sole caller
+                    // CGame_NetSendRoundResult@0x004131bb passes CGaming::pEntitySlots[0x49]
+                    // (scheduler bank base); not CGaming::this.
   iVar1 = param_1 + 0x200;
   iVar2 = 0x100;
   do {
@@ -100835,8 +100949,8 @@ void __thiscall CGaming::CGaming_SyncKeyLatchAfterModal(CGaming *this,undefined4
   int iVar5;
   void **ppvVar6;
   
-                    // CGaming_SyncKeyLatchAfterModal: diff g_pApp->keyLatchByVk (+0x100) vs CGaming
-                    // shadow; replay bit1/bit2 edges via CDSApp_KeybQueue
+                    // Caller CGaming_RunPreMatchModal@0x0041c4d3 passes g_pApp (CBulanci*) as this;
+                    // compares param_1 snapshot vs this+0x100 keyLatchByVk. IDA sub_429F70 matches.
   iVar4 = 0x100;
   pbVar3 = (byte *)(param_1 + 0x40);
   iVar5 = (int)(this->pEntitySlots + 0xe) - (int)param_1;
@@ -101230,19 +101344,17 @@ uint __thiscall CBulanci::CBulanci_HandleDirtyRectBitBltHresult(CBulanci *this,i
 
 
 
-uchar __fastcall _Globals::CDSApp_TryBindBackBufferSurface(void)
+uchar __thiscall _Globals::CDSApp_TryBindBackBufferSurface(void *this)
 
 {
   bool bVar1;
   bool bVar2;
-  CDSApp *in_ECX;
   
-                    // Pre-render gate: FUN_004298d0(CDSBackBuffer@+0x7c) GetSurfaceDesc+bind; on
-                    // fail FUN_00429bd0 surface-restore then tail-retry. Non-zero AL ->
-                    // CDSApp_RenderFrame sets bDirtyDuringFrame@+0x275.
+                    // __thiscall CDSApp* this (ECX): pre-render gate before
+                    // CDSApp_RenderFrame@0x0042bc1f. IDA sub_42A590.
   bVar1 = CDSBackBuffer_BindImageFromSurface();
   if (!bVar1) {
-    bVar2 = CDSApp::CDSApp_RestoreLostSurfaces(in_ECX);
+    bVar2 = CDSApp::CDSApp_RestoreLostSurfaces(this);
     bVar1 = false;
     if (bVar2) {
       bVar1 = CDSBackBuffer_BindImageFromSurface();
@@ -102263,7 +102375,8 @@ void __thiscall CDSApp::CDSApp_AddDirtyRectCoalesced(CDSApp *this,int *param_1,i
   int iVar10;
   int iVar11;
   int *piVar12;
-  int iVar13;
+  tagRECT *ptVar13;
+  int iVar14;
   uint local_48;
   int local_44;
   int local_40;
@@ -102290,27 +102403,27 @@ void __thiscall CDSApp::CDSApp_AddDirtyRectCoalesced(CDSApp *this,int *param_1,i
         iVar6 = iVar6 + -0x10;
         iVar8 = *(int *)(*param_1 + 8 + iVar6);
         piVar12 = (int *)(*param_1 + iVar6);
-        iVar13 = *piVar12;
+        iVar14 = *piVar12;
         iVar11 = iVar11 + -1;
         uVar7 = local_48;
         iVar3 = local_44;
         iVar4 = iVar11;
-        if (iVar13 < iVar8) {
+        if (iVar14 < iVar8) {
           iVar1 = piVar12[1];
           iVar2 = piVar12[3];
           if (iVar1 < iVar2) {
-            if ((((iVar10 == iVar13) && (iVar1 == local_30.top)) && (iVar8 == local_30.right)) &&
+            if ((((iVar10 == iVar14) && (iVar1 == local_30.top)) && (iVar8 == local_30.right)) &&
                (iVar2 == local_30.bottom)) {
               return;
             }
-            if (((iVar13 <= iVar10) && (iVar1 <= local_30.top)) &&
+            if (((iVar14 <= iVar10) && (iVar1 <= local_30.top)) &&
                ((local_30.right <= iVar8 && (local_30.bottom <= iVar2)))) {
               return;
             }
             iVar4 = local_40;
-            if (((iVar13 < iVar10) || (iVar1 < local_30.top)) ||
+            if (((iVar14 < iVar10) || (iVar1 < local_30.top)) ||
                ((local_30.right < iVar8 || (local_30.bottom < iVar2)))) {
-              local_20.left = iVar13;
+              local_20.left = iVar14;
               local_20.top = iVar1;
               local_20.right = iVar8;
               local_20.bottom = iVar2;
@@ -102320,7 +102433,7 @@ void __thiscall CDSApp::CDSApp_AddDirtyRectCoalesced(CDSApp *this,int *param_1,i
                 local_10.left = *piVar12;
                 local_10.right = piVar12[2];
                 local_10.bottom = piVar12[3];
-                tagRECT::CDSRect_IntersectInPlace(&local_10,&local_30.left);
+                tagRECT::CDSRect_IntersectInPlace(&local_10,&local_30);
                 if ((local_10.left < local_10.right) && (local_10.top < local_10.bottom)) {
                   iVar10 = (local_10.bottom - local_10.top) * (local_10.right - local_10.left);
                 }
@@ -102335,20 +102448,20 @@ void __thiscall CDSApp::CDSApp_AddDirtyRectCoalesced(CDSApp *this,int *param_1,i
                 }
                 if (*piVar12 < piVar12[2]) {
                   if (piVar12[3] <= piVar12[1]) goto LAB_0042b812;
-                  iVar13 = (piVar12[3] - piVar12[1]) * (piVar12[2] - *piVar12);
+                  iVar14 = (piVar12[3] - piVar12[1]) * (piVar12[2] - *piVar12);
                 }
                 else {
 LAB_0042b812:
-                  iVar13 = 0;
+                  iVar14 = 0;
                 }
-                uVar7 = ((iVar8 - iVar13) - iVar5 * iVar9) + iVar10;
+                uVar7 = ((iVar8 - iVar14) - iVar5 * iVar9) + iVar10;
                 iVar10 = local_30.left;
                 iVar3 = iVar11;
                 if (uVar7 < local_48) goto LAB_0042b6c2;
               }
             }
             else {
-              piVar12[2] = iVar13;
+              piVar12[2] = iVar14;
             }
             iVar10 = local_30.left;
             uVar7 = local_48;
@@ -102361,16 +102474,16 @@ LAB_0042b6c2:
         local_48 = uVar7;
       } while (iVar11 != 0);
       if (-1 < local_44) {
-        piVar12 = (int *)(local_44 * 0x10 + *param_1);
+        ptVar13 = (tagRECT *)(local_44 * 0x10 + *param_1);
         if (local_48 < 0x1389) {
 LAB_0042b72a:
-          tagRECT::CDSRect_IntersectInPlace(&local_30,piVar12);
-          piVar12[2] = *piVar12;
+          tagRECT::CDSRect_IntersectInPlace(&local_30,ptVar13);
+          ptVar13->right = ptVar13->left;
           CDSApp_AddDirtyRectCoalesced(this,param_1,&local_30.left);
           return;
         }
-        _Globals::CDSRect_Assign(&local_10,piVar12);
-        tagRECT::CDSRect_IntersectInPlace(&local_10,&local_30.left);
+        _Globals::CDSRect_Assign(&local_10,(undefined4 *)ptVar13);
+        tagRECT::CDSRect_IntersectInPlace(&local_10,&local_30);
         uVar7 = tagRECT::CDSApp_DirtyRect_ComputeAreaPixels(&local_10);
         iVar10 = local_30.left;
         if ((local_48 * 100) / uVar7 < 0x28) goto LAB_0042b72a;
@@ -102658,7 +102771,7 @@ void __fastcall _Globals::CDSApp_RenderFrame(CBulanci *param_1)
   
   if ((param_1->app).bDrawable != 0) {
     (param_1->app).bDirtyDuringFrame = 0;
-    uVar3 = CDSApp_TryBindBackBufferSurface();
+    uVar3 = CDSApp_TryBindBackBufferSurface(param_1);
     if (uVar3 != '\0') {
       piVar1 = (int *)(param_1->app).pCurrentView;
       (param_1->app).bDirtyDuringFrame = 1;
@@ -104234,6 +104347,8 @@ LAB_0042d1ef:
         piVar5 = (int *)0x0;
       }
       else {
+                    // DoModal: save parent keyboard-focus child at parent+0x50 (dwChainField_50);
+                    // parent from this+0x4c. R10 task 14.
         piVar5 = *(int **)((int)pvVar2 + 0x50);
       }
       bVar4 = (byte)(this->win).wViewStateFlags & 1;
@@ -104253,6 +104368,8 @@ LAB_0042d1ef:
       } while ((((this->win).wWidgetFlags & 0x40) != 0) &&
               (cVar3 = (**(code **)((int)(this->win).pVftable_primary + 0x34))
                                  ((this->win).wChainCounter_4a), cVar3 == '\0'));
+                    // DoModal epilogue: primary vfn+0x24 (pInvalidateRect) after modal loop; pairs
+                    // with call @+0x22d. R10 task 14.
       (**(code **)((int)(this->win).pVftable_primary + 0x24))(0,0);
       if (bVar4 == 0) {
         CDSView__Hide(this);
@@ -104426,9 +104543,10 @@ int __cdecl CBulanci::CDsString_CompareHandles(void *param_1)
 
 
 
-void __thiscall _Globals::CDsString_WriteWStringToStream(void *this,int *param_1)
+int __thiscall _Globals::CDsString_WriteWStringToStream(void *this,int *param_1)
 
 {
+  int iVar1;
   int unaff_EDI;
   undefined4 local_4;
   
@@ -104439,10 +104557,11 @@ void __thiscall _Globals::CDsString_WriteWStringToStream(void *this,int *param_1
     local_4 = *(undefined4 *)(*(int *)this + -0xc);
   }
   (**(code **)(*param_1 + 0x14))(&local_4,4);
+  iVar1 = 0;
   if (unaff_EDI != 0) {
-    (**(code **)(*param_1 + 0x14))(*(undefined4 *)this,unaff_EDI * 2);
+    iVar1 = (**(code **)(*param_1 + 0x14))(*(undefined4 *)this,unaff_EDI * 2);
   }
-  return;
+  return iVar1;
 }
 
 
@@ -104515,21 +104634,9 @@ void * __thiscall _Globals::CDsStringAssignFromHandle(void *this,undefined4 *par
 
 
 
-// CDsString::AssignFromLiteral(this, pwLiteral) -- assign from raw null-terminated wide literal.
-// 
-// Walks pwLiteral until null to compute length, then:
-//   1. If `this` has a unique buffer of sufficient capacity, memcpy + update length.
-//   2. Otherwise call CDsStringAllocAndCopyWide() to allocate a fresh handle
-//      (header + data) sized exactly for this literal, release the old handle,
-//      and adopt the new one.
-// 
-// When pwLiteral is NULL, the engine substitutes a static empty-string fallback
-// from PTR_DAT_004afce0.
-// 
-// This is the most common string entry-point: most dialog construction code
-// uses literal text via `CDsStringAssignFromLiteral(&stack_handle, L"...")`.
-// 
-// See CDsStringAssignFromHandle (0x0042d490) for the full layout doc.
+// Parameters:
+//   this (ECX) — CDSString* handle slot (wchar_t**), NOT CBulanci*
+//   param_1 — null-terminated wide literal
 
 CBulanci * __thiscall CBulanci::CDsStringAssignFromLiteral(CBulanci *this,short *param_1)
 
@@ -104697,11 +104804,15 @@ void * __cdecl _Globals::CDsStringFormatV(void *param_1,wchar_t *param_2)
 
 
 
-void __thiscall CStartGame2::CDsString_CompareHandles(CStartGame2 *this,undefined4 *param_1)
+int __thiscall CStartGame2::CDsString_CompareHandles(CStartGame2 *this,void *param_1)
 
 {
-  CBulanci::CDsString_CompareHandles((void *)*param_1);
-  return;
+  int iVar1;
+  
+                    // Lexicographic compare of two CDSString handle slots via sub_42D3F0 (IDA
+                    // sub_42D7A0).
+  iVar1 = CBulanci::CDsString_CompareHandles(*(void **)param_1);
+  return iVar1;
 }
 
 
@@ -104867,8 +104978,11 @@ CDSFileStream * __thiscall CBulanci::CBulanci_CreateCDSFileStream(CBulanci *this
 
 // WARNING: Function: __alloca_probe replaced with injection: alloca_probe
 // WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie
+// Parameters:
+//   param_1 (stack) — CDSString* / wchar_t** output handle slot
+// Returns param_1 after GetTempPathW + trailing backslash
 
-CBulanci * __cdecl CBulanci::CBulanci_AssignTempPathWithTrailingBackslash(CBulanci *param_1)
+void * __cdecl CBulanci::CBulanci_AssignTempPathWithTrailingBackslash(void)
 
 {
   undefined *puVar1;
@@ -104878,8 +104992,8 @@ CBulanci * __cdecl CBulanci::CBulanci_AssignTempPathWithTrailingBackslash(CBulan
   uint uVar5;
   int iVar6;
   undefined *puVar7;
-  wchar_t awStack_801c [4];
-  CBulanci *local_8014;
+  CBulanci *in_stack_00000004;
+  wchar_t awStack_801c [6];
   WCHAR local_8010 [16384];
   uint local_10;
   void *local_c;
@@ -104894,22 +105008,21 @@ CBulanci * __cdecl CBulanci::CBulanci_AssignTempPathWithTrailingBackslash(CBulan
   awStack_801c[2] = L'\0';
   awStack_801c[3] = L'\0';
   local_4 = 0;
-  local_8014 = param_1;
   local_8010[0] = L'\0';
   DVar2 = GetTempPathW(0x4000,local_8010);
   if (DVar2 == 0) {
     CDSApiException::CDSApiException_ThrowFromGetLastError();
   }
-  (param_1->app).vftable_primary = (undefined *)0x0;
-  CDsStringAssignFromLiteral(param_1,local_8010);
-  puVar1 = (param_1->app).vftable_primary;
+  (in_stack_00000004->app).vftable_primary = (undefined *)0x0;
+  CDsStringAssignFromLiteral(in_stack_00000004,local_8010);
+  puVar1 = (in_stack_00000004->app).vftable_primary;
   local_4 = 0;
   awStack_801c[2] = L'\x01';
   awStack_801c[3] = L'\0';
   if ((puVar1 == (undefined *)0x0) || (*(int *)(puVar1 + -0xc) == 0)) {
     CDSApiException::CDSApiException_ThrowFromWin32(10);
   }
-  puVar1 = (param_1->app).vftable_primary;
+  puVar1 = (in_stack_00000004->app).vftable_primary;
   if (puVar1 == (undefined *)0x0) {
     iVar6 = 0;
     puVar7 = PTR_DAT_004afce0;
@@ -104927,9 +105040,9 @@ CBulanci * __cdecl CBulanci::CBulanci_AssignTempPathWithTrailingBackslash(CBulan
     }
     awStack_801c[0] = L'\\';
     awStack_801c[1] = 0;
-    _Globals::CDsStringInsertWide(param_1,piVar3,0,awStack_801c,1);
+    _Globals::CDsStringInsertWide(in_stack_00000004,piVar3,0,awStack_801c,1);
   }
-  pWVar4 = (LPCWSTR)(param_1->app).vftable_primary;
+  pWVar4 = (LPCWSTR)(in_stack_00000004->app).vftable_primary;
   if (pWVar4 == (LPCWSTR)0x0) {
     pWVar4 = (LPCWSTR)PTR_DAT_004afce0;
   }
@@ -104938,12 +105051,12 @@ CBulanci * __cdecl CBulanci::CBulanci_AssignTempPathWithTrailingBackslash(CBulan
     CDSApiException::CDSApiException_ThrowFromWin32(10);
   }
   ExceptionList = local_c;
-  return param_1;
+  return in_stack_00000004;
 }
 
 
 
-void __thiscall CBulanci::CDsString_AssignFromMultiByte(CBulanci *this,LPCSTR param_1,UINT param_2)
+void __thiscall CBulanci::CDsString_AssignFromMultiByte(CBulanci *this,char *param_1,UINT param_2)
 
 {
   int iVar1;
@@ -104953,7 +105066,7 @@ void __thiscall CBulanci::CDsString_AssignFromMultiByte(CBulanci *this,LPCSTR pa
   bool bVar3;
   
                     // MultiByteToWideChar into CDSString handle (R6 task 19)
-  if (param_1 == (LPCSTR)0x0) {
+  if (param_1 == (char *)0x0) {
     (this->app).vftable_primary = (undefined *)0x0;
     return;
   }
@@ -104983,7 +105096,7 @@ void __thiscall CBulanci::CDsString_AssignFromMultiByte(CBulanci *this,LPCSTR pa
 
 
 
-void __thiscall _Globals::CDsString_WideToMultiByteBuffer(void *this,LPCWSTR param_1,UINT param_2)
+void __thiscall _Globals::CDsString_WideToMultiByteBuffer(void *this,wchar_t *param_1,UINT param_2)
 
 {
   int iVar1;
@@ -104995,7 +105108,7 @@ void __thiscall _Globals::CDsString_WideToMultiByteBuffer(void *this,LPCWSTR par
                     // UNCERTAIN: WideCharToMultiByte wrapper (FUN_004031b0 cap 0x4000). Pair with
                     // FUN_004045f0 (cap 0x80) and WideCharToMultiByte_Wrapper @ 0x437440 (cap
                     // 0x400).
-  if (param_1 == (LPCWSTR)0x0) {
+  if (param_1 == (wchar_t *)0x0) {
     *(undefined4 *)this = 0;
     return;
   }
@@ -105392,7 +105505,7 @@ CBulanci::CDsString_ReadNarrowLengthPrefixedFromStream(CBulanci *this,int *param
 {
   uint uVar1;
   CBulanci *pCVar2;
-  LPCSTR pCVar3;
+  char *pcVar3;
   UINT UVar4;
   int unaff_ESI;
   CBulanci local_8018 [26];
@@ -105415,20 +105528,20 @@ CBulanci::CDsString_ReadNarrowLengthPrefixedFromStream(CBulanci *this,int *param
     pCVar2 = (CBulanci *)_Globals::CDsString_ClearInPlace((int *)this);
   }
   else {
-    pCVar3 = _Globals::Runtime_MallocOrThrow(&DAT_004b7c94,(uchar *)(unaff_ESI + 1));
+    pcVar3 = _Globals::Runtime_MallocOrThrow(&DAT_004b7c94,(uchar *)(unaff_ESI + 1));
     local_c = (void *)0x0;
-    (**(code **)(*param_1 + 0x10))(pCVar3,unaff_ESI);
-    pCVar3[uVar1] = '\0';
+    (**(code **)(*param_1 + 0x10))(pcVar3,unaff_ESI);
+    pcVar3[uVar1] = '\0';
     UVar4 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-    CDsString_AssignFromMultiByte(local_8018,pCVar3,UVar4);
+    CDsString_AssignFromMultiByte(local_8018,pcVar3,UVar4);
     local_c = (void *)CONCAT31(local_c._1_3_,1);
     pCVar2 = CDsStringAssignFromLiteral(this,(short *)local_8018[0].app.vftable_primary);
     if ((undefined **)local_8018[0].app.vftable_primary != &local_8018[0].app.vftable_sub04) {
       Runtime::MSVCRT::_free(local_8018[0].app.vftable_primary);
     }
     local_c = (void *)0xffffffff;
-    if (pCVar3 != (LPCSTR)0x0) {
-      _Globals::Runtime_Free(&DAT_004b7c94,pCVar3);
+    if (pcVar3 != (char *)0x0) {
+      _Globals::Runtime_Free(&DAT_004b7c94,pcVar3);
     }
   }
   ExceptionList = pvStack_14;
@@ -105446,7 +105559,7 @@ void __thiscall CBulanci::CDsString_WriteNarrowLengthPrefixedToStream(CBulanci *
   undefined *puVar1;
   UINT UVar2;
   int unaff_EDI;
-  LPCWSTR pWVar3;
+  wchar_t *pwVar3;
   undefined4 local_4014 [4096];
   void *pvStack_14;
   undefined4 uStack_10;
@@ -105471,12 +105584,12 @@ void __thiscall CBulanci::CDsString_WriteNarrowLengthPrefixedToStream(CBulanci *
   }
   (**(code **)(*param_1 + 0x14))(local_4014,4,DAT_004b0e44 ^ (uint)&stack0xffffbfe4);
   if (unaff_EDI != 0) {
-    pWVar3 = (LPCWSTR)(this->app).vftable_primary;
-    if (pWVar3 == (LPCWSTR)0x0) {
-      pWVar3 = (LPCWSTR)PTR_DAT_004afce0;
+    pwVar3 = (wchar_t *)(this->app).vftable_primary;
+    if (pwVar3 == (wchar_t *)0x0) {
+      pwVar3 = (wchar_t *)PTR_DAT_004afce0;
     }
     UVar2 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-    _Globals::CDsString_WideToMultiByteBuffer(&stack0xffffbfe8,pWVar3,UVar2);
+    _Globals::CDsString_WideToMultiByteBuffer(&stack0xffffbfe8,pwVar3,UVar2);
     local_c = (void *)0x0;
     (**(code **)(*param_1 + 0x14))(local_4014,unaff_EDI);
   }
@@ -105498,7 +105611,9 @@ _Globals::CDsString_WriteTwoWideStringsToStream(void *this,int *pStream,wchar_t 
   UINT UVar3;
   undefined4 uVar4;
   LPCWSTR pWVar5;
-  LPCWSTR pWVar6;
+  UINT UVar6;
+  LPCWSTR pWVar7;
+  wchar_t *pwVar8;
   LPCWSTR unaff_retaddr;
   undefined1 *puStack_4018;
   undefined1 auStack_4014 [4];
@@ -105520,13 +105635,13 @@ _Globals::CDsString_WriteTwoWideStringsToStream(void *this,int *pStream,wchar_t 
   uStack_10 = 0x42e4f8;
   _Memory = (undefined1 *)(DAT_004b0e44 ^ (uint)&stack0xffffbf60);
   ExceptionList = &local_c;
-  pWVar5 = *(LPCWSTR *)this;
-  if (*(LPCWSTR *)this == (LPCWSTR)0x0) {
-    pWVar5 = (LPCWSTR)PTR_DAT_004afce0;
+  pwVar8 = *(wchar_t **)this;
+  if (*(wchar_t **)this == (wchar_t *)0x0) {
+    pwVar8 = (wchar_t *)PTR_DAT_004afce0;
   }
   local_4010 = local_400c;
   UVar3 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-  CDsString_WideToMultiByteBuffer(&local_4010,pWVar5,UVar3);
+  CDsString_WideToMultiByteBuffer(&local_4010,pwVar8,UVar3);
   uStack_4 = 0;
   if (*(int *)this == 0) {
     uVar4 = 0;
@@ -105548,12 +105663,12 @@ _Globals::CDsString_WriteTwoWideStringsToStream(void *this,int *pStream,wchar_t 
     WVar2 = *pWVar5;
     pWVar5 = pWVar5 + 1;
   } while (WVar2 != L'\0');
-  pWVar6 = (LPCWSTR)PTR_DAT_004afce0;
+  pWVar7 = (LPCWSTR)PTR_DAT_004afce0;
   if (unaff_retaddr != (LPCWSTR)0x0) {
-    pWVar6 = unaff_retaddr;
+    pWVar7 = unaff_retaddr;
   }
-  UVar3 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
-  CDsString_AssignFromWideCapped80(&stack0xffffbf64,pWVar6,UVar3);
+  UVar6 = (*(code *)PTR__AtlGetThreadACPThunk_004afbfc)();
+  CDsString_AssignFromWideCapped80(&stack0xffffbf64,pWVar7,UVar6);
   local_c = (void *)0x1;
   (**(code **)(*pStream + 0x14))(&stack0xffffbf68,(int)pWVar5 - (int)pWVar1 >> 1);
   if (_Memory != &stack0xffffbf60) {
@@ -108347,13 +108462,13 @@ CBulanci * CDSEasyMemStream::GetStreamName(CBulanci *param_1)
 
 
 
-void __fastcall _Globals::CDSEasyMemStream_GuardReadable(int param_1)
+void __thiscall _Globals::CDSEasyMemStream_GuardReadable(void *this)
 
 {
                     // CDSEasyMemStream readable guard: null backing -> stream errno 8
-  if (*(int *)(param_1 + 0x28) == 0) {
+  if (*(int *)((int)this + 0x28) == 0) {
                     // WARNING: Subroutine does not return
-    ThrowStreamErrorNoReturn(8,(int *)(param_1 + 0xc),0);
+    ThrowStreamErrorNoReturn(8,(int *)((int)this + 0xc),0);
   }
   return;
 }
@@ -108628,11 +108743,11 @@ _Globals::CDSEasyMemStream_CreateFromStreamSlice
 {
   longlong lVar1;
   CDSEasyMemStream *this_00;
-  undefined4 uVar2;
-  int iVar3;
-  uchar *puVar4;
-  CDSEasyMemStream *pCVar5;
-  longlong lVar6;
+  undefined4 extraout_EAX;
+  int iVar2;
+  uchar *puVar3;
+  CDSEasyMemStream *this_01;
+  longlong lVar4;
   uchar *unaff_retaddr;
   void *local_c;
   undefined1 *puStack_8;
@@ -108649,26 +108764,26 @@ _Globals::CDSEasyMemStream_CreateFromStreamSlice
   ExceptionList = &local_c;
   (**(code **)(*(int *)this + 0x28))
             (idsStreamSlice,seekOrigin,0,DAT_004b0e44 ^ (uint)&stack0xffffffe4);
-  lVar6 = (**(code **)(*(int *)this + 0x1c))();
-  lVar6 = lVar6 - lVar1;
-  puVar4 = (uchar *)lVar6;
-  iVar3 = (int)((ulonglong)lVar6 >> 0x20);
+  lVar4 = (**(code **)(*(int *)this + 0x1c))();
+  lVar4 = lVar4 - lVar1;
+  puVar3 = (uchar *)lVar4;
+  iVar2 = (int)((ulonglong)lVar4 >> 0x20);
   if ((unaff_retaddr == (uchar *)0xffffffff) ||
-     ((iVar3 <= (int)unaff_retaddr >> 0x1f &&
-      ((iVar3 < (int)unaff_retaddr >> 0x1f || (puVar4 < unaff_retaddr)))))) {
-    unaff_retaddr = puVar4;
+     ((iVar2 <= (int)unaff_retaddr >> 0x1f &&
+      ((iVar2 < (int)unaff_retaddr >> 0x1f || (puVar3 < unaff_retaddr)))))) {
+    unaff_retaddr = puVar3;
   }
   this_00 = (CDSEasyMemStream *)OperatorNewWithBadAlloc(0x2c);
-  pCVar5 = (CDSEasyMemStream *)0x0;
+  this_01 = (CDSEasyMemStream *)0x0;
   if (this_00 != (CDSEasyMemStream *)0x0) {
-    pCVar5 = CDSEasyMemStream::CDSEasyMemStream_ctor(this_00,unaff_retaddr,0);
+    this_01 = CDSEasyMemStream::CDSEasyMemStream_ctor(this_00,unaff_retaddr,0);
   }
-  (**(code **)(pCVar5->vf_IDSStream + 0x24))(unaff_retaddr,(int)unaff_retaddr >> 0x1f);
-  iVar3 = *(int *)this;
-  uVar2 = CDSEasyMemStream_GuardReadable((int)pCVar5);
-  (**(code **)(iVar3 + 0x10))(uVar2,unaff_retaddr);
+  (**(code **)(this_01->vf_IDSStream + 0x24))(unaff_retaddr,(int)unaff_retaddr >> 0x1f);
+  iVar2 = *(int *)this;
+  CDSEasyMemStream_GuardReadable(this_01);
+  (**(code **)(iVar2 + 0x10))(extraout_EAX,unaff_retaddr);
   ExceptionList = (void *)seekOrigin;
-  return pCVar5;
+  return this_01;
 }
 
 
@@ -111250,7 +111365,7 @@ void __fastcall _Globals::CBulanci_CloseFindHandle(int param_1)
 
 
 
-void __thiscall tagRECT::CDSRect_IntersectInPlace(tagRECT *this,int *param_1)
+void __thiscall tagRECT::CDSRect_IntersectInPlace(tagRECT *this,tagRECT *param_1)
 
 {
   int iVar1;
@@ -111260,8 +111375,8 @@ void __thiscall tagRECT::CDSRect_IntersectInPlace(tagRECT *this,int *param_1)
   int iVar5;
   
                     // ECX=dest RECT*; in-place intersect (pair with CDSRect_Intersect@0x33280)
-  iVar5 = *param_1;
-  if ((iVar5 < param_1[2]) && (param_1[1] < param_1[3])) {
+  iVar5 = param_1->left;
+  if ((iVar5 < param_1->right) && (param_1->top < param_1->bottom)) {
     iVar1 = this->right;
     iVar2 = this->left;
     if (iVar2 < iVar1) {
@@ -111272,18 +111387,18 @@ void __thiscall tagRECT::CDSRect_IntersectInPlace(tagRECT *this,int *param_1)
           iVar5 = iVar2;
         }
         this->left = iVar5;
-        iVar5 = param_1[1];
-        if (iVar3 <= param_1[1]) {
+        iVar5 = param_1->top;
+        if (iVar3 <= param_1->top) {
           iVar5 = iVar3;
         }
         this->top = iVar5;
-        iVar5 = param_1[2];
-        if (param_1[2] < iVar1) {
+        iVar5 = param_1->right;
+        if (param_1->right < iVar1) {
           iVar5 = iVar1;
         }
         this->right = iVar5;
-        iVar5 = param_1[3];
-        if (param_1[3] < iVar4) {
+        iVar5 = param_1->bottom;
+        if (param_1->bottom < iVar4) {
           iVar5 = iVar4;
         }
         this->bottom = iVar5;
@@ -111291,9 +111406,9 @@ void __thiscall tagRECT::CDSRect_IntersectInPlace(tagRECT *this,int *param_1)
       }
     }
     this->left = iVar5;
-    this->top = param_1[1];
-    this->right = param_1[2];
-    this->bottom = param_1[3];
+    this->top = param_1->top;
+    this->right = param_1->right;
+    this->bottom = param_1->bottom;
     return;
   }
   return;
@@ -117800,8 +117915,9 @@ void __cdecl _Globals::TM_ShiftTrackEntries(undefined4 *dst,undefined4 *src,int 
   undefined4 *puVar1;
   int iVar2;
   
-                    // R5 w10: 8-byte pair memmove for CDSTrackVector insert; sole caller
-                    // TM_InsertTrackAt@0x00439a70.
+                    // R10 t15: 8-byte {key,IDSStream*} memmove (forward @0x439800 ADD EAX,8;
+                    // reverse @0x439825 LEA EAX,[ESI+ECX*8]). Sole caller
+                    // TM_InsertTrackAt@0x439a96.
   if (dst < src) {
     if (0 < count) {
       iVar2 = (int)src - (int)dst;
@@ -117836,6 +117952,9 @@ void __fastcall _Globals::TM_PauseAndStampClock(CDSVideoPlayer *this)
 {
   void *pvVar1;
   
+                    // R10 t15: NOT CDSTrackVector — CDSVideoPlayer scheduler pause/stamp (R5 w14
+                    // mis-blocked as vector memmove). Offsets +0x35 bPaused, +0x40
+                    // dwSchedulerCookie.
   if (this->bPaused == 0) {
                     // dwSchedulerCookie @ +0x40: wall-clock ms stamp when pausing (g_dwElapsedMs);
                     // ctor init 0xffffffff; consumed by scheduler slot-0 arm/cancel path.
@@ -117870,20 +117989,22 @@ void __fastcall CGaming::CGaming_ArmTrackMgrSchedulerIfUnpaused(CDSVideoPlayer *
 
 
 
-void __thiscall _Globals::TM_ClearTracks(void *this,int param_1)
+void __thiscall _Globals::TM_ClearTracks(void *this,int newCapacity)
 
 {
   void *pvVar1;
   
-  if (*(int *)((int)this + 4) < param_1) {
-    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 * 8));
-    *(int *)((int)this + 4) = param_1;
+                    // R10 t15: Realloc backing store to newCapacity*8 bytes; updates pTracks@+0 and
+                    // dwTracksAllocated@+4. Does not zero cTracks@+8.
+  if (*(int *)((int)this + 4) < newCapacity) {
+    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(newCapacity * 8));
+    *(int *)((int)this + 4) = newCapacity;
     *(void **)this = pvVar1;
     return;
   }
-  if (param_1 < *(int *)((int)this + 4)) {
-    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(param_1 * 8));
-    *(int *)((int)this + 4) = param_1;
+  if (newCapacity < *(int *)((int)this + 4)) {
+    pvVar1 = Runtime_ReallocOrThrow(*(void **)this,(uchar *)(newCapacity * 8));
+    *(int *)((int)this + 4) = newCapacity;
     *(void **)this = pvVar1;
   }
   return;
@@ -117891,14 +118012,18 @@ void __thiscall _Globals::TM_ClearTracks(void *this,int param_1)
 
 
 
-void __thiscall _Globals::CDSVideoPlayer_EnsureCapacity(void *this,uint param_1)
+void __thiscall _Globals::CDSTrackVector_EnsureCapacity(void *this,uint minCount)
 
 {
-  if (*(int *)((int)this + 4) < (int)param_1) {
+                    // R10 t15: Grow CDSTrackVector when dwTracksAllocated < minCount. Requires
+                    // dwTrackCapacity@+0xc != 0 else throw(11,13). newCap =
+                    // (minCount/growthChunk+1)*growthChunk; calls TM_ClearTracks →
+                    // Realloc(pTracks, newCap*8).
+  if (*(int *)((int)this + 4) < (int)minCount) {
     if (*(int *)((int)this + 0xc) == 0) {
       CDSSimpleException::CDSSimpleException_Throw(0xb,0xd);
     }
-    TM_ClearTracks(this,(param_1 / *(uint *)((int)this + 0xc) + 1) * *(uint *)((int)this + 0xc));
+    TM_ClearTracks(this,(minCount / *(uint *)((int)this + 0xc) + 1) * *(uint *)((int)this + 0xc));
   }
   return;
 }
@@ -118013,7 +118138,7 @@ int __thiscall CDSTrackVector::TM_InsertTrackAt(CDSTrackVector *this,void *recor
                     // UNCERTAIN: sorted 8-byte record vector insert-at-index; callee of
                     // InsertOrFindTrack via FUN_00439730 lookup. Parallel to FUN_004072b0
                     // pointer-vector insert — helper tier still unnamed per batch_42.
-  _Globals::CDSVideoPlayer_EnsureCapacity(this,this->dwTracks + 1);
+  _Globals::CDSTrackVector_EnsureCapacity(this,this->dwTracks + 1);
   count = this->dwTracks - index;
   if (count != 0) {
     src = (undefined4 *)((int)this->pTracks + index * 8);
@@ -118152,7 +118277,7 @@ CDSTrackVector::InsertOrFindTrack(CDSTrackVector *this,undefined4 *record,void *
     }
   }
   else if (((char)flags != '\0') || (iVar3 < 0)) {
-    _Globals::CDSVideoPlayer_EnsureCapacity(this,this->dwTracks + 1);
+    _Globals::CDSTrackVector_EnsureCapacity(this,this->dwTracks + 1);
     uVar1 = this->dwTracks;
     pvVar2 = this->pTracks;
     *(undefined4 *)((int)pvVar2 + uVar1 * 8) = *record;
@@ -118440,18 +118565,19 @@ undefined8 __fastcall _Globals::ComputeDurationMs(int param_1)
 
 
 
-void __thiscall
-_Globals::CDSAudioPlayer_SetDirectSoundBufferPosition(void *this,undefined4 position)
+void __thiscall _Globals::CDSAudioPlayer_ApplySpatialAttenToDirectSound(void *this,int attenDb100)
 
 {
   uint dwHresult;
   
-                    // UNCERTAIN: CDSAudioPlayer — if stream at +0x14 set, calls
-                    // vtable+0x40(param). Sole code xref CDSAudioPlayer_Create when param_3!=0;
-                    // DirectSound buffer seek/play helper.
+                    // CDSAudioPlayer::ApplySpatialAttenToDirectSound — if pDirectSoundBuffer
+                    // (+0x14) set, calls IDirectSoundBuffer vtable+0x40(attenDb100). Sole caller
+                    // CDSAudioPlayer_Create when preDelayOrFlags!=0; value is TriggerBankSample 4th
+                    // arg (ComputeSpatialAttenuationDb100), NOT sample position.
+                    // HRESULT→CDSDirectXException.
   if (*(int *)((int)this + 0x14) != 0) {
     dwHresult = (**(code **)(**(int **)((int)this + 0x14) + 0x40))
-                          (*(int **)((int)this + 0x14),position);
+                          (*(int **)((int)this + 0x14),attenDb100);
     if ((int)dwHresult < 0) {
       CDSDirectXException::CDSDirectXException_ThrowFromHresult(1,dwHresult);
     }
@@ -118519,6 +118645,10 @@ bool __thiscall CDSAudioPlayer::CDSAudioPlayer_RefillDirectSoundBuffer(CDSAudioP
   undefined1 local_8 [4];
   undefined1 local_4 [4];
   
+                    // CDSAudioPlayer::RefillDirectSoundBuffer — non-streaming playback position
+                    // sync. DS path: GetCurrentPosition vtable+0x10; Stop vtable+0x48 when
+                    // non-looping end. No-DS path: elapsed-ms→byte pos via sample
+                    // rate/channels/bps. Updates dwDsSubOffset (+0x3C), dwPlaybackBytePos (+0x40).
   piVar1 = this->pDirectSoundBuffer;
   bVar5 = false;
   if (piVar1 != (int *)0x0) {
@@ -118582,6 +118712,10 @@ bool __thiscall CDSAudioPlayer::CDSAudioPlayer_OnPlaybackTick(CDSAudioPlayer *th
   bool local_5;
   byte local_4 [4];
   
+                    // CDSAudioPlayer::OnPlaybackTick — GetStatus vtable+0x24 on
+                    // pDirectSoundBuffer (+0x14); streaming refill arms bRefillArmed (+0x23);
+                    // completion posts WM 0x200/1 to g_pDirectSoundSingleton+0x1C. AV sync:
+                    // RefillDirectSoundBuffer then TM_SeekToFrame via pTrackSync (+0x10).
   local_5 = false;
   if (this->bPlaying == 0) {
     return false;
@@ -158276,7 +158410,7 @@ void __cdecl _Globals::jinit_color_deconverter(int *param_1)
   
   puVar1 = (undefined4 *)(**(code **)param_1[1])(param_1,1,0x18);
   param_1[0x69] = (int)puVar1;
-  *puVar1 = CDSApp::CDSApp_PreCreateHook;
+  *puVar1 = CDSApp::IDSStream_NoOpFlush;
   switch(param_1[10]) {
   case 1:
     if (param_1[9] != 1) {
@@ -159457,7 +159591,7 @@ void __cdecl _Globals::start_pass_2(int *param_1,char param_2)
     else {
       *(code **)(iVar1 + 4) = color_quantize3;
     }
-    *(code **)(iVar1 + 8) = CDSApp::CDSApp_PreCreateHook;
+    *(code **)(iVar1 + 8) = CDSApp::IDSStream_NoOpFlush;
     iVar4 = param_1[0x1c];
     if (iVar4 < 1) {
       *(undefined4 *)(*param_1 + 8) = 0x38;
@@ -160272,15 +160406,10 @@ void __cdecl _Globals::start_pass_merged_upsampler(int *cinfo)
 
 
 
-// Shared no-op thunk used as IDSStream slot 6 (Flush) by
-// CDSEasyMemStream and CDSQueueStream.  Ghidra attributes the symbol
-// to CDSApp::CDSApp_PreCreateHook because that's the first class whose
-// vftable references it; in reality this is just `return;` and the
-// linker dedupes every class-method body that's identical to it.
-// 
-// Memory and queue streams don't buffer anything, so Flush is a no-op.
+// Shared 1-byte RET (linker dedupe). IDSStream::Flush no-op for mem/queue streams; IJG upsampler
+// vtable slot 2; also invoked from CGaming scheduler walk. NOT CDSApp-specific — IDA: nullsub_2.
 
-void __thiscall CDSApp::CDSApp_PreCreateHook(CDSApp *this)
+void __cdecl CDSApp::IDSStream_NoOpFlush(void)
 
 {
   return;
@@ -160300,7 +160429,7 @@ void __cdecl _Globals::jinit_merged_upsampler(int *param_1)
   puVar1 = (undefined4 *)(**(code **)param_1[1])(param_1,1,0x58);
   param_1[0x6a] = (int)puVar1;
   *puVar1 = start_pass_merged_upsampler;
-  puVar1[2] = CDSApp::CDSApp_PreCreateHook;
+  puVar1[2] = CDSApp::IDSStream_NoOpFlush;
   puVar1[3] = &LAB_00467440;
   puVar1[0x11] = 0;
   puVar1[0xd] = 0;
@@ -162952,7 +163081,7 @@ void __cdecl CDSJpegImage::jinit_downsampler(int *cinfo)
                     // !raw_data_in.
   puVar3 = (undefined4 *)(**(code **)cinfo[1])(cinfo,1,0x34);
   cinfo[0x55] = (int)puVar3;
-  *puVar3 = CDSApp::CDSApp_PreCreateHook;
+  *puVar3 = CDSApp::IDSStream_NoOpFlush;
   puVar3[1] = _Globals::sep_downsample;
   *(undefined1 *)(puVar3 + 2) = 0;
   if (*(char *)((int)cinfo + 0xb3) != '\0') {
@@ -163237,7 +163366,7 @@ void __cdecl CDSJpegImage::jinit_color_converter(int *param_1)
   
   puVar2 = (undefined4 *)(**(code **)param_1[1])(param_1,1,0xc);
   param_1[0x54] = (int)puVar2;
-  *puVar2 = CDSApp::CDSApp_PreCreateHook;
+  *puVar2 = CDSApp::IDSStream_NoOpFlush;
   switch(param_1[10]) {
   case 1:
     if (param_1[9] != 1) {

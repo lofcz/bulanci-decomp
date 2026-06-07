@@ -1,0 +1,215 @@
+{
+  "round": 10,
+  "kind": "deep_recovery",
+  "workers": 20,
+  "summary": "Re-verify PARTIAL R6 logic + struct deep-dives + codec follow-ups with live Ghidra/IDA correlation",
+  "tasks": [
+    {
+      "id": 1,
+      "title": "R6 rerun: FUN_0041af70 scheduler/gaming cluster",
+      "kind": "logic_rerun",
+      "prior_round": 6,
+      "prior_task": 2,
+      "seed_address": "0x0041af70",
+      "addresses": ["0x0041af70", "0x0041a520", "0x0041a530", "0x0041a540", "0x0041a550", "0x0041a5c0", "0x0041a5d0", "0x0041a5e0", "0x0041a5f0", "0x0041a600"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_02_report.md", "ghidra_analysis/engine/struct_recovery/CBulanek.md", "ghidra_analysis/engine/struct_recovery/CGaming.md", "ghidra_analysis/engine/tick_system.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Live get_xrefs_to + decompile seed; prove scheduler tick role; fix wrong this/types; correlate IDA vs Ghidra decomp at seed."
+    },
+    {
+      "id": 2,
+      "title": "R6 rerun: CWeapon_OnSchedulerEvent + neighbors",
+      "kind": "logic_rerun",
+      "prior_round": 6,
+      "prior_task": 3,
+      "seed_address": "0x0041b180",
+      "addresses": ["0x0041b180", "0x0041a610", "0x0041a620", "0x0041a630", "0x0041a640", "0x0041a6a0", "0x0041a710", "0x0041a780", "0x0041a7f0", "0x0041a860"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_03_report.md", "ghidra_analysis/engine/struct_recovery/CWeapon.md", "ghidra_analysis/gameplay/combat_projectiles.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Trace weapon scheduler event dispatch; verify CWeapon* this; document fire/cooldown path with xref proof."
+    },
+    {
+      "id": 3,
+      "title": "R6 rerun: CBulanek_AddEntity + entity factory",
+      "kind": "logic_rerun",
+      "prior_round": 6,
+      "prior_task": 6,
+      "seed_address": "0x0041a390",
+      "addresses": ["0x0041a390", "0x0041ab40", "0x0041ab50", "0x0041aca0", "0x0041acb0", "0x0041acc0", "0x0041acd0", "0x0041ace0", "0x0041acf0", "0x0041ad80"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_06_report.md", "ghidra_analysis/engine/struct_recovery/CBulanek.md", "ghidra_analysis/engine/struct_recovery/CGaming.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Prove entity slot allocation path from CGaming; fix decomp mistakes on AddEntity parameters."
+    },
+    {
+      "id": 4,
+      "title": "R6 rerun: sim slice 0x00429d60–0x0042ab28",
+      "kind": "logic_rerun",
+      "prior_round": 6,
+      "prior_task": 13,
+      "seed_address": "0x00429d60",
+      "addresses": ["0x00429d60", "0x00429e20", "0x00429e80", "0x00429f40", "0x0042a000", "0x0042a0c0", "0x0042a180", "0x0042a240", "0x0042a300", "0x0042a3c0", "0x0042a480", "0x0042a540", "0x0042a600", "0x0042a6c0", "0x0042a780", "0x0042a840", "0x0042a900", "0x0042a9c0", "0x0042aa80", "0x0042ab28"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_13_report.md", "ghidra_analysis/engine/struct_recovery/CDSAudioBank.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Classify each func in slice; rename only with xref closure; flag decomp errors vs IDA."
+    },
+    {
+      "id": 5,
+      "title": "R6 rerun: sim slice 0x0042d440–0x0042e140",
+      "kind": "logic_rerun",
+      "prior_round": 6,
+      "prior_task": 19,
+      "seed_address": "0x0042d440",
+      "addresses": ["0x0042d440", "0x0042d500", "0x0042d5c0", "0x0042d680", "0x0042d740", "0x0042d800", "0x0042d8c0", "0x0042d980", "0x0042da40", "0x0042db00", "0x0042dbc0", "0x0042dc80", "0x0042dd40", "0x0042de00", "0x0042dec0", "0x0042df80", "0x0042e040", "0x0042e100"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_19_report.md", "ghidra_analysis/engine/struct_recovery/CDSView.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Deep xref on view/input helpers; correct wrong calling conventions in Ghidra."
+    },
+    {
+      "id": 6,
+      "title": "R6 rerun: sim slice 0x00430360–0x00430ca0",
+      "kind": "logic_rerun",
+      "prior_round": 6,
+      "prior_task": 25,
+      "seed_address": "0x00430360",
+      "addresses": ["0x00430360", "0x00430420", "0x004304e0", "0x004305a0", "0x00430660", "0x00430720", "0x004307e0", "0x004308a0", "0x00430960", "0x00430a20", "0x00430ae0", "0x00430ba0", "0x00430c60"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_25_report.md", "ghidra_analysis/engine/struct_recovery/CDSMpxStream.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "MPx/audio stream path; prove buffer layout accesses; Frida if static proof fails."
+    },
+    {
+      "id": 7,
+      "title": "R6 rerun: sim slice 0x004327e0–0x00432be0",
+      "kind": "logic_rerun",
+      "prior_round": 6,
+      "prior_task": 29,
+      "seed_address": "0x004327e0",
+      "addresses": ["0x004327e0", "0x00432840", "0x004328a0", "0x00432900", "0x00432960", "0x004329c0", "0x00432a20", "0x00432a80", "0x00432ae0", "0x00432b40", "0x00432ba0", "0x00432be0"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_29_report.md", "ghidra_analysis/engine/struct_recovery/CDSMpx.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Resolve pSubObjStash@+0x40 UNK from prior report if possible; document MPx decode overlay."
+    },
+    {
+      "id": 8,
+      "title": "R6 rerun: IJG slice 0x00466f00–0x004681d0 (live Ghidra apply)",
+      "kind": "codec_rerun",
+      "prior_round": 6,
+      "prior_task": 48,
+      "seed_address": "0x00466f00",
+      "addresses": ["0x00466f00", "0x00467020", "0x00467150", "0x00467300", "0x00467340", "0x00467430", "0x00467460", "0x00467600", "0x00467690", "0x004676e0", "0x00467930", "0x00467af0", "0x00467d10", "0x00467dc0", "0x00467ed0", "0x004680f0", "0x00468120", "0x004681d0"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_48_report.md", "ghidra_analysis/formats/jpeg_decoder.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Apply deferred IJG renames (emit_byte_s, flush_bits_s, jinit_merged_upsampler); fix CDSApp_PreCreateHook misname; live xrefs."
+    },
+    {
+      "id": 9,
+      "title": "Struct deep: CWeapon layout + combat path",
+      "kind": "struct",
+      "struct_name": "CWeapon",
+      "seed_address": "0x0041b180",
+      "addresses": ["0x0041b180", "0x0041a6a0", "0x0041a710"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/CWeapon.md", "ghidra_analysis/gameplay/combat_projectiles.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Prove sizeof and tail fields via ctor/dtor/xref; apply create_struct fields only when proven."
+    },
+    {
+      "id": 10,
+      "title": "Struct deep: CShot projectile",
+      "kind": "struct",
+      "struct_name": "CShot",
+      "seed_address": "0x0041b1d0",
+      "addresses": ["0x0041b1d0", "0x0041aa30", "0x0041aa40"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/CShot.md", "ghidra_analysis/gameplay/combat_projectiles.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Scheduler tick + collision fields with disasm proof; update CShot.md."
+    },
+    {
+      "id": 11,
+      "title": "Struct deep: CMina landmine",
+      "kind": "struct",
+      "struct_name": "CMina",
+      "seed_address": "0x0041b210",
+      "addresses": ["0x0041b210", "0x0041a2f0", "0x0041b390"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/CMina.md", "ghidra_analysis/engine/struct_recovery/CExplosion.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Prove arming/trigger offsets; link to CExplosion_CollectLandminesInBlastRect."
+    },
+    {
+      "id": 12,
+      "title": "Struct deep: CGaming match-modal tail (+0x300..+0x36C)",
+      "kind": "struct",
+      "struct_name": "CGaming",
+      "seed_address": "0x00439880",
+      "addresses": ["0x00439880", "0x0043aa70", "0x0041ab70", "0x00420380"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/CGaming.md", "ghidra_analysis/engine/logic_recovery/round6_logic_task_08_report.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Close UNK fields in modal coordinator region; verify wModalExitCode@+0x364 consumers."
+    },
+    {
+      "id": 13,
+      "title": "Struct deep: CDSAudioPlayer DirectSound path",
+      "kind": "struct",
+      "struct_name": "CDSAudioPlayer",
+      "seed_address": "0x0043a030",
+      "addresses": ["0x0043a030", "0x0043a100", "0x0043a200"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/round5_worker_14_results.jsonl", "ghidra_analysis/engine/struct_recovery/CDSAudioBank.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Prior R5 blocked this — prove DirectSound buffer layout or document BLOCKED with evidence."
+    },
+    {
+      "id": 14,
+      "title": "Struct deep: CMenu UI dispatch",
+      "kind": "struct",
+      "struct_name": "CMenu",
+      "seed_address": "0x0042d160",
+      "addresses": ["0x0042d160", "0x0042d200", "0x0042d280"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/pass_r4_CMenu_report.md", "ghidra_analysis/engine/logic_recovery/round6_logic_task_18_report.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Menu event routing; prove vtable slots and owner pointer offsets."
+    },
+    {
+      "id": 15,
+      "title": "Struct deep: CDSTrackVector memmove path",
+      "kind": "struct",
+      "struct_name": "CDSTrackVector",
+      "seed_address": "0x004397e0",
+      "addresses": ["0x004397e0", "0x00439800", "0x00439840"],
+      "evidence_paths": ["ghidra_analysis/engine/struct_recovery/round5_worker_14_results.jsonl", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Vector growth/realloc algorithm; prove element size and capacity fields."
+    },
+    {
+      "id": 16,
+      "title": "Codec follow-up: FUN_0046A840 dispatch UNK",
+      "kind": "codec",
+      "prior_round": 8,
+      "seed_address": "0x0046a840",
+      "addresses": ["0x0046a840"],
+      "evidence_paths": ["ghidra_analysis/engine/fun_recovery/round8_fun_task_17_report.md", "ghidra_analysis/engine/fun_recovery/round7_fun_task_37_report.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "3 xref closure; rename only if unique IJG/libmad/zlib export match or bulanci symbol proof."
+    },
+    {
+      "id": 17,
+      "title": "Codec follow-up: FUN_0046DB50 dispatch UNK",
+      "kind": "codec",
+      "prior_round": 8,
+      "seed_address": "0x0046db50",
+      "addresses": ["0x0046db50"],
+      "evidence_paths": ["ghidra_analysis/engine/fun_recovery/round8_fun_task_19_report.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Caller chain + algorithm ID; Frida if static inconclusive."
+    },
+    {
+      "id": 18,
+      "title": "Codec follow-up: FUN_00448A97 high-xref sim",
+      "kind": "codec",
+      "prior_round": 8,
+      "seed_address": "0x00448a97",
+      "addresses": ["0x00448a97"],
+      "evidence_paths": ["ghidra_analysis/engine/fun_recovery/round8_fun_task_14_report.md", "ghidra_analysis/engine/fun_recovery/r9_globals_task_016_report.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "5 xref callers mapped; prove blit/table or IJG role."
+    },
+    {
+      "id": 19,
+      "title": "Gaming: CGaming_OnPlayerCollectItem + item pickup",
+      "kind": "logic_rerun",
+      "prior_round": 6,
+      "prior_task": 10,
+      "seed_address": "0x0041a020",
+      "addresses": ["0x0041a020", "0x0041be70", "0x0041bee0", "0x0041bf00", "0x0041bf70", "0x0041bf80"],
+      "evidence_paths": ["ghidra_analysis/engine/logic_recovery/round6_logic_task_10_report.md", "ghidra_analysis/engine/struct_recovery/CGaming.md", "bulanci/bulanci.ida.exe.c", "bulanci/bulanci.ghidra.exe.c"],
+      "acceptance": "Item type dispatch table; score/inventory side effects with xref proof."
+    },
+    {
+      "id": 20,
+      "title": "Coordinator: R10 manifest audit",
+      "kind": "coordinator",
+      "addresses": [],
+      "evidence_paths": ["ghidra_analysis/engine/agent_todos_20_r10_deep.json", "ghidra_analysis/engine/agent_todos_20_r10_deep_results.jsonl"],
+      "acceptance": "No Ghidra mutations; checklist of worker statuses; gaps for R11."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{"id":10,"round":11,"phase":"connect","action":"decompile","address":"0x004195f0","symbol":"CBulanek_ClampMoveRectByCollision","finding":"SpatialQuery(pGaming_host, proposed, collisionAtOrigin, hitBounds, 0, 0); facing switch on nCurrentTrackIdx@+0xD4; mapW/H from pChainParent@+0x4C bbox"}
+{"id":10,"round":11,"phase":"verify","address":"0x00418300","symbol":"_Globals::SpatialQuery","finding":"walk CGaming+0x31C chain+0x54; skip +0x69==0; vfn+0x70 GetWorldCollisionRect; rect_Intersect; CDSRect_Overlaps when param_4==0; +0x6A filter when param_5!=0"}
+{"id":10,"round":11,"phase":"verify","address":"0x00404730","symbol":"CDSRect_Overlaps","finding":"non-empty intersect of tileOverlapRect vs entityBounds rejects candidate when movement param_4==0"}
+{"id":10,"round":11,"phase":"verify","address":"0x00417210","symbol":"CGameView_GetWorldCollisionRect","finding":"vtable slot 28 (+0x70) all combat views; gated by wChainInit44&1"}
+{"id":10,"round":11,"phase":"disasm","address":"0x0041965e","finding":"PUSH 0 / PUSH 0 before CALL SpatialQuery — movement tile gate on, include +0x6A entities"}
+{"id":10,"round":11,"phase":"disasm","address":"0x0041977a","finding":"bPlayerSlot 0x20..0x23 or 0x24..0x27 + blocked flag → PostMessage 0x200/0x102 → OnEvent case 0x102 → TryBotRandomAction"}
+{"id":10,"round":11,"phase":"caller","address":"0x0041b147","symbol":"CBulanek_StepMovementAndCollision","finding":"sole xref to ClampMoveRectByCollision"}
+{"id":10,"round":11,"phase":"slot","claim":"campaign_no_wall_reroll","finding":"0x7d..0x7f use same SpatialQuery/clamp; PostMessage 0x102 only for 0x20..0x27"}
+{"id":10,"round":11,"phase":"ghidra","action":"set_function_prototype","address":"0x004195f0","result":"CBulanek_ClampMoveRectByCollision typed on CBulanek*"}
+{"id":10,"round":11,"phase":"ghidra","action":"save_program","program":"bulanci.exe","result":"ok"}
+{"id":10,"round":11,"status":"DONE","title":"CBulanek_ClampMoveRectByCollision + SpatialQuery","archetype":"moving_bot","report":"ghidra_analysis/engine/ai_recovery/r11_ai_task_10_report.md","ghidra_actions":["set_function_prototype@0x004195f0","set_decompiler_comment@0x004195f0","set_decompiler_comment@0x0041965e","set_decompiler_comment@0x0041977a","save_program"],"blockers":[],"source":"r11_ai_worker_10"}

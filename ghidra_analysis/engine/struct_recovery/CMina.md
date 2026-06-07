@@ -102,6 +102,17 @@ Agent todo **20** r2 (worker 20, 2026-05-30): **DONE** — `CMina.animBase` = **
 
 **R5 worker 44 (2026-05-30):** `CAnim.bTraceAreasActive` @ `animBase+0x0c` — when non-zero, `CMina_UpdateTraceAreas@0x00419fd0` walks `animBase.pGaming_host` entity ring (slots `0x80` down to `0x7e`). `pDangerZoneNode` @ `+0x10C` holds `0x20` B heap node from `CGaming_AppendDangerZoneNode@0x0041b420` (appends to `CGaming+0x2d8` vector); released by `CMina_ReleaseDangerZoneNode@0x0041b4a0`. `save_program bulanci.exe`.
 
+## Arming / trigger (R10 task 11, live Ghidra)
+
+| Phase | Offset / event | Evidence |
+|-------|----------------|----------|
+| Init disarmed | `bArmed@+0x114 := 0` | `CMina_Ctor@0x0041cc0d` `MOV byte [ESI+0x114],0`; `InitMine@0x0041cd84` `MOV byte [ESI+0x114],BL` (BL=0) |
+| Trigger | `CMina_OnEvent@0x0041efb0` event `0xF2` | Disasm `SUB EAX,0xF2` / `JZ` → `CALL ExplodeMine@0x0041e070` (ECX=`this`) |
+| Detonate guard | `bArmed@+0x114` non-zero | `ExplodeMine@0x0041e096` `CMP byte [ESI+0x114],0` |
+| Chain blast | `CExplosion_CollectLandminesInBlastRect@0x0041a2f0` | Caller `CExplosion_ApplyAreaDamage@0x0041e296`; classId `0x816`; bbox `animBase+0x20..0x2c` |
+
+**UNK:** no native `MOV byte [reg+0x114],1` in `bulanci.exe` (program-wide `search_instructions`); arm-after-landing likely via `CGameEntity_SetEntityType(..., 0xfffffff2)` / scheduler — needs Frida.
+
 ## UNK
 
 - `dwView_pad_40`, `pChain_pad_48`, `pHeader_tail_58` — only `CMina_RegisterDangerZone` / generic CDSView paths.

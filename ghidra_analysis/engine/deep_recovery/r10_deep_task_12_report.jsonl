@@ -1,0 +1,13 @@
+{"id":12,"round":10,"phase":"connect","action":"connect_instance","project":"bulanci","result":"ok","tools_registered":195}
+{"id":12,"round":10,"phase":"verify","address":"0x00439880","symbol":"CGaming_ArmTrackMgrSchedulerIfUnpaused","finding":"pre-match modal type-0; sole caller CGaming_RunPreMatchModal@0x0041c400"}
+{"id":12,"round":10,"phase":"verify","address":"0x0043aa70","symbol":"CGaming_PreMatchModal_RestartDeferredAudio","finding":"post-modal type-2 deferred audio restart; caller RunPreMatchModal@0x0041c487"}
+{"id":12,"round":10,"phase":"verify","address":"0x0041ab70","symbol":"CGaming_Ctor","finding":"partial heap ctor; four 16B slot-vec bands through +0x360 zero; CreateObject@0x0041beb0 sole xref"}
+{"id":12,"round":10,"phase":"verify","address":"0x00420380","symbol":"CGaming_ctor","finding":"full match shell; wModalExitCode=0xFFFF@+0x364; solo ambient + SetAmbientAnimMode(0)"}
+{"id":12,"round":10,"phase":"wModalExitCode","action":"search_instructions","pattern":"0x364","finding":"7 hits: ctor@0x004200ee; OnCmd@0x0041d602/615/686/69f/6b0; OnCustomEvent@0x004206f7"}
+{"id":12,"round":10,"phase":"field_close","offset":"0x33c","name":"nAmbientAnimMode","finding":"CGaming_SetAmbientAnimMode writer; scheduler delay 25s/10s; renamed from CBulanci_SetAmbientAnimMode"}
+{"id":12,"round":10,"phase":"field_close","offset":"0x360","name":"pPrefaceDrawable","finding":"LoadPreface@0x0041d96f store; LoadLevelAssetAndMusic/dtor Release"}
+{"id":12,"round":10,"phase":"field_close","offset":"0x300","name":"nNetPurgeEntitySlotCount","finding":"0xF5 purge handler MOV EDI,[ECX+0x300]; vec data @+0x2F8"}
+{"id":12,"round":10,"phase":"field_close","offset":"0x2d8","name":"dangerZoneSlotVec","finding":"AppendDangerZoneNode; DefineTraceArea/DefineDangerZone; RetestTraceAreas count@+0x2e0"}
+{"id":12,"round":10,"phase":"unk","offset":"0x2e8","name":"vecSlotVec_2e8","finding":"ctor/dtor only; no read xrefs"}
+{"id":12,"round":10,"phase":"unk","offset":"0x30c","name":"pad_0x30c","finding":"ctor zero only; no read xrefs"}
+{"id":12,"round":10,"status":"PARTIAL","ghidra_actions":["modify_struct_field pPrefaceDrawable","add_struct_field nAmbientAnimMode/nNetPurgeEntitySlotCount/nPad_0x30c/dangerZoneSlotVec/netPurgeEntitySlotVec","rename_function CGaming_SetAmbientAnimMode","set_decompiler_comment@0x0041d602/0x0041d960/0x00417c87","save_program bulanci.exe"],"blockers":["vecSlotVec_2e8 unused","pad_0x30c write-only","pPrefaceDrawable exact drawable type"]}

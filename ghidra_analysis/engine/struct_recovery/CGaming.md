@@ -2,7 +2,7 @@
 
 ## Status
 
-**PARTIAL** — match-modal coordinator **`0x36C` (876 B)** on stack during `CGame_StartGame` (`local_414[16]` + `local_404[860]`). **Not** `0x20c` — that size is **`CDirectKeyb`** (`player_controls.md`). R5 worker 25 closed the Ghidra gap **`+0x588..+0x33F`** (was a single `CGame` blob) and corrected **`wModalExitCode`** to **`+0x364`**.
+**PARTIAL** — match-modal coordinator **`0x36C` (876 B)** on stack during `CGame_StartGame` (`local_414[16]` + `local_404[860]`). **Not** `0x20c` — that size is **`CDirectKeyb`** (`player_controls.md`). R5 worker 25 closed the Ghidra gap **`+0x588..+0x33F`** (was a single `CGame` blob) and corrected **`wModalExitCode`** to **`+0x364`**. **R10 task 12** closed tail UNKs **`nAmbientAnimMode`**, **`pPrefaceDrawable`**, **`nNetPurgeEntitySlotCount`**, renamed danger/purge slot vecs, verified **`wModalExitCode`** consumers (7 disasm sites).
 
 ## Size proof table
 
@@ -41,9 +41,15 @@
 | `+0xC8` | 512 | `void *[128]` | `apEntitySlots` | ctor `memset(ESI+0xC8,0,0x200)` @ `0x004200a7`; `GetObjectAtSlotUnchecked@0x00482062` |
 | `+0x148` | 16 | `CDSView *[4]` | `apPlayerHudViews` | `CGaming_CountActiveEntities@0x00416943` `LEA EDX,[ECX+0x148]` loop 4; `PostMouseMoveToOccupiedHudSlot@0x004168f3` |
 | `+0x2C8` | 8 | `CDSPtrSlotVec` | `bulletSlotVec` | ctor init `ESI+0x2C8..+0x2D4` @ `0x0042001e`; `CGaming_CleanupInactiveBullets@0x0041a2a0` |
-| `+0x2D8` | 8 | `CDSPtrSlotVec` | `vecSlotVec_2d8` | ctor capacity **8** @ `0x00420036`; dtor `CDSPtrSlotVec_Resize@+0x2d8` @ `0x0041b8..` |
-| `+0x2E8` | 8 | `CDSPtrSlotVec` | `vecSlotVec_2e8` | ctor @ `0x0042004e`; dtor resize @ `0x0041b8..` |
-| `+0x2F8` | 8 | `CDSPtrSlotVec` | `vecSlotVec_2f8` | ctor @ `0x00420066`; dtor resize @ `0x0041b8..` |
+| `+0x2D0` | 4 | `int` | `nBulletSlotCount` | companion live-count dword after `bulletSlotVec` (ctor zero @ `0x0042002a`; pattern matches other vecs) |
+| `+0x2D8` | 8 | `CDSPtrSlotVec` | `dangerZoneSlotVec` | `CGaming_AppendDangerZoneNode` → `CIntListInsertSortedOrAppend(&+0x2d8)`; `DefineTraceArea` / `DefineDangerZone` / `CMina_RegisterDangerZone`; `CGaming_RetestTraceAreasForEntity` walks count `@+0x2e0` |
+| `+0x2E0` | 4 | `int` | `nDangerZoneSlotCount` | `CGaming_RetestTraceAreasForEntity@0x0041b5a0` reverse-walk count; `AppendDangerZoneNode` insert helper |
+| `+0x2E8` | 8 | `CDSPtrSlotVec` | `vecSlotVec_2e8` | ctor @ `0x0042004e`; dtor resize @ `0x0041b8..` — **no read xrefs** (reserved) |
+| `+0x2F0` | 4 | `int` | `nVecSlot2e8Count` | ctor zero only @ `0x0042005a` — no consumer |
+| `+0x2F8` | 8 | `CDSPtrSlotVec` | `netPurgeEntitySlotVec` | `CGaming_OnCustomEvent_0xF5_RemoveEntitiesBySlotId@0x0041b3b0` reverse-walk; match `entity+0x3C` (slot id); max 2 removals |
+| `+0x300` | 4 | `int` | `nNetPurgeEntitySlotCount` | `0xF5` handler `MOV EDI,[ECX+0x300]` @ `0x0041b3b3` |
+| `+0x304` | 4 | `int` | `cNetPurgeEntitySlotCapacity` | ctor `=8` @ `0x0042007e` (parallel to other vec capacity dwords) |
+| `+0x30C` | 4 | `int` | `pad_0x30c` | ctor zero @ `0x004200d5` — **no read** |
 | `+0x310` | 4 | `CDSString` | `hLevelTitleCopy` | ctor `MOV [ESI+0x310],0` @ `0x0042007e`; assign `CDsStringAssignFromHandle` @ `0x0042028e`; dtor `CDsStringReleaseHeader` @ `0x0041b98d` |
 
 ### HUD / script / audio tail (`+0x31C..+0x368`)
@@ -60,7 +66,7 @@
 | `+0x334` | 4 | `CPauseDlg *` | `pPauseDlg` | `OperatorNew(0x7c)` → `CPauseDlg_Build` → `MOV [ESI+0x334],EAX` @ `0x00420434` |
 | `+0x338` | 4 | `int` | `nRoundEndWait` | `CGaming_IsRoundEndTransitionComplete@0x004168e0` `[param_1+0x338]==0`; `OnCmd` `ADD [ESI+0x338],1` @ `0x0041d63b` |
 | `+0x341` | 1 | `byte` | `bEntityRegisterMode` | **R6 logic todo 6:** `MOVZX EAX,byte [ESI+0x341]` @ `CGaming_AddEntity@0x0041a3ac` branches `0/1/2`; writer `CGaming_SetEntityRegisterMode@0x004168c0` (`MOV [ECX+0x341],AL`); also `CGaming_SpawnPracticeDummy@0x0041f583` sets `1` before spawn |
-| `+0x33C` | 4 | `pointer` | `pPad_33c` | ctor zero @ `0x00420227` — no consumer located |
+| `+0x33C` | 4 | `int` | `nAmbientAnimMode` | `CGaming_SetAmbientAnimMode@0x00417c87` `MOV [ESI+0x33c],EAX`; modes **0** → 25 s / **1** → 10 s scheduler delay on `schedulerFacet` slot 0; callers `CGaming_ctor` (solo), `CGaming_TickAmbientAnimations`, `CGaming_OnPlayerCollectItem`, `CGaming_UnregisterRoundHudObjects` |
 | `+0x344` | 4 | `CLevelScript *` | `pLevelScript` | ctor store menu script @ `0x004202c9`; `OnResumeOrStartGame` `CallExport(...,10,...)` @ `0x0041c157`; dtor `CallExport(...,2,...)` @ `0x0041b8a0` |
 | `+0x348` | 4 | `CDSView *` | `pDepthInsertHead` | `CGaming_InsertEntityByDepth` / `AddEntity` compare-update @ `0x004184fe`, `0x0041a3e8` |
 | `+0x34C` | 4 | `CDSView *` | `pDepthInsertTail` | `InsertEntityByDepth` / `Unregister` @ `0x00418529`, `0x00419cca` |
@@ -68,8 +74,8 @@
 | `+0x354` | 4 | `CDSAudioPlayer *` | `pLevelBgmPlayer` | dtor release @ `0x0041b9..`; `OnResumeOrStartGame` play/stop |
 | `+0x358` | 4 | `CDSAudioPlayer *` | `pIntroMusicPlayer` | ctor `CreateFromResource(0x1014b)` → `[ESI+0x358]` @ `0x00420174`; dtor release |
 | `+0x35C` | 4 | `CDSAudioPlayer *` | `pDefaultSfxBankPlayer` | ctor stores resource `0x10003` bank via `[ESI+0x35c]` path; dtor release @ `0x0041b977` |
-| `+0x360` | 4 | `byte[4]` | `pad_0x360` | ctor `MOV [ESI+0x360],0` @ `0x0042009c` — no read located |
-| `+0x364` | 2 | `ushort` | `wModalExitCode` | ctor `MOV word [ESI+0x364],0xFFFF` @ `0x004200ee`; `OnCmd` `CMP/MOV [ESI+0x364]` @ `0x0041d602`, `0x0041d615` |
+| `+0x360` | 4 | `void *` | `pPrefaceDrawable` | `CLevelScriptOpExt_LoadPreface@0x0041d96f` store cast `DAT_004b826c`; `CGaming_LoadLevelAssetAndMusic` / `CGaming_dtor` Release via vtable `+8` |
+| `+0x364` | 2 | `ushort` | `wModalExitCode` | ctor `MOV word [ESI+0x364],0xFFFF` @ `0x004200ee`; **`CGaming_OnCmd`** `CMP/MOV/MOVZX` @ `0x0041d602`/`0x0041d615`/`0x0041d686`/`0x0041d69f`; `cmd==0xED && sentinel` → `CGaming_RunPreMatchModal`; high-bit → round-end + `EndModal`; **`CGaming_OnCustomEvent`** `CMP` @ `0x004206f7` (case `0xE9` gate) |
 | `+0x368` | 4 | `uint` | `dwWeaponSpawnerMode` | ctor `=2` / host-admin `=6` @ `0x00420117`, `0x00420132`; `RandomPickupSpawner_Tick` reads `dwWeaponSpawnerMode` |
 
 **Linear `CGame` fields** (e.g. `+0x32` local player slot, `+0x208` `pDirectKeyb`, demo stream `+0x1BC`) are on **`pOwnerGame`**, not duplicated on the `CGaming` shell — use `pOwnerGame + offset` (see `net_protocol.md` embed table when `pOwnerGame` points at `CBulanci.game`).
@@ -93,6 +99,11 @@
 | `CGaming_GetObjectAtSlotUnchecked` | `0x004168d0` |
 | `CGaming_RegisterObjectAtSlot` | `0x00482074` |
 | `CGaming_OnSchedulerTimer` | `0x0041f050` |
+| `CGaming_RunPreMatchModal` | `0x0041c290` |
+| `CGaming_ArmTrackMgrSchedulerIfUnpaused` | `0x00439880` |
+| `CGaming_PreMatchModal_RestartDeferredAudio` | `0x0043aa70` |
+| `CGaming_SetAmbientAnimMode` | `0x00417c80` |
+| `CGaming_OnCmd` | `0x0041d5f0` |
 | `CGaming_OnPlayerCollectItem` | `0x0041a020` — unregister pickup, `CBulanek_NetSendTeamScoreOnCollect`, quip slot from `weaponKind` when collector `bPlayerSlot==0` (R6 logic task 10) |
 | `CGaming_TickPlayerCollisions` | `0x0041f0c0` — calls `OnPlayerCollectItem` (4 sites @ `0x0041f154`..`0x0041f1bd`) |
 | `CGaming_RespawnPlayerAtSafeLocation` | `0x0041a140` — random 800×516 placement; `SpatialQuery(p4=1,p5=0)` loop; callers include `SpawnAndInitializePlayer`, `RespawnPlayer`, `CreateRespawnTeleportPair` |
@@ -111,13 +122,13 @@
 
 ## UNK
 
-- Exact types for **`vecSlotVec_2d8` / `vecSlotVec_2e8` / `vecSlotVec_2f8`** consumers beyond dtor resize (no semantic rename yet).
-- **`pPad_33c`**, **`pad_0x360`**: zero-init only.
-- **`+0x30C`**: ctor zero @ `0x004200d5` — no read.
+- **`vecSlotVec_2e8` / `nVecSlot2e8Count`**: ctor/dtor only — no read xrefs in `.text`.
+- **`pad_0x30c`**: ctor zero only.
+- Exact nominal type of **`pPrefaceDrawable`** (`CDSStaticDrawableFace *` vs generic COM) — cast id `DAT_004b826c` shared with `CBulPicture.pBitmap`.
 - Interior **`CDSView` / `CDSChained`** fields inside `pEntityViewRoot` panel — use `CDSView.md` (+0x54 child chain for entity iteration).
 
 ## Follow-up
 
 - Retype **`CGaming_GetObjectAtSlot*`** / **`RegisterObjectAtSlot`** to use `apEntitySlots` member (still shows `chain.pPad_a4` in some decompiles).
-- Fold **`vecSlotVec_*`** names after per-vector xref pass.
+- ~~Fold **`vecSlotVec_*`** names~~ — **R10 t12:** `dangerZoneSlotVec`, `netPurgeEntitySlotVec` + companion counts; `vecSlotVec_2e8` still reserved.
 - Cross-link `match_orchestration.md`, `map_slots_spawner.md`, `round4_task_08_report.md` (collect helpers).
